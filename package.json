@@ -7,7 +7,12 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vuepress dev docs/.",
+    "build": "rm -rf docs/.vuepress/dist && vuepress build docs/.",
+    "compress": "./shell/compress.sh",
+    "upload":"./shell/upload.sh",
+    "deploy":"./shell/deploy.sh",
+    "onestep":"npm run build && npm run compress && npm run upload && npm run deploy"
   },
   "keywords": [],
   "author": "",

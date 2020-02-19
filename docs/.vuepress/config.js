@@ -10,25 +10,23 @@ module.exports = {
     },
     themeConfig: {
         lastUpdated: 'Last Updated',
-        repo: 'ATQQ/sugar-blog',
-        repoLabel: 'Github',
+        repo:'ATQQ/sugar-blog',
+        repoLabel:'Github',
         editLinks: true,
         docsDir: 'docs',
         docsBranch: 'master',
         nav: [
             {
                 text: '大前端',
-                items: [{ text: '前端面试准备', link: '/ready/' },
+                items: [
                 { text: 'javascript', link: '/js/' },
+                { text: 'css',link: '/css/'},
                 { text: 'es6 and more', link: '/es6+/' }]
-            },
-            {
-                text: '作品集',
-                items: []
             }
         ],
         sidebar: {
-            '/js/': getJsSidebar('javascript', '简介')
+            '/js/': getJsSidebar('javascript', '简介'),
+            '/css/': getCssSidebar('css','简介')
         },
         displayAllHeaders: false,
         sidebarDepth: 2,
@@ -53,3 +51,18 @@ function getJsSidebar(group, introduction) {
         }
     ]
 }   
+
+function getCssSidebar(group, introduction) {
+    return [
+        {
+            title: group,
+            collapsable: false,
+            sidebarDepth: 2,
+            children: [
+                ['', introduction],
+                ['problem/p1', '伪元素before与after'],
+                ['problem/p2', '实现表格斑马纹']
+            ]
+        }
+    ]
+}
