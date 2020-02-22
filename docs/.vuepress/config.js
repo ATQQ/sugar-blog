@@ -10,8 +10,8 @@ module.exports = {
     },
     themeConfig: {
         lastUpdated: 'Last Updated',
-        repo:'ATQQ/sugar-blog',
-        repoLabel:'Github',
+        repo: 'ATQQ/sugar-blog',
+        repoLabel: 'Github',
         editLinks: true,
         docsDir: 'docs',
         docsBranch: 'master',
@@ -19,14 +19,18 @@ module.exports = {
             {
                 text: '大前端',
                 items: [
-                { text: 'javascript', link: '/js/' },
-                { text: 'css',link: '/css/'},
-                { text: 'es6 and more', link: '/es6+/' }]
+                    { text: 'javascript', link: '/js/' },
+                    { text: 'css', link: '/css/' },
+                    { text: 'regexp(正则)', 'link': '/regexp/' },
+                    { text: 'es6 and more', link: '/es6+/' },
+                    { text: 'node',link:'/node/'}]
             }
         ],
         sidebar: {
             '/js/': getJsSidebar('javascript', '简介'),
-            '/css/': getCssSidebar('css','简介')
+            '/css/': getCssSidebar('css', '简介'),
+            '/regexp/': getRegexpSidebar('regexp', '正则表达式'),
+            '/node/':getNodeSidebar('node','NodeJS')
         },
         displayAllHeaders: false,
         sidebarDepth: 2,
@@ -50,7 +54,7 @@ function getJsSidebar(group, introduction) {
             ]
         }
     ]
-}   
+}
 
 function getCssSidebar(group, introduction) {
     return [
@@ -62,6 +66,34 @@ function getCssSidebar(group, introduction) {
                 ['', introduction],
                 ['problem/p1', '伪元素before与after'],
                 ['problem/p2', '实现表格斑马纹']
+            ]
+        }
+    ]
+}
+
+function getRegexpSidebar(group, introduction) {
+    return [
+        {
+            title: group,
+            collapsable: false,
+            sidebarDepth: 2,
+            children: [
+                ['', introduction],
+                ['problem/p1', '提取url()中的地址']
+            ]
+        }
+    ]
+}
+
+function getNodeSidebar(group, introduction) {
+    return [
+        {
+            title: group,
+            collapsable: false,
+            sidebarDepth: 2,
+            children: [
+                ['', introduction],
+                ['problem/p1', '从控制台录入数据']
             ]
         }
     ]
