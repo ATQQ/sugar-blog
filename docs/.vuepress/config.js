@@ -23,14 +23,21 @@ module.exports = {
                     { text: 'css', link: '/css/' },
                     { text: 'regexp(正则)', 'link': '/regexp/' },
                     { text: 'es6 and more', link: '/es6+/' },
-                    { text: 'node',link:'/node/'}]
+                    { text: 'node', link: '/node/' }]
+            },
+            {
+                text: '面试',
+                items: [
+                    { text: 'javascript', link: '/interview/js/' }
+                ]
             }
         ],
         sidebar: {
             '/js/': getJsSidebar('javascript', '简介'),
             '/css/': getCssSidebar('css', '简介'),
             '/regexp/': getRegexpSidebar('regexp', '正则表达式'),
-            '/node/':getNodeSidebar('node','NodeJS')
+            '/node/': getNodeSidebar('node', 'NodeJS'),
+            '/interview/js/': getInterviewJsSidebar('JsInterview', 'js面试题')
         },
         displayAllHeaders: false,
         sidebarDepth: 2,
@@ -94,6 +101,21 @@ function getNodeSidebar(group, introduction) {
             children: [
                 ['', introduction],
                 ['problem/p1', '从控制台录入数据']
+            ]
+        }
+    ]
+}
+
+function getInterviewJsSidebar(group, introduction) {
+    return [
+        {
+            title: group,
+            collapsable: false,
+            sidebarDepth: 2,
+            children: [
+                ['', introduction],
+                ['currying', '柯里化'],
+                ['closure', '闭包']
             ]
         }
     ]
