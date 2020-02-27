@@ -115,7 +115,9 @@ function getInterviewJsSidebar(group, introduction) {
             children: [
                 ['', introduction],
                 ['currying', '柯里化'],
-                ['closure', '闭包']
+                ['closure', '闭包'],
+                ['delete','delete'],
+                ['garbage','垃圾回收']
             ]
         }
     ]
