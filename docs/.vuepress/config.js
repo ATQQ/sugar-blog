@@ -117,7 +117,9 @@ function getInterviewJsSidebar(group, introduction) {
                 ['currying', '柯里化'],
                 ['closure', '闭包'],
                 ['delete','delete'],
-                ['garbage','垃圾回收']
+                ['garbage','垃圾回收'],
+                ['throttling','节流与防抖'],
+                ['apply','apply,call,bind']
             ]
         }
     ]
