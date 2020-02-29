@@ -28,7 +28,8 @@ module.exports = {
             {
                 text: '面试',
                 items: [
-                    { text: 'javascript', link: '/interview/js/' }
+                    { text: 'javascript', link: '/interview/js/' },
+                    { text: 'css', link: '/interview/css/' }
                 ]
             }
         ],
@@ -37,7 +38,8 @@ module.exports = {
             '/css/': getCssSidebar('css', '简介'),
             '/regexp/': getRegexpSidebar('regexp', '正则表达式'),
             '/node/': getNodeSidebar('node', 'NodeJS'),
-            '/interview/js/': getInterviewJsSidebar('JsInterview', 'js面试题')
+            '/interview/js/': getInterviewJsSidebar('JsInterview', 'js面试题'),
+            '/interview/css/': getInterviewCssSidebar('cssInterview', 'css面试')
         },
         displayAllHeaders: false,
         sidebarDepth: 2,
@@ -120,6 +122,20 @@ function getInterviewJsSidebar(group, introduction) {
                 ['garbage','垃圾回收'],
                 ['throttling','节流与防抖'],
                 ['apply','apply,call,bind']
+            ]
+        }
+    ]
+}
+
+function getInterviewCssSidebar(group, introduction) {
+    return [
+        {
+            title: group,
+            collapsable: false,
+            sidebarDepth: 2,
+            children: [
+                ['', introduction],
+                ['reflow', '回流与重绘']
             ]
         }
     ]
