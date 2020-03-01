@@ -29,7 +29,10 @@ module.exports = {
                 text: '面试',
                 items: [
                     { text: 'javascript', link: '/interview/js/' },
-                    { text: 'css', link: '/interview/css/' }
+                    { text: 'css', link: '/interview/css/' },
+                    { text: 'vue', link: '/interview/vue/' },
+                    { text: '性能优化', link: '/interview/performance/' },
+                    { text: '网络', link: '/interview/Internet/' }
                 ]
             }
         ],
@@ -39,7 +42,8 @@ module.exports = {
             '/regexp/': getRegexpSidebar('regexp', '正则表达式'),
             '/node/': getNodeSidebar('node', 'NodeJS'),
             '/interview/js/': getInterviewJsSidebar('JsInterview', 'js面试题'),
-            '/interview/css/': getInterviewCssSidebar('cssInterview', 'css面试')
+            '/interview/css/': getInterviewCssSidebar('cssInterview', 'css面试'),
+            '/interview/vue/': getInterviewVueSidebar('vueInterview', 'vue面试')
         },
         displayAllHeaders: false,
         sidebarDepth: 2,
@@ -118,10 +122,11 @@ function getInterviewJsSidebar(group, introduction) {
                 ['', introduction],
                 ['currying', '柯里化'],
                 ['closure', '闭包'],
-                ['delete','delete'],
-                ['garbage','垃圾回收'],
-                ['throttling','节流与防抖'],
-                ['apply','apply,call,bind']
+                ['delete', 'delete'],
+                ['garbage', '垃圾回收'],
+                ['throttling', '节流与防抖'],
+                ['apply', 'apply,call,bind'],
+                ['blob', 'blob与file']
             ]
         }
     ]
@@ -135,7 +140,22 @@ function getInterviewCssSidebar(group, introduction) {
             sidebarDepth: 2,
             children: [
                 ['', introduction],
-                ['reflow', '回流与重绘']
+                ['reflow', '回流与重绘'],
+                ['box', '盒模型']
+            ]
+        }
+    ]
+}
+
+function getInterviewVueSidebar(group, introduction) {
+    return [
+        {
+            title: group,
+            collapsable: false,
+            sidebarDepth: 2,
+            children: [
+                ['', introduction],
+                ['bindData', '数据绑定']
             ]
         }
     ]
