@@ -32,7 +32,8 @@ module.exports = {
                     { text: 'css', link: '/interview/css/' },
                     { text: 'vue', link: '/interview/vue/' },
                     { text: '性能优化', link: '/interview/performance/' },
-                    { text: '网络', link: '/interview/Internet/' }
+                    { text: '网络', link: '/interview/internet/' },
+                    { text: '综合问题', link: '/interview/other/' }
                 ]
             }
         ],
@@ -43,7 +44,9 @@ module.exports = {
             '/node/': getNodeSidebar('node', 'NodeJS'),
             '/interview/js/': getInterviewJsSidebar('JsInterview', 'js面试题'),
             '/interview/css/': getInterviewCssSidebar('cssInterview', 'css面试'),
-            '/interview/vue/': getInterviewVueSidebar('vueInterview', 'vue面试')
+            '/interview/vue/': getInterviewVueSidebar('vueInterview', 'vue面试'),
+            '/interview/other/': getInterviewOtherSidebar('otherInterview', '前端面试综合问题'),
+            '/interview/internet/': getInterviewInternetSidebar('internetInterview', '网络')
         },
         displayAllHeaders: false,
         sidebarDepth: 2,
@@ -126,7 +129,8 @@ function getInterviewJsSidebar(group, introduction) {
                 ['garbage', '垃圾回收'],
                 ['throttling', '节流与防抖'],
                 ['apply', 'apply,call,bind'],
-                ['blob', 'blob与file']
+                ['blob', 'blob与file'],
+                ['eventloop', 'Event Loop']
             ]
         }
     ]
@@ -141,7 +145,8 @@ function getInterviewCssSidebar(group, introduction) {
             children: [
                 ['', introduction],
                 ['reflow', '回流与重绘'],
-                ['box', '盒模型']
+                ['box', '盒模型'],
+                ['flex', '弹性布局']
             ]
         }
     ]
@@ -156,6 +161,34 @@ function getInterviewVueSidebar(group, introduction) {
             children: [
                 ['', introduction],
                 ['bindData', '数据绑定']
+            ]
+        }
+    ]
+}
+
+function getInterviewOtherSidebar(group, introduction) {
+    return [
+        {
+            title: group,
+            collapsable: false,
+            sidebarDepth: 2,
+            children: [
+                ['', introduction],
+                ['engineering', '前端工程化']
+            ]
+        }
+    ]
+}
+
+function getInterviewInternetSidebar(group, introduction) {
+    return [
+        {
+            title: group,
+            collapsable: false,
+            sidebarDepth: 2,
+            children: [
+                ['', introduction],
+                ['http', 'http协议']
             ]
         }
     ]
