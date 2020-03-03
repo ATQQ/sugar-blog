@@ -33,6 +33,7 @@ module.exports = {
                     { text: 'vue', link: '/interview/vue/' },
                     { text: '性能优化', link: '/interview/performance/' },
                     { text: '网络', link: '/interview/internet/' },
+                    { text: '设计模式', link: '/interview/design/' },
                     { text: '综合问题', link: '/interview/other/' }
                 ]
             }
@@ -46,7 +47,8 @@ module.exports = {
             '/interview/css/': getInterviewCssSidebar('cssInterview', 'css面试'),
             '/interview/vue/': getInterviewVueSidebar('vueInterview', 'vue面试'),
             '/interview/other/': getInterviewOtherSidebar('otherInterview', '前端面试综合问题'),
-            '/interview/internet/': getInterviewInternetSidebar('internetInterview', '网络')
+            '/interview/internet/': getInterviewInternetSidebar('internetInterview', '网络'),
+            '/interview/design/': getInterviewDesignSidebar('designPattern', '设计模式')
         },
         displayAllHeaders: false,
         sidebarDepth: 2,
@@ -174,7 +176,8 @@ function getInterviewOtherSidebar(group, introduction) {
             sidebarDepth: 2,
             children: [
                 ['', introduction],
-                ['engineering', '前端工程化']
+                ['engineering', '前端工程化'],
+                ['inputurl', '输入URL到页面渲染的整个过程']
             ]
         }
     ]
@@ -192,6 +195,22 @@ function getInterviewInternetSidebar(group, introduction) {
                 ['tcp', 'TCP协议'],
                 ['tcp-udp', 'TCP与UDP的区别'],
                 ['http', 'HTTP协议']
+            ]
+        }
+    ]
+}
+
+function getInterviewDesignSidebar(group, introduction) {
+    return [
+        {
+            title: group,
+            collapsable: false,
+            sidebarDepth: 2,
+            children: [
+                ['', introduction],
+                ['factory', '工厂模式'],
+                ['abstractfactory', '抽象工厂模式'],
+                ['single', '单例模式']
             ]
         }
     ]
