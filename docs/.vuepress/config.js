@@ -188,7 +188,10 @@ function getInterviewInternetSidebar(group, introduction) {
             sidebarDepth: 2,
             children: [
                 ['', introduction],
-                ['http', 'http协议']
+                ['udp', 'UDP协议'],
+                ['tcp', 'TCP协议'],
+                ['tcp-udp', 'TCP与UDP的区别'],
+                ['http', 'HTTP协议']
             ]
         }
     ]
