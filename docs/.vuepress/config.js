@@ -48,7 +48,8 @@ module.exports = {
             '/interview/vue/': getInterviewVueSidebar('vueInterview', 'vue面试'),
             '/interview/other/': getInterviewOtherSidebar('otherInterview', '前端面试综合问题'),
             '/interview/internet/': getInterviewInternetSidebar('internetInterview', '网络'),
-            '/interview/design/': getInterviewDesignSidebar('designPattern', '设计模式')
+            '/interview/design/': getInterviewDesignSidebar('designPattern', '设计模式'),
+            '/interview/performance/': getInterviewPerformanceSidebar('improvePF', '性能优化')
         },
         displayAllHeaders: false,
         sidebarDepth: 2,
@@ -211,6 +212,21 @@ function getInterviewDesignSidebar(group, introduction) {
                 ['factory', '工厂模式'],
                 ['abstractfactory', '抽象工厂模式'],
                 ['single', '单例模式']
+            ]
+        }
+    ]
+}
+
+function getInterviewPerformanceSidebar(group, introduction) {
+    return [
+        {
+            title: group,
+            collapsable: false,
+            sidebarDepth: 2,
+            children: [
+                ['', introduction],
+                ['cache', '浏览器缓存机制'],
+                ['brorender', '浏览器渲染原理']
             ]
         }
     ]
