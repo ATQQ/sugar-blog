@@ -226,7 +226,14 @@ function getInterviewPerformanceSidebar(group, introduction) {
             children: [
                 ['', introduction],
                 ['cache', '浏览器缓存机制'],
-                ['brorender', '浏览器渲染原理']
+                ['brorender', '浏览器渲染原理'],
+                ['image', '图片优化'],
+                ['dnsPre', 'DNS预解析'],
+                ['throttling', '节流与防抖'],
+                ['preLoad', '资源预加载'],
+                ['preRender', '页面预渲染'],
+                ['lazyLoad', '懒加载'],
+                ['Internet', '网络层面优化']
             ]
         }
     ]
