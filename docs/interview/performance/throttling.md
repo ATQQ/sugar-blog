@@ -136,3 +136,31 @@ function throttle(fn,delay){
     }
 }
 ```
+
+### 加强版节流
+throttle 与 debounce “合体”思路,目的是解决
+
+>如果用户的操作十分频繁——他每次都不等 debounce 设置的 delay 时间结束就进行下一次操作，于是每次 debounce 都为该用户重新生成定时器，回调函数被延迟了不计其数次。频繁的延迟会导致用户迟迟得不到响应，用户同样会产生“这个页面卡死了”的观感
+
+```js
+function throttle(fn, delay) {
+    let start = 0, timer = null
+    return function () {
+        let end = Date.now()
+        let context = this;
+        let args = arguments
+        if (end - start < delay) {
+            if (timer) {
+                clearTimeout(timer)
+            }
+            timer = setTimeout(() => {
+                start = end
+                fn.apply(context, [...args])
+            }, delay)
+        } else {
+            start = end
+            fn.call(context, ...args)
+        }
+    }
+}
+```

@@ -20,7 +20,7 @@
 let doc = document.createDocumentFragment()
 
 // 屏幕可见高度 
-const screenHeight = document.documentElement.clientHeight
+const screenHeight = window.innerHeight || document.documentElement.clientHeight
 /**
 * 节流函数
 */

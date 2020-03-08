@@ -233,7 +233,10 @@ function getInterviewPerformanceSidebar(group, introduction) {
                 ['preLoad', '资源预加载'],
                 ['preRender', '页面预渲染'],
                 ['lazyLoad', '懒加载'],
-                ['Internet', '网络层面优化']
+                ['Internet', '网络层面优化'],
+                ['storage', '本地存储'],
+                ['cdn', 'CDN的缓存与回源机制'],
+                ['ssr', '服务端渲染']
             ]
         }
     ]
