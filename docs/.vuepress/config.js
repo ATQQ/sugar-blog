@@ -133,7 +133,9 @@ function getInterviewJsSidebar(group, introduction) {
                 ['throttling', '节流与防抖'],
                 ['apply', 'apply,call,bind'],
                 ['blob', 'blob与file'],
-                ['eventloop', 'Event Loop']
+                ['eventloop', 'Event Loop'],
+                ['promise', 'Promise'],
+                ['clock', '定时器']
             ]
         }
     ]
@@ -163,7 +165,8 @@ function getInterviewVueSidebar(group, introduction) {
             sidebarDepth: 2,
             children: [
                 ['', introduction],
-                ['bindData', '数据绑定']
+                ['bindData', '数据绑定'],
+                ['hook', '生命周期钩子']
             ]
         }
     ]
