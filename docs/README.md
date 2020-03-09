@@ -6,7 +6,7 @@ actionText: 关于笔者 →
 actionLink: /aboutme
 title: Blogging Like a Hacker
 lang: zh-CN
-footer: MIT Licensed | Copyright © 2018-present 粥里有勺糖
+# footer: MIT Licensed | Copyright © 2018-present 粥里有勺糖
 ---
 
 ### :pencil:关于内容
@@ -26,4 +26,8 @@ footer: MIT Licensed | Copyright © 2018-present 粥里有勺糖
 * 邮箱:engineerzjl@foxmail.com
 
 
-
+<div class='footer'>
+    MIT Licensed | Copyright © 2018-present 粥里有勺糖
+    <br/><br/>
+    <a style="color: #4e6e8e;" target="_blank" href="http://www.beian.miit.gov.cn/">蜀ICP备19011724号</a>
+</div>
