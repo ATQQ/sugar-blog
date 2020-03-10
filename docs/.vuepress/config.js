@@ -179,7 +179,7 @@ function getInterviewVueSidebar(group, introduction) {
 }
 
 function getInterviewOtherSidebar(group, introduction) {
-    return [
+    let res = [
         {
             title: group,
             collapsable: false,
@@ -187,10 +187,28 @@ function getInterviewOtherSidebar(group, introduction) {
             children: [
                 ['', introduction],
                 ['engineering', '前端工程化'],
-                ['inputurl', '输入URL到页面渲染的整个过程']
+                ['inputurl', '输入URL到页面渲染的整个过程'],
+                ['primitive', '原始类型有哪几种？null 是对象嘛？'],
+                ['object', '对象类型和原始类型的不同之处？函数参数是对象会发生什么问题？'],
+                ['judgeType', 'typeof 是否能正确判断类型？instanceof 能正确判断对象的原理是什么？'],
+                ['typeConvert', '类型转换?'],
+                ['this', '如何正确判断 this？箭头函数的 this 是什么？'],
+                ['equal', '== 和 === 有什么区别？'],
+                ['closure', '什么是闭包?'],
+                ['copy', '什么是浅拷贝？如何实现浅拷贝？什么是深拷贝？如何实现深拷贝？'],
+                ['prototype', '如何理解原型？如何理解原型链？'],
+                ['promote', '什么是提升？什么是暂时性死区？var、let 及 const 区别？'],
+                ['inherit', '原型如何实现继承？Class 如何实现继承？Class 本质是什么？'],
+                ['module', '为什么要使用模块化？都有哪几种方式可以实现模块化，各有什么特点？']
             ]
         }
     ]
+    res[0].children.forEach((v, i) => {
+        if (i > 0) {
+            v[1] = `${i}.${v[1]}`
+        }
+    })
+    return res;
 }
 
 function getInterviewInternetSidebar(group, introduction) {
