@@ -166,7 +166,13 @@ function getInterviewVueSidebar(group, introduction) {
             children: [
                 ['', introduction],
                 ['bindData', '数据绑定'],
-                ['hook', '生命周期钩子']
+                ['hook', '生命周期钩子'],
+                ['communicate', '组件通信'],
+                ['extend', 'extend API'],
+                ['mixin', 'mixin与mixins'],
+                ['computed', 'computed与watch'],
+                ['keep-alive', 'keep-alive'],
+                ['showif', 'v-show 与 v-if']
             ]
         }
     ]
