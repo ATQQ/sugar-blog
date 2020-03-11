@@ -199,7 +199,13 @@ function getInterviewOtherSidebar(group, introduction) {
                 ['prototype', '如何理解原型？如何理解原型链？'],
                 ['promote', '什么是提升？什么是暂时性死区？var、let 及 const 区别？'],
                 ['inherit', '原型如何实现继承？Class 如何实现继承？Class 本质是什么？'],
-                ['module', '为什么要使用模块化？都有哪几种方式可以实现模块化，各有什么特点？']
+                ['module', '为什么要使用模块化？都有哪几种方式可以实现模块化，各有什么特点？'],
+                ['promise', 'Promise 的特点是什么，分别有什么优缺点？什么是 Promise 链？Promise 构造函数执行和 then 函数执行有什么区别？'],
+                ['asyncawait', 'async 及 await 的特点，它们的优点和缺点分别是什么？await 原理是什么？'],
+                ['new', 'new 的原理是什么？通过 new 的方式创建对象和通过字面量创建有什么区别？'],
+                ['v8garbage', 'V8 下的垃圾回收机制是怎么样的？'],
+                ['event', '事件的触发过程是怎么样的？知道什么是事件代理嘛？'],
+                ['cros', '什么是跨域？为什么浏览器要使用同源策略？你有几种方式可以解决跨域问题？了解预检请求嘛？']
             ]
         }
     ]
@@ -222,7 +228,8 @@ function getInterviewInternetSidebar(group, introduction) {
                 ['udp', 'UDP协议'],
                 ['tcp', 'TCP协议'],
                 ['tcp-udp', 'TCP与UDP的区别'],
-                ['http', 'HTTP协议']
+                ['http', 'HTTP协议'],
+                ['safe', '网络安全']
             ]
         }
     ]

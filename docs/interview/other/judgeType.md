@@ -33,3 +33,19 @@ console.log(t instanceof Teacher) // true
 console.log(t instanceof People) // true
 console.log(t instanceof Student) // false
 ```
+## myInstanceof
+```js
+function myInstanceof(target, origin) {
+    let prototype = origin.prototype
+    target = target.__proto__
+    while (true) {
+        if (target === null || target === undefined) {
+            return false
+        }
+        if (target === prototype) {
+            return true
+        }
+        target = target.__proto__
+    }
+}
+```
