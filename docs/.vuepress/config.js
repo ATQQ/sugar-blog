@@ -34,7 +34,8 @@ module.exports = {
                     { text: '性能优化', link: '/interview/performance/' },
                     { text: '网络', link: '/interview/internet/' },
                     { text: '设计模式', link: '/interview/design/' },
-                    { text: '综合问题', link: '/interview/other/' }
+                    { text: '综合问题', link: '/interview/other/' },
+                    { text: '面经', link: '/interview/experience/' }
                 ]
             }
         ],
@@ -49,7 +50,8 @@ module.exports = {
             '/interview/other/': getInterviewOtherSidebar('otherInterview', '前端面试综合问题'),
             '/interview/internet/': getInterviewInternetSidebar('internetInterview', '网络'),
             '/interview/design/': getInterviewDesignSidebar('designPattern', '设计模式'),
-            '/interview/performance/': getInterviewPerformanceSidebar('improvePF', '性能优化')
+            '/interview/performance/': getInterviewPerformanceSidebar('improvePF', '性能优化'),
+            '/interview/experience/': getInterviewExperienceSidebar('experience', '面经整理')
         },
         displayAllHeaders: false,
         sidebarDepth: 2,
@@ -270,7 +272,22 @@ function getInterviewPerformanceSidebar(group, introduction) {
                 ['Internet', '网络层面优化'],
                 ['storage', '本地存储'],
                 ['cdn', 'CDN的缓存与回源机制'],
-                ['ssr', '服务端渲染']
+                ['ssr', '服务端渲染'],
+                ['monitor', '监控']
+            ]
+        }
+    ]
+}
+
+function getInterviewExperienceSidebar(group, introduction) {
+    return [
+        {
+            title: group,
+            collapsable: false,
+            sidebarDepth: 2,
+            children: [
+                ['', introduction],
+                ['tencent-video1','腾讯视频一面']
             ]
         }
     ]
