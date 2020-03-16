@@ -227,9 +227,116 @@ console.log(10);
 </details>
 
 ## node中的Event Loop
-...wait
+Node 与 浏览器中的 Event Loop 完全不同
+
+Node的Event Loop分为**6个阶段**,会按照**顺序**反复执行,每当进入某一个阶段的时候,都会从对应的回调队列中取出函数去执行
+
+![图片](http://img.cdn.sugarat.top/mdImg/MTU4NDMzOTU2ODEwMw==584339568103)
+
+## timers
+执行 ``setTimeout`` 与 ``setInterval``回调,由poll阶段控制
+
+node中的定时器也是不准确的,只是**尽快执行**
+
+## I/O
+处理上一轮中少数未执行的 ``I/O``回调
+
+## idle, prepare
+内部实现
+
+## poll
+至关重要的阶段，这一阶段中，系统会做两件事情
+1. 回到timer阶段执行回调
+2. 执行I/O回调
+
+判断是否设置了timer
+* 是: 如果poll 队列为空，则会判断是否有 timer 超时，有的话就回到 timer 阶段执行回调
+* 否:
+  * 如果poll队列**不为空**,遍历回调队列并同步执行,直到队列为空或者达到系统限制
+  * 如果**为空**
+    * 如果**有**``setImmediate``回调需要执行,poll阶段会停止并进入``check阶段``执行回调
+    * 如果**没有**``setImmediate``,会等待回调被加入的队列中并立即执行回调(超时防止一直等待下去)
 
 
+## check
+执行``setImmediate``回调
+
+## close callbacks
+执行 close 事件
+
+## 例子
+### 某些情况下定时器随机执行
+```js
+setTimeout(() => {
+    console.log('setTimeout')
+}, 1)
+setImmediate(() => {
+    console.log('setImmediate')
+})
+```
+``setTimeout``可能在前,可能在后
+
+**原因**
+* ``setTimeout(fn,0)`` 等价于 ``setTimeout(fn,1)`` 源码决定
+* 进入event loop 需要成本,如果准备时间超过1ms,timer阶段就会直接执行回调
+* 如果准备时间小于1ms就先执行setImmediate
+
+### 定时器执行顺序一定情况
+**I/O回调中**
+```js
+const fs = require('fs')
+fs.readFile(__filename, () => {
+    setTimeout(() => {
+        console.log('timeout');
+    }, 0)
+    setImmediate(() => {
+        console.log('immediate')
+    })
+})
+// timeout
+// immediate
+```
+1. I/O回调在Poll阶段执行
+2. 判断timer --> timers为空 --> 判断poll
+3. poll为空 --> 有setimmediate --> poll阶段会停止并进入check阶段执行回调
+
+**宏任务↑**
+
+**微任务↓**
+``微任务(microtask)``会在每个阶段完成前清空 微任务队列
+
+## process.nextTick
+>独立于 Event Loop 之外的，它有一个自己的队列，当每个阶段完成后，如果存在 nextTick 队列，就会清空队列中的所有回调函数，并且优先于其他 microtask 执行。
+
+### 示例
+```js
+setTimeout(() => {
+    console.log('timer1')
+}, 0)
+
+Promise.resolve().then(function () {
+    console.log('promise1')
+})
+
+process.nextTick(() => {
+    console.log('nextTick')
+    process.nextTick(() => {
+        console.log('nextTick')
+        process.nextTick(() => {
+            console.log('nextTick')
+            process.nextTick(() => {
+                console.log('nextTick')
+            })
+        })
+    })
+})
+// nextTick
+// nextTick
+// nextTick
+// nextTick
+// promise1
+// timer1
+```
 :::tip 参考
 [从setTimeout-setInterval看JS线程](https://palmer.arkstack.cn/2017/12/%E4%BB%8EsetTimeout-setInterval%E7%9C%8BJS%E7%BA%BF%E7%A8%8B/)<br>
 [什么是Event Loop](http://www.ruanyifeng.com/blog/2013/10/event_loop.html)<br>

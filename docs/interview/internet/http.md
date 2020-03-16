@@ -218,7 +218,11 @@ QUIC 基于 UDP，在原本的基础上新增了很多功能，比如多路复�
 >一种全新的基于UDP的web开发协议。可以用一个公式大致概括：TCP + TLS + HTTP2 = UDP + QUIC + HTTP2’s API
 
 >从公式可看出：QUIC协议虽然是基于UDP，但它不但具有TCP的可靠性、拥塞控制、流量控制等，且在TCP协议的基础上做了一些改进，比如避免了队首阻塞；另外，QUIC协议具有TLS的安全传输特性，实现了TLS的保密功能，同时又使用更少的RTT建立安全的会话。
+
+
 ### 多路复用
+>无队头阻塞的多路复用
+
 QUIC 原生实现了这个功能，并且传输的单个数据流可以保证有序交付且不会影响其他的数据流，这样的技术就解决了之前 TCP 存在的问题。
 
 并且 QUIC 在移动端的表现也会比 TCP 好:
@@ -226,8 +230,18 @@ QUIC 原生实现了这个功能，并且传输的单个数据流可以保证有
 * QUIC 是通过 ID 的方式去识别一个连接，不管你网络环境如何变化，只要 ID 不变，就能迅速重连上。
 
 ### 0-RTT
+**与其它协议比较**
+* TCP建立链接需要三次握手,每次链接需要额外的RTT
+* 加入了TLS需要额外的RTT
+
+**0-RTT情况**
+
 通过使用类似 TCP 快速打开的技术，缓存当前会话的上下文，在下次恢复会话的时候，只需要将之前的缓存传递给服务端验证通过就可以进行传输了。
 
+**1-RTT情况**
+新的QUIC连接至少需要1 RTT才能完成握手
+
+![图片](http://img.cdn.sugarat.top/mdImg/MTU4NDMyMzc2NTY2MA==584323765660)
 ### 纠错机制
 假如说这次我要发送三个包，那么协议会算出这三个包的异或值并单独发出一个校验包，也就是总共发出了四个包。
 
@@ -241,5 +255,6 @@ QUIC 原生实现了这个功能，并且传输的单个数据流可以保证有
 
 :::tip 参考
 [MDN Http方法](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Methods)<br>
-[http](https://yuchengkai.cn/docs/cs/#post-%E5%92%8C-get-%E7%9A%84%E5%8C%BA%E5%88%AB)
+[http](https://yuchengkai.cn/docs/cs/#post-%E5%92%8C-get-%E7%9A%84%E5%8C%BA%E5%88%AB)<br>
+[CSDN:QUIC（Quick UDP Internet Connections）协议：全新的基于UDP的web开发协议](https://blog.csdn.net/coloriy/article/details/88418258)
 :::

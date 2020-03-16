@@ -33,6 +33,7 @@ module.exports = {
                     { text: 'vue', link: '/interview/vue/' },
                     { text: '性能优化', link: '/interview/performance/' },
                     { text: '网络', link: '/interview/internet/' },
+                    { text: '操作系统', link: '/interview/os/' },
                     { text: '设计模式', link: '/interview/design/' },
                     { text: '综合问题', link: '/interview/other/' },
                     { text: '面经', link: '/interview/experience/' }
@@ -51,7 +52,8 @@ module.exports = {
             '/interview/internet/': getInterviewInternetSidebar('internetInterview', '网络'),
             '/interview/design/': getInterviewDesignSidebar('designPattern', '设计模式'),
             '/interview/performance/': getInterviewPerformanceSidebar('improvePF', '性能优化'),
-            '/interview/experience/': getInterviewExperienceSidebar('experience', '面经整理')
+            '/interview/experience/': getInterviewExperienceSidebar('experience', '面经整理'),
+            '/interview/os/': getInterviewOsSidebar('os', '操作系统')
         },
         displayAllHeaders: false,
         sidebarDepth: 2,
@@ -287,7 +289,23 @@ function getInterviewExperienceSidebar(group, introduction) {
             sidebarDepth: 2,
             children: [
                 ['', introduction],
-                ['tencent-video1','腾讯视频一面']
+                ['tencent-video1', '腾讯视频一面']
+            ]
+        }
+    ]
+}
+
+function getInterviewOsSidebar(group, introduction) {
+    return [
+        {
+            title: group,
+            collapsable: false,
+            sidebarDepth: 2,
+            children: [
+                ['', introduction],
+                ['process', '进程'],
+                ['thread', '线程'],
+                ['difprothr', '进程与线程的区别']
             ]
         }
     ]

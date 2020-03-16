@@ -5,3 +5,8 @@
 :::tip 参考
 [掘进小册:JavaScript 设计模式核⼼原理与应⽤实践](https://juejin.im/book/5c70fc83518825428d7f9dfb/section/5c7163256fb9a049d132c3ed)
 :::
+
+## 目录
+* [抽象工厂模式](./abstractfactory.md)
+* [简单工厂模式](./factory.md)
+* [单例模式](./single.md)
