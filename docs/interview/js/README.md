@@ -12,4 +12,8 @@
 * [Event Loop](./eventloop.md)
 * [垃圾回收机制](./garbage.md)
 * [Promise](./promise.md)
+* [原型与原型链](./prototype.md)
+* [执行上下文栈](./runStack.md)
+* [作用域](./scope.md)
 * [节流与防抖](./throttling.md)
+* [变量对象](./variableObject.md)

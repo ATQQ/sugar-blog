@@ -139,7 +139,11 @@ function getInterviewJsSidebar(group, introduction) {
                 ['blob', 'blob与file'],
                 ['eventloop', 'Event Loop'],
                 ['promise', 'Promise'],
-                ['clock', '定时器']
+                ['clock', '定时器'],
+                ['prototype', '原型与原型链'],
+                ['scope', '作用域'],
+                ['runStack', '执行上下文栈'],
+                ['variableObject', '变量对象']
             ]
         }
     ]

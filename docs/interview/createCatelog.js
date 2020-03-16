@@ -13,6 +13,9 @@ function getDirList(dir, dir2 = '') {
 }
 function addDirListToREADME(dirList, readmefile) {
     let res = `\n\n## 目录\n${dirList.join("\n")}`
+    let old = fs.readFileSync(readmefile, { encoding: 'utf-8' })
+    old = old.slice(0, old.indexOf('\n\n## 目录'))
+    fs.writeFileSync(readmefile, old)
     fs.appendFileSync(readmefile, res)
 }
 
