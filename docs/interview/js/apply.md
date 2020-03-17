@@ -3,7 +3,7 @@
 ## 相同点
 1. 更改this指向
 :::tip
-bind 会返回一个新的函数
+MDN:bind() 方法会创建一个新函数。当这个新函数被调用时，bind() 的第一个参数将作为它运行时的 this，之后的一序列参数将会在传递的实参前传入作为它的参数
 :::
 
 ```js
@@ -44,6 +44,14 @@ function test(a, b) {
 }
 ```
 ### mycall
+**步骤**
+1. 将函数设为对象的属性
+2. 执行函数
+3. 删除该属性
+
+**注意点**
+* 传入的this可能为null:此时使用window
+
 ```js
 Function.prototype.mycall = function (thisArg) {
     if (typeof this !== 'function') {
@@ -90,16 +98,13 @@ Function.prototype.mybind = function (thisArg) {
         throw 'error'
     }
     const that = this
-    thisArg = thisArg || window
-    if (!(thisArg instanceof Object)) {
-        thisArg = new Object(thisArg)
-    }
-    const argvs = [...arguments].slice(1)
+    const args = [...arguments].slice(1)
     return function F() {
+        const bindArgs = args.concat(...arguments)
         if (this instanceof F) {
-            return new that(...argvs, ...arguments)
+            return new that(...bindArgs)
         }
-        return that.apply(thisArg, argvs.concat([...arguments]))
+        return that.apply(thisArg,bindArgs)
     }
 }
 

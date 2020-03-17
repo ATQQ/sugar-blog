@@ -143,7 +143,12 @@ function getInterviewJsSidebar(group, introduction) {
                 ['prototype', '原型与原型链'],
                 ['scope', '作用域'],
                 ['runStack', '执行上下文栈'],
-                ['variableObject', '变量对象']
+                ['variableObject', '变量对象'],
+                ['scopeLink', '作用域链'],
+                ['ecmathis', 'ECMAScript规范解读this'],
+                ['runcontext', '执行上下文'],
+                ['valuePass', '参数按值传递'],
+                ['likearray', '类数组与arguments']
             ]
         }
     ]
