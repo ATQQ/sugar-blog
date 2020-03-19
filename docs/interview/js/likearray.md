@@ -88,6 +88,16 @@ fn(666,555)
 * 传入的参数，实参和 arguments 的值会共享
 * 没有传入时，实参与 arguments 值不会共享
 
+### 传递参数
+```js
+function foo(){
+    return bar.apply(this,arguments)
+}
+function bar(a,b){
+    return a+b;
+}
+console.log(foo(1,2)) // 3
+```
 :::tip 参考
 [JavaScript深入之类数组对象与arguments](https://github.com/mqyqingfeng/Blog/issues/14)
 :::

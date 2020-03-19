@@ -148,7 +148,8 @@ function getInterviewJsSidebar(group, introduction) {
                 ['ecmathis', 'ECMAScript规范解读this'],
                 ['runcontext', '执行上下文'],
                 ['valuePass', '参数按值传递'],
-                ['likearray', '类数组与arguments']
+                ['likearray', '类数组与arguments'],
+                ['float', '浮点数']
             ]
         }
     ]

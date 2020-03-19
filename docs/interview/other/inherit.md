@@ -14,11 +14,12 @@ function Child(v){
     Parent.call(this,v)
 }
 Child.prototype = new Parent()
-
+Child.prototype = Child
 let child1 = new Child(1)
 console.log(child1.getValue()) // 1
 ```
 ### 寄生组合继承
+1. 
 ```js
 function Parent(val){
     this.val = val
@@ -41,7 +42,33 @@ Child.prototype = Object.create(Parent.prototype,{constructor:{
 let child1 = new Child(1)
 console.log(child1.getValue()) // 1
 ```
+2. 
+```js
+function Parent(val){
+    this.val = val
+}
+Parent.prototype.getValue = function(){
+    return this.val
+}
 
+function Child(v){
+    Parent.call(this,v)
+}
+function Object(o){
+  let fn = function(){}
+  fn.prototype = o
+  return new fn()
+}
+function prototype(Child,Parent){
+  let proto = Object(Parent.prototype)
+  proto.constructor = Child
+  Child.prototype = proto
+}
+
+prototype(Child,Parent)
+let child1 = new Child(1)
+console.log(child1.getValue()) // 1
+```
 ## Class 如何实现继承？
 ```js
 class Parent{
