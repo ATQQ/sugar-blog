@@ -36,6 +36,7 @@ module.exports = {
                     { text: '操作系统', link: '/interview/os/' },
                     { text: '设计模式', link: '/interview/design/' },
                     { text: '综合问题', link: '/interview/other/' },
+                    { text: '问解', link: '/interview/problem/' },
                     { text: '面经', link: '/interview/experience/' }
                 ]
             }
@@ -53,7 +54,8 @@ module.exports = {
             '/interview/design/': getInterviewDesignSidebar('designPattern', '设计模式'),
             '/interview/performance/': getInterviewPerformanceSidebar('improvePF', '性能优化'),
             '/interview/experience/': getInterviewExperienceSidebar('experience', '面经整理'),
-            '/interview/os/': getInterviewOsSidebar('os', '操作系统')
+            '/interview/os/': getInterviewOsSidebar('os', '操作系统'),
+            '/interview/problem/': getInterviewQASidebar('QA', '问解')
         },
         displayAllHeaders: false,
         sidebarDepth: 2,
@@ -201,7 +203,7 @@ function getInterviewOtherSidebar(group, introduction) {
             children: [
                 ['', introduction],
                 ['engineering', '前端工程化'],
-                ['inputurl', '输入URL到页面渲染的整个过程'],
+                ['inputurl', '输入URL到页面渲染的整个过程发生了什么?'],
                 ['primitive', '原始类型有哪几种？null 是对象嘛？'],
                 ['object', '对象类型和原始类型的不同之处？函数参数是对象会发生什么问题？'],
                 ['judgeType', 'typeof 是否能正确判断类型？instanceof 能正确判断对象的原理是什么？'],
@@ -223,11 +225,7 @@ function getInterviewOtherSidebar(group, introduction) {
             ]
         }
     ]
-    res[0].children.forEach((v, i) => {
-        if (i > 0) {
-            v[1] = `${i}.${v[1]}`
-        }
-    })
+    addChildNums(res)
     return res;
 }
 
@@ -319,4 +317,38 @@ function getInterviewOsSidebar(group, introduction) {
             ]
         }
     ]
+}
+
+function getInterviewQASidebar(group, introduction) {
+    let res = [
+        {
+            title: group,
+            collapsable: false,
+            sidebarDepth: 2,
+            children: [
+                ['', introduction],
+                ['engineering', '怎样理解前端工程化?'],
+                ['inputurl', '输入URL到页面渲染的整个过程发生了什么?'],
+                ['primitive', '原始类型有哪几种？null 是对象嘛？'],
+                ['zero', '为什么 0.1 + 0.2 != 0.3?'],
+                ['objDfValue', '对象类型和原始类型的不同之处？'],
+                ['objparam','函数参数是对象会发生什么问题？']
+            ]
+        }
+    ]
+    addChildNums(res)
+    return res;
+}
+
+/**
+ * 为侧边导航栏目加上序号
+ * @param {Object} res 
+ */
+function addChildNums(res) {
+    res[0].children.forEach((v, i) => {
+        if (i > 0) {
+            v[1] = `${i}.${v[1]}`
+        }
+    })
+    return res;
 }

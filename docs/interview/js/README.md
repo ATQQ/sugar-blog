@@ -11,6 +11,7 @@
 * [delete](./delete.md)
 * [ECMAScript规范解读this(未完待续)](./ecmathis.md)
 * [Event Loop](./eventloop.md)
+* [浮点数](./float.md)
 * [垃圾回收机制](./garbage.md)
 * [类数组与arguments](./likearray.md)
 * [Promise](./promise.md)
