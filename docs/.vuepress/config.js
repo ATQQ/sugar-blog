@@ -55,7 +55,7 @@ module.exports = {
             '/interview/performance/': getInterviewPerformanceSidebar('improvePF', '性能优化'),
             '/interview/experience/': getInterviewExperienceSidebar('experience', '面经整理'),
             '/interview/os/': getInterviewOsSidebar('os', '操作系统'),
-            '/interview/problem/': getInterviewQASidebar('QA', '问解')
+            '/interview/problem/': getInterviewQASidebar('QA', '目录')
         },
         displayAllHeaders: false,
         sidebarDepth: 2,
@@ -332,7 +332,10 @@ function getInterviewQASidebar(group, introduction) {
                 ['primitive', '原始类型有哪几种？null 是对象嘛？'],
                 ['zero', '为什么 0.1 + 0.2 != 0.3?'],
                 ['objDfValue', '对象类型和原始类型的不同之处？'],
-                ['objparam','函数参数是对象会发生什么问题？']
+                ['objparam', '函数参数是对象会发生什么问题？'],
+                ['typeof', 'typeof能否正常判断类型?'],
+                ['instanceof', 'instanceof能正确判断对象的原因是什么?'],
+                ['this', '如何正确判断this?箭头函数的this是什么?']
             ]
         }
     ]

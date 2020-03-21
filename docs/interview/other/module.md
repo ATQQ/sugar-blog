@@ -43,10 +43,13 @@ CommonJS 最早是 Node 在使用，目前也仍然广泛使用，比如在 Webp
 * ES Module
 
 ES Module 是原生实现的模块化方案，与 CommonJS 有以下几个区别:
-* CommonJS 支持动态导入
-* CommonJS 同步导入,ES Module是异步导入
-* CommonJS 在导出时都是值拷贝
-* ES Module 会编译成 require/exports 来执行的
+
+|   方案    |         导出          |             导入              |          语法           |   this    |
+| :-------: | :-------------------: | :---------------------------: | :---------------------: | :-------: |
+| CommonJS  |  值拷贝/只能单个导出  | 动态导入(运行时加载)/同步导入 | 动态语法,可以写在判断中 | 当前模块  |
+| ES Module | 值的引用/可以导出多个 |    编译时输出接口/异步导入    | 静态语法,只能写在最顶层 | undefined |
+
+**ES Module 会编译成 require/exports 来执行的**
 ```js
 // 引入模块 API
 import XXX from './a.js'
