@@ -57,7 +57,7 @@ document.body.appendChild($srcipt)
 </script>
 ```
 
-## CORS
+### CORS
 服务端设置 Access-Control-Allow-Origin 就可以开启 CORS
 
 以node为例子
@@ -78,16 +78,6 @@ let server = http.createServer(async (req, res) => {
         return res.end()
     }
     console.log(method, url)
-    if (url === '/api/expires') {
-        // 设置过期时间
-        res.setHeader('Expires', 'Tue Mar 10 2020 11:11:28 GMT+0800')
-        return res.end(`Expires---${new Date()}`)
-    }
-    if (url === '/api/cache') {
-        // 设置10s后过期,需重新请求
-        res.setHeader('Cache-control', 'max-age=10')
-        return res.end(`Cache-control---${new Date()}`)
-    }
     res.end('success')
 })
 
@@ -97,13 +87,36 @@ server.listen(3000, err => {
 })
 ```
 
-## Nginx
+### Nginx
 通过设置反向代理进行请求的转发
 
-## document.domain
+### document.domain
 二级域名相同的情况下，比如 a.sugarat.top 和 b.sugarat.top 适用于该方式。
 
 只需要给页面添加 document.domain = 'sugarat.top' 表示二级域名都相同就可以实现跨域
+
+### 预检请求
+使用后端开启CROS解决跨域的方式，会把请求分成两种类型：
+* 简单请求
+* 复杂请求
+
+#### 简单请求
+触发简单请求的条件↓
+
+**1.使用方法**:
+* GET
+* HEAD
+* POST
+
+**2.Content-Type仅限于**:
+* text/plain
+* multipart/form-data
+* application/x-www-form-urlencoded
+
+#### 复杂请求
+``非简单请求``的即为复杂请求↓
+
+对于复杂请求，首先会发起一个**预检请求**,请求方法为``option``,通过该请求来判断服务器是否允许跨域
 
 :::tip 涉及面试问题
 什么是跨域？<br>

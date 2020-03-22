@@ -151,7 +151,10 @@ function getInterviewJsSidebar(group, introduction) {
                 ['runcontext', '执行上下文'],
                 ['valuePass', '参数按值传递'],
                 ['likearray', '类数组与arguments'],
-                ['float', '浮点数']
+                ['float', '浮点数'],
+                ['symbol', 'Symbol的用法?'],
+                ['arrowfun', '箭头函数?'],
+                ['es6', 'ees6面试题']
             ]
         }
     ]
@@ -167,7 +170,12 @@ function getInterviewCssSidebar(group, introduction) {
                 ['', introduction],
                 ['reflow', '回流与重绘'],
                 ['box', '盒模型'],
-                ['flex', '弹性布局']
+                ['flex', '弹性布局'],
+                ['level', 'CSS层级关系'],
+                ['display', 'display属性有哪些?作用分别是什么?'],
+                ['position', 'position的值有哪些?'],
+                ['bfc', 'BFC?'],
+                ['ifc', 'IFC?']
             ]
         }
     ]

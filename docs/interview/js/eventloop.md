@@ -124,10 +124,18 @@ console.log('script end')
 如果 await 后面跟着 Promise 的话，async1 end 需要等待三个 tick 才能执行到。
 
 ### Event Loop执行顺序
-* 同步代码  宏任务
+* 同步代码
 * 执行完所有同步代码后，执行栈为空，查询是否有异步代码需要执行
 * 执行 微任务,如果在执行microtask的过程中，又产生了microtask，那么会加入到队列的末尾，也会在这个周期被调用执行
-* 执行完所有微任务后，如有必要会渲染页面
+* 执行完所有微任务后，如有必要会渲染页面:
+  * 判断document是否需要更新:浏览器是 60Hz 的刷新率，每 16.6ms 才会更新一次。
+  * 判断是否有 resize 或者 scroll 事件，有的话会去触发事件:所以 resize 和 scroll 事件也是至少 16ms 才会触发一次，并且**自带节流**功能。
+  * 判断是否触发了 media query
+  * 更新动画并且发送事件
+  * 判断是否有全屏操作事件
+  * 执行 requestAnimationFrame 回调
+  * 执行 IntersectionObserver 回调，该方法用于判断元素是否可见，可以用于懒加载上，但是兼容性不好
+  * 更新界面
 * 然后开始下一轮 Event Loop，执行宏任务中的异步代码，也就是 setTimeout 中的回调函数
 
 归纳
@@ -143,6 +151,7 @@ console.log('script end')
 
 ### 宏任务
 * script
+* xhr
 * setTimeout
 * setInterval
 * setImmediate(node)
