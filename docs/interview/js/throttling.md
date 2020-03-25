@@ -132,7 +132,7 @@ function throttle(fn,delay){
             return
         }
         start = Date.now()
-        fn.apply(this,[...arguments])
+        fn.apply(this,arguments)
     }
 }
 ```

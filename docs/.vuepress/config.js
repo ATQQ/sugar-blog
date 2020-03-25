@@ -249,7 +249,8 @@ function getInterviewInternetSidebar(group, introduction) {
                 ['tcp', 'TCP协议'],
                 ['tcp-udp', 'TCP与UDP的区别'],
                 ['http', 'HTTP协议'],
-                ['safe', '网络安全']
+                ['safe', '网络安全'],
+                ['clength', 'Content-Length']
             ]
         }
     ]
@@ -305,7 +306,8 @@ function getInterviewExperienceSidebar(group, introduction) {
             sidebarDepth: 2,
             children: [
                 ['', introduction],
-                ['tencent-video1', '腾讯视频一面']
+                ['tencent-video1', '腾讯视频一面'],
+                ['tencent-video2', '腾讯视频二面']
             ]
         }
     ]
@@ -321,7 +323,8 @@ function getInterviewOsSidebar(group, introduction) {
                 ['', introduction],
                 ['process', '进程'],
                 ['thread', '线程'],
-                ['difprothr', '进程与线程的区别']
+                ['difprothr', '进程与线程的区别'],
+                ['communicate', '进程和线程怎么通信']
             ]
         }
     ]

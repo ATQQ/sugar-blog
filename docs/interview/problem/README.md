@@ -8,8 +8,8 @@
 <solve ok>[为什么0.1+0.2!=0.3?](./zero.md)</solve>
 <solve ok>[对象类型与原始类型的不同之处?](./objDfValue.md)</solve>
 <solve ok>[函数参数是对象会发生什么问题?](./objparam.md)</solve>
-<solve ok>[typeof能否正常判断问题?](./typeof.md)</solve>
-<solve ok>[instanceof能正确判断问题的原因是什么?](./instanceof.md)</solve>
+<solve ok>[typeof能否正常判断类型?](./typeof.md)</solve>
+<solve ok>[instanceof能正确判断类型的原因是什么?](./instanceof.md)</solve>
 <solve ok>[原型与原型链?](../js/prototype.md)</solve>
 <solve ok>[如何正确判断this?](../other/this.md)</solve>
 <solve ok>[箭头函数的this是什么?](../other/this.md)</solve>
@@ -49,6 +49,7 @@
 
 ## vue
 <solve>[实现数据的响应式的原理？](../vue/bindData.md)</solve>
+<solve>路由原理,为什么浏览器不会刷新</solve>
 
 ## ES6
 <solve ok>[常见es6问题?](../js/es6.md)</solve>
@@ -64,31 +65,41 @@
 
 
 ## 编程题
-<solve>如何实现继承？</solve>
-<solve>实现new</solve>
-<solve>节流与防抖实现</solve>
-<solve>实现call/apply/bind</solve>
-<solve>实现setTimeout/setInterval</solve>
-<solve>如何实现垂直居中</solve>
+<solve ok>如何实现继承？</solve>
+<solve ok>实现new</solve>
+<solve ok>节流与防抖实现</solve>
+<solve ok>实现call/apply/bind</solve>
+<solve ok>实现setTimeout/setInterval</solve>
+<solve>并发请求?</solve>
+<solve ok>实现一个ajax</solve>
+<solve ok>vue原理</solve>
+<solve ok>如何实现垂直居中</solve>
+<solve>KMP</solve>
+<solve ok>quicksort</solve>
+<solve ok>实现36进制转换</solve>
+<solve>树的遍历方式,前/中/后,层次</solve>
+<solve>对称二叉树</solve>
+<solve ok>实现36进制转换</solve>
 
 ## 网络
-<solve>概述一下TCP？</solve>
-<solve>概述一下UDP？</solve>
-<solve>TCP与UDP区别？</solve>
-<solve>概述HTTP？</solve>
-<solve>HTTP与HTTPS的区别?</solve>
-<solve>TLS协议握手过程,如何工作的？</solve>
-<solve>HTTP2的特点?</solve>
-<solve>如何才能使用HTTP2?有什么前提条件?</solve>
-<solve>HTTP3中使用的QUIC协议基于UDP的原因?</solve>
-<solve>如果响应头Content-Length=0那么是发出来被截取了还是没发出来?</solve>
+<solve ok>[概述一下TCP？](../internet/tcp.md)</solve>
+<solve ok>[概述一下UDP？](../internet/udp.md)</solve>
+<solve ok>[TCP与UDP区别？](../internet/tcp-udp.md)</solve>
+<solve ok>[概述HTTP？](../internet/http.md)</solve>
+<solve ok>[HTTP与HTTPS的区别?](../internet/http.md#HTTPS)</solve>
+<solve ok>[TLS协议握手过程,如何工作的？](../internet/http.md#TLS)</solve>
+<solve ok>[HTTP2的特点?](../internet/http.md#http-2)</solve>
+<solve ok>[如何才能使用HTTP2?有什么前提条件?](../internet/http.md#如何使用)</solve>
+<solve ok>[HTTP3中使用的QUIC协议基于UDP的原因?](../internet/http.md#QUIC)</solve>
+<solve ok>[如果响应头Content-Length=0那么是发出来被截取了还是没发出来?](../internet/clength.md)</solve>
 
 ## 操作系统
 <solve>线程与进程的概念/区别/如何工作的?</solve>
 <solve>进程之间如何进行切换的?</solve>
+<solve>[进程和线程怎么通信?](../os/communicate.md)</solve>
 
 ## 综合问题
-<solve>怎么理解前端工程化？</solve>
-<solve>浏览器输入url之后到网页显示发生了什么？</solve>
+<solve ok>[怎么理解前端工程化？](./engineering.md)</solve>
+<solve ok>[浏览器输入url之后到网页显示发生了什么？](./inputurl.md)</solve>
 
 ## 非技术问题

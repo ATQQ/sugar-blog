@@ -160,6 +160,7 @@ function throttle(fn, delay) {
         } else {
             start = end
             fn.call(context, ...args)
+            clearTimeout(timer)
         }
     }
 }

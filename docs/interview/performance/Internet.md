@@ -79,7 +79,7 @@ module.exports = {
 ### 拆分资源
 
 ### 删除冗余代码
-
+* 使用``Tree-Shaking``插件
 ## Gzip 压缩
 ### 开启Gzip
 在request headers中加入
