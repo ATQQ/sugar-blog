@@ -80,6 +80,7 @@
 <solve>树的遍历方式,前/中/后,层次</solve>
 <solve>对称二叉树</solve>
 <solve ok>实现36进制转换</solve>
+<solve ok>如何实现 a==1&&a==2 -- true</solve>
 
 ## 网络
 <solve ok>[概述一下TCP？](../internet/tcp.md)</solve>
@@ -103,3 +104,14 @@
 <solve ok>[浏览器输入url之后到网页显示发生了什么？](./inputurl.md)</solve>
 
 ## 非技术问题
+
+## 目录
+* [如何理解前端工程化?](./engineering.md)
+* [在浏览器中输入URL到页面渲染的整个过程](./inputurl.md)
+* [instanceof能正确判断对象的原因是什么?](./instanceof.md)
+* [对象类型和原始类型的不同之处？](./objDfValue.md)
+* [函数参数是对象会发生什么问题？](./objparam.md)
+* [原始类型有哪几种？null 是对象嘛？](./primitive.md)
+* [如何正确判断this?箭头函数的this是什么?](./this.md)
+* [typeof能否正常判断类型?](./typeof.md)
+* [为什么 0.1 + 0.2 != 0.3?](./zero.md)

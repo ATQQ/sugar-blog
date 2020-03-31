@@ -21,7 +21,15 @@ sql = "SELECT * FROM articles WHERE id = ? "
 ## XSS
 ### 什么是 XSS 攻击？
 
+``XSS``全称``Cross Site Scripting`` 跨站脚本
+
 攻击者将代码注入页面
+* 窃取Cookie
+* 监听用户行为:表单输入
+* 修改 DOM 伪造登录表单
+* 在页面中生成浮窗广告
+* 恶意跳转
+* ...
 
 XSS 可以分为两类：``持久型``和``非持久型``。
 
@@ -39,7 +47,8 @@ XSS 可以分为两类：``持久型``和``非持久型``。
 
 ### 如何防范 XSS 攻击？什么是 CSP？
 
-**转义字符**
+#### 转义字符
+>不相信任何用户的输入
 
 转译用户输入的内容
 ```js
@@ -54,7 +63,7 @@ function escape(str) {
   return str
 }
 ```
-### CSP
+#### CSP
 CSP 本质上就是建立白名单，明确告诉浏览器哪些外部资源可以加载和执行。可以通过这种方式来尽量减少 XSS 攻击。
 
 **使用方式**
@@ -70,6 +79,9 @@ CSP 本质上就是建立白名单，明确告诉浏览器哪些外部资源可�
 * 框架（frame）：必须使用HTTPS协议加载
 * 其他资源：没有限制
 
+#### 设置HttpOnly
+阻止脚本读取cookie,防范XSS
+
 :::tip 参考
 [MDN:Content-Security-Policy](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Security-Policy)<br/>
 [阮一峰:CSP](http://www.ruanyifeng.com/blog/2016/09/csp.html)
@@ -77,16 +89,28 @@ CSP 本质上就是建立白名单，明确告诉浏览器哪些外部资源可�
 
 ## CSRF
 ### 什么是 CSRF 攻击？
-CSRF--跨站请求伪造
+``CSRF``--``Cross-site request forgery``--跨站请求伪造
 
 攻击者构造出一个后端请求地址，诱导用户点击或者通过某些途径自动发起请求。如果用户是在登录状态下的话，后端就以为是用户在操作，从而进行相应的逻辑。
+
+### 如何伪造CSRF
+* 自动GET:使用img,link等等标签
+* 自动POST:自动提交表单的脚本
+* 诱导用户点击
+
 ### 如何防范 CSRF 攻击？
 * ``Get``请求不对数据进行修改,即无副作用操作
 * 阻止第三方网站请求接口
 * 请求时附带验证信息，比如验证码或者 Token
 * 不让第三方网站访问到用户 Cookie
 * 设置SameSite:表示 Cookie 不随着跨域请求发送
-* 验证Referer:通过Referer验证请求是否为第三方发送
+  * strict:完全禁止第三方请求携带Cookie
+  * lax:get 方法提交表单,a标签发送 get 请求可以携带
+  * none:请求会自动携带上 Cookie
+* 验证Referer/Origin:通过Referer验证请求是否为第三方发送
+  * Origin:域名信息
+  * Referer:包含具体URL
+  * **可通过自定义请求头伪造**
 * Token:服务器下发一个随机 Token，每次发起请求时将 Token 携带上，服务器验证 Token 是否有效
 
 ## 点击劫持

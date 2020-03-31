@@ -23,7 +23,8 @@ module.exports = {
                     { text: 'css', link: '/css/' },
                     { text: 'regexp(正则)', 'link': '/regexp/' },
                     { text: 'es6 and more', link: '/es6+/' },
-                    { text: 'node', link: '/node/' }]
+                    { text: 'node', link: '/node/' },
+                    { text: 'leetcode', link: '/leetcode/' }]
             },
             {
                 text: '面试',
@@ -46,6 +47,7 @@ module.exports = {
             '/css/': getCssSidebar('css', '简介'),
             '/regexp/': getRegexpSidebar('regexp', '正则表达式'),
             '/node/': getNodeSidebar('node', 'NodeJS'),
+            '/leetcode/': getLeedCodeSidebar('leetcode', 'leetcode'),
             '/interview/js/': getInterviewJsSidebar('JsInterview', 'js面试题'),
             '/interview/css/': getInterviewCssSidebar('cssInterview', 'css面试'),
             '/interview/vue/': getInterviewVueSidebar('vueInterview', 'vue面试'),
@@ -119,6 +121,24 @@ function getNodeSidebar(group, introduction) {
             children: [
                 ['', introduction],
                 ['problem/p1', '从控制台录入数据']
+            ]
+        }
+    ]
+}
+function getLeedCodeSidebar(group, introduction) {
+    return [
+        {
+            title: group,
+            collapsable: false,
+            sidebarDepth: 2,
+            children: [
+                ['', introduction],
+                ['offer/p50', '面试题50:第一个只出现一次的字符'],
+                ['offer/p53-2', '面试题53II:0～n-1中缺失的数字'],
+                ['offer/p54', '面试题54:二叉搜索树的第k大节点'],
+                ['offer/p55', '面试题55:平衡二叉树'],
+                ['offer/p55-1', '面试题55:二叉树的深度'],
+                ['offer/p58', '面试题58:左旋转字符串']
             ]
         }
     ]
@@ -292,7 +312,8 @@ function getInterviewPerformanceSidebar(group, introduction) {
                 ['storage', '本地存储'],
                 ['cdn', 'CDN的缓存与回源机制'],
                 ['ssr', '服务端渲染'],
-                ['monitor', '监控']
+                ['monitor', '监控'],
+                ['firstScreenRender', '如何加快首屏渲染']
             ]
         }
     ]
@@ -307,7 +328,9 @@ function getInterviewExperienceSidebar(group, introduction) {
             children: [
                 ['', introduction],
                 ['tencent-video1', '腾讯视频一面'],
-                ['tencent-video2', '腾讯视频二面']
+                ['tencent-video2', '腾讯视频二面'],
+                ['tencent-video3', '腾讯视频三面'],
+                ['meituan-dd', '美团点评一,二面']
             ]
         }
     ]

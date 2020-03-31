@@ -1,6 +1,11 @@
 # 腾讯视频一面
 ## 编程题
+<detail>
+<template v-slot:title>
+
 ### 1. 拓展Array排序,考虑时间,空间复杂度,越低越好
+</template>
+
 ```js
 function swap(arr, left, right) {
     let t = arr[left]
@@ -64,8 +69,14 @@ b.mySort()
 console.log(a)
 console.log(b)
 ```
+</detail>
+
+<detail>
+<template v-slot:title>
 
 ### 2.一张90*90的图片由9个表情组成,每10s随机显示其中一个
+</template>
+
 ```html
 <div class="emoji"> </div>
 ```
@@ -95,7 +106,14 @@ loop()
 ```
 [codePen:示例](https://codepen.io/sugarInSoup/pen/qBdoMeX)
 
+</detail>
+
+<detail>
+<template v-slot:title>
+
 ### 3.弹性9宫格布局,9个表情(30*30),每10秒随机显示一个
+</template>
+
 ```html
 <div class="emojis">
     <img class="emoji" src="http://img.cdn.sugarat.top/mdImg/MTU4NDE1NzU4NTE2Mg==584157585163"></img>
@@ -140,11 +158,31 @@ loop()
 ```
 [codePen查看示例](https://codepen.io/sugarInSoup/pen/poJLxJJ)
 
+</detail>
+
 ## JS
 ### [1.event loop](./../js/eventloop.md)
+<detail>
+<template v-slot:title>
+
 ### 2.nodejs中的进程与线程
-* 一个http请求是线程还是进程?
-  * 答:线程
+</template>
+
+>Node.js 中的进程 Process 是一个全局对象，无需 require 直接使用，给我们提供了当前进程中的相关信息。Node.js 中进程可以使用 child_process 模块创建。
+
+**关系：**
+* 一个线程只能属于一个进程，而一个进程可以有多个线程，但至少有一个线程（通常说的主线程）。
+* 同一进程的所有线程共享该进程的所有资源。
+* 进程在执行过程中，需要协作同步。不同进程的线程间要利用消息通信的办法实现同步。
+* 处理机分给线程，即真正在处理机上运行的是线程。
+* 线程是指进程内的一个执行单元，也是进程内的可调度实体。
+
+**区别：**
+* 调度：线程作为调度和分配的基本单位，进程作为拥有资源的基本单位。
+* 拥有资源：进程是拥有资源的一个独立单位，线程不拥有系统资源，但可以访问隶属于进程的资源。
+
+</detail>
+
 
 ## webpack
 ### 1.loader
@@ -157,7 +195,12 @@ loop()
 ### [2.性能优化](./../performance/README.md)
 * 开发中有在什么地方使用过性能优化?
 ## CSS
+<detail>
+<template v-slot:title>
+
 ### 1.垂直居中
+</template>
+
 ```html
 <style>
 .parent{
@@ -220,6 +263,8 @@ loop()
     transform: translateY(-50%);
 }
 ```
+</detail>
+
 ### 2.弹性布局兼容性
 ```css
 .container{  
@@ -243,9 +288,11 @@ loop()
 * https与http的区别
 * TLS协议握手过程,如何工作的
 * HTTP3中使用QUIC协议基于UDP的原因
+* 一个http请求是线程还是进程?
+  * 答:线程
 
 ## [操作系统](./../os/README.md)
 ### 1.进程与线程的概念
 ### 2.进程与线程的区别
 ### 3.进程之间如何切换
-### 3.进程与线程如何工作
+### 4.进程与线程如何工作

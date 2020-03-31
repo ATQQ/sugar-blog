@@ -37,7 +37,7 @@ console.log(t instanceof Student) // false
 ```js
 function myInstanceof(target, origin) {
     let prototype = origin.prototype
-    target = target.__proto__
+    target = Object.getPrototypeOf(target)
     while (true) {
         if (target === null || target === undefined) {
             return false
@@ -45,7 +45,7 @@ function myInstanceof(target, origin) {
         if (target === prototype) {
             return true
         }
-        target = target.__proto__
+        target = Object.getPrototypeOf(target)
     }
 }
 ```

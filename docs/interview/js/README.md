@@ -4,12 +4,14 @@
 
 ## 目录
 * [apply,call,bind 的异同](./apply.md)
+* [箭头函数?](./arrowfun.md)
 * [blob与file](./blob.md)
 * [定时器](./clock.md)
 * [闭包](./closure.md)
 * [柯里化(Currying)](./currying.md)
 * [delete](./delete.md)
 * [ECMAScript规范解读this(未完待续)](./ecmathis.md)
+* [ES6面试问题](./es6.md)
 * [Event Loop](./eventloop.md)
 * [浮点数](./float.md)
 * [垃圾回收机制](./garbage.md)
@@ -20,6 +22,7 @@
 * [执行上下文](./runcontext.md)
 * [作用域](./scope.md)
 * [作用域链](./scopeLink.md)
+* [Symbol 的用法](./symbol.md)
 * [节流与防抖](./throttling.md)
 * [参数按值传递](./valuePass.md)
 * [变量对象](./variableObject.md)

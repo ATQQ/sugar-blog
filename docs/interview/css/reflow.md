@@ -44,7 +44,7 @@
 回流一定触发重绘,重绘不一定触发回流
 :::
 
-## 减少回流与重绘
+## 如何减少回流与重绘
 ### 最小化重绘与重排
 1. 减少发生次数:合并多次修改
 ```js
@@ -69,7 +69,7 @@ e.style.fontSize = '18px'
 2. 进行修改
 3. 将元素放回源文档中
 
-脱离文档流的方式
+**脱离文档流的方式**
 * 隐藏元素
 * 使用``DocumentFragment``构建一个子树,然后拷贝会源文档(``document.createDocumentFragment()``)
 * 拷贝元素到脱离文档流的节点中,修改节点后,在替换原来的节点
@@ -77,6 +77,13 @@ e.style.fontSize = '18px'
 * 浮动
 * 固定定位
 
+### 其它
+* 避免频繁使用 style，而是采用修改class的方式
+* resize、scroll 等时间进行防抖或者节流处理
+* 添加 will-change: tranform:让渲染引擎为其单独实现一个图层，当这些变换发生时，仅仅只是利用合成线程去处理这些变换，而不牵扯到主线程，大大提高渲染效率
+* 动画使用 transform 实现
+
 :::tip 参考
-[你真的了解回流和重绘吗?](https://github.com/chenjigeng/blog/blob/master/%E4%BD%A0%E7%9C%9F%E7%9A%84%E4%BA%86%E8%A7%A3%E5%9B%9E%E6%B5%81%E5%92%8C%E9%87%8D%E7%BB%98%E5%90%97.md)
+[你真的了解回流和重绘吗?](https://github.com/chenjigeng/blog/blob/master/%E4%BD%A0%E7%9C%9F%E7%9A%84%E4%BA%86%E8%A7%A3%E5%9B%9E%E6%B5%81%E5%92%8C%E9%87%8D%E7%BB%98%E5%90%97.md)<br>
+[掘金(三元大佬):浏览器灵魂之问，请问你能接得住几个？](https://juejin.im/post/5df5bcea6fb9a016091def69#heading-63)
 :::

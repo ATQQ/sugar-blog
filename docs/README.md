@@ -5,7 +5,7 @@ tagline: 你的指尖,拥有改变世界的力量
 actionText: 关于笔者 →
 actionLink: /aboutme
 title: Blogging Like a Hacker
-lang: zh-CN
+lang: zh-cmn-Hans
 # footer: MIT Licensed | Copyright © 2018-present 粥里有勺糖
 ---
 
