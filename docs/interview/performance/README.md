@@ -1,22 +1,4 @@
-# 性能优化笔记
-
-![图片](http://img.cdn.sugarat.top/mdImg/MTU4MzQwMTU3ODkwNw==583401578907)
-
-:::tip 参考
-[掘金小册:性能优化](https://juejin.im/book/5b936540f265da0a9624b04b/section/5b97cd22e51d450e8f5f6375#heading-2)
-:::
+# 性能优化面试题
 
 ## 目录
-* [网络层面优化](./Internet.md)
-* [浏览器渲染原理](./brorender.md)
-* [浏览器缓存机制](./cache.md)
-* [CDN的缓存与回源机制](./cdn.md)
-* [DNS 预解析](./dnsPre.md)
-* [图片优化](./image.md)
-* [懒加载与执行](./lazyLoad.md)
-* [监控](./monitor.md)
-* [预加载](./preLoad.md)
-* [预渲染](./preRender.md)
-* [服务端渲染](./ssr.md)
-* [本地存储](./storage.md)
-* [节流与防抖](./throttling.md)
+* [如何加快首屏渲染?](./firstScreenRender.md)

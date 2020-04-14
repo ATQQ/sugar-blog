@@ -1,7 +1,11 @@
-#  什么是闭包
-## 简单定义
-函数 A 内部有一个函数 B，函数 B 可以访问到函数 A 中的参数与变量,那么函数 B 就是闭包
+# 闭包
 
+## 定义
+* 简单定义:函数 A 内部有一个函数 B，函数 B 可以访问到函数 A 中的参数与变量,那么函数 B 就是闭包
+* MDN定义(理论上)
+>闭包是指那些能够访问自由变量(在函数中使用的，但既不是函数参数也不是函数的局部变量的变量)的函数。
+* 实践
+>使创建它的上下文已经销毁，它仍然存在,在代码中引用了自由变量
 垃圾回收机制没有把当前变量和参数回收掉，这样的操作带来了内存泄漏的影响
 ```js
 function A() {
@@ -100,3 +104,89 @@ for (let i = 1; i <= 5; i++) {
     }, i * 1000)
 }
 ```
+
+## 结合[作用域链](./scopeLink.md)
+```js
+var data = [];
+for (var i = 0; i < 3; i++) {
+  data[i] = function () {
+    console.log(i);
+  };
+}
+data[0](); // 3
+data[1](); // 3
+data[2](); // 3
+```
+1. 执行到 ``data[0]`` 时
+```js
+globalContext = {
+    VO:{
+        data:[...],
+        i:3
+    }
+}
+```
+2. 执行data[0]
+```js
+data[0]Context = {
+    AO:{
+        arguments:{
+            length:0
+        }
+    },
+    Scope:[AO,globalContext.VO]
+}
+```
+3. 因为data[0]的AO中没有i,所以从 globalContext.VO 中去查找
+4. data[1],data[2] 同理
+
+**使用匿名函数包裹形成闭包**
+```js
+var data = [];
+for (var i = 0; i < 3; i++) {
+  data[i] = (function (i) {
+        return function(){
+            console.log(i);
+        }
+  })(i);
+}
+data[0](); // 0
+data[1](); // 1
+data[2](); // 2
+```
+1. 在执行到 ``data[0]``时
+```js
+globalContext = {
+    VO:{
+        data:[...],
+        i:3
+    }
+}
+```
+2. 执行``data[0]``时
+```js
+data[0]Context = {
+    AO:{
+        arguments:{
+            length:0
+        }
+    },
+    Scope:[AO,匿名函数Context.AO,globalContext.VO]
+}
+匿名函数Context= {
+    AO:{
+        arguments:{
+            0:0,
+            length:1
+        },
+        i:0
+    }
+}
+```
+3. data[0]沿着作用域链找到了匿名函数Context.AO上的``i``,此时就不会再继续查找了
+4. data[1],data[2] 同理
+
+
+:::tip 参考
+[JavaScript深入之闭包](https://github.com/mqyqingfeng/Blog/issues/9)
+:::
