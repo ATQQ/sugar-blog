@@ -1,11 +1,19 @@
 # Vue知识点记录
+:::tip 参考
+[掘金小册:剖析 Vue.js 内部运行机制](https://juejin.im/book/5a36661851882538e2259c0f)
+:::
 
 ## 目录
 * [Vue中的数据绑定](./bindData.md)
 * [组件通信](./communicate.md)
+* [编译template的过程](./compile.md)
 * [computed 与 watch](./computed.md)
+* [响应式系统的依赖收集追踪原理](./dep.md)
 * [extend API](./extend.md)
 * [生命周期钩子](./hook.md)
 * [keep-alive](./keep-alive.md)
+* [运行机制概述](./mechanism.md)
 * [mixin 与 mixins](./mixin.md)
+* [响应式基本原理](./responsive.md)
 * [v-show 与 v-if](./showif.md)
+* [实现 VNode 节点](./vnode.md)

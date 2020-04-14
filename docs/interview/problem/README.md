@@ -46,6 +46,7 @@
 <solve>[grid布局？](http://www.ruanyifeng.com/blog/2019/03/grid-layout-tutorial.html)</solve>
 <solve ok>[display属性有哪些?作用分别是什么?](../css/display.md)</solve>
 <solve ok>[position的值有哪些?](../css/position.md)</solve>
+<solve >display:none,opactiy:0,visibility:hidden区别</solve>
 
 ## vue
 <solve ok>[实现数据的响应式的原理？](../../bigWeb/vue/bindData.md)</solve>

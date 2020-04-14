@@ -106,7 +106,12 @@ function vueSidebar(group, introduction) {
                 ['mixin', 'mixin与mixins'],
                 ['computed', 'computed与watch'],
                 ['keep-alive', 'keep-alive'],
-                ['showif', 'v-show 与 v-if']
+                ['showif', 'v-show 与 v-if'],
+                ['mechanism', '❤运行机制概述'],
+                ['responsive', '❤响应式基本原理'],
+                ['dep', '❤响应式系统的依赖收集追踪原理'],
+                ['vnode', '❤VNode实现'],
+                ['compile', '❤编译template的过程']
             ]
         }
     ]
