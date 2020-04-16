@@ -124,7 +124,9 @@ function experienceSidebar(group, introduction) {
                 ['tencent2-video1', '腾讯一面'],
                 ['meituan-dd', '美团点评一,二,HR面'],
                 ['baidu', '百度一,二,三技术面'],
-                ['mogu', '蘑菇街一面']
+                ['mogu', '蘑菇街一面'],
+                ['wy-1', '网易云音乐一面'],
+                ['thoughtWorks', '思特沃克初试+复试']
             ]
         }
     ]

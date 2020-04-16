@@ -8,3 +8,5 @@
 * [腾讯视频二面](./tencent-video2.md)
 * [腾讯视频三面](./tencent-video3.md)
 * [腾讯一面](./tencent2-video1.md)
+* [thoughtWorks初试,复试](./thoughtWorks.md)
+* [网易一面](./wy-1.md)
