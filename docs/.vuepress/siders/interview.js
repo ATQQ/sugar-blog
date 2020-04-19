@@ -126,7 +126,8 @@ function experienceSidebar(group, introduction) {
                 ['baidu', '百度一,二,三技术面'],
                 ['mogu', '蘑菇街一面'],
                 ['wy-1', '网易云音乐一面'],
-                ['thoughtWorks', '思特沃克初试+复试']
+                ['thoughtWorks', '思特沃克初试+复试'],
+                ['2020spring_wechat', '2020前端春招经验分享']
             ]
         }
     ]
