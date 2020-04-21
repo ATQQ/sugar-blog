@@ -20,7 +20,7 @@
 <solve ok>[Promise的特点/优点/缺点？](../js/promise.md#特点)</solve>
 <solve ok>[什么是Promise链？](../js/promise.md#promise链)</solve>
 <solve ok>[Promise构造函数执行和then函数执行有什么区别？](../js/promise.md#promise链)</solve>
-<solve ok>[async及await的特点/优点/缺点是什么？]((../js/asyncawait.md))</solve>
+<solve ok>[async及await的特点/优点/缺点是什么？](../js/asyncawait.md)</solve>
 <solve ok>[await原理是什么？](../js/asyncawait.md)</solve>
 <solve ok>[new原理是什么？](../js/new.md)</solve>
 <solve ok>[new创建对象与字面量创建对象的区别？](../js/new.md)</solve>
@@ -35,6 +35,8 @@
 <solve ok>[什么是节流,防抖？](../../bigWeb/js/throttling.md#防抖)</solve>
 <solve ok>[浏览器与Node中event loop?他们有何不同？](../../bigWeb/js/eventloop.md)</solve>
 <solve ok>[概述一下js中的词法作用域？](../../bigWeb/js/scope.md)</solve>
+<solve>window.onload与document.ready执行顺序</solve>
+<solve ok>[for in遍历数组会有哪些问题](../js/forin.md)</solve>
 
 ## css
 <solve ok>[什么是回流与重绘？](../../bigWeb/css/reflow.md#回流)</solve>
@@ -75,7 +77,7 @@
 <solve>如何实现继承？</solve>
 <solve>实现new</solve>
 <solve>节流与防抖实现</solve>
-<solve>实现call/apply/bind</solve>
+<solve ok>[实现call/apply/bind](../../bigWeb/js/apply.md#mycall)</solve>
 <solve>实现setTimeout/setInterval</solve>
 <solve>并发请求?</solve>
 <solve>实现一个ajax</solve>
@@ -87,7 +89,7 @@
 <solve>树的遍历方式,前/中/后,层次</solve>
 <solve>对称二叉树</solve>
 <solve>实现36进制转换</solve>
-<solve>如何实现 a==1&&a==2 -- true</solve>
+<solve ok>[如何实现 a==1&&a==2 -- true](../code/1equal2.md)</solve>
 
 ## 网络
 <solve ok>[概述一下TCP](../../computerBase/Internet/tcp.md)</solve>
@@ -100,11 +102,13 @@
 <solve ok>[如何才能使用HTTP2,有什么前提条件](../../computerBase/Internet/http.md#如何使用)</solve>
 <solve ok>[HTTP3中使用的QUIC协议基于UDP的原因?](../../computerBase/Internet/http.md#QUIC)</solve>
 <solve ok>[如果响应头Content-Length=0那么是发出来被截取了还是没发出来?](../../computerBase/Internet/clength.md)</solve>
+<solve ok>[跨域如何携带cookie](../internet/cros.md#cors)</solve>
 
 ## 操作系统
 <solve ok>[线程与进程的概念/区别/如何工作的?](../../computerBase/os/difprothr.md)</solve>
-<solve>进程之间如何进行切换的?</solve>
 <solve ok>[进程和线程怎么通信?](../../computerBase/os/communicate.md)</solve>
+<solve>进程之间如何进行切换的?</solve>
+<solve>几种常见的页面置换算法</solve>
 
 ## 综合问题
 <solve ok>[怎么理解前端工程化？](../other/engineering.md)</solve>

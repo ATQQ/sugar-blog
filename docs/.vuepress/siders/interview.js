@@ -23,7 +23,8 @@ function jsSidebar(group, introduction) {
                 ['asyncawait', 'async 及 await 的特点与优缺点？await 原理是什么？'],
                 ['new', 'new 的原理是什么？通过 new 的方式创建对象和通过字面量创建有什么区别'],
                 ['v8garbage', 'V8 下的垃圾回收机制是怎么样的'],
-                ['event', 'V8 事件触发过程是怎么样的,什么是事件代理']
+                ['event', 'V8 事件触发过程是怎么样的,什么是事件代理'],
+                ['forin', 'forin遍历数组的坑']
             ]
         }
     ]
@@ -126,8 +127,22 @@ function experienceSidebar(group, introduction) {
                 ['baidu', '百度一,二,三技术面'],
                 ['mogu', '蘑菇街一面'],
                 ['wy-1', '网易云音乐一面'],
+                ['wy-2', '网易云音乐二面'],
                 ['thoughtWorks', '思特沃克初试+复试'],
                 ['2020spring_wechat', '2020前端春招经验分享']
+            ]
+        }
+    ]
+}
+function codeSidebar(group, introduction) {
+    return [
+        {
+            title: group,
+            collapsable: false,
+            sidebarDepth: 2,
+            children: [
+                ['', introduction],
+                ['1equal2', 'a==1&&a==2']
             ]
         }
     ]
@@ -156,5 +171,6 @@ interviewSider.addChildSider('css', cssSidebar('CSS', 'CSS相关面试题'))
 interviewSider.addChildSider('mini', miniSidebar('Mini Program', '小程序相关面试题'))
 interviewSider.addChildSider('performance', performanceSidebar('Performance', '性能优化相关面试题'))
 interviewSider.addChildSider('experience', experienceSidebar('Experience', '面经'))
+interviewSider.addChildSider('code', codeSidebar('Code', '手撕代码'))
 
 module.exports = interviewSider.getSiders()

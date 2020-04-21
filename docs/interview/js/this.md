@@ -16,10 +16,10 @@ const c = new foo() // undefined
 c()
 ```
 1. 对于普通函数来说,this->window
-2. 对于对象来说,谁调用函数谁就是this
-3. new 的方式,this永远被绑定在实例上
-4. 箭头函数本身是没有this
-5. 箭头函数中的this取决于包裹箭头函数的第一个普通函数的this
+2. 全局作用域下,this -> window
+3. 对于对象来说,谁调用函数谁就是this
+4. new 的方式,this永远被绑定在实例上
+5. 箭头函数本身是没有this,继承外层上下文绑定的this(包裹箭头函数的第一个普通函数的this)
 6. 箭头函数使用bind,call,this无效
 7. bind/call/apply 这些改变上下文的 API 了，对于这些函数来说，this 取决于第一个参数，如果第一个参数为空，那么就是 window
 8. 不管我们给函数 bind 几次，fn 中的 this 永远由第一次 bind 决定

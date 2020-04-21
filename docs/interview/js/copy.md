@@ -9,6 +9,10 @@
 * ``Object.assign``
 * 展开运算符``...``
 
+**针对数组还有**
+* Array.prototype.slice
+* Array.prototype.concat
+
 ```js
 let a ={p:666}
 let b = {...a}
@@ -16,6 +20,12 @@ let c = Object.assign({},a)
 b.p=111
 c.p=222
 console.log(a,b,c)
+
+let arr1 = [1, 2, { name: 'xm' }]
+let arr2 = [...arr1]
+let arr3 = Object.assign([], arr1)
+let arr4 = Array.prototype.slice.call(arr1)
+let arr5 = Array.prototype.concat.call(arr1)
 ```
 
 ## 什么是深拷贝?
@@ -23,12 +33,16 @@ console.log(a,b,c)
 
 ## 如何实现深拷贝?
 ### JSON.parse(JSON.stringify(object))
+>能应付大多数业务场景
+
 * 忽略undefined
 * 忽略symbol
+* 原型链上的属性无法拷贝
+* 不能处理RegExp
+* 不能正确处理Date
 * 不能序列化函数
-* 不能解决循环引用的对象
+* 不能处理循环引用的对象
 
-能应付大多数业务常见
 ### MessageChannel
 * 异步方法
 * 不能处理函数
@@ -60,14 +74,18 @@ function isObject(obj) {
 }
 
 function deepClone(obj) {
-    if (!isObject(obj)) {
-        throw new Error('不是对象')
+    let newObj = obj
+    if(Array.isArray(obj)){
+        newObj = []
+        for(let v of obj){
+            newObj.push(isObject(v)?deepClone(obj):v)
+        }
+    }else if(isObject(obj)){
+        newObj = {}
+        Object.keys(obj).forEach(key=>{
+            newObj[key] = isObject(obj[key]) ? deepClone(obj[key]) : obj[key]
+        })
     }
-    // 判断是否数组
-    let newObj = Array.isArray(obj) ? [...obj] : { ...obj }
-    Object.keys(newObj).forEach(key => {
-        newObj[key] = isObject(obj[key]) ? deepClone(obj[key]) : obj[key]
-    })
     return newObj
 }
 

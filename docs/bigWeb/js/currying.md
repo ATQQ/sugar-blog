@@ -77,4 +77,15 @@ console.log(test(1)(2)(3)(4))//10
 :::
 
 ## 一个通用的封装方法
-飞速敲击中...
+```js
+function curry(fn, ...args) {
+    return fn.length > args.length ? (...args2) => curry(fn, ...args, ...args2) : fn(...args)
+}
+
+function fn(a, b, c, d) {
+    console.log(a + b + c + d)
+}
+
+fn = curry(fn)
+fn(1)(2)(3, 4) // 10
+```

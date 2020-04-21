@@ -110,8 +110,9 @@ function vueSidebar(group, introduction) {
                 ['mechanism', '❤运行机制概述'],
                 ['responsive', '❤响应式基本原理'],
                 ['dep', '❤响应式系统的依赖收集追踪原理'],
-                ['vnode', '❤VNode实现'],
-                ['compile', '❤编译template的过程']
+                ['vnode', '❤VNode实现']
+                // ['compile', '❤编译template的过程'],
+                // ['diff', '❤数据状态更新时的差异 diff 及 patch 机制']
             ]
         }
     ]

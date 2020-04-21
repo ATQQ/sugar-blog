@@ -11,4 +11,6 @@
 * 全局作用域下:
   * 使用 var 声明的变量会被挂载到window上
   * 使用 let 和 const 声明的变量，不会被挂载到 window 上
-* let 与 const 作用基本一致,后者声明的变量不能再次赋值
+* var定义变量会提升,let,const不会
+* 同一作用域中var允许重复声明,let,const不可以
+* const 声明必须赋初值,且声明后不能改变

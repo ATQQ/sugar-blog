@@ -68,13 +68,19 @@ Function.prototype.mycall = function (thisArg) {
     return res
 }
 test.mycall({ a: 1, b: 2 }, 1, 2) // { a: 1, b: 2, fn: [Function: test] } 3
+
+// 不考虑边界情况的简单写法
+Function.prototype.myCall = function (thisArg, ...argArray) {
+    thisArg = thisArg || window
+    thisArg.fn = this
+    let res = thisArg.fn(...argArray)
+    delete thisArg.fn
+    return res
+}
 ```
 ### myapply
 ```js
 Function.prototype.myapply = function (thisArg) {
-    if (typeof this !== 'function') {
-        throw 'error'
-    }
     thisArg = thisArg || window
     if (!(thisArg instanceof Object)) {
         thisArg = new Object(thisArg)
@@ -90,13 +96,24 @@ Function.prototype.myapply = function (thisArg) {
     return res
 }
 test.myapply({ a: 2, b: 4 }, [4, 4]) // { a: 2, b: 4, fn: [Function: test] } 8
+
+// 简单写法
+Function.prototype.myApply = function (thisArg, argArray = []) {
+    thisArg = thisArg || window
+    thisArg.fn = this
+    let res
+    if (argArray.length === 0) {
+        res = thisArg.fn()
+    } else {
+        res = thisArg.fn(...argArray)
+    }
+    delete thisArg.fn
+    return res
+}
 ```
 ### mybind
 ```js
 Function.prototype.mybind = function (thisArg) {
-    if (typeof this !== 'function') {
-        throw 'error'
-    }
     const that = this
     const args = [...arguments].slice(1)
     return function F() {

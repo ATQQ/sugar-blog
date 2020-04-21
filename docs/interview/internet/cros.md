@@ -70,6 +70,8 @@ let server = http.createServer(async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*')
     //跨域允许的header类型
     res.setHeader("Access-Control-Allow-Headers", "*")
+    // 允许携带cookie
+    res.setHeader("Access-Control-Allow-Credentials", "true")
     // 允许的方法
     res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS')
 
