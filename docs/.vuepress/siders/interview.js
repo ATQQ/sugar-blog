@@ -123,6 +123,8 @@ function experienceSidebar(group, introduction) {
                 ['tencent-video2', '腾讯视频二面'],
                 ['tencent-video3', '腾讯视频三面'],
                 ['tencent2-video1', '腾讯一面'],
+                ['tencent-kd1', '腾讯看点一面'],
+                ['tencent-kd2', '腾讯看点二面'],
                 ['meituan-dd', '美团点评一,二,HR面'],
                 ['baidu', '百度一,二,三技术面'],
                 ['mogu', '蘑菇街一面'],
