@@ -1,4 +1,4 @@
-const {NavSider} = require('./object')
+const { NavSider } = require('./object')
 function offerSidebar(group, introduction) {
     return [
         {
@@ -28,7 +28,8 @@ function osSidebar(group, introduction) {
                 ['process', '进程'],
                 ['thread', '线程'],
                 ['difprothr', '进程与线程的区别'],
-                ['communicate', '进程和线程怎么通信']
+                ['communicate', '进程和线程怎么通信'],
+                ['deadlock', '死锁']
             ]
         }
     ]

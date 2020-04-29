@@ -128,8 +128,12 @@ function experienceSidebar(group, introduction) {
                 ['meituan-dd', '美团点评一,二,HR面'],
                 ['baidu', '百度一,二,三技术面'],
                 ['mogu', '蘑菇街一面'],
-                ['wy-1', '网易云音乐一面'],
-                ['wy-2', '网易云音乐二面'],
+                ['wy-music-1', '网易云音乐一面'],
+                ['wy-music-2', '网易云音乐二面'],
+                ['wy-music-hr', '网易云音乐HR面'],
+                ['wy-hy-1', '网易互娱一面'],
+                ['kuaishou-acfun1', '快手A站一面'],
+                ['kuaishou-acfun2', '快手A站二面'],
                 ['thoughtWorks', '思特沃克初试+复试'],
                 ['2020spring_wechat', '2020前端春招经验分享']
             ]
