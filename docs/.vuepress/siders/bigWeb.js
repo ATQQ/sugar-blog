@@ -100,6 +100,7 @@ function vueSidebar(group, introduction) {
             children: [
                 ['', introduction],
                 ['bindData', '数据绑定'],
+                ['routing', '路由原理'],
                 ['hook', '生命周期钩子'],
                 ['communicate', '组件通信'],
                 ['extend', 'extend API'],
@@ -155,8 +156,22 @@ function browserSidebar(group, introduction) {
         }
     ]
 }
+function htmlSidebar(group, introduction) {
+    return [
+        {
+            title: group,
+            collapsable: false,
+            sidebarDepth: 2,
+            children: [
+                ['', introduction],
+                ['semantic', '语义化标签']
+            ]
+        }
+    ]
+}
 const bigWeb = new NavSider('bigWeb')
 bigWeb.addChildSider('js', jsSidebar('javascript', '简介'))
+bigWeb.addChildSider('html', htmlSidebar('HTML', '简介'))
 bigWeb.addChildSider('regexp', regexpSidebar('regexp', '正则表达式'))
 bigWeb.addChildSider('css', cssSidebar('css', '简介'))
 bigWeb.addChildSider('node', nodeSidebar('node', 'NodeJS'))

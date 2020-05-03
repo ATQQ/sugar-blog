@@ -24,7 +24,8 @@ function jsSidebar(group, introduction) {
                 ['new', 'new 的原理是什么？通过 new 的方式创建对象和通过字面量创建有什么区别'],
                 ['v8garbage', 'V8 下的垃圾回收机制是怎么样的'],
                 ['event', 'V8 事件触发过程是怎么样的,什么是事件代理'],
-                ['forin', 'forin遍历数组的坑']
+                ['forin', 'forin遍历数组的坑'],
+                ['onload-ready', 'window.onload与document.ready执行顺序']
             ]
         }
     ]
@@ -75,7 +76,9 @@ function cssSidebar(group, introduction) {
             children: [
                 ['', introduction],
                 ['display', 'display属性有哪些,作用分别是什么'],
-                ['position', 'position的值有哪些,作用分别是什么']
+                ['position', 'position的值有哪些,作用分别是什么'],
+                ['inherit', 'css中哪些属性不能被继承'],
+                ['hideElement', '几种隐藏元素的方式比较']
             ]
         }
     ]
@@ -148,7 +151,16 @@ function codeSidebar(group, introduction) {
             sidebarDepth: 2,
             children: [
                 ['', introduction],
-                ['1equal2', 'a==1&&a==2']
+                ['1equal2', 'a==1&&a==2'],
+                ['inherit', '继承'],
+                ['myNew','new的实现'],
+                ['debounce-throttle','节流防抖实现'],
+                ['myClock','使用requestAnimationFrame实现定时器'],
+                ['middle-center','垂直水平居中'],
+                ['quicksort','快速排序'],
+                ['transfer','任意进制间的转换'],
+                ['treeTraverse','二叉树几种遍历方式'],
+                ['reverseList','单链表转置']
             ]
         }
     ]

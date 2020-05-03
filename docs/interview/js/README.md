@@ -17,6 +17,7 @@
 * [为什么0.1+0.2!=0.3](./numNotEqual.md)
 * [对象类型和原始类型的不同之处](./objDiffPrim.md)
 * [函数参数是对象会发生什么问题](./objparam.md)
+* [window.onload与document.ready执行顺序](./onload-ready.md)
 * [原始类型有哪些](./primitiveType.md)
 * [Promise 的特点是什么，分别有什么优缺点？什么是 Promise 链？Promise 构造函数执行和 then 函数执行有什么区别？](./promise.md)
 * [如何正确判断 this？箭头函数的 this 是什么？](./this.md)

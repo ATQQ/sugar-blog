@@ -41,7 +41,7 @@ module.exports = {
             items: [
                 { text: 'javascript', link: '/bigWeb/js/' },
                 { text: 'vue', link: '/bigWeb/vue/' },
-                // { text: 'es6', link: '/bigWeb/es6/' },
+                { text: 'html', link: '/bigWeb/html/' },
                 { text: 'css', link: '/bigWeb/css/' },
                 { text: '浏览器', link: '/bigWeb/browser/' },
                 { text: 'Web性能优化', link: '/bigWeb/performance/' },
@@ -54,7 +54,7 @@ module.exports = {
                 { text: '问解', link: '/interview/problem/' },
                 { text: 'javascript', link: '/interview/js/' },
                 { text: 'css', link: '/interview/css/' },
-                // { text: 'vue', link: '/interview/vue/' },
+                { text: '手撕代码', link: '/interview/code/' },
                 { text: '性能优化', link: '/interview/performance/' },
                 { text: '网络', link: '/interview/internet/' },
                 // { text: '操作系统', link: '/interview/os/' },

@@ -35,24 +35,26 @@
 <solve ok>[什么是节流,防抖？](../../bigWeb/js/throttling.md#防抖)</solve>
 <solve ok>[浏览器与Node中event loop?他们有何不同？](../../bigWeb/js/eventloop.md)</solve>
 <solve ok>[概述一下js中的词法作用域？](../../bigWeb/js/scope.md)</solve>
-<solve>window.onload与document.ready执行顺序</solve>
 <solve ok>[for in遍历数组会有哪些问题](../js/forin.md)</solve>
+<solve ok>[window.onload与document.ready执行顺序](../js/onload-ready.md)</solve>
+<solve >了解JSBridge吗</solve>
 
 ## css
 <solve ok>[什么是回流与重绘？](../../bigWeb/css/reflow.md#回流)</solve>
 <solve ok>[什么是盒模型？](../../bigWeb/css/box.md)</solve>
 <solve ok>[CSS的层级关系？](../../bigWeb/css/level.md)</solve>
 <solve ok>[什么是BFC？](../../bigWeb/css/bfc.md)</solve>
-<solve>[什么是IFC？](../../bigWeb/css/ifc.md)</solve>
 <solve ok>[flex弹性布局？](../../bigWeb/css/flex.md)</solve>
-<solve>[grid布局？](http://www.ruanyifeng.com/blog/2019/03/grid-layout-tutorial.html)</solve>
 <solve ok>[display属性有哪些?作用分别是什么?](../css/display.md)</solve>
 <solve ok>[position的值有哪些?](../css/position.md)</solve>
-<solve >display:none,opactiy:0,visibility:hidden区别</solve>
-
+<solve ok>[什么是语义化标签?有哪些?为什么要使用它](../../bigWeb/html/semantic.md)</solve>
+<solve ok>[哪些属性不可以被继承](../css/inherit.md)</solve>
+<solve ok>[display:none,opactiy:0,visibility:hidden区别](../css/hideElement.md)</solve>
+<solve>[什么是IFC？](../../bigWeb/css/ifc.md)</solve>
+<solve>[grid布局？](http://www.ruanyifeng.com/blog/2019/03/grid-layout-tutorial.html)</solve>
 ## vue
 <solve ok>[实现数据的响应式的原理？](../../bigWeb/vue/bindData.md)</solve>
-<solve>路由原理,为什么浏览器不会刷新</solve>
+<solve ok>[路由原理,为什么浏览器不会刷新](../../bigWeb/vue/routing.md)</solve>
 
 ## ES6
 <solve ok>[常见es6问题?](../js/es6.md)</solve>
@@ -74,22 +76,23 @@
 
 
 ## 编程题
-<solve>如何实现继承？</solve>
-<solve>实现new</solve>
-<solve>节流与防抖实现</solve>
+<solve ok>[如何实现继承](../code/inherit.md)</solve>
+<solve ok>[实现new](../code/myNew.md)</solve>
+<solve ok>[节流与防抖实现](../code/debounce-throttle.md)</solve>
 <solve ok>[实现call/apply/bind](../../bigWeb/js/apply.md#mycall)</solve>
-<solve>实现setTimeout/setInterval</solve>
+<solve ok>[如何实现 a==1&&a==2 -- true](../code/1equal2.md)</solve>
+<solve ok>[使用requestAnimationFrame实现setTimeout/setInterval](../code/myClock.md)</solve>
+<solve ok>[如何实现水平居中,垂直居中,垂直水平居中](../code/middle-center.md)</solve>
+<solve ok>[quicksort](../code/quicksort.md)</solve>
+<solve ok>[实现36进制转换](../code/transfer.md)</solve>
+<solve ok>[二叉树树的遍历方式,前/中/后,层次](../code/treeTraverse.md)</solve>
+<solve ok>[函数柯里化实现](../../bigWeb/js/currying.md)</solve>
+<solve ok>[单链表转置](../code/reverseList.md)</solve>
+<solve>KMP</solve>
+<solve>对称二叉树</solve>
 <solve>并发请求?</solve>
 <solve>实现一个ajax</solve>
-<solve>vue原理</solve>
-<solve>如何实现垂直居中</solve>
-<solve>KMP</solve>
-<solve>quicksort</solve>
-<solve>实现36进制转换</solve>
-<solve>树的遍历方式,前/中/后,层次</solve>
-<solve>对称二叉树</solve>
-<solve>实现36进制转换</solve>
-<solve ok>[如何实现 a==1&&a==2 -- true](../code/1equal2.md)</solve>
+<solve>判断一个有向图是否包含环</solve>
 
 ## 网络
 <solve ok>[概述一下TCP](../../computerBase/Internet/tcp.md)</solve>
@@ -107,6 +110,7 @@
 ## 操作系统
 <solve ok>[线程与进程的概念/区别/如何工作的?](../../computerBase/os/difprothr.md)</solve>
 <solve ok>[进程和线程怎么通信?](../../computerBase/os/communicate.md)</solve>
+<solve ok>[什么是死锁?为什么会出现?如何避免](../../computerBase/os/deadlock.md)</solve>
 <solve>进程之间如何进行切换的?</solve>
 <solve>几种常见的页面置换算法</solve>
 
