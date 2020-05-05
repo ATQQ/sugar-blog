@@ -160,7 +160,8 @@ function codeSidebar(group, introduction) {
                 ['quicksort','快速排序'],
                 ['transfer','任意进制间的转换'],
                 ['treeTraverse','二叉树几种遍历方式'],
-                ['reverseList','单链表转置']
+                ['reverseList','单链表转置'],
+                ['kmp','模式串匹配']
             ]
         }
     ]

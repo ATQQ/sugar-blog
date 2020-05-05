@@ -88,7 +88,7 @@
 <solve ok>[二叉树树的遍历方式,前/中/后,层次](../code/treeTraverse.md)</solve>
 <solve ok>[函数柯里化实现](../../bigWeb/js/currying.md)</solve>
 <solve ok>[单链表转置](../code/reverseList.md)</solve>
-<solve>KMP</solve>
+<solve ok>[模式串匹配,在找出子串在模式串中第一次出现的位置](../code/kmp.md)</solve>
 <solve>对称二叉树</solve>
 <solve>并发请求?</solve>
 <solve>实现一个ajax</solve>
