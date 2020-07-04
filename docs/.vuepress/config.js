@@ -2,6 +2,7 @@ const sidersBigWeb = require('./siders/bigWeb')
 const siderComputerBase = require('./siders/computerBase')
 const siderInterview = require('./siders/interview')
 const siderTechnology = require('./siders/technology')
+const siderOffer = require('./siders/offer')
 function mergeSider(...siders) {
     let sider = {}
     siders.forEach((cuur) => {
@@ -27,6 +28,12 @@ module.exports = {
         docsDir: 'docs',
         docsBranch: 'master',
         nav: [
+            {
+                text: '备战春秋',
+                items: [
+                    { text: '21届秋招', link: '/offer/autumn21/' }
+                ]
+            },
             {
                 text: '技术文章',
                 items: [
@@ -73,7 +80,7 @@ module.exports = {
                 ]
             }
         ],
-        sidebar: mergeSider(sidersBigWeb, siderComputerBase, siderInterview, siderTechnology),
+        sidebar: mergeSider(sidersBigWeb, siderComputerBase, siderInterview, siderTechnology, siderOffer),
         displayAllHeaders: false,
         sidebarDepth: 2,
     }
