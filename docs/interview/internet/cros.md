@@ -73,7 +73,7 @@ let server = http.createServer(async (req, res) => {
     // 允许携带cookie
     res.setHeader("Access-Control-Allow-Credentials", "true")
     // 允许的方法
-    res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS')
+    res.setHeader('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS')
 
     let { method, url } = req
     if (method === 'OPTIONS') {

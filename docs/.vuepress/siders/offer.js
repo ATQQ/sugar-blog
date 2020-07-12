@@ -9,6 +9,7 @@ function autumn21Sidebar(group, introduction) {
                 ['', introduction],
                 ['Internet', '前端备战秋招之计算机网络'],
                 ['os', '前端备战秋招之操作系统'],
+                ['bytedance', '字节跳动-广告'],
             ]
         }
     ]

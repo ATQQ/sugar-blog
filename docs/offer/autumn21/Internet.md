@@ -103,7 +103,7 @@ TODO：想办法巧妙记住
 ![图片](http://img.cdn.sugarat.top/mdImg/MTU5MzYyMTYyOTYyMA==593621629620)
 ## UDP
 用户数据报协议（User Datagram Protocol）
-* 数据单位协议：TCP报文段
+* 数据单位协议：UDP 报文或用户数据报
 ### 特点
 * 无连接服务协议
   * 传送数据之前不需要建立连接
@@ -158,7 +158,7 @@ TODO：想办法巧妙记住
 
 ## TCP
 传输控制协议（Transmission Control Protocol）
-* 数据单位协议：UDP报文、用户数据报
+* 数据单位协议：TCP 报文段
 
 ### 特点
 * 面向连接的运输层协议
