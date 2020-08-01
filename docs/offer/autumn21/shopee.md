@@ -3,6 +3,17 @@
 ## 一面
 ### 代码题
 1. 页面几乎同时发出请求，向同一个接口发出的请求，模块1是`api/list?id=1`,2是`api/list?id=2`，n是`api/list?id=n`，针对这种情况，设计一个request方法，将多次请求合并，智慧向后端发出一个请求`api/list?id=1,2,...n`
+```js
+const res1 = await requestUser(1)
+const res2 = await requestUser(2)
+const res3 = await requestUser(3)
+// 我感觉这题出得有问题，用了await异步代码变同步，后两个执行 要等第一个执行完才开始
+
+// 我觉得 当时面试官的意思是这样，因为我是按下面的理解给的解法
+requestUser(1).then(res1=>{})
+requestUser(2).then(res2=>{})
+requestUser(3).then(res3=>{})
+```
 
 2. setTimeout(fn1,0),process.nextTick(fn2),Promise.resolve().then().then(fn3) 执行顺序
 3. setTimeout(fn1,0),setImmediate(fn2)谁先执行
