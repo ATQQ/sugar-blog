@@ -3,6 +3,7 @@ const siderComputerBase = require('./siders/computerBase')
 const siderInterview = require('./siders/interview')
 const siderTechnology = require('./siders/technology')
 const siderOffer = require('./siders/offer')
+const siderCoding = require('./siders/coding')
 function mergeSider(...siders) {
     let sider = {}
     siders.forEach((cuur) => {
@@ -78,9 +79,17 @@ module.exports = {
                     { text: '小程序', link: '/interview/mini/' },
                     { text: '面经', link: '/interview/experience/' }
                 ]
+            },
+            {
+                text: '手撕代码',
+                items: [
+                    { text: '数据结构与算法', link: '/coding/algorithm/' },
+                    { text: 'javascript', link: '/coding/js/' },
+                    { text: 'css', link: '/coding/css/' }
+                ]
             }
         ],
-        sidebar: mergeSider(sidersBigWeb, siderComputerBase, siderInterview, siderTechnology, siderOffer),
+        sidebar: mergeSider(sidersBigWeb, siderComputerBase, siderInterview, siderTechnology, siderOffer, siderCoding),
         displayAllHeaders: false,
         sidebarDepth: 2,
     }
