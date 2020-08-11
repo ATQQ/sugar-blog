@@ -29,6 +29,8 @@ lang: zh-cmn-Hans
 
 * 邮箱:engineerzjl@foxmail.com
 
+# :fire: 巨佬博客 - 记得三连
+* [Linbudu](https://github.com/linbudu599/FE-Basics)
 
 <div class='footer'>
     MIT Licensed | Copyright © 2018-present 粥里有勺糖
