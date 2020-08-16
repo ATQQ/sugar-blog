@@ -12,6 +12,8 @@ function autumn21Sidebar(group, introduction) {
                 ['bytedance', '字节跳动-广告'],
                 ['shopee', 'shopee-供应链'],
                 ['nowcoder', 'nowcoder-牛客网'],
+                ['txcloud', 'txcloud-腾讯云'],
+                ['cloudmusic', 'cloudmusic-网易云'],
             ]
         }
     ]
