@@ -14,6 +14,7 @@ function autumn21Sidebar(group, introduction) {
                 ['nowcoder', 'nowcoder-牛客网'],
                 ['txcloud', 'txcloud-腾讯云'],
                 ['cloudmusic', 'cloudmusic-网易云'],
+                ['zyb', 'zyb-作业帮'],
             ]
         }
     ]
