@@ -11,8 +11,9 @@ for (const filePath of files) {
     const lastLine = data[data.length - 1].trim()
     // 最后一行为空则 直接替换加入tj
     if (lastLine.length === 0) {
-        data[data.length - 1] = '<tongji/>'
+        data.push('<tongji/>')
     } else if (lastLine !== '<tongji/>') {
+        data.push('')
         data.push('<tongji/>')
     }
     fs.writeFileSync(filePath, data.join('\n'))
