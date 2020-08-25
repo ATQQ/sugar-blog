@@ -34,3 +34,5 @@
 ## 比较运算符
 * 对象，通过 toPrimitive 转换对象
 * 字符串，通过 unicode 字符索引来比较
+
+<tongji/>

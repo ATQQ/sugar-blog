@@ -32,3 +32,5 @@
     new SuperComponent().$mount('#app')
 </script>
 ```
+
+<tongji/>

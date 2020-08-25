@@ -49,3 +49,5 @@ function myInstanceof(target, origin) {
     }
 }
 ```
+
+<tongji/>

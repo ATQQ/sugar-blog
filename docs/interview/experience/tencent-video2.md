@@ -130,3 +130,5 @@ topK(wordsArr, 3).forEach(v => console.log(v.value))
 ### 1.你是如何学习前端的?
 ### 2.你对未来有什么规划?
 ### 3.有考研的打算吗?为什么不考研?
+
+<tongji/>

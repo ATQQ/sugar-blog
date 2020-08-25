@@ -8,3 +8,5 @@
 :::tip 更多参考
 [js类型判断](./../../bigWeb/js/p4.md)
 :::
+
+<tongji/>

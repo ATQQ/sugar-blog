@@ -84,3 +84,5 @@
 * 临时存储复杂的数据,如页面中的临时文章
 
 [简单使用](https://developer.mozilla.org/zh-CN/docs/Web/API/IndexedDB_API/Using_IndexedDB)
+
+<tongji/>

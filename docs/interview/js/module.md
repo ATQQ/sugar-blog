@@ -58,3 +58,5 @@ import { XXX } from './a.js'
 export function a() {}
 export default function() {}
 ```
+
+<tongji/>

@@ -223,3 +223,5 @@ new myPromise((resolve, reject) => {
     console.log('err:' + err)
 })I
 ```
+
+<tongji/>

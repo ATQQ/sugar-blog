@@ -73,3 +73,5 @@ generate 是将 `AST` 转化成 `render function` 字符串的过程，得到结
 
 当数据变化后，执行 `render function` 就可以得到一个新的 `VNode` 节点,将`新 VNode` 与`旧 VNode` 一起传入 `patch` 进行比较，经过 diff 算法得出它们的`差异`
 ,只需要将这些`差异`的对应 DOM 进行修改即可。
+
+<tongji/>

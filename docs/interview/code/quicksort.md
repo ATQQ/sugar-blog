@@ -29,3 +29,5 @@ function quickSort(array) {
     _quickSort(array, 0, array.length - 1)
 }
 ```
+
+<tongji/>

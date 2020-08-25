@@ -7,3 +7,5 @@
 [js类型判断](./../../bigWeb/js/p4.md)<br>
 [原型与原型链](./../../bigWeb/js/prototype.md)
 :::
+
+<tongji/>

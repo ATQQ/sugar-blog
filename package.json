@@ -7,8 +7,8 @@
     "doc": "docs"
   },
   "scripts": {
-    "dev": "vuepress dev docs/.",
-    "build": "rm -rf docs/.vuepress/dist && vuepress build docs/.",
+    "dev": "npm run addTJ && vuepress dev docs/.",
+    "build": "npm run addTJ && rm -rf docs/.vuepress/dist && vuepress build docs/.",
     "compress": "./shell/compress.sh",
     "upload":"./shell/upload.sh",
     "deploy":"./shell/deploy.sh",

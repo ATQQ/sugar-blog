@@ -13,3 +13,5 @@ function myNew() {
     return res instanceof Object ? res : o
 }
 ```
+
+<tongji/>
