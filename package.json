@@ -12,7 +12,8 @@
     "compress": "./shell/compress.sh",
     "upload":"./shell/upload.sh",
     "deploy":"./shell/deploy.sh",
-    "onestep":"npm run build && npm run compress && npm run upload && npm run deploy"
+    "onestep":"npm run build && npm run compress && npm run upload && npm run deploy",
+    "addTJ":"node src/addTJ.js"
   },
   "keywords": [],
   "author": "",
