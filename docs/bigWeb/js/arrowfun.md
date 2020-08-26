@@ -11,3 +11,5 @@ const fn = () =>{
 * 不能当做构造函数,即不能使用new
 * 没有arguments对象,可以使用``...rest``代替
 * 不能使用yield命令,即不可以用作Generator函数
+
+<tongji/>

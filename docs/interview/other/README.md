@@ -9,3 +9,5 @@
 * [原始类型有哪几种？null 是对象嘛？](./primitive.md)
 * [什么是提升？什么是暂时性死区？var、let 及 const 区别？](./promote.md)
 * [如何理解原型？如何理解原型链？](./prototype.md)
+
+<tongji/>

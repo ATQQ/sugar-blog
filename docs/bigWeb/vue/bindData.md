@@ -130,3 +130,5 @@ document.getElementById('add').addEventListener('click', function () {
 [冴羽大大:ES6 系列之 defineProperty 与 proxy](https://github.com/mqyqingfeng/Blog/issues/107)<br>
 [阮一峰:ECMAScript 6 入门](https://es6.ruanyifeng.com/#docs/proxy#Proxy-%E5%AE%9E%E4%BE%8B%E7%9A%84%E6%96%B9%E6%B3%95)
 :::
+
+<tongji/>

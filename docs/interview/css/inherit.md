@@ -22,3 +22,5 @@
 * font-(style|weight|size|family)
 * line-height
 * text-align
+
+<tongji/>

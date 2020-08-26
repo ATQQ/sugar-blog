@@ -89,3 +89,5 @@ const child = new Child(1);
 ```
 ## Class 本质是什么？
  JS 中并不存在类，class 只是语法糖，本质还是函数
+
+<tongji/>

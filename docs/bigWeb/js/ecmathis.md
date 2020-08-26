@@ -46,3 +46,5 @@ var barReference = {
 [JavaScript深入之从ECMAScript规范解读this](https://github.com/mqyqingfeng/Blog/issues/7)
 [ ECMAScript 5.1 ](http://yanhaijing.com/es5/#115)
 :::
+
+<tongji/>

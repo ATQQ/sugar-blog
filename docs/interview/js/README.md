@@ -23,3 +23,5 @@
 * [如何正确判断 this？箭头函数的 this 是什么？](./this.md)
 * [typeof能否正常判断类型](./typeof.md)
 * [V8 下的垃圾回收机制是怎么样的？](./v8garbage.md)
+
+<tongji/>

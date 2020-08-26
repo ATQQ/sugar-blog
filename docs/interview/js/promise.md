@@ -22,3 +22,5 @@
 ## Promise 构造函数执行和 then 函数执行有什么区别
 * 构造 Promise 的时候，构造函数内部的代码是立即执行的
 * then函数在promise.resolve()执行后执行
+
+<tongji/>

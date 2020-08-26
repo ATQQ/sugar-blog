@@ -94,3 +94,5 @@ let a = { b: 1, d: { e: 0 }, h: [1, 2, { i: 3 }] }
 let b = deepClone(a)
 console.log(b)
 ```
+
+<tongji/>

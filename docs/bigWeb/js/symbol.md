@@ -129,3 +129,5 @@ console.log(u1.name) // xm
 console.log(u1.age) // undefined
 u1.printAge() // 18
 ```
+
+<tongji/>

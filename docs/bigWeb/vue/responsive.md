@@ -78,3 +78,5 @@ app._data.name = 1 // 数据更新1
 app._data.friends.name1 = 2 // 数据更新2
 app._data.friends.name2 = 3 // 数据更新3
 ```
+
+<tongji/>

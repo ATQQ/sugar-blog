@@ -85,3 +85,5 @@ checkscope()();
 :::tip 参考
 [JavaScript深入之词法作用域和动态作用域](https://github.com/mqyqingfeng/Blog/issues/3)
 :::
+
+<tongji/>

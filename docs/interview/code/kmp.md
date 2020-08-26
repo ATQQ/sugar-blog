@@ -48,3 +48,5 @@ function kmp(origin, target) {
     return j === tLen ? i - j : -1
 }
 ```
+
+<tongji/>

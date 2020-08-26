@@ -110,3 +110,5 @@ var html = '<div :class="c" class="demo" v-if="isShow"><span v-for="item in sz">
 
 ## generate
 generate 会将 AST 转化成 render funtion 字符串，最终得到 render 的字符串以及 staticRenderFns 字符串
+
+<tongji/>

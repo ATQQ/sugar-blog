@@ -39,3 +39,5 @@ console.log(compareNum(0.1+0.2,0.3)) // true
 :::tip 参考
 [JavaScript 深入之浮点数精度](https://github.com/mqyqingfeng/Blog/issues/155)
 :::
+
+<tongji/>

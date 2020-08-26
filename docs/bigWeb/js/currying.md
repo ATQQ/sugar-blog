@@ -89,3 +89,5 @@ function fn(a, b, c, d) {
 fn = curry(fn)
 fn(1)(2)(3, 4) // 10
 ```
+
+<tongji/>

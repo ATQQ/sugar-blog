@@ -194,3 +194,5 @@ data[0]Context = {
 :::tip 参考
 [JavaScript深入之闭包](https://github.com/mqyqingfeng/Blog/issues/9)
 :::
+
+<tongji/>

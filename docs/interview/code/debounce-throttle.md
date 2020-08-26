@@ -77,3 +77,5 @@ function superThrottle(fn, delay) {
     }
 }
 ```
+
+<tongji/>
