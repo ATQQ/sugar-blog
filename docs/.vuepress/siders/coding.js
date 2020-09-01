@@ -13,6 +13,8 @@ function algorithmSidebar(group, introduction) {
                 ['quickSort', '排序--快速排序'],
                 ['headSort', '排序--堆排序'],
                 ['mergeSort', '排序--归并排序'],
+                ['publicString', '字符串--最长公共子序列长度'],
+                ['publicStringLen', '字符串--最长公共子串'],
             ]
         }
     ]
@@ -37,6 +39,11 @@ function jsSidebar(group, introduction) {
             sidebarDepth: 2,
             children: [
                 ['', introduction],
+                ['promiseAll', '简单-实现promiseAll'],
+                ['myBind', '简单-实现bind'],
+                ['myCall', '简单-实现call'],
+                ['myApply', '简单-实现apply'],
+                ['deepClone', '中等-实现深拷贝']
             ]
         }
     ]

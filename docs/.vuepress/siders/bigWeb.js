@@ -35,7 +35,8 @@ function jsSidebar(group, introduction) {
                 ['float', '浮点数'],
                 ['symbol', 'Symbol的用法'],
                 ['arrowfun', '箭头函数'],
-                ['typeConvert','类型转换']
+                ['typeConvert','类型转换'],
+                ['es6+','ES6+的新语法糖和方法整理']
             ]
         }
     ]

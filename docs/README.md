@@ -15,6 +15,13 @@ features:
   details: 记录了笔者在2020春招,秋招中经历的面试经历,并整理了相关题目
 ---
 
+# :pencil:最近撰写
+* coding
+  * [深拷贝的实现](./coding/js/deepClone.md)
+  * [promiseAll实现](./coding/js/promiseAll.md)
+  * [更多...](./coding/js/README.md)
+* [ES6+的一些新语法糖和方法整理](./bigWeb/js/es6+.md)
+
 # :rocket:快捷入口
 * [整理的部分面试题](./interview/problem)
 * [面经](./interview/experience)
@@ -25,7 +32,8 @@ features:
 >[粥里有勺糖●博客园](https://www.cnblogs.com/roseAT/)<br>
 [ATQQ●GitHub](https://github.com/ATQQ)<br>
 [ES6笔记●GITBOOK](https://sugar-js.gitbook.io/-1/)<br>
-[blog●GitBook](https://sugar-at.gitbook.io/blog-article/)
+[blog●GitBook](https://sugar-at.gitbook.io/blog-article/)<br>
+[掘金](https://juejin.im/user/1028798615918983)
 
 # :phone:联系我
 >如对博客内容，知识，排版等有疑问或者建议，欢迎邮件和我联系

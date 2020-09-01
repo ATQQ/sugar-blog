@@ -61,202 +61,200 @@
 >对前端的计算机基础考查相比后端开发已经简单了许多,大厂一二面也特别爱考查这部分内容
 
 >如果并没有深入了解或使用Node,大家可以不用刻意去准备Node
-
 <details>
-  <summary>
-  <font color='3eaf7c'>计算机基础知识</font>
-  </summary>
-  <ul>
-    <li>
-    <details>
-        <summary>
-        <font color='3eaf7c'>算法与数据结构</font>
-        </summary>
-        <ol>
-            <li>链表</li>
-            <li>堆/栈</li>
-            <li>哈希表</li>
-            <li>二叉树</li>
-            <li>各种排序,尤其是快排</li>
-            <li>BST</li>
-            <li>KMP</li>
-            <li>二分</li>
-        </ol>
-        </details>
-    </li>
-    <li>
-    <details>
-        <summary>
-        <font color='3eaf7c'>操作系统</font>
-        </summary>
-        <ol>
-            <li>线程相关的问题</li>
-            <li>进程相关的问题</li>
-            <li>进程与线程进行对比所产生的问题</li>
-        </ol>
-        </details>
-    </li>
-    <li>
-    <details>
-        <summary>
-        <font color='3eaf7c'>计算机网络</font>
-        </summary>
-        <ol>
-            <li>TCP相关</li>
-            <li>UDP相关</li>
-            <li>HTTP相关</li>
-            <li>DNS相关</li>
-        </ol>
-        </details>
-    </li>
-    <li>
-    <details>
-        <summary>
-        <font color='3eaf7c'>设计模式</font>
-        </summary>
-        <ol>
-            <li>工厂模式</li>
-            <li>抽象工厂模式</li>
-            <li>单例模式</li>
-        </ol>
-        </details>
-    </li>
-  </ul>
-</details>
-<details>
-  <summary>
-  <font color='3eaf7c'>大前端</font>
-  </summary>
-  <ul>
-    <li>
-    <details>
-        <summary>
-        <font color='3eaf7c'>JS(包含ES6)</font>
-        </summary>
-        <ol>
-            <li>DOM事件触发的几个阶段(捕获,目标,冒泡)相关问题</li>
-            <li>值类型与引用类型相关问题</li>
-            <li>函数柯里化</li>
-            <li>闭包</li>
-            <li>this指向判断</li>
-            <li>apply,call,bind</li>
-            <li>event loop</li>
-            <li>promise</li>
-            <li>定时器</li>
-            <li>原型与原型链</li>
-            <li>箭头函数</li>
-            <li>类型转换</li>
-            <li>async与await</li>
-            <li>类数组</li>
-            <li>节流防抖</li>
-            <li>垃圾回收机制</li>
-            <li>typeof与instanceof</li>
-            <li>==与===</li>
-            <li>JS中的继承实现</li>
-            <li>let,const,var区别</li>
-            <li>各种遍历数组的方式比较(for,forof,forin,forEach)</li>
-        </ol>
-        </details>
-    </li>
-    <li>
-    <details>
-        <summary>
-        <font color='3eaf7c'>CSS</font>
-        </summary>
-        <ol>
-            <li>回流与重绘</li>
-            <li>盒模型</li>
-            <li>弹性布局(flex)</li>
-            <li>栅栏布局(grid)</li>
-            <li>display各种值及其作业</li>
-            <li>position各种值及其作用</li>
-            <li>BFC(概念,如何触发,特点)</li>
-            <li>display:none,visibility:hidden,opacity:0区别</li>
-            <li>CSS层级关系,样式权重计算</li>
-            <li>CSS伪类</li>
-            <li>CSS伪元素</li>
-            <li>斑马纹实现</li>
-            <li>简单动画的实现</li>
-            <li>小球从屏幕左滚动到右xxxpx</li>
-            <li>子元素相对于父元素水平居中的方法</li>
-            <li>子元素相对于父元素水平垂直居中的方法</li>
-            <li>如何做页面主题(皮肤)切换</li>
-        </ol>
-        </details>
-    </li>
-    <li>
-    <details>
-        <summary>
-        <font color='3eaf7c'>VUE(针对没看源码)</font>
-        </summary>
-        <ol>
-            <li>数据双向绑定,数据响应式实现的原理</li>
-            <li>生命周期</li>
-            <li>组件之间通信方法(父子,兄弟,祖孙,任意)</li>
-            <li>v-if,v-show异同</li>
-            <li>路由原理,为什么地址发生改变,浏览器不会刷新</li>
-            <li>权限管理</li>
-        </ol>
-        </details>
-    </li>
-    <li>
-    <details>
-        <summary>
-        <font color='3eaf7c'>浏览器</font>
-        </summary>
-        <ol>
-            <li>缓存机制</li>
-            <li>页面渲染原理(过程)</li>
-            <li>本地存储</li>
-            <li>浏览器安全相关问题(SQL注入,XSS,CSRF,DNS劫持,点击劫持)</li>
-            <li>跨域相关问题(原因,解决方式)</li>
-            <li>同源策略</li>
-            <li>预检请求</li>
-        </ol>
-        </details>
-    </li>
+    <summary>
+        <font color='3eaf7c'>计算机基础知识</font>
+    </summary>
+    <ul>
         <li>
-    <details>
-        <summary>
-        <font color='3eaf7c'>性能优化</font>
-        </summary>
-        <ol>
-            <li>Webpack代码打包优化</li>
-            <li>网络层面优化</li>
-            <li>首屏加载优化</li>
-        </ol>
-        </details>
-    </li>
-    <li>
-    <details>
-        <summary>
-        <font color='3eaf7c'>小程序</font>
-        </summary>
-        <ol>
-            <li>小程序的特点</li>
-            <li>你对小程序的发展看法</li>
-            <li>小程序的原理</li>
-            <li>小程序与传统移动端Web的区别</li>
-        </ol>
-        </details>
-    </li>
-    <li>
-    <details>
-        <summary>
-        <font color='3eaf7c'>Node</font>
-        </summary>
-        <ol>
-            <li>node中的Event loop</li>
-            <li>node中的进程与线程相关问题</li>
-        </ol>
-        </details>
-    </li>
-    <li>
-    正则表达式简单使用
-    </li>
-  </ul>
+            <details>
+                <summary>
+                    <font color='3eaf7c'>算法与数据结构</font>
+                </summary>
+                <ol>
+                    <li>链表</li>
+                    <li>堆/栈</li>
+                    <li>哈希表</li>
+                    <li>二叉树</li>
+                    <li>各种排序,尤其是快排</li>
+                    <li>BST</li>
+                    <li>KMP</li>
+                    <li>二分</li>
+                </ol>
+            </details>
+        </li>
+        <li>
+            <details>
+                <summary>
+                    <font color='3eaf7c'>操作系统</font>
+                </summary>
+                <ol>
+                    <li>线程相关的问题</li>
+                    <li>进程相关的问题</li>
+                    <li>进程与线程进行对比所产生的问题</li>
+                </ol>
+            </details>
+        </li>
+        <li>
+            <details>
+                <summary>
+                    <font color='3eaf7c'>计算机网络</font>
+                </summary>
+                <ol>
+                    <li>TCP相关</li>
+                    <li>UDP相关</li>
+                    <li>HTTP相关</li>
+                    <li>DNS相关</li>
+                </ol>
+            </details>
+        </li>
+        <li>
+            <details>
+                <summary>
+                    <font color='3eaf7c'>设计模式</font>
+                </summary>
+                <ol>
+                    <li>工厂模式</li>
+                    <li>抽象工厂模式</li>
+                    <li>单例模式</li>
+                </ol>
+            </details>
+        </li>
+    </ul>
 </details>
-
+<details>
+    <summary>
+        <font color='3eaf7c'>大前端</font>
+    </summary>
+    <ul>
+        <li>
+            <details>
+                <summary>
+                    <font color='3eaf7c'>JS(包含ES6)</font>
+                </summary>
+                <ol>
+                    <li>DOM事件触发的几个阶段(捕获,目标,冒泡)相关问题</li>
+                    <li>值类型与引用类型相关问题</li>
+                    <li>函数柯里化</li>
+                    <li>闭包</li>
+                    <li>this指向判断</li>
+                    <li>apply,call,bind</li>
+                    <li>event loop</li>
+                    <li>promise</li>
+                    <li>定时器</li>
+                    <li>原型与原型链</li>
+                    <li>箭头函数</li>
+                    <li>类型转换</li>
+                    <li>async与await</li>
+                    <li>类数组</li>
+                    <li>节流防抖</li>
+                    <li>垃圾回收机制</li>
+                    <li>typeof与instanceof</li>
+                    <li>==与===</li>
+                    <li>JS中的继承实现</li>
+                    <li>let,const,var区别</li>
+                    <li>各种遍历数组的方式比较(for,forof,forin,forEach)</li>
+                </ol>
+            </details>
+        </li>
+        <li>
+            <details>
+                <summary>
+                    <font color='3eaf7c'>CSS</font>
+                </summary>
+                <ol>
+                    <li>回流与重绘</li>
+                    <li>盒模型</li>
+                    <li>弹性布局(flex)</li>
+                    <li>栅栏布局(grid)</li>
+                    <li>display各种值及其作业</li>
+                    <li>position各种值及其作用</li>
+                    <li>BFC(概念,如何触发,特点)</li>
+                    <li>display:none,visibility:hidden,opacity:0区别</li>
+                    <li>CSS层级关系,样式权重计算</li>
+                    <li>CSS伪类</li>
+                    <li>CSS伪元素</li>
+                    <li>斑马纹实现</li>
+                    <li>简单动画的实现</li>
+                    <li>小球从屏幕左滚动到右xxxpx</li>
+                    <li>子元素相对于父元素水平居中的方法</li>
+                    <li>子元素相对于父元素水平垂直居中的方法</li>
+                    <li>如何做页面主题(皮肤)切换</li>
+                </ol>
+            </details>
+        </li>
+        <li>
+            <details>
+                <summary>
+                    <font color='3eaf7c'>VUE(针对没看源码)</font>
+                </summary>
+                <ol>
+                    <li>数据双向绑定,数据响应式实现的原理</li>
+                    <li>生命周期</li>
+                    <li>组件之间通信方法(父子,兄弟,祖孙,任意)</li>
+                    <li>v-if,v-show异同</li>
+                    <li>路由原理,为什么地址发生改变,浏览器不会刷新</li>
+                    <li>权限管理</li>
+                </ol>
+            </details>
+        </li>
+        <li>
+            <details>
+                <summary>
+                    <font color='3eaf7c'>浏览器</font>
+                </summary>
+                <ol>
+                    <li>缓存机制</li>
+                    <li>页面渲染原理(过程)</li>
+                    <li>本地存储</li>
+                    <li>浏览器安全相关问题(SQL注入,XSS,CSRF,DNS劫持,点击劫持)</li>
+                    <li>跨域相关问题(原因,解决方式)</li>
+                    <li>同源策略</li>
+                    <li>预检请求</li>
+                </ol>
+            </details>
+        </li>
+        <li>
+            <details>
+                <summary>
+                    <font color='3eaf7c'>性能优化</font>
+                </summary>
+                <ol>
+                    <li>Webpack代码打包优化</li>
+                    <li>网络层面优化</li>
+                    <li>首屏加载优化</li>
+                </ol>
+            </details>
+        </li>
+        <li>
+            <details>
+                <summary>
+                    <font color='3eaf7c'>小程序</font>
+                </summary>
+                <ol>
+                    <li>小程序的特点</li>
+                    <li>你对小程序的发展看法</li>
+                    <li>小程序的原理</li>
+                    <li>小程序与传统移动端Web的区别</li>
+                </ol>
+            </details>
+        </li>
+        <li>
+            <details>
+                <summary>
+                    <font color='3eaf7c'>Node</font>
+                </summary>
+                <ol>
+                    <li>node中的Event loop</li>
+                    <li>node中的进程与线程相关问题</li>
+                </ol>
+            </details>
+        </li>
+        <li>
+            正则表达式简单使用
+        </li>
+    </ul>
+</details>
 ## 2.总结自己的项目
 >如果你的项目非常有意思的话,不妨多多总结一下其闪光点,如果你的项目非常有意思,很容易与面试官产生共鸣,妥妥的面试+分,也能让他留下一个印象
 
@@ -420,6 +418,7 @@ TCP 的一些特性
 2. ``服务端``收到``客户端``的请求后,告知应用层释放连接
 3. ``服务端``将数据发送完毕后,再向``客户端``发送释放连接请求
 4. ``客户端``收到释放请求后,并向``服务端``发送确认释放的应答,同意释放
+
 </details>
 <details>
     <summary>
@@ -543,6 +542,7 @@ function quickSort(array) {
 * 没有任何控制流量的算法,以恒定速率传输
 * 适用于对网络通讯质量要求不高但实时性要求高的地方
   * 直播,语音,视屏等场景
+
 </details>
         </li>
         <li>
@@ -557,6 +557,7 @@ function quickSort(array) {
   * HTTP
   * FTP
   * 网游
+
 </details>
         </li>
         <li>
@@ -568,6 +569,7 @@ function quickSort(array) {
 * 防止出现失效的连接请求报文段被服务端接收的情况，从而产生错误
 * 如果一次:客户端发送连接请求后，没有收到服务端的应答，是没法判断连接是否成功的
 * 如果两次:客户端发送连接请求后，等待服务器端的应答。如过客户端的SYN过了一段时间没有到达服务器端，客户端链接超时，会重新发送一次连接，如果重发的这次服务器端收到了，且应答了客户端，连接就建立了。但是建立后，第一个SYN也到达服务端了，这时服务端会认为这是一个新连接，会再给客户端发送一个ACK，这个ACK当然会被客户端丢弃。但是此时服务器端已经为这个连接分配资源了，而且服务器端会一直维持着这个资源，会造成浪费
+
 </details>
         </li>
                 <li>
@@ -581,6 +583,7 @@ function quickSort(array) {
 * HTTP 页面响应速度比 HTTPS 快
 * HTTPS 是建构在 SSL/TLS 之上的 HTTP 协议,HTTPS 比 HTTP 要更耗费服务器资源
 * HTTPS是在HTTP上建立SSL/TLS加密层，并对传输数据进行加密
+
 </details>
         </li>
         <li>
@@ -593,6 +596,7 @@ function quickSort(array) {
 * Header压缩
 * 服务端主动 Push资源
 * HTTP/2 中引入了新的编码机制，所有传输的数据都会被分割，并采用二进制格式编码
+
 </details>
         </li>
         <li>
@@ -603,6 +607,7 @@ function quickSort(array) {
 
 * 支持Http2的服务端与客户端
 * 域名就必须是https(基于TLS/1.2或以上版本的加密连接)
+
 </details>
         </li>
         <li>
@@ -612,6 +617,7 @@ function quickSort(array) {
             </summary>
 
 利用非对称加密实现身份认证和密钥协商，对称加密算法采用协商的密钥对数据加密，基于散列函数验证信息的完整性
+
 </details>
         </li>
     </ol>
@@ -643,6 +649,7 @@ function quickSort(array) {
 
 null不是对象
 >虽然 typeof null 会输出 object，但是这只是 JS 存在的一个悠久 Bug。在 JS 的最初版本中使用的是 32 位系统，为了性能考虑使用低位存储变量的类型信息，000 开头代表是对象，然而 null 表示为全零，所以将它错误的判断为 object
+
 </details>
         </li>
          <li>
@@ -652,6 +659,7 @@ null不是对象
             </summary>
 
 把一个接受多个参数的函数变换成接受一个单一参数（最初函数的第一个参数）的函数，并且返回(接受剩下的参数而且返回结果的)新函数的技术
+
 </details>
         </li>
          <li>
@@ -667,6 +675,7 @@ null不是对象
 
 **值类型**
 * 赋值的时候拷贝的一个新的值,不会影响原来的
+
 </details>
         </li>
         <li>
@@ -682,6 +691,7 @@ null不是对象
 * undefined
 * symbol
 * function
+
 </details>
         </li>
         <li>
@@ -693,6 +703,7 @@ null不是对象
 * 通过原型链进行判断
 * 每个对象都有一个原型,instanceof会沿着原型链进行判断,直到最顶层原型为止
 * 可以通过`Symbol.hasInstance`重定义instanceof的行为,所以instanceof的结果不一定绝对正确
+
 </details>
         </li>
         <li>
@@ -703,6 +714,7 @@ null不是对象
 
 * 每一个js对象在创建的时候就会自动关联另一个对象，这个对象就是`原型`，每一个对象都会从原型"继承"属性
 * 相互关联的原型组成的链状结构就是`原型链`
+
 </details>
         </li>
         <li>
@@ -803,6 +815,7 @@ obj2
 
 **===**
 * 判断两者类型和值是否相同,都相同则`true`
+
 </details>
         </li>
                 <li>
@@ -864,6 +877,7 @@ obj2
   * 不能序列化函数
   * 不能解决循环引用的对象
 * 递归实现deepClone
+
 </details>
         </li>
         <li>
@@ -878,6 +892,7 @@ obj2
 * rejectde:拒绝
 
 一旦从等待状态变成为其他状态就永远不能更改状态
+
 </details>
         </li>
         <li>
@@ -895,6 +910,7 @@ obj2
   * 因为await将异步代码变成了同步代码,如果多个异步之间没有关系,会导致性能降低
 * 原理
   * await 就是 generator 加上 Promise 的语法糖，且内部实现了自动执行 generator
+
 </details>
         </li>
         <li>
@@ -907,6 +923,7 @@ obj2
 * 捕获阶段
 * 目标阶段
 * 冒泡阶段
+
 </details>
         </li>
         <li>
@@ -918,6 +935,7 @@ obj2
 如果一个节点中的子节点是动态生成的，那么子节点需要注册事件的话应该注册在父节点上
 * 节省内存,不需要给每个子节点注册一次
 * 不需要给子节点注销事件
+
 </details>
         </li>
         <li>
@@ -932,6 +950,7 @@ obj2
 * jsonp
 * 服务端开启CROS支持
 * Nginx反向代理
+
 </details>
         </li>
         <li>
@@ -945,6 +964,7 @@ obj2
 * 复杂请求
 
 对于复杂请求，首先会发起一个预检请求,请求方法为options,通过该请求来判断服务器是否允许跨域
+
 </details>
         </li>
         <li>
@@ -988,6 +1008,7 @@ obj2
 * requestAnimationFrame(浏览器)
 * I/O
 * UI rendering(浏览器)
+
 </details>
         </li>
                 <li>
@@ -1002,6 +1023,7 @@ obj2
   * 使用 var 声明的变量会被提升到作用域的顶部,函数也会被提升，并且优先于变量提升
 
 let 与 const 不能在声明前就使用,作用基本一致,后者声明的变量不能再次赋值
+
 </details>
         </li>
         <li>ES6有哪些新特性,你了解到的</li>
@@ -1032,7 +1054,8 @@ let 与 const 不能在声明前就使用,作用基本一致,后者声明的变�
 **重绘**
 
 经过生成的渲染树和回流阶段,得到了所有可见节点具体的几何信息与样式,然后将渲染树的每个节点转换成屏幕上的实际像素,这个阶段就叫`重绘`节点
-        </details>
+    
+</details>
         </li>
         <li>
         <details>
@@ -1050,7 +1073,8 @@ let 与 const 不能在声明前就使用,作用基本一致,后者声明的变�
 * !important最大
 
 权重一样的情况下,后声明的覆盖前面的
-        </details>
+
+ </details>
         </li>
         <li>
         <details>
@@ -1074,7 +1098,8 @@ BFC规范(块级格式化上下文：block formatting context)
 * overflow不为visible
 * display的值为inline-block、table-cell、table-caption
 * position的值为absolute或fixed
-        </details>
+
+</details>
         </li>
         <li>弹性布局flex</li>
         <li>栅栏布局grid</li>
