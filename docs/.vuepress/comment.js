@@ -3,7 +3,9 @@ import Valine from "valine";
 export default {
     init() {
         const pathname = window.location.pathname
-        document.querySelector('#pathname').id = pathname
+        const el = document.querySelector('#pathname')
+        el.id = pathname
+        el.setAttribute('data-flag-title', document.title)
         new Valine({
             el: "#comments",
             appId: "L3HgpT2JA3KJFUots3ql2AAd-gzGzoHsz",

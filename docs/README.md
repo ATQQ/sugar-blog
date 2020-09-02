@@ -15,6 +15,8 @@ features:
   details: 记录了笔者在2020春招,秋招中经历的面试经历,并整理了相关题目
 ---
 
+<center>现在支持在文章末页进行评论啦，大家踊跃交流呀</center>
+
 # :pencil:最近更新
 * coding
   * [深拷贝的实现](./coding/js/deepClone.md)
