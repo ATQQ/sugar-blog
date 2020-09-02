@@ -47,4 +47,5 @@ var barReference = {
 [ ECMAScript 5.1 ](http://yanhaijing.com/es5/#115)
 :::
 
+<comment/>
 <tongji/>

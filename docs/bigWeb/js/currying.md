@@ -90,4 +90,5 @@ fn = curry(fn)
 fn(1)(2)(3, 4) // 10
 ```
 
+<comment/>
 <tongji/>

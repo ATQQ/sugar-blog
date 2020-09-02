@@ -42,4 +42,5 @@ new Component().$mount("#app")
 </script>
 ```
 
+<comment/>
 <tongji/>

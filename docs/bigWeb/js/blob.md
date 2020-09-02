@@ -65,4 +65,5 @@ File 实例对象是一个特殊的 Blob 实例，增加了``name``(文件名称
 [网道JavaScript](http://wangdoc.com/javascript/bom/file.html#file-%E5%AF%B9%E8%B1%A1)
 :::
 
+<comment/>
 <tongji/>

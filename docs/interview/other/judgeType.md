@@ -50,4 +50,5 @@ function myInstanceof(target, origin) {
 }
 ```
 
+<comment/>
 <tongji/>

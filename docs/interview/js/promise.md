@@ -23,4 +23,5 @@
 * 构造 Promise 的时候，构造函数内部的代码是立即执行的
 * then函数在promise.resolve()执行后执行
 
+<comment/>
 <tongji/>

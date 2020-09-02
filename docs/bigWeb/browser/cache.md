@@ -266,4 +266,5 @@ ETag 类似于文件指纹，If-None-Match 会将当前 ETag 发送给服务器�
 
 因此可以给代码文件设置缓存有效期一年Cache-Control: max-age=31536000，这样只有当``HTML``文件中引入的文件名发生了改变才会去下载最新的代码文件，否则就一直使用缓存。
 
+<comment/>
 <tongji/>

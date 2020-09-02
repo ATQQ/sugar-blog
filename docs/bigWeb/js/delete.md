@@ -64,4 +64,5 @@ console.log(a.name) // undefined
 [MDN-delete](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/delete)
 :::
 
+<comment/>
 <tongji/>

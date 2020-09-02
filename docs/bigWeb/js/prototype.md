@@ -103,4 +103,5 @@ console.log(Object.prototype.__proto__ === null) // true
 [JavaScript深入之从原型到原型链](https://github.com/mqyqingfeng/Blog/issues/2)
 :::
 
+<comment/>
 <tongji/>

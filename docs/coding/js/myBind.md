@@ -45,4 +45,5 @@ const print2 = print.mybind({ name: 'print2' }).bind({ name: 'print22' })
 print2() // print2
 ```
 
+<comment/>
 <tongji/>

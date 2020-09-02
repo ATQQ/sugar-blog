@@ -128,4 +128,5 @@ Function.prototype.mybind = function (thisArg) {
 test.mybind('123', 4, 5)() // [String: '123'] 9
 ```
 
+<comment/>
 <tongji/>

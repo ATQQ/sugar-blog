@@ -48,4 +48,5 @@ console.log(obj) // {a:1}
 * 引用类型按**共享传递**
 * 拷贝副本也是一种值的拷贝
 
+<comment/>
 <tongji/>

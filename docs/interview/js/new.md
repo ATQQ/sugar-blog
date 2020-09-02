@@ -25,4 +25,5 @@ function myNew() {
 * 使用字面量的方式创建对象性能上与可读性更高
 * 使用 new Object() 的方式创建对象需要通过作用域链一层层找到 Object
 
+<comment/>
 <tongji/>
