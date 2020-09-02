@@ -8,6 +8,7 @@ function learnSidebar(group, introduction) {
             children: [
                 ['', introduction],
                 ['eslint-plugin', 'eslint插件开发教程'],
+                ['git-base', 'Git常用的一些基本操作'],
             ]
         }
     ]

@@ -6,7 +6,7 @@ function jsSidebar(group, introduction) {
             sidebarDepth: 2,
             children: [
                 ['', introduction],
-                ['es6', 'ees6面试题'],
+                ['es6', 'es6面试题'],
                 ['primitiveType', '原始类型有哪些'],
                 ['nullobj', 'null是对象吗'],
                 ['numNotEqual', '为什么0.1+0.2!=0.3'],
@@ -41,7 +41,6 @@ function otherSidebar(group, introduction) {
                 ['', introduction],
                 ['engineering', '前端工程化'],
                 ['inputurl', '输入URL到页面渲染的整个过程发生了什么?'],
-                ['primitive', '原始类型有哪几种？null 是对象嘛？'],
                 ['object', '对象类型和原始类型的不同之处？函数参数是对象会发生什么问题？'],
                 ['judgeType', 'typeof 是否能正确判断类型？instanceof 能正确判断对象的原理是什么？'],
                 ['prototype', '如何理解原型？如何理解原型链？'],

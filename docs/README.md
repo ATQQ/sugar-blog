@@ -15,12 +15,14 @@ features:
   details: 记录了笔者在2020春招,秋招中经历的面试经历,并整理了相关题目
 ---
 
-# :pencil:最近撰写
+# :pencil:最近更新
 * coding
   * [深拷贝的实现](./coding/js/deepClone.md)
   * [promiseAll实现](./coding/js/promiseAll.md)
   * [更多...](./coding/js/README.md)
 * [ES6+的一些新语法糖和方法整理](./bigWeb/js/es6+.md)
+* [js判断数据类型的几种方案](./bigWeb/js/p4.md)
+* [Git基本操作整理](./technology/learn/git-base.md)
 
 # :rocket:快捷入口
 * [整理的部分面试题](./interview/problem)
