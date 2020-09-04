@@ -15,6 +15,7 @@ function autumn21Sidebar(group, introduction) {
                 ['txcloud', 'txcloud-腾讯云'],
                 ['cloudmusic', 'cloudmusic-网易云'],
                 ['zyb', 'zyb-作业帮'],
+                ['ks', 'ks-快手'],
             ]
         }
     ]

@@ -17,6 +17,11 @@ features:
 
 <center>现在支持在文章末页进行评论啦，大家踊跃交流呀</center>
 
+<center>
+
+# :pencil2:[☞ 留言板 ☜](./show/messagePanel.md)
+</center>
+
 # :pencil:最近更新
 * coding
   * [深拷贝的实现](./coding/js/deepClone.md)
