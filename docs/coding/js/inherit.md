@@ -1,6 +1,7 @@
 # 继承实现
 
-## class
+## ES6
+### class
 ```js
 class A{
     constructor(name){
@@ -21,8 +22,9 @@ class B extends A{
 let a = new B('123',0)
 a.printName() // 123
 ```
+## ES5
 
-## 组合继承
+### 组合继承
 ```js
 function A(name) {
     this.name = name
@@ -42,7 +44,7 @@ let a = new B('123', 0)
 a.printName() // 123
 ```
 
-## 寄生组合继承
+### 寄生组合继承
 1. 
 ```js
 function A(name) {

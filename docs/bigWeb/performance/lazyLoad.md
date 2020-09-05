@@ -58,8 +58,8 @@ function init() {
     let i = 100
     while (i--) {
         let img = document.createElement('img')
-        img.src = 'http://img.cdn.sugarat.top/mdImg/MTU4MzM5NzA0NzA5OA==583397047098'
-        img.setAttribute('lazy', 'http://img.cdn.sugarat.top/mdImg/MTU4MzM5NzEyNTYzOA==583397125638')
+        img.src = 'https://img.cdn.sugarat.top/mdImg/MTU4MzM5NzA0NzA5OA==583397047098'
+        img.setAttribute('lazy', 'https://img.cdn.sugarat.top/mdImg/MTU4MzM5NzEyNTYzOA==583397125638')
         doc.appendChild(img)
     }
     document.body.append(doc)

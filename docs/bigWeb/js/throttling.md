@@ -13,7 +13,7 @@ window.onscroll = () => {
 ```
 运行的时候会发现存在一个问题,这个函数的**默认执行频率，太高了**,只按一次键盘上的``↓``就执行了9次
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTU4Mjg1OTQ3NTYzMQ==582859475631)
+![图片](https://img.cdn.sugarat.top/mdImg/MTU4Mjg1OTQ3NTYzMQ==582859475631)
 
 实际是不需要这么高的执行频率的,会消耗浏览器的性能
 

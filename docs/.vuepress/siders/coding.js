@@ -43,6 +43,8 @@ function jsSidebar(group, introduction) {
                 ['myBind', '简单-实现bind'],
                 ['myCall', '简单-实现call'],
                 ['myApply', '简单-实现apply'],
+                ['inherit', '简单-继承实现'],
+                ['myNew','简单-new实现'],
                 ['deepClone', '中等-实现深拷贝']
             ]
         }

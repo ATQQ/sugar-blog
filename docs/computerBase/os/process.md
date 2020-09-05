@@ -14,7 +14,7 @@
 * 就绪(Ready):已具备运行条件(获取了除CPU以外的其它所需资源),但CPU没有空闲
 * 等待/阻塞/睡眠(Waiting/Blocked):因等待某一事件而不能运行
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTU4NDMyOTQ0ODQ1OA==584329448458)
+![图片](https://img.cdn.sugarat.top/mdImg/MTU4NDMyOTQ0ODQ1OA==584329448458)
 
 ## 低级调度
 * 非抢占式调度:不允许某进程抢占已经分配出去的处理机。

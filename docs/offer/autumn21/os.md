@@ -38,7 +38,7 @@
 5. 异步性:各自的进程独立的按不可预知的速度推进
 
 ### 状态
-![](http://img.cdn.sugarat.top/mdImg/MTU4NDMyOTQ0ODQ1OA==584329448458)
+![](https://img.cdn.sugarat.top/mdImg/MTU4NDMyOTQ0ODQ1OA==584329448458)
 * 运行(Running):占用CPU且正在CPU上运行
 * 就绪(Ready):已具备运行条件(获取了除CPU以外的其它所需资源),但CPU没有空闲
 * 等待/阻塞/睡眠(Waiting/Blocked):因等待某一事件而不能运行

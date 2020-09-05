@@ -19,7 +19,7 @@
 
 生成 DOM 树和 CSSOM 树之后，就需要将这两棵树组合为渲染树
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTU4MzMwNTYyNTE4Ng==583305625186)
+![图片](https://img.cdn.sugarat.top/mdImg/MTU4MzMwNTYyNTE4Ng==583305625186)
 
 渲染树只会包括需要显示的节点和这些节点的样式信息
 

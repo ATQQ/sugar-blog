@@ -1,6 +1,6 @@
 # 运行机制概述
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTU4NjgzMzgxNDE1OA==586833814158)
+![图片](https://img.cdn.sugarat.top/mdImg/MTU4NjgzMzgxNDE1OA==586833814158)
 <center>全局概览</center>
 
 ## 初始化及挂载
@@ -34,7 +34,7 @@ generate 是将 `AST` 转化成 `render function` 字符串的过程，得到结
 
 当 `render function` 被渲染的时候，因为会读取所需对象的值，所以会触发 `getter` 函数进行**依赖收集**,目的是将观察者 `Watcher` 对象存放到当前闭包中的订阅者 `Dep` 的 `subs` 中
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTU4Njg0NTExMjAxOA==586845112018)
+![图片](https://img.cdn.sugarat.top/mdImg/MTU4Njg0NTExMjAxOA==586845112018)
 
 修改对象的值的时候，会触发对应的 `setter`， `setter` 通知之前**依赖收集**得到的 `Dep` 中的每一个 `Watcher`，告知他们我的值改变了，需要重新渲染视图。这时候这些 `Watcher` 就会开始调用 `update` 来更新视图，当然这中间还有一个 `patch` 的过程以及使用队列来异步更新的策略
 

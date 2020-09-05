@@ -7,7 +7,7 @@
 ### prototype
 * 每一个函数都有一个``prototype``属性
 * prototype 属性指向了一个对象，这个对象正是调用该构造函数而创建的实例的**原型**
-![图片](http://img.cdn.sugarat.top/mdImg/MTU4NDM1ODU4MzY1MA==584358583650)
+![图片](https://img.cdn.sugarat.top/mdImg/MTU4NDM1ODU4MzY1MA==584358583650)
 
 **示例**
 ```js
@@ -24,7 +24,7 @@ console.log(dog2.weight) // 20
 * ``__proto__``指向该对象的原型
 * ``__proto__`` 绝大部分浏览器都支持这个非标准的方法访问原型，然而它并不存在于 Person.prototype 中，实际上，它是来自于 Object.prototype ，与其说是一个属性，不如说是一个 getter/setter，当使用 ``obj.__proto__`` 时，可以理解成返回了 Object.getPrototypeOf(obj)。
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTU4NDM1OTA4MTY2OQ==584359081669)
+![图片](https://img.cdn.sugarat.top/mdImg/MTU4NDM1OTA4MTY2OQ==584359081669)
 
 **示例**
 ```js
@@ -39,7 +39,7 @@ console.log(Object.getPrototypeOf(dog1)===Animal.prototype) // true
 ### constructor
 * 每个原型都有一个``constructor``属性
 * ``constructor``属性指向关联的构造函数
-![图片](http://img.cdn.sugarat.top/mdImg/MTU4NDM1OTIxODU0OA==584359218548)
+![图片](https://img.cdn.sugarat.top/mdImg/MTU4NDM1OTIxODU0OA==584359218548)
 
 **示例**
 ```js
@@ -87,11 +87,11 @@ console.log(Animal.prototype.__proto__ === Object.prototype) // true
 // 实例对象的原型的原型
 console.log(cat.__proto__.__proto__ === Object.prototype) // true
 ```
-![图片](http://img.cdn.sugarat.top/mdImg/MTU4NDM2MjcxNDY2Ng==584362714666)
+![图片](https://img.cdn.sugarat.top/mdImg/MTU4NDM2MjcxNDY2Ng==584362714666)
 ## 原型链
 >相互关联的原型组成的链状结构就是原型链
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTU4NDM2MzA5ODkyOA==584363098928)
+![图片](https://img.cdn.sugarat.top/mdImg/MTU4NDM2MzA5ODkyOA==584363098928)
 
 * Object.prototype的原型为null
 ```js

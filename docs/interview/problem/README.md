@@ -35,7 +35,7 @@
 <solve ok>[什么是节流,防抖？](../../bigWeb/js/throttling.md#防抖)</solve>
 <solve ok>[浏览器与Node中event loop?他们有何不同？](../../bigWeb/js/eventloop.md)</solve>
 <solve ok>[概述一下js中的词法作用域？](../../bigWeb/js/scope.md)</solve>
-<solve ok>[for in遍历数组会有哪些问题](../js/forin.md)</solve>
+<solve ok>[for in遍历数组会有哪些问题](../../interview/js/diff-for-in-of.md)</solve>
 <solve ok>[window.onload与document.ready执行顺序](../js/onload-ready.md)</solve>
 <solve >了解JSBridge吗</solve>
 

@@ -43,7 +43,7 @@ function bfs(root){
 ### 2.哈希表冲突处理规则?
 * 线性探测再散列:冲突后存储在冲突后一个位置，如果仍然冲突继续向后
 * 链地址法:产生hash冲突后在存储数据后面加一个指针，指向后面冲突的数据
-![图片](http://img.cdn.sugarat.top/mdImg/MTU4NTEyNjUyNjM5OQ==585126526399)
+![图片](https://img.cdn.sugarat.top/mdImg/MTU4NTEyNjUyNjM5OQ==585126526399)
 
 ### 3.统计一篇英文文章中出现次数最多的N个单词?(提示使用某种数据结构)
 1. 暴力解法排序:使用map统计后排序,O(NlogN)

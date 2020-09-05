@@ -11,6 +11,7 @@
 * [柯里化(Currying)](./currying.md)
 * [delete](./delete.md)
 * [ECMAScript规范解读this(未完待续)](./ecmathis.md)
+* [ES6+的一些新语法糖和方法整理](./es6+.md)
 * [Event Loop](./eventloop.md)
 * [浮点数](./float.md)
 * [垃圾回收机制](./garbage.md)

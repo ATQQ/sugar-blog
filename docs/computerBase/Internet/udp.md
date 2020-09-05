@@ -19,7 +19,7 @@
 ## 高效
 UDP 的头部开销小，只有八字节，相比 TCP 的至少二十字节要少得多，在传输数据报文时是高效的。
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTU4MzIyMDM3OTg1MA==583220379850)
+![图片](https://img.cdn.sugarat.top/mdImg/MTU4MzIyMDM3OTg1MA==583220379850)
 
 UDP 头部包含了:
 * 两个十六位的端口号

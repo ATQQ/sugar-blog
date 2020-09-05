@@ -3,12 +3,12 @@
 ## 一面
 ### 代码题
 1. 链表的插入，删除，长度计算
-2. 求解最长公共字串
+2. 求解最长公共子串
 ```js
 let list = ['acccs', 'acaaa', 'ac']
 // ac
 ```
-3. 实现一个promise.All
+1. [实现一个promise.All](./../../coding/js/promiseAll.md)
 ```js
 // 要求：必须等全部都resolved或这reject才返回
 // 有一个reject就走catch
@@ -17,8 +17,8 @@ function waitAll(promises){
 
 }
 ```
-4. 实现bind
-5. 深拷贝的有哪些实现方式,递归实现一个深拷贝
+4. [实现bind](./../../coding/js/myBind.md)
+5. [深拷贝的有哪些实现方式,递归实现一个深拷贝](./../../coding/js/deepClone.md)
 6. 下面代码哪些if是真
 ```js
 if([])
@@ -26,8 +26,8 @@ if({})
 if([]==false)
 if({}==false)
 ```
-7. 实现一个单例模式
-8. 使用ES5实现一个继承
+7. [实现一个单例模式](./../../computerBase/design/single.md)
+8. [使用ES5实现一个继承](./../../coding/js/inherit.md)
 
 ### 计网
 1. TCP、UDP的区别
@@ -39,8 +39,8 @@ if({}==false)
 5. 在浏览器中输入url发出的请求与ajax的区别
 6. http包是如何到达服务器的
 7. TLS工作原理
-8.  客户端如何知道服务端下发的CA证书是没有被劫持篡改过的
-9.  客户端如何验证CA证书是合法的
+8. 客户端如何知道服务端下发的CA证书是没有被劫持篡改过的
+9. 客户端如何验证CA证书是合法的
 10. 我没有去主动安装这些证书，浏览器是怎么验证的
 11. GET与POST区别
 12. URL长度限制是多长
@@ -54,26 +54,26 @@ if({}==false)
 2. 进程怎么并行
 
 ### 浏览器
-1. 如何设置浏览器缓存
-2. 什么是强缓存/协商缓存
-3. XSS是什么？如何预防？
+1. [如何设置浏览器缓存](./../../bigWeb/browser/cache.md#强缓存)
+2. [什么是强缓存/协商缓存](./../../bigWeb/browser/cache.md#缓存策略)
+3. [XSS是什么？如何预防？](./../../bigWeb/browser/safe.md#xss)
 
 ### js/css
-1. 原始值类型与那些
-2. 如何判断变量类型
-3. 如何判断数组
-4. null是对象吗，为什么
-5. forof与forin区别
-6. forof 与 forin在遍历顺序上是否有区别
-7. call,bind,apply区别
+1. [原始值类型有哪些](./../../interview/js/primitiveType.md)
+2. [如何判断变量类型](./../../bigWeb/js/p4.md)
+3. [如何判断数组](./../../interview/js/judgeArr.md)
+4. [null是对象吗，为什么](./../../interview/js/nullobj.md)
+5. [forof与forin区别](./../../interview/js/diff-for-in-of.md)
+6. [forof 与 forin在遍历顺序上是否有区别](./../../interview/js/diff-for-in-of.md)
+7. [call,bind,apply区别](./../../bigWeb/js/apply.md)
 8. 伪类与伪元素的区别，举例用过的伪类与伪元素，以及它们的使用场景
 9. css选择器用过哪些，都有什么作用
-11. 如何获取一个dom对象，这几种方式哪个效率最高，为什么
-12. 什么是事件委托？优点是什么？
-13. 如何获取指定dom的指定属性
-14. 如何获取指定dom的指定样式
-15. 如何获取指定dom的生效样式
-16. 简述一下CSS盒模型，可以手动去改变吗
+10. 如何获取一个dom对象，这几种方式哪个效率最高，为什么
+11. 什么是事件委托？优点是什么？
+12. 如何获取指定dom的指定属性
+13. 如何获取指定dom的指定样式
+14. 如何获取指定dom的生效样式
+15. 简述一下CSS盒模型，可以手动去改变吗
 
 ### vue
 1. slot的常见用法有哪些

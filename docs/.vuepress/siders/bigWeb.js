@@ -35,8 +35,8 @@ function jsSidebar(group, introduction) {
                 ['float', '浮点数'],
                 ['symbol', 'Symbol的用法'],
                 ['arrowfun', '箭头函数'],
-                ['typeConvert','类型转换'],
-                ['es6+','ES6+的新语法糖和方法整理']
+                ['typeConvert', '类型转换'],
+                ['es6+', 'ES6+的新语法糖和方法整理']
             ]
         }
     ]
@@ -64,6 +64,9 @@ function cssSidebar(group, introduction) {
             sidebarDepth: 2,
             children: [
                 ['', introduction],
+                ['pseudo-element', '伪元素'],
+                ['pseudo-class', '伪类'],
+                ['selectors', '选择器'],
                 ['p1', '伪元素before与after'],
                 ['p2', '实现表格斑马纹'],
                 ['reflow', '回流与重绘'],

@@ -1,9 +1,9 @@
 # 前端备战秋招之计算机网络
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTU4NTIzMzA2NDMwNw==585233064307)
+![图片](https://img.cdn.sugarat.top/mdImg/MTU4NTIzMzA2NDMwNw==585233064307)
 
 ## 常见协议的端口
-![图片](http://img.cdn.sugarat.top/mdImg/MTU5MzYyMTk2NTM4NQ==593621965385)
+![图片](https://img.cdn.sugarat.top/mdImg/MTU5MzYyMTk2NTM4NQ==593621965385)
 
 ## OSI体系结构
 自低向上(7层结构)
@@ -36,7 +36,7 @@ TODO：贴生动形象图
 TODO：贴生动形象图
 
 ## 网际层IP协议
-<img style="background-color:white;" src="http://img.cdn.sugarat.top/mdImg/MTU5MzYxNzg5MDI1Ng==593617890256"/>
+<img style="background-color:white;" src="https://img.cdn.sugarat.top/mdImg/MTU5MzYxNzg5MDI1Ng==593617890256"/>
 
 * ARP:地址解析协议--从网络层使用的 IP 地址，解析出在数据链路层使用的硬件地址
 * ICMP：网际控制报文协议--用于在IP主机、路由器之间传递控制消息
@@ -68,7 +68,7 @@ TODO：贴生动形象图
 * 数据
 
 #### 图解构成
-![图片](http://img.cdn.sugarat.top/mdImg/MTU5MzYxOTgwNzUyNw==593619807527)
+![图片](https://img.cdn.sugarat.top/mdImg/MTU5MzYxOTgwNzUyNw==593619807527)
 
 TODO：想办法巧妙记住
 
@@ -92,7 +92,7 @@ TODO：想办法巧妙记住
 * 源地址：32位--4字节
 * 目的地之：32位--4字节
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTU5MzYyMDk2ODE1MQ==593620968151)
+![图片](https://img.cdn.sugarat.top/mdImg/MTU5MzYyMDk2ODE1MQ==593620968151)
 
 ### PING
 * PING 用来测试两个主机之间的连通性
@@ -100,7 +100,7 @@ TODO：想办法巧妙记住
 * PING 是应用层直接使用网络层 ICMP 的例子，它没有通过运输层的 TCP 或UDP
 
 ## 运输层
-![图片](http://img.cdn.sugarat.top/mdImg/MTU5MzYyMTYyOTYyMA==593621629620)
+![图片](https://img.cdn.sugarat.top/mdImg/MTU5MzYyMTYyOTYyMA==593621629620)
 ## UDP
 用户数据报协议（User Datagram Protocol）
 * 数据单位协议：UDP 报文或用户数据报
@@ -131,7 +131,7 @@ TODO：想办法巧妙记住
 ### 高效
 * UDP 的首部开销小，只有 8 个字节，比 TCP 的 20 个字节的首部要少得多
 
-![](http://img.cdn.sugarat.top/mdImg/MTU4MzIyMDM3OTg1MA==583220379850)
+![](https://img.cdn.sugarat.top/mdImg/MTU4MzIyMDM3OTg1MA==583220379850)
 
 ### 传输方式
 * 一对多：单播
@@ -146,7 +146,7 @@ TODO：想办法巧妙记住
 * 视屏等等
 
 ### 数据报格式
-![图片](http://img.cdn.sugarat.top/mdImg/MTU5MzYyMjM0OTY4OA==593622349688)
+![图片](https://img.cdn.sugarat.top/mdImg/MTU5MzYyMjM0OTY4OA==593622349688)
 * 源端口--16位
 * 目的端口--16位
 * 整个数据报文的长度--16位
@@ -174,7 +174,7 @@ TODO：想办法巧妙记住
 ### 建立连接三次握手
 >三报文握手主要是为了防止已失效的连接请求报文段突然又传送到了，因而产生错误。
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTU5Mzg0MzU4NzI2NQ==593843587265)
+![图片](https://img.cdn.sugarat.top/mdImg/MTU5Mzg0MzU4NzI2NQ==593843587265)
 
 起初，两端都为 CLOSED 状态。在通信开始前，双方都会创建 TCB。 服务器创建完 TCB 后便进入 LISTEN 状态，此时开始等待客户端发送数据
 
@@ -188,7 +188,7 @@ TODO：想办法巧妙记住
 ### 连接释放四次挥手
 >数据传输结束后，通信的双方都可释放连接
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTU5Mzg0NTQwODY4Nw==593845408687)
+![图片](https://img.cdn.sugarat.top/mdImg/MTU5Mzg0NTQwODY4Nw==593845408687)
 TCP 是全双工的，在断开连接时两端都需要发送 FIN 和 ACK
 1. 第一次挥手
    * 客户端认为数据发送完成，向服务端发送链接释放请求(FIN=1,序号seq=u)，等待服务端确认
@@ -204,7 +204,7 @@ TCP 是全双工的，在断开连接时两端都需要发送 FIN 和 ACK
    * 然后 客户端 进入 TIME-WAIT 状态
      * 该状态会持续 2MSL（最大段生存期，指报文段在网络中生存的时间，超时会被抛弃） 时间，若该时间段内没有 B 的重发请求的话，就进入 CLOSED 状态。当 服务端 收到确认应答后，也便进入 CLOSED 状态。
 ### 首部格式
-![图片](http://img.cdn.sugarat.top/mdImg/MTU5MzY1NDYwMDI2OQ==593654600269)
+![图片](https://img.cdn.sugarat.top/mdImg/MTU5MzY1NDYwMDI2OQ==593654600269)
 * 源端口：2字节
 * 目的端口：2字节
   * 端口是运输层与应用层的服务接口。运输层的复用和分用功能都要通过端口才能实现
@@ -377,7 +377,7 @@ GET /images/logo.gif HTTP/1.1
 
 `URI` 包含 `URL` 与 `URN`
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTU5Mzg1NDQzMjQ4NQ==593854432485)
+![图片](https://img.cdn.sugarat.top/mdImg/MTU5Mzg1NDQzMjQ4NQ==593854432485)
 
 URI只能使用ASCII, ASCII 之外的字符不支持显示,因此，URI 引入了编码机制，将所有非 ASCII 码字符和界定符转为十六进制字节值，然后在前面加个%
 
@@ -646,7 +646,7 @@ QUIC 在移动端的表现也会比 TCP 好:
 #### 1-RTT情况
 新的QUIC连接至少需要1 RTT才能完成握手
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTU4NDMyMzc2NTY2MA==584323765660)
+![图片](https://img.cdn.sugarat.top/mdImg/MTU4NDMyMzc2NTY2MA==584323765660)
 
 ### 纠错机制
 假如说这次我要发送三个包，那么协议会算出这三个包的异或值并单独发出一个校验包，也就是总共发出了四个包
@@ -656,7 +656,7 @@ QUIC 在移动端的表现也会比 TCP 好:
 当然这种技术只能使用在丢失一个包的情况下，如果出现丢失多个包就不能使用纠错机制了，只能使用重传的方式了
 
 ## 结构对比图
-![图片](http://img.cdn.sugarat.top/mdImg/MTU4NTcxMzIwNDc0Nw==585713204747)
+![图片](https://img.cdn.sugarat.top/mdImg/MTU4NTcxMzIwNDc0Nw==585713204747)
 
 ## 总结HTTP/2|3
 * HTTP/2 通过多路复用、二进制流、Header 压缩等等技术，极大地提高了性能，但是还是存在着一定的问题的

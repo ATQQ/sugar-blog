@@ -19,10 +19,10 @@
 * 逻辑层并非运行在浏览器中,即JavaScript 在 web 中一些能力都无法使用
 
 **微信小程序通信模型**
-![图片](http://img.cdn.sugarat.top/mdImg/MTU4NjMyMjQ4MzQ5Mg==586322483492)
+![图片](https://img.cdn.sugarat.top/mdImg/MTU4NjMyMjQ4MzQ5Mg==586322483492)
 
 **小程序框架图**
-![图片](http://img.cdn.sugarat.top/mdImg/MTU4NjMyMzEzNjU0OQ==586323136549)
+![图片](https://img.cdn.sugarat.top/mdImg/MTU4NjMyMzEzNjU0OQ==586323136549)
 
 * native层就是小程序的框架,这个框架里封装了ui层组件和逻辑层组件,组件可以通过微信app提供的接口调用操作系统的一些API
 * 视图层和逻辑层的交互的数据经由native层处理

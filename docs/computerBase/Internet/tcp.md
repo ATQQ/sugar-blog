@@ -5,7 +5,7 @@ TCP 基本是和 UDP 反着来，建立连接断开连接都需要先需要进�
 ## 头部
 TCP 头部比 UDP 头部复杂的多
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTU4MzIyMDU2MTE4NA==583220561184)
+![图片](https://img.cdn.sugarat.top/mdImg/MTU4MzIyMDU2MTE4NA==583220561184)
 
 * Sequence number:这个序号保证了 TCP 传输的报文都是有序的，对端可以通过序号顺序的拼接报文
 * Acknowledgement Number:这个序号表示数据接收端期望接收的下一个字节的编号是多少，同时也表示上一个序号的数据已经收到
@@ -21,7 +21,7 @@ TCP 头部比 UDP 头部复杂的多
 ## 状态机
 
 ### 建立连接三次握手
-![图片](http://img.cdn.sugarat.top/mdImg/MTU4MzIyMzUzMzkzMQ==583223533931)
+![图片](https://img.cdn.sugarat.top/mdImg/MTU4MzIyMzUzMzkzMQ==583223533931)
 
 假设:
 * 主动发起请求的一端称为**客户端**
@@ -42,7 +42,7 @@ TCP 头部比 UDP 头部复杂的多
   * 当客户端收到连接同意的应答后，还要向服务端发送一个确认报文。客户端发完这个报文段后便进入 ESTABLISHED 状态，服务端收到这个应答后也进入 ESTABLISHED(建立成功) 状态，此时连接建立成功。
 
 ### 断开连接四次握手
-![图片](http://img.cdn.sugarat.top/mdImg/MTU4MzIyNDA4Mjk2Ng==583224082966)
+![图片](https://img.cdn.sugarat.top/mdImg/MTU4MzIyNDA4Mjk2Ng==583224082966)
 
 TCP 是全双工的，在断开连接时两端都需要发送 FIN 和 ACK。
 
