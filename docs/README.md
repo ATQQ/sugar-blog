@@ -27,11 +27,16 @@ features:
   * [深拷贝的实现](./coding/js/deepClone.md)
   * [promiseAll实现](./coding/js/promiseAll.md)
   * [更多...](./coding/js/README.md)
-* [js获取DOM元素的方法](./bigWeb/js/getElement.md)
-* [for-of与for-in的区别](./interview/js/diff-for-in-of.md)
-* [ES6+的一些新语法糖和方法整理](./bigWeb/js/es6+.md)
-* [js判断数据类型的几种方案](./bigWeb/js/p4.md)
-* [Git基本操作整理](./technology/learn/git-base.md)
+* css
+  * [伪元素](./bigWeb/css/pseudo-element.md)
+  * [伪类](./bigWeb/css/pseudo-class.md)
+  * [css选择器](./bigWeb/css/selectors.md)
+* js
+  * [js获取DOM元素的方法](./bigWeb/js/getElement.md)
+  * [for-of与for-in的区别](./interview/js/diff-for-in-of.md)
+  * [ES6+的一些新语法糖和方法整理](./bigWeb/js/es6+.md)
+  * [js判断数据类型的几种方案](./bigWeb/js/p4.md)
+  * [Git基本操作整理](./technology/learn/git-base.md)
 
 # :rocket:快捷入口
 * [整理的部分面试题](./interview/problem)

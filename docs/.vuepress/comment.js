@@ -11,6 +11,7 @@ export default {
             appId: "L3HgpT2JA3KJFUots3ql2AAd-gzGzoHsz",
             appKey: "cmU9sBLuIqYl5QLS1aCYIKzK",
             placeholder: "请在此处留下你的评论(支持markdown)",
+            recordIP: true,
             visitor: true,
             path: pathname,
             avatar: "monsterid",
