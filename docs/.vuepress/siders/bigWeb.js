@@ -36,6 +36,7 @@ function jsSidebar(group, introduction) {
                 ['symbol', 'Symbol的用法'],
                 ['arrowfun', '箭头函数'],
                 ['typeConvert', '类型转换'],
+                ['getElement', '获取dom元素的方式'],
                 ['es6+', 'ES6+的新语法糖和方法整理']
             ]
         }

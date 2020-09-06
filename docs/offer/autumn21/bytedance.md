@@ -66,9 +66,9 @@ if({}==false)
 5. [forof与forin区别](./../../interview/js/diff-for-in-of.md)
 6. [forof 与 forin在遍历顺序上是否有区别](./../../interview/js/diff-for-in-of.md)
 7. [call,bind,apply区别](./../../bigWeb/js/apply.md)
-8. 伪类与伪元素的区别，举例用过的伪类与伪元素，以及它们的使用场景
-9. css选择器用过哪些，都有什么作用
-10. 如何获取一个dom对象，这几种方式哪个效率最高，为什么
+8. [伪类](./../../bigWeb/css/pseudo-class.md)与[伪元素](./../../bigWeb/css/pseudo-element.md)的区别，举例用过的伪类与伪元素，以及它们的使用场景
+9. [css选择器](./../../bigWeb/css/selectors.md)用过哪些，都有什么作用
+10. [如何获取一个dom对象，这几种方式哪个效率最高，为什么](./../../bigWeb/js/getElement.md)
 11. 什么是事件委托？优点是什么？
 12. 如何获取指定dom的指定属性
 13. 如何获取指定dom的指定样式

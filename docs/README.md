@@ -27,6 +27,8 @@ features:
   * [深拷贝的实现](./coding/js/deepClone.md)
   * [promiseAll实现](./coding/js/promiseAll.md)
   * [更多...](./coding/js/README.md)
+* [js获取DOM元素的方法](./bigWeb/js/getElement.md)
+* [for-of与for-in的区别](./interview/js/diff-for-in-of.md)
 * [ES6+的一些新语法糖和方法整理](./bigWeb/js/es6+.md)
 * [js判断数据类型的几种方案](./bigWeb/js/p4.md)
 * [Git基本操作整理](./technology/learn/git-base.md)
