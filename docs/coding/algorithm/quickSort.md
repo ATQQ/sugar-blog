@@ -6,7 +6,8 @@
 
 给你一个整数数组 nums，请你将该数组升序排列。
 
-## 填坑法
+## 交换法
+原理参考-[【坐在马桶上看算法】快速排序](https://blog.csdn.net/afjaklsdflka/article/details/52829030)
 ```js
 /**
  * @param {number[]} nums
@@ -43,7 +44,48 @@ var sortArray = function (nums) {
     return nums
 };
 ```
+## 填坑法
+原理参考-[漫画：什么是快速排序？（完整版）](https://www.cxyxiaowu.com/5262.html)
+```js
+function quickSort(data) {
+    const _quickSort = (arr, left, right) => {
+        if (left >= right) {
+            return
+        }
+        let o = arr[left] // 选择的基数
+        let oIndex = left // 当前的坑位置
+        const i = left
+        const j = right
+        while (left < right) {
+            while (left < right) {
+                if (arr[right] < o) {
+                    arr[oIndex] = arr[right] // 填坑
+                    oIndex = right // 新坑
+                    left++
+                    break
+                }
+                right--
+            }
+            while (left < right) {
+                if (arr[left] > o) {
+                    arr[oIndex] = arr[left] // 填坑
+                    oIndex = left // 新坑
+                    right--
+                    break
+                }
+                left++
+            }
+        }
 
+        arr[oIndex] = o // 基数入坑
+        // 开始下一轮
+        _quickSort(arr, i, oIndex - 1)
+        _quickSort(arr, oIndex + 1, j)
+    }
+    _quickSort(data, 0, data.length - 1)
+    return data
+}
+```
 
 <comment/>
 <tongji/>
