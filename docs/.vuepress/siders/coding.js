@@ -44,7 +44,8 @@ function jsSidebar(group, introduction) {
                 ['myCall', '简单-实现call'],
                 ['myApply', '简单-实现apply'],
                 ['inherit', '简单-继承实现'],
-                ['myNew','简单-new实现'],
+                ['myNew', '简单-new实现'],
+                ['equalA', '简单-a同时等于多个值'],
                 ['deepClone', '中等-实现深拷贝']
             ]
         }

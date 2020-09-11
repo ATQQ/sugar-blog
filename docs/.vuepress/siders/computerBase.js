@@ -67,11 +67,26 @@ function designSidebar(group, introduction) {
     ]
 }
 
+function algorithmSidebar(group, introduction) {
+    return [
+        {
+            title: group,
+            collapsable: false,
+            sidebarDepth: 2,
+            children: [
+                ['', introduction],
+                ['sort', '排序算法的稳定性'],
+            ]
+        }
+    ]
+}
+
 
 const computerBase = new NavSider('computerBase')
 computerBase.addChildSider('offer', offerSidebar('剑指Offer', '简介'))
 computerBase.addChildSider('os', osSidebar('os', '操作系统'))
 computerBase.addChildSider('Internet', internetSidebar('Internet', '计算机网络'))
 computerBase.addChildSider('design', designSidebar('design Pattern', '设计模式'))
+computerBase.addChildSider('algorithm', algorithmSidebar('algorithm and data', '算法与数据结构'))
 
 module.exports = computerBase.getSiders()

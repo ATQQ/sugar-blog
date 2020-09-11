@@ -44,7 +44,7 @@ module.exports = {
             {
                 text: '计算机基础',
                 items: [
-                    // { text: '算法与数据结构', link: '/computerBase/algorithm/' },
+                    { text: '算法与数据结构', link: '/computerBase/algorithm/' },
                     { text: '操作系统', link: '/computerBase/os/' },
                     { text: '计算机网络', link: '/computerBase/Internet/' },
                     { text: '设计模式', link: '/computerBase/design/' },

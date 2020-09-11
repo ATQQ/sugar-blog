@@ -25,8 +25,11 @@ function jsSidebar(group, introduction) {
                 ['v8garbage', 'V8 下的垃圾回收机制是怎么样的'],
                 ['event', 'V8 事件触发过程是怎么样的,什么是事件代理'],
                 ['onload-ready', 'window.onload与document.ready执行顺序'],
-                ['judgeArr', '如何判断数组'],
-                ['diff-for-in-of', 'forof与forin区别']
+                ['judgeArr', '如何判断变量类型是数组'],
+                ['judgeObj', '如何判断变量类型对象'],
+                ['diff-for-in-of', 'forof与forin区别'],
+                ['changeArr', '数组哪些方法会改变自身'],
+                ['getBool', '获取变量对应的布尔值']
             ]
         }
     ]
@@ -155,7 +158,6 @@ function codeSidebar(group, introduction) {
                 ['debounce-throttle', '节流防抖实现'],
                 ['myClock', '使用requestAnimationFrame实现定时器'],
                 ['middle-center', '垂直水平居中'],
-                ['quicksort', '快速排序'],
                 ['transfer', '任意进制间的转换'],
                 ['treeTraverse', '二叉树几种遍历方式'],
                 ['reverseList', '单链表转置'],

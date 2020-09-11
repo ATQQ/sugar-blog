@@ -136,6 +136,49 @@ console.log(demo4 + 1); // 报错
 // 所以结果为true
 ```
 
+## 自测
+```js
+if ([]) console.log(1);             // 1 -- 对象始终为true
+if ({}) console.log(2);             // 2 -- 对象始终为true
+if ([] == false) console.log(3);    // 3 -- [] == 0 --> '' == 0 --> 0 == 0
+if ({} == false) console.log(4);    //   -- {} == 0 --> '[object Object]' == 0  --> NaN == 0 --> NaN不等于任何值
+if ([] == ![]) console.log(5);      // 5 -- [] == false --> 同3
+if ({} == !{}) console.log(6);      //   -- {} == false --> 同4
+if ('' == false) console.log(7);    // 7 -- '' == 0 --> 0 == 0
+if (false == 0) console.log(8);     // 8 -- 0 == 0
+if (1 == true) console.log(9);      // 9 -- 1 == 1
+if ('' == 0) console.log(10);       // 10 -- 0 == 0
+if (NaN == NaN) console.log(11);    //    -- NaN不等于任何值
+if ([] == !true) console.log(12);   // 12 -- [] == false --> [] == 0 --> '' == 0 ->> 0 == 0
+if ([] == false) console.log(13);   // 13 -- 同12 的步骤
+if ([] == 0) console.log(14);       // 14 -- '' == 0 --> 0 == 0
+if (+0 == -0) console.log(15);      // 15
+if (NaN == false) console.log(16);  //    -- NaN不等于任何值
+```
+
+```js
+{ } +1              // 1 {} 被解析为是代码块
+1 + {}              // '1[object Object]' -- 1 + ’[object Object]‘ --> '1' + [object Object]
+[] + 1              // '1' -- '' + 1 --> '' + '1'
+1 + []              // '1' -- 1 + '' --> '1' + ''
+[1, 2, 3] + 0       // '1,2,30' -- '1,2,3' + 0 --> '1,2,3' + '0'
+[1, 2, 3] + '0'     // 同上
+1 + '0'             // '10' --  '1' + '0'
+1 + 0               // 1
+1 + true            // 2 -- 1 + 1
+1 + false           // 1 -- 1 + 0
+'1' + true          // '1true' -- '1' + 'true'
+'1' + false         // '1false' -- '1' + 'false'
+![] + []            // 'false' -- false + [] --> false + '' --> 'false' + ''
+1 - true            // 0 -- 1 - 1
+'0' - 0             // 0 -- 0 - 0
+0 - '1'             // -1 -- 0 - 1
+false - true        // -1 -- 0 - 1
+{ } -[]             // -0 -- -0
+[] - {}             // NaN -- '' - [object Object] --> 0 - NaN
+false - []          // 0 -- 0 - '' --> 0 - 0
+```
+
 :::tip 参考
 
 [思否-前端碎碎念 之 为什么[] == ![] ?](https://segmentfault.com/a/1190000008594792)
