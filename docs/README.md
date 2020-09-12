@@ -15,18 +15,29 @@ features:
   details: 记录了笔者在2020春招,秋招中经历的面试经历,并整理了相关题目
 ---
 
-<center>现在支持在文章末页进行评论啦，大家踊跃交流呀</center>
 
 <center>
 
-# :pencil2:[☞ 留言板 ☜](./show/messagePanel.md)
+<img src="https://img.cdn.sugarat.top/mdImg/MTU5OTg3MzMzMTkzMA==z6DWPh5jv88hRRkyzITSsZFU0hUElQ5J.gif_s400x0" style="height:200px;"></img>
+
+<iframe src="https://ghbtns.com/github-btn.html?user=atqq&repo=sugar-blog&type=star&count=true&size=large" frameborder="0" scrolling="0" width="120" height="30" title="GitHub"></iframe>
+<iframe src="https://ghbtns.com/github-btn.html?user=atqq&repo=sugar-blog&type=fork&count=true&size=large" frameborder="0" scrolling="0" width="120" height="30" title="GitHub"></iframe>
+</center>
+
+<center>
+
+现在支持在文章末页进行评论啦，大家踊跃交流呀
+### :pencil2:[☞ 留言板 ☜](./show/messagePanel.md)
 </center>
 
 # :pencil:最近更新
+* 面经
+  * [bilibili-主站技术中心](./offer/autumn21/blibili.md)
+  * [更多](./offer/autumn21/README.md)
 * coding
   * [快速排序](./coding/algorithm/quickSort.md)
+  * [归并排序](./coding/algorithm/mergeSort.md)
   * [深拷贝的实现](./coding/js/deepClone.md)
-  * [promiseAll实现](./coding/js/promiseAll.md)
   * [更多...](./coding/js/README.md)
 * css
   * [伪元素](./bigWeb/css/pseudo-element.md)
