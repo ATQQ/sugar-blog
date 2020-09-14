@@ -44,14 +44,6 @@ function test(a, b) {
 }
 ```
 ### mycall
-**步骤**
-1. 将函数设为对象的属性
-2. 执行函数
-3. 删除该属性
-
-**注意点**
-* 传入的this可能为null:此时使用window
-
 ```js
 Function.prototype.mycall = function (thisArg) {
     if (typeof this !== 'function') {

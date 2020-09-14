@@ -11,10 +11,11 @@ function algorithmSidebar(group, introduction) {
                 ['treeLevelTraverse', '二叉树--层序遍历'],
                 ['judgeSymmetryTree', '二叉树--判断是否对称'],
                 ['quickSort', '排序--快速排序'],
-                ['headSort', '排序--堆排序'],
+                // ['headSort', '排序--堆排序'],
                 ['mergeSort', '排序--归并排序'],
-                ['publicString', '字符串--最长公共子序列长度'],
-                ['publicStringLen', '字符串--最长公共子串'],
+                ['addString', '字符串--大数相加'],
+                // ['publicString', '字符串--最长公共子序列长度'],
+                // ['publicStringLen', '字符串--最长公共子串'],
             ]
         }
     ]

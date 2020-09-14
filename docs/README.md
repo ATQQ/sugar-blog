@@ -35,9 +35,11 @@ features:
   * [bilibili-主站技术中心](./offer/autumn21/blibili.md)
   * [更多](./offer/autumn21/README.md)
 * coding
+  * [大数相加/字符串相加](./coding/algorithm/addString.md)
+  * [new模拟实现](./coding/js/myNew.md)
+  * [深拷贝的实现](./coding/js/deepClone.md)
   * [快速排序](./coding/algorithm/quickSort.md)
   * [归并排序](./coding/algorithm/mergeSort.md)
-  * [深拷贝的实现](./coding/js/deepClone.md)
   * [更多...](./coding/js/README.md)
 * css
   * [伪元素](./bigWeb/css/pseudo-element.md)

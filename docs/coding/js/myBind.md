@@ -41,7 +41,7 @@ Function.prototype.mybind = function (thisArg) {
 
 const print1 = print.mybind({ name: 'print1' })
 print1() // print1
-const print2 = print.mybind({ name: 'print2' }).bind({ name: 'print22' })
+const print2 = print.mybind({ name: 'print2' }).mybind({ name: 'print22' })
 print2() // print2
 ```
 
