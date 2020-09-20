@@ -75,7 +75,10 @@ features:
 
 # :fire: 巨佬博客 - 记得三连
 * [Linbudu](https://github.com/linbudu599/FE-Basics)
-
+* [kweku](http://kweku.top/)
+* [炽翎](https://juejin.im/user/3122268753634541/posts)
+* [冴羽](https://github.com/mqyqingfeng/Blog)
+* [神三元](http://47.98.159.95/my_blog/)
 <div class='footer'>
     MIT Licensed | Copyright © 2018-present 粥里有勺糖
     <br/><br/>
