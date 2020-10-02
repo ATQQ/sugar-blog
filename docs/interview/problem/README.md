@@ -76,18 +76,20 @@
 
 
 ## 编程题
-<solve ok>[如何实现继承](../code/inherit.md)</solve>
-<solve ok>[实现new](../code/myNew.md)</solve>
+<solve ok>[如何实现继承](../../coding/js/inherit.md)</solve>
+<solve ok>[模拟实现new命令](../../coding/js/myNew.md)</solve>
+<solve ok>[如何实现 a==1&&a==2](../../coding/js/equalA.md)</solve>
+<solve ok>[快排实现](../../coding/algorithm/quickSort.md)</solve>
+<solve ok>[单链表转置](../../coding/algorithm/linkReserve.md)</solve>
+<solve ok>[模拟实现call](../../coding/js/myCall.md)</solve>
+<solve ok>[模拟实现apply](../../coding/js/myApply.md)</solve>
+<solve ok>[模拟实现bind](../../coding/js/myBind.md)</solve>
 <solve ok>[节流与防抖实现](../code/debounce-throttle.md)</solve>
-<solve ok>[实现call/apply/bind](../../bigWeb/js/apply.md#mycall)</solve>
-<solve ok>[如何实现 a==1&&a==2 -- true](../code/1equal2.md)</solve>
 <solve ok>[使用requestAnimationFrame实现setTimeout/setInterval](../code/myClock.md)</solve>
 <solve ok>[如何实现水平居中,垂直居中,垂直水平居中](../code/middle-center.md)</solve>
-<solve ok>[quicksort](../code/quicksort.md)</solve>
 <solve ok>[实现36进制转换](../code/transfer.md)</solve>
 <solve ok>[二叉树树的遍历方式,前/中/后,层次](../code/treeTraverse.md)</solve>
 <solve ok>[函数柯里化实现](../../bigWeb/js/currying.md)</solve>
-<solve ok>[单链表转置](../code/reverseList.md)</solve>
 <solve ok>[模式串匹配,在找出子串在模式串中第一次出现的位置](../code/kmp.md)</solve>
 <solve>对称二叉树</solve>
 <solve>并发请求?</solve>

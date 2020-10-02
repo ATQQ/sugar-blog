@@ -19,7 +19,6 @@ function jsSidebar(group, introduction) {
                 ['module', '为什么要使用模块化？都有哪几种方式可以实现模块化，各有什么特点？'],
                 ['promise', 'Promise 的特点与优缺点？什么是 Promise 链？Promise 构造函数执行和 then 函数执行有什么区别？'],
                 ['asyncawait', 'async 及 await 的特点与优缺点？await 原理是什么？'],
-                ['new', 'new 的原理是什么？通过 new 的方式创建对象和通过字面量创建有什么区别'],
                 ['v8garbage', 'V8 下的垃圾回收机制是怎么样的'],
                 ['event', 'V8 事件触发过程是怎么样的,什么是事件代理'],
                 ['onload-ready', 'window.onload与document.ready执行顺序'],
@@ -47,7 +46,6 @@ function otherSidebar(group, introduction) {
                 ['judgeType', 'typeof 是否能正确判断类型？instanceof 能正确判断对象的原理是什么？'],
                 ['prototype', '如何理解原型？如何理解原型链？'],
                 ['promote', '什么是提升？什么是暂时性死区？var、let 及 const 区别？'],
-                ['inherit', '原型如何实现继承？Class 如何实现继承？Class 本质是什么？']
             ]
         }
     ]
@@ -152,13 +150,11 @@ function codeSidebar(group, introduction) {
             sidebarDepth: 2,
             children: [
                 ['', introduction],
-                ['1equal2', 'a==1&&a==2'],
                 ['debounce-throttle', '节流防抖实现'],
                 ['myClock', '使用requestAnimationFrame实现定时器'],
                 ['middle-center', '垂直水平居中'],
                 ['transfer', '任意进制间的转换'],
                 ['treeTraverse', '二叉树几种遍历方式'],
-                ['reverseList', '单链表转置'],
                 ['kmp', '模式串匹配']
             ]
         }

@@ -2,6 +2,8 @@
 
 ## ES6
 ### class
+
+JS 中并不存在类，class 只是语法糖，本质还是函数
 ```js
 class A{
     constructor(name){
@@ -85,14 +87,14 @@ function B(name, age) {
     this.age = age
 }
 
-function prototype(child, parent) {
+function extends(child, parent) {
     const fn = function () { }
     fn.prototype = parent.prototype
     const temp = new fn()
     child.prototype = temp
     temp.constructor = child
 }
-prototype(B, A)
+extends(B, A)
 let a = new B('123', 0)
 a.printName() // 123
 ```
