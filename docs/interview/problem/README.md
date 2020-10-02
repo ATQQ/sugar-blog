@@ -14,8 +14,8 @@
 <solve ok>[概述原型与原型链?](../../bigWeb/js/prototype.md)</solve>
 <solve ok>[如何正确判断this?](../js/this.md)</solve>
 <solve ok>[==与===有什么区别?](../js/equal.md)</solve>
-<solve ok>[什么是闭包?](../js/closure.md)</solve>
-<solve ok>[深拷贝与浅拷贝?](../js/copy.md)</solve>
+<solve ok>[什么是闭包?](../../bigWeb/js/closure.md)</solve>
+<solve ok>[深拷贝与浅拷贝?](../../bigWeb/js/copy.md)</solve>
 <solve ok>[为什么使用模块化？JS实现模块化的几种方式](../js/module.md)</solve>
 <solve ok>[Promise的特点/优点/缺点？](../js/promise.md#特点)</solve>
 <solve ok>[什么是Promise链？](../js/promise.md#promise链)</solve>

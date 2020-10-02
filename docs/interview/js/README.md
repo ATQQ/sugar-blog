@@ -4,14 +4,15 @@
 
 ## 目录
 * [async 及 await 的特点，它们的优点和缺点分别是什么？await 原理是什么？](./asyncawait.md)
-* [什么是闭包](./closure.md)
-* [浅拷贝与深拷贝](./copy.md)
+* [数组哪些方法会改变自身](./changeArr.md)
 * [for-of与for-in的区别](./diff-for-in-of.md)
 * [== 和 === 有什么区别](./equal.md)
 * [ES6面试问题](./es6.md)
 * [事件的触发过程是怎么样的？知道什么是事件代理嘛？](./event.md)
+* [将任意类型转为Boolean的方案](./getBool.md)
 * [instanceof能正确判断对象的原因是什么](./instanceof.md)
 * [如何判断数组](./judgeArr.md)
+* [如何判断变量类型是对象](./judgeObj.md)
 * [为什么要使用模块化？有哪几种方式可以实现模块化，各有什么特点？](./module.md)
 * [new 的原理是什么](./new.md)
 * [null是对象吗](./nullobj.md)

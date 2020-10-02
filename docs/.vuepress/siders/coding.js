@@ -14,6 +14,8 @@ function algorithmSidebar(group, introduction) {
                 // ['headSort', '排序--堆排序'],
                 ['mergeSort', '排序--归并排序'],
                 ['addString', '字符串--大数相加'],
+                ['feibo1', '简单--斐波拉契数列1'],
+                ['feibo2', '简单--斐波拉契数列2'],
                 // ['publicString', '字符串--最长公共子序列长度'],
                 // ['publicStringLen', '字符串--最长公共子串'],
             ]

@@ -46,6 +46,7 @@ features:
   * [伪类](./bigWeb/css/pseudo-class.md)
   * [css选择器](./bigWeb/css/selectors.md)
 * js
+  * [深拷贝与浅拷贝](./coding/js/deepClone.md)
   * [如何判断this指向?箭头函数的this是什么](./interview/js/this.md)
   * [类型转换规则](./bigWeb/js/typeConvert.md)
   * [判断数组的几种方案](./interview/js/judgeArr.md)
