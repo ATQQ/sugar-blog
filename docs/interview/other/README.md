@@ -2,7 +2,6 @@
 
 ## 目录
 * [前端工程化](./engineering.md)
-* [原型如何实现继承？Class 如何实现继承？Class 本质是什么？](./inherit.md)
 * [在浏览器中输入URL到页面渲染的整个过程](./inputurl.md)
 * [typeof 是否能正确判断类型？instanceof 能正确判断对象的原理是什么？](./judgeType.md)
 * [对象类型和原始类型的不同之处？函数参数是对象会发生什么问题？](./object.md)

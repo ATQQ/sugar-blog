@@ -14,7 +14,6 @@
 * [如何判断数组](./judgeArr.md)
 * [如何判断变量类型是对象](./judgeObj.md)
 * [为什么要使用模块化？有哪几种方式可以实现模块化，各有什么特点？](./module.md)
-* [new 的原理是什么](./new.md)
 * [null是对象吗](./nullobj.md)
 * [为什么0.1+0.2!=0.3](./numNotEqual.md)
 * [对象类型和原始类型的不同之处](./objDiffPrim.md)
