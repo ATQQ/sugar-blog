@@ -13,8 +13,8 @@
 * [图片优化](./image.md)
 * [懒加载与执行](./lazyLoad.md)
 * [监控](./monitor.md)
-* [预加载](./preLoad.md)
-* [预渲染](./preRender.md)
+* [资源预加载](./preLoad.md)
+* [页面预渲染](./preRender.md)
 * [服务端渲染](./ssr.md)
 * [节流与防抖](./throttling.md)
 

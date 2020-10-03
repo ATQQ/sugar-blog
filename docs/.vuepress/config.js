@@ -1,16 +1,5 @@
-const sidersBigWeb = require('./siders/bigWeb')
-const siderComputerBase = require('./siders/computerBase')
-const siderInterview = require('./siders/interview')
-const siderTechnology = require('./siders/technology')
-const siderOffer = require('./siders/offer')
-const siderCoding = require('./siders/coding')
-function mergeSider(...siders) {
-    let sider = {}
-    siders.forEach((cuur) => {
-        Object.assign(sider, cuur)
-    })
-    return sider
-}
+const sidebar = require('./siders/index')
+
 module.exports = {
     title: '粥里有勺糖',
     description: '粥里有勺糖的个人博客,记录随笔与学习笔记，大前端相关的知识，高频面试题，个人面经等',
@@ -89,7 +78,7 @@ module.exports = {
                 ]
             }
         ],
-        sidebar: mergeSider(sidersBigWeb, siderComputerBase, siderInterview, siderTechnology, siderOffer, siderCoding),
+        sidebar,
         displayAllHeaders: false,
         sidebarDepth: 2,
     }
