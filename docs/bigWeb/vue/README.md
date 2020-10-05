@@ -4,7 +4,6 @@
 :::
 
 ## 目录
-* [Vue中的数据绑定](./bindData.md)
 * [组件通信](./communicate.md)
 * [编译template的过程](./compile.md)
 * [computed 与 watch](./computed.md)
@@ -15,7 +14,7 @@
 * [keep-alive](./keep-alive.md)
 * [运行机制概述](./mechanism.md)
 * [mixin 与 mixins](./mixin.md)
-* [响应式基本原理](./responsive.md)
+* [响应式的基本原理](./responsive.md)
 * [路由原理](./routing.md)
 * [v-show 与 v-if](./showif.md)
 * [实现 VNode 节点](./vnode.md)

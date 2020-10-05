@@ -48,12 +48,11 @@ features:
 * js
   * [深拷贝与浅拷贝](./bigWeb/js/copy.md)
   * [如何判断this指向?箭头函数的this是什么](./interview/js/this.md)
-  * [类型转换规则](./bigWeb/js/typeConvert.md)
-  * [判断数组的几种方案](./interview/js/judgeArr.md)
-  * [获取DOM元素的方法](./bigWeb/js/getElement.md)
-  * [for-of与for-in的区别](./interview/js/diff-for-in-of.md)
-  * [ES6+的一些新语法糖和方法整理](./bigWeb/js/es6+.md)
   * [判断数据类型的几种方案](./bigWeb/js/p4.md)
+  * [类型转换规则](./bigWeb/js/typeConvert.md)
+  * [更多...](./bigWeb/js/README.md)
+* vue
+  * [响应式基本实现原理](./bigWeb/vue/responsive.md)
 * 其它
   * [Git基本操作整理](./technology/learn/git-base.md)
 
