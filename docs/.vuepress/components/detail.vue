@@ -9,6 +9,7 @@
 
 <script>
 export default {
+  name:'detail',
   data() {
     return {
       show: false
@@ -18,20 +19,8 @@ export default {
 </script>
 
 <style scoped>
-h3 {
-  display: inline-block;
-  color: #3eaf7c;
-  cursor: pointer;
-  margin: 10px 0;
-}
 font {
   position: relative;
-}
-font::after {
-    right: -25px;
-    position: absolute;
-    content: '♥';
-    top: -1px;
-    display: inline-block;
+  color: #3eaf7c;
 }
 </style>

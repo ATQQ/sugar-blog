@@ -24,16 +24,14 @@ features:
 <iframe src="https://ghbtns.com/github-btn.html?user=atqq&repo=sugar-blog&type=fork&count=true&size=large" frameborder="0" scrolling="0" width="120" height="30" title="GitHub"></iframe>
 </center>
 
-<center>
-
-现在支持在文章末页进行评论啦，大家踊跃交流呀
-### :pencil2:[☞ 留言板 ☜](./show/messagePanel.md)
-</center>
+# :sound:预告
+* 浏览器专题 -> [留下问题](show/browserPanel.md)
+* 性能优化专题 -> [留下问题](show/improvePanel.md)
 
 # :pencil:最近更新
 * 面经
-  * [bilibili-主站技术中心](./offer/autumn21/blibili.md)
-  * [更多](./offer/autumn21/README.md)
+  * [bilibili-主站技术中心](./offer/autumn20/blibili.md)
+  * [更多](./offer/autumn20/README.md)
 * coding
   * [判断两日期是否同一周](./coding/js/judgeDate.md)
   * [大数相加/字符串相加](./coding/algorithm/addString.md)
@@ -60,7 +58,6 @@ features:
 
 # :rocket:快捷入口
 * [整理的部分面试题](./interview/problem)
-* [面经](./interview/experience)
 * 因篇幅有限，更多内容请点击页面顶部的tabs进行分类查看
 
 # :link:个人相关链接
@@ -82,6 +79,9 @@ features:
 * [炽翎](https://juejin.im/user/3122268753634541/posts)
 * [冴羽](https://github.com/mqyqingfeng/Blog)
 * [神三元](http://47.98.159.95/my_blog/)
+
+# :pencil2:[留言板](./show/messagePanel.md)
+
 <div class='footer'>
     MIT Licensed | Copyright © 2018-present 粥里有勺糖
     <br/><br/>

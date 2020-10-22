@@ -1,4 +1,4 @@
-# thoughtWorks初试,复试
+# thoughtWorks-思特沃克
 
 ## 初试
 1. 向面试官讲解笔试题目你的思路与实现

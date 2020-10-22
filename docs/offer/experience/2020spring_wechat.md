@@ -1,5 +1,7 @@
 # 2020前端春招经验分享,从面试小白到老油条的蜕变
 
+掘金阅读[原文](https://juejin.im/post/6844904130939453447)体验更好
+
 >终于上岸了呜呜呜...,终于又能愉快的写代码了
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTU4NzEzMjEzMjc4NQ==587132132785)

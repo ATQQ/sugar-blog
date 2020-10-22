@@ -7,7 +7,6 @@ module.exports = {
         ['css', 'Css', 'CSS相关面试题'],
         ['mini', 'Mini Program', '小程序相关面试题'],
         ['performance', 'Performance', '性能优化相关面试题'],
-        ['experience', 'Experience', '面经'],
         ['code', 'Code', '手撕代码'],
     ],
 }

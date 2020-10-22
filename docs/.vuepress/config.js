@@ -4,7 +4,7 @@ module.exports = {
     title: '粥里有勺糖',
     description: '粥里有勺糖的个人博客,记录随笔与学习笔记，大前端相关的知识，高频面试题，个人面经等',
     head: [
-        // ['link', { ref: 'icon', href: '/test.jpg' }]
+        ['link', { ref: 'icon', href: '/favicon.ico' }]
     ],
     base: "/",
     markdown: {
@@ -21,7 +21,9 @@ module.exports = {
             {
                 text: '备战春秋',
                 items: [
-                    { text: '21届秋招', link: '/offer/autumn21/' }
+                    { text: '心得总结', link: '/offer/experience/' },
+                    { text: '20年春招', link: '/offer/spring20/' },
+                    { text: '20年秋招', link: '/offer/autumn20/' }
                 ]
             },
             {
@@ -66,7 +68,7 @@ module.exports = {
                     // { text: '设计模式', link: '/interview/design/' },
                     { text: '综合问题', link: '/interview/other/' },
                     { text: '小程序', link: '/interview/mini/' },
-                    { text: '面经', link: '/interview/experience/' }
+                    // { text: '面经', link: '/interview/experience/' }
                 ]
             },
             {
