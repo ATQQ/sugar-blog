@@ -26,6 +26,9 @@ features:
 
 # :sound:预告
 * 浏览器专题 -> [留下问题](show/browserPanel.md)
+  * [内核](./bigWeb/browser/core.md)
+  * [渲染机制](./bigWeb/browser/render.md)
+  * [阻塞渲染](./bigWeb/browser/block.md)
 * 性能优化专题 -> [留下问题](show/improvePanel.md)
 
 # :pencil:最近更新

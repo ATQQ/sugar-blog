@@ -64,7 +64,11 @@ module.exports = {
             ['dep', '❤响应式系统的依赖收集追踪原理'],
             ['vnode', '❤VNode实现']
         ]],
-        ['browser', 'Browser', '浏览器专题内容'],
+        ['browser', 'Browser', '浏览器专题内容',[
+            ['core','内核'],
+            ['render','渲染机制'],
+            ['block','阻塞渲染']
+        ]],
         ['performance', 'Performance', '性能优化'],
     ],
 }
