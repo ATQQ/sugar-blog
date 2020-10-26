@@ -1,4 +1,96 @@
-# 浏览器渲染原理
+# 渲染原理
+
+篇幅较长，需赖心阅读
+
+**示例代码**
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="style.css" rel="stylesheet">
+    <title>Critical Path</title>
+  </head>
+  <body>
+    <p>Hello <span>web performance</span> students!</p>
+    <div><img src="awesome-photo.jpg"></div>
+  </body>
+</html>
+```
+## 1. 构建对象模型
+浏览器渲染页面前需要先构建 DOM 和 CSSOM 树
+
+### 文档对象模型(DOM)
+
+**构建过程**
+1. 转换：浏览器从磁盘或网络读取 HTML 的原始字节，并根据文件的指定编码（例如 UTF-8）将它们转换成各个字符
+2. 令牌化：浏览器将字符串转换成 [W3C HTML5 标准](https://html.spec.whatwg.org/)规定的各种令牌，例如，`<html>`、`<body>`，以及其他尖括号内的字符串。每个令牌都具有特殊含义和一组规则
+3. 词法分析：将令牌转换成定义了属性和规则的“对象”
+4. DOM构建：由于 HTML 标记定义不同标记之间的关系（一些标记包含在其他标记内），创建的对象链接在一个树数据结构内，此结构也会捕获原始标记中定义的父项-子项关系：HTML 对象是 body 对象的父项，body 是 paragraph 对象的父项，依此类推
+
+<img style="background-color:white;" src="http://img.cdn.sugarat.top/mdImg/MTYwMzYxNzU0MDI0Ng==603617540246"></img>
+
+整个流程的最终输出是文档对象模型 (DOM)，浏览器对页面做进一步处理时会用到它
+
+浏览器每次处理 HTML 标记时，都会完成以上所有步骤：将字节转换成字符，确定令牌，将令牌转换成节点，然后构建 DOM 树。
+
+### CSS对象模型(CSSOM)
+>在浏览器构建我们这个简单页面的 DOM 时，在文档的 head 部分遇到了一个 link 标记，该标记引用一个外部 CSS 样式表：style.css。
+
+```css
+body { font-size: 16px }
+p { font-weight: bold }
+span { color: red }
+p span { display: none }
+img { float: right }
+```
+
+与处理 HTML 时的流程类似
+
+CSS 字节转换成字符，接着转换成令牌和节点，最后链接为为一个“CSS 对象模型”(CSSOM) 的树结构内
+
+<img style="background-color:white;" src="http://img.cdn.sugarat.top/mdImg/MTYwMzYxODk4NjE2Mw==603618986163"></img>
+
+<img style="background-color:white;" src="http://img.cdn.sugarat.top/mdImg/MTYwMzYxOTEwMjEzNA==603619102134"></img>
+
+
+### 小结
+* 浏览器渲染页面前需要先构建 DOM树 和 CSSOM 树
+* 构建流程：字节(Bytes) → 字符(Characters) → 令牌(Tokens) → 节点(Nodes) → 对象模型(Dom)
+* DOM 和 CSSOM 是相互独立的数据结构
+
+## 2. 渲染树构建
+### 简介
+渲染树用于计算每个可见元素的几何信息，然后根据这些元素的几何信息绘制出屏幕上的实际像素
+
+### 构建过程
+浏览器将 DOM 数和 CSSOM 数合并成“渲染树”，包含页面上所有可见的内容，以及每个节点的所有 CSSOM 样式信息
+
+<img style="background-color:white;" src="http://img.cdn.sugarat.top/mdImg/MTYwMzYyMjExNzA4Ng==603622117086"></img>
+
+* 从 DOM 树的根节点开始遍历每个可见节点
+  * 某些节点不可见（例如脚本标记、元标记等--title,meta,link）
+  * 某些节点通过 CSS 隐藏，因此在渲染树中也会被忽略（display:none）
+* 对于每个可见节点，为其找到适配的 CSSOM 规则并应用它们
+
+
+### 小结
+1. DOM 树和 CSSOM 树合并生成渲染树
+2. 渲染树只包含渲染网页所需的节点(可见节点)
+
+## 3. 回流与重绘
+### 回流
+也有 “布局”,“重排”等叫法
+
+根据生成的渲染树，从渲染树的根节点开始进行遍历，计算每个节点的几何信息(在设备视口内的确切位置和大小)
+
+输出是一个“盒模型”，它会精确地捕获每个元素在视口内的确切位置和尺寸：所有相对测量值都会转换为屏幕上的绝对像素
+
+### 重绘
+也叫 “绘制”或“栅格化”
+
+经过生成的渲染树和回流阶段,得到了所有可见节点具体的几何信息与样式,然后将渲染树的每个节点转换成屏幕上的实际像素
 
 ## 解析HTML
 浏览器接收到 HTML 文件并转换为 DOM 树
@@ -97,7 +189,8 @@
 4. 需要下载的内容是否需要在首屏使用上来考虑
 
 :::tip 参考
-[浏览器|前端进阶之道](https://yuchengkai.cn/docs/frontend/browser.html)
+* [浏览器|前端进阶之道](https://yuchengkai.cn/docs/frontend/browser.html)
+* [developers.google](https://developers.google.com/web/fundamentals/performance/critical-rendering-path)
 :::
 
 <comment/>
