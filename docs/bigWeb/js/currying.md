@@ -54,8 +54,8 @@ let add = a => b => a + b
 
 let add2 = add(2)
 console.log(add2(3)) // 5
-console.log(add2(4)) // 7
-console.log(add2(5)) // 6
+console.log(add2(4)) // 6
+console.log(add2(5)) // 7
 ```
 es6写法中n个连续箭头组成的函数实际上就是柯里化了n-1次
 
