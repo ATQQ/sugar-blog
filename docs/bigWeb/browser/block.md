@@ -106,9 +106,169 @@ h1{
 <link href="print.css"    rel="stylesheet" media="print">
 ```
 
-## JS
-TODO: 待完善
+利用媒体查询解决上面的问题:
+* 只在加载时当屏幕宽度`<=400px`时才阻塞,其它情况不阻塞渲染
 
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 外网资源，无梯子无法访问 -->
+    <link rel="stylesheet" href="https://www.youtube.com/s/player/4a1799bd/www-player-webp.css" media="(max-width: 400px)">
+    <link rel="stylesheet" href="./1.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>content</h1>
+</body>
+</html>
+```
+
+### 4. 小结
+* CSS 是阻塞渲染的资源，在CSSOM构建完毕之前浏览器将不会渲染任何已处理的内容
+* 利用**媒体类型** 或 **媒体查询**来解除对渲染的阻塞
+* 浏览器会下载所有 CSS 资源，无论阻塞还是不阻塞
+
+## JS
+### 1. 阻塞渲染
+JavaScript 可以查询和修改 DOM 与 CSSOM
+
+所以当 HTML 解析器遇到一个 script 标记时，它会暂停构建 DOM，将控制权移交给 JS 引擎，等 JS 引擎运行完毕，浏览器会从中断的地方恢复 DOM 构建
+
+**内联脚本阻塞渲染示例**
+* 刚加载时页面白屏，5秒后才会渲染出内容
+* 说明内联js会阻塞DOM解析和渲染
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>AAA</h1>
+    <script>
+        let d = Date.now()
+        while (Date.now() < d + 1000 * 5) { }
+    </script>
+    <h2>BBB</h2>
+</body>
+
+</html>
+```
+
+**外联同步脚本阻塞渲染示例**
+* 可以看到会先渲染出 `AAA`,5 s 后才渲染出 `BBB`
+* 说明外联脚本也会阻塞DOM解析与渲染，但是因为无法确定脚本中的内容，所以会优先渲染一次已经构建DOM，确保加载的脚本能取得最新的DOM
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>AAA</h1>
+    <script src="./test.js"></script>
+    <h2>BBB</h2>
+</body>
+
+</html>
+```
+
+test.js
+```js
+let d = Date.now()
+while (Date.now() < d + 1000 * 5) { }
+```
+
+### 2. 解除阻塞
+将 JavaScript 脚本显式声明为异步，即可防止其阻塞DOM构建与渲染
+
+向 script 标记添加异步关键字可以指示浏览器在等待脚本可用期间不阻止 DOM 构建
+* defer：异步进行下载，然后等待 HTML 解析完成后（DOM完成构建）按照下载顺序进行执行
+* async：异步进行下载,下载完成后会立即执行，执行时仍然会阻塞
+
+**defer使用示例**
+* 5 s 后可以看到渲染出`AAA`和`BBB`
+* 又经过 5 s后控制台打印 `render success`,`render success2`
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>AAA</h1>
+    <script defer src="./test.js"></script>
+    <script defer src="./tes2.js"></script>
+    <script>
+        let k = Date.now()
+        while (Date.now() < k + 1000 * 5) { }
+    </script>
+    <h1>BBB</h1>
+</body>
+</html>
+```
+test.js
+```js
+let d = Date.now()
+while (Date.now() < d + 1000 * 5) { }
+console.log('render success');
+```
+
+tes2.js
+```js
+console.log('render success2');
+```
+
+**async使用示例**
+* 4 s 后可以看到渲染出`AAA`
+* 又经过 4 s后渲染出`BBB`
+* 然后控制台打印 `render success`,
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>AAA</h1>
+    <script async src="./test.js"></script>
+    <script>
+        let k = Date.now()
+        while (Date.now() < k + 1000 * 4) { }
+    </script>
+    <h1>BBB</h1>
+</body>
+</html>
+```
+test.js
+```js
+let d = Date.now()
+while (Date.now() < d + 1000 * 4) { }
+console.log('render success');
+```
+
+TODO: js阻塞CSSOM示例
+
+### 3. 小结
 
 :::tip 参考
 * [developers-关键路径渲染](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-blocking-css)
