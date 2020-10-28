@@ -266,9 +266,25 @@ while (Date.now() < d + 1000 * 4) { }
 console.log('render success');
 ```
 
-TODO: js阻塞CSSOM示例
-
 ### 3. 小结
+**无论是内联还是外联，js脚本会阻塞DOM的解析与渲染**但
+* 外联：因为无法确定外联脚本中的内容，所以会优先渲染一次已经构建DOM，确保加载的脚本能取得最新的DOM
+
+
+将 JavaScript 脚本显式声明为异步，即可防止其阻塞DOM构建与渲染
+
+在 script 标签中添加异步关键字即可指示浏览器在等待脚本下载期间不阻止 DOM 构建
+
+**异步关键字**
+* defer：异步进行下载，然后等待 HTML 解析完成后（DOM完成构建）按照下载顺序进行执行
+ * async：异步进行下载,下载完成后会立即执行，执行时仍然会阻塞
+
+## 总结
+1. JS 与 CSS 都是阻塞页面渲染的资源
+2. 可以通过媒体查询解除解决CSS在特定场景阻塞的问题
+3. 可通过为script添加异步属性来防止阻塞
+
+**补充：** CSS 其实可以通过打包工具转化成js，在页面加载时，通过异步加载js资源，然后应用样式。这也是可以防止css阻塞渲染的一种方式
 
 :::tip 参考
 * [developers-关键路径渲染](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-blocking-css)
