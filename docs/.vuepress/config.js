@@ -21,6 +21,7 @@ module.exports = {
             {
                 text: '备战春秋',
                 items: [
+                    { text: '校招考点', link: '/offer/campus/' },
                     { text: '心得总结', link: '/offer/experience/' },
                     { text: '20年春招', link: '/offer/spring20/' },
                     { text: '20年秋招', link: '/offer/autumn20/' }

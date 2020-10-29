@@ -1,0 +1,30 @@
+# 前端校招考点总结
+
+* 了解：听说过这个概念，知道是干什么的
+* 熟悉：能快速地利用这个技术构建一个可用的应用
+* 精通：读过源码，了解其原理，可对其修改以满足某些特殊需求
+
+笔者能力有限，如有遗漏之处，请在评论中补充，或者直接提PR完
+
+## 目录
+* [算法](./algorithm.md)
+* [浏览器](./browser.md)
+* [基本工](./coder.md)
+* [综合问题](./complex.md)
+* [CSS](./css.md)
+* [数据结构](./dataStruture.md)
+* [数据库](./database.md)
+* [HTML](./html.md)
+* [计算机网络](./internet.md)
+* [JS](./javascript.md)
+* [移动端](./mobile.md)
+* [Node](./node.md)
+* [操作系统](./os.md)
+* [其它](./other.md)
+* [React](./react.md)
+* [正则表达式](./regexp.md)
+* [安全](./safe.md)
+* [Vue全家桶](./vue.md)
+* [业务相关](./work.md)
+
+<tongji/>
