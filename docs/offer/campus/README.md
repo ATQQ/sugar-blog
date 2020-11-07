@@ -14,6 +14,7 @@
 * [CSS](./css.md)
 * [数据结构](./dataStruture.md)
 * [数据库](./database.md)
+* [设计模式](./designPattern.md)
 * [HTML](./html.md)
 * [计算机网络](./internet.md)
 * [JS](./javascript.md)

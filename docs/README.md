@@ -15,22 +15,18 @@ features:
   details: 记录了笔者在2020春招,秋招中经历的面试经历,并整理了相关题目
 ---
 
-
 <center>
 
-<!-- <img src="https://img.cdn.sugarat.top/mdImg/MTU5OTg3MzMzMTkzMA==z6DWPh5jv88hRRkyzITSsZFU0hUElQ5J.gif_s400x0" style="height:200px;"></img> -->
-
-# :hand:给个 “Star” 吧:hand:
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNDcyMTQ4NTMyOA==604721485328)
 
 <iframe src="https://ghbtns.com/github-btn.html?user=atqq&repo=sugar-blog&type=star&count=true&size=large" frameborder="0" scrolling="0" width="120" height="30" title="GitHub"></iframe>
 <iframe src="https://ghbtns.com/github-btn.html?user=atqq&repo=sugar-blog&type=fork&count=true&size=large" frameborder="0" scrolling="0" width="120" height="30" title="GitHub"></iframe>
-</center>
 
-<center>
 
 #### 又要春招了（还有几个月），总结一下的校招考点
 
 # :fire:[校招考点总结](./offer/campus/README.md):fire:
+
 </center>
 
 # :sound:预告
