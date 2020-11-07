@@ -1,9 +1,7 @@
 <template>
   <details>
     <summary>
-      <mark
-        ><font color="darkred">{{ title }}</font></mark
-      >
+      <font color="#3eb07c">{{ title }}</font>
     </summary>
     <slot></slot>
   </details>
