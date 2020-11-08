@@ -67,7 +67,10 @@ module.exports = {
         ['browser', 'Browser', '浏览器专题内容',[
             ['core','内核'],
             ['render','渲染机制'],
-            ['block','阻塞渲染']
+            ['block','阻塞渲染'],
+            ['cache','缓存机制'],
+            ['storage','本地存储'],
+            ['safe','安全问题']
         ]],
         ['performance', 'Performance', '性能优化'],
     ],
