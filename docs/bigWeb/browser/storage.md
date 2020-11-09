@@ -20,16 +20,24 @@
 ### 如何使用
 
 #### 服务端
-服务端在响应头中添加一个`Set-Cookie`字段
+服务端在响应头(Response Header)中添加一个`Set-Cookie`字段
 
 **示例**
 ```js
 Set-Cookie:"name=value;expires=session;path=/;domain=.sugarat.top;HttpOnly;secure;sameSite=lax"
 ```
 
-**Set-Cookie 字段的属性介绍**
+#### 客户端（浏览器）
+```js
+document.cookie
+```
+可以通过此 API获取或者修改cookie
 
-### 属性
+
+### Set-Cookie
+
+**:star:Set-Cookie 字段的属性介绍**
+
 | cookie属性 |          简介          |                   特殊说明                   |
 | :--------: | :--------------------: | :------------------------------------------: |
 |    name    |           键           |                      -                       |
@@ -42,16 +50,16 @@ Set-Cookie:"name=value;expires=session;path=/;domain=.sugarat.top;HttpOnly;secur
 |  HTTPOnly  |        安全标志        |     不允许使用脚本去更改/获取这个cookie      |
 |  SameSite  |        安全标志        |            控制跨站请求获取cookie            |
 
+**:star:属性补充说明**
 
-**补充说明**
 * Expires：其值为默认session,即关闭浏览器时此cookie就过期失效
 * Max-Age：不同取值范围不同效果
   * 大于0：会将cookie存到本地文件中
   * 等于0：立即删除
   * 小于0：等价于会话性cookie
   * 优先级大于Expires
-* Domain:指定了 Cookie 可以送达的主机名
-  * 没有指定:默认值为当前文档访问地址中的主机部分(不包含子域名)
+* Domain：指定了 Cookie 可以送达的主机名
+  * 没有指定：默认值为当前文档访问地址中的主机部分(不包含子域名)
   * 如果设置为`.a.com`那么`a.com`,`a.a.com`，`b.a.com`等都能访问,即`a.com`的子域名都可以访问到这个cokie
 * HTTPOnly
   * 防止客户端脚本通过 `document.cookie` 方式访问或者更改 此Cookie
@@ -62,7 +70,7 @@ Set-Cookie:"name=value;expires=session;path=/;domain=.sugarat.top;HttpOnly;secur
   * None:无论是否跨站都会发送 Cookie
   * **之前默认值是 None ，在Chrome稳定版80及更高版本上默认是 Lax**
 
-**SameSite = lax**
+**:star:SameSite = lax 的影响**
 ```js
 Set-Cookie:'name=value;SameSite=Lax;'
 ```
@@ -81,58 +89,78 @@ Set-Cookie:'name=value;SameSite=Lax;'
 |  iframe   |       <iframe src="..."\></iframe\>        |             :x:              |
 |   ajax    |                 fetch(url)                 |             :x:              |
 
-<!-- TODO：wait continue -->
 
-**Domain 和 Path 标识共同定义了 Cookie 的作用域：即 Cookie 应该发送给哪些 URL。**
+**:star:Cookie 的作用域**
+
+Domain 和 Path 标识共同定义了 Cookie 的作用域：即哪些URL的请求 会携带 目标Cookie
+
 ### 用途
-* 会话状态管理:（如用户登录状态、购物车、游戏分数或其它需要记录的信息）
+* 会话状态管理:（如用户登录状态、账号信息等）
 * 个性化设置:（如用户自定义设置、主题等）
-* 浏览器行为跟踪:埋点系统（如跟踪分析用户行为等）
+* 用户行为分析：埋点系统（访问深度，停留时长等）
+
 ### 缺点
-* 容量小:有上限，最大只能有 4KB
-* 大的Cookie会浪费巨大的性能:同一个域名下的所有请求，都会携带 Cookie
-* 可以在客户端直接获取到:有XSS,CSRF等安全问题
-### 解决安全问题的方法
+* 容量问题：有上限，最大只能有 4KB
+* 性能问题：同一个域名下的所有请求，都会携带 Cookie，某些请求（a,img,link等标签发出的请求）可能不需要此cookie，会加大传输的头部，损耗一定时空开销
+* 安全问题：客户端可以通过一定手段（脚本，devtools，本地存储的文件，修改host文件）获取到，存在XSS,CSRF等安全问题
+
+### 解决安全问题的方案
 * 减短cookie的有效时间
-* HttpOnly设置为true:防止本地脚本读取cookie
-* 加密cookie
-* Secure属性为true:使用https协议传输
+* 添加HttpOnly属性：防止本地脚本读取cookie
+* 服务端对传送的cookie加密
+* 添加Secure属性：使用https协议传输
+* 设置samesite属性为需要的值：严格卡控cookie的携带范围
+
 ## localStorage与sessionStorage
-生命周期与作用域的不同
-### 声明周期
+浏览器提供的数据存储API，作用相同，生命周期与作用域的不同
+
+```js
+window.sessionStorage.setItem()
+window.localStorage.setItem()
+window.sessionStorage.getItem()
+window.localStorage.getItem()
+```
+
+### 生命周期
 * localStorage 是持久化的本地存储,永远不会过期,除非手动删除
 * sessionStorage 是临时性的本地存储,在会话结束时(关闭页面),存储的内容就被释放
 
 ### 作用域
-``Local Storage``、``Session Storage`` 和 ``Cookie`` 都遵循同源策略。但Session Storage，即便是相同域名下的两个页面，只要它们不在同一个浏览器窗口中打开，那么它们的 Session Storage 内容便无法共享。
+`Local Storage`、`Session Storage` 和 `Cookie` 都遵循**同源策略**
+
+但Session Storage有特殊之处：即便是相同域名下的两个页面，只要它们不在浏览器的同一个Tab中打开，那么它们的 Session Storage 内容便无法共享
 
 ### 优点
-* 存储容量大:不同浏览器，存储容量可以达到 5-10M,针对一个域名
-* 存储于客户端，不与服务端发生通信。
+* 存储容量大:不同浏览器，存储容量可以达到 5-10M，针对一个域名
+* 存储于客户端，不会服务端发生通信
 
 ### 缺点
-* 只能存储字符串
+* 只能存储字符串，JSON对象需要转换为json string 存储
 * 只适用于存储少量简单数据
+* localStorage需要手动删除
 
 ### 应用场景
-* base64图片存储
-* 存储logo
+* base64图片存储：存储logo
+* 接口数据持久化：对于依赖于接口(变动周期比较长)生成的内容，可以使用storage存储，以加快首屏渲染
 
 ## IndexedDB
 运行在浏览器上的非关系型数据库
 
->受同源策略限制，即无法访问跨域的数据库。
+依旧受同源策略限制
 
 ### 优点
 * 理论上没有存储上线
-* 可以存储字符串，还可以存储二进制数据。
+* 可以存储字符串，还可以存储二进制数据
+* 浏览器提供了一套可简单操作的API
 
 ### 应用场景
-
 * 当数据的复杂度和规模上升到了 LocalStorage 无法解决的程度,就使用IndexDB
-* 临时存储复杂的数据,如页面中的临时文章
+* 临时存储复杂的数据，如页面中的临时文章
+* 一些复杂表单内容的离线保存
 
-[简单使用](https://developer.mozilla.org/zh-CN/docs/Web/API/IndexedDB_API/Using_IndexedDB)
+### 使用教程
+* [简单使用1](https://developer.mozilla.org/zh-CN/docs/Web/API/IndexedDB_API/Using_IndexedDB)
+* [简单使用2](http://www.ruanyifeng.com/blog/2018/07/indexeddb.html)
 
 
 :::tip 参考

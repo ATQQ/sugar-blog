@@ -35,7 +35,7 @@ features:
   * [渲染机制](./bigWeb/browser/render.md)
   * [阻塞渲染](./bigWeb/browser/block.md)
   * [缓存机制](./bigWeb/browser/cache.md)
-  * 存储
+  * [本地存储](./bigWeb/browser/storage.md)
   * 安全
 * 性能优化专题 -> [留下问题](show/improvePanel.md)
 * 杂记
