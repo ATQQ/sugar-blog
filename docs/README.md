@@ -38,14 +38,15 @@ features:
   * [本地存储](./bigWeb/browser/storage.md)
   * 安全
 * 性能优化专题 -> [留下问题](show/improvePanel.md)
-* 杂记
-  * serverless
+* 大前端相关理论概念
+  * [Serverless](./technology/theory/serverless.md)
   * css架构
   * 微前端
   * lowCode
   * 容器化
 # :pencil:最近更新
 * [浏览器专题](./bigWeb/browser/README.md)
+* [Serverless](./technology/theory/serverless.md)
 
 <my-details title="历史文章">
 

@@ -28,9 +28,10 @@ module.exports = {
                 ]
             },
             {
-                text: '技术文章',
+                text: '五花八门',
                 items: [
-                    { text: '教程', link: '/technology/learn/' }
+                    { text: '技术教程', link: '/technology/learn/' },
+                    { text: '理论干货', link: '/technology/theory/' },
                 ]
             },
             {

@@ -8,7 +8,7 @@
 * [内核](./core.md)
 * [常见问题](./problem.md)
 * [渲染原理](./render.md)
-* [安全防范](./safe.md)
+* [安全](./safe.md)
 * [本地存储](./storage.md)
 
 <tongji/>

@@ -1,23 +1,52 @@
-# 安全防范
+# 安全
+在现代网络中，安全相关的问题是非常繁杂的，种类颇多
+
+这里只介绍Web开发中经常碰到的一些安全问题：
+* SQL注入
+* XSS
+* CSRF
+* 点击劫持
+* 中间人攻击
 
 ## SQL注入
-### 什么是SQL注入?
+### 什么是SQL注入
 后台人员使用用户输入的数据进行拼接组装SQL查询语句时,遇到恶意输入就会返回不应该返回的内容
 
-**例如**
+### 简单示例
+**普通的查询语句**
 ```sql
-sql = "SELECT * FROM articles WHERE id = ? "
+SELECT * FROM articles WHERE id = $id
 ```
-**正常情况发送的请求**
+
+**1. 客户端发送的正常请求**
 ```js
 /api/articlres/article?id = 12
 ```
-**注入SQL**
-```js
-/api/articlres/article?id = 12 OR 1 = 1
+拼接后的SQL
+```sql
+SELECT * FROM articles WHERE id = 12
 ```
-### 如何防范?
-* 服务端加入过滤和验证机制
+
+**2. 注入SQL发送的恶意请求**
+```js
+/api/articlres/article?id=1%20or%201=1
+```
+这里的 `%20`是空格经过UrlEncode过后的内容
+
+拼接后的sql
+```sql
+SELECT * FROM articles WHERE id = 12 or 1=1
+```
+这样就扩大了查询数据的范围，导致查询异常或者 返回原本不该返回的数据
+
+
+### 如何防范
+加入过滤和验证机制：
+* 将参数的所有内容当做值去set，而不是字符串拼接sql
+* 使用正则表达式过滤传入的参数
+* 检查传入内容是否包含非法的关键字
+
+<!-- TODO：wait start -->
 ## XSS
 ### 什么是 XSS 攻击？
 
@@ -159,5 +188,8 @@ X-FRAME-OPTIONS 是一个 HTTP 响应头
 * 使用https
 * 不要在公共Wi-Fi上发送敏感数据
 
+:::tip 参考
+* [简书 - sql注入基础原理（超详细）](https://www.jianshu.com/p/078df7a35671)
+:::
 <comment/>
 <tongji/>

@@ -60,7 +60,7 @@
     * readme规范
   * 系统化
     * 微前端
-    * serverless
+    * Serverless
     * 低代码
     * BFF
     * 分包加载
