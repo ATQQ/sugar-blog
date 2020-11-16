@@ -36,7 +36,8 @@ features:
   * [阻塞渲染](./bigWeb/browser/block.md)
   * [缓存机制](./bigWeb/browser/cache.md)
   * [本地存储](./bigWeb/browser/storage.md)
-  * 安全
+  * [安全](./bigWeb/browser/safe.md)
+  * 常见问题
 * 性能优化专题 -> [留下问题](show/improvePanel.md)
 * 大前端相关理论概念
   * [Serverless](./technology/theory/serverless.md)
