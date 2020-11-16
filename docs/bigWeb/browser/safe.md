@@ -39,32 +39,58 @@ SELECT * FROM articles WHERE id = 12 or 1=1
 ```
 这样就扩大了查询数据的范围，导致查询异常或者 返回原本不该返回的数据
 
-
 ### 如何防范
 加入过滤和验证机制：
-* 将参数的所有内容当做值去set，而不是字符串拼接sql
+* 将参数的所有内容当做值，而不是当做字符串的一部分
 * 使用正则表达式过滤传入的参数
 * 检查传入内容是否包含非法的关键字
 
-<!-- TODO：wait start -->
 ## XSS
 ### 什么是 XSS 攻击？
 
-``XSS``全称``Cross Site Scripting`` 跨站脚本
+``XSS``全称``Cross Site Scripting`` ，`即跨站脚本`攻击
 
-攻击者将代码注入页面
+攻击者可以将代码注入页面，然后可以进行一系列损害用户利益的事情
 * 窃取Cookie
-* 监听用户行为:表单输入
+* 监听用户行为
 * 修改 DOM 伪造登录表单
 * 在页面中生成浮窗广告
 * 恶意跳转
 * ...
 
-XSS 可以分为两类：``持久型``和``非持久型``。
+恶意代码未经过滤，与网站正常的代码混在一起，以至于浏览器无法分辨哪些脚本是可信的，导致恶意脚本被执行
+
+XSS 可以分为两类：``持久型``和``非持久型``
 
 **持久型**
 
 持久型也就是攻击的代码被服务端写入进数据库中,在页面加载的时候执行
+
+常见于服务端渲染的时候出现
+
+示例
+```html
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <title>Document</title>
+</head>
+<body>
+    <script src="./test.js"></script>
+</body>
+</html>
+```
+
+```js
+function renderPage() {
+    // ajax获取数据 <script>alert(123)</script>
+    // 解析字符串生成对应dom节点
+    const script = document.createElement('script')
+    script.innerHTML = 'alert(123)'
+    document.body.appendChild(script)
+}
+renderPage()
+```
 
 **非持久型**
 
@@ -74,6 +100,7 @@ XSS 可以分为两类：``持久型``和``非持久型``。
 <div>{{name}}</div>  
 ```
 
+<!-- // todo strat chrome的优化 -->
 ### 如何防范 XSS 攻击？什么是 CSP？
 
 #### 转义字符
