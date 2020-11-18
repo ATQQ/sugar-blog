@@ -29,7 +29,9 @@ function getChildren(p) {
         const basename = path.basename(name, '.md')
         const title = fs.readFileSync(path.resolve(p, name), {
             encoding: 'utf-8'
-        }).split('\n')[0].slice(1).trim()
+        }).split('\n').find(str => {
+            return str.startsWith('# ')
+        }).slice(2).replace(/[\s]/g, '')
         return [basename, title]
     })
     return children
