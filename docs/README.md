@@ -5,7 +5,7 @@ tagline: 你的指尖,拥有改变世界的力量
 actionText: 关于笔者 →
 actionLink: /aboutme
 title: 粥里有勺糖-个人技术博客
-lang: zh-cmn-Hans
+lang: zh-Ch
 features:
 - title: 关于内容
   details: 大前端开发相关知识，包含但不限于前端
@@ -83,32 +83,5 @@ features:
 * [整理的部分面试题](./interview/problem)
 * 因篇幅有限，更多内容请点击页面顶部的tabs进行分类查看
 
-# :link:个人相关链接
-
-* [粥里有勺糖●博客园](https://www.cnblogs.com/roseAT/)
-* [ATQQ●GitHub](https://github.com/ATQQ)
-* [ES6笔记●GITBOOK](https://sugar-js.gitbook.io/-1/)
-* [blog●GitBook](https://sugar-at.gitbook.io/blog-article/)
-* [掘金](https://juejin.im/user/1028798615918983)
-
-# :phone:联系我
-如对博客内容，知识，排版等有疑问或者建议，欢迎邮件和我联系
-
-**邮箱:engineerzjl@foxmail.com**
-
-# :fire: 巨佬博客 - 记得三连
-* [Linbudu](https://github.com/linbudu599/FE-Basics)
-* [kweku](http://kweku.top/)
-* [炽翎](https://juejin.im/user/3122268753634541/posts)
-* [冴羽](https://github.com/mqyqingfeng/Blog)
-* [神三元](http://47.98.159.95/my_blog/)
-
-# :pencil2:[留言板](./show/messagePanel.md)
-
-<div class='footer'>
-    MIT Licensed | Copyright © 2018-present 粥里有勺糖
-    <br/><br/>
-    <a style="color: #4e6e8e;" target="_blank" href="https://beian.miit.gov.cn">蜀ICP备19011724号</a>
-</div>
 
 <tongji/>

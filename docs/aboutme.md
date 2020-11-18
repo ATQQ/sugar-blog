@@ -1,8 +1,10 @@
 # 关于自己
 99年出生，标准的理工男一枚,目前大四在读([西南石油大学](https://www.swpu.edu.cn/)),热爱开源与知识分享
 
+目前以实习生的身份就职于 🛵**美团**🛵
+
 ## :sparkles:当下
-结束了秋招，黄袍加身🛵
+结束了秋招，黄袍加身
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTYwNDcyMTQ4NTMyOA==604721485328)
 

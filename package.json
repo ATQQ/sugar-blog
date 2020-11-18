@@ -14,12 +14,17 @@
     "deploy": "./shell/deploy.sh",
     "onestep": "npm run build && npm run compress && npm run upload && npm run deploy",
     "addTJ": "node src/addTJ.js",
-    "addCatelog":"node src/createCatelog.js && npm run addTJ"
+    "addCatelog": "node src/createCatelog.js && npm run addTJ"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "valine": "^1.4.14"
+    "valine": "^1.4.14",
+    "vue-class-component": "^7.2.3"
+  },
+  "devDependencies": {
+    "vuepress-theme-reco": "^1.5.7",
+    "vuepress": "1.5.4"
   }
 }

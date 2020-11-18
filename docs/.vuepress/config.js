@@ -4,12 +4,19 @@ module.exports = {
     title: '粥里有勺糖',
     description: '粥里有勺糖的个人博客,记录随笔与学习笔记，大前端相关的知识，高频面试题，个人面经等',
     head: [
-        ['link', { ref: 'icon', href: '/favicon.ico' }]
+        ['link', { ref: 'icon', href: '/favicon.ico' }],
+        ['meta', { name: 'viewport', content: 'width=device-width,initial-scale=1,user-scalable=no' }]
     ],
+    locales: {
+        '/': {
+            lang: 'zh-CN' // 默认中文
+        }
+    },
     base: "/",
     markdown: {
         lineNumbers: true
     },
+    theme: 'reco',
     themeConfig: {
         lastUpdated: 'Last Updated',
         repo: 'ATQQ/sugar-blog',
@@ -18,6 +25,11 @@ module.exports = {
         docsDir: 'docs',
         docsBranch: 'master',
         nav: [
+            {
+                text: "关于我",
+                link: "/aboutme",
+                icon: "reco-account"
+            },
             {
                 text: '备战春秋',
                 items: [
@@ -80,10 +92,101 @@ module.exports = {
                     { text: 'javascript', link: '/coding/js/' },
                     { text: 'css', link: '/coding/css/' }
                 ]
+            },
+            {
+                text: "个人站点",
+                icon: "reco-message",
+                items: [
+                    {
+                        text: "GitHub",
+                        link: "https://github.com/ATQQ/sugar-blog",
+                        icon: "reco-github"
+                    },
+                    {
+                        text: "博客园",
+                        link: "https://www.cnblogs.com/roseAT/",
+                        icon: "reco-bokeyuan"
+                    },
+                    {
+                        text: "掘金",
+                        link: "https://juejin.im/user/1028798615918983",
+                        icon: "reco-juejin"
+                    },
+                    {
+                        text: "GitBook-blog",
+                        link: "https://sugar-at.gitbook.io/blog-article/",
+                        icon: "reco-blog"
+                    },
+                    {
+                        text: "GitBook-ES6",
+                        link: "https://sugar-js.gitbook.io/-1/",
+                        icon: "reco-document"
+                    }
+                ]
+            },
+            {
+                text: "时间线",
+                link: "/timeline/",
+                icon: "reco-date"
+            },
+            {
+                text:"留言板",
+                link:"/show/messagePanel",
+                icon: "reco-suggestion"
             }
         ],
         sidebar,
         displayAllHeaders: false,
         sidebarDepth: 2,
+        type: 'blog',
+        logo: '/icon.png',
+        authorAvatar: '/icon.png',
+        // 搜索设置
+        search: true,
+        searchMaxSuggestions: 10,
+        // 自动形成侧边导航
+        subSidebar: 'auto',
+        // 最后更新时间
+        lastUpdated: 'Last Updated',
+        // 作者
+        author: '粥里有勺糖',
+        // 备案号
+        record: '蜀ICP备19011724号',
+        // 项目开始时间
+        startYear: '2018',
+        friendLink: [
+            {
+                title: "Linbudu",
+                desc: "未来的不可知，是前进的原动力",
+                email: "linbudu@qq.com",
+                link: "https://linbudu.top/",
+                logo: "https://linbudu-img-store.oss-cn-shenzhen.aliyuncs.com/img/48507806.jfif",
+            },
+            {
+                title: "kweku",
+                desc: "所有的出乎意料都是努力的结果",
+                email: "631199793@qq.com",
+                link: "http://kweku.top/",
+                logo: "http://kweku.top/images/logo.png",
+            },
+            {
+                title: "炽翎",
+                desc: " A full stack developer from China🇨🇳.",
+                link: "https://juejin.im/user/3122268753634541",
+                logo: "https://user-gold-cdn.xitu.io/2020/4/5/1714ab3969d6a1cc?imageView2/1/w/180/h/180/q/85/format/webp/interlace/1",
+            },
+            {
+                title: "神三元",
+                desc: "热爱技术，深耕前端，乐于分享。     掘金小册《React Hooks 与 Immutable 数据流实战》作者",
+                link: "http://47.98.159.95/my_blog",
+                logo: "http://47.98.159.95/my_blog/avatar.jpg",
+            },
+            {
+                title: "冴羽",
+                desc: "冴羽的JavaScript博客",
+                link: "https://github.com/mqyqingfeng/Blog",
+                logo: "https://mirror-gold-cdn.xitu.io/168e084832fd5ec238f?imageView2/1/w/180/h/180/q/85/format/webp/interlace/1",
+            },
+        ],
     }
 }
