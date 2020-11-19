@@ -40,10 +40,10 @@ module.exports = {
                 ]
             },
             {
-                text: '五花八门',
+                text: '技术笔记',
                 items: [
                     { text: '技术教程', link: '/technology/learn/' },
-                    { text: '理论干货', link: '/technology/theory/' },
+                    { text: '技术概念', link: '/technology/theory/' },
                 ]
             },
             {

@@ -46,7 +46,7 @@ const TagMap = {
     'css': 'CSS',
     'es6': 'ES6',
     'html': 'html',
-    'js': 'js',
+    'js': 'javascript',
     'node': 'node.js',
     'performance': '性能优化',
     'regexp': '正则表达式',
@@ -64,8 +64,8 @@ const TagMap = {
     'campus': '校招考点',
     'experience': '面试经验',
     'spring20': '2020春招',
-    'learn': '学习笔记',
-    'theory': '学习笔记',
+    'learn': '技术教程',
+    'theory': '技术概念',
 }
 
 function getCategoryAndTags(url) {
@@ -83,12 +83,12 @@ function getCategoryAndTags(url) {
 
 
 const CategoryMap = {
-    'bigWeb': '大前端',
+    'bigweb': '大前端',
     'coding': '手撕代码',
-    'computerBase': '计算机基础',
+    'computerbase': '计算机基础',
     'interview': '面试',
-    'offer': '面经',
-    'technology': '开发/学习笔记',
+    'offer': '备战春秋',
+    'technology': '技术笔记',
 }
 
 function getFileConfig(url) {
