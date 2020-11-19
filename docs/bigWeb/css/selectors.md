@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: css选择器
+date: 2020-09-05
+tags:
+ - 大前端
+ - CSS
+categories:
+ - 大前端
+---
 # css选择器
 ## 基本选择器
 1. 通配符(通用选择器):`*`

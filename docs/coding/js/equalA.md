@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 如何实现变量a同时等于多个值
+date: 2020-09-11
+tags:
+ - 手撕代码
+ - javascript
+categories:
+ - 手撕代码
+---
 # 如何实现变量a同时等于多个值
 
 通过重新定义对象的隐式转换行为实现

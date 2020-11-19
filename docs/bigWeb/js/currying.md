@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 柯里化(Currying)
+date: 2020-04-14
+tags:
+ - 大前端
+ - javascript
+categories:
+ - 大前端
+---
 # 柯里化(Currying)
 
 ## 高阶函数

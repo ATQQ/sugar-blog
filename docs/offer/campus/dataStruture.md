@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 数据结构
+date: 2020-10-30
+tags:
+ - 备战春秋
+ - 校招考点
+categories:
+ - 备战春秋
+---
 # 数据结构
 * 栈
 * 队列

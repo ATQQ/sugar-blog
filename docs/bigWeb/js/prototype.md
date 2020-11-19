@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 原型与原型链
+date: 2020-04-14
+tags:
+ - 大前端
+ - javascript
+categories:
+ - 大前端
+---
 # 原型与原型链
 
 ## 原型

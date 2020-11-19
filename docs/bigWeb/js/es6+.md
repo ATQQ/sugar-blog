@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: ES6+的一些新语法糖和方法整理
+date: 2020-09-01
+tags:
+ - 大前端
+ - javascript
+categories:
+ - 大前端
+---
 # ES6+的一些新语法糖和方法整理
 **只列举了比较实用的而又鲜为人知的一些**
 ## ES2020

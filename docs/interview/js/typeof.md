@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: typeof能否正常判断类型
+date: 2020-04-14
+tags:
+ - 面试
+ - javascript
+categories:
+ - 面试
+---
 # typeof能否正常判断类型
 * 不能正确的判断所有的类型
 

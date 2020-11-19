@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: EventLoop
+date: 2020-04-14
+tags:
+ - 大前端
+ - javascript
+categories:
+ - 大前端
+---
 # Event Loop
 
 * Event Loop是一个执行模型，在不同的地方有不同的实现。

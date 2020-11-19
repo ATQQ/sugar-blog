@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 路由原理
+date: 2020-05-03
+tags:
+ - 大前端
+ - vue
+categories:
+ - 大前端
+---
 # 路由原理
 * hash模式
 * history模式

@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: typeof是否能正确判断类型？instanceof能正确判断对象的原理是什么？
+date: 2020-03-10
+tags:
+ - 面试
+ - 其它
+categories:
+ - 面试
+---
 # typeof 是否能正确判断类型？instanceof 能正确判断对象的原理是什么？
 ## typeof
 * typeof对于原始值类型除了null外都可以准确判断

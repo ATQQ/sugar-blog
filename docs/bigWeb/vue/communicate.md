@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 组件通信
+date: 2020-04-14
+tags:
+ - 大前端
+ - vue
+categories:
+ - 大前端
+---
 # 组件通信
 ## 父子通信
 ### props与emit

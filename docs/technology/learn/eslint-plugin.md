@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: eslint插件开发教程
+date: 2020-05-20
+tags:
+ - 技术笔记
+ - 技术教程
+categories:
+ - 技术笔记
+---
 # eslint插件开发教程
 
 开发eslint插件目的：根据项目需要，自定义满足项目特殊需要的校验规则

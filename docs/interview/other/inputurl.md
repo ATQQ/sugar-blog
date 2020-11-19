@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 在浏览器中输入URL到页面渲染的整个过程
+date: 2020-03-03
+tags:
+ - 面试
+ - 其它
+categories:
+ - 面试
+---
 # 在浏览器中输入URL到页面渲染的整个过程
 
 ## 构建请求行

@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: for-of与for-in的区别
+date: 2020-09-05
+tags:
+ - 面试
+ - javascript
+categories:
+ - 面试
+---
 # for-of与for-in的区别
 ## for-of
 遍历可迭代的对象（部署了`Symbol.iterator`），包括 `Array`，`Map`，`Set`，`String`，`arguments`等等

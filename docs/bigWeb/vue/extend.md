@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: extendAP
+date: 2020-04-14
+tags:
+ - 大前端
+ - vue
+categories:
+ - 大前端
+---
 # extend API
 扩展组件生成一个构造器，通常会与 $mount 一起使用
 

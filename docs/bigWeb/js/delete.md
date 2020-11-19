@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: delete
+date: 2020-04-14
+tags:
+ - 大前端
+ - javascript
+categories:
+ - 大前端
+---
 # delete
 delete命令用于删除对象的属性，删除成功后返回true。
 

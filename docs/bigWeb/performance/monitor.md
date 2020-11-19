@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 监控
+date: 2020-04-14
+tags:
+ - 大前端
+ - 性能优化
+categories:
+ - 大前端
+---
 # 监控
 一般分为三种:
 * 页面埋点

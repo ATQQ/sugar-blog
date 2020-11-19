@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 实现一下new
+date: 2020-09-05
+tags:
+ - 手撕代码
+ - javascript
+categories:
+ - 手撕代码
+---
 # 实现一下new
 ## new命令原理
 使用new命令时，它后面的函数依次执行下面的步骤

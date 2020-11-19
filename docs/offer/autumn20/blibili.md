@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: B站-主站技术中心
+date: 2020-10-23
+tags:
+ - 备战春秋
+ - 2020秋招
+categories:
+ - 备战春秋
+---
 # B站-主站技术中心
 
 平均每面30min左右

@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 运行机制概述
+date: 2020-04-14
+tags:
+ - 大前端
+ - vue
+categories:
+ - 大前端
+---
 # 运行机制概述
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTU4NjgzMzgxNDE1OA==586833814158)

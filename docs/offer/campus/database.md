@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 数据库
+date: 2020-10-30
+tags:
+ - 备战春秋
+ - 校招考点
+categories:
+ - 备战春秋
+---
 # 数据库
 
 前端会考一点，但内容不多

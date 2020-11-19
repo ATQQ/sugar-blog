@@ -113,6 +113,11 @@ function getFileConfig(url) {
     ].join('\n')
 }
 
+function isHaveConfig(url) {
+    const originData = fs.readFileSync(url, { encoding: 'utf-8' }).split('\n')
+    return originData[0] === '---'
+}
+
 const files = getDirFileByType(__dirname + '/../docs', 'md')
 
 for (const filepath of files) {
@@ -122,6 +127,10 @@ for (const filepath of files) {
     }
     // 不处理配置文章
     if (filepath.includes('_configDoc')) {
+        continue
+    }
+    // 已经配置过的不操作
+    if(isHaveConfig(filepath)){
         continue
     }
     // 无有效配置信息不处理

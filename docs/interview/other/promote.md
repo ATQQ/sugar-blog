@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 什么是提升？什么是暂时性死区？var、let及const区别？
+date: 2020-03-10
+tags:
+ - 面试
+ - 其它
+categories:
+ - 面试
+---
 # 什么是提升？什么是暂时性死区？var、let 及 const 区别？
 ## 什么是提升？
 * 使用 var 声明的变量会被提升到作用域的顶部

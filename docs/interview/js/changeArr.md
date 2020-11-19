@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 数组哪些方法会改变自身
+date: 2020-09-11
+tags:
+ - 面试
+ - javascript
+categories:
+ - 面试
+---
 # 数组哪些方法会改变自身
 ## ES5
 * splice：删除数组元素或在目标位置插入新元素

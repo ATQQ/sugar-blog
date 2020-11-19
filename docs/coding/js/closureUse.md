@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 闭包调用
+date: 2020-10-18
+tags:
+ - 手撕代码
+ - javascript
+categories:
+ - 手撕代码
+---
 # 闭包调用
 
 ## 问题描述

@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 原始类型有哪些
+date: 2020-04-14
+tags:
+ - 面试
+ - javascript
+categories:
+ - 面试
+---
 # 原始类型有哪些
 * ES5
   * string

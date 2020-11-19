@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: BFC
+date: 2020-04-14
+tags:
+ - 大前端
+ - CSS
+categories:
+ - 大前端
+---
 # BFC
 
 BFC规范(块级格式化上下文：block formatting context)

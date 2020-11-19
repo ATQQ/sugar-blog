@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 阻塞
+date: 2020-10-27
+tags:
+ - 大前端
+ - 浏览器
+categories:
+ - 大前端
+---
 # 阻塞
 ## CSS
 ### 1. 阻塞渲染

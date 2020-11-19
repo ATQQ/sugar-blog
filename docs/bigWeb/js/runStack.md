@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 执行上下文栈
+date: 2020-04-14
+tags:
+ - 大前端
+ - javascript
+categories:
+ - 大前端
+---
 # 执行上下文栈
 JavaScript 引擎并非一行一行地分析和执行程序，而是一段一段地分析执行。当执行一段代码的时候，会进行一个“准备工作”(执行上下文)
 

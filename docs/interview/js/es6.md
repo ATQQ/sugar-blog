@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: ES6面试问题
+date: 2020-03-22
+tags:
+ - 面试
+ - javascript
+categories:
+ - 面试
+---
 # ES6面试问题
 
 ## 1.ES6是什么，为什么要学习它

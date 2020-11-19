@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 设计模式
+date: 2020-11-07
+tags:
+ - 备战春秋
+ - 校招考点
+categories:
+ - 备战春秋
+---
 # 设计模式
 1. 单例模式
 2. 工厂模式

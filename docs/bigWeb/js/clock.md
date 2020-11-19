@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 定时器
+date: 2020-04-14
+tags:
+ - 大前端
+ - javascript
+categories:
+ - 大前端
+---
 # 定时器
 ## setTimeout
 ``setTimeout(fn,delay,params)``

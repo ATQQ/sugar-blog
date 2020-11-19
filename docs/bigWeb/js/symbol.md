@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: Symbol的用法
+date: 2020-04-14
+tags:
+ - 大前端
+ - javascript
+categories:
+ - 大前端
+---
 # Symbol 的用法
 
 >ES6 引入的一种新的原始数据类型，表示独一无二的值。从根本上解决对象属性太多导致属性名冲突覆盖的问题

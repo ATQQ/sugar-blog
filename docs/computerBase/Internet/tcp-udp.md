@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: TCP与UDP的区别
+date: 2020-04-14
+tags:
+ - 计算机基础
+ - 计算机网络
+categories:
+ - 计算机基础
+---
 # TCP与UDP的区别
 ## UDP
 * UDP 协议是面向无连接的:不需要在正式传递数据之前先连接起双方

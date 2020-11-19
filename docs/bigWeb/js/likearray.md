@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 类数组与arguments
+date: 2020-04-14
+tags:
+ - 大前端
+ - javascript
+categories:
+ - 大前端
+---
 # 类数组与arguments
 ## 类数组
 >拥有一个 length 属性和若干索引属性的对象

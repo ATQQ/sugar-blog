@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 浮点数
+date: 2020-04-14
+tags:
+ - 大前端
+ - javascript
+categories:
+ - 大前端
+---
 # 浮点数
 
 * ECMAScript 中的 Number 类型使用 IEEE754 标准来表示整数和浮点数值。

@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 参数按值传递
+date: 2020-04-14
+tags:
+ - 大前端
+ - javascript
+categories:
+ - 大前端
+---
 # 参数按值传递
 ## 定义
 >ECMAScript中所有函数的参数都是按值传递的。

@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: CSS层级关系
+date: 2020-04-14
+tags:
+ - 大前端
+ - CSS
+categories:
+ - 大前端
+---
 # CSS层级关系
 
 >如果同个元素有两个或以上冲突的CSS规则，浏览器有一些基本的规则来决定哪一个非常特殊而胜出

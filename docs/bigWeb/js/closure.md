@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 闭包
+date: 2020-04-14
+tags:
+ - 大前端
+ - javascript
+categories:
+ - 大前端
+---
 # 闭包
 
 ## 定义

@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: JS
+date: 2020-10-30
+tags:
+ - 备战春秋
+ - 校招考点
+categories:
+ - 备战春秋
+---
 # JS
 * 熟悉ES5,至少了解ES6
 * 了解ES6+的一些新特性，解决了现存的那些问题
