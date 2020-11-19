@@ -131,7 +131,7 @@ module.exports = {
             },
             {
                 text:"留言板",
-                link:"/show/messagePanel",
+                link:"/_configDoc/show/messagePanel",
                 icon: "reco-suggestion"
             }
         ],

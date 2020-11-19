@@ -42,7 +42,6 @@ function removeFileConfig(url) {
 }
 
 const TagMap = {
-    'bigweb': '大前端',
     'browser': '浏览器',
     'css': 'CSS',
     'es6': 'ES6',
@@ -52,17 +51,15 @@ const TagMap = {
     'performance': '性能优化',
     'regexp': '正则表达式',
     'vue': 'vue',
-    'coding': '手撕代码',
     'algorithm': '算法与数据结构',
-    'computerBase': '计算机基础',
     'design': '设计模式',
     'internet': '计算机网络',
+    'leetcode': '力扣',
     'offer': '剑指offer',
     'os': '操作系统',
-    'interview': '面试题',
     'code': '手撕代码',
     'mini': '小程序',
-    'other': '未分类',
+    'other': '其它',
     'autumn20': '2020秋招',
     'campus': '校招考点',
     'experience': '面试经验',
@@ -70,47 +67,28 @@ const TagMap = {
     'learn': '学习笔记',
     'theory': '学习笔记',
 }
-function getTags(url) {
-    // Linux/mac
-    const dirs = path.dirname(url).split('/')
-    const tags = dirs.slice(dirs.length - 2).map(v => v.toLowerCase()).map(v => TagMap[v]).filter(v => v)
-    return tags.length === 0 ? ['未分类'] : [...new Set(tags)]
+
+function getCategoryAndTags(url) {
+    const _dirs = path.dirname(url).split('/')
+    const tokens = _dirs.slice(_dirs.length - 2).map(v => v.toLowerCase())
+    const category = CategoryMap[tokens[0]]
+    const tag = TagMap[tokens[1]]
+    const tags = [category, tag]
+    const categorys = [category]
+    return {
+        tags,
+        categorys
+    }
 }
 
 
 const CategoryMap = {
-    'browser': '浏览器',
-    'css': 'CSS',
-    'es6': 'JavaScript',
-    'html': 'html',
-    'js': 'JavaScript',
-    'node': 'JavaScript',
-    'performance': '性能优化',
-    'regexp': '正则表达式',
-    'vue': 'vue',
+    'bigWeb': '大前端',
     'coding': '手撕代码',
-    'algorithm': '算法与数据结构',
     'computerBase': '计算机基础',
-    'design': '计算机基础',
-    'internet': '计算机基础',
-    'offer': '计算机基础',
-    'os': '计算机基础',
     'interview': '面试',
-    'code': '手撕代码',
-    'mini': '小程序',
-    'other': '未分类',
-    'autumn20': '面试',
-    'campus': '面试',
-    'experience': '面试',
-    'spring20': '面试',
-    'learn': '学习笔记',
-    'theory': '学习笔记',
-}
-function getCategory(url) {
-    // Linux/mac
-    const dirs = path.dirname(url).split('/')
-    const categorys = dirs.slice(dirs.length - 2).map(v => v.toLowerCase()).map(v => CategoryMap[v] || '').filter(v => v)
-    return categorys.length === 0 ? ['未分类'] : [...new Set(categorys)]
+    'offer': '面经',
+    'technology': '开发/学习笔记',
 }
 
 function getFileConfig(url) {
@@ -118,35 +96,41 @@ function getFileConfig(url) {
         return str.startsWith('# ')
     }).slice(2).replace(/[\sI]/g, '')
     const date = getFileBirthTime(url)
-    const tags = getTags(url)
-    const noCategoryKey = ['campus', 'show']
-    if (noCategoryKey.filter(k => url.includes(k)).length !== 0) {
-        return `---
-title: ${title}
-date: ${date}
-tags: 
-${tags.map(v => ` - ${v}`).join('\n')}
-isTimeLine: true
----`
+    const { tags, categorys } = getCategoryAndTags(url)
+    if (!categorys[0]) {
+        return false
     }
-    const categorys = getCategory(url)
-    return `---
-title: ${title}
-date: ${date}
-tags: 
-${tags.map(v => ` - ${v}`).join('\n')}
-categories:
-${categorys.map(v => ` - ${v}`).join('\n')}
-isTimeLine: true
----`
+    return [
+        '---',
+        'isTimeLine: true',
+        `title: ${title}`,
+        `date: ${date}`,
+        'tags:',
+        `${tags.map(v => ` - ${v}`).join('\n')}`,
+        'categories:',
+        `${categorys.map(v => ` - ${v}`).join('\n')}`,
+        '---'
+    ].join('\n')
 }
 
-const files = getDirFileByType(__dirname + '/../docs', 'md').filter(v => !v.endsWith('README.md'))
+const files = getDirFileByType(__dirname + '/../docs', 'md')
 
 for (const filepath of files) {
+    // 不处理README
+    if (filepath.endsWith('README.md')) {
+        continue
+    }
+    // 不处理配置文章
+    if (filepath.includes('_configDoc')) {
+        continue
+    }
+    // 无有效配置信息不处理
+    const config = getFileConfig(filepath)
+    if (!config) {
+        continue
+    }
     // 移除旧的配置文件
     removeFileConfig(filepath)
-    const config = getFileConfig(filepath)
     const originData = fs.readFileSync(filepath, { encoding: 'utf-8' })
     // 写入新的内容
     fs.writeFileSync(filepath, config + '\n' + originData)

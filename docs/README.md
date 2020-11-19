@@ -30,14 +30,14 @@ features:
 </center>
 
 # :sound:预告
-* 浏览器专题 -> [留下问题](show/browserPanel.md)
+* 浏览器专题 -> [留下问题](_configDoc/show/browserPanel.md)
   * [内核](./bigWeb/browser/core.md)
   * [渲染机制](./bigWeb/browser/render.md)
   * [阻塞渲染](./bigWeb/browser/block.md)
   * [缓存机制](./bigWeb/browser/cache.md)
   * [本地存储](./bigWeb/browser/storage.md)
   * 安全
-* 性能优化专题 -> [留下问题](show/improvePanel.md)
+* 性能优化专题 -> [留下问题](_configDoc/show/improvePanel.md)
 * 大前端相关理论概念
   * [Serverless](./technology/theory/serverless.md)
   * css架构
