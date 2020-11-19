@@ -19,6 +19,8 @@ export default {
 }
 .hidden-tj {
   position: absolute;
-  z-index: -1;
+  width: 0;
+  height: 0;
+  opacity: 0;
 }
 </style>

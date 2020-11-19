@@ -130,8 +130,8 @@ module.exports = {
                 icon: "reco-date"
             },
             {
-                text:"留言板",
-                link:"/_configDoc/show/messagePanel",
+                text: "留言板",
+                link: "/_configDoc/show/messagePanel",
                 icon: "reco-suggestion"
             }
         ],
