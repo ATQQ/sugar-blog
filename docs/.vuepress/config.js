@@ -156,7 +156,7 @@ module.exports = {
         valineConfig: {
             appId: "L3HgpT2JA3KJFUots3ql2AAd-gzGzoHsz",
             appKey: "cmU9sBLuIqYl5QLS1aCYIKzK",
-            showComment:false
+            showComment: false
         },
         // 项目开始时间
         startYear: '2018',

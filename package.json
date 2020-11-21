@@ -27,6 +27,6 @@
   },
   "devDependencies": {
     "vuepress-theme-reco": "^1.5.7",
-    "vuepress": "1.5.4"
+    "vuepress": "1.7.1"
   }
 }
