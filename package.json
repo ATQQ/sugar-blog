@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "npm run beforeBuild && vuepress dev docs/.",
-    "build": "npm run addCatelog && rm -rf docs/.vuepress/dist && vuepress build docs/.",
+    "build": "npm run beforeBuild && rm -rf docs/.vuepress/dist && vuepress build docs/.",
     "compress": "./shell/compress.sh",
     "upload": "./shell/upload.sh",
     "deploy": "./shell/deploy.sh",
