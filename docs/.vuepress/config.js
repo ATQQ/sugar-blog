@@ -152,6 +152,12 @@ module.exports = {
         author: '粥里有勺糖',
         // 备案号
         record: '蜀ICP备19011724号',
+        recordLink: 'https://beian.miit.gov.cn/',
+        valineConfig: {
+            appId: "L3HgpT2JA3KJFUots3ql2AAd-gzGzoHsz",
+            appKey: "cmU9sBLuIqYl5QLS1aCYIKzK",
+            showComment:false
+        },
         // 项目开始时间
         startYear: '2018',
         friendLink: [

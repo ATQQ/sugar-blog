@@ -9,9 +9,12 @@ export default {
         script.type = "text/javascript";
         tj.append(span);
         tj.append(script);
-        const hidden = !location.pathname.endsWith("/");
+        // 只在首页展示
+        const hidden = location.pathname !== "/";
         if (hidden) {
             tj.className += ' hidden-tj'
+        } else {
+            tj.className += ' home-tj'
         }
     }
 }
