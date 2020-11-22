@@ -1,6 +1,10 @@
 const sidebar = require('./siders/index')
 
 module.exports = {
+    plugins: ['@vuepress/pwa', {
+        serviceWorker: true,
+        updatePopup: true
+    }],
     title: '粥里有勺糖',
     description: '粥里有勺糖的个人博客,记录随笔与学习笔记，大前端相关的知识，高频面试题，个人面经等',
     head: [
