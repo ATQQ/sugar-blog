@@ -39,15 +39,15 @@ Serverless 架构即“⽆服务器”架构，它是一种全新的架构方式
 ## 传统开发
 ### 开发流程
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNTI1OTM2NTgyNw==605259365827)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNTI1OTM2NTgyNw==605259365827)
 
 ### 开发之外的问题
 对开发团队的要求越来越高
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNTI1OTgwMzM3OA==605259803378)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNTI1OTgwMzM3OA==605259803378)
 
 ### 上线后
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNTI1OTkzMDY1MQ==605259930651)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNTI1OTkzMDY1MQ==605259930651)
 * 运维复杂
 * 测试复杂
 * 扩展复杂
@@ -57,7 +57,7 @@ Serverless 架构即“⽆服务器”架构，它是一种全新的架构方式
 
 ## 技术变革,思想先行👏
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNTI2MDQzNjQ3Mg==605260436472)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNTI2MDQzNjQ3Mg==605260436472)
 
 名词解释（云计算中的一些概念）：
 * On-Premise: 本地部署
@@ -84,7 +84,7 @@ Serverless 架构即“⽆服务器”架构，它是一种全新的架构方式
 ## 云的未来 - Serverless
 追求更低的心理成本，就是能力闭环
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNTI2MzIwNzg4MA==605263207880)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNTI2MzIwNzg4MA==605263207880)
 
 Serverless 可能是目前资源抽象最高级别，为能力闭环带来了可能性
 

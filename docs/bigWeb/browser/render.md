@@ -39,7 +39,7 @@ categories:
 3. 词法分析：将令牌转换成定义了属性和规则的“对象”
 4. DOM构建：由于 HTML 标记定义不同标记之间的关系（一些标记包含在其他标记内），创建的对象链接在一个树数据结构内，此结构也会捕获原始标记中定义的父项-子项关系：HTML 对象是 body 对象的父项，body 是 paragraph 对象的父项，依此类推
 
-<img style="background-color:white;" src="http://img.cdn.sugarat.top/mdImg/MTYwMzYxNzU0MDI0Ng==603617540246"></img>
+<img style="background-color:white;" src="https://img.cdn.sugarat.top/mdImg/MTYwMzYxNzU0MDI0Ng==603617540246"></img>
 
 整个流程的最终输出是文档对象模型 (DOM)，浏览器对页面做进一步处理时会用到它
 
@@ -60,9 +60,9 @@ img { float: right }
 
 CSS 字节转换成字符，接着转换成令牌和节点，最后链接为为一个“CSS 对象模型”(CSSOM) 的树结构内
 
-<img style="background-color:white;" src="http://img.cdn.sugarat.top/mdImg/MTYwMzYxODk4NjE2Mw==603618986163"></img>
+<img style="background-color:white;" src="https://img.cdn.sugarat.top/mdImg/MTYwMzYxODk4NjE2Mw==603618986163"></img>
 
-<img style="background-color:white;" src="http://img.cdn.sugarat.top/mdImg/MTYwMzYxOTEwMjEzNA==603619102134"></img>
+<img style="background-color:white;" src="https://img.cdn.sugarat.top/mdImg/MTYwMzYxOTEwMjEzNA==603619102134"></img>
 
 
 ### 小结
@@ -77,7 +77,7 @@ CSS 字节转换成字符，接着转换成令牌和节点，最后链接为为�
 ### 构建过程
 浏览器将 DOM 数和 CSSOM 数合并成“渲染树”，包含页面上所有可见的内容，以及每个节点的所有 CSSOM 样式信息
 
-<img style="background-color:white;" src="http://img.cdn.sugarat.top/mdImg/MTYwMzYyMjExNzA4Ng==603622117086"></img>
+<img style="background-color:white;" src="https://img.cdn.sugarat.top/mdImg/MTYwMzYyMjExNzA4Ng==603622117086"></img>
 
 * 从 DOM 树的根节点开始遍历每个可见节点
   * 某些节点不可见（例如脚本标记、元标记等--title,meta,link）

@@ -55,38 +55,38 @@ FaaS(Function as a Service - 函数即服务) 是在无状态容器中运行的�
 
 点击右上角进入控制台
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNjA1OTA0OTA5MA==606059049090)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNjA1OTA0OTA5MA==606059049090)
 
 ### 3. 云函数-函数服务
 
 左上角选择云产品，输入云函数，选择 云函数-函数服务
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNjA1OTEwOTg4NQ==606059109885)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNjA1OTEwOTg4NQ==606059109885)
 
 ### 4. 新建云函数
 
 新建一个云函数
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNjA1OTE5MDY3NA==606059190674)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNjA1OTE5MDY3NA==606059190674)
 
 ### 5. 录入基本信息
 * 符合规范的函数名称
 * 环境选择一个Node.js的环境
 * 选择空白函数
 * 然后下一步
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNjA1OTI2MDczNA==606059260734)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNjA1OTI2MDczNA==606059260734)
 
 ### 6. 完成创建
 
 直接点击完成，什么都不更改
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNjA1OTUwNjc4NQ==606059506785)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNjA1OTUwNjc4NQ==606059506785)
 
 ### 7. 触发器
 
 然后来到这个界面，点击触发管理
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNjA1OTU5ODY4MQ==606059598681)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNjA1OTU5ODY4MQ==606059598681)
 
 ### 8. 创建触发器
 
@@ -96,13 +96,13 @@ FaaS(Function as a Service - 函数即服务) 是在无状态容器中运行的�
 * 请求方法-GET
 * 鉴权方法-免鉴权
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNjA1OTcwMDk3NA==606059700974)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNjA1OTcwMDk3NA==606059700974)
 
 ### 9. 大功告成
 
 体验一下生成的触发器[链接](https://service-36n2x31h-1256505457.cd.apigw.tencentcs.com/release/demoAPi?param1=中文&param2=123)
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNjA1OTgxOTU3NQ==606059819575)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNjA1OTgxOTU3NQ==606059819575)
 
 ### 10. 观察接口
 
@@ -110,11 +110,11 @@ FaaS(Function as a Service - 函数即服务) 是在无状态容器中运行的�
 
 **响应结果**
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNjA2MDAyMTk0Mg==606060021942)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNjA2MDAyMTk0Mg==606060021942)
 
 **我们的云函数代码**
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNjA2MDEwMjU0NA==606060102544)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNjA2MDEwMjU0NA==606060102544)
 
 关注红色框中的内容
 * 执行方法：index.main_handler
@@ -139,7 +139,7 @@ context的内容（console.log的内容）在哪里看?
 
 ### 11. 日志查询
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNjA2MDQ5NDAwOA==606060494008)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNjA2MDQ5NDAwOA==606060494008)
 
 在日志查询面板可以查询到我们接口的调用信息，响应状态与log的内容
 
@@ -152,7 +152,7 @@ context的内容（console.log的内容）在哪里看?
 ```sh
 npm init -y
 ```
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNjA2MDcyOTQyMg==606060729422)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNjA2MDcyOTQyMg==606060729422)
 
 package.json
 ```json
@@ -199,17 +199,17 @@ npm i axios
 
 在平台上创建一个 package.json文件,并把上述内容粘贴进去,`ctrl/command + S` 保存修改的内容
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNjA2MDk5Mzc5NA==606060993794)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNjA2MDk5Mzc5NA==606060993794)
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNjA2MTA0MTkzNg==606061041936)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNjA2MTA0MTkzNg==606061041936)
 
 选择在线安装依赖，然后点击保存
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNjA2MTEzNjU5NA==606061136594)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNjA2MTEzNjU5NA==606061136594)
 
 安装完成后 会出现 node_modules目录
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNjA2MTU3NjI5Ng==606061576296)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNjA2MTU3NjI5Ng==606061576296)
 
 JS云函数创建相关流程，差不都陈述完毕
 
@@ -279,7 +279,7 @@ function getNowWeather(cityId = 3) {
 
 [控制台](https://apigateway.console.aliyun.com/?spm=5176.12818093.products-recent.dapigateway.718e16d05FzxRX#/cn-beijing/purchasedApis/list)->API网关->华北2（北京）
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNjA2MzU3MTA1OA==606063571058)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNjA2MzU3MTA1OA==606063571058)
 
 为了节约查找token与appcode的时间，下面列一下步骤（吐槽，阿里云的文档太拦了，不方便信息定位）
 
@@ -289,13 +289,13 @@ function getNowWeather(cityId = 3) {
 1. token: 应用管理->选择一个应用->已授权API列表->选择自己要查看的API->点击调试API->调试面板的token参数即是所需参数
 2. appcode: 应用管理->选择一个应用->AppCode面板
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNjA2Mzk4NTYyOQ==606063985629)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNjA2Mzk4NTYyOQ==606063985629)
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNjA2NDE0NzU2Mg==606064147562)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNjA2NDE0NzU2Mg==606064147562)
 
 ## 最终代码
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNjA2NDY3MDM4MQ==606064670381)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNjA2NDY3MDM4MQ==606064670381)
 
 index.js
 ```js

@@ -7,7 +7,8 @@
     "doc": "docs"
   },
   "scripts": {
-    "dev": "npm run beforeBuild && vuepress dev docs/.",
+    "dev": "npm run beforeBuild &&cross-env ENV_SCHEMA=http vuepress dev docs/.",
+    "devHttps": "npm run beforeBuild && cross-env ENV_SCHEMA=https vuepress dev docs/.",
     "build": "npm run beforeBuild && rm -rf docs/.vuepress/dist && vuepress build docs/.",
     "compress": "./shell/compress.sh",
     "upload": "./shell/upload.sh",
@@ -27,6 +28,7 @@
   },
   "devDependencies": {
     "@vuepress/plugin-pwa": "^1.7.1",
+    "cross-env": "^7.0.2",
     "vuepress": "1.7.1",
     "vuepress-theme-reco": "^1.5.7"
   }
