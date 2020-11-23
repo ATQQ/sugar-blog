@@ -30,4 +30,12 @@ export default {
   right: 0;
   bottom: -100px;
 }
+@media (max-width: 719px) {
+  .home-tj {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -200px;
+  }
+}
 </style>
