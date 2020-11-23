@@ -56,7 +56,7 @@ SELECT * FROM articles WHERE id = 12 or 1=1
 * 检查传入内容是否包含非法的关键字
 
 ## XSS
-### 什么是 XSS 攻击？
+### 什么是 XSS
 
 ``XSS``全称``Cross Site Scripting`` ，`即跨站脚本`攻击
 
@@ -110,8 +110,37 @@ renderPage()
 <div>{{name}}</div>  
 ```
 
-<!-- // todo strat chrome的优化 -->
-### 如何防范 XSS 攻击？什么是 CSP？
+**jquery触发此错误示例**
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://cdn.staticfile.org/jquery/1.10.0/jquery.min.js"></script>
+</head>
+
+<body>
+    <h1>大标题</h1>
+    <ul id="list"></ul>
+    <script src="./test.js"></script>
+</body>
+
+</html>
+```
+test.js
+```js
+const data = [
+    '1',
+    '2',
+    '<script>alert(123)</script>'
+]
+data.forEach(str=>{
+    $('#list').append(`<li>${str}</li>`)
+})
+```
+### 如何防范
 
 #### 转义字符
 >不相信任何用户的输入
@@ -129,8 +158,24 @@ function escape(str) {
   return str
 }
 ```
+或者利用现代浏览器的特性
+
+自动处理特殊字符
+```js
+function filterStr(str) {
+    const div = document.createElement('div')
+    div.textContent = str
+    return div.innerHTML
+}
+filterStr('<div></div>') // &lt;div&gt;&lt;/div&gt;
+```
+
 #### CSP
-CSP 本质上就是建立白名单，明确告诉浏览器哪些外部资源可以加载和执行。可以通过这种方式来尽量减少 XSS 攻击。
+CSP - 内容安全策略
+
+本质上就是建立白名单，明确告诉浏览器哪些外部资源可以加载和执行
+
+可以通过这种方式来尽量减少 XSS 攻击。
 
 **使用方式**
 * 设置 HTTP Header 中的 Content-Security-Policy
@@ -145,46 +190,66 @@ CSP 本质上就是建立白名单，明确告诉浏览器哪些外部资源可�
 * 框架（frame）：必须使用HTTPS协议加载
 * 其他资源：没有限制
 
-#### 设置HttpOnly
-阻止脚本读取cookie,防范XSS
+#### 防止脚本读取Cookie
+为Cookie添加HttpOnly属性，防止第三方脚本读取网站的cookie相关内容
 
-:::tip 参考
-[MDN:Content-Security-Policy](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Security-Policy)<br/>
-[阮一峰:CSP](http://www.ruanyifeng.com/blog/2016/09/csp.html)
-:::
 
 ## CSRF
-### 什么是 CSRF 攻击？
+### 什么是CSRF
 ``CSRF``--``Cross-site request forgery``--跨站请求伪造
 
-攻击者构造出一个后端请求地址，诱导用户点击或者通过某些途径自动发起请求。如果用户是在登录状态下的话，后端就以为是用户在操作，从而进行相应的逻辑。
+攻击者构造出一个请求链接，诱导用户点击或者通过某些途径自动发起请求
 
-### 如何伪造CSRF
-* 自动GET:使用img,link等等标签
+如果当前用户是在登录状态下请求的此链接的话，服务端就以为是用户在操作，从而进行相应的逻辑
+
+### 发起手段
+* 自动GET:使用img,link,script等等标签
 * 自动POST:自动提交表单的脚本
-* 诱导用户点击
+* 诱导用户点击：iframe,a标签，透明的元素等
 
-### 如何防范 CSRF 攻击？
-* ``Get``请求不对数据进行修改,即无副作用操作
-* 阻止第三方网站请求接口
-* 请求时附带验证信息，比如验证码或者 Token
-* 不让第三方网站访问到用户 Cookie
-* 设置SameSite:表示 Cookie 不随着跨域请求发送
-  * strict:完全禁止第三方请求携带Cookie
-  * lax:get 方法提交表单,a标签发送 get 请求可以携带
-  * none:请求会自动携带上 Cookie
-* 验证Referer/Origin:通过Referer验证请求是否为第三方发送
-  * Origin:域名信息
-  * Referer:包含具体URL
-  * **可通过自定义请求头伪造**
-* Token:服务器下发一个随机 Token，每次发起请求时将 Token 携带上，服务器验证 Token 是否有效
+```html
+<img src="http://a.b.com/api/xxx"/>
+<link href="http://a.b.com/api/xxx">
+<script src="http://a.b.com/api/xxx"></script>
+<script>
+setTimeout(()=>{
+    const $form = document.createElement('form')
+    $form.method = 'POST'
+    $form.action = 'a.b.com/api/xxx'
+    document.body.appendChild($form)
+    $form.submit()
+    $form.remove()
+},0)
+</script>
+```
+### 如何防范
+* Get请求不对数据进行修改,即无副作用操作
+* 服务端过滤
+  * 阻止第三方网站请求接口
+  * 验证request header中的 Referer/Origin:通过Referer验证请求是否为第三方发送
+    * Origin:域名信息
+    * Referer:包含具体URL
+    * **可通过自定义请求头伪造**
+* 请求时附带验证信息
+  * 添加验证码参数
+  * request header中添加一个token字段
+* 阻止第三方网站访问到用户 Cookie
+* 设置Cookie的SameSite属性： Cookie 随跨域请求发送的策略
+  * Strict:仅允许一方请求携带 Cookie，即浏览器将只发送相同站点请求的 Cookie，当前网页 URL 与请求目标 URL 完全一致才发送
+  * Lax:允许部（导航到目标网址的 Get 请求）分第三方请求携带 Cookie
+  * None:无论是否跨站都会发送 Cookie
 
 ## 点击劫持
-### 什么是点击劫持？
-点击劫持是一种视觉欺骗的攻击手段。攻击者将需要攻击的网站通过 iframe 嵌套的方式嵌入自己的网页中，并将 iframe 设置为透明，在页面中透出一个按钮诱导用户点击。
+### 什么是点击劫持
+点击劫持是一种视觉欺骗的攻击手段
 
-### 如何防范点击劫持？
-**X-FRAME-OPTIONS**
+1. 攻击者将需要攻击的网站通过 iframe 嵌套的方式嵌入自己的网页中，并将 iframe 设置为透明，在页面中透出一个按钮诱导用户点击：此种方式最为常见，因为iframe中可以嵌入用户已经登陆过的网页
+2. 使用一个透明的绑定了事件元素附在正常元素上，诱导用户点击
+
+
+### 如何防范
+#### 1. X-FRAME-OPTIONS
+针对iframe形式的可通过设置**X-FRAME-OPTIONS**
 
 X-FRAME-OPTIONS 是一个 HTTP 响应头
 
@@ -194,8 +259,12 @@ X-FRAME-OPTIONS 是一个 HTTP 响应头
 * ALLOW-FROM，表示页面可以在指定来源的 iframe 中展示
 
 
-**JS 防御**
+#### 2. JS 防御
+* window.self: 当前 window 对象的引用
+* window.top: 最顶层的窗口对象
+* window.parent: 当前窗口的直接父对象
 
+在页面中加入此代码
 ```html
 <head>
   <style id="click-jack">
@@ -217,16 +286,27 @@ X-FRAME-OPTIONS 是一个 HTTP 响应头
 ```
 
 ## 中间人攻击
-### 什么是中间人攻击？
-* 中间人攻击是攻击方同时与服务端和客户端建立起了连接，并让对方认为连接是安全的。
-* 攻击者不仅能获得双方的通信信息，还能修改通信信息。
+### 什么是中间人攻击
+* 中间人攻击是攻击方同时与服务端和客户端建立起了连接，并让对方认为连接是安全的
+* 攻击者不仅能获得双方的通信信息，还能修改通信信息
 
-### 如何防范中间人攻击？
+**场景举例：使用非对称加密传输的数据**
+1. 中间人已经同时与客户端与服务端建立了链接
+2. 服务端下发公钥a1，中间人截获，然后下发自己的公钥b1
+3. 客户端接收到公钥b1，对传输的数据 “你好” 加密成 “xxx”，然后发送给服务端
+4. 中间人收到数据 “xxx”，用自己的私钥B解密获得内容 “你好”，然后用截获的a1公钥 加密 内容“滚滚滚”成 “yyy”，发送给服务端
+5. 服务端收到内容 “yyy” 用自己的私钥A解密 得到 “滚滚滚”的内容
+
+在这个过程中，中间人不仅获取了用户传输的真实数据，还给服务的发送了错误的信息
+
+### 如何防范
 * 使用https
 * 不要在公共Wi-Fi上发送敏感数据
 
 :::tip 参考
 * [简书 - sql注入基础原理（超详细）](https://www.jianshu.com/p/078df7a35671)
+* [MDN:Content-Security-Policy](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Security-Policy)
+* [阮一峰:CSP](http://www.ruanyifeng.com/blog/2016/09/csp.html)
 :::
 <comment/>
 <tongji/>
