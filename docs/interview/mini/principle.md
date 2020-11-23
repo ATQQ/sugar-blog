@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 小程序的原理?
+date: 2020-04-14
+tags:
+ - 面试
+ - 小程序
+categories:
+ - 面试
+---
 # 小程序的原理?
 **微信小程序为例**
 

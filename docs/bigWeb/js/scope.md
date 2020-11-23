@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 作用域
+date: 2020-04-14
+tags:
+ - 大前端
+ - javascript
+categories:
+ - 大前端
+---
 # 作用域
 * 作用域指程序源代码中定义变量的区域
 * 规定了如何查找变量,确定当前执行代码对变量的访问权限

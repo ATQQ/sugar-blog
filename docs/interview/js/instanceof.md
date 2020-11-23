@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: instanceof能正确判断对象的原因是什么
+date: 2020-04-14
+tags:
+ - 面试
+ - javascript
+categories:
+ - 面试
+---
 # instanceof能正确判断对象的原因是什么
 * 通过原型链进行判断的
 * 每个对象都有一个原型,instanceof会沿着原型链进行判断,直到最顶层原型为止

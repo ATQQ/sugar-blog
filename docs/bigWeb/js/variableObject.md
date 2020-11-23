@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 变量对象
+date: 2020-04-14
+tags:
+ - 大前端
+ - javascript
+categories:
+ - 大前端
+---
 # 变量对象
 每个执行上下文，都有三个重要属性：
 * 变量对象(Variable object，VO)

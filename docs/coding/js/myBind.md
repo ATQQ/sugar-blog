@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 实现bind
+date: 2020-09-01
+tags:
+ - 手撕代码
+ - javascript
+categories:
+ - 手撕代码
+---
 # 实现bind
 
 面试非常高频率的题

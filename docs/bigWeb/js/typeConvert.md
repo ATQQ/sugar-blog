@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 类型转换
+date: 2020-04-14
+tags:
+ - 大前端
+ - javascript
+categories:
+ - 大前端
+---
 # 类型转换
 
 **文中的值类型等价于所说的基础类型，其范围是（boolean,string,number）**

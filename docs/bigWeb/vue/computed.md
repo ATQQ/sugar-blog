@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: computed与watch
+date: 2020-04-14
+tags:
+ - 大前端
+ - vue
+categories:
+ - 大前端
+---
 # computed 与 watch
 * ``computed`` 是计算属性，依赖其他属性计算值，并且 computed 的值有缓存，只有当计算值变化才会返回内容。
 * ``watch`` 监听到值的变化就会执行回调，在回调中可以进行一些逻辑操作。

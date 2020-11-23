@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 箭头函数?
+date: 2020-04-14
+tags:
+ - 大前端
+ - javascript
+categories:
+ - 大前端
+---
 # 箭头函数?
 ## 简单使用
 ```js

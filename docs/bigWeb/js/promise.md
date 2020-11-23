@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: Promise
+date: 2020-04-14
+tags:
+ - 大前端
+ - javascript
+categories:
+ - 大前端
+---
 # Promise
 
 [Promise/A+ 规范](http://www.ituring.com.cn/article/66566)

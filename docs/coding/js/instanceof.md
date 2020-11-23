@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 实现instanceOf
+date: 2020-10-13
+tags:
+ - 手撕代码
+ - javascript
+categories:
+ - 手撕代码
+---
 # 实现instanceOf
 
 ## instanceof作用

@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: window.onload与document.ready执行顺序
+date: 2020-05-03
+tags:
+ - 面试
+ - javascript
+categories:
+ - 面试
+---
 # window.onload与document.ready执行顺序
 
 ## onload

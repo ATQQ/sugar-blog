@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 与传统移动web的异同
+date: 2020-04-14
+tags:
+ - 面试
+ - 小程序
+categories:
+ - 面试
+---
 # 与传统移动web的异同
 ## 相似
 * 主要开发语言都是JavaScript

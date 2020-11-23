@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: mixin与mixins
+date: 2020-04-14
+tags:
+ - 大前端
+ - vue
+categories:
+ - 大前端
+---
 # mixin 与 mixins
 ## mixin
 mixin 用于全局混入，会影响到每个组件实例，通常插件都是这样做初始化的。

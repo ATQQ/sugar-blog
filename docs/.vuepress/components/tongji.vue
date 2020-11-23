@@ -16,9 +16,18 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  font-size: 12px;
 }
 .hidden-tj {
   position: absolute;
-  z-index: -1;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+.home-tj {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -100px;
 }
 </style>

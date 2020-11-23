@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 渲染原理
+date: 2020-10-26
+tags:
+ - 大前端
+ - 浏览器
+categories:
+ - 大前端
+---
 # 渲染原理
 
 篇幅较长，需赖心阅读

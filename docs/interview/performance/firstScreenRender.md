@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 如何加快首屏渲染?
+date: 2020-03-31
+tags:
+ - 面试
+ - 性能优化
+categories:
+ - 面试
+---
 # 如何加快首屏渲染?
 
 ## 降低请求数量

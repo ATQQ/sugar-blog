@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: CSS中哪些属性不能被继承
+date: 2020-05-03
+tags:
+ - 面试
+ - CSS
+categories:
+ - 面试
+---
 # CSS中哪些属性不能被继承
 
 ## 概念

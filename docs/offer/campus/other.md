@@ -1,3 +1,11 @@
+---
+isTimeLine: true
+title: 其它
+date: 2020-10-30
+tags:
+ - 备战春秋
+ - 校招考点
+---
 # 其它
 * TS
   * 与js区别

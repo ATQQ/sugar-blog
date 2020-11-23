@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 垃圾回收机制
+date: 2020-04-14
+tags:
+ - 大前端
+ - javascript
+categories:
+ - 大前端
+---
 # 垃圾回收机制
 
 JavaScript 中的内存管理是自动执行的，而且是不可见的。

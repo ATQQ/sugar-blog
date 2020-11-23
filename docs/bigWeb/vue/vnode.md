@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 实现VNode节点
+date: 2020-04-14
+tags:
+ - 大前端
+ - vue
+categories:
+ - 大前端
+---
 # 实现 VNode 节点
 ## VNode?
 `render function` 会被转化成 `VNode` 节点

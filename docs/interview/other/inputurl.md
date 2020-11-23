@@ -1,7 +1,17 @@
+---
+isTimeLine: true
+title: 在浏览器中输入URL到页面渲染的整个过程
+date: 2020-03-03
+tags:
+ - 面试
+ - 其它
+categories:
+ - 面试
+---
 # 在浏览器中输入URL到页面渲染的整个过程
 
 ## 构建请求行
-```text
+```sh
 GET   /     HTTP/1.1
 方法  请求路径 请求的协议/版本
 ```

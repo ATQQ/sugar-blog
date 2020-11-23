@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 如何判断变量类型是对象
+date: 2020-09-11
+tags:
+ - 面试
+ - javascript
+categories:
+ - 面试
+---
 # 如何判断变量类型是对象
 >指广义上的对象这里，Array,RegExp,function。。。。等等
 ## 1. instanceof

@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 定时器实现
+date: 2020-05-03
+tags:
+ - 面试
+ - 手撕代码
+categories:
+ - 面试
+---
 # 定时器实现
 >借助requestAnimationFrame实现,精度更高
 ## mySetTimeout

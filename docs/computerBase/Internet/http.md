@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: http协议
+date: 2020-04-14
+tags:
+ - 计算机基础
+ - 计算机网络
+categories:
+ - 计算机基础
+---
 # http协议
 > 超文本传输协议(HyperText Transfer Protocol）),基于TCP实现的应用层协议
 

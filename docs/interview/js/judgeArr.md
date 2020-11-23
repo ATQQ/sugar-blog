@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 如何判断数组
+date: 2020-09-05
+tags:
+ - 面试
+ - javascript
+categories:
+ - 面试
+---
 # 如何判断数组
 ## 1.Array.isArray
 ```js

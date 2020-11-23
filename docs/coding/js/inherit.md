@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 继承实现
+date: 2020-09-05
+tags:
+ - 手撕代码
+ - javascript
+categories:
+ - 手撕代码
+---
 # 继承实现
 
 ## ES6

@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: Git常用的一些基本操作
+date: 2020-09-02
+tags:
+ - 技术笔记
+ - 技术教程
+categories:
+ - 技术笔记
+---
 # Git常用的一些基本操作
 
 ## 基本操作

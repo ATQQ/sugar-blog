@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: keep-alive
+date: 2020-04-14
+tags:
+ - 大前端
+ - vue
+categories:
+ - 大前端
+---
 # keep-alive
 
 需要在组件切换的时候，保存一些组件的状态防止多次渲染，就可以使用 keep-alive 组件包裹需要保存的组件

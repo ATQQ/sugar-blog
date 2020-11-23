@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: null是对象吗
+date: 2020-04-14
+tags:
+ - 面试
+ - javascript
+categories:
+ - 面试
+---
 # null是对象吗
 
 **null不是对象**

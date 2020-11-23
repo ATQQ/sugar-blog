@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: blob与file
+date: 2020-04-14
+tags:
+ - 大前端
+ - javascript
+categories:
+ - 大前端
+---
 # blob与file
 
 Blob 对象表示一个二进制文件的数据内容,是Binary Large Object （二进制大型对象）的缩写

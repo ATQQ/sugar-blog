@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 本地存储
+date: 2020-04-14
+tags:
+ - 大前端
+ - 浏览器
+categories:
+ - 大前端
+---
 # 本地存储
 在目前的线代浏览器中主要有以下几种存储方案
 * cookie

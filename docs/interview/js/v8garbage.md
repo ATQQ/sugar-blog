@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: V8下的垃圾回收机制是怎么样的？
+date: 2020-04-14
+tags:
+ - 面试
+ - javascript
+categories:
+ - 面试
+---
 # V8 下的垃圾回收机制是怎么样的？
 垃圾回收会暂停JS运行，如果内存过大会导致垃圾回收时间变长，从而导致JS暂停时间变长
 

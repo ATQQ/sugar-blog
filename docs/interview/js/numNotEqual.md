@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 为什么0.1+0.2!=0.3
+date: 2020-04-14
+tags:
+ - 面试
+ - javascript
+categories:
+ - 面试
+---
 # 为什么0.1+0.2!=0.3
 
 1. JS采用IEEE 754双精度版本表示数字

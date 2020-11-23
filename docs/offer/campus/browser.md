@@ -1,3 +1,11 @@
+---
+isTimeLine: true
+title: 浏览器
+date: 2020-10-30
+tags:
+ - 备战春秋
+ - 校招考点
+---
 # 浏览器
 * event loop
 * 涉及dom

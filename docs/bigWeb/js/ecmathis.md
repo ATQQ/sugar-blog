@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: ECMAScript规范解读this(未完待续)
+date: 2020-04-14
+tags:
+ - 大前端
+ - javascript
+categories:
+ - 大前端
+---
 # ECMAScript规范解读this(未完待续)
 >ECMAScript 的类型分为语言类型和规范类型。
 

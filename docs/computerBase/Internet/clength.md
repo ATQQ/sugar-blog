@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: Content-Length
+date: 2020-04-14
+tags:
+ - 计算机基础
+ - 计算机网络
+categories:
+ - 计算机基础
+---
 # Content-Length
 
 >如果响应头Content-Length=0那么是发出来被截取了还是没发出来?

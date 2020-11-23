@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 实现apply
+date: 2020-09-01
+tags:
+ - 手撕代码
+ - javascript
+categories:
+ - 手撕代码
+---
 # 实现apply
 
 面试中所遇频率极高的手写题之一

@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: DNS预解析
+date: 2020-04-14
+tags:
+ - 大前端
+ - 性能优化
+categories:
+ - 大前端
+---
 # DNS 预解析
 
 DNS预解析是浏览器试图在用户访问链接之前解析域名

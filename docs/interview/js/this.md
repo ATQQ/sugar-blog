@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 如何正确判断this？箭头函数的this是什么？
+date: 2020-04-14
+tags:
+ - 面试
+ - javascript
+categories:
+ - 面试
+---
 # 如何正确判断 this？箭头函数的 this 是什么？
 ```js
 function foo() {

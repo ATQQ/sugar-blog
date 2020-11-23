@@ -7,19 +7,27 @@
     "doc": "docs"
   },
   "scripts": {
-    "dev": "npm run addCatelog && vuepress dev docs/.",
-    "build": "npm run addCatelog && rm -rf docs/.vuepress/dist && vuepress build docs/.",
+    "dev": "npm run beforeBuild && vuepress dev docs/.",
+    "build": "npm run beforeBuild && rm -rf docs/.vuepress/dist && vuepress build docs/.",
     "compress": "./shell/compress.sh",
     "upload": "./shell/upload.sh",
     "deploy": "./shell/deploy.sh",
     "onestep": "npm run build && npm run compress && npm run upload && npm run deploy",
     "addTJ": "node src/addTJ.js",
-    "addCatelog":"node src/createCatelog.js && npm run addTJ"
+    "addConfig": "node src/addConfig.js",
+    "addCatelog": "node src/createCatelog.js",
+    "beforeBuild": "npm run addCatelog && npm run addTJ && npm run addConfig"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "valine": "^1.4.14"
+    "valine": "^1.4.14",
+    "vue-class-component": "^7.2.3"
+  },
+  "devDependencies": {
+    "@vuepress/plugin-pwa": "^1.7.1",
+    "vuepress": "1.7.1",
+    "vuepress-theme-reco": "^1.5.7"
   }
 }

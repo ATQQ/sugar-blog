@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 实现promiseAll
+date: 2020-09-01
+tags:
+ - 手撕代码
+ - javascript
+categories:
+ - 手撕代码
+---
 # 实现promiseAll
 
 这个难度比较底，面试遇到的频率也挺高的

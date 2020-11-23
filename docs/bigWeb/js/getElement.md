@@ -1,3 +1,13 @@
+---
+isTimeLine: true
+title: 获取dom元素的几种方式
+date: 2020-09-06
+tags:
+ - 大前端
+ - javascript
+categories:
+ - 大前端
+---
 # 获取dom元素的几种方式
 * 按使用频率排序
 * 低版本浏览器 === < IE8
