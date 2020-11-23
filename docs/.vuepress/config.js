@@ -21,7 +21,10 @@ module.exports = {
     "@vuepress/pwa",
     {
       serviceWorker: true,
-      updatePopup: true,
+      updatePopup: {
+        message: "页面有新的改动，点击按钮获取最新的内容",
+        buttonText: "点我",
+      },
       popupComponent: "MySWUpdatePopup",
     },
   ],
