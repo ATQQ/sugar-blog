@@ -1,6 +1,6 @@
 ---
 isTimeLine: true
-title: :sound:内容预告-最近准备撰写的内容
+title: :sound:内容预告-最近准备整理的内容
 date: 2020-11-21
 tags:
  - 大前端
@@ -19,11 +19,12 @@ sticky: 1
 * [阻塞渲染](./../../bigWeb/browser/block.md)
 * [缓存机制](./../../bigWeb/browser/cache.md)
 * [本地存储](./../../bigWeb/browser/storage.md)
-* [安全](../../bigWeb/browser/safe.md) 50%
-  
+* [安全](../../bigWeb/browser/safe.md)
+* [常见面试题](../../bigWeb/browser/problem.md) 10%
+
+
 ## :rocket:性能优化专题
 * 浏览器
-* 小程序
 * 首屏
 * 白屏
 * 长列表
@@ -36,6 +37,10 @@ sticky: 1
 * 微前端
 * lowCode
 * 容器化
+* 智能化
+* 跨端
+* 小程序
+* ....
 
 <comment/>
 <tongji/>

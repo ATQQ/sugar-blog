@@ -1,6 +1,6 @@
 ---
 isTimeLine: true
-title: 常见问题
+title: 浏览器-常见面试题
 date: 2020-10-27
 tags:
  - 大前端
@@ -10,7 +10,12 @@ categories:
 ---
 # 常见问题
 
-TODO： 待重新完善
+::: warning TODO: 此页内容待重新完善
+* 经典面试题：从URL输入到页面展现出来发生过了什么
+* 。。。
+
+:::
+
 
 ## 1.为什么操作 DOM 慢?
 

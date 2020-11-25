@@ -1,7 +1,7 @@
 ---
 isTimeLine: true
-title: 安全
-date: 2020-04-14
+title: 浏览器-安全问题
+date: 2020-10-27
 tags:
  - 大前端
  - 浏览器
@@ -170,7 +170,7 @@ function filterStr(str) {
 filterStr('<div></div>') // &lt;div&gt;&lt;/div&gt;
 ```
 
-#### CSP
+### CSP
 CSP - 内容安全策略
 
 本质上就是建立白名单，明确告诉浏览器哪些外部资源可以加载和执行
@@ -184,14 +184,71 @@ CSP - 内容安全策略
 ```html
 <meta http-equiv="Content-Security-Policy" content="script-src 'self'; object-src 'none'; style-src cdn.example.org third-party.org; child-src https:">
 ```
+上述策略解释
 * 脚本：只信任当前域名
 * ``<object>``标签：不信任任何URL，即不加载任何资源
 * 样式表：只信任cdn.example.org和third-party.org
 * 框架（frame）：必须使用HTTPS协议加载
 * 其他资源：没有限制
 
-#### 防止脚本读取Cookie
-为Cookie添加HttpOnly属性，防止第三方脚本读取网站的cookie相关内容
+示例：
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy"
+        content="script-src 'self'; object-src 'none'; style-src cdn.example.org third-party.org; child-src https:">
+    <script src="https://cdn.staticfile.org/jquery/1.10.0/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>测试</h1>
+    <script>
+        console.log($);
+    </script>
+</body>
+
+</html>
+```
+观察浏览器的devtools面板会发现以下内容
+
+![图片](http://img.cdn.sugarat.top/mdImg/MTYwNjMxODQxNDk2NQ==606318414965)
+
+阻止第三方域名的脚本资源加载，阻止内联脚本执行
+
+### 防止脚本读取Cookie
+JavaScript提供了访问cookie的API
+
+可以通过`document.cookie`读取与修改cookie
+```js
+document.cookie
+```
+
+**新增一个cookie**
+```js
+document.cookie = 'sugar=at;expires=session'
+```
+执行后我们可以在devtools面板的`Application`选项卡中看到我们添加的cookie
+
+![图片](http://img.cdn.sugarat.top/mdImg/MTYwNjMxOTM3NDEzMQ==606319374131)
+
+```js
+console.log(document.cookie)
+// 可以看到我们刚才设置的cookie
+```
+
+![图片](http://img.cdn.sugarat.top/mdImg/MTYwNjMyMDU3MDE0Mw==606320570143)
+
+
+目前很多统计网站的埋点监控，权限控制，离线数据都依赖于cookie，第三方脚本很容易的能够进行窃取
+
+可以为Cookie添加HttpOnly属性，防止脚本读取网站的cookie
+
+添加`Secure`属性要求必须使用https协议才能传输此cookie，可以防止中间人截获修改到传输的cookie
 
 
 ## CSRF
@@ -199,6 +256,8 @@ CSP - 内容安全策略
 ``CSRF``--``Cross-site request forgery``--跨站请求伪造
 
 攻击者构造出一个请求链接，诱导用户点击或者通过某些途径自动发起请求
+
+主要利用的cookie会自动附带在请求header中这个特性，很多网站使用cookie鉴权
 
 如果当前用户是在登录状态下请求的此链接的话，服务端就以为是用户在操作，从而进行相应的逻辑
 
@@ -222,6 +281,7 @@ setTimeout(()=>{
 },0)
 </script>
 ```
+
 ### 如何防范
 * Get请求不对数据进行修改,即无副作用操作
 * 服务端过滤
@@ -229,7 +289,7 @@ setTimeout(()=>{
   * 验证request header中的 Referer/Origin:通过Referer验证请求是否为第三方发送
     * Origin:域名信息
     * Referer:包含具体URL
-    * **可通过自定义请求头伪造**
+    * **开发者可通过自定义请求头伪造**
 * 请求时附带验证信息
   * 添加验证码参数
   * request header中添加一个token字段
@@ -238,6 +298,8 @@ setTimeout(()=>{
   * Strict:仅允许一方请求携带 Cookie，即浏览器将只发送相同站点请求的 Cookie，当前网页 URL 与请求目标 URL 完全一致才发送
   * Lax:允许部（导航到目标网址的 Get 请求）分第三方请求携带 Cookie
   * None:无论是否跨站都会发送 Cookie
+
+Cookie相关更多知识-> [本地存储-Cookie](./storage.md#set-cookie)
 
 ## 点击劫持
 ### 什么是点击劫持
@@ -302,6 +364,7 @@ X-FRAME-OPTIONS 是一个 HTTP 响应头
 ### 如何防范
 * 使用https
 * 不要在公共Wi-Fi上发送敏感数据
+* 使用权威机构的CA证书
 
 :::tip 参考
 * [简书 - sql注入基础原理（超详细）](https://www.jianshu.com/p/078df7a35671)

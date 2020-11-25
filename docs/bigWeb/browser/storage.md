@@ -1,6 +1,6 @@
 ---
 isTimeLine: true
-title: 本地存储
+title: 浏览器-本地存储
 date: 2020-04-14
 tags:
  - 大前端

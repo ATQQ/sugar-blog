@@ -1,6 +1,6 @@
 ---
 isTimeLine: true
-title: 渲染原理
+title: 浏览器-渲染原理
 date: 2020-10-26
 tags:
  - 大前端
