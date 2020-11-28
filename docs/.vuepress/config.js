@@ -15,20 +15,18 @@ const httpsConfig = {
   },
 };
 const isHttps = process.env.ENV_SCHEMA === "https";
-const isSw = process.env.ENV_SW === 'sw' // serviceWorker
-const swPlugin = ["@vuepress/pwa",
-  {
-    serviceWorker: true,
-    updatePopup: {
-      message: "页面有新的改动，点击按钮获取最新的内容",
-      buttonText: "点我",
-    },
-    popupComponent: "MySWUpdatePopup",
-  }]
 module.exports = {
   ...(isHttps ? httpsConfig : {}),
   plugins: [
-    ...(isSw ? swPlugin : [])
+    ["@vuepress/pwa",
+      {
+        serviceWorker: true,
+        updatePopup: {
+          message: "页面有新的改动，点击按钮获取最新的内容",
+          buttonText: "点我",
+        },
+        popupComponent: "MySWUpdatePopup",
+      }]
   ],
   title: "粥里有勺糖",
   description:

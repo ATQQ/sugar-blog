@@ -17,8 +17,6 @@ features:
 
 <center>
 
-### [:rocket:使用 ServiceWorker 版本阅读 - 支持一次加载后本地离线化阅读](https://sw.sugarat.top)
-
 ![图片](https://img.cdn.sugarat.top/mdImg/MTYwNDcyMTQ4NTMyOA==604721485328)
 
 <iframe src="https://ghbtns.com/github-btn.html?user=atqq&repo=sugar-blog&type=star&count=true&size=large" frameborder="0" scrolling="0" width="120" height="30" title="GitHub"></iframe>
