@@ -22,8 +22,8 @@ module.exports = {
       {
         serviceWorker: true,
         updatePopup: {
-          message: "页面有新的改动，点击按钮获取最新的内容",
-          buttonText: "点我",
+          message: "站点有新的内容更新，点击按钮加载最新的内容",
+          buttonText: "加载最新的内容",
         },
         popupComponent: "MySWUpdatePopup",
       }]
