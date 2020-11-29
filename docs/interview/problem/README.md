@@ -28,8 +28,8 @@
 <solve ok>[事件触发过程是怎么样的？](../js/event.md)</solve>
 <solve ok>[什么是事件代理？](../js/event.md)</solve>
 <solve ok>[什么是跨域？使用同源策略的原因？](../internet/cros.md)</solve>
-<solve ok>[解决跨域的方式？](../internet/cros.md)</solve>
-<solve ok>[什么是预检请求？](../internet/cros.md#预检请求)</solve>
+<solve ok>[解决跨域的方式？](../../bigWeb/browser/cors.md)</solve>
+<solve ok>[什么是预检请求？](../../bigWeb/browser/cors.md#预检请求)</solve>
 <solve ok>[什么是函数柯里化？](../../bigWeb/js/currying.md#柯里化)</solve>
 <solve ok>[JS的垃圾回收机制？](../../bigWeb/js/garbage.md)</solve>
 <solve ok>[什么是节流,防抖？](../../bigWeb/js/throttling.md#防抖)</solve>

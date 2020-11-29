@@ -112,7 +112,7 @@ module.exports = {
           { text: "css", link: "/interview/css/" },
           { text: "手撕代码", link: "/interview/code/" },
           { text: "性能优化", link: "/interview/performance/" },
-          { text: "网络", link: "/interview/internet/" },
+          // { text: "网络", link: "/interview/internet/" },
           // { text: '操作系统', link: '/interview/os/' },
           // { text: '设计模式', link: '/interview/design/' },
           { text: "综合问题", link: "/interview/other/" },
