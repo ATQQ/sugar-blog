@@ -23,7 +23,7 @@ categories:
 * 面试
 * 可观的非兼职收入
 * 超长的"寒假"
-* 。。。
+* ...
 
 对于我来说也是人生中除`中考`,`高考`外的,另一个关键时间节点和转折点，已经大三了，该准备`找工作`了，心里既忐忑，又激动
 
@@ -226,7 +226,7 @@ Code A Better Life，Code The Future
 
 We help people eat better，live better
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNzI2MzA4MjgzNA==607263082834)
+![图片](http://img.cdn.sugarat.top/mdImg/MTYwNzM1MTU4MzkyOQ==607351583929)
 
 ## 掘金年度征文活动
 [掘金年度征文 | 2020 与我的技术之路 征文活动正在进行中......](https://juejin.cn/post/6901125532729999374)
