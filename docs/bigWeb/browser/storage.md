@@ -9,7 +9,7 @@ categories:
  - 大前端
 ---
 # 本地存储
-在目前的线代浏览器中主要有以下几种存储方案
+在目前的现代浏览器中主要有以下几种存储方案
 * cookie
 * localStorage
 * sessionStorage
@@ -169,9 +169,11 @@ window.localStorage.getItem()
 * 一些复杂表单内容的离线保存
 
 ### 使用教程
-* [简单使用1](https://developer.mozilla.org/zh-CN/docs/Web/API/IndexedDB_API/Using_IndexedDB)
-* [简单使用2](http://www.ruanyifeng.com/blog/2018/07/indexeddb.html)
+笔者就不在这里赘述使用方法，网上有更优秀的资料
 
+下面给大家推荐两篇
+* [MDN：使用 IndexedDB](https://developer.mozilla.org/zh-CN/docs/Web/API/IndexedDB_API/Using_IndexedDB)
+* [阮一峰：浏览器数据库 IndexedDB 入门教程](http://www.ruanyifeng.com/blog/2018/07/indexeddb.html)
 
 :::tip 参考
 * [SameSite update 日志](https://www.chromium.org/updates/same-site)
