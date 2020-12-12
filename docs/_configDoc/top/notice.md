@@ -14,7 +14,7 @@ sticky: 1
 你可以在评论区留下所遇到的相关面试题哟
 
 ## :earth_asia:浏览器专题
-* [内核](./../../bigWeb/browser/core.md) 70%
+* [内核](./../../bigWeb/browser/core.md)
 * [渲染机制](./../../bigWeb/browser/render.md)
 * [阻塞渲染](./../../bigWeb/browser/block.md)
 * [缓存机制](./../../bigWeb/browser/cache.md)
