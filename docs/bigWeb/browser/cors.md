@@ -348,14 +348,15 @@ server.listen(3000, err => {
 
 可以使用 Nginx,Node Server，Apache等技术方案为请求做一个转发
 
+下面是一些示例
 #### Nginx配置
 ```sh
 server {
     listen 80;
 	listen 443 ssl http2;
-    server_name ep.sugarat.top;
+    server_name test.sugarat.top;
     index index.php index.html index.htm default.php default.htm default.html;
-    root /xxx/ep.sugarat.top;
+    root /xxx/aaa;
     # 省略其它配置
     location /api {
         proxy_pass http://a.b.com;
@@ -364,23 +365,219 @@ server {
     }
 }
 ```
-访问 `http://ep.sugarat.top/api/user/login`,实际是nginx服务器 访问`http://a.b.com/api/user/login`
+访问 `http://test.sugarat.top/api/user/login`,实际是nginx服务器 访问`http://a.b.com/api/user/login`
 
 关于`proxy_pass`属性，更多详细内容可参考[proxy_pass url 反向代理的坑](https://xuexb.github.io/learn-nginx/example/proxy_pass.html)
 
-TODO: 待完善示例
+#### Node Server
+这里采用Node原生http模块+axios实现请求的转发
+```js
+const http = require('http')
+const axios = require('axios').default
 
-* 补充Node Server配置
+// 要转发到哪里去
+const BASE_URL = 'http://www.baidu.com'
+// 启动服务的端口
+const PORT = 3000
+
+const app = http.createServer(async (req, res) => {
+    const { url, method } = req
+    console.log(url);
+    // 对预检请求放行
+    if (method === 'OPTIONS') {
+        return res.end()
+    }
+    // 获取传递的参数
+    const reqData = await getBodyContent(req)
+    console.log(reqData);
+    const { data } = await axios.request({
+        method,
+        url,
+        baseURL: BASE_URL,
+        data: reqData
+    })
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Content-Type', 'application/json;charset=utf-8')
+    res.end(JSON.stringify(data))
+})
+
+app.listen(PORT, () => {
+    console.log(`listen ${PORT} success`);
+})
+
+function getBodyContent(req) {
+    return new Promise((resolve, reject) => {
+        let buffer = Buffer.alloc(0)
+
+        req.on('data', chunk => {
+            try {
+                buffer = Buffer.concat([buffer, chunk])
+            } catch (err) {
+                console.error(err);                
+            }
+        })
+
+        req.on('end', () => {
+            let data = {}
+            try {
+                data = JSON.parse(buffer.toString('utf-8'))
+            } catch (error) {
+                data = {}
+            } finally {
+                resolve(data)
+            }
+        })
+    })
+}
+```
+测试页面
+```html
+<h1>测试</h1>
+<script>
+    fetch('http://localhost:3000/sugrec?name=test').then(res=>res.json()).then(console.log)
+</script>
+```
+运行结果，请求被成功转发
+
+![图片](http://img.cdn.sugarat.top/mdImg/MTYwODA4NTkxMjcxMw==608085912713)
+
 
 ### websocket
-TODO: 待完善示例
+WebSocket protocol是HTML5一种新的协议。它实现了浏览器与服务器全双工通信，同时允许跨域通讯，是server push技术的一种很好的实现
 
+**使用示例**
+
+#### 客户端
+```html
+<body>
+    <p><span>链接状态：</span><span id="status">断开</span></p>
+    <label for="content">
+        内容
+        <input id="content" type="text">
+    </label>
+    <button id="send">发送</button>
+    <button id="close">断开</button>
+    <script>
+        const ws = new WebSocket('ws:localhost:3000', 'echo-protocol')
+        let status = false
+        const $status = document.getElementById('status')
+        const $send = document.getElementById('send')
+        const $close = document.getElementById('close')
+        $send.onclick = function () {
+            const text = document.getElementById('content').value
+            console.log('发送: ', text);
+            ws.send(text)
+        }
+        ws.onopen = function (e) {
+            console.log('connection open ...');
+            ws.send('Hello')
+            status = true
+            $status.textContent = '链接成功'
+        }
+        $close.onclick = function () {
+            ws.close()
+        }
+        ws.onmessage = function (e) {
+            console.log('client received: ', e.data);
+        }
+        ws.onclose = function () {
+            console.log('close');
+            status = false
+            $status.textContent = '断开连接'
+        }
+        ws.onerror = function (e) {
+            console.error(e);
+            status = false
+            $status.textContent = '链接发生错误'
+        }
+    </script>
+</body>
+```
+
+#### 服务端
+这里采用Node实现，需安装`websocket`模块
+```js
+const WebSocketServer = require('websocket').server;
+const http = require('http');
+
+const server = http.createServer(function (request, response) {
+    console.log((new Date()) + ' Received request for ' + request.url);
+    response.writeHead(200);
+    response.end();
+});
+server.listen(3000, function () {
+    console.log((new Date()) + ' Server is listening on port 3000');
+});
+
+const wsServer = new WebSocketServer({
+    httpServer: server,
+    autoAcceptConnections: false
+});
+
+function originIsAllowed(origin) {
+    return true;
+}
+
+wsServer.on('request', function (request) {
+    if (!originIsAllowed(request.origin)) {
+        request.reject();
+        console.log((new Date()) + ' Connection from origin ' + request.origin + ' rejected.');
+        return;
+    }
+
+    var connection = request.accept('echo-protocol', request.origin);
+    console.log((new Date()) + ' Connection accepted.');
+    connection.on('message', function (message) {
+        if (message.type === 'utf8') {
+            console.log('Received Message: ' + message.utf8Data);
+            connection.sendUTF(`${new Date().toLocaleString()}:${message.utf8Data}`);
+        }
+    });
+    connection.on('close', function (reasonCode, description) {
+        console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
+    });
+});
+```
 ## iframe跨域通信方案
-TODO: 待完善
-* window.location.hash
-* window.name
-* window.postMessage
-* document.domain
+### location.hash
+原理：location的hash值发生变化，页面不会刷新，且浏览器提供了hashchange事件
+
+**示例**
+
+父页面
+```html
+<body>
+    <h1>父页面</h1>
+    <button id="send">send</button>
+    <iframe id="iframe1" src="http://localhost:3001/2.html"></iframe>
+    <script>
+        const $send = document.getElementById('send')
+        const $iframe = document.getElementById('iframe1')
+        const oldSrc = $iframe.src
+        $send.onclick = function () {
+            $iframe.src = oldSrc + '#' + Math.random() * 100
+        }
+    </script>
+</body>
+```
+子页面
+```html
+<body>
+    <h1>子页面</h1>
+    <script>
+        window.addEventListener('hashchange',function(e){
+            console.log(e);
+            console.log(location.hash);
+        })
+    </script>
+</body>
+```
+
+TODO:
+### window.name
+
+### window.postMessage
+### document.domain
 <!-- ### document.domain
 二级域名相同的情况下，比如 a.sugarat.top 和 b.sugarat.top 适用于该方式。
 
@@ -388,12 +585,12 @@ TODO: 待完善
 
 
 :::tip 参考
-* [冴羽 - 预测最近面试会考 Cookie 的 SameSite 属性](https://juejin.im/post/5e718ecc6fb9a07cda098c2d)
 * [wangningbo -浅谈几种跨域的方法](https://wangningbo93.github.io/2017/06/16/%E6%B5%85%E8%B0%88%E5%87%A0%E7%A7%8D%E8%B7%A8%E5%9F%9F%E7%9A%84%E6%96%B9%E6%B3%95/)
 * [MDN - 浏览器的同源策略](https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy)
 * [跨域资源共享 CORS 详解](http://www.ruanyifeng.com/blog/2016/04/cors.html)
 * [浏览器同源政策及其规避方法](https://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html)
 * [前端常见跨域解决方案](https://segmentfault.com/a/1190000011145364)
+* [WebSocket-Node](https://github.com/theturtle32/WebSocket-Node)
 :::
 
 <comment/>
