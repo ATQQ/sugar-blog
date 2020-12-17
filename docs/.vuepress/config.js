@@ -234,6 +234,13 @@ module.exports = {
         logo:
           "https://mirror-gold-cdn.xitu.io/168e084832fd5ec238f?imageView2/1/w/180/h/180/q/85/format/webp/interlace/1",
       },
+      {
+        title: "YAMI",
+        desc: "💡在这里分享我的灵感",
+        link: "https://blog.yami.love/",
+        logo:
+          "https://blog.yami.love/avatar.jpg",
+      }
     ],
   },
 };

@@ -20,7 +20,7 @@ sticky: 1
 * [缓存机制](./../../bigWeb/browser/cache.md)
 * [本地存储](./../../bigWeb/browser/storage.md)
 * [安全](../../bigWeb/browser/safe.md)
-* [跨域与跨站](../../bigWeb/browser/cors.md) 50%
+* [跨域与跨站](../../bigWeb/browser/cors.md) 80%
 * [常见面试题](../../bigWeb/browser/problem.md) 10%
 
 
