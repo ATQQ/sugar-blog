@@ -124,11 +124,10 @@ If an opaque response serves your needs, set the request's mode to 'no-cors' to 
 Cookie与此息息相关，Cookie实际上遵守的是“同站”策略
 
 ### 什么是同站
->eTLD (effective top-level domain) 有效顶级域名
 
 只要两个 URL 的 eTLD+1 相同即是同站,不需要考虑协议和端口
 
-**eTLD**: 有效顶级域名，注册于 Mozilla 维护的公共后缀列表（Public Suffix List）中,如`.com`、`.co.uk`、`.github.io`,`.top` 等
+**eTLD**: (effective top-level domain) 有效顶级域名，注册于 Mozilla 维护的公共后缀列表（Public Suffix List）中,如`.com`、`.co.uk`、`.github.io`,`.top` 等
 
 **eTLD+1**: 有效顶级域名+二级域名，如 `taobao.com`,`baidu.com`,`sugarat.top`
 
@@ -193,9 +192,8 @@ tips: 这里的一级,二级域名主要指计算机网络中规定的，与通�
 
 ## 解决跨域的方案
 
-tips: 对于前端页面的运行可以 使用 [**http-server**](https://www.npmjs.com/package/http-server)
+**Tips:** 对于前端页面的运行可以 使用 [**http-server**](https://www.npmjs.com/package/http-server)
 
-下文基本揽括了常见的一些跨域方案，并配上了能直接复制粘贴运行的示例，方便理解与上手体验
 ### jsonp
 
 #### 原理
@@ -547,9 +545,10 @@ wsServer.on('request', function (request) {
 
 ![图片](http://img.cdn.sugarat.top/mdImg/MTYwODI5NzY3ODk2MQ==608297678962)
 
-## iframe跨域通信方案
 ### location.hash
-原理：location的hash值发生变化，页面不会刷新，且浏览器提供了hashchange事件
+location的hash值发生变化，页面不会刷新，且浏览器提供了hashchange事件
+
+主要用于iframe跨域通信
 
 **示例**
 
@@ -588,6 +587,8 @@ wsServer.on('request', function (request) {
 
 ### window.name
 只要当前的这个浏览器tab没有关闭，无论tab内的网页如何变动，这个name值都可以保持，并且tab内的网页都有权限访问到这个值
+
+iframe中的页面利用上述特性，实现任意页面的window.name的读取
 
 **使用示例**
 
@@ -640,6 +641,11 @@ wsServer.on('request', function (request) {
     </script>
 </body>
 ```
+
+运行结果
+
+![图片](http://img.cdn.sugarat.top/mdImg/MTYwODM1OTA3NjA1Ng==608359076056)
+
 ### window.postMessage
 window.postMessage 方法可以安全地实现跨源通信,可以适用的场景:
 * 与其它页面之间的消息传递
@@ -726,15 +732,20 @@ targetOrigin值示例:
 
 ![图片](http://img.cdn.sugarat.top/mdImg/MTYwODM0ODYyODM1MQ==608348628351)
 
+## 总结
+上文只是介绍了常见的一些跨域方案，并配上了能直接复制粘贴运行的示例，方便读者理解与上手体验
 
-:::tip 参考
+在实际生产环境中需针对特定的场景进行方案的pick
+
+面试中这也是一道经典考题，望能帮助读者加深理解
+
+## 参考
 * [wangningbo -浅谈几种跨域的方法](https://wangningbo93.github.io/2017/06/16/%E6%B5%85%E8%B0%88%E5%87%A0%E7%A7%8D%E8%B7%A8%E5%9F%9F%E7%9A%84%E6%96%B9%E6%B3%95/)
 * [MDN - 浏览器的同源策略](https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy)
 * [跨域资源共享 CORS 详解](http://www.ruanyifeng.com/blog/2016/04/cors.html)
 * [浏览器同源政策及其规避方法](https://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html)
 * [前端常见跨域解决方案](https://segmentfault.com/a/1190000011145364)
 * [WebSocket-Node](https://github.com/theturtle32/WebSocket-Node)
-:::
 
 <comment/>
 <tongji/>
