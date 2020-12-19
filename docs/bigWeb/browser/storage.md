@@ -91,13 +91,13 @@ Set-Cookie:'name=value;SameSite=Lax;'
 
 | 请求类型  |                    示例                    | SameSite = lax 是否发送cooie |
 | :-------: | :----------------------------------------: | :--------------------------: |
-|  超链接   |            <a\ href="..."></a\>            |      :white_check_mark:      |
-|  GET表单  | <form method="GET" action="..."\></form\>  |      :white_check_mark:      |
-|  预加载   |    <link rel="prerender" href="..."/\>     |      :white_check_mark:      |
-| POST 表单 | <form method="POST" action="..."\></form\> |             :x:              |
-|   image   |             <img src="..." \/>             |             :x:              |
-|  iframe   |       <iframe src="..."\></iframe\>        |             :x:              |
-|   ajax    |                 fetch(url)                 |             :x:              |
+|  超链接   |            <a\ href="..."></a\>            |              ✅               |
+|  GET表单  | <form method="GET" action="..."\></form\>  |              ✅               |
+|  预加载   |    <link rel="prerender" href="..."/\>     |              ✅               |
+| POST 表单 | <form method="POST" action="..."\></form\> |              ❌               |
+|   image   |             <img src="..." \/>             |              ❌               |
+|  iframe   |       <iframe src="..."\></iframe\>        |              ❌               |
+|   ajax    |                 fetch(url)                 |              ❌               |
 
 
 **:star:Cookie 的作用域**
