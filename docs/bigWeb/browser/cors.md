@@ -1,7 +1,7 @@
 ---
 isTimeLine: true
 title: 浏览器-跨域与跨站
-date: 2020-11-28
+date: 2020-12-19
 tags:
  - 大前端
  - 浏览器
@@ -124,11 +124,10 @@ If an opaque response serves your needs, set the request's mode to 'no-cors' to 
 Cookie与此息息相关，Cookie实际上遵守的是“同站”策略
 
 ### 什么是同站
->eTLD (effective top-level domain) 有效顶级域名
 
 只要两个 URL 的 eTLD+1 相同即是同站,不需要考虑协议和端口
 
-**eTLD**: 有效顶级域名，注册于 Mozilla 维护的公共后缀列表（Public Suffix List）中,如`.com`、`.co.uk`、`.github.io`,`.top` 等
+**eTLD**: (effective top-level domain) 有效顶级域名，注册于 Mozilla 维护的公共后缀列表（Public Suffix List）中,如`.com`、`.co.uk`、`.github.io`,`.top` 等
 
 **eTLD+1**: 有效顶级域名+二级域名，如 `taobao.com`,`baidu.com`,`sugarat.top`
 
@@ -162,8 +161,39 @@ tips: 这里的一级,二级域名主要指计算机网络中规定的，与通�
 
 ![图片](http://img.cdn.sugarat.top/mdImg/MTYwNjY0MzA0ODI1MA==606643048250)
 
+## 预检请求
+使用后端开启CORS解决跨域的方式，浏览器会把请求分成两种类型
+* 简单请求
+* 复杂请求
+
+#### 简单请求
+触发简单请求的条件↓
+
+**1.请求方法仅限于**:
+* GET
+* HEAD
+* POST
+
+**2.Content-Type仅限于**:
+* text/plain
+* multipart/form-data
+* application/x-www-form-urlencoded
+
+#### 复杂请求
+``非简单请求``的即为复杂请求↓
+
+对于复杂请求，首先会发起一个**预检请求**,请求方法为``options``,通过该请求来判断服务器是否允许跨域
+
+与预检请求有关的以`Access-Control-`开头的响应头：
+* Access-Control-Allow-Methods：表明服务器支持的所有跨域请求的方法
+* Access-Control-Allow-Headers：表明服务器支持的头信息
+* Access-Control-Max-Age：指定本次预检请求的有效期，单位为秒，在此期间，不用再重新发型新的预检请求
+
 
 ## 解决跨域的方案
+
+**Tips:** 对于前端页面的运行可以 使用 [**http-server**](https://www.npmjs.com/package/http-server)
+
 ### jsonp
 
 #### 原理
@@ -313,35 +343,6 @@ server.listen(3000, err => {
     console.log(`listen 3000 success`);
 })
 ```
-
-### 预检请求
-使用后端开启CORS解决跨域的方式，浏览器会把请求分成两种类型
-* 简单请求
-* 复杂请求
-
-#### 简单请求
-触发简单请求的条件↓
-
-**1.请求方法下载乃i**:
-* GET
-* HEAD
-* POST
-
-**2.Content-Type仅限于**:
-* text/plain
-* multipart/form-data
-* application/x-www-form-urlencoded
-
-#### 复杂请求
-``非简单请求``的即为复杂请求↓
-
-对于复杂请求，首先会发起一个**预检请求**,请求方法为``options``,通过该请求来判断服务器是否允许跨域
-
-与预检请求有关的以`Access-Control-`开头的响应头：
-* Access-Control-Allow-Methods：表明服务器支持的所有跨域请求的方法
-* Access-Control-Allow-Headers：表明服务器支持的头信息
-* Access-Control-Max-Age：指定本次预检请求的有效期，单位为秒，在此期间，不用再重新发型新的预检请求
-
 ### 反向代理
 因为跨域是针对浏览器做出的限制
 
@@ -349,33 +350,402 @@ server.listen(3000, err => {
 
 可以使用 Nginx,Node Server，Apache等技术方案为请求做一个转发
 
-TODO: 待完善示例
-* 补充Nginx配置文件
-* 补充Node Server配置
+下面是一些示例
+#### Nginx配置
+```sh
+server {
+    listen 80;
+	listen 443 ssl http2;
+    server_name test.sugarat.top;
+    index index.php index.html index.htm default.php default.htm default.html;
+    root /xxx/aaa;
+    # 省略其它配置
+    location /api {
+        proxy_pass http://a.b.com;
+        # 防止缓存
+    	add_header Cache-Control no-cache;
+    }
+}
+```
+访问 `http://test.sugarat.top/api/user/login`,实际是nginx服务器 访问`http://a.b.com/api/user/login`
+
+关于`proxy_pass`属性，更多详细内容可参考[proxy_pass url 反向代理的坑](https://xuexb.github.io/learn-nginx/example/proxy_pass.html)
+
+#### Node Server
+这里采用Node原生http模块+axios实现请求的转发
+```js
+const http = require('http')
+const axios = require('axios').default
+
+// 要转发到哪里去
+const BASE_URL = 'http://www.baidu.com'
+// 启动服务的端口
+const PORT = 3000
+
+const app = http.createServer(async (req, res) => {
+    const { url, method } = req
+    console.log(url);
+    // 对预检请求放行
+    if (method === 'OPTIONS') {
+        return res.end()
+    }
+    // 获取传递的参数
+    const reqData = await getBodyContent(req)
+    console.log(reqData);
+    const { data } = await axios.request({
+        method,
+        url,
+        baseURL: BASE_URL,
+        data: reqData
+    })
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Content-Type', 'application/json;charset=utf-8')
+    res.end(JSON.stringify(data))
+})
+
+app.listen(PORT, () => {
+    console.log(`listen ${PORT} success`);
+})
+
+function getBodyContent(req) {
+    return new Promise((resolve, reject) => {
+        let buffer = Buffer.alloc(0)
+
+        req.on('data', chunk => {
+            try {
+                buffer = Buffer.concat([buffer, chunk])
+            } catch (err) {
+                console.error(err);                
+            }
+        })
+
+        req.on('end', () => {
+            let data = {}
+            try {
+                data = JSON.parse(buffer.toString('utf-8'))
+            } catch (error) {
+                data = {}
+            } finally {
+                resolve(data)
+            }
+        })
+    })
+}
+```
+测试页面
+```html
+<h1>测试</h1>
+<script>
+    fetch('http://localhost:3000/sugrec?name=test').then(res=>res.json()).then(console.log)
+</script>
+```
+运行结果，请求被成功转发
+
+![图片](http://img.cdn.sugarat.top/mdImg/MTYwODA4NTkxMjcxMw==608085912713)
+
 
 ### websocket
-TODO: 待完善示例
+WebSocket protocol是HTML5一种新的协议。它实现了浏览器与服务器全双工通信，同时允许跨域通讯，是server push技术的一种很好的实现
 
-## iframe跨域通信方案
-TODO: 待完善
-* window.location.hash
-* window.name
-* window.postMessage
-* document.domain
-<!-- ### document.domain
+**使用示例**
+
+#### 客户端
+```html
+<body>
+    <p><span>链接状态：</span><span id="status">断开</span></p>
+    <label for="content">
+        内容
+        <input id="content" type="text">
+    </label>
+    <button id="send">发送</button>
+    <button id="close">断开</button>
+    <script>
+        const ws = new WebSocket('ws:localhost:3000', 'echo-protocol')
+        let status = false
+        const $status = document.getElementById('status')
+        const $send = document.getElementById('send')
+        const $close = document.getElementById('close')
+        $send.onclick = function () {
+            const text = document.getElementById('content').value
+            console.log('发送: ', text);
+            ws.send(text)
+        }
+        ws.onopen = function (e) {
+            console.log('connection open ...');
+            ws.send('Hello')
+            status = true
+            $status.textContent = '链接成功'
+        }
+        $close.onclick = function () {
+            ws.close()
+        }
+        ws.onmessage = function (e) {
+            console.log('client received: ', e.data);
+        }
+        ws.onclose = function () {
+            console.log('close');
+            status = false
+            $status.textContent = '断开连接'
+        }
+        ws.onerror = function (e) {
+            console.error(e);
+            status = false
+            $status.textContent = '链接发生错误'
+        }
+    </script>
+</body>
+```
+
+#### 服务端
+这里采用Node实现，需安装`websocket`模块
+```js
+const WebSocketServer = require('websocket').server;
+const http = require('http');
+
+const server = http.createServer(function (request, response) {
+    console.log((new Date()) + ' Received request for ' + request.url);
+    response.writeHead(200);
+    response.end();
+});
+server.listen(3000, function () {
+    console.log((new Date()) + ' Server is listening on port 3000');
+});
+
+const wsServer = new WebSocketServer({
+    httpServer: server,
+    autoAcceptConnections: false
+});
+
+function originIsAllowed(origin) {
+    return true;
+}
+
+wsServer.on('request', function (request) {
+    if (!originIsAllowed(request.origin)) {
+        request.reject();
+        console.log((new Date()) + ' Connection from origin ' + request.origin + ' rejected.');
+        return;
+    }
+
+    var connection = request.accept('echo-protocol', request.origin);
+    console.log((new Date()) + ' Connection accepted.');
+    connection.on('message', function (message) {
+        if (message.type === 'utf8') {
+            console.log('Received Message: ' + message.utf8Data);
+            connection.sendUTF(`${new Date().toLocaleString()}:${message.utf8Data}`);
+        }
+    });
+    connection.on('close', function (reasonCode, description) {
+        console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
+    });
+});
+```
+
+#### 运行结果
+
+![图片](http://img.cdn.sugarat.top/mdImg/MTYwODI5NzY3ODk2MQ==608297678962)
+
+### location.hash
+location的hash值发生变化，页面不会刷新，且浏览器提供了hashchange事件
+
+主要用于iframe跨域通信
+
+**示例**
+
+父页面
+```html
+<body>
+    <h1>父页面</h1>
+    <button id="send">send</button>
+    <iframe id="iframe1" src="http://localhost:3001/2.html"></iframe>
+    <script>
+        const $send = document.getElementById('send')
+        const $iframe = document.getElementById('iframe1')
+        const oldSrc = $iframe.src
+        $send.onclick = function () {
+            $iframe.src = oldSrc + '#' + Math.random() * 100
+        }
+    </script>
+</body>
+```
+子页面
+```html
+<body>
+    <h1>子页面</h1>
+    <script>
+        window.addEventListener('hashchange',function(e){
+            console.log(e);
+            console.log(location.hash);
+        })
+    </script>
+</body>
+```
+
+运行结果
+
+![图片](http://img.cdn.sugarat.top/mdImg/MTYwODI5ODU2OTk2Nw==608298569967)
+
+### window.name
+只要当前的这个浏览器tab没有关闭，无论tab内的网页如何变动，这个name值都可以保持，并且tab内的网页都有权限访问到这个值
+
+iframe中的页面利用上述特性，实现任意页面的window.name的读取
+
+**使用示例**
+
+**父页面 1.html**
+```html
+<body>
+    <h1>父页面</h1>
+    <button id="send">send</button>
+
+    <script>
+        document.getElementById('send').addEventListener('click', function () {
+            getCrossIframeName('http://localhost:3000/2.html', console.log)
+        })
+        function getCrossIframeName(url, callback) {
+            let ok = false
+            const iframe = document.createElement('iframe')
+            iframe.src = url
+            iframe.style.width = '0px'
+            iframe.style.height = '0px'
+            iframe.onload = function () {
+                if (ok) {
+                    // 第二次触发时，同域的页面加载完成
+                    callback(iframe.contentWindow.name)
+                    // 移除
+                    document.body.removeChild(iframe)
+                } else {
+                    // 第一次触发onload事件,定向到同域的中间页面
+                    // 经测试 中间页面不存在也可以，如存在页面内容为空也可
+                    iframe.contentWindow.location.href = '/proxy.html'
+                    ok = !ok
+                }
+            }
+            document.body.appendChild(iframe)
+        }
+    </script>
+</body>
+```
+
+**中间页面 proxy.html**
+```html
+<!-- 空文件即可 -->
+```
+
+**目标页面 2.html**
+```html
+<body>
+    <script>
+        const data = { name: '传输的数据', status: 'success', num: Math.random() * 100 }
+        window.name = JSON.stringify(data)
+    </script>
+</body>
+```
+
+运行结果
+
+![图片](http://img.cdn.sugarat.top/mdImg/MTYwODM1OTA3NjA1Ng==608359076056)
+
+### window.postMessage
+window.postMessage 方法可以安全地实现跨源通信,可以适用的场景:
+* 与其它页面之间的消息传递
+* 与内嵌iframe通信
+
+用法
+```js
+otherWindow.postMessage(message, targetOrigin);
+```
+targetOrigin值示例:
+* 协议+主机+端口：只有三者完全匹配，消息才会被发送
+* *：传递给任意窗口
+* /：和当前窗口同源的窗口
+
+
+**使用示例**
+
+父页面
+```html
+<body>
+    <h1>父页面</h1>
+    <button id="send">send</button>
+    <iframe id="iframe1" src="http://localhost:3001/2.html"></iframe>
+    <script>
+        const $send = document.getElementById('send')
+        const $iframe = document.getElementById('iframe1')
+        const oldSrc = $iframe.src
+        $send.onclick = function () {
+            $iframe.contentWindow.postMessage(JSON.stringify({ num: Math.random() }),'*')
+        }
+    </script>
+</body>
+```
+
+子页面
+```html
+<body>
+    <h1>子页面</h1>
+    <script>
+        window.addEventListener('message', function (e) {
+            console.log('receive', e.data);
+        })
+    </script>
+</body>
+```
+
+**运行结果**
+![图片](http://img.cdn.sugarat.top/mdImg/MTYwODM0NzAyMzM1OA==608347023358)
+### document.domain
 二级域名相同的情况下，比如 a.sugarat.top 和 b.sugarat.top 适用于该方式。
 
-只需要给页面添加 document.domain = 'sugarat.top' 表示二级域名都相同就可以实现跨域 -->
+只需要给页面添加 document.domain = 'sugarat.top' 表示二级域名都相同就可以实现跨域
 
+**简单示例**
 
-:::tip 参考
-* [冴羽 - 预测最近面试会考 Cookie 的 SameSite 属性](https://juejin.im/post/5e718ecc6fb9a07cda098c2d)
+首先修改host文件,添加两个自定义的域名，模拟跨域环境
+
+![图片](http://img.cdn.sugarat.top/mdImg/MTYwODM0ODY3MTgzNg==608348671836)
+
+父页面
+```html
+<body>
+    <h1>父页面</h1>
+    <iframe id="iframe1" src="http://b.sugarat.top:3000/2.html"></iframe>
+    <script>
+        document.domain = 'sugarat.top'
+        var a = 666
+    </script>
+</body>
+```
+
+子页面
+```html
+<body>
+    <h1>子页面</h1>
+    <script>
+        document.domain = 'sugarat.top'
+        console.log('get parent data a:', window.parent.a);
+    </script>
+</body>
+```
+
+**运行结果**
+
+![图片](http://img.cdn.sugarat.top/mdImg/MTYwODM0ODYyODM1MQ==608348628351)
+
+## 总结
+上文只是介绍了常见的一些跨域方案，并配上了能直接复制粘贴运行的示例，方便读者理解与上手体验
+
+在实际生产环境中需针对特定的场景进行方案的pick
+
+面试中这也是一道经典考题，望能帮助读者加深理解
+
+## 参考
 * [wangningbo -浅谈几种跨域的方法](https://wangningbo93.github.io/2017/06/16/%E6%B5%85%E8%B0%88%E5%87%A0%E7%A7%8D%E8%B7%A8%E5%9F%9F%E7%9A%84%E6%96%B9%E6%B3%95/)
 * [MDN - 浏览器的同源策略](https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy)
 * [跨域资源共享 CORS 详解](http://www.ruanyifeng.com/blog/2016/04/cors.html)
 * [浏览器同源政策及其规避方法](https://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html)
 * [前端常见跨域解决方案](https://segmentfault.com/a/1190000011145364)
-:::
+* [WebSocket-Node](https://github.com/theturtle32/WebSocket-Node)
 
 <comment/>
 <tongji/>
