@@ -1,7 +1,7 @@
 ---
 isTimeLine: true
 title: 浏览器-跨域与跨站
-date: 2020-11-28
+date: 2020-12-19
 tags:
  - 大前端
  - 浏览器
@@ -192,6 +192,10 @@ tips: 这里的一级,二级域名主要指计算机网络中规定的，与通�
 
 
 ## 解决跨域的方案
+
+tips: 对于前端页面的运行可以 使用 [**http-server**](https://www.npmjs.com/package/http-server)
+
+下文基本揽括了常见的一些跨域方案，并配上了能直接复制粘贴运行的示例，方便理解与上手体验
 ### jsonp
 
 #### 原理
@@ -538,6 +542,11 @@ wsServer.on('request', function (request) {
     });
 });
 ```
+
+#### 运行结果
+
+![图片](http://img.cdn.sugarat.top/mdImg/MTYwODI5NzY3ODk2MQ==608297678962)
+
 ## iframe跨域通信方案
 ### location.hash
 原理：location的hash值发生变化，页面不会刷新，且浏览器提供了hashchange事件
@@ -573,15 +582,149 @@ wsServer.on('request', function (request) {
 </body>
 ```
 
-TODO:
-### window.name
+运行结果
 
+![图片](http://img.cdn.sugarat.top/mdImg/MTYwODI5ODU2OTk2Nw==608298569967)
+
+### window.name
+只要当前的这个浏览器tab没有关闭，无论tab内的网页如何变动，这个name值都可以保持，并且tab内的网页都有权限访问到这个值
+
+**使用示例**
+
+**父页面 1.html**
+```html
+<body>
+    <h1>父页面</h1>
+    <button id="send">send</button>
+
+    <script>
+        document.getElementById('send').addEventListener('click', function () {
+            getCrossIframeName('http://localhost:3000/2.html', console.log)
+        })
+        function getCrossIframeName(url, callback) {
+            let ok = false
+            const iframe = document.createElement('iframe')
+            iframe.src = url
+            iframe.style.width = '0px'
+            iframe.style.height = '0px'
+            iframe.onload = function () {
+                if (ok) {
+                    // 第二次触发时，同域的页面加载完成
+                    callback(iframe.contentWindow.name)
+                    // 移除
+                    document.body.removeChild(iframe)
+                } else {
+                    // 第一次触发onload事件,定向到同域的中间页面
+                    // 经测试 中间页面不存在也可以，如存在页面内容为空也可
+                    iframe.contentWindow.location.href = '/proxy.html'
+                    ok = !ok
+                }
+            }
+            document.body.appendChild(iframe)
+        }
+    </script>
+</body>
+```
+
+**中间页面 proxy.html**
+```html
+<!-- 空文件即可 -->
+```
+
+**目标页面 2.html**
+```html
+<body>
+    <script>
+        const data = { name: '传输的数据', status: 'success', num: Math.random() * 100 }
+        window.name = JSON.stringify(data)
+    </script>
+</body>
+```
 ### window.postMessage
+window.postMessage 方法可以安全地实现跨源通信,可以适用的场景:
+* 与其它页面之间的消息传递
+* 与内嵌iframe通信
+
+用法
+```js
+otherWindow.postMessage(message, targetOrigin);
+```
+targetOrigin值示例:
+* 协议+主机+端口：只有三者完全匹配，消息才会被发送
+* *：传递给任意窗口
+* /：和当前窗口同源的窗口
+
+
+**使用示例**
+
+父页面
+```html
+<body>
+    <h1>父页面</h1>
+    <button id="send">send</button>
+    <iframe id="iframe1" src="http://localhost:3001/2.html"></iframe>
+    <script>
+        const $send = document.getElementById('send')
+        const $iframe = document.getElementById('iframe1')
+        const oldSrc = $iframe.src
+        $send.onclick = function () {
+            $iframe.contentWindow.postMessage(JSON.stringify({ num: Math.random() }),'*')
+        }
+    </script>
+</body>
+```
+
+子页面
+```html
+<body>
+    <h1>子页面</h1>
+    <script>
+        window.addEventListener('message', function (e) {
+            console.log('receive', e.data);
+        })
+    </script>
+</body>
+```
+
+**运行结果**
+![图片](http://img.cdn.sugarat.top/mdImg/MTYwODM0NzAyMzM1OA==608347023358)
 ### document.domain
-<!-- ### document.domain
 二级域名相同的情况下，比如 a.sugarat.top 和 b.sugarat.top 适用于该方式。
 
-只需要给页面添加 document.domain = 'sugarat.top' 表示二级域名都相同就可以实现跨域 -->
+只需要给页面添加 document.domain = 'sugarat.top' 表示二级域名都相同就可以实现跨域
+
+**简单示例**
+
+首先修改host文件,添加两个自定义的域名，模拟跨域环境
+
+![图片](http://img.cdn.sugarat.top/mdImg/MTYwODM0ODY3MTgzNg==608348671836)
+
+父页面
+```html
+<body>
+    <h1>父页面</h1>
+    <iframe id="iframe1" src="http://b.sugarat.top:3000/2.html"></iframe>
+    <script>
+        document.domain = 'sugarat.top'
+        var a = 666
+    </script>
+</body>
+```
+
+子页面
+```html
+<body>
+    <h1>子页面</h1>
+    <script>
+        document.domain = 'sugarat.top'
+        console.log('get parent data a:', window.parent.a);
+    </script>
+</body>
+```
+
+**运行结果**
+
+![图片](http://img.cdn.sugarat.top/mdImg/MTYwODM0ODYyODM1MQ==608348628351)
 
 
 :::tip 参考

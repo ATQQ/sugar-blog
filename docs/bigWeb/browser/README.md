@@ -21,6 +21,7 @@ sticky: 3
 * [缓存机制](./cache.md)
 * [内核](./core.md)
 * [跨域与跨站](./cors.md)
+* [新的跨域策略](./newco.md)
 * [常见问题](./problem.md)
 * [渲染原理](./render.md)
 * [安全](./safe.md)
