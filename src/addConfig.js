@@ -64,6 +64,7 @@ const TagMap = {
     'campus': '校招考点',
     'experience': '面试经验',
     'spring20': '2020春招',
+    'spring21': '2021春招',
     'learn': '技术教程',
     'theory': '技术概念',
 }

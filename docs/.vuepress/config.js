@@ -96,6 +96,7 @@ module.exports = {
           { text: "心得总结", link: "/offer/experience/" },
           { text: "20年春招", link: "/offer/spring20/" },
           { text: "20年秋招", link: "/offer/autumn20/" },
+          { text: "21年春招", link: "/offer/spring21/" },
         ],
       },
       {

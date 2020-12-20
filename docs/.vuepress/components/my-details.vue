@@ -1,5 +1,5 @@
 <template>
-  <details>
+  <details class="details">
     <summary>
       <font color="#3eb07c">{{ title }}</font>
     </summary>
@@ -18,5 +18,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.details{
+  margin-bottom: 1.5rem;
+}
 </style>
