@@ -17,7 +17,8 @@
     "addTJ": "node src/addTJ.js",
     "addConfig": "node src/addConfig.js",
     "addCatelog": "node src/createCatelog.js",
-    "beforeBuild": "npm run addCatelog && npm run addTJ && npm run addConfig"
+    "beforeBuild": "npm run addCatelog && npm run addTJ && npm run addConfig",
+    "wx":"node src/wx.js"
   },
   "keywords": [],
   "author": "",
