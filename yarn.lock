@@ -1224,6 +1224,11 @@
   resolved "https://registry.npm.taobao.org/@vuepress-reco/vuepress-plugin-back-to-top/download/@vuepress-reco/vuepress-plugin-back-to-top-1.5.7.tgz#ae65e3ba484d0873ad58591e939fe58a4e46e7de"
   integrity sha1-rmXjukhNCHOtWFkek5/lik5G594=
 
+"@vuepress-reco/vuepress-plugin-bulletin-popover@^1.5.7":
+  version "1.5.7"
+  resolved "https://registry.npm.taobao.org/@vuepress-reco/vuepress-plugin-bulletin-popover/download/@vuepress-reco/vuepress-plugin-bulletin-popover-1.5.7.tgz#f1f5fac56dd4ec8e2adcae33f18a1e00d6122d9b"
+  integrity sha1-8fX6xW3U7I4q3K4z8YoeANYSLZs=
+
 "@vuepress-reco/vuepress-plugin-comments@^1.5.7":
   version "1.5.7"
   resolved "https://registry.npm.taobao.org/@vuepress-reco/vuepress-plugin-comments/download/@vuepress-reco/vuepress-plugin-comments-1.5.7.tgz#c1d9709c9d80bed79d860b2962b0be7d17a62d39"

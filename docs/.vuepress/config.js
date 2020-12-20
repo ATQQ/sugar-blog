@@ -26,7 +26,32 @@ module.exports = {
           buttonText: "加载最新的内容",
         },
         popupComponent: "MySWUpdatePopup",
-      }]
+      }],
+    [
+      "@vuepress-reco/vuepress-plugin-bulletin-popover", {
+        title: '公告',
+        body: [
+          {
+            type: 'title',
+            content: '欢迎加入交流群 🎉🎉🎉'
+          },
+          {
+            type: 'text',
+            content: 'QQ群：1047199470',
+            style: 'text-align: center;'
+          },
+          {
+            type: 'text',
+            content: '👇微信群👇',
+            style: 'text-align: center;'
+          },
+          {
+            type: 'image',
+            src: 'https://img.cdn.sugarat.top/mdImg/MTYwODQ2ODA0MzA5Nw==608468043097'
+          }
+        ],
+      }
+    ]
   ],
   title: "粥里有勺糖",
   description:

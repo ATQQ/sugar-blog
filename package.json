@@ -18,12 +18,13 @@
     "addConfig": "node src/addConfig.js",
     "addCatelog": "node src/createCatelog.js",
     "beforeBuild": "npm run addCatelog && npm run addTJ && npm run addConfig",
-    "wx":"node src/wx.js"
+    "wx": "node src/wx.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@vuepress-reco/vuepress-plugin-bulletin-popover": "^1.5.7",
     "valine": "^1.4.14",
     "vue-class-component": "^7.2.3"
   },
