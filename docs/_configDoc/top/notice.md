@@ -21,9 +21,18 @@ sticky: 1
 * [本地存储](./../../bigWeb/browser/storage.md)
 * [安全](../../bigWeb/browser/safe.md)
 * [跨域与跨站](../../bigWeb/browser/cors.md)
+* [event loop](../../bigWeb/browser/eventloop.md) 60%
 * [新的跨域策略](../../bigweb/browser/newco.md) 0%
 * [常见面试题](../../bigWeb/browser/problem.md) 10%
 
+## :pencil:校招面试
+* 面试题整理（[春招冲刺-xx-xx](https://github.com/ATQQ/fe-study-kerno/tree/master/%E6%98%A5%E6%8B%9B%E5%86%B2%E5%88%BA)）
+  * JS 100%
+  * 计网
+  * HTML/CSS
+  * 操作系统
+  * 框架
+  * 。。。未完待续
 
 ## :rocket:性能优化专题
 * 浏览器

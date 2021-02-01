@@ -7,7 +7,7 @@ tags:
  - 面试经验
 categories:
  - 备战春秋
-sticky: 2
+sticky: 4
 ---
 
 # 前端校招考点总结
