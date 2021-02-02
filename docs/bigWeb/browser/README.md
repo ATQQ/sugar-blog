@@ -21,7 +21,7 @@ sticky: 3
 * [缓存机制](./cache.md)
 * [内核](./core.md)
 * [跨域与跨站](./cors.md)
-* [浏览器中的event loop](./eventloop.md)
+* [浏览器中的Event loop](./eventloop.md)
 * [新的跨域策略](./newco.md)
 * [常见问题](./problem.md)
 * [渲染原理](./render.md)

@@ -10,7 +10,7 @@ categories:
 ---
 # Event Loop
 
-* Event Loop是一个执行模型，在不同的地方有不同的实现。
+* Event Loop是一个执行模型，在不同的地方有不同的实现
 * Event Loop是一个程序结构，用于等待和发送消息和事件
 ## 进程与线程
 
