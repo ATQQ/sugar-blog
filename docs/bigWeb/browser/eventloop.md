@@ -97,7 +97,7 @@ js的事件循环模型与许多其他语言相比有一个非常有趣的特性
 
 js开始执行代码的时候会首先创建一个``main``函数,然后根据执行的代码,根据先进后出的原则,后执行的函数先弹出栈
 
-这里有一根可视化执行栈的在线工具 -> [Loupe](http://latentflip.com/loupe)
+这里有一个可视化执行栈的在线工具 -> [Loupe](http://latentflip.com/loupe)
 
 示例
 ```js
@@ -163,22 +163,24 @@ console.log(b(2))
 2. 执行完所有同步代码后，执行栈为空，查询是否有异步任务需要执行
 3. 执行 `微任务`,如果在执行 微任务 的过程中，又产生了 微任务，那么会加入到 微任务的队列 的末尾，也会在这个周期被调用执行
 4. 执行完所有微任务后，如有必要会渲染页面:
-  * 判断document是否需要更新
-    * 大部分显示设备还是 60Hz 的刷新率，所以 16.6ms 才会更新一次渲染
-  * 判断是否有 resize 或者 scroll 事件，有的话会去触发事件
-    * 所以 resize 和 scroll 事件也是至少 16.6ms 才会触发一次，即**自带节流**功能。
-  * 判断是否触发了 media query（媒体查询）
-  * 更新动画并且发送事件
-  * 判断是否有全屏操作事件
-  * 执行 requestAnimationFrame 回调
-  * 执行 IntersectionObserver 回调，该方法用于判断元素是否可见，可以用于懒加载上
-  * 更新界面
+   * 判断document是否需要更新
+     * 大部分显示设备还是 60Hz 的刷新率，所以 16.6ms 才会更新一次渲染
+   * 判断是否有 resize 或者 scroll 事件，有的话会去触发事件
+     * 所以 resize 和 scroll 事件也是至少 16.6ms 才会触发一次，即**自带节流**功能。
+   * 判断是否触发了 media query（媒体查询）
+   * 更新动画并且发送事件
+   * 判断是否有全屏操作事件
+   * 执行 requestAnimationFrame 回调
+   * 执行 IntersectionObserver 回调，该方法用于判断元素是否可见，可以用于懒加载上
+   * 更新界面
 5. 开始下一轮 Event Loop ，从宏任务中取出一个执行,再然后微任务...
 
 #### 小结归纳
 * 宏任务一次只从宏任务队列中取一个任务执行，执行完后就去执行微任务队列中的任务
 * 微任务队列中所有的任务都会被依次取出来执行，直到微任务队列为空；
 * 执行UI rendering，它的时间节点是在执行完所有的微任务之后，下一个宏任务之前
+* 定时器不是绝对准确的
+  * SetTimeout/SetInterval只是在指定时间后将其回调函数放入到宏任务队列中
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTU4MzE0NTA5MTE0Mg==583145091142)
 
@@ -189,7 +191,6 @@ console.log(b(2))
 console.log('script start')
 
 async function async1() {
-  // 跳转到async2 函数内部
   await async2()
 
   console.log('async1 end')
@@ -198,7 +199,6 @@ async function async2() {
   console.log('async2 end')
 }
 
-// 执行函数async1中的同步代码 -> async1 内部
 async1()
 
 setTimeout(function() {
@@ -218,7 +218,6 @@ new Promise(resolve => {
 
 console.log('script end')
 ```
-TODO: 优化
 
 1. 执行同步代码 输出  `script start`
    * console.log('script start')
@@ -246,24 +245,57 @@ TODO: 优化
    4. 取出P4执行, 输出`promise2`,无新的任务产生 \[P5\]
    5. 取出P5执行, 输出`async1 end`,无新的任务产生 \[\]
 
+#### 旧版浏览器的结果为
 
-如果 await 后面跟着 Promise 的话，`async1 end` 需要等待3个 tick 才能执行到
-
-所以，**旧版浏览器的结果为**
 ```js
 // script start --> async2 end --> Promise --> script end --> promise1 --> promise2
 // async1 end --> setTimeout
 ```
+因为 await 后面跟着 Promise 的话，`async1 end` 需要等待3个 microtick 才能执行到
 
-新版浏览器的结果为，因为 await 变快了，会优化await promiseFun
-* 即在本例中上述的 **P2**包裹**P1** 合并成了一个
+**async1** 其等价的v8**优化前**的旧版代码为
+```js
+function async1(){
+  new Promise((resolve)=>{
+    const p = new Promise(res=>res(async2()))
+    p.then(()=>{
+      console.log('async1 end')
+      resolve()
+    })
+  })
+}
+```
 
-所以**最终结果为**
+#### 新版浏览器的结果为
+
 ```js
 // script start --> async2 end --> Promise --> script end --> async1 end 
 //  promise1 --> promise2 --> setTimeout
 ```
+在本例中上述的 **P2**包裹**P1** 合并成了一个，即await后面如果是Promise将不会再进行一次Promise包装
 
+**async1** 其等价的v8**优化后**的代码为
+```js
+function async1(){
+  new Promise((resolve)=>{
+    const p = Promise.resolve(async2())
+    p.then(()=>{
+      console.log('async1 end')
+      resolve()
+    })
+  })
+}
+```
+
+#### 小结
+1. 在新版浏览器中，await promiseFun，3个 microtick 被优化为了 2个 microtick
+   * new Promise 替换为了 Promise.resolve
+   * Promise.resolve的参数如果是Promise则直接返回这个Promise
+
+#### 补充
+问题追溯可查看
+* [更快的异步函数和 Promise](https://v8.js.cn/blog/fast-async/)
+* [v8是怎么实现更快的 await ？深入理解 await 的运行机制](https://zhuanlan.zhihu.com/p/53944576)
 
 ### 自测
 自测试1
