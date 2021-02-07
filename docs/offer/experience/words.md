@@ -1,6 +1,6 @@
 ---
 isTimeLine: true
-title: 互联网校招相关词汇
+title: 互联网校招相关名词
 date: 2021-02-03
 tags:
  - 备战春秋
@@ -8,7 +8,7 @@ tags:
 categories:
  - 备战春秋
 ---
-# 互联网校招相关词汇
+# 互联网校招相关名词
 
 ## 内推
 

@@ -16,7 +16,7 @@
 * [数据库](./database.md)
 * [设计模式](./designPattern.md)
 * [HTML](./html.md)
-* [计算机网络](./internet.md)
+* [校招考点汇总-计算机网络](./internet.md)
 * [校招考点汇总-JavaScript](./javascript.md)
 * [移动端](./mobile.md)
 * [Node](./node.md)
