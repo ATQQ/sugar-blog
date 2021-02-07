@@ -13,7 +13,7 @@ sticky: 1
 
 你可以在评论区留下所遇到的相关面试题哟
 
-## :earth_asia:浏览器专题
+## :earth_asia:[浏览器专题](./../../../bigWeb/browser/README.md)
 * [内核](./../../bigWeb/browser/core.md)
 * [渲染机制](./../../bigWeb/browser/render.md)
 * [阻塞渲染](./../../bigWeb/browser/block.md)
@@ -25,10 +25,10 @@ sticky: 1
 * [新的跨域策略](../../bigweb/browser/newco.md) 0%
 * [常见面试题](../../bigWeb/browser/problem.md) 10%
 
-## :pencil:校招面试
+## :pencil:[校招面试](./../../../bigWeb/browser/README.md)
 * 面试题整理（[春招冲刺-xx-xx](https://github.com/ATQQ/fe-study-kerno/tree/master/%E6%98%A5%E6%8B%9B%E5%86%B2%E5%88%BA)）
-  * [JS](../../offer/campus/javascript.md) 100%
-  * 计网
+  * [JS](../../offer/campus/javascript.md)
+  * [计网](../../offer/campus/internet.md)
   * HTML/CSS
   * 操作系统
   * 框架
