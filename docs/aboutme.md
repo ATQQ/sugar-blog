@@ -18,5 +18,12 @@
 ## :pencil:座右铭
 你的指尖,拥有改变世界的力量:smile:
 
+## :phone:联系我
+**邮箱**：engineerzjl@foxmail.com
+
+**微信**：
+
+<img src="http://img.cdn.sugarat.top/mdImg/MTYxMzIwMTA0NzIyNg==wx.jpg" style="width:200px;">
+
 <comment/>
 <tongji/>
