@@ -29,7 +29,8 @@ sticky: 1
 * 面试题整理（[春招冲刺-xx-xx](https://github.com/ATQQ/fe-study-kerno/tree/master/%E6%98%A5%E6%8B%9B%E5%86%B2%E5%88%BA)）
   * [JS](../../offer/campus/javascript.md)
   * [计网](../../offer/campus/internet.md)
-  * HTML/CSS
+  * [CSS](../../offer/campus/css.md)
+  * [HTML](../../offer/campus/html.md)
   * 操作系统
   * 框架
   * 。。。未完待续
