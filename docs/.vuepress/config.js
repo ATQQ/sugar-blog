@@ -42,13 +42,13 @@ module.exports = {
           },
           {
             type: 'text',
-            content: '👇微信群👇',
+            content: '👇微信群👇---👇个人微信👇',
             style: 'text-align: center;'
           },
           {
             type: 'image',
-            src: 'http://img.cdn.sugarat.top/mdImg/MTYxMzE5OTY2NzU1Mw==613199667553'
-          }
+            src: 'http://img.cdn.sugarat.top/mdImg/MTYxNDE0OTYzNzE1MQ==614149637151'
+          },
         ],
       }
     ]
