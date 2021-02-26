@@ -49,6 +49,17 @@ module.exports = {
             type: 'image',
             src: 'http://img.cdn.sugarat.top/mdImg/MTYxNDE0OTYzNzE1MQ==614149637151'
           },
+          {
+            type: 'text',
+            content: '最近在写一个在线简历生成应用',
+            style: 'text-align: center;'
+          },
+          {
+            type: 'button',
+            link: 'https://resume.sugarat.top',
+            text: '点击体验，给予反馈',
+            style: 'text-align: center;display:block;'
+          }
         ],
       }
     ]

@@ -1,6 +1,6 @@
 ---
 isTimeLine: true
-title: :school:前端校招考点总结
+title: :school:前端校招考点汇总
 date: 2020-11-20
 tags:
  - 备战春秋
@@ -10,7 +10,7 @@ categories:
 sticky: 1
 ---
 
-# 前端校招考点总结
+# 前端校招考点汇总
 
 ## 措辞
 * 了解：听说过这个概念，知道是干什么的
