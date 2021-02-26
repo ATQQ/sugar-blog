@@ -26,14 +26,13 @@ sticky: 1
 * [常见面试题](../../bigWeb/browser/problem.md) 10%
 
 ## :pencil:[校招面试](./../../../bigWeb/browser/README.md)
-* 面试题整理（[春招冲刺-xx-xx](https://github.com/ATQQ/fe-study-kerno/tree/master/%E6%98%A5%E6%8B%9B%E5%86%B2%E5%88%BA)）
-  * [JS](../../offer/campus/javascript.md)
-  * [计网](../../offer/campus/internet.md)
-  * [CSS](../../offer/campus/css.md)
-  * [HTML](../../offer/campus/html.md)
-  * 操作系统
-  * 框架
-  * 。。。未完待续
+* [JS](../../offer/campus/javascript.md)
+* [计网](../../offer/campus/internet.md)
+* [CSS](../../offer/campus/css.md)
+* [HTML](../../offer/campus/html.md)
+* 操作系统
+* 框架
+* 。。。未完待续
 
 ## :rocket:性能优化专题
 * 浏览器

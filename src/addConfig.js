@@ -65,6 +65,7 @@ const TagMap = {
     'experience': '面试经验',
     'spring20': '2020春招',
     'spring21': '2021春招',
+    'review': '复习自查',
     'learn': '技术教程',
     'theory': '技术概念',
 }
@@ -103,7 +104,6 @@ function getFileConfig(url) {
     }
     return [
         '---',
-        'isTimeLine: true',
         `title: ${title}`,
         `date: ${date}`,
         'tags:',
@@ -131,7 +131,7 @@ for (const filepath of files) {
         continue
     }
     // 已经配置过的不操作
-    if(isHaveConfig(filepath)){
+    if (isHaveConfig(filepath)) {
         continue
     }
     // 无有效配置信息不处理

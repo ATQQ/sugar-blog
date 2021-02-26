@@ -97,6 +97,7 @@ module.exports = {
           { text: "20年春招", link: "/offer/spring20/" },
           { text: "20年秋招", link: "/offer/autumn20/" },
           { text: "21年春招", link: "/offer/spring21/" },
+          { text: "复习自查", link: "/offer/review/" },
         ],
       },
       {
