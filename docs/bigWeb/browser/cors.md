@@ -86,7 +86,7 @@ No 'Access-Control-Allow-Origin' header is present on the requested resource.
 If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.
 ```
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNjY1MTgwMTg3OQ==606651801879)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNjY1MTgwMTg3OQ==606651801879)
 
 ```html
 <body>
@@ -155,11 +155,11 @@ tips: 这里的一级,二级域名主要指计算机网络中规定的，与通�
 
 打开 `taobao.com`,可以看到其cookie有
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNjY0Mjk2NjAxNg==606642966016)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNjY0Mjk2NjAxNg==606642966016)
 
 我们在 `ai.taobao,com`下也可看到这些cookie
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNjY0MzA0ODI1MA==606643048250)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNjY0MzA0ODI1MA==606643048250)
 
 ## 预检请求
 使用后端开启CORS解决跨域的方式，浏览器会把请求分成两种类型
@@ -253,7 +253,7 @@ document.body.appendChild($srcipt)
 ```
 页面中插入上述代码并运行可以在控制台看机输出
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNjY0NTcwNjgwMg==606645706802)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNjY0NTcwNjgwMg==606645706802)
 
 #### 通用方法封装
 
@@ -292,11 +292,11 @@ function jsonp(url, callbackName, success) {
 
 如:`origin: http://localhost:8080`
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNjY1MTI1OTk1OA==606651259958)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNjY1MTI1OTk1OA==606651259958)
 
 如果Origin的内容不包含在请求的响应头`Access-Control-Allow-Origin`中,就会抛出以下错误
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNjY1MTgwMTg3OQ==606651801879)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNjY1MTgwMTg3OQ==606651801879)
 
 与CORS有关的以`Access-Control-`开头的响应头：
 * Access-Control-Allow-Origin：该字段是CORS中必须有的字段，它的值是请求时Origin字段的值以`,`分割多个域名，或者是`*`，表示对所有请求都放行
@@ -441,7 +441,7 @@ function getBodyContent(req) {
 ```
 运行结果，请求被成功转发
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwODA4NTkxMjcxMw==608085912713)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwODA4NTkxMjcxMw==608085912713)
 
 
 ### websocket
@@ -543,7 +543,7 @@ wsServer.on('request', function (request) {
 
 #### 运行结果
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwODI5NzY3ODk2MQ==608297678962)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwODI5NzY3ODk2MQ==608297678962)
 
 ### location.hash
 location的hash值发生变化，页面不会刷新，且浏览器提供了hashchange事件
@@ -583,7 +583,7 @@ location的hash值发生变化，页面不会刷新，且浏览器提供了hashc
 
 运行结果
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwODI5ODU2OTk2Nw==608298569967)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwODI5ODU2OTk2Nw==608298569967)
 
 ### window.name
 只要当前的这个浏览器tab没有关闭，无论tab内的网页如何变动，这个name值都可以保持，并且tab内的网页都有权限访问到这个值
@@ -644,7 +644,7 @@ iframe中的页面利用上述特性，实现任意页面的window.name的读取
 
 运行结果
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwODM1OTA3NjA1Ng==608359076056)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwODM1OTA3NjA1Ng==608359076056)
 
 ### window.postMessage
 window.postMessage 方法可以安全地实现跨源通信,可以适用的场景:
@@ -693,7 +693,7 @@ targetOrigin值示例:
 ```
 
 **运行结果**
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwODM0NzAyMzM1OA==608347023358)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwODM0NzAyMzM1OA==608347023358)
 ### document.domain
 二级域名相同的情况下，比如 a.sugarat.top 和 b.sugarat.top 适用于该方式。
 
@@ -703,7 +703,7 @@ targetOrigin值示例:
 
 首先修改host文件,添加两个自定义的域名，模拟跨域环境
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwODM0ODY3MTgzNg==608348671836)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwODM0ODY3MTgzNg==608348671836)
 
 父页面
 ```html
@@ -730,7 +730,7 @@ targetOrigin值示例:
 
 **运行结果**
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwODM0ODYyODM1MQ==608348628351)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwODM0ODYyODM1MQ==608348628351)
 
 ## 总结
 上文只是介绍了常见的一些跨域方案，并配上了能直接复制粘贴运行的示例，方便读者理解与上手体验

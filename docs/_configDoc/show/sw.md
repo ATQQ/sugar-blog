@@ -28,7 +28,7 @@ sticky: 5
 
 2. 可在DevTools(开发者调试工具) 中的 Application 面板的 ServiceWorkers的侧边栏中 看到如下内容
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNjU0OTYzNDg5NQ==606549634895)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNjU0OTYzNDg5NQ==606549634895)
 
 * 绿色的表示是目前正在使用的sw.js(缓存控制文件)版本
 * 橙色表示已经就绪的新版本内容，等待被载入使用

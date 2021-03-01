@@ -53,13 +53,13 @@ categories:
 
 庆兴有这次面试，让我知道了自己的不足在哪里，知道大公司与小公司的面试在哪不一样
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNzAwNjgzNTcyOQ==607006835729)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNzAwNjgzNTcyOQ==607006835729)
 
 #### 2020-03-02 -- 开始投递春招
 
 部分面/笔试时间节点
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNzI2MDEzMDg1Mw==Screenshot_2020-12-06-21-07-25-959_com.miui.notes.jpg)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNzI2MDEzMDg1Mw==Screenshot_2020-12-06-21-07-25-959_com.miui.notes.jpg)
 
 那段时间挺累的，有时候一天两场笔试，早上面了下午面
 
@@ -86,7 +86,7 @@ categories:
 
 开始苦练基本功
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNzI2Mjc5MDU4NA==607262790584)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNzI2Mjc5MDU4NA==607262790584)
 
 #### 秋招
 
@@ -103,7 +103,7 @@ categories:
 #### 现在
 不知不觉实习了已有半年时间
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNzI2MzYyMTQ5OA==607263621498)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNzI2MzYyMTQ5OA==607263621498)
 
 期间既参与了业务项目，又参与了一些技术项目的开发
 
@@ -226,7 +226,7 @@ Code A Better Life，Code The Future
 
 We help people eat better，live better
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNzM1MTU4MzkyOQ==607351583929)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNzM1MTU4MzkyOQ==607351583929)
 
 ## 掘金年度征文活动
 [掘金年度征文 | 2020 与我的技术之路 征文活动正在进行中......](https://juejin.cn/post/6901125532729999374)

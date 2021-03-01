@@ -216,7 +216,7 @@ CSP - 内容安全策略
 ```
 观察浏览器的devtools面板会发现以下内容
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNjMxODQxNDk2NQ==606318414965)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNjMxODQxNDk2NQ==606318414965)
 
 阻止第三方域名的脚本资源加载，阻止内联脚本执行
 
@@ -234,14 +234,14 @@ document.cookie = 'sugar=at;expires=session'
 ```
 执行后我们可以在devtools面板的`Application`选项卡中看到我们添加的cookie
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNjMxOTM3NDEzMQ==606319374131)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNjMxOTM3NDEzMQ==606319374131)
 
 ```js
 console.log(document.cookie)
 // 可以看到我们刚才设置的cookie
 ```
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYwNjMyMDU3MDE0Mw==606320570143)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYwNjMyMDU3MDE0Mw==606320570143)
 
 
 目前很多统计网站的埋点监控，权限控制，离线数据都依赖于cookie，第三方脚本很容易的能够进行窃取

@@ -47,7 +47,7 @@ module.exports = {
           },
           {
             type: 'image',
-            src: 'http://img.cdn.sugarat.top/mdImg/MTYxNDE0OTYzNzE1MQ==614149637151'
+            src: 'https://img.cdn.sugarat.top/mdImg/MTYxNDE0OTYzNzE1MQ==614149637151'
           },
           {
             type: 'text',
