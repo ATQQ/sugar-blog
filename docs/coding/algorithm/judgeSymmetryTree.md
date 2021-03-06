@@ -10,7 +10,7 @@ categories:
 ---
 # 判断是否为对称二叉树
 
-<leetcode href="https://leetcode-cn.com/problems/dui-cheng-de-er-cha-shu-lcof/">剑指offer：对称二叉树</leetcode>
+<LeetCode href="https://leetcode-cn.com/problems/dui-cheng-de-er-cha-shu-lcof/">剑指offer：对称二叉树</LeetCode>
 
 请实现一个函数，用来判断一棵二叉树是不是对称的。如果一棵二叉树和它的镜像一样，那么它是对称的
 

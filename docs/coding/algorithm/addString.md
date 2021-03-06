@@ -10,7 +10,7 @@ categories:
 ---
 # 字符串相加
 
-<leetcode href="https://leetcode-cn.com/problems/add-strings/">415. 字符串相加</leetcode>
+<LeetCode href="https://leetcode-cn.com/problems/add-strings/">415. 字符串相加</LeetCode>
 
 给定两个字符串形式的非负整数 num1 和num2 ，计算它们的和。
 

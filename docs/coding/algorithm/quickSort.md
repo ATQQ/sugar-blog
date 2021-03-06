@@ -12,7 +12,7 @@ categories:
 
 <company value="这个频率比较高。。。对于前端来说，算基础考点"></company>
 
-<leetcode href="https://leetcode-cn.com/problems/sort-an-array/">912：排序树组</leetcode>
+<LeetCode href="https://leetcode-cn.com/problems/sort-an-array/">912：排序树组</LeetCode>
 
 给你一个整数数组 nums，请你将该数组升序排列。
 

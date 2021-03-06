@@ -11,7 +11,8 @@ categories:
 # 单链表转置
 
 <company value="百度,字节,美团"></company>
-<leetcode href="https://leetcode-cn.com/problems/fan-zhuan-lian-biao-lcof/">剑指offer24:单链表反转</leetcode>
+
+<LeetCode href="https://leetcode-cn.com/problems/fan-zhuan-lian-biao-lcof/">剑指offer24:单链表反转</LeetCode>
 
 
 定义一个函数，输入一个链表的头节点，反转该链表并输出反转后链表的头节点。

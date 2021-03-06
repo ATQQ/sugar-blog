@@ -6,19 +6,25 @@
       class="leancloud_visitors"
       data-flag-title="Your Article Title"
     >
-      <em class="post-meta-item-text">阅读量：</em>
-      <i class="leancloud-visitors-count"></i>
+      <em class="post-meta-item-text"
+        >阅读量：</em
+      >
+      <i
+        class="leancloud-visitors-count"
+      ></i>
     </span>
   </div>
 </template>
 
 <script>
 export default {
-  name: "comment",
+  name: 'comment',
   mounted() {
-    import("./../comment").then((res) => {
-      res.default.init();
-    });
+    import('./../comment').then(
+      (res) => {
+        res.default.init();
+      }
+    );
   },
 };
 </script>

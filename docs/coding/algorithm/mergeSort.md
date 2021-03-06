@@ -11,7 +11,7 @@ categories:
 # 归并排序
 <company value="牛客网,几种常见时间复杂度比较低的排序算法之一"></company>
 
-<leetcode href="https://leetcode-cn.com/problems/sort-an-array/">912：排序树组</leetcode>
+<LeetCode href="https://leetcode-cn.com/problems/sort-an-array/">912：排序树组</LeetCode>
 
 给你一个整数数组 nums，请你将该数组升序排列。
 
