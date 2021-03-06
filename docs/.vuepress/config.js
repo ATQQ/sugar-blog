@@ -42,16 +42,21 @@ module.exports = {
           },
           {
             type: 'text',
-            content: '👇微信群👇---👇个人微信👇',
+            content: 'wx群：通过好友邀请加入',
+            style: 'text-align: center;'
+          },
+          {
+            type: 'text',
+            content: '👇公众号👇---👇个人微信👇',
             style: 'text-align: center;'
           },
           {
             type: 'image',
-            src: 'https://img.cdn.sugarat.top/mdImg/MTYxNDE0OTYzNzE1MQ==614149637151'
+            src: 'http://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210'
           },
           {
             type: 'text',
-            content: '最近在写一个在线简历生成应用',
+            content: '最近做了一个在线简历生成应用',
             style: 'text-align: center;'
           },
           {
