@@ -1,5 +1,8 @@
 <template>
-  <div class="comment">
+  <div
+    class="comment"
+    id="valine-comment"
+  >
     <!-- <div id="comments"></div>
     <span
       id="pathname"
@@ -35,6 +38,9 @@ export default {
   text-align: center;
   padding: 40px 0;
 }
+</style>
+
+<style>
 #comments {
   max-width: 840px;
   margin: 0 auto;
