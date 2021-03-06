@@ -1,6 +1,6 @@
 <template>
   <div class="comment">
-    <div id="comments"></div>
+    <!-- <div id="comments"></div>
     <span
       id="pathname"
       class="leancloud_visitors"
@@ -12,7 +12,7 @@
       <i
         class="leancloud-visitors-count"
       ></i>
-    </span>
+    </span> -->
   </div>
 </template>
 
