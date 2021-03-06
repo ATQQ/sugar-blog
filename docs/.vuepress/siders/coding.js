@@ -25,7 +25,8 @@ module.exports = {
             ['equalA', '简单-a同时等于多个值'],
             ['closureUse','简单-闭包调用'],
             ['judgeDate','中等-判断两个日期是否同一周'],
-            ['deepClone', '中等-实现深拷贝']
+            ['deepClone', '中等-实现深拷贝'],
+            ['mergeRequest', '中等-请求合并'],
         ]],
         ['css', 'Css', 'css代码面试题']
     ],
