@@ -27,6 +27,7 @@ module.exports = {
             ['judgeDate','中等-判断两个日期是否同一周'],
             ['deepClone', '中等-实现深拷贝'],
             ['mergeRequest', '中等-请求合并'],
+            ['duplicate', '中等-数组去重'],
         ]],
         ['css', 'Css', 'css代码面试题']
     ],
