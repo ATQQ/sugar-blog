@@ -5,20 +5,14 @@ date: 2020-10-30
 tags:
  - 备战春秋
  - 校招考点
+categories:
+ - 备战春秋
 ---
 # 其它
 * TS
   * 与js区别
   * 如何接入,接入成本
   * 优势
-* 构建工具
-  * webpack
-    * loader 与 plugin异同
-    * loader作用
-    * plugin作用
-    * 用一句话介绍webpack
-    * 如何向一个刚入门前端的人讲述webpack是什么
-  * 其它构建工具
 * 小程序
   * 与h5的区别
   * 你如何看待小程序
@@ -27,7 +21,6 @@ tags:
   * 性能优化
 * 单元测试
 * 脚手架工具
-* babel
 * polyfill
 * eslint
 * 混合开发,跨端
