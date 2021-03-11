@@ -2,6 +2,7 @@
 记录面试所遇的与javascript相关的代码题
 
 ## 目录
+* [实现async/await](./async.md)
 * [闭包调用](./closureUse.md)
 * [实现深拷贝](./deepClone.md)
 * [笔试题-数组去重](./duplicate.md)
