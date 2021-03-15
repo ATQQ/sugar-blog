@@ -68,6 +68,7 @@ const TagMap = {
     'review': '复习自查',
     'learn': '技术教程',
     'theory': '技术概念',
+    'works':'个人作品'
 }
 
 function getCategoryAndTags(url) {

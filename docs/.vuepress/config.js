@@ -121,6 +121,7 @@ module.exports = {
         items: [
           { text: "技术教程", link: "/technology/learn/" },
           { text: "技术概念", link: "/technology/theory/" },
+          { text: "个人作品", link: "/technology/works/" },
         ],
       },
       {
