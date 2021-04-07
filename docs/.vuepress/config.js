@@ -52,19 +52,13 @@ module.exports = {
           },
           {
             type: 'image',
-            src: 'http://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210'
+            src: 'https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210'
           },
           {
             type: 'text',
-            content: '最近做了一个在线简历生成应用',
+            content: '最近在做毕设,内容更新频率较低',
             style: 'text-align: center;'
           },
-          {
-            type: 'button',
-            link: 'https://resume.sugarat.top',
-            text: '点击体验，给予反馈',
-            style: 'text-align: center;display:block;'
-          }
         ],
       }
     ]
@@ -122,6 +116,7 @@ module.exports = {
           { text: "技术教程", link: "/technology/learn/" },
           { text: "技术概念", link: "/technology/theory/" },
           { text: "个人作品", link: "/technology/works/" },
+          { text: "学习笔记", link: "/technology/study/" },
         ],
       },
       {

@@ -9,14 +9,14 @@ categories:
 ---
 # 助你轻松编写与分享snippet的VsCode插件
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYxNTg5OTg3Njc4OA==615899876788)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYxNTg5OTg3Njc4OA==615899876788)
 
 ## 前言
 分享你的代码片段通过npm包的形式，让其它的开发者都能够一键体验
 
 **我**来搞定插件，**你**来编写snippet提示规则
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYxNTkwMDE3NDcwMw==615900174703)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYxNTkwMDE3NDcwMw==615900174703)
 
 先给各位哥哥姐姐奉上插件相关链接
 * [仓库地址](https://github.com/ATQQ/ShareSnippet)
