@@ -20,5 +20,6 @@
 ## 目录
 * [Chrome 调试技巧-基础](./chrome-debug1.md)
 * [Chrome 调试技巧-Console](./chrome-debug2.md)
+* [Chrome 调试技巧-Network](./chrome-debug3.md)
 
 <tongji/>

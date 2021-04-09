@@ -1,3 +1,12 @@
+---
+title: Chrome调试技巧-Network
+date: 2021-04-07
+tags:
+ - 技术笔记
+ - 学习笔记
+categories:
+ - 技术笔记
+---
 # Chrome 调试技巧-Network
 
 在调试网络请求时,离不开Network面板的使用
@@ -34,3 +43,6 @@ Ctrl + 鼠标左键选择要添加的类目
 ![图片](http://img.cdn.sugarat.top/mdImg/MTYxNzgwNTUwNzY0Nw==617805507647)
 
 todo: 未完待续
+
+<comment/>
+<tongji/>
