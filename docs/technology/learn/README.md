@@ -4,5 +4,6 @@
 * [eslint插件开发教程](./eslint-plugin.md)
 * [ServerLess之云函数实践-天气API](./faas.md)
 * [Git常用的一些基本操作](./git-base.md)
+* [工具方法汇总](./tool-methods.md)
 
 <tongji/>
