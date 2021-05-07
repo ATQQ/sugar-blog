@@ -8058,9 +8058,9 @@ uglify-js@3.4.x:
     source-map "~0.6.1"
 
 underscore@^1.8.3:
-  version "1.11.0"
-  resolved "https://registry.npm.taobao.org/underscore/download/underscore-1.11.0.tgz?cache=0&sync_timestamp=1598645044264&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Funderscore%2Fdownload%2Funderscore-1.11.0.tgz#dd7c23a195db34267186044649870ff1bab5929e"
-  integrity sha1-3XwjoZXbNCZxhgRGSYcP8bq1kp4=
+  version "1.13.1"
+  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.13.1.tgz#0c1c6bd2df54b6b69f2314066d65b6cde6fcf9d1"
+  integrity sha512-hzSoAVtJF+3ZtiFX0VgfFPHEDRm7Y/QPjGyNo4TVdnDTdft3tr8hEkD25a1jC+TjTuE7tkHGKkhwCgs9dgBB2g==
 
 unicode-canonical-property-names-ecmascript@^1.0.4:
   version "1.0.4"
