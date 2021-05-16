@@ -40,11 +40,6 @@ module.exports = {
             content: 'QQ群：1047199470',
             style: 'text-align: center;'
           },
-          // {
-          //   type: 'text',
-          //   content: 'wx群：通过好友邀请加入',
-          //   style: 'text-align: center;'
-          // },
           {
             type: 'text',
             content: '👇公众号👇---👇个人微信👇',
@@ -58,7 +53,7 @@ module.exports = {
         footer:[
           {
             type: 'text',
-            content: '最近在做毕设,内容更新频率较低',
+            content: '肝完毕设,恢复更新',
             style: 'text-align: center;'
           },
           {

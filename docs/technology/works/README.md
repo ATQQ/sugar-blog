@@ -6,5 +6,6 @@
 ## 目录
 * [一款检测代码中TODO的eslint插件](./eslint-plugin-todo-ddl.md)
 * [助你轻松编写与分享snippet的VsCode插件](./share-snippets.md)
+* [开箱即用的Vite-Vue3工程化模板](./vite-vue3-template.md)
 
 <tongji/>
