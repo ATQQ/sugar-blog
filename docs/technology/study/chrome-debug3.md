@@ -42,7 +42,12 @@ Ctrl + 鼠标左键选择要添加的类目
 
 ![图片](http://img.cdn.sugarat.top/mdImg/MTYxNzgwNTUwNzY0Nw==617805507647)
 
-todo: 未完待续
+## 自定义请求表中展示的项
 
+![图片](http://img.cdn.sugarat.top/mdImg/MTYyMTIxODY5Mzc4Mw==621218693783)
+
+## 重新发送请求
+
+![图片](http://img.cdn.sugarat.top/mdImg/MTYyMTIxODc3NTE2MQ==621218775161)
 <comment/>
 <tongji/>
