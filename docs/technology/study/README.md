@@ -26,5 +26,7 @@
 * [Chrome 调试技巧-Elements](./chrome-debug4.md)
 * [Chrome 调试技巧-Drawer](./chrome-debug5.md)
 * [Chrome 调试技巧-workspace](./chrome-debug6.md)
+* [设计模式-设计原则](./design-patterns0.md)
+* [设计模式-创建型模式](./design-patterns1.md)
 
 <tongji/>
