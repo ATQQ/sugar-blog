@@ -290,6 +290,148 @@ const u2 = User.getInstance()
 
 console.log(u1 === u2);
 ```
+## 建造者模式
+### 概念
+* 让简单的对象通过组合的方式构造成多种复杂对象
+* 一种创建复杂对象的最佳实践
+
+### 示例
+以团购火锅卷为例，通常有多种套餐类型可供选择，不同套餐由饮料，小吃，荤菜，素菜等等构成。饮料用瓶装，小吃用木碗装等等。
+
+```js
+// 木盘子
+class WoodenBowl {
+    pack() {
+        return 'WoodenBowl'
+    }
+}
+
+// 瓶子
+class Bottle {
+    pack() {
+        return 'Bottle'
+    }
+}
+
+// 小吃用木碗装
+class Snack {
+    packing() {
+        return new WoodenBowl()
+    }
+}
+
+// 饮品用瓶装
+class Drink {
+    packing() {
+        return new Bottle()
+    }
+}
+
+// 可乐
+class Coke extends Drink {
+    price() {
+        return 3.00
+    }
+    name() {
+        return 'Coke'
+    }
+}
+
+// 茶
+class Tea extends Drink {
+    price() {
+        return 5.00
+    }
+    name() {
+        return 'Tea'
+    }
+}
+
+// 薯条
+class FrenchFries extends Snack {
+    price() {
+        return 15.00
+    }
+    name() {
+        return 'FrenchFries'
+    }
+}
+
+// 面包
+class Bread extends Snack {
+    price() {
+        return 5.00
+    }
+    name() {
+        return 'Bread'
+    }
+}
+
+// 套餐
+class Meal {
+    constructor() {
+        this.items = []
+    }
+    addItem(item) {
+        this.items.push(item);
+    }
+    getCost() {
+        let cost = 0.0;
+        for (const item of this.items) {
+            cost += item.price();
+        }
+        return cost;
+    }
+    showItems() {
+        for (const item of this.items) {
+            const nameStr = "Item : " + item.name();
+            const packStr = "Packing : " + item.packing().pack();
+            const priceStr = "Price : " + item.price();
+            console.log(`${nameStr},${packStr},${priceStr}`);
+        }
+    }
+}
+
+//  建造套餐
+class MealBuilder {
+    prepare2People() {
+        const meal = new Meal();
+        meal.addItem(new Coke());
+        meal.addItem(new Tea());
+        meal.addItem(new Bread());
+        meal.addItem(new FrenchFries());
+        return meal;
+    }
+    prepare1People() {
+        const meal = new Meal();
+        meal.addItem(new Coke());
+        meal.addItem(new FrenchFries());
+        return meal;
+    }
+}
+
+const mealBuilder = new MealBuilder();
+const people2 = mealBuilder.prepare2People();
+people2.showItems();
+console.log("Total Cost: " + people2.getCost());
+```
+输出
+```
+Item : Coke,Packing : Bottle,Price : 3
+Item : Tea,Packing : Bottle,Price : 5
+Item : Bread,Packing : WoodenBowl,Price : 5
+Item : FrenchFries,Packing : WoodenBowl,Price : 15
+Total Cost: 28
+```
+## 原型模式
+### 概念
+* 原型模式是一种创建对象的方式
+* 利用实例来描述对象，用实例作为定义对象和继承的基础
+* 用原型模式的优势是使用更小的代价来创建对象，通过原型引用的方式而不是开辟新的空间
+
+JS创建对象的方式就是原型引用：
+* [模拟new实现](../../coding/js/myNew.md)
+* [原型与原型链](../../bigWeb/js/prototype.md)
 
 <comment/>
 <tongji/>

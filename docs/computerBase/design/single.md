@@ -1,7 +1,7 @@
 ---
 isTimeLine: true
 title: 单例模式
-date: 2020-04-14
+date: 2021-05-19
 tags:
  - 计算机基础
  - 设计模式
@@ -15,46 +15,155 @@ categories:
 
 单例模式想要做到的是，不管我们尝试去创建多少次，它都只给你返回第一次所创建的那唯一的一个实例。
 
-### 静态方法
+实现方案有多种，大体上分ES5（Function）与ES6（Class）两种
+### 方式1
+利用instanceof判断是否使用new关键字调用函数进行对象的实例化
 ```js
-class SingleDog {
-    sing() {
-        console.log('w w w w')
+function User() {
+    if (!(this instanceof User)) {
+        return
     }
-    static getInstance() {
-        // 判断是否存在
-        if (!SingleDog.instance) {
-            // 不存在则创建
-            SingleDog.instance = new SingleDog()
-        }
-        // 存在则返回
-        return SingleDog.instance
+    if (!User._instance) {
+        this.name = '无名'
+        User._instance = this
     }
+    return User._instance
 }
-let a = SingleDog.getInstance()
-let b = SingleDog.getInstance()
-console.log(a === b) // true
+
+const u1 = new User()
+const u2 = new User()
+
+console.log(u1===u2);// true
 ```
-### 闭包实现
+### 方式2
+在函数上直接添加方法属性调用生成实例
 ```js
-function SingleDog() {
-    this.show = function () {
-        console.log('w w w w')
-    }
+function User(){
+    this.name = '无名'
 }
-SingleDog.getInstance = (function () {
-    let instance = null
+User.getInstance = function(){
+    if(!User._instance){
+        User._instance = new User()
+    }
+    return User._instance
+}
+
+const u1 = User.getInstance()
+const u2 = User.getInstance()
+
+console.log(u1===u2);
+```
+
+### 方式3
+使用闭包，改进方式2
+```js
+function User() {
+    this.name = '无名'
+}
+User.getInstance = (function () {
+    var instance
     return function () {
         if (!instance) {
-            instance = new SingleDog()
+            instance = new User()
         }
         return instance
     }
 })()
 
-let a = SingleDog.getInstance()
-let b = SingleDog.getInstance()
-console.log(a === b) // true
+const u1 = User.getInstance()
+const u2 = User.getInstance()
+
+console.log(u1 === u2);
+```
+### 方式4
+使用包装对象结合闭包的形式实现
+```js
+const User = (function () {
+    function _user() {
+        this.name = 'xm'
+    }
+    return function () {
+        if (!_user.instance) {
+            _user.instance = new _user()
+        }
+        return _user.instance
+    }
+})()
+
+const u1 = new User()
+const u2 = new User()
+
+console.log(u1 === u2); // true
+```
+当然这里可以将闭包部分的代码单独封装为一个函数
+
+在频繁使用到单例的情况下，推荐使用类似此方法的方案
+```js
+function SingleWrapper(cons) {
+    // 排出非函数与箭头函数
+    if (!(cons instanceof Function) || !cons.prototype) {
+        throw new Error('不是合法的构造函数')
+    }
+    var instance
+    return function () {
+        if (!instance) {
+            instance = new cons()
+        }
+        return instance
+    }
+}
+
+function User(){
+    this.name = 'xm'
+}
+const SingleUser = SingleWrapper(User)
+const u1 = new SingleUser()
+const u2 = new SingleUser()
+console.log(u1 === u2);
+```
+
+### 方式5
+在构造函数中利用`new.target`判断是否使用new关键字
+```js
+class User{
+    constructor(){
+        if(new.target !== User){
+            return
+        }
+        if(!User._instance){
+            this.name = 'xm'
+            User._instance = this
+        }
+        return User._instance
+    }
+}
+
+const u1 = new User()
+const u2 = new User()
+console.log(u1 === u2);
+```
+
+### 方式6
+使用`static`静态方法
+
+```js
+class User {
+    constructor() {
+        this.name = 'xm'
+    }
+    static getInstance() {
+        if (!User._instance) {
+            User._instance = new User()
+        }
+        return User._instance
+    }
+}
+
+
+const u1 = User.getInstance()
+const u2 = User.getInstance()
+
+console.log(u1 === u2);
 ```
 
 ## 面试题

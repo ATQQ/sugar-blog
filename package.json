@@ -32,6 +32,6 @@
     "@vuepress/plugin-pwa": "^1.7.1",
     "cross-env": "^7.0.2",
     "vuepress": "1.7.1",
-    "vuepress-theme-reco": "^1.5.7"
+    "vuepress-theme-reco": "1.5.7"
   }
 }
