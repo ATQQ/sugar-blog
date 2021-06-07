@@ -2,7 +2,7 @@
 整理面试所遇到的相关算法题
 
 ## 目录
-* [字符串相加](./addString.md)
+* [大数相加&数字字符串相加](./addString.md)
 * [斐波拉契数列I](./feibo1.md)
 * [斐波拉契数列II](./feibo2.md)
 * [堆排序](./headSort.md)

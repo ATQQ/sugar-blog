@@ -1,6 +1,6 @@
 ---
 isTimeLine: true
-title: 字符串相加
+title: 大数相加&数字字符串相加
 date: 2020-09-14
 tags:
  - 手撕代码
@@ -8,19 +8,22 @@ tags:
 categories:
  - 手撕代码
 ---
-# 字符串相加
+# 大数相加&数字字符串相加
 
 <LeetCode href="https://leetcode-cn.com/problems/add-strings/">415. 字符串相加</LeetCode>
 
+这是一个校招面试时候，手写频率比较高的一个算法题，这里给大家分享**三种方法**：
+
+一个常规解法，两个清奇的思路
+## 题目描述
 给定两个字符串形式的非负整数 num1 和num2 ，计算它们的和。
 
 要求：
-```js
-num1 和num2 的长度都小于 5100
-num1 和num2 都只包含数字 0-9
-num1 和num2 都不包含任何前导零
-你不能使用任何內建 BigInteger 库，也不能直接将输入的字符串转换为整数形式
-```
+* num1 和num2 的长度都小于 5100
+* num1 和num2 都只包含数字 0-9
+* num1 和num2 都不包含任何前导零
+* 你不能使用任何內建 BigInteger 库，也不能直接将输入的字符串转换为整数形式
+
 ## 1. 朴素做法
 按竖式计算的方式，模拟向加
 ### 过程描述
@@ -39,7 +42,7 @@ num1 和num2 都不包含任何前导零
 4:  1 + 0 + 0 = 1  /10   0      1   
 结果：1711
 ```
-### 代码
+### 实现代码
 ```js
 // 48 是字符 0 的ASCII码
 
@@ -63,7 +66,7 @@ var addStrings = function (num1, num2) {
 };
 ```
 
-**下面还有一些其它类似的，清奇的思路**
+**下面介绍一些其它类似的，清奇的思路**
 
 ## 解法2
 ### 过程描述
@@ -73,7 +76,7 @@ var addStrings = function (num1, num2) {
 4. 结果小于10 进位为0 当前位值为 结果对10求余
 5. 重复上述操作，知道两者都遍历完
 
-### 代码
+### 实现代码
 ```js
 /**
  * @param {string} num1
@@ -110,7 +113,7 @@ var addStrings = function (num1, num2) {
 4. 结果截取后n位作为这n位的值
    1. 如果结果长度大于n位，则进位为1,否则为0
    2. 如果结果长度小于n位，则不足位数用0进行补
-### 代码
+### 实现代码
 ```js
 /**
  * @param {string} num1
@@ -143,5 +146,6 @@ var addStrings = function (num1, num2) {
     return res
 };
 ```
+
 <comment/>
 <tongji/>
