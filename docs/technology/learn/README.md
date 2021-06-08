@@ -6,6 +6,7 @@
 * [ServerLess之云函数实践-天气API](./faas.md)
 * [FileSaver.js源码学习，纯前端实现文件下载，防止浏览器直接打开预览](./file-saver-source.md)
 * [Git常用的一些基本操作](./git-base.md)
+* [实践-使用jsencrypt配合axios实现非对称加密传输的数据](./jsencrypt.md)
 * [使用免费的七牛云OSS(10G)搭建个人的在线图床](./qiniu-imgbed.md)
 * [分享封装的一些七牛云OSS操作方法](./qiniu-oss.md)
 * [工具方法汇总](./tool-methods.md)
