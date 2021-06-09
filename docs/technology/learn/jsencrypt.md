@@ -1,5 +1,5 @@
 ---
-title: 实践-使用jsencrypt配合axios实现非对称加密传输的数据
+title: 实践：使用jsencrypt配合axios实现非对称加密传输的数据
 date: 2021-06-08
 tags:
  - 技术笔记
@@ -7,7 +7,7 @@ tags:
 categories:
  - 技术笔记
 ---
-# 实践-使用jsencrypt配合axios实现非对称加密传输的数据
+# 实践：使用jsencrypt配合axios实现非对称加密传输的数据
 
 ## 背景
 不希望应用发送的数据能在 Devtools 中被看到，避免接口被“同行”扒下来，然后被恶意使用
@@ -40,7 +40,7 @@ categories:
 
 通过对比，选用保密性好的 **非对称加密** 方案作为加密方案
 
-本文选用 **[RSA](https://baike.baidu.com/item/RSA%E7%AE%97%E6%B3%95/263310)** 对城加密算法
+本文选用 **[RSA](https://baike.baidu.com/item/RSA%E7%AE%97%E6%B3%95/263310)** 对称加密算法
 
 ## 公私钥生成
 根据百度经验的建议,生成一个1024位的的秘钥
