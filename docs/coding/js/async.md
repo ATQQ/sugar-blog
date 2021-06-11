@@ -9,13 +9,66 @@ categories:
 ---
 # 实现async/await
 
-## 原理
-TODO:待完善
+## 简介
+async，await大家在平时工作中用得非常的多，大部分同志也知道是Generator的语法糖
 
+开发中，目前也只有在使用dva的时候才会直接接触到Generator编写
+
+本文就带着学习的目的，和大家分享一下具体的实现细节
+
+### async/await
 * [async](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/async_function)
 * [await](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/await)
+
+利用async和await可以很简单的利用Promise将异步行为改成同步
+
+```js
+async function fn(){
+  await promise1()
+  await promise2()
+  await promise3()
+}
+fn()
+```
+
+是Generator+Promise的语法糖
+
+async函数默认返回一个Promis
+
+### Generator
+>又叫生成器,返回一个可迭代的对象
 * [Generator](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Generator)
+
+```js
+function* gen() {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+const obj = gen()
+for(const o of obj){
+  console.log(o) // 1 2 3
+}
+```
+
+### Symbol.iterator
+>可迭代协议，对象只有实现了`Symbol.iterator`方法才可被迭代
+
 * [Symbol.iterator](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Iteration_protocols)
+
+```js
+const obj = {
+  0:'000',
+  1:'777',
+  2:'666',
+  length:3,
+  [Symbol.iterator]:[][Symbol.iterator]
+}
+for(const o of obj){
+  console.log(o) // 000 777 666 
+}
+```
+定义对象为类数组的形式，然后直接使用Array的`Symbol.iterator`
 
 ## 模拟实现
 ### 第一阶段
