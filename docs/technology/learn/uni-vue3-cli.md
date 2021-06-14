@@ -6,6 +6,7 @@ tags:
  - 技术教程
 categories:
  - 技术笔记
+publish: false
 ---
 # 实践：从0-1使用Vue-cli搭建一个Vue3的uni-app项目模板
 
