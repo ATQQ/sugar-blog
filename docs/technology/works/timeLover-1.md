@@ -369,6 +369,8 @@ Dom结构如下：
 ## 本期效果
 ![图片](https://img.cdn.sugarat.top/mdImg/MTYyMzY1MDcwODQ5NA==179e683a-47e7-4008-ab25-59f31f3b2a3a.png)
 
+* 线上[预览地址](https://lover.sugarat.top)
+
 ## 资料汇总
 * [仓库源代码](https://github.com/ATQQ/timeLover)
 * [项目模板：vite-vue3-template](https://github.com/atqq/vite-vue3-template)
