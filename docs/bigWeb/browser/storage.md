@@ -148,6 +148,8 @@ window.localStorage.getItem()
   * UTF-16 - 中/英文：4字节
 * 存储于客户端，不会服务端发生通信
 
+关于存储容量的计算demo可以[跳转查看](https://github.com/ATQQ/demos/blob/main/getLocalStoragSize/README.md)
+
 ### 缺点
 * 只能存储字符串，JSON对象需要转换为json string 存储
 * 只适用于存储少量简单数据
