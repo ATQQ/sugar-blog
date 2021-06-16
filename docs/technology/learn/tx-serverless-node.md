@@ -10,7 +10,7 @@ categories:
 # 腾讯云Serverless实践-Node.js服务部署
 
 :::tip
-本文旨在帮助不懂运维/网络/服务器知识的**小白**，在**不租用云服务器**实现Node服务的上线部署
+本文旨在帮助不懂运维/网络/服务器知识的**小白**，在**不租用云服务器**实现Node服务（Node开发的后端应用）的上线部署
 :::
 
 <!-- more -->
@@ -470,8 +470,6 @@ sls deploy
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTYyMzg1NTc3MDY2Mg==623855770662)
 
-TODO：探究一下终端如何展示二维码的，展示图片的可能性
-
 此时静静等待几秒
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTYyMzg1NTg4ODkxMA==623855888910)
@@ -494,9 +492,10 @@ TODO：探究一下终端如何展示二维码的，展示图片的可能性
 到此从0-1的创建应用到部署上线的流程都走完了
 
 
-TODO: 补全（两者类似）
-* 原生Node使用HTTP模块开发的应用部署
-* koa项目的部署
+# TODO
+* 补全原生Node使用HTTP模块开发的应用部署
+* 补全koa项目的部署
+* 探究一下终端如何展示二维码的，展示图片的可能性
 
 <comment/>
 <tongji/>
