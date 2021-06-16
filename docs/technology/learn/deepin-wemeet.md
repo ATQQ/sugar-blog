@@ -23,7 +23,7 @@ categories:
 
 如果是deepin用户，先看看是否有deepin-wine5环境
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYyMTUyNDI0Mzk1NA==621524243954)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYyMTUyNDI0Mzk1NA==621524243954)
 
 
 没试用过其它发行版，各位如不是deepin，不妨也可试试看
@@ -40,7 +40,7 @@ sudo vim /etc/apt/sources.list
 deb [by-hash=force] https://community-packages.deepin.com/deepin/ apricot main contrib non-free
 ```
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYyMTUyNDQyODMyMA==621524428320)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYyMTUyNDQyODMyMA==621524428320)
 
 更新源
 ```sh
@@ -95,7 +95,7 @@ sudo apt-get install com.tencent.meeting.deepin
 deepin-wine5 wemeetapp.exe
 ```
 
-![图片](http://img.cdn.sugarat.top/mdImg/MTYyMTUyNTEzNTA3OA==621525135078)
+![图片](https://img.cdn.sugarat.top/mdImg/MTYyMTUyNTEzNTA3OA==621525135078)
 
 
 如果过程中遇到问题的老哥，欢迎评论区交流
