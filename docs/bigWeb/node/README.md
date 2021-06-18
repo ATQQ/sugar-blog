@@ -4,6 +4,6 @@
 
 ## 目录
 * [使用TS封装操作MongoDB数据库的工具方法](./mongoDb.md)
-* [使用js从控制台读入内容](./p1.md)
+* [使用Node.js从终端读入内容](./p1.md)
 
 <tongji/>
