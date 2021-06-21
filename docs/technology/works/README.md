@@ -12,6 +12,7 @@
 * [实践：给女朋友个性化定制应用-体重记录（一）](./timeLover-1.md)
 * [实践：给女朋友个性化定制应用-体重记录（二）](./timeLover-2.md)
 * [实践：给女朋友个性化定制应用-体重记录（三）](./timeLover-3.md)
+* [源码学习：Vite中加载环境变量（loadEnv）的实现](./vite-loadEnv.md)
 * [开箱即用的Vite-Vue3工程化模板](./vite-vue3-template.md)
 
 <tongji/>
