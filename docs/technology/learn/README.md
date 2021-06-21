@@ -13,6 +13,6 @@
 * [工具方法汇总](./tool-methods.md)
 * [腾讯云Serverless实践-Node.js服务部署](./tx-serverless-node.md)
 * [腾讯云Serverless实践-静态网站托管](./tx-serverless-static.md)
-* [实践：从0-1使用Vue-cli搭建一个Vue3的uni-app项目模板](./uni-vue3-cli.md)
+* [实践：从0-1使用Vue-cli搭建一个Vue3-TS的uni-app项目模板](./uni-vue3-cli.md)
 
 <tongji/>
