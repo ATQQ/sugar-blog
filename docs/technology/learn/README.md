@@ -15,5 +15,6 @@
 * [腾讯云Serverless实践-静态网站托管](./tx-serverless-static.md)
 * [实践：使用vue-cli搭建一个Vue3-TS的uni-app工程化项目模板(上)](./uni-vue3-cli_1.md)
 * [实践：使用vue-cli搭建一个Vue3-TS的uni-app工程化项目模板(中)](./uni-vue3-cli_2.md)
+* [实践：使用vue-cli搭建一个Vue3-TS的uni-app工程化项目模板(下)](./uni-vue3-cli_3.md)
 
 <tongji/>
