@@ -13,8 +13,6 @@
 * [工具方法汇总](./tool-methods.md)
 * [腾讯云Serverless实践-Node.js服务部署](./tx-serverless-node.md)
 * [腾讯云Serverless实践-静态网站托管](./tx-serverless-static.md)
-* [实践：使用vue-cli搭建一个Vue3-TS的uni-app工程化项目模板(上)](./uni-vue3-cli_1.md)
-* [实践：使用vue-cli搭建一个Vue3-TS的uni-app工程化项目模板(中)](./uni-vue3-cli_2.md)
-* [实践：使用vue-cli搭建一个Vue3-TS的uni-app工程化项目模板(下)](./uni-vue3-cli_3.md)
+* [源码学习：Vite中加载环境变量（loadEnv）的实现](./vite-loadEnv.md)
 
 <tongji/>
