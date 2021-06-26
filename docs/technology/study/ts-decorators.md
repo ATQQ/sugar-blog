@@ -248,7 +248,7 @@ r.hello3('456')
 ```
 
 ## 实例
-这里参考了一下[core-decorators]中的源码
+这里参考了一下[core-decorators](https://github.com/jayphelps/core-decorators)中的源码
 
 ### 弃用API提示
 ```ts
