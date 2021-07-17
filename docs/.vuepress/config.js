@@ -53,14 +53,13 @@ module.exports = {
         footer:[
           {
             type: 'text',
-            content: '肝完毕设,恢复更新',
+            content: '美团全年招聘 前端&客户端',
             style: 'text-align: center;'
           },
           {
             type: 'button',
-            link: 'https://ep2.sugarat.top',
-            text: '体验',
-            // style: 'text-align: center;display:block;'
+            link: '/_configDoc/show/bole',
+            text: '投递',
           }
         ]
       }
@@ -274,14 +273,14 @@ module.exports = {
         desc: "冴羽的JavaScript博客",
         link: "https://github.com/mqyqingfeng/Blog",
         logo:
-          "https://mirror-gold-cdn.xitu.io/168e084832fd5ec238f?imageView2/1/w/180/h/180/q/85/format/webp/interlace/1",
+          "https://img.cdn.sugarat.top/mdImg/MTYyNjQ4MzkxMzIxMA==626483913210",
       },
       {
         title: "YAMI",
         desc: "💡在这里分享我的灵感",
         link: "https://blog.yami.love/",
         logo:
-          "https://blog.yami.love/avatar.jpg",
+          "https://img.cdn.sugarat.top/mdImg/MTYyNjQ4Mzg3ODUwMg==626483878503",
       }
     ],
   },
