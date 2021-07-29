@@ -5,6 +5,7 @@
 
 ## 目录
 * [一款检测代码中TODO的eslint插件](./eslint-plugin-todo-ddl.md)
+* [向页面注入js实现为图片和文字元素添加透明蒙层](./js-cover.md)
 * [封装dotenv库实现类似Vite加载环境变量的行为](./loadEnv.md)
 * [30行代码实现合并指定目录下的所有文件的内容](./mergefile.md)
 * [助你轻松编写与分享snippet的VsCode插件](./share-snippets.md)
