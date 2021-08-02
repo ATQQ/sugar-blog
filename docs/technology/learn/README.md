@@ -3,6 +3,7 @@
 ## 目录
 * [优秀装饰器源码学习（一）：time](./core-decorators-1.md)
 * [优秀装饰器源码学习（二）](./core-decorators-2.md)
+* [优秀装饰器源码学习（三）](./core-decorators-3.md)
 * [在linux-deepin上使用deepin-wine5完美运行腾讯会议/QQ/微信等此类应用](./deepin-wemeet.md)
 * [eslint插件开发教程](./eslint-plugin.md)
 * [ServerLess之云函数实践-天气API](./faas.md)
