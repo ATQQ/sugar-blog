@@ -10,6 +10,7 @@
 * [30行代码实现合并指定目录下的所有文件的内容](./mergefile.md)
 * [助你轻松编写与分享snippet的VsCode插件](./share-snippets.md)
 * [一个通过NPM包共(分)享代码块的解决方案](./snippets.md)
+* [做一个CLI版的时间管理工具（一）](./time-tools-1.md)
 * [实践：给女朋友个性化定制应用-体重记录（一）](./timeLover-1.md)
 * [实践：给女朋友个性化定制应用-体重记录（二）](./timeLover-2.md)
 * [实践：给女朋友个性化定制应用-体重记录（三）](./timeLover-3.md)
