@@ -1,13 +1,13 @@
 ---
-title: 做一个CL版的时间管理工具（九）
-date: 2021-08-10
+title: 做一个CL版的时间管理工具（十）
+date: 2021-08-11
 tags:
  - 技术笔记
  - 个人作品
 categories:
  - 技术笔记
 ---
-# 做一个CLI版的时间管理工具（九）
+# 做一个CLI版的时间管理工具（十）
 
 ## 前言
 [上一篇文章](./time-tools-9.md)主要详细介绍了工具的使用，到目前为止已经支持了不少指令了
@@ -48,15 +48,124 @@ if (filenames.length === 0 && !existsSync(recordFilepath)) {
 }
 ```
 
-<!-- TODO：接着 -->
+如果没有输入文件，就读取配置的文件中的内容
 ```js
 const content = getFilesContent(filenames.length === 0 ? [recordFilepath] : filenames.map(filename => {
     return getFilePath(cwd, filename)
 }))
 ```
 
+后续的逻辑不变，跟原来的一致，这里额外添加了一个兜底逻辑
+
+当没有指定输出时间范围的时候，输出`1970-2970`（手动滑稽）的数据
+```js
+// ...more code
+if (month) {
+    const year = new Date().getFullYear()
+    return output(`${year}-${month}-01`, `${year}-${month}-${new Date(year, month, 0).getDate()}`)
+}
+
+// 兜底(上下1000年,希望代码还在)
+output('1970-01-01','2970-01-01')
+```
+
+#### 使用
+
+直接导出默认全部的数据
+```sh
+timec report
+```
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTYyODY4ODMwNjgyNg==628688306826)
+
+
+导出某天
+```sh
+timec report -D 2021-08-11
+```
+
+导出今年某月
+```sh
+timec report -M 8
+```
+
+导出某年
+```sh
+timec report -Y 2021
+```
+导出一段时间
+```sh
+timec report -R 2021-08-01_2021-08-11
+```
+
+### 导出MD/JSON
+这部分逻辑原来和上述部分逻辑耦合在一起，这里也将其拆分出来
+
+预期的指令`timec output [option] [filenames...]`
+
+逻辑跟上述相同，默认会以配置中的`defaultFilepath`作为输入文件
+```js
+commander.Command('output [filenames...]')
+    .option('-j, --json', 'Export result as json description file')
+    .option('-m, --markdown', 'Export the result as a markdown file')
+    .option('-t, --time', 'Export the result with time')
+    .action((filenames, cmdObj) => {
+        // ...code 添加跟上述一样的逻辑
+    })
+```
+后续逻辑基本一致
+1. 判断是否有输入文件
+2. 判断是否配置了默认输入文件
+3. 获取文件内容
+4. 判断使用的option
+5. 调用对应的逻辑
+```js
+// 1.
+if (filenames.length === 0 && !existsSync(recordFilepath)){
+  // code
+}
+
+// 2.
+// 获取所有文件的内容
+
+// 3.
+// 判断输入的option
+const { json, markdown, time } = cmdObj
+if(json){
+
+}
+// ...
+```
+
+优化后的指令如下
+
+导出json
+```sh
+timec output -j
+```
+
+导出md
+```sh
+timec output -m
+```
+
+option可以组合使用
+
+使用自定义的输入文件
+```sh
+timec output -mj ./file1 ./file2
+```
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTYyODY4OTE3MzkxMg==628689173912)
+
 ## 小结
+目前的指令如下`timec --help`
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTYyODY4OTY0MDQzMA==628689640430)
+
 现在的代码就像shi⛰，下一期和大家一起优化一下
+
+整洁代码就要来了
 
 然后后续再做一个可视化的功能，将报告通过一个网页展示出来
 
