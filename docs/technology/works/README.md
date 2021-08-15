@@ -13,6 +13,7 @@
 * [做一个CLI版的时间管理工具（一）](./time-tools-1.md)
 * [做一个CLI版的时间管理工具（十）](./time-tools-10.md)
 * [做一个CLI版的时间管理工具（11）](./time-tools-11.md)
+* [做一个CLI版的时间管理工具（12）](./time-tools-12.md)
 * [做一个CLI版的时间管理工具（二）](./time-tools-2.md)
 * [做一个CLI版的时间管理工具（三）](./time-tools-3.md)
 * [做一个CLI版的时间管理工具（四）](./time-tools-4.md)
