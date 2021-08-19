@@ -8,6 +8,7 @@
 * [向页面注入js实现为图片和文字元素添加透明蒙层](./js-cover.md)
 * [封装dotenv库实现类似Vite加载环境变量的行为](./loadEnv.md)
 * [30行代码实现合并指定目录下的所有文件的内容](./mergefile.md)
+* [Node中require与fs.readFile读取JSON文件的对比](./node-require-json.md)
 * [助你轻松编写与分享snippet的VsCode插件](./share-snippets.md)
 * [一个通过NPM包共(分)享代码块的解决方案](./snippets.md)
 * [做一个CLI版的时间管理工具（一）](./time-tools-1.md)
