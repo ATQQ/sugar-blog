@@ -24,6 +24,7 @@ module.exports = {
             ['instanceof', '简单-instanceof实现'],
             ['equalA', '简单-a同时等于多个值'],
             ['closureUse', '简单-闭包调用'],
+            ['immed-setInterval', '简单-立即执行的定时器'],
             ['judgeDate', '中等-判断两个日期是否同一周'],
             ['async', '中等-async/await实现'],
             ['deepClone', '中等-实现深拷贝'],

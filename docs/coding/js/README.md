@@ -7,6 +7,7 @@
 * [实现深拷贝](./deepClone.md)
 * [笔试题-数组去重](./duplicate.md)
 * [如何实现变量a同时等于多个值](./equalA.md)
+* [实现调用就执行一次的定时器](./immed-setInterval.md)
 * [继承实现](./inherit.md)
 * [实现instanceOf](./instanceof.md)
 * [判断两个时间是否在同一周](./judgeDate.md)
