@@ -10,7 +10,7 @@ categories:
 # 优雅的处理挂载window上的函数可能不存在的情况
 
 ## 背景
-在做一个JS SDK（A）时，内部会用到另一个JS SDK（B）的方法。（文中后续用A/B代替两者）
+在做一个Web JS SDK（A）时，内部会用到另一个Web JS SDK（B）的方法。（文中后续用A/B代替两者）
 
 B通常会提供Script和NPM包两种使用方式
 
@@ -19,12 +19,13 @@ B通常会提供Script和NPM包两种使用方式
 * 如果这个SDK被Web应用已经引入过页面，那么理论上可直接使用，不必要再整一个
 :::
 
-如果SDK B包含script引入的方式，目标页面也存在可能会引入B的情况，那么优先考虑使用Script引入依赖的SDK的情况：
-* 例如，目标页面已经引入过JQuery（符合SDK A的使用需求），那么SDK A就可以直接使用已经存在的`$`进行操作即可，不必再创建jQuery的script
+如果SDK B包含script引入的方式，目标页面也存在可能会引入B的情况，那么优先考虑使用Script引入依赖的SDK的情况：例如
+* 目标页面已经引入过JQuery（符合SDK A的使用需求），那么SDK A就可以直接使用已经存在的`$`进行操作即可，不必再创建jQuery的script
+* 通常页面都会接入埋点监控等基建服务SDK B，SDK A也需要通过B进行数据的上报
 
 ## 衍生需求
 * 挂载在window上的函数不存在时，自动通过script或者polyfill（垫片方法）补全这个方法
-* 调用方照常使用不影响调用结果
+* 调用方依旧按照SDK B的文档进行使用
 
 ```js
 window.sdkB(options)
@@ -56,6 +57,8 @@ function patchWindowFun(
    3. `alreadyExistCB`：方法如果已经存在执行的回掉
    4. `async`：控制script的**async**属性
    5. `defer`：控制script的**defer**属性
+
+由于大多数web sdk都会存在需要调用特定函数或者方法进行初始化的情况，固提供了`afterScriptLoad`,`beforeAppendScript`,`alreadyExistCB`三个钩子函数处理不同时机初始化的情况
 
 ## 方法实现
 如果目标属性存在则直接执行相应的回掉，不做进一步处理
@@ -157,7 +160,7 @@ function patchWindowFun(
 }
 ```
 ## 小结
-目前的方法实现仅适用于，**调用的方法相对独立**不影响正常的业务场景
+目前的方法实现仅适用于，**调用的方法相对独立**不影响正常的交互
 
 如果业务代码依赖方法的返回值，那么异步通过`script`加载的方法方式将不太适用
 <comment/>
