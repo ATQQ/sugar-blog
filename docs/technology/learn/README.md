@@ -18,6 +18,8 @@
 * [腾讯云Serverless实践-Node.js服务部署](./tx-serverless-node.md)
 * [腾讯云Serverless实践-静态网站托管](./tx-serverless-static.md)
 * [源码学习：Vite中加载环境变量（loadEnv）的实现](./vite-loadEnv.md)
+* [Vite插件开发纪实：vite-plugin-monitor（上）](./vite-plugin-monitor1.md)
+* [Vite插件开发纪实：vite-plugin-monitor（中）](./vite-plugin-monitor2.md)
 * [优雅的处理挂载window上的函数可能不存在的情况](./window-var.md)
 
 <tongji/>
