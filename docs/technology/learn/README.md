@@ -20,6 +20,7 @@
 * [源码学习：Vite中加载环境变量（loadEnv）的实现](./vite-loadEnv.md)
 * [Vite插件开发纪实：vite-plugin-monitor（上）](./vite-plugin-monitor1.md)
 * [Vite插件开发纪实：vite-plugin-monitor（中）](./vite-plugin-monitor2.md)
+* [Vite插件开发纪实：vite-plugin-monitor（下）](./vite-plugin-monitor3.md)
 * [优雅的处理挂载window上的函数可能不存在的情况](./window-var.md)
 
 <tongji/>
