@@ -1,7 +1,7 @@
 ---
 isTimeLine: true
 title: :sound:内容预告-最近准备整理的内容
-date: 2020-11-21
+date: 2021-10-04
 tags:
  - 大前端
 categories:
@@ -13,7 +13,31 @@ sticky: 1
 
 由于砖太烫手，这部分内容鸽了有大办年了，争取21Q4完善其中一部分内容
 
-你可以在评论区留下所遇到的相关面试题哟
+你也可以在评论区留下所遇到的相关面试题哟
+
+## 随笔内容
+* Node.js 中的ESM
+* 模块联邦
+* monorepo
+  * learn
+  * yarn
+  * pnpm
+* Vite
+  * 原理
+  * 插件机制
+  * mini版实现
+* NCC
+* bundle与chunk
+* web SDK开发
+  * 工程模板
+  * 通用鼠标指针SDK
+  * 监控sdk实现
+* Node SDK
+  * 工程模板创建
+* 前端水印实现
+* Nginx
+  * 学习
+  * njs
 
 ## :earth_asia:[浏览器专题](./../../../bigWeb/browser/README.md)
 * [内核](./../../bigWeb/browser/core.md)
