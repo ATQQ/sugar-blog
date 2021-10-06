@@ -38,6 +38,9 @@ sticky: 1
 * Nginx
   * 学习
   * njs
+* npx
+* pnpm yarn npm 使用对比
+* 一键引入工程工具的CLI工具开发
 
 ## :earth_asia:[浏览器专题](./../../../bigWeb/browser/README.md)
 * [内核](./../../bigWeb/browser/core.md)

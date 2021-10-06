@@ -1,9 +1,9 @@
 ---
-title: 开箱即用的Vite-Vue3工程化模板
+title: 模板工程搭建：Vite-Vue3工程化模板
 date: 2021-05-16
 tags:
  - 技术笔记
- - 个人作品
+ - 工程模板
 categories:
  - 技术笔记
 ---

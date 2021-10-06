@@ -3,7 +3,7 @@ title: 源码学习：MongoDB-Objectd生成原理
 date: 2021-06-11
 tags:
  - 技术笔记
- - 技术教程
+ - 源码学习
 categories:
  - 技术笔记
 ---

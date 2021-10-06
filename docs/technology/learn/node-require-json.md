@@ -3,7 +3,7 @@ title: Node中require与fs.readFile读取JSON文件的对比
 date: 2021-08-19
 tags:
  - 技术笔记
- - 个人作品
+ - 技术教程
 categories:
  - 技术笔记
 ---

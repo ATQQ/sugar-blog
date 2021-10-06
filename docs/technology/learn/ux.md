@@ -32,7 +32,7 @@ console.log([chalk.blue('green')]);
 '\x1B'.replace(/\\x/,'') // 结果？？
 ```
 
-再通过`.length`查看其长度，结果就如标题所示
+通过`.length`查看其长度，结果就如标题所示
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTYzMzE1ODMwMzk5Ng==633158303996)
 
@@ -79,7 +79,7 @@ r.test('中文') // true
 r.test('English') // false
 ```
 
-## 字符串与Unicode互转
+## 常规字符与Unicode字符互转
 ### str2Unicode
 1. 使用`String.prototype.charCodeAt`获取指定位置的 Unicode 码点（十进制表示）
 2. 使用`String.prototype.toString`将其转为十六进制字符,转为16进制字符不会自动补0

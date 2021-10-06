@@ -3,7 +3,7 @@ title: 封装dotenv库实现类似Vite加载环境变量的行为
 date: 2021-06-20
 tags:
  - 技术笔记
- - 个人作品
+ - 技术教程
 categories:
  - 技术笔记
 ---

@@ -20,7 +20,6 @@
 * [ ] [书栈网：JavaScript中的设计模式](https://www.bookstack.cn/books/design-pattern-in-javascript)
 
 ## 目录
-* [实践：利用ArrayBuffer实现预览指定目录下的所有文件的内容](./array-buffer.md)
 * [Chrome 调试技巧-基础](./chrome-debug1.md)
 * [Chrome 调试技巧-Console](./chrome-debug2.md)
 * [Chrome 调试技巧-Network](./chrome-debug3.md)

@@ -1,13 +1,13 @@
 ---
-title: 实践：使用vue-cli搭建一个Vue3-TS的uni-app工程化项目模板(中)
+title: 模板工程搭建：Vue-Cli搭建Vue3/TS/uni-app小程序工程(中)
 date: 2021-06-23
 tags:
  - 技术笔记
- - 技术教程
+ - 工程模板
 categories:
  - 技术笔记
 ---
-# 实践：使用vue-cli搭建一个Vue3-TS的uni-app工程化项目模板(中)
+# 模板工程搭建：Vue-Cli搭建Vue3/TS/uni-app小程序工程(中)
 
 ## 前言
 [上一期](./uni-vue3-cli_1.md)已经搭建了一个初步可用的[uni-vue3-ts](https://github.com/ATQQ/uni-vue3-ts-template)工程化模板
