@@ -9,8 +9,6 @@ categories:
 ---
 # 模板工程搭建：Web-SDK/Library
 
-TODO:还在完善中
-
 此系列会与时俱进的不断更新
 
 包含Node/Web SDK，单组件，组件库，Eslint插件，Webpack插件，Vite插件，MonoRepo仓库等等
@@ -21,6 +19,7 @@ TODO:还在完善中
 其中库/SDK又分为框架相关和框架无关的，本文主要介绍**框架无关的 Web JS SDK/Library**工程模板搭建，下文统称为`Lib（库）`
 
 ## 一点定义
+产品定位是SDK还是工具库，取决于构建产物的功能与适用范围，两者之间的定位不绝对，工具库在不断的迭代过程中也可变为一个SDK
 ### SDK（软件开发工具包）
 包含一些列功能的库，这些功能通常由多个库或者sdk组合提供
 
@@ -29,7 +28,6 @@ TODO:还在完善中
 ### Lib（库）
 库是功能的集合，如`chalk`,`loadsh`,`debug`等等常用工具库，包含了一系列的工具方法或者某一类功能的方法集合
 
-产品定位是SDK还是工具库，取决于构建产物的功能与适用范围，两者之间的定位不绝对，工具库在不断的迭代过程中也可变为一个SDK
 ## 库运行环境
 通常是在浏览器或者Webview控件中
 
@@ -77,7 +75,7 @@ node_modules
 dist
 ```
 ### 安装依赖
-这里使用新一代的包管理工具 pnpm
+这里使用新一代的包管理工具 [pnpm](https://www.pnpm.cn/)
 
 安装pnpm指令
 ```sh
@@ -300,6 +298,29 @@ export function Demo2() {}
   exports2[Symbol.toStringTag] = "Module";
 });
 ```
+
+如果的确需要有导出多个，那么建议
+* 方式1：都是具名的导出
+* 方式2：通过default导出一个对象，里面包含LibName
+
+```ts
+// 方式1
+export function fun1(){}
+export const var1 = 1
+export class LibName{
+
+}
+
+// 方式2
+class LibName{
+
+}
+export default {
+  fun1(){},
+  var1:1,
+  libName
+}
+```
 ## 开发测试
 ### PKG
 在工程中执行如下指令，在全局创建一个软链接（执行一次即可）
@@ -340,17 +361,175 @@ npm i -g http-server
 ```
 ![图片](https://img.cdn.sugarat.top/mdImg/MTYzMzUzMjk5MTk0MA==633532991940)
 
+### Vite
+vite本身就是一个支持ESM的Server，在项目中测试使用完全没问题他
+
+根目录创建一个`index.html`,在其中加入以下代码
+```html
+<body>
+    <script type="module">
+        import PkG from './src/index.ts'
+        new PkG().sayHello()
+    </script>
+</body>
+```
+
+`pkg.json`中加入启动指令
+```json
+{
+  "scripts": {
+    "serve": "vite",
+  },
+}
+```
+
+启动
+```sh
+pnpm serve
+```
 ## CSS资源处理
-### 生成外部样式表
+css资源的处理方式有很多种，下面介绍几种常见的
+
+测试样式
+```css
+h1{
+  font-size:48px;
+  color:red;
+}
+```
+### 外部样式表
+直接在入口文件`src/index.ts`中引入
+```ts
+import './styles/demo.css';
+```
+`build`产物包含一个`style.css`文件，里面即为书写的样式
+
+于是此种方式引入sdk的话，还需要额外引入一个css资源
 
 ### style 标签
-### css in js
+可以算作**css in js**的一种
 
+先编写2个工具方法
+* h：简化创建标签
+* addStyleDom：向指定Dom下插入`style`标签
+```ts
+/**
+ * 创建HtmlElement
+ * @param tag 标签名
+ * @returns
+ */
+export function h(tag: string) {
+  return document.createElement(tag)
+}
+
+/**
+ * 通过style标签向目标DOM添加css样式
+ * @param target 目标DOM
+ * @param style 样式
+ */
+export function addStyleDom(target: HTMLElement, style: string) {
+  const styleDom = h('style')
+  styleDom.textContent = style
+  target.append(styleDom)
+}
+```
+
+```ts
+import style from './styles/demo.css';
+import { addStyleDom } from './utils';
+
+addStyleDom(document.documentElement, style);
+```
+
+于是此种方式会将css内容写入到js代码中，在运行时自动通过style节点插入到文档节点中
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTYzMzc1NzUzNDYzNg==633757534636)
+
+### scss/less支持
+Vite内置对这两个预处理语言的支持，只需要安装相应的依赖就行
+```sh
+pnpm add -D less sass
+```
+
+使用
+```ts
+import './styles/demo.scss';
+import style from './styles/demo.less';
+```
 ## 发布
+要让别人使用，那就得将npm包发布上线
+
 ### NPM
+线上[npm](https://www.npmjs.com/)注册一个账号，调用`npm login`进行登录
+
+```sh
+npm login
+```
+
+发布前记得先build，然后commit暂存区的代码，清理工作区的变动
+```sh
+npm run build
+```
+
+接着升级版本
+```sh
+npm version patch
+```
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTYzMzc1ODgzNzI3OA==633758837278)
+
+发布
+```sh
+npm publish
+```
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTYzMzg0NTE0MDEzMQ==633845140131)
+
 ### CDN资源
+简单一点就使用[UNPKG](https://unpkg.com/),可以读取发布到npm上的静态资源
+
+为了速度更快的话可以将资源上传到大陆的`OSS`上，再通过`CDN`下发
+
+```js
+<script src="https://unpkg.com/tpl-web-lib@0.0.1/dist/index.min.js"></script>
+```
+
+## Demo
+### 效果
+会向你的页面中心位置添加一个`tag`
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTYzMzg1NDMyNjkzNw==633854326937)
+### npm
+```sh
+# npm
+npm i tpl-web-lib
+
+# yarn
+yarn add tpl-web-lib
+
+# pnpm
+pnpm add tpl-web-lib
+```
+
+```ts
+import libName from 'tpl-web-lib'
+new libName()
+```
+### cdn
+```html
+<script src="https://unpkg.com/tpl-web-lib@latest/dist/index.min.js"></script>
+<script>
+    new LibName()
+</script>
+```
 
 ## 总结
+文章比较详细的介绍了整个搭建过程，笔者水平有限，如有错误还请斧正
+
+经过一些思考（文章篇幅与相关性），关于一些工程通用的能力，如`eslint`，`api-extractor`，`prettier`，`jest`，`husky`等等将会在后续文章中专门介绍
+
+>文中所涉及[源码仓库](https://github.com/ATQQ/web-lib-template)地址：https://github.com/ATQQ/web-lib-template
+
 
 <comment/>
 <tongji/>
