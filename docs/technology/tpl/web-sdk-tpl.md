@@ -11,7 +11,7 @@ categories:
 
 此系列会与时俱进的不断更新
 
-包含Node/Web SDK，单组件，组件库，Eslint插件，Webpack插件，Vite插件，MonoRepo仓库等等
+包含Node/Web SDK，单组件，组件库，Eslint插件，Webpack插件，Vite插件，MonoRepo等等工程化相关能力的模板建设
 
 ## 前言
 在Web开发中，通常会把一些常用的方法，一个技术产品做成一个SDK或者Library（库）的形式，方便调用方直接接入使用
