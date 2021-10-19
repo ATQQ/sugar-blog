@@ -1,7 +1,7 @@
 ---
 isTimeLine: true
 title: ES6+的一些新语法糖和方法整理
-date: 2020-09-01
+date: 2021-10-13
 tags:
  - 大前端
  - javascript
@@ -9,7 +9,14 @@ categories:
  - 大前端
 ---
 # ES6+的一些新语法糖和方法整理
-**只列举了比较实用的而又鲜为人知的一些**
+**只列举了比较实用的而又鲜为人知的一些，并不绝对全面**
+
+## ESNext
+
+## ES2022
+
+## ES2021
+
 ## ES2020
 ### 1. #号创建类的私有变量
 ```ts
@@ -334,6 +341,7 @@ console.log(arr.includes('hello')); // true
 * [TC39:RegExp Named Capture Groups](https://github.com/tc39/proposal-regexp-named-groups)
 * [String padding](https://www.digitalocean.com/community/tutorials?q=String+padding)
 * [Object.getOwnPropertyDescriptor()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptor)
+* [compat-table/es2016plus/](https://kangax.github.io/compat-table/es2016plus/)
 
 
 <comment/>
