@@ -10,7 +10,7 @@ categories:
 # webpack项目接入Vite的通用方案介绍(上)
 
 ## 愿景
-希望通过本文，能给读者提供一个存/增量项目接入Vite的点子，起抛转引玉的作用，减少这方面能力的建设成本
+希望通过本文，能给读者提供一个存/增量项目接入Vite的点子，起抛砖引玉的作用，减少这方面能力的建设成本
 
 在阐述过程中同时也会逐渐完善[webpack-vite-serve](https://github.com/ATQQ/webpack-vite-serve)这个工具
 
@@ -58,6 +58,9 @@ npm run vite
 ### React SPA
 ![图片](https://img.cdn.sugarat.top/mdImg/MTYzNTA3MDM3NDkyMQ==react-demo2.gif)
 
+在最简单的Demo工程中，Vite的启动/HMR速度也是明显比webpack快不少的
+
+其它常见项目类型的demo也会逐渐的完善到源码仓库中
 ## 实现
 ### 1. 初始化工程
 >完整的工程结构移步[仓库](https://github.com/ATQQ/webpack-vite-serve)
