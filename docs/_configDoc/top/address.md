@@ -66,7 +66,8 @@ sticky: 2
 * [webgradients](https://webgradients.com/) - Free Gradients Collection: Sketch/Photoshop/CSS
 * [uiGradients](https://uigradients.com/#EmeraldWater) - uiGradients is a handpicked collection of beautiful color gradients for designers and developers.
 * [特殊符号](http://cn.piliapp.com/symbol/) - 特殊符号查询
-* 
+* [深入理解 TypeScript](https://jkchao.github.io/typescript-book-chinese/#why)
+* [阿里巴巴知识图谱](https://f2e.tech/)
 
 ## 在线演示
 * [stackblitz](https://stackblitz.com/) - 在线代码编辑器 - Code the Future In Your Browser.
