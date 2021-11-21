@@ -1,24 +1,23 @@
 ---
 isTimeLine: true
 title: 如何编写一份好的互联网校招简历
-date: 2021-02-12
+date: 2021-11-21
 tags:
  - 备战春秋
  - 面试经验
 categories:
  - 备战春秋
-sticky: 2
+sticky: 3
 ---
 # 如何编写一份好的互联网校招简历
 
 ## 前言
-### 背景
-面向2022届同学的校(春)招马上就要大规模开始啦（有些公司已经开始提前批了），学弟学妹们加油呀
+<!-- ### 背景 -->
+<!-- 面向2022届同学的校(春)招马上就要大规模开始啦（有些公司已经开始提前批了），学弟学妹们加油呀
 
 顺便在这里跟大家拜个年
 
-![图片](https://img.cdn.sugarat.top/mdImg/MTYxMzE0MTYyNzAyNQ==613141627025)
-
+![图片](https://img.cdn.sugarat.top/mdImg/MTYxMzE0MTYyNzAyNQ==613141627025) -->
 <center>
 
 **🎉祝每个人都能成为offer收割机，🐂气冲破天际🎉**
@@ -379,10 +378,14 @@ XX产品名称
    3. 实习（可选，实习岗位建议加上）
    4. base（可选）
 
-## Flag
-TODO：码个简历在线生成工具，方便同学们直接生成自己的简历，咱前端人还可以使用自己的本领进行定制
+## 简历工具推荐
+FLAG：自己码了个简历在线生成工具，方便同学们直接生成自己的简历，咱前端人还可以使用自己的本领进行定制
+* [仓库地址](https://github.com/ATQQ/resume)
+* [线上地址](https://resume.sugarat.top)
 
-[仓库地址](https://github.com/ATQQ/resume)
+其它优秀又好用的推荐
+* [木及简历](https://www.mujicv.com/)
+
 ## 参考
 推荐大家阅读也阅读一下以下几篇文章，篇篇都很赞
 

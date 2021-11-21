@@ -1,15 +1,3 @@
----
-isTimeLine: true
-title: :school:前端校招考点汇总
-date: 2020-11-20
-tags:
- - 备战春秋
- - 面试经验
-categories:
- - 备战春秋
-sticky: 1
----
-
 # 前端校招考点汇总
 
 ## 措辞

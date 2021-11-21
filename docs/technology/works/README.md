@@ -5,6 +5,7 @@
 
 ## 目录
 * [一款检测代码中TODO的eslint插件](./eslint-plugin-todo-ddl.md)
+* [我打造的在线简历生成应用](./online-resume.md)
 * [助你轻松编写与分享snippet的VsCode插件](./share-snippets.md)
 * [一个通过NPM包共(分)享代码块的解决方案](./snippets.md)
 * [做一个CLI版的时间管理工具（一）](./time-tools-1.md)

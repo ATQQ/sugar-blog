@@ -104,11 +104,11 @@ module.exports = {
       {
         text: "备战春秋",
         items: [
-          { text: "校招考点", link: "/offer/campus/" },
           { text: "心得总结", link: "/offer/experience/" },
-          { text: "20年春招", link: "/offer/spring20/" },
-          { text: "20年秋招", link: "/offer/autumn20/" },
-          { text: "21年春招", link: "/offer/spring21/" },
+          { text: "校招考点汇总", link: "/offer/campus/" },
+          { text: "20年春招面经", link: "/offer/spring20/" },
+          { text: "20年秋招面经", link: "/offer/autumn20/" },
+          { text: "21年春招面经", link: "/offer/spring21/" },
           { text: "复习自查", link: "/offer/review/" },
         ],
       },
@@ -139,7 +139,7 @@ module.exports = {
           { text: "vue", link: "/bigWeb/vue/" },
           { text: "html", link: "/bigWeb/html/" },
           { text: "css", link: "/bigWeb/css/" },
-          { text: "浏览器", link: "/bigWeb/browser/" },
+          { text: "🌏浏览器专题", link: "/bigWeb/browser/" },
           { text: "Web性能优化", link: "/bigWeb/performance/" },
           { text: "regexp", link: "/bigWeb/regexp/" },
           { text: "node", link: "/bigWeb/node/" },
@@ -188,23 +188,49 @@ module.exports = {
             link: "https://juejin.im/user/1028798615918983",
             icon: "reco-juejin",
           },
-          {
-            text: "GitBook-blog",
-            link: "https://sugar-at.gitbook.io/blog-article/",
-            icon: "reco-blog",
-          },
-          {
-            text: "GitBook-ES6",
-            link: "https://sugar-js.gitbook.io/-1/",
-            icon: "reco-document",
-          },
+          // {
+          //   text: "GitBook-blog",
+          //   link: "https://sugar-at.gitbook.io/blog-article/",
+          //   icon: "reco-blog",
+          // },
+          // {
+          //   text: "GitBook-ES6",
+          //   link: "https://sugar-js.gitbook.io/-1/",
+          //   icon: "reco-document",
+          // },
         ],
       },
       {
-        text: "时间线",
-        link: "/timeline/",
-        icon: "reco-date",
+        text: "线上作品",
+        icon: "reco-other",
+        items: [
+          {
+            text: "轻取(文件收集)",
+            link: "https://ep2.sugarat.top",
+          },
+          {
+            text: "个人图床",
+            link: "https://imgbed.sugarat.top",
+          },
+          {
+            text: "考勤小程序",
+            link: "https://hdkq.top/",
+          },
+          {
+            text: "时光恋人",
+            link: "https://lover.sugarat.top",
+          },
+          {
+            text: "在线简历生成",
+            link: "https://resume.sugarat.top/",
+          },
+        ],
       },
+      // {
+      //   text: "时间线",
+      //   link: "/timeline/",
+      //   icon: "reco-date",
+      // },
       {
         text: "留言板",
         link: "/_configDoc/show/messagePanel",
