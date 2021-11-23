@@ -19,7 +19,7 @@ sticky: 2
 笔者能力有限，如有遗漏之处，请在评论中补充，或者直接提PR完善
 
 ## 目录
-* [算法](./algorithm.md)
+* [校招考点汇总-算法](./algorithm.md)
 * [浏览器](./browser.md)
 * [基本工](./coder.md)
 * [综合问题](./complex.md)
