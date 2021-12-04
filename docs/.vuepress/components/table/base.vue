@@ -55,9 +55,15 @@ export default {
       }
       const {
         name = '-',
-        url = '',
+        href = '',
+        src = ''
       } = td;
-      return `<a href="${url}" target="blank">${name}</a>`;
+      if(href){
+        return `<a href="${href}" target="blank">${name}</a>`;
+      }
+      if(src){
+        return `<img src="${src}"/>`;
+      }
     },
   },
   async mounted() {

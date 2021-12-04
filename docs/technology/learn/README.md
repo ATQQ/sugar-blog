@@ -25,8 +25,8 @@
 * [Vite插件开发纪实：vite-plugin-monitor（中）](./vite-plugin-monitor2.md)
 * [Vite插件开发纪实：vite-plugin-monitor（下）](./vite-plugin-monitor3.md)
 * [解决Vite-React项目中js使用jsx语法报错的问题](./vite-react-js.md)
-* [webpack 项目接入Vite的通用方案介绍(上)](./webapck2vite.md)
-* [webpack 项目接入Vite的通用方案介绍(下)](./webapck2vite2.md)
+* [webpack 项目接入Vite的通用方案介绍](./webapck2vite.md)
+* [webpack 项目接入Vite的通用方案介绍-草稿](./webapck2vite2.md)
 * [优雅的处理挂载window上的函数可能不存在的情况](./window-var.md)
 
 <tongji/>

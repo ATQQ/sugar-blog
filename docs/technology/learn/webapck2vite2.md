@@ -1,5 +1,5 @@
 ---
-title: webpack项目接入Vite的通用方案介绍(下)
+title: webpack项目接入Vite的通用方案介绍-草稿
 date: 2021-11-14
 tags:
  - 技术笔记
@@ -7,7 +7,7 @@ tags:
 categories:
  - 技术笔记
 ---
-# webpack 项目接入Vite的通用方案介绍(下)
+# webpack 项目接入Vite的通用方案介绍-草稿
 
 ## 愿景
 希望通过此系列文章，能给读者提供一个存/增量项目接入Vite的点子，起抛砖引玉的作用，减少这方面能力的建设成本

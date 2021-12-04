@@ -1,213 +1,343 @@
 ---
-title: webpack项目接入Vite的通用方案介绍(上)
-date: 2021-10-19
+title: webpack项目接入Vite的通用方案介绍
+date: 2021-12-04
 tags:
  - 技术笔记
  - 技术教程
 categories:
  - 技术笔记
 ---
-# webpack 项目接入Vite的通用方案介绍(上)
+# webpack 项目接入Vite的通用方案介绍
 
 ## 愿景
-希望通过本文，能给读者提供一个存/增量项目接入Vite的点子，起抛砖引玉的作用，减少这方面能力的建设成本
+希望通过本文，能给读者提供一个存/增量项目（包含但不限于webpack工程）接入Vite的点子，起抛砖引玉的作用，减少这方面能力的建设成本
 
 在阐述过程中同时也会逐渐完善[webpack-vite-serve](https://github.com/ATQQ/webpack-vite-serve)这个工具
 
-读者可直接fork这个工具仓库，针对个人/公司项目场景进行定制化的二次开发
+读者可直接fork这个工具仓库，针对个人/公司项目场景进行定制化的二次开发，也可在issues中留言遇到的问题
 
-## 背景
-在当下的业务开发中处处可见[webpack](https://webpack.docschina.org/concepts/)的身影，大部分的业务项目采用的构建工具也都是它。
+## 1 背景
+### 1.1 现状 - Vite诞生背景
 
-随着时间的推移，存量老项目体积越来越大，开发启动(dev)/构建(build) 需要的时间越来越长。针对webpack的优化手段越来越有限。
+>引用自[Vite官方文档](https://cn.vitejs.dev/guide/why.html)的介绍
 
-于是乎某些场景出现了用其它语言写的工具，帮助构建/开发提效。如[SWC（Rust）](https://github.com/swc-project/swc),[esbuild（Go）](https://github.com/evanw/esbuild)
+在浏览器支持 ES 模块之前，JavaScript 并没有提供的原生机制让开发者以模块化的方式进行开发。这也正是我们对 “打包” 这个概念熟悉的原因：使用工具抓取、处理并将我们的源码模块串联成可以在浏览器中运行的文件。
 
-当然上述工具并不是一个完整的构建工具，不能取代webpack直接使用，只是通过plugin，为webpack工作提效
+时过境迁，我们见证了诸如 webpack、Rollup 和 Parcel 等工具的变迁，它们极大地改善了前端开发者的开发体验。
 
-当下另一种火热的方案是`bundleless`，利用浏览器原生支持`ES Module`的特性，让浏览器接管"打包"工作，工具只负责对浏览器请求的资源进行相应的转换，从而极大的减少服务的启动时间，提升开发体验与开发幸福感
+然而，当我们开始构建越来越大型的应用时，需要处理的 JavaScript 代码量也呈指数级增长。包含数千个模块的大型项目相当普遍。
 
-比较出名的两个产品就是[snowpack](https://github.com/snowpackjs/snowpack)与[Vite](https://github.com/vitejs/vite)
+我们开始遇到性能瓶颈 —— 使用 JavaScript 开发的工具通常需要很长时间（甚至是几分钟！）才能启动开发服务器，即使使用 HMR，文件修改后的效果也需要几秒钟才能在浏览器中反映出来。
 
-本文的主角就是`Vite`：**下一代前端开发与构建工具**
+如此循环往复，迟钝的反馈会极大地影响开发者的开发效率和幸福感。
 
-由于`Vite`的周边还处于建设期，要完全替代webpack，还需要一定时日，为了保证**存量**线上项目的稳定性，`Vite`作为一个**开发时可选的能力**接入是比较推荐的一个做法。
+**Vite 旨在利用生态系统中的新进展解决上述问题**
+* 浏览器开始原生支持 ES 模块
+* 越来越多 JavaScript 工具使用编译型语言编写。
 
-```sh
-# webpack devServer
-npm run dev
+### 1.2 当下流行趋势
+#### 1.2.1 SWC与esbuild
 
-# Vite devServer
-npm run vite
-```
-## 目标
+突破Node.js的性能瓶颈，出现了用其它语言写的工具，帮助构建/开发提效，如 [SWC（Rust）](https://github.com/swc-project/swc)，[esbuild（Go）](https://github.com/evanw/esbuild)，在部分场景下能替代传统Node.js工具工作，并表现非常好。
+
+<table-base src="swc-esbuild"/>
+
+#### 1.2.2 Vite与snowpack
+
+另一种火热的方案是bundleless，利用浏览器原生支持 ES Module 的特性，让浏览器接管"打包"的部分工作，工具只负责对请求的资源进行简单的转换，从而极大的减少服务的启动时间，提升开发体验与开发幸福感
+
+比较出名的两个产品就是 snowpack 与 Vite
+
+<table-base src="vite-snowpack"/>
+
+### 1.3 问题与诉求
+开发者或技术团队为保持框架技术的先进性，将会接入vite，从而提升开发者的工作效率
+
+#### 1.3.1 问题
+
+在当下的业务开发中处处可见[webpack](https://webpack.docschina.org/concepts/)的身影，大部分的业务项目采用的构建工具也都是它，但随着时间的推移，存量老项目体积越来越大，开发启动(dev)/构建(build) 需要的时间越来越长。
+
+存量webpack项目数目庞大，同时项目体积也不小。围绕webpack所建立的周边也是比vite更加丰富，老项目对其依赖性强。
+
+从webpack直接迁移到vite，迁移和回归测试成本都非常大。
+
+#### 1.3.2 诉求
+期望提供一个低成本甚至一键接入Vite方案，开发者按需开启使用，无需进行额外的配置，与webpack共存。
+
+### 1.4 为什么选Vite，而不是snowpack
+#### 1.4.1 生产构建
+
+Snowpack 
+* 默认构建输出是未打包的：它将每个文件转换为单独的构建模块，然后将这些模块提供给执行实际绑定的不同“优化器”。这么做的好处是，你可以选择不同终端打包器，以适应不同需求（例如 webpack, Rollup，甚至是 ESbuild）
+* 缺点是体验有些支离破碎 —— 例如，esbuild 优化器仍然是不稳定的，Rollup 优化器也不是官方维护，而不同的优化器又有不同的输出和配置。
+
+Vite
+* 选择了与单个打包器（Rollup）进行更深入的集成。
+* 支持一套通用插件API 扩展了 Rollup 的插件接口，开发和构建两种模式都适用。
+
+#### 1.4.2 Vite支持更多的特性
+支持目前在 Snowpack 构建优化器中不可用的多种功能：
+* 多页面应用支持
+* 库模式
+* 自动分割 CSS 代码
+* 预优化的异步 chunk 加载
+* 对动态导入自动 polyfill
+* 官方 兼容模式插件 打包为现代/传统两种产物，并根据浏览器支持自动交付正确的版本。
+* 更快的依赖预构建
+* Monorepo 支持
+* CSS 预处理器支持。。。
+## 2 目标
 
 **为webpack项目开发环境提供最简单的Vite接入方案**
 
 待接入项目只需要做极小的变动就能享受到`Vite`带来的开发乐趣
 
-## 方案
-1. 做一个CLI工具，封装Vite启动项目的能力
-2. 将Vite相关的配置全部收敛于插件内，自动将webpack配置转化为Vite配置
-3. 对外提供一些可选参数，用于手动指定配置文件的位置
+**通过CLI工具为项目提供一个一键接入Vite能力**
 
-## demo效果
-### Vue SPA
-![图片](https://img.cdn.sugarat.top/mdImg/MTYzNTE2OTU0MzgyMA==vue.gif)
+Tips：大部分框架都有自己的CLI工具，没有CLI工具也可以CLI工具的形式提供使用Vite的能力，方便维护与升级
 
-### React SPA
-![图片](https://img.cdn.sugarat.top/mdImg/MTYzNTA3MDM3NDkyMQ==react-demo2.gif)
+## 3 实现方案介绍
+### 3.1 再次思考Vite是什么
+* 官方：下一代前端开发与构建工具 （feature：💡极速的服务启动、⚡️轻量快速的热重载）
+* 祖师爷(yyx)：上层的工具链方案，对标 （webpack + 针对 web 的常用配置 + webpack-dev-server）
+* 笔者：一个非常Nice的前端构建工具，能够提高开发者编码幸福感与舒适度
+### 3.2 Vite原理介绍
+官方文档中有提到
+* Vite使用原生 ESM 文件，无需打包!
+* Vite 将 index.html 视为源码和模块图的一部分。
+* Vite 解析 `<script type="module" src="...">`，这个标签指向你的 JavaScript 源码。
+#### 3.2.1 script module
+浏览器原生支持的JS的模块能力，遵循ES Module规范，从 [caniuse](https://caniuse.com/?search=script%20module) 上的数据来看，大约95%的浏览器都支持
 
-在最简单的Demo工程中，Vite的启动/HMR速度也是明显比webpack快不少的
+![图片](https://img.cdn.sugarat.top/mdImg/MTYzODYwMjk4NDc1Mg==638602984752)
 
-其它常见项目类型的demo也会逐渐的完善到源码仓库中
-## 实现
-### 1. 初始化工程
->完整的工程结构移步[仓库](https://github.com/ATQQ/webpack-vite-serve)
+使用示例
 
-注册一个启动方法`start`
+![图片](https://img.cdn.sugarat.top/mdImg/MTYzODYwMzAwMDc5Nw==638603000797)
 
-`src/bin.ts`
-```ts
-#!/usr/bin/env node
-import { Command } from 'commander';
-import { startCommand } from './command';
-program.command('start')
-  .alias('s')
-  .action(startCommand);
+#### 3.2.2 Vite快的原因
 
-program.parse(process.argv);
-```
-```ts
-export default function startCommand() {
-  console.log('hello vite');
-}
-```
+<table-base src="vite-webpack"/>
 
-`package.json`中添加指令
-* 其中`wvs`为自定义的指令
-* `npm run dev`：利用`typescript`依赖提供的指令，监听文件变动，自动将其转换`js`文件
-```json
-{
-  "bin": {
-    "wvs": "./dist/bin.js"
-  },
-  "scripts": {
-    "dev": "tsc -w -p .",
-    "build": "rimraf dist && tsc -p ."
-  },
-}
-```
-项目根目录执行`npm link`,注册指令
+有了浏览器提供模块化的基础，Vite只需要做静态资源的转化工作就可
+* ts,jsx转换
+* node_modules资源处理
+* 。。。and more
+
+#### 3.2.3 实现mini Vite开发服务器
+Vite基本原理就是通过Node启动一个HttpServer，拦截浏览器的ES Module请求，根据资源/模块请求路径，在工作目录中查找到对应的文件，再转换成ES Module的形式返回给浏览器。
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTYzODYwMzY4OTYxNQ==vite-mini.png)
+
+包含 scss/css/ts 的资源处理的一个demo。[在线体验地址（包含源码）](https://stackblitz.com/edit/node-qt2m2e?file=README.md)
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTYzODYwMzczNDA3Mw==638603734073)
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTYzODYwMzc0NjE2Mg==638603746163)
+
+demo的目录结构如下
 ```sh
-npm link
+├── src
+|  ├── App.ts
+|  ├── assets
+|  |  ├── app.css
+|  |  └── app.scss
+|  └── main.ts
+├── index.html
 ```
 
-测试
-```sh
-wvs start
-```
+开发服务器的实现如下
+* 通过 http 模块，创建一个服务器实例，监听3000端口
+* 请求头包含 'text/html', 'application/xhtml+xml' 则认定为请求html文档
+* 其余资源，交由 esbuild 与 sass 做进一步处理
 
-![图片](https://img.cdn.sugarat.top/mdImg/MTYzNDk3MzczODk5MQ==634973738991)
+<my-details title="点击查看完整源码与实现步骤">
 
-紧接着我们用[Vue-CLI](https://cli.vuejs.org/zh/)和[Create React App](https://www.html.cn/create-react-app/)分别创建两个webpack的SPA应用进行接下来的实验
+```js
+// vite.js
+const http = require('http');
+const { readFileSync } = require('fs');
+const { getSourceType, transformSource } = require('./utils')
 
-```sh
-vue create vue-spa
-```
-![图片](https://img.cdn.sugarat.top/mdImg/MTYzNDk3NTExNTUwMQ==634975115501)
-
-```sh
-npx create-react-app react-spa
-```
-### 2. 收敛Vite启动
-`Vite`的启动比较简单，只需要执行`vite`这个指令就行s
-
-![图片](https://img.cdn.sugarat.top/mdImg/MTYzNDk3NDE2ODQ1MQ==634974168451)
-
-在我们的CLI工具里使用[spawn](http://nodejs.cn/api/child_process.html#child_process_child_process_spawn_command_args_options)创建子进程启动`Vite`
-* 其中`cwd`用于指定子进程的工作目录
-* [stdio](http://nodejs.cn/api/child_process.html#child_process_options_stdio)：子进程的标准输入输出配置
-```ts
-import { spawn } from 'child_process';
-
-export default function startCommand() {
-  const viteService = spawn('vite', ['--host', '0.0.0.0'], {
-    cwd: process.cwd(),
-    stdio: 'inherit',
-  });
-
-  viteService.on('close', (code) => {
-    process.exit(code);
-  });
-}
-```
-
-这里为了方便调试，咱们全局安装一下`Vite`
-```sh
-npm i -g vite
-```
-
-在启动模板`public/index.html`里添加一个`<h1>Hello Vite</h1>`
-
-在demo项目里运行`wvs start`
-
-![图片](https://img.cdn.sugarat.top/mdImg/MTYzNDk3NjY4MTkwNw==634976681907)
-
-打开对应地址
-```sh
-# vue
-http://localhost:3000/
-# react
-http://localhost:3001/
-```
-得到了如下的结果，提示找不到页面（意料之中）
-
-![图片](https://img.cdn.sugarat.top/mdImg/MTYzNDk3NzEzMjIyNQ==634977132225)
-
-通过文档得知,Vite会默认寻找`index.html`作为项目的入口文件
-
-![图片](https://img.cdn.sugarat.top/mdImg/MTYzNDk3NzQyOTA2MQ==634977429061)
-
-这就带来了第一个要处理的问题，多页应用下可能有多个模板文件
-
-**如何根据访问路由动态的指定这个`x.html`的入口**？ 
-
-在解决问题之前，咱们再简单完善一下启动指令，为其指定一个vite.config.js 配置文件
-
-通过`vite --help`，可以看到通过`--config`参数指定配置文件位置
-
-![图片](https://img.cdn.sugarat.top/mdImg/MTYzNDk3ODE2Mjk4OQ==634978162990)
-
-```ts
-export default function startCommand() {
-  const configPath = require.resolve('./../config/vite.js');
-  const viteService = spawn('vite', ['--host', '0.0.0.0', '--config', configPath], {
-    cwd: process.cwd(),
-    stdio: 'inherit',
-  });
-}
-```
-这里指向配置文件的绝对路径
-
-config/vite.ts
-```ts
-import { defineConfig } from 'vite';
-
-module.exports = defineConfig({
-  plugins: [],
-  optimizeDeps: {},
+const server = http.createServer((req, res) => {
+  const htmlAccepts = ['text/html', 'application/xhtml+xml'];
+  const isHtml = !!htmlAccepts.find((a) => req.headers?.accept?.includes(a));
+  // HTML文档
+  if (isHtml) {
+    res.end(readFileSync('./index.html'));
+    return;
+  }
+  const url = new URL(req.url, 'http://localhost');
+  const { pathname } = url
+  // 其它资源
+  const type = getSourceType(pathname)
+  res.setHeader('content-type','application/javascript')
+  res.end(transformSource(type, pathname));
 });
+
+server.listen(3000);
 ```
 
-### 3. html模板处理
-拓展Vite的能力就是定制各种的插件，根据[插件文档](https://cn.vitejs.dev/guide/api-plugin.html)
+esbuild 处理js（jsx,ts,cjs,mjs等等）相关的文件
 
-编写一个简单的`plugin`，利用`configServer`钩子，读取浏览器发起的资源请求
+```js
+const { transformSync } = require('esbuild')
+const res = transformSync(sourceCode, {
+    format: 'esm',
+    minify: true,
+    loader: 'ts'
+}).code
+```
+
+sass 负责 scss文件的转换
+```js
+const sass = require('sass')
+const css = sass.renderSync({
+    data: code
+}).css.toString()
+```
+
+资源处理逻辑如下：
+* 根据请求资源路径，判断资源可能的类型
+* 利用对应的转换器，将资源**转换成浏览器可识别的js代码**
+
+```js
+// utils.js
+const { readFileSync, existsSync } = require('fs');
+const path = require('path');
+const sass = require('sass')
+const { transformSync } = require('esbuild')
+
+const resolved = (...p) => path.join(process.cwd(), ...p);
+
+/**
+ * 获取资源类型
+ */
+function getSourceType(pathname) {
+    // TODO: 省略 tsx,jsx
+    const jsSourceType = ['ts', 'js']
+    // TODO：还有很多其它资源
+    const sourceType = [...jsSourceType, 'css', 'scss']
+    let type = sourceType.find(t => pathname.endsWith(`.${t}`))
+
+    if (!type && !/\..+$/.test(pathname)) {
+        type = jsSourceType.find(t => {
+            return existsSync(resolved(`${pathname}.${t}`))
+        })
+    }
+    return type
+}
+
+/**
+ * 获取资源的源码
+ * @returns 
+ */
+function getSourceCode(type, pathname) {
+    if (existsSync(resolved(pathname))) {
+        return readFileSync(resolved(pathname), { encoding: 'utf-8' })
+    }
+    if (existsSync(resolved(`${pathname}.${type}`))) {
+        return readFileSync(resolved(`${pathname}.${type}`), { encoding: 'utf-8' })
+    }
+    return ''
+}
+
+/**
+ * 添加内联样式表
+ */
+function addInlineStyle(code) {
+    return `{
+        const style = document.createElement('style')    
+        style.textContent = \`${code}\`
+        document.head.appendChild(style)
+    }
+    `
+}
+/**
+ * 转换资源
+ */
+function transformSource(type, pathname) {
+    const sourceCode = getSourceCode(type, pathname)
+
+    const ops = {
+        css(code) {
+            return addInlineStyle(code)
+        },
+        scss(code) {
+            const css = sass.renderSync({
+                data: code
+            }).css.toString()
+            return this.css(css)
+        },
+        ts(code) {
+            return transformSync(code, {
+                format: 'esm',
+                minify: true,
+                loader: 'ts'
+            }).code
+        },
+        js(code) {
+            return transformSync(code, {
+                format: 'esm',
+                minify: true,
+                loader: 'js'
+            }).code
+        },
+    }
+    return ops[type] ? ops[type](sourceCode) : sourceCode
+}
+
+module.exports = {
+    resolved,
+    getSourceType,
+    transformSource
+}
+```
+</my-details>
+
+### 3.3 Vite插件系统简介
+Vite 插件扩展了设计出色的 Rollup 接口，带有一些 Vite 独有的配置项。
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTYzODYwNDI5OTQwOQ==vite-plugin.png)
+
+### 3.4 方案概述
+#### 3.4.1 要解决的问题
+解决这些问题也是方案实现的关键点
+
+<table-base src="vite-problem"/>
+
+#### 3.4.2 CLI结构
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTYzODYwNTMyOTExNg==638605329116)
+
+* 通过Plugin拓展Vite的能力，将常用插件全部内置
+  * 内置框架相关的Plugin
+  * 内置业务常用Plugin
+* 将Vite相关的配置全部收敛于插件内，同时支持用户通过外部配置文件 vite.conig.ts 修改&拓展Vite能力
+* 内部通过配置转换插件自动将Webpack配置转化为Vite配置
+* 通过CLI工具，封装Vite的能力
+
+## 4 方案实现
+能力优先通过VIte插件提供，然后将实现的插件进行内置。
+### 4.1 Dev-HTML模板处理
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTYzODYwNTQzODg3Mg==638605438872)
+
+Vite默认是将启动目录下的 index.html的文件，作为启动入口，而在传统的webpack项目中，这个模板文件是在 public/index.html或者src/pages/pageName下
+
+所以需要优先处理Html模板的问题
+
+#### 4.1.1 初始化模板内容
+
+首先通过 configureServer 钩子注册一个自定义的中间件。处理开发服务器的资源请求
+
+当请求头包含 text/html 与 application/xhtml+xml，可以认定为是请求的HTML文档
+
+紧接着根据请求的资源路径查找本地文档
+
+<my-details title="点击展开源码">
 
 ```ts
-import type { PluginOption } from 'vite';
-
 export default function HtmlTemplatePlugin(): PluginOption {
   return {
     name: 'wvs-html-tpl',
@@ -215,84 +345,97 @@ export default function HtmlTemplatePlugin(): PluginOption {
     configureServer(server) {
       const { middlewares: app } = server;
       app.use(async (req, res, next) => {
-        const { url } = req;
-        console.log(url);
+        const htmlAccepts = ['text/html', 'application/xhtml+xml'];
+        const isHtml = !!htmlAccepts.find((a) => req.headers?.accept?.includes(a));
+        if (isHtml) {
+          const originHtml = loadHtmlContent(req.url);
+          const html = await server.transformIndexHtml(req.url, originHtml, req.originalUrl);
+          res.end(html);
+          return;
+        }
         next();
       });
+    },
+    transformIndexHtml(html) {
+      return transformTpl(html);
     },
   };
 }
 ```
-在上述的配置文件中引入
-```ts
-import { htmlTemplatePlugin } from '../plugins/index';
-module.exports = defineConfig({
-  plugins: [
-    htmlTemplatePlugin(),
-  ]
-});
-```
-再次启动服务观察
 
-* 访问`http://localhost:3000`,终端中输出`/`
-* 访问`http://localhost:3000/path1/path2`,终端中输出`/path1/path2`
-* 访问`http://localhost:3000/path1/path2?param1=123`,终端中输出`/path1/path2?param1=123`
+</my-details>
 
+SPA 默认使用 public/index.html
 
-在 devTools面板内容中可以看到，第一个资源请求头上的`Accept`字段中带有`text/html,application/xhtml+xml`等内容，咱们就以这个字段表明请求的是`html`文档
+MPA默认按照如下路径进行查找
+* src/pages/${entryName}/${entryName}.html
+* src/pages/${entryName}/index.html
+* public/${entryName}.html
+* public/index.html
 
-![图片](https://img.cdn.sugarat.top/mdImg/MTYzNDk4Mjg0OTU1OQ==634982849559)
+<my-details title="点击展开源码">
 
-再次修改一下处理资源请求的代码
-```ts
-import { readFileSync } from 'fs';
-import path from 'path';
-import { URL } from 'url';
-
-function loadHtmlContent(reqPath) {
-  // 单页默认 public/index.html
-  const tplPath = 'public/index.html';
-  // 可以根据请求的path：reqPath 作进一步的判断
-  return readFileSync(path.resolve(process.cwd(), tplPath));
-}
-
-// 省略了前面出现过的代码
-app.use(async (req, res, next) => {
-  const { pathname } = new URL(req.url, `http://${req.headers.host}`);
-  const htmlAccepts = ['text/html', 'application/xhtml+xml'];
-  const isHtml = !!htmlAccepts.find((a) => req.headers.accept.includes(a));
-  if (isHtml) {
-    const html = loadHtmlContent(pathname);
-    res.end(html);
-    return;
-  }
-  next();
-});
-```
-再次在demo中启动服务，访问就能正确看到`Hello Vite`
-
-在终端中会发现一个报错
-```sh
-UnhandledPromiseRejectionWarning: URIError: URI malformed
-```
-打开模板可以发现是由于有一些其它的内容，里面包含一些变量，这部分在webpack中是由 [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)插件处理 
-```html
-<link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-<link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-<link rel="icon" href="<%= BASE_URL %>favicon.ico">
-<title>
-  <%= htmlWebpackPlugin.options.title %>
-</title>
-```
-这里编写一个简单的方法对模板先做一些简单处理（这个方法只处理了当前遇到的这种情况）
 ```ts
 /**
- * 初始化模板内容（替换 <%= varName %> 一些内容）
+ * 获取原始模板
  */
-function initTpl(tplStr:string, data = {}, ops?:{
-  backup?:string
-  matches?:RegExp[]
+function loadHtmlContent(reqPath:string) {
+  // 兜底页面
+  const pages = [path.resolve(__dirname, '../../public/index.html')];
+  // 单页/多页默认 public/index.html
+  pages.unshift(resolved('public/index.html'));
+  // 多页应用可以根据请求的 路径 作进一步的判断
+  if (isMPA()) {
+    const entryName = getEntryName(reqPath);
+    if (entryName) {
+    // src/pages/${entryName}/${entryName}.html
+    // src/pages/${entryName}/index.html
+    // public/${entryName}.html
+      pages.unshift(resolved(`public/${entryName}.html`));
+      pages.unshift(resolved(`src/pages/${entryName}/index.html`));
+      pages.unshift(resolved(`src/pages/${entryName}/${entryName}.html`));
+    }
+  }
+  // TODO：根据框架的配置寻找，可自行进一步拓展
+  const page = pages.find((v) => existsSync(v));
+  return readFileSync(page, { encoding: 'utf-8' });
+}
+```
+</my-details>
+
+获取到原始的模板内容后，通常原始模板中可能会包含一些EJS的语法
+
+可以通过 transformIndexHtml 钩子对模板内容进行一个进一步的处理
+
+```ts
+export default function HtmlTemplatePlugin(): PluginOption {
+  return {
+    transformIndexHtml(html) {
+      return transformTpl(html);
+    },
+  };
+}
+```
+
+transformTpl方法的实现，可以根据具体的场景进行实现，这里提供一个简单的正则替换实现
+
+<my-details title="点击展开源码">
+
+```ts
+export function transformTpl(tplStr:string, data = {}, ops?:{
+ backup?:string
+ matches?:RegExp[]
 }) {
+  data = {
+    PUBLIC_URL: '.',
+    BASE_URL: './',
+    htmlWebpackPlugin: {
+      options: {
+        title: 'App',
+      },
+    },
+    ...data,
+  };
   const { backup = '', matches = [] } = ops || {};
   // match %Name% <%Name%>
   return [/<?%=?(.*)%>?/g].concat(matches).reduce((tpl, r) => tpl.replace(r, (_, $1) => {
@@ -302,91 +445,59 @@ function initTpl(tplStr:string, data = {}, ops?:{
   }), tplStr);
 }
 ```
-如果模板中还有复杂的ejs语法可以使用 `ejs` 库做进一步处理
-```ts
-import ejs from 'ejs';
+</my-details>
 
-/**
- * ejs渲染
- */
-function transformEjsTpl(html:string, data = {}) {
-  return ejs.render(html, data);
-}
+#### 4.1.2 插入entryJs
+
+模板处理完成后，需要再模板中通过 script 标签引入entryJs才能正常的进行工作
+
+```html
+<script type="module" src="$entryPath"></script>
+<!--例如-->
+<script type="module" src="/src/main"></script>
+<script type="module" src="/src/pages/pageName/index"></script>
 ```
-当然如果还有其它未考虑到的case，可根据特定情况，再对模板做进一步的处理
 
-下面将上述编写的方法集成到插件中
-```ts
-export default function HtmlTemplatePlugin(): PluginOption {
-  return {
-    configureServer(server) {
-      const { middlewares: app } = server;
-      app.use(async (req, res, next) => {
-        // 省略代码
-        if (isHtml) {
-          const originHtml = loadHtmlContent(pathname);
-          // 调用插件中的transformIndexHtml 钩子对模板做进一步处理
-          const html = await server.transformIndexHtml(req.url, originHtml, req.originalUrl);
-          res.end(html);
-          return;
-        }
-        next();
-      });
-    },
-    transformIndexHtml(html) {
-      // data可以传入模板中包含的一些变量
-      // 可以再此处获取webpack配置，做自动转换
-      return initTpl(html, {
-        PUBLIC_URL: '.',
-        BASE_URL: './',
-        htmlWebpackPlugin: {
-          options: {
-            title: 'App',
-          },
-        },
-      });
-    },
-  };
-}
-```
-到此再次在demo中运行，页面跑起来了，终端中也无报错，页面的模板到此算是处理完毕
+这部分的处理相对简单，只需要调用 transformIndexHtml 钩子即可
 
-有了初始的模板，就意味着我们已经为`Vite`提供了页面的入口，但其中还没有处理的`js/ts`的依赖即 `entry`
-
-下面将介绍往模板中插入entry
-### 4. 指定entry入口
-入口文件名(entryName)通常为`(main|index).js|ts|jsx|tsx`
-* 单页应用（SPA）中entryBase通常为：`src`
-* 多页应用（MPA）中entryBase通常为：`src/pages/${pageName}`
-
-利用`transformIndexHtml`钩子往模板中插入`<script type="module" src="entryFile"></script>`
 ```ts
 export default function pageEntryPlugin(): PluginOption {
   return {
     name: 'wvs-page-entry',
     apply: 'serve',
     transformIndexHtml(html, ctx) {
-      return html.replace('</body>', `<script type="module" src="${getPageEntry(ctx.originalUrl)}"></script>
+      const entry = getPageEntry(ctx.originalUrl);
+      if (!entry) {
+        return html;
+      }
+      return html.replace('</body>', `<script type="module" src="${path.join('/', entry)}"></script>
         </body>
         `);
     },
   };
 }
 ```
-这里以SPA为例
+entryJs的获取逻辑如下：
+* entry命名通过正则 `/(index|main)\.[jt]sx?$/` 进行筛选
+* SPA查找目录 `src`
+* MPA查找目录 `src/pages/pageName`
+
+<my-details title="点击展开源码">
+
 ```ts
 function getPageEntry(reqUrl) {
-  // SPA
+  if (isMPA()) {
+    const pageName = getPageName(reqUrl);
+    return !!pageName && getEntryFullPath(`src/pages/${pageName}`);
+  }
+  // 其它场景跟MPA处理类似
+
+  // 默认SPA
   const SPABase = 'src';
   return getEntryFullPath(SPABase);
 }
-```
-`getEntryFullPath` 实现如下
-* 先判断目录是否存在
-* 读取目录，遍历文件利用正则`/(index|main)\.[jt]sx?$/`判断文件是否为目标文件
-```ts
-const resolved = (...p) => path.resolve(getCWD(), ...p);
-const getEntryFullPath = (dirPath) => {
+
+function getEntryFullPath(dirPath) {
   if (!existsSync(resolved(dirPath))) {
     return false;
   }
@@ -398,129 +509,365 @@ const getEntryFullPath = (dirPath) => {
       return v.isFile() && entryName.test(v.name);
     });
   return entryNames.length > 0 ? path.join(dirPath, entryNames[0].name) : false;
-};
+}
 ```
-将这个插件加入到配置里
+</my-details>
+
+其中 pageName 根据请求的资源路径，使用 “/ ” 分割，对每个分割内容进行文件目录的存在与否进行判断
+
 ```ts
-import { pageEntryPlugin } from '../plugins/index';
-module.exports = defineConfig({
-  plugins: [
-    pageEntryPlugin(),
-  ]
-});
+export function getPageName(reqUrl:string) {
+  // TODO：兼容webpack配置 historyRewrites
+  const { pathname } = new URL(reqUrl, 'http://localhost');
+  const paths = pathname.split('/').filter((v) => !!v);
+  const entryName = paths.find((p) => existsSync(path.join(getCWD(), 'src/pages', p)));
+  return entryName || '';
+}
 ```
 
-启动demo查看效果，抛出了一堆错误
+### 4.2 Production-Build
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTYzODYwNjI2NTQyMA==638606265420)
+
+vite构建的入口也是 html，通过 build.rollup.input 属性设置
+```ts
+// vite.config.ts
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  build: {
+    rollupOptions: {
+      input: {
+        index: 'src/pages/index/index.html',
+        second: 'src/pages/second/second.html',
+      },
+    },
+  },
+});
+```
+按照如上配置，构建产物中的html目录将会如下
 ```sh
-wvs start
+* dist
+  * src/pages/index/index.html
+  * src/pages/second/second.html
+  * assets
 ```
-
-下面是针对框架特定的处理
-#### React
-1. **React: the content contains invalid JS syntax**
-
-React中将带有jsx语法的js文件后缀改为jsx,关于直接在js中使用jsx语法的处理方案，见文章：[解决Vite-React项目中.js使用jsx语法报错的问题](https://juejin.cn/post/7018128782225571853)
-
-2. **Uncaught ReferenceError: React is not defined**
-
-在 react组件顶部引入`React`,或引入`@vitejs/plugin-react`插件，同下3处理方案
-```ts
-import React from 'react';
-```
-
-3. **HMR支持**
-
-引入[@vitejs/plugin-react](https://github.com/vitejs/vite/tree/main/packages/plugin-react)插件
-```ts
-import react from '@vitejs/plugin-react'
-
-module.exports = defineConfig({
-  plugins: [
-    react(),
-  ]
-});
-```
-#### Vue
-需要添加插件处理.vue文件
-
-引入[@vitejs/plugin-vue](https://github.com/vitejs/vite/tree/main/packages/plugin-vue)插件
-```ts
-import vue from '@vitejs/plugin-vue'
-
-module.exports = defineConfig({
-  plugins: [
-    vue(),
-  ]
-});
-```
-同时 `@vitejs/plugin-vue` 需要 `vue` (>=3.2.13)
-
-由于前面采用的是`npm link`创建软连接进行的调试，配置文件中会在开发目录下去查找Vue依赖，不会在指令运行目录下查找，会不断的抛出上述问题
-
-这里在demo项目里本地安装我们的依赖，然后在package.json添加相关指令
+不太符合通常的习惯，常规格式如下
 ```sh
-yarn add file:webpack-vite-service-workspace-path
+* dist
+  * index.html
+  * second.html
+  * assets
 ```
-```json
+
+所以需要通过插件 处理构建入口文件 和 调整构建后的产物位置
+
+#### 4.2.1 插件结构
+通过 configResolved 钩子获取最终配置，配置提供给其它钩子使用
+
+约定pageEntry的目录
+* SPA：src
+* MPA：src/pages
+
+<my-details title="点击展开源码">
+
+```ts
+export default function BuildPlugin(): PluginOption {
+  let userConfig:ResolvedConfig = null;
+  return {
+    name: 'wvs-build',
+    // 只在构建阶段生效
+    apply: 'build',
+    // 获取最终配置
+    configResolved(cfg) {
+      userConfig = cfg;
+    },
+    // 插件配置处理
+    config() {
+      
+    },
+    resolveId(id) {
+
+    },
+    load(id) {
+
+    },
+    // 构建完成后
+    closeBundle() {
+      
+    },
+  };
+}
+```
+</my-details>
+
+#### 4.2.2 获取所有的entry
+
+```ts
+const entry = [];
+if (isMPA()) {
+  entry.push(...getMpaPageEntry());
+} else {
+  // 单页应用
+  entry.push({
+    entryName: 'index',
+    entryHtml: 'public/index.html',
+    entryJs: getEntryFullPath('src'),
+  });
+}
+```
+
+MPA的pageEntry逻辑获取如下:
+1. 先获取所有的entryName
+2. 再查询遍历每个page对应的 entryJs 与 entryHtml
+
+<my-details title="点击展开源码">
+
+```ts
+export function getMpaPageEntry(baseDir = 'src/pages') {
+  // 获取所有的EntryName
+  const entryNameList = readdirSync(resolved(baseDir), { withFileTypes: true })
+    .filter((v) => v.isDirectory())
+    .map((v) => v.name);
+
+  return entryNameList
+    .map((entryName) => ({ entryName, entryHtml: '', entryJs: getEntryFullPath(path.join(baseDir, entryName)) }))
+    .filter((v) => !!v.entryJs)
+    .map((v) => {
+      const { entryName } = v;
+      const entryHtml = [
+        // src/pages/${entryName}/${entryName}.html
+        resolved(`src/pages/${entryName}/${entryName}.html`),
+        // src/pages/${entryName}/index.html
+        resolved(`src/pages/${entryName}/index.html`),
+        // public/${entryName}.html
+        resolved(`public/${entryName}.html`),
+        // 应用兜底
+        resolved('public/index.html'),
+        // CLI兜底页面
+        path.resolve(__dirname, '../index.html'),
+      ].find((html) => existsSync(html));
+      return {
+        ...v,
+        entryHtml,
+      };
+    });
+}
+```
+</my-details>
+
+#### 4.2.3 生成Build所需配置
+根据获取的所有 entry生成最终构建所需的配置
+* 获取每个 entryHtml 的内容,然后使用 map 进行临时的存储
+* 构建入口模板路径取 entryJs 的目录加index.html
+
+<my-details title="点击展开源码">
+
+```ts
+const htmlContentMap = new Map();
+// 省略其它无关代码
 {
-  "scripts": {
-    "vite": "wvs start -f vue"
+  config() {
+    const input = entry.reduce((pre, v) => {
+      const { entryName, entryHtml, entryJs } = v;
+      const html = getEntryHtml(resolved(entryHtml), path.join('/', entryJs));
+      const htmlEntryPath = resolved(path.parse(entryJs).dir, tempHtmlName);
+      // 存储内容
+      htmlContentMap.set(htmlEntryPath, html);
+      pre[entryName] = htmlEntryPath;
+      return pre;
+    }, {});
+    return {
+      build: {
+        rollupOptions: {
+          input,
+        },
+      },
+    };
+  }
+}
+```
+</my-details>
+
+#### 4.2.4 入口HTML内容生成
+
+实际上htmlEntryPath这个路径并不是真实存在的（不存在这个文件）
+
+需要通过 resolveId 与 load 钩子，利用 htmlContentMap 存储的内容进行进一步的处理
+
+```ts
+{
+  load(id) {
+    if (id.endsWith('.html')) {
+      return htmlContentMap.get(id);
+    }
+    return null;
+  },
+  resolveId(id) {
+    if (id.endsWith('.html')) {
+      return id;
+    }
+    return null;
   },
 }
 ```
 
-`Vue`项目中并没有`React`相关依赖，所以在Vue项目中不能引入`@vitejs/plugin-react`插件
+其中 id 为资源请求的路径，直接从 htmlContentMap 取出模板的内容即可
 
-可以在指令入口添加框架相关参数判断处理一下，只引入对应框架的插件
+构建完成后，需要调整html文档的位置，使其符合预期
+
+#### 4.2.5 产物目录调整
+使用 closeBundle 钩子，在构建完成后，服务关闭前进行文件调整
+* 遍历`entry`将`dist/src/pages/pageName/index.html`移动到`dist`下
+* 移除`dist/src`下的内容
+
 ```ts
-// src/bin.ts
-program.command('start')
-  .option('-f, --framework <type>', 'set project type [vue/react]')
-  .action(startCommand);
+closeBundle() {
+  const { outDir } = userConfig.build;
+  // 目录调整
+  entry.forEach((e) => {
+    const { entryName, entryJs } = e;
+    const outputHtmlPath = resolved(outDir, path.parse(entryJs).dir, tempHtmlName);
+    writeFileSync(resolved(outDir, `${entryName}.html`), readFileSync(outputHtmlPath));
+  });
+  // 移除临时资源
+  rmdirSync(resolved(outDir, 'src'), { recursive: true });
+}
+```
 
-// src/command/start.ts
-export default function startCommand(options:{[key:string]:string}) {
-  const { framework = '' } = options;
-  process.env.framework = framework.toUpperCase();
+### 4.3 Vite配置处理
+#### 4.3.1 读取用户配置
+
+Vite 提供了一个现成的方法用于读取与解析Vite的配置文件
+
+```ts
+import { loadConfigFromFile, ConfigEnv } from 'vite';
+
+export function getUserConfig(configEnv:ConfigEnv, suffix = '') {
+  const configName = 'vite.config';
+  const _suffix = ['ts', 'js', 'mjs', 'cjs'];
+  if (suffix) {
+    _suffix.unshift(suffix);
+  }
+  const configFile = _suffix.map((s) => `${configName}.${s}`).find((s) => existsSync(s));
+  return loadConfigFromFile(configEnv, configFile);
+}
+```
+
+获取配置后通过 config 钩子，将配置并入最终的配置之中
+
+```ts
+import type { PluginOption } from 'vite';
+import { getUserConfig } from '../utils';
+
+export default function UserConfigPlugin(): PluginOption {
+  return {
+    name: 'wvs-config',
+    async config(cfg, env) {
+      const userConfig = await getUserConfig(env);
+      return {
+        ...userConfig?.config,
+      };
+    },
+  };
+}
+```
+
+#### 4.3.2 转换webpack配置
+
+目前社区已经有一个CLI工具，[wp2vite](https://github.com/tnfe/wp2vite) 支持常规Vue/React项目的[webpack配置](https://www.webpackjs.com/configuration/)的自动转换到[vite配置](https://cn.vitejs.dev/config/)
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTYzODYwNzE1ODI2OA==638607158268)
+
+```sh
+npm install -g wp2vite
+```
+
+根目录执行 wp2vite 即可自动转换
+* 但由于是一个CLI工具，并没有将内部转换配置的方法暴露出来
+* 工具是开源的。使用方可以对其进行二次的定制，复用其部分能力
+* 获取到转换后的配置后，同上通过config钩子并入最终配置即可
+
+### 4.4 CLI工具支持
+Vite支持在启动命令中指定配置文件的路径，这为CLI内置Vite能力提供了便利
+
+```sh
+vite -c configFilePath
+```
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTYzODYwNzU3MDIwMQ==638607570201)
+
+CLI内部可以通过 spawn 创建子进程启动，也可使用vite对外暴露的`createServer`方法
+
+```ts
+import spawn from 'cross-spawn';
+// 或者
+import { spawn } from 'child_process';
+
+const configPath = require.resolve('./../config/vite.js');
+const params = ['--config', configPath];
+
+if (debug) {
+  // 标志debug
+  process.env.DEBUG = 'true';
+
+  // vite debug
+  params.push('--debug');
+  if (typeof debug === 'string') {
+    params.push(debug);
+  }
 }
 
-// src/config/vite.ts
-import react from '@vitejs/plugin-react';
-import vue from '@vitejs/plugin-vue';
-
-const extraPlugins: any[] = [
-  process.env.framework === 'REACT' ? [react()] : [],
-  process.env.framework === 'VUE' ? [vue()] : [],
-];
-module.exports = defineConfig({
-  plugins: [
-    htmlTemplatePlugin(),
-    pageEntryPlugin(),
-    ...extraPlugins,
-  ],
+const viteService = spawn('vite', params, {
+  cwd: process.cwd(),
+  stdio: 'inherit',
 });
 ```
-到此最关键的两个步骤就算完成了
-### 5. 其它工程能力
-目前针对webpack常见的能力，社区已经有了许多插件和方案，下面只做简单介绍
 
-这些插件当然也有些场景可能处理不了，还是期望广大开发者，勇于实验，然后向插件作者提交PR/issues
+## 5 效果 - 接入Vite前后对比
+启动提速≈70% - 80% HMR速度碾压
+### 5.1 Vue SPA
+![图片](https://img.cdn.sugarat.top/mdImg/MTYzNTE2OTU0MzgyMA==vue.gif)
 
-* Sass/Less：在依赖中安装`Sass/Less`即可
-* 组件库按需引入：[vite-plugin-style-import](https://www.npmjs.com/package/vite-plugin-style-import)
-* process.env：[vite-plugin-env-compatible](https://github.com/IndexXuan/vite-plugin-env-compatible)
-* window.xx/xx undefined：使用`transformIndexHtml`钩子开发插件，在模板中提前引入这个方法的`polyfill`或者兜底处理
-* ...
+### 5.2 React SPA
+![图片](https://img.cdn.sugarat.top/mdImg/MTYzNTA3MDM3NDkyMQ==react-demo2.gif)
 
-## 总结
+## 6 总结与展望
+
+### 6.1 总结
+
+本文主要讲述了，项目（包含但不限于webpack工程）接入Vite的通用方案与核心部分逻辑的实现。
+
+为读者提供了一种Web工程接入Vite的思路。
+
 企业：大部分是拥有自己的研发框架，在研发框架中只需要加入一个Vite启动的CLI指令，这样对接入方的影响与使用成本是最小的
 
 个人：喜欢折腾/不想改动原来的代码，可以按上述流程自己接一下，新项目可以直接使用Vite官方模板开发
 
 总之：**开发中使用`Vite`还是很香的**
 
-由于篇幅与时间都有限，文中部分地方只介绍了实现思路，并没粘贴完整代码，完整代码可在[源码仓库](https://github.com/ATQQ/webpack-vite-serve)中查看，也可`fork`直接进行二次开发
+### 6.2 未来展望
 
-`webpack`向`vite`配置的转换这部分的内容将放在下期做介绍
+Vite是一颗冉冉升起的前端新星，相信随着周边的不断完善。工程使用Vite作为构建工具的比例会大大的增加。
+
+在只兼容现代浏览器的前提下，bundleless方案将会大放异彩，极大的提升产物的构建速度，再也不用发一次版要等几分钟甚至几十分钟才能Build完成，尤其是在需要频繁部署的测试环境之中。
+
+## 后续规划
+* [ ] 目前`wp2vite`在配置转换这一块，还不能太满足使用要求，准备提PR增强一下
+* [ ] 将内部能力抽成一个个单独的vite插件
+* [ ] 将日常所需能力进行内置
+* [ ] 将常见问题的解决方案进行内置
+* [ ] 减小包体积，加快下载速度
+* [ ] 完善文档
+
+## 参考资料
+* [掘金：js打包时间缩短90%，bundleless生产环境实践总结](https://juejin.cn/post/7010585760642367496#heading-1)
+* [掘金：可能是最完善的 React+Vite 解决方案，阿里飞冰团队发布 icejs 2.0 版本](https://juejin.cn/post/7026616296426962958)
+* [近 20k Star的项目说不做就不做了，但总结的内容值得借鉴](https://juejin.cn/post/7010922819143860261)
+* [知乎：Vite 的目标不是要干掉 webpack](https://www.zhihu.com/question/477139054/answer/2156019180)
+* [知乎：彻底告别编译 OOM，用 esbuild 做压缩器](https://zhuanlan.zhihu.com/p/139219361)
+* [Vite官方中文文档](https://cn.vitejs.dev/guide/why.html)
+
+
 <comment/>
 <tongji/>
