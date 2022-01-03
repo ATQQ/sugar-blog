@@ -108,7 +108,7 @@ module.exports = {
           { text: "校招考点汇总", link: "/offer/campus/" },
           { text: "20年春招面经", link: "/offer/spring20/" },
           { text: "20年秋招面经", link: "/offer/autumn20/" },
-          { text: "21年春招面经", link: "/offer/spring21/" },
+          { text: "21年面经", link: "/offer/spring21/" },
           { text: "复习自查", link: "/offer/review/" },
         ],
       },

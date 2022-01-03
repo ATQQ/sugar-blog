@@ -41,6 +41,7 @@ sticky: 5
 * [阿里巴巴开源镜像站](https://developer.aliyun.com/mirror/) - 阿里云官方镜像站
 * [牛6网](https://n6app.com/) - 常用网址聚合
 * [在线工具](https://tool.lu/) - 你的工具箱
+* [大圣编程自学网](https://shengxinjing.cn/)
 
 ## 代码&仓库
 * [clean-code-javascript​](https://github.com/ryanmcdermott/clean-code-javascript#set-default-objects-with-objectassign)​ - 整洁代码实践精髓
