@@ -4,15 +4,21 @@ const path = require('path')
 const scanDirectory = ['technology', 'offer', 'interview', 'computerBase', 'coding', 'bigWeb']
 const baseDir = path.resolve(__dirname, '../docs')
 
-function getDirList(dir, dir2 = '') {
-    let files = fs.readdirSync(path.resolve(dir, dir2))
-    files = files.filter(v => v !== 'README.md')
+/**
+ * 获取指定目录下的md文件目录
+ * @param {string} dir 目标目录
+ * @param {string[]} exclude 排除的文件名
+ */
+function getDirMdCatalog(dir,exclude=[]) {
+    let files = fs.readdirSync(dir,{withFileTypes:true})
+    files = files.filter(f=>f.isFile() && !exclude.includes(f.name))
     let res = files.map(file => {
-        let title = fs.readFileSync(path.resolve(dir, dir2, file), { encoding: 'utf-8' })
+        const filename = file.name
+        let title = fs.readFileSync(path.resolve(dir, filename), { encoding: 'utf-8' })
             .split('\n').find(str => {
                 return str.startsWith('# ')
             }).slice(2).trim()
-        return `* [${title}](./${dir2 ? `${dir2}/` : ''}${file})`
+        return `* [${title}](./${filename})`
     })
     return res;
 }
@@ -31,7 +37,7 @@ scanDirectory.forEach(v => {
     dirs.forEach(dir => {
         if (dir.isDirectory()) {
             let { name } = dir
-            let list = getDirList(path.resolve(baseDir, v, name));
+            let list = getDirMdCatalog(path.resolve(baseDir, v, name),['README.md']);
             addDirListToREADME(list, path.resolve(baseDir, v, name, 'README.md'))
             console.log(`success:${name}`)
         }

@@ -16,8 +16,8 @@
     "onestep": "npm run build && npm run compress && npm run upload && npm run deploy",
     "addTJ": "node src/addTJ.js",
     "addConfig": "node src/addConfig.js",
-    "addCatelog": "node src/createCatelog.js",
-    "beforeBuild": "npm run addCatelog && npm run addTJ && npm run addConfig",
+    "addCatalog": "node src/createCatalog.js",
+    "beforeBuild": "npm run addCatalog && npm run addTJ && npm run addConfig",
     "wx": "node src/wx.js"
   },
   "keywords": [],

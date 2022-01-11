@@ -18,7 +18,7 @@ NavSider.prototype.getSiders = function () {
 }
 
 const defaultConfig = {
-    collapsable: false,
+    collapsable: true,
     sidebarDepth: 2
 }
 
