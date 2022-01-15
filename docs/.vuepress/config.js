@@ -1,22 +1,5 @@
 const sidebar = require("./siders/index");
-const fs = require("fs");
-const path = require("path");
-const httpsConfig = {
-  host: "local.sugarat.top",
-  devServer: {
-    https: {
-      key: fs.readFileSync(
-        path.resolve(__dirname, "./../../src/ca/local.sugarat.top-key.pem")
-      ),
-      cert: fs.readFileSync(
-        path.resolve(__dirname, "./../../src/ca/local.sugarat.top.pem")
-      ),
-    },
-  },
-};
-const isHttps = process.env.ENV_SCHEMA === "https";
 module.exports = {
-  ...(isHttps ? httpsConfig : {}),
   plugins: [
     ["@vuepress/pwa",
       {
@@ -50,7 +33,7 @@ module.exports = {
             src: 'https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210'
           },
         ],
-        footer:[
+        footer: [
           {
             type: 'text',
             content: '美团全年招聘 前端&客户端',

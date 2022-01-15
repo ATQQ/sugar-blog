@@ -96,7 +96,7 @@ timec task -d <name>
 ### 事务管理
 
 开始一个新的事务
-```sj
+```sh
 timec thing <name>
 ```
 
