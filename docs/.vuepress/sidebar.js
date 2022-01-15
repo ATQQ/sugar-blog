@@ -30,10 +30,10 @@ const matterExample = {
     collapsable: false
 }
 
-function getTitle(filepath) {
+function getTitle(filepath, isGroup = false) {
     // 文章配置
     const { groupTitle, sidebarTitle } = getFileMatterData(filepath)
-    return groupTitle || sidebarTitle || getFileH1(filepath)
+    return (isGroup && groupTitle) || sidebarTitle || getFileH1(filepath)
 }
 
 function isCollapsable(filepath) {
@@ -45,7 +45,7 @@ function getDirSide(dirRoute, ops = {}) {
 
     const READMEFile = join(docsDir, dirRoute, 'README.md')
     const config = {
-        title: getTitle(READMEFile),
+        title: getTitle(READMEFile, isRoot),
         ...otherOps,
         collapsable: !!isCollapsable(READMEFile)
     }
@@ -81,5 +81,5 @@ function getDirSide(dirRoute, ops = {}) {
     return config
 }
 
-writeFileSync(join(__dirname, 'test.json'), JSON.stringify(sidebar, null, 2))
+// writeFileSync(join(__dirname, 'test.json'), JSON.stringify(sidebar, null, 2))
 module.exports = sidebar
