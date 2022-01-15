@@ -1,0 +1,1645 @@
+{
+  "/bigWeb/js/": [
+    {
+      "collapsable": true,
+      "sidebarDepth": 2,
+      "title": "Javascript",
+      "children": [
+        [
+          "",
+          "简介"
+        ],
+        [
+          "p1",
+          "获取某年某月的天数"
+        ],
+        [
+          "p2",
+          "日期格式化"
+        ],
+        [
+          "p3",
+          "展开多级数组"
+        ],
+        [
+          "p4",
+          "判断数据类型的方案"
+        ],
+        [
+          "p5",
+          "文件上传与下载"
+        ],
+        [
+          "currying",
+          "柯里化"
+        ],
+        [
+          "closure",
+          "闭包"
+        ],
+        [
+          "delete",
+          "delete"
+        ],
+        [
+          "garbage",
+          "垃圾回收"
+        ],
+        [
+          "throttling",
+          "节流与防抖"
+        ],
+        [
+          "apply",
+          "apply,call,bind"
+        ],
+        [
+          "blob",
+          "blob与file"
+        ],
+        [
+          "eventloop",
+          "Event Loop"
+        ],
+        [
+          "promise",
+          "Promise"
+        ],
+        [
+          "clock",
+          "定时器"
+        ],
+        [
+          "prototype",
+          "原型与原型链"
+        ],
+        [
+          "scope",
+          "作用域"
+        ],
+        [
+          "runStack",
+          "执行上下文栈"
+        ],
+        [
+          "variableObject",
+          "变量对象"
+        ],
+        [
+          "scopeLink",
+          "作用域链"
+        ],
+        [
+          "ecmathis",
+          "ECMAScript规范解读this"
+        ],
+        [
+          "runcontext",
+          "执行上下文"
+        ],
+        [
+          "valuePass",
+          "参数按值传递"
+        ],
+        [
+          "likearray",
+          "类数组与arguments"
+        ],
+        [
+          "float",
+          "浮点数"
+        ],
+        [
+          "symbol",
+          "Symbol的用法"
+        ],
+        [
+          "arrowfun",
+          "箭头函数"
+        ],
+        [
+          "typeConvert",
+          "类型转换"
+        ],
+        [
+          "getElement",
+          "获取dom元素的方式"
+        ],
+        [
+          "copy",
+          "浅拷贝与深拷贝"
+        ],
+        [
+          "es6+",
+          "ES6+的新语法糖和方法整理"
+        ],
+        [
+          "p0",
+          "学习过程中学到的一些取巧之法"
+        ]
+      ]
+    }
+  ],
+  "/bigWeb/html/": [
+    {
+      "collapsable": true,
+      "sidebarDepth": 2,
+      "title": "HTML",
+      "children": [
+        [
+          "",
+          "简介"
+        ],
+        [
+          "semantic",
+          "语义化标签"
+        ]
+      ]
+    }
+  ],
+  "/bigWeb/regexp/": [
+    {
+      "collapsable": true,
+      "sidebarDepth": 2,
+      "title": "Regexp",
+      "children": [
+        [
+          "",
+          "正则表达式"
+        ],
+        [
+          "p1",
+          "提取样式表中url()中的内容"
+        ]
+      ]
+    }
+  ],
+  "/bigWeb/css/": [
+    {
+      "collapsable": true,
+      "sidebarDepth": 2,
+      "title": "Css",
+      "children": [
+        [
+          "",
+          "简介"
+        ],
+        [
+          "pseudo-element",
+          "伪元素"
+        ],
+        [
+          "pseudo-class",
+          "伪类"
+        ],
+        [
+          "selectors",
+          "选择器"
+        ],
+        [
+          "p1",
+          "伪元素before与after"
+        ],
+        [
+          "p2",
+          "实现表格斑马纹"
+        ],
+        [
+          "reflow",
+          "回流与重绘"
+        ],
+        [
+          "box",
+          "盒模型"
+        ],
+        [
+          "flex",
+          "弹性布局"
+        ],
+        [
+          "level",
+          "CSS层级关系"
+        ],
+        [
+          "bfc",
+          "BFC"
+        ],
+        [
+          "ifc",
+          "IFC"
+        ]
+      ]
+    }
+  ],
+  "/bigWeb/node/": [
+    {
+      "collapsable": true,
+      "sidebarDepth": 2,
+      "title": "Node",
+      "children": [
+        [
+          "",
+          "NodeJS"
+        ],
+        [
+          "mongoDb",
+          "使用TS封装操作MongoDB数据库的工具方法"
+        ],
+        [
+          "p1",
+          "使用Node.js从终端读入内容"
+        ]
+      ]
+    }
+  ],
+  "/bigWeb/vue/": [
+    {
+      "collapsable": true,
+      "sidebarDepth": 2,
+      "title": "Vue",
+      "children": [
+        [
+          "",
+          "简介"
+        ],
+        [
+          "responsive",
+          "响应式基本原理"
+        ],
+        [
+          "routing",
+          "路由原理"
+        ],
+        [
+          "hook",
+          "生命周期钩子"
+        ],
+        [
+          "communicate",
+          "组件通信"
+        ],
+        [
+          "extend",
+          "extend API"
+        ],
+        [
+          "mixin",
+          "mixin与mixins"
+        ],
+        [
+          "computed",
+          "computed与watch"
+        ],
+        [
+          "keep-alive",
+          "keep-alive"
+        ],
+        [
+          "showif",
+          "v-show 与 v-if"
+        ],
+        [
+          "mechanism",
+          "❤运行机制概述"
+        ],
+        [
+          "dep",
+          "❤响应式系统的依赖收集追踪原理"
+        ],
+        [
+          "vnode",
+          "❤VNode实现"
+        ],
+        [
+          "compile",
+          "编译template的过程"
+        ],
+        [
+          "diff",
+          "数据状态更新时的差异diff及patch机制"
+        ]
+      ]
+    }
+  ],
+  "/bigWeb/browser/": [
+    {
+      "collapsable": true,
+      "sidebarDepth": 2,
+      "title": "Browser",
+      "children": [
+        [
+          "",
+          "浏览器专题内容"
+        ],
+        [
+          "core",
+          "内核"
+        ],
+        [
+          "render",
+          "渲染机制"
+        ],
+        [
+          "block",
+          "阻塞渲染"
+        ],
+        [
+          "cache",
+          "缓存机制"
+        ],
+        [
+          "storage",
+          "本地存储"
+        ],
+        [
+          "safe",
+          "安全问题"
+        ],
+        [
+          "chrome-devtools-study",
+          "分享小册《Chrome-DevTools的使用技巧》中的精华"
+        ],
+        [
+          "cors",
+          "跨域与跨站"
+        ],
+        [
+          "eventloop",
+          "浏览器中的Eventloop"
+        ],
+        [
+          "newco",
+          "新的跨域策略"
+        ],
+        [
+          "problem",
+          "常见问题"
+        ]
+      ]
+    }
+  ],
+  "/bigWeb/performance/": [
+    {
+      "collapsable": true,
+      "sidebarDepth": 2,
+      "title": "Performance",
+      "children": [
+        [
+          "",
+          "性能优化"
+        ],
+        [
+          "Internet",
+          "网络层面优化"
+        ],
+        [
+          "cdn",
+          "CDN的缓存与回源机制"
+        ],
+        [
+          "dnsPre",
+          "DNS预解析"
+        ],
+        [
+          "image",
+          "图片优化"
+        ],
+        [
+          "lazyLoad",
+          "懒加载与执行"
+        ],
+        [
+          "monitor",
+          "监控"
+        ],
+        [
+          "preLoad",
+          "资源预加载"
+        ],
+        [
+          "preRender",
+          "页面预渲染"
+        ],
+        [
+          "ssr",
+          "服务端渲染"
+        ],
+        [
+          "throttling",
+          "节流与防抖"
+        ]
+      ]
+    }
+  ],
+  "/coding/algorithm/": [
+    {
+      "collapsable": true,
+      "sidebarDepth": 2,
+      "title": "Algorithm",
+      "children": [
+        [
+          "",
+          "算法与数据结构"
+        ],
+        [
+          "linkReserve",
+          "链表--转置"
+        ],
+        [
+          "treeLevelTraverse",
+          "二叉树--层序遍历"
+        ],
+        [
+          "judgeSymmetryTree",
+          "二叉树--判断是否对称"
+        ],
+        [
+          "quickSort",
+          "排序--快速排序"
+        ],
+        [
+          "headSort",
+          "排序--堆排序"
+        ],
+        [
+          "mergeSort",
+          "排序--归并排序"
+        ],
+        [
+          "addString",
+          "字符串--大数相加"
+        ],
+        [
+          "publicString",
+          "字符串--最长公共子序列长度"
+        ],
+        [
+          "publicStringLen",
+          "字符串--最长公共子串"
+        ],
+        [
+          "feibo1",
+          "简单--斐波拉契数列1"
+        ],
+        [
+          "feibo2",
+          "简单--斐波拉契数列2"
+        ]
+      ]
+    }
+  ],
+  "/coding/js/": [
+    {
+      "collapsable": true,
+      "sidebarDepth": 2,
+      "title": "Javascript",
+      "children": [
+        [
+          "",
+          "javscript代码题"
+        ],
+        [
+          "promiseAll",
+          "简单-实现promiseAll"
+        ],
+        [
+          "myBind",
+          "简单-实现bind"
+        ],
+        [
+          "myCall",
+          "简单-实现call"
+        ],
+        [
+          "myApply",
+          "简单-实现apply"
+        ],
+        [
+          "inherit",
+          "简单-继承实现"
+        ],
+        [
+          "myNew",
+          "简单-new实现"
+        ],
+        [
+          "instanceof",
+          "简单-instanceof实现"
+        ],
+        [
+          "equalA",
+          "简单-a同时等于多个值"
+        ],
+        [
+          "closureUse",
+          "简单-闭包调用"
+        ],
+        [
+          "immed-setInterval",
+          "简单-立即执行的定时器"
+        ],
+        [
+          "judgeDate",
+          "中等-判断两个日期是否同一周"
+        ],
+        [
+          "async",
+          "中等-async/await实现"
+        ],
+        [
+          "deepClone",
+          "中等-实现深拷贝"
+        ],
+        [
+          "mergeRequest",
+          "中等-请求合并"
+        ],
+        [
+          "duplicate",
+          "中等-数组去重"
+        ]
+      ]
+    }
+  ],
+  "/coding/css/": [
+    {
+      "collapsable": true,
+      "sidebarDepth": 2,
+      "title": "Css",
+      "children": [
+        [
+          "",
+          "css代码面试题"
+        ]
+      ]
+    }
+  ],
+  "/computerBase/offer/": [
+    {
+      "collapsable": true,
+      "sidebarDepth": 2,
+      "title": "剑指Offer",
+      "children": [
+        [
+          "",
+          "简介"
+        ],
+        [
+          "p50",
+          "面试题50第一个只出现一次的字符"
+        ],
+        [
+          "p53-2",
+          "面试题53-II.0～n-1中缺失的数字"
+        ],
+        [
+          "p54",
+          "面试题54.二叉搜索树的第k大节点"
+        ],
+        [
+          "p55-1",
+          "面试题55-I.二叉树的深度"
+        ],
+        [
+          "p55",
+          "面试题55-II.平衡二叉树"
+        ],
+        [
+          "p58",
+          "面试题58-II.左旋转字符串"
+        ]
+      ]
+    }
+  ],
+  "/computerBase/os/": [
+    {
+      "collapsable": true,
+      "sidebarDepth": 2,
+      "title": "OS",
+      "children": [
+        [
+          "",
+          "操作系统"
+        ],
+        [
+          "process",
+          "进程"
+        ],
+        [
+          "thread",
+          "线程"
+        ],
+        [
+          "difprothr",
+          "进程与线程的区别"
+        ],
+        [
+          "communicate",
+          "进程和线程怎么通信"
+        ],
+        [
+          "deadlock",
+          "死锁"
+        ]
+      ]
+    }
+  ],
+  "/computerBase/Internet/": [
+    {
+      "collapsable": true,
+      "sidebarDepth": 2,
+      "title": "Internet",
+      "children": [
+        [
+          "",
+          "计算机网络"
+        ],
+        [
+          "udp",
+          "UDP协议"
+        ],
+        [
+          "tcp",
+          "TCP协议"
+        ],
+        [
+          "tcp-udp",
+          "TCP与UDP的区别"
+        ],
+        [
+          "http",
+          "HTTP协议"
+        ],
+        [
+          "clength",
+          "Content-Length"
+        ]
+      ]
+    }
+  ],
+  "/computerBase/design/": [
+    {
+      "collapsable": true,
+      "sidebarDepth": 2,
+      "title": "Design Pattern",
+      "children": [
+        [
+          "",
+          "设计模式"
+        ],
+        [
+          "factory",
+          "工厂模式"
+        ],
+        [
+          "abstractfactory",
+          "抽象工厂模式"
+        ],
+        [
+          "single",
+          "单例模式"
+        ]
+      ]
+    }
+  ],
+  "/computerBase/algorithm/": [
+    {
+      "collapsable": true,
+      "sidebarDepth": 2,
+      "title": "Algorithm And Data",
+      "children": [
+        [
+          "",
+          "算法与数据结构"
+        ],
+        [
+          "sort",
+          "排序算法是否稳定"
+        ]
+      ]
+    }
+  ],
+  "/interview/js/": [
+    {
+      "collapsable": true,
+      "sidebarDepth": 2,
+      "title": "JsInterview",
+      "children": [
+        [
+          "",
+          "js面试题"
+        ],
+        [
+          "asyncawait",
+          "async及await的特点，它们的优点和缺点分别是什么？await原理是什么？"
+        ],
+        [
+          "changeArr",
+          "数组哪些方法会改变自身"
+        ],
+        [
+          "diff-for-in-of",
+          "for-of与for-in的区别"
+        ],
+        [
+          "equal",
+          "==和===有什么区别"
+        ],
+        [
+          "es6",
+          "ES6面试问题"
+        ],
+        [
+          "event",
+          "事件的触发过程是怎么样的？知道什么是事件代理嘛？"
+        ],
+        [
+          "getBool",
+          "将任意类型转为Boolean的方案"
+        ],
+        [
+          "instanceof",
+          "instanceof能正确判断对象的原因是什么"
+        ],
+        [
+          "judgeArr",
+          "如何判断数组"
+        ],
+        [
+          "judgeObj",
+          "如何判断变量类型是对象"
+        ],
+        [
+          "module",
+          "为什么要使用模块化？有哪几种方式可以实现模块化，各有什么特点？"
+        ],
+        [
+          "nullobj",
+          "null是对象吗"
+        ],
+        [
+          "numNotEqual",
+          "为什么0.1+0.2!=0.3"
+        ],
+        [
+          "objDiffPrim",
+          "对象类型和原始类型的不同之处"
+        ],
+        [
+          "objparam",
+          "函数参数是对象会发生什么问题"
+        ],
+        [
+          "onload-ready",
+          "window.onload与document.ready执行顺序"
+        ],
+        [
+          "primitiveType",
+          "原始类型有哪些"
+        ],
+        [
+          "promise",
+          "Promise的特点是什么，分别有什么优缺点？什么是Promise链？Promise构造函数执行和then函数执行有什么区别？"
+        ],
+        [
+          "this",
+          "如何正确判断this？箭头函数的this是什么？"
+        ],
+        [
+          "typeof",
+          "typeof能否正常判断类型"
+        ],
+        [
+          "v8garbage",
+          "V8下的垃圾回收机制是怎么样的？"
+        ]
+      ]
+    }
+  ],
+  "/interview/other/": [
+    {
+      "collapsable": true,
+      "sidebarDepth": 2,
+      "title": "other",
+      "children": [
+        [
+          "",
+          "前端面试综合问题"
+        ],
+        [
+          "engineering",
+          "前端工程化"
+        ],
+        [
+          "inputurl",
+          "在浏览器中输入URL到页面渲染的整个过程"
+        ],
+        [
+          "judgeType",
+          "typeof是否能正确判断类型？instanceof能正确判断对象的原理是什么？"
+        ],
+        [
+          "object",
+          "对象类型和原始类型的不同之处？函数参数是对象会发生什么问题？"
+        ],
+        [
+          "promote",
+          "什么是提升？什么是暂时性死区？var、let及const区别？"
+        ],
+        [
+          "prototype",
+          "如何理解原型？如何理解原型链？"
+        ]
+      ]
+    }
+  ],
+  "/interview/css/": [
+    {
+      "collapsable": true,
+      "sidebarDepth": 2,
+      "title": "Css",
+      "children": [
+        [
+          "",
+          "CSS相关面试题"
+        ],
+        [
+          "display",
+          "display属性有哪些?作用分别是什么?"
+        ],
+        [
+          "hideElement",
+          "几种隐藏元素的方式比较"
+        ],
+        [
+          "inherit",
+          "CSS中哪些属性不能被继承"
+        ],
+        [
+          "position",
+          "position的值有哪些"
+        ]
+      ]
+    }
+  ],
+  "/interview/mini/": [
+    {
+      "collapsable": true,
+      "sidebarDepth": 2,
+      "title": "Mini Program",
+      "children": [
+        [
+          "",
+          "小程序相关面试题"
+        ],
+        [
+          "differentweb",
+          "与传统移动web的异同"
+        ],
+        [
+          "feature",
+          "小程序特点"
+        ],
+        [
+          "principle",
+          "小程序的原理?"
+        ]
+      ]
+    }
+  ],
+  "/interview/performance/": [
+    {
+      "collapsable": true,
+      "sidebarDepth": 2,
+      "title": "Performance",
+      "children": [
+        [
+          "",
+          "性能优化相关面试题"
+        ],
+        [
+          "firstScreenRender",
+          "如何加快首屏渲染?"
+        ]
+      ]
+    }
+  ],
+  "/interview/code/": [
+    {
+      "collapsable": true,
+      "sidebarDepth": 2,
+      "title": "Code",
+      "children": [
+        [
+          "",
+          "手撕代码"
+        ],
+        [
+          "debounce-throttle",
+          "防抖与节流实现"
+        ],
+        [
+          "kmp",
+          "模式串匹配"
+        ],
+        [
+          "middle-center",
+          "居中"
+        ],
+        [
+          "myClock",
+          "定时器实现"
+        ],
+        [
+          "transfer",
+          "任意进制转换"
+        ],
+        [
+          "treeTraverse",
+          "二叉树的遍历"
+        ]
+      ]
+    }
+  ],
+  "/offer/autumn20/": [
+    {
+      "collapsable": true,
+      "sidebarDepth": 2,
+      "title": "2020 autumn offer",
+      "children": [
+        [
+          "",
+          "20年秋招"
+        ],
+        [
+          "blibili",
+          "B站-主站技术中心"
+        ],
+        [
+          "bytedance",
+          "字节跳动-商业变现-广告"
+        ],
+        [
+          "cloudmusic",
+          "网易-云音乐"
+        ],
+        [
+          "ks",
+          "快手-最大的前端团队"
+        ],
+        [
+          "nowcoder",
+          "牛客网-大前端团队"
+        ],
+        [
+          "shopee",
+          "shopee-供应链"
+        ],
+        [
+          "txcloud",
+          "腾讯-腾讯云"
+        ],
+        [
+          "zyb",
+          "作业帮-前端团队"
+        ]
+      ]
+    }
+  ],
+  "/offer/spring20/": [
+    {
+      "collapsable": true,
+      "sidebarDepth": 2,
+      "title": "2020 spring offer",
+      "children": [
+        [
+          "",
+          "20年春招"
+        ],
+        [
+          "baidu",
+          "百度-百度文库"
+        ],
+        [
+          "bytedance-fs",
+          "字节跳动-飞书"
+        ],
+        [
+          "kuaishou-acfun",
+          "快手-Acfun"
+        ],
+        [
+          "meituan-dd",
+          "美团-到店事业群"
+        ],
+        [
+          "mogu",
+          "蘑菇街-小程序BU"
+        ],
+        [
+          "tencent-kd",
+          "腾讯-腾讯看点"
+        ],
+        [
+          "tencent-video",
+          "腾讯-腾讯视频"
+        ],
+        [
+          "thoughtWorks",
+          "thoughtWorks-思特沃克"
+        ],
+        [
+          "wy-hy",
+          "网易互娱"
+        ],
+        [
+          "wy-music",
+          "网易-云音乐"
+        ]
+      ]
+    }
+  ],
+  "/offer/spring21/": [
+    {
+      "collapsable": true,
+      "sidebarDepth": 2,
+      "title": "2021 spring offer",
+      "children": [
+        [
+          "",
+          "21年春招"
+        ],
+        [
+          "bytedance-dy",
+          "字节跳动-抖音架构"
+        ]
+      ]
+    }
+  ],
+  "/offer/experience/": [
+    {
+      "collapsable": true,
+      "sidebarDepth": 2,
+      "title": "Summary of experience",
+      "children": [
+        [
+          "",
+          "心得总结"
+        ],
+        [
+          "2020spring_wechat",
+          "2020前端春招经验分享"
+        ],
+        [
+          "2020summary",
+          "2020年度总结"
+        ],
+        [
+          "2021summary",
+          "2021年度总结"
+        ],
+        [
+          "Internet",
+          "前端备战之计算机网络"
+        ],
+        [
+          "os",
+          "前端备战之操作系统"
+        ],
+        [
+          "resume",
+          "如何编写一份好的互联网校招简历"
+        ],
+        [
+          "words",
+          "互联网校招相关名词"
+        ]
+      ]
+    }
+  ],
+  "/offer/campus/": [
+    {
+      "collapsable": true,
+      "sidebarDepth": 2,
+      "title": "problems of campus",
+      "children": [
+        [
+          "",
+          "校招考点"
+        ],
+        [
+          "algorithm",
+          "校招考点汇总-算法"
+        ],
+        [
+          "browser",
+          "浏览器"
+        ],
+        [
+          "coder",
+          "基本工"
+        ],
+        [
+          "complex",
+          "综合问题"
+        ],
+        [
+          "css",
+          "校招考点汇总-CSS"
+        ],
+        [
+          "dataStruture",
+          "数据结构"
+        ],
+        [
+          "database",
+          "数据库"
+        ],
+        [
+          "designPattern",
+          "设计模式"
+        ],
+        [
+          "html",
+          "校招考点汇总-HTML"
+        ],
+        [
+          "internet",
+          "校招考点汇总-计算机网络"
+        ],
+        [
+          "javascript",
+          "校招考点汇总-JavaScript"
+        ],
+        [
+          "mobile",
+          "移动端"
+        ],
+        [
+          "node",
+          "Node"
+        ],
+        [
+          "os",
+          "操作系统"
+        ],
+        [
+          "other",
+          "其它"
+        ],
+        [
+          "react",
+          "React"
+        ],
+        [
+          "regexp",
+          "正则表达式"
+        ],
+        [
+          "safe",
+          "安全"
+        ],
+        [
+          "vue",
+          "Vue全家桶"
+        ],
+        [
+          "webpack",
+          "校招考点汇总-Webpack"
+        ],
+        [
+          "work",
+          "业务相关"
+        ]
+      ]
+    }
+  ],
+  "/offer/review/": [
+    {
+      "collapsable": true,
+      "sidebarDepth": 2,
+      "title": "review",
+      "children": [
+        [
+          "",
+          "复习自查"
+        ],
+        [
+          "01-01",
+          "01-01"
+        ],
+        [
+          "01-04",
+          "01-04"
+        ],
+        [
+          "01-16",
+          "01-16"
+        ],
+        [
+          "01-17",
+          "01-17"
+        ],
+        [
+          "01-19",
+          "01-19"
+        ],
+        [
+          "01-20",
+          "01-20"
+        ],
+        [
+          "01-21",
+          "01-20"
+        ],
+        [
+          "01-22",
+          "01-22"
+        ],
+        [
+          "01-23",
+          "01-23"
+        ],
+        [
+          "01-24",
+          "01-24"
+        ],
+        [
+          "01-25",
+          "01-25"
+        ],
+        [
+          "01-26",
+          "01-26"
+        ],
+        [
+          "01-27",
+          "01-27"
+        ],
+        [
+          "01-28",
+          "01-28"
+        ],
+        [
+          "01-29",
+          "01-29"
+        ],
+        [
+          "01-30",
+          "01-30"
+        ],
+        [
+          "01-31",
+          "01-31"
+        ],
+        [
+          "02-01",
+          "02-01"
+        ],
+        [
+          "12-15",
+          "12-15"
+        ],
+        [
+          "12-16",
+          "12-16"
+        ],
+        [
+          "12-17",
+          "12-17"
+        ],
+        [
+          "12-18",
+          "12-18"
+        ],
+        [
+          "12-21",
+          "12-21"
+        ],
+        [
+          "12-23",
+          "12-23"
+        ],
+        [
+          "12-25",
+          "12-25"
+        ],
+        [
+          "12-27",
+          "12-27"
+        ],
+        [
+          "12-29",
+          "12-29"
+        ],
+        [
+          "12-30",
+          "12-30"
+        ]
+      ]
+    }
+  ],
+  "/technology/learn/": [
+    {
+      "collapsable": true,
+      "sidebarDepth": 2,
+      "title": "devlearn",
+      "children": [
+        [
+          "",
+          "开发教程"
+        ],
+        [
+          "array-buffer",
+          "实践：利用ArrayBuffer实现预览指定目录下的所有文件的内容"
+        ],
+        [
+          "deepin-wemeet",
+          "在linux-deepin上使用deepin-wine5完美运行腾讯会议/QQ/微信等此类应用"
+        ],
+        [
+          "eslint-plugin",
+          "eslint插件开发教程"
+        ],
+        [
+          "faas",
+          "ServerLess之云函数实践-天气API"
+        ],
+        [
+          "git-base",
+          "Git常用的一些基本操作"
+        ],
+        [
+          "js-cover",
+          "向页面注入js实现为图片和文字元素添加透明蒙层"
+        ],
+        [
+          "jsencrypt",
+          "实践：使用jsencrypt配合axios实现非对称加密传输的数据"
+        ],
+        [
+          "loadEnv",
+          "封装dotenv库实现类似Vite加载环境变量的行为"
+        ],
+        [
+          "mergefile",
+          "30行代码实现合并指定目录下的所有文件的内容"
+        ],
+        [
+          "mid-autumn-festival",
+          "马上中秋了，把鼠标指针变为小玉兔"
+        ],
+        [
+          "node-require-json",
+          "Node中require与fs.readFile读取JSON文件的对比"
+        ],
+        [
+          "qiniu-imgbed",
+          "使用免费的七牛云OSS(10G)搭建个人的在线图床"
+        ],
+        [
+          "qiniu-oss",
+          "分享封装的一些七牛云OSS操作方法"
+        ],
+        [
+          "tool-methods",
+          "工具方法汇总"
+        ],
+        [
+          "tx-serverless-node",
+          "腾讯云Serverless实践-Node.js服务部署"
+        ],
+        [
+          "tx-serverless-static",
+          "腾讯云Serverless实践-静态网站托管"
+        ],
+        [
+          "ux",
+          "为什么'\\x1B'.length===1？\\x与\\u知识延伸"
+        ],
+        [
+          "vite-plugin-monitor1",
+          "Vite插件开发纪实：vite-plugin-monitor（上）"
+        ],
+        [
+          "vite-plugin-monitor2",
+          "Vite插件开发纪实：vite-plugin-monitor（中）"
+        ],
+        [
+          "vite-plugin-monitor3",
+          "Vite插件开发纪实：vite-plugin-monitor（下）"
+        ],
+        [
+          "vite-react-js",
+          "解决Vite-React项目中js使用jsx语法报错的问题"
+        ],
+        [
+          "webapck2vite",
+          "webpack项目接入Vite的通用方案介绍"
+        ],
+        [
+          "webapck2vite2",
+          "webpack项目接入Vite的通用方案介绍-草稿"
+        ],
+        [
+          "window-var",
+          "优雅的处理挂载window上的函数可能不存在的情况"
+        ]
+      ]
+    }
+  ],
+  "/technology/theory/": [
+    {
+      "collapsable": true,
+      "sidebarDepth": 2,
+      "title": "Fe-Theory",
+      "children": [
+        [
+          "",
+          "概念知识-理论干货"
+        ],
+        [
+          "serverless",
+          "Serverless"
+        ]
+      ]
+    }
+  ],
+  "/technology/works/": [
+    {
+      "collapsable": true,
+      "sidebarDepth": 2,
+      "title": "wheel",
+      "children": [
+        [
+          "",
+          "个人作品"
+        ],
+        [
+          "eslint-plugin-todo-ddl",
+          "一款检测代码中TODO的eslint插件"
+        ],
+        [
+          "online-resume",
+          "我打造的在线简历生成应用"
+        ],
+        [
+          "share-snippets",
+          "助你轻松编写与分享snippet的VsCode插件"
+        ],
+        [
+          "snippets",
+          "一个通过NPM包共(分)享代码块的解决方案"
+        ],
+        [
+          "timeLover-1",
+          "实践：给女朋友个性化定制应用-体重记录（一）"
+        ],
+        [
+          "timeLover-2",
+          "实践：给女朋友个性化定制应用-体重记录（二）"
+        ],
+        [
+          "timeLover-3",
+          "实践：给女朋友个性化定制应用-体重记录（三）"
+        ],
+        {
+          "collapsable": true,
+          "sidebarDepth": 2,
+          "title": "时间管理工具",
+          "path": "/technology/works/time-tools/",
+          "children": [
+            {
+              "sidebarDepth": 2,
+              "title": "时间管理工具time-tools-1",
+              "path": "/technology/works/time-tools/time-tools-1"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "/technology/study/": [
+    {
+      "collapsable": true,
+      "sidebarDepth": 2,
+      "title": "note",
+      "children": [
+        [
+          "",
+          "学习笔记"
+        ],
+        [
+          "chrome-debug1",
+          "Chrome调试技巧-基础"
+        ],
+        [
+          "chrome-debug2",
+          "Chrome调试技巧-Console"
+        ],
+        [
+          "chrome-debug3",
+          "Chrome调试技巧-Network"
+        ],
+        [
+          "chrome-debug4",
+          "Chrome调试技巧-Elements"
+        ],
+        [
+          "chrome-debug5",
+          "Chrome调试技巧-Drawer"
+        ],
+        [
+          "chrome-debug6",
+          "Chrome调试技巧-workspace"
+        ],
+        [
+          "design-patterns0",
+          "设计模式-设计原则"
+        ],
+        [
+          "design-patterns1",
+          "设计模式-创建型模式"
+        ],
+        [
+          "design-patterns2",
+          "设计模式-结构型模式"
+        ],
+        [
+          "ts-decorators",
+          "学习笔记：TypeScript装饰器"
+        ]
+      ]
+    }
+  ],
+  "/technology/source/": [
+    {
+      "collapsable": true,
+      "sidebarDepth": 2,
+      "title": "source learn",
+      "children": [
+        [
+          "",
+          "源码学习"
+        ],
+        [
+          "core-decorators-1",
+          "优秀装饰器源码学习（一）：time"
+        ],
+        [
+          "core-decorators-2",
+          "优秀装饰器源码学习（二）"
+        ],
+        [
+          "core-decorators-3",
+          "优秀装饰器源码学习（三）"
+        ],
+        [
+          "file-saver-source",
+          "FileSaver.js源码学习，纯前端实现文件下载，防止浏览器直接打开预览"
+        ],
+        [
+          "objectId",
+          "源码学习：MongoDB-ObjectId生成原理"
+        ],
+        [
+          "vite-loadEnv",
+          "源码学习：Vite中加载环境变量（loadEnv）的实现"
+        ]
+      ]
+    }
+  ],
+  "/technology/tpl/": [
+    {
+      "collapsable": true,
+      "sidebarDepth": 2,
+      "title": "Template Project",
+      "children": [
+        [
+          "",
+          "工程模板"
+        ],
+        [
+          "uni-vue3-cli_1",
+          "模板工程搭建：Vue-Cli搭建Vue3/TS/uni-app小程序工程(上)"
+        ],
+        [
+          "uni-vue3-cli_2",
+          "模板工程搭建：Vue-Cli搭建Vue3/TS/uni-app小程序工程(中)"
+        ],
+        [
+          "uni-vue3-cli_3",
+          "模板工程搭建：Vue-Cli搭建Vue3/TS/uni-app小程序工程(下)"
+        ],
+        [
+          "vite-vue3-template",
+          "开箱即用的Vite-Vue3工程化模板"
+        ],
+        [
+          "web-sdk-tpl",
+          "模板工程搭建：Web-SDK/Library"
+        ]
+      ]
+    }
+  ]
+}

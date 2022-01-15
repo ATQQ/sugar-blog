@@ -1,21 +1,7 @@
 const fs = require('fs')
 const path = require('path')
+const { readDir, readFile, getFileH1 } = require('./util')
 
-function readDir(v) {
-    return fs.readdirSync(v, { withFileTypes: true })
-}
-function readFile(v) {
-    return fs.readFileSync(v, { encoding: 'utf-8' })
-}
-
-function getFileH1(filepath) {
-    if (fs.existsSync(filepath)) {
-        return readFile(filepath)
-            .split('\n').find(str => {
-                return str.startsWith('# ')
-            }).slice(2).trim() || path.parse(filepath).name
-    }
-}
 
 /**
  * 获取指定目录下的md文件目录
@@ -45,9 +31,6 @@ function addDirListToREADME(dirList, readmeFile) {
     fs.appendFileSync(readmeFile, res)
 }
 
-// 待扫描的根目录
-const dirList = ['technology', 'offer', 'interview', 'computerBase', 'coding', 'bigWeb']
-const baseDir = path.resolve(__dirname, '../docs')
 
 /**
  * 对指定的根目录进行递归扫描，为README.md添加目录
@@ -75,18 +58,6 @@ function scanDirectory(directory, include = []) {
     }
 }
 
-scanDirectory(baseDir, dirList)
-
-// dirList.forEach(v => {
-//     console.log(`------start scan ${v}------`);
-//     let dirs = fs.readdirSync(path.resolve(baseDir, v), { withFileTypes: true })
-//     dirs.forEach(dir => {
-//         if (dir.isDirectory()) {
-//             let { name } = dir
-//             let list = getDirMdCatalog(path.resolve(baseDir, v, name), ['README.md']);
-//             addDirListToREADME(list, path.resolve(baseDir, v, name, 'README.md'))
-//             console.log(`success:${name}`)
-//         }
-//     })
-//     console.log(`------${v} add success------`);
-// })
+// 待扫描的根目录
+const { sidebarList, docsDir } = require('./constants')
+scanDirectory(docsDir, sidebarList)

@@ -1,4 +1,4 @@
-const { getDirFileByType } = require('./fileUtil')
+const { getDirFileByType } = require('./util')
 const fs = require('fs')
 
 const files = getDirFileByType(__dirname + '/../docs', 'md')

@@ -1,4 +1,4 @@
-const sidebar = require("./siders/index");
+const sidebar = require('./sidebar')
 module.exports = {
   plugins: [
     ["@vuepress/pwa",

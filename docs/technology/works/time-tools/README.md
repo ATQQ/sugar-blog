@@ -1,3 +1,6 @@
+---
+collapsable: true
+---
 # 时间管理CLI工具
 
 ## 目录

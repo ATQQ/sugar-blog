@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const execSync = require('child_process').execSync
 
-const { getDirFileByType } = require('./fileUtil')
+const { getDirFileByType } = require('./util')
 
 Date.prototype.Format = function (fmt) {
     let o = {
@@ -68,10 +68,10 @@ const TagMap = {
     'review': '复习自查',
     'learn': '技术教程',
     'theory': '技术概念',
-    'works':'个人作品',
-    'study':'学习笔记',
-    'source':'源码学习',
-    'tpl':'工程模板'
+    'works': '个人作品',
+    'study': '学习笔记',
+    'source': '源码学习',
+    'tpl': '工程模板'
 }
 
 function getCategoryAndTags(url) {

@@ -1,4 +1,5 @@
 const fs = require('fs')
+const matter = require('gray-matter');
 const path = require('path')
 
 function NavSider(baseSiderPath) {
@@ -27,9 +28,11 @@ function getChildren(p) {
     const children = files.filter(f => (f.isFile() && f.name !== 'README.md')).map(file => {
         const { name } = file
         const basename = path.basename(name, '.md')
-        const title = fs.readFileSync(path.resolve(p, name), {
+        const fileContext = fs.readFileSync(path.resolve(p, name), {
             encoding: 'utf-8'
-        }).split('\n').find(str => {
+        })
+        console.log(matter(fileContext));
+        const title = fileContext.split('\n').find(str => {
             return str.startsWith('# ')
         }).slice(2).replace(/[\s]/g, '')
         return [basename, title]
@@ -78,5 +81,5 @@ const childSiderbar = files.filter(f => f.isFile() && f.name !== 'index.js').map
     return loadConfig(config).getSiders()
 })
 const siderbar = mergeSider.apply(this, childSiderbar)
-
+// fs.writeFileSync(join(__dirname, 'side.json'), JSON.stringify(siderbar, null, 2))
 module.exports = siderbar

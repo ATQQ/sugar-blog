@@ -1,6 +1,13 @@
 const path = require('path')
 const fs = require('fs')
+const matter = require('gray-matter');
 
+function getFileMatterData(filepath) {
+    if (!fs.existsSync(filepath)) {
+        return {}
+    }
+    return matter(readFile(filepath)).data
+}
 /**
  * 递归获取指定目录中的所有文件路径
  * @param {String} dir 目录名 
@@ -28,7 +35,28 @@ let getDirFileByType = (dir, type) => {
     return getDirFiles(dir).filter(file => path.extname(file).endsWith(type))
 }
 
+
+function readDir(v) {
+    return fs.readdirSync(v, { withFileTypes: true })
+}
+function readFile(v) {
+    return fs.readFileSync(v, { encoding: 'utf-8' })
+}
+
+function getFileH1(filepath) {
+    if (fs.existsSync(filepath)) {
+        return readFile(filepath)
+            .split('\n').find(str => {
+                return str.startsWith('# ')
+            }).slice(2).trim() || path.parse(filepath).name
+    }
+}
+
 module.exports = {
     getDirFiles,
-    getDirFileByType
+    getDirFileByType,
+    readDir,
+    readFile,
+    getFileH1,
+    getFileMatterData
 }
