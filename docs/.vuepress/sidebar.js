@@ -3,7 +3,6 @@ const path = require('path')
 const { join } = require('path')
 const { sidebarList, docsDir } = require('./../../src/constants')
 const { readFile, readDir, getFileH1, getFileMatterData } = require('./../../src/util')
-
 const sidebar = {}
 
 const defaultConfig = {
@@ -24,16 +23,21 @@ for (const sideDirname of sidebarList) {
     }
 }
 
-const matterExample = {
-    groupTitle: '',
-    sidebarTitle: '',
+const yamlDataExample = {
+    group: {
+        title: ''
+    },
+    sidebar: {
+        title: '',
+        step: 0
+    },
     collapsable: false
 }
 
 function getTitle(filepath, isGroup = false) {
     // 文章配置
-    const { groupTitle, sidebarTitle } = getFileMatterData(filepath)
-    return (isGroup && groupTitle) || sidebarTitle || getFileH1(filepath)
+    const { group = {}, sidebar = {} } = getFileMatterData(filepath)
+    return (isGroup && group.title) || sidebar.title || getFileH1(filepath)
 }
 
 function isCollapsable(filepath) {
@@ -78,7 +82,26 @@ function getDirSide(dirRoute, ops = {}) {
             children.push(getDirSide(join(dirRoute, name, '/'), defaultConfig))
         }
     }
+
+    // 排序
+    children.sort((a, b) => {
+        return getRouteStep(a.path) - getRouteStep(b.path)
+    })
     return config
+}
+
+function getRouteStep(filepath) {
+    if (filepath.endsWith('/')) {
+        return -1
+    }
+    const { sidebar } = getFileMatterData(join(docsDir, `${filepath}.md`))
+    if (sidebar === undefined) {
+        return 999
+    }
+    if (sidebar.step === undefined) {
+        return 998
+    }
+    return sidebar.step
 }
 
 // writeFileSync(join(__dirname, 'test.json'), JSON.stringify(sidebar, null, 2))

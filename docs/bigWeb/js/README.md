@@ -1,5 +1,6 @@
 ---
-groupTitle: javascript部分
+group:
+ title: javascript部分
 ---
 
 # 简介

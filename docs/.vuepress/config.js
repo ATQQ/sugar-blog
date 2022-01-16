@@ -99,6 +99,8 @@ module.exports = {
         text: "技术笔记",
         items: [
           { text: "技术教程", link: "/technology/learn/" },
+          { text: "模板工程", link: "/technology/tpl/" },
+          { text: "源码学习", link: "/technology/source/" },
           { text: "技术概念", link: "/technology/theory/" },
           { text: "个人作品", link: "/technology/works/" },
           { text: "学习笔记", link: "/technology/study/" },

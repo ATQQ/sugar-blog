@@ -42,7 +42,9 @@ function readDir(v) {
 function readFile(v) {
     return fs.readFileSync(v, { encoding: 'utf-8' })
 }
-
+function writeFile(filepath, data) {
+    return fs.writeFileSync(filepath, data, { encoding: 'utf-8' })
+}
 function getFileH1(filepath) {
     if (fs.existsSync(filepath)) {
         return readFile(filepath)
@@ -58,5 +60,6 @@ module.exports = {
     readDir,
     readFile,
     getFileH1,
-    getFileMatterData
+    getFileMatterData,
+    writeFile
 }

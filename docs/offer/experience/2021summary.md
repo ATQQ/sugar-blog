@@ -224,6 +224,8 @@ categories:
 ### 文章
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY0MTcyNDQzMjE5NQ==641724432195)
 
+![图片](https://img.cdn.sugarat.top/mdImg/MTY0MjMxOTE2MjY1Mg==642319162652)
+
 其中不乏有些水文，但也有部分质量不错的
 ## 个人成长
 
