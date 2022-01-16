@@ -3,11 +3,9 @@ isTimeLine: true
 title: 2020年度总结
 date: 2020-12-03
 tags:
- - 备战春秋
- - 其它
+ - 心得总结
 categories:
- - 备战春秋
- - 其它
+ - 心得总结
 ---
 # 2020年度总结
 
