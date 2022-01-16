@@ -32,3 +32,15 @@
 * [炽翎](https://juejin.im/user/3122268753634541/posts)
 * [冴羽](https://github.com/mqyqingfeng/Blog)
 * [神三元](http://47.98.159.95/my_blog/)
+
+## 运行本项目
+```sh
+# 安装依赖
+yarn install
+
+# 开发启动
+yarn dev
+
+# 构建
+yarn build
+```
