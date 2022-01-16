@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 获取dom元素的方式
+ step: 28
 isTimeLine: true
 title: 获取dom元素的几种方式
 date: 2020-09-06

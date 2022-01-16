@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 简单-new实现
+ step: 5
 isTimeLine: true
 title: 实现一下new
 date: 2020-09-05

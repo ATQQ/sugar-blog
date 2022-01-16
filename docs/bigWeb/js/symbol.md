@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: Symbol的用法
+ step: 25
 isTimeLine: true
 title: Symbol的用法
 date: 2020-04-14

@@ -1,3 +1,9 @@
+---
+sidebar:
+ title: 性能优化
+group:
+ title: Performance
+---
 # 性能优化笔记
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTU4MzQwMTU3ODkwNw==583401578907)

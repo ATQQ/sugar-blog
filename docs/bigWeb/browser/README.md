@@ -1,4 +1,8 @@
 ---
+sidebar:
+ title: 浏览器专题内容
+group:
+ title: Browser
 isTimeLine: true
 title: :earth_asia:浏览器专题
 date: 2020-11-20

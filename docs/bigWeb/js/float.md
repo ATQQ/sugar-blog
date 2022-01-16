@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 浮点数
+ step: 24
 isTimeLine: true
 title: 浮点数
 date: 2020-04-14

@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 缓存机制
+ step: 3
 isTimeLine: true
 title: 浏览器-缓存机制
 date: 2020-04-14

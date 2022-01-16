@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: delete
+ step: 7
 isTimeLine: true
 title: delete
 date: 2020-04-14

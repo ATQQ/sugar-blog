@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 原型与原型链
+ step: 15
 isTimeLine: true
 title: 原型与原型链
 date: 2020-04-14

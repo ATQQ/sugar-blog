@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 二叉树--判断是否对称
+ step: 2
 isTimeLine: true
 title: 判断是否为对称二叉树
 date: 2020-08-02

@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 弹性布局
+ step: 7
 isTimeLine: true
 title: 弹性布局
 date: 2020-04-14

@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: IFC
+ step: 10
 isTimeLine: true
 title: FC
 date: 2020-04-14

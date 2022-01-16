@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 死锁
+ step: 4
 isTimeLine: true
 title: 死锁
 date: 2020-04-29

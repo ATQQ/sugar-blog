@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 渲染机制
+ step: 1
 isTimeLine: true
 title: 浏览器-渲染原理
 date: 2020-10-26

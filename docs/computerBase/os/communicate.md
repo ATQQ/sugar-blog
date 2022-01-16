@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 进程和线程怎么通信
+ step: 3
 isTimeLine: true
 title: 进程和线程怎么通信
 date: 2020-04-14

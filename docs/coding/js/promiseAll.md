@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 简单-实现promiseAll
+ step: 0
 isTimeLine: true
 title: 实现promiseAll
 date: 2020-09-01

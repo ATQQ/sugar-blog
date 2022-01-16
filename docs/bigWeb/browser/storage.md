@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 本地存储
+ step: 4
 isTimeLine: true
 title: 浏览器-本地存储
 date: 2020-04-14

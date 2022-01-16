@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 排序--快速排序
+ step: 3
 isTimeLine: true
 title: 快速排序
 date: 2020-08-02

@@ -1,3 +1,9 @@
+---
+sidebar:
+ title: 20年秋招
+group:
+ title: 2020 autumn offer
+---
 # 备战秋招
 2020-07-01开始
 

@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 字符串--大数相加
+ step: 6
 isTimeLine: true
 title: 大数相加&数字字符串相加
 date: 2020-09-14

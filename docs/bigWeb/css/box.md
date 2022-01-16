@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 盒模型
+ step: 6
 isTimeLine: true
 title: 盒模型
 date: 2020-04-14

@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: Chrome-DevTools的小技巧
+ step: 9999
 title: 分享小册《Chrome-DevTools的使用技巧》中的精华
 date: 2021-05-17
 tags:

@@ -1,3 +1,9 @@
+---
+sidebar:
+ title: 心得总结
+group:
+ title: Summary of experience
+---
 # 心得总结
 
 ## 目录

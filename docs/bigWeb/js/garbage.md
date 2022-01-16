@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 垃圾回收
+ step: 8
 isTimeLine: true
 title: 垃圾回收机制
 date: 2020-04-14

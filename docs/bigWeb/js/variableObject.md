@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 变量对象
+ step: 18
 isTimeLine: true
 title: 变量对象
 date: 2020-04-14

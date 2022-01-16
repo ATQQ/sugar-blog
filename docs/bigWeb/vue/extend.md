@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: extend API
+ step: 4
 isTimeLine: true
 title: extendAP
 date: 2020-04-14

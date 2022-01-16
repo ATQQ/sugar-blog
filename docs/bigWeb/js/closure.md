@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 闭包
+ step: 6
 isTimeLine: true
 title: 闭包
 date: 2020-04-14

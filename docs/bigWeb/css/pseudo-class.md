@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 伪类
+ step: 1
 isTimeLine: true
 title: 伪类
 date: 2020-09-05

@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 选择器
+ step: 2
 isTimeLine: true
 title: css选择器
 date: 2020-09-05

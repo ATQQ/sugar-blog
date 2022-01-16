@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 类数组与arguments
+ step: 23
 isTimeLine: true
 title: 类数组与arguments
 date: 2020-04-14

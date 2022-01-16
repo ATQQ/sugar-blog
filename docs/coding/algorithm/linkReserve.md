@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 链表--转置
+ step: 0
 isTimeLine: true
 title: 单链表转置
 date: 2020-08-02

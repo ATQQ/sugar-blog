@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 字符串--最长公共子序列长度
+ step: 7
 isTimeLine: true
 title: 最长公共子序列长度
 date: 2020-09-01

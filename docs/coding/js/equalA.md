@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 简单-a同时等于多个值
+ step: 7
 isTimeLine: true
 title: 如何实现变量a同时等于多个值
 date: 2020-09-11

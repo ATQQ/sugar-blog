@@ -1,4 +1,6 @@
 ---
+sidebar:
+ title: 常见面试题
 isTimeLine: true
 title: 浏览器-常见面试题
 date: 2020-10-27

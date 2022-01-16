@@ -1,4 +1,8 @@
 ---
+sidebar:
+ title: 校招考点
+group:
+ title: problems of campus
 isTimeLine: true
 title: :school:前端校招考点汇总
 date: 2021-11-21

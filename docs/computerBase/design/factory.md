@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 工厂模式
+ step: 0
 isTimeLine: true
 title: 简单工厂模式
 date: 2020-04-14

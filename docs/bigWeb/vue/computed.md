@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: computed与watch
+ step: 6
 isTimeLine: true
 title: computed与watch
 date: 2020-04-14

@@ -1,3 +1,9 @@
+---
+sidebar:
+ title: 开发教程
+group:
+ title: devlearn
+---
 # 技术杂文集
 记录一些开发过程中遇到的一些小问题以及解决方案
 

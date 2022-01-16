@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 简单-instanceof实现
+ step: 6
 isTimeLine: true
 title: 实现instanceOf
 date: 2020-10-13

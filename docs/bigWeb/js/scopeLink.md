@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 作用域链
+ step: 19
 isTimeLine: true
 title: 作用域链
 date: 2020-04-14

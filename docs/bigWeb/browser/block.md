@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 阻塞渲染
+ step: 2
 isTimeLine: true
 title: 浏览器-阻塞
 date: 2020-10-27

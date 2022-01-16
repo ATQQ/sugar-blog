@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: ES6+的新语法糖和方法整理
+ step: 30
 isTimeLine: true
 title: ES6+的一些新语法糖和方法整理
 date: 2021-10-13

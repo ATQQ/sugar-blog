@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: apply,call,bind
+ step: 10
 isTimeLine: true
 title: apply,call,bind的异同
 date: 2020-04-14

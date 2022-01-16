@@ -235,9 +235,7 @@ timec
 本系列会不断的更新迭代，直至产品初代完成
 
 * [仓库地址](https://github.com/ATQQ/time-control)
----
-theme: smartblue
----
+
 # 做一个CLI版的时间管理工具（一）
 
 ## 背景

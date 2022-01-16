@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 简单-实现bind
+ step: 1
 isTimeLine: true
 title: 实现bind
 date: 2020-09-01

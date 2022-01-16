@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 排序--归并排序
+ step: 5
 isTimeLine: true
 title: 归并排序
 date: 2020-08-02

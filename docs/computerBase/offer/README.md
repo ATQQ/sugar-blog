@@ -1,3 +1,9 @@
+---
+sidebar:
+ title: 简介
+group:
+ title: 剑指Offer
+---
 # 剑指Offer刷题记录
 
 ## 目录

@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: mixin与mixins
+ step: 5
 isTimeLine: true
 title: mixin与mixins
 date: 2020-04-14

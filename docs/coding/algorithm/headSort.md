@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 排序--堆排序
+ step: 4
 isTimeLine: true
 title: 堆排序
 date: 2020-08-02

@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 二叉树--层序遍历
+ step: 1
 isTimeLine: true
 title: 层序遍历二叉树
 date: 2020-08-02

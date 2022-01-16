@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 生命周期钩子
+ step: 2
 isTimeLine: true
 title: 生命周期钩子
 date: 2020-04-14

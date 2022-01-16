@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 简单--斐波拉契数列2
+ step: 10
 isTimeLine: true
 title: 斐波拉契数列
 date: 2020-10-02

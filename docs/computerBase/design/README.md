@@ -1,3 +1,9 @@
+---
+sidebar:
+ title: 设计模式
+group:
+ title: Design Pattern
+---
 # 简介
 
 学习/记录前端经常用到的一些设计模式

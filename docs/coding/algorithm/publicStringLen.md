@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 字符串--最长公共子串
+ step: 8
 isTimeLine: true
 title: 最长公共子串
 date: 2020-09-01

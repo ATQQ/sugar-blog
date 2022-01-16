@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: ❤响应式系统的依赖收集追踪原理
+ step: 10
 isTimeLine: true
 title: 响应式系统的依赖收集追踪原理
 date: 2020-04-14

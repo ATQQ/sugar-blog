@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 简单-继承实现
+ step: 4
 isTimeLine: true
 title: 继承实现
 date: 2020-09-05

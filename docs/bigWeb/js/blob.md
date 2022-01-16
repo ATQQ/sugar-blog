@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: blob与file
+ step: 11
 isTimeLine: true
 title: blob与file
 date: 2020-04-14

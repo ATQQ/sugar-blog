@@ -7,9 +7,6 @@ tags:
 categories:
  - 技术笔记
 ---
----
-theme: smartblue
----
 
 # FileSaver.js源码学习，纯前端实现文件下载，防止浏览器直接打开预览
 

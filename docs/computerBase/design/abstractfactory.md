@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 抽象工厂模式
+ step: 1
 isTimeLine: true
 title: 抽象工厂模式
 date: 2020-04-14

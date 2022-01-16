@@ -1,3 +1,9 @@
+---
+sidebar:
+ title: 操作系统
+group:
+ title: OS
+---
 # 记录操作系统相关知识
 
 ## 目录

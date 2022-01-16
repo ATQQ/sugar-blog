@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 类型转换
+ step: 27
 isTimeLine: true
 title: JavaScript中的类型转换规则
 date: 2020-04-14

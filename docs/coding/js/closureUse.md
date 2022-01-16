@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 简单-闭包调用
+ step: 8
 isTimeLine: true
 title: 闭包调用
 date: 2020-10-18

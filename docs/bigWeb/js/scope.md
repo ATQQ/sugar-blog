@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 作用域
+ step: 16
 isTimeLine: true
 title: 作用域
 date: 2020-04-14

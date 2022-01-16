@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: ECMAScript规范解读this
+ step: 20
 isTimeLine: true
 title: ECMAScript规范解读this(未完待续)
 date: 2020-04-14

@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 单例模式
+ step: 2
 isTimeLine: true
 title: 单例模式
 date: 2021-05-18

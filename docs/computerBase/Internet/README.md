@@ -1,3 +1,9 @@
+---
+sidebar:
+ title: 计算机网络
+group:
+ title: Internet
+---
 # 网络相关问题
 
 ## 目录

@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 节流与防抖
+ step: 9
 isTimeLine: true
 title: 节流与防抖
 date: 2020-04-14

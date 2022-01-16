@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 简单-立即执行的定时器
+ step: 9
 title: 实现调用就执行一次的定时器
 date: 2021-08-29
 tags:

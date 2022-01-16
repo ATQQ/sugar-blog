@@ -1,6 +1,8 @@
 ---
+sidebar:
+ title: 简介
 group:
- title: javascript部分
+ title: Javascript
 ---
 
 # 简介

@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 进程与线程的区别
+ step: 2
 isTimeLine: true
 title: 进程与线程的区别
 date: 2020-04-14

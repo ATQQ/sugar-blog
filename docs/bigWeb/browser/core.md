@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 内核
+ step: 0
 isTimeLine: true
 title: 浏览器-内核
 date: 2020-10-26

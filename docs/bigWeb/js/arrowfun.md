@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 箭头函数
+ step: 26
 isTimeLine: true
 title: 箭头函数?
 date: 2020-04-14

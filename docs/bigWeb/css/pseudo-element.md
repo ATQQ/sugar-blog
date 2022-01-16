@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 伪元素
+ step: 0
 isTimeLine: true
 title: 伪元素
 date: 2020-09-05

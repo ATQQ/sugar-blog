@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 柯里化
+ step: 5
 isTimeLine: true
 title: 柯里化(Currying)
 date: 2020-04-14

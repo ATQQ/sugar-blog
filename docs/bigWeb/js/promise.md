@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: Promise
+ step: 13
 isTimeLine: true
 title: Promise
 date: 2020-04-14

@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: v-show 与 v-if
+ step: 8
 isTimeLine: true
 title: v-show与v-if
 date: 2020-04-14

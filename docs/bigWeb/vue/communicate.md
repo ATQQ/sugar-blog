@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 组件通信
+ step: 3
 isTimeLine: true
 title: 组件通信
 date: 2020-04-14

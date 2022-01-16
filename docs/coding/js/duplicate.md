@@ -1,4 +1,7 @@
 ---
+sidebar:
+ title: 中等-数组去重
+ step: 14
 title: 笔试题-数组去重
 date: 2021-03-07
 tags:
