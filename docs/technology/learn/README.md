@@ -14,6 +14,7 @@ group:
 * [在linux-deepin上使用deepin-wine5完美运行腾讯会议/QQ/微信等此类应用](./deepin-wemeet.md)
 * [eslint插件开发教程](./eslint-plugin.md)
 * [ServerLess之云函数实践-天气API](./faas.md)
+* [小技巧：for of中获取index](./forof-idx.md)
 * [Git常用的一些基本操作](./git-base.md)
 * [向页面注入js实现为图片和文字元素添加透明蒙层](./js-cover.md)
 * [实践：使用jsencrypt配合axios实现非对称加密传输的数据](./jsencrypt.md)
