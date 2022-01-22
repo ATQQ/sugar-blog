@@ -15,29 +15,29 @@ categories:
 
 ```ts
 const data = [
-  { name: 'xm1', age: 18 },
-  { name: 'xm2', age: 10 },
-  { name: 'xm3', age: 13 },
-  { name: 'xm4', age: 99 }
+  { name: 'xm1', age: 1 },
+  { name: 'xm2', age: 4 },
+  { name: 'xm3', age: 5 },
+  { name: 'xm4', age: 9 }
 ]
-for (const people of data) {
-  if (people.age % 2 !== 0) {
-    continue
-  }
-  console.log(people.name);
-}
-// xm1
-// xm2
 
-for (const people of data) {
-  if (people.age === 99) {
-    break
-  }
-  console.log(people.name);
+function sleep(s){
+  const end = s * 1000 + Date.now()
+  while(Date.now() < end){}
 }
-// xm1
-// xm2
-// xm3
+async function fn(){
+  for (const people of data) {
+    if (people.age === 9) {
+      break
+    }
+    if (people.age % 2 !== 0) {
+      continue
+    }
+    await sleep(people.age)
+    console.log(people.name);
+  }
+} 
+fn() // xm2
 ```
 
 但有时候想获取元素的`idx`，有哪些简单的方式呢
