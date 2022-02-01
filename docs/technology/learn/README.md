@@ -17,6 +17,7 @@ group:
 * [移动端阻止弹窗下层页面被滑动](./fixed-page.md)
 * [小技巧：for of中获取index](./forof-idx.md)
 * [Git常用的一些基本操作](./git-base.md)
+* [新年快乐，虎虎生威](./hongbao.md)
 * [向页面注入js实现为图片和文字元素添加透明蒙层](./js-cover.md)
 * [实践：使用jsencrypt配合axios实现非对称加密传输的数据](./jsencrypt.md)
 * [封装dotenv库实现类似Vite加载环境变量的行为](./loadEnv.md)
