@@ -41,7 +41,7 @@ module.exports = {
           },
           {
             type: 'button',
-            link: '/technology/learn/hongbao',
+            link: '/_configDoc/newyear/2022',
             style: 'background-color:red;',
             text: '领红包',
           },
