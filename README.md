@@ -34,13 +34,19 @@
 * [神三元](http://47.98.159.95/my_blog/)
 
 ## 运行本项目
+先安装 `pnpm`
+
+```sh
+npm i -g pnpm
+```
+
 ```sh
 # 安装依赖
-yarn install
+pnpm install
 
 # 开发启动
-yarn dev
+pnpm dev
 
 # 构建
-yarn build
+pnpm build
 ```
