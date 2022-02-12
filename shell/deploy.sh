@@ -1,1 +1,1 @@
-ssh -p22 root@sugarat.top "tar -xf blog.tar.gz -C /www/wwwroot/sugarat.top/"
+ssh -p22 root@blog.sugarat.top "tar -xf blog.tar.gz -C /www/wwwroot/blog.sugarat.top/"

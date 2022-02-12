@@ -25,6 +25,7 @@ group:
 * [Node中require与fs.readFile读取JSON文件的对比](./node-require-json.md)
 * [使用免费的七牛云OSS(10G)搭建个人的在线图床](./qiniu-imgbed.md)
 * [分享封装的一些七牛云OSS操作方法](./qiniu-oss.md)
+* [本地配置SSH免密远程登录服务器](./ssh-no-pwd-login.md)
 * [工具方法汇总](./tool-methods.md)
 * [腾讯云Serverless实践-Node.js服务部署](./tx-serverless-node.md)
 * [腾讯云Serverless实践-静态网站托管](./tx-serverless-static.md)
