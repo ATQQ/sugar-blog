@@ -249,7 +249,7 @@ module.exports = {
     // 作者
     author: "粥里有勺糖",
     // 备案号
-    record: "蜀ICP备19011724号-1",
+    record: "蜀ICP备19011724号",
     recordLink: "https://beian.miit.gov.cn/",
     valineConfig: {
       appId: "L3HgpT2JA3KJFUots3ql2AAd-gzGzoHsz",

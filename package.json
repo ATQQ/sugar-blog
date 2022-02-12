@@ -17,7 +17,8 @@
     "addConfig": "node src/addConfig.js",
     "addCatalog": "node src/createCatalog.js",
     "beforeBuild": "npm run addCatalog && npm run addTJ && npm run addConfig",
-    "wx": "node src/wx.js"
+    "wx": "node src/wx.js",
+    "deploy:tcb":"npx @cloudbase/cli login && npx @cloudbase/cli framework deploy"
   },
   "keywords": [],
   "author": "",
