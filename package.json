@@ -18,13 +18,13 @@
     "addCatalog": "node src/createCatalog.js",
     "beforeBuild": "npm run addCatalog && npm run addTJ && npm run addConfig",
     "wx": "node src/wx.js",
-    "deploy:tcb":"npx @cloudbase/cli login && npx @cloudbase/cli framework deploy"
+    "deploy:tcb":"tcb login && tcb framework deploy"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@vuepress-reco/vuepress-plugin-bulletin-popover": "^1.5.7",
+    "@vuepress-reco/vuepress-plugin-bulletin-popover": "1.5.7",
     "valine": "^1.4.14",
     "vue-class-component": "^7.2.3"
   },

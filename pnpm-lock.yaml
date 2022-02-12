@@ -1,7 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
-  '@vuepress-reco/vuepress-plugin-bulletin-popover': ^1.5.7
+  '@vuepress-reco/vuepress-plugin-bulletin-popover': 1.5.7
   '@vuepress/plugin-pwa': ^1.7.1
   valine: ^1.4.14
   vue-class-component: ^7.2.3
@@ -9,7 +9,7 @@ specifiers:
   vuepress-theme-reco: 1.5.7
 
 dependencies:
-  '@vuepress-reco/vuepress-plugin-bulletin-popover': 1.6.0
+  '@vuepress-reco/vuepress-plugin-bulletin-popover': 1.5.7
   valine: 1.4.16
   vue-class-component: 7.2.6
 
@@ -1714,8 +1714,8 @@ packages:
     resolution: {integrity: sha512-BCEv+d6UwNnI7njQx54XcsKdBvHKkp+JmyKnrxcRltyR8OAIW4qf1PQC0Ypp1GHMAL4fFgbUc9/eeAkvMPgYkg==}
     dev: true
 
-  /@vuepress-reco/vuepress-plugin-bulletin-popover/1.6.0:
-    resolution: {integrity: sha512-vMCzvDDXMlzQDADqCwitQetjD0NiQ2skOJ+xXSZWJj/n1Mj4q+eMLDXgFOZ1z6xiNWrDO7CBXGcJIp8kRfAS5g==}
+  /@vuepress-reco/vuepress-plugin-bulletin-popover/1.5.7:
+    resolution: {integrity: sha512-6+oYzaE0PbA/H4KU0/yhm6V0yEBPSUXPhOf3Nh+I5Uen0DBjkF4NOH3dQBoijcdNACvVnr/JCo9gO8xhG0kSDg==}
     dev: false
 
   /@vuepress-reco/vuepress-plugin-comments/1.6.0:
