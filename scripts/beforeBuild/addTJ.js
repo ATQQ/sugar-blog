@@ -1,7 +1,7 @@
-const { getDirFileByType } = require('./util')
+const { getDirFileByType } = require('../utils')
 const fs = require('fs')
 
-const files = getDirFileByType(__dirname + '/../docs', 'md')
+const files = getDirFileByType(__dirname + '/../../docs', 'md')
 
 // 加入页面统计
 for (const filePath of files) {

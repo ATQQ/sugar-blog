@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const execSync = require('child_process').execSync
 
-const { getDirFileByType } = require('./util')
+const { getDirFileByType } = require('../utils')
 
 Date.prototype.Format = function (fmt) {
     let o = {
@@ -123,7 +123,7 @@ function isHaveConfig(url) {
     return originData[0] === '---'
 }
 
-const files = getDirFileByType(__dirname + '/../docs', 'md')
+const files = getDirFileByType(__dirname + '/../../docs', 'md')
 
 for (const filepath of files) {
     // 不处理README

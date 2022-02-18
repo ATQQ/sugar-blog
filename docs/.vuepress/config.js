@@ -34,27 +34,27 @@ module.exports = {
           },
         ],
         footer: [
-          {
-            type: 'text',
-            content: '新年快乐，虎虎生威',
-            style: 'text-align: center;'
-          },
-          {
-            type: 'button',
-            link: '/_configDoc/newyear/2022',
-            style: 'background-color:red;',
-            text: '领红包',
-          },
           // {
           //   type: 'text',
-          //   content: '美团全年招聘 前端&客户端',
+          //   content: '新年快乐，虎虎生威',
           //   style: 'text-align: center;'
           // },
           // {
           //   type: 'button',
-          //   link: '/_configDoc/show/bole',
-          //   text: '投递',
-          // }
+          //   link: '/_configDoc/newyear/2022',
+          //   style: 'background-color:red;',
+          //   text: '领红包',
+          // },
+          {
+            type: 'text',
+            content: '美团全年招聘 前端&客户端',
+            style: 'text-align: center;'
+          },
+          {
+            type: 'button',
+            link: '/_configDoc/show/bole',
+            text: '投递',
+          }
         ]
       }
     ]
@@ -210,7 +210,7 @@ module.exports = {
           },
           {
             text: "考勤小程序",
-            link: "https://hdkq.top/",
+            link: "https://hdkq.sugarat.top/",
           },
           {
             text: "时光恋人",

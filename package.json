@@ -1,28 +1,25 @@
 {
-  "name": "vuepress-first",
+  "name": "blog-sugarat",
   "version": "1.0.0",
-  "description": "",
+  "description": "粥里有勺糖的个人博客",
   "main": "index.js",
   "directories": {
     "doc": "docs"
   },
+  "engines": {
+    "node": ">= 16.0.0"
+  },
   "scripts": {
-    "dev": "npm run beforeBuild && vuepress dev docs/.",
-    "build": "npm run beforeBuild && rm -rf docs/.vuepress/dist && vuepress build docs/.",
-    "compress": "./shell/compress.sh",
-    "upload": "./shell/upload.sh",
-    "deploy": "./shell/deploy.sh",
-    "onestep": "npm run build && npm run compress && npm run upload && npm run deploy",
-    "addTJ": "node src/addTJ.js",
-    "addConfig": "node src/addConfig.js",
-    "addCatalog": "node src/createCatalog.js",
-    "beforeBuild": "npm run addCatalog && npm run addTJ && npm run addConfig",
-    "wx": "node src/wx.js",
-    "deploy:tcb":"tcb login && tcb framework deploy"
+    "dev": "vuepress dev docs/.",
+    "build": "vuepress build docs/.",
+    "deploy": "zx scripts/deploy/index.mjs",
+    "predeploy": "npm run build",
+    "prebuild": "zx scripts/beforeBuild/index.mjs",
+    "predev":"zx scripts/beforeBuild/index.mjs"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@vuepress-reco/vuepress-plugin-bulletin-popover": "1.5.7",
     "valine": "^1.4.14",
@@ -31,6 +28,7 @@
   "devDependencies": {
     "@vuepress/plugin-pwa": "^1.7.1",
     "vuepress": "1.7.1",
-    "vuepress-theme-reco": "1.5.7"
+    "vuepress-theme-reco": "1.5.7",
+    "zx":"^5.1.0"
   }
 }

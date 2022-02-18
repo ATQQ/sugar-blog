@@ -1,6 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const { readDir, readFile, getFileH1 } = require('./util')
+const { readDir, readFile, getFileH1 } = require('../utils')
 
 
 /**
@@ -59,5 +59,5 @@ function scanDirectory(directory, include = []) {
 }
 
 // 待扫描的根目录
-const { sidebarList, docsDir } = require('./constants')
+const { sidebarList, docsDir } = require('../constants')
 scanDirectory(docsDir, sidebarList)

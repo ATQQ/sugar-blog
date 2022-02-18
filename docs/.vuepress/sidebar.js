@@ -1,8 +1,7 @@
-const { writeFileSync } = require('fs')
 const path = require('path')
 const { join } = require('path')
-const { sidebarList, docsDir } = require('./../../src/constants')
-const { readFile, readDir, getFileH1, getFileMatterData } = require('./../../src/util')
+const { sidebarList, docsDir } = require('./../../scripts/constants')
+const { readDir, getFileH1, getFileMatterData } = require('./../../scripts/utils')
 const sidebar = {}
 
 const defaultConfig = {

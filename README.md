@@ -7,7 +7,7 @@
 记录面试中所遇的问题，并整理相关知识点，分模块进行了梳理
 
 ## :speak_no_evil:[关于笔者](./docs/aboutme.md)
-目前大四在校生，热爱大前端开发技术
+21年毕业，目前就职于美团（到店餐饮B端），热爱大前端开发技术
 
 热爱开源，乐于分享
 
@@ -45,8 +45,12 @@ npm i -g pnpm
 pnpm install
 
 # 开发启动
-pnpm dev
+pnpm dev --enable-pre-post-scripts
+# or
+npm run dev
 
 # 构建
-pnpm build
+pnpm build --enable-pre-post-scripts
+# or
+npm run build
 ```
