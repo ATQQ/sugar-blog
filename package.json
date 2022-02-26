@@ -6,9 +6,6 @@
   "directories": {
     "doc": "docs"
   },
-  "engines": {
-    "node": ">= 16.0.0"
-  },
   "scripts": {
     "dev": "vuepress dev docs/.",
     "build": "vuepress build docs/.",

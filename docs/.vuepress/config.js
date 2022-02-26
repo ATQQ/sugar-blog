@@ -100,9 +100,7 @@ module.exports = {
         items: [
           { text: "心得总结", link: "/offer/experience/" },
           { text: "校招考点汇总", link: "/offer/campus/" },
-          { text: "20年春招面经", link: "/offer/spring20/" },
-          { text: "20年秋招面经", link: "/offer/autumn20/" },
-          { text: "21年面经", link: "/offer/spring21/" },
+          { text: "面经汇总", link: "/offer/sum-interview/" },
           { text: "复习自查", link: "/offer/review/" },
         ],
       },
@@ -153,6 +151,7 @@ module.exports = {
           // { text: '操作系统', link: '/interview/os/' },
           // { text: '设计模式', link: '/interview/design/' },
           { text: "综合问题", link: "/interview/other/" },
+          { text: "面经汇总", link: "/offer/sum-interview/" },
           { text: "小程序", link: "/interview/mini/" },
           // { text: '面经', link: '/interview/experience/' }
         ],

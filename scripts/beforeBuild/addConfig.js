@@ -60,7 +60,10 @@ const TagMap = {
     'code': '手撕代码',
     'mini': '小程序',
     'other': '其它',
-    'autumn20': '2020秋招',
+    '20-autumn': '2020秋招',
+    '20-spring': '2020春招',
+    '21-spring': '2021春招',
+    '22-spring': '2022春招',
     'campus': '校招考点',
     'experience': '面试经验',
     'spring20': '2020春招',
@@ -80,10 +83,10 @@ function getCategoryAndTags(url) {
     const category = CategoryMap[tokens[0]]
     const tag = TagMap[tokens[1]]
     const tags = [category, tag]
-    const categorys = [category]
+    const categories = [category]
     return {
         tags,
-        categorys
+        categories
     }
 }
 
@@ -94,16 +97,17 @@ const CategoryMap = {
     'computerbase': '计算机基础',
     'interview': '面试',
     'offer': '备战春秋',
+    'sum-interview':'面经',
     'technology': '技术笔记',
 }
 
 function getFileConfig(url) {
     const title = fs.readFileSync(url, { encoding: 'utf-8' }).split('\n').find(str => {
         return str.startsWith('# ')
-    }).slice(2).replace(/[\sI]/g, '')
+    }).slice(2).replace(/[\s]/g, '')
     const date = getFileBirthTime(url)
-    const { tags, categorys } = getCategoryAndTags(url)
-    if (!categorys[0]) {
+    const { tags, categories } = getCategoryAndTags(url)
+    if (!categories[0]) {
         return false
     }
     return [
@@ -113,7 +117,7 @@ function getFileConfig(url) {
         'tags:',
         `${tags.map(v => ` - ${v}`).join('\n')}`,
         'categories:',
-        `${categorys.map(v => ` - ${v}`).join('\n')}`,
+        `${categories.map(v => ` - ${v}`).join('\n')}`,
         '---'
     ].join('\n')
 }
