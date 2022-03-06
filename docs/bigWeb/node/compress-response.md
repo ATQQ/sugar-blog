@@ -1,4 +1,13 @@
-# Node Server实现返回内容的压缩(gzip/br/deflate)介绍与实践
+---
+title: Node侧实现内容压缩(gzip/br/deflate)介绍与实践
+date: 2022-03-05
+tags:
+ - 大前端
+ - node.js
+categories:
+ - 大前端
+---
+# Node侧实现内容压缩(gzip/br/deflate)介绍与实践
 
 ## 背景
 在查看自己的[应用](https://ep2.sugarat.top/)日志时，发现进入日志页面后总是要几秒钟才会加载（接口没做分页），于是打开网络面板查看
@@ -17,12 +26,12 @@
 
 >下面的客户端均指浏览器
 ### accept-encoding
-![图片](https://img.cdn.sugarat.top/mdImg/MTY0NjExMzE0NjMyNQ==646113146325)
+![accept-encoding](https://img.cdn.sugarat.top/mdImg/MTY0NjExMzE0NjMyNQ==646113146325)
 
 客户端在向服务端发起请求时，会在请求头(request header)中添加`accept-encoding`字段，其值标明客户端`支持的压缩内容编码`格式
 
 ### content-encoding
-![图片](https://img.cdn.sugarat.top/mdImg/MTY0NjExMzI0OTczMQ==646113249731)
+![content-encoding](https://img.cdn.sugarat.top/mdImg/MTY0NjExMzI0OTczMQ==646113249731)
 
 服务端在对返回内容执行压缩后，通过在响应头（response header）中添加`content-encoding`，来告诉浏览器内容`实际压缩使用的编码算法`
 
@@ -35,7 +44,7 @@
 `br`指代`Brotli`，该数据格式旨在进一步提高压缩比，对文本的压缩相对`deflate`能增加`20%`的压缩密度，而其压缩与解压缩速度则大致不变
 
 ## zlib模块
-Node.js包含一个`zlib 模块`，提供了开行即用使用 `Gzip`、`Deflate/Inflate`、以及 `Brotli` 实现的压缩功能
+Node.js包含一个`zlib 模块`，提供了使用 `Gzip`、`Deflate/Inflate`、以及 `Brotli` 实现的压缩功能
 
 这里以`gzip`为例分场景列举多种使用方式，`Deflate/Inflate`与`Brotli`使用方式一样，只是API不一样
 
@@ -76,7 +85,7 @@ du -ah tests
 * 注：所有 `zlib` API，除了那些显式同步的 API，都使用 Node.js 内部线程池，可以看做是异步的
 * 因此下面的示例中的压缩和解压代码应分开执行，否则会报错
 
-**方式1：**直接利用实例上的`pipe`方法传递流
+**方式1：** 直接利用实例上的`pipe`方法传递流
 ```js
 // 压缩
 const readStream = fs.createReadStream(testFile)
@@ -89,7 +98,7 @@ const writeStream = fs.createWriteStream(decodeFile)
 readStream.pipe(zlib.createUnzip()).pipe(writeStream)
 ```
 
-**方式2：**利用`stream`上的`pipeline`，可在回掉中单独做其它的处理
+**方式2：** 利用`stream`上的`pipeline`，可在回掉中单独做其它的处理
 ```js
 // 压缩
 const readStream = fs.createReadStream(testFile)
@@ -110,7 +119,7 @@ stream.pipeline(readStream, zlib.createUnzip(), writeStream, err => {
 })
 ```
 
-**方式3：**Promise化`pipeline`方法
+**方式3：** Promise化`pipeline`方法
 ```js
 const { promisify } = require('util')
 const pipeline = promisify(stream.pipeline)
@@ -141,7 +150,7 @@ pipeline(readStream, zlib.createUnzip(), writeStream)
   * `unzip`
   * `unzipSync`
 
-**方式1：**将`readStream`转`Buffer`,然后进行进一步操作
+**方式1：** 将`readStream`转`Buffer`,然后进行进一步操作
 * gzip：异步
 ```js
 // 压缩
@@ -171,7 +180,7 @@ readStream.on('end', () => {
 })
 ```
 
-**方式2：**直接通过`readFileSync`读取（返回结果默认为Buffer）
+**方式2：** 直接通过`readFileSync`读取
 ```js
 // 压缩
 const readBuffer = fs.readFileSync(testFile)
@@ -214,7 +223,7 @@ transformStream.push(null)
 
 这里以写入到文件示例，当然也可以写到其它的流里，如`HTTP的Response`（后面会单独介绍）
 ```js
-duplex
+transformStream
     .pipe(zlib.createGzip())
     .pipe(fs.createWriteStream(targetFile))
 ```
@@ -236,14 +245,90 @@ fs.writeFileSync(targetFile, result)
 ```
 
 ## Node Server中的实践
-这里以Node中 `http` 模块创建一个简单的 Server 实例
+这里直接使用Node中 `http` 模块创建一个简单的 Server 进行演示
+
+在其他的 `Node Web` 框架中，处理思路类似，当然一般也有现成的插件，一键接入
+
+![运行结果](https://img.cdn.sugarat.top/mdImg/MTY0NjUzMzExNDE3OQ==646533114179)
 
 ```js
+const http = require('http')
+const { PassThrough, pipeline } = require('stream')
+const zlib = require('zlib')
 
+// 测试数据
+const testTxt = '测试数据123'.repeat(1000)
+
+const app = http.createServer((req, res) => {
+    const { url } = req
+    // 读取支持的压缩算法
+    const acceptEncoding = req.headers['accept-encoding'].match(/(br|deflate|gzip)/g)
+
+    // 默认响应的数据类型
+    res.setHeader('Content-Type', 'application/json; charset=utf-8')
+
+    // 几个示例的路由
+    const routes = [
+        ['/gzip', () => {
+            if (acceptEncoding.includes('gzip')) {
+                res.setHeader('content-encoding', 'gzip')
+                // 使用同步API直接压缩文本内容
+                res.end(zlib.gzipSync(Buffer.from(testTxt)))
+                return
+            }
+            res.end(testTxt)
+        }],
+        ['/deflate', () => {
+            if (acceptEncoding.includes('deflate')) {
+                res.setHeader('content-encoding', 'deflate')
+                // 基于流的单次操作
+                const originStream = new PassThrough()
+                originStream.write(Buffer.from(testTxt))
+                originStream.pipe(zlib.createDeflate()).pipe(res)
+                originStream.end()
+                return
+            }
+            res.end(testTxt)
+        }],
+        ['/br', () => {
+            if (acceptEncoding.includes('br')) {
+                res.setHeader('content-encoding', 'br')
+                res.setHeader('Content-Type', 'text/html; charset=utf-8')
+                // 基于流的多次写操作
+                const originStream = new PassThrough()
+                pipeline(originStream, zlib.createBrotliCompress(), res, (err) => {
+                    if (err) {
+                        console.error(err);
+                    }
+                })
+                originStream.write(Buffer.from('<h1>BrotliCompress</h1>'))
+                originStream.write(Buffer.from('<h2>测试数据</h2>'))
+                originStream.write(Buffer.from(testTxt))
+                originStream.end()
+                return
+            }
+            res.end(testTxt)
+        }]
+    ]
+    const route = routes.find(v => url.startsWith(v[0]))
+    if (route) {
+        route[1]()
+        return
+    }
+
+    // 兜底
+    res.setHeader('Content-Type', 'text/html; charset=utf-8')
+    res.end(`<h1>404: ${url}</h1>
+    <h2>已注册路由</h2>
+    <ul>
+        ${routes.map(r => `<li><a href="${r[0]}">${r[0]}</a></li>`).join('')}
+    </ul>
+    `)
+    res.end()
+})
+
+app.listen(3000)
 ```
-## 线上Demo
-
-
 ## 参考
 * [掘金:Node.js 流（stream）：你需要知道的一切](https://juejin.cn/post/6844903618441641991#heading-2)
 * [掘金:Node.js实战--资源压缩与zlib模块](https://juejin.cn/post/6844904062974951437#heading-1)
@@ -251,3 +336,6 @@ fs.writeFileSync(targetFile, result)
 * [美团技术团队:速度与压缩比如何兼得？压缩算法在构建部署中的优化](https://tech.meituan.com/2021/01/07/pack-gzip-zstd-lz4.html)
 * [Node.js v16.14.0 文档:zlib](http://nodejs.cn/api/zlib.html#zlib)
 * [Github:ayqy/string-to-file-stream](https://github.com/ayqy/string-to-file-stream/blob/2f43145ca9515345fb0b9b697414bcfd0effe276/index.js)
+
+<comment/>
+<tongji/>
