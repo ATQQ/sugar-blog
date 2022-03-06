@@ -1,4 +1,7 @@
 const sidebar = require('./sidebar')
+const { ESBuildMinifyPlugin } = require('esbuild-loader')
+const jsStringify = require('javascript-stringify');
+const fs = require('fs')
 module.exports = {
   plugins: [
     ["@vuepress/pwa",
@@ -59,6 +62,28 @@ module.exports = {
       }
     ]
   ],
+  configureWebpack(config, isServer) {
+    // fs.writeFileSync(isServer ? 'server.js' : 'client.js', jsStringify.stringify(config, null, 2))
+    if (!isServer) {
+      const jsRule = config.module.rules.find(v => v.test.toString() === '/\\.jsx?$/')
+      config.optimization.minimize = true
+      config.optimization.minimizer = [
+        new ESBuildMinifyPlugin({
+          target: 'es2015',
+          css: true
+        })
+      ]
+      // jsRule.use = [
+      //   {
+      //     loader: require.resolve('esbuild-loader'),
+      //     options: {
+      //       loader: 'jsx',
+      //       target: 'es2015'
+      //     }
+      //   }
+      // ]
+    }
+  },
   title: "粥里有勺糖",
   description:
     "粥里有勺糖的个人博客,记录随笔与学习笔记，大前端相关的知识，高频面试题，个人面经等",
