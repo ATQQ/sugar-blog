@@ -12,7 +12,7 @@
     "deploy": "zx scripts/deploy/index.mjs",
     "predeploy": "npm run build",
     "prebuild": "zx scripts/beforeBuild/index.mjs",
-    "predev":"zx scripts/beforeBuild/index.mjs"
+    "predev": "zx scripts/beforeBuild/index.mjs"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +26,6 @@
     "@vuepress/plugin-pwa": "^1.7.1",
     "vuepress": "1.7.1",
     "vuepress-theme-reco": "1.5.7",
-    "zx":"^5.1.0"
+    "zx": "^5.1.0"
   }
 }
