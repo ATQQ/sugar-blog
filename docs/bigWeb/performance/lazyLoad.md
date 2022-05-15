@@ -81,4 +81,3 @@ document.onscroll = throttle(loadImg, 200)
 [CodePen:示例](https://codepen.io/sugarInSoup/pen/WNvZEap)
 
 <comment/>
-<tongji/>

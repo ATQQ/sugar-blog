@@ -253,4 +253,3 @@ r.hello3('456')
 * [TypeScript-decorators](https://www.typescriptlang.org/docs/handbook/decorators.html#parameter-decorators)
 
 <comment/>
-<tongji/>

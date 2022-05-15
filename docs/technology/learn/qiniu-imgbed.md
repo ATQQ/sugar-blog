@@ -178,4 +178,3 @@ function copyRes(text) {
 
 
 <comment/>
-<tongji/>

@@ -20,5 +20,3 @@ group:
 * [伪元素](./pseudo-element.md)
 * [回流与重绘](./reflow.md)
 * [css选择器](./selectors.md)
-
-<tongji/>

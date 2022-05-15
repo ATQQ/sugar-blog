@@ -60,4 +60,3 @@ function kmp(origin, target) {
 ```
 
 <comment/>
-<tongji/>

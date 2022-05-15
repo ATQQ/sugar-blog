@@ -68,4 +68,3 @@ console.log(instanceOf([], Function));
 ```
 
 <comment/>
-<tongji/>

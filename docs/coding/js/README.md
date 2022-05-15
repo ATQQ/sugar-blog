@@ -23,5 +23,3 @@ group:
 * [实现call](./myCall.md)
 * [实现一下new](./myNew.md)
 * [实现promiseAll](./promiseAll.md)
-
-<tongji/>

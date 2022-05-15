@@ -31,4 +31,3 @@ function isObject(obj) {
 * Object.prototype.toString.call
 
 <comment/>
-<tongji/>

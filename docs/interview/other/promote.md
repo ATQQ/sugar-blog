@@ -26,4 +26,3 @@ categories:
 * const 声明必须赋初值,且声明后不能改变
 
 <comment/>
-<tongji/>

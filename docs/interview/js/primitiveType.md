@@ -36,4 +36,3 @@ console.log(compareNum(0.1+0.2,0.3)) // true
 ```
 
 <comment/>
-<tongji/>

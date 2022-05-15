@@ -16,5 +16,3 @@ group:
 * [shopee-供应链](./shopee.md)
 * [腾讯-腾讯云](./txcloud.md)
 * [作业帮-前端团队](./zyb.md)
-
-<tongji/>

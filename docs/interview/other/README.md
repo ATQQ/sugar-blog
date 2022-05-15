@@ -13,5 +13,3 @@ group:
 * [对象类型和原始类型的不同之处？函数参数是对象会发生什么问题？](./object.md)
 * [什么是提升？什么是暂时性死区？var、let 及 const 区别？](./promote.md)
 * [如何理解原型？如何理解原型链？](./prototype.md)
-
-<tongji/>

@@ -146,4 +146,3 @@ module.exports = {
 * [uni-app 使用 tailwindcss](https://wyz.xyz/d/150-uni-app-tailwindcss)
 
 <comment/>
-<tongji/>

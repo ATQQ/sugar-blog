@@ -23,4 +23,3 @@ tags:
 * 图片选取策略
 
 <comment/>
-<tongji/>

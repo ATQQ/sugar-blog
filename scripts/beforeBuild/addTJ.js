@@ -8,14 +8,19 @@ for (const filePath of files) {
     const data = fs.readFileSync(filePath, {
         encoding: 'utf-8'
     }).split('\n')
-    const lastLine = data[data.length - 1].trim()
-    // 最后一行为空则 直接替换加入tj
-    if (lastLine.length === 0) {
-        data.push('<tongji/>')
-        fs.writeFileSync(filePath, data.join('\n'))
-    } else if (lastLine !== '<tongji/>') {
-        data.push('')
-        data.push('<tongji/>')
+    // const lastLine = data[data.length - 1].trim()
+    // // 最后一行为空则 直接替换加入tj
+    // if (lastLine.length === 0) {
+    //     data.push('<tongji/>')
+    //     fs.writeFileSync(filePath, data.join('\n'))
+    // } else if (lastLine !== '<tongji/>') {
+    //     data.push('')
+    //     data.push('<tongji/>')
+    //     fs.writeFileSync(filePath, data.join('\n'))
+    // }
+    const tjIdx = data.findIndex(item => item.trim() === '<tongji/>')
+    if (tjIdx !== -1) {
+        data.splice(tjIdx, 1)
         fs.writeFileSync(filePath, data.join('\n'))
     }
 }

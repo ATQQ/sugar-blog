@@ -42,5 +42,3 @@ group:
 * [JavaScript中的类型转换规则](./typeConvert.md)
 * [参数按值传递](./valuePass.md)
 * [变量对象](./variableObject.md)
-
-<tongji/>

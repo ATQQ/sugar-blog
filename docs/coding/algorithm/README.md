@@ -19,5 +19,3 @@ group:
 * [最长公共子串](./publicStringLen.md)
 * [快速排序](./quickSort.md)
 * [层序遍历二叉树](./treeLevelTraverse.md)
-
-<tongji/>

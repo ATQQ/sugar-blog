@@ -24,4 +24,3 @@ categories:
 6. 表达出对我某某项目感兴趣,叫我详细的给他们讲一下:smile:
 
 <comment/>
-<tongji/>

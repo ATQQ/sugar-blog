@@ -19,5 +19,3 @@ collapsable: true
 * [做一个CLI版的时间管理工具（七）](./time-tools-7.md)
 * [做一个CLI版的时间管理工具（八）](./time-tools-8.md)
 * [做一个CLI版的时间管理工具（九）](./time-tools-9.md)
-
-<tongji/>

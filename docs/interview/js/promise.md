@@ -34,4 +34,3 @@ categories:
 * then函数在promise.resolve()执行后执行
 
 <comment/>
-<tongji/>

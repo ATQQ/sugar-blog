@@ -33,4 +33,3 @@ author: wzj
 * 组件件传递数据的方式
 
 <comment/>
-<tongji/>

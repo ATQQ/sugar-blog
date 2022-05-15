@@ -175,4 +175,3 @@ export default function lazyInitialize(initializer): any {
 * `@throttle`：节流
 
 <comment/>
-<tongji/>

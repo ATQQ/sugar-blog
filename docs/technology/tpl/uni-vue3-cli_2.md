@@ -385,4 +385,3 @@ export default defineComponent({
 * [uni-vue3-ts：模板仓库](https://github.com/ATQQ/uni-vue3-ts-template)
 
 <comment/>
-<tongji/>

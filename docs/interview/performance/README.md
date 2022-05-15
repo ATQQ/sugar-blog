@@ -8,5 +8,3 @@ group:
 
 ## 目录
 * [如何加快首屏渲染?](./firstScreenRender.md)
-
-<tongji/>

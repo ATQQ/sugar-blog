@@ -46,4 +46,3 @@ function isArray(arr) {
 console.log(isArray([]))
 ```
 <comment/>
-<tongji/>

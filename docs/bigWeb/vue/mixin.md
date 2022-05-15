@@ -56,4 +56,3 @@ new Component().$mount("#app")
 ```
 
 <comment/>
-<tongji/>

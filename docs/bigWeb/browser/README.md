@@ -34,5 +34,3 @@ sticky: 4
 * [渲染原理](./render.md)
 * [安全](./safe.md)
 * [本地存储](./storage.md)
-
-<tongji/>

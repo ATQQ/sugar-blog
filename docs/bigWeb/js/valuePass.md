@@ -62,4 +62,3 @@ console.log(obj) // {a:1}
 * 拷贝副本也是一种值的拷贝
 
 <comment/>
-<tongji/>

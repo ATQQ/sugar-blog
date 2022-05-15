@@ -434,4 +434,3 @@ JS创建对象的方式就是原型引用：
 * [原型与原型链](../../bigWeb/js/prototype.md)
 
 <comment/>
-<tongji/>

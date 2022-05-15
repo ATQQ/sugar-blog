@@ -56,4 +56,3 @@ function fib(index) {
 ```
 
 <comment/>
-<tongji/>

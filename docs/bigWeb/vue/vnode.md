@@ -119,4 +119,3 @@ function cloneVNode(node){
 * 用 VNode 节点的形式来模拟一棵 Virtual DOM 树
 
 <comment/>
-<tongji/>

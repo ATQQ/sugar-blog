@@ -20,5 +20,3 @@ group:
 * [thoughtWorks-思特沃克](./thoughtWorks.md)
 * [网易互娱](./wy-hy.md)
 * [网易-云音乐](./wy-music.md)
-
-<tongji/>
