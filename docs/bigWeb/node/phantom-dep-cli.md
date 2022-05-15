@@ -24,7 +24,7 @@ categories:
 
 |                                     npm                                     |                                    yarn                                     |                                    pnpm                                     |
 | :-------------------------------------------------------------------------: | :-------------------------------------------------------------------------: | :-------------------------------------------------------------------------: |
-| ![图片](https://img.cdn.sugarat.top/mdImg/MTY1MjYwNDA3MDcxMQ==652604070711) | ![图片](https://img.cdn.sugarat.top/mdImg/MTY1MjYwNDEyMzUwMQ==652604123501) | ![图片](https://img.cdn.sugarat.top/mdImg/MTY1MjYwNDIxODMwMA==652604218300) |
+| ![图片](https://img.cdn.sugarat.top/mdImg/MTY1MjYyNDkxNDc0OQ==652624914749) | ![图片](https://img.cdn.sugarat.top/mdImg/MTY1MjYwNDEyMzUwMQ==652604123501) | ![图片](https://img.cdn.sugarat.top/mdImg/MTY1MjYwNDIxODMwMA==652604218300) |
 
 由于依赖的`扁平化`，可以看到前两者会使 `node_modules` 中多出一些其它的东西
 
