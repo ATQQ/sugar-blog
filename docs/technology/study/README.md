@@ -36,5 +36,3 @@ group:
 * [设计模式-创建型模式](./design-patterns1.md)
 * [设计模式-结构型模式](./design-patterns2.md)
 * [学习笔记：TypeScript装饰器](./ts-decorators.md)
-
-<tongji/>

@@ -88,4 +88,3 @@ generate 是将 `AST` 转化成 `render function` 字符串的过程，得到结
 ,只需要将这些`差异`的对应 DOM 进行修改即可。
 
 <comment/>
-<tongji/>

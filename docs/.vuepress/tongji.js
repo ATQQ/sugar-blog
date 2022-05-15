@@ -1,20 +1,15 @@
 export default {
     init() {
-        const tj = document.querySelector('#cnzz');
-        const span = document.createElement("span");
-        span.id = "cnzz_stat_icon_1279199338";
-        const script = document.createElement("script");
-        script.src =
-            "https://v1.cnzz.com/z_stat.php?id=1279199338&online=1&show=line";
-        script.type = "text/javascript";
-        tj.append(span);
-        tj.append(script);
-        // 只在首页展示
-        const hidden = location.pathname !== "/";
-        if (hidden) {
-            tj.className += ' hidden-tj'
-        } else {
-            tj.className += ' home-tj'
-        }
+//         <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+// <script>LA.init({id: "Jgmg5avjAUvoyePS",ck: "Jgmg5avjAUvoyePS"})</script>
+        const tj = document.querySelector('#51tj');
+        const script1 = document.createElement('script');
+        script1.setAttribute('charset', 'UTF-8');
+        script1.setAttribute('id', 'LA_COLLECT');
+        script1.setAttribute('src', '//sdk.51.la/js-sdk-pro.min.js');
+        tj.appendChild(script1);
+        const script2 = document.createElement('script');
+        script2.innerHTML = `LA.init({id: "Jgmg5avjAUvoyePS",ck: "Jgmg5avjAUvoyePS"})`;
+        tj.appendChild(script2);
     }
 }

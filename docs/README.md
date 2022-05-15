@@ -23,5 +23,3 @@ features:
 <iframe src="https://ghbtns.com/github-btn.html?user=atqq&repo=sugar-blog&type=fork&count=true&size=large" frameborder="0" scrolling="0" width="120" height="30" title="GitHub"></iframe>
 
 </center>
-
-<tongji/>

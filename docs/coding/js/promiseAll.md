@@ -73,4 +73,3 @@ PromiseAll([p1, p2, p3]).then(console.log).catch(console.error)
 ```
 
 <comment/>
-<tongji/>

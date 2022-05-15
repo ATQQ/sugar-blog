@@ -71,6 +71,8 @@ module.exports = {
         content: "width=device-width,initial-scale=1,user-scalable=no",
       },
     ],
+    ['script', { charset: 'UTF-8', id: 'LA_COLLECT', src: '//sdk.51.la/js-sdk-pro.min.js' }],
+    ['script', {}, `LA.init({id: 'Jgmg5avjAUvoyePS', ck: 'Jgmg5avjAUvoyePS'});`],
   ],
   locales: {
     "/": {

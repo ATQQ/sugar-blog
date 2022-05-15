@@ -32,4 +32,3 @@ console.log('ss' instanceof myString); // true
 :::
 
 <comment/>
-<tongji/>

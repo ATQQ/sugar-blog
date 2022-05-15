@@ -18,4 +18,3 @@ categories:
 * 在函数内部改变对象的属性会影响原来的值
 
 <comment/>
-<tongji/>

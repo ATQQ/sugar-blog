@@ -41,4 +41,3 @@ categories:
 6. 你有加入什么实验室吗?详细介绍下
 
 <comment/>
-<tongji/>

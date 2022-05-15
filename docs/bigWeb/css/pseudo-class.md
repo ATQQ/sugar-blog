@@ -35,4 +35,3 @@ selector:pseudo-class {
 其它更多的伪类 [MDN:CSS伪类](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Pseudo-classes)
 
 <comment/>
-<tongji/>

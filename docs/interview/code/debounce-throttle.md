@@ -89,4 +89,3 @@ function superThrottle(fn, delay) {
 ```
 
 <comment/>
-<tongji/>

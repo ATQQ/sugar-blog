@@ -17,5 +17,3 @@ group:
 * [抽象工厂模式](./abstractfactory.md)
 * [简单工厂模式](./factory.md)
 * [单例模式](./single.md)
-
-<tongji/>

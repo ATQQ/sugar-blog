@@ -412,4 +412,3 @@ vite提供了`loadConfigFromFile`方法，只需要在此方法中做一层简�
 2. 将内部能力抽成一个个单独的vite插件
 
 <comment/>
-<tongji/>

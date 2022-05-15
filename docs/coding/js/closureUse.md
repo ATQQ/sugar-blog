@@ -40,4 +40,3 @@ console.log(func()); // -> 3
 ```
 
 <comment/>
-<tongji/>

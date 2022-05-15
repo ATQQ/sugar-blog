@@ -18,4 +18,3 @@ categories:
 * 线程间的通信可以通过共享进程级全局变量
 
 <comment/>
-<tongji/>

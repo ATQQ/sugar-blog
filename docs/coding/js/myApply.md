@@ -49,4 +49,3 @@ print.myapply(null, [1, 2]) // undefined 3
 print.myapply({ name: 'test' }, [1, 2]) // test 3
 ```
 <comment/>
-<tongji/>

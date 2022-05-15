@@ -24,5 +24,3 @@ group:
 * [路由原理](./routing.md)
 * [v-show 与 v-if](./showif.md)
 * [实现 VNode 节点](./vnode.md)
-
-<tongji/>

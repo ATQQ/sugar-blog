@@ -238,4 +238,3 @@ new myPromise((resolve, reject) => {
 ```
 
 <comment/>
-<tongji/>

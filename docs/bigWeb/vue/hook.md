@@ -87,4 +87,3 @@ updated: function () {
 * 所有子组件都销毁完毕后才会执行根组件的 destroyed 钩子函数
 
 <comment/>
-<tongji/>

@@ -26,4 +26,3 @@ const fn = () =>{
 * 不能使用yield命令,即不可以用作Generator函数
 
 <comment/>
-<tongji/>

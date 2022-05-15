@@ -151,4 +151,3 @@ p.color-color-blue{
 8. 画五角星
 
 <comment/>
-<tongji/>

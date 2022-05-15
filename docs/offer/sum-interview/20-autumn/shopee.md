@@ -51,4 +51,3 @@ requestUser(3).then(res3=>{})
 1. 对MVVM，MVC，MVP架构的认识
 
 <comment/>
-<tongji/>

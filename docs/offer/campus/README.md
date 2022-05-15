@@ -44,5 +44,3 @@ sticky: 2
 * [Vue全家桶](./vue.md)
 * [校招考点汇总-Webpack](./webpack.md)
 * [业务相关](./work.md)
-
-<tongji/>

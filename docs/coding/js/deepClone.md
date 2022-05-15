@@ -379,4 +379,3 @@ fn3(2, 3) // string 5
 关于深拷贝完整实现 可以研究一下 [lodash.cloneDeep](https://www.lodashjs.com/docs/lodash.cloneDeep)，[源码](https://github.com/lodash/lodash/blob/master/.internal/baseClone.js)
 
 <comment/>
-<tongji/>

@@ -129,4 +129,3 @@ m2.createHardWare().operateByCommand()
 * 具体产品:用于生成产品族里的一个具体的产品所依赖的更细粒度的产品,比如具体的一种操作系统或具体的一种硬件等。
 
 <comment/>
-<tongji/>

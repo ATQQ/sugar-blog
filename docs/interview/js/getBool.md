@@ -22,4 +22,3 @@ Boolean(1) // true
 ```
 
 <comment/>
-<tongji/>

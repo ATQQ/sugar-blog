@@ -498,4 +498,3 @@ sls deploy
 * 探究一下终端如何展示二维码的，展示图片的可能性
 
 <comment/>
-<tongji/>

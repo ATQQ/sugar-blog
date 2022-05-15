@@ -36,4 +36,3 @@ categories:
 只要打破四个必要条件之一就能有效预防死锁的发生
 
 <comment/>
-<tongji/>

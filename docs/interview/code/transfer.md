@@ -63,4 +63,3 @@ console.log(tenToOther('9999', 16)); // 270f
 ```
 
 <comment/>
-<tongji/>

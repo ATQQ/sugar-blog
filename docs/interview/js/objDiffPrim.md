@@ -24,4 +24,3 @@ console.log(o1.a) // 2
 1. 赋值的时候拷贝的一个新的值,不会影响原来的
 
 <comment/>
-<tongji/>

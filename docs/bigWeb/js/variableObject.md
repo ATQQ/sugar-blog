@@ -182,4 +182,3 @@ var foo = 1;
 :::
 
 <comment/>
-<tongji/>

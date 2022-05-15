@@ -197,4 +197,3 @@ timec -or -R <startTime_endTime> <filepath>
 * [仓库地址](https://github.com/ATQQ/time-control)
 
 <comment/>
-<tongji/>

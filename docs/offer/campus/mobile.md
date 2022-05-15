@@ -19,4 +19,3 @@ tags:
 * jsBridge
 
 <comment/>
-<tongji/>

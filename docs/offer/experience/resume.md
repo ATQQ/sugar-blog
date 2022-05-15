@@ -397,4 +397,3 @@ FLAG：自己码了个简历在线生成工具，方便同学们直接生成自�
 * [知乎：怎么写简历中的自我评价？](https://www.zhihu.com/question/20632491)
 
 <comment/>
-<tongji/>

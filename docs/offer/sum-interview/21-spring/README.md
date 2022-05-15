@@ -10,5 +10,3 @@ group:
 
 ## 目录
 * [字节跳动-抖音架构](./bytedance-dy.md)
-
-<tongji/>

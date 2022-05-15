@@ -23,5 +23,3 @@ group:
 * [页面预渲染](./preRender.md)
 * [服务端渲染](./ssr.md)
 * [节流与防抖](./throttling.md)
-
-<tongji/>

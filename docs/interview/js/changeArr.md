@@ -22,4 +22,3 @@ categories:
 * copyWithin：在当前数组内部，将指定位置的成员复制到其他位置
 * fill：使用给定值，填充一个数组
 <comment/>
-<tongji/>
