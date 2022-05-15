@@ -72,7 +72,7 @@ module.exports = {
       },
     ],
     ['script', { charset: 'UTF-8', id: 'LA_COLLECT', src: '//sdk.51.la/js-sdk-pro.min.js' }],
-    ['script', {}, `LA.init({id: 'Jgmg5avjAUvoyePS', ck: 'Jgmg5avjAUvoyePS'});`],
+    ['script', {}, `LA.init({id: 'Jgmg5avjAUvoyePS', ck: 'Jgmg5avjAUvoyePS', hashMode:true});`],
   ],
   locales: {
     "/": {
