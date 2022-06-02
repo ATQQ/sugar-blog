@@ -243,14 +243,15 @@ function isValidNodeModulesSource(
 ```
 
 ### 提取包名
-最后一步就是从筛选出来的`有效资源路径`里提取出包名了，通常就两种场景`pkgName`和`@scope/pkgName`
+接下来就是从筛选出来的`有效资源路径`里提取出包名了，通常就两种场景`pkgName`和`@scope/pkgName`，通过几个常用的API就能搞定
+
 ```ts
 function getPkgNameBySourcePath(pkgPath: string) {
   const paths = pkgPath
     .replace(/~/g, '')
     .replace(/.*node_modules\//, '')
-    .split(path.sep)
-  return paths[0].startsWith('@') ? paths.slice(0, 2).join(path.sep) : paths[0]
+    .split('/')
+  return paths[0].startsWith('@') ? paths.slice(0, 2).join('/') : paths[0]
 }
 ```
 ```ts
@@ -265,9 +266,43 @@ test('getPkgNameBySourcePath', () => {
 })
 ```
 
-关键方法搞定后，只需要进行逻辑的组织即可，[完整源码](https://github.com/ATQQ/tools/tree/main/packages/cli/ghost)
 
-当然可能存在一些未考虑到的case场景，遇到了再`case by case`完善即可
+### 过滤掉不合法的包名
+上述规则不能涵盖到所有情况，取到的包名可能有不合法的如`this.xxx`,`xx.resolve(yyy)`,`Node内置的包 fs/path/process/...etc`
+
+针对Node内置的包可以直接写个正则搞定,当然这段正则来源于`Copilot`推荐
+```sh
+function isNodeLib(v: string) {
+  return /^(?:assert|buffer|child_process|cluster|console|constants|crypto|dgram|dns|domain|events|fs|http|https|module|net|os|path|punycode|querystring|readline|repl|stream|string_decoder|sys|timers|tls|tty|url|util|vm|zlib)$/.test(
+    v
+  )
+}
+```
+
+当然也有现成的第三方包可以直接使用 [validate-npm-package-name](https://www.npmjs.com/package/validate-npm-package-name) ,这个是官方出品的，用法也就更加简单了
+* 不仅仅能过滤掉Node内置包，还能过滤掉不合法命名的包
+
+```ts
+import validPkgName from 'validate-npm-package-name'
+
+function isValidPkgName(pkgName: string): boolean {
+  const { validForNewPackages, validForOldPackages} = validPkgName(pkgName)
+
+  return validForNewPackages
+}
+```
+```ts
+test('isValidPkgName', () => {
+  expect(isValidPkgName('vue')).toBe(true)
+  expect(isValidPkgName('some-package')).toBe(true)
+  expect(isValidPkgName('@jane/foo.js')).toBe(true)
+  expect(isValidPkgName('r.resolve("custom-token.js")')).toBe(false)
+  expect(isValidPkgName('dayjs/dsds/abc.js')).toBe(false)
+})
+```
+
+关键一系列方法搞定后，只需要进行逻辑的组织即可，[Github查看最终方法源码](https://github.com/ATQQ/tools/blob/8e0a79d093b3f03a47adff4d7fc0569f19a398e4/packages/cli/ghost/src/util/index.ts#L15-L81)
+
 ## 上手体验
 已将最终实现整成了`npm`包`@sugarat/ghost`，项目可引入直接使用
 
@@ -299,5 +334,11 @@ const phantomDependency = findGhost(
   path.join(process.cwd(), 'package.json')
 )
 ```
+
+## 最后
+`pnpm` 是个好东西，推荐大家可以用起来了
+
+欢迎评论区交流指正，有 `case` 可以抛出来帮助工具完善得更好
+* [项目完整源码](https://github.com/ATQQ/tools/tree/main/packages/cli/ghost)
 
 <comment/>
