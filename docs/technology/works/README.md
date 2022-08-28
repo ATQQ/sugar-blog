@@ -10,8 +10,9 @@ group:
 个人精力有限,感兴趣有能力的朋友可以帮忙迭代维护
 
 ## 目录
+* [组装个低配版语雀+CodePen](./codeNote.md)
 * [一款检测代码中TODO的eslint插件](./eslint-plugin-todo-ddl.md)
-* [实现一个Web UI检测(视觉走查)工具(撰写中)](./ewuit.md)
+* [实现一个Web UI检测(视觉走查)工具ing](./ewuit.md)
 * [我打造的在线简历生成应用](./online-resume.md)
 * [助你轻松编写与分享snippet的VsCode插件](./share-snippets.md)
 * [一个通过NPM包共(分)享代码块的解决方案](./snippets.md)
