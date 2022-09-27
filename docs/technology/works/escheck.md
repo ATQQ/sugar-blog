@@ -282,11 +282,152 @@ errArr.forEach((err) => {
 ## 增强实现es-check
 综上2个对比，从源码实现反应来看 `es-check` 的实现更简单，维护成本也相对较低
 <!-- 补超链接 -->
-@sugarat/es-check 也将基于`es-check`做1个增强实现，弥补`检测HTML`，`友好提示`、`sourcemap解析`、`单文件多次检测`等能力
+@sugarat/es-check 也将基于`es-check`做1个增强实现，弥补`单文件多次检测`,`支持HTML`、`sourcemap解析`等能力
 
 ### 单文件多次检测
+现状：利用`acorn.parse`直接对`code`进行解析时候，将会直接抛出`code`中的一处`解析错误`，然后就结束了
 
-### 友好提示
+那咱们只需要将`code`拆成多个代码片段，那这个问题理论上就迎刃而解了
+
+现在的问题就是怎么拆了？
+
+我们这直接简单暴力一点，**对AST直接进行节点遍历，然后分别检测每个节点对应的代码是否合法**
+
+首先使用`latest`版本生成这棵AST
+```ts
+const ast = acorn.parse(code, {
+  ecmaVersion: 'latest'
+})
+```
+接下来使用[acorn-walk](https://github.com/acornjs/acorn/tree/master/acorn-walk)进行遍历
+
+```ts
+import * as acornWalk from 'acorn-walk'
+
+acornWalk.full(ast, (node, _state, _type) => {
+  // 节点对应的源码
+  const codeSnippet = code.slice(node.start, node.end)
+  try {
+    acorn.parse(codeSnippet, {
+        ecmaVersion,
+    })
+  } catch (error) {
+    // 在这里输出错误片段和解析报错原因
+    console.log(codeSnippet)
+    console.log(error.message)
+  }
+})
+```
+还是以前面的测试代码为例，输出的错误信息如下
+```ts
+var str = 'hello'
+var str2 = 'world'
+
+const varConst = 'const'
+let varLet = 'let'
+const arrFun = () => {
+    console.log('hello world');
+}
+```
+[完整demo1代码](https://github.com/ATQQ/tools/blob/feature/es-check/packages/cli/es-check/__test__/demos/more-error/1.ts)
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTY2NDI5MDc0Mzc4MA==664290743780)
+
+部分节点对应的片段可能不完整，会导致解析错误
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTY2NDI5MTE3Nzc2NQ==664291177765)
+
+用于测试的片段如下
+
+```ts
+const obj = {
+  'boolean': true,
+}
+```
+
+这里可以再`parse`检测`error`前再parse一次`latest` 用于排除语法错误，额外逻辑如下
+```ts
+let isValidCode = true
+// 判断代码片段 是否合法
+try {
+  acorn.parse(codeSnippet, {
+    ecmaVersion: 'latest'
+  })
+} catch (_) {
+  isValidCode = false
+}
+// 不合法不处理
+if (!isValidCode) {
+  return 
+}
+```
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTY2NDI5MTMyMzU1MQ==664291323551)
+
+[完整demo2代码](https://github.com/ATQQ/tools/blob/feature/es-check/packages/cli/es-check/__test__/demos/more-error/2.ts)
+
+此时输出的错误存在一些重复的情况，比如`父节点包含子节点的问题代码`，这里做一下过滤
+```ts
+const codeErrorList: any[] = []
+acornWalk.full(ast, (node, _state, _type) => {
+  // 节点对应的源码
+  const codeSnippet = code.slice(node.start, node.end)
+  // 省略重复代码。。。
+  try {
+    acorn.parse(codeSnippet, {
+      ecmaVersion: '5'
+    } as any)
+  } catch (error: any) {
+    // 与先存错误进行比较
+    const isRepeat = codeErrorList.find((e) => {
+      // 判断是否是包含关系
+      return e.start >= node.start && e.end <= node.end
+    })
+
+    if (!isRepeat) {
+      codeErrorList.push({
+        codeSnippet,
+        message: error.message,
+        start: node.start,
+        end: node.end
+      })
+    }
+  }
+})
+console.log(codeErrorList)
+```
+修正后结果如下
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTY2NDI5MjA0MDk1Ng==664292040956)
+
+[完整demo3代码](https://github.com/ATQQ/tools/blob/feature/es-check/packages/cli/es-check/__test__/demos/more-error/3.ts)
+
+如有一些边界情况也是在 `catch err`部分根据 `message`做一下过滤即可
+
+比如下代码
+
+```ts
+var { boolean:hello } = {}
+```
+![图片](https://img.cdn.sugarat.top/mdImg/MTY2NDI5MjY5Mjg2Ng==664292692866)
+
+[完整demo4代码](https://github.com/ATQQ/tools/blob/feature/es-check/packages/cli/es-check/__test__/demos/more-error/4.ts)
+
+做一下过滤，`catch message`添加过滤逻辑
+
+```ts
+const filterMessage = [/^The keyword /]
+if (filterMessage.find((r) => r.test(error.message))) {
+  return
+}
+```
+调整后的报错信息就是`解构赋值`的语法错误了
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTY2NDI5MjkxNDY0MQ==664292914641)
+
+[完整demo5代码](https://github.com/ATQQ/tools/blob/feature/es-check/packages/cli/es-check/__test__/demos/more-error/5.ts)
+
+至此基本能完成了`单文件的多次es-check检测`，虽然不像`mpx-es-check`那样用直白的语言直接说面是什么语法。但还有改进空间嘛，后面再单独写个文章做个工具检测目标代码用了哪些`ES6+`特性。就不再这里赘述了
 
 ### sourcemap解析
 ### HTML支持
@@ -299,7 +440,7 @@ errArr.forEach((err) => {
 | @sugarat/es-check | ✅   | ✅    | ✅        |
 
 ## 最后
-当然这个工具可能存在bug，存在遗漏场景等情况
+当然这个工具可能存在bug，存在遗漏场景等情况，读者试用可以评论区给反馈，或者库里直接提`issues`
 ## 参考
 * [es-check](https://github.com/yowainwright/es-check)：社区出品
 * [mpx-es-check](https://github.com/mpx-ecology/mpx-es-check)：滴滴出品 [MPX](https://mpxjs.cn/) 框架的配套工具
