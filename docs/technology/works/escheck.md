@@ -9,9 +9,6 @@ categories:
 ---
 # ESCheck工具原理解析及增强实现
 
-<!-- TODO：掘金标语 -->
-<!-- TODO：示例代码的Github地址 -->
-
 ## 前言
 
 2022了，大家做的面向C端的产品，还是避不开兼容性的话题（即使IE已官宣停止支持）
@@ -602,8 +599,23 @@ traverse(htmlAST, {
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY2NDM1MzM1OTY4OA==664353359688)
 
 ### 组建CLI能力
-这里就不再赘述过程代码，核心的已在前面阐述，这里直接上最终成品的使用
+这里就不再赘述CLI过程代码，核心的已在前面阐述，这里直接上最终成品的使用演示，参数同`es-check`保持一致
+```sh
+npm i @sugarat/es-check -g
+```
 
+检测目标文件
+```sh
+escheck es5 testProject/**/*.js testProject/**/*.html
+```
+![图片](https://img.cdn.sugarat.top/mdImg/MTY2NDM3ODMyNjc0OQ==664378326749)
+
+日志输出到文件
+
+```sh
+escheck es5 testProject/**/*.js testProject/**/*.html --out
+```
+![图片](https://img.cdn.sugarat.top/mdImg/MTY2NDM3ODU2NzI1OA==664378567258)
 ## 最终对比
 | Name              | JS  | HTML | Friendly |
 | ----------------- | --- | ---- | -------- |
@@ -613,6 +625,7 @@ traverse(htmlAST, {
 
 ## 最后
 当然这个工具可能存在bug，存在遗漏场景等情况，读者试用可以评论区给反馈，或者库里直接提`issues`
+
 ## 参考
 * [es-check](https://github.com/yowainwright/es-check)：社区出品
 * [mpx-es-check](https://github.com/mpx-ecology/mpx-es-check)：滴滴出品 [MPX](https://mpxjs.cn/) 框架的配套工具
