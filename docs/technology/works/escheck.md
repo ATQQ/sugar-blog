@@ -430,7 +430,179 @@ if (filterMessage.find((r) => r.test(error.message))) {
 至此基本能完成了`单文件的多次es-check检测`，虽然不像`mpx-es-check`那样用直白的语言直接说面是什么语法。但还有改进空间嘛，后面再单独写个文章做个工具检测目标代码用了哪些`ES6+`特性。就不再这里赘述了
 
 ### sourcemap解析
+这个主要针对检测资源是`build产物`的一项优化，通过`source-map`解析报错信息对应的源码
+
+前面的代码我们只获取了`问题源码`的起止字符位置`start`,`end`
+
+通过source-map解析，首先要获取报错代码在资源中的行列信息
+
+这里通过`acorn.getLineInfo`方法可直接获取行列信息
+
+```ts
+// 省略了重复代码
+const codeErrorList: any[] = []
+acornWalk.full(ast, (node, _state, _type) => {
+  // 节点对应的源码
+  const codeSnippet = code.slice(node.start, node.end)
+  try {
+    acorn.parse(codeSnippet, {
+      ecmaVersion: '5'
+    } as any)
+  } catch (error) {
+    const locStart = acorn.getLineInfo(code, node.start)
+    const locEnd = acorn.getLineInfo(code, node.end)
+    codeErrorList.push({
+      loc: {
+        start: locStart,
+        end: locEnd
+      }
+    })
+  }
+})
+console.dir(codeErrorList, {
+  depth: 3
+})
+```
+结果如下，[完整demo1代码](https://github.com/ATQQ/tools/blob/feature/es-check/packages/cli/es-check/__test__/demos/source-map/1.ts)
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTY2NDMzNzAxMjIyOQ==664337012229)
+
+有了行列号，我们就可以根据`*.map`文件进行源码的解析
+
+默认`map`文件由原文件名加`.map`后缀
+```ts
+function getSourcemapFileContent(file: string) {
+  const sourceMapFile = `${file}.map`
+  if (fs.existsSync(sourceMapFile)) {
+    return fs.readFileSync(sourceMapFile, 'utf-8')
+  }
+  return ''
+}
+```
+解析`map`文件直接使用 `sourceMap.SourceMapConsumer`,返回的实例是1个`Promise`,使用时需注意
+```ts
+function parseSourceMap(code: string) {
+  const consumer = new sourceMap.SourceMapConsumer(code)
+  return consumer
+}
+```
+根据前面`source-map`解析的例子，把这块逻辑放到`checkCode`之后即可
+```ts
+const code = fs.readFileSync(file, 'utf-8')
+// ps: checkCode 即为上一小节实现代码检测能力的封装
+const codeErrorList = checkCode(code)
+const sourceMapContent = getSourcemapFileContent(file)
+if (sourceMapContent) {
+  const consumer = await parseSourceMap(sourceMapContent)
+  codeErrorList.forEach((v) => {
+    // 解析获取原文件信息
+    const smStart = consumer.originalPositionFor({
+      line: v.loc.start.line,
+      column: v.loc.start.column
+    })
+    const smEnd = consumer.originalPositionFor({
+      line: v.loc.end.line,
+      column: v.loc.end.column
+    })
+
+    // start对应源码所在行的代码
+    const sourceStartCode = consumer
+      .sourceContentFor(smStart.source!)
+      ?.split(/\r?\n/g)[smStart.line! - 1]
+    const sourceEndCode = consumer
+      .sourceContentFor(smEnd.source!)
+      ?.split(/\r?\n/g)[smEnd.line! - 1]
+    // 省略 console 打印代码
+  })
+}
+```
+[完整demo2代码](https://github.com/ATQQ/tools/blob/feature/es-check/packages/cli/es-check/__test__/demos/source-map/2.ts)
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTY2NDMzNzM4NTkyMw==664337385923)
+
+这块就对齐了`mpx-es-check`的`source-map`解析能力
 ### HTML支持
+这个就比较好办了，只需要将`script`里的内容提取出来，调用上述的`checkCode`方法，然后对结果进行一个行列号的优化即可
+
+这里提取的方法很多，可以
+1. `正则匹配`
+2. [cheerio](https://cheerio.js.org/)：像jQuery一样操作
+3. [parse5](https://github.com/inikulin/parse5)：生成AST，递归遍历需要的节点
+4. [htmlparser2](https://github.com/fb55/htmlparser2)：生成AST，相比`parse5`更加，解析策略更加”包容“
+
+小试对比了一下，最后发现是用`parse5`更符合这个场景（编写代码更少）
+
+```ts
+import * as parse5 from 'parse5'
+
+const htmlAST = parse5.parse(code, {
+  sourceCodeLocationInfo: true
+})
+```
+下面是生成的AST示例: https://astexplorer.net/#/gist/03728790dcd82e64204cdf4641a43d8f/c988f350916bfe04c642333b0839ed35e7578ca6
+
+通过`nodeName`或者`tagName`就可以区分节点类型，这里简单写个遍历方法
+
+节点可以通过`childNodes`属性区分是否包含子节点
+
+```ts
+function traverse(ast: any, traverseSchema: Record<string, any>) {
+  traverseSchema?.[ast?.nodeName]?.(ast)
+  if (ast?.nodeName !== ast?.tagName) {
+    traverseSchema?.[ast?.tagName]?.(ast)
+  }
+  ast?.childNodes?.forEach((n) => {
+    traverse(n, traverseSchema)
+  })
+}
+```
+
+这里遍历一下demo代码生成的ast
+```ts
+traverse(htmlAST, {
+  script(node: any) {
+    const code = `${node.childNodes.map((n) => n.value)}`
+    const loc = node.sourceCodeLocation
+    if (code) {
+      console.log(code)
+      console.log(loc)
+    }
+  }
+})
+```
+[完整demo1代码](https://github.com/ATQQ/tools/blob/feature/es-check/packages/cli/es-check/__test__/demos/html-check/1.ts)
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTY2NDM1MTM3NDUyMA==664351374520)
+
+获得对应的源码后就可以调用之前的`checkCode`方法，对错误行号做一个拼接即可得到错误信息
+
+```ts
+traverse(htmlAST, {
+  script(node: any) {
+    const code = `${node.childNodes.map((n) => n.value)}`
+    const loc = node.sourceCodeLocation
+    if (code) {
+      const errList = checkCode(code)
+      errList.forEach((err) => {
+        console.log(
+          'line:',
+          loc.startLine + err.loc.start.line - 1,
+          'column:',
+          err.loc.start.column
+        )
+        console.log(err.source)
+        console.log()
+      })
+    }
+  }
+})
+```
+[完整demo2代码](https://github.com/ATQQ/tools/blob/feature/es-check/packages/cli/es-check/__test__/demos/html-check/2.ts)
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTY2NDM1MzM1OTY4OA==664353359688)
+
+### 组建CLI能力
+这里就不再赘述过程代码，核心的已在前面阐述，这里直接上最终成品的使用
 
 ## 最终对比
 | Name              | JS  | HTML | Friendly |
