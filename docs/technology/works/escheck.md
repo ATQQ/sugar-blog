@@ -11,7 +11,7 @@ categories:
 
 ## 前言
 
-2022了，大家做的面向C端的产品，还是避不开兼容性的话题（即使IE已官宣停止支持）
+2022了，大家做的面向C端的产品（Web，小程序，其它跨端方案），涉及JS产物的还是避不开兼容性的话题（即使IE已官宣停止支持）
 
 但就目前看来这个停止维护还是避免不了大家做开发还是要考虑兼容低端机，甚至`IE11`
 
@@ -21,9 +21,9 @@ categories:
 
 经过一顿操作为项目配置 Babel 之后，为了保证产物不出现 ES5 之外的语法，通常都会搭配一个 Check 工具去检测产物是否符合要求
 
-本文将阐述市面上已有工具的`实现原理`，`功能对比`，最后`实现增强型的es-check`（支持HTML中的js检测，产物直接进行语法降级），提供 CLI 和 Lib 两种使用方式
+本文将阐述市面上已有工具的`实现原理`，`功能对比`，最后`实现增强型的es-check`，提供 CLI 和 Lib 两种使用方式
 
-下面先分别介绍一下社区版的[es-check](https://github.com/yowainwright/es-check)和滴滴版的[@mpxjs/es-check](https://github.com/mpx-ecology/mpx-es-check)，最后再实现一个集大成者
+下面先分别介绍一下社区版的[es-check](https://github.com/yowainwright/es-check)和滴滴版的[@mpxjs/es-check](https://github.com/mpx-ecology/mpx-es-check)实现原理，最后再实现一个集大成者
 
 ## es-check
 先看一下其效果，下面是用于测试的代码
@@ -623,8 +623,13 @@ escheck es5 testProject/**/*.js testProject/**/*.html --out
 | @mpxjs/es-check   | ✅   | ❌    | ✅        |
 | @sugarat/es-check | ✅   | ✅    | ✅        |
 
+取了2者的优点相结合然后做了一定的增强
 ## 最后
-当然这个工具可能存在bug，存在遗漏场景等情况，读者试用可以评论区给反馈，或者库里直接提`issues`
+当然这个工具可能存在bug，遗漏部分场景等情况，读者试用可以评论区给反馈，或者库里直接提`issues`
+
+有其它功能上的建议也可评论区留言交流
+
+完整源码移步=>[Github](https://github.com/ATQQ/tools/tree/main/packages/cli/es-check)
 
 ## 参考
 * [es-check](https://github.com/yowainwright/es-check)：社区出品
