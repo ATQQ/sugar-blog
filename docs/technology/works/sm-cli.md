@@ -1,4 +1,13 @@
-# 个性化source-map解析CLI工具打造
+---
+title: 个性化Source Map解析CLI工具
+date: 2022-10-29
+tags:
+ - 技术笔记
+ - 个人作品
+categories:
+ - 技术笔记
+---
+# 个性化Source Map解析CLI工具
 
 > 本文为稀土掘金技术社区首发签约文章，14天内禁止转载，14天后未获授权禁止转载，侵权必究！
 
@@ -22,8 +31,63 @@
 
 本文将综合现有的source-map cli解析工具优缺点，取长补短，🐴一个集大成者。
 
-## source-map库的介绍
+## source-map库的简介
+npm地址：[source-map](https://www.npmjs.com/package/source-map)
 
+可以用于生成和解析sourcemap的库，本文主要用到其解析的能力，关注[API:SourceMapConsumer](https://www.npmjs.com/package/source-map#sourcemapconsumer)即可
+
+下面是示例，其返回值`consumer`是一个`Promise`
+```ts {4}
+import sourceMap from 'source-map'
+
+function createSourceMapConsumer(sourceMapCode: string) {
+  const consumer = new sourceMap.SourceMapConsumer(sourceMapCode)
+  return consumer
+}
+```
+
+`consumer`中包含一个`sources`属性，标明了包含的所用到的源码文件，通过实例上的`sourceContentFor`方法即可获取到对应`文件(source)`的`源码(sourceCode)`
+```ts
+;(async () => {
+  const consumer = await createSourceMapConsumer(mapContent)
+
+  // [
+  // '../../vite/modulepreload-polyfill',
+  // '../../node_modules/.pnpm/@vue+shared@3.2.37/node_modules/@vue/shared/dist/shared.esm-bundler.js',
+  // 类似的源文件路径
+  // ]
+  const sourceFileNames = consumer.sources
+
+  // 源文件个数
+  const sourceCount = sourceFileNames.length
+
+  // 第一个源文件的内容
+  const sourceCode = consumer.sourceContentFor(sourceFileNames[0])
+})()
+```
+
+`consumer`实例上的另一个最常用的方法`originalPositionFor`可以通过压缩混淆后的代码行列号，解析出源文件信息。
+
+包含`源文件source`,`行号line`,`列号column`,`name`
+```ts
+// 第一个源文件的内容
+const sourceCode = consumer.sourceContentFor(sourceFileNames[0])
+
+// 通过压缩混淆后的代码的行列号，定位到源文件
+const sourceInfo = consumer.originalPositionFor({
+  line: 24,
+  column: 17596
+})
+
+// 这个例子的结果如下
+console.log(sourceInfo)
+//   {
+//     source: '../../node_modules/.pnpm/vue-router@4.0.14_vue@3.2.37/node_modules/vue-router/dist/vue-router.esm-bundler.js',
+//     line: 2882,
+//     column: 12,
+//     name: null
+//   }
+```
 ## .map资源加载
 
 ## 还原报错源码
@@ -55,4 +119,5 @@ CLI
 * [source-map-cli](https://www.npmjs.com/package/source-map-cli)
 * [source-map-to-source](https://www.npmjs.com/package/source-map-to-source)
 * [kaifu](https://www.npmjs.com/package/kaifu)
+<comment/>
 * [@hl-cli/restore-code](https://www.npmjs.com/package/@hl-cli/restore-code)
