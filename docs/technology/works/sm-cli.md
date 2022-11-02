@@ -31,6 +31,7 @@ categories:
 
 本文将综合现有的source-map cli解析工具优缺点，取长补短，🐴一个集大成者。
 
+TODO：能力简介
 ## source-map库的简介
 npm地址：[source-map](https://www.npmjs.com/package/source-map)
 
@@ -90,8 +91,20 @@ console.log(sourceInfo)
 //     name: null
 //   }
 ```
+通过如上2个简单的`API`即可完成常用能力的封装。
 
 ## .map资源加载
+通常每个js产物都对应有一份`.map`文件，文件命名为`原文件名.js.map`
+
+在不考虑特殊的约定条件情况下，通常情况是在js产物末尾都有1个`// #sourceMappingURL=xx.js.map`注释表明js资源关联的map文件路径
+
+于是乎咱们，可以先写个方法来获取传入文件对应的sourceMap文件路径
+
+### sourceMap路径获取
+```ts
+
+```
+### 远程资源加载
 
 ## 还原报错源码
 
