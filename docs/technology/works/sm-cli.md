@@ -46,8 +46,10 @@ function createSourceMapConsumer(sourceMapCode: string) {
 }
 ```
 
-`consumer`中包含一个`sources`属性，标明了包含的所用到的源码文件，通过实例上的`sourceContentFor`方法即可获取到对应`文件(source)`的`源码(sourceCode)`
+`consumer`中包含一个`sources`属性，标明了包含的所用到的源码文件路径信息，通过实例上的`sourceContentFor`方法即可获取到对应`文件(source)`的`源码(sourceCode)`
 ```ts
+
+// mapContent 内容来源 https://script.sugarat.top/js/tests/index.9bb0da5c.js.map
 ;(async () => {
   const consumer = await createSourceMapConsumer(mapContent)
 
@@ -88,6 +90,7 @@ console.log(sourceInfo)
 //     name: null
 //   }
 ```
+
 ## .map资源加载
 
 ## 还原报错源码
