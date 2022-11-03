@@ -117,7 +117,7 @@ function getLocalSourceMapFilePath(sourceJsPath: string) {
 
   // 获取代码里的 // #sourceMappingURL= 注释的内容
   const jsCode = readFileSync(sourceJsPath, 'utf-8')
-  const flag = '// #sourceMappingURL='
+  const flag = '//# sourceMappingURL='
   const flagIdx = jsCode.lastIndexOf(flag)
   if (flagIdx === -1) {
     return NOT_FOUND
@@ -142,18 +142,178 @@ function getLocalSourceMapFilePath(sourceJsPath: string) {
 
 首先是`http`，node内置网络模块，使用上的感官和web里的[XMLHttpRequest](https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest)差不多，不太优雅
 
+简单场景书写代码量也在可接受的范围
 ```ts
+import http from 'http'
+import https from 'https'
 
+function getRemoteSource(
+  url: string
+): Promise<{ body: string; code?: number }> {
+  return new Promise((resolve, reject) => {
+    // 区别https与http资源
+    const HTTP = url.startsWith('https://') ? https : http
+
+    // 通过回调的形式获取
+    HTTP.get(url, (res) => {
+      // 设置可读流的字符编码
+      res.setEncoding('utf-8')
+
+      // 响应内容拼接
+      let content = ''
+      res.on('data', (chunk) => {
+        content += chunk
+      })
+
+      // 读完对外暴露内容和状态码
+      res.on('end', () => {
+        resolve({
+          body: content,
+          code: res.statusCode
+        })
+      })
+
+      res.on('error', (err) => {
+        reject(err)
+      })
+    })
+  })
+}
 ```
 
 `axios`，前端常用的跨平台网络请求库（web/node/其它场景提供adaptor层做适配）
 
+用这个代码量就更简洁了，3行就能搞定
+```ts
+function getRemoteSourceByAxios(url: string) {
+  return axios.get(url).then((v) => {
+    return {
+      code: v.status,
+      body: v.data
+    }
+  })
+}
+```
+
+
 `fetch`，在web侧已经出现很久了，Node.js>=v17.5.0 内置，低版本可使用第三方的[node-fetch](https://www.npmjs.com/package/node-fetch)
 
+这里使用`node-fetch`进行举例，使用也是非常简单
+```ts
+import fetch from 'node-fetch'
+
+function getRemoteSourceByFetch(url: string) {
+  return fetch(url).then(async (v) => {
+    const code = v.status
+    const body = await v.text()
+    return {
+      code,
+      body
+    }
+  })
+}
+```
+
+包含但不限于以上三种方式达到需要的目的。
+
 ### 远程sourceMap路径获取
-思路和本地的基本一致，只是一些获取和判断需要走网络
+思路和本地的资源逻辑基本一致，只是内容获取和判断需要走网络，实现如下，接近一半都是重复代码，有优化空间，这里不赘述了
+```ts
+async function getRemoteSourceMapFilePath(sourceJsPath: string) {
+  const context = await getRemoteSource(sourceJsPath)
+  if (context.code === 404) {
+    return NOT_FOUND
+  }
+  if ((await getRemoteSource(`${sourceJsPath}.map`)).code === 200) {
+    return `${sourceJsPath}.map`
+  }
+  const jsCode = context.body
+  const flag = '//# sourceMappingURL='
+  const flagIdx = jsCode.lastIndexOf(flag)
+  if (flagIdx === -1) {
+    return NOT_FOUND
+  }
+  const sourceMappingURL = jsCode.slice(flagIdx + flag.length)
+  if (isHTTPSource(sourceMappingURL)) {
+    return sourceMappingURL
+  }
+  return path.resolve(path.dirname(sourceJsPath), sourceMappingURL)
+}
+```
+
+简单做合并后的方法如下
+```ts
+const isHTTPSource = (sourcePath: string) =>
+  sourcePath.startsWith('http')
+
+async function getSourceMapFilePath(sourceJsPath: string) {
+  if (!isHTTPSource(sourceJsPath)) {
+    return getLocalSourceMapFilePath(sourceJsPath)
+  }
+  return getRemoteSourceMapFilePath(sourceJsPath)
+}
+```
 
 ## 还原报错源码
+有了前面的基础，咱们第一个整合功能就可以实现了 **根据报错资源信息，还原源码和行列号**，先给出方法的定义
+
+```ts
+interface SourceResult {
+  /**
+   * 源码
+   */
+  sourceCode: string
+  /**
+   * 源码文件路径
+   */
+  source: string
+  /**
+   * 行号
+   */
+  line: number
+  /**
+   * 列号
+   */
+  column: number
+}
+
+/**
+ * 根据报错资源信息，获取对应源码信息
+ * @param url 报错资源
+ * @param line 行号
+ * @param column 列号
+ */
+async function getErrorSourceResult(
+  url: string,
+  line: number,
+  column: number
+): Promise<SourceResult>
+```
+
+利用上面实现的`getSourceMapFilePath`,配合`source-map`的2个API即可实现`originalPositionFor`,`originalPositionFor`
+```ts
+import fs from 'fs/promises'
+
+const sourceMapURL = await getSourceMapFilePath(url)
+
+// sourceMap 内容
+const sourceMapCode = await (isHTTPSource(sourceMapURL)
+  ? getRemoteSource(sourceMapURL).then((v) => v.body)
+  : fs.readFile(sourceMapURL, 'utf-8'))
+
+const consumer = await createSourceMapConsumer(sourceMapCode)
+// 解析出原来的行列号，源文件路径等信息
+const { name, ...rest } = consumer.originalPositionFor({
+  line,
+  column
+})
+// 获取源码
+const sourceCode = consumer.sourceContentFor(rest.source!)
+const result = {
+  ...rest,
+  sourceCode
+}
+```
 
 ## 完整source生成
 
