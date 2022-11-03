@@ -100,11 +100,58 @@ console.log(sourceInfo)
 
 于是乎咱们，可以先写个方法来获取传入文件对应的sourceMap文件路径
 
-### sourceMap路径获取
+### 本地sourceMap路径获取
+先是考虑本地的情况，通过路径拼接`.map`与读取文件文件末尾`sourceMappingURL`2种方式相结合
+
+```ts
+function getLocalSourceMapFilePath(sourceJsPath: string) {
+  // 文件不存在
+  if (!existsSync(sourceJsPath)) {
+    return NOT_FOUND
+  }
+
+  // 先直接判断是否存在.js.map文件存在
+  if (existsSync(`${sourceJsPath}.map`)) {
+    return `${sourceJsPath}.map`
+  }
+
+  // 获取代码里的 // #sourceMappingURL= 注释的内容
+  const jsCode = readFileSync(sourceJsPath, 'utf-8')
+  const flag = '// #sourceMappingURL='
+  const flagIdx = jsCode.lastIndexOf(flag)
+  if (flagIdx === -1) {
+    return NOT_FOUND
+  }
+  const sourceMappingURL = jsCode.slice(flagIdx + flag.length)
+
+  // 如果是http路径表明 是绝对路径 直接返回
+  if (isHTTPSource(sourceMappingURL)) {
+    return sourceMappingURL
+  }
+
+  // 否则拼接js资源的目录
+  return path.resolve(path.dirname(sourceJsPath), sourceMappingURL)
+}
+```
+<!-- TODO:test case -->
+
+### 远程资源加载
+除了本地情况那也有线上资源的情况，比如用于测试的`https://script.sugarat.top/js/tests/index.9bb0da5c.js`
+
+下面介绍3种常见方式获取`http`资源，`http`,`axios`,`fetch`
+
+首先是`http`，node内置网络模块，使用上的感官和web里的[XMLHttpRequest](https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest)差不多，不太优雅
+
 ```ts
 
 ```
-### 远程资源加载
+
+`axios`，前端常用的跨平台网络请求库（web/node/其它场景提供adaptor层做适配）
+
+`fetch`，在web侧已经出现很久了，Node.js>=v17.5.0 内置，低版本可使用第三方的[node-fetch](https://www.npmjs.com/package/node-fetch)
+
+### 远程sourceMap路径获取
+思路和本地的基本一致，只是一些获取和判断需要走网络
 
 ## 还原报错源码
 
