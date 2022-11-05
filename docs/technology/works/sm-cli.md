@@ -27,15 +27,16 @@ categories:
 
 有时候没有自动解析的平台可用的时候（比如一些商用监控平台，免费版通常不提供自动source-map解析能力）
 
-就会搜些在线`source-map`解析工具凑合一下，包含在线网页，以及CLI版本的。作者也体验使用了一些都贴到最后附录列表中，大家有推荐的也可评论区补充。
+就会搜些在线`source-map`解析工具凑合一下，包含在线网页，以及CLI版本的。作者也体验使用了一些（都贴到最后附录列表中，读者有其它推荐的也可评论区补充）。
 
-本文将综合现有的source-map cli解析工具优缺点，取长补短，🐴一个集大成者（主要包含`报错源码解析`和`根据sourceMap文件生成源码`2个能力）。
+本文将综合现有的source-map cli解析工具优缺点，取长补短，🐴一个缝合怪（主要包含`报错源码解析`和`根据sourceMap文件生成源码`2个能力）。
 
 先上个演示，有兴趣的读者可接着往下看
 ```sh
 npm i -g @sugarat/source-map-cli
 ```
 
+![图片](https://img.cdn.sugarat.top/mdImg/MTY2NzY2NTE1NzQwOQ==667665157409)
 ## source-map库的简介
 npm地址：[source-map](https://www.npmjs.com/package/source-map)
 

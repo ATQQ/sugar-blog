@@ -18,7 +18,7 @@ group:
 * [Node CLI工具原理解析](./node-cli.md)
 * [我打造的在线简历生成应用](./online-resume.md)
 * [助你轻松编写与分享snippet的VsCode插件](./share-snippets.md)
-* [个性化source-map解析CLI工具打造](./sm-cli.md)
+* [个Source Map解析CLI工具实现](./sm-cli.md)
 * [一个通过NPM包共(分)享代码块的解决方案](./snippets.md)
 * [时间管理CLI工具](./time-tools/)
 * [实践：给女朋友个性化定制应用-体重记录（一）](./timeLover-1.md)
