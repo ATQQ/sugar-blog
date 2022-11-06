@@ -1,5 +1,5 @@
 ---
-title: Source Map解析CLI工具实现
+title: SourceMap解析CLI工具实现
 date: 2022-10-29
 tags:
  - 技术笔记
@@ -7,7 +7,7 @@ tags:
 categories:
  - 技术笔记
 ---
-# 个Source Map解析CLI工具实现
+# SourceMap解析CLI工具实现
 
 > 本文为稀土掘金技术社区首发签约文章，14天内禁止转载，14天后未获授权禁止转载，侵权必究！
 
