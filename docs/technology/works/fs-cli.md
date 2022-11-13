@@ -174,9 +174,69 @@ _http.get(
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY2ODI2NjY3NjE0MA==668266676140)
 
-### 后台下载
+为了防止无限重定向，还需要加个次数限制，再简单改造一下上述代码，添加一个配置属性作为入参
+
+```ts
+interface Options {
+  filename: string
+  maxRedirects: number
+}
+function downloadByUrl(url: string, option?: Partial<Options>) {
+  const ops: Options = { filename: randomName(), maxRedirects: 10, ...option }
+  // 省略一些重复代码
+  _http.get(
+    url,
+    (response) => {
+      const { statusCode } = response
+      if (Math.floor(statusCode! / 100) === 3 && ops.maxRedirects) {
+        ops.maxRedirects -= 1
+        // 递归调用
+        if (response.headers.location) {
+          downloadByUrl(response.headers.location, ops)
+          return
+        }
+      }
+    }
+  )
+  return thisArg
+}
+```
+
+### 请求超时
+部分资源由于网络原因可能出现超时，为了避免长时间无反馈等待，可以设置超时时间
+
+`http`模块支持`timeout`属性设置
+
+```ts
+// 接着之前的例子修改部分代码即可
+const request = _http.get(
+  url,
+  {
+    // 设置超时时间，单位ms
+    timeout: ops.timeout || 300000,
+  },
+  (response) => {
+    // 省略response 逻辑
+  }
+)
+request.on('timeout', () => {
+  // 中断请求，输出错误
+  request.destroy()
+  console.error(`http request timeout url:${url}`)
+})
+```
+下面是请求 goggle logo 失败示例
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTY2ODMyOTcwMTAwMA==668329701000)
 
 ### Proxy
+部分资源访问不顺畅的时候，通常会走服务代理（🪜）
+
+以谷歌的`logo`资源链接`https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png`
+
+要让前面的方法`downloadByUrl`顺利执行，就需要其走代理服务
+
+为`http`模块添加代理也非常简单
 
 ### 相关三方库
 
