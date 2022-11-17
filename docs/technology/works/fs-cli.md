@@ -1,4 +1,13 @@
-# 实用的文件下载上传CLI工具实现
+---
+title: Node文件下载上传CLI工具实现
+date: 2022-11-09
+tags:
+ - 技术笔记
+ - 个人作品
+categories:
+ - 技术笔记
+---
+# Node文件下载上传CLI工具实现
 
 ## 前言
 在日常学习/生活中，下载资源时，大部分情况是通过别人分享的资源站点，找到下载入口然后触发下载。
@@ -27,7 +36,7 @@ curl -L http://mtw.so/6647Rc >码上掘金logo.image
 
 定制场景包含`url文件下载`，`GitHub/Gitee Release资源简化下载`，`七牛OSS文件直传`等。
 
-知识点包含`Node下载文件`，`CLI配置存储`，`Proxy 网络代理`等
+知识点包含`Node实现下载文件`，`Proxy 网络代理`，`CLI配置存储`等
 
 下面是简单演示
 TODO：
@@ -236,8 +245,51 @@ request.on('timeout', () => {
 
 要让前面的方法`downloadByUrl`顺利执行，就需要其走代理服务
 
-为`http`模块添加代理也非常简单
+为`http`模块添加代理也非常简单，原生提供了一个`agent`参数，可用于设置代理
+
+```ts
+import http from 'http'
+
+const request = http.get(url,{
+  agent: Agent,
+})
+```
+
+这个`Agent`的构造可以直接用社区已经封装好的[http-proxy-agent](https://www.npmjs.com/package/http-proxy-agent)
+
+```ts
+const HttpProxyAgent = require('http-proxy-agent')
+
+const proxy = new HttpProxyAgent('http://127.0.0.1:7890')
+```
+
+在调用时只需将这个`proxy`实例传入即可
+
+```ts
+http.get(url, {
+  agent: proxy
+})
+```
+
+原有的方法只需要添加一个`proxy`入参即可，
+```ts
+const request = _http.get(url, {
+  agent: ops.proxy ? new HttpProxyAgent(ops.proxy) : undefined,
+})
+```
+
+下面是使用代理成功请求的示例
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTY2ODYwNTcyODQ3NA==668605728474)
+
+### 自行实现proxyAgent
+
+TODO:
 
 ### 相关三方库
 
 ## 本地配置存储
+
+## Releases资源下载
+
+<comment/>
