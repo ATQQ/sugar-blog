@@ -286,6 +286,70 @@ const request = _http.get(url, {
 
 TODO:
 
+### 文件名生成
+文件下载到本地肯定需要有个名字，如果用随机的或者用户手动输入那肯定体验较差
+
+最常见的就是通过`url`的`pathname`生成
+
+比如上面的谷歌图片资源，咱们使用`URL`构造出一个示例，查看url的构成
+
+```ts
+new URL(sourceUrl)
+```
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTY2ODY5MzA0OTM4Mg==668693049382)
+
+文件名就可以取`pathname`最后一截，通过`path.basename`即可获取
+
+```ts
+import path from 'path'
+
+const url = new URL('http://www.google.com/images/googlelogo_color_92x30dp.png')
+const filename = path.basename(url.pathname) // googlelogo_color_92x30dp.png
+```
+当然文件名也可能会重复，再非覆盖写入的前提下，通过会在文件名后添加"分隔符+数字"，比如`x.png`,`x_1.png`,`x 1.png`
+
+提取文件名与后缀可以用`path.parse`直接获取
+```ts
+import path from 'path'
+
+// { ext: '.png', name: 'google' }
+path.parse('google.png')
+
+// { ext: '', name: 'hashname' }
+path.parse('hashname')
+
+// { ext: '.ts', name: 'index.d' }
+path.parse('index.d.ts')
+
+// { ext: '.', name: 'index' }
+path.parse('index.')
+
+// { ext: '', name: '.gitkeep' }
+path.parse('.gitkeep')
+```
+但是针对带有多个 **.** 的文件名不太友好，比如`.d.ts`是期望被当做完整的`ext`处理
+
+所以咱们可以对其简单递归包装一下实现1个`nameParse`，确保最后`parse(input).name === input`即可
+```ts
+function nameParse(filename: string, suffix = '') {
+  const { name, ext } = path.parse(filename)
+  if (name === filename) {
+    return { name, ext: ext + suffix }
+  }
+  return nameParse(name, ext + suffix)
+}
+```
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTY2ODY5NzM4MDAzNw==668697380037)
+
+文件名分离后简单进行一下`name`的合法性替换
+
+>正则来自于Google
+
+```ts
+
+```
 ### 相关三方库
 
 ## 本地配置存储
