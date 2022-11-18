@@ -14,7 +14,7 @@ group:
 * [ESCheck工具原理解析及增强实现](./escheck.md)
 * [一款检测代码中TODO的eslint插件](./eslint-plugin-todo-ddl.md)
 * [实现一个Web UI检测(视觉走查)工具ing](./ewuit.md)
-* [实用的文件下载上传CLI工具实现](./fs-cli.md)
+* [Node文件下载上传CLI工具实现](./fs-cli.md)
 * [内联JS处理(ES语法降级&内容压缩)](./html-inline-js-transform.md)
 * [Node CLI工具原理解析](./node-cli.md)
 * [我打造的在线简历生成应用](./online-resume.md)

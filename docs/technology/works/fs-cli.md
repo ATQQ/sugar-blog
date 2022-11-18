@@ -286,7 +286,7 @@ const request = _http.get(url, {
 
 TODO:
 
-### 文件名生成
+### 合法文件名生成
 文件下载到本地肯定需要有个名字，如果用随机的或者用户手动输入那肯定体验较差
 
 最常见的就是通过`url`的`pathname`生成
@@ -340,16 +340,76 @@ function nameParse(filename: string, suffix = '') {
   return nameParse(name, ext + suffix)
 }
 ```
+下面是运行示例
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY2ODY5NzM4MDAzNw==668697380037)
 
-文件名分离后简单进行一下`name`的合法性替换
+到此完成了`name`和`ext`的分离
+
+文件名分离后简单进行一下`name`的合法性替换，避免出现操作系统不支持的字符
 
 >正则来自于Google
 
 ```ts
-
+function normalizeFilename(name: string) {
+  return name.replace(/[\\/:*?"<>|]/g, '')
+}
 ```
+
+再做文件名去重只需要给`name`添加后缀数字即可
+
+`url`上的内容还可能存在`encode`的情况，比如`掘金.png` => encode => `%E6%8E%98%E9%87%91.png`
+
+因此咱们在处理从`pathname`提取的`filename`前先进行必要的`decode`
+
+```ts
+decodeURIComponent('%E6%8E%98%E9%87%91.png') // 掘金.png
+```
+
+有了前面的准备工作咱们就可以组装出一个从`url`提取合法可用的文件名的方法嘞
+
+```ts
+function getValidFilenameByUrl(url: string) {
+  const urlInstance = new URL(url)
+  return decodeURIComponent(path.basename(urlInstance.pathname))
+}
+getValidFilenameByUrl('http://a/b/c.png?width=100&height') // c.png
+```
+
+然后是获取不重复的文件路径
+```ts
+function getNoRepeatFilepath(filename: string, dir = process.cwd()) {
+  const { name, ext } = nameParse(filename)
+  let i = 0
+  let filepath = ''
+  do {
+    filepath = path.join(dir, `${name}${i ? ` ${i}` : ''}${ext}`)
+    i += 1
+  } while (fs.existsSync(filepath))
+  return filepath
+}
+```
+
+最后集成到`downloadByUrl`方法中，使输出的文件名可控
+
+```ts
+// ...code
+const filename = normalizeFilename(
+  ops.filename || getValidFilenameByUrl(url) || randomName()
+)
+const filepath = ops.override
+  ? path.resolve(filename)
+  : getNoRepeatFilepath(filename)
+
+const writeStream = fs.createWriteStream(filepath)
+
+// ...code
+```
+
+测试案例运行结果如下
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTY2ODc4Njc0NzcwMg==668786747702)
+
 ### 相关三方库
 
 ## 本地配置存储
