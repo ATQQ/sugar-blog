@@ -4,7 +4,7 @@ sidebar:
 group:
  title: Browser
 isTimeLine: true
-title: :earth_asia:浏览器专题
+title: :earth_asia:浏览器专题系列文章
 date: 2020-11-20
 tags:
  - 大前端
@@ -14,7 +14,7 @@ categories:
 sticky: 4
 ---
 
-# 浏览器专题
+# 浏览器专题系列文章
 
 主要针对面试中所遇到的相关知识做一些梳理与知识延伸
 

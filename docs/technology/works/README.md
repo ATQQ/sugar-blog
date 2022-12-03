@@ -11,10 +11,15 @@ group:
 
 ## 目录
 * [组装个支持记笔记的CodePen](./codeNote.md)
+* [ESCheck工具原理解析及增强实现](./escheck.md)
 * [一款检测代码中TODO的eslint插件](./eslint-plugin-todo-ddl.md)
 * [实现一个Web UI检测(视觉走查)工具ing](./ewuit.md)
+* [从0-1实现文件下载CLI工具](./fs-cli.md)
+* [内联JS处理(ES语法降级&内容压缩)](./html-inline-js-transform.md)
+* [Node CLI工具原理解析](./node-cli.md)
 * [我打造的在线简历生成应用](./online-resume.md)
 * [助你轻松编写与分享snippet的VsCode插件](./share-snippets.md)
+* [SourceMap解析CLI工具实现](./sm-cli.md)
 * [一个通过NPM包共(分)享代码块的解决方案](./snippets.md)
 * [时间管理CLI工具](./time-tools/)
 * [实践：给女朋友个性化定制应用-体重记录（一）](./timeLover-1.md)
