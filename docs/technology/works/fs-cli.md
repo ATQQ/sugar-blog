@@ -1,5 +1,5 @@
 ---
-title: URL资源下载CLI工具实现
+title: 从0-1实现文件下载CLI工具
 date: 2022-11-09
 tags:
  - 技术笔记
@@ -7,7 +7,8 @@ tags:
 categories:
  - 技术笔记
 ---
-# URL资源下载CLI工具实现
+# 从0-1实现文件下载CLI工具
+> 本文为稀土掘金技术社区首发签约文章，14天内禁止转载，14天后未获授权禁止转载，侵权必究！
 
 ## 前言
 在日常学习/生活中，下载资源时，大部分情况是通过别人分享的资源站点，找到下载入口然后触发下载。
@@ -22,7 +23,7 @@ categories:
 ```sh
 # 链接是第三方服务缩短后的
 # -L 参数表明自动对资源进行重定向
-curl -L http://mtw.so/6647Rc -o 码上掘金logo.image
+curl -L http://mtw.so/5YIGGb -o 码上掘金logo.image
 
 # 通过管道
 curl -L http://mtw.so/6647Rc >码上掘金logo.image
@@ -32,20 +33,21 @@ curl -L http://mtw.so/6647Rc >码上掘金logo.image
 
 当然 **curl** 也支持上传下载，以及多种传输协议，具体用法这里就不展开了，感兴趣的读者可以前往[Quick Reference: Curl 备忘清单](https://wangchujiang.com/reference/docs/curl.html) 进一步了解。
 
-本文从 0-1 使用Node实现，一个`url文件下载`工具，读者可以收获如下知识点
+本文从 0-1 使用Node实现一个 `url文件下载` 工具，读者可以收获包含但不限于如下知识点，
 
-包含但不限于`Node实现下载文件`，`如何通过Proxy（🪜）代理下载资源`，`通用的Node本地持久化存储方法`，`fs/path等模块的常见用法`等
+`Node实现下载文件`，`如何通过Proxy（🪜）代理下载资源`，`通用的Node本地持久化存储方法`，`fs/path/http等模块的常见用法`等。
+
+对包含文件下载场景的**CLI**提供一个实践参考。
 
 下面是简单的使用演示，对实现感兴趣的读者可以接着往下阅读
 ```ts
-npx efst http://mtw.so/5uDwX3
-
-npx efst https://img.cdn.sugarat.top/docs/images/test/avatar.png
+npx efst http://mtw.so/66eO7c
 ```
 
+![图片](https://img.cdn.sugarat.top/mdImg/MTY2ODkyMDg3NDEwNg==668920874106)
 
 ## url资源下载
-先是纯 **url资源下载** 的场景，本小节将详细展开相关小功能的实现
+先是纯 **url资源下载** 的场景，本小节将详细展开相关小功能的实现。
 
 ### Node原生实现
 基于`读写流`操作，可以看到代码还是十分的简洁
@@ -70,6 +72,8 @@ downloadByUrl(sourceUrl,'test.image')
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY2ODI2MjI2ODMxNQ==668262268315)
 
+[示例代码1](https://github.com/ATQQ/tools/blob/main/packages/cli/efst/__test__/download/1.ts)
+
 ### 下载进度获取
 大一点的文件肯定无法实现秒下载，需要获取一下进度，了解现在下载了多少
 
@@ -91,7 +95,7 @@ response.on('data', (chunk: Buffer) => {
 ```
 到此进度`percentage`就可以获取到了
 
-对上面的方法进行稍加改造通过链式调用增加`progress`，`end`两个方法（丐版实现）
+对上面的方法进行稍加改造，增加`progress`，`end`两个方法（支持链式调用的丐版实现）
 
 ```ts
 function downloadByUrl(url: string, filename?: string) {
@@ -142,6 +146,8 @@ downloadByUrl(sourceUrl, 'test.image')
 ```
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY2ODI2MzA2OTAyMQ==668263069021)
 
+[示例代码2](https://github.com/ATQQ/tools/blob/main/packages/cli/efst/__test__/download/2.ts)
+
 ### 重定向处理
 部分资源在对外直接暴露时，可能是一个短链，此时就需要做重定向处理
 
@@ -186,6 +192,8 @@ _http.get(
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY2ODI2NjY3NjE0MA==668266676140)
 
+[示例代码3](https://github.com/ATQQ/tools/blob/main/packages/cli/efst/__test__/download/3.ts)
+
 为了防止无限重定向，还需要加个次数限制，再简单改造一下上述代码，添加一个配置属性作为入参
 
 ```ts
@@ -213,6 +221,7 @@ function downloadByUrl(url: string, option?: Partial<Options>) {
   return thisArg
 }
 ```
+[示例代码4](https://github.com/ATQQ/tools/blob/main/packages/cli/efst/__test__/download/4.ts)
 
 ### 请求超时
 部分资源由于网络原因可能出现超时，为了避免长时间无反馈等待，可以设置超时时间
@@ -240,6 +249,8 @@ request.on('timeout', () => {
 下面是请求 google logo 失败示例
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY2ODMyOTcwMTAwMA==668329701000)
+
+[示例代码5](https://github.com/ATQQ/tools/blob/main/packages/cli/efst/__test__/download/5.ts)
 
 ### Proxy
 部分资源访问不顺畅的时候，通常会走服务代理（🪜）
@@ -285,9 +296,7 @@ const request = _http.get(url, {
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY2ODYwNTcyODQ3NA==668605728474)
 
-### 自行实现proxyAgent
-
-TODO:
+[示例代码6](https://github.com/ATQQ/tools/blob/main/packages/cli/efst/__test__/download/6.ts)
 
 ### 合法文件名生成
 文件下载到本地肯定需要有个名字，如果用随机的或者用户手动输入那肯定体验较差
@@ -413,6 +422,8 @@ const writeStream = fs.createWriteStream(filepath)
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY2ODc4Njc0NzcwMg==668786747702)
 
+[示例代码7](https://github.com/ATQQ/tools/blob/main/packages/cli/efst/__test__/download/7.ts)
+
 ### 异常错误情况处理
 对于非法的`url`，资源不存在通常会响应`404`等没考虑到的异常场景
 
@@ -458,7 +469,11 @@ try {
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY2ODg0NjEwNDEwMQ==668846104101)
 
+[示例代码8](https://github.com/ATQQ/tools/blob/main/packages/cli/efst/__test__/download/8.ts)
+
 ## 封装CLI
+上一小节阐述了功能的核心实现方法，此部分将上述能力集成到CLI中，方便对外分享与使用。
+
 ### Options定义
 ```ts
 import { Command } from 'commander'
@@ -478,7 +493,9 @@ program
 
 ### 参数转换传递
 
-下面是`defaultCommand`的逻辑，只需要将相关参数处理后透传给定义的`download`方法即可，`option` 不支持 **number** 所以需要对数字字符串做一些转换
+下面是`defaultCommand`的逻辑，只需要将相关参数处理后透传给定义的`download`方法即可
+
+`option` 不支持 **number** 所以需要对数字字符串做一下显示转换
 ```ts
 export default function defaultCommand(url: string, options: CLIOptions) {
   const { filename, location, timeout, proxy, override } = options
@@ -500,7 +517,7 @@ export default function defaultCommand(url: string, options: CLIOptions) {
 }
 ```
 
-下面是这块使用演示
+下面是使用演示
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY2ODg1MDU4NzY1OQ==668850587659)
 
@@ -562,7 +579,7 @@ progressBar.update(rec, {
 })
 ```
 
-`formatSize`方法实现如下(来源于谷歌推荐代码)，用于文件大小转换
+`formatSize`方法实现如下(来源于谷歌推荐代码)，短小精悍的代码，将B转换为其它单位展示。
 ```ts
 export function formatSize(
   size: number,
@@ -571,7 +588,6 @@ export function formatSize(
 ) {
   let unit
   units = units || ['B', 'K', 'M', 'G', 'TB']
-  // eslint-disable-next-line no-cond-assign
   while ((unit = units.shift()) && size > 1024) {
     size /= 1024
   }
@@ -588,7 +604,9 @@ formatSize(10240) // 10.00K
 
 ### 计算下载速度
 
-`speed`方法实现如下，使用闭包处理
+`speed`方法实现如下
+* 使用闭包
+* 一段时间计算一次速度（1000ms / 时间周期 * 周期内下载量B）
 ```ts
 /**
  * @param cycle 多久算一次（ms）
@@ -637,7 +655,7 @@ setTimeout(() => {
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY2ODg2ODgwOTU3Mw==668868809573)
 
-同理我们可以开辟一个文件存放`.efstrc`
+同理我们可以开辟一个文件存放`.efstrc`，`process.env.HOME`即可获取到`HOME`目录,`process.env.USERPROFILE`用于兼容`win32`平台。
 ```ts
 const configPath = path.join(
   process.env.HOME || process.env.USERPROFILE || process.cwd(),
@@ -646,6 +664,8 @@ const configPath = path.join(
 ```
 
 读写配置实现如下,利用`Array.prototype.reduce`方法在遍历的过程中做存取值操作
+* 支持**多级的key**的读写
+* 兼容异常场景，返回空或空对象
 ```ts
 function getCLIConfig(key = '') {
   try {
@@ -730,7 +750,7 @@ program
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY2ODg3MjMzMzkzNQ==668872333935)
 
-`configCommand`封装实现
+`configCommand`封装实现，将上述实现的方法按场景放入即可
 ```ts
 export type ConfigType = 'set' | 'get' | 'del'
 
@@ -766,7 +786,7 @@ registerConfigCommand(program,'.efstrc')
 ## 最后
 笔者对这个工具的想法还有很多，后续先把功能🐴出来再写续集，本文就先到这里。
 
-内容有不妥的之处，还请读者斧正。
+内容有不妥的之处，还请评论区斧正。
 
 CLI完整源码见[GitHub](https://github.com/ATQQ/tools/tree/main/packages/cli/efst)
 

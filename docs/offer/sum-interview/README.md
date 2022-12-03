@@ -1,13 +1,13 @@
 ---
-title: 面经汇总
+title: 校招面经汇总
 date: 2022-02-26
 tags:
  - 面经
 categories:
  - 面经
-sticky: 2
+sticky: 3
 ---
-# 面经汇总
+# 校招面经汇总
 
 包含个人和一些同学的面经
 
