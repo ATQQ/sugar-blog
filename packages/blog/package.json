@@ -1,0 +1,32 @@
+{
+  "name": "blog-sugarat",
+  "version": "1.0.0",
+  "description": "粥里有勺糖的个人博客",
+  "main": "index.js",
+  "private":"true",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "vuepress dev docs/.",
+    "build": "vuepress build docs/.",
+    "deploy": "zx scripts/deploy/index.mjs",
+    "predeploy": "npm run build",
+    "prebuild": "zx scripts/beforeBuild/index.mjs",
+    "predev": "zx scripts/beforeBuild/index.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@vuepress-reco/vuepress-plugin-bulletin-popover": "1.5.7",
+    "valine": "^1.4.14",
+    "vue-class-component": "^7.2.3"
+  },
+  "devDependencies": {
+    "@vuepress/plugin-pwa": "^1.7.1",
+    "vuepress": "1.7.1",
+    "vuepress-theme-reco": "1.5.7",
+    "zx": "^5.1.0"
+  }
+}

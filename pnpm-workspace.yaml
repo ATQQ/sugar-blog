@@ -1,0 +1,6 @@
+packages:
+  # 所有在 packages/ 目录下的 package
+  - 'packages/**'
+  # 不包括在 test/demos 文件夹下的 package
+  - '!**/__test__/**'
+  - '!**/demos/**'
