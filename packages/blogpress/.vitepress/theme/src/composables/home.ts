@@ -8,6 +8,7 @@ export const injectKey: InjectionKey<
       date: Date
       tag: string[]
       description: string
+      cover: string
       // old
       categories: string[]
       tags: string[]

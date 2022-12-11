@@ -22,7 +22,9 @@ export function getConfigData() {
         meta.description = meta.description || getTextSummary(fileContent, wordCount)
 
         // 获取封面图
-
+        if (!meta.cover) {
+            meta.cover = fileContent.match(/[!]\[.+?\]\((https:\/\/.+)\)/)?.[1]
+        }
         return {
             route,
             meta

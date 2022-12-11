@@ -1,13 +1,14 @@
 <template>
   <div>
     <ul>
-      <li v-for="v in currentWikiData">
+      <li v-for="v in currentWikiData" :key="v.route">
         <blog-item
           :route="v.route"
           :title="v.meta.title"
           :description="v.meta.description"
           :date="v.meta.date"
           :tag="v.meta.tag"
+          :cover="v.meta.cover"
         />
       </li>
     </ul>

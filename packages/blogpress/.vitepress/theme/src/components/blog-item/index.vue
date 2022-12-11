@@ -12,12 +12,10 @@
         <span v-if="tag">{{ tag.join(' · ') }}</span>
       </div>
     </div>
-    <!-- TODO封面图片 -->
     <div
+      v-if="cover"
       class="cover-img"
-      style="
-        background-image: url('https://img-bsy.txrpic.com/preview/photo/00/01/23/13/51miz-P1231387-17837374.jpg?imageMogr2/quality/90/thumbnail/!800x%3E');
-      "
+      :style="`background-image: url(${cover});`"
     ></div>
   </a>
 </template>
