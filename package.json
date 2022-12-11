@@ -7,7 +7,8 @@
     "prettier": "^2.5.1"
   },
   "devDependencies": {
-    "zx": "^5.1.0"
+    "zx": "^5.1.0",
+    "@types/node": "^16.11.45"
   },
   "scripts": {
     "dev:blog": "pnpm --filter 'blog-sugarat' dev"
