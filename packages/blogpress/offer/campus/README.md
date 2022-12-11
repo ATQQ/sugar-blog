@@ -4,7 +4,7 @@ sidebar:
 group:
  title: problems of campus
 isTimeLine: true
-title: :school:前端校招考点汇总
+title: 前端校招考点汇总
 date: 2021-11-21
 tags:
  - 备战春秋
@@ -13,7 +13,7 @@ categories:
  - 备战春秋
 sticky: 1
 ---
-# :school:前端校招考点汇总
+# 前端校招考点汇总
 
 ## 措辞
 * 了解：听说过这个概念，知道是干什么的

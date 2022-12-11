@@ -9,6 +9,7 @@ export const injectKey: InjectionKey<
       tag: string[]
       description: string
       cover: string
+      sticky?: number
       // old
       categories: string[]
       tags: string[]

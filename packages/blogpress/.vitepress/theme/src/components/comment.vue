@@ -1,6 +1,7 @@
 <template>
   <div class="comment" id="valine-comment">
     <component
+      v-if="showComment"
       :is="'script'"
       src="https://giscus.app/client.js"
       data-repo="ATQQ/sugar-blog"
@@ -21,8 +22,18 @@
 </template>
 <script setup>
 import { useDark } from '@vueuse/core'
+import { useRoute } from 'vitepress';
+import { ref, watch } from 'vue';
 
 const isDark = useDark()
+const route = useRoute()
+const showComment = ref(true)
+watch(()=>route.path,()=>{
+  showComment.value = false
+  setTimeout(()=>{
+    showComment.value = true
+  },100)
+})
 </script>
 <style scoped>
 .comment {

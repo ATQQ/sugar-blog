@@ -17,15 +17,45 @@
         <span class="label">本周上新</span>
       </div>
     </div>
+    <div class="card overview-data recommend">
+      <!-- 头部 -->
+      <div class="recommend-header">
+        <span class="title">🔥 精选文章</span>
+        <el-button size="small" type="primary" text @click="changePage"
+          >换一组</el-button
+        >
+      </div>
+      <!-- 文章列表 -->
+      <ol class="recommend-container">
+        <li v-for="(v, idx) in currentWikiData" :key="v.route">
+          <!-- 序号 -->
+          <span class="num">{{ idx + 1 }}</span>
+          <!-- 简介 -->
+          <div class="des">
+            <!-- title -->
+            <el-link type="info" class="title" :href="v.route">{{
+              v.meta.title
+            }}</el-link>
+            <!-- 描述信息 -->
+            <div class="suffix">
+              <!-- 日期 -->
+              <span class="tag">{{ formatShowDate(v.meta.date) }}</span>
+            </div>
+          </div>
+        </li>
+      </ol>
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
+import { ElButton, ElLink } from 'element-plus'
 import { useHomeData } from '../../composables/home'
 import { isCurrentWeek } from '../../utils'
+import { formatShowDate } from '../blog-item'
 
-const homeData = useHomeData()
+const homeData = useHomeData()!
 const nowMonth = new Date().getMonth()
 const nowYear = new Date().getFullYear()
 const currentMonth = computed(() => {
@@ -41,6 +71,26 @@ const currentWeek = computed(() => {
     return isCurrentWeek(pubDate)
   })
 })
+
+const recommendList = computed(() => {
+  const data = homeData.filter((v) => v.meta.sticky)
+  data.sort((a, b) => b.meta.sticky! - a.meta.sticky!)
+  return [...data,...data]
+})
+const pageSize = ref(10)
+const currentPage = ref(1)
+const changePage = () => {
+  const newIdx = ((currentPage.value) %
+      Math.ceil(recommendList.value.length / pageSize.value))
+
+  currentPage.value = newIdx + 1
+}
+
+const currentWikiData = computed(() => {
+  const startIdx = (currentPage.value - 1) * pageSize.value
+  const endIdx = startIdx + pageSize.value
+  return recommendList.value.slice(startIdx, endIdx)
+})
 </script>
 
 <style lang="scss" scoped>
@@ -50,6 +100,12 @@ const currentWeek = computed(() => {
   min-width: 240px;
   position: relative;
   box-sizing: border-box;
+}
+
+@media screen and (min-width: 767px) {
+  .blog-info {
+    max-width: 300px;
+  }
 }
 
 .card {
@@ -101,6 +157,57 @@ const currentWeek = computed(() => {
     margin-top: 6px;
     font-size: 12px;
     color: var(--description-font-color);
+  }
+}
+
+.recommend {
+  flex-direction: column;
+}
+
+.recommend-container {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 0 10px;
+  width: 100%;
+
+  li {
+    display: flex;
+
+    .num {
+      font-size: 14px;
+      color: var(--description-font-color);
+      font-weight: 600;
+      margin: 6px 18px 10px 0;
+    }
+
+    .des {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .title {
+      font-size: 14px;
+      color: var(--vp-c-text-1);
+    }
+
+    .suffix {
+      font-size: 12px;
+      color: var(--vp-c-text-2);
+    }
+  }
+}
+
+.recommend-header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+
+  .title {
+    font-size: 12px;
   }
 }
 </style>

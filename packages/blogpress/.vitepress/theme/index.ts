@@ -21,17 +21,16 @@ export default {
     app.provide(homeInjectKey, ctx.siteData.value.themeConfig.pagesData)
     app.component('comment', Comment)
 
+    // 兼容README旧路由
     router.onBeforeRouteChange = (to: string) => {
       const url = new URL(to)
-      console.log(url.pathname)
-
       const isREADMERoute = ctx.siteData.value.themeConfig.pagesData?.find(
         (v) => {
           return `/${v.route}` === `${url.pathname}README`
         }
       )
       if (to.endsWith('/') && isREADMERoute) {
-        location.replace(`/${isREADMERoute.route}`)
+        window.location.replace(`/${isREADMERoute.route}`)
       }
     }
   }

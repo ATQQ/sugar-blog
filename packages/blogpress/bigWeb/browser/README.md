@@ -4,7 +4,7 @@ sidebar:
 group:
  title: Browser
 isTimeLine: true
-title: :earth_asia:浏览器专题系列文章
+title: 浏览器专题系列文章
 date: 2020-11-20
 tags:
  - 大前端

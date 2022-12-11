@@ -50,15 +50,15 @@ export default defineConfig({
               text: "关于我",
               link: "/aboutme",
             },
-            {
-              text: "备战春秋",
-              items: [
-                { text: "心得总结", link: "/offer/experience/" },
-                { text: "校招考点汇总", link: "/offer/campus/" },
-                { text: "面经汇总", link: "/offer/sum-interview/" },
-                { text: "复习自查", link: "/offer/review/" },
-              ],
-            },
+            // {
+            //   text: "备战春秋",
+            //   items: [
+            //     { text: "心得总结", link: "/offer/experience/" },
+            //     { text: "校招考点汇总", link: "/offer/campus/" },
+            //     { text: "面经汇总", link: "/offer/sum-interview/" },
+            //     { text: "复习自查", link: "/offer/review/" },
+            //   ],
+            // },
             {
               text: "技术笔记",
               items: [
@@ -97,6 +97,10 @@ export default defineConfig({
             {
               text: "面试",
               items: [
+                { text: "心得总结", link: "/offer/experience/" },
+                { text: "校招考点汇总", link: "/offer/campus/" },
+                { text: "面经汇总", link: "/offer/sum-interview/" },
+                { text: "复习自查", link: "/offer/review/" },
                 { text: "问解", link: "/interview/problem/" },
                 { text: "javascript", link: "/interview/js/" },
                 { text: "css", link: "/interview/css/" },
@@ -119,33 +123,33 @@ export default defineConfig({
                 { text: "css", link: "/coding/css/" },
               ],
             },
-            {
-              text: "个人站点",
-              items: [
-                {
-                  text: "GitHub",
-                  link: "https://github.com/ATQQ/sugar-blog",
-                },
-                {
-                  text: "博客园",
-                  link: "https://www.cnblogs.com/roseAT/",
-                },
-                {
-                  text: "掘金",
-                  link: "https://juejin.im/user/1028798615918983",
-                },
-                // {
-                //   text: "GitBook-blog",
-                //   link: "https://sugar-at.gitbook.io/blog-article/",
-                //   icon: "reco-blog",
-                // },
-                // {
-                //   text: "GitBook-ES6",
-                //   link: "https://sugar-js.gitbook.io/-1/",
-                //   icon: "reco-document",
-                // },
-              ],
-            },
+            // {
+            //   text: "个人站点",
+            //   items: [
+            //     {
+            //       text: "GitHub",
+            //       link: "https://github.com/ATQQ/sugar-blog",
+            //     },
+            //     {
+            //       text: "博客园",
+            //       link: "https://www.cnblogs.com/roseAT/",
+            //     },
+            //     {
+            //       text: "掘金",
+            //       link: "https://juejin.im/user/1028798615918983",
+            //     },
+            //     // {
+            //     //   text: "GitBook-blog",
+            //     //   link: "https://sugar-at.gitbook.io/blog-article/",
+            //     //   icon: "reco-blog",
+            //     // },
+            //     // {
+            //     //   text: "GitBook-ES6",
+            //     //   link: "https://sugar-js.gitbook.io/-1/",
+            //     //   icon: "reco-document",
+            //     // },
+            //   ],
+            // },
             {
               text: "线上作品",
               items: [
