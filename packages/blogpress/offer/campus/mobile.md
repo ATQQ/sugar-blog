@@ -18,4 +18,3 @@ tags:
 * 知道桥吗
 * jsBridge
 
-<comment/>

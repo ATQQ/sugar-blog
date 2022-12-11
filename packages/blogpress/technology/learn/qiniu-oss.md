@@ -369,4 +369,3 @@ function checkFopTaskStatus(persistentId){
 ## 参考
 * [七牛云-Node.js SDK](https://developer.qiniu.com/kodo/1289/nodejs)
 
-<comment/>

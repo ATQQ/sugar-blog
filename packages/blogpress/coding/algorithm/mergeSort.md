@@ -76,4 +76,3 @@ function merge(left, right) {
 ```js
 //TODO： ... 未完待续
 ```
-<comment/>

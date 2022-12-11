@@ -367,4 +367,3 @@ process.nextTick(() => {
 [彻底弄得Event Loop](https://segmentfault.com/a/1190000016278115)
 :::
 
-<comment/>

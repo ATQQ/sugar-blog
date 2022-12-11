@@ -116,4 +116,3 @@ console.log(isSameWeek(new Date('2021-06-06 23:59:59'), new Date('2021-06-12')))
 console.log(isSameWeek(new Date('2021-06-12 23:59:59'), new Date('2021-06-19')));  // false  
 console.log(isSameWeek(new Date('2021-06-20'), new Date('2021-06-12')));  // false  
 ```
-<comment/>

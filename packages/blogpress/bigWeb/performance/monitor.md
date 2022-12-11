@@ -64,4 +64,3 @@ categories:
 ### 接口异常上报
 * 可以通过img 标签的 src 发起一个请求
 
-<comment/>

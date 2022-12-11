@@ -341,4 +341,3 @@ const phantomDependency = findGhost(
 欢迎评论区交流指正，有 `case` 可以抛出来帮助工具完善得更好
 * [项目完整源码](https://github.com/ATQQ/tools/tree/main/packages/cli/ghost)
 
-<comment/>

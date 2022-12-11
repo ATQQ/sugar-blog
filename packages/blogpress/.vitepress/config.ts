@@ -1,12 +1,10 @@
-import { inspect } from 'util'
 import { defineConfig } from 'vitepress'
-import Pkg from './../package.json'
 import { getConfigData } from './util'
 const extraHead: any = process.env.NODE_ENV === 'production' ? [
     ['script', { charset: 'UTF-8', id: 'LA_COLLECT', src: '//sdk.51.la/js-sdk-pro.min.js' }],
     ['script', {}, 'LA.init({id: "Jgmg5avjAUvoyePS",ck: "Jgmg5avjAUvoyePS",hashMode: true})'],
 ] : []
-const { pagesData, sidebar } = getConfigData()
+const { pagesData } = getConfigData()
 
 export default defineConfig({
     title: '粥里有勺糖',
@@ -43,56 +41,148 @@ export default defineConfig({
         },
         logo: '/logo.png',
         editLink: {
-            pattern: "https://github.com/ATQQ/easypicker2-client/edit/main/docs/:path",
+            // TODO: 分支切换
+            pattern: "https://github.com/ATQQ/sugar-blog/tree/feature/monorepo/packages/blogpress/:path",
             text: '去 GitHub 上编辑内容'
         },
         nav: [
             {
-                text: '私有化部署',
-                items: [
-                    {
-                        text: '本地启动',
-                        link: '/deploy/local',
-                    },
-                    {
-                        text: '线上部署',
-                        link: '/deploy/online',
-                    },
-                    {
-                        text: '接入七牛云OSS',
-                        link: '/deploy/qiniu',
-                    },
-                    {
-                        text: '常见问题❓',
-                        link: '/deploy/faq',
-                    },
-                    {
-                        text: '相关设计',
-                        link: '/deploy/design/index',
-                    }
-                ],
-                activeMatch: '/deploy/'
+              text: "关于我",
+              link: "/aboutme",
             },
             {
-                text: `v${Pkg.version}`,
-                items: [
-                    { text: '⭐️ 需求墙', link: '/plan/wish' },
-                    { text: '🥔 近期规划', link: '/plan/todo' },
-                    { text: '📅 更新日志', link: '/plan/log' },
-                ],
-                activeMatch: '/plan/'
+              text: "备战春秋",
+              items: [
+                { text: "心得总结", link: "/offer/experience/" },
+                { text: "校招考点汇总", link: "/offer/campus/" },
+                { text: "面经汇总", link: "/offer/sum-interview/" },
+                { text: "复习自查", link: "/offer/review/" },
+              ],
             },
             {
-                text: '作者信息', link: '/author',
+              text: "技术笔记",
+              items: [
+                { text: "技术教程", link: "/technology/learn/" },
+                { text: "模板工程", link: "/technology/tpl/" },
+                { text: "源码学习", link: "/technology/source/" },
+                { text: "技术概念", link: "/technology/theory/" },
+                { text: "个人作品", link: "/technology/works/" },
+                { text: "学习笔记", link: "/technology/study/" },
+              ],
             },
             {
-                text: '打赏', link: '/praise/index',
+              text: "计算机基础",
+              items: [
+                { text: "算法与数据结构", link: "/computerBase/algorithm/" },
+                { text: "操作系统", link: "/computerBase/os/" },
+                { text: "计算机网络", link: "/computerBase/Internet/" },
+                { text: "设计模式", link: "/computerBase/design/" },
+                { text: "剑指offer", link: "/computerBase/offer/" },
+                // { text: '力扣', link: '/computerBase/leetcode/' }
+              ],
             },
-            { text: '⭐️ 需求墙', link: '/plan/wish' },
-        ],
-        // sidebar,
+            {
+              text: "大前端",
+              items: [
+                { text: "javascript", link: "/bigWeb/js/" },
+                { text: "vue", link: "/bigWeb/vue/" },
+                { text: "html", link: "/bigWeb/html/" },
+                { text: "css", link: "/bigWeb/css/" },
+                { text: "🌏浏览器专题", link: "/bigWeb/browser/" },
+                { text: "Web性能优化", link: "/bigWeb/performance/" },
+                { text: "regexp", link: "/bigWeb/regexp/" },
+                { text: "node", link: "/bigWeb/node/" },
+              ],
+            },
+            {
+              text: "面试",
+              items: [
+                { text: "问解", link: "/interview/problem/" },
+                { text: "javascript", link: "/interview/js/" },
+                { text: "css", link: "/interview/css/" },
+                { text: "手撕代码", link: "/interview/code/" },
+                { text: "性能优化", link: "/interview/performance/" },
+                // { text: "网络", link: "/interview/internet/" },
+                // { text: '操作系统', link: '/interview/os/' },
+                // { text: '设计模式', link: '/interview/design/' },
+                { text: "综合问题", link: "/interview/other/" },
+                { text: "面经汇总", link: "/offer/sum-interview/" },
+                { text: "小程序", link: "/interview/mini/" },
+                // { text: '面经', link: '/interview/experience/' }
+              ],
+            },
+            {
+              text: "手撕代码",
+              items: [
+                { text: "数据结构与算法", link: "/coding/algorithm/" },
+                { text: "javascript", link: "/coding/js/" },
+                { text: "css", link: "/coding/css/" },
+              ],
+            },
+            {
+              text: "个人站点",
+              items: [
+                {
+                  text: "GitHub",
+                  link: "https://github.com/ATQQ/sugar-blog",
+                },
+                {
+                  text: "博客园",
+                  link: "https://www.cnblogs.com/roseAT/",
+                },
+                {
+                  text: "掘金",
+                  link: "https://juejin.im/user/1028798615918983",
+                },
+                // {
+                //   text: "GitBook-blog",
+                //   link: "https://sugar-at.gitbook.io/blog-article/",
+                //   icon: "reco-blog",
+                // },
+                // {
+                //   text: "GitBook-ES6",
+                //   link: "https://sugar-js.gitbook.io/-1/",
+                //   icon: "reco-document",
+                // },
+              ],
+            },
+            {
+              text: "线上作品",
+              items: [
+                {
+                  text: "轻取(文件收集)",
+                  link: "https://ep2.sugarat.top",
+                },
+                {
+                  text: "个人图床",
+                  link: "https://imgbed.sugarat.top",
+                },
+                {
+                  text: "考勤小程序",
+                  link: "https://hdkq.sugarat.top/",
+                },
+                {
+                  text: "时光恋人",
+                  link: "https://lover.sugarat.top",
+                },
+                {
+                  text: "在线简历生成",
+                  link: "https://resume.sugarat.top/",
+                },
+              ],
+            },
+            // {
+            //   text: "时间线",
+            //   link: "/timeline/",
+            //   icon: "reco-date",
+            // },
+            {
+              text: "留言板",
+              link: "/_configDoc/show/messagePanel",
+            },
+          ],
         socialLinks: [
-            { icon: 'github', link: 'https://github.com/ATQQ/easypicker2-client' },
+            { icon: 'github', link: 'https://github.com/ATQQ/sugar-blog' },
         ],
     },
 })

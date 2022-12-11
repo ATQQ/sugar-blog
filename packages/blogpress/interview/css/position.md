@@ -15,4 +15,3 @@ categories:
 * fixed:固定定位,参照可视窗口
 * sticky:粘性定位
 
-<comment/>

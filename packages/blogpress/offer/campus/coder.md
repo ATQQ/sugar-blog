@@ -10,4 +10,3 @@ tags:
 * git
 * shell
 
-<comment/>

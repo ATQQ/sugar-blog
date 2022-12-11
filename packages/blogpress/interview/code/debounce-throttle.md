@@ -88,4 +88,3 @@ function superThrottle(fn, delay) {
 }
 ```
 
-<comment/>

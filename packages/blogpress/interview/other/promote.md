@@ -25,4 +25,3 @@ categories:
 * 同一作用域中var允许重复声明,let,const不可以
 * const 声明必须赋初值,且声明后不能改变
 
-<comment/>

@@ -29,9 +29,8 @@ export function getConfigData() {
             route,
             meta
         }
-    }).filter(v => v.meta.date)
+    })
 
-    data.sort((a, b) => b.meta.date - a.meta.date)
     return {
         pagesData: data,
         sidebar: getSidebarData(files.map(v => v.replace('.md', '')))

@@ -174,4 +174,3 @@ export default function lazyInitialize(initializer): any {
 * `@debounce`：防抖
 * `@throttle`：节流
 
-<comment/>

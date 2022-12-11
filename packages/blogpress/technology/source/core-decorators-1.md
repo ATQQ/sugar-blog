@@ -214,4 +214,3 @@ export default function time(prefix: null | string = null, console = defaultCons
 
 后续文章将直接对源码进行分析与学习
 
-<comment/>

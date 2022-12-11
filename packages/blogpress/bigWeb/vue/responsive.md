@@ -486,4 +486,3 @@ delete rData.name
 [vue-next:reactive.ts](https://github.com/vuejs/vue-next/blob/master/packages/reactivity/src/reactive.ts)
 :::
 
-<comment/>

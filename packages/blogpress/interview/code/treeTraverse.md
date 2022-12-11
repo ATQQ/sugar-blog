@@ -57,4 +57,3 @@ function sequenceTraversal(root){
 }
 ```
 
-<comment/>

@@ -39,4 +39,3 @@ console.log(func()); // -> 2
 console.log(func()); // -> 3
 ```
 
-<comment/>

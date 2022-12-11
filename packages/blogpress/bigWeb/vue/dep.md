@@ -109,4 +109,3 @@ app._data.friends.name1 = 2 // 更新视图
 app._data.friends.name2 = 3
 ```
 
-<comment/>

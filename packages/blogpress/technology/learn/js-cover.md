@@ -222,4 +222,3 @@ function getAllTextEls() {
 
 [完整源码地址](https://github.com/ATQQ/demos/blob/main/test-script/index.js)
 
-<comment/>

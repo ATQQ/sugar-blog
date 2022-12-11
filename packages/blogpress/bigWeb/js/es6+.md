@@ -347,4 +347,3 @@ console.log(arr.includes('hello')); // true
 * [compat-table/es2016plus/](https://kangax.github.io/compat-table/es2016plus/)
 
 
-<comment/>

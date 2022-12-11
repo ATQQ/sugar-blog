@@ -189,4 +189,3 @@ timec -oj filepath1 filepath2 ....
 
 * [仓库地址](https://github.com/ATQQ/time-control)
 
-<comment/>

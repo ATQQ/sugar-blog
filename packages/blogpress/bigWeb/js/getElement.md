@@ -118,4 +118,3 @@ nodeList = document.getElementsByTagNameNS(namespace, name)
 
 [CSDN-HTML元素之间的继承关系](https://blog.csdn.net/ppwwp/article/details/88169145)
 :::
-<comment/>

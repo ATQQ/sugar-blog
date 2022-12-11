@@ -3,14 +3,15 @@ import Theme from 'vitepress/theme'
 import HeroBanner from '../hero-banner/index.vue'
 import BlogList from '../blog-list/index.vue'
 import BlogInfo from '../blog-info/index.vue'
+import Comment from '../comment.vue'
 
 const { Layout } = Theme
 </script>
 
 <template>
   <Layout>
+    <!-- 自定义首页 -->
     <template #home-hero-before>
-      <!-- 自定义首页 -->
       <div class="home">
         <div class="header-banner">
           <hero-banner />
@@ -21,9 +22,12 @@ const { Layout } = Theme
         </div>
       </div>
     </template>
+    <!-- 评论 -->
+    <template #doc-after>
+      <Comment />
+    </template>
   </Layout>
 </template>
-
 <style scoped lang="scss">
 .home {
   margin: 0 auto;

@@ -235,4 +235,3 @@ function getDirFiles(dir, exclude = []) {
 }
 ```
 
-<comment/>

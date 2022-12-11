@@ -55,6 +55,7 @@ importers:
   packages/blogpress:
     specifiers:
       '@element-plus/icons-vue': ^2.0.10
+      '@vueuse/core': ^9.6.0
       axios: ^0.27.2
       clipboard-copy: ^4.0.1
       element-plus: ^2.2.26
@@ -66,6 +67,7 @@ importers:
       vue: ^3.2.45
     dependencies:
       '@element-plus/icons-vue': 2.0.10_vue@3.2.45
+      '@vueuse/core': 9.6.0_vue@3.2.45
       axios: 0.27.2
       clipboard-copy: 4.0.1
       element-plus: 2.2.26_vue@3.2.45

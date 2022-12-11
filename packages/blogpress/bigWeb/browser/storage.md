@@ -190,4 +190,3 @@ window.localStorage.getItem()
 * [Chrome Platform Status](https://www.chromestatus.com/feature/5088147346030592)
 * [SameSite cookies explained](https://web.dev/samesite-cookies-explained/)
 :::
-<comment/>

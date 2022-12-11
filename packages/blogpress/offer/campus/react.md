@@ -18,4 +18,3 @@ tags:
 * VDom
 * Diff算法
 
-<comment/>

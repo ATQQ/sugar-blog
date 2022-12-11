@@ -176,4 +176,3 @@ export default defineConfig({
 
 查看：[仓库源码](https://github.com/ATQQ/vite-plugin-monitor)
 
-<comment/>

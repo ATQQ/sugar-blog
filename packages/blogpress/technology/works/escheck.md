@@ -635,4 +635,3 @@ escheck es5 testProject/**/*.js testProject/**/*.html --out
 * [es-check](https://github.com/yowainwright/es-check)：社区出品
 * [mpx-es-check](https://github.com/mpx-ecology/mpx-es-check)：滴滴出品 [MPX](https://mpxjs.cn/) 框架的配套工具
 
-<comment/>

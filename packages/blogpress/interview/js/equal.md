@@ -44,4 +44,3 @@ true == 'true'
 [JS中的类型转换](../../bigWeb/js/typeConvert.md)
 :::
 
-<comment/>

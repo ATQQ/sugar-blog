@@ -93,4 +93,3 @@ mySetInterval(timer => {
 }, 1000)
 ```
 
-<comment/>

@@ -21,4 +21,3 @@ Boolean(1) // true
 !!'' // false
 ```
 
-<comment/>

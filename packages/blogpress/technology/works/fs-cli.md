@@ -790,4 +790,4 @@ registerConfigCommand(program,'.efstrc')
 
 CLI完整源码见[GitHub](https://github.com/ATQQ/tools/tree/main/packages/cli/efst)
 
-<comment/>
+

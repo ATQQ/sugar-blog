@@ -33,4 +33,3 @@ categories:
 * 触发重绘
 * 绑定的事件仍然能被触发
 
-<comment/>

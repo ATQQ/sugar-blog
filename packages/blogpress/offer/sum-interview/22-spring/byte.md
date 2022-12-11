@@ -33,4 +33,3 @@ author: wzj
 1. 手写模态框
 2. 用`React Hooks`模拟类组件的几种生命周期
 
-<comment/>

@@ -60,4 +60,3 @@ function myInstanceof(target, origin) {
 }
 ```
 
-<comment/>

@@ -63,4 +63,3 @@ for (const k in data) {
 * 遍历出来的key是string类型
 * 可以遍历到原型上的属性 
 
-<comment/>

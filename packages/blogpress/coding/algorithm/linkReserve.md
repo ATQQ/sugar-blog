@@ -126,4 +126,3 @@ var reverseList = function (head) {
 };
 ```
 
-<comment/>

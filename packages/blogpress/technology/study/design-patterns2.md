@@ -252,4 +252,3 @@ r.hello3('456')
 ### 参考
 * [TypeScript-decorators](https://www.typescriptlang.org/docs/handbook/decorators.html#parameter-decorators)
 
-<comment/>

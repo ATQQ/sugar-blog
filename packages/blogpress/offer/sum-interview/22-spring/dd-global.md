@@ -25,4 +25,3 @@ author: czh
 ### React
 1. 虚拟Dom
 
-<comment/>

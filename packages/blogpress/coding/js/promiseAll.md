@@ -72,4 +72,3 @@ PromiseAll([p1, p2, p3]).then(console.log).catch(console.error)
 // [1000,3000,2000]
 ```
 
-<comment/>

@@ -31,4 +31,3 @@ console.log('ss' instanceof myString); // true
 [原型与原型链](./../../bigWeb/js/prototype.md)
 :::
 
-<comment/>

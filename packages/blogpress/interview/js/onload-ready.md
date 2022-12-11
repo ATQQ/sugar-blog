@@ -28,4 +28,3 @@ categories:
 [博客园:细说document.ready和window.onload](https://www.cnblogs.com/shcrk/p/9256308.html)
 :::
 
-<comment/>

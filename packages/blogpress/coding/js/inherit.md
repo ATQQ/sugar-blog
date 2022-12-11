@@ -112,4 +112,3 @@ let a = new B('123', 0)
 a.printName() // 123
 ```
 
-<comment/>

@@ -33,4 +33,3 @@ tags:
   * hash
   * history
 
-<comment/>

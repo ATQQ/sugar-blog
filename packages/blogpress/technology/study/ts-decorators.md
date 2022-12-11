@@ -297,4 +297,3 @@ hello world
 * [TypeScript-decorators](https://www.typescriptlang.org/docs/handbook/decorators.html#parameter-decorators)
 * [core-decorators源码](https://github.com/jayphelps/core-decorators)
 
-<comment/>

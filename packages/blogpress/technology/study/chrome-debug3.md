@@ -49,4 +49,3 @@ Ctrl + 鼠标左键选择要添加的类目
 ## 重新发送请求
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTYyMTIxODc3NTE2MQ==621218775161)
-<comment/>

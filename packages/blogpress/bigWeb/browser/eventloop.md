@@ -380,4 +380,3 @@ console.log(10);
 * [阮一峰：JavaScript 运行机制详解：再谈Event Loop](http://www.ruanyifeng.com/blog/2014/10/event-loop.html)
 * [MDN：并发模型与事件循环 ](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/EventLoop)
 
-<comment/>

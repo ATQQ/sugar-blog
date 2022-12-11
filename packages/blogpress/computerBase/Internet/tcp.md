@@ -117,4 +117,3 @@ TCP 是全双工的，在断开连接时两端都需要发送 FIN 和 ACK。
 [网络-TCP](https://yuchengkai.cn/docs/cs/#tcp)
 :::
 
-<comment/>

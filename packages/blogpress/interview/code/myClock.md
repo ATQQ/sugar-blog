@@ -42,4 +42,3 @@ function mySetInterval(callback, delay) {
 }
 ```
 
-<comment/>

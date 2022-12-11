@@ -11,7 +11,7 @@
       data-reactions-enabled="1"
       data-emit-metadata="0"
       data-input-position="top"
-      data-theme="light"
+      :data-theme="isDark ? 'dark' : 'light'"
       data-lang="zh-CN"
       crossorigin="anonymous"
       async
@@ -19,7 +19,11 @@
     </component>
   </div>
 </template>
-<script setup></script>
+<script setup>
+import { useDark } from '@vueuse/core'
+
+const isDark = useDark()
+</script>
 <style scoped>
 .comment {
   width: 100%;

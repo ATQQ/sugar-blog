@@ -20,4 +20,3 @@ categories:
 ## 原理
 * await 就是 generator 加上 Promise 的语法糖，且内部实现了自动执行 generator
 
-<comment/>

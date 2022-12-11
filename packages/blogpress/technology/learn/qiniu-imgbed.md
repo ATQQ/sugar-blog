@@ -177,4 +177,3 @@ function copyRes(text) {
 
 
 
-<comment/>

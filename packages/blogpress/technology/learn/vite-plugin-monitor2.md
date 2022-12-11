@@ -133,4 +133,3 @@ server.middlewares.use(async (req, res, next) => {
 更加详细的信息只能通过`--debug`看到，下一步的计划就是hack，模拟一下debug下的行为，将debug的打印的数据都拦截下来
 由于时间关系，这部分hack还没完成。准备假期抽时间实现一下。下一篇文章将详细的介绍最终实现。
 
-<comment/>

@@ -30,4 +30,3 @@ function isObject(obj) {
 * constructor
 * Object.prototype.toString.call
 
-<comment/>

@@ -176,4 +176,3 @@ function throttle(fn, delay) {
 }
 ```
 
-<comment/>

@@ -71,4 +71,3 @@ function getFibIndex(num, a = 1, b = 1, index = 2) {
 }
 ```
 
-<comment/>

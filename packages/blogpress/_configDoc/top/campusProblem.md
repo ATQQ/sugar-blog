@@ -9,4 +9,3 @@
 
 <redirectBtn href="/offer/campus" text="查看" />
 
-<comment/>

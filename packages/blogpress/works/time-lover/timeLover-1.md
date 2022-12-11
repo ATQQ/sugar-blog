@@ -381,4 +381,3 @@ Dom结构如下：
 * [@vue/compiler-sfc使用](https://github.com/vuejs/rfcs/blob/script-setup-2/active-rfcs/0000-script-setup.md)
 * [在线带壳截图生成](https://deviceshots.com/app?device=apple-iphone-x)
 
-<comment/>

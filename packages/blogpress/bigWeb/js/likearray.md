@@ -115,4 +115,3 @@ console.log(foo(1,2)) // 3
 [JavaScript深入之类数组对象与arguments](https://github.com/mqyqingfeng/Blog/issues/14)
 :::
 
-<comment/>

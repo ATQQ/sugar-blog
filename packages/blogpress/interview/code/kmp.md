@@ -59,4 +59,3 @@ function kmp(origin, target) {
 }
 ```
 
-<comment/>

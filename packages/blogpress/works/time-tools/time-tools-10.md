@@ -180,4 +180,3 @@ timec output -mj ./file1 ./file2
 
 * [仓库地址](https://github.com/ATQQ/time-control)
 
-<comment/>

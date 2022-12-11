@@ -23,19 +23,25 @@
   </div>
 </template>
 <script setup>
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 import { ElPagination } from 'element-plus'
 import BlogItem from '../blog-item/index.vue'
 import { useHomeData } from '../../composables/home'
 
-const wikiList = useHomeData()
+const pageData = useHomeData()
+
+const wikiList = computed(() => {
+  const data = pageData.filter((v) => v.meta.date)
+  data.sort((a, b) => new Date(b.meta.date) - new Date(a.meta.date))
+  return data
+})
 const pageSize = ref(6)
 const currentPage = ref(1)
 
 const currentWikiData = computed(() => {
   const startIdx = (currentPage.value - 1) * pageSize.value
   const endIdx = startIdx + pageSize.value
-  return wikiList.slice(startIdx, endIdx)
+  return wikiList.value.slice(startIdx, endIdx)
 })
 </script>
 <style lang="scss" scoped></style>

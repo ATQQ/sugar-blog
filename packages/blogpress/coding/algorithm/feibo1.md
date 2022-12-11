@@ -55,4 +55,3 @@ function fib(index) {
 };
 ```
 
-<comment/>

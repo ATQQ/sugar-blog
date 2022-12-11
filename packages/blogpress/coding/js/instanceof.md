@@ -67,4 +67,3 @@ console.log(instanceOf(function () { }, Function));
 console.log(instanceOf([], Function));
 ```
 
-<comment/>

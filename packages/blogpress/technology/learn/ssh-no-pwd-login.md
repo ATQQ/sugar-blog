@@ -62,4 +62,3 @@ ssh -p22 root@$host "service sshd restart"
 ssh root@$host
 ```
 
-<comment/>

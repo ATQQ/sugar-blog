@@ -302,4 +302,3 @@ console.log('render success');
 :::tip 参考
 * [developers-关键路径渲染](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-blocking-css)
 :::
-<comment/>

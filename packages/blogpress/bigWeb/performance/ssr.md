@@ -36,4 +36,3 @@ categories:
 ### Vue SSR
 ...wait
 
-<comment/>

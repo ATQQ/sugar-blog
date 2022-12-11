@@ -106,4 +106,3 @@ XMLHttpRequest 请求会在浏览器中新开一个线程请求， 将检测到�
 * [简书-全面了解浏览器（内核）发展史](https://www.jianshu.com/p/db1b230e3415)
 :::
 
-<comment/>

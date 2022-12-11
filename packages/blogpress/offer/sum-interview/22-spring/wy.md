@@ -36,4 +36,3 @@ author: wcy
 * 阐述一下`MVVM`与`MVC`
 * 
 
-<comment/>

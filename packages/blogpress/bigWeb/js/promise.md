@@ -237,4 +237,3 @@ new myPromise((resolve, reject) => {
 })I
 ```
 
-<comment/>

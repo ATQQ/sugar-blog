@@ -704,4 +704,3 @@ QUIC 在移动端的表现也会比 TCP 好:
 * Content-Length如果存在且生效, 必须是正确的, 否则会发生异常
 * 如果报文中包含Transfer-Encoding: chunked首部, 那么Content-Length将被忽略.
 
-<comment/>

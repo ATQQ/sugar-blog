@@ -13,4 +13,3 @@ tags:
 * 图片选择策略
 * mvc、mvvm架构
 
-<comment/>

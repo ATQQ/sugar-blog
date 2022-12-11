@@ -69,4 +69,3 @@ export function a() {}
 export default function() {}
 ```
 
-<comment/>

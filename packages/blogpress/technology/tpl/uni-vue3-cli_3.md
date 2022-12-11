@@ -145,4 +145,3 @@ module.exports = {
 * [PostCSS 7 compatibility build](https://tailwindcss.com/docs/installation#post-css-7-compatibility-build)
 * [uni-app 使用 tailwindcss](https://wyz.xyz/d/150-uni-app-tailwindcss)
 
-<comment/>

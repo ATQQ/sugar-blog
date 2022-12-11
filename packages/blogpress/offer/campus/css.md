@@ -150,4 +150,3 @@ p.color-color-blue{
 7. 画圆形
 8. 画五角星
 
-<comment/>

@@ -25,4 +25,3 @@ const fn = () =>{
 * 没有arguments对象,可以使用``...rest``代替
 * 不能使用yield命令,即不可以用作Generator函数
 
-<comment/>

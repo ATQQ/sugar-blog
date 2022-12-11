@@ -531,4 +531,3 @@ new libName()
 >文中所涉及[源码仓库](https://github.com/ATQQ/web-lib-template)地址：https://github.com/ATQQ/web-lib-template
 
 
-<comment/>

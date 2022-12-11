@@ -411,4 +411,3 @@ vite提供了`loadConfigFromFile`方法，只需要在此方法中做一层简�
 1. 目前`wp2vite`在配置转换这一块，还不能太满足使用要求，准备提PR增强一下
 2. 将内部能力抽成一个个单独的vite插件
 
-<comment/>

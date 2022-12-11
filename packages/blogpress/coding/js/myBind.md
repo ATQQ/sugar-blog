@@ -58,4 +58,3 @@ const print2 = print.mybind({ name: 'print2' }).mybind({ name: 'print22' })
 print2() // print2
 ```
 
-<comment/>

@@ -30,4 +30,3 @@ author: wcy
 ### 手撕
 1. 数组的扁平化
 
-<comment/>

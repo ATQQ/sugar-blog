@@ -410,4 +410,3 @@ TODO: 补充一张前端技术的思维导图
 ## 参考资料
 * [语雀-分享狼叔关于《大前端工程化的实践与思考》](https://www.yuque.com/robinson/fe-pro/gu001d)
 
-<comment/>

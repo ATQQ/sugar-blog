@@ -481,4 +481,3 @@ catch err
 TypeError: Assignment to constant variable.
 ```
 
-<comment/>

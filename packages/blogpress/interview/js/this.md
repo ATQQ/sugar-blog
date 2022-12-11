@@ -271,4 +271,3 @@ obj.say6()
 ```
 </my-details>
 
-<comment/>

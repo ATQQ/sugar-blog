@@ -119,4 +119,3 @@ export function copyRes(text) {
 
 <codepen src="https://codepen.io/sugarInSoup/embed/rNjZzLx?height=265&theme-id=dark&default-tab=js,result"></codepen>
 
-<comment/>

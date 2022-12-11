@@ -66,4 +66,3 @@ console.log('1', a)
 ### 算法
 1. 快排的时间复杂度
 
-<comment/>
