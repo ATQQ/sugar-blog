@@ -1,9 +1,10 @@
 <script setup>
-import HeroBanner from './../hero-banner/index.vue'
-import BlogList from './../blog-list/index.vue'
-import BlogInfo from './../blog-info/index.vue'
-import Theme from "vitepress/theme";
-const { Layout } = Theme;
+import Theme from 'vitepress/theme'
+import HeroBanner from '../hero-banner/index.vue'
+import BlogList from '../blog-list/index.vue'
+import BlogInfo from '../blog-info/index.vue'
+
+const { Layout } = Theme
 </script>
 
 <template>
