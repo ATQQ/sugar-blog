@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "粥里有勺糖的个人博客",
   "main": "index.js",
-  "private":"true",
+  "private": "true",
   "directories": {
     "doc": "docs"
   },
@@ -21,6 +21,7 @@
   "dependencies": {
     "@vuepress-reco/vuepress-plugin-bulletin-popover": "1.5.7",
     "valine": "^1.4.14",
+    "vue": "2",
     "vue-class-component": "^7.2.3"
   },
   "devDependencies": {

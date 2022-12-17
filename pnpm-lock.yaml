@@ -38,6 +38,7 @@ importers:
       '@vuepress-reco/vuepress-plugin-bulletin-popover': 1.5.7
       '@vuepress/plugin-pwa': ^1.7.1
       valine: ^1.4.14
+      vue: '2'
       vue-class-component: ^7.2.3
       vuepress: 1.7.1
       vuepress-theme-reco: 1.5.7
@@ -45,7 +46,8 @@ importers:
     dependencies:
       '@vuepress-reco/vuepress-plugin-bulletin-popover': 1.5.7
       valine: 1.4.16
-      vue-class-component: 7.2.6
+      vue: 2.6.14
+      vue-class-component: 7.2.6_vue@2.6.14
     devDependencies:
       '@vuepress/plugin-pwa': 1.9.7
       vuepress: 1.7.1
@@ -11067,19 +11069,12 @@ packages:
       vue-property-decorator: 8.5.1_vue@2.6.14
     dev: true
 
-  /vue-class-component/7.2.6:
-    resolution: {integrity: sha512-+eaQXVrAm/LldalI272PpDe3+i4mPis0ORiMYxF6Ae4hyuCh15W8Idet7wPUEs4N4YptgFHGys4UrgNQOMyO6w==}
-    peerDependencies:
-      vue: ^2.0.0
-    dev: false
-
   /vue-class-component/7.2.6_vue@2.6.14:
     resolution: {integrity: sha512-+eaQXVrAm/LldalI272PpDe3+i4mPis0ORiMYxF6Ae4hyuCh15W8Idet7wPUEs4N4YptgFHGys4UrgNQOMyO6w==}
     peerDependencies:
       vue: ^2.0.0
     dependencies:
       vue: 2.6.14
-    dev: true
 
   /vue-click-outside/1.1.0:
     resolution: {integrity: sha512-pNyvAA9mRXJwPHlHJyjMb4IONSc7khS5lxGcMyE2EIKgNMAO279PWM9Hyq0d5J4FkiSRdmFLwnbjDd5UtPizHQ==}
@@ -11265,7 +11260,6 @@ packages:
 
   /vue/2.6.14:
     resolution: {integrity: sha512-x2284lgYvjOMj3Za7kqzRcUSxBboHqtgRE2zlos1qWaOye5yUmHn42LB1250NJBLRwEcdrB0JRwyPTEPhfQjiQ==}
-    dev: true
 
   /vue/3.2.45:
     resolution: {integrity: sha512-9Nx/Mg2b2xWlXykmCwiTUCWHbWIj53bnkizBxKai1g61f2Xit700A1ljowpTIM11e3uipOeiPcSqnmBg6gyiaA==}

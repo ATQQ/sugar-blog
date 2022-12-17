@@ -50,3 +50,16 @@ html[class='dark'] {
 .el-pagination > * {
   margin-bottom: 10px !important;
 }
+
+
+@media screen and (min-width: 768px) and (max-width: 920px) {
+  .VPNavBarMenuGroup .button span.text,.VPNavBarMenuLink{
+    font-size: 10px;
+  }
+  .VPNavBar{
+    height: auto !important;
+  }
+  .VPNavBarMenu.menu{
+    flex-wrap: wrap;
+  }
+}
