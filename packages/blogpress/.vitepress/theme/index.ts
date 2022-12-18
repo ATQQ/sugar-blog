@@ -3,6 +3,7 @@ import Theme from 'vitepress/theme'
 import './index.scss'
 // element-ui
 import 'element-plus/dist/index.css'
+import 'element-plus/theme-chalk/dark/css-vars.css'
 
 import { h } from 'vue'
 import { EnhanceAppContext } from 'vitepress'

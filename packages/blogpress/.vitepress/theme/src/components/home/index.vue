@@ -4,12 +4,17 @@ import HeroBanner from '../hero-banner/index.vue'
 import BlogList from '../blog-list/index.vue'
 import BlogInfo from '../blog-info/index.vue'
 import Comment from '../comment.vue'
+import BlogSearch from '../blog-search/index.vue'
 
 const { Layout } = Theme
 </script>
 
 <template>
   <Layout>
+    <!-- 自定义搜索，临时替代Algolia -->
+    <template #nav-bar-content-before>
+      <blog-search />
+    </template>
     <!-- 自定义首页 -->
     <template #home-hero-before>
       <div class="home">
