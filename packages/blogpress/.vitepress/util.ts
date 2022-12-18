@@ -15,7 +15,7 @@ export function getConfigData() {
         }
 
         // 处理tags和categories,兼容历史文章
-        meta.tag = [...new Set([...(meta.categories || []), ...(meta.tags || [])])]
+        meta.tag = (meta.tag||[]).concat([...new Set([...(meta.categories || []), ...(meta.tags || [])])])
 
         // 获取摘要信息
         const wordCount = 100

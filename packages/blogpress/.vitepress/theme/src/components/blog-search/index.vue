@@ -93,9 +93,11 @@ watch(
 )
 
 const homeData = useHomeData()!
+const docs = computed(() => homeData.docs)
+
 const searchResult = computed(() => {
   if (!searchWords.value) return []
-  const result = homeData.filter((v) =>
+  const result = docs.value.filter((v) =>
     `${v.meta.description}${v.meta.title}`.includes(searchWords.value)
   )
   result.sort((a, b) => {

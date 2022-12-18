@@ -1,7 +1,7 @@
-import { InjectionKey, inject } from 'vue'
+import { InjectionKey, inject, Ref } from 'vue'
 
-export const injectKey: InjectionKey<
-  {
+export const injectKey: InjectionKey<{
+  docs: {
     route: string
     meta: {
       title: string
@@ -15,7 +15,11 @@ export const injectKey: InjectionKey<
       tags: string[]
     }
   }[]
-> = Symbol('home-data')
+  activeTag: Ref<{
+    label: string
+    type: string
+  }>
+}> = Symbol('home-data')
 
 export const useHomeData = () => {
   return inject(injectKey)

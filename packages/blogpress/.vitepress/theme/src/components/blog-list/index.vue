@@ -17,23 +17,30 @@
       background
       v-model:current-page="currentPage"
       :page-size="pageSize"
-      :total="wikiList.length"
+      :total="filterData.length"
       layout="prev, pager, next, jumper"
     />
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import { computed, ref } from 'vue'
 import { ElPagination } from 'element-plus'
 import BlogItem from '../blog-item/index.vue'
 import { useHomeData } from '../../composables/home'
 
-const pageData = useHomeData()
+const homeData = useHomeData()!
+const docs = computed(() => homeData.docs)
+const activeTagLabel = computed(() => homeData.activeTag.value.label)
 
 const wikiList = computed(() => {
-  const data = pageData.filter((v) => v.meta.date)
-  data.sort((a, b) => new Date(b.meta.date) - new Date(a.meta.date))
+  const data = docs.value.filter((v) => v.meta.date)
+  data.sort((a, b) => +new Date(b.meta.date) - +new Date(a.meta.date))
   return data
+})
+
+const filterData = computed(() => {
+  if (!activeTagLabel.value) return wikiList.value
+  return wikiList.value.filter((v) => v.meta.tag.includes(activeTagLabel.value))
 })
 const pageSize = ref(6)
 const currentPage = ref(1)
@@ -41,7 +48,7 @@ const currentPage = ref(1)
 const currentWikiData = computed(() => {
   const startIdx = (currentPage.value - 1) * pageSize.value
   const endIdx = startIdx + pageSize.value
-  return wikiList.value.slice(startIdx, endIdx)
+  return filterData.value.slice(startIdx, endIdx)
 })
 </script>
 <style lang="scss" scoped></style>

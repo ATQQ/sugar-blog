@@ -27,7 +27,7 @@ import { formatShowDate } from './index'
 const props = defineProps<{
   route: string
   title: string
-  date: string
+  date: string | Date
   sticky?: number
   description?: string
   tag?: string[]

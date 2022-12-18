@@ -25,7 +25,10 @@ import { useDark } from '@vueuse/core'
 import { useRoute } from 'vitepress'
 import { ref, watch } from 'vue'
 
-const isDark = useDark()
+const isDark = useDark({
+  storageKey: 'vitepress-theme-appearance'
+})
+
 const route = useRoute()
 const showComment = ref(true)
 watch(
