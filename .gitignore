@@ -2,3 +2,4 @@ docs/.vuepress/dist
 node_modules
 .vscode
 dist
+cache

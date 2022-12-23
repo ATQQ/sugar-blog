@@ -19,7 +19,7 @@ export default {
     return h(Home, {})
   },
   enhanceApp: (ctx: EnhanceAppContext) => {
-    const { app, router } = ctx
+    const { app } = ctx
     app.provide(homeInjectKey, {
       docs: ctx.siteData.value.themeConfig.pagesData,
       activeTag: ref({
@@ -29,17 +29,5 @@ export default {
     })
     app.component('comment', Comment)
 
-    // 兼容README旧路由
-    router.onBeforeRouteChange = (to: string) => {
-      const url = new URL(to)
-      const isREADMERoute = ctx.siteData.value.themeConfig.pagesData?.find(
-        (v) => {
-          return `/${v.route}` === `${url.pathname}README`
-        }
-      )
-      if (to.endsWith('/') && isREADMERoute) {
-        window.location.replace(`/${isREADMERoute.route}`)
-      }
-    }
   }
 }

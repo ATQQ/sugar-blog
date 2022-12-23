@@ -5,7 +5,12 @@ import type { DefaultTheme } from 'vitepress';
 
 export function getConfigData() {
     const files = glob.sync('./**/*.md', { ignore: ['node_modules'] })
-
+    // readme.md => index.md
+    for (const file of files) {
+        if(file.endsWith('README.md')){
+            fs.promises.rename(file, file.replace('README.md', 'index.md'))
+        }
+    }
     const data = files.map(v => {
         const route = v.replace('.md', '')
         const fileContent = fs.readFileSync(v, 'utf-8')

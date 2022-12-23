@@ -43,7 +43,7 @@ categories:
 * 一键引入工程工具的CLI工具开发
 * vite插件开发实践
 
-## :earth_asia:[浏览器专题](./../../bigWeb/browser/README.md)
+## :earth_asia:[浏览器专题](./../../bigWeb/browser/index.md)
 * [内核](./../../bigWeb/browser/core.md)
 * [渲染机制](./../../bigWeb/browser/render.md)
 * [阻塞渲染](./../../bigWeb/browser/block.md)
@@ -54,7 +54,7 @@ categories:
 * [event loop](./../../bigWeb/browser/eventloop.md)
 * [常见面试题](./../../bigWeb/browser/problem.md)
 
-## :pencil:[校招面试](./../../bigWeb/browser/README.md)
+## :pencil:[校招面试](./../../bigWeb/browser/index.md)
 * [JS](./../../offer/campus/javascript.md)
 * [计网](./../../offer/campus/internet.md)
 * [CSS](./../../offer/campus/css.md)

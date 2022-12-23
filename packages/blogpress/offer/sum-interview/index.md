@@ -14,7 +14,7 @@ sticky: 3
 校招面试为主
 
 ## 目录
-* [20年秋招](./20-autumn/README.md)
-* [20年春招](./20-spring/README.md)
-* [21年春招](./21-spring/README.md)
-* [22年春招](./22-spring/README.md)
+* [20年秋招](./20-autumn/index.md)
+* [20年春招](./20-spring/index.md)
+* [21年春招](./21-spring/index.md)
+* [22年春招](./22-spring/index.md)
