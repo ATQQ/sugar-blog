@@ -1,14 +1,14 @@
 #!/usr/bin/env zx
 
 // user config
-const originName = "blog"
+const originName = 'blog'
 
 // not care
 const compressPkgName = `${originName}.tar.gz`
 const user = 'root'
 const origin = 'sugarat.top'
 const fullOrigin = `${originName}.${origin}`
-const baseServerDir = `/www/wwwroot`
+const baseServerDir = '/www/wwwroot'
 const destDir = ''
 
 await $`echo ==🔧 压缩dist ==`

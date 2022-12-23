@@ -15,6 +15,10 @@ export function getConfigData() {
         const route = v.replace('.md', '')
         const fileContent = fs.readFileSync(v, 'utf-8')
         const meta = matter(fileContent).data
+        if(Object.keys(meta).length === 0){
+            console.log(route);
+        }
+
         if (!meta.title) {
             meta.title = fileContent.match(`# (.+)`)?.[1]
         }

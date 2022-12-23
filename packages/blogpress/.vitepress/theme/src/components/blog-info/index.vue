@@ -93,7 +93,7 @@ import { isCurrentWeek } from '../../utils'
 import { formatShowDate } from '../blog-item'
 
 const homeData = useHomeData()!
-const docs = computed(()=>homeData.docs)
+const docs = computed(() => homeData.docs)
 
 const nowMonth = new Date().getMonth()
 const nowYear = new Date().getFullYear()
@@ -156,14 +156,13 @@ const handleCloseTag = () => {
 }
 
 const handleTagClick = (tag: string, type: string) => {
-  if(tag === activeTag.label){
+  if (tag === activeTag.label) {
     handleCloseTag()
     return
   }
   activeTag.type = type
   activeTag.label = tag
 }
-
 </script>
 
 <style lang="scss" scoped>

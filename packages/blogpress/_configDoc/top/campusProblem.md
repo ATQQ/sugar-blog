@@ -7,5 +7,5 @@
 
 笔者能力有限，如有遗漏之处，请在评论中补充，或者直接提PR完
 
-<redirectBtn href="/offer/campus" text="查看" />
+<redirectBtn href="/offer/campus/index" text="查看" />
 
