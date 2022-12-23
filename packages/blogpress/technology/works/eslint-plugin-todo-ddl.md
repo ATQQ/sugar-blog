@@ -275,7 +275,7 @@ if (errMsg) {
 
 
 ## 其它
-* [eslint插件开发教程文档](../learn/eslint-plugin.md)
+* [eslint插件开发教程文档](./../learn/eslint-plugin.md)
 * [vs code插件 todo-tree](https://github.com/Gruntfuggly/todo-tree)也很棒哟
 
 >[本文](https://juejin.cn/post/6939877553582637069)正在参与「掘金 2021 春招闯关活动」, 点击查看 [活动详情](https://juejin.cn/post/6939329638506168334)

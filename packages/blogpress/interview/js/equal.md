@@ -41,6 +41,6 @@ true == 'true'
 ```
 
 :::tip 更多参考
-[JS中的类型转换](../../bigWeb/js/typeConvert.md)
+[JS中的类型转换](./../../bigWeb/js/typeConvert.md)
 :::
 

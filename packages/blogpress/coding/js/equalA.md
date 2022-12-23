@@ -15,7 +15,7 @@ categories:
 
 通过重新定义对象的隐式转换行为实现
 
-如对隐式转换不了解，推荐阅读[类型转换](../../bigWeb/js/typeConvert.md)
+如对隐式转换不了解，推荐阅读[类型转换](./../../bigWeb/js/typeConvert.md)
 ```js
 if(a==1&&a==2){
     console.log('yes')

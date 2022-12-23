@@ -310,7 +310,7 @@ tcb framework deploy
     └── main.yml
 ```
 main.yml文件内容如下
-```yml
+```yaml
 # This is a basic workflow to help you get started with Actions
 
 name: prod-CI

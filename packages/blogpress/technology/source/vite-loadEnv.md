@@ -10,7 +10,7 @@ categories:
 # 源码学习：Vite中加载环境变量（loadEnv）的实现
 
 ## 前言
-昨天在[封装dotenv库实现类似Vite加载环境变量的行为](./loadEnv.md)的文章中，模拟实现了Vite加载环境变量的方法
+昨天在[封装dotenv库实现类似Vite加载环境变量的行为](./../learn/loadEnv.md)的文章中，模拟实现了Vite加载环境变量的方法
 
 本文进入源码，进一步学习一下的原本的加载逻辑
 

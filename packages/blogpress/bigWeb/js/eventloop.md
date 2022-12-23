@@ -16,7 +16,7 @@ categories:
 * Event Loop是一个执行模型，在不同的地方有不同的实现
 * Event Loop是一个程序结构，用于等待和发送消息和事件
 
-**关于浏览器中的Event loop 请跳转这里查看更详细的内容** [戳我](../browser/eventloop.md)
+**关于浏览器中的Event loop 请跳转这里查看更详细的内容** [戳我](./../browser/eventloop.md)
 ## 进程与线程
 
 模拟场景

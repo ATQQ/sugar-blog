@@ -191,7 +191,7 @@ module.exports = app
 ### serverless.yml配置文件解释
 只关注根目录下的那个`serverless.yml`文件，不关注`layer/serverless.yml`
 
-```yml
+```yaml
 component: express
 name: express-jskJUp-v4
 org: '1256505457'

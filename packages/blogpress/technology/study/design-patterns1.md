@@ -430,6 +430,6 @@ Total Cost: 28
 * 用原型模式的优势是使用更小的代价来创建对象，通过原型引用的方式而不是开辟新的空间
 
 JS创建对象的方式就是原型引用：
-* [模拟new实现](../../coding/js/myNew.md)
-* [原型与原型链](../../bigWeb/js/prototype.md)
+* [模拟new实现](./../../coding/js/myNew.md)
+* [原型与原型链](./../../bigWeb/js/prototype.md)
 

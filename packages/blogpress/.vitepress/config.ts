@@ -7,6 +7,8 @@ const extraHead: any = process.env.NODE_ENV === 'production' ? [
 const { pagesData } = getConfigData()
 
 export default defineConfig({
+    ignoreDeadLinks: true,
+    lang:'zh-cmn-Hans',
     title: '粥里有勺糖',
     description: '粥里有勺糖的个人博客，记录随笔与学习笔记，大前端相关的知识，高频面试题，个人面经等',
     head: [

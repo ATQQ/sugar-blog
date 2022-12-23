@@ -1,6 +1,6 @@
 ---
 isTimeLine: true
-title: :sound:内容预告-最近准备整理的内容
+title: 内容预告-最近准备整理的内容
 date: 2021-10-04
 tags:
  - 大前端
@@ -9,7 +9,7 @@ categories:
 # sticky: 1
 ---
 
-# :sound:内容预告-最近准备撰写的内容
+# 内容预告-最近准备撰写的内容
 
 由于砖太烫手，这部分内容鸽了有大办年了，争取21Q4完善其中一部分内容
 
@@ -43,23 +43,22 @@ categories:
 * 一键引入工程工具的CLI工具开发
 * vite插件开发实践
 
-## :earth_asia:[浏览器专题](./../../../bigWeb/browser/README.md)
+## :earth_asia:[浏览器专题](./../../bigWeb/browser/README.md)
 * [内核](./../../bigWeb/browser/core.md)
 * [渲染机制](./../../bigWeb/browser/render.md)
 * [阻塞渲染](./../../bigWeb/browser/block.md)
 * [缓存机制](./../../bigWeb/browser/cache.md)
 * [本地存储](./../../bigWeb/browser/storage.md)
-* [安全](../../bigWeb/browser/safe.md)
-* [跨域与跨站](../../bigWeb/browser/cors.md)
-* [event loop](../../bigWeb/browser/eventloop.md)
-* [新的跨域策略](../../bigweb/browser/newco.md) 0%
-* [常见面试题](../../bigWeb/browser/problem.md) 10%
+* [安全](./../../bigWeb/browser/safe.md)
+* [跨域与跨站](./../../bigWeb/browser/cors.md)
+* [event loop](./../../bigWeb/browser/eventloop.md)
+* [常见面试题](./../../bigWeb/browser/problem.md)
 
-## :pencil:[校招面试](./../../../bigWeb/browser/README.md)
-* [JS](../../offer/campus/javascript.md)
-* [计网](../../offer/campus/internet.md)
-* [CSS](../../offer/campus/css.md)
-* [HTML](../../offer/campus/html.md)
+## :pencil:[校招面试](./../../bigWeb/browser/README.md)
+* [JS](./../../offer/campus/javascript.md)
+* [计网](./../../offer/campus/internet.md)
+* [CSS](./../../offer/campus/css.md)
+* [HTML](./../../offer/campus/html.md)
 * 操作系统
 * 框架
 * 。。。未完待续
@@ -73,7 +72,7 @@ categories:
 * 。。。
 
 ## :zap:大前端相关概念
-* [Serverless](../../technology/theory/serverless.md)
+* [Serverless](./../../technology/theory/serverless.md)
 * css架构
 * 微前端
 * lowCode

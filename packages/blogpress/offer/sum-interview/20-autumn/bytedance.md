@@ -18,7 +18,7 @@ categories:
 let list = ['acccs', 'acaaa', 'ac']
 // ac
 ```
-1. [实现一个promise.All](./../../coding/js/promiseAll.md)
+1. [实现一个promise.All](./../../../coding/js/promiseAll.md)
 ```js
 // 要求：必须等全部都resolved或这reject才返回
 // 有一个reject就走catch
@@ -27,8 +27,8 @@ function waitAll(promises){
 
 }
 ```
-4. [实现bind](./../../coding/js/myBind.md)
-5. [深拷贝的有哪些实现方式,递归实现一个深拷贝](./../../coding/js/deepClone.md)
+4. [实现bind](./../../../coding/js/myBind.md)
+5. [深拷贝的有哪些实现方式,递归实现一个深拷贝](./../../../coding/js/deepClone.md)
 6. 下面代码哪些if是真
 ```js
 if([])
@@ -36,8 +36,8 @@ if({})
 if([]==false)
 if({}==false)
 ```
-7. [实现一个单例模式](./../../computerBase/design/single.md)
-8. [使用ES5实现一个继承](./../../coding/js/inherit.md)
+7. [实现一个单例模式](./../../../computerBase/design/single.md)
+8. [使用ES5实现一个继承](./../../../coding/js/inherit.md)
 
 ### 计网
 1. TCP、UDP的区别
@@ -64,21 +64,21 @@ if({}==false)
 2. 进程怎么并行
 
 ### 浏览器
-1. [如何设置浏览器缓存](./../../bigWeb/browser/cache.md#强缓存)
-2. [什么是强缓存/协商缓存](./../../bigWeb/browser/cache.md#缓存策略)
-3. [XSS是什么？如何预防？](./../../bigWeb/browser/safe.md#xss)
+1. [如何设置浏览器缓存](./../../../bigWeb/browser/cache.md#强缓存)
+2. [什么是强缓存/协商缓存](./../../../bigWeb/browser/cache.md#缓存策略)
+3. [XSS是什么？如何预防？](./../../../bigWeb/browser/safe.md#xss)
 
 ### js/css
-1. [原始值类型有哪些](./../../interview/js/primitiveType.md)
-2. [如何判断变量类型](./../../bigWeb/js/p4.md)
-3. [如何判断数组](./../../interview/js/judgeArr.md)
-4. [null是对象吗，为什么](./../../interview/js/nullobj.md)
-5. [forof与forin区别](./../../interview/js/diff-for-in-of.md)
-6. [forof 与 forin在遍历顺序上是否有区别](./../../interview/js/diff-for-in-of.md)
-7. [call,bind,apply区别](./../../bigWeb/js/apply.md)
-8. [伪类](./../../bigWeb/css/pseudo-class.md)与[伪元素](./../../bigWeb/css/pseudo-element.md)的区别，举例用过的伪类与伪元素，以及它们的使用场景
-9. [css选择器](./../../bigWeb/css/selectors.md)用过哪些，都有什么作用
-10. [如何获取一个dom对象，这几种方式哪个效率最高，为什么](./../../bigWeb/js/getElement.md)
+1. [原始值类型有哪些](./../../../interview/js/primitiveType.md)
+2. [如何判断变量类型](./../../../bigWeb/js/p4.md)
+3. [如何判断数组](./../../../interview/js/judgeArr.md)
+4. [null是对象吗，为什么](./../../../interview/js/nullobj.md)
+5. [forof与forin区别](./../../../interview/js/diff-for-in-of.md)
+6. [forof 与 forin在遍历顺序上是否有区别](./../../../interview/js/diff-for-in-of.md)
+7. [call,bind,apply区别](./../../../bigWeb/js/apply.md)
+8. [伪类](./../../../bigWeb/css/pseudo-class.md)与[伪元素](./../../../bigWeb/css/pseudo-element.md)的区别，举例用过的伪类与伪元素，以及它们的使用场景
+9. [css选择器](./../../../bigWeb/css/selectors.md)用过哪些，都有什么作用
+10. [如何获取一个dom对象，这几种方式哪个效率最高，为什么](./../../../bigWeb/js/getElement.md)
 11. 什么是事件委托？优点是什么？
 12. 如何获取指定dom的指定属性
 13. 如何获取指定dom的指定样式
