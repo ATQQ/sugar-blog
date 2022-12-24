@@ -103,6 +103,10 @@ function appendMeta(file: string, content: string) {
     title,
     date
   }
+  fs.writeFileSync(
+    file,
+    ['---', `title: ${title}`, `date: ${date}`, '---', '', content].join('\n')
+  )
   return meta
 }
 
