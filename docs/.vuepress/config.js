@@ -45,15 +45,25 @@ module.exports = {
           //   style: 'background-color:red;',
           //   text: '领红包',
           // },
+          // {
+          //   type: 'text',
+          //   content: '美团全年招聘 前端&客户端',
+          //   style: 'text-align: center;'
+          // },
+          // {
+          //   type: 'button',
+          //   link: '/_configDoc/show/bole',
+          //   text: '投递',
+          // }
           {
             type: 'text',
-            content: '美团全年招聘 前端&客户端',
+            content: '作者正在参加"掘金人气作者"活动',
             style: 'text-align: center;'
           },
           {
             type: 'button',
-            link: '/_configDoc/show/bole',
-            text: '投递',
+            link: 'https://rank.juejin.cn/rank/2022/writer/1028798615918983',
+            text: '投它',
           }
         ]
       }
