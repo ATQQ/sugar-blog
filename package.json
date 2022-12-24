@@ -19,7 +19,8 @@
     "zx": "^5.1.0"
   },
   "scripts": {
-    "dev:blog": "pnpm --filter 'blog-sugarat' dev",
+    "dev": "pnpm --filter 'blogpress' dev",
+    "build": "pnpm --filter 'blogpress' build",
     "lint": "eslint --ext .js,.ts,.vue --fix packages/**"
   },
   "repository": {
