@@ -3,9 +3,6 @@
   "version": "2.0.0",
   "private": true,
   "description": "个人博客&知识&文档站集",
-  "dependencies": {
-    "prettier": "^2.5.1"
-  },
   "devDependencies": {
     "@types/node": "^16.11.45",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
@@ -23,7 +20,7 @@
   },
   "scripts": {
     "dev:blog": "pnpm --filter 'blog-sugarat' dev",
-    "lint": "eslint packages/** packages/**/.vitepress/** --ext .js,.ts,.vue --fix"
+    "lint": "eslint --ext .js,.ts,.vue --fix packages/**"
   },
   "repository": {
     "type": "git",

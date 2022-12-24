@@ -1,6 +1,10 @@
 <template>
   <p class="action">
-    <a :href="href"><el-button type="success" round size="large">戳我 {{ text }}</el-button></a>
+    <a :href="href"
+      ><el-button type="success" round size="large"
+        >戳我 {{ text }}</el-button
+      ></a
+    >
   </p>
 </template>
 
@@ -8,10 +12,9 @@
 import { ElButton } from 'element-plus'
 
 const props = defineProps<{
-  href: string,
+  href: string
   text?: string
 }>()
-
 </script>
 
 <style scoped>

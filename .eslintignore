@@ -1,0 +1,4 @@
+dist
+node_modules
+packages/blogpress/.vitepress/cache
+!packages/blogpress/.vitepress
