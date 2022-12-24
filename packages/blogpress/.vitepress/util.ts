@@ -125,6 +125,7 @@ function getTextSummary(text: string, count = 100) {
   return text
     .match(/^# ([\s\S]+)/m)?.[1]
     ?.replace(/#/g, '')
+    ?.replace(/!\[.*?\]\(.*?\)/g, '')
     ?.split('\n')
     ?.filter((v) => !!v)
     ?.slice(1)

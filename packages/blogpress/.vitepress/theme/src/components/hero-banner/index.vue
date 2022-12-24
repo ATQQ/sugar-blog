@@ -11,13 +11,15 @@
 </template>
 <script setup>
 import { ref } from 'vue'
+import { ElMessage } from 'element-plus'
 
 const soulSoup = ref('千万不要因为走得太久，而忘记了我们为什么出发')
 const changeSoul = () => {
-  soulSoup.value = ''
+  // soulSoup.value = ''
   setTimeout(() => {
     // TODO: 接口抓数据
-    soulSoup.value = Math.random()
+    // soulSoup.value = Math.random()
+    ElMessage.success('只有这一条，接口正在路上')
   })
 }
 </script>

@@ -45,12 +45,12 @@ npm i -g pnpm
 pnpm install
 
 # 开发启动
-pnpm dev --enable-pre-post-scripts
+pnpm dev
 # or
 npm run dev
 
 # 构建
-pnpm build --enable-pre-post-scripts
+pnpm build
 # or
 npm run build
 ```

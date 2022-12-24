@@ -77,3 +77,12 @@ html[class='dark'] {
     padding-right: 10px !important;
   }
 }
+
+// TODO: 图片需要支持预览
+.VPDoc .content main{
+  img{
+    max-height: 300px;
+    margin: 0 auto;
+    cursor: pointer;
+  }
+}
