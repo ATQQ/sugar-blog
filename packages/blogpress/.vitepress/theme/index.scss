@@ -52,7 +52,7 @@ html[class='dark'] {
 }
 
 
-@media screen and (min-width: 768px) and (max-width: 1020px) {
+@media screen and (min-width: 768px) and (max-width: 1200px) {
   .VPNavBarMenuGroup .button span.text,.VPNavBarMenuLink{
     font-size: 10px;
   }
@@ -61,5 +61,19 @@ html[class='dark'] {
   }
   .VPNavBarMenu.menu{
     flex-wrap: wrap;
+  }
+}
+
+@media screen and (min-width: 960px) and (max-width: 1120px) {
+  .VPContent.has-sidebar{
+    margin-top: 60px !important;
+  }
+}
+
+// sidebar
+@media (min-width: 1440px){
+  aside.VPSidebar {
+    padding-left: max(32px, calc((100% - (var(--vp-layout-max-width) - 16px)) / 2)) !important;
+    padding-right: 10px !important;
   }
 }

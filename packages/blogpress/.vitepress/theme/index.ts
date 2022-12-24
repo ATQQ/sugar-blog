@@ -11,6 +11,7 @@ import { EnhanceAppContext } from 'vitepress'
 import Home from './src/components/home/index.vue'
 import Comment from './src/components/comment.vue'
 import redirectBtn from './src/components/redirectBtn.vue'
+import Solve from './src/components/solve.vue'
 import { injectKey as homeInjectKey, useHomeData } from './src/composables/home'
 
 export default {
@@ -29,5 +30,6 @@ export default {
     })
     app.component('comment', Comment)
     app.component('redirectBtn', redirectBtn)
+    app.component('solve', Solve)
   }
 }

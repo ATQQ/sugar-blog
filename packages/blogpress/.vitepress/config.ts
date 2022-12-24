@@ -58,12 +58,6 @@ export default defineConfig({
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     pagesData,
-    // algolia :{
-    //     appId:'GPX84VDH91',
-    //     apiKey: '150dda0b943087c4e6a04d54af1d7391',
-    //     indexName: 'sugarat',
-    //     placeholder: '请输入要搜索的内容...',
-    // },
     lastUpdatedText: '上次更新于',
     footer: {
       message:
@@ -215,6 +209,12 @@ export default defineConfig({
       {
         text: '留言板',
         link: '/_configDoc/show/messagePanel'
+      }
+    ],
+    sidebar: [
+      {
+        text: '',
+        items: []
       }
     ],
     socialLinks: [

@@ -5,6 +5,7 @@ import BlogList from '../blog-list/index.vue'
 import BlogInfo from '../blog-info/index.vue'
 import Comment from '../comment.vue'
 import BlogSearch from '../blog-search/index.vue'
+import Sidebar from '../sidebar/index.vue'
 
 const { Layout } = Theme
 </script>
@@ -26,6 +27,9 @@ const { Layout } = Theme
           <div class="blog-info-wrapper"><blog-info /></div>
         </div>
       </div>
+    </template>
+    <template #sidebar-nav-after>
+      <Sidebar />
     </template>
     <!-- 评论 -->
     <template #doc-after>
