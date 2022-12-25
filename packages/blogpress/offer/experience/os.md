@@ -11,7 +11,7 @@ categories:
 
 <center>
 
-内容根据[春招面经](https://sugarat.top/interview/experience)整理,文末有面试遇到的相关问题
+内容根据[春招面经](./index.md)整理,文末有面试遇到的相关问题
 
 笔者文笔有限,如有不足之处还请斧正
 
