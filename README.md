@@ -34,6 +34,8 @@
 * [神三元](http://47.98.159.95/my_blog/)
 
 ## 运行本项目
+博客基于[vitepress](https://vitepress.vuejs.org/)构建
+
 先安装 `pnpm`
 
 ```sh
