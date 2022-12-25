@@ -21,7 +21,8 @@
   "scripts": {
     "dev": "pnpm --filter 'blogpress' dev",
     "build": "pnpm --filter 'blogpress' build",
-    "lint": "eslint --ext .js,.ts,.vue --fix packages/**"
+    "lint": "eslint --ext .js,.ts,.vue --fix packages/**",
+    "deploy": "zx deploy.mjs"
   },
   "repository": {
     "type": "git",
