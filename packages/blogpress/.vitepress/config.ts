@@ -68,7 +68,7 @@ export default defineConfig({
     editLink: {
       // TODO: 分支切换
       pattern:
-        'https://github.com/ATQQ/sugar-blog/tree/feature/monorepo/packages/blogpress/:path',
+        'https://github.com/ATQQ/sugar-blog/tree/master/packages/blogpress/:path',
       text: '去 GitHub 上编辑内容'
     },
     nav: [
@@ -76,15 +76,15 @@ export default defineConfig({
         text: '关于我',
         link: '/aboutme'
       },
-      // {
-      //   text: "备战春秋",
-      //   items: [
-      //     { text: "心得总结", link: "/offer/experience/" },
-      //     { text: "校招考点汇总", link: "/offer/campus/" },
-      //     { text: "面经汇总", link: "/offer/sum-interview/" },
-      //     { text: "复习自查", link: "/offer/review/" },
-      //   ],
-      // },
+      {
+        text: '备战春秋',
+        items: [
+          { text: '心得总结', link: '/offer/experience/' },
+          { text: '校招考点汇总', link: '/offer/campus/' },
+          { text: '面经汇总', link: '/offer/sum-interview/' },
+          { text: '复习自查', link: '/offer/review/' }
+        ]
+      },
       {
         text: '技术笔记',
         items: [
@@ -150,20 +150,20 @@ export default defineConfig({
         ]
       },
       // {
-      //   text: "个人站点",
+      //   text: '个人站点',
       //   items: [
       //     {
-      //       text: "GitHub",
-      //       link: "https://github.com/ATQQ/sugar-blog",
+      //       text: 'GitHub',
+      //       link: 'https://github.com/ATQQ/sugar-blog'
       //     },
       //     {
-      //       text: "博客园",
-      //       link: "https://www.cnblogs.com/roseAT/",
+      //       text: '博客园',
+      //       link: 'https://www.cnblogs.com/roseAT/'
       //     },
       //     {
-      //       text: "掘金",
-      //       link: "https://juejin.im/user/1028798615918983",
-      //     },
+      //       text: '掘金',
+      //       link: 'https://juejin.im/user/1028798615918983'
+      //     }
       //     // {
       //     //   text: "GitBook-blog",
       //     //   link: "https://sugar-at.gitbook.io/blog-article/",
@@ -174,7 +174,7 @@ export default defineConfig({
       //     //   link: "https://sugar-js.gitbook.io/-1/",
       //     //   icon: "reco-document",
       //     // },
-      //   ],
+      //   ]
       // },
       {
         text: '线上作品',
@@ -200,15 +200,6 @@ export default defineConfig({
             link: 'https://resume.sugarat.top/'
           }
         ]
-      },
-      // {
-      //   text: "时间线",
-      //   link: "/timeline/",
-      //   icon: "reco-date",
-      // },
-      {
-        text: '留言板',
-        link: '/_configDoc/show/messagePanel'
       }
     ],
     sidebar: [
