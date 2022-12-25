@@ -1,31 +1,38 @@
 {
-  "name": "blog-sugarat",
-  "version": "1.0.0",
-  "description": "粥里有勺糖的个人博客",
-  "main": "index.js",
-  "directories": {
-    "doc": "docs"
+  "name": "sugar-wiki-monorepo",
+  "version": "2.0.0",
+  "private": true,
+  "description": "个人博客&知识&文档站集",
+  "devDependencies": {
+    "@types/node": "^16.11.45",
+    "@typescript-eslint/eslint-plugin": "^4.33.0",
+    "@typescript-eslint/parser": "^4.33.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-todo-ddl": "^1.1.1",
+    "eslint-plugin-vue": "^7.20.0",
+    "prettier": "^2.8.1",
+    "typescript": "^4.9.4",
+    "zx": "^5.1.0"
   },
   "scripts": {
-    "dev": "vuepress dev docs/.",
-    "build": "vuepress build docs/.",
-    "deploy": "zx scripts/deploy/index.mjs",
-    "predeploy": "npm run build",
-    "prebuild": "zx scripts/beforeBuild/index.mjs",
-    "predev": "zx scripts/beforeBuild/index.mjs"
+    "dev": "pnpm --filter 'blogpress' dev",
+    "build": "pnpm --filter 'blogpress' build",
+    "lint": "eslint --ext .js,.ts,.vue --fix packages/**",
+    "deploy": "zx deploy.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ATQQ/sugar-blog.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "sugar",
   "license": "MIT",
-  "dependencies": {
-    "@vuepress-reco/vuepress-plugin-bulletin-popover": "1.5.7",
-    "valine": "^1.4.14",
-    "vue-class-component": "^7.2.3"
+  "bugs": {
+    "url": "https://github.com/ATQQ/sugar-blog/issues"
   },
-  "devDependencies": {
-    "@vuepress/plugin-pwa": "^1.7.1",
-    "vuepress": "1.7.1",
-    "vuepress-theme-reco": "1.5.7",
-    "zx": "^5.1.0"
-  }
+  "homepage": "https://github.com/ATQQ/sugar-blog#readme"
 }

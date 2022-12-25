@@ -1,0 +1,29 @@
+{
+  "name": "blogpress",
+  "version": "2.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "serve": "vitepress serve"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.0.10",
+    "@vueuse/core": "^9.6.0",
+    "axios": "^0.27.2",
+    "clipboard-copy": "^4.0.1",
+    "element-plus": "^2.2.26",
+    "fast-glob": "^3.2.12",
+    "gray-matter": "^4.0.3",
+    "sass": "^1.56.1",
+    "vitepress": "1.0.0-alpha.33",
+    "vue": "^3.2.45"
+  },
+  "devDependencies": {
+    "vite": "^3.2.4"
+  }
+}
