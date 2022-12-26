@@ -3,14 +3,16 @@
     <span>正文字数：{{ wordCount }} 个字</span>
     <!-- <span>图片数：{{ imageCount }}</span> -->
     <span>预计阅读：{{ readTime }} 分钟</span>
+    <div class="meta-des" ref="$des">{{ publishDate }} · 阅读 {{ pv }}</div>
   </div>
 </template>
 
 <script lang="ts" setup>
-// 计算方式参考
+// 阅读时间计算方式参考
 // https://zhuanlan.zhihu.com/p/36375802
-import { useRoute } from 'vitepress'
+import { useData, useRoute } from 'vitepress'
 import { computed, ref, watch } from 'vue'
+import { formatShowDate } from '../blog-item'
 
 const wordCount = ref(0)
 const imageCount = ref(0)
@@ -32,6 +34,7 @@ const readTime = computed(() => {
 })
 
 const route = useRoute()
+const $des = ref<HTMLDivElement>()
 
 const analyze = () => {
   const docDomContainer = document.querySelector('#VPContent')
@@ -42,6 +45,7 @@ const analyze = () => {
 
   const words = docDomContainer?.textContent || ''
   wordCount.value = words.length
+  docDomContainer?.querySelector('h1')?.after($des.value!)
 }
 
 watch(
@@ -53,6 +57,14 @@ watch(
     immediate: true
   }
 )
+
+// 阅读量
+const pv = ref(6666)
+const docMeta = useData()
+
+const publishDate = computed(() => {
+  return formatShowDate(docMeta.frontmatter.value.date)
+})
 </script>
 
 <style lang="scss" scoped>
@@ -63,5 +75,11 @@ watch(
   span {
     margin: 0 10px;
   }
+}
+.meta-des {
+  text-align: left;
+  color: var(--vp-c-text-2);
+  font-size: 14px;
+  margin-top: 6px;
 }
 </style>

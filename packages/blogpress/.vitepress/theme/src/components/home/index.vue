@@ -7,7 +7,7 @@ import Comment from '../comment.vue'
 import BlogSearch from '../blog-search/index.vue'
 import Sidebar from '../sidebar/index.vue'
 import ImagePreview from '../imagePreview/index.vue'
-import WordAnalyze from '../word-analyze/index.vue'
+import DocAnalyze from '../doc-analyze/index.vue'
 
 const { Layout } = Theme
 </script>
@@ -16,7 +16,7 @@ const { Layout } = Theme
   <Layout>
     <template #doc-before>
       <!-- 阅读时间分析 -->
-      <WordAnalyze />
+      <DocAnalyze />
       <!-- 图片预览 -->
       <ImagePreview />
     </template>
