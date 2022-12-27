@@ -9,10 +9,9 @@ import 'element-plus/theme-chalk/dark/css-vars.css'
 import { h, ref } from 'vue'
 import { EnhanceAppContext } from 'vitepress'
 import Home from './src/components/home/index.vue'
-import Comment from './src/components/comment.vue'
 import redirectBtn from './src/components/redirectBtn.vue'
 import Solve from './src/components/solve.vue'
-import { injectKey as homeInjectKey, useHomeData } from './src/composables/home'
+import { injectKey as homeInjectKey, pageData } from './src/composables/home'
 
 export default {
   ...Theme,
@@ -28,8 +27,11 @@ export default {
         type: ''
       })
     })
-    app.component('comment', Comment)
     app.component('redirectBtn', redirectBtn)
     app.component('solve', Solve)
   }
+}
+
+export interface BlogTheme {
+  pagesData: pageData[]
 }

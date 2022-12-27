@@ -16,7 +16,9 @@ const { Layout } = Theme
   <Layout>
     <template #doc-before>
       <!-- 阅读时间分析 -->
-      <DocAnalyze />
+      <ClientOnly>
+        <DocAnalyze />
+      </ClientOnly>
       <!-- 图片预览 -->
       <ImagePreview />
     </template>

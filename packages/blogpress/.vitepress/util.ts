@@ -4,6 +4,7 @@ import fs from 'fs'
 import type { DefaultTheme } from 'vitepress'
 import { execSync } from 'child_process'
 import { formatDate } from './theme/src/utils'
+import type { pageData } from './theme/src/composables/home'
 
 export function getConfigData() {
   const files = glob.sync('./**/*.md', { ignore: ['node_modules'] })
@@ -46,7 +47,7 @@ export function getConfigData() {
   })
 
   return {
-    pagesData: data,
+    pagesData: data as pageData[],
     sidebar: getSidebarData(files.map((v) => v.replace('.md', '')))
   }
 }

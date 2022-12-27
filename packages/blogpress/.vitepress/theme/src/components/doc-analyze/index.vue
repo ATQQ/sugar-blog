@@ -37,7 +37,7 @@ const route = useRoute()
 const $des = ref<HTMLDivElement>()
 
 const analyze = () => {
-  const docDomContainer = document.querySelector('#VPContent')
+  const docDomContainer = window.document.querySelector('#VPContent')
   const imgs = docDomContainer?.querySelectorAll<HTMLImageElement>(
     '.content-container .main img'
   )
@@ -65,6 +65,17 @@ const docMeta = useData()
 const publishDate = computed(() => {
   return formatShowDate(docMeta.frontmatter.value.date)
 })
+
+watch(
+  () => route.path,
+  () => {
+    // TODO: 调用接口取数据
+    pv.value = 123
+  },
+  {
+    immediate: true
+  }
+)
 </script>
 
 <style lang="scss" scoped>

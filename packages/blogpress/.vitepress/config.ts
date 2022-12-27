@@ -1,5 +1,6 @@
-import { defineConfig } from 'vitepress'
+import { defineConfigWithTheme, DefaultTheme } from 'vitepress'
 import { getConfigData } from './util'
+import type { BlogTheme } from './theme/index'
 
 const extraHead: any =
   process.env.NODE_ENV === 'production'
@@ -21,7 +22,7 @@ const extraHead: any =
     : []
 const { pagesData } = getConfigData()
 
-export default defineConfig({
+export default defineConfigWithTheme<DefaultTheme.Config & BlogTheme>({
   ignoreDeadLinks: true,
   lang: 'zh-cmn-Hans',
   title: '粥里有勺糖',
@@ -55,8 +56,6 @@ export default defineConfig({
   },
   lastUpdated: true,
   themeConfig: {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     pagesData,
     lastUpdatedText: '上次更新于',
     footer: {
@@ -66,7 +65,6 @@ export default defineConfig({
     },
     logo: '/logo.png',
     editLink: {
-      // TODO: 分支切换
       pattern:
         'https://github.com/ATQQ/sugar-blog/tree/master/packages/blogpress/:path',
       text: '去 GitHub 上编辑内容'
