@@ -5,3 +5,4 @@ dist
 cache
 .temp
 blog.tar.gz
+.DS_Store

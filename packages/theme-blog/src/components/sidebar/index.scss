@@ -1,0 +1,76 @@
+.card {
+  position: relative;
+  margin: 0 auto 10px;
+  padding: 10px;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 0.25rem;
+  box-shadow: var(--box-shadow);
+  box-sizing: border-box;
+  transition: all 0.3s;
+  background-color: rgba(var(--bg-gradient));
+  display: flex;
+
+  &:hover {
+    box-shadow: var(--box-shadow-hover);
+  }
+}
+
+.recommend {
+  flex-direction: column;
+  padding: 16px 10px;
+}
+
+.recommend-container {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 0 10px 0 0px;
+  width: 100%;
+
+  li {
+    display: flex;
+
+    .num {
+      display: block;
+      font-size: 14px;
+      color: var(--description-font-color);
+      font-weight: 600;
+      margin: 6px 12px 10px 0;
+      width: 18px;
+      height: 18px;
+      line-height: 18px;
+      text-align: center;
+    }
+
+    .des {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .title {
+      font-size: 14px;
+      color: var(--vp-c-text-1);
+      word-break: break-all;
+      white-space: break-spaces;
+    }
+
+    .suffix {
+      font-size: 12px;
+      color: var(--vp-c-text-2);
+    }
+  }
+}
+
+.card-header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  .title {
+    font-size: 16px;
+  }
+}
