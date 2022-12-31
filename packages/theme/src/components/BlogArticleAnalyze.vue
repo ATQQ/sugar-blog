@@ -11,8 +11,9 @@
 <script lang="ts" setup>
 // 阅读时间计算方式参考
 // https://zhuanlan.zhihu.com/p/36375802
-import { useData, useRoute } from 'vitepress'
+import { useRoute } from 'vitepress'
 import { computed, ref, watch } from 'vue'
+import { useCurrentArticle } from '../composables/config/blog'
 import { formatShowDate } from '../utils/index'
 
 const wordCount = ref(0)
@@ -64,10 +65,10 @@ watch(
 
 // 阅读量
 const pv = ref(6666)
-const docMeta = useData()
 
+const currentArticle = useCurrentArticle()
 const publishDate = computed(() => {
-  return formatShowDate(docMeta.frontmatter.value.date)
+  return formatShowDate(currentArticle.value?.meta?.date || '')
 })
 
 watch(

@@ -1,6 +1,7 @@
 ---
 title: 关于自己
 date: 2021-12-11
+sticky: 10
 tags:
  - 其它
 ---

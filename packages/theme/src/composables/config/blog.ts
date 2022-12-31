@@ -1,4 +1,4 @@
-import { useData } from 'vitepress'
+import { useData, useRoute } from 'vitepress'
 import {
   Component,
   computed,
@@ -45,15 +45,22 @@ export function useActiveTag() {
   return inject(activeTagSymbol)!
 }
 
+export function useCurrentArticle() {
+  const blogConfig = useConfig()
+  const route = useRoute()
+
+  const docs = computed(() => blogConfig.config.pagesData)
+  const currentArticle = computed(() =>
+    docs.value.find(
+      (v) => v.route === route.path.replace(/\/?(.*).html$/, '$1')
+    )
+  )
+  return currentArticle
+}
+
 function resolveConfig(config: Theme.Config): Theme.Config {
   return {
     ...config,
-    pagesData: config.pagesData || [],
-    sidebar: config.sidebar || [
-      {
-        text: '',
-        items: []
-      }
-    ]
+    pagesData: config.pagesData || []
   }
 }
