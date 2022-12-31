@@ -26,11 +26,8 @@ export function getThemeConfig(dir: string) {
     const fileContent = fs.readFileSync(v, 'utf-8')
     const meta: Partial<Theme.PageMeta> = {
       ...getDefaultMeta(v, fileContent),
+      // TODO: 支持JSON
       ...matter(fileContent).data
-    }
-
-    if (!meta.title) {
-      meta.title = fileContent.match('# (.+)')?.[1] || ''
     }
 
     // 处理tags和categories,兼容历史文章
@@ -66,6 +63,8 @@ export function getThemeConfig(dir: string) {
 function getDefaultMeta(file: string, content: string) {
   const title =
     content
+      // 剔除---之间的内容
+      .replace(/---([\S\s]+)---/, '')
       ?.split('\n')
       ?.find((str) => {
         return str.startsWith('# ')
@@ -81,7 +80,8 @@ function getDefaultMeta(file: string, content: string) {
 }
 
 function getFileBirthTime(url: string) {
-  const infoStr = execSync(`git log --format=%aD ${url} | tail -1 `)
+  // 参考 vitepress 中的 getGitTimestamp 实现
+  const infoStr = execSync(`git log -1 --pretty="%ci" ${url}`)
     .toString('utf-8')
     .trim()
   let date = new Date()
