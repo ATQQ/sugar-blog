@@ -71,8 +71,8 @@ import {
   ElButton
 } from 'element-plus'
 import { useWindowSize } from '@vueuse/core'
-import { formatDate } from '../../utils'
-import { useConfig } from '../../composables/config/blog'
+import { formatDate } from '../utils'
+import { useConfig } from '../composables/config/blog'
 
 const searchModal = ref(false)
 

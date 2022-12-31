@@ -37,8 +37,8 @@
 <script lang="ts" setup>
 import { ref, computed } from 'vue'
 import { ElButton, ElLink } from 'element-plus'
-import { useConfig } from '../../composables/config/blog'
-import { formatShowDate } from '../../utils/index'
+import { useConfig } from '../composables/config/blog'
+import { formatShowDate } from '../utils/index'
 
 const blogConfig = useConfig()
 const docs = computed(() => blogConfig.config.pagesData)
@@ -68,5 +68,98 @@ const showChangeBtn = computed(() => {
 </script>
 
 <style lang="scss" scoped>
-@import './index.scss';
+.card {
+  position: relative;
+  margin: 0 auto 10px;
+  padding: 10px;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 0.25rem;
+  box-shadow: var(--box-shadow);
+  box-sizing: border-box;
+  transition: all 0.3s;
+  background-color: rgba(var(--bg-gradient));
+  display: flex;
+
+  &:hover {
+    box-shadow: var(--box-shadow-hover);
+  }
+}
+
+.card-header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+
+  .title {
+    font-size: 12px;
+  }
+}
+
+.recommend {
+  flex-direction: column;
+}
+
+.recommend-container {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 0 10px 0 0px;
+  width: 100%;
+
+  li {
+    display: flex;
+
+    &:nth-child(1) .num {
+      background-color: #f56c6c;
+      color: #fff;
+      font-size: 12px;
+      border-radius: 8px 0 8px 0;
+    }
+
+    &:nth-child(2) .num {
+      background-color: #67c23a;
+      color: #fff;
+      font-size: 12px;
+      border-radius: 0 8px 0 8px;
+    }
+
+    &:nth-child(3) .num {
+      background-color: #409eff;
+      color: #fff;
+      font-size: 12px;
+      border-radius: 6px;
+    }
+
+    .num {
+      display: block;
+      font-size: 14px;
+      color: var(--description-font-color);
+      font-weight: 600;
+      margin: 6px 12px 10px 0;
+      width: 18px;
+      height: 18px;
+      line-height: 18px;
+      text-align: center;
+    }
+
+    .des {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .title {
+      font-size: 14px;
+      color: var(--vp-c-text-1);
+    }
+
+    .suffix {
+      font-size: 12px;
+      color: var(--vp-c-text-2);
+    }
+  }
+}
 </style>

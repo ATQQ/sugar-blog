@@ -1,13 +1,13 @@
-<script setup lang="ts">
+<script setup lang="ts" name="BlogApp">
 import Theme from 'vitepress/theme'
-import HeroBanner from '../hero-banner/index.vue'
-import BlogList from '../blog-list/index.vue'
-import BlogInfo from '../blog-info/index.vue'
-import Comment from '../comment/index.vue'
-import BlogSearch from '../blog-search/index.vue'
-import Sidebar from '../sidebar/index.vue'
-import ImagePreview from '../imagePreview/index.vue'
-import DocAnalyze from '../doc-analyze/index.vue'
+import BlogHomeInfo from './BlogHomeInfo.vue'
+import BlogHomeBanner from './BlogHomeBanner.vue'
+import BlogList from './BlogList.vue'
+import BlogComment from './BlogComment.vue'
+import BlogSearch from './BlogSearch.vue'
+import BlogSidebar from './BlogSidebar.vue'
+import BlogImagePreview from './BlogImagePreview.vue'
+import BlogArticleAnalyze from './BlogArticleAnalyze.vue'
 
 const { Layout } = Theme
 </script>
@@ -17,10 +17,10 @@ const { Layout } = Theme
     <template #doc-before>
       <!-- 阅读时间分析 -->
       <ClientOnly>
-        <DocAnalyze />
+        <BlogArticleAnalyze />
       </ClientOnly>
       <!-- 图片预览 -->
-      <ImagePreview />
+      <BlogImagePreview />
     </template>
 
     <!-- 自定义搜索，临时替代Algolia -->
@@ -31,20 +31,20 @@ const { Layout } = Theme
     <template #home-hero-before>
       <div class="home">
         <div class="header-banner">
-          <hero-banner />
+          <BlogHomeBanner />
         </div>
         <div class="content-wrapper">
           <div><blog-list /></div>
-          <div class="blog-info-wrapper"><blog-info /></div>
+          <div class="blog-info-wrapper"><BlogHomeInfo /></div>
         </div>
       </div>
     </template>
     <template #sidebar-nav-after>
-      <Sidebar />
+      <BlogSidebar />
     </template>
     <!-- 评论 -->
     <template #doc-after>
-      <Comment />
+      <BlogComment />
     </template>
   </Layout>
 </template>

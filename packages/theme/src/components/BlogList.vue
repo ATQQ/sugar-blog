@@ -25,8 +25,8 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { ElPagination } from 'element-plus'
-import BlogItem from '../blog-item/index.vue'
-import { useConfig, useActiveTag } from '../../composables/config/blog'
+import BlogItem from './BlogItem.vue'
+import { useConfig, useActiveTag } from '../composables/config/blog'
 
 const blogConfig = useConfig()
 const docs = computed(() => blogConfig.config.pagesData)
@@ -36,7 +36,7 @@ const activeTag = useActiveTag()
 const activeTagLabel = computed(() => activeTag.value.label)
 
 const wikiList = computed(() => {
-  const data = docs.value.filter((v) => v.meta.date)
+  const data = docs.value.filter((v) => v.meta.date && v.meta.title)
   data.sort((a, b) => +new Date(b.meta.date) - +new Date(a.meta.date))
   return data
 })

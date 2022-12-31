@@ -32,7 +32,7 @@
 import { computed } from 'vue'
 import { ElTag } from 'element-plus'
 import { useDark } from '@vueuse/core'
-import { useConfig, useActiveTag } from '../../composables/config/blog'
+import { useConfig, useActiveTag } from '../composables/config/blog'
 
 const blogConfig = useConfig()
 const docs = computed(() => blogConfig.config.pagesData)
@@ -67,5 +67,46 @@ const handleTagClick = (tag: string, type: string) => {
 </script>
 
 <style lang="scss" scoped>
-@import './index.scss';
+.card {
+  position: relative;
+  margin: 0 auto 10px;
+  padding: 10px;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 0.25rem;
+  box-shadow: var(--box-shadow);
+  box-sizing: border-box;
+  transition: all 0.3s;
+  background-color: rgba(var(--bg-gradient));
+  display: flex;
+
+  &:hover {
+    box-shadow: var(--box-shadow-hover);
+  }
+}
+.card-header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+
+  .title {
+    font-size: 12px;
+  }
+}
+
+.tags {
+  flex-direction: column;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  li {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+}
 </style>

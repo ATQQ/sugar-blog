@@ -1,19 +1,20 @@
 import { DefaultTheme } from 'vitepress'
 
 export namespace Theme {
+  export interface PageMeta {
+    title: string
+    date: string
+    tag: string[]
+    description: string
+    cover: string
+    sticky?: number
+    // old
+    categories: string[]
+    tags: string[]
+  }
   export interface PageData {
     route: string
-    meta: {
-      title: string
-      date: Date
-      tag: string[]
-      description: string
-      cover: string
-      sticky?: number
-      // old
-      categories: string[]
-      tags: string[]
-    }
+    meta: PageMeta
   }
   export interface activeTag {
     label: string

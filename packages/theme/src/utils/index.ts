@@ -1,4 +1,4 @@
-export function formatDate(d: Date, fmt = 'yyyy-MM-dd hh:mm:ss') {
+export function formatDate(d: any, fmt = 'yyyy-MM-dd hh:mm:ss') {
   if (!(d instanceof Date)) {
     d = new Date(d)
   }

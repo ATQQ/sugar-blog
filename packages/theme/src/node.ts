@@ -24,13 +24,13 @@ export function getThemeConfig(dir: string) {
       .replace(new RegExp(`^${path.join(dir, '/')}`), '')
 
     const fileContent = fs.readFileSync(v, 'utf-8')
-    let meta = matter(fileContent).data
-    if (Object.keys(meta).length === 0) {
-      meta = appendMeta(v, fileContent)
+    const meta: Partial<Theme.PageMeta> = {
+      ...getDefaultMeta(v, fileContent),
+      ...matter(fileContent).data
     }
 
     if (!meta.title) {
-      meta.title = fileContent.match('# (.+)')?.[1]
+      meta.title = fileContent.match('# (.+)')?.[1] || ''
     }
 
     // 处理tags和categories,兼容历史文章
@@ -54,30 +54,29 @@ export function getThemeConfig(dir: string) {
 
   return {
     pagesData: data as Theme.PageData[],
-    sidebar: []
+    sidebar: [
+      {
+        text: '',
+        items: []
+      }
+    ]
   }
 }
 
-function appendMeta(file: string, content: string) {
-  if (file.endsWith('index.md')) {
-    return {}
-  }
-  const title = content
-    ?.split('\n')
-    ?.find((str) => {
-      return str.startsWith('# ')
-    })
-    ?.slice(2)
-    .replace(/[\s]/g, '')
+function getDefaultMeta(file: string, content: string) {
+  const title =
+    content
+      ?.split('\n')
+      ?.find((str) => {
+        return str.startsWith('# ')
+      })
+      ?.slice(2)
+      .replace(/[\s]/g, '') || ''
   const date = getFileBirthTime(file)
   const meta = {
     title,
     date
   }
-  fs.writeFileSync(
-    file,
-    ['---', `title: ${title}`, `date: ${date}`, '---', '', content].join('\n')
-  )
   return meta
 }
 

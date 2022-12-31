@@ -6,7 +6,7 @@ import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
 
 import { Theme } from 'vitepress'
-import BlogApp from './components/blog-app/index.vue'
+import BlogApp from './components/BlogApp.vue'
 import { withConfigProvider } from './composables/config/blog'
 
 export const BlogTheme: Theme = {

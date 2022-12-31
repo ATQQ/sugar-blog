@@ -1,9 +1,9 @@
 <template>
-  <div class="sidebar"><Recommend /></div>
+  <div class="sidebar"><BlogRecommendArticle /></div>
 </template>
 
 <script lang="ts" setup>
-import Recommend from './recommend.vue'
+import BlogRecommendArticle from './BlogRecommendArticle.vue'
 </script>
 
 <style lang="scss" scoped>

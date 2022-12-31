@@ -13,7 +13,7 @@
 // https://zhuanlan.zhihu.com/p/36375802
 import { useData, useRoute } from 'vitepress'
 import { computed, ref, watch } from 'vue'
-import { formatShowDate } from '../../utils/index'
+import { formatShowDate } from '../utils/index'
 
 const wordCount = ref(0)
 const imageCount = ref(0)

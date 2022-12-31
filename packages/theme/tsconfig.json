@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "module": "esnext",
-    "outDir": "./src",
+    "outDir": "dist",
     "target": "esnext",
     "moduleResolution": "node",
     "strict": true,
@@ -18,5 +18,5 @@
     }
   },
   "include": ["src", "types", "demo/.vitepress/theme","demo/.vitepress/config.ts"],
-  "exclude": ["node_modules", "src/node.d.ts"]
+  "exclude": ["node_modules","dist"]
 }
