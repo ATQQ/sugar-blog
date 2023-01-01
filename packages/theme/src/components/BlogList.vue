@@ -13,6 +13,7 @@
     </li>
   </ul>
   <el-pagination
+    v-if="wikiList.length >= pageSize"
     small
     background
     v-model:current-page="currentPage"
@@ -26,7 +27,11 @@ import { computed, ref } from 'vue'
 import { ElPagination } from 'element-plus'
 import { useData } from 'vitepress'
 import BlogItem from './BlogItem.vue'
-import { useArticles, useActiveTag } from '../composables/config/blog'
+import {
+  useArticles,
+  useActiveTag,
+  useBlogConfig
+} from '../composables/config/blog'
 import { Theme } from '../composables/config'
 
 const { theme } = useData<Theme.Config>()
@@ -51,9 +56,11 @@ const filterData = computed(() => {
     v.meta?.tag?.includes(activeTagLabel.value)
   )
 })
-const pageSize = ref(6)
+
+const { home } = useBlogConfig()
+const pageSize = computed(() => home?.pageSize || 6)
 const currentPage = ref(1)
-// TODO: pagesize控制
+
 const currentWikiData = computed(() => {
   const startIdx = (currentPage.value - 1) * pageSize.value
   const endIdx = startIdx + pageSize.value

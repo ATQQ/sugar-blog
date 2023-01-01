@@ -32,6 +32,9 @@ export namespace Theme {
       nextText?: string
       empty?: string | boolean
     }
+    home?: {
+      pageSize?: number
+    }
   }
   export interface Config extends DefaultTheme.Config {
     blog: BlogConfig
