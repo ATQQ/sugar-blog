@@ -34,7 +34,7 @@ const { Layout } = Theme
           <BlogHomeBanner />
         </div>
         <div class="content-wrapper">
-          <div><blog-list /></div>
+          <div class="blog-list-wrapper"><blog-list /></div>
           <div class="blog-info-wrapper"><BlogHomeInfo /></div>
         </div>
       </div>
@@ -66,6 +66,9 @@ const { Layout } = Theme
   justify-content: center;
 }
 
+.blog-list-wrapper {
+  width: 100%;
+}
 .blog-info-wrapper {
   margin-left: 16px;
   position: sticky;

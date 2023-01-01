@@ -1,27 +1,25 @@
 <template>
-  <div>
-    <ul>
-      <li v-for="v in currentWikiData" :key="v.route">
-        <blog-item
-          :route="v.route"
-          :title="v.meta.title"
-          :description="v.meta.description"
-          :date="v.meta.date"
-          :tag="v.meta.tag"
-          :cover="v.meta.cover"
-          :author="v.meta.author || globalAuthor"
-        />
-      </li>
-    </ul>
-    <el-pagination
-      small
-      background
-      v-model:current-page="currentPage"
-      :page-size="pageSize"
-      :total="filterData.length"
-      layout="prev, pager, next, jumper"
-    />
-  </div>
+  <ul>
+    <li v-for="v in currentWikiData" :key="v.route">
+      <blog-item
+        :route="v.route"
+        :title="v.meta.title"
+        :description="v.meta.description"
+        :date="v.meta.date"
+        :tag="v.meta.tag"
+        :cover="v.meta.cover"
+        :author="v.meta.author || globalAuthor"
+      />
+    </li>
+  </ul>
+  <el-pagination
+    small
+    background
+    v-model:current-page="currentPage"
+    :page-size="pageSize"
+    :total="filterData.length"
+    layout="prev, pager, next, jumper"
+  />
 </template>
 <script setup lang="ts">
 import { computed, ref } from 'vue'
@@ -62,4 +60,7 @@ const currentWikiData = computed(() => {
   return filterData.value.slice(startIdx, endIdx)
 })
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.blog-list {
+}
+</style>
