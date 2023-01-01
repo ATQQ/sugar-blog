@@ -41,6 +41,10 @@ export function useConfig() {
   }
 }
 
+export function useBlogConfig() {
+  return inject(configSymbol)!.value.blog
+}
+
 export function useArticles() {
   const blogConfig = useConfig()
   const articles = computed(() => blogConfig.config?.blog?.pagesData || [])

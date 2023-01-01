@@ -26,6 +26,12 @@ export namespace Theme {
   export interface BlogConfig {
     pagesData: PageData[]
     author?: string
+    hotArticle?: {
+      title?: string
+      pageSize?: number
+      nextText?: string
+      empty?: string | boolean
+    }
   }
   export interface Config extends DefaultTheme.Config {
     blog: BlogConfig

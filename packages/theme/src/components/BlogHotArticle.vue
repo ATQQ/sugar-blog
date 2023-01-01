@@ -1,19 +1,19 @@
 <template>
-  <div class="card recommend">
+  <div class="card recommend" v-if="recommendList.length || empty">
     <!-- 头部 -->
     <div class="card-header">
-      <span class="title">🔥 精选文章</span>
+      <span class="title">{{ title }}</span>
       <el-button
         v-if="showChangeBtn"
         size="small"
         type="primary"
         text
         @click="changePage"
-        >换一组</el-button
+        >{{ nextText }}</el-button
       >
     </div>
     <!-- 文章列表 -->
-    <ol class="recommend-container">
+    <ol class="recommend-container" v-if="currentWikiData.length">
       <li v-for="(v, idx) in currentWikiData" :key="v.route">
         <!-- 序号 -->
         <i class="num">{{ idx + 1 }}</i>
@@ -31,14 +31,21 @@
         </div>
       </li>
     </ol>
+    <div class="empty-text" v-else>{{ empty }}</div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref, computed } from 'vue'
 import { ElButton, ElLink } from 'element-plus'
-import { useArticles } from '../composables/config/blog'
+import { useArticles, useBlogConfig } from '../composables/config/blog'
 import { formatShowDate } from '../utils/index'
+
+const { hotArticle } = useBlogConfig()
+const title = computed(() => hotArticle?.title || '🔥 精选文章')
+const nextText = computed(() => hotArticle?.nextText || '换一组')
+const pageSize = computed(() => hotArticle?.pageSize || 9)
+const empty = computed(() => hotArticle?.empty ?? '暂无精选内容')
 
 const docs = useArticles()
 
@@ -47,7 +54,7 @@ const recommendList = computed(() => {
   data.sort((a, b) => b.meta.sticky! - a.meta.sticky!)
   return [...data]
 })
-const pageSize = ref(9)
+
 const currentPage = ref(1)
 const changePage = () => {
   const newIdx =
@@ -160,5 +167,11 @@ const showChangeBtn = computed(() => {
       color: var(--vp-c-text-2);
     }
   }
+}
+
+.empty-text {
+  padding: 6px;
+  font-size: 14px;
+  text-align: center;
 }
 </style>
