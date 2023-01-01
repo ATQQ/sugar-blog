@@ -1,5 +1,5 @@
 <template>
-  <div class="card tags">
+  <div class="card tags" v-if="tags.length">
     <!-- 头部 -->
     <div class="card-header">
       <span class="title">🏷 标签</span>
