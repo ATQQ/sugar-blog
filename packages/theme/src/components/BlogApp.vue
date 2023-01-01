@@ -25,7 +25,7 @@ const { Layout } = Theme
 
     <!-- 自定义搜索，临时替代Algolia -->
     <template #nav-bar-content-before>
-      <blog-search />
+      <BlogSearch />
     </template>
     <!-- 自定义首页 -->
     <template #home-hero-before>

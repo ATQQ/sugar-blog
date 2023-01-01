@@ -35,6 +35,16 @@ export namespace Theme {
     home?: {
       pageSize?: number
     }
+    // TODO: 本地全文搜索定制 pagefind || minisearch
+    search?: boolean
+    // TODO: 评论配置
+    comment?: boolean
+    recommend?: {
+      title?: string
+      pageSize?: number
+      nextText?: string
+      empty?: string | boolean
+    }
   }
   export interface Config extends DefaultTheme.Config {
     blog: BlogConfig

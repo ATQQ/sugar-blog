@@ -1,19 +1,19 @@
 <template>
-  <div class="card recommend">
+  <div class="card recommend" v-if="recommendList.length || emptyText">
     <!-- 头部 -->
     <div class="card-header">
-      <span class="title">🔍 相关文章</span>
+      <span class="title">{{ title }}</span>
       <el-button
         v-if="showChangeBtn"
         size="small"
         type="primary"
         text
         @click="changePage"
-        >换一组</el-button
+        >{{ nextText }}</el-button
       >
     </div>
     <!-- 文章列表 -->
-    <ol class="recommend-container">
+    <ol class="recommend-container" v-if="currentWikiData.length">
       <li v-for="(v, idx) in currentWikiData" :key="v.route">
         <!-- 序号 -->
         <i class="num">{{ idx + 1 }}</i>
@@ -31,6 +31,7 @@
         </div>
       </li>
     </ol>
+    <div class="empty-text" v-else>{{ emptyText }}</div>
   </div>
 </template>
 
@@ -39,7 +40,13 @@ import { ref, computed } from 'vue'
 import { ElButton, ElLink } from 'element-plus'
 import { useRoute } from 'vitepress'
 import { formatShowDate } from '../utils/index'
-import { useArticles } from '../composables/config/blog'
+import { useArticles, useBlogConfig } from '../composables/config/blog'
+
+const { recommend } = useBlogConfig()
+const title = computed(() => recommend?.title || '🔍 相关文章')
+const pageSize = computed(() => recommend?.pageSize || 9)
+const nextText = computed(() => recommend?.nextText || '换一组')
+const emptyText = computed(() => recommend?.empty ?? '暂无推荐文章')
 
 const docs = useArticles()
 
@@ -47,20 +54,25 @@ const route = useRoute()
 
 const recommendList = computed(() => {
   const paths = route.path.split('/')
-  const data = docs.value
-    .map((v) => {
-      return {
-        ...v,
-        route: `/${v.route}`
-      }
-    })
-    .filter((v) =>
-      v.route.startsWith(paths.slice(0, paths.length - 1).join('/'))
-    )
-    .filter((v) => !!v.meta.title)
-  return data
+  return (
+    docs.value
+      .map((v) => {
+        return {
+          ...v,
+          route: `/${v.route}`
+        }
+      })
+      // 过滤出公共路由前缀
+      // TODO：限制为同路由前缀
+      .filter((v) =>
+        v.route.startsWith(paths.slice(0, paths.length - 1).join('/'))
+      )
+      // 过滤出带标题的
+      .filter((v) => !!v.meta.title)
+      // 过滤掉自己
+      .filter((v) => v.route !== route.path.replace(/.html$/, ''))
+  )
 })
-const pageSize = ref(9)
 const currentPage = ref(1)
 const changePage = () => {
   const newIdx =
