@@ -72,7 +72,7 @@ import {
 } from 'element-plus'
 import { useWindowSize } from '@vueuse/core'
 import { formatDate } from '../utils'
-import { useConfig } from '../composables/config/blog'
+import { useArticles } from '../composables/config/blog'
 
 const searchModal = ref(false)
 
@@ -92,8 +92,7 @@ watch(
   }
 )
 
-const blogConfig = useConfig()
-const docs = computed(() => blogConfig.config.pagesData)
+const docs = useArticles()
 
 const searchResult = computed(() => {
   if (!searchWords.value) return []

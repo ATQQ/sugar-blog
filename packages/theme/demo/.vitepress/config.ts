@@ -3,13 +3,16 @@ import type { Theme } from '@sugarat/theme'
 import path from 'path'
 import { getThemeConfig } from '@sugarat/theme/node'
 
+const blogTheme = getThemeConfig('demo', {
+  author: '粥里有勺糖'
+})
+
 export default defineConfigWithTheme<Theme.Config>({
   lang: 'zh-cmn-Hans',
-  title: '粥里有勺糖',
-  description: '描述信息',
+  title: '@sugarat/theme',
+  description: '粥里有勺糖的博客主题包',
   vite: {
     server: {
-      //   port: 4000,
       host: '0.0.0.0'
     },
     resolve: {
@@ -20,7 +23,7 @@ export default defineConfigWithTheme<Theme.Config>({
   },
   lastUpdated: true,
   themeConfig: {
-    ...getThemeConfig('demo'),
+    ...blogTheme,
     lastUpdatedText: '上次更新于',
     footer: {
       message:
@@ -65,7 +68,10 @@ export default defineConfigWithTheme<Theme.Config>({
       }
     ],
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/ATQQ/sugar-blog' }
+      {
+        icon: 'github',
+        link: 'https://github.com/ATQQ/sugar-blog/tree/master/packages/theme'
+      }
     ]
   }
 })

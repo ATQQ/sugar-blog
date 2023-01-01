@@ -32,10 +32,9 @@
 import { computed } from 'vue'
 import { ElTag } from 'element-plus'
 import { useDark } from '@vueuse/core'
-import { useConfig, useActiveTag } from '../composables/config/blog'
+import { useActiveTag, useArticles } from '../composables/config/blog'
 
-const blogConfig = useConfig()
-const docs = computed(() => blogConfig.config.pagesData)
+const docs = useArticles()
 
 const tags = computed(() => {
   return [...new Set(docs.value.map((v) => v.meta.tag || []).flat(3))]

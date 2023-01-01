@@ -6,7 +6,7 @@ import path from 'path'
 import { formatDate } from './utils/index'
 import type { Theme } from './composables/config/index'
 
-export function getThemeConfig(dir: string) {
+export function getThemeConfig(dir: string, cfg?: Partial<Theme.BlogConfig>) {
   const files = glob
     .sync('./**/*.md', { ignore: ['node_modules'] })
     .filter((v) => v.startsWith(dir))
@@ -50,7 +50,10 @@ export function getThemeConfig(dir: string) {
   })
 
   return {
-    pagesData: data as Theme.PageData[],
+    blog: {
+      pagesData: data as Theme.PageData[],
+      ...cfg
+    },
     sidebar: [
       {
         text: '',

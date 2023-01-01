@@ -39,10 +39,9 @@ import { ref, computed } from 'vue'
 import { ElButton, ElLink } from 'element-plus'
 import { useRoute } from 'vitepress'
 import { formatShowDate } from '../utils/index'
-import { useConfig } from '../composables/config/blog'
+import { useArticles } from '../composables/config/blog'
 
-const blogConfig = useConfig()
-const docs = computed(() => blogConfig.config.pagesData)
+const docs = useArticles()
 
 const route = useRoute()
 

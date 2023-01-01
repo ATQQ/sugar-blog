@@ -7,9 +7,9 @@
       <!-- 简短描述 -->
       <p class="description" v-if="!!description">{{ description }}</p>
       <div class="badge-list">
-        <span>{{ author || '粥里有勺糖' }}</span>
+        <span class="split" v-if="author">{{ author }}</span>
         <span class="split">{{ showTime }}</span>
-        <span v-if="tag">{{ tag.join(' · ') }}</span>
+        <span class="split" v-if="tag?.length">{{ tag.join(' · ') }}</span>
       </div>
     </div>
     <div
@@ -82,8 +82,7 @@ const showTime = computed(() => {
 .badge-list {
   font-size: 13px;
   color: var(--badge-font-color);
-  .split {
-    &::before,
+  .split:not(:last-child) {
     &::after {
       content: '';
       display: inline-block;

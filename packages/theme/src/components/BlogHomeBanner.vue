@@ -1,24 +1,34 @@
 <template>
   <div>
     <h1>
-      <span class="author">粥里有勺糖</span
-      ><span class="motto">你的指尖,拥有改变世界的力量</span>
+      <span class="name">{{ name }}</span>
+      <span class="motto" v-show="motto">{{ motto }}</span>
     </h1>
-    <div class="soul-wrapper">
-      <h2 @click="changeSoul" v-show="!!soulSoup">{{ soulSoup }}</h2>
+    <div class="inspiring-wrapper">
+      <h2 @click="changeSoul" v-show="!!inspiring">{{ inspiring }}</h2>
     </div>
   </div>
 </template>
 <script setup>
-import { ref } from 'vue'
+import { computed } from 'vue'
 import { ElMessage } from 'element-plus'
+import { useData } from 'vitepress'
 
-const soulSoup = ref('千万不要因为走得太久，而忘记了我们为什么出发')
+const { site, frontmatter } = useData()
+
+const name = computed(
+  () => (frontmatter.value.blog?.name ?? site.value.title) || ''
+)
+
+const motto = computed(() => frontmatter.value.blog?.motto || '')
+
+const inspiring = computed(() => frontmatter.value.blog?.inspiring || '')
+
 const changeSoul = () => {
-  // soulSoup.value = ''
+  // inspiring.value = ''
   setTimeout(() => {
     // TODO: 接口抓数据
-    // soulSoup.value = Math.random()
+    // inspiring.value = Math.random()
     ElMessage.success('只有这一条，接口正在路上')
   })
 }
@@ -26,7 +36,7 @@ const changeSoul = () => {
 <style lang="scss" scoped>
 h1 {
   text-align: center;
-  .author {
+  .name {
     transition: all 0.25s ease-in-out 0.04s;
     transform: translateY(0px);
     opacity: 1;
@@ -62,7 +72,7 @@ h1 {
   }
 }
 
-.soul-wrapper {
+.inspiring-wrapper {
   margin-top: 16px;
   height: 24px;
   width: auto;

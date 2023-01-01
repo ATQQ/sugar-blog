@@ -37,11 +37,10 @@
 <script lang="ts" setup>
 import { ref, computed } from 'vue'
 import { ElButton, ElLink } from 'element-plus'
-import { useConfig } from '../composables/config/blog'
+import { useArticles } from '../composables/config/blog'
 import { formatShowDate } from '../utils/index'
 
-const blogConfig = useConfig()
-const docs = computed(() => blogConfig.config.pagesData)
+const docs = useArticles()
 
 const recommendList = computed(() => {
   const data = docs.value.filter((v) => v.meta.sticky)

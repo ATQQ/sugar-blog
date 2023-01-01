@@ -9,6 +9,7 @@
           :date="v.meta.date"
           :tag="v.meta.tag"
           :cover="v.meta.cover"
+          :author="v.meta.author || globalAuthor"
         />
       </li>
     </ul>
@@ -25,29 +26,36 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { ElPagination } from 'element-plus'
+import { useData } from 'vitepress'
 import BlogItem from './BlogItem.vue'
-import { useConfig, useActiveTag } from '../composables/config/blog'
+import { useArticles, useActiveTag } from '../composables/config/blog'
+import { Theme } from '../composables/config'
 
-const blogConfig = useConfig()
-const docs = computed(() => blogConfig.config.pagesData)
+const { theme } = useData<Theme.Config>()
+const globalAuthor = computed(() => theme.value.blog.author || '')
+const docs = useArticles()
 
 const activeTag = useActiveTag()
 
 const activeTagLabel = computed(() => activeTag.value.label)
 
 const wikiList = computed(() => {
-  const data = docs.value.filter((v) => v.meta.date && v.meta.title)
+  const data = docs.value
+    .filter((v) => v.meta.date && v.meta.title)
+    .filter((v) => !v.meta.hidden)
   data.sort((a, b) => +new Date(b.meta.date) - +new Date(a.meta.date))
   return data
 })
 
 const filterData = computed(() => {
   if (!activeTagLabel.value) return wikiList.value
-  return wikiList.value.filter((v) => v.meta.tag.includes(activeTagLabel.value))
+  return wikiList.value.filter((v) =>
+    v.meta?.tag?.includes(activeTagLabel.value)
+  )
 })
 const pageSize = ref(6)
 const currentPage = ref(1)
-
+// TODO: pagesize控制
 const currentWikiData = computed(() => {
   const startIdx = (currentPage.value - 1) * pageSize.value
   const endIdx = startIdx + pageSize.value

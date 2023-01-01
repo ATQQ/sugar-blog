@@ -41,6 +41,12 @@ export function useConfig() {
   }
 }
 
+export function useArticles() {
+  const blogConfig = useConfig()
+  const articles = computed(() => blogConfig.config?.blog?.pagesData || [])
+  return articles
+}
+
 export function useActiveTag() {
   return inject(activeTagSymbol)!
 }
@@ -49,7 +55,7 @@ export function useCurrentArticle() {
   const blogConfig = useConfig()
   const route = useRoute()
 
-  const docs = computed(() => blogConfig.config.pagesData)
+  const docs = computed(() => blogConfig.config.blog.pagesData)
   const currentArticle = computed(() =>
     docs.value.find(
       (v) => v.route === route.path.replace(/\/?(.*).html$/, '$1')
@@ -61,6 +67,9 @@ export function useCurrentArticle() {
 function resolveConfig(config: Theme.Config): Theme.Config {
   return {
     ...config,
-    pagesData: config.pagesData || []
+    blog: {
+      ...config?.blog,
+      pagesData: config?.blog?.pagesData || []
+    }
   }
 }

@@ -20,10 +20,9 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { isCurrentWeek } from '../utils'
-import { useConfig } from '../composables/config/blog'
+import { useArticles } from '../composables/config/blog'
 
-const blogConfig = useConfig()
-const docs = computed(() => blogConfig.config.pagesData)
+const docs = useArticles()
 
 const nowMonth = new Date().getMonth()
 const nowYear = new Date().getFullYear()

@@ -4,10 +4,12 @@ export namespace Theme {
   export interface PageMeta {
     title: string
     date: string
-    tag: string[]
-    description: string
-    cover: string
+    tag?: string[]
+    description?: string
+    cover?: string
     sticky?: number
+    author?: string
+    hidden?: boolean
     // old
     categories: string[]
     tags: string[]
@@ -21,7 +23,11 @@ export namespace Theme {
     type: string
   }
 
-  export interface Config extends DefaultTheme.Config {
+  export interface BlogConfig {
     pagesData: PageData[]
+    author?: string
+  }
+  export interface Config extends DefaultTheme.Config {
+    blog: BlogConfig
   }
 }
