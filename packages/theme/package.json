@@ -4,13 +4,14 @@
   "description": "粥里有勺糖的博客主题，sugarat vitepress blog theme",
   "main": "src/index.ts",
   "exports": {
-    "./node": "./dist/node.js",
+    "./node": "./node.js",
     ".": "./src/index.ts"
   },
   "files": [
     "src",
     "types",
-    "dist"
+    "node.js",
+    "node.d.ts"
   ],
   "repository": {
     "type": "git",
@@ -30,7 +31,7 @@
   "scripts": {
     "dev": "npm run build:node && vitepress dev demo",
     "build:demo": "vitepress build demo",
-    "build:node":"npx tsup src/node.ts --dts",
+    "build:node":"npx tsup src/node.ts --dts --out-dir=./",
     "serve": "npm run build:node && npm run build:demo && vitepress serve demo"
   },
   "dependencies": {

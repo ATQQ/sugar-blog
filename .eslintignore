@@ -4,3 +4,5 @@ packages/blogpress/.vitepress/cache
 packages/theme/src/node.js
 !packages/blogpress/.vitepress
 !packages/theme/demo/.vitepress
+packages/theme/node.d.ts
+packages/theme/node.js

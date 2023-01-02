@@ -13,10 +13,10 @@
     "skipLibCheck": true,
     "allowJs": true,
     "paths": {
-      "@sugarat/theme/node": ["src/node.js"],
+      "@sugarat/theme/node": ["./node.js"],
       "@sugarat/theme": ["src/index.ts"]
     }
   },
   "include": ["src", "types", "demo/.vitepress/theme","demo/.vitepress/config.ts"],
-  "exclude": ["node_modules","dist"]
+  "exclude": ["node_modules","dist","node.d.ts"]
 }
