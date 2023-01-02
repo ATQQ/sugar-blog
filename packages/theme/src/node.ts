@@ -14,47 +14,51 @@ export function getThemeConfig(
     .sync('./**/*.md', { ignore: ['node_modules'] })
     .filter((v) => v.startsWith(articleDir))
 
-  const data = files.map((v) => {
-    const route = v
-      // 处理文件后缀名
-      .replace('.md', '')
-      // 处理目录名
-      .replace(new RegExp(`^${path.join(articleDir, '/')}`), '')
+  const data = files
+    .map((v) => {
+      const route = v
+        // 处理文件后缀名
+        .replace('.md', '')
+        // 处理目录名
+        .replace(new RegExp(`^${path.join(articleDir, '/')}`), '')
 
-    const fileContent = fs.readFileSync(v, 'utf-8')
+      const fileContent = fs.readFileSync(v, 'utf-8')
 
-    // TODO: 支持JSON
-    const meta: Partial<Theme.PageMeta> = {
-      ...matter(fileContent).data
-    }
-    if (!meta.title) {
-      meta.title = getDefaultTitle(fileContent)
-    }
-    if (!meta.date) {
-      // getGitTimestamp(v).then((v) => {
-      //   meta.date = formatDate(v)
-      // })
-      meta.date = getFileBirthTime(v)
-    }
+      // TODO: 支持JSON
+      const meta: Partial<Theme.PageMeta> = {
+        ...matter(fileContent).data
+      }
+      if (!meta.title) {
+        meta.title = getDefaultTitle(fileContent)
+      }
+      if (!meta.date) {
+        // getGitTimestamp(v).then((v) => {
+        //   meta.date = formatDate(v)
+        // })
+        meta.date = getFileBirthTime(v)
+      }
 
-    // 处理tags和categories,兼容历史文章
-    meta.tag = (meta.tag || []).concat([
-      ...new Set([...(meta.categories || []), ...(meta.tags || [])])
-    ])
+      // 处理tags和categories,兼容历史文章
+      meta.tag = (meta.tag || []).concat([
+        ...new Set([...(meta.categories || []), ...(meta.tags || [])])
+      ])
 
-    // 获取摘要信息
-    const wordCount = 100
-    meta.description =
-      meta.description || getTextSummary(fileContent, wordCount)
+      // 获取摘要信息
+      const wordCount = 100
+      meta.description =
+        meta.description || getTextSummary(fileContent, wordCount)
 
-    // 获取封面图
-    meta.cover =
-      meta.cover || fileContent.match(/[!]\[.+?\]\((https:\/\/.+)\)/)?.[1] || ''
-    return {
-      route: `/${route}`,
-      meta
-    }
-  })
+      // 获取封面图
+      meta.cover =
+        meta.cover ||
+        fileContent.match(/[!]\[.+?\]\((https:\/\/.+)\)/)?.[1] ||
+        ''
+      return {
+        route: `/${route}`,
+        meta
+      }
+    })
+    .filter((v) => v.meta.layout !== 'home')
 
   return {
     blog: {

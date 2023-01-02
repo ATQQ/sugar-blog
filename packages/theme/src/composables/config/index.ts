@@ -10,6 +10,7 @@ export namespace Theme {
     sticky?: number
     author?: string
     hidden?: boolean
+    layout?: string
     // old
     categories: string[]
     tags: string[]
