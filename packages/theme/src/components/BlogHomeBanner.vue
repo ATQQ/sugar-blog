@@ -9,10 +9,10 @@
     </div>
   </div>
 </template>
-<script setup>
-import { computed } from 'vue'
+<script setup lang="ts">
+import { computed, ref } from 'vue'
 import { useData } from 'vitepress'
-import { useBlogConfig } from '../composables/config/blog'
+import { useHomeConfig } from '../composables/config/blog'
 
 const { site, frontmatter } = useData()
 
@@ -20,20 +20,29 @@ const name = computed(
   () => (frontmatter.value.blog?.name ?? site.value.title) || ''
 )
 const motto = computed(() => frontmatter.value.blog?.motto || '')
-const inspiring = computed(() => frontmatter.value.blog?.inspiring || '')
+const initInspiring = ref<string>(frontmatter.value.blog?.inspiring || '')
+const inspiring = computed({
+  get() {
+    return initInspiring.value
+  },
+  set(newValue) {
+    initInspiring.value = newValue
+  }
+})
 
-const { home } = useBlogConfig()
+const home = useHomeConfig()
 
 const changeSlogan = async () => {
-  // TODO: 自定义事件
   if (typeof home?.handleChangeSlogan !== 'function') {
     return
   }
-  const newSlogan = await home.handleChangeSlogan()
+  const newSlogan = await home.handleChangeSlogan(inspiring.value)
   if (typeof newSlogan !== 'string' || !newSlogan.trim()) {
     return
   }
-  inspiring.value = newSlogan
+
+  // 重新渲染数据，同时触发动画
+  inspiring.value = ''
   setTimeout(async () => {
     inspiring.value = newSlogan
   })
@@ -79,15 +88,15 @@ h1 {
 }
 
 .inspiring-wrapper {
-  margin-top: 16px;
+  margin: 16px 0;
   height: 24px;
   width: auto;
-}
-
-h2 {
-  animation: fade-in 0.5s ease-in-out;
-  cursor: pointer;
-  text-align: center;
-  font-size: 20px;
+  h2 {
+    animation: fade-in 0.5s ease-in-out;
+    cursor: pointer;
+    text-align: center;
+    font-size: 20px;
+    line-height: 1.6;
+  }
 }
 </style>

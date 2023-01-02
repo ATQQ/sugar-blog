@@ -16,12 +16,21 @@ const configSymbol: InjectionKey<Ref<Theme.Config>> = Symbol('theme-config')
 
 const activeTagSymbol: InjectionKey<Ref<Theme.activeTag>> = Symbol('active-tag')
 
+const homeConfigSymbol: InjectionKey<Theme.HomeConfig> = Symbol('home-config')
+
 export function withConfigProvider(App: Component) {
   return defineComponent({
     name: 'ConfigProvider',
-    setup(_, { slots }) {
-      const { theme } = useData()
+    props: {
+      handleChangeSlogan: {
+        type: Function,
+        required: false
+      }
+    },
+    setup(props, { slots }) {
+      provide(homeConfigSymbol, props as Theme.HomeConfig)
 
+      const { theme } = useData()
       const config = computed(() => resolveConfig(theme.value))
       provide(configSymbol, config)
 
@@ -43,6 +52,10 @@ export function useConfig() {
 
 export function useBlogConfig() {
   return inject(configSymbol)!.value.blog
+}
+
+export function useHomeConfig() {
+  return inject(homeConfigSymbol)!
 }
 
 export function useArticles() {
