@@ -55,15 +55,25 @@ module.exports = {
           //   link: '/_configDoc/show/bole',
           //   text: '投递',
           // }
+          // {
+          //   type: 'text',
+          //   content: '作者正在参加"掘金人气作者"活动',
+          //   style: 'text-align: center;'
+          // },
+          // {
+          //   type: 'button',
+          //   link: 'https://rank.juejin.cn/rank/2022/writer/1028798615918983',
+          //   text: '投它',
+          // },
           {
             type: 'text',
-            content: '作者正在参加"掘金人气作者"活动',
+            content: '新版博客正在路上，戳↓',
             style: 'text-align: center;'
           },
           {
             type: 'button',
-            link: 'https://rank.juejin.cn/rank/2022/writer/1028798615918983',
-            text: '投它',
+            link: 'https://next.sugarat.top',
+            text: '体验',
           }
         ]
       }

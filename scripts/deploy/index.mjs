@@ -20,6 +20,5 @@ await $`rm -rf ${compressPkgName}`
 
 await $`echo ==✅ 部署代码 ==`
 await $`ssh -p22 ${user}@${origin} "tar -xf ${compressPkgName} -C ${baseServerDir}/${fullOrigin}/${destDir}"`
-
-// await $`echo ==🕊 启动服务 ==`
-// await $`启动服务`
+// 旧的buckup也先部署一份
+await $`ssh -p22 ${user}@${origin} "tar -xf ${compressPkgName} -C ${baseServerDir}/old.${origin}/${destDir}"`
