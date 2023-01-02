@@ -1,8 +1,5 @@
 ---
-sidebar:
- title: 正则表达式
-group:
- title: Regexp
+hidden: true
 ---
 # 正则表达式
 

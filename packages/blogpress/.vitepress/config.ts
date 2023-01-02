@@ -1,6 +1,17 @@
-import { defineConfigWithTheme, DefaultTheme } from 'vitepress'
-import { getConfigData } from './util'
-import type { BlogTheme } from './theme/index'
+import { defineConfigWithTheme } from 'vitepress'
+import type { Theme } from '@sugarat/theme'
+import { getThemeConfig } from '@sugarat/theme/node'
+
+const blogTheme = getThemeConfig('', {
+  author: '粥里有勺糖',
+  comment: {
+    repo: 'ATQQ/sugar-blog',
+    repoId: 'MDEwOlJlcG9zaXRvcnkyNDEyNDUyOTk',
+    category: 'Announcements',
+    categoryId: 'DIC_kwDODmEcc84COVc6',
+    inputPosition: 'bottom'
+  }
+})
 
 const extraHead: any =
   process.env.NODE_ENV === 'production'
@@ -20,9 +31,8 @@ const extraHead: any =
         ]
       ]
     : []
-const { pagesData } = getConfigData()
 
-export default defineConfigWithTheme<DefaultTheme.Config & BlogTheme>({
+export default defineConfigWithTheme<Theme.Config>({
   ignoreDeadLinks: true,
   lang: 'zh-cmn-Hans',
   title: '粥里有勺糖',
@@ -56,7 +66,7 @@ export default defineConfigWithTheme<DefaultTheme.Config & BlogTheme>({
   },
   lastUpdated: true,
   themeConfig: {
-    pagesData,
+    ...blogTheme,
     lastUpdatedText: '上次更新于',
     footer: {
       message:
@@ -198,12 +208,6 @@ export default defineConfigWithTheme<DefaultTheme.Config & BlogTheme>({
             link: 'https://resume.sugarat.top/'
           }
         ]
-      }
-    ],
-    sidebar: [
-      {
-        text: '',
-        items: []
       }
     ],
     socialLinks: [

@@ -35,6 +35,7 @@ importers:
   packages/blogpress:
     specifiers:
       '@element-plus/icons-vue': ^2.0.10
+      '@sugarat/theme': workspace:*
       '@vueuse/core': ^9.6.0
       axios: ^0.27.2
       clipboard-copy: ^4.0.1
@@ -43,10 +44,11 @@ importers:
       gray-matter: ^4.0.3
       sass: ^1.56.1
       vite: ^3.2.4
-      vitepress: 1.0.0-alpha.33
+      vitepress: ^1.0.0-alpha.33
       vue: ^3.2.45
     dependencies:
       '@element-plus/icons-vue': 2.0.10_vue@3.2.45
+      '@sugarat/theme': link:../theme
       '@vueuse/core': 9.6.0_vue@3.2.45
       axios: 0.27.2
       clipboard-copy: 4.0.1
@@ -59,7 +61,7 @@ importers:
       sass: 1.56.1
       vite: 3.2.4_sass@1.56.1
 
-  packages/theme-blog:
+  packages/theme:
     specifiers:
       '@element-plus/icons-vue': ^2.0.10
       '@vueuse/core': ^9.6.0
@@ -1182,7 +1184,7 @@ packages:
       '@popperjs/core': /@sxzz/popperjs-es/2.11.7
       '@types/lodash': 4.14.191
       '@types/lodash-es': 4.17.6
-      '@vueuse/core': 9.6.0_vue@3.2.45
+      '@vueuse/core': 9.8.2_vue@3.2.45
       async-validator: 4.2.5
       dayjs: 1.11.6
       escape-html: 1.0.3

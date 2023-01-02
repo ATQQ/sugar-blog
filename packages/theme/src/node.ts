@@ -1,7 +1,7 @@
 import glob from 'fast-glob'
 import matter from 'gray-matter'
 import fs from 'fs'
-import { execSync } from 'child_process'
+import { execSync, spawn } from 'child_process'
 import path from 'path'
 import { formatDate } from './utils/index'
 import type { Theme } from './composables/config/index'
@@ -22,10 +22,19 @@ export function getThemeConfig(
       .replace(new RegExp(`^${path.join(articleDir, '/')}`), '')
 
     const fileContent = fs.readFileSync(v, 'utf-8')
+
+    // TODO: 支持JSON
     const meta: Partial<Theme.PageMeta> = {
-      ...getDefaultMeta(v, fileContent),
-      // TODO: 支持JSON
       ...matter(fileContent).data
+    }
+    if (!meta.title) {
+      meta.title = getDefaultTitle(fileContent)
+    }
+    if (!meta.date) {
+      // getGitTimestamp(v).then((v) => {
+      //   meta.date = formatDate(v)
+      // })
+      meta.date = getFileBirthTime(v)
     }
 
     // 处理tags和categories,兼容历史文章
@@ -61,26 +70,39 @@ export function getThemeConfig(
   }
 }
 
-function getDefaultMeta(file: string, content: string) {
+export function getDefaultTitle(content: string) {
+  let first___: unknown
+  let second___: unknown
+
+  const lines = content.split('\n').reduce<string[]>((pre, line) => {
+    // 移除开头的空白行
+    if (!line.trim() && pre.length === 0) {
+      return pre
+    }
+    if (line.trim() === '---') {
+      if (first___ === undefined) {
+        first___ = pre.length
+      } else if (second___ === undefined) {
+        second___ = pre.length
+      }
+    }
+    pre.push(line)
+    return pre
+  }, [])
+
   const title =
-    content
+    lines
       // 剔除---之间的内容
-      .replace(/---([\S\s]+)---/, '')
-      ?.split('\n')
+      .slice((second___ as number) || 0)
       ?.find((str) => {
         return str.startsWith('# ')
       })
       ?.slice(2)
       .replace(/[\s]/g, '') || ''
-  const date = getFileBirthTime(file)
-  const meta = {
-    title,
-    date
-  }
-  return meta
+  return title
 }
 
-function getFileBirthTime(url: string) {
+export function getFileBirthTime(url: string) {
   // 参考 vitepress 中的 getGitTimestamp 实现
   const infoStr = execSync(`git log -1 --pretty="%ci" ${url}`)
     .toString('utf-8')
@@ -90,6 +112,20 @@ function getFileBirthTime(url: string) {
     date = new Date(infoStr)
   }
   return formatDate(date)
+}
+
+export function getGitTimestamp(file: string) {
+  return new Promise((resolve, reject) => {
+    const child = spawn('git', ['log', '-1', '--pretty="%ci"', file])
+    let output = ''
+    child.stdout.on('data', (d) => {
+      output += String(d)
+    })
+    child.on('close', () => {
+      resolve(+new Date(output))
+    })
+    child.on('error', reject)
+  })
 }
 
 function getTextSummary(text: string, count = 100) {

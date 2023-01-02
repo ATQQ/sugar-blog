@@ -1,7 +1,7 @@
 {
   "name": "@sugarat/theme",
   "version": "0.0.0",
-  "description": "粥里有勺糖的博客主题,sugarat vitepress blog theme",
+  "description": "粥里有勺糖的博客主题，sugarat vitepress blog theme",
   "main": "src/index.ts",
   "exports": {
     "./node": "./dist/node.js",
