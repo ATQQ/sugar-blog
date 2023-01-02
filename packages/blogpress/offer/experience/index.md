@@ -1,8 +1,5 @@
 ---
-sidebar:
- title: 心得总结
-group:
- title: Summary of experience
+hidden: true
 ---
 # 心得总结
 

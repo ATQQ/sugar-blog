@@ -58,6 +58,7 @@
         "no-continue": "off",
         "no-extend-native": "warn",
         "no-underscore-dangle": "off",
-        "@typescript-eslint/no-non-null-assertion":"off"
+        "@typescript-eslint/no-non-null-assertion":"off",
+        "non-null-expression":"off"
     }
 }

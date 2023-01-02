@@ -1,8 +1,5 @@
 ---
-sidebar:
- title: 算法与数据结构
-group:
- title: Algorithm And Data
+hidden: true
 ---
 # 算法与数据结构
 

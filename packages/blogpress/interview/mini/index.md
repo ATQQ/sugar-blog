@@ -1,8 +1,5 @@
 ---
-sidebar:
- title: 小程序相关面试题
-group:
- title: Mini Program
+hidden: true
 ---
 # 小程序相关面试问题
 

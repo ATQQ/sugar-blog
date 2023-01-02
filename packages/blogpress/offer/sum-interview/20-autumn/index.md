@@ -1,8 +1,5 @@
 ---
-sidebar:
- title: 20年秋招
-group:
- title: 2020 autumn offer
+hidden: true
 ---
 # 20年秋招
 2020-07-01开始

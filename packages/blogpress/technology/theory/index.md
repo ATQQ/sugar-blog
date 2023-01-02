@@ -1,8 +1,5 @@
 ---
-sidebar:
- title: 概念知识-理论干货
-group:
- title: Fe-Theory
+hidden: true
 ---
 # 概念知识-理论干货
 记录一些大前端发展过程中的一些知识

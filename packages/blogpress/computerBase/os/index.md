@@ -1,8 +1,5 @@
 ---
-sidebar:
- title: 操作系统
-group:
- title: OS
+hidden: true
 ---
 # 记录操作系统相关知识
 

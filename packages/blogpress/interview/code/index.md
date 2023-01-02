@@ -1,8 +1,5 @@
 ---
-sidebar:
- title: 手撕代码
-group:
- title: Code
+hidden: true
 ---
 # 手撕代码
 

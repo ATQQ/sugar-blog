@@ -1,8 +1,5 @@
 ---
-sidebar:
- title: js面试题
-group:
- title: JsInterview
+hidden: true
 ---
 # js面试题
 
