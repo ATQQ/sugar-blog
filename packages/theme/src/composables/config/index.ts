@@ -45,6 +45,9 @@ export namespace Theme {
       nextText?: string
       empty?: string | boolean
     }
+    article?: {
+      readingTime?: boolean
+    }
   }
   export interface Config extends DefaultTheme.Config {
     blog: BlogConfig

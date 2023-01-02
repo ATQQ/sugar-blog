@@ -17,7 +17,10 @@ const AIWords = [
 
 const homeProps: Theme.HomeConfig = {
   handleChangeSlogan() {
-    ElMessage.success('支持点击修改内容')
+    ElMessage.success({
+      message: '支持点击修改内容',
+      duration: 888
+    })
     return AIWords[Math.floor(Math.random() * AIWords.length)]
   }
 }

@@ -1,11 +1,11 @@
 <template>
-  <div class="doc-analyze">
+  <div class="doc-analyze" v-if="showAnalyze">
     <span>正文字数：{{ wordCount }} 个字</span>
     <!-- <span>图片数：{{ imageCount }}</span> -->
     <span>预计阅读：{{ readTime }} 分钟</span>
-    <div class="meta-des" ref="$des">{{ publishDate }}</div>
     <!-- <div class="meta-des" ref="$des">{{ publishDate }} · 阅读 {{ pv }}</div> -->
   </div>
+  <div class="meta-des" ref="$des">{{ publishDate }}</div>
 </template>
 
 <script lang="ts" setup>
@@ -13,8 +13,12 @@
 // https://zhuanlan.zhihu.com/p/36375802
 import { useRoute } from 'vitepress'
 import { computed, ref, watch } from 'vue'
-import { useCurrentArticle } from '../composables/config/blog'
+import { useBlogConfig, useCurrentArticle } from '../composables/config/blog'
 import { formatShowDate } from '../utils/index'
+
+const { article } = useBlogConfig()
+
+const showAnalyze = computed(() => article?.readingTime ?? true)
 
 const wordCount = ref(0)
 const imageCount = ref(0)
