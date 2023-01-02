@@ -1,20 +1,36 @@
 <template>
   <div class="doc-analyze" v-if="showAnalyze">
-    <span>正文字数：{{ wordCount }} 个字</span>
-    <!-- <span>图片数：{{ imageCount }}</span> -->
-    <span>预计阅读：{{ readTime }} 分钟</span>
-    <!-- <div class="meta-des" ref="$des">{{ publishDate }} · 阅读 {{ pv }}</div> -->
+    <span>
+      <el-icon><EditPen /></el-icon>
+      字数：{{ wordCount }} 个字
+    </span>
+    <span>
+      <el-icon><AlarmClock /></el-icon>
+      预计：{{ readTime }} 分钟
+    </span>
   </div>
-  <div class="meta-des" ref="$des">{{ publishDate }}</div>
+  <div class="meta-des" ref="$des" id="hack-article-des">
+    <span>
+      <el-icon><UserFilled /></el-icon>
+      {{ author }}
+    </span>
+    <span>
+      <el-icon><Clock /></el-icon>
+      {{ publishDate }}
+    </span>
+  </div>
 </template>
 
 <script lang="ts" setup>
 // 阅读时间计算方式参考
 // https://zhuanlan.zhihu.com/p/36375802
-import { useRoute } from 'vitepress'
-import { computed, ref, watch } from 'vue'
+import { useData, useRoute } from 'vitepress'
+import { computed, onMounted, ref, watch } from 'vue'
+import { ElIcon } from 'element-plus'
+import { UserFilled, Clock, EditPen, AlarmClock } from '@element-plus/icons-vue'
 import { useBlogConfig, useCurrentArticle } from '../composables/config/blog'
 import { formatShowDate } from '../utils/index'
+import { Theme } from '../composables/config'
 
 const { article } = useBlogConfig()
 
@@ -57,15 +73,21 @@ const analyze = () => {
   docDomContainer?.querySelector('h1')?.after($des.value!)
 }
 
-watch(
-  () => route.path,
-  () => {
-    setTimeout(analyze)
-  },
-  {
-    immediate: true
-  }
-)
+onMounted(() => {
+  const observer = new MutationObserver(() => {
+    const targetInstance = document.querySelector('#hack-article-des')
+    if (!targetInstance) {
+      analyze()
+    }
+  })
+  observer.observe(document.body, {
+    childList: true, // 观察目标子节点的变化，是否有添加或者删除
+    subtree: true // 观察后代节点，默认为 false
+  })
+
+  // 初始化时执行一次
+  analyze()
+})
 
 // 阅读量
 const pv = ref(6666)
@@ -74,6 +96,12 @@ const currentArticle = useCurrentArticle()
 const publishDate = computed(() => {
   return formatShowDate(currentArticle.value?.meta?.date || '')
 })
+
+const { theme } = useData<Theme.Config>()
+const globalAuthor = computed(() => theme.value.blog.author || '')
+const author = computed(
+  () => currentArticle.value?.meta.author || globalAuthor.value
+)
 
 watch(
   () => route.path,
@@ -89,11 +117,18 @@ watch(
 
 <style lang="scss" scoped>
 .doc-analyze {
-  color: var(--vp-c-text-3);
-  text-align: center;
+  color: var(--vp-c-text-2);
+  font-size: 14px;
   margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
   span {
-    margin: 0 10px;
+    margin-right: 16px;
+    display: flex;
+    align-items: center;
+    .el-icon {
+      margin-right: 4px;
+    }
   }
 }
 .meta-des {
@@ -101,5 +136,14 @@ watch(
   color: var(--vp-c-text-2);
   font-size: 14px;
   margin-top: 6px;
+  display: flex;
+  span {
+    margin-right: 16px;
+    display: flex;
+    align-items: center;
+    .el-icon {
+      margin-right: 4px;
+    }
+  }
 }
 </style>
