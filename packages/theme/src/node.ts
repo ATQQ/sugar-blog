@@ -6,22 +6,20 @@ import path from 'path'
 import { formatDate } from './utils/index'
 import type { Theme } from './composables/config/index'
 
-export function getThemeConfig(dir: string, cfg?: Partial<Theme.BlogConfig>) {
+export function getThemeConfig(
+  articleDir: string,
+  cfg?: Partial<Theme.BlogConfig>
+) {
   const files = glob
     .sync('./**/*.md', { ignore: ['node_modules'] })
-    .filter((v) => v.startsWith(dir))
-  // readme.md => index.md
-  // for (const file of files) {
-  //   if (file.endsWith('README.md')) {
-  //     fs.promises.rename(file, file.replace('README.md', 'index.md'))
-  //   }
-  // }
+    .filter((v) => v.startsWith(articleDir))
+
   const data = files.map((v) => {
     const route = v
       // 处理文件后缀名
       .replace('.md', '')
       // 处理目录名
-      .replace(new RegExp(`^${path.join(dir, '/')}`), '')
+      .replace(new RegExp(`^${path.join(articleDir, '/')}`), '')
 
     const fileContent = fs.readFileSync(v, 'utf-8')
     const meta: Partial<Theme.PageMeta> = {
@@ -44,7 +42,7 @@ export function getThemeConfig(dir: string, cfg?: Partial<Theme.BlogConfig>) {
     meta.cover =
       meta.cover || fileContent.match(/[!]\[.+?\]\((https:\/\/.+)\)/)?.[1] || ''
     return {
-      route,
+      route: `/${route}`,
       meta
     }
   })

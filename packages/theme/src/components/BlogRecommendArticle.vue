@@ -56,13 +56,6 @@ const recommendList = computed(() => {
   const paths = route.path.split('/')
   return (
     docs.value
-      .map((v) => {
-        return {
-          ...v,
-          // 添加 / 避免路由切换异常
-          route: `/${v.route}`
-        }
-      })
       // 过滤出公共路由前缀
       // 限制为同路由前缀
       .filter(

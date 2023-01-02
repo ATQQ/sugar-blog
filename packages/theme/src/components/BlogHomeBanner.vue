@@ -5,31 +5,37 @@
       <span class="motto" v-show="motto">{{ motto }}</span>
     </h1>
     <div class="inspiring-wrapper">
-      <h2 @click="changeSoul" v-show="!!inspiring">{{ inspiring }}</h2>
+      <h2 @click="changeSlogan" v-show="!!inspiring">{{ inspiring }}</h2>
     </div>
   </div>
 </template>
 <script setup>
 import { computed } from 'vue'
-import { ElMessage } from 'element-plus'
 import { useData } from 'vitepress'
+import { useBlogConfig } from '../composables/config/blog'
 
 const { site, frontmatter } = useData()
 
 const name = computed(
   () => (frontmatter.value.blog?.name ?? site.value.title) || ''
 )
-
 const motto = computed(() => frontmatter.value.blog?.motto || '')
-
 const inspiring = computed(() => frontmatter.value.blog?.inspiring || '')
 
-const changeSoul = () => {
-  // inspiring.value = ''
-  setTimeout(() => {
-    // TODO: 接口抓数据
-    // inspiring.value = Math.random()
-    ElMessage.success('只有这一条，接口正在路上')
+const { home } = useBlogConfig()
+
+const changeSlogan = async () => {
+  // TODO: 自定义事件
+  if (typeof home?.handleChangeSlogan !== 'function') {
+    return
+  }
+  const newSlogan = await home.handleChangeSlogan()
+  if (typeof newSlogan !== 'string' || !newSlogan.trim()) {
+    return
+  }
+  inspiring.value = newSlogan
+  setTimeout(async () => {
+    inspiring.value = newSlogan
   })
 }
 </script>

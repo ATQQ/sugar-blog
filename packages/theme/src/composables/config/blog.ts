@@ -61,10 +61,9 @@ export function useCurrentArticle() {
 
   const docs = computed(() => blogConfig.config.blog.pagesData)
   const currentArticle = computed(() =>
-    docs.value.find(
-      (v) => v.route === route.path.replace(/\/?(.*).html$/, '$1')
-    )
+    docs.value.find((v) => v.route === route.path.replace(/.html$/, ''))
   )
+
   return currentArticle
 }
 

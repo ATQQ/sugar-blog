@@ -40,7 +40,7 @@
         >
         <li v-for="item in showSearchResult" :key="item.route">
           <el-card body-style="padding:10px;" shadow="hover">
-            <a :href="`/${item.route}`" @click="searchModal = false">
+            <a :href="item.route" @click="searchModal = false">
               <div class="title">
                 <span>{{ item.meta.title }}</span>
                 <span class="date">
