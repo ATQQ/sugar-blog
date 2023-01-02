@@ -23,6 +23,17 @@ export namespace Theme {
     type: string
   }
 
+  export interface GiscusConfig {
+    repo: string
+    repoId: string
+    category: string
+    categoryId: string
+    mapping?: string
+    inputPosition?: 'top' | 'bottom'
+    lang?: string
+    loading?: string
+  }
+
   export interface BlogConfig {
     pagesData: PageData[]
     author?: string
@@ -37,8 +48,11 @@ export namespace Theme {
     }
     // TODO: 本地全文搜索定制 pagefind || minisearch
     search?: boolean
-    // TODO: 评论配置
-    comment?: boolean
+    /**
+     * 配置评论
+     * power by https://giscus.app/zh-CN
+     */
+    comment?: GiscusConfig | false
     recommend?: {
       title?: string
       pageSize?: number

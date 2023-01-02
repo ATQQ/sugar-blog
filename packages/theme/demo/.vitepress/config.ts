@@ -4,7 +4,14 @@ import path from 'path'
 import { getThemeConfig } from '@sugarat/theme/node'
 
 const blogTheme = getThemeConfig('demo', {
-  author: '粥里有勺糖'
+  author: '粥里有勺糖',
+  comment: {
+    repo: 'ATQQ/sugar-blog',
+    repoId: 'MDEwOlJlcG9zaXRvcnkyNDEyNDUyOTk',
+    category: 'Announcements',
+    categoryId: 'DIC_kwDODmEcc84COVc6',
+    inputPosition: 'bottom'
+  }
 })
 
 export default defineConfigWithTheme<Theme.Config>({

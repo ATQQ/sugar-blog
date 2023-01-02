@@ -58,6 +58,11 @@ export function useHomeConfig() {
   return inject(homeConfigSymbol)!
 }
 
+export function useGiscusConfig() {
+  const blogConfig = useConfig()
+  return blogConfig.config.blog.comment
+}
+
 export function useArticles() {
   const blogConfig = useConfig()
   const articles = computed(() => blogConfig.config?.blog?.pagesData || [])
