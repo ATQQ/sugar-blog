@@ -29,7 +29,7 @@ import { computed, onMounted, ref, watch } from 'vue'
 import { ElIcon } from 'element-plus'
 import { UserFilled, Clock, EditPen, AlarmClock } from '@element-plus/icons-vue'
 import { useBlogConfig, useCurrentArticle } from '../composables/config/blog'
-import { formatShowDate } from '../utils/index'
+import countWord, { formatShowDate } from '../utils/index'
 import { Theme } from '../composables/config'
 
 const { article } = useBlogConfig()
@@ -68,8 +68,11 @@ const analyze = () => {
   )
   imageCount.value = imgs?.length || 0
 
-  const words = docDomContainer?.textContent || ''
-  wordCount.value = words.length
+  const words =
+    docDomContainer?.querySelector('.content-container .main')?.textContent ||
+    ''
+
+  wordCount.value = countWord(words)
   docDomContainer?.querySelector('h1')?.after($des.value!)
 }
 
