@@ -59,13 +59,16 @@ const recommendList = computed(() => {
       .map((v) => {
         return {
           ...v,
+          // 添加 / 避免路由切换异常
           route: `/${v.route}`
         }
       })
       // 过滤出公共路由前缀
-      // TODO：限制为同路由前缀
-      .filter((v) =>
-        v.route.startsWith(paths.slice(0, paths.length - 1).join('/'))
+      // 限制为同路由前缀
+      .filter(
+        (v) =>
+          v.route.split('/').length === paths.length &&
+          v.route.startsWith(paths.slice(0, paths.length - 1).join('/'))
       )
       // 过滤出带标题的
       .filter((v) => !!v.meta.title)
@@ -167,5 +170,10 @@ const showChangeBtn = computed(() => {
   .title {
     font-size: 16px;
   }
+}
+.empty-text {
+  padding: 6px;
+  font-size: 14px;
+  text-align: center;
 }
 </style>
