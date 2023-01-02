@@ -1,8 +1,5 @@
 ---
-sidebar:
- title: 设计模式
-group:
- title: Design Pattern
+hidden: true
 ---
 # 简介
 

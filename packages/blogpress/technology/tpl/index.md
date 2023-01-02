@@ -1,8 +1,5 @@
 ---
-sidebar:
- title: 工程模板
-group:
- title: Template Project
+hidden: true
 ---
 # 工程模板搭建
 记录从0-1的工程模板搭建教程

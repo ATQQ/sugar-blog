@@ -1,8 +1,5 @@
 ---
-sidebar:
- title: 个人作品
-group:
- title: wheel
+hidden: true
 ---
 # 个人作品
 为我造过的轮子与写过的项目,书写传记

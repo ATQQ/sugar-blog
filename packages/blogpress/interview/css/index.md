@@ -1,8 +1,5 @@
 ---
-sidebar:
- title: CSS相关面试题
-group:
- title: Css
+hidden: true
 ---
 # css相关面试题
 

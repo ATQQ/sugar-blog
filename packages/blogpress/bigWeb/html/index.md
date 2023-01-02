@@ -3,6 +3,7 @@ sidebar:
  title: 简介
 group:
  title: HTML
+hidden: true
 ---
 # HTML相关内容
 

@@ -1,8 +1,5 @@
 ---
-sidebar:
- title: 计算机网络
-group:
- title: Internet
+hidden: true
 ---
 # 网络相关问题
 

@@ -1,4 +1,5 @@
 ---
+hidden: true
 sidebar:
  title: NodeJS
 group:

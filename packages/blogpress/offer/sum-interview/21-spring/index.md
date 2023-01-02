@@ -1,8 +1,5 @@
 ---
-sidebar:
- title: 21年春招
-group:
- title: 2021 spring offer
+hidden: true
 ---
 # 21年春招
 

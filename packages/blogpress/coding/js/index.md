@@ -1,8 +1,5 @@
 ---
-sidebar:
- title: javscript代码题
-group:
- title: Javascript
+hidden: true
 ---
 # javascript
 记录面试所遇的与javascript相关的代码题

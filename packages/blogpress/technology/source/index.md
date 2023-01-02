@@ -1,8 +1,5 @@
 ---
-sidebar:
- title: 源码学习
-group:
- title: source learn
+hidden: true
 ---
 # 源码学习笔记
 记录一些源码学习笔记

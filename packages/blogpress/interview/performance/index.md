@@ -1,8 +1,5 @@
 ---
-sidebar:
- title: 性能优化相关面试题
-group:
- title: Performance
+hidden: true
 ---
 # 性能优化面试题
 

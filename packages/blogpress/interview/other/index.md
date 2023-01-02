@@ -1,8 +1,5 @@
 ---
-sidebar:
- title: 前端面试综合问题
-group:
- title: other
+hidden: true
 ---
 # 关于前端一些综合知识
 

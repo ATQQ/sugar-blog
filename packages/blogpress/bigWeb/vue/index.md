@@ -1,8 +1,5 @@
 ---
-sidebar:
- title: 简介
-group:
- title: Vue
+hidden: true
 ---
 # Vue知识点记录
 :::tip 参考
