@@ -29,9 +29,10 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { ElTag } from 'element-plus'
 import { useDark } from '@vueuse/core'
+import { useRouter } from 'vitepress'
 import { useActiveTag, useArticles } from '../composables/config/blog'
 
 const docs = useArticles()
@@ -53,8 +54,10 @@ const tagType: any = ['', 'info', 'success', 'warning', 'danger']
 const handleCloseTag = () => {
   activeTag.value.label = ''
   activeTag.value.type = ''
+  router.go(`${window.location.origin}${router.route.path}`)
 }
 
+const router = useRouter()
 const handleTagClick = (tag: string, type: string) => {
   if (tag === activeTag.value.label) {
     handleCloseTag()
@@ -62,7 +65,16 @@ const handleTagClick = (tag: string, type: string) => {
   }
   activeTag.value.type = type
   activeTag.value.label = tag
+
+  router.go(
+    `${window.location.origin}${router.route.path}?tag=${tag}&type=${type}`
+  )
 }
+onMounted(() => {
+  const url = new URL(window.location.href)
+  activeTag.value.type = url.searchParams.get('type') || ''
+  activeTag.value.label = url.searchParams.get('tag') || ''
+})
 </script>
 
 <style lang="scss" scoped>

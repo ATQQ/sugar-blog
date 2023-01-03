@@ -15,7 +15,7 @@
       :data-theme="isDark ? 'dark' : 'light'"
       :data-lang="commentConfig.lang || 'zh-CN'"
       crossorigin="anonymous"
-      :data-loading="commentConfig.loading || 'lazy'"
+      :data-loading="commentConfig.loading || ''"
       async
     >
     </component>

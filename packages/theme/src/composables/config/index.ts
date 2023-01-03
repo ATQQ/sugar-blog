@@ -32,7 +32,7 @@ export namespace Theme {
     mapping?: string
     inputPosition?: 'top' | 'bottom'
     lang?: string
-    loading?: string
+    loading?: 'lazy' | ''
   }
 
   export interface BlogConfig {
