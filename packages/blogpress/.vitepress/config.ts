@@ -9,7 +9,7 @@ const blogTheme = getThemeConfig('', {
     repoId: 'MDEwOlJlcG9zaXRvcnkyNDEyNDUyOTk',
     category: 'Announcements',
     categoryId: 'DIC_kwDODmEcc84COVc6',
-    inputPosition: 'bottom'
+    inputPosition: 'top'
   }
 })
 

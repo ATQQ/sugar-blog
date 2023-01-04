@@ -1,5 +1,21 @@
 <template>
   <div class="comment" v-if="show" id="giscus-comment">
+    <el-affix
+      :class="{ hidden: !showCommnetAffix }"
+      class="comment-btn"
+      target="main"
+      position="bottom"
+      @change="handleVisibleChange"
+      :offset="40"
+    >
+      <el-button
+        @click="handleScrollToComment"
+        plain
+        :icon="Comment"
+        type="primary"
+        >评论</el-button
+      >
+    </el-affix>
     <component
       v-if="showComment"
       :is="'script'"
@@ -19,15 +35,6 @@
       async
     >
     </component>
-    <!-- TODO：跳转到评论区优化 -->
-    <el-affix
-      :class="{ hidden: !showCommnetAffix }"
-      position="bottom"
-      @change="handleVisibleChange"
-      :offset="40"
-    >
-      <el-button type="primary">Offset bottom 20px</el-button>
-    </el-affix>
   </div>
 </template>
 <script setup lang="ts">
@@ -35,12 +42,19 @@ import { useDark } from '@vueuse/core'
 import { useRoute } from 'vitepress'
 import { computed, ref, watch } from 'vue'
 import { ElAffix, ElButton } from 'element-plus'
+import { Comment } from '@element-plus/icons-vue'
 import { useGiscusConfig } from '../composables/config/blog'
 import { Theme } from '../composables/config/index'
 
 const showCommnetAffix = ref(true)
 const handleVisibleChange = (v: boolean) => {
   showCommnetAffix.value = v
+}
+const handleScrollToComment = () => {
+  document.querySelector('#giscus-comment')?.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start'
+  })
 }
 const giscusConfig = useGiscusConfig()
 
@@ -79,7 +93,7 @@ watch(
   }
 )
 </script>
-<style scoped>
+<style scoped lang="scss">
 .comment {
   width: 100%;
   text-align: center;
@@ -89,5 +103,25 @@ watch(
 .hidden {
   opacity: 0;
   pointer-events: none;
+}
+.comment-btn {
+  :deep(.el-affix--fixed) {
+    text-align: right;
+    .el-button {
+      position: relative;
+      right: -100px;
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .comment-btn {
+    :deep(.el-affix--fixed) {
+      opacity: 0.7;
+      .el-button {
+        position: static;
+      }
+    }
+  }
 }
 </style>
