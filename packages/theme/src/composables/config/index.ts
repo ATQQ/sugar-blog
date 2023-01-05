@@ -63,6 +63,24 @@ export namespace Theme {
     article?: {
       readingTime?: boolean
     }
+    /**
+     * el-alert
+     */
+    alert?: {
+      type: 'success' | 'warning' | 'info' | 'error'
+      title?: string
+      description?: string
+      closable?: boolean
+      center?: boolean
+      closeText?: string
+      showIcon?: boolean
+      html?: string
+      /**
+       * TODO：细粒度的时间控制
+       * 默认展示时间，0一直展示，-1
+       */
+      duration?: number
+    }
   }
   export interface Config extends DefaultTheme.Config {
     blog: BlogConfig

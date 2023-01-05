@@ -8,12 +8,17 @@ import BlogSearch from './BlogSearch.vue'
 import BlogSidebar from './BlogSidebar.vue'
 import BlogImagePreview from './BlogImagePreview.vue'
 import BlogArticleAnalyze from './BlogArticleAnalyze.vue'
+import BlogAlert from './BlogAlert.vue'
 
 const { Layout } = Theme
 </script>
 
 <template>
   <Layout>
+    <template #layout-top>
+      <BlogAlert />
+    </template>
+
     <template #doc-before>
       <!-- 阅读时间分析 -->
       <ClientOnly>

@@ -10,6 +10,11 @@ const blogTheme = getThemeConfig('', {
     category: 'Announcements',
     categoryId: 'DIC_kwDODmEcc84COVc6',
     inputPosition: 'top'
+  },
+  alert: {
+    type: 'success',
+    title: '博客改版，上新啦！！！ 🎉 🎉 🎉 ',
+    center: true
   }
 })
 
