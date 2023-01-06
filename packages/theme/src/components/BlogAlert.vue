@@ -1,5 +1,5 @@
 <template>
-  <div class="global-alert" v-if="alertProps">
+  <div class="global-alert" v-if="show">
     <el-alert
       :title="alertProps?.title"
       :type="alertProps?.type"
@@ -16,9 +16,34 @@
 
 <script lang="ts" setup>
 import { ElAlert } from 'element-plus'
+import { ref, onMounted } from 'vue'
 import { useBlogConfig } from '../composables/config/blog'
 
 const { alert: alertProps } = useBlogConfig()
+const show = ref(false)
+
+onMounted(() => {
+  const storageKey = 'theme-blog-alert'
+  // 取旧值
+  const oldValue = localStorage.getItem(storageKey)
+  const newValue = JSON.stringify(alertProps)
+  localStorage.setItem(storageKey, newValue)
+
+  // >= 0 每次都展示，区别是否自动消失
+  if (Number(alertProps?.duration) >= 0) {
+    show.value = true
+    if (alertProps?.duration) {
+      setTimeout(() => {
+        show.value = false
+      }, alertProps?.duration)
+    }
+  }
+
+  if (oldValue !== newValue && alertProps?.duration === -1) {
+    // 当做新值处理
+    show.value = true
+  }
+})
 </script>
 
 <style lang="scss" scoped>

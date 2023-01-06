@@ -13,8 +13,9 @@ const blogTheme = getThemeConfig('', {
   },
   alert: {
     type: 'success',
-    title: '博客改版，上新啦！！！ 🎉 🎉 🎉 ',
-    center: true
+    title: '博客改版，上新啦！！！ 🎉 🎉 ，欢迎吐槽留言 ',
+    center: true,
+    duration: 3200
   }
 })
 
