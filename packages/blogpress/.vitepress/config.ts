@@ -42,6 +42,13 @@ const blogTheme = getThemeConfig('', {
       url: 'https://github.com/mqyqingfeng/Blog'
     },
     {
+      nickname: 'Linbudu',
+      des: '未来的不可知，是前进的原动力',
+      avatar:
+        'https://linbudu-img-store.oss-cn-shenzhen.aliyuncs.com/img/48507806.jfif',
+      url: 'https://linbudu.top/'
+    },
+    {
       nickname: '小九',
       des: '日益努力，而后风生水起',
       avatar: 'https://jiangly.com/favicon.ico',
