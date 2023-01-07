@@ -1,5 +1,6 @@
 html {
-  --bg-gradient: 255, 255, 255;
+  --bg-gradient: 255, 255, 255, 0.1;
+  --bg-gradient-home: 255, 255, 255;
   --box-shadow: 0 1px 8px 0
     rgba(0, 0, 0, 0.1);
 
@@ -13,6 +14,7 @@ html {
 
 html[class='dark'] {
   --bg-gradient: 20, 20, 20;
+  --bg-gradient-home: 20, 20, 20;
   --box-shadow: 0 1px 8px 0
     rgba(0, 0, 0, 0.6);
   --nav-bgc: rgba(0, 0, 0, 0.8);
@@ -26,14 +28,17 @@ html[class='dark'] {
     content: '';
     inset: 0;
     position: absolute;
+    top: 0;
     z-index: -1;
-    background: url(./bg.png);
+    background-image: url(./bg.png);
+    background-repeat: repeat;
+    min-height: 100vh;
   }
   min-height: 88vh;
   background: radial-gradient(
     ellipse,
-    rgba(var(--bg-gradient), 1) 0%,
-    rgba(var(--bg-gradient), 0) 1000%
+    rgba(var(--bg-gradient-home), 1) 0%,
+    rgba(var(--bg-gradient-home), 0) 700%
   );
 }
 

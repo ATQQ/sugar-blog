@@ -9,7 +9,35 @@ const blogTheme = getThemeConfig('', {
     repoId: 'MDEwOlJlcG9zaXRvcnkyNDEyNDUyOTk',
     category: 'Announcements',
     categoryId: 'DIC_kwDODmEcc84COVc6',
-    inputPosition: 'bottom'
+    inputPosition: 'top'
+  },
+  // alert: {
+  //   type: 'success',
+  //   title: '博客改版，上新啦！！！ 🎉 🎉',
+  //   center: true,
+  //   duration: 3200
+  // },
+  popover: {
+    title: '公告',
+    body: [
+      { type: 'title', content: '博客改版，上新啦！！！ 🎉 🎉 ' },
+      { type: 'text', content: '👇公众号👇---👇 微信 👇' },
+      {
+        type: 'image',
+        src: 'https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210'
+      }
+    ],
+    footer: [
+      {
+        type: 'button',
+        content: '旧版',
+        link: 'https://old.sugarat.top',
+        props: {
+          round: true
+        }
+      }
+    ],
+    duration: -1
   }
 })
 
@@ -28,6 +56,15 @@ const extraHead: any =
           'script',
           {},
           'LA.init({id: "Jgmg5avjAUvoyePS",ck: "Jgmg5avjAUvoyePS",hashMode: true})'
+        ],
+        [
+          'script',
+          {},
+          `if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.getRegistrations().then((registrations) => {
+            registrations.forEach(sw => sw.unregister())
+          })
+        }`
         ]
       ]
     : []

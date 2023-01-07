@@ -1,4 +1,35 @@
+import type { ElButton } from 'element-plus'
 import { DefaultTheme } from 'vitepress'
+
+export namespace BlogPopover {
+  export interface Title {
+    type: 'title'
+    content: string
+    style?: string
+  }
+
+  export interface Text {
+    type: 'text'
+    content: string
+    style?: string
+  }
+
+  export interface Image {
+    type: 'image'
+    src: string
+    style?: string
+  }
+
+  export interface Button {
+    type: 'button'
+    link: string
+    content: string
+    style?: string
+    props?: InstanceType<typeof ElButton>['$props']
+  }
+
+  export type Value = Title | Text | Image | Button
+}
 
 export namespace Theme {
   export interface PageMeta {
@@ -32,7 +63,7 @@ export namespace Theme {
     mapping?: string
     inputPosition?: 'top' | 'bottom'
     lang?: string
-    loading?: string
+    loading?: 'lazy' | ''
   }
 
   export interface BlogConfig {
@@ -63,7 +94,42 @@ export namespace Theme {
     article?: {
       readingTime?: boolean
     }
+    /**
+     * el-alert
+     */
+    alert?: {
+      type: 'success' | 'warning' | 'info' | 'error'
+      title?: string
+      description?: string
+      closable?: boolean
+      center?: boolean
+      closeText?: string
+      showIcon?: boolean
+      html?: string
+      /**
+       * 细粒度的时间控制
+       * 默认展示时间，-1 只展示1次，其它数字为每次都展示，一定时间后自动消失，0为不自动消失
+       * 配置改变时，会重新触发展示
+       */
+      duration?: number
+    }
+    popover?: {
+      title: string
+      body?: BlogPopover.Value[]
+      footer?: BlogPopover.Value[]
+      /**
+       * 细粒度的时间控制
+       * 默认展示时间，-1 只展示1次，其它数字为每次都展示，一定时间后自动消失，0为不自动消失
+       * 配置改变时，会重新触发展示
+       */
+      duration?: number
+      /**
+       * 手动重新打开
+       */
+      reopen?: boolean
+    }
   }
+
   export interface Config extends DefaultTheme.Config {
     blog: BlogConfig
   }

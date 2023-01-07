@@ -64,6 +64,7 @@ importers:
   packages/theme:
     specifiers:
       '@element-plus/icons-vue': ^2.0.10
+      '@vue/shared': ^3.2.45
       '@vueuse/core': ^9.6.0
       element-plus: ^2.2.26
       fast-glob: ^3.2.12
@@ -75,6 +76,7 @@ importers:
       vue: ^3.2.45
     dependencies:
       '@element-plus/icons-vue': 2.0.10_vue@3.2.45
+      '@vue/shared': 3.2.45
       '@vueuse/core': 9.8.2_vue@3.2.45
       element-plus: 2.2.26_vue@3.2.45
       fast-glob: 3.2.12
