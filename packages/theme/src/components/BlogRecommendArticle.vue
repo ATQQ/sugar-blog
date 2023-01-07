@@ -54,20 +54,21 @@ const route = useRoute()
 
 const recommendList = computed(() => {
   const paths = route.path.split('/')
-  return (
-    docs.value
-      // 过滤出公共路由前缀
-      // 限制为同路由前缀
-      .filter(
-        (v) =>
-          v.route.split('/').length === paths.length &&
-          v.route.startsWith(paths.slice(0, paths.length - 1).join('/'))
-      )
-      // 过滤出带标题的
-      .filter((v) => !!v.meta.title)
-      // 过滤掉自己
-      .filter((v) => v.route !== route.path.replace(/.html$/, ''))
-  )
+  const origin = docs.value
+    // 过滤出公共路由前缀
+    // 限制为同路由前缀
+    .filter(
+      (v) =>
+        v.route.split('/').length === paths.length &&
+        v.route.startsWith(paths.slice(0, paths.length - 1).join('/'))
+    )
+    // 过滤出带标题的
+    .filter((v) => !!v.meta.title)
+    // 过滤掉自己
+    .filter((v) => v.route !== route.path.replace(/.html$/, ''))
+
+  origin.sort((a, b) => +new Date(b.meta.date) - +new Date(a.meta.date))
+  return origin
 })
 const currentPage = ref(1)
 const changePage = () => {
