@@ -21,6 +21,7 @@
   "scripts": {
     "dev": "pnpm --filter 'blogpress' dev",
     "build": "pnpm --filter 'blogpress' build",
+    "serve": "pnpm --filter 'blogpress' serve",
     "lint": "eslint --ext .js,.ts,.vue --fix packages/**",
     "deploy": "zx deploy.mjs"
   },

@@ -22,3 +22,4 @@ await $`rm -rf ${compressPkgName}`
 
 await $`echo ==✅ 部署代码 ==`
 await $`ssh -p22 ${user}@${origin} "tar -xf ${compressPkgName} -C ${baseServerDir}/${fullOrigin}/${destDir}"`
+await $`ssh -p22 ${user}@${origin} "tar -xf ${compressPkgName} -C ${baseServerDir}/blog.${origin}/${destDir}"`

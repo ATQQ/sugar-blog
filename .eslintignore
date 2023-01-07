@@ -6,3 +6,4 @@ packages/theme/src/node.js
 !packages/theme/demo/.vitepress
 packages/theme/node.d.ts
 packages/theme/node.js
+packages/blogpress/public/service-worker.js
