@@ -11,12 +11,6 @@ const blogTheme = getThemeConfig('', {
     categoryId: 'DIC_kwDODmEcc84COVc6',
     inputPosition: 'top'
   },
-  // alert: {
-  //   type: 'success',
-  //   title: '博客改版，上新啦！！！ 🎉 🎉',
-  //   center: true,
-  //   duration: 3200
-  // },
   popover: {
     title: '公告',
     body: [
@@ -38,7 +32,29 @@ const blogTheme = getThemeConfig('', {
       }
     ],
     duration: -1
-  }
+  },
+  friend: [
+    {
+      nickname: '冴羽',
+      des: '冴羽的JavaScript博客',
+      avatar:
+        'https://img.cdn.sugarat.top/mdImg/MTYyNjQ4MzkxMzIxMA==626483913210',
+      url: 'https://github.com/mqyqingfeng/Blog'
+    },
+    {
+      nickname: '小九',
+      des: '日益努力，而后风生水起',
+      avatar: 'https://jiangly.com/favicon.ico',
+      url: 'https://jiangly.com/'
+    },
+    {
+      nickname: '花喵电台      ',
+      des: '曹豪侠和余湾湾还有两只猫的生活记录~',
+      avatar:
+        'https://pic.fmcat.top/head.jpg?x-oss-process=image/auto-orient,1/resize,m_fill,w_110,h_110/quality,q_90',
+      url: 'https://www.fmcat.top'
+    }
+  ]
 })
 
 const extraHead: any =
