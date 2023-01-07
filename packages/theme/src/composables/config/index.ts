@@ -128,6 +128,12 @@ export namespace Theme {
        */
       reopen?: boolean
     }
+    friend?: {
+      nickname: string
+      des: string
+      url: string
+      avatar: string
+    }[]
   }
 
   export interface Config extends DefaultTheme.Config {
