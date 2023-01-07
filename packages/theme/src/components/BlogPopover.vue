@@ -140,7 +140,7 @@ const PopoverValue = (
   box-sizing: border-box;
   border: 1px solid var(--el-color-primary-light-3);
   border-radius: 6px;
-  background-color: rgba(var(--bg-gradient));
+  background-color: rgba(var(--bg-gradient-home));
   box-shadow: var(--box-shadow);
 }
 @media screen and (min-width: 760px) and (max-width: 1140px) {
