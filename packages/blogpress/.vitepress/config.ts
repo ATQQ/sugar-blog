@@ -56,6 +56,15 @@ const extraHead: any =
           'script',
           {},
           'LA.init({id: "Jgmg5avjAUvoyePS",ck: "Jgmg5avjAUvoyePS",hashMode: true})'
+        ],
+        [
+          'script',
+          {},
+          `if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.getRegistrations().then((registrations) => {
+            registrations.forEach(sw => sw.unregister())
+          })
+        }`
         ]
       ]
     : []
