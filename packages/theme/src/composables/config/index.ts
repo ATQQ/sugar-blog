@@ -117,6 +117,16 @@ export namespace Theme {
       title: string
       body?: BlogPopover.Value[]
       footer?: BlogPopover.Value[]
+      /**
+       * 细粒度的时间控制
+       * 默认展示时间，-1 只展示1次，其它数字为每次都展示，一定时间后自动消失，0为不自动消失
+       * 配置改变时，会重新触发展示
+       */
+      duration?: number
+      /**
+       * 手动重新打开
+       */
+      reopen?: boolean
     }
   }
 

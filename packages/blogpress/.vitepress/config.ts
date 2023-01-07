@@ -36,7 +36,8 @@ const blogTheme = getThemeConfig('', {
           round: true
         }
       }
-    ]
+    ],
+    duration: -1
   }
 })
 

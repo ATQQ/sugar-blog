@@ -3,27 +3,30 @@
     <div class="header">
       <div class="title-wrapper">
         <el-icon size="20px"><Flag /></el-icon>
-        <span class="title">{{ popover?.title }}</span>
+        <span class="title">{{ popoverProps?.title }}</span>
       </div>
       <el-icon @click="show = false" class="close-icon" size="20px"
         ><CircleCloseFilled
       /></el-icon>
     </div>
     <div class="body content" v-if="bodyContent.length">
-      <PopoverValue
-        v-for="(v, idx) in bodyContent"
-        :key="idx"
-        :item="v"
-      ></PopoverValue>
+      <PopoverValue v-for="(v, idx) in bodyContent" :key="idx" :item="v">
+        {{ v.type !== 'image' ? v.content : '' }}
+      </PopoverValue>
       <hr v-if="footerContent.length" />
     </div>
     <div class="footer content">
-      <PopoverValue
-        v-for="(v, idx) in footerContent"
-        :key="idx"
-        :item="v"
-      ></PopoverValue>
+      <PopoverValue v-for="(v, idx) in footerContent" :key="idx" :item="v">
+        {{ v.type !== 'image' ? v.content : '' }}
+      </PopoverValue>
     </div>
+  </div>
+  <div
+    class="theme-blog-popover-close"
+    v-show="!show && (popoverProps?.reopen ?? true)"
+    @click="show = true"
+  >
+    <el-icon size="20px"><Flag /></el-icon>
   </div>
 </template>
 
@@ -35,25 +38,49 @@ import type { BlogPopover } from '@sugarat/theme'
 import { parseStringStyle } from '@vue/shared'
 import { useBlogConfig } from '../composables/config/blog'
 
-const { popover } = useBlogConfig()
+const { popover: popoverProps } = useBlogConfig()
 
 const show = ref(false)
 
 const bodyContent = computed(() => {
-  return popover?.body || []
+  return popoverProps?.body || []
 })
 
 const footerContent = computed(() => {
-  return popover?.footer || []
+  return popoverProps?.footer || []
 })
 
 onMounted(() => {
-  if (popover?.title) {
+  if (!popoverProps?.title) {
+    return
+  }
+
+  const storageKey = 'theme-blog-popover'
+  // 取旧值
+  const oldValue = localStorage.getItem(storageKey)
+  const newValue = JSON.stringify(popoverProps)
+  localStorage.setItem(storageKey, newValue)
+
+  // >= 0 每次都展示，区别是否自动消失
+  if (Number(popoverProps?.duration ?? '') >= 0) {
+    show.value = true
+    if (popoverProps?.duration) {
+      setTimeout(() => {
+        show.value = false
+      }, popoverProps?.duration)
+    }
+  }
+
+  if (oldValue !== newValue && popoverProps?.duration === -1) {
+    // 当做新值处理
     show.value = true
   }
 })
 
-const PopoverValue = (props: { key: number; item: BlogPopover.Value }) => {
+const PopoverValue = (
+  props: { key: number; item: BlogPopover.Value },
+  { slots }: any
+) => {
   const { key, item } = props
   if (item.type === 'title') {
     return h(
@@ -90,7 +117,7 @@ const PopoverValue = (props: { key: number; item: BlogPopover.Value }) => {
         style: parseStringStyle(item.style || ''),
         ...item.props
       },
-      item.content
+      slots
     )
   }
   return h(
@@ -98,21 +125,20 @@ const PopoverValue = (props: { key: number; item: BlogPopover.Value }) => {
     {
       key
     },
-    '123'
+    ''
   )
 }
 </script>
 
 <style lang="scss" scoped>
 .theme-blog-popover {
-  position: fixed;
-  width: 270px;
+  width: 258px;
   position: fixed;
   top: 80px;
   right: 20px;
   z-index: 19;
   box-sizing: border-box;
-  border: 1px solid #409eff;
+  border: 1px solid var(--el-color-primary-light-3);
   border-radius: 6px;
   background-color: rgba(var(--bg-gradient));
   box-shadow: var(--box-shadow);
@@ -123,7 +149,7 @@ const PopoverValue = (props: { key: number; item: BlogPopover.Value }) => {
   }
 }
 .header {
-  background-color: #409eff;
+  background-color: var(--el-color-primary-light-3);
   color: #fff;
   padding: 6px 4px;
   display: flex;
@@ -145,7 +171,7 @@ const PopoverValue = (props: { key: number; item: BlogPopover.Value }) => {
 
 .body {
   box-sizing: border-box;
-  padding: 10px 15px 0;
+  padding: 10px 10px 0;
   hr {
     border: none;
     border-bottom: 1px solid #eaecef;
@@ -171,5 +197,22 @@ const PopoverValue = (props: { key: number; item: BlogPopover.Value }) => {
   img {
     width: 100%;
   }
+}
+
+.theme-blog-popover-close {
+  cursor: pointer;
+  opacity: 0.5;
+  position: fixed;
+  z-index: 19;
+  top: 80px;
+  right: 10px;
+  position: fixed;
+  background-color: var(--el-color-primary-light-3);
+  padding: 8px;
+  color: #fff;
+  font-size: 12px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
 }
 </style>
