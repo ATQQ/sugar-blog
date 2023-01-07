@@ -1,4 +1,35 @@
+import type { ElButton } from 'element-plus'
 import { DefaultTheme } from 'vitepress'
+
+export namespace BlogPopover {
+  export interface Title {
+    type: 'title'
+    content: string
+    style?: string
+  }
+
+  export interface Text {
+    type: 'text'
+    content: string
+    style?: string
+  }
+
+  export interface Image {
+    type: 'image'
+    src: string
+    style?: string
+  }
+
+  export interface Button {
+    type: 'button'
+    link: string
+    content: string
+    style?: string
+    props?: InstanceType<typeof ElButton>['$props']
+  }
+
+  export type Value = Title | Text | Image | Button
+}
 
 export namespace Theme {
   export interface PageMeta {
@@ -82,7 +113,13 @@ export namespace Theme {
        */
       duration?: number
     }
+    popover?: {
+      title: string
+      body?: BlogPopover.Value[]
+      footer?: BlogPopover.Value[]
+    }
   }
+
   export interface Config extends DefaultTheme.Config {
     blog: BlogConfig
   }

@@ -11,11 +11,32 @@ const blogTheme = getThemeConfig('', {
     categoryId: 'DIC_kwDODmEcc84COVc6',
     inputPosition: 'top'
   },
-  alert: {
-    type: 'success',
-    title: '博客改版，上新啦！！！ 🎉 🎉 ，欢迎吐槽留言 ',
-    center: true,
-    duration: 3200
+  // alert: {
+  //   type: 'success',
+  //   title: '博客改版，上新啦！！！ 🎉 🎉',
+  //   center: true,
+  //   duration: 3200
+  // },
+  popover: {
+    title: '公告',
+    body: [
+      { type: 'title', content: '博客改版，上新啦！！！ 🎉 🎉 ' },
+      { type: 'text', content: '👇公众号👇---👇 微信 👇' },
+      {
+        type: 'image',
+        src: 'https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210'
+      }
+    ],
+    footer: [
+      {
+        type: 'button',
+        content: '旧版',
+        link: 'https://old.sugarat.top',
+        props: {
+          round: true
+        }
+      }
+    ]
   }
 })
 
