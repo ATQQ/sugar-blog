@@ -36,6 +36,11 @@ export function getThemeConfig(
         //   meta.date = formatDate(v)
         // })
         meta.date = getFileBirthTime(v)
+      } else {
+        // TODO: 开放配置，设置时区
+        meta.date = formatDate(
+          new Date(`${new Date(meta.date).toUTCString()}+8`)
+        )
       }
 
       // 处理tags和categories,兼容历史文章
