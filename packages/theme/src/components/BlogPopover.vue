@@ -23,7 +23,7 @@
   </div>
   <div
     class="theme-blog-popover-close"
-    v-show="!show && (popoverProps?.reopen ?? true)"
+    v-show="!show && (popoverProps?.reopen ?? true) && popoverProps?.title"
     @click="show = true"
   >
     <el-icon size="20px"><Flag /></el-icon>
