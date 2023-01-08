@@ -89,4 +89,8 @@ html[class='dark'] {
     margin: 0 auto;
     cursor: pointer;
   }
+
+  .vp-doc a {
+    word-break: break-all;
+  }
 }
