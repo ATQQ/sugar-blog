@@ -80,6 +80,18 @@ export function getThemeConfig(
 }
 
 export function getDefaultTitle(content: string) {
+  const title =
+    clearMatterContent(content)
+      .split('\n')
+      ?.find((str) => {
+        return str.startsWith('# ')
+      })
+      ?.slice(2)
+      .replace(/[\s]/g, '') || ''
+  return title
+}
+
+export function clearMatterContent(content: string) {
   let first___: unknown
   let second___: unknown
 
@@ -98,17 +110,12 @@ export function getDefaultTitle(content: string) {
     pre.push(line)
     return pre
   }, [])
-
-  const title =
+  return (
     lines
       // 剔除---之间的内容
       .slice((second___ as number) || 0)
-      ?.find((str) => {
-        return str.startsWith('# ')
-      })
-      ?.slice(2)
-      .replace(/[\s]/g, '') || ''
-  return title
+      .join('\n')
+  )
 }
 
 export function getFileBirthTime(url: string) {
@@ -139,7 +146,7 @@ export function getGitTimestamp(file: string) {
 
 function getTextSummary(text: string, count = 100) {
   return (
-    text
+    clearMatterContent(text)
       .match(/^# ([\s\S]+)/m)?.[1]
       // 除去标题
       ?.replace(/#/g, '')

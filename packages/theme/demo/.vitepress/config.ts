@@ -3,9 +3,7 @@ import type { Theme } from '@sugarat/theme'
 import path from 'path'
 import { getThemeConfig } from '@sugarat/theme/node'
 
-const blogTheme = getThemeConfig('demo',{
-  
-})
+const blogTheme = getThemeConfig('demo', {})
 
 export default defineConfigWithTheme<Theme.Config>({
   lang: 'zh-cmn-Hans',
