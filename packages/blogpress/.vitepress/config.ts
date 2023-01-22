@@ -14,30 +14,15 @@ const blogTheme = getThemeConfig('', {
   popover: {
     title: '公告',
     body: [
-      // { type: 'title', content: '博客改版，上新啦！！！ 🎉 🎉 ' },
-      // { type: 'text', content: '👇公众号👇---👇 微信 👇' },
-      // {
-      //   type: 'image',
-      //   src: 'https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210'
-      // }
-      { type: 'title', content: '新年快乐，万事如意' },
-      { type: 'text', content: '微信扫码抽奖' },
+      { type: 'text', content: '👇公众号👇---👇 微信 👇' },
       {
         type: 'image',
-        src: 'https://img.cdn.sugarat.top/mdImg/MTY3NDI2NzQxOTIxMg==674267419212'
-      }
+        src: 'https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210'
+      },
+      { type: 'title', content: '祝大家新年快乐，万事如意' },
+      { type: 'title', content: '🐰年大吉，大展宏🐰' }
     ],
-    // footer: [
-    //   {
-    //     type: 'button',
-    //     content: '旧版',
-    //     link: 'https://old.sugarat.top',
-    //     props: {
-    //       round: true
-    //     }
-    //   }
-    // ],
-    duration: 0
+    duration: -1
   },
   friend: [
     {
