@@ -1,3 +1,7 @@
+---
+tag:
+ - 技术笔记
+---
 # nvm ls-remote 只有iojs列表
 
 nvm 镜像地址的问题，修改对应环境变量`NVM_NODEJS_ORG_MIRROR`即可
