@@ -68,6 +68,7 @@ export namespace Theme {
 
   export interface BlogConfig {
     pagesData: PageData[]
+    srcDir?: string
     author?: string
     hotArticle?: {
       title?: string

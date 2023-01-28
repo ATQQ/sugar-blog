@@ -10,7 +10,7 @@
     </span>
   </div>
   <div class="meta-des" ref="$des" id="hack-article-des">
-    <span>
+    <span v-if="author">
       <el-icon><UserFilled /></el-icon>
       {{ author }}
     </span>

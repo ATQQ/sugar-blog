@@ -1,5 +1,5 @@
 <template>
-  <div class="blog-search">
+  <div class="blog-search" v-if="openSearch">
     <div class="nav-search-btn-wait" @click="searchModal = true">
       <el-icon size="22px">
         <Search />
@@ -72,7 +72,9 @@ import {
 } from 'element-plus'
 import { useWindowSize } from '@vueuse/core'
 import { formatDate } from '../utils'
-import { useArticles } from '../composables/config/blog'
+import { useArticles, useBlogConfig } from '../composables/config/blog'
+
+const { search: openSearch = true } = useBlogConfig()
 
 const searchModal = ref(false)
 

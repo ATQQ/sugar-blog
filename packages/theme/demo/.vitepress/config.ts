@@ -3,12 +3,17 @@ import type { Theme } from '@sugarat/theme'
 import path from 'path'
 import { getThemeConfig } from '@sugarat/theme/node'
 
-const blogTheme = getThemeConfig('demo', {})
+const blogConfig: Partial<Theme.BlogConfig> = {
+  search: true,
+  author: '粥里有勺糖'
+}
+
+const blogTheme = getThemeConfig(blogConfig)
 
 export default defineConfigWithTheme<Theme.Config>({
   lang: 'zh-cmn-Hans',
-  // title: '@sugarat/theme',
-  // description: '粥里有勺糖的博客主题包',
+  title: '@sugarat/theme',
+  description: '粥里有勺糖的博客主题',
   vite: {
     server: {
       host: '0.0.0.0'

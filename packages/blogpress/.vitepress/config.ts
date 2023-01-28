@@ -2,7 +2,7 @@ import { defineConfigWithTheme } from 'vitepress'
 import type { Theme } from '@sugarat/theme'
 import { getThemeConfig } from '@sugarat/theme/node'
 
-const blogTheme = getThemeConfig('', {
+const blogTheme = getThemeConfig({
   author: '粥里有勺糖',
   comment: {
     repo: 'ATQQ/sugar-blog',
