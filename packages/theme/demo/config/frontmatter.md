@@ -8,6 +8,9 @@ title: 🔧 主题配置 - 首页&文章
 * `home`：首页的独立配置
 * `article`：单篇文章独立配置
 
+:::tip
+主题继承[默认主题配置](https://vitepress.vuejs.org/config/frontmatter-configs)，即原主题配置依然生效
+:::
 ## layout <Badge type="tip" text="home" />
 主要针对主页的部分内容调整
 
@@ -170,3 +173,14 @@ categories:
 效果同上
 ## categories <Badge type="warning" text="article" />
 效果同上
+
+## sticky <Badge type="warning" text="article" />
+用于设置在首页展示的 `精选文章`，值越大展示越靠前
+
+```md
+---
+sticky: 1
+---
+```
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkxMDA0NzU5MQ==674910047591)
