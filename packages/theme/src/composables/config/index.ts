@@ -66,19 +66,30 @@ export namespace Theme {
     loading?: 'lazy' | ''
   }
 
+  export interface HotArticle {
+    title?: string
+    pageSize?: number
+    nextText?: string
+    empty?: string | boolean
+  }
+  export interface RecommendArticle {
+    title?: string
+    pageSize?: number
+    nextText?: string
+    empty?: string | boolean
+  }
+  export interface Home {
+    pageSize?: number
+  }
+  export interface ArticleConfig {
+    readingTime?: boolean
+  }
   export interface BlogConfig {
     pagesData: PageData[]
     srcDir?: string
     author?: string
-    hotArticle?: {
-      title?: string
-      pageSize?: number
-      nextText?: string
-      empty?: string | boolean
-    }
-    home?: {
-      pageSize?: number
-    }
+    hotArticle?: HotArticle
+    home?: Home
     // TODO: 本地全文搜索定制 pagefind || minisearch
     search?: boolean
     /**
@@ -86,15 +97,8 @@ export namespace Theme {
      * power by https://giscus.app/zh-CN
      */
     comment?: GiscusConfig | false
-    recommend?: {
-      title?: string
-      pageSize?: number
-      nextText?: string
-      empty?: string | boolean
-    }
-    article?: {
-      readingTime?: boolean
-    }
+    recommend?: RecommendArticle
+    article?: ArticleConfig
     /**
      * el-alert
      */

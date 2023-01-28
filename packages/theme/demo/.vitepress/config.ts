@@ -4,8 +4,28 @@ import path from 'path'
 import { getThemeConfig } from '@sugarat/theme/node'
 
 const blogConfig: Partial<Theme.BlogConfig> = {
-  search: true,
-  author: '粥里有勺糖'
+  // search: false,
+  // hotArticle: {
+  //   title: '🔥 自定义标题',
+  //   nextText: '下一页',
+  //   pageSize: 1
+  // },
+  // home: {
+  //   pageSize: 2
+  // },
+  // recommend: {
+  //   title: '🔍 推荐文章',
+  //   nextText: '下一页',
+  //   pageSize: 1
+  // },
+  author: '粥里有勺糖',
+  comment: {
+    repo: 'ATQQ/sugar-blog',
+    repoId: 'MDEwOlJlcG9zaXRvcnkyNDEyNDUyOTk',
+    category: 'Announcements',
+    categoryId: 'DIC_kwDODmEcc84COVc6',
+    inputPosition: 'top'
+  }
 }
 
 const blogTheme = getThemeConfig(blogConfig)
