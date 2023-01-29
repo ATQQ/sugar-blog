@@ -26,6 +26,7 @@ layout: home
 
 
 ## blog <Badge type="tip" text="home" />
+设置首页的博客样式文案
 ::: code-group
 
 ```md [Frontmatter]
@@ -141,25 +142,16 @@ author: 粥里有勺糖
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MjA0ODcxMA==673182048710)
 
-如果没有单独设置则会默认使用全局的 `author` 配置，这个在后面会有介绍
+如果没有单独设置则会默认使用全局的 `author` 配置，这个在 [全局配置: author](./global.md#author) 有介绍
 
 ## readingTime <Badge type="warning" text="article" />
-设置是否展示文章的预计阅读时间
-::: code-group
+单独设置是否展示文章的预计阅读时间，全局配置开关见 [article.readingTime](./global.md#article)
 
-```md [Frontmatter]
+```md
 ---
 readingTime: true
 ---
 ```
-
-```ts [type]
-interface ArticleConfig {
-  readingTime?: boolean
-}
-```
-
-:::
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMjAzNDEzOA==674922034138)
 
