@@ -36,13 +36,14 @@ export default defineConfig({
   }
 })
 ```
+![](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMDQ0OTg1Ng==674920449856)
 
 下面开始详细介绍 [Theme.BlogConfig](https://github.com/ATQQ/sugar-blog/blob/255c4b1e6a85a529be3a72c88e365077e067ecba/packages/theme/src/composables/config/index.ts#L69-L137)
 
 ## author
 * Type: `string`
 
-设置文章默认的作者名字，在文章里不设置的情况下默认用全局的
+设置文章默认的作者名字，优先级低于[单独在文章中设置](./frontmatter.md#author)的情况
 
 ```ts
 const blogTheme = getThemeConfig({
@@ -53,9 +54,11 @@ const blogTheme = getThemeConfig({
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkxMzUxNzQxMg==674913517412)
 
 ## hotArticle
-* Type: `HotArticle`
-* Default
-```ts
+用于控制首页右侧的精选文章内容，其中精选的文章由 [frontmatter: sticky](./frontmatter.md#sticky) 进行控制
+
+::: code-group
+
+```ts [default]
 const blogTheme = getThemeConfig({
   hotArticle:{
     title: '🔥 精选文章',
@@ -65,8 +68,8 @@ const blogTheme = getThemeConfig({
   }
 })
 ```
-用于控制首页右侧的精选文章内容
-```ts
+
+```ts [example]
 const blogTheme = getThemeConfig({
   hotArticle: {
     title: '🔥 自定义标题',
@@ -75,9 +78,8 @@ const blogTheme = getThemeConfig({
   }
 })
 ```
-![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkxNzkzMjY5Nw==674917932697)
 
-```ts
+```ts [type]
 interface HotArticle{
   title?: string
   pageSize?: number
@@ -86,7 +88,19 @@ interface HotArticle{
 }
 ```
 
+```md [sticky]
+---
+# 用于设置在首页展示的 精选文章，值越大展示越靠前
+sticky: 1
+---
+```
+
+:::
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkxNzkzMjY5Nw==674917932697)
+
 ## home
+用于设置首页的自定义内容
 ::: code-group
 
 ```ts [default]
@@ -140,13 +154,13 @@ const blogTheme = getThemeConfig({
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMDQ0OTg1Ng==674920449856)
 
 ## comment
-* Type: `GiscusConfig`
-
-配置文章的评论，使用[giscus](https://giscus.app/zh-CN)（由 GitHub Discussions 驱动的评论系统）
+配置文章的评论，使用 [giscus](https://giscus.app/zh-CN)（由 GitHub Discussions 驱动的评论系统）
 
 访问 https://giscus.app/zh-CN 获取下述的参数
 
-```ts
+::: code-group
+
+```ts [example]
 const blogTheme = getThemeConfig({
   comment: {
     repo: 'ATQQ/sugar-blog',
@@ -156,9 +170,8 @@ const blogTheme = getThemeConfig({
   }
 })
 ```
-![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMDc2MDIxMw==674920760213)
 
-```ts
+```ts [type]
 interface GiscusConfig {
   repo: string
   repoId: string
@@ -170,6 +183,10 @@ interface GiscusConfig {
   loading?: 'lazy' | ''
 }
 ```
+
+:::
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMDc2MDIxMw==674920760213)
 ## recommend
 * Type: `RecommendArticle`
 * Default

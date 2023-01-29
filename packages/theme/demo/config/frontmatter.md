@@ -1,6 +1,7 @@
 ---
 description: 详细介绍首页&文章相关的各个配置项
 title: 🔧 主题配置 - 首页&文章
+readingTime: false
 ---
 
 # 主题配置
@@ -154,6 +155,16 @@ readingTime: true
 ```
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMjAzNDEzOA==674922034138)
+
+## comment <Badge type="warning" text="article" />
+单独为某篇文章设置是否开启评论
+
+```md
+---
+# 关闭评论
+comment: false
+---
+```
 
 ## date <Badge type="warning" text="article" />
 单独设置文章的发布时间，不设置的情况下默认会通过`Git`取文件最后修改时间
