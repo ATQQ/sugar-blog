@@ -39,13 +39,14 @@
 </template>
 <script setup lang="ts">
 import { useDark } from '@vueuse/core'
-import { useRoute } from 'vitepress'
+import { useData, useRoute } from 'vitepress'
 import { computed, ref, watch } from 'vue'
 import { ElAffix, ElButton } from 'element-plus'
 import { Comment } from '@element-plus/icons-vue'
 import { useGiscusConfig } from '../composables/config/blog'
 import { Theme } from '../composables/config/index'
 
+const { frontmatter } = useData()
 const showCommnetAffix = ref(true)
 const handleVisibleChange = (v: boolean) => {
   showCommnetAffix.value = v
@@ -66,6 +67,9 @@ const commentConfig = computed<Partial<Theme.GiscusConfig>>(() => {
 })
 
 const show = computed(() => {
+  if (frontmatter.value.comment === false) {
+    return frontmatter.value.comment
+  }
   if (!giscusConfig) {
     return giscusConfig
   }

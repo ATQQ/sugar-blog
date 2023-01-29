@@ -1,14 +1,22 @@
 ---
 description: 详细介绍首页&文章相关的各个配置项
 title: 🔧 主题配置 - 首页&文章
+readingTime: false
+outline: [2,3]
+tag:
+ - 配置
 ---
 
 # 主题配置
-这里将配置分成了2类 
+这里将配置分成了2块 
 * `home`：首页的独立配置
-* `article`：单篇文章独立配置
+* `Article`：单篇文章独立配置
 
-## layout <Badge type="tip" text="home" />
+:::tip
+主题继承[默认主题配置](https://vitepress.vuejs.org/config/frontmatter-configs)，即原主题配置依然生效
+:::
+## Home
+### layout
 主要针对主页的部分内容调整
 
 首先需要指定`layout`为`home`，通常会对 入口的`/index.md` 进行配置
@@ -22,23 +30,42 @@ layout: home
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MDM5ODQ3MQ==673180398471)
 
 
-## blog <Badge type="tip" text="home" />
-设置首页的 banner 信息
+### blog
+设置首页的博客样式文案
+::: code-group
 
-```md
+```md [Frontmatter]
 ---
+layout: home
 blog:
+ # 设置首页的 banner 信息
  name: '@sugarat/theme'
  motto: 粥里有勺糖的博客主题
  inspiring: 基于 Vitepress 定制的主题🎨
+ # 设置首页列表每页展示数量
+ pageSize: 2
 ---
 ```
+
+```ts [type]
+interface HomeBlog {
+  name?: string
+  motto?: string
+  inspiring?: string
+  pageSize?: number
+}
+```
+
+:::
 
 对应效果如下
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MDczMzQ2OQ==673180733469)
 
-## title <Badge type="warning" text="article" />
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMDIwMzE5MQ==674920203192)
+
+## Article
+### title
 用于设置文章在首页卡片列表里展示的 `标题`
 
 例如`changelog.md`有如下内容
@@ -55,7 +82,7 @@ title: 更新日志
 
 不设置情况下默认取一级标题 `# 一级标题`
 
-## description <Badge type="warning" text="article" />
+### description
 
 用于设置文章在首页卡片列表里展示的 `描述信息`
 
@@ -79,7 +106,7 @@ description: 简单介绍主题的由来和实现原理
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MTUyMTExOQ==673181521119)
 
-## cover <Badge type="warning" text="article" />
+### cover
 用于设置文章在首页卡片列表里展示的 `封面信息`
 ```md
 ---
@@ -91,7 +118,7 @@ cover: https://img.cdn.sugarat.top/mdImg/MTY3MzE0Njg5NDY4OQ==673146894689
 
 未指定时，默认取文章中出现的第一张图片
 
-## hidden <Badge type="warning" text="article" />
+### hidden
 
 用于设置文章是否出现在首页的列表里
 
@@ -104,7 +131,7 @@ hidden: true
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MTcwMDU4MQ==673181700581)
 
-## author <Badge type="warning" text="article" />
+### author
 
 用于单独设置文章的作者信息
 
@@ -122,10 +149,31 @@ author: 粥里有勺糖
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MjA0ODcxMA==673182048710)
 
-如果没有单独设置则会默认使用全局的 `author` 配置，这个在后面会有介绍
+如果没有单独设置则会默认使用全局的 `author` 配置，这个在 [全局配置: author](./global.md#author) 有介绍
 
-## date <Badge type="warning" text="article" />
-单独设置文章的发布时间，不设置的情况下默认会通过`Git`取记录的文件最后修改时间
+### readingTime
+单独设置是否展示文章的预计阅读时间，全局配置开关见 [article.readingTime](./global.md#article)
+
+```md
+---
+readingTime: true
+---
+```
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMjAzNDEzOA==674922034138)
+
+### comment
+单独为某篇文章设置是否开启评论
+
+```md
+---
+# 关闭评论
+comment: false
+---
+```
+
+### date
+单独设置文章的发布时间，不设置的情况下默认会通过`Git`取文件最后修改时间
 
 ```md
 ---
@@ -150,7 +198,7 @@ date: 2023-01-08 20:00:00
 * 小于1周：xx天前
 * 其它：按照实际时间展示 `yyyy-MM-dd`
 
-## tag <Badge type="warning" text="article" />
+### tag
 用于按标签给文章分类
 
 ```md
@@ -166,7 +214,18 @@ categories:
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4NTY0MTI2Nw==673185641267)
 
-## tags <Badge type="warning" text="article" />
+### tags
 效果同上
-## categories <Badge type="warning" text="article" />
+### categories
 效果同上
+
+### sticky
+用于设置在首页展示的 `精选文章`，值越大展示越靠前
+
+```md
+---
+sticky: 1
+---
+```
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkxMDA0NzU5MQ==674910047591)

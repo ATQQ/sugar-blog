@@ -34,7 +34,7 @@ import {
 } from '../composables/config/blog'
 import { Theme } from '../composables/config'
 
-const { theme } = useData<Theme.Config>()
+const { theme, frontmatter } = useData<Theme.Config>()
 const globalAuthor = computed(() => theme.value.blog.author || '')
 const docs = useArticles()
 
@@ -58,7 +58,9 @@ const filterData = computed(() => {
 })
 
 const { home } = useBlogConfig()
-const pageSize = computed(() => home?.pageSize || 6)
+const pageSize = computed(
+  () => frontmatter.value.blog?.pageSize || home?.pageSize || 6
+)
 const currentPage = ref(1)
 
 const currentWikiData = computed(() => {

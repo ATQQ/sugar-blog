@@ -1,12 +1,10 @@
 html {
   --bg-gradient: 255, 255, 255, 0.1;
   --bg-gradient-home: 255, 255, 255;
-  --box-shadow: 0 1px 8px 0
-    rgba(0, 0, 0, 0.1);
+  --box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.1);
 
   // blog-item
-  --box-shadow-hover: 0 2px 16px 0
-    rgba(0, 0, 0, 0.2);
+  --box-shadow-hover: 0 2px 16px 0 rgba(0, 0, 0, 0.2);
   --nav-bgc: rgba(255, 255, 255, 0.9);
   --badge-font-color: #4e5969;
   --description-font-color: #86909c;
@@ -15,11 +13,9 @@ html {
 html[class='dark'] {
   --bg-gradient: 20, 20, 20;
   --bg-gradient-home: 20, 20, 20;
-  --box-shadow: 0 1px 8px 0
-    rgba(0, 0, 0, 0.6);
+  --box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.6);
   --nav-bgc: rgba(0, 0, 0, 0.8);
-  --box-shadow-hover: 0 2px 16px 0
-    rgba(0, 0, 0, 0.7);
+  --box-shadow-hover: 0 2px 16px 0 rgba(0, 0, 0, 0.7);
   --badge-font-color: #bdc3cc;
   --description-font-color: #9facba;
 }
@@ -27,14 +23,14 @@ html[class='dark'] {
   &::before {
     content: '';
     inset: 0;
-    position: absolute;
+    position: fixed;
     top: 0;
     z-index: -1;
     background-image: url(./bg.png);
     background-repeat: repeat;
-    min-height: 100vh;
+    min-height: 100%;
   }
-  min-height: 88vh;
+  min-height: calc(100vh - var(--vp-nav-height));
   background: radial-gradient(
     ellipse,
     rgba(var(--bg-gradient-home), 1) 0%,
@@ -56,35 +52,38 @@ html[class='dark'] {
   margin-bottom: 10px !important;
 }
 
-
 @media screen and (min-width: 768px) and (max-width: 1200px) {
-  .VPNavBarMenuGroup .button span.text,.VPNavBarMenuLink{
+  .VPNavBarMenuGroup .button span.text,
+  .VPNavBarMenuLink {
     font-size: 10px;
   }
-  .VPNavBar{
+  .VPNavBar {
     height: auto !important;
   }
-  .VPNavBarMenu.menu{
+  .VPNavBarMenu.menu {
     flex-wrap: wrap;
   }
 }
 
 @media screen and (min-width: 960px) and (max-width: 1120px) {
-  .VPContent.has-sidebar{
+  .VPContent.has-sidebar {
     margin-top: 60px !important;
   }
 }
 
 // sidebar
-@media (min-width: 1440px){
+@media (min-width: 1440px) {
   aside.VPSidebar {
-    padding-left: max(32px, calc((100% - (var(--vp-layout-max-width) - 16px)) / 2)) !important;
+    padding-left: max(
+      32px,
+      calc((100% - (var(--vp-layout-max-width) - 16px)) / 2)
+    ) !important;
     padding-right: 10px !important;
   }
 }
 
-.VPDoc .content main{
-  img{
+.VPDoc .content main {
+  img {
     max-height: 300px;
     margin: 0 auto;
     cursor: pointer;

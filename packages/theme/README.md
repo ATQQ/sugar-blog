@@ -1,14 +1,31 @@
 # @sugarat/theme
 
-简约风的 Vitepress 博客主题
+简约风的 Vitepress 博客主题，更多细节见 https://theme.sugarat.top
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE3MDUxOTMwMw==673170519303)
 
 ## Quick Start
-TODO:
+① 初始化项目模板
+```sh
+npx degit ATQQ/sugar-blog/packages/template my-blog-demo
+```
 
-## Usage
-TODO: 
+② 安装依赖
+```sh
+pnpm install
+```
+
+③ 开发启动
+```sh
+pnpm dev
+```
+
+④ 构建产物
+```sh
+pnpm build
+```
+## Advanced Ssage
+详细配置见文档 https://theme.sugarat.top
 
 ## Thanks
 从以下项目中获得了灵感&经验

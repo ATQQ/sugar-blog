@@ -10,7 +10,7 @@
     </span>
   </div>
   <div class="meta-des" ref="$des" id="hack-article-des">
-    <span>
+    <span v-if="author">
       <el-icon><UserFilled /></el-icon>
       {{ author }}
     </span>
@@ -33,8 +33,10 @@ import countWord, { formatShowDate } from '../utils/index'
 import { Theme } from '../composables/config'
 
 const { article } = useBlogConfig()
-
-const showAnalyze = computed(() => article?.readingTime ?? true)
+const { frontmatter } = useData()
+const showAnalyze = computed(
+  () => frontmatter.value?.readingTime ?? article?.readingTime ?? true
+)
 
 const wordCount = ref(0)
 const imageCount = ref(0)

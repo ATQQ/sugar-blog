@@ -3,24 +3,29 @@ import matter from 'gray-matter'
 import fs from 'fs'
 import { execSync, spawn } from 'child_process'
 import path from 'path'
+import type { UserConfig } from 'vitepress'
 import { formatDate } from './utils/index'
 import type { Theme } from './composables/config/index'
 
-export function getThemeConfig(
-  articleDir: string,
-  cfg?: Partial<Theme.BlogConfig>
-) {
-  const files = glob
-    .sync('./**/*.md', { ignore: ['node_modules'] })
-    .filter((v) => v.startsWith(articleDir))
+export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
+  const srcDir = cfg?.srcDir || process.argv.slice(2)?.[1] || '.'
+  const files = glob.sync(`${srcDir}/**/*.md`, { ignore: ['node_modules'] })
 
   const data = files
     .map((v) => {
-      const route = v
+      let route = v
         // 处理文件后缀名
         .replace('.md', '')
-        // 处理目录名
-        .replace(new RegExp(`^${path.join(articleDir, '/')}`), '')
+
+      // 去除 srcDir 处理目录名
+      if (route.startsWith('./')) {
+        route = route.replace(
+          new RegExp(`^\\.\\/${path.join(srcDir, '/')}`),
+          ''
+        )
+      } else {
+        route = route.replace(new RegExp(`^${path.join(srcDir, '/')}`), '')
+      }
 
       const fileContent = fs.readFileSync(v, 'utf-8')
 
@@ -163,4 +168,8 @@ function getTextSummary(text: string, count = 100) {
       ?.replace(/>(.*)/, '')
       ?.slice(0, count)
   )
+}
+
+export function defineConfig(config: UserConfig<Theme.Config>) {
+  return config
 }

@@ -1,5 +1,6 @@
 <h1 align="center"> 粥里有勺糖 </h1>
 <p align="center">你的指尖,拥有改变世界的力量</p>
+<p align="center">博客主题：<a href="https://theme.sugarat.top/" target="_blank">@sugarat/theme</a></p>
 
 ## :pencil:关于内容
 大前端开发相关知识，包含但不限于前端
