@@ -83,32 +83,44 @@ interface HotArticle{
 ```
 
 ## home
-* type: `Home`
-* default
-```ts
+::: code-group
+
+```ts [default]
 const blogTheme = getThemeConfig({
   home: {
+    name: '',
+    motto: '',
+    inspiring: '',
     pageSize: 6
   }
 })
 ```
 
-用于控制首页展示文章的数量
-
-```ts
+```ts [example]
 const blogTheme = getThemeConfig({
   home: {
+    name: '@sugarat/theme',
+    motto: '粥里有勺糖的博客主题',
+    inspiring: '基于 Vitepress 定制的主题🎨',
     pageSize: 2
   }
 })
 ```
-![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMDIwMzE5MQ==674920203192)
 
-```ts
-interface Home {
+```ts [type]
+interface HomeBlog {
+  name?: string
+  motto?: string
+  inspiring?: string
   pageSize?: number
 }
 ```
+
+:::
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MDczMzQ2OQ==673180733469)
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMDIwMzE5MQ==674920203192)
 
 ## search
 * Type: `boolean`

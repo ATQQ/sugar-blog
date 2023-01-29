@@ -12,15 +12,18 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useData } from 'vitepress'
-import { useHomeConfig } from '../composables/config/blog'
+import { useHomeConfig, useBlogConfig } from '../composables/config/blog'
 
 const { site, frontmatter } = useData()
+const { home } = useBlogConfig()
 
 const name = computed(
-  () => (frontmatter.value.blog?.name ?? site.value.title) || ''
+  () => (frontmatter.value.blog?.name ?? site.value.title) || home?.name || ''
 )
-const motto = computed(() => frontmatter.value.blog?.motto || '')
-const initInspiring = ref<string>(frontmatter.value.blog?.inspiring || '')
+const motto = computed(() => frontmatter.value.blog?.motto || home?.motto || '')
+const initInspiring = ref<string>(
+  frontmatter.value.blog?.inspiring || home?.inspiring || ''
+)
 const inspiring = computed({
   get() {
     return initInspiring.value
@@ -30,13 +33,13 @@ const inspiring = computed({
   }
 })
 
-const home = useHomeConfig()
+const homeConfig = useHomeConfig()
 
 const changeSlogan = async () => {
-  if (typeof home?.handleChangeSlogan !== 'function') {
+  if (typeof homeConfig?.handleChangeSlogan !== 'function') {
     return
   }
-  const newSlogan = await home.handleChangeSlogan(inspiring.value)
+  const newSlogan = await homeConfig.handleChangeSlogan(inspiring.value)
   if (typeof newSlogan !== 'string' || !newSlogan.trim()) {
     return
   }

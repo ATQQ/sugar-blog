@@ -78,10 +78,16 @@ export namespace Theme {
     nextText?: string
     empty?: string | boolean
   }
-  export interface Home {
+
+  export interface HomeBlog {
+    name?: string
+    motto?: string
+    inspiring?: string
     pageSize?: number
   }
+
   export interface ArticleConfig {
+    // TODO：支持文章单独设置
     readingTime?: boolean
   }
   export interface BlogConfig {
@@ -89,7 +95,7 @@ export namespace Theme {
     srcDir?: string
     author?: string
     hotArticle?: HotArticle
-    home?: Home
+    home?: HomeBlog
     // TODO: 本地全文搜索定制 pagefind || minisearch
     search?: boolean
     /**

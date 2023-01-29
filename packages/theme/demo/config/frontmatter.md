@@ -26,21 +26,37 @@ layout: home
 
 
 ## blog <Badge type="tip" text="home" />
-设置首页的 banner 信息
+::: code-group
 
-```md
+```md [Frontmatter]
 ---
+layout: home
 blog:
+ # 设置首页的 banner 信息
  name: '@sugarat/theme'
  motto: 粥里有勺糖的博客主题
  inspiring: 基于 Vitepress 定制的主题🎨
+ # 设置首页列表每页展示数量
+ pageSize: 2
 ---
 ```
+
+```ts [type]
+interface HomeBlog {
+  name?: string
+  motto?: string
+  inspiring?: string
+  pageSize?: number
+}
+```
+
+:::
 
 对应效果如下
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MDczMzQ2OQ==673180733469)
 
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMDIwMzE5MQ==674920203192)
 ## title <Badge type="warning" text="article" />
 用于设置文章在首页卡片列表里展示的 `标题`
 
