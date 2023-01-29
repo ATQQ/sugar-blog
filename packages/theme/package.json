@@ -1,6 +1,6 @@
 {
   "name": "@sugarat/theme",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "粥里有勺糖的博客主题，sugarat vitepress blog theme",
   "main": "src/index.ts",
   "exports": {

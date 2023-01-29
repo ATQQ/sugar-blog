@@ -1,66 +1,8 @@
 import path from 'path'
 import { getThemeConfig, defineConfig } from '@sugarat/theme/node'
+import packageJSON from '../../package.json'
 
 const blogTheme = getThemeConfig({
-  // 开启搜索
-  // search: false,
-  // 精选文章文案
-  // hotArticle: {
-  //   title: '🔥 自定义标题',
-  //   nextText: '下一页',
-  //   pageSize: 1
-  // },
-  // 首页相关
-  // home: {
-  //   pageSize: 6,
-  //   name: '@sugarat/theme',
-  //   motto: '粥里有勺糖的博客主题',
-  //   inspiring: '基于 Vitepress 定制的主题🎨'
-  // },
-  // 推荐文章文案
-  // recommend: {
-  //   title: '🔍 推荐文章',
-  //   nextText: '下一页',
-  //   pageSize: 1
-  // },
-  // article: {
-  //   readingTime: false
-  // },
-  // alert: {
-  //   type: 'success',
-  //   title: '标配内容，这是一个不会自动关闭的弹窗',
-  //   duration: 0
-  // },
-  // popover: {
-  //   title: '📢 广而周知 📢',
-  //   duration: -1,
-  //   body: [
-  //     {
-  //       type: 'title',
-  //       content: '小标题',
-  //       style: 'color:red'
-  //     },
-  //     { type: 'text', content: '👇公众号👇---👇 微信 👇' },
-  //     {
-  //       type: 'image',
-  //       src: 'https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210'
-  //     }
-  //   ],
-  //   footer: [
-  //     {
-  //       type: 'text',
-  //       content: 'footer 与 body 结构一致'
-  //     },
-  //     {
-  //       type: 'button',
-  //       link: 'https://sugarat.top',
-  //       content: '作者博客',
-  //       props: {
-  //         round: true
-  //       }
-  //     }
-  //   ]
-  // },
   friend: [
     {
       nickname: '粥里有勺糖',
@@ -104,6 +46,43 @@ export default defineConfig({
     }
   },
   themeConfig: {
-    ...blogTheme
+    ...blogTheme,
+    nav: [
+      {
+        text: `v${packageJSON.version}`,
+        link: '/changelog'
+      },
+      {
+        text: '线上作品',
+        items: [
+          {
+            text: '轻取(文件收集)',
+            link: 'https://ep2.sugarat.top'
+          },
+          {
+            text: '个人图床',
+            link: 'https://imgbed.sugarat.top'
+          },
+          {
+            text: '考勤小程序',
+            link: 'https://hdkq.sugarat.top/'
+          },
+          {
+            text: '时光恋人',
+            link: 'https://lover.sugarat.top'
+          },
+          {
+            text: '在线简历生成',
+            link: 'https://resume.sugarat.top/'
+          }
+        ]
+      }
+    ],
+    socialLinks: [
+      {
+        icon: 'github',
+        link: 'https://github.com/ATQQ/sugar-blog/tree/master/packages/theme'
+      }
+    ]
   }
 })

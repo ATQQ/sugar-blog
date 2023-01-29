@@ -12,6 +12,7 @@
     "lib": ["ESNext", "DOM"],
     "skipLibCheck": true,
     "allowJs": true,
+    "resolveJsonModule":true,
     "paths": {
       "@sugarat/theme/node": ["./node"],
       "@sugarat/theme": ["src/index.ts"]
