@@ -13,7 +13,7 @@
     "skipLibCheck": true,
     "allowJs": true,
     "paths": {
-      "@sugarat/theme/node": ["./node.js"],
+      "@sugarat/theme/node": ["./node"],
       "@sugarat/theme": ["src/index.ts"]
     }
   },

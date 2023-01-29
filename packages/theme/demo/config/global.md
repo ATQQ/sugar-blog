@@ -1,6 +1,7 @@
 ---
 description: 详细介绍主题提供的全局能力
 title: 🔧 主题配置 - 全局
+readingTime: false
 ---
 
 # 全局配置
@@ -8,13 +9,11 @@ title: 🔧 主题配置 - 全局
 
 默认配置如下
 ```ts
-import { defineConfigWithTheme } from 'vitepress'
-import type { Theme } from '@sugarat/theme'
-import { getThemeConfig } from '@sugarat/theme/node'
+import { getThemeConfig, defineConfig } from '@sugarat/theme/node'
 
 const blogTheme = getThemeConfig()
 
-export default defineConfigWithTheme<Theme.Config>({
+export default defineConfig({
   themeConfig: {
     ...blogTheme
   }
@@ -23,17 +22,22 @@ export default defineConfigWithTheme<Theme.Config>({
 
 本主题的拓展配置都在`getThemeConfig`方法中
 
-下面是个示例
+下面是简单示例 **关闭主题自带搜索**
 ```ts
-const blogConfig: Partial<Theme.BlogConfig> = {
-  // 关闭主题自带搜索
-  search: false
-}
+import { getThemeConfig, defineConfig } from '@sugarat/theme/node'
 
-const blogTheme = getThemeConfig(blogConfig)
+const blogTheme = getThemeConfig({ // [!code focus]
+  search: false // [!code focus]
+}) // [!code focus]
+
+export default defineConfig({
+  themeConfig: {
+    ...blogTheme
+  }
+})
 ```
 
-下面详细介绍 [Theme.BlogConfig](https://github.com/ATQQ/sugar-blog/blob/255c4b1e6a85a529be3a72c88e365077e067ecba/packages/theme/src/composables/config/index.ts#L69-L137)
+下面开始详细介绍 [Theme.BlogConfig](https://github.com/ATQQ/sugar-blog/blob/255c4b1e6a85a529be3a72c88e365077e067ecba/packages/theme/src/composables/config/index.ts#L69-L137)
 
 ## author
 * Type: `string`

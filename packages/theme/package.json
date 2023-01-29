@@ -4,7 +4,10 @@
   "description": "粥里有勺糖的博客主题，sugarat vitepress blog theme",
   "main": "src/index.ts",
   "exports": {
-    "./node": "./node.js",
+    "./node": {
+      "types": "./node.d.ts",
+      "default": "./node.js"
+    },
     ".": "./src/index.ts"
   },
   "files": [

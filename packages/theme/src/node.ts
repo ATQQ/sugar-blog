@@ -3,6 +3,7 @@ import matter from 'gray-matter'
 import fs from 'fs'
 import { execSync, spawn } from 'child_process'
 import path from 'path'
+import type { UserConfig } from 'vitepress'
 import { formatDate } from './utils/index'
 import type { Theme } from './composables/config/index'
 
@@ -167,4 +168,8 @@ function getTextSummary(text: string, count = 100) {
       ?.replace(/>(.*)/, '')
       ?.slice(0, count)
   )
+}
+
+export function defineConfig(config: UserConfig<Theme.Config>) {
+  return config
 }

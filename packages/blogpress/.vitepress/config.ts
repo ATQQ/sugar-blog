@@ -1,6 +1,4 @@
-import { defineConfigWithTheme } from 'vitepress'
-import type { Theme } from '@sugarat/theme'
-import { getThemeConfig } from '@sugarat/theme/node'
+import { getThemeConfig, defineConfig } from '@sugarat/theme/node'
 
 const blogTheme = getThemeConfig({
   author: '粥里有勺糖',
@@ -83,7 +81,7 @@ const extraHead: any =
       ]
     : []
 
-export default defineConfigWithTheme<Theme.Config>({
+export default defineConfig({
   ignoreDeadLinks: true,
   lang: 'zh-cmn-Hans',
   title: '粥里有勺糖',
