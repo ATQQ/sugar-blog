@@ -74,7 +74,8 @@ const blogTheme = getThemeConfig({
   hotArticle: {
     title: '🔥 自定义标题',
     nextText: '下一页',
-    pageSize: 1
+    pageSize: 1,
+    // empty: false // false 时无精选文章不展示此模块
   }
 })
 ```
@@ -187,10 +188,12 @@ interface GiscusConfig {
 :::
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMDc2MDIxMw==674920760213)
+
 ## recommend
-* Type: `RecommendArticle`
-* Default
-```ts
+用于控制推荐文章的展示卡片
+::: code-group
+
+```ts [default]
 const blogTheme = getThemeConfig({
   recommend: {
     title: '🔍 相关文章',
@@ -200,19 +203,19 @@ const blogTheme = getThemeConfig({
   }
 })
 ```
-用于控制推荐文章的展示卡片
-```ts
+
+```ts [example]
 const blogTheme = getThemeConfig({
   recommend: {
     title: '🔍 推荐文章',
     nextText: '下一页',
-    pageSize: 1
+    pageSize: 1,
+    // empty: false // false时无推荐文章不展示此模块
   }
 })
 ```
-![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMTI2MDQyNQ==674921260425)
 
-```ts
+```ts [type]
 interface RecommendArticle {
   title?: string
   pageSize?: number
@@ -220,6 +223,11 @@ interface RecommendArticle {
   empty?: string | boolean
 }
 ```
+
+:::
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMTI2MDQyNQ==674921260425)
+
 ## article
 设置文章全局相关能力
 ::: code-group
@@ -251,7 +259,9 @@ interface ArticleConfig {
 
 相对于项目根目录，文章所在位置，同 [App Configs #srcdir](https://vitepress.vuejs.org/config/app-configs#srcdir)
 
-**通常情况下无需设置**，默认从 CLI 指令取值 `vitepress dev docs`
+**通常情况下无需设置**，默认从 CLI 指令取值 
+
+例如 `vitepress dev docs`，取值即为`docs`
 
 等价于
 ```ts
@@ -260,3 +270,186 @@ const blogTheme = getThemeConfig({
 })
 ```
 
+## alert
+设置一个全局的提示弹窗 (由 [el-alert](https://element-plus.gitee.io/zh-CN/component/alert.html) 驱动)
+
+::: code-group
+
+```ts [example ①]
+const blogTheme = getThemeConfig({
+  alert: {
+    type: 'success',
+    title: 'xx功能上新啦🎉',
+    duration: 3000
+  }
+})
+```
+
+```ts [example ②]
+const blogTheme = getThemeConfig({
+  alert: {
+    type: 'success',
+    title: '标配内容，这是一个不会自动关闭的弹窗',
+    duration: 0,
+    description: '每次打开都会展示，可通过 html 属性自定义这块内容',
+    showIcon: true
+  }
+})
+```
+
+```ts [type]
+interface Alert {
+  type: 'success' | 'warning' | 'info' | 'error'
+  /**
+   * 细粒度的时间控制
+   * 默认展示时间，-1 只展示1次，其它数字为每次都展示，一定时间后自动消失，0为不自动消失
+   * 配置改变时，会重新触发展示
+   */
+  duration: number
+
+  title?: string
+  description?: string
+  closable?: boolean
+  center?: boolean
+  closeText?: string
+  showIcon?: boolean
+  html?: string
+}
+```
+:::
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDk5MzQwNTQwOA==674993405408)
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDk5MzcyNzU2MA==674993727560)
+
+## popover
+
+设置一个全局的公告弹窗，支持设置图片，文字，按钮（[el-button](https://element-plus.gitee.io/zh-CN/component/button.html)）跳链
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDk5NDY3Nzc5NQ==674994677795)
+
+
+::: code-group
+
+```ts [example]
+const blogTheme = getThemeConfig({
+  popover: {
+    title: '📢 广而周知 📢',
+    duration: -1,
+    body: [
+      {
+        type: 'title',
+        content: '小标题',
+        style: 'color:red'
+      },
+      { type: 'text', content: '👇公众号👇---👇 微信 👇' },
+      {
+        type: 'image',
+        src: 'https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210'
+      }
+    ],
+    footer: [
+      {
+        type: 'text',
+        content: 'footer 与 body 结构一致'
+      },
+      {
+        type: 'button',
+        link: 'https://sugarat.top',
+        content: '作者博客',
+        props: {
+          round: true
+        }
+      }
+    ]
+  },
+})
+```
+
+```ts [type]
+interface Popover {
+  title: string
+  /**
+   * 细粒度的时间控制
+   * 默认展示时间，-1 只展示1次，其它数字为每次都展示，一定时间后自动消失，0为不自动消失
+   * 配置改变时，会重新触发展示
+   */
+  duration: number
+  body?: BlogPopover.Value[]
+  footer?: BlogPopover.Value[]
+  /**
+   * 手动重新打开
+   */
+  reopen?: boolean
+}
+
+export namespace BlogPopover {
+  export interface Title {
+    type: 'title'
+    content: string
+    style?: string
+  }
+
+  export interface Text {
+    type: 'text'
+    content: string
+    style?: string
+  }
+
+  export interface Image {
+    type: 'image'
+    src: string
+    style?: string
+  }
+
+  export interface Button {
+    type: 'button'
+    link: string
+    content: string
+    style?: string
+    props?: InstanceType<typeof ElButton>['$props']
+  }
+
+  export type Value = Title | Text | Image | Button
+}
+```
+:::
+
+## friend
+用于设置首页展示的友链信息
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTMxMTE4Ng==674995311186)
+
+
+::: code-group
+
+```ts [example]
+const blogTheme = getThemeConfig({
+  friend: [
+    {
+      nickname: '粥里有勺糖',
+      des: '你的指尖用于改变世界的力量',
+      avatar:
+        'https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTE2NzAzMA==674995167030',
+      url: 'https://sugarat.top'
+    },
+    {
+      nickname: 'Vitepress',
+      des: 'Vite & Vue Powered Static Site Generator',
+      avatar:
+        'https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTI2NzY1Ng==674995267656',
+      url: 'https://vitepress.vuejs.org/'
+    }
+  ]
+})
+```
+
+```ts [type]
+interface FriendLink {
+  nickname: string
+  des: string
+  url: string
+  avatar: string
+}
+```
+:::

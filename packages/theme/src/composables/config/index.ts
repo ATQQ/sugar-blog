@@ -89,6 +89,44 @@ export namespace Theme {
   export interface ArticleConfig {
     readingTime?: boolean
   }
+  export interface Alert {
+    type: 'success' | 'warning' | 'info' | 'error'
+    /**
+     * 细粒度的时间控制
+     * 默认展示时间，-1 只展示1次，其它数字为每次都展示，一定时间后自动消失，0为不自动消失
+     * 配置改变时，会重新触发展示
+     */
+    duration: number
+    title?: string
+    description?: string
+    closable?: boolean
+    center?: boolean
+    closeText?: string
+    showIcon?: boolean
+    html?: string
+  }
+
+  export interface Popover {
+    title: string
+    /**
+     * 细粒度的时间控制
+     * 默认展示时间，-1 只展示1次，其它数字为每次都展示，一定时间后自动消失，0为不自动消失
+     * 配置改变时，会重新触发展示
+     */
+    duration: number
+    body?: BlogPopover.Value[]
+    footer?: BlogPopover.Value[]
+    /**
+     * 手动重新打开
+     */
+    reopen?: boolean
+  }
+  export interface FriendLink {
+    nickname: string
+    des: string
+    url: string
+    avatar: string
+  }
   export interface BlogConfig {
     pagesData: PageData[]
     srcDir?: string
@@ -107,43 +145,9 @@ export namespace Theme {
     /**
      * el-alert
      */
-    alert?: {
-      type: 'success' | 'warning' | 'info' | 'error'
-      title?: string
-      description?: string
-      closable?: boolean
-      center?: boolean
-      closeText?: string
-      showIcon?: boolean
-      html?: string
-      /**
-       * 细粒度的时间控制
-       * 默认展示时间，-1 只展示1次，其它数字为每次都展示，一定时间后自动消失，0为不自动消失
-       * 配置改变时，会重新触发展示
-       */
-      duration?: number
-    }
-    popover?: {
-      title: string
-      body?: BlogPopover.Value[]
-      footer?: BlogPopover.Value[]
-      /**
-       * 细粒度的时间控制
-       * 默认展示时间，-1 只展示1次，其它数字为每次都展示，一定时间后自动消失，0为不自动消失
-       * 配置改变时，会重新触发展示
-       */
-      duration?: number
-      /**
-       * 手动重新打开
-       */
-      reopen?: boolean
-    }
-    friend?: {
-      nickname: string
-      des: string
-      url: string
-      avatar: string
-    }[]
+    alert?: Alert
+    popover?: Popover
+    friend?: FriendLink[]
   }
 
   export interface Config extends DefaultTheme.Config {
