@@ -143,8 +143,28 @@ author: 粥里有勺糖
 
 如果没有单独设置则会默认使用全局的 `author` 配置，这个在后面会有介绍
 
+## readingTime <Badge type="warning" text="article" />
+设置是否展示文章的预计阅读时间
+::: code-group
+
+```md [Frontmatter]
+---
+readingTime: true
+---
+```
+
+```ts [type]
+interface ArticleConfig {
+  readingTime?: boolean
+}
+```
+
+:::
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMjAzNDEzOA==674922034138)
+
 ## date <Badge type="warning" text="article" />
-单独设置文章的发布时间，不设置的情况下默认会通过`Git`取记录的文件最后修改时间
+单独设置文章的发布时间，不设置的情况下默认会通过`Git`取文件最后修改时间
 
 ```md
 ---

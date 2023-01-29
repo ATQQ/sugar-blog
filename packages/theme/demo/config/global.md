@@ -200,9 +200,10 @@ interface RecommendArticle {
 }
 ```
 ## article
-* Type: `ArticleConfig`
-* Default
-```ts
+设置文章全局相关能力
+::: code-group
+
+```ts [default]
 const blogTheme = getThemeConfig({
   article: {
     /**
@@ -212,14 +213,17 @@ const blogTheme = getThemeConfig({
   }
 })
 ```
-![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMjAzNDEzOA==674922034138)
 
-配置全局文章相关的属性
-```ts
+```ts [type]
 interface ArticleConfig {
   readingTime?: boolean
 }
 ```
+
+:::
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMjAzNDEzOA==674922034138)
+
 ## srcDir
 * Type: `string`
 * Default: `.`

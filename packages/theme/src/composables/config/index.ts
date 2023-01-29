@@ -87,7 +87,6 @@ export namespace Theme {
   }
 
   export interface ArticleConfig {
-    // TODO：支持文章单独设置
     readingTime?: boolean
   }
   export interface BlogConfig {
