@@ -25,8 +25,9 @@
     "serve": "pnpm --filter 'blogpress' serve",
     "lint": "eslint --ext .js,.ts,.vue --fix packages/**",
     "deploy": "zx deploy.mjs",
-    "build:node": "pnpm --filter '@sugarat/theme' build:node",
-    "release": "pnpm build:node && pnpm release:only",
+    "deploy:theme": "zx deploy-theme.mjs",
+    "build:theme": "pnpm --filter '@sugarat/theme' build",
+    "release": "pnpm build:theme && pnpm release:only",
     "release:only": "changeset publish --registry=https://registry.npmjs.com/"
   },
   "repository": {

@@ -34,9 +34,10 @@
   "scripts": {
     "dev": "vitepress dev demo",
     "dev:lib": "npm run build:node && vitepress dev demo",
-    "build:demo": "vitepress build demo",
+    "build": "npm run build:node && npm run build:docs",
+    "build:docs": "vitepress build demo",
     "build:node": "npx tsup src/node.ts --dts --out-dir=./",
-    "serve": "npm run build:node && npm run build:demo && vitepress serve demo"
+    "serve": "npm run build && vitepress serve demo"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.10",
