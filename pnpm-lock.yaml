@@ -63,6 +63,21 @@ importers:
       sass: 1.56.1
       vite: 3.2.4_sass@1.56.1
 
+  packages/template:
+    specifiers:
+      '@sugarat/theme': ^0.1.0
+      sass: ^1.56.1
+      typescript: ^4.8.2
+      vitepress: ^1.0.0-alpha.33
+      vue: ^3.2.45
+    dependencies:
+      '@sugarat/theme': link:../theme
+      vue: 3.2.45
+    devDependencies:
+      sass: 1.56.1
+      typescript: 4.9.4
+      vitepress: 1.0.0-alpha.33_sass@1.56.1
+
   packages/theme:
     specifiers:
       '@element-plus/icons-vue': ^2.0.10

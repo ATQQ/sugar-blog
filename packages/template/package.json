@@ -1,0 +1,21 @@
+{
+  "name": "vitepress-blog",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "serve": "vitepress serve docs"
+  },
+  "dependencies": {
+    "@sugarat/theme":"^0.1.0",
+    "vue": "^3.2.45"
+  },
+  "devDependencies": {
+    "sass": "^1.56.1",
+    "typescript": "^4.8.2",
+    "vitepress": "^1.0.0-alpha.33"
+  },
+  "author": "粥里有勺糖",
+  "license": "MIT"
+}
