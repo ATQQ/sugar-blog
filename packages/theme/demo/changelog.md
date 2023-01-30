@@ -7,7 +7,16 @@ tag:
 
 # Changelog
 
-## 0.1.0
+## 0.1.1 (2023/01/30)
+
+### Patch Changes
+
+- fix: 没有初始化 git 之前启动报错
+- fix: 文章作者信息重复渲染
+- chore: 引导文案更新，记录 degit bug 解法
+- chore: 包信息修改
+
+## 0.1.0 (2023/01/29)
 
 ### Minor Changes
 
