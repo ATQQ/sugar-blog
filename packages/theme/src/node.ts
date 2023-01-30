@@ -124,14 +124,20 @@ export function clearMatterContent(content: string) {
 }
 
 export function getFileBirthTime(url: string) {
-  // 参考 vitepress 中的 getGitTimestamp 实现
-  const infoStr = execSync(`git log -1 --pretty="%ci" ${url}`)
-    .toString('utf-8')
-    .trim()
   let date = new Date()
-  if (infoStr) {
-    date = new Date(infoStr)
+
+  try {
+    // 参考 vitepress 中的 getGitTimestamp 实现
+    const infoStr = execSync(`git log -1 --pretty="%ci" ${url}`)
+      .toString('utf-8')
+      .trim()
+    if (infoStr) {
+      date = new Date(infoStr)
+    }
+  } catch (error) {
+    return formatDate(date)
   }
+
   return formatDate(date)
 }
 

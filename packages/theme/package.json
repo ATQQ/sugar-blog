@@ -1,7 +1,7 @@
 {
   "name": "@sugarat/theme",
   "version": "0.1.0",
-  "description": "粥里有勺糖的博客主题，sugarat vitepress blog theme",
+  "description": "简约风的 Vitepress 博客主题，sugarat vitepress blog theme",
   "main": "src/index.ts",
   "exports": {
     "./node": {
@@ -27,7 +27,7 @@
   ],
   "author": "sugar",
   "license": "MIT",
-  "homepage": "https://next.sugarat.top",
+  "homepage": "https://theme.sugarat.top",
   "bugs": {
     "url": "https://github.com/ATQQ/sugar-blog/issues"
   },
