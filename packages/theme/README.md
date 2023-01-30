@@ -27,6 +27,10 @@ pnpm build
 ## Advanced Ssage
 详细配置见文档 https://theme.sugarat.top
 
+## Known bugs and workarounds
+* `zlib: unexpected end of file:` clearing the cache folder (rm -rf ~/.degit)
+
+
 ## Thanks
 从以下项目中获得了灵感&经验
 * [vuepress-reco/vuepress-theme-reco-1.x](https://github.com/vuepress-reco/vuepress-theme-reco-1.x)

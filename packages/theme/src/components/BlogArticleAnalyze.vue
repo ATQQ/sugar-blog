@@ -9,7 +9,7 @@
       预计：{{ readTime }} 分钟
     </span>
   </div>
-  <div class="meta-des" ref="$des" id="hack-article-des">
+  <div class="meta-des 123" ref="$des" id="hack-article-des">
     <span v-if="author">
       <el-icon><UserFilled /></el-icon>
       {{ author }}
@@ -64,6 +64,7 @@ const analyze = () => {
   if (!$des.value) {
     return
   }
+  document.querySelectorAll('.meta-des').forEach((v) => v.remove())
   const docDomContainer = window.document.querySelector('#VPContent')
   const imgs = docDomContainer?.querySelectorAll<HTMLImageElement>(
     '.content-container .main img'

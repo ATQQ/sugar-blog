@@ -39,3 +39,6 @@ pnpm dev
 ```sh
 pnpm build
 ```
+
+## 可能的问题
+* `zlib: unexpected end of file:` clearing the cache folder (rm -rf ~/.degit)
