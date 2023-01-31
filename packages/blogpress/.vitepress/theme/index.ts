@@ -1,6 +1,6 @@
 import { h } from 'vue'
 import { EnhanceAppContext } from 'vitepress'
-import { BlogTheme, Theme } from '@sugarat/theme'
+import BlogTheme, { Theme } from '@sugarat/theme'
 
 // 全局组件
 import redirectBtn from './src/components/redirectBtn.vue'

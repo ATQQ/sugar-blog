@@ -1,3 +1,3 @@
-import { BlogTheme } from '@sugarat/theme'
+import BlogTheme from '@sugarat/theme'
 
 export default BlogTheme

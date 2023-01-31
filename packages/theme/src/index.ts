@@ -16,3 +16,5 @@ export const BlogTheme: Theme = {
 }
 
 export * from './composables/config/index'
+
+export default BlogTheme

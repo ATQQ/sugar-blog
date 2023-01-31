@@ -1,4 +1,4 @@
-import { BlogTheme, Theme } from '@sugarat/theme'
+import BlogTheme, { Theme } from '@sugarat/theme'
 import { ElMessage } from 'element-plus'
 import { h } from 'vue'
 
