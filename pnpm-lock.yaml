@@ -41,7 +41,7 @@ importers:
       '@vueuse/core': ^9.6.0
       axios: ^0.27.2
       clipboard-copy: ^4.0.1
-      element-plus: ^2.2.26
+      element-plus: ^2.2.28
       fast-glob: ^3.2.12
       gray-matter: ^4.0.3
       sass: ^1.56.1
@@ -54,7 +54,7 @@ importers:
       '@vueuse/core': 9.6.0_vue@3.2.45
       axios: 0.27.2
       clipboard-copy: 4.0.1
-      element-plus: 2.2.26_vue@3.2.45
+      element-plus: 2.2.28_vue@3.2.45
       fast-glob: 3.2.12
       gray-matter: 4.0.3
       vitepress: 1.0.0-alpha.33_sass@1.56.1
@@ -83,7 +83,7 @@ importers:
       '@element-plus/icons-vue': ^2.0.10
       '@vue/shared': ^3.2.45
       '@vueuse/core': ^9.6.0
-      element-plus: ^2.2.26
+      element-plus: ^2.2.28
       fast-glob: ^3.2.12
       gray-matter: ^4.0.3
       sass: ^1.56.1
@@ -95,7 +95,7 @@ importers:
       '@element-plus/icons-vue': 2.0.10_vue@3.2.45
       '@vue/shared': 3.2.45
       '@vueuse/core': 9.8.2_vue@3.2.45
-      element-plus: 2.2.26_vue@3.2.45
+      element-plus: 2.2.28_vue@3.2.45
       fast-glob: 3.2.12
       gray-matter: 4.0.3
     devDependencies:
@@ -1538,8 +1538,8 @@ packages:
     resolution: {integrity: sha512-jtD6YG370ZCIi/9GTaJKQxWTZD045+4R4hTk/x1UyoqadyJ9x9CgSi1RlVDQF8U2sxLLSnFkCaMihqljHIWgMg==}
     dev: true
 
-  /element-plus/2.2.26_vue@3.2.45:
-    resolution: {integrity: sha512-O/rdY5m9DkclpVg8r3GynyqCunm7MxSR142xSsjrZA77bi7bcwA3SIy6SPEDqHi5R4KqgkGYgKSp4Q4e3irbYg==}
+  /element-plus/2.2.28_vue@3.2.45:
+    resolution: {integrity: sha512-BsxF7iEaBydmRfw1Tt++EO9jRBjbtJr7ZRIrnEwz4J3Cwa1IzHCNCcx3ZwcYTlJq9CYFxv94JnbNr1EbkTou3A==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:

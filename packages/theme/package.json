@@ -43,7 +43,7 @@
     "@element-plus/icons-vue": "^2.0.10",
     "@vue/shared": "^3.2.45",
     "@vueuse/core": "^9.6.0",
-    "element-plus": "^2.2.26",
+    "element-plus": "^2.2.28",
     "fast-glob": "^3.2.12",
     "gray-matter": "^4.0.3"
   },
