@@ -1,10 +1,16 @@
 # @sugarat/theme
 
+## 0.1.3
+
+### Patch Changes
+
+- fix: 模板启动构建报错
+
 ## 0.1.2
 
 ### Patch Changes
 
-- fix: 升级element-plus版本，解决构建报错
+- fix: 升级 element-plus 版本，解决构建报错
 - feat: 追加主题的导出方式 default
 
 ## 0.1.1
