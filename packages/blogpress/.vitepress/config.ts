@@ -50,7 +50,8 @@ const blogTheme = getThemeConfig({
         'https://pic.fmcat.top/head.jpg?x-oss-process=image/auto-orient,1/resize,m_fill,w_110,h_110/quality,q_90',
       url: 'https://www.fmcat.top'
     }
-  ]
+  ],
+  search: false
 })
 
 const extraHead: any =
@@ -116,6 +117,12 @@ export default defineConfig({
   lastUpdated: true,
   themeConfig: {
     ...blogTheme,
+    algolia: {
+      appId: 'F919JCK8WY',
+      apiKey: '3eca209ad24bdfc26db63382dd5e4490',
+      indexName: 'sugarat_top',
+      placeholder: '请输入要搜索的内容...'
+    },
     lastUpdatedText: '上次更新于',
     footer: {
       message:
