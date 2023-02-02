@@ -6,6 +6,18 @@ tag:
 ---
 
 # Changelog
+## 0.1.3 (2023/02/01)
+
+### Patch Changes
+
+- fix: 模板启动构建报错
+
+## 0.1.2 (2023/01/31)
+
+### Patch Changes
+
+- fix: 升级 element-plus 版本，解决构建报错
+- feat: 追加主题的导出方式 default
 
 ## 0.1.1 (2023/01/30)
 
