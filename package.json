@@ -29,7 +29,7 @@
     "deploy:theme": "zx deploy-theme.mjs",
     "build:theme": "pnpm --filter '@sugarat/theme' build",
     "release": "pnpm build:theme && pnpm release:only",
-    "release:only": "changeset publish --registry=https://registry.npmjs.com/"
+    "release:only": "changeset publish"
   },
   "repository": {
     "type": "git",
