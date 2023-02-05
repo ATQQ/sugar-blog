@@ -6,6 +6,13 @@ tag:
 ---
 
 # Changelog
+
+## 0.1.4 (2023/02/05)
+
+### Patch Changes
+
+- fix: cover 提取失败
+
 ## 0.1.3 (2023/02/01)
 
 ### Patch Changes
