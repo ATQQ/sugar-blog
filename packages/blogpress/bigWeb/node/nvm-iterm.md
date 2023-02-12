@@ -1,4 +1,6 @@
 ---
+description: 终端启动时总会卡顿一下，没去探究原因，看到咲奈的分享才知道是nvm在作祟
+cover: https://img.cdn.sugarat.top/mdImg/MTY3NjE4NTM2MDkyOQ==676185360929
 tag:
  - 技术笔记
 ---
@@ -70,7 +72,7 @@ fnm install --latest
 fnm install 14
 ```
 
-### pnpm
+### [pnpm](https://pnpm.io/zh/cli/env)
 没错`pnpm` 可以安装Node包
 
 ```sh
@@ -82,3 +84,12 @@ pnpm env use --global latest
 ```sh
 pnpm env use --global 16
 ```
+
+## 最后
+笔者试用了下最后选择了`volta`
+
+不仅仅支持 node 版本管理，还支持其它全局包的管理
+
+功能非常的多（比如 根据项目里Node版本要求，自动切换）
+
+![](https://img.cdn.sugarat.top/mdImg/MTY3NjE4OTM5MTk2Mg==676189391962)
