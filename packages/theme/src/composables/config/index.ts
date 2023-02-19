@@ -128,6 +128,7 @@ export namespace Theme {
     avatar: string
   }
   export interface BlogConfig {
+    blog?: false
     pagesData: PageData[]
     srcDir?: string
     author?: string

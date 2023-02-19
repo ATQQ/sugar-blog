@@ -10,7 +10,9 @@ import BlogImagePreview from './BlogImagePreview.vue'
 import BlogArticleAnalyze from './BlogArticleAnalyze.vue'
 import BlogAlert from './BlogAlert.vue'
 import BlogPopover from './BlogPopover.vue'
+import { useBlogThemeMode } from '../composables/config/blog'
 
+const isBlogTheme = useBlogThemeMode()
 const { Layout } = Theme
 </script>
 
@@ -35,7 +37,7 @@ const { Layout } = Theme
       <BlogSearch />
     </template>
     <!-- 自定义首页 -->
-    <template #home-hero-before>
+    <template #home-hero-before v-if="isBlogTheme">
       <div class="home">
         <div class="header-banner">
           <BlogHomeBanner />
@@ -46,7 +48,7 @@ const { Layout } = Theme
         </div>
       </div>
     </template>
-    <template #sidebar-nav-after>
+    <template #sidebar-nav-after v-if="isBlogTheme">
       <BlogSidebar />
     </template>
     <!-- 评论 -->
