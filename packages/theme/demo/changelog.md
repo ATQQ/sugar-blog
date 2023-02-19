@@ -7,6 +7,12 @@ tag:
 
 # Changelog
 
+## 0.1.5 (2023/02/19)
+
+### Patch Changes
+
+- feat: 支持单独使用博客的主题能力但不影响首页布局
+
 ## 0.1.4 (2023/02/05)
 
 ### Patch Changes

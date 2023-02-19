@@ -17,8 +17,10 @@ const blogTheme = getThemeConfig({
         type: 'image',
         src: 'https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210'
       },
-      { type: 'title', content: '祝大家新年快乐，万事如意' },
-      { type: 'title', content: '🐰年大吉，大展宏🐰' }
+      {
+        type: 'text',
+        content: '欢迎大家私信交流'
+      }
     ],
     duration: -1
   },

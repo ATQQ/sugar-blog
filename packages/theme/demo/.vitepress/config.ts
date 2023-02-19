@@ -28,6 +28,26 @@ const blogTheme = getThemeConfig({
     category: 'Announcements',
     categoryId: 'DIC_kwDODmEcc84COVc6',
     inputPosition: 'top'
+  },
+  popover: {
+    title: '公告',
+    body: [
+      { type: 'text', content: '👇公众号👇---👇 微信 👇' },
+      {
+        type: 'image',
+        src: 'https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210'
+      },
+      {
+        type: 'text',
+        content: '欢迎大家私信交流'
+      },
+      {
+        type: 'button',
+        content: '博客',
+        link: 'https://sugarat.top'
+      }
+    ],
+    duration: 0
   }
 })
 
