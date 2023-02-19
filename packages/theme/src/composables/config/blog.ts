@@ -54,6 +54,9 @@ export function useBlogConfig() {
   return inject(configSymbol)!.value.blog
 }
 
+export function useBlogThemeMode() {
+  return inject(configSymbol)!.value.blog.blog ?? true
+}
 export function useHomeConfig() {
   return inject(homeConfigSymbol)!
 }
