@@ -38,6 +38,15 @@ html[class='dark'] {
   );
 }
 
+@media screen and (min-width: 960px) {
+  #VPContent.VPContent{
+    padding-top: 0;
+    .VPHome{
+      min-height: 100vh;
+    }
+  }
+}
+
 @media screen and (max-width: 959px) {
   .VPNav {
     background-color: var(--nav-bgc);

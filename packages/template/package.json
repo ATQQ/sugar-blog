@@ -16,7 +16,7 @@
   "devDependencies": {
     "sass": "^1.56.1",
     "typescript": "^4.8.2",
-    "vitepress": "1.0.0-alpha.33"
+    "vitepress": "1.0.0-alpha.47"
   },
   "author": "粥里有勺糖",
   "license": "MIT"
