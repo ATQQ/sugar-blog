@@ -67,6 +67,10 @@ export default defineConfig({
   },
   themeConfig: {
     ...blogTheme,
+    footer: {
+      message: `Power By <a target="_blank" href="https://theme.sugarat.top/"> @sugarat/theme@${packageJSON.version} </a>`,
+      copyright: 'MIT Licensed | Copyright © 粥里有勺糖'
+    },
     nav: [
       {
         text: `v${packageJSON.version}`,

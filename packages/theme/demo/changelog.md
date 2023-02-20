@@ -7,6 +7,13 @@ tag:
 
 # Changelog
 
+## 0.1.6 (2023/02/20)
+
+### Patch Changes
+
+- fix: 最新版vitepress首页顶部Nav穿透背景图
+- fix: 修复window路径问题
+
 ## 0.1.5 (2023/02/19)
 
 ### Patch Changes

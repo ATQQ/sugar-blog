@@ -64,6 +64,12 @@ const { Layout } = Theme
   max-width: 1126px;
 }
 
+@media screen and (min-width: 960px) {
+  .home {
+    padding-top: var(--vp-nav-height);
+  }
+}
+
 .header-banner {
   width: 100%;
   padding: 60px 0;
