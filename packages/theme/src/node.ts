@@ -20,11 +20,22 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
       // 去除 srcDir 处理目录名
       if (route.startsWith('./')) {
         route = route.replace(
-          new RegExp(`^\\.\\/${path.join(srcDir, '/')}`),
+          new RegExp(
+            `^\\.\\/${path
+              .join(srcDir, '/')
+              .replace(new RegExp(`\\${path.sep}`, 'g'), '/')}`
+          ),
           ''
         )
       } else {
-        route = route.replace(new RegExp(`^${path.join(srcDir, '/')}`), '')
+        route = route.replace(
+          new RegExp(
+            `^${path
+              .join(srcDir, '/')
+              .replace(new RegExp(`\\${path.sep}`, 'g'), '/')}`
+          ),
+          ''
+        )
       }
 
       const fileContent = fs.readFileSync(v, 'utf-8')
