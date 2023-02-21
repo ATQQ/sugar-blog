@@ -1,11 +1,20 @@
 # @sugarat/theme
 
+## 0.1.7
+
+### Patch Changes
+
+- fix: 文章页顶部展示遮挡问题
+- fix: 刷新页面评论偶现不展示
+- chore: 模板里添加自定义背景图示例
+- chore: 更新文档站介绍
+
 ## 0.1.6
 
 ### Patch Changes
 
-- fix: 最新版vitepress首页顶部Nav穿透背景图
-- fix: 修复window路径问题
+- fix: 最新版 vitepress 首页顶部 Nav 穿透背景图
+- fix: 修复 window 路径问题
 
 ## 0.1.5
 

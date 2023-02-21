@@ -7,6 +7,15 @@ tag:
 
 # Changelog
 
+## 0.1.7 (2023/02/21)
+
+### Patch Changes
+
+- fix: 文章页顶部展示遮挡问题
+- fix: 刷新页面评论偶现不展示
+- chore: 模板里添加自定义背景图示例
+- chore: 更新文档站介绍
+
 ## 0.1.6 (2023/02/20)
 
 ### Patch Changes
