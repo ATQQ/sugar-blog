@@ -39,7 +39,7 @@ html[class='dark'] {
 }
 
 @media screen and (min-width: 960px) {
-  #VPContent.VPContent{
+  #VPContent.is-home.VPContent{
     padding-top: 0;
     .VPHome{
       min-height: 100vh;
