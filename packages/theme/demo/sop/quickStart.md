@@ -17,6 +17,10 @@ npx degit ATQQ/sugar-blog/packages/template my-blog-demo
 cd my-blog-demo
 ```
 
+:::tip 执行 degit, 可能会遇到的问题
+* `zlib: unexpected end of file:` clearing the cache folder (rm -rf ~/.degit)
+:::
+
 ② 安装依赖
 ::: code-group
 
@@ -35,10 +39,21 @@ npm i -g pnpm
 pnpm dev
 ```
 
+你就会得到一个这样的页面
+
+![](https://img.cdn.sugarat.top/mdImg/MTY3Njk4OTk2Mjc0Nw==676989962747)
+
 ④ 构建产物
 ```sh
 pnpm build
 ```
 
-## 可能的问题
-* `zlib: unexpected end of file:` clearing the cache folder (rm -rf ~/.degit)
+⑤ 预览构建产物
+```sh
+pnpm serve
+```
+
+## 更多
+* [主题配置：首页&文章](./../config/frontmatter.md) - 主题提供的一些 `frontmatter`
+* [主题配置：全局](./../config/global.md) - 主题提供的额外能力
+* [主题配置：样式](./../config/style.md) - 自定义博客样式介绍

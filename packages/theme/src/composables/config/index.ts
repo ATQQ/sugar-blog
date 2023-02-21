@@ -63,7 +63,7 @@ export namespace Theme {
     mapping?: string
     inputPosition?: 'top' | 'bottom'
     lang?: string
-    loading?: 'lazy' | ''
+    loading?: 'lazy' | 'auto' | 'eager'
   }
 
   export interface HotArticle {
