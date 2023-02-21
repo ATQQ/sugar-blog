@@ -31,7 +31,7 @@
       :data-theme="isDark ? 'dark' : 'light'"
       :data-lang="commentConfig.lang || 'zh-CN'"
       crossorigin="anonymous"
-      :data-loading="commentConfig.loading || ''"
+      :data-loading="commentConfig.loading || 'eager'"
       async
     >
     </component>
@@ -93,7 +93,10 @@ watch(
     showComment.value = false
     setTimeout(() => {
       showComment.value = true
-    }, 100)
+    }, 200)
+  },
+  {
+    immediate: true
   }
 )
 </script>
