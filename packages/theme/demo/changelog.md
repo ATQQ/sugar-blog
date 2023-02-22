@@ -6,6 +6,18 @@ tag:
 ---
 
 # Changelog
+## 0.1.8 (2023/02/22)
+### Patch Changes
+
+- feat: 支持首页文章置顶能力 (样式较粗糙，欢迎PR改进)
+```md
+---
+# 值越小越靠前
+top: 1
+---
+```
+
+![](https://img.cdn.sugarat.top/mdImg/MTY3NzA3ODA4MDM5NA==677078080394)
 
 ## 0.1.7 (2023/02/21)
 

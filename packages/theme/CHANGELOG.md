@@ -1,5 +1,10 @@
 # @sugarat/theme
 
+## 0.1.8
+### Patch Changes
+
+- feat: 支持首页文章置顶能力
+
 ## 0.1.7
 
 ### Patch Changes

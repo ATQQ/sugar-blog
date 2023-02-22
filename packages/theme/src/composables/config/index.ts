@@ -45,6 +45,19 @@ export namespace Theme {
     // old
     categories: string[]
     tags: string[]
+    /**
+     * 文章首页置顶
+     */
+    top: number
+    // TODO: 待开发
+    /**
+     * 时间线
+     */
+    timeline: string
+    /**
+     * 专栏&合集
+     */
+    album: string
   }
   export interface PageData {
     route: string

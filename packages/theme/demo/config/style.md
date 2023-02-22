@@ -4,6 +4,7 @@ title: 🔧 主题配置 - 样式配置
 readingTime: false
 tag:
  - 配置
+top: 3
 ---
 
 # 样式配置
@@ -64,5 +65,24 @@ export default BlogTheme
 }
 ```
 
-## 更多
+## 置顶样式
+可以自行修改置顶icon的样式
+```scss
+.blog-item .pin.pin::before {
+  // 修改颜色
+  background-image: linear-gradient(red, red);
+}
+```
+![](https://img.cdn.sugarat.top/mdImg/MTY3NzA3OTExMjgxMA==677079112810)
+
+```scss
+// 隐藏置顶的icon
+.blog-item .pin.pin::before {
+  display: none;
+}
+```
+![](https://img.cdn.sugarat.top/mdImg/MTY3NzA3OTIwODAzNg==677079208036)
+
+
+## More
 ... wait a moment

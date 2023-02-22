@@ -5,6 +5,7 @@ readingTime: false
 outline: [2,3]
 tag:
  - 配置
+top: 1
 ---
 
 # 主题配置
@@ -231,3 +232,14 @@ sticky: 1
 ```
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkxMDA0NzU5MQ==674910047591)
+
+### top
+用于设置在首页置顶展示的文章，从 1 开始，值越小越靠前
+
+```md
+---
+top: 1
+---
+```
+
+![](https://img.cdn.sugarat.top/mdImg/MTY3NzA3ODA4MDM5NA==677078080394)

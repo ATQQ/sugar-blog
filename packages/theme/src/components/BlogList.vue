@@ -9,6 +9,7 @@
         :tag="v.meta.tag"
         :cover="v.meta.cover"
         :author="v.meta.author || globalAuthor"
+        :pin="v.meta.top"
       />
     </li>
   </ul>
@@ -43,11 +44,13 @@ const activeTag = useActiveTag()
 const activeTagLabel = computed(() => activeTag.value.label)
 
 const wikiList = computed(() => {
-  const data = docs.value
-    .filter((v) => v.meta.date && v.meta.title)
-    .filter((v) => !v.meta.hidden)
+  const topList = docs.value.filter((v) => v.meta.top)
+  topList.sort((a, b) => a.meta.top - b.meta.top)
+  const data = docs.value.filter(
+    (v) => v.meta.date && v.meta.title && !v.meta.top && !v.meta.hidden
+  )
   data.sort((a, b) => +new Date(b.meta.date) - +new Date(a.meta.date))
-  return data
+  return topList.concat(data)
 })
 
 const filterData = computed(() => {

@@ -1,5 +1,6 @@
 <template>
   <a class="blog-item" :href="route">
+    <i class="pin" v-if="!!pin"></i>
     <!-- 左侧信息  -->
     <div class="info-part">
       <!-- 标题 -->
@@ -33,6 +34,7 @@ const props = defineProps<{
   tag?: string[]
   author?: string
   cover?: string
+  pin?: number
 }>()
 
 const showTime = computed(() => {
@@ -41,6 +43,35 @@ const showTime = computed(() => {
 </script>
 
 <style lang="scss" scoped>
+.blog-item .pin {
+  position: absolute;
+  overflow: hidden;
+  width: 30px;
+  height: 30px;
+  top: -4px;
+  left: -4px;
+  opacity: 0.5;
+}
+.blog-item:hover .pin {
+  opacity: 1;
+}
+.blog-item .pin::before {
+  content: '';
+  position: absolute;
+  width: 120%;
+  height: 30px;
+  background-image: linear-gradient(
+    45deg,
+    var(--blog-theme-color),
+    var(--blog-theme-color)
+  );
+  transform: rotate(-45deg) translateY(-20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.23);
+}
+
 .blog-item {
   position: relative;
   margin: 0 auto 20px;
