@@ -6,6 +6,12 @@ tag:
 ---
 
 # Changelog
+
+## 0.1.9 (2023/02/24)
+### Patch Changes
+- feat: 支持自定义推荐文章的展示顺序
+
+
 ## 0.1.8 (2023/02/22)
 ### Patch Changes
 
