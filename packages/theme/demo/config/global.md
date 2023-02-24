@@ -5,6 +5,7 @@ readingTime: false
 tag:
  - 配置
 top: 2
+recommend: 2
 ---
 
 # 全局配置

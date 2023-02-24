@@ -48,7 +48,11 @@ export namespace Theme {
     /**
      * 文章首页置顶
      */
-    top: number
+    top?: number
+    /**
+     * 手动控制相关文章列表的顺序
+     */
+    recommend?: number | false
     // TODO: 待开发
     /**
      * 时间线
