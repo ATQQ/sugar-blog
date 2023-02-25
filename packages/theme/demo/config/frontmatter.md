@@ -5,6 +5,8 @@ readingTime: false
 outline: [2,3]
 tag:
  - 配置
+top: 1
+recommend: 1
 ---
 
 # 主题配置
@@ -231,3 +233,37 @@ sticky: 1
 ```
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkxMDA0NzU5MQ==674910047591)
+
+### top
+* type: `number`
+
+用于设置在首页置顶展示的文章，从 1 开始，值越小越靠前
+
+```md
+---
+top: 1
+---
+```
+
+![](https://img.cdn.sugarat.top/mdImg/MTY3NzA3ODA4MDM5NA==677078080394)
+
+### recommend
+* type: `number | false`
+
+用于设置文章左侧展示的 `推荐文章` 顺序（越小越靠前），或者在推荐列表中隐藏掉不展示
+
+```md
+---
+recommend: 1
+---
+```
+
+![](https://img.cdn.sugarat.top/mdImg/MTY3NzI0NTYyNDEyOA==677245624128)
+
+```md
+---
+recommend: false
+---
+```
+
+![](https://img.cdn.sugarat.top/mdImg/MTY3NzI0NjQ2NzIyNA==677246467224)

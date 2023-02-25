@@ -10,9 +10,15 @@ import DefaultTheme from 'vitepress/theme'
 import BlogApp from './components/BlogApp.vue'
 import { withConfigProvider } from './composables/config/blog'
 
+// page
+import TimelinePage from './components/TimelinePage.vue'
+
 export const BlogTheme: Theme = {
   ...DefaultTheme,
-  Layout: withConfigProvider(BlogApp)
+  Layout: withConfigProvider(BlogApp),
+  enhanceApp(ctx) {
+    ctx.app.component('TimelinePage', TimelinePage)
+  }
 }
 
 export * from './composables/config/index'

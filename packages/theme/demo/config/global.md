@@ -4,6 +4,8 @@ title: 🔧 主题配置 - 全局
 readingTime: false
 tag:
  - 配置
+top: 2
+recommend: 2
 ---
 
 # 全局配置
@@ -147,7 +149,7 @@ interface HomeBlog {
 * Type: `boolean`
 * Default: `true`
 
-控制是否启用主题自带的搜索功能
+控制是否启用主题自带的搜索功能(目前仅支持标题和描述内容的检索，整站内容的搜索还在开发中)
 ```ts
 const blogTheme = getThemeConfig({
   search: false
@@ -155,6 +157,30 @@ const blogTheme = getThemeConfig({
 ```
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMDQ0OTg1Ng==674920449856)
+
+当然也推荐大家接入[algolia](https://vitepress.vuejs.org/guide/theme-search)使用，申请教程可以参考 [博客优化之开启 Algolia 全文搜索](https://github.com/mqyqingfeng/Blog/issues/267)
+
+![](https://img.cdn.sugarat.top/mdImg/MTY3NzE2MjEzMjcyNQ==677162132725)
+
+其它搜索方案：可以使用官方推荐的一个插件 [vitepress-plugin-search](https://github.com/emersonbottero/vitepress-plugin-search)，基于 [flexsearch](https://github.com/nextapps-de/flexsearch#options)实现
+
+如下接入步骤
+
+::: code-group
+```sh [① 安装必要依赖]
+pnpm add vitepress-plugin-search markdown-it flexsearch -D
+```
+
+```ts [② .vitepress/config 加入配置]
+import { defineConfig } from '@sugarat/theme/node'
+import { SearchPlugin } from 'vitepress-plugin-search'
+export default defineConfig({
+  vite: {
+    plugins: [SearchPlugin()]
+  }
+})
+```
+:::
 
 ## comment
 配置文章的评论，使用 [giscus](https://giscus.app/zh-CN)（由 GitHub Discussions 驱动的评论系统）
@@ -455,3 +481,40 @@ interface FriendLink {
 }
 ```
 :::
+
+## blog
+* Type: `boolean`
+* Default: `true`
+
+是否设置为博客模式，默认为博客模式
+
+如果设置为`false`，就可以使用 Vitepress 默认的首页主题样式，如下示例
+
+```ts
+const blogTheme = getThemeConfig({
+  blog: false
+})
+```
+
+```md
+---
+layout: home
+
+hero:
+  name: VitePress
+  text: Vite & Vue powered static site generator.
+  tagline: Lorem ipsum...
+  image:
+    src: /logo.png
+    alt: VitePress
+  actions:
+    - theme: brand
+      text: Get Started
+      link: /guide/what-is-vitepress
+    - theme: alt
+      text: View on GitHub
+      link: https://github.com/vuejs/vitepress
+---
+```
+
+![](https://img.cdn.sugarat.top/mdImg/MTY3NzE2Mjk1NzczNw==677162957737)

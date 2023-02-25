@@ -1,5 +1,14 @@
 # @sugarat/theme
 
+## 0.1.9
+### Patch Changes
+- feat: 支持自定义推荐文章的展示顺序
+
+## 0.1.8
+### Patch Changes
+
+- feat: 支持首页文章置顶能力
+
 ## 0.1.7
 
 ### Patch Changes

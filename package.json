@@ -5,7 +5,7 @@
   "description": "个人博客&知识&文档站集",
   "devDependencies": {
     "@changesets/cli": "^2.26.0",
-    "@types/node": "^16.11.45",
+    "@types/node": "^16.18.4",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
     "eslint": "^7.32.0",

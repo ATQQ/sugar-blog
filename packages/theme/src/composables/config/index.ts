@@ -45,6 +45,23 @@ export namespace Theme {
     // old
     categories: string[]
     tags: string[]
+    /**
+     * 文章首页置顶
+     */
+    top?: number
+    /**
+     * 手动控制相关文章列表的顺序
+     */
+    recommend?: number | false
+    // TODO: 待开发
+    /**
+     * 时间线
+     */
+    timeline: string
+    /**
+     * 专栏&合集
+     */
+    album: string
   }
   export interface PageData {
     route: string

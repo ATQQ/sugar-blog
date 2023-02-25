@@ -66,9 +66,16 @@ const recommendList = computed(() => {
     .filter((v) => !!v.meta.title)
     // 过滤掉自己
     .filter((v) => v.route !== route.path.replace(/.html$/, ''))
+    // 过滤掉不需要展示的
+    .filter((v) => v.meta.recommend !== false)
 
-  origin.sort((a, b) => +new Date(b.meta.date) - +new Date(a.meta.date))
-  return origin
+  const topList = origin.filter((v) => v.meta?.recommend)
+  topList.sort((a, b) => Number(a.meta.recommend) - Number(b.meta.recommend))
+
+  const normalList = origin.filter((v) => !v.meta?.recommend)
+  normalList.sort((a, b) => +new Date(b.meta.date) - +new Date(a.meta.date))
+
+  return topList.concat(normalList)
 })
 const currentPage = ref(1)
 const changePage = () => {
@@ -128,7 +135,7 @@ const showChangeBtn = computed(() => {
       font-size: 14px;
       color: var(--description-font-color);
       font-weight: 600;
-      margin: 6px 12px 10px 0;
+      margin: 6px 8px 10px 0;
       width: 18px;
       height: 18px;
       line-height: 18px;
