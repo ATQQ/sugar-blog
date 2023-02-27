@@ -50,11 +50,30 @@ const blogTheme = getThemeConfig({
     duration: 0
   }
 })
+const extraHead: any =
+  process.env.NODE_ENV === 'production'
+    ? [
+        [
+          'script',
+          {
+            charset: 'UTF-8',
+            id: 'LA_COLLECT',
+            src: '//sdk.51.la/js-sdk-pro.min.js'
+          }
+        ],
+        [
+          'script',
+          {},
+          'LA.init({id:"Jyzk2AcXA3JsYbrG",ck:"Jyzk2AcXA3JsYbrG",hashMode:true})'
+        ]
+      ]
+    : []
 
 export default defineConfig({
   lang: 'zh-cmn-Hans',
   title: '@sugarat/theme',
   description: '粥里有勺糖的博客主题，基于 vitepress 实现',
+  head: [...extraHead],
   vite: {
     server: {
       host: '0.0.0.0'
