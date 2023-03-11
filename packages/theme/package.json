@@ -34,10 +34,10 @@
   "scripts": {
     "dev": "vitepress dev demo",
     "dev:lib": "npm run build:node && vitepress dev demo",
-    "build": "npm run build:node && npm run build:docs",
+    "build": "npm run build:node && npm run build:docs && npx pagefind --source 'demo/.vitepress/dist'",
     "build:docs": "vitepress build demo",
     "build:node": "npx tsup src/node.ts --dts --out-dir=./",
-    "serve": "npm run build && vitepress serve demo"
+    "serve": "vitepress serve demo"
   },
   "dependencies": {
     "@vue/shared": "^3.2.45",

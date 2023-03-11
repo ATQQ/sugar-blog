@@ -59,6 +59,7 @@
         "no-extend-native": "warn",
         "no-underscore-dangle": "off",
         "@typescript-eslint/no-non-null-assertion":"off",
-        "non-null-expression":"off"
+        "non-null-expression":"off",
+        "@typescript-eslint/ban-ts-comment":"off"
     }
 }

@@ -94,6 +94,19 @@ watch(
   }
 )
 
+watch(
+  () => searchWords.value,
+  () => {
+    // @ts-ignore
+    window?.__pagefind__
+      ?.search?.(searchWords.value)
+      .then(async (search: any) => {
+        console.log(search)
+        const oneResult = await search.results[0].data()
+        console.log(oneResult)
+      })
+  }
+)
 const docs = useArticles()
 
 const searchResult = computed(() => {
