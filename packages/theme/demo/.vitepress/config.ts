@@ -48,7 +48,8 @@ const blogTheme = getThemeConfig({
       }
     ],
     duration: 0
-  }
+  },
+  search: 'pagefind'
 })
 const extraHead: any =
   process.env.NODE_ENV === 'production'
@@ -65,17 +66,6 @@ const extraHead: any =
           'script',
           {},
           'LA.init({id:"Jyzk2AcXA3JsYbrG",ck:"Jyzk2AcXA3JsYbrG",hashMode:true})'
-        ],
-        [
-          'script',
-          {},
-          `import('/_pagefind/pagefind.js')
-          .then((module) => {
-            window.__pagefind__ = module
-          })
-          .catch(() => {
-            console.log('')
-          })`
         ]
       ]
     : []

@@ -188,5 +188,20 @@ function getTextSummary(text: string, count = 100) {
 }
 
 export function defineConfig(config: UserConfig<Theme.Config>) {
+  if (config?.themeConfig?.blog?.search === 'pagefind') {
+    config.head = (config.head || []).concat([
+      [
+        'script',
+        {},
+        `import('/_pagefind/pagefind.js')
+      .then((module) => {
+        window.__pagefind__ = module
+      })
+      .catch(() => {
+        console.log('not load /_pagefind/pagefind.js')
+      })`
+      ]
+    ])
+  }
   return config
 }

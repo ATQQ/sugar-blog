@@ -1,5 +1,5 @@
 <template>
-  <ul>
+  <ul data-pagefind-ignore="all">
     <li v-for="v in currentWikiData" :key="v.route">
       <blog-item
         :route="v.route"
@@ -44,8 +44,8 @@ const activeTag = useActiveTag()
 const activeTagLabel = computed(() => activeTag.value.label)
 
 const wikiList = computed(() => {
-  const topList = docs.value.filter((v) => v.meta.top)
-  topList.sort((a, b) => a.meta.top - b.meta.top)
+  const topList = docs.value.filter((v) => !!v.meta.top)
+  topList.sort((a, b) => a.meta!.top - b.meta!.top)
   const data = docs.value.filter(
     (v) => v.meta.date && v.meta.title && !v.meta.top && !v.meta.hidden
   )

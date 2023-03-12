@@ -15,7 +15,7 @@ recommend: 1
 * `Article`：单篇文章独立配置
 
 :::tip
-主题继承[默认主题配置](https://vitepress.vuejs.org/config/frontmatter-configs)，即原主题配置依然生效
+主题继承[默认主题配置](https://vitepress.dev/reference/site-config)，即原主题配置依然生效
 
 官方内置的👉🏻 [markdown 能力](https://vitepress.vuejs.org/guide/markdown) 👈🏻
 :::

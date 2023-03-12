@@ -1,5 +1,5 @@
 <template>
-  <div class="theme-blog-popover" v-show="show">
+  <div class="theme-blog-popover" v-show="show" data-pagefind-ignore="all">
     <div class="header">
       <div class="title-wrapper">
         <el-icon size="20px"><Flag /></el-icon>

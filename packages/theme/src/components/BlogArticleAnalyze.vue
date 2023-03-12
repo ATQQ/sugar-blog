@@ -1,5 +1,5 @@
 <template>
-  <div class="doc-analyze" v-if="showAnalyze">
+  <div class="doc-analyze" v-if="showAnalyze" data-pagefind-ignore="all">
     <span>
       <el-icon><EditPen /></el-icon>
       字数：{{ wordCount }} 个字

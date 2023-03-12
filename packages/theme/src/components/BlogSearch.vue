@@ -1,5 +1,5 @@
 <template>
-  <div class="blog-search" v-if="openSearch">
+  <div class="blog-search" v-if="openSearch" data-pagefind-ignore="all">
     <div class="nav-search-btn-wait" @click="searchModal = true">
       <el-icon size="22px">
         <Search />
@@ -47,9 +47,7 @@
                   {{ formatDate(item.meta.date, 'yyyy-MM-dd') }}</span
                 >
               </div>
-              <div class="des">
-                {{ item.meta.description }}
-              </div>
+              <div class="des" v-html="item.meta.description"></div>
             </a>
           </el-card>
         </li>
@@ -73,6 +71,7 @@ import {
 import { useWindowSize } from '@vueuse/core'
 import { formatDate } from '../utils'
 import { useArticles, useBlogConfig } from '../composables/config/blog'
+import { Theme } from '../composables/config'
 
 const { search: openSearch = true } = useBlogConfig()
 
@@ -94,31 +93,50 @@ watch(
   }
 )
 
+const docs = useArticles()
+
+const searchResult = ref<Theme.PageData[]>([])
+
 watch(
   () => searchWords.value,
   () => {
-    // @ts-ignore
-    window?.__pagefind__
-      ?.search?.(searchWords.value)
-      .then(async (search: any) => {
-        console.log(search)
-        const oneResult = await search.results[0].data()
-        console.log(oneResult)
+    if (openSearch === 'pagefind') {
+      // @ts-ignore
+      window?.__pagefind__
+        ?.search?.(searchWords.value)
+        .then(async (search: any) => {
+          const result = await Promise.all(
+            search.results.map((v: any) => v.data())
+          )
+          searchResult.value = []
+          docs.value.forEach((v) => {
+            const match = result.find((r) => r.url.startsWith(v.route))
+            if (match) {
+              searchResult.value.push({
+                ...v,
+                meta: {
+                  ...v.meta,
+                  description: match.excerpt
+                }
+              })
+            }
+          })
+        })
+    } else {
+      if (!searchWords.value) {
+        searchResult.value = []
+        return
+      }
+      searchResult.value = docs.value.filter((v) =>
+        `${v.meta.description}${v.meta.title}`.includes(searchWords.value)
+      )
+      searchResult.value.sort((a, b) => {
+        return +new Date(b.meta.date) - +new Date(a.meta.date)
       })
+    }
   }
 )
-const docs = useArticles()
 
-const searchResult = computed(() => {
-  if (!searchWords.value) return []
-  const result = docs.value.filter((v) =>
-    `${v.meta.description}${v.meta.title}`.includes(searchWords.value)
-  )
-  result.sort((a, b) => {
-    return +new Date(b.meta.date) - +new Date(a.meta.date)
-  })
-  return result
-})
 const pageSize = ref(6)
 const currentPage = ref(0)
 const showSearchResult = computed(() => {
