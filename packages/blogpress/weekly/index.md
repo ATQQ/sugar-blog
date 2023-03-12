@@ -17,6 +17,7 @@ hidden: true
 
 
 ## 2023
+* [技术视野周刊第28期](./2023-03-10.md)
 * [技术视野周刊第27期](./2023-03-03.md)
 * [技术视野周刊第26期](./2023-02-24.md)
 * [技术视野周刊第25期](./2023-02-17.md)
@@ -42,7 +43,7 @@ hidden: true
 * [云谦：MDH 前端周刊](https://www.yuque.com/chencheng/mdh-weekly) - 前端资讯和分享
 * [童欧巴：前端食堂](https://github.com/Geekhyt/weekly) - 你的前端食堂，吃好每一顿饭
 * [rottenpen：FE News](https://rottenpen.zhubai.love/) - 分享前端，生活
-* [知识星球：咲奈的平行时空](https://public.zsxq.com/groups/28851452458181.html) - 前端前沿技术、资讯、方法论分享
+* [知识星球：咲奈的平行时空](https://wx.zsxq.com/dweb2/index/group/15552285284822) - 前端前沿技术、资讯、方法论分享
 
 ### 技术社区
 * [掘金](https://juejin.cn/)
