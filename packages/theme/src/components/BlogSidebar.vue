@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar"><BlogRecommendArticle /></div>
+  <div class="sidebar" data-pagefind-ignore="all"><BlogRecommendArticle /></div>
 </template>
 
 <script lang="ts" setup>

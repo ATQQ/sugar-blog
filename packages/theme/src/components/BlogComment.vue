@@ -1,5 +1,10 @@
 <template>
-  <div class="comment" v-if="show" id="giscus-comment">
+  <div
+    class="comment"
+    v-if="show"
+    id="giscus-comment"
+    data-pagefind-ignore="all"
+  >
     <el-affix
       :class="{ hidden: !showCommnetAffix }"
       class="comment-btn"

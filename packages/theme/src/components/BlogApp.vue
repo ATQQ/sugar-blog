@@ -17,7 +17,7 @@ const { Layout } = Theme
 </script>
 
 <template>
-  <Layout>
+  <Layout data-pagefind-body>
     <template #layout-top>
       <BlogAlert />
       <BlogPopover />

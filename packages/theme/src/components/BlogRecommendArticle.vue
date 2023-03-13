@@ -1,5 +1,9 @@
 <template>
-  <div class="card recommend" v-if="recommendList.length || emptyText">
+  <div
+    class="card recommend"
+    v-if="recommendList.length || emptyText"
+    data-pagefind-ignore="all"
+  >
     <!-- 头部 -->
     <div class="card-header">
       <span class="title">{{ title }}</span>

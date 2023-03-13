@@ -53,6 +53,13 @@ pnpm build
 pnpm serve
 ```
 
+## 升级
+
+如果主题更新了，升级主题，原项目只需执行如下指令即可
+```sh
+pnpm up @sugarat/theme
+```
+
 ## 更多
 * [主题配置：首页&文章](./../config/frontmatter.md) - 主题提供的一些 `frontmatter`
 * [主题配置：全局](./../config/global.md) - 主题提供的额外能力

@@ -1,5 +1,5 @@
 <template>
-  <div class="global-alert" v-if="show">
+  <div class="global-alert" v-if="show" data-pagefind-ignore="all">
     <el-alert
       :title="alertProps?.title"
       :type="alertProps?.type"

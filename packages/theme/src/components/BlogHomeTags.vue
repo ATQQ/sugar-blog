@@ -1,5 +1,5 @@
 <template>
-  <div class="card tags" v-if="tags.length">
+  <div class="card tags" v-if="tags.length" data-pagefind-ignore="all">
     <!-- 头部 -->
     <div class="card-header">
       <span class="title">🏷 标签</span>

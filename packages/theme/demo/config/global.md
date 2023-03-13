@@ -24,7 +24,13 @@ export default defineConfig({
 })
 ```
 
-本主题的拓展配置都在`getThemeConfig`方法中
+:::tip
+主题继承[默认主题配置](https://vitepress.dev/reference/site-config)，即原主题配置依然生效
+
+官方内置的👉🏻 [markdown 能力](https://vitepress.vuejs.org/guide/markdown) 👈🏻
+:::
+
+本主题的拓展配置都在导出的`getThemeConfig`方法中
 
 下面是简单示例 **关闭主题自带搜索**
 ```ts
@@ -146,10 +152,10 @@ interface HomeBlog {
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMDIwMzE5MQ==674920203192)
 
 ## search
-* Type: `boolean`
+* Type: `boolean|'pagefind'`
 * Default: `true`
 
-控制是否启用主题自带的搜索功能(目前仅支持标题和描述内容的检索，整站内容的搜索还在开发中)
+控制是否启用主题自带的搜索功能(目前仅支持标题和描述内容的检索)
 ```ts
 const blogTheme = getThemeConfig({
   search: false
@@ -157,6 +163,16 @@ const blogTheme = getThemeConfig({
 ```
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMDQ0OTg1Ng==674920449856)
+
+开启全文搜索（基于 [pagefind](https://pagefind.app/) 实现）
+```ts
+const blogTheme = getThemeConfig({
+  search: 'pagefind'
+})
+```
+
+![](https://img.cdn.sugarat.top/mdImg/MTY3ODcxODkwNjUyOA==678718906528)
+
 
 当然也推荐大家接入[algolia](https://vitepress.vuejs.org/guide/theme-search)使用，申请教程可以参考 [博客优化之开启 Algolia 全文搜索](https://github.com/mqyqingfeng/Blog/issues/267)
 

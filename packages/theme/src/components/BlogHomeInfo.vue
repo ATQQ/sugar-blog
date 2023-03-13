@@ -6,7 +6,7 @@ import BlogFriendLink from './BlogFriendLink.vue'
 </script>
 
 <template>
-  <div class="blog-info">
+  <div class="blog-info" data-pagefind-ignore="all">
     <!-- 统计数据，日后支持，点击筛选出左侧的数据 -->
     <BlogHomeOverview />
 

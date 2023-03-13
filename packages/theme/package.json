@@ -1,6 +1,6 @@
 {
   "name": "@sugarat/theme",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "简约风的 Vitepress 博客主题，sugarat vitepress blog theme",
   "main": "src/index.ts",
   "exports": {
@@ -37,7 +37,7 @@
     "build": "npm run build:node && npm run build:docs",
     "build:docs": "vitepress build demo",
     "build:node": "npx tsup src/node.ts --dts --out-dir=./",
-    "serve": "npm run build && vitepress serve demo"
+    "serve": "vitepress serve demo"
   },
   "dependencies": {
     "@vue/shared": "^3.2.45",

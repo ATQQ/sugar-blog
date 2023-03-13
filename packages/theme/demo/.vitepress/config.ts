@@ -48,7 +48,8 @@ const blogTheme = getThemeConfig({
       }
     ],
     duration: 0
-  }
+  },
+  search: 'pagefind'
 })
 const extraHead: any =
   process.env.NODE_ENV === 'production'

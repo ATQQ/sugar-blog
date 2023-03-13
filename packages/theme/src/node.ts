@@ -1,3 +1,4 @@
+/* eslint-disable prefer-rest-params */
 import glob from 'fast-glob'
 import matter from 'gray-matter'
 import fs from 'fs'
@@ -188,5 +189,61 @@ function getTextSummary(text: string, count = 100) {
 }
 
 export function defineConfig(config: UserConfig<Theme.Config>) {
+  if (config?.themeConfig?.blog?.search === 'pagefind') {
+    config.head = (config.head || []).concat([
+      [
+        'script',
+        {},
+        `import('/_pagefind/pagefind.js')
+      .then((module) => {
+        window.__pagefind__ = module
+      })
+      .catch(() => {
+        console.log('not load /_pagefind/pagefind.js')
+      })`
+      ]
+    ])
+    let flag = true
+    let originLog: any = null
+    config.vite = {
+      ...config.vite,
+      plugins: [
+        ...(config.vite?.plugins || []),
+        {
+          name: '@sugarar/theme-plugin-pagefind',
+          buildEnd() {
+            const { log } = console
+            // TODO: hack
+            if (flag) {
+              flag = false
+              originLog = log
+              Object.defineProperty(console, 'log', {
+                value() {
+                  if (`${arguments[0]}`.includes('build complete')) {
+                    console.log = originLog
+                    setTimeout(() => {
+                      originLog()
+                      originLog('=== pagefind: https://pagefind.app/ ===')
+                      const command = `npx pagefind --source ${path.join(
+                        process.argv.slice(2)?.[1] || '.',
+                        '.vitepress/dist'
+                      )}`
+                      originLog(command)
+                      originLog()
+                      execSync(command, {
+                        stdio: 'inherit'
+                      })
+                    }, 100)
+                  }
+                  // @ts-ignore
+                  return log.apply(this, arguments)
+                }
+              })
+            }
+          }
+        }
+      ]
+    }
+  }
   return config
 }

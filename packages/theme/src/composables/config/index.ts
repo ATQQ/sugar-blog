@@ -152,7 +152,7 @@ export namespace Theme {
     hotArticle?: HotArticle
     home?: HomeBlog
     // TODO: 本地全文搜索定制 pagefind || minisearch
-    search?: boolean
+    search?: boolean | 'pagefind'
     /**
      * 配置评论
      * power by https://giscus.app/zh-CN
