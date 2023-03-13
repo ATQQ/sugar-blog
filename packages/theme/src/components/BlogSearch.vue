@@ -96,11 +96,28 @@ watch(
 const docs = useArticles()
 
 const searchResult = ref<Theme.PageData[]>([])
-
+const inlineSearch = () => {
+  if (!searchWords.value) {
+    searchResult.value = []
+    return
+  }
+  searchResult.value = docs.value.filter((v) =>
+    `${v.meta.description}${v.meta.title}`.includes(searchWords.value)
+  )
+  searchResult.value.sort((a, b) => {
+    return +new Date(b.meta.date) - +new Date(a.meta.date)
+  })
+}
 watch(
   () => searchWords.value,
   () => {
     if (openSearch === 'pagefind') {
+      // dev-server兜底
+      // @ts-ignore
+      if (!window?.__pagefind__?.search) {
+        inlineSearch()
+        return
+      }
       // @ts-ignore
       window?.__pagefind__
         ?.search?.(searchWords.value)
@@ -123,16 +140,7 @@ watch(
           })
         })
     } else {
-      if (!searchWords.value) {
-        searchResult.value = []
-        return
-      }
-      searchResult.value = docs.value.filter((v) =>
-        `${v.meta.description}${v.meta.title}`.includes(searchWords.value)
-      )
-      searchResult.value.sort((a, b) => {
-        return +new Date(b.meta.date) - +new Date(a.meta.date)
-      })
+      inlineSearch()
     }
   }
 )

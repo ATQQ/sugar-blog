@@ -1,5 +1,9 @@
 # @sugarat/theme
 
+## 0.1.10
+- feat: 支持全文搜索（基于 [pagefind](https://pagefind.app/) 实现）
+  - `search: 'pagefind'`
+
 ## 0.1.9
 ### Patch Changes
 - feat: 支持自定义推荐文章的展示顺序
