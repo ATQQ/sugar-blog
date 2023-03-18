@@ -6,6 +6,7 @@ tag:
  - 配置
 top: 2
 recommend: 2
+outline: [2,3]
 ---
 
 # 全局配置
@@ -46,7 +47,7 @@ export default defineConfig({
   }
 })
 ```
-![](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMDQ0OTg1Ng==674920449856)
+![](https://img.cdn.sugarat.top/mdImg/MTY3OTEyMjg5Nzc1Mg==679122897752)
 
 下面开始详细介绍 [Theme.BlogConfig](https://github.com/ATQQ/sugar-blog/blob/255c4b1e6a85a529be3a72c88e365077e067ecba/packages/theme/src/composables/config/index.ts#L69-L137)
 
@@ -155,30 +156,55 @@ interface HomeBlog {
 * Type: `boolean|'pagefind'`
 * Default: `true`
 
-控制是否启用主题自带的搜索功能(目前仅支持标题和描述内容的检索)
+控制是否启用主题自带的搜索功能
 ```ts
 const blogTheme = getThemeConfig({
   search: false
 })
 ```
+![](https://img.cdn.sugarat.top/mdImg/MTY3OTEyMjg5Nzc1Mg==679122897752)
 
-![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMDQ0OTg1Ng==674920449856)
+![](https://img.cdn.sugarat.top/mdImg/MTY3OTEyMjk2MTg5Mg==679122961892)
 
+### 全文搜索 - pagefind
 开启全文搜索（基于 [pagefind](https://pagefind.app/) 实现）
 ```ts
 const blogTheme = getThemeConfig({
   search: 'pagefind'
 })
 ```
+:::tip
+构建后才会生效，其原理是分析生成的html文件内容
 
-![](https://img.cdn.sugarat.top/mdImg/MTY3ODcxODkwNjUyOA==678718906528)
+原理见 => [Pagefind indexes your site after it builds](https://pagefind.app/docs/)
+:::
+:::details 构建示例
+![](https://img.cdn.sugarat.top/mdImg/MTY3OTEyMzM1ODQxNQ==679123358415)
+:::
 
+![](https://img.cdn.sugarat.top/mdImg/MTY3OTEyMzQ0NDAwOA==679123444008)
 
+### 全文搜索 - algolia
 当然也推荐大家接入[algolia](https://vitepress.vuejs.org/guide/theme-search)使用，申请教程可以参考 [博客优化之开启 Algolia 全文搜索](https://github.com/mqyqingfeng/Blog/issues/267)
+
+```ts
+export default defineConfig({
+  themeConfig: {
+    algolia: {
+      appId: '',
+      apiKey: '',
+      indexName: '',
+      placeholder: '请输入要搜索的内容...'
+    }
+  }
+})
+```
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY3NzE2MjEzMjcyNQ==677162132725)
 
-其它搜索方案：可以使用官方推荐的一个插件 [vitepress-plugin-search](https://github.com/emersonbottero/vitepress-plugin-search)，基于 [flexsearch](https://github.com/nextapps-de/flexsearch#options)实现
+### 全文搜索 - flexsearch
+
+其它搜索方案：可以使用官方文档推荐的一个插件 [vitepress-plugin-search](https://github.com/emersonbottero/vitepress-plugin-search)，基于 [flexsearch](https://github.com/nextapps-de/flexsearch#options)实现
 
 如下接入步骤
 

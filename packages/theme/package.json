@@ -1,6 +1,6 @@
 {
   "name": "@sugarat/theme",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "简约风的 Vitepress 博客主题，sugarat vitepress blog theme",
   "main": "src/index.ts",
   "exports": {
@@ -43,7 +43,9 @@
     "@vue/shared": "^3.2.45",
     "@vueuse/core": "^9.6.0",
     "fast-glob": "^3.2.12",
-    "gray-matter": "^4.0.3"
+    "gray-matter": "^4.0.3",
+    "highlight.js": "^11.7.0",
+    "vue-command-palette": "^0.1.4"
   },
   "devDependencies": {
     "@element-plus/icons-vue": "^2.0.10",
