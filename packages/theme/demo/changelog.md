@@ -12,6 +12,12 @@ tag:
 pnpm up @sugarat/theme
 ```
 
+## 0.1.11 (2023/03/18)
+- chore: 文档内容完善
+- feat：内置搜索弹窗UI更新 - 类似algolia（基于 [vue-command-palette](https://github.com/xiaoluoboding/vue-command-palette/blob/main/src/assets/scss/algolia.scss)）
+
+![](https://img.cdn.sugarat.top/mdImg/MTY3OTEyNDM0ODQ4OA==679124348488)
+
 ## 0.1.10 (2023/03/12)
 - feat: 支持全文搜索（基于 [pagefind](https://pagefind.app/) 实现）
   - `search: 'pagefind'`
