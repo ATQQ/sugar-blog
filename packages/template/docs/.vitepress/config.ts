@@ -18,7 +18,9 @@ const blogTheme = getThemeConfig({
         'https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTI2NzY1Ng==674995267656',
       url: 'https://vitepress.vuejs.org/'
     }
-  ]
+  ],
+  // 开启离线的全文搜索支持（如构建报错可注释下面的配置再次尝试）
+  search: 'pagefind'
 })
 
 export default defineConfig({
