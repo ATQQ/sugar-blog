@@ -1,5 +1,8 @@
 # @sugarat/theme
 
+## 0.1.12
+- fix: 搜索框影响首页样式
+
 ## 0.1.11
 - chore: 文档内容完善
 - feat：内置搜索弹窗UI更新 - 类似algolia（基于 [vue-command-palette](https://github.com/xiaoluoboding/vue-command-palette/blob/main/src/assets/scss/algolia.scss)）
