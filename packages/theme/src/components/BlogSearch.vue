@@ -33,7 +33,7 @@
             >
               <Command.Item
                 v-for="item in showSearchResult"
-                :data-value="item.route"
+                :data-value="withBase(item.route)"
                 :key="item.route"
                 @select="handleSelect"
               >
@@ -131,7 +131,7 @@
 import { computed, nextTick, ref, watch } from 'vue'
 // @ts-ignore
 import { Command } from 'vue-command-palette'
-import { useRoute, useRouter } from 'vitepress'
+import { useRoute, useRouter, withBase } from 'vitepress'
 import { useMagicKeys } from '@vueuse/core'
 import { formatDate } from '../utils'
 import { useArticles, useBlogConfig } from '../composables/config/blog'

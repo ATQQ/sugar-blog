@@ -11,6 +11,8 @@ tag:
 ```sh
 pnpm up @sugarat/theme
 ```
+## 0.1.13 (2023/03/19)
+- fix: route support [withBase](https://vitepress.dev/reference/runtime-api#withbase)
 
 ## 0.1.12 (2023/03/18)
 - fix: 搜索框影响首页样式

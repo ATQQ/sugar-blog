@@ -1,5 +1,5 @@
 <template>
-  <a class="blog-item" :href="route">
+  <a class="blog-item" :href="withBase(route)">
     <i class="pin" v-if="!!pin"></i>
     <!-- 左侧信息  -->
     <div class="info-part">
@@ -22,6 +22,7 @@
 </template>
 
 <script lang="ts" setup>
+import { withBase } from 'vitepress'
 import { computed } from 'vue'
 import { formatShowDate } from '../utils/index'
 

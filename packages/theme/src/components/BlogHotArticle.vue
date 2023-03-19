@@ -24,7 +24,7 @@
         <!-- 简介 -->
         <div class="des">
           <!-- title -->
-          <el-link type="info" class="title" :href="v.route">{{
+          <el-link type="info" class="title" :href="withBase(v.route)">{{
             v.meta.title
           }}</el-link>
           <!-- 描述信息 -->
@@ -42,6 +42,7 @@
 <script lang="ts" setup>
 import { ref, computed } from 'vue'
 import { ElButton, ElLink } from 'element-plus'
+import { withBase } from 'vitepress'
 import { useArticles, useBlogConfig } from '../composables/config/blog'
 import { formatShowDate } from '../utils/index'
 

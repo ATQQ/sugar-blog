@@ -42,7 +42,7 @@
 <script lang="ts" setup>
 import { ref, computed } from 'vue'
 import { ElButton, ElLink } from 'element-plus'
-import { useRoute } from 'vitepress'
+import { useRoute, withBase } from 'vitepress'
 import { formatShowDate } from '../utils/index'
 import { useArticles, useBlogConfig } from '../composables/config/blog'
 
@@ -59,6 +59,7 @@ const route = useRoute()
 const recommendList = computed(() => {
   const paths = route.path.split('/')
   const origin = docs.value
+    .map((v) => ({ ...v, route: withBase(v.route) }))
     // 过滤出公共路由前缀
     // 限制为同路由前缀
     .filter(
