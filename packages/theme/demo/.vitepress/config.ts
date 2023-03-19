@@ -71,6 +71,7 @@ const extraHead: any =
     : []
 
 export default defineConfig({
+  extends: blogTheme,
   lang: 'zh-cmn-Hans',
   title: '@sugarat/theme',
   description: '粥里有勺糖的博客主题，基于 vitepress 实现',
@@ -86,7 +87,6 @@ export default defineConfig({
     }
   },
   themeConfig: {
-    ...blogTheme,
     footer: {
       message: `Power By <a target="_blank" href="https://theme.sugarat.top/"> @sugarat/theme@${packageJSON.version} </a>`,
       copyright: 'MIT Licensed | Copyright © 粥里有勺糖'

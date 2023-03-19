@@ -55,7 +55,7 @@ export function useBlogConfig() {
 }
 
 export function useBlogThemeMode() {
-  return inject(configSymbol)!.value.blog.blog ?? true
+  return inject(configSymbol)!.value?.blog?.blog ?? true
 }
 export function useHomeConfig() {
   return inject(homeConfigSymbol)!
@@ -63,7 +63,7 @@ export function useHomeConfig() {
 
 export function useGiscusConfig() {
   const blogConfig = useConfig()
-  return blogConfig.config.blog.comment
+  return blogConfig.config?.blog?.comment
 }
 
 export function useArticles() {
@@ -80,9 +80,9 @@ export function useCurrentArticle() {
   const blogConfig = useConfig()
   const route = useRoute()
 
-  const docs = computed(() => blogConfig.config.blog.pagesData)
+  const docs = computed(() => blogConfig.config?.blog?.pagesData)
   const currentArticle = computed(() =>
-    docs.value.find((v) => v.route === route.path.replace(/.html$/, ''))
+    docs.value?.find((v) => v.route === route.path.replace(/.html$/, ''))
   )
 
   return currentArticle

@@ -85,6 +85,7 @@ const extraHead: any =
     : []
 
 export default defineConfig({
+  extends: blogTheme,
   ignoreDeadLinks: true,
   lang: 'zh-cmn-Hans',
   title: '粥里有勺糖',
@@ -118,7 +119,6 @@ export default defineConfig({
   },
   lastUpdated: true,
   themeConfig: {
-    ...blogTheme,
     algolia: {
       appId: 'F919JCK8WY',
       apiKey: '3eca209ad24bdfc26db63382dd5e4490',

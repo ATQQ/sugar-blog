@@ -19,9 +19,8 @@ import { getThemeConfig, defineConfig } from '@sugarat/theme/node'
 const blogTheme = getThemeConfig()
 
 export default defineConfig({
-  themeConfig: {
-    ...blogTheme
-  }
+  extends: blogTheme
+  // ...other config
 })
 ```
 
@@ -42,9 +41,8 @@ const blogTheme = getThemeConfig({ // [!code focus]
 }) // [!code focus]
 
 export default defineConfig({
-  themeConfig: {
-    ...blogTheme
-  }
+  extends: blogTheme
+  // ...other config
 })
 ```
 ![](https://img.cdn.sugarat.top/mdImg/MTY3OTEyMjg5Nzc1Mg==679122897752)

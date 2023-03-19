@@ -3,6 +3,7 @@ import { getThemeConfig, defineConfig } from '@sugarat/theme/node'
 const blogTheme = getThemeConfig({
   // 文章默认作者
   author: '粥里有勺糖',
+  // 友链
   friend: [
     {
       nickname: '粥里有勺糖',
@@ -24,6 +25,7 @@ const blogTheme = getThemeConfig({
 })
 
 export default defineConfig({
+  extends: blogTheme,
   lang: 'zh-cmn-Hans',
   title: '@sugarat/theme',
   description: '粥里有勺糖的博客主题，基于 vitepress 实现',
@@ -34,7 +36,6 @@ export default defineConfig({
     }
   },
   themeConfig: {
-    ...blogTheme,
     lastUpdatedText: '上次更新于',
     footer: {
       message: '自定义底部内容',

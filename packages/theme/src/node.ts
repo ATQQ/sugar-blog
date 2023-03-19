@@ -8,6 +8,8 @@ import type { UserConfig } from 'vitepress'
 import { formatDate } from './utils/index'
 import type { Theme } from './composables/config/index'
 
+const checkKeys = ['themeConfig']
+
 export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
   const srcDir = cfg?.srcDir || process.argv.slice(2)?.[1] || '.'
   const files = glob.sync(`${srcDir}/**/*.md`, { ignore: ['node_modules'] })
@@ -82,17 +84,81 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
     })
     .filter((v) => v.meta.layout !== 'home')
 
-  return {
-    blog: {
-      pagesData: data as Theme.PageData[],
-      ...cfg
-    },
-    sidebar: [
-      {
-        text: '',
-        items: []
-      }
+  const extraConfig: any = {}
+
+  if (cfg?.search === 'pagefind') {
+    checkKeys.push('head', 'vite')
+    extraConfig.head = [
+      [
+        'script',
+        {},
+        `import('/_pagefind/pagefind.js')
+        .then((module) => {
+          window.__pagefind__ = module
+        })
+        .catch(() => {
+          console.log('not load /_pagefind/pagefind.js')
+        })`
+      ]
     ]
+    let flag = true
+    let originLog: any = null
+    extraConfig.vite = {
+      plugins: [
+        {
+          name: '@sugarar/theme-plugin-pagefind',
+          buildEnd() {
+            const { log } = console
+            // TODO: hack
+            if (flag) {
+              flag = false
+              originLog = log
+              Object.defineProperty(console, 'log', {
+                value() {
+                  if (`${arguments[0]}`.includes('build complete')) {
+                    console.log = originLog
+                    setTimeout(() => {
+                      originLog()
+                      originLog('=== pagefind: https://pagefind.app/ ===')
+                      const command = `npx pagefind --source ${path.join(
+                        process.argv.slice(2)?.[1] || '.',
+                        '.vitepress/dist'
+                      )}`
+                      originLog(command)
+                      originLog()
+                      execSync(command, {
+                        stdio: 'inherit'
+                      })
+                    }, 100)
+                  }
+                  // @ts-ignore
+                  return log.apply(this, arguments)
+                }
+              })
+            }
+          }
+        }
+      ]
+    }
+  }
+  return {
+    themeConfig: {
+      blog: {
+        pagesData: data as Theme.PageData[],
+        ...cfg
+      },
+      ...(cfg?.blog !== false
+        ? {
+            sidebar: [
+              {
+                text: '',
+                items: []
+              }
+            ]
+          }
+        : undefined)
+    },
+    ...extraConfig
   }
 }
 
@@ -189,61 +255,22 @@ function getTextSummary(text: string, count = 100) {
 }
 
 export function defineConfig(config: UserConfig<Theme.Config>) {
-  if (config?.themeConfig?.blog?.search === 'pagefind') {
-    config.head = (config.head || []).concat([
-      [
-        'script',
-        {},
-        `import('/_pagefind/pagefind.js')
-      .then((module) => {
-        window.__pagefind__ = module
-      })
-      .catch(() => {
-        console.log('not load /_pagefind/pagefind.js')
-      })`
-      ]
-    ])
-    let flag = true
-    let originLog: any = null
-    config.vite = {
-      ...config.vite,
-      plugins: [
-        ...(config.vite?.plugins || []),
-        {
-          name: '@sugarar/theme-plugin-pagefind',
-          buildEnd() {
-            const { log } = console
-            // TODO: hack
-            if (flag) {
-              flag = false
-              originLog = log
-              Object.defineProperty(console, 'log', {
-                value() {
-                  if (`${arguments[0]}`.includes('build complete')) {
-                    console.log = originLog
-                    setTimeout(() => {
-                      originLog()
-                      originLog('=== pagefind: https://pagefind.app/ ===')
-                      const command = `npx pagefind --source ${path.join(
-                        process.argv.slice(2)?.[1] || '.',
-                        '.vitepress/dist'
-                      )}`
-                      originLog(command)
-                      originLog()
-                      execSync(command, {
-                        stdio: 'inherit'
-                      })
-                    }, 100)
-                  }
-                  // @ts-ignore
-                  return log.apply(this, arguments)
-                }
-              })
-            }
-          }
-        }
-      ]
-    }
+  // 兼容低版本主题配置
+  // @ts-ignore
+  if (config.themeConfig?.themeConfig) {
+    config.extends = checkKeys.reduce((pre, key) => {
+      // @ts-ignore
+      pre[key] = config.themeConfig[key]
+      // @ts-ignore
+      delete config.themeConfig[key]
+      return pre
+    }, {})
+
+    // 打印warn信息
+    setTimeout(() => {
+      console.warn('==↓ 主题配置方式过期，请尽快参照文档更新 ↓==')
+      console.warn('https://theme.sugarat.top/config/global.html')
+    }, 1200)
   }
   return config
 }

@@ -169,7 +169,7 @@ export namespace Theme {
   }
 
   export interface Config extends DefaultTheme.Config {
-    blog: BlogConfig
+    blog?: BlogConfig
   }
   export interface HomeConfig {
     handleChangeSlogan?: (oldSlogan: string) => string | Promise<string>
