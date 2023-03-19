@@ -23,6 +23,25 @@ export default defineConfig({
   // ...other config
 })
 ```
+:::details 我启动时遇到配置方式过期提示？
+![](https://img.cdn.sugarat.top/mdImg/MTY3OTIxNDY5MjE3NQ==679214692175)
+
+只需动动手指将配置按照如上最新的方式做个替换即可
+* 将 `...blogTheme` 改成通过 `extends` 的方式引入
+
+```ts
+// .vitepress/config.ts
+import { getThemeConfig, defineConfig } from '@sugarat/theme/node'
+const blogTheme = getThemeConfig()
+
+export default defineConfig({
+  extends: blogTheme // [!code ++]
+  themeConfig: {
+    ...blogTheme // [!code --]
+  }
+})
+```
+:::
 
 :::tip
 主题继承[默认主题配置](https://vitepress.dev/reference/site-config)，即原主题配置依然生效
