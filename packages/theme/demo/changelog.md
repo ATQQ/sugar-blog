@@ -11,6 +11,9 @@ tag:
 ```sh
 pnpm up @sugarat/theme
 ```
+## 0.1.14 (2023/03/19)
+- chore: 主题配置改为继承的方式引入
+
 ## 0.1.13 (2023/03/19)
 - fix: route support [withBase](https://vitepress.dev/reference/runtime-api#withbase)
 
