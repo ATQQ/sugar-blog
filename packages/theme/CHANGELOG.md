@@ -1,5 +1,8 @@
 # @sugarat/theme
 
+## 0.1.13
+- fix: route support [withBase](https://vitepress.dev/reference/runtime-api#withbase)
+
 ## 0.1.12
 - fix: 搜索框影响首页样式
 
