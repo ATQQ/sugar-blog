@@ -51,7 +51,7 @@ export function useConfig() {
 }
 
 export function useBlogConfig() {
-  return inject(configSymbol)!.value.blog
+  return inject(configSymbol)!.value.blog!
 }
 
 export function useBlogThemeMode() {

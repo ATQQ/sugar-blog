@@ -32,7 +32,7 @@
               :heading="`共：${searchResult.length} 个搜索结果`"
             >
               <Command.Item
-                v-for="item in showSearchResult"
+                v-for="item in searchResult"
                 :data-value="withBase(item.route)"
                 :key="item.route"
                 @select="handleSelect"
@@ -128,8 +128,8 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, nextTick, ref, watch } from 'vue'
-// @ts-ignore
+// @ts-nocheck
+import { nextTick, ref, watch } from 'vue'
 import { Command } from 'vue-command-palette'
 import { useRoute, useRouter, withBase } from 'vitepress'
 import { useMagicKeys } from '@vueuse/core'
@@ -252,15 +252,17 @@ watch(
     }
   }
 )
-const pageSize = ref(6)
-const currentPage = ref(0)
-const showSearchResult = computed(() => {
-  // 合法性处理
-  const pageIdx =
-    currentPage.value % Math.ceil(searchResult.value.length / pageSize.value)
-  const startIdx = pageIdx * pageSize.value
-  return searchResult.value.slice(startIdx, startIdx + pageSize.value)
-})
+
+// 搜索结果分页？
+// const pageSize = ref(6)
+// const currentPage = ref(0)
+// const showSearchResult = computed(() => {
+//   // 合法性处理
+//   const pageIdx =
+//     currentPage.value % Math.ceil(searchResult.value.length / pageSize.value)
+//   const startIdx = pageIdx * pageSize.value
+//   return searchResult.value.slice(startIdx, startIdx + pageSize.value)
+// })
 
 const router = useRouter()
 const route = useRoute()
