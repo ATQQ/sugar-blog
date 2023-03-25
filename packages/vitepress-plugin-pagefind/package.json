@@ -26,8 +26,16 @@
     "offline",
     "pagefind"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ATQQ/sugar-blog.git"
+  },
   "author": "sugar",
   "license": "MIT",
+  "homepage": "https://github.com/ATQQ/sugar-blog/tree/master/packages/vitepress-plugin-pagefind",
+  "bugs": {
+    "url": "https://github.com/ATQQ/sugar-blog/issues"
+  },
   "peerDependencies": {
     "vitepress": "^1.0.0-alpha.42",
     "vue": "^3"
