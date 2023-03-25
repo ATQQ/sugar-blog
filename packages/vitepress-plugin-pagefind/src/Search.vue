@@ -259,7 +259,7 @@ watch(
   }
 )
 // TODO：搜索结果限制
-const pageSize = ref(6)
+const pageSize = ref(999)
 const currentPage = ref(0)
 const showSearchResult = computed(() => {
   // 合法性处理
