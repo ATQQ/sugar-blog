@@ -1,0 +1,12 @@
+@use 'sass:meta';
+
+html {
+  @include meta.load-css('highlight.js/styles/github');
+}
+html.dark {
+  @include meta.load-css('highlight.js/styles/github-dark');
+}
+
+code.hljs {
+  border-radius: 16px;
+}
