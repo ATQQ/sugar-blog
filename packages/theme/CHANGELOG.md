@@ -1,28 +1,43 @@
 # @sugarat/theme
 
+## 0.1.15
+
+### Patch Changes
+
+- feat: 分离独立的 pagefind 插件
+- chore: 搜索结果条数不限制
+
 ## 0.1.14
+
 - chore: 主题配置改为继承的方式引入
 
 ## 0.1.13
+
 - fix: route support [withBase](https://vitepress.dev/reference/runtime-api#withbase)
 
 ## 0.1.12
+
 - fix: 搜索框影响首页样式
 
 ## 0.1.11
+
 - chore: 文档内容完善
-- feat：内置搜索弹窗UI更新 - 类似algolia（基于 [vue-command-palette](https://github.com/xiaoluoboding/vue-command-palette/blob/main/src/assets/scss/algolia.scss)）
-![](https://img.cdn.sugarat.top/mdImg/MTY3OTEyNDM0ODQ4OA==679124348488)
+- feat：内置搜索弹窗 UI 更新 - 类似 algolia（基于 [vue-command-palette](https://github.com/xiaoluoboding/vue-command-palette/blob/main/src/assets/scss/algolia.scss)）
+  ![](https://img.cdn.sugarat.top/mdImg/MTY3OTEyNDM0ODQ4OA==679124348488)
 
 ## 0.1.10
+
 - feat: 支持全文搜索（基于 [pagefind](https://pagefind.app/) 实现）
   - `search: 'pagefind'`
 
 ## 0.1.9
+
 ### Patch Changes
+
 - feat: 支持自定义推荐文章的展示顺序
 
 ## 0.1.8
+
 ### Patch Changes
 
 - feat: 支持首页文章置顶能力
