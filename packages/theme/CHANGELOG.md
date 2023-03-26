@@ -1,5 +1,10 @@
 # @sugarat/theme
 
+## 0.1.16
+### Patch Changes
+
+- fix: 全局BG色和Vitepress主题样式冲突
+
 ## 0.1.15
 
 ### Patch Changes

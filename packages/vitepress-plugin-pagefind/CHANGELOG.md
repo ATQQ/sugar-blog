@@ -1,5 +1,8 @@
 # vitepress-plugin-pagefind
 
+## 0.1.1
+- fix: 全局BG色和Vitepress主题样式冲突
+
 ## 0.1.0
 
 ### Minor Changes

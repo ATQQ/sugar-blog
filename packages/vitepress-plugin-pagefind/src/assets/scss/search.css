@@ -298,7 +298,7 @@ ul {
   --blue12: hsl(206, 98%, 95.8%);
 }
 body {
-  background: var(--app-bg);
+  /* background: var(--app-bg); */
 }
 div [command-dialog-mask] {
   background-color: rgba(0, 0, 0, 0.3);

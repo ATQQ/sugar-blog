@@ -12,6 +12,9 @@ tag:
 pnpm up @sugarat/theme
 ```
 
+## 0.1.16 (2023/03/26)
+- fix: 全局BG色和Vitepress主题样式冲突
+
 ## 0.1.15 (2023/03/26)
 
 - feat: 分离可独立使用的的 搜索插件[pagefind](https://github.com/ATQQ/sugar-blog/tree/master/packages/vitepress-plugin-pagefind)
