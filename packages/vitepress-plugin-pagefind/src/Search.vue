@@ -1,5 +1,5 @@
 <template>
-  <div class="blog-search" v-if="openSearch" data-pagefind-ignore="all">
+  <div class="blog-search" data-pagefind-ignore="all">
     <div class="nav-search-btn-wait" @click="searchModal = true">
       <svg width="14" height="14" viewBox="0 0 20 20">
         <path
@@ -12,7 +12,7 @@
         ></path>
       </svg>
       <span v-if="!isMinimized" class="search-tip">{{
-        searchConfig?.btnPlaceholder || '搜索'
+        searchConfig?.btnPlaceholder || 'Search'
       }}</span>
       <span v-if="!isMinimized" class="metaKey"> {{ metaKey }} K </span>
     </div>
@@ -20,18 +20,18 @@
       <template #header>
         <Command.Input
           v-model:value="searchWords"
-          :placeholder="searchConfig?.placeholder || '请输入要搜素的内容'"
+          :placeholder="searchConfig?.placeholder || 'Search Docs'"
         />
       </template>
       <template #body>
         <div class="search-dialog">
           <Command.List>
-            <Command.Empty v-if="!searchResult.length">{{
-              searchConfig?.emptyText || 'No results found.'
-            }}</Command.Empty>
+            <Command.Empty v-if="!searchResult.length">
+              {{ searchConfig?.emptyText || 'No results found.' }}
+            </Command.Empty>
             <Command.Group v-else :heading="headingText">
               <Command.Item
-                v-for="item in searchResult"
+                v-for="item in showSearchResult"
                 :data-value="withBase(item.route)"
                 :key="item.route"
                 @select="handleSelect"
@@ -53,7 +53,6 @@
       <template #footer v-if="searchResult.length">
         <div class="command-palette-logo">
           <a
-            v-if="openSearch === 'pagefind'"
             href="https://github.com/cloudcannon/pagefind"
             target="_blank"
             rel="noopener noreferrer"
@@ -125,23 +124,20 @@
     </Command.Dialog>
   </div>
 </template>
-
 <script lang="ts" setup>
 // @ts-nocheck
 import { computed, nextTick, ref, watch, onBeforeMount, onMounted } from 'vue'
 import { Command } from 'vue-command-palette'
 import { useRoute, useRouter, withBase } from 'vitepress'
 import { useMagicKeys, useWindowSize } from '@vueuse/core'
-import { formatDate } from '../utils'
-import { useArticles, useBlogConfig } from '../composables/config/blog'
-import { Theme } from '../composables/config'
+import { docs, searchConfig } from 'virtual:pagefind'
+import { formatDate } from './utils'
 import LogoPagefind from './LogoPagefind.vue'
 
 const windowSize = useWindowSize()
 
 const isMinimized = computed(() => windowSize.width.value < 760)
 const flexValue = computed(() => (isMinimized.value ? 0 : 1))
-const { search: searchConfig } = useBlogConfig()
 
 const headingText = computed(() => {
   return searchConfig?.heading
@@ -149,13 +145,8 @@ const headingText = computed(() => {
         /\{\{searchResult\}\}/,
         searchResult.value.length
       )
-    : `共: ${searchResult.value.length} 个搜索结果`
+    : `Total: ${searchResult.value.length} search results.`
 })
-const openSearch = computed(() =>
-  searchConfig instanceof Object
-    ? searchConfig.mode ?? true
-    : searchConfig || true
-)
 
 const addInlineScript = () => {
   const scriptText = `import('/_pagefind/pagefind.js')
@@ -171,9 +162,7 @@ const addInlineScript = () => {
 }
 
 onBeforeMount(() => {
-  if (openSearch.value === 'pagefind') {
-    addInlineScript()
-  }
+  addInlineScript()
 })
 
 const metaKey = ref('')
@@ -184,19 +173,12 @@ onMounted(() => {
 })
 const searchModal = ref(false)
 const searchWords = ref('')
-const docs = useArticles()
 
 const keys = useMagicKeys()
 const CmdK = keys['Meta+K']
-const CtrlK = keys['Ctrl+K']
 // eslint-disable-next-line dot-notation, prefer-destructuring
 const Escape = keys['Escape']
 
-watch(CtrlK, (v) => {
-  if (v) {
-    searchModal.value = true
-  }
-})
 watch(CmdK, (v) => {
   if (v) {
     searchModal.value = true
@@ -208,7 +190,7 @@ watch(Escape, (v) => {
   }
 })
 
-const searchResult = ref<Theme.PageData[]>([])
+const searchResult = ref<any[]>([])
 const inlineSearch = () => {
   if (!searchWords.value) {
     searchResult.value = []
@@ -239,36 +221,30 @@ const inlineSearch = () => {
 watch(
   () => searchWords.value,
   async () => {
-    if (openSearch.value === 'pagefind') {
-      // dev-server兜底
-      // @ts-ignore
-      if (!window?.__pagefind__?.search) {
-        inlineSearch()
-      } else {
-        // @ts-ignore
-        await window?.__pagefind__
-          ?.search?.(searchWords.value)
-          .then(async (search: any) => {
-            const result = await Promise.all(
-              search.results.map((v: any) => v.data())
-            )
-            searchResult.value = []
-            docs.value.forEach((v) => {
-              const match = result.find((r) => r.url.startsWith(v.route))
-              if (match) {
-                searchResult.value.push({
-                  ...v,
-                  meta: {
-                    ...v.meta,
-                    description: match.excerpt
-                  }
-                })
-              }
-            })
-          })
-      }
-    } else {
+    // dev-server兜底
+    if (!window?.__pagefind__?.search) {
       inlineSearch()
+    } else {
+      await window?.__pagefind__
+        ?.search?.(searchWords.value)
+        .then(async (search: any) => {
+          const result = await Promise.all(
+            search.results.map((v: any) => v.data())
+          )
+          searchResult.value = []
+          docs.value.forEach((v) => {
+            const match = result.find((r) => r.url.startsWith(v.route))
+            if (match) {
+              searchResult.value.push({
+                ...v,
+                meta: {
+                  ...v.meta,
+                  description: match.excerpt
+                }
+              })
+            }
+          })
+        })
     }
     nextTick(() => {
       // hack 原组件实现
@@ -300,17 +276,16 @@ watch(
     }
   }
 )
-
-// 搜索结果分页？
-// const pageSize = ref(6)
-// const currentPage = ref(0)
-// const showSearchResult = computed(() => {
-//   // 合法性处理
-//   const pageIdx =
-//     currentPage.value % Math.ceil(searchResult.value.length / pageSize.value)
-//   const startIdx = pageIdx * pageSize.value
-//   return searchResult.value.slice(startIdx, startIdx + pageSize.value)
-// })
+// TODO：搜索结果限制
+const pageSize = ref(999)
+const currentPage = ref(0)
+const showSearchResult = computed(() => {
+  // 合法性处理
+  const pageIdx =
+    currentPage.value % Math.ceil(searchResult.value.length / pageSize.value)
+  const startIdx = pageIdx * pageSize.value
+  return searchResult.value.slice(startIdx, startIdx + pageSize.value)
+})
 
 const router = useRouter()
 const route = useRoute()
@@ -323,76 +298,35 @@ const handleSelect = (target: any) => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="css" scoped>
 .blog-search {
   flex: v-bind(flexValue);
   display: flex;
   padding-left: 32px;
-  .nav-search-btn-wait {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 6px;
-    box-sizing: border-box;
-
-    .metaKey {
-      margin-left: 10px;
-      font-size: 12px;
-    }
-
-    &:hover {
-      border: 1px solid var(--vp-c-brand);
-      border-radius: 6px;
-    }
-
-    .search-tip {
-      color: #909399;
-      font-size: 12px;
-      padding-left: 10px;
-    }
-  }
+}
+.blog-search .nav-search-btn-wait {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  box-sizing: border-box;
+}
+.blog-search .nav-search-btn-wait .metaKey {
+  margin-left: 10px;
+  font-size: 12px;
+}
+.blog-search .nav-search-btn-wait:hover {
+  border: 1px solid var(--vp-c-brand);
+  border-radius: 6px;
+}
+.blog-search .nav-search-btn-wait .search-tip {
+  color: #909399;
+  font-size: 12px;
+  padding-left: 10px;
 }
 </style>
 
-<style lang="scss">
-@import '../styles/scss/global.scss';
-@import '../styles/scss/algolia.scss';
-
-div[command-group] {
-  display: block !important;
-}
-div[command-item] {
-  display: flex !important;
-}
-.search-dialog {
-  div[command-item] > div.link {
-    width: 100%;
-  }
-  div[command-item] .title {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  div[command-item] .des {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    word-break: keep-all;
-    white-space: nowrap;
-  }
-
-  div[command-item] .date {
-    min-width: 80px;
-  }
-  div[command-item] mark {
-    background: none;
-    color: var(--vp-c-brand);
-  }
-
-  div[command-item][aria-selected='true'] mark,
-  div[command-item]:hover mark {
-    color: inherit;
-    text-decoration: underline;
-  }
-}
+<style lang="css">
+@import './assets/scss/search.css';
 </style>

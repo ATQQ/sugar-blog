@@ -11,6 +11,14 @@ tag:
 ```sh
 pnpm up @sugarat/theme
 ```
+
+## 0.1.15 (2023/03/26)
+
+- feat: 分离可独立使用的的 搜索插件[pagefind](https://github.com/ATQQ/sugar-blog/tree/master/packages/vitepress-plugin-pagefind)
+- feat: 搜索框展示UI优化，支持定制文案，展示适配移动端
+- fix: 搜索结果未全部展示
+- fix: 中文文件名文章时间显示NaN
+
 ## 0.1.14 (2023/03/19)
 - chore: 主题配置改为继承的方式引入
 

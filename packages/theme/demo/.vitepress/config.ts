@@ -49,7 +49,13 @@ const blogTheme = getThemeConfig({
     ],
     duration: 0
   },
-  search: 'pagefind'
+  search: {
+    mode: 'pagefind',
+    btnPlaceholder: 'Search',
+    placeholder: 'Search Docs',
+    emptyText: 'No results found',
+    heading: 'Total: {{searchResult}} search results.'
+  }
 })
 const extraHead: any =
   process.env.NODE_ENV === 'production'

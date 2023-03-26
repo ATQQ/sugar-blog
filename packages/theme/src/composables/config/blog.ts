@@ -51,7 +51,7 @@ export function useConfig() {
 }
 
 export function useBlogConfig() {
-  return inject(configSymbol)!.value.blog
+  return inject(configSymbol)!.value.blog!
 }
 
 export function useBlogThemeMode() {
@@ -81,9 +81,13 @@ export function useCurrentArticle() {
   const route = useRoute()
 
   const docs = computed(() => blogConfig.config?.blog?.pagesData)
-  const currentArticle = computed(() =>
-    docs.value?.find((v) => v.route === route.path.replace(/.html$/, ''))
-  )
+  const currentArticle = computed(() => {
+    const currentPath = route.path.replace(/.html$/, '')
+    return docs.value?.find((v) =>
+      // 兼容中文路径
+      [currentPath, decodeURIComponent(currentPath)].includes(v.route)
+    )
+  })
 
   return currentArticle
 }

@@ -1,3 +1,5 @@
+/* eslint-disable prefer-rest-params */
+
 export function formatDate(d: any, fmt = 'yyyy-MM-dd hh:mm:ss') {
   if (!(d instanceof Date)) {
     d = new Date(d)
@@ -39,7 +41,7 @@ export function isCurrentWeek(date: Date, target?: Date) {
 }
 
 export function formatShowDate(date: Date | string) {
-  const source = date ? +new Date(date) : +new Date()
+  const source = +new Date(date)
   const now = +new Date()
   const diff = now - source
   const oneSeconds = 1000

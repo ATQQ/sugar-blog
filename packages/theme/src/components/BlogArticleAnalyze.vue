@@ -104,7 +104,7 @@ const publishDate = computed(() => {
 })
 
 const { theme } = useData<Theme.Config>()
-const globalAuthor = computed(() => theme.value.blog.author || '')
+const globalAuthor = computed(() => theme.value.blog?.author || '')
 const author = computed(
   () => currentArticle.value?.meta.author || globalAuthor.value
 )

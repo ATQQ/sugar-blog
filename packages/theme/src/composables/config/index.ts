@@ -144,6 +144,21 @@ export namespace Theme {
     url: string
     avatar: string
   }
+  export type SearchConfig =
+    | boolean
+    | 'pagefind'
+    | {
+        btnPlaceholder?: string
+        placeholder?: string
+        emptyText?: string
+        /**
+         * @example
+         * 'Total: {{searchResult}} search results.'
+         */
+        heading?: string
+        mode?: boolean | 'pagefind'
+      }
+
   export interface BlogConfig {
     blog?: false
     pagesData: PageData[]
@@ -151,8 +166,8 @@ export namespace Theme {
     author?: string
     hotArticle?: HotArticle
     home?: HomeBlog
-    // TODO: 本地全文搜索定制 pagefind || minisearch
-    search?: boolean | 'pagefind'
+    // TODO: 本地全文搜索定制 pagefind || minisearch || flexsearch
+    search?: SearchConfig
     /**
      * 配置评论
      * power by https://giscus.app/zh-CN

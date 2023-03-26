@@ -1,17 +1,12 @@
-/* eslint-disable prefer-rest-params */
 import glob from 'fast-glob'
 import matter from 'gray-matter'
 import fs from 'fs'
 import { execSync, spawn } from 'child_process'
 import path from 'path'
-import type { UserConfig } from 'vitepress'
-import { formatDate } from './utils/index'
-import type { Theme } from './composables/config/index'
+import { formatDate } from './utils'
 
-const checkKeys = ['themeConfig']
-
-export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
-  const srcDir = cfg?.srcDir || process.argv.slice(2)?.[1] || '.'
+export function getPagesData() {
+  const srcDir = process.argv.slice(2)?.[1] || '.'
   const files = glob.sync(`${srcDir}/**/*.md`, { ignore: ['node_modules'] })
 
   const data = files
@@ -44,7 +39,7 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
       const fileContent = fs.readFileSync(v, 'utf-8')
 
       // TODO: 支持JSON
-      const meta: Partial<Theme.PageMeta> = {
+      const meta = {
         ...matter(fileContent).data
       }
       if (!meta.title) {
@@ -84,83 +79,7 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
     })
     .filter((v) => v.meta.layout !== 'home')
 
-  const extraConfig: any = {}
-
-  if (
-    cfg?.search === 'pagefind' ||
-    (cfg?.search instanceof Object && cfg.search.mode === 'pagefind')
-  ) {
-    checkKeys.push('vite')
-    let flag = true
-    let originLog: any = null
-    extraConfig.vite = {
-      plugins: [
-        {
-          name: '@sugarar/theme-plugin-pagefind',
-          enforce: 'pre',
-          buildEnd() {
-            const { log } = console
-            // TODO: hack
-            if (flag) {
-              flag = false
-              originLog = log
-              Object.defineProperty(console, 'log', {
-                value() {
-                  if (`${arguments[0]}`.includes('build complete')) {
-                    console.log = originLog
-                    setTimeout(() => {
-                      originLog()
-                      originLog('=== pagefind: https://pagefind.app/ ===')
-                      const command = `npx pagefind --source ${path.join(
-                        process.argv.slice(2)?.[1] || '.',
-                        '.vitepress/dist'
-                      )}`
-                      originLog(command)
-                      originLog()
-                      execSync(command, {
-                        stdio: 'inherit'
-                      })
-                    }, 100)
-                  }
-                  // @ts-ignore
-                  return log.apply(this, arguments)
-                }
-              })
-            }
-          },
-          // 添加检索的内容标识
-          transform(code: string, id: string) {
-            if (id.endsWith('theme-default/Layout.vue')) {
-              return code.replace(
-                '<VPContent>',
-                '<VPContent data-pagefind-body>'
-              )
-            }
-            return code
-          }
-        }
-      ]
-    }
-  }
-  return {
-    themeConfig: {
-      blog: {
-        pagesData: data as Theme.PageData[],
-        ...cfg
-      },
-      ...(cfg?.blog !== false
-        ? {
-            sidebar: [
-              {
-                text: '',
-                items: []
-              }
-            ]
-          }
-        : undefined)
-    },
-    ...extraConfig
-  }
+  return data
 }
 
 export function getDefaultTitle(content: string) {
@@ -253,25 +172,4 @@ function getTextSummary(text: string, count = 100) {
       ?.replace(/>(.*)/, '')
       ?.slice(0, count)
   )
-}
-
-export function defineConfig(config: UserConfig<Theme.Config>) {
-  // 兼容低版本主题配置
-  // @ts-ignore
-  if (config.themeConfig?.themeConfig) {
-    config.extends = checkKeys.reduce((pre, key) => {
-      // @ts-ignore
-      pre[key] = config.themeConfig[key]
-      // @ts-ignore
-      delete config.themeConfig[key]
-      return pre
-    }, {})
-
-    // 打印warn信息
-    setTimeout(() => {
-      console.warn('==↓ 主题配置方式过期，请尽快参照文档更新 ↓==')
-      console.warn('https://theme.sugarat.top/config/global.html')
-    }, 1200)
-  }
-  return config
 }
