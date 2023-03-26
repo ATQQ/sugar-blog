@@ -170,26 +170,64 @@ interface HomeBlog {
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMDIwMzE5MQ==674920203192)
 
 ## search
-* Type: `boolean|'pagefind'`
+* Type: `boolean | 'pagefind' | Object`
 * Default: `true`
 
 控制是否启用主题自带的搜索功能
-```ts
+:::code-group
+```ts [关闭搜索]
 const blogTheme = getThemeConfig({
   search: false
 })
 ```
+```ts [修改搜索文案]
+const blogTheme = getThemeConfig({
+  search: {
+    btnPlaceholder: 'Search',
+    placeholder: 'Search Docs'
+  }
+})
+```
+```ts [type]
+type SearchConfig =
+    | boolean
+    | 'pagefind'
+    | {
+        btnPlaceholder?: string
+        placeholder?: string
+        mode: boolean | 'pagefind'
+      }
+```
+:::
+
+
 ![](https://img.cdn.sugarat.top/mdImg/MTY3OTEyMjg5Nzc1Mg==679122897752)
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY3OTEyMjk2MTg5Mg==679122961892)
 
+![](https://img.cdn.sugarat.top/mdImg/MTY3OTgxMjk3Nzk5Nw==679812977997)
+
 ### 全文搜索 - pagefind
 开启全文搜索（基于 [pagefind](https://pagefind.app/) 实现）
-```ts
+
+:::code-group
+```ts [demo1]
 const blogTheme = getThemeConfig({
   search: 'pagefind'
 })
 ```
+
+```ts [demo2]
+const blogTheme = getThemeConfig({
+  search: {
+    mode: 'pagefind',
+    btnPlaceholder: 'Search',
+    placeholder: 'Search Docs'
+  }
+})
+```
+:::
+
 :::tip
 构建后才会生效，其原理是分析生成的html文件内容
 

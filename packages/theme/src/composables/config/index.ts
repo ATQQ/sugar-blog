@@ -144,6 +144,15 @@ export namespace Theme {
     url: string
     avatar: string
   }
+  export type SearchConfig =
+    | boolean
+    | 'pagefind'
+    | {
+        btnPlaceholder?: string
+        placeholder?: string
+        mode: boolean | 'pagefind'
+      }
+
   export interface BlogConfig {
     blog?: false
     pagesData: PageData[]
@@ -152,14 +161,7 @@ export namespace Theme {
     hotArticle?: HotArticle
     home?: HomeBlog
     // TODO: 本地全文搜索定制 pagefind || minisearch || flexsearch
-    search?:
-      | boolean
-      | 'pagefind'
-      | {
-          btnPlaceholder?: string
-          placeholder?: string
-          mode: boolean | 'pagefind'
-        }
+    search?: SearchConfig
     /**
      * 配置评论
      * power by https://giscus.app/zh-CN

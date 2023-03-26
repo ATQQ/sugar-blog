@@ -202,7 +202,6 @@ const inlineSearch = () => {
 watch(
   () => searchWords.value,
   async () => {
-    console.log(!window?.__pagefind__?.search)
     // dev-server兜底
     if (!window?.__pagefind__?.search) {
       inlineSearch()
