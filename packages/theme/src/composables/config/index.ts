@@ -150,7 +150,13 @@ export namespace Theme {
     | {
         btnPlaceholder?: string
         placeholder?: string
-        mode: boolean | 'pagefind'
+        emptyText?: string
+        /**
+         * @example
+         * 'Total: {{searchResult}} search results.'
+         */
+        heading?: string
+        mode?: boolean | 'pagefind'
       }
 
   export interface BlogConfig {

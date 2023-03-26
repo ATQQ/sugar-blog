@@ -52,7 +52,9 @@ const blogTheme = getThemeConfig({
   search: {
     mode: 'pagefind',
     btnPlaceholder: 'Search',
-    placeholder: 'Search Docs'
+    placeholder: 'Search Docs',
+    emptyText: 'No results found',
+    heading: 'Total: {{searchResult}} search results.'
   }
 })
 const extraHead: any =

@@ -31,13 +31,10 @@
       <template #body>
         <div class="search-dialog">
           <Command.List>
-            <Command.Empty v-if="!searchResult.length"
-              >No results found.</Command.Empty
-            >
-            <Command.Group
-              v-else
-              :heading="`共：${searchResult.length} 个搜索结果`"
-            >
+            <Command.Empty v-if="!searchResult.length">{{
+              searchConfig?.emptyText || 'No results found.'
+            }}</Command.Empty>
+            <Command.Group v-else :heading="headingText">
               <Command.Item
                 v-for="item in searchResult"
                 :data-value="withBase(item.route)"
@@ -150,6 +147,14 @@ const windowSize = useWindowSize()
 const isMinimized = computed(() => windowSize.width.value < 760)
 const { search: searchConfig } = useBlogConfig()
 
+const headingText = computed(() => {
+  return searchConfig?.heading
+    ? searchConfig.heading.replace(
+        /\{\{searchResult\}\}/,
+        searchResult.value.length
+      )
+    : `共: ${searchResult.value.length} 个搜索结果`
+})
 const openSearch = computed(() =>
   searchConfig instanceof Object
     ? searchConfig.mode ?? true

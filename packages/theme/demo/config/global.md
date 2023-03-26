@@ -184,7 +184,9 @@ const blogTheme = getThemeConfig({
 const blogTheme = getThemeConfig({
   search: {
     btnPlaceholder: 'Search',
-    placeholder: 'Search Docs'
+    placeholder: 'Search Docs',
+    emptyText: 'No results found',
+    heading: 'Total: {{searchResult}} search results.'
   }
 })
 ```
@@ -195,7 +197,13 @@ type SearchConfig =
     | {
         btnPlaceholder?: string
         placeholder?: string
-        mode: boolean | 'pagefind'
+        emptyText?: string
+        /**
+         * @example
+         * 'Total: {{searchResult}} search results.'
+         */
+        heading?: string
+        mode?: boolean | 'pagefind'
       }
 ```
 :::
@@ -205,7 +213,7 @@ type SearchConfig =
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY3OTEyMjk2MTg5Mg==679122961892)
 
-![](https://img.cdn.sugarat.top/mdImg/MTY3OTgxMjk3Nzk5Nw==679812977997)
+![](https://img.cdn.sugarat.top/mdImg/MTY3OTgxNTk5NTQyMw==679815995423)
 
 ### 全文搜索 - pagefind
 开启全文搜索（基于 [pagefind](https://pagefind.app/) 实现）
@@ -222,7 +230,9 @@ const blogTheme = getThemeConfig({
   search: {
     mode: 'pagefind',
     btnPlaceholder: 'Search',
-    placeholder: 'Search Docs'
+    placeholder: 'Search Docs',
+    emptyText: 'No results found',
+    heading: 'Total: {{searchResult}} search results.'
   }
 })
 ```
