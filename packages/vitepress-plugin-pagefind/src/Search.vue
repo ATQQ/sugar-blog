@@ -1,9 +1,5 @@
 <template>
-  <div
-    :style="`flex: ${isMinimized ? '0' : '1'}`"
-    class="blog-search"
-    data-pagefind-ignore="all"
-  >
+  <div class="blog-search" data-pagefind-ignore="all">
     <div class="nav-search-btn-wait" @click="searchModal = true">
       <svg width="14" height="14" viewBox="0 0 20 20">
         <path
@@ -141,6 +137,7 @@ import LogoPagefind from './LogoPagefind.vue'
 const windowSize = useWindowSize()
 
 const isMinimized = computed(() => windowSize.width.value < 760)
+const flexValue = computed(() => (isMinimized.value ? 0 : 1))
 
 const headingText = computed(() => {
   return searchConfig?.heading
@@ -303,7 +300,7 @@ const handleSelect = (target: any) => {
 
 <style lang="css" scoped>
 .blog-search {
-  flex: 1;
+  flex: v-bind(flexValue);
   display: flex;
   padding-left: 32px;
 }
