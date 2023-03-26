@@ -11,14 +11,16 @@
           stroke-linejoin="round"
         ></path>
       </svg>
-      <span class="search-tip">搜索</span>
+      <span class="search-tip">{{
+        searchConfig?.btnPlaceholder || '搜索'
+      }}</span>
       <span class="metaKey"> {{ metaKey }} K </span>
     </div>
     <Command.Dialog :visible="searchModal" theme="algolia">
       <template #header>
         <Command.Input
           v-model:value="searchWords"
-          placeholder="请输入要搜索的内容"
+          :placeholder="searchConfig?.placeholder || '请输入要搜素的内容'"
         />
       </template>
       <template #body>
@@ -129,7 +131,7 @@
 
 <script lang="ts" setup>
 // @ts-nocheck
-import { nextTick, ref, watch } from 'vue'
+import { computed, nextTick, ref, watch, onBeforeMount } from 'vue'
 import { Command } from 'vue-command-palette'
 import { useRoute, useRouter, withBase } from 'vitepress'
 import { useMagicKeys } from '@vueuse/core'
@@ -138,7 +140,32 @@ import { useArticles, useBlogConfig } from '../composables/config/blog'
 import { Theme } from '../composables/config'
 import LogoPagefind from './LogoPagefind.vue'
 
-const { search: openSearch = true } = useBlogConfig()
+const { search: searchConfig } = useBlogConfig()
+
+const openSearch = computed(() =>
+  searchConfig instanceof Object
+    ? searchConfig.mode ?? true
+    : searchConfig || true
+)
+
+const addInlineScript = () => {
+  const scriptText = `import('/_pagefind/pagefind.js')
+        .then((module) => {
+          window.__pagefind__ = module
+        })
+        .catch(() => {
+          console.log('not load /_pagefind/pagefind.js')
+        })`
+  const inlineScript = document.createElement('script')
+  inlineScript.innerHTML = scriptText
+  document.head.appendChild(inlineScript)
+}
+
+onBeforeMount(() => {
+  if (openSearch.value === 'pagefind') {
+    addInlineScript()
+  }
+})
 
 const metaKey = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)
   ? '⌘'
@@ -200,7 +227,7 @@ const inlineSearch = () => {
 watch(
   () => searchWords.value,
   async () => {
-    if (openSearch === 'pagefind') {
+    if (openSearch.value === 'pagefind') {
       // dev-server兜底
       // @ts-ignore
       if (!window?.__pagefind__?.search) {

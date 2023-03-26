@@ -151,8 +151,15 @@ export namespace Theme {
     author?: string
     hotArticle?: HotArticle
     home?: HomeBlog
-    // TODO: 本地全文搜索定制 pagefind || minisearch
-    search?: boolean | 'pagefind'
+    // TODO: 本地全文搜索定制 pagefind || minisearch || flexsearch
+    search?:
+      | boolean
+      | 'pagefind'
+      | {
+          btnPlaceholder?: string
+          placeholder?: string
+          mode: boolean | 'pagefind'
+        }
     /**
      * 配置评论
      * power by https://giscus.app/zh-CN

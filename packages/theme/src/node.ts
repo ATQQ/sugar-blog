@@ -86,21 +86,11 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
 
   const extraConfig: any = {}
 
-  if (cfg?.search === 'pagefind') {
-    checkKeys.push('head', 'vite')
-    extraConfig.head = [
-      [
-        'script',
-        {},
-        `import('/_pagefind/pagefind.js')
-        .then((module) => {
-          window.__pagefind__ = module
-        })
-        .catch(() => {
-          console.log('not load /_pagefind/pagefind.js')
-        })`
-      ]
-    ]
+  if (
+    cfg?.search === 'pagefind' ||
+    (cfg?.search instanceof Object && cfg.search.mode === 'pagefind')
+  ) {
+    checkKeys.push('vite')
     let flag = true
     let originLog: any = null
     extraConfig.vite = {
@@ -136,6 +126,16 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
                 }
               })
             }
+          },
+          // 添加检索的内容标识
+          transform(code: string, id: string) {
+            if (id.endsWith('theme-default/Layout.vue')) {
+              return code.replace(
+                '<VPContent>',
+                '<VPContent data-pagefind-body>'
+              )
+            }
+            return code
           }
         }
       ]
