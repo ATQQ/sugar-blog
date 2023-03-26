@@ -12,7 +12,7 @@
         ></path>
       </svg>
       <span class="search-tip">搜索</span>
-      <span class="metaKey"> ⌘ K </span>
+      <span class="metaKey"> {{ metaKey }} K </span>
     </div>
     <Command.Dialog :visible="searchModal" theme="algolia">
       <template #header>
@@ -140,15 +140,24 @@ import LogoPagefind from './LogoPagefind.vue'
 
 const { search: openSearch = true } = useBlogConfig()
 
+const metaKey = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)
+  ? '⌘'
+  : 'Ctrl'
 const searchModal = ref(false)
 const searchWords = ref('')
 const docs = useArticles()
 
 const keys = useMagicKeys()
 const CmdK = keys['Meta+K']
+const CtrlK = keys['Ctrl+K']
 // eslint-disable-next-line dot-notation, prefer-destructuring
 const Escape = keys['Escape']
 
+watch(CtrlK, (v) => {
+  if (v) {
+    searchModal.value = true
+  }
+})
 watch(CmdK, (v) => {
   if (v) {
     searchModal.value = true
