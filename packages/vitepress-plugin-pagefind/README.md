@@ -2,9 +2,14 @@
 
 Offline full-text search based on [pagefind](https://github.com/cloudcannon/pagefind) implementation.
 
-![](https://img.cdn.sugarat.top/mdImg/MTY3OTgxOTEzNjUwMw==679819136503)
+**similar UI as Algolia**
 
-![](https://img.cdn.sugarat.top/mdImg/MTY3OTgxOTE1MDQ0OA==679819150448)
+|                               Search Btn                                |                              Search Dialog                              |
+| :---------------------------------------------------------------------: | :---------------------------------------------------------------------: |
+| ![](https://img.cdn.sugarat.top/mdImg/MTY3OTgxOTEzNjUwMw==679819136503) | ![](https://img.cdn.sugarat.top/mdImg/MTY3OTgxOTE1MDQ0OA==679819150448) |
+
+
+
 ## Usage
 
 step1: install plugin
