@@ -1,6 +1,6 @@
 {
   "name": "@sugarat/theme",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "description": "简约风的 Vitepress 博客主题，sugarat vitepress blog theme",
   "main": "src/index.ts",
   "exports": {

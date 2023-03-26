@@ -12,6 +12,9 @@ tag:
 pnpm up @sugarat/theme
 ```
 
+## 0.1.17 (2023/03/26)
+- fix: search: false 不生效
+
 ## 0.1.16 (2023/03/26)
 - fix: 全局BG色和Vitepress主题样式冲突
 

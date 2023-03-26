@@ -1,5 +1,8 @@
 # @sugarat/theme
 
+## 0.1.17
+- fix: search: false 不生效
+
 ## 0.1.16
 ### Patch Changes
 

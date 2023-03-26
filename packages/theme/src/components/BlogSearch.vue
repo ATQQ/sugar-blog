@@ -154,7 +154,7 @@ const headingText = computed(() => {
 const openSearch = computed(() =>
   searchConfig instanceof Object
     ? searchConfig.mode ?? true
-    : searchConfig || true
+    : searchConfig ?? true
 )
 
 const addInlineScript = () => {
