@@ -2,6 +2,9 @@
 
 Offline full-text search based on [pagefind](https://github.com/cloudcannon/pagefind) implementation.
 
+![](https://img.cdn.sugarat.top/mdImg/MTY3OTgxOTEzNjUwMw==679819136503)
+
+![](https://img.cdn.sugarat.top/mdImg/MTY3OTgxOTE1MDQ0OA==679819150448)
 ## Usage
 
 step1: install plugin
@@ -40,8 +43,47 @@ export default defineConfig({
 ```
 
 ## Options
-TODO: Accept Pagefind Index Options
+```ts
+interface SearchConfig {
+  /**
+   * @default
+   * 'Search'
+   */
+  btnPlaceholder?: string
+  /**
+   * @default
+   * 'Search Docs'
+   */
+  placeholder?: string
+  /**
+   * @default
+   * 'No results found.'
+   */
+  emptyText?: string
+  /**
+   * @default
+   * 'Total: {{searchResult}} search results.'
+   */
+  heading?: string
+}
+```
 
-Wait a moment
+example
+```ts
+pagefindPlugin({
+  btnPlaceholder: '搜索',
+  placeholder: '搜索文档',
+  emptyText: '空空如也',
+  heading: '共: {{searchResult}} 条结果'
+})
+```
 ## Multi language support
 Provided by [Pagefind](https://pagefind.app/docs/multilingual/#language-support)
+
+## Thanks
+Thanks to the following libraries for inspiration.
+
+* [pagefind](https://github.com/cloudcannon/pagefind)
+* [vitepress-plugin-search](https://github.com/emersonbottero/vitepress-plugin-search)
+* [vue-command-palette](https://github.com/xiaoluoboding/vue-command-palette)
+* [@sugarat/theme](https://github.com/ATQQ/sugar-blog/tree/master/packages/theme)

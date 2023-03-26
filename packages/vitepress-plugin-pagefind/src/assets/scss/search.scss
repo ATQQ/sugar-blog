@@ -1,0 +1,39 @@
+@import './global.scss';
+@import './algolia.scss';
+
+div[command-group] {
+  display: block !important;
+}
+div[command-item] {
+  display: flex !important;
+}
+.search-dialog {
+  div[command-item] > div.link {
+    width: 100%;
+  }
+  div[command-item] .title {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  div[command-item] .des {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-break: keep-all;
+    white-space: nowrap;
+  }
+
+  div[command-item] .date {
+    min-width: 80px;
+  }
+  div[command-item] mark {
+    background: none;
+    color: var(--vp-c-brand);
+  }
+
+  div[command-item][aria-selected='true'] mark,
+  div[command-item]:hover mark {
+    color: inherit;
+    text-decoration: underline;
+  }
+}

@@ -1,0 +1,530 @@
+html {
+  /*!
+      Theme: GitHub
+      Description: Light theme as seen on github.com
+      Author: github.com
+      Maintainer: @Hirse
+      Updated: 2021-05-15
+  
+      Outdated base version: https://github.com/primer/github-syntax-light
+      Current colors taken from GitHub's CSS
+    */
+}
+html pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em;
+}
+html code.hljs {
+  padding: 3px 5px;
+}
+html .hljs {
+  color: #24292e;
+  background: #fff;
+}
+html .hljs-doctag,
+html .hljs-keyword,
+html .hljs-meta .hljs-keyword,
+html .hljs-template-tag,
+html .hljs-template-variable,
+html .hljs-type,
+html .hljs-variable.language_ {
+  color: #d73a49;
+}
+html .hljs-title,
+html .hljs-title.class_,
+html .hljs-title.class_.inherited__,
+html .hljs-title.function_ {
+  color: #6f42c1;
+}
+html .hljs-attr,
+html .hljs-attribute,
+html .hljs-literal,
+html .hljs-meta,
+html .hljs-number,
+html .hljs-operator,
+html .hljs-selector-attr,
+html .hljs-selector-class,
+html .hljs-selector-id,
+html .hljs-variable {
+  color: #005cc5;
+}
+html .hljs-meta .hljs-string,
+html .hljs-regexp,
+html .hljs-string {
+  color: #032f62;
+}
+html .hljs-built_in,
+html .hljs-symbol {
+  color: #e36209;
+}
+html .hljs-code,
+html .hljs-comment,
+html .hljs-formula {
+  color: #6a737d;
+}
+html .hljs-name,
+html .hljs-quote,
+html .hljs-selector-pseudo,
+html .hljs-selector-tag {
+  color: #22863a;
+}
+html .hljs-subst {
+  color: #24292e;
+}
+html .hljs-section {
+  color: #005cc5;
+  font-weight: 700;
+}
+html .hljs-bullet {
+  color: #735c0f;
+}
+html .hljs-emphasis {
+  color: #24292e;
+  font-style: italic;
+}
+html .hljs-strong {
+  color: #24292e;
+  font-weight: 700;
+}
+html .hljs-addition {
+  color: #22863a;
+  background-color: #f0fff4;
+}
+html .hljs-deletion {
+  color: #b31d28;
+  background-color: #ffeef0;
+}
+html.dark {
+  /*!
+      Theme: GitHub Dark
+      Description: Dark theme as seen on github.com
+      Author: github.com
+      Maintainer: @Hirse
+      Updated: 2021-05-15
+  
+      Outdated base version: https://github.com/primer/github-syntax-dark
+      Current colors taken from GitHub's CSS
+    */
+}
+html.dark pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em;
+}
+html.dark code.hljs {
+  padding: 3px 5px;
+}
+html.dark .hljs {
+  color: #c9d1d9;
+  background: #0d1117;
+}
+html.dark .hljs-doctag,
+html.dark .hljs-keyword,
+html.dark .hljs-meta .hljs-keyword,
+html.dark .hljs-template-tag,
+html.dark .hljs-template-variable,
+html.dark .hljs-type,
+html.dark .hljs-variable.language_ {
+  color: #ff7b72;
+}
+html.dark .hljs-title,
+html.dark .hljs-title.class_,
+html.dark .hljs-title.class_.inherited__,
+html.dark .hljs-title.function_ {
+  color: #d2a8ff;
+}
+html.dark .hljs-attr,
+html.dark .hljs-attribute,
+html.dark .hljs-literal,
+html.dark .hljs-meta,
+html.dark .hljs-number,
+html.dark .hljs-operator,
+html.dark .hljs-selector-attr,
+html.dark .hljs-selector-class,
+html.dark .hljs-selector-id,
+html.dark .hljs-variable {
+  color: #79c0ff;
+}
+html.dark .hljs-meta .hljs-string,
+html.dark .hljs-regexp,
+html.dark .hljs-string {
+  color: #a5d6ff;
+}
+html.dark .hljs-built_in,
+html.dark .hljs-symbol {
+  color: #ffa657;
+}
+html.dark .hljs-code,
+html.dark .hljs-comment,
+html.dark .hljs-formula {
+  color: #8b949e;
+}
+html.dark .hljs-name,
+html.dark .hljs-quote,
+html.dark .hljs-selector-pseudo,
+html.dark .hljs-selector-tag {
+  color: #7ee787;
+}
+html.dark .hljs-subst {
+  color: #c9d1d9;
+}
+html.dark .hljs-section {
+  color: #1f6feb;
+  font-weight: 700;
+}
+html.dark .hljs-bullet {
+  color: #f2cc60;
+}
+html.dark .hljs-emphasis {
+  color: #c9d1d9;
+  font-style: italic;
+}
+html.dark .hljs-strong {
+  color: #c9d1d9;
+  font-weight: 700;
+}
+html.dark .hljs-addition {
+  color: #aff5b4;
+  background-color: #033a16;
+}
+html.dark .hljs-deletion {
+  color: #ffdcd7;
+  background-color: #67060c;
+}
+code.hljs {
+  border-radius: 16px;
+}
+html,
+body,
+#app {
+  height: 100%;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+ul {
+  margin: 0;
+  padding: 0;
+}
+:root {
+  --font-sans: 'Inter', --apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  --app-bg: var(--gray1);
+  --app-text: #000000;
+  --command-shadow: 0 16px 70px rgb(0 0 0 / 20%);
+  --lowContrast: #ffffff;
+  --highContrast: #000000;
+  --vcp-c-brand: #44bd87;
+  --vcp-c-accent: #35495e;
+  --gray1: hsl(0, 0%, 98%);
+  --gray2: hsl(0, 0%, 97.3%);
+  --gray3: hsl(0, 0%, 95.1%);
+  --gray4: hsl(0, 0%, 93%);
+  --gray5: hsl(0, 0%, 90.9%);
+  --gray6: hsl(0, 0%, 88.7%);
+  --gray7: hsl(0, 0%, 85.8%);
+  --gray8: hsl(0, 0%, 78%);
+  --gray9: hsl(0, 0%, 56.1%);
+  --gray10: hsl(0, 0%, 52.3%);
+  --gray11: hsl(0, 0%, 43.5%);
+  --gray12: hsl(0, 0%, 9%);
+  --grayA1: hsla(0, 0%, 0%, 0.012);
+  --grayA2: hsla(0, 0%, 0%, 0.027);
+  --grayA3: hsla(0, 0%, 0%, 0.047);
+  --grayA4: hsla(0, 0%, 0%, 0.071);
+  --grayA5: hsla(0, 0%, 0%, 0.09);
+  --grayA6: hsla(0, 0%, 0%, 0.114);
+  --grayA7: hsla(0, 0%, 0%, 0.141);
+  --grayA8: hsla(0, 0%, 0%, 0.22);
+  --grayA9: hsla(0, 0%, 0%, 0.439);
+  --grayA10: hsla(0, 0%, 0%, 0.478);
+  --grayA11: hsla(0, 0%, 0%, 0.565);
+  --grayA12: hsla(0, 0%, 0%, 0.91);
+  --blue1: hsl(206, 100%, 99.2%);
+  --blue2: hsl(210, 100%, 98%);
+  --blue3: hsl(209, 100%, 96.5%);
+  --blue4: hsl(210, 98.8%, 94%);
+  --blue5: hsl(209, 95%, 90.1%);
+  --blue6: hsl(209, 81.2%, 84.5%);
+  --blue7: hsl(208, 77.5%, 76.9%);
+  --blue8: hsl(206, 81.9%, 65.3%);
+  --blue9: hsl(206, 100%, 50%);
+  --blue10: hsl(208, 100%, 47.3%);
+  --blue11: hsl(211, 100%, 43.2%);
+  --blue12: hsl(211, 100%, 15%);
+}
+.dark {
+  --app-bg: var(--gray1);
+  --app-text: #ffffff;
+  --lowContrast: #000000;
+  --highContrast: #ffffff;
+  --gray1: hsl(0, 0%, 8.5%);
+  --gray2: hsl(0, 0%, 11%);
+  --gray3: hsl(0, 0%, 13.6%);
+  --gray4: hsl(0, 0%, 15.8%);
+  --gray5: hsl(0, 0%, 17.9%);
+  --gray6: hsl(0, 0%, 20.5%);
+  --gray7: hsl(0, 0%, 24.3%);
+  --gray8: hsl(0, 0%, 31.2%);
+  --gray9: hsl(0, 0%, 43.9%);
+  --gray10: hsl(0, 0%, 49.4%);
+  --gray11: hsl(0, 0%, 62.8%);
+  --gray12: hsl(0, 0%, 93%);
+  --grayA1: hsla(0, 0%, 100%, 0);
+  --grayA2: hsla(0, 0%, 100%, 0.026);
+  --grayA3: hsla(0, 0%, 100%, 0.056);
+  --grayA4: hsla(0, 0%, 100%, 0.077);
+  --grayA5: hsla(0, 0%, 100%, 0.103);
+  --grayA6: hsla(0, 0%, 100%, 0.129);
+  --grayA7: hsla(0, 0%, 100%, 0.172);
+  --grayA8: hsla(0, 0%, 100%, 0.249);
+  --grayA9: hsla(0, 0%, 100%, 0.386);
+  --grayA10: hsla(0, 0%, 100%, 0.446);
+  --grayA11: hsla(0, 0%, 100%, 0.592);
+  --grayA12: hsla(0, 0%, 100%, 0.923);
+  --blue1: hsl(212, 35%, 9.2%);
+  --blue2: hsl(216, 50%, 11.8%);
+  --blue3: hsl(214, 59.4%, 15.3%);
+  --blue4: hsl(214, 65.8%, 17.9%);
+  --blue5: hsl(213, 71.2%, 20.2%);
+  --blue6: hsl(212, 77.4%, 23.1%);
+  --blue7: hsl(211, 85.1%, 27.4%);
+  --blue8: hsl(211, 89.7%, 34.1%);
+  --blue9: hsl(206, 100%, 50%);
+  --blue10: hsl(209, 100%, 60.6%);
+  --blue11: hsl(210, 100%, 66.1%);
+  --blue12: hsl(206, 98%, 95.8%);
+}
+body {
+  background: var(--app-bg);
+}
+div [command-dialog-mask] {
+  background-color: rgba(0, 0, 0, 0.3);
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 200;
+}
+div [command-dialog-wrapper] {
+  position: relative;
+  background: var(--gray2);
+  border-radius: 6px;
+  box-shadow: none;
+  flex-direction: column;
+  margin: 20vh auto auto;
+  max-width: 560px;
+}
+div [command-dialog-footer] {
+  border-top: 1px solid var(--gray6);
+  align-items: center;
+  background: var(--gray4);
+  color: var(--gray11);
+  border-radius: 0 0 8px 8px;
+  box-shadow: none;
+  display: flex;
+  flex-direction: row-reverse;
+  flex-shrink: 0;
+  height: 44px;
+  justify-content: space-between;
+  padding: 0 12px;
+  position: relative;
+  user-select: none;
+  width: 100%;
+  z-index: 300;
+  font-size: 12px;
+}
+.algolia [command-input] {
+  font-family: var(--font-sans);
+  width: 100%;
+  font-size: 18px;
+  padding: 12px;
+  outline: none;
+  background: var(--bg);
+  color: var(--gray12);
+  border-bottom: 1px solid var(--gray6);
+  border-radius: 4px;
+  caret-color: var(--vcp-c-brand);
+  margin: 0;
+  border: 1px solid var(--vcp-c-brand);
+}
+.algolia [command-input]::placeholder {
+  color: var(--gray9);
+}
+.algolia [command-list] {
+  height: var(--command-list-height);
+  max-height: 360px;
+  overflow: auto;
+  overscroll-behavior: contain;
+  transition: 100ms ease;
+  transition-property: height;
+}
+.algolia [command-item] {
+  position: relative;
+  content-visibility: auto;
+  cursor: pointer;
+  height: 56px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0px 16px;
+  color: var(--gray12);
+  user-select: none;
+  will-change: background, color;
+  transition: all 150ms ease;
+  transition-property: none;
+  border-radius: 4px;
+  margin-top: 4px;
+  background-color: var(--lowContrast);
+}
+.algolia [command-item]:first-child {
+  margin-top: 0px;
+}
+.algolia [command-item][aria-selected='true'],
+.algolia [command-item]:hover {
+  background: var(--vcp-c-brand);
+  color: #fff;
+}
+.algolia [command-item][aria-selected='true'] svg,
+.algolia [command-item]:hover svg {
+  color: #fff;
+}
+.algolia [command-item][aria-selected='true'] [command-linear-shortcuts],
+.algolia [command-item]:hover [command-linear-shortcuts] {
+  display: flex;
+  margin-left: auto;
+  gap: 8px;
+}
+.algolia [command-item][aria-selected='true'] [command-linear-shortcuts] kbd,
+.algolia [command-item]:hover [command-linear-shortcuts] kbd {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--gray11);
+}
+.algolia [command-item]:active {
+  transition-property: background;
+  background: var(--gray4);
+}
+.algolia [command-item] svg {
+  width: 16px;
+  height: 16px;
+  color: var(--gray10);
+}
+.algolia [command-empty=''] {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
+  white-space: pre-wrap;
+  color: var(--gray11);
+}
+.algolia [command-dialog-mask] {
+  background-color: rgba(75, 75, 75, 0.8);
+}
+.algolia [command-dialog-header] {
+  padding: 12px;
+}
+.algolia [command-dialog-body] {
+  padding: 0 12px 12px;
+}
+.algolia [command-dialog-footer] {
+  align-items: center;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 -1px 0 0 #e0e3e8, 0 -3px 6px 0 rgba(69, 98, 155, 0.12);
+  display: flex;
+  flex-direction: row-reverse;
+  flex-shrink: 0;
+  height: 44px;
+  justify-content: space-between;
+  padding: 0 12px;
+  position: relative;
+  user-select: none;
+  width: 100%;
+  z-index: 300;
+}
+.algolia [command-group-heading] {
+  color: var(--vcp-c-brand);
+  font-size: 0.85em;
+  font-weight: 600;
+  line-height: 32px;
+  margin: 0 -4px;
+  padding: 8px 4px 0;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+}
+.algolia .command-palette-commands {
+  color: var(--docsearch-muted-color);
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.algolia .command-palette-commands li {
+  display: flex;
+  align-items: center;
+}
+.algolia .command-palette-commands li:not(:last-of-type) {
+  margin-right: 0.8em;
+}
+.algolia .command-palette-logo a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.algolia .command-palette-logo svg {
+  height: 24px;
+  width: 24px;
+}
+.algolia .command-palette-commands-key {
+  align-items: center;
+  background: var(--gray3);
+  border-radius: 2px;
+  display: flex;
+  height: 18px;
+  justify-content: center;
+  margin-right: 0.4em;
+  padding: 0 0 1px;
+  color: var(--gray11);
+  border: 0;
+  width: 20px;
+}
+.dark .algolia [command-dialog-footer] {
+  box-shadow: none;
+}
+div[command-group] {
+  display: block !important;
+}
+div[command-item] {
+  display: flex !important;
+}
+.search-dialog div[command-item] > div.link {
+  width: 100%;
+}
+.search-dialog div[command-item] .title {
+  display: flex;
+  justify-content: space-between;
+}
+.search-dialog div[command-item] .des {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: keep-all;
+  white-space: nowrap;
+}
+.search-dialog div[command-item] .date {
+  min-width: 80px;
+}
+.search-dialog div[command-item] mark {
+  background: none;
+  color: var(--vp-c-brand);
+}
+.search-dialog div[command-item][aria-selected='true'] mark,
+.search-dialog div[command-item]:hover mark {
+  color: inherit;
+  text-decoration: underline;
+}

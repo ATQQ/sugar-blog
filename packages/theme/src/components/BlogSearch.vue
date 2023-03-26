@@ -133,7 +133,7 @@
 
 <script lang="ts" setup>
 // @ts-nocheck
-import { computed, nextTick, ref, watch, onBeforeMount } from 'vue'
+import { computed, nextTick, ref, watch, onBeforeMount, onMounted } from 'vue'
 import { Command } from 'vue-command-palette'
 import { useRoute, useRouter, withBase } from 'vitepress'
 import { useMagicKeys, useWindowSize } from '@vueuse/core'
@@ -180,9 +180,12 @@ onBeforeMount(() => {
   }
 })
 
-const metaKey = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)
-  ? '⌘'
-  : 'Ctrl'
+const metaKey = ref('')
+onMounted(() => {
+  metaKey.value = /(Mac|iPhone|iPod|iPad)/i.test(navigator?.platform)
+    ? '⌘'
+    : 'Ctrl'
+})
 const searchModal = ref(false)
 const searchWords = ref('')
 const docs = useArticles()
@@ -328,7 +331,7 @@ const handleSelect = (target: any) => {
 .blog-search {
   flex: 1;
   display: flex;
-  margin-left: 10px;
+  padding-left: 32px;
   .nav-search-btn-wait {
     cursor: pointer;
     display: flex;
@@ -343,7 +346,7 @@ const handleSelect = (target: any) => {
     }
 
     &:hover {
-      border: 1px solid #409eff;
+      border: 1px solid var(--vp-c-brand);
       border-radius: 6px;
     }
 

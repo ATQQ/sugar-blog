@@ -97,6 +97,7 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
       plugins: [
         {
           name: '@sugarar/theme-plugin-pagefind',
+          enforce: 'pre',
           buildEnd() {
             const { log } = console
             // TODO: hack

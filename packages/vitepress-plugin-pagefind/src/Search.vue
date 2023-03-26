@@ -1,5 +1,9 @@
 <template>
-  <div class="blog-search" data-pagefind-ignore="all">
+  <div
+    :style="`flex: ${isMinimized ? '0' : '1'}`"
+    class="blog-search"
+    data-pagefind-ignore="all"
+  >
     <div class="nav-search-btn-wait" @click="searchModal = true">
       <svg width="14" height="14" viewBox="0 0 20 20">
         <path
@@ -11,26 +15,25 @@
           stroke-linejoin="round"
         ></path>
       </svg>
-      <span class="search-tip">搜索</span>
-      <span class="metaKey"> ⌘ K </span>
+      <span v-if="!isMinimized" class="search-tip">{{
+        searchConfig?.btnPlaceholder || 'Search'
+      }}</span>
+      <span v-if="!isMinimized" class="metaKey"> {{ metaKey }} K </span>
     </div>
     <Command.Dialog :visible="searchModal" theme="algolia">
       <template #header>
         <Command.Input
           v-model:value="searchWords"
-          placeholder="请输入要搜索的内容"
+          :placeholder="searchConfig?.placeholder || 'Search Docs'"
         />
       </template>
       <template #body>
         <div class="search-dialog">
           <Command.List>
-            <Command.Empty v-if="!searchResult.length"
-              >No results found.</Command.Empty
-            >
-            <Command.Group
-              v-else
-              :heading="`共：${searchResult.length} 个搜索结果`"
-            >
+            <Command.Empty v-if="!searchResult.length">
+              {{ searchConfig?.emptyText || 'No results found.' }}
+            </Command.Empty>
+            <Command.Group v-else :heading="headingText">
               <Command.Item
                 v-for="item in showSearchResult"
                 :data-value="withBase(item.route)"
@@ -127,13 +130,26 @@
 </template>
 <script lang="ts" setup>
 // @ts-nocheck
-import { computed, nextTick, ref, watch, onBeforeMount } from 'vue'
+import { computed, nextTick, ref, watch, onBeforeMount, onMounted } from 'vue'
 import { Command } from 'vue-command-palette'
 import { useRoute, useRouter, withBase } from 'vitepress'
-import { useMagicKeys } from '@vueuse/core'
-import docs from 'virtual:docs'
+import { useMagicKeys, useWindowSize } from '@vueuse/core'
+import { docs, searchConfig } from 'virtual:pagefind'
 import { formatDate } from './utils'
 import LogoPagefind from './LogoPagefind.vue'
+
+const windowSize = useWindowSize()
+
+const isMinimized = computed(() => windowSize.width.value < 760)
+
+const headingText = computed(() => {
+  return searchConfig?.heading
+    ? searchConfig.heading.replace(
+        /\{\{searchResult\}\}/,
+        searchResult.value.length
+      )
+    : `Total: ${searchResult.value.length} search results.`
+})
 
 const addInlineScript = () => {
   const scriptText = `import('/_pagefind/pagefind.js')
@@ -152,6 +168,12 @@ onBeforeMount(() => {
   addInlineScript()
 })
 
+const metaKey = ref('')
+onMounted(() => {
+  metaKey.value = /(Mac|iPhone|iPod|iPad)/i.test(navigator?.platform)
+    ? '⌘'
+    : 'Ctrl'
+})
 const searchModal = ref(false)
 const searchWords = ref('')
 
@@ -279,76 +301,35 @@ const handleSelect = (target: any) => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="css" scoped>
 .blog-search {
   flex: 1;
+  display: flex;
+  padding-left: 32px;
+}
+.blog-search .nav-search-btn-wait {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  box-sizing: border-box;
+}
+.blog-search .nav-search-btn-wait .metaKey {
   margin-left: 10px;
-  .nav-search-btn-wait {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 6px;
-    box-sizing: border-box;
-    width: 120px;
-
-    .metaKey {
-      margin-left: 10px;
-      font-size: 12px;
-    }
-
-    &:hover {
-      border: 1px solid #409eff;
-      border-radius: 6px;
-    }
-
-    .search-tip {
-      color: #909399;
-      font-size: 12px;
-      padding-left: 10px;
-    }
-  }
+  font-size: 12px;
+}
+.blog-search .nav-search-btn-wait:hover {
+  border: 1px solid var(--vp-c-brand);
+  border-radius: 6px;
+}
+.blog-search .nav-search-btn-wait .search-tip {
+  color: #909399;
+  font-size: 12px;
+  padding-left: 10px;
 }
 </style>
 
-<style lang="scss">
-@import './assets/scss/global.scss';
-@import './assets/scss/algolia.scss';
-
-div[command-group] {
-  display: block !important;
-}
-div[command-item] {
-  display: flex !important;
-}
-.search-dialog {
-  div[command-item] > div.link {
-    width: 100%;
-  }
-  div[command-item] .title {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  div[command-item] .des {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    word-break: keep-all;
-    white-space: nowrap;
-  }
-
-  div[command-item] .date {
-    min-width: 80px;
-  }
-  div[command-item] mark {
-    background: none;
-    color: var(--vp-c-brand);
-  }
-
-  div[command-item][aria-selected='true'] mark,
-  div[command-item]:hover mark {
-    color: inherit;
-    text-decoration: underline;
-  }
-}
+<style lang="css">
+@import './assets/scss/search.css';
 </style>

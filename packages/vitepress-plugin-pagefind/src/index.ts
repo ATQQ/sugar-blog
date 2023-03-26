@@ -6,8 +6,31 @@ import { getPagesData } from './node'
 
 const docsData = getPagesData()
 
-export function pagefindPlugin(): any {
-  const virtualModuleId = 'virtual:docs'
+export interface SearchConfig {
+  /**
+   * @default
+   * 'Search'
+   */
+  btnPlaceholder?: string
+  /**
+   * @default
+   * 'Search Docs'
+   */
+  placeholder?: string
+  /**
+   * @default
+   * 'No results found.'
+   */
+  emptyText?: string
+  /**
+   * @default
+   * 'Total: {{searchResult}} search results.'
+   */
+  heading?: string
+}
+
+export function pagefindPlugin(searchConfig: SearchConfig = {}): any {
+  const virtualModuleId = 'virtual:pagefind'
   const resolvedVirtualModuleId = `\0${virtualModuleId}`
   let flag = true
   let originLog = null
@@ -34,7 +57,9 @@ export function pagefindPlugin(): any {
       // eslint-disable-next-line consistent-return
       return `
       import { ref } from 'vue'
-      export default ref(${JSON.stringify(docsData)})`
+      export const docs = ref(${JSON.stringify(docsData)})
+      export const searchConfig = ${JSON.stringify(searchConfig)}
+      `
     },
     // 调用pagefind
     buildEnd() {
