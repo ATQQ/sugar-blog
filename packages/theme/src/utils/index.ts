@@ -39,7 +39,7 @@ export function isCurrentWeek(date: Date, target?: Date) {
 }
 
 export function formatShowDate(date: Date | string) {
-  const source = +new Date(date)
+  const source = date ? +new Date(date) : +new Date()
   const now = +new Date()
   const diff = now - source
   const oneSeconds = 1000

@@ -4,8 +4,9 @@
 
 ### Patch Changes
 
-- feat: 分离独立的 pagefind 插件
-- chore: 搜索结果条数不限制
+- feat: 分离可独立使用的的 搜索插件[pagefind](https://github.com/ATQQ/sugar-blog/tree/master/packages/vitepress-plugin-pagefind)
+- fix: 搜索结果未全部展示
+- fix: 中文文件名文章时间显示NaN
 
 ## 0.1.14
 
