@@ -1,5 +1,10 @@
 <template>
-  <div class="blog-search" v-if="openSearch" data-pagefind-ignore="all">
+  <div
+    class="blog-search"
+    :style="`flex: ${isMinimized ? '0' : '1'}`"
+    v-if="openSearch"
+    data-pagefind-ignore="all"
+  >
     <div class="nav-search-btn-wait" @click="searchModal = true">
       <svg width="14" height="14" viewBox="0 0 20 20">
         <path
@@ -11,10 +16,10 @@
           stroke-linejoin="round"
         ></path>
       </svg>
-      <span class="search-tip">{{
+      <span v-if="!isMinimized" class="search-tip">{{
         searchConfig?.btnPlaceholder || '搜索'
       }}</span>
-      <span class="metaKey"> {{ metaKey }} K </span>
+      <span v-if="!isMinimized" class="metaKey"> {{ metaKey }} K </span>
     </div>
     <Command.Dialog :visible="searchModal" theme="algolia">
       <template #header>
@@ -134,12 +139,15 @@
 import { computed, nextTick, ref, watch, onBeforeMount } from 'vue'
 import { Command } from 'vue-command-palette'
 import { useRoute, useRouter, withBase } from 'vitepress'
-import { useMagicKeys } from '@vueuse/core'
+import { useMagicKeys, useWindowSize } from '@vueuse/core'
 import { formatDate } from '../utils'
 import { useArticles, useBlogConfig } from '../composables/config/blog'
 import { Theme } from '../composables/config'
 import LogoPagefind from './LogoPagefind.vue'
 
+const windowSize = useWindowSize()
+
+const isMinimized = computed(() => windowSize.width.value < 760)
 const { search: searchConfig } = useBlogConfig()
 
 const openSearch = computed(() =>
@@ -314,6 +322,7 @@ const handleSelect = (target: any) => {
 <style lang="scss" scoped>
 .blog-search {
   flex: 1;
+  display: flex;
   margin-left: 10px;
   .nav-search-btn-wait {
     cursor: pointer;
@@ -322,7 +331,6 @@ const handleSelect = (target: any) => {
     justify-content: center;
     padding: 6px;
     box-sizing: border-box;
-    width: 120px;
 
     .metaKey {
       margin-left: 10px;

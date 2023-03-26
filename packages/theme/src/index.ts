@@ -17,6 +17,7 @@ export const BlogTheme: Theme = {
   ...DefaultTheme,
   Layout: withConfigProvider(BlogApp),
   enhanceApp(ctx) {
+    // TODO: 优化到自定义组件中注册
     ctx.app.component('TimelinePage', TimelinePage)
   }
 }
