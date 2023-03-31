@@ -1,21 +1,30 @@
 # @sugarat/theme
 
+## 0.1.18
+
+### Patch Changes
+
+- fix: 设置base路径后发布时间显示0秒
+- fix: 评论跳转按钮在部分场景展示异常
+
 ## 0.1.17
+
 - fix: search: false 不生效
 
 ## 0.1.16
+
 ### Patch Changes
 
-- fix: 全局BG色和Vitepress主题样式冲突
+- fix: 全局 BG 色和 Vitepress 主题样式冲突
 
 ## 0.1.15
 
 ### Patch Changes
 
 - feat: 分离可独立使用的的 搜索插件[pagefind](https://github.com/ATQQ/sugar-blog/tree/master/packages/vitepress-plugin-pagefind)
-- feat: 搜索框展示UI优化，支持定制文案，展示适配移动端
+- feat: 搜索框展示 UI 优化，支持定制文案，展示适配移动端
 - fix: 搜索结果未全部展示
-- fix: 中文文件名文章时间显示NaN
+- fix: 中文文件名文章时间显示 NaN
 
 ## 0.1.14
 
