@@ -4,9 +4,10 @@
     v-if="show"
     id="giscus-comment"
     data-pagefind-ignore="all"
+    ref="commentEl"
   >
     <el-affix
-      :class="{ hidden: !showCommnetAffix }"
+      :class="{ hidden: commentIsVisible }"
       class="comment-btn"
       target="main"
       position="bottom"
@@ -43,7 +44,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { useDark } from '@vueuse/core'
+import { useDark, useElementVisibility } from '@vueuse/core'
 import { useData, useRoute } from 'vitepress'
 import { computed, ref, watch } from 'vue'
 import { ElAffix, ElButton } from 'element-plus'
@@ -52,10 +53,9 @@ import { useGiscusConfig } from '../composables/config/blog'
 import { Theme } from '../composables/config/index'
 
 const { frontmatter } = useData()
-const showCommnetAffix = ref(true)
-const handleVisibleChange = (v: boolean) => {
-  showCommnetAffix.value = v
-}
+const commentEl = ref(null)
+const commentIsVisible = useElementVisibility(commentEl)
+
 const handleScrollToComment = () => {
   document.querySelector('#giscus-comment')?.scrollIntoView({
     behavior: 'smooth',
