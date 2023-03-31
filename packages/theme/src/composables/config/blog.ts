@@ -1,4 +1,4 @@
-import { useData, useRoute } from 'vitepress'
+import { useData, useRoute, withBase } from 'vitepress'
 import {
   Component,
   computed,
@@ -85,7 +85,7 @@ export function useCurrentArticle() {
     const currentPath = route.path.replace(/.html$/, '')
     return docs.value?.find((v) =>
       // 兼容中文路径
-      [currentPath, decodeURIComponent(currentPath)].includes(v.route)
+      [currentPath, decodeURIComponent(currentPath)].includes(withBase(v.route))
     )
   })
 
