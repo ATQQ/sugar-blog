@@ -41,5 +41,8 @@
   "bugs": {
     "url": "https://github.com/ATQQ/sugar-blog/issues"
   },
-  "homepage": "https://github.com/ATQQ/sugar-blog#readme"
+  "homepage": "https://github.com/ATQQ/sugar-blog#readme",
+  "engines": {
+    "pnpm":"^7"
+  }
 }

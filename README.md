@@ -40,7 +40,7 @@
 先安装 `pnpm`
 
 ```sh
-npm i -g pnpm
+npm i -g pnpm@7
 ```
 
 ```sh
