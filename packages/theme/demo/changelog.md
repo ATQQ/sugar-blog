@@ -12,6 +12,13 @@ tag:
 pnpm up @sugarat/theme
 ```
 
+## 0.1.18 (2023/03/31)
+
+### Patch Changes
+
+- fix: 设置base路径后发布时间显示0秒
+- fix: 评论跳转按钮在部分场景展示异常
+
 ## 0.1.17 (2023/03/26)
 - fix: search: false 不生效
 
