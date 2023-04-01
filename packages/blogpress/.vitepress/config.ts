@@ -1,4 +1,5 @@
 import { getThemeConfig, defineConfig } from '@sugarat/theme/node'
+import themePkg from '@sugarat/theme/package.json'
 
 const blogTheme = getThemeConfig({
   author: '粥里有勺糖',
@@ -129,7 +130,7 @@ export default defineConfig({
     footer: {
       message:
         '<a target="_blank" href="https://beian.miit.gov.cn/">蜀ICP备19011724号</a>',
-      copyright: 'MIT Licensed | © 2018-present 粥里有勺糖'
+      copyright: `© 2018-present 粥里有勺糖 | @sugarat/theme@${themePkg.version} </a>`
     },
     logo: '/logo.png',
     editLink: {

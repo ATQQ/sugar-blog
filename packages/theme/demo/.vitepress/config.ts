@@ -95,7 +95,7 @@ export default defineConfig({
   themeConfig: {
     footer: {
       message: `Power By <a target="_blank" href="https://theme.sugarat.top/"> @sugarat/theme@${packageJSON.version} </a>`,
-      copyright: 'MIT Licensed | Copyright © 粥里有勺糖'
+      copyright: 'MIT License | Copyright © 粥里有勺糖'
     },
     nav: [
       {
