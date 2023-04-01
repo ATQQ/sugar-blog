@@ -8,6 +8,7 @@
       "types": "./node.d.ts",
       "default": "./node.js"
     },
+    "./package.json": "./package.json",
     ".": "./src/index.ts"
   },
   "files": [
