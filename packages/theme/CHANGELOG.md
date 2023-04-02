@@ -1,5 +1,13 @@
 # @sugarat/theme
 
+## 0.1.19
+
+### Patch Changes
+
+- fix: dev not defined error
+- chore: 主题的exports 添加 package.json
+- fix: default template lang error
+
 ## 0.1.18
 
 ### Patch Changes

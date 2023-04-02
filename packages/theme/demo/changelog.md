@@ -12,6 +12,14 @@ tag:
 pnpm up @sugarat/theme
 ```
 
+## 0.1.19 (2023/04/02)
+
+### Patch Changes
+
+- fix: dev not defined error
+- chore: 主题的exports 添加 package.json
+- fix: default template lang error
+
 ## 0.1.18 (2023/03/31)
 
 ### Patch Changes
