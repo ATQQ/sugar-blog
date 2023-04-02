@@ -28,6 +28,7 @@
     "deploy": "zx deploy.mjs",
     "deploy:theme": "zx deploy-theme.mjs",
     "build:theme": "pnpm --filter '@sugarat/theme' build",
+    "build:theme-only": "pnpm --filter '@sugarat/theme' build:node",
     "release": "pnpm build:theme && pnpm release:only",
     "release:only": "changeset publish"
   },
