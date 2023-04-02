@@ -35,6 +35,7 @@ export default defineConfig({
       exclude: ['@sugarat/theme']
     }
   },
+  lastUpdated: true,
   themeConfig: {
     lastUpdatedText: '上次更新于',
     footer: {

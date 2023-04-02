@@ -140,5 +140,6 @@ export default defineConfig({
       text: '去 GitHub 上编辑内容'
     },
     lastUpdatedText: '上次更新于'
-  }
+  },
+  lastUpdated: true
 })
