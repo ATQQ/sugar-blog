@@ -11,7 +11,6 @@
       class="comment-btn"
       target="main"
       position="bottom"
-      @change="handleVisibleChange"
       :offset="40"
     >
       <el-button
