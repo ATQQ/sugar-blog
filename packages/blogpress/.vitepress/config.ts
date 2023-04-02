@@ -88,7 +88,7 @@ const extraHead: any =
 export default defineConfig({
   extends: blogTheme,
   ignoreDeadLinks: true,
-  lang: 'zh-cmn-Hans',
+  lang: 'zh-cn',
   title: '粥里有勺糖',
   description:
     '粥里有勺糖的个人博客，记录随笔与学习笔记，大前端相关的知识，高频面试题，个人面经等',

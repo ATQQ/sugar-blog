@@ -78,7 +78,7 @@ const extraHead: any =
 
 export default defineConfig({
   extends: blogTheme,
-  lang: 'zh-cmn-Hans',
+  lang: 'zh-cn',
   title: '@sugarat/theme',
   description: '粥里有勺糖的博客主题，基于 vitepress 实现',
   head: [...extraHead],
