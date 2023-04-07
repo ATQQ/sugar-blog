@@ -173,3 +173,22 @@ function getTextSummary(text: string, count = 100) {
       ?.slice(0, count)
   )
 }
+
+/**
+ * TODO：支持更多pagefind配置项
+ * vitepress buildEnd钩子调用
+ */
+export function buildEnd(siteConfig?: any) {
+  const { log } = console
+  log()
+  log('=== pagefind: https://pagefind.app/ ===')
+  const command = `npx pagefind --source ${path.join(
+    process.argv.slice(2)?.[1] || '.',
+    '.vitepress/dist'
+  )}`
+  log(command)
+  log()
+  execSync(command, {
+    stdio: 'inherit'
+  })
+}

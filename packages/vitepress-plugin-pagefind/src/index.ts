@@ -1,8 +1,5 @@
-// @ts-nocheck
-/* eslint-disable prefer-rest-params */
-import { execSync } from 'child_process'
-import path from 'path'
-import { getPagesData } from './node'
+import type { PluginOption } from 'vite'
+import { buildEnd, getPagesData } from './node'
 
 const docsData = getPagesData()
 
@@ -32,9 +29,9 @@ export interface SearchConfig {
 export function pagefindPlugin(searchConfig: SearchConfig = {}): any {
   const virtualModuleId = 'virtual:pagefind'
   const resolvedVirtualModuleId = `\0${virtualModuleId}`
-  let flag = true
-  let originLog = null
-  return {
+
+  let resolveConfig: any
+  const pluginOps: PluginOption = {
     name: 'vitepress-plugin-pagefind',
     enforce: 'pre',
     config: () => ({
@@ -44,9 +41,21 @@ export function pagefindPlugin(searchConfig: SearchConfig = {}): any {
         }
       }
     }),
+    configResolved(config: any) {
+      if (resolveConfig) {
+        return
+      }
+      resolveConfig = config
 
-    // eslint-disable-next-line consistent-return
-    async resolveId(id) {
+      // 添加 vitepress 的钩子
+      const selfBuildEnd = config.vitepress.buildEnd
+      config.vitepress.buildEnd = (siteConfig: any) => {
+        // 调用自己的
+        selfBuildEnd?.(siteConfig)
+        buildEnd(siteConfig)
+      }
+    },
+    async resolveId(id: string) {
       if (id === virtualModuleId) {
         return resolvedVirtualModuleId
       }
@@ -54,44 +63,11 @@ export function pagefindPlugin(searchConfig: SearchConfig = {}): any {
     // 文章数据
     load(this, id) {
       if (id !== resolvedVirtualModuleId) return
-      // eslint-disable-next-line consistent-return
       return `
       import { ref } from 'vue'
       export const docs = ref(${JSON.stringify(docsData)})
       export const searchConfig = ${JSON.stringify(searchConfig)}
       `
-    },
-    // 调用pagefind
-    buildEnd() {
-      const { log } = console
-      // hack
-      if (flag) {
-        flag = false
-        originLog = log
-        Object.defineProperty(console, 'log', {
-          value() {
-            // eslint-disable-next-line prefer-rest-params
-            if (`${arguments[0]}`.includes('build complete')) {
-              console.log = originLog
-              setTimeout(() => {
-                originLog()
-                originLog('=== pagefind: https://pagefind.app/ ===')
-                const command = `npx pagefind --source ${path.join(
-                  process.argv.slice(2)?.[1] || '.',
-                  '.vitepress/dist'
-                )}`
-                originLog(command)
-                originLog()
-                execSync(command, {
-                  stdio: 'inherit'
-                })
-              }, 100)
-            }
-            // @ts-ignore
-            return log.apply(this, arguments)
-          }
-        })
-      }
     },
     // 添加检索的内容标识
     transform(code, id) {
@@ -101,4 +77,5 @@ export function pagefindPlugin(searchConfig: SearchConfig = {}): any {
       return code
     }
   }
+  return pluginOps
 }
