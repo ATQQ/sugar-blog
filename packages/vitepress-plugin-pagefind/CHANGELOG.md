@@ -1,5 +1,9 @@
 # vitepress-plugin-pagefind
 
+## 0.2.1
+### patch Changes
+* chore: get file timestamp use stdout replace output
+
 ## 0.2.0
 
 ### Minor Changes

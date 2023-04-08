@@ -133,7 +133,8 @@ export function getFileBirthTime(url: string) {
     //   .trim()
 
     const infoStr = spawnSync('git', ['log', '-1', '--pretty="%ci"', url])
-      .output?.[1]?.toString()
+      .stdout?.toString()
+      .replace(/["']/g, '')
       .trim()
     if (infoStr) {
       date = new Date(infoStr)

@@ -1,18 +1,27 @@
 # @sugarat/theme
 
+## 0.1.20
+
+### Patch Changes
+
+- feat: 内置 pagefind 搜索针对中文优化
+- fix: 内置 pagefind 在自定义base后无效
+- chore: 没有git仓库时，打印Not日志
+- chore: pagefind 引导使用独立的插件
+
 ## 0.1.19
 
 ### Patch Changes
 
 - fix: dev not defined error
-- chore: 主题的exports 添加 package.json
+- chore: 主题的 exports 添加 package.json
 - fix: default template lang error
 
 ## 0.1.18
 
 ### Patch Changes
 
-- fix: 设置base路径后发布时间显示0秒
+- fix: 设置 base 路径后发布时间显示 0 秒
 - fix: 评论跳转按钮在部分场景展示异常
 
 ## 0.1.17

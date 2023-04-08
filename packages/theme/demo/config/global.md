@@ -249,6 +249,42 @@ const blogTheme = getThemeConfig({
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY3OTEyMzQ0NDAwOA==679123444008)
 
+
+如果需要自定义更多的内容可以使用独立的插件 [vitepress-plugin-pagefind](https://github.com/ATQQ/sugar-blog/blob/master/packages/vitepress-plugin-pagefind/README-zh.md)
+
+:::code-group
+
+```sh [①: 安装插件]
+pnpm add vitepress-plugin-pagefind
+```
+
+```ts [②: 引入插件]
+// 在 `.vitepress/config.ts` 引入
+import { defineConfig } from 'vitepress'
+import { chineseSearchOptimize, pagefindPlugin } from 'vitepress-plugin-pagefind'
+
+const blogTheme = getThemeConfig({
+  // 关闭主题内置
+  search: false
+})
+
+export default defineConfig({
+  extends: blogTheme,
+  lang: 'zh-cn',
+  vite: {
+    // 使用插件加载
+    plugins: [pagefindPlugin({
+      customSearchQuery: chineseSearchOptimize,
+      btnPlaceholder: '搜索',
+      placeholder: '搜索文档',
+      emptyText: '空空如也',
+      heading: '共: {{searchResult}} 条结果'
+    })],
+  },
+})
+```
+:::
+
 ### 全文搜索 - algolia
 当然也推荐大家接入[algolia](https://vitepress.vuejs.org/guide/theme-search)使用，申请教程可以参考 [博客优化之开启 Algolia 全文搜索](https://github.com/mqyqingfeng/Blog/issues/267)
 
