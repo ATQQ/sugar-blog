@@ -1,7 +1,7 @@
 export interface PagefindOption {
   /**
    * Pass extra element selectors that Pagefind should ignore when indexing
-   * @detail https://pagefind.app/docs/config-options/#exclude-selectors
+   * @see https://pagefind.app/docs/config-options/#exclude-selectors
    * @default
    * ['div.aside' ,'a.header-anchor']
    */
@@ -28,4 +28,11 @@ export interface SearchConfig {
    * 'Total: {{searchResult}} search results.'
    */
   heading?: string
+
+  /**
+   * For some special languages.
+   * Customize the conversion of user input
+   * @see https://pagefind.app/docs/multilingual/#specialized-languages
+   */
+  customSearchQuery?: (input: string) => string
 }

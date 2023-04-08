@@ -1,5 +1,6 @@
 import type { PluginOption } from 'vite'
 import type { SiteConfig } from 'vitepress'
+import { stringify } from 'javascript-stringify'
 import { pluginSiteConfig, getPagesData } from './node'
 import type { SearchConfig, PagefindOption } from './type'
 
@@ -64,7 +65,7 @@ export function pagefindPlugin(
       return `
       import { ref } from 'vue'
       export const docs = ref(${JSON.stringify(docsData)})
-      export const searchConfig = ${JSON.stringify(searchConfig)}
+      export const searchConfig = ${stringify(searchConfig)}
       `
     },
     // 添加检索的内容标识

@@ -130,9 +130,12 @@ import { computed, nextTick, ref, watch, onMounted } from 'vue'
 import { Command } from 'vue-command-palette'
 import { useRoute, useRouter, withBase } from 'vitepress'
 import { useMagicKeys, useWindowSize } from '@vueuse/core'
-import { docs, searchConfig } from 'virtual:pagefind'
+import { docs, searchConfig as _searchConfig } from 'virtual:pagefind'
 import { formatDate } from './utils'
 import LogoPagefind from './LogoPagefind.vue'
+import type { SearchConfig } from './type'
+
+const searchConfig: SearchConfig = _searchConfig
 
 const windowSize = useWindowSize()
 
@@ -208,8 +211,13 @@ watch(
     if (!window?.__pagefind__?.search) {
       inlineSearch()
     } else {
+      const searchText =
+        typeof searchConfig.customSearchQuery === 'function'
+          ? searchConfig.customSearchQuery(searchWords.value)
+          : searchWords.value
+
       await window?.__pagefind__
-        ?.search?.(searchWords.value)
+        ?.search?.(searchText)
         .then(async (search: any) => {
           const result = await Promise.all(
             search.results.map((v: any) => v.data())
