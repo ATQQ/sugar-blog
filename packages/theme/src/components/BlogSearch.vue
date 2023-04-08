@@ -132,7 +132,7 @@ import { computed, nextTick, ref, watch, onBeforeMount, onMounted } from 'vue'
 import { Command } from 'vue-command-palette'
 import { useRoute, useRouter, withBase } from 'vitepress'
 import { useMagicKeys, useWindowSize } from '@vueuse/core'
-import { formatDate } from '../utils'
+import { chineseSearchOptimize, formatDate } from '../utils'
 import { useArticles, useBlogConfig } from '../composables/config/blog'
 import { Theme } from '../composables/config'
 import LogoPagefind from './LogoPagefind.vue'
@@ -158,7 +158,7 @@ const openSearch = computed(() =>
 )
 
 const addInlineScript = () => {
-  const scriptText = `import('/_pagefind/pagefind.js')
+  const scriptText = `import('${withBase('/_pagefind/pagefind.js')}')
         .then((module) => {
           window.__pagefind__ = module
         })
@@ -247,14 +247,16 @@ watch(
       } else {
         // @ts-ignore
         await window?.__pagefind__
-          ?.search?.(searchWords.value)
+          ?.search?.(chineseSearchOptimize(searchWords.value))
           .then(async (search: any) => {
             const result = await Promise.all(
               search.results.map((v: any) => v.data())
             )
             searchResult.value = []
             docs.value.forEach((v) => {
-              const match = result.find((r) => r.url.startsWith(v.route))
+              const match = result.find((r) =>
+                r.url.startsWith(withBase(v.route))
+              )
               if (match) {
                 searchResult.value.push({
                   ...v,

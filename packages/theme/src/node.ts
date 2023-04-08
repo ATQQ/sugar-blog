@@ -4,7 +4,7 @@ import matter from 'gray-matter'
 import fs from 'fs'
 import { execSync, spawn } from 'child_process'
 import path from 'path'
-import type { UserConfig } from 'vitepress'
+import type { SiteConfig, UserConfig } from 'vitepress'
 import { formatDate } from './utils/index'
 import type { Theme } from './composables/config/index'
 
@@ -91,40 +91,52 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
     (cfg?.search instanceof Object && cfg.search.mode === 'pagefind')
   ) {
     checkKeys.push('vite')
-    let flag = true
-    let originLog: any = null
+
+    let resolveConfig: any
     extraConfig.vite = {
       plugins: [
         {
           name: '@sugarar/theme-plugin-pagefind',
           enforce: 'pre',
-          buildEnd() {
-            const { log } = console
-            // TODO: hack
-            if (flag) {
-              flag = false
-              originLog = log
-              Object.defineProperty(console, 'log', {
-                value() {
-                  if (`${arguments[0]}`.includes('build complete')) {
-                    console.log = originLog
-                    setTimeout(() => {
-                      originLog()
-                      originLog('=== pagefind: https://pagefind.app/ ===')
-                      const command = `npx pagefind --source ${path.join(
-                        process.argv.slice(2)?.[1] || '.',
-                        '.vitepress/dist'
-                      )}`
-                      originLog(command)
-                      originLog()
-                      execSync(command, {
-                        stdio: 'inherit'
-                      })
-                    }, 100)
-                  }
-                  // @ts-ignore
-                  return log.apply(this, arguments)
-                }
+          configResolved(config: any) {
+            if (resolveConfig) {
+              return
+            }
+            resolveConfig = config
+
+            const vitepressConfig: SiteConfig = config.vitepress
+            if (!vitepressConfig) {
+              return
+            }
+
+            // 添加 自定义 vitepress 的钩子
+            const selfBuildEnd = vitepressConfig.buildEnd
+            vitepressConfig.buildEnd = (siteConfig: any) => {
+              // 调用自己的
+              selfBuildEnd?.(siteConfig)
+              // 调用pagefind
+              const ignore: string[] = [
+                // 侧边栏内容
+                'div.aside',
+                // 标题锚点
+                'a.header-anchor'
+              ]
+              const { log } = console
+              log()
+              log('=== pagefind: https://pagefind.app/ ===')
+              let command = `npx pagefind --source ${path.join(
+                process.argv.slice(2)?.[1] || '.',
+                '.vitepress/dist'
+              )}`
+
+              if (ignore.length) {
+                command += ` --exclude-selectors "${ignore.join(', ')}"`
+              }
+
+              log(command)
+              log()
+              execSync(command, {
+                stdio: 'inherit'
               })
             }
           },
