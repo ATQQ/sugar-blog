@@ -1,7 +1,20 @@
 # vitepress-plugin-pagefind
 
+## 0.2.0
+
+### Minor Changes
+
+- feat: support [custom index page lang](https://pagefind.app/docs/config-options/#force-language)
+- feat: support customSearchQuery（The goal is to [optimize Chinese search](https://pagefind.app/docs/multilingual/#specialized-languages)）
+- feat：support custom [excludeSelector](https://pagefind.app/docs/config-options/#exclude-selectors)
+- fix: print warn not a git repository
+- fix: the indexing text includes anchor points and sidebar content
+- fix: after set base, will not have search info
+- chore: use vitepress hook replace hack code
+
 ## 0.1.1
-- fix: 全局BG色和Vitepress主题样式冲突
+
+- fix: 全局 BG 色和 Vitepress 主题样式冲突
 
 ## 0.1.0
 

@@ -1,40 +1,19 @@
-// @ts-nocheck
-/* eslint-disable prefer-rest-params */
-import { execSync } from 'child_process'
-import path from 'path'
-import { getPagesData } from './node'
+import type { PluginOption } from 'vite'
+import type { SiteConfig } from 'vitepress'
+import { stringify } from 'javascript-stringify'
+import { pluginSiteConfig, getPagesData } from './node'
+import type { SearchConfig, PagefindOption } from './type'
 
 const docsData = getPagesData()
 
-export interface SearchConfig {
-  /**
-   * @default
-   * 'Search'
-   */
-  btnPlaceholder?: string
-  /**
-   * @default
-   * 'Search Docs'
-   */
-  placeholder?: string
-  /**
-   * @default
-   * 'No results found.'
-   */
-  emptyText?: string
-  /**
-   * @default
-   * 'Total: {{searchResult}} search results.'
-   */
-  heading?: string
-}
-
-export function pagefindPlugin(searchConfig: SearchConfig = {}): any {
+export function pagefindPlugin(
+  searchConfig: SearchConfig & PagefindOption = {}
+): any {
   const virtualModuleId = 'virtual:pagefind'
   const resolvedVirtualModuleId = `\0${virtualModuleId}`
-  let flag = true
-  let originLog = null
-  return {
+
+  let resolveConfig: any
+  const pluginOps: PluginOption = {
     name: 'vitepress-plugin-pagefind',
     enforce: 'pre',
     config: () => ({
@@ -44,9 +23,38 @@ export function pagefindPlugin(searchConfig: SearchConfig = {}): any {
         }
       }
     }),
+    configResolved(config: any) {
+      if (resolveConfig) {
+        return
+      }
+      resolveConfig = config
 
-    // eslint-disable-next-line consistent-return
-    async resolveId(id) {
+      const vitepressConfig: SiteConfig = config.vitepress
+      if (!vitepressConfig) {
+        return
+      }
+
+      // 添加 自定义 vitepress 的钩子
+
+      const selfBuildEnd = vitepressConfig.buildEnd
+      vitepressConfig.buildEnd = (siteConfig: any) => {
+        // 调用自己的
+        selfBuildEnd?.(siteConfig)
+        siteConfig = Object.assign(siteConfig || {}, {
+          PagefindOption: searchConfig
+        })
+        pluginSiteConfig?.buildEnd?.(siteConfig)
+      }
+
+      const selfTransformHead = vitepressConfig.transformHead
+      vitepressConfig.transformHead = async (ctx) => {
+        const selfHead = (await Promise.resolve(selfTransformHead?.(ctx))) || []
+        const pluginHead =
+          (await Promise.resolve(pluginSiteConfig?.transformHead?.(ctx))) || []
+        return selfHead.concat(pluginHead)
+      }
+    },
+    async resolveId(id: string) {
       if (id === virtualModuleId) {
         return resolvedVirtualModuleId
       }
@@ -54,51 +62,24 @@ export function pagefindPlugin(searchConfig: SearchConfig = {}): any {
     // 文章数据
     load(this, id) {
       if (id !== resolvedVirtualModuleId) return
-      // eslint-disable-next-line consistent-return
       return `
       import { ref } from 'vue'
       export const docs = ref(${JSON.stringify(docsData)})
-      export const searchConfig = ${JSON.stringify(searchConfig)}
+      export const searchConfig = ${stringify(searchConfig)}
       `
-    },
-    // 调用pagefind
-    buildEnd() {
-      const { log } = console
-      // hack
-      if (flag) {
-        flag = false
-        originLog = log
-        Object.defineProperty(console, 'log', {
-          value() {
-            // eslint-disable-next-line prefer-rest-params
-            if (`${arguments[0]}`.includes('build complete')) {
-              console.log = originLog
-              setTimeout(() => {
-                originLog()
-                originLog('=== pagefind: https://pagefind.app/ ===')
-                const command = `npx pagefind --source ${path.join(
-                  process.argv.slice(2)?.[1] || '.',
-                  '.vitepress/dist'
-                )}`
-                originLog(command)
-                originLog()
-                execSync(command, {
-                  stdio: 'inherit'
-                })
-              }, 100)
-            }
-            // @ts-ignore
-            return log.apply(this, arguments)
-          }
-        })
-      }
     },
     // 添加检索的内容标识
     transform(code, id) {
+      // 只检索文章内容
       if (id.endsWith('theme-default/Layout.vue')) {
         return code.replace('<VPContent>', '<VPContent data-pagefind-body>')
       }
       return code
     }
   }
+  return pluginOps
 }
+
+export * from './type'
+
+export { chineseSearchOptimize } from './node'

@@ -1,20 +1,20 @@
 # vitepress-plugin-pagefind
 
-English | [简体中文](./README-zh.md)
+[English](./README.md) | 简体中文
 
-Offline full-text search based on [pagefind](https://github.com/cloudcannon/pagefind) implementation.
+基于[pagefind](https://github.com/cloudcannon/pagefind)实现的离线全文搜索插件
 
-**similar UI as Algolia**
+**UI 风格近似 Algolia**
 
-|                               Search Btn                                |                              Search Dialog                              |
+|                               搜索按钮                                |                              搜索框                              |
 | :---------------------------------------------------------------------: | :---------------------------------------------------------------------: |
 | ![](https://img.cdn.sugarat.top/mdImg/MTY3OTgxOTEzNjUwMw==679819136503) | ![](https://img.cdn.sugarat.top/mdImg/MTY3OTgxOTE1MDQ0OA==679819150448) |
 
 
 
-## Usage
+## 如何使用
 
-step1: install plugin
+①: 安装插件
 ```sh
 npm i vitepress-plugin-pagefind
 # or
@@ -23,9 +23,9 @@ yarn add vitepress-plugin-pagefind
 pnpm add vitepress-plugin-pagefind
 ```
 
-step2: import plugin
+②: 引入插件
 
-in `.vitepress/config.ts`
+在 `.vitepress/config.ts` 引入插件（推荐）
 ```ts
 import { defineConfig } from 'vitepress'
 import { pagefindPlugin } from 'vitepress-plugin-pagefind'
@@ -38,7 +38,7 @@ export default defineConfig({
 
 ```
 
-or in `vite.config.ts`
+当然也可以是在 `vite.config.ts`中引入
 ```ts
 //vite.config.ts
 import { pagefindPlugin } from "vitepress-plugin-pagefind";
@@ -49,11 +49,11 @@ export default defineConfig({
 });
 ```
 
-**(optional)** step3: customSearchQuery
+**(可选)** ③: 搜索优化
 
-if your docs language（`lang`） is Chinese (`zh-`)
+如果你的文档主要内容是中文，推荐做以下设置，优化一下搜索
 
-in `.vitepress/config.ts`，recommend import `chineseSearchOptimize` fun
+在配置中加入 `chineseSearchOptimize` 方法
 
 ```ts
 import { defineConfig } from 'vitepress'
@@ -68,11 +68,11 @@ export default defineConfig({
   },
 })
 ```
-see Example4 below for details
 
-## Advanced Usage
+详见下面的示例4了解为什么要这样做
+## 高级用法
 
-### Example 1：custom search box text
+### 示例1：自定义搜素框文案
 ```ts
 pagefindPlugin({
   btnPlaceholder: '搜索',
@@ -82,8 +82,8 @@ pagefindPlugin({
 })
 ```
 
-### Example 2：exclude indexing some page elements
-The main goal is to exclude public content from each article
+### 示例2：生成文章检索时排除一些元素
+目的是避免检索到页面中的公共部分内容（比如全局弹窗，侧边栏，导航栏等等）
 
 ```ts
 pagefindPlugin({
@@ -91,8 +91,8 @@ pagefindPlugin({
 })
 ```
 
-### Example 3：Setting the force language option when indexing 
-Different languages have different strategies for generating content index，more detail see [pagefind：multilingual](https://pagefind.app/docs/multilingual/#language-support) 
+### 示例 3：设置检索内容的语言
+不同的页面语言，pagefind 会使用不同的生成内容检索的策略，更多细节说明可以阅读 [pagefind：multilingual](https://pagefind.app/docs/multilingual/#language-support) 文档
 
 ```ts
 pagefindPlugin({
@@ -100,24 +100,24 @@ pagefindPlugin({
 })
 ```
 
-**recommend**：default use vitepress siteConfig `lang`
+**建议**：不设置的前提下，插件会默认使用 `vitepress` 配置中设置的 `lang` 值
 ```ts
 import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "My Awesome Project",
   description: "A VitePress Site",
-  // ...other config
+  // ...其它配置
   lang:'zh-cn',
   // ^^^^^^^^^
 })
 ```
-You can see the language used in the final build message.
+你可以在构建信息中看到，最后使用的是哪一种检索策略
 
-like this below
+下图示例
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY4MDkzNzI3MjQ3OQ==680937272479)
 
-### Example 4：Search optimization
+### 示例 4：搜索优化
 [pagefind](https://pagefind.app/docs/multilingual/#specialized-languages) 目前对中文支持还不如英语完善，下面是官方的介绍
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY4MDkzNzQ4NjYxMg==680937486612)
@@ -138,13 +138,13 @@ pagefindPlugin({
 | :---------------------------------------------------------------------: | :---------------------------------------------------------------------: |
 | ![](https://img.cdn.sugarat.top/mdImg/MTY4MDkzODE4ODgwMQ==680938188801) | ![](https://img.cdn.sugarat.top/mdImg/MTY4MDkzODMzMzE1NA==680938333154) |
 
-If you have a better implementation, welcome to share
+如果你有更好的实现，欢迎分享
 
-## Options
-TS DTS see [src/type.ts](./src/type.ts)
+## 完整配置项如下
+详细类型定义见文件 [src/type.ts](./src/type.ts)
 
 <details>
-  <summary>show interface</summary>
+  <summary>展开查看类型定义</summary>
 
   ```ts
 interface PagefindOption {
@@ -194,11 +194,11 @@ interface SearchConfig {
 ```
 </details>
 
-## Multi language support
-Provided by [Pagefind](https://pagefind.app/docs/multilingual/#language-support)
+## 开箱即用的多语言支持
+由 [Pagefind](https://pagefind.app/docs/multilingual/#language-support)驱动
 
-## Thanks
-Thanks to the following libraries for inspiration.
+## 感谢
+感谢下面的项目提供灵感
 
 * [pagefind](https://github.com/cloudcannon/pagefind)
 * [vitepress-plugin-search](https://github.com/emersonbottero/vitepress-plugin-search)

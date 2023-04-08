@@ -126,13 +126,16 @@
 </template>
 <script lang="ts" setup>
 // @ts-nocheck
-import { computed, nextTick, ref, watch, onBeforeMount, onMounted } from 'vue'
+import { computed, nextTick, ref, watch, onMounted } from 'vue'
 import { Command } from 'vue-command-palette'
 import { useRoute, useRouter, withBase } from 'vitepress'
 import { useMagicKeys, useWindowSize } from '@vueuse/core'
-import { docs, searchConfig } from 'virtual:pagefind'
+import { docs, searchConfig as _searchConfig } from 'virtual:pagefind'
 import { formatDate } from './utils'
 import LogoPagefind from './LogoPagefind.vue'
+import type { SearchConfig } from './type'
+
+const searchConfig: SearchConfig = _searchConfig
 
 const windowSize = useWindowSize()
 
@@ -146,23 +149,6 @@ const headingText = computed(() => {
         searchResult.value.length
       )
     : `Total: ${searchResult.value.length} search results.`
-})
-
-const addInlineScript = () => {
-  const scriptText = `import('/_pagefind/pagefind.js')
-        .then((module) => {
-          window.__pagefind__ = module
-        })
-        .catch(() => {
-          console.log('not load /_pagefind/pagefind.js')
-        })`
-  const inlineScript = document.createElement('script')
-  inlineScript.innerHTML = scriptText
-  document.head.appendChild(inlineScript)
-}
-
-onBeforeMount(() => {
-  addInlineScript()
 })
 
 const metaKey = ref('')
@@ -225,15 +211,22 @@ watch(
     if (!window?.__pagefind__?.search) {
       inlineSearch()
     } else {
+      const searchText =
+        typeof searchConfig.customSearchQuery === 'function'
+          ? searchConfig.customSearchQuery(searchWords.value)
+          : searchWords.value
+
       await window?.__pagefind__
-        ?.search?.(searchWords.value)
+        ?.search?.(searchText)
         .then(async (search: any) => {
           const result = await Promise.all(
             search.results.map((v: any) => v.data())
           )
           searchResult.value = []
           docs.value.forEach((v) => {
-            const match = result.find((r) => r.url.startsWith(v.route))
+            const match = result.find((r) =>
+              r.url.startsWith(withBase(v.route))
+            )
             if (match) {
               searchResult.value.push({
                 ...v,

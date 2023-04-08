@@ -1,9 +1,11 @@
 import glob from 'fast-glob'
 import matter from 'gray-matter'
 import fs from 'fs'
-import { execSync, spawn } from 'child_process'
+import { execSync, spawn, spawnSync } from 'child_process'
 import path from 'path'
+import type { SiteConfig } from 'vitepress'
 import { formatDate } from './utils'
+import type { PagefindOption } from './type'
 
 export function getPagesData() {
   const srcDir = process.argv.slice(2)?.[1] || '.'
@@ -126,8 +128,12 @@ export function getFileBirthTime(url: string) {
 
   try {
     // 参考 vitepress 中的 getGitTimestamp 实现
-    const infoStr = execSync(`git log -1 --pretty="%ci" ${url}`)
-      .toString('utf-8')
+    // const infoStr = execSync(`git log -1 --pretty="%ci" ${url}`)
+    //   .toString('utf-8')
+    //   .trim()
+
+    const infoStr = spawnSync('git', ['log', '-1', '--pretty="%ci"', url])
+      .output?.[1]?.toString()
       .trim()
     if (infoStr) {
       date = new Date(infoStr)
@@ -172,4 +178,86 @@ function getTextSummary(text: string, count = 100) {
       ?.replace(/>(.*)/, '')
       ?.slice(0, count)
   )
+}
+
+// 需要忽略检索的内容
+const ignoreSelectors: string[] = [
+  // 侧边栏内容
+  'div.aside',
+  // 标题锚点
+  'a.header-anchor'
+]
+
+export const EXTERNAL_URL_RE = /^[a-z]+:/i
+
+/**
+ * Join two paths by resolving the slash collision.
+ */
+export function joinPath(base: string, path: string): string {
+  return `${base}${path}`.replace(/\/+/g, '/')
+}
+
+export function withBase(base: string, path: string) {
+  return EXTERNAL_URL_RE.test(path) || path.startsWith('.')
+    ? path
+    : joinPath(base, path)
+}
+
+export const pluginSiteConfig: Partial<SiteConfig> = {
+  /**
+   * TODO：支持更多pagefind配置项
+   * vitepress buildEnd钩子调用
+   */
+  buildEnd(ctx) {
+    const pagefindOps: PagefindOption = (ctx as any).PagefindOption
+    const ignore = [
+      ...new Set(ignoreSelectors.concat(pagefindOps?.excludeSelector || []))
+    ]
+    const { log } = console
+    log()
+    log('=== pagefind: https://pagefind.app/ ===')
+    let command = `npx pagefind --source ${path.join(
+      process.argv.slice(2)?.[1] || '.',
+      '.vitepress/dist'
+    )}`
+
+    if (ignore.length) {
+      command += ` --exclude-selectors "${ignore.join(', ')}"`
+    }
+
+    if (typeof pagefindOps.forceLanguage === 'string') {
+      command += ` --force-language ${pagefindOps.forceLanguage}`
+    }
+
+    log(command)
+    log()
+    execSync(command, {
+      stdio: 'inherit'
+    })
+  },
+  transformHead(ctx) {
+    return [
+      [
+        'script',
+        {},
+        `import('${withBase(
+          ctx.siteData.base || '',
+          '/_pagefind/pagefind.js'
+        )}')
+    .then((module) => {
+      window.__pagefind__ = module
+    })
+    .catch(() => {
+      console.log('not load /_pagefind/pagefind.js')
+    })`
+      ]
+    ]
+  }
+}
+
+export function chineseSearchOptimize(input: string) {
+  return input
+    .replace(/[\u4e00-\u9fa5]/g, ' $& ')
+    .replace(/\s+/g, ' ')
+    .trim()
 }

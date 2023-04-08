@@ -1,6 +1,6 @@
 {
   "name": "vitepress-plugin-pagefind",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "vitepress plugin, Offline full-text search based on pagefind implementation.",
   "module": "dist/index.mjs",
   "main": "dist/index.js",
@@ -52,6 +52,7 @@
     "fast-glob": "^3.2.12",
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.7.0",
+    "javascript-stringify": "^2.1.0",
     "vue": "^3",
     "vue-command-palette": "^0.1.4"
   }

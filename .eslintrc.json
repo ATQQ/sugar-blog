@@ -60,6 +60,7 @@
         "no-underscore-dangle": "off",
         "@typescript-eslint/no-non-null-assertion":"off",
         "non-null-expression":"off",
-        "@typescript-eslint/ban-ts-comment":"off"
+        "@typescript-eslint/ban-ts-comment":"off",
+        "consistent-return":"off"
     }
 }
