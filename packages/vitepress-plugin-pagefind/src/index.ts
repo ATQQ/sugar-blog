@@ -1,33 +1,13 @@
 import type { PluginOption } from 'vite'
 import type { SiteConfig } from 'vitepress'
 import { pluginSiteConfig, getPagesData } from './node'
+import type { SearchConfig, PagefindOption } from './type'
 
 const docsData = getPagesData()
 
-export interface SearchConfig {
-  /**
-   * @default
-   * 'Search'
-   */
-  btnPlaceholder?: string
-  /**
-   * @default
-   * 'Search Docs'
-   */
-  placeholder?: string
-  /**
-   * @default
-   * 'No results found.'
-   */
-  emptyText?: string
-  /**
-   * @default
-   * 'Total: {{searchResult}} search results.'
-   */
-  heading?: string
-}
-
-export function pagefindPlugin(searchConfig: SearchConfig = {}): any {
+export function pagefindPlugin(
+  searchConfig: SearchConfig & PagefindOption = {}
+): any {
   const virtualModuleId = 'virtual:pagefind'
   const resolvedVirtualModuleId = `\0${virtualModuleId}`
 
@@ -59,6 +39,9 @@ export function pagefindPlugin(searchConfig: SearchConfig = {}): any {
       vitepressConfig.buildEnd = (siteConfig: any) => {
         // 调用自己的
         selfBuildEnd?.(siteConfig)
+        siteConfig = Object.assign(siteConfig || {}, {
+          PagefindOption: searchConfig
+        })
         pluginSiteConfig?.buildEnd?.(siteConfig)
       }
 
@@ -95,3 +78,5 @@ export function pagefindPlugin(searchConfig: SearchConfig = {}): any {
   }
   return pluginOps
 }
+
+export * from './type'

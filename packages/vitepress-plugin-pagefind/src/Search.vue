@@ -126,7 +126,7 @@
 </template>
 <script lang="ts" setup>
 // @ts-nocheck
-import { computed, nextTick, ref, watch, onBeforeMount, onMounted } from 'vue'
+import { computed, nextTick, ref, watch, onMounted } from 'vue'
 import { Command } from 'vue-command-palette'
 import { useRoute, useRouter, withBase } from 'vitepress'
 import { useMagicKeys, useWindowSize } from '@vueuse/core'
@@ -146,23 +146,6 @@ const headingText = computed(() => {
         searchResult.value.length
       )
     : `Total: ${searchResult.value.length} search results.`
-})
-
-const addInlineScript = () => {
-  const scriptText = `import('/_pagefind/pagefind.js')
-        .then((module) => {
-          window.__pagefind__ = module
-        })
-        .catch(() => {
-          console.log('not load /_pagefind/pagefind.js')
-        })`
-  const inlineScript = document.createElement('script')
-  inlineScript.innerHTML = scriptText
-  document.head.appendChild(inlineScript)
-}
-
-onBeforeMount(() => {
-  addInlineScript()
 })
 
 const metaKey = ref('')

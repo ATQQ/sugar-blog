@@ -5,6 +5,7 @@ import { execSync, spawn } from 'child_process'
 import path from 'path'
 import type { SiteConfig } from 'vitepress'
 import { formatDate } from './utils'
+import type { PagefindOption } from './type'
 
 export function getPagesData() {
   const srcDir = process.argv.slice(2)?.[1] || '.'
@@ -188,7 +189,11 @@ export const pluginSiteConfig: Partial<SiteConfig> = {
    * TODO：支持更多pagefind配置项
    * vitepress buildEnd钩子调用
    */
-  buildEnd() {
+  buildEnd(ctx) {
+    const pagefindOps: PagefindOption = (ctx as any).PagefindOption
+    const ignore = [
+      ...new Set(ignoreSelectors.concat(pagefindOps?.excludeSelector || []))
+    ]
     const { log } = console
     log()
     log('=== pagefind: https://pagefind.app/ ===')
@@ -197,8 +202,8 @@ export const pluginSiteConfig: Partial<SiteConfig> = {
       '.vitepress/dist'
     )}`
 
-    if (ignoreSelectors.length) {
-      command += ` --exclude-selectors "${ignoreSelectors.join(', ')}"`
+    if (ignore.length) {
+      command += ` --exclude-selectors "${ignore.join(', ')}"`
     }
 
     log(command)
