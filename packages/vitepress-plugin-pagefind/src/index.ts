@@ -90,14 +90,6 @@ export function pagefindPlugin(searchConfig: SearchConfig = {}): any {
       if (id.endsWith('theme-default/Layout.vue')) {
         return code.replace('<VPContent>', '<VPContent data-pagefind-body>')
       }
-
-      // 忽略侧边栏内容
-      if (id.endsWith('theme-default/components/VPDoc.vue')) {
-        return code.replace(
-          'class="aside"',
-          'class="aside" data-pagefind-ignore="all"'
-        )
-      }
       return code
     }
   }

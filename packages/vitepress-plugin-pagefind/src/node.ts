@@ -175,6 +175,14 @@ function getTextSummary(text: string, count = 100) {
   )
 }
 
+// 需要忽略检索的内容
+const ignoreSelectors: string[] = [
+  // 侧边栏内容
+  'div.aside',
+  // 标题锚点
+  'a.header-anchor'
+]
+
 export const pluginSiteConfig: Partial<SiteConfig> = {
   /**
    * TODO：支持更多pagefind配置项
@@ -184,10 +192,15 @@ export const pluginSiteConfig: Partial<SiteConfig> = {
     const { log } = console
     log()
     log('=== pagefind: https://pagefind.app/ ===')
-    const command = `npx pagefind --source ${path.join(
+    let command = `npx pagefind --source ${path.join(
       process.argv.slice(2)?.[1] || '.',
       '.vitepress/dist'
     )}`
+
+    if (ignoreSelectors.length) {
+      command += ` --exclude-selectors "${ignoreSelectors.join(', ')}"`
+    }
+
     log(command)
     log()
     execSync(command, {
