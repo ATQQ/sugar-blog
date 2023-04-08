@@ -1,5 +1,6 @@
 import type { PluginOption } from 'vite'
-import { buildEnd, getPagesData } from './node'
+import type { SiteConfig } from 'vitepress'
+import { pluginSiteConfig, getPagesData } from './node'
 
 const docsData = getPagesData()
 
@@ -47,12 +48,26 @@ export function pagefindPlugin(searchConfig: SearchConfig = {}): any {
       }
       resolveConfig = config
 
-      // 添加 vitepress 的钩子
-      const selfBuildEnd = config.vitepress.buildEnd
-      config.vitepress.buildEnd = (siteConfig: any) => {
+      const vitepressConfig: SiteConfig = config.vitepress
+      if (!vitepressConfig) {
+        return
+      }
+
+      // 添加 自定义 vitepress 的钩子
+
+      const selfBuildEnd = vitepressConfig.buildEnd
+      vitepressConfig.buildEnd = (siteConfig: any) => {
         // 调用自己的
         selfBuildEnd?.(siteConfig)
-        buildEnd(siteConfig)
+        pluginSiteConfig?.buildEnd?.(siteConfig)
+      }
+
+      const selfTransformHead = vitepressConfig.transformHead
+      vitepressConfig.transformHead = async (ctx) => {
+        const selfHead = (await Promise.resolve(selfTransformHead?.(ctx))) || []
+        const pluginHead =
+          (await Promise.resolve(pluginSiteConfig?.transformHead?.(ctx))) || []
+        return selfHead.concat(pluginHead)
       }
     },
     async resolveId(id: string) {
@@ -71,8 +86,17 @@ export function pagefindPlugin(searchConfig: SearchConfig = {}): any {
     },
     // 添加检索的内容标识
     transform(code, id) {
+      // 只检索文章内容
       if (id.endsWith('theme-default/Layout.vue')) {
         return code.replace('<VPContent>', '<VPContent data-pagefind-body>')
+      }
+
+      // 忽略侧边栏内容
+      if (id.endsWith('theme-default/components/VPDoc.vue')) {
+        return code.replace(
+          'class="aside"',
+          'class="aside" data-pagefind-ignore="all"'
+        )
       }
       return code
     }

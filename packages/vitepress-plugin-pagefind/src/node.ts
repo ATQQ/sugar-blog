@@ -3,6 +3,7 @@ import matter from 'gray-matter'
 import fs from 'fs'
 import { execSync, spawn } from 'child_process'
 import path from 'path'
+import type { SiteConfig } from 'vitepress'
 import { formatDate } from './utils'
 
 export function getPagesData() {
@@ -174,21 +175,38 @@ function getTextSummary(text: string, count = 100) {
   )
 }
 
-/**
- * TODO：支持更多pagefind配置项
- * vitepress buildEnd钩子调用
- */
-export function buildEnd(siteConfig?: any) {
-  const { log } = console
-  log()
-  log('=== pagefind: https://pagefind.app/ ===')
-  const command = `npx pagefind --source ${path.join(
-    process.argv.slice(2)?.[1] || '.',
-    '.vitepress/dist'
-  )}`
-  log(command)
-  log()
-  execSync(command, {
-    stdio: 'inherit'
-  })
+export const pluginSiteConfig: Partial<SiteConfig> = {
+  /**
+   * TODO：支持更多pagefind配置项
+   * vitepress buildEnd钩子调用
+   */
+  buildEnd() {
+    const { log } = console
+    log()
+    log('=== pagefind: https://pagefind.app/ ===')
+    const command = `npx pagefind --source ${path.join(
+      process.argv.slice(2)?.[1] || '.',
+      '.vitepress/dist'
+    )}`
+    log(command)
+    log()
+    execSync(command, {
+      stdio: 'inherit'
+    })
+  },
+  transformHead() {
+    return [
+      [
+        'script',
+        {},
+        `import('/_pagefind/pagefind.js')
+    .then((module) => {
+      window.__pagefind__ = module
+    })
+    .catch(() => {
+      console.log('not load /_pagefind/pagefind.js')
+    })`
+      ]
+    ]
+  }
 }
