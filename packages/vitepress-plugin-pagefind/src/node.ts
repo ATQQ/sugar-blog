@@ -1,7 +1,7 @@
 import glob from 'fast-glob'
 import matter from 'gray-matter'
 import fs from 'fs'
-import { execSync, spawn } from 'child_process'
+import { execSync, spawn, spawnSync } from 'child_process'
 import path from 'path'
 import type { SiteConfig } from 'vitepress'
 import { formatDate } from './utils'
@@ -128,8 +128,12 @@ export function getFileBirthTime(url: string) {
 
   try {
     // 参考 vitepress 中的 getGitTimestamp 实现
-    const infoStr = execSync(`git log -1 --pretty="%ci" ${url}`)
-      .toString('utf-8')
+    // const infoStr = execSync(`git log -1 --pretty="%ci" ${url}`)
+    //   .toString('utf-8')
+    //   .trim()
+
+    const infoStr = spawnSync('git', ['log', '-1', '--pretty="%ci"', url])
+      .output?.[1]?.toString()
       .trim()
     if (infoStr) {
       date = new Date(infoStr)
