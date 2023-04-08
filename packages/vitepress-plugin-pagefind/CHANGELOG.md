@@ -9,6 +9,7 @@
 - feat：support custom [excludeSelector](https://pagefind.app/docs/config-options/#exclude-selectors)
 - fix: print warn not a git repository
 - fix: the indexing text includes anchor points and sidebar content
+- fix: after set base, will not have search info
 - chore: use vitepress hook replace hack code
 
 ## 0.1.1

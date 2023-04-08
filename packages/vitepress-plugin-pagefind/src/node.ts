@@ -188,6 +188,21 @@ const ignoreSelectors: string[] = [
   'a.header-anchor'
 ]
 
+export const EXTERNAL_URL_RE = /^[a-z]+:/i
+
+/**
+ * Join two paths by resolving the slash collision.
+ */
+export function joinPath(base: string, path: string): string {
+  return `${base}${path}`.replace(/\/+/g, '/')
+}
+
+export function withBase(base: string, path: string) {
+  return EXTERNAL_URL_RE.test(path) || path.startsWith('.')
+    ? path
+    : joinPath(base, path)
+}
+
 export const pluginSiteConfig: Partial<SiteConfig> = {
   /**
    * TODO：支持更多pagefind配置项
@@ -220,12 +235,15 @@ export const pluginSiteConfig: Partial<SiteConfig> = {
       stdio: 'inherit'
     })
   },
-  transformHead() {
+  transformHead(ctx) {
     return [
       [
         'script',
         {},
-        `import('/_pagefind/pagefind.js')
+        `import('${withBase(
+          ctx.siteData.base || '',
+          '/_pagefind/pagefind.js'
+        )}')
     .then((module) => {
       window.__pagefind__ = module
     })
@@ -235,4 +253,11 @@ export const pluginSiteConfig: Partial<SiteConfig> = {
       ]
     ]
   }
+}
+
+export function chineseSearchOptimize(input: string) {
+  return input
+    .replace(/[\u4e00-\u9fa5]/g, ' $& ')
+    .replace(/\s+/g, ' ')
+    .trim()
 }

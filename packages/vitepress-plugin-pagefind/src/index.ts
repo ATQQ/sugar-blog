@@ -81,3 +81,5 @@ export function pagefindPlugin(
 }
 
 export * from './type'
+
+export { chineseSearchOptimize } from './node'

@@ -224,7 +224,9 @@ watch(
           )
           searchResult.value = []
           docs.value.forEach((v) => {
-            const match = result.find((r) => r.url.startsWith(v.route))
+            const match = result.find((r) =>
+              r.url.startsWith(withBase(v.route))
+            )
             if (match) {
               searchResult.value.push({
                 ...v,
