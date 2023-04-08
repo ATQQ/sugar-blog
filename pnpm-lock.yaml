@@ -93,7 +93,7 @@ importers:
         specifier: ^2.1.0
         version: 2.1.0(vue@3.2.47)
       '@sugarat/theme':
-        specifier: ^0.1.19
+        specifier: ^0.1.20
         version: link:../theme
       element-plus:
         specifier: ^2.3.0
@@ -109,8 +109,8 @@ importers:
         specifier: ^4.9.5
         version: 4.9.5
       vitepress:
-        specifier: ^1.0.0-alpha.62
-        version: 1.0.0-alpha.62(@algolia/client-search@4.15.0)(@types/node@16.18.4)(sass@1.59.2)
+        specifier: ^1.0.0-alpha.65
+        version: 1.0.0-alpha.65(@algolia/client-search@4.15.0)(@types/node@16.18.4)(sass@1.59.2)
 
   packages/theme:
     dependencies:
@@ -4799,8 +4799,8 @@ packages:
       - sugarss
       - terser
 
-  /vitepress@1.0.0-alpha.62(@algolia/client-search@4.15.0)(@types/node@16.18.4)(sass@1.59.2):
-    resolution: {integrity: sha512-99RvczAQANultUykkRQeWb75pD07Fgg+dc7epqctrPmLuK/9FC2DQojC0xFNUMJJMYWCR4liCfHjKMPdOpChIA==}
+  /vitepress@1.0.0-alpha.65(@algolia/client-search@4.15.0)(@types/node@16.18.4)(sass@1.59.2):
+    resolution: {integrity: sha512-iGWC0AQC6WrfRZTJf5+TiGG4o8PLhqIJNyai8NVxZCY9YpmMJhddvQeqqjJdQniF/LQK/hQ5nQZ9HgSZDGRPGQ==}
     hasBin: true
     dependencies:
       '@docsearch/css': 3.3.3

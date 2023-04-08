@@ -11,6 +11,14 @@ tag:
 ```sh
 pnpm up @sugarat/theme
 ```
+## 0.1.20 (2023/04/08)
+
+### Patch Changes
+
+- feat: 内置 pagefind 搜索针对中文优化
+- fix: 内置 pagefind 在自定义base后无效
+- chore: 没有git仓库时，打印Not日志
+- chore: pagefind 引导使用独立的插件 [vitepress-plugin-pagefind](https://github.com/ATQQ/sugar-blog/blob/master/packages/vitepress-plugin-pagefind/README-zh.md)
 
 ## 0.1.19 (2023/04/02)
 
