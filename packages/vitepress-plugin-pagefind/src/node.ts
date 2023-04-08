@@ -210,6 +210,10 @@ export const pluginSiteConfig: Partial<SiteConfig> = {
       command += ` --exclude-selectors "${ignore.join(', ')}"`
     }
 
+    if (typeof pagefindOps.forceLanguage === 'string') {
+      command += ` --force-language ${pagefindOps.forceLanguage}`
+    }
+
     log(command)
     log()
     execSync(command, {

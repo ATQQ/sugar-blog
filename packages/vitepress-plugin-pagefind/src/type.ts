@@ -6,6 +6,12 @@ export interface PagefindOption {
    * ['div.aside' ,'a.header-anchor']
    */
   excludeSelector?: string[]
+  /**
+   * Ignores any detected languages and creates a single index for the entire site as the provided language.
+   * Expects an ISO 639-1 code, such as en or zh.
+   * @see https://pagefind.app/docs/config-options/#force-language
+   */
+  forceLanguage?: string
 }
 export interface SearchConfig {
   /**
