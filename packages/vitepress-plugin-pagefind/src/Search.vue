@@ -128,13 +128,14 @@
 // @ts-nocheck
 import { computed, nextTick, ref, watch, onMounted } from 'vue'
 import { Command } from 'vue-command-palette'
-import { useRoute, useRouter, withBase } from 'vitepress'
+import { useData, useRoute, useRouter, withBase } from 'vitepress'
 import { useMagicKeys, useWindowSize } from '@vueuse/core'
 import { docs, searchConfig as _searchConfig } from 'virtual:pagefind'
 import { formatDate } from './utils'
 import LogoPagefind from './LogoPagefind.vue'
 import type { SearchConfig } from './type'
 
+// TODO: i18n支持
 const searchConfig: SearchConfig = _searchConfig
 
 const windowSize = useWindowSize()
@@ -289,6 +290,19 @@ const handleSelect = (target: any) => {
     router.go(target.value)
   }
 }
+
+const { lang } = useData()
+const langReload = searchConfig.langReload ?? true
+watch(
+  () => lang.value,
+  () => {
+    // 重载页面
+    // TODO：不在开发环境生效
+    if (langReload) {
+      window.location.reload()
+    }
+  }
+)
 </script>
 
 <style lang="css" scoped>
