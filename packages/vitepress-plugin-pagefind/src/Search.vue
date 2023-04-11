@@ -171,10 +171,16 @@ const searchWords = ref('')
 
 const keys = useMagicKeys()
 const CmdK = keys['Meta+K']
+const CtrlK = keys['Ctrl+K']
 // eslint-disable-next-line dot-notation, prefer-destructuring
 const Escape = keys['Escape']
 
 watch(CmdK, (v) => {
+  if (v) {
+    searchModal.value = true
+  }
+})
+watch(CtrlK, (v) => {
   if (v) {
     searchModal.value = true
   }
