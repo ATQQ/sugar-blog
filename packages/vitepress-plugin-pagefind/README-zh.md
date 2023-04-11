@@ -140,11 +140,61 @@ pagefindPlugin({
 
 如果你有更好的实现，欢迎分享
 
+### 示例 5: 国际化
+[pagefind](https://pagefind.app/docs/multisite/#merging-multiple-languages) 搜索结果默认只会包含与当前页面语言一样的页面 (通过 `lang` 属性区分)
+
+下面是一份配置，使搜索框在不同的语言页面下展示不同的文案
+
+`.vitepress/config.ts`
+```ts
+export default defineConfig({
+  // ...other config
+  locales: {
+    root: {
+      lang: 'en',
+      label: 'English'
+    },
+    zh: {
+      lang: 'zh-cn',
+      label: '简体中文',
+    }
+  },
+  vite: {
+    plugins: [pagefindPlugin(
+      {
+        locales: {
+          root:{
+            btnPlaceholder: 'Search',
+            placeholder: 'Search Docs...',
+            emptyText: 'No results',
+            heading: 'Total: {{searchResult}} search results.',
+          },
+          zh: {
+            btnPlaceholder: '搜索',
+            placeholder: '搜索文档',
+            emptyText: '空空如也',
+            heading: '共: {{searchResult}} 条结果',
+            // 搜索结果不展示最后修改日期日期
+            showDate: false
+          }
+        }
+      }
+    )],
+  }
+})
+```
+
+|                                 English                                 |                                简体中文                                 |
+| :---------------------------------------------------------------------: | :---------------------------------------------------------------------: |
+| ![](https://img.cdn.sugarat.top/mdImg/MTY4MTIyNjM1NzEyOQ==681226357129) | ![](https://img.cdn.sugarat.top/mdImg/MTY4MTIyNjMzNTU5Nw==681226335597) |
+
+更多可配置的选项请查看下面的完整配置项
+
 ## 完整配置项如下
 详细类型定义见文件 [src/type.ts](./src/type.ts)
 
 <details>
-  <summary>展开查看类型定义</summary>
+  <summary>show interface</summary>
 
   ```ts
 interface PagefindOption {
@@ -162,6 +212,7 @@ interface PagefindOption {
    */
   forceLanguage?: string
 }
+
 interface SearchConfig {
   /**
    * @default
@@ -185,11 +236,27 @@ interface SearchConfig {
   heading?: string
 
   /**
+   * Automatically reloads the page when the page language changes.
+   *
+   * The purpose is to reload the index file for the target language.
+   * @default true
+   */
+  langReload?: boolean
+  /**
    * For some special languages.
    * Customize the conversion of user input
    * @see https://pagefind.app/docs/multilingual/#specialized-languages
    */
   customSearchQuery?: (input: string) => string
+  /**
+   * Search result Displays the date the document was last modified
+   * @default true
+   */
+  showDate?: boolean
+  /**
+   * i18n
+   */
+  locales?: Record<string, Omit<SearchConfig, 'locales'>>
 }
 ```
 </details>

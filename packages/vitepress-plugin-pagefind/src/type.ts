@@ -36,9 +36,25 @@ export interface SearchConfig {
   heading?: string
 
   /**
+   * Automatically reloads the page when the page language changes.
+   *
+   * The purpose is to reload the index file for the target language.
+   * @default true
+   */
+  langReload?: boolean
+  /**
    * For some special languages.
    * Customize the conversion of user input
    * @see https://pagefind.app/docs/multilingual/#specialized-languages
    */
   customSearchQuery?: (input: string) => string
+  /**
+   * Search result Displays the date the document was last modified
+   * @default true
+   */
+  showDate?: boolean
+  /**
+   * i18n
+   */
+  locales?: Record<string, Omit<SearchConfig, 'locales'>>
 }

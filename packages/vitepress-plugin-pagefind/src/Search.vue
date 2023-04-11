@@ -12,7 +12,7 @@
         ></path>
       </svg>
       <span v-if="!isMinimized" class="search-tip">{{
-        searchConfig?.btnPlaceholder || 'Search'
+        finalSearchConfig?.btnPlaceholder || 'Search'
       }}</span>
       <span v-if="!isMinimized" class="metaKey"> {{ metaKey }} K </span>
     </div>
@@ -20,14 +20,14 @@
       <template #header>
         <Command.Input
           v-model:value="searchWords"
-          :placeholder="searchConfig?.placeholder || 'Search Docs'"
+          :placeholder="finalSearchConfig?.placeholder || 'Search Docs'"
         />
       </template>
       <template #body>
         <div class="search-dialog">
           <Command.List>
             <Command.Empty v-if="!searchResult.length">
-              {{ searchConfig?.emptyText || 'No results found.' }}
+              {{ finalSearchConfig?.emptyText || 'No results found.' }}
             </Command.Empty>
             <Command.Group v-else :heading="headingText">
               <Command.Item
@@ -39,7 +39,7 @@
                 <div class="link">
                   <div class="title">
                     <span>{{ item.meta.title }}</span>
-                    <span class="date">
+                    <span class="date" v-if="showDateInfo">
                       {{ formatDate(item.meta.date, 'yyyy-MM-dd') }}</span
                     >
                   </div>
@@ -128,7 +128,7 @@
 // @ts-nocheck
 import { computed, nextTick, ref, watch, onMounted } from 'vue'
 import { Command } from 'vue-command-palette'
-import { useRoute, useRouter, withBase } from 'vitepress'
+import { useData, useRoute, useRouter, withBase } from 'vitepress'
 import { useMagicKeys, useWindowSize } from '@vueuse/core'
 import { docs, searchConfig as _searchConfig } from 'virtual:pagefind'
 import { formatDate } from './utils'
@@ -137,14 +137,23 @@ import type { SearchConfig } from './type'
 
 const searchConfig: SearchConfig = _searchConfig
 
+const { localeIndex } = useData()
+const finalSearchConfig = computed<SearchConfig>(() => ({
+  ...searchConfig,
+  // i18n支持
+  ...(searchConfig?.locales?.[localeIndex.value] || {})
+}))
+
+const showDateInfo = computed(() => finalSearchConfig.value?.showDate ?? true)
+
 const windowSize = useWindowSize()
 
 const isMinimized = computed(() => windowSize.width.value < 760)
 const flexValue = computed(() => (isMinimized.value ? 0 : 1))
 
 const headingText = computed(() => {
-  return searchConfig?.heading
-    ? searchConfig.heading.replace(
+  return finalSearchConfig.value?.heading
+    ? finalSearchConfig.value.heading.replace(
         /\{\{searchResult\}\}/,
         searchResult.value.length
       )
@@ -162,10 +171,16 @@ const searchWords = ref('')
 
 const keys = useMagicKeys()
 const CmdK = keys['Meta+K']
+const CtrlK = keys['Ctrl+K']
 // eslint-disable-next-line dot-notation, prefer-destructuring
 const Escape = keys['Escape']
 
 watch(CmdK, (v) => {
+  if (v) {
+    searchModal.value = true
+  }
+})
+watch(CtrlK, (v) => {
   if (v) {
     searchModal.value = true
   }
@@ -212,8 +227,8 @@ watch(
       inlineSearch()
     } else {
       const searchText =
-        typeof searchConfig.customSearchQuery === 'function'
-          ? searchConfig.customSearchQuery(searchWords.value)
+        typeof finalSearchConfig.value.customSearchQuery === 'function'
+          ? finalSearchConfig.value.customSearchQuery(searchWords.value)
           : searchWords.value
 
       await window?.__pagefind__
@@ -289,6 +304,22 @@ const handleSelect = (target: any) => {
     router.go(target.value)
   }
 }
+
+const { lang } = useData()
+const langReload = computed(() => finalSearchConfig.value.langReload ?? true)
+watch(
+  () => lang.value,
+  () => {
+    // 不在开发环境生效
+    if (import.meta.env.DEV) {
+      return
+    }
+    // 重载页面
+    if (langReload.value) {
+      window.location.reload()
+    }
+  }
+)
 </script>
 
 <style lang="css" scoped>

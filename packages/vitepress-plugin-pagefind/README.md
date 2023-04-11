@@ -1,6 +1,6 @@
 # vitepress-plugin-pagefind
 
-English | [简体中文](./README-zh.md)
+English | [简体中文](https://github.com/ATQQ/sugar-blog/blob/master/packages/vitepress-plugin-pagefind/README-zh.md)
 
 Offline full-text search based on [pagefind](https://github.com/cloudcannon/pagefind) implementation.
 
@@ -140,6 +140,56 @@ pagefindPlugin({
 
 If you have a better implementation, welcome to share
 
+### Example 5: i18n
+[pagefind](https://pagefind.app/docs/multisite/#merging-multiple-languages) search results will only contain content in the same language as the current page (distinguished by the lang attribute of the page)
+
+Here is an example of how to configure the search box to display different text in different language pages
+
+`.vitepress/config.ts`
+```ts
+export default defineConfig({
+  // ...other config
+  locales: {
+    root: {
+      lang: 'en',
+      label: 'English'
+    },
+    zh: {
+      lang: 'zh-cn',
+      label: '简体中文',
+    }
+  },
+  vite: {
+    plugins: [pagefindPlugin(
+      {
+        locales: {
+          root:{
+            btnPlaceholder: 'Search',
+            placeholder: 'Search Docs...',
+            emptyText: 'No results',
+            heading: 'Total: {{searchResult}} search results.',
+          },
+          zh: {
+            btnPlaceholder: '搜索',
+            placeholder: '搜索文档',
+            emptyText: '空空如也',
+            heading: '共: {{searchResult}} 条结果',
+            // 搜索结果不展示最后修改日期日期
+            showDate: false
+          }
+        }
+      }
+    )],
+  }
+})
+```
+
+|                                 English                                 |                                简体中文                                 |
+| :---------------------------------------------------------------------: | :---------------------------------------------------------------------: |
+| ![](https://img.cdn.sugarat.top/mdImg/MTY4MTIyNjM1NzEyOQ==681226357129) | ![](https://img.cdn.sugarat.top/mdImg/MTY4MTIyNjMzNTU5Nw==681226335597) |
+
+
+See options below for more details
 ## Options
 TS DTS see [src/type.ts](./src/type.ts)
 
@@ -162,6 +212,7 @@ interface PagefindOption {
    */
   forceLanguage?: string
 }
+
 interface SearchConfig {
   /**
    * @default
@@ -185,11 +236,27 @@ interface SearchConfig {
   heading?: string
 
   /**
+   * Automatically reloads the page when the page language changes.
+   *
+   * The purpose is to reload the index file for the target language.
+   * @default true
+   */
+  langReload?: boolean
+  /**
    * For some special languages.
    * Customize the conversion of user input
    * @see https://pagefind.app/docs/multilingual/#specialized-languages
    */
   customSearchQuery?: (input: string) => string
+  /**
+   * Search result Displays the date the document was last modified
+   * @default true
+   */
+  showDate?: boolean
+  /**
+   * i18n
+   */
+  locales?: Record<string, Omit<SearchConfig, 'locales'>>
 }
 ```
 </details>
