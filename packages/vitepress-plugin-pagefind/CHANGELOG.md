@@ -1,5 +1,11 @@
 # vitepress-plugin-pagefind
 
+## 0.2.2
+### patch Changes
+* feat: support i18n
+* fix: support ctrl+k
+* chore: readme error link
+
 ## 0.2.1
 ### patch Changes
 * chore: get file timestamp use stdout replace output

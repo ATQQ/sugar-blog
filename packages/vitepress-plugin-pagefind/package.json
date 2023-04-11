@@ -1,6 +1,6 @@
 {
   "name": "vitepress-plugin-pagefind",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "vitepress plugin, Offline full-text search based on pagefind implementation.",
   "module": "dist/index.mjs",
   "main": "dist/index.js",
