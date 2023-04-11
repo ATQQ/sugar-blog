@@ -48,7 +48,11 @@ export interface SearchConfig {
    * @see https://pagefind.app/docs/multilingual/#specialized-languages
    */
   customSearchQuery?: (input: string) => string
-
+  /**
+   * Search result Displays the date the document was last modified
+   * @default true
+   */
+  showDate?: boolean
   /**
    * i18n
    */
