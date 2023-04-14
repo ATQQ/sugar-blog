@@ -83,10 +83,15 @@ export function useCurrentArticle() {
   const docs = computed(() => blogConfig.config?.blog?.pagesData)
   const currentArticle = computed(() => {
     const currentPath = route.path.replace(/.html$/, '')
-    return docs.value?.find((v) =>
-      // 兼容中文路径
-      [currentPath, decodeURIComponent(currentPath)].includes(withBase(v.route))
-    )
+    // 兼容中文路径
+    const okPaths = [currentPath, decodeURIComponent(currentPath)]
+    // 兼容 /(index.md)
+    if (currentPath.endsWith('/')) {
+      okPaths.push(
+        ...[`${currentPath}index`, `${decodeURIComponent(currentPath)}index`]
+      )
+    }
+    return docs.value?.find((v) => okPaths.includes(withBase(v.route)))
   })
 
   return currentArticle

@@ -33,8 +33,9 @@
     "url": "https://github.com/ATQQ/sugar-blog/issues"
   },
   "scripts": {
-    "dev": "vitepress dev demo",
-    "dev:lib": "npm run build:node && vitepress dev demo",
+    "dev": "npm run build:node && npm run dev:docs",
+    "dev:docs":"vitepress dev demo",
+    "dev:node": "npx tsup src/node.ts --dts --out-dir=./ --watch",
     "build": "npm run build:node && npm run build:docs",
     "build:docs": "vitepress build demo",
     "build:node": "npx tsup src/node.ts --dts --out-dir=./",
