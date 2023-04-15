@@ -1,5 +1,9 @@
 # @sugarat/theme
 
+## 0.1.21
+### Patch Changes
+- fix: index.md 路径无法正常展示时间信息
+
 ## 0.1.20
 
 ### Patch Changes

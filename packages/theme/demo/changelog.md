@@ -11,6 +11,10 @@ tag:
 ```sh
 pnpm up @sugarat/theme
 ```
+## 0.1.21 (2023/04/15)
+### Patch Changes
+- fix: index.md 路径无法正常展示时间信息
+
 ## 0.1.20 (2023/04/08)
 
 ### Patch Changes
