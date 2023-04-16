@@ -160,11 +160,21 @@ const headingText = computed(() => {
     : `Total: ${searchResult.value.length} search results.`
 })
 
+//阻止浏览器地址栏默认行为
+const preventBrowserDefault = (event) => {
+    event = event || window.event;
+    //press ctrl + K
+    if(event.ctrlKey && event.keyCode == 75){
+      event.preventDefault();
+    }
+}
+
 const metaKey = ref('')
 onMounted(() => {
   metaKey.value = /(Mac|iPhone|iPod|iPad)/i.test(navigator?.platform)
     ? '⌘'
-    : 'Ctrl'
+    : 'Ctrl';
+  window.document.addEventListener('keydown', preventBrowserDefault);
 })
 const searchModal = ref(false)
 const searchWords = ref('')
