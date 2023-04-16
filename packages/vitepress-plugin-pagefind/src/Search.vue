@@ -164,8 +164,7 @@ const metaKey = ref('')
 onMounted(() => {
   metaKey.value = /(Mac|iPhone|iPod|iPad)/i.test(navigator?.platform)
     ? '⌘'
-    : 'Ctrl';
-  window.document.addEventListener('keydown', preventBrowserDefault);
+    : 'Ctrl'
 })
 const searchModal = ref(false)
 const searchWords = ref('')
