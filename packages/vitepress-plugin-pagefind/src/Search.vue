@@ -171,10 +171,9 @@ const searchWords = ref('')
 
 const keys = useMagicKeys({
   passive: false,
-  onEventFired(e){
-     if (e.ctrlKey && e.key === 'k' && e.type === 'keydown')
-      e.preventDefault()
-  },
+  onEventFired(e) {
+    if (e.ctrlKey && e.key === 'k' && e.type === 'keydown') e.preventDefault()
+  }
 })
 const CmdK = keys['Meta+K']
 const CtrlK = keys['Ctrl+K']

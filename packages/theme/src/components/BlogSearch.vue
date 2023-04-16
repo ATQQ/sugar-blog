@@ -186,7 +186,12 @@ const searchModal = ref(false)
 const searchWords = ref('')
 const docs = useArticles()
 
-const keys = useMagicKeys()
+const keys = useMagicKeys({
+  passive: false,
+  onEventFired(e) {
+    if (e.ctrlKey && e.key === 'k' && e.type === 'keydown') e.preventDefault()
+  }
+})
 const CmdK = keys['Meta+K']
 const CtrlK = keys['Ctrl+K']
 // eslint-disable-next-line dot-notation, prefer-destructuring
