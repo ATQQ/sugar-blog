@@ -11,6 +11,13 @@ tag:
 ```sh
 pnpm up @sugarat/theme
 ```
+
+## 0.1.22 (2023/04/16)
+
+### Patch Changes
+
+- fix: ctrl+k open browser search
+
 ## 0.1.21 (2023/04/15)
 ### Patch Changes
 - fix: index.md 路径无法正常展示时间信息

@@ -1,7 +1,15 @@
 # @sugarat/theme
 
-## 0.1.21
+## 0.1.22
+
 ### Patch Changes
+
+- fix: ctrl+k open browser search
+
+## 0.1.21
+
+### Patch Changes
+
 - fix: index.md 路径无法正常展示时间信息
 
 ## 0.1.20
@@ -9,8 +17,8 @@
 ### Patch Changes
 
 - feat: 内置 pagefind 搜索针对中文优化
-- fix: 内置 pagefind 在自定义base后无效
-- chore: 没有git仓库时，打印Not日志
+- fix: 内置 pagefind 在自定义 base 后无效
+- chore: 没有 git 仓库时，打印 Not 日志
 - chore: pagefind 引导使用独立的插件
 
 ## 0.1.19

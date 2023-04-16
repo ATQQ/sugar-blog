@@ -1,6 +1,6 @@
 {
   "name": "@sugarat/theme",
-  "version": "0.1.21",
+  "version": "0.1.22",
   "description": "简约风的 Vitepress 博客主题，sugarat vitepress blog theme",
   "main": "src/index.ts",
   "exports": {
@@ -34,7 +34,7 @@
   },
   "scripts": {
     "dev": "npm run build:node && npm run dev:docs",
-    "dev:docs":"vitepress dev demo",
+    "dev:docs": "vitepress dev demo",
     "dev:node": "npx tsup src/node.ts --dts --out-dir=./ --watch",
     "build": "npm run build:node && npm run build:docs",
     "build:docs": "vitepress build demo",
