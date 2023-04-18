@@ -12,6 +12,13 @@ tag:
 pnpm up @sugarat/theme
 ```
 
+## 0.1.23 (2023/04/18)
+
+### Patch Changes
+
+- fix: RecommendArticle 不支持多级中文路径
+- feat: RecommendArticle 支持设置自定义过滤与是否展示正在浏览文章
+
 ## 0.1.22 (2023/04/16)
 
 ### Patch Changes

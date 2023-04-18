@@ -392,6 +392,15 @@ interface RecommendArticle {
   pageSize?: number
   nextText?: string
   empty?: string | boolean
+  /**
+   * 是否展示当前正在浏览的文章在左侧
+   * @default false
+   */
+  showSelf?: boolean;
+  /**
+   * 自定义过滤规则
+   */
+  filter?: (page: Theme.PageData) => boolean;
 }
 ```
 
