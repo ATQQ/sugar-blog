@@ -57,7 +57,9 @@ const docs = useArticles()
 const route = useRoute()
 
 const recommendList = computed(() => {
-  const paths = route.path.split('/')
+  // 中文支持
+  const paths = decodeURIComponent(route.path).split('/')
+
   const origin = docs.value
     .map((v) => ({ ...v, route: withBase(v.route) }))
     // 过滤出公共路由前缀
@@ -70,9 +72,14 @@ const recommendList = computed(() => {
     // 过滤出带标题的
     .filter((v) => !!v.meta.title)
     // 过滤掉自己
-    .filter((v) => v.route !== route.path.replace(/.html$/, ''))
+    .filter(
+      (v) =>
+        (recommend?.showSelf ?? true) ||
+        v.route !== decodeURIComponent(route.path).replace(/.html$/, '')
+    )
     // 过滤掉不需要展示的
     .filter((v) => v.meta.recommend !== false)
+    .filter((v) => recommend?.filter?.(v) ?? true)
 
   const topList = origin.filter((v) => v.meta?.recommend)
   topList.sort((a, b) => Number(a.meta.recommend) - Number(b.meta.recommend))
