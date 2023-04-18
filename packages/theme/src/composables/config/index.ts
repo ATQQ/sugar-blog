@@ -93,6 +93,12 @@ export namespace Theme {
     title?: string
     pageSize?: number
     nextText?: string
+    /**
+     * 是否展示当前正在浏览的文章在左侧
+     * @default false
+     */
+    showSelf?: boolean
+    filter?: (page: Theme.PageData) => boolean
     empty?: string | boolean
   }
 

@@ -54,7 +54,10 @@ const blogTheme = getThemeConfig({
       url: 'https://www.fmcat.top'
     }
   ],
-  search: false
+  search: false,
+  recommend: {
+    showSelf: true
+  }
 })
 
 const extraHead: any =
