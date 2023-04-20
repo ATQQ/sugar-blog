@@ -20,6 +20,9 @@ const blogTheme = getThemeConfig({
       url: 'https://vitepress.vuejs.org/'
     }
   ],
+  recommend: {
+    showSelf: true
+  },
   // 开启离线的全文搜索支持（如构建报错可注释下面的配置再次尝试）
   search: 'pagefind'
 })

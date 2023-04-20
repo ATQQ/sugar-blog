@@ -12,6 +12,12 @@ tag:
 pnpm up @sugarat/theme
 ```
 
+## 0.1.24 (2023/04/20)
+
+### Patch Changes
+
+- feat: 左侧相关文章，高亮当前正在浏览的文章
+
 ## 0.1.23 (2023/04/18)
 
 ### Patch Changes

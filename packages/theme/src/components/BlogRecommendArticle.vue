@@ -24,9 +24,15 @@
         <!-- 简介 -->
         <div class="des">
           <!-- title -->
-          <el-link type="info" class="title" :href="v.route">{{
-            v.meta.title
-          }}</el-link>
+          <el-link
+            type="info"
+            class="title"
+            :class="{
+              current: isCurrentDoc(v.route)
+            }"
+            :href="v.route"
+            >{{ v.meta.title }}</el-link
+          >
           <!-- 描述信息 -->
           <div class="suffix">
             <!-- 日期 -->
@@ -89,6 +95,11 @@ const recommendList = computed(() => {
 
   return topList.concat(normalList)
 })
+
+const isCurrentDoc = (value: string) => {
+  return value === decodeURIComponent(route.path).replace(/.html$/, '')
+}
+
 const currentPage = ref(1)
 const changePage = () => {
   const newIdx =
@@ -165,6 +176,9 @@ const showChangeBtn = computed(() => {
       color: var(--vp-c-text-1);
       word-break: break-all;
       white-space: break-spaces;
+      &.current {
+        color: var(--vp-c-brand);
+      }
     }
 
     .suffix {
