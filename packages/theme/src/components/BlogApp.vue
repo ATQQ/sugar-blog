@@ -10,6 +10,7 @@ import BlogImagePreview from './BlogImagePreview.vue'
 import BlogArticleAnalyze from './BlogArticleAnalyze.vue'
 import BlogAlert from './BlogAlert.vue'
 import BlogPopover from './BlogPopover.vue'
+import BlogLazyImage from './BlogLazyImage.vue'
 import { useBlogThemeMode } from '../composables/config/blog'
 
 const isBlogTheme = useBlogThemeMode()
@@ -19,6 +20,7 @@ const { Layout } = Theme
 <template>
   <Layout>
     <template #layout-top>
+      <BlogLazyImage />
       <BlogAlert />
       <BlogPopover />
     </template>

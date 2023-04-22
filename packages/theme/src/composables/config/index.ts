@@ -55,13 +55,18 @@ export namespace Theme {
      * 手动控制相关文章列表的顺序
      */
     recommend?: number | false
+    /**
+     * 是否懒加载图片
+     * @default true
+     */
+    lazy: boolean
     // TODO: 待开发
     /**
-     * 时间线
+     * (待开发) 时间线
      */
     timeline: string
     /**
-     * 专栏&合集
+     * (待开发) 专栏&合集
      */
     album: string
   }
@@ -112,8 +117,21 @@ export namespace Theme {
   }
 
   export interface ArticleConfig {
+    /**
+     * 是否展示阅读时间分析
+     * @default true
+     */
     readingTime?: boolean
+    /**
+     * 是否隐藏文章页的封面图
+     * @default false
+     */
     hiddenCover?: boolean
+    /**
+     * 是否懒加载图片资源
+     * @default true
+     */
+    lazy?: boolean
   }
   export interface Alert {
     type: 'success' | 'warning' | 'info' | 'error'
@@ -195,6 +213,9 @@ export namespace Theme {
     alert?: Alert
     popover?: Popover
     friend?: FriendLink[]
+    /**
+     * 作者信息列表
+     */
     authorList?: Omit<FriendLink, 'avatar'>[]
   }
 
