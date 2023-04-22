@@ -9,15 +9,36 @@
       预计：{{ readTime }} 分钟
     </span>
   </div>
-  <div class="meta-des 123" ref="$des" id="hack-article-des">
-    <span v-if="author">
-      <el-icon><UserFilled /></el-icon>
-      {{ author }}
+  <div class="meta-des" ref="$des" id="hack-article-des">
+    <!-- TODO：是否需要原创？转载等标签，理论上可以添加标签解决 -->
+    <span v-if="author && !hiddenAuthor" class="author">
+      <el-icon title="本文作者"><UserFilled /></el-icon>
+      <a
+        class="link"
+        :href="currentAuthorInfo.url"
+        :title="currentAuthorInfo.des"
+        v-if="currentAuthorInfo"
+      >
+        {{ currentAuthorInfo.nickname }}
+      </a>
+      <template v-else>
+        {{ author }}
+      </template>
     </span>
-    <span>
-      <el-icon><Clock /></el-icon>
+    <span v-if="publishDate && !hiddenTime" class="publishDate">
+      <el-icon :title="timeTitle"><Clock /></el-icon>
       {{ publishDate }}
     </span>
+    <span v-if="tags.length" class="tags">
+      <el-icon :title="timeTitle"><CollectionTag /></el-icon>
+      <a class="link" :href="`/?tag=${tag}`" v-for="tag in tags" :key="tag"
+        >{{ tag }}
+      </a>
+    </span>
+    <!-- 封面展示 -->
+    <ClientOnly>
+      <BlogDocCover />
+    </ClientOnly>
   </div>
 </template>
 
@@ -27,13 +48,31 @@
 import { useData, useRoute } from 'vitepress'
 import { computed, onMounted, ref, watch } from 'vue'
 import { ElIcon } from 'element-plus'
-import { UserFilled, Clock, EditPen, AlarmClock } from '@element-plus/icons-vue'
+import {
+  UserFilled,
+  Clock,
+  EditPen,
+  AlarmClock,
+  CollectionTag
+} from '@element-plus/icons-vue'
 import { useBlogConfig, useCurrentArticle } from '../composables/config/blog'
 import countWord, { formatShowDate } from '../utils/index'
 import { Theme } from '../composables/config'
+import BlogDocCover from './BlogDocCover.vue'
 
-const { article } = useBlogConfig()
+const { article, authorList } = useBlogConfig()
 const { frontmatter } = useData()
+const tags = computed(() => {
+  const { tag, tags, categories } = frontmatter.value
+  return [
+    ...new Set(
+      []
+        .concat(tag, tags, categories)
+        .flat()
+        .filter((v) => !!v)
+    )
+  ]
+})
 const showAnalyze = computed(
   () => frontmatter.value?.readingTime ?? article?.readingTime ?? true
 )
@@ -103,11 +142,22 @@ const publishDate = computed(() => {
   return formatShowDate(currentArticle.value?.meta?.date || '')
 })
 
+const timeTitle = computed(() =>
+  frontmatter.value.date ? '发布时间' : '最近修改时间'
+)
+const hiddenTime = computed(() => frontmatter.value.date === false)
+
 const { theme } = useData<Theme.Config>()
 const globalAuthor = computed(() => theme.value.blog?.author || '')
 const author = computed(
-  () => currentArticle.value?.meta.author || globalAuthor.value
+  () =>
+    (frontmatter.value.author || currentArticle.value?.meta.author) ??
+    globalAuthor.value
 )
+const currentAuthorInfo = computed(() =>
+  authorList?.find((v) => author.value === v.nickname)
+)
+const hiddenAuthor = computed(() => frontmatter.value.author === false)
 
 watch(
   () => route.path,
@@ -143,12 +193,30 @@ watch(
   font-size: 14px;
   margin-top: 6px;
   display: flex;
+  flex-wrap: wrap;
   span {
     margin-right: 16px;
     display: flex;
     align-items: center;
     .el-icon {
       margin-right: 4px;
+    }
+  }
+
+  .link {
+    color: var(--vp-c-text-2);
+    &:hover {
+      color: var(--vp-c-brand);
+      cursor: pointer;
+    }
+  }
+}
+.tags {
+  a.link:not(:last-child) {
+    &::after {
+      content: '·';
+      display: inline-block;
+      padding: 0 4px;
     }
   }
 }

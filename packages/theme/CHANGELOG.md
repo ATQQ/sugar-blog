@@ -1,5 +1,18 @@
 # @sugarat/theme
 
+## 0.1.25
+
+### Patch Changes
+
+- feat: 文章页支持tag展示和跳转
+- feat: 作者支持跳转外链
+- feat: 优化时间展示，支持单独控制显隐
+- feat: 支持通过配置控制Cover封面的展示
+- feat: 支持文章封面展示
+- fix: 标签回退不生效
+- chore: 一些TODO更新
+- chore: 移动端首页卡片样式微调
+
 ## 0.1.24
 
 ### Patch Changes

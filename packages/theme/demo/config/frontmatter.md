@@ -122,6 +122,23 @@ cover: https://img.cdn.sugarat.top/mdImg/MTY3MzE0Njg5NDY4OQ==673146894689
 
 未指定时，默认取文章中出现的第一张图片
 
+同时如果手动设置了，封面将同时在文章页展示
+
+![](https://img.cdn.sugarat.top/mdImg/MTY4MjE3NDAzNzMxMw==682174037313)
+
+可以通过下面的 `hiddenCover` 隐藏文章页的展示
+
+### hiddenCover
+`hiddenCover` 控制是否展示当前文章的封面，全局配置开关见 [article.hiddenCover](./global.md#article)
+```md
+---
+hiddenCover: true 
+cover: url
+---
+```
+
+如果`hiddenCover`为false则不会在文章页展示上述的封面
+
 ### hidden
 
 用于设置文章是否出现在首页的列表里
@@ -177,7 +194,9 @@ comment: false
 ```
 
 ### date
-单独设置文章的发布时间，不设置的情况下默认会通过`Git`取文件最后修改时间
+* type：`string | false`
+
+单独设置文章的发布时间，不设置的情况下默认会通过`Git`取文件最后修改时间，设置为 `false` 则不会在文章页展示
 
 ```md
 ---
@@ -202,8 +221,16 @@ date: 2023-01-08 20:00:00
 * 小于1周：xx天前
 * 其它：按照实际时间展示 `yyyy-MM-dd`
 
+```md
+---
+date: false
+---
+```
+
+![](https://img.cdn.sugarat.top/mdImg/MTY4MjE3NTQwODI4MA==682175408280)
+
 ### tag
-用于按标签给文章分类
+用于按标签给文章分类，同时，在文章页标签可点击跳转
 
 ```md
 ---
@@ -218,6 +245,7 @@ categories:
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4NTY0MTI2Nw==673185641267)
 
+![](https://img.cdn.sugarat.top/mdImg/MTY4MjE3NTE3NjgyNg==682175176826)
 ### tags
 效果同上
 ### categories

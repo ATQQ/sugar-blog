@@ -57,7 +57,14 @@ const blogTheme = getThemeConfig({
   search: false,
   recommend: {
     showSelf: true
-  }
+  },
+  authorList: [
+    {
+      nickname: '粥里有勺糖',
+      url: 'https://sugarat.top/aboutme.html',
+      des: '你的指尖,拥有改变世界的力量'
+    }
+  ]
 })
 
 const extraHead: any =

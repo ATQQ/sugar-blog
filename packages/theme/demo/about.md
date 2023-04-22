@@ -43,6 +43,7 @@ sticky: 1
 * [reco](https://vuepress-theme-reco.recoluan.com/)
 * [掘金](https://juejin.cn/)
 * [surmon](https://surmon.me/) 
+* [查尔斯的知识库](https://blog.charles7c.top/)
 * [@vue/theme](https://github.com/vuejs/theme)
 * [vitest](https://vitest.dev/)
 * [element-plus](https://element-plus.gitee.io/zh-CN/)

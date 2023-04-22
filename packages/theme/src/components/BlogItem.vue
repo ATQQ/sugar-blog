@@ -1,31 +1,46 @@
 <template>
   <a class="blog-item" :href="withBase(route)">
     <i class="pin" v-if="!!pin"></i>
-    <!-- 左侧信息  -->
-    <div class="info-part">
-      <!-- 标题 -->
-      <p class="title">{{ title }}</p>
-      <!-- 简短描述 -->
-      <p class="description" v-if="!!description">{{ description }}</p>
-      <div class="badge-list">
-        <span class="split" v-if="author">{{ author }}</span>
-        <span class="split">{{ showTime }}</span>
-        <span class="split" v-if="tag?.length">{{ tag.join(' · ') }}</span>
+    <!-- 标题 -->
+    <p class="title" v-if="inMobile">{{ title }}</p>
+    <div class="info-container">
+      <!-- 左侧信息 -->
+      <div class="info-part">
+        <!-- 标题 -->
+        <p class="title" v-if="!inMobile">{{ title }}</p>
+        <!-- 简短描述 -->
+        <p class="description" v-if="!!description">{{ description }}</p>
+        <!-- 底部补充描述 -->
+        <div class="badge-list" v-if="!inMobile">
+          <span class="split" v-if="author">{{ author }}</span>
+          <span class="split">{{ showTime }}</span>
+          <span class="split" v-if="tag?.length">{{ tag.join(' · ') }}</span>
+        </div>
       </div>
+      <!-- 右侧封面图 -->
+      <div
+        v-if="cover"
+        class="cover-img"
+        :style="`background-image: url(${cover});`"
+      ></div>
     </div>
-    <div
-      v-if="cover"
-      class="cover-img"
-      :style="`background-image: url(${cover});`"
-    ></div>
+    <!-- 底部补充描述 -->
+    <div class="badge-list" v-if="inMobile">
+      <span class="split" v-if="author">{{ author }}</span>
+      <span class="split">{{ showTime }}</span>
+      <span class="split" v-if="tag?.length">{{ tag.join(' · ') }}</span>
+    </div>
   </a>
 </template>
 
 <script lang="ts" setup>
 import { withBase } from 'vitepress'
 import { computed } from 'vue'
+import { useWindowSize } from '@vueuse/core'
 import { formatShowDate } from '../utils/index'
 
+const { width } = useWindowSize()
+const inMobile = computed(() => width.value <= 500)
 const props = defineProps<{
   route: string
   title: string
@@ -86,10 +101,15 @@ const showTime = computed(() => {
   background-color: rgba(var(--bg-gradient));
   cursor: pointer;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   &:hover {
     box-shadow: var(--box-shadow-hover);
   }
+}
+.info-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .info-part {
@@ -114,6 +134,7 @@ const showTime = computed(() => {
 .badge-list {
   font-size: 13px;
   color: var(--badge-font-color);
+  margin-top: 8px;
   .split:not(:last-child) {
     &::after {
       content: '';

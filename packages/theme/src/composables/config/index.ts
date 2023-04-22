@@ -38,6 +38,8 @@ export namespace Theme {
     tag?: string[]
     description?: string
     cover?: string
+    hiddenCover?: boolean
+    readingTime?: boolean
     sticky?: number
     author?: string
     hidden?: boolean
@@ -111,6 +113,7 @@ export namespace Theme {
 
   export interface ArticleConfig {
     readingTime?: boolean
+    hiddenCover?: boolean
   }
   export interface Alert {
     type: 'success' | 'warning' | 'info' | 'error'
@@ -172,7 +175,12 @@ export namespace Theme {
     author?: string
     hotArticle?: HotArticle
     home?: HomeBlog
-    // TODO: 本地全文搜索定制 pagefind || minisearch || flexsearch
+    /**
+     * 本地全文搜索定制
+     * 内置pagefind 实现，
+     * VitePress 官方提供 minisearch 实现，
+     * 社区提供 flexsearch 实现
+     */
     search?: SearchConfig
     /**
      * 配置评论
@@ -187,6 +195,7 @@ export namespace Theme {
     alert?: Alert
     popover?: Popover
     friend?: FriendLink[]
+    authorList?: Omit<FriendLink, 'avatar'>[]
   }
 
   export interface Config extends DefaultTheme.Config {
