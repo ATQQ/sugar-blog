@@ -9,7 +9,7 @@
       预计：{{ readTime }} 分钟
     </span>
   </div>
-  <div class="meta-des 123" ref="$des" id="hack-article-des">
+  <div class="meta-des" ref="$des" id="hack-article-des">
     <span v-if="author">
       <el-icon><UserFilled /></el-icon>
       {{ author }}
@@ -18,6 +18,10 @@
       <el-icon><Clock /></el-icon>
       {{ publishDate }}
     </span>
+    <!-- 封面展示 -->
+    <ClientOnly>
+      <BlogDocCover />
+    </ClientOnly>
   </div>
 </template>
 
@@ -31,6 +35,7 @@ import { UserFilled, Clock, EditPen, AlarmClock } from '@element-plus/icons-vue'
 import { useBlogConfig, useCurrentArticle } from '../composables/config/blog'
 import countWord, { formatShowDate } from '../utils/index'
 import { Theme } from '../composables/config'
+import BlogDocCover from './BlogDocCover.vue'
 
 const { article } = useBlogConfig()
 const { frontmatter } = useData()
@@ -143,6 +148,7 @@ watch(
   font-size: 14px;
   margin-top: 6px;
   display: flex;
+  flex-wrap: wrap;
   span {
     margin-right: 16px;
     display: flex;
