@@ -29,9 +29,9 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted } from 'vue'
+import { computed, watch } from 'vue'
 import { ElTag } from 'element-plus'
-import { useDark } from '@vueuse/core'
+import { useBrowserLocation, useDark } from '@vueuse/core'
 import { useRouter } from 'vitepress'
 import { useActiveTag, useArticles } from '../composables/config/blog'
 
@@ -70,11 +70,18 @@ const handleTagClick = (tag: string, type: string) => {
     `${window.location.origin}${router.route.path}?tag=${tag}&type=${type}`
   )
 }
-onMounted(() => {
-  const url = new URL(window.location.href)
-  activeTag.value.type = url.searchParams.get('type') || ''
-  activeTag.value.label = url.searchParams.get('tag') || ''
-})
+const location = useBrowserLocation()
+watch(
+  () => location.value,
+  () => {
+    const url = new URL(location.value.href!)
+    activeTag.value.type = url.searchParams.get('type') || ''
+    activeTag.value.label = url.searchParams.get('tag') || ''
+  },
+  {
+    immediate: true
+  }
+)
 </script>
 
 <style lang="scss" scoped>
