@@ -190,6 +190,7 @@ export namespace Theme {
     alert?: Alert
     popover?: Popover
     friend?: FriendLink[]
+    authorList?: Omit<FriendLink, 'avatar'>[]
   }
 
   export interface Config extends DefaultTheme.Config {

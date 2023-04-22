@@ -11,9 +11,19 @@
   </div>
   <div class="meta-des" ref="$des" id="hack-article-des">
     <!-- TODO：是否需要原创？转载等标签，理论上可以添加标签解决 -->
-    <span v-if="author">
+    <span v-if="author && !hiddenAuthor">
       <el-icon title="本文作者"><UserFilled /></el-icon>
-      {{ author }}
+      <a
+        class="author-link"
+        :href="currentAuthorInfo.url"
+        :title="currentAuthorInfo.des"
+        v-if="currentAuthorInfo"
+      >
+        {{ currentAuthorInfo.nickname }}
+      </a>
+      <template v-else>
+        {{ author }}
+      </template>
     </span>
     <span v-if="publishDate && !hiddenTime">
       <el-icon :title="timeTitle"><Clock /></el-icon>
@@ -38,7 +48,7 @@ import countWord, { formatShowDate } from '../utils/index'
 import { Theme } from '../composables/config'
 import BlogDocCover from './BlogDocCover.vue'
 
-const { article } = useBlogConfig()
+const { article, authorList } = useBlogConfig()
 const { frontmatter } = useData()
 const showAnalyze = computed(
   () => frontmatter.value?.readingTime ?? article?.readingTime ?? true
@@ -117,8 +127,14 @@ const hiddenTime = computed(() => frontmatter.value.date === false)
 const { theme } = useData<Theme.Config>()
 const globalAuthor = computed(() => theme.value.blog?.author || '')
 const author = computed(
-  () => currentArticle.value?.meta.author || globalAuthor.value
+  () =>
+    (frontmatter.value.author || currentArticle.value?.meta.author) ??
+    globalAuthor.value
 )
+const currentAuthorInfo = computed(() =>
+  authorList?.find((v) => author.value === v.nickname)
+)
+const hiddenAuthor = computed(() => frontmatter.value.author === false)
 
 watch(
   () => route.path,
@@ -162,6 +178,12 @@ watch(
     .el-icon {
       margin-right: 4px;
     }
+  }
+}
+.author-link {
+  color: var(--vp-c-text-2);
+  &:hover {
+    color: var(--vp-c-brand);
   }
 }
 </style>
