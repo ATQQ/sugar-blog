@@ -1,6 +1,8 @@
 ---
 title: 更新日志
+description: 最近更新(v0.1.25) 💯：① 文章页支持tag展示和跳转 ② 作者支持跳转外链 ③ 支持控制文章时间的展示 ④ 支持封面在文章页展示
 author: 粥里有勺糖
+top: 1
 tag:
  - 日志
 ---
@@ -11,6 +13,19 @@ tag:
 ```sh
 pnpm up @sugarat/theme
 ```
+
+## 0.1.25 (2023/04/22)
+
+### Patch Changes
+
+- feat: 文章页支持tag展示和跳转 [tag](./config/frontmatter.md#tag)
+- feat: 作者支持跳转外链 [authorList](./config/global.md#authorlist)
+- feat: 优化时间展示，支持单独控制显隐 [date](./config/frontmatter.md#date)
+- feat: 支持文章封面展示 [cover](./config/frontmatter.md#cover)
+- feat: 支持通过配置控制文章里的封面的展示 [hiddenCover](./config/frontmatter.md#hiddencover)
+- fix: 标签回退不生效
+- chore: 一些TODO更新
+- chore: 移动端首页卡片样式微调
 
 ## 0.1.24 (2023/04/20)
 

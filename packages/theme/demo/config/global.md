@@ -215,6 +215,26 @@ type SearchConfig =
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY3OTgxNTk5NTQyMw==679815995423)
 
+### 全文搜索 - minisearch
+
+官方`VitePress`内置的离线全文搜索实现，使用方法如下
+
+```ts
+import { defineConfig } from 'vitepress'
+
+export default defineConfig({
+  themeConfig: {
+    search: {
+      provider: 'local'
+    }
+  }
+})
+```
+
+效果如下
+
+![](https://img.cdn.sugarat.top/mdImg/MTY4MjE3NDYxOTczMA==682174619730)
+
 ### 全文搜索 - pagefind
 开启全文搜索（基于 [pagefind](https://pagefind.app/) 实现）
 
@@ -419,6 +439,10 @@ const blogTheme = getThemeConfig({
      * 是否展示文章的预计阅读时间
      */
     readingTime: true
+    /**
+     * 是否隐藏文章页的封面展示
+     */
+    hiddenCover: false
   }
 })
 ```
@@ -426,12 +450,15 @@ const blogTheme = getThemeConfig({
 ```ts [type]
 interface ArticleConfig {
   readingTime?: boolean
+  hiddenCover?: boolean
 }
 ```
 
 :::
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMjAzNDEzOA==674922034138)
+
+![](https://img.cdn.sugarat.top/mdImg/MTY4MjE3NDAzNzMxMw==682174037313)
 
 ## srcDir
 * Type: `string`
@@ -633,6 +660,36 @@ interface FriendLink {
 }
 ```
 :::
+## authorList
+用于设置文章页作者信息跳转相关信息，默认情况下`author`仅做展示
+
+设置这个列表后，作者信息如果匹配上，即可跳转
+
+![](https://img.cdn.sugarat.top/mdImg/MTY4MjE3NTA0MDc1NA==682175040754)
+
+::: code-group
+
+```ts [example]
+const blogTheme = getThemeConfig({
+  authorList: [
+    {
+      nickname: '粥里有勺糖',
+      url: 'https://sugarat.top/aboutme.html',
+      des: '你的指尖,拥有改变世界的力量'
+    }
+  ]
+})
+```
+
+```ts [type]
+interface AuthorInfo {
+  nickname: string
+  des: string
+  url: string
+}
+```
+:::
+
 
 ## blog
 * Type: `boolean`
