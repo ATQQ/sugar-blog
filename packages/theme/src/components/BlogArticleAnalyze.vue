@@ -11,10 +11,10 @@
   </div>
   <div class="meta-des" ref="$des" id="hack-article-des">
     <!-- TODO：是否需要原创？转载等标签，理论上可以添加标签解决 -->
-    <span v-if="author && !hiddenAuthor">
+    <span v-if="author && !hiddenAuthor" class="author">
       <el-icon title="本文作者"><UserFilled /></el-icon>
       <a
-        class="author-link"
+        class="link"
         :href="currentAuthorInfo.url"
         :title="currentAuthorInfo.des"
         v-if="currentAuthorInfo"
@@ -25,9 +25,15 @@
         {{ author }}
       </template>
     </span>
-    <span v-if="publishDate && !hiddenTime">
+    <span v-if="publishDate && !hiddenTime" class="publishDate">
       <el-icon :title="timeTitle"><Clock /></el-icon>
       {{ publishDate }}
+    </span>
+    <span v-if="tags.length" class="tags">
+      <el-icon :title="timeTitle"><CollectionTag /></el-icon>
+      <a class="link" :href="`/?tag=${tag}`" v-for="tag in tags" :key="tag"
+        >{{ tag }}
+      </a>
     </span>
     <!-- 封面展示 -->
     <ClientOnly>
@@ -42,7 +48,13 @@
 import { useData, useRoute } from 'vitepress'
 import { computed, onMounted, ref, watch } from 'vue'
 import { ElIcon } from 'element-plus'
-import { UserFilled, Clock, EditPen, AlarmClock } from '@element-plus/icons-vue'
+import {
+  UserFilled,
+  Clock,
+  EditPen,
+  AlarmClock,
+  CollectionTag
+} from '@element-plus/icons-vue'
 import { useBlogConfig, useCurrentArticle } from '../composables/config/blog'
 import countWord, { formatShowDate } from '../utils/index'
 import { Theme } from '../composables/config'
@@ -50,6 +62,17 @@ import BlogDocCover from './BlogDocCover.vue'
 
 const { article, authorList } = useBlogConfig()
 const { frontmatter } = useData()
+const tags = computed(() => {
+  const { tag, tags, categories } = frontmatter.value
+  return [
+    ...new Set(
+      []
+        .concat(tag, tags, categories)
+        .flat()
+        .filter((v) => !!v)
+    )
+  ]
+})
 const showAnalyze = computed(
   () => frontmatter.value?.readingTime ?? article?.readingTime ?? true
 )
@@ -179,11 +202,22 @@ watch(
       margin-right: 4px;
     }
   }
+
+  .link {
+    color: var(--vp-c-text-2);
+    &:hover {
+      color: var(--vp-c-brand);
+      cursor: pointer;
+    }
+  }
 }
-.author-link {
-  color: var(--vp-c-text-2);
-  &:hover {
-    color: var(--vp-c-brand);
+.tags {
+  a.link:not(:last-child) {
+    &::after {
+      content: '·';
+      display: inline-block;
+      padding: 0 4px;
+    }
   }
 }
 </style>
