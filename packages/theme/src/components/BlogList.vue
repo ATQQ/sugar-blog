@@ -36,7 +36,7 @@ import {
 import { Theme } from '../composables/config'
 
 const { theme, frontmatter } = useData<Theme.Config>()
-const globalAuthor = computed(() => theme.value.blog.author || '')
+const globalAuthor = computed(() => theme.value.blog?.author || '')
 const docs = useArticles()
 
 const activeTag = useActiveTag()
@@ -45,7 +45,11 @@ const activeTagLabel = computed(() => activeTag.value.label)
 
 const wikiList = computed(() => {
   const topList = docs.value.filter((v) => !!v.meta.top)
-  topList.sort((a, b) => a.meta!.top - b.meta!.top)
+  topList.sort((a, b) => {
+    const aTop = a?.meta?.top
+    const bTop = b?.meta.top
+    return Number(aTop) - Number(bTop)
+  })
   const data = docs.value.filter(
     (v) => v.meta.date && v.meta.title && !v.meta.top && !v.meta.hidden
   )
@@ -72,7 +76,3 @@ const currentWikiData = computed(() => {
   return filterData.value.slice(startIdx, endIdx)
 })
 </script>
-<style lang="scss" scoped>
-.blog-list {
-}
-</style>

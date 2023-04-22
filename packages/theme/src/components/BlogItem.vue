@@ -10,6 +10,12 @@
         <p class="title" v-if="!inMobile">{{ title }}</p>
         <!-- 简短描述 -->
         <p class="description" v-if="!!description">{{ description }}</p>
+        <!-- 底部补充描述 -->
+        <div class="badge-list" v-if="!inMobile">
+          <span class="split" v-if="author">{{ author }}</span>
+          <span class="split">{{ showTime }}</span>
+          <span class="split" v-if="tag?.length">{{ tag.join(' · ') }}</span>
+        </div>
       </div>
       <!-- 右侧封面图 -->
       <div
@@ -19,7 +25,7 @@
       ></div>
     </div>
     <!-- 底部补充描述 -->
-    <div class="badge-list">
+    <div class="badge-list" v-if="inMobile">
       <span class="split" v-if="author">{{ author }}</span>
       <span class="split">{{ showTime }}</span>
       <span class="split" v-if="tag?.length">{{ tag.join(' · ') }}</span>
@@ -128,6 +134,7 @@ const showTime = computed(() => {
 .badge-list {
   font-size: 13px;
   color: var(--badge-font-color);
+  margin-top: 8px;
   .split:not(:last-child) {
     &::after {
       content: '';
