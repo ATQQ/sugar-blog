@@ -38,6 +38,8 @@ export namespace Theme {
     tag?: string[]
     description?: string
     cover?: string
+    hiddenCover?: boolean
+    readingTime?: boolean
     sticky?: number
     author?: string
     hidden?: boolean
@@ -111,6 +113,7 @@ export namespace Theme {
 
   export interface ArticleConfig {
     readingTime?: boolean
+    hiddenCover?: boolean
   }
   export interface Alert {
     type: 'success' | 'warning' | 'info' | 'error'
