@@ -10,12 +10,13 @@
     </span>
   </div>
   <div class="meta-des" ref="$des" id="hack-article-des">
+    <!-- TODO：是否需要原创？转载等标签，理论上可以添加标签解决 -->
     <span v-if="author">
-      <el-icon><UserFilled /></el-icon>
+      <el-icon title="本文作者"><UserFilled /></el-icon>
       {{ author }}
     </span>
-    <span>
-      <el-icon><Clock /></el-icon>
+    <span v-if="publishDate && !hiddenTime">
+      <el-icon :title="timeTitle"><Clock /></el-icon>
       {{ publishDate }}
     </span>
     <!-- 封面展示 -->
@@ -107,6 +108,11 @@ const currentArticle = useCurrentArticle()
 const publishDate = computed(() => {
   return formatShowDate(currentArticle.value?.meta?.date || '')
 })
+
+const timeTitle = computed(() =>
+  frontmatter.value.date ? '发布时间' : '最近修改时间'
+)
+const hiddenTime = computed(() => frontmatter.value.date === false)
 
 const { theme } = useData<Theme.Config>()
 const globalAuthor = computed(() => theme.value.blog?.author || '')
