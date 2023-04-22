@@ -74,9 +74,11 @@ const location = useBrowserLocation()
 watch(
   () => location.value,
   () => {
-    const url = new URL(location.value.href!)
-    activeTag.value.type = url.searchParams.get('type') || ''
-    activeTag.value.label = url.searchParams.get('tag') || ''
+    if (location.value.href) {
+      const url = new URL(location.value.href!)
+      activeTag.value.type = url.searchParams.get('type') || ''
+      activeTag.value.label = url.searchParams.get('tag') || ''
+    }
   },
   {
     immediate: true
