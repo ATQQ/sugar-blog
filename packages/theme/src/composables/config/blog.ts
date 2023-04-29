@@ -16,6 +16,7 @@ const configSymbol: InjectionKey<Ref<Theme.Config>> = Symbol('theme-config')
 
 const activeTagSymbol: InjectionKey<Ref<Theme.activeTag>> = Symbol('active-tag')
 
+const currentPageNum: InjectionKey<Ref<number>> = Symbol('home-page-num')
 const homeConfigSymbol: InjectionKey<Theme.HomeConfig> = Symbol('home-config')
 
 export function withConfigProvider(App: Component) {
@@ -39,6 +40,10 @@ export function withConfigProvider(App: Component) {
         type: ''
       })
       provide(activeTagSymbol, activeTag)
+
+      const pageNum = ref(1)
+      provide(currentPageNum, pageNum)
+
       return () => h(App, null, slots)
     }
   })
@@ -74,6 +79,9 @@ export function useArticles() {
 
 export function useActiveTag() {
   return inject(activeTagSymbol)!
+}
+export function useCurrentPageNum() {
+  return inject(currentPageNum)!
 }
 
 export function useCurrentArticle() {

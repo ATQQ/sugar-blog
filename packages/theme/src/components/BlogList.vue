@@ -17,21 +17,24 @@
     v-if="wikiList.length >= pageSize"
     small
     background
-    v-model:current-page="currentPage"
+    :current-page="currentPage"
+    @update:current-page="handleUpdatePageNum"
     :page-size="pageSize"
     :total="filterData.length"
     layout="prev, pager, next, jumper"
   />
 </template>
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, watch } from 'vue'
 import { ElPagination } from 'element-plus'
-import { useData } from 'vitepress'
+import { useData, useRouter } from 'vitepress'
+import { useBrowserLocation } from '@vueuse/core'
 import BlogItem from './BlogItem.vue'
 import {
   useArticles,
   useActiveTag,
-  useBlogConfig
+  useBlogConfig,
+  useCurrentPageNum
 } from '../composables/config/blog'
 import { Theme } from '../composables/config'
 
@@ -68,11 +71,43 @@ const { home } = useBlogConfig()
 const pageSize = computed(
   () => frontmatter.value.blog?.pageSize || home?.pageSize || 6
 )
-const currentPage = ref(1)
-
+const currentPage = useCurrentPageNum()
 const currentWikiData = computed(() => {
   const startIdx = (currentPage.value - 1) * pageSize.value
   const endIdx = startIdx + pageSize.value
   return filterData.value.slice(startIdx, endIdx)
 })
+
+const router = useRouter()
+const location = useBrowserLocation()
+const queryPageNumKey = 'pageNum'
+const handleUpdatePageNum = (current: number) => {
+  if (currentPage.value === current) {
+    return
+  }
+  currentPage.value = current
+  const { searchParams } = new URL(window.location.href!)
+  searchParams.delete(queryPageNumKey)
+  searchParams.append(queryPageNumKey, String(current))
+  router.go(
+    `${location.value.origin}${router.route.path}?${searchParams.toString()}`
+  )
+}
+
+watch(
+  location,
+  () => {
+    if (location.value.href) {
+      const { searchParams } = new URL(location.value.href)
+      if (searchParams.has(queryPageNumKey)) {
+        currentPage.value = Number(searchParams.get(queryPageNumKey))
+      } else {
+        currentPage.value = 1
+      }
+    }
+  },
+  {
+    immediate: true
+  }
+)
 </script>
