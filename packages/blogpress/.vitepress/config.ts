@@ -130,11 +130,14 @@ export default defineConfig({
   },
   lastUpdated: true,
   themeConfig: {
-    algolia: {
-      appId: 'F919JCK8WY',
-      apiKey: '3eca209ad24bdfc26db63382dd5e4490',
-      indexName: 'sugarat_top',
-      placeholder: '请输入要搜索的内容...'
+    search: {
+      provider: 'algolia',
+      options: {
+        appId: 'F919JCK8WY',
+        apiKey: '3eca209ad24bdfc26db63382dd5e4490',
+        indexName: 'sugarat_top',
+        placeholder: '请输入要搜索的内容...'
+      }
     },
     lastUpdatedText: '上次更新于',
     footer: {

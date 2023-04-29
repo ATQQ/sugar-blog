@@ -311,11 +311,14 @@ export default defineConfig({
 ```ts
 export default defineConfig({
   themeConfig: {
-    algolia: {
-      appId: '',
-      apiKey: '',
-      indexName: '',
-      placeholder: '请输入要搜索的内容...'
+    search: {
+      provider: 'algolia',
+      options: {
+        appId: '',
+        apiKey: '',
+        indexName: '',
+        placeholder: '请输入要搜索的内容...'
+      }
     }
   }
 })
