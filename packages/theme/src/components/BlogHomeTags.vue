@@ -33,7 +33,11 @@ import { computed, watch } from 'vue'
 import { ElTag } from 'element-plus'
 import { useBrowserLocation, useDark } from '@vueuse/core'
 import { useRouter } from 'vitepress'
-import { useActiveTag, useArticles } from '../composables/config/blog'
+import {
+  useActiveTag,
+  useArticles,
+  useCurrentPageNum
+} from '../composables/config/blog'
 
 const docs = useArticles()
 
@@ -50,14 +54,18 @@ const isDark = useDark({
 const colorMode = computed(() => (isDark.value ? 'light' : 'dark'))
 
 const tagType: any = ['', 'info', 'success', 'warning', 'danger']
+const currentPage = useCurrentPageNum()
 
 const handleCloseTag = () => {
   activeTag.value.label = ''
   activeTag.value.type = ''
+  currentPage.value = 1
   router.go(`${window.location.origin}${router.route.path}`)
 }
 
 const router = useRouter()
+const location = useBrowserLocation()
+
 const handleTagClick = (tag: string, type: string) => {
   if (tag === activeTag.value.label) {
     handleCloseTag()
@@ -65,14 +73,14 @@ const handleTagClick = (tag: string, type: string) => {
   }
   activeTag.value.type = type
   activeTag.value.label = tag
-
+  currentPage.value = 1
   router.go(
-    `${window.location.origin}${router.route.path}?tag=${tag}&type=${type}`
+    `${location.value.origin}${router.route.path}?tag=${tag}&type=${type}`
   )
 }
-const location = useBrowserLocation()
+
 watch(
-  () => location.value,
+  location,
   () => {
     if (location.value.href) {
       const url = new URL(location.value.href!)

@@ -140,7 +140,7 @@ export default defineConfig({
     footer: {
       message:
         '<a target="_blank" href="https://beian.miit.gov.cn/">蜀ICP备19011724号</a>',
-      copyright: `© 2018-present 粥里有勺糖 | @sugarat/theme@${themePkg.version} </a>`
+      copyright: `© 2018-present 粥里有勺糖 | <a href="https://theme.sugarat.top">@sugarat/theme@${themePkg.version} </a>`
     },
     logo: '/logo.png',
     editLink: {
