@@ -1,5 +1,9 @@
 # @sugarat/theme
 
+## 0.1.26
+### Patch Changes
+- fix: 翻页后回到首页又回到开头
+
 ## 0.1.25
 
 ### Patch Changes
