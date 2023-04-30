@@ -14,6 +14,10 @@ tag:
 pnpm up @sugarat/theme
 ```
 
+## 0.1.27 (2023/04/30)
+### Patch Changes
+- fix: element ui 分页组件展示异常
+
 ## 0.1.26 (2023/04/29)
 ### Patch Changes
 - fix: 翻页后回到首页又回到开头

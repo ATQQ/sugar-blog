@@ -13,16 +13,20 @@
       />
     </li>
   </ul>
-  <el-pagination
-    v-if="wikiList.length >= pageSize"
-    small
-    background
-    :current-page="currentPage"
-    @update:current-page="handleUpdatePageNum"
-    :page-size="pageSize"
-    :total="filterData.length"
-    layout="prev, pager, next, jumper"
-  />
+  <!-- 解决element-ui bug -->
+  <ClientOnly>
+    <el-pagination
+      v-if="wikiList.length >= pageSize"
+      small
+      background
+      :default-current-page="1"
+      :current-page="currentPage"
+      @update:current-page="handleUpdatePageNum"
+      :page-size="pageSize"
+      :total="filterData.length"
+      layout="prev, pager, next, jumper"
+    />
+  </ClientOnly>
 </template>
 <script setup lang="ts">
 import { computed, watch } from 'vue'

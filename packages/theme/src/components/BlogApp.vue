@@ -43,7 +43,9 @@ const { Layout } = Theme
           <BlogHomeBanner />
         </div>
         <div class="content-wrapper">
-          <div class="blog-list-wrapper"><blog-list /></div>
+          <div class="blog-list-wrapper">
+            <BlogList />
+          </div>
           <div class="blog-info-wrapper"><BlogHomeInfo /></div>
         </div>
       </div>

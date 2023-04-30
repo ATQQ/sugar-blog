@@ -1,5 +1,9 @@
 # @sugarat/theme
 
+## 0.1.27
+### Patch Changes
+- fix: element ui 分页组件展示异常
+
 ## 0.1.26
 ### Patch Changes
 - fix: 翻页后回到首页又回到开头
