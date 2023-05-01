@@ -24,7 +24,31 @@ const blogTheme = getThemeConfig({
     showSelf: true
   },
   // 开启离线的全文搜索支持（如构建报错可注释下面的配置再次尝试）
-  search: 'pagefind'
+  search: 'pagefind',
+  popover: {
+    title: '公告',
+    body: [
+      {
+        type: 'text',
+        content: 'QQ交流群：681489336 🎉🎉'
+      },
+      { type: 'text', content: '👇公众号👇---👇 微信 👇' },
+      {
+        type: 'image',
+        src: 'https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210'
+      },
+      {
+        type: 'text',
+        content: '欢迎大家加群&私信交流'
+      },
+      {
+        type: 'button',
+        content: '博客',
+        link: 'https://sugarat.top'
+      }
+    ],
+    duration: 0
+  }
 })
 
 export default defineConfig({

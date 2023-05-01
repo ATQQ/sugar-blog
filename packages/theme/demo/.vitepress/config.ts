@@ -32,6 +32,10 @@ const blogTheme = getThemeConfig({
   popover: {
     title: '公告',
     body: [
+      {
+        type: 'text',
+        content: 'QQ交流群：681489336 🎉🎉'
+      },
       { type: 'text', content: '👇公众号👇---👇 微信 👇' },
       {
         type: 'image',
@@ -39,7 +43,7 @@ const blogTheme = getThemeConfig({
       },
       {
         type: 'text',
-        content: '欢迎大家私信交流'
+        content: '欢迎大家加群&私信交流'
       },
       {
         type: 'button',
