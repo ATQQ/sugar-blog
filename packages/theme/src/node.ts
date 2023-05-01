@@ -63,8 +63,11 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
       }
 
       // 处理tags和categories,兼容历史文章
-      meta.categories = typeof meta.categories === 'string' ? [meta.categories] : meta.categories;
-      meta.tags = typeof meta.tags === 'string' ? [meta.tags] : meta.tags;
+      meta.categories =
+        typeof meta.categories === 'string'
+          ? [meta.categories]
+          : meta.categories
+      meta.tags = typeof meta.tags === 'string' ? [meta.tags] : meta.tags
       meta.tag = (meta.tag || []).concat([
         ...new Set([...(meta.categories || []), ...(meta.tags || [])])
       ])
@@ -164,13 +167,13 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
       },
       ...(cfg?.blog !== false
         ? {
-          sidebar: [
-            {
-              text: '',
-              items: []
-            }
-          ]
-        }
+            sidebar: [
+              {
+                text: '',
+                items: []
+              }
+            ]
+          }
         : undefined)
     },
     ...extraConfig
