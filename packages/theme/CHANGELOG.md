@@ -1,5 +1,9 @@
 # @sugarat/theme
 
+## 0.1.28
+### Patch Changes
+- fix: tag设置为字符串时展示异常
+
 ## 0.1.27
 ### Patch Changes
 - fix: element ui 分页组件展示异常

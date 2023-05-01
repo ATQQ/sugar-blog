@@ -68,9 +68,11 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
           ? [meta.categories]
           : meta.categories
       meta.tags = typeof meta.tags === 'string' ? [meta.tags] : meta.tags
-      meta.tag = (meta.tag || []).concat([
-        ...new Set([...(meta.categories || []), ...(meta.tags || [])])
-      ])
+      meta.tag = [meta.tag || []]
+        .flat()
+        .concat([
+          ...new Set([...(meta.categories || []), ...(meta.tags || [])])
+        ])
 
       // 获取摘要信息
       const wordCount = 100
