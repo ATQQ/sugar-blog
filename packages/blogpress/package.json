@@ -21,7 +21,7 @@
     "element-plus": "^2.3.4",
     "fast-glob": "^3.2.12",
     "gray-matter": "^4.0.3",
-    "vitepress": "1.0.0-alpha.74",
+    "vitepress": "1.0.0-alpha.75",
     "vue": "^3.2.45"
   },
   "devDependencies": {
