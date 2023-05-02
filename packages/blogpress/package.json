@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "sass": "^1.56.1",
-    "vite": "^3.2.4"
+    "vite": "^4.3.3"
   },
   "pnpm": {
     "peerDependencyRules": {
