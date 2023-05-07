@@ -7,8 +7,8 @@ import type { SiteConfig } from 'vitepress'
 import { formatDate } from './utils'
 import type { PagefindOption } from './type'
 
-export function getPagesData() {
-  const srcDir = process.argv.slice(2)?.[1] || '.'
+export function getPagesData(_srcDir?: string) {
+  const srcDir = _srcDir || process.argv.slice(2)?.[1] || '.'
   const files = glob.sync(`${srcDir}/**/*.md`, { ignore: ['node_modules'] })
 
   const data = files

@@ -118,6 +118,9 @@ like this below
 ![](https://img.cdn.sugarat.top/mdImg/MTY4MDkzNzI3MjQ3OQ==680937272479)
 
 ### Example 4：Search optimization
+
+#### 4.1 input word optimization
+
 [pagefind](https://pagefind.app/docs/multilingual/#specialized-languages) 目前对中文支持还不如英语完善，下面是官方的介绍
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY4MDkzNzQ4NjYxMg==680937486612)
@@ -140,6 +143,19 @@ pagefindPlugin({
 
 If you have a better implementation, welcome to share
 
+#### 4.2 Search result optimization
+You can turn off the built-in search results optimization
+
+Implement it yourself using the `filter` method
+```js
+pagefindPlugin({
+  resultOptimization: false,
+  filter(searchItem, idx, originArray) {
+    console.log(searchItem);
+    return !searchItem.route.includes('404') 
+  }
+})
+```
 ### Example 5: i18n
 [pagefind](https://pagefind.app/docs/multisite/#merging-multiple-languages) search results will only contain content in the same language as the current page (distinguished by the lang attribute of the page)
 
@@ -248,6 +264,14 @@ interface SearchConfig {
    * @see https://pagefind.app/docs/multilingual/#specialized-languages
    */
   customSearchQuery?: (input: string) => string
+  /**
+   * @default true
+   */
+  resultOptimization?: boolean
+  /**
+   * Customize the filtering schema
+   */
+  filter?: (searchItem: SearchItem, idx: number, array: SearchItem[]) => boolean
   /**
    * Search result Displays the date the document was last modified
    * @default true

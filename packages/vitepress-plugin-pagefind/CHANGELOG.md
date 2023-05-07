@@ -1,5 +1,12 @@
 # vitepress-plugin-pagefind
 
+## 0.2.4
+
+### Patch Changes
+
+- feat: support `filter` function process search results
+- fix: after use `srcDir`，result will empty
+
 ## 0.2.3
 
 ### Patch Changes

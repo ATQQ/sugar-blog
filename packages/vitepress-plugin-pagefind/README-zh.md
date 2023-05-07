@@ -118,6 +118,7 @@ export default defineConfig({
 ![](https://img.cdn.sugarat.top/mdImg/MTY4MDkzNzI3MjQ3OQ==680937272479)
 
 ### 示例 4：搜索优化
+#### 4.1 搜索词优化
 [pagefind](https://pagefind.app/docs/multilingual/#specialized-languages) 目前对中文支持还不如英语完善，下面是官方的介绍
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY4MDkzNzQ4NjYxMg==680937486612)
@@ -139,6 +140,19 @@ pagefindPlugin({
 | ![](https://img.cdn.sugarat.top/mdImg/MTY4MDkzODE4ODgwMQ==680938188801) | ![](https://img.cdn.sugarat.top/mdImg/MTY4MDkzODMzMzE1NA==680938333154) |
 
 如果你有更好的实现，欢迎分享
+
+#### 4.2 搜索结果优化
+可以关闭内置的搜索结果优化，使用`filter`方法自定义过滤行为
+
+```js
+pagefindPlugin({
+  resultOptimization: false,
+  filter(searchItem, idx, originArray) {
+    console.log(searchItem);
+    return !searchItem.route.includes('404') 
+  }
+})
+```
 
 ### 示例 5: 国际化
 [pagefind](https://pagefind.app/docs/multisite/#merging-multiple-languages) 搜索结果默认只会包含与当前页面语言一样的页面 (通过 `lang` 属性区分)
@@ -243,11 +257,20 @@ interface SearchConfig {
    */
   langReload?: boolean
   /**
-   * For some special languages.
-   * Customize the conversion of user input
+   * 针对一些特殊的语言
+   * 自定义用户输入内容的分词逻辑
    * @see https://pagefind.app/docs/multilingual/#specialized-languages
    */
   customSearchQuery?: (input: string) => string
+  /**
+   * 搜索结果优化
+   * @default true
+   */
+  resultOptimization?: boolean
+  /**
+   * 自定义搜索结果过滤规则
+   */
+  filter?: (searchItem: SearchItem, idx: number, array: SearchItem[]) => boolean
   /**
    * Search result Displays the date the document was last modified
    * @default true
