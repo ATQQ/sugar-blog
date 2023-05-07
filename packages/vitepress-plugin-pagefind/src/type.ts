@@ -13,6 +13,11 @@ export interface PagefindOption {
    */
   forceLanguage?: string
 }
+
+export interface SearchItem {
+  route: string
+  meta: Record<string, any>
+}
 export interface SearchConfig {
   /**
    * @default
@@ -48,6 +53,14 @@ export interface SearchConfig {
    * @see https://pagefind.app/docs/multilingual/#specialized-languages
    */
   customSearchQuery?: (input: string) => string
+  /**
+   * @default true
+   */
+  searchOptimization?: boolean
+  /**
+   * Customize the filtering schema
+   */
+  filter?: (searchItem: SearchItem, idx: number, array: SearchItem[]) => boolean
   /**
    * Search result Displays the date the document was last modified
    * @default true
