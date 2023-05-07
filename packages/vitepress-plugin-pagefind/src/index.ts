@@ -4,8 +4,6 @@ import { stringify } from 'javascript-stringify'
 import { pluginSiteConfig, getPagesData } from './node'
 import type { SearchConfig, PagefindOption } from './type'
 
-const docsData = getPagesData()
-
 export function pagefindPlugin(
   searchConfig: SearchConfig & PagefindOption = {}
 ): any {
@@ -62,6 +60,11 @@ export function pagefindPlugin(
     // 文章数据
     load(this, id) {
       if (id !== resolvedVirtualModuleId) return
+      const docsData = getPagesData(
+        resolveConfig.vitepress.srcDir
+          .replace(resolveConfig.vitepress.root, '')
+          .replace(/^\//, '')
+      )
       return `
       import { ref } from 'vue'
       export const docs = ref(${JSON.stringify(docsData)})
