@@ -56,7 +56,7 @@ export interface SearchConfig {
   /**
    * @default true
    */
-  searchOptimization?: boolean
+  resultOptimization?: boolean
   /**
    * Customize the filtering schema
    */

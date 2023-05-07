@@ -227,7 +227,7 @@ const inlineSearch = () => {
 }
 
 const searchOptimization = computed(
-  () => finalSearchConfig.value?.searchOptimization ?? true
+  () => finalSearchConfig.value?.resultOptimization ?? true
 )
 
 watch(
