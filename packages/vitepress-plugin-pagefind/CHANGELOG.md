@@ -4,8 +4,8 @@
 
 ### Patch Changes
 
-- feat: 支持自定义搜索结果过滤逻辑
-- fix: 使用`srcDir`后，无搜索结果展示
+- feat: support `filter` function process search results
+- fix: after use `srcDir`，result will empty
 
 ## 0.2.3
 
