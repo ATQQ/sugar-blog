@@ -32,7 +32,9 @@
             <Command.Group v-else :heading="headingText">
               <Command.Item
                 v-for="item in showSearchResult"
-                :data-value="withBase(item.route)"
+                :data-value="
+                  searchOptimization ? withBase(item.route) : item.route
+                "
                 :key="item.route"
                 @select="handleSelect"
               >
@@ -224,6 +226,10 @@ const inlineSearch = () => {
   })
 }
 
+const searchOptimization = computed(
+  () => finalSearchConfig.value?.searchOptimization ?? true
+)
+
 watch(
   () => searchWords.value,
   async () => {
@@ -243,7 +249,7 @@ watch(
             search.results.map((v: any) => v.data())
           )
           let newSearchResult = []
-          if (finalSearchConfig.value.searchOptimization ?? true) {
+          if (searchOptimization.value) {
             // 仅展示检索到的路由结果
             docs.value.forEach((v) => {
               const match = result.find((r) =>
@@ -268,6 +274,7 @@ watch(
               if (match) {
                 return {
                   ...match,
+                  route: r.url,
                   meta: {
                     ...match.meta,
                     description: r.excerpt
