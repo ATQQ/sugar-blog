@@ -93,7 +93,7 @@ importers:
         specifier: ^2.1.0
         version: 2.1.0(vue@3.2.47)
       '@sugarat/theme':
-        specifier: ^0.1.20
+        specifier: ^0.1.29
         version: link:../theme
       element-plus:
         specifier: ^2.3.4
