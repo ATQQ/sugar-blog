@@ -29,7 +29,7 @@ const inBrowser = typeof window !== 'undefined'
 
 export default {
   ...BlogTheme,
-  Layout: h(BlogTheme.Layout, homeProps),
+  Layout: h(BlogTheme.Layout as any, homeProps),
   enhanceApp: (ctx: EnhanceAppContext) => {
     const { app } = ctx
     app.component('redirectBtn', redirectBtn)

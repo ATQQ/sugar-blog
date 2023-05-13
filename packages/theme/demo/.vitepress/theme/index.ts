@@ -1,6 +1,7 @@
 import BlogTheme, { Theme } from '@sugarat/theme'
 import { ElMessage } from 'element-plus'
 import { h } from 'vue'
+import { enhanceAppWithTabs } from 'vitepress-plugin-tabs/client'
 
 const AIWords = [
   '无论多么沉重的负担，也不要忘记微笑；无论多么漫长的路程，也不要忘记坚持',
@@ -19,5 +20,9 @@ const homeProps: Theme.HomeConfig = {
 
 export default {
   ...BlogTheme,
-  Layout: h(BlogTheme.Layout, homeProps)
+  Layout: h(BlogTheme.Layout as any, homeProps),
+  enhanceApp(ctx: any) {
+    BlogTheme?.enhanceApp?.(ctx)
+    enhanceAppWithTabs(ctx.app)
+  }
 }
