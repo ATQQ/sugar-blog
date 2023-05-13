@@ -1,28 +1,41 @@
 # @sugarat/theme
 
-## 0.1.28
+## 0.1.29
+
 ### Patch Changes
-- fix: tag设置为字符串时展示异常
+
+- fix: 标题中的空格被自动移除
+- feat: 内置 [vitepress-plugin-tabs](https://www.npmjs.com/package/vitepress-plugin-tabs) 能力，使用见`主题配置 - 组件能力`
+
+## 0.1.28
+
+### Patch Changes
+
+- fix: tag 设置为字符串时展示异常
 
 ## 0.1.27
+
 ### Patch Changes
+
 - fix: element ui 分页组件展示异常
 
 ## 0.1.26
+
 ### Patch Changes
+
 - fix: 翻页后回到首页又回到开头
 
 ## 0.1.25
 
 ### Patch Changes
 
-- feat: 文章页支持tag展示和跳转
+- feat: 文章页支持 tag 展示和跳转
 - feat: 作者支持跳转外链
 - feat: 优化时间展示，支持单独控制显隐
-- feat: 支持通过配置控制Cover封面的展示
+- feat: 支持通过配置控制 Cover 封面的展示
 - feat: 支持文章封面展示
 - fix: 标签回退不生效
-- chore: 一些TODO更新
+- chore: 一些 TODO 更新
 - chore: 移动端首页卡片样式微调
 
 ## 0.1.24

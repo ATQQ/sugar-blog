@@ -5,6 +5,7 @@ import fs from 'fs'
 import { execSync, spawn, spawnSync } from 'child_process'
 import path from 'path'
 import type { SiteConfig, UserConfig } from 'vitepress'
+import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
 import { formatDate } from './utils/index'
 import type { Theme } from './composables/config/index'
 
@@ -161,6 +162,13 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
       ]
     }
   }
+  if (cfg?.tabs) {
+    extraConfig.markdown = {
+      config(md: any) {
+        tabsMarkdownPlugin(md)
+      }
+    }
+  }
   return {
     themeConfig: {
       blog: {
@@ -190,7 +198,7 @@ export function getDefaultTitle(content: string) {
         return str.startsWith('# ')
       })
       ?.slice(2)
-      .replace(/[\s]/g, '') || ''
+      .replace(/^\s+|\s+$/g, '') || ''
   return title
 }
 
@@ -295,3 +303,5 @@ export function defineConfig(config: UserConfig<Theme.Config>) {
   }
   return config
 }
+
+export { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'

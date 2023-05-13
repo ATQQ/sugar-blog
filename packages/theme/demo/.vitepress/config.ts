@@ -59,7 +59,8 @@ const blogTheme = getThemeConfig({
     placeholder: 'Search Docs',
     emptyText: 'No results found',
     heading: 'Total: {{searchResult}} search results.'
-  }
+  },
+  tabs: true
 })
 const extraHead: any =
   process.env.NODE_ENV === 'production'
@@ -94,6 +95,9 @@ export default defineConfig({
       alias: {
         '@sugarat/theme': path.join(__dirname, '../../src/index.ts')
       }
+    },
+    optimizeDeps: {
+      exclude: ['vitepress-plugin-tabs']
     }
   },
   themeConfig: {

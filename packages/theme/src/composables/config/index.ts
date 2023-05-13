@@ -196,6 +196,11 @@ export namespace Theme {
     popover?: Popover
     friend?: FriendLink[]
     authorList?: Omit<FriendLink, 'avatar'>[]
+    /**
+     * 启用 [vitepress-plugin-tabs](https://www.npmjs.com/package/vitepress-plugin-tabs)
+     * @default false
+     */
+    tabs: boolean
   }
 
   export interface Config extends DefaultTheme.Config {
