@@ -190,7 +190,7 @@ export function getDefaultTitle(content: string) {
         return str.startsWith('# ')
       })
       ?.slice(2)
-      .replace(/[\s]/g, '') || ''
+      .replace(/^\s+|\s+$/g, '') || ''
   return title
 }
 
