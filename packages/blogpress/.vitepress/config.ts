@@ -56,7 +56,8 @@ const blogTheme = getThemeConfig({
   ],
   search: false,
   recommend: {
-    showSelf: true
+    showSelf: true,
+    nextText: '下一页'
   },
   authorList: [
     {
