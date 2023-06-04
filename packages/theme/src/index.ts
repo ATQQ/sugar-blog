@@ -12,13 +12,15 @@ import { withConfigProvider } from './composables/config/blog'
 
 // page
 import TimelinePage from './components/TimelinePage.vue'
+import UserWorksPage from './components/UserWorks.vue'
 
 export const BlogTheme: Theme = {
   ...DefaultTheme,
   Layout: withConfigProvider(BlogApp),
   enhanceApp(ctx) {
-    // TODO: 优化到自定义组件中注册
+    // @ts-ignore
     ctx.app.component('TimelinePage', TimelinePage)
+    ctx.app.component('UserWorksPage', UserWorksPage)
   }
 }
 

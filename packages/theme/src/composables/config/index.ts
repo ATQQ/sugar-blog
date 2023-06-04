@@ -153,6 +153,36 @@ export namespace Theme {
     url: string
     avatar: string
   }
+
+  export interface UserWork {
+    title: string
+    description: string
+    time: {
+      start: string
+      end?: string
+      lastupdate?: string
+    }
+    status?:
+      | 'active'
+      | 'negative'
+      | 'off'
+      | {
+          text: string
+        }
+    url?: string
+    github?: string
+    cover?:
+      | string
+      | string[]
+      | {
+          urls: string[]
+          layout?: 'swiper' | 'list' | 'card'
+        }
+    links?: {
+      title: string
+      url: string
+    }[]
+  }
   export type SearchConfig =
     | boolean
     | 'pagefind'
@@ -200,7 +230,8 @@ export namespace Theme {
      * 启用 [vitepress-plugin-tabs](https://www.npmjs.com/package/vitepress-plugin-tabs)
      * @default false
      */
-    tabs: boolean
+    tabs?: boolean
+    works?: UserWork[]
   }
 
   export interface Config extends DefaultTheme.Config {

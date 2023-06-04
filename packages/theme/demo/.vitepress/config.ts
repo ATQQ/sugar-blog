@@ -60,7 +60,47 @@ const blogTheme = getThemeConfig({
     emptyText: 'No results found',
     heading: 'Total: {{searchResult}} search results.'
   },
-  tabs: true
+  // TODO: tabs bug?
+  tabs: true,
+  works: [
+    {
+      title: '博客主题 @sugarat/theme',
+      description: '基于 vitepress 实现的博客主题',
+      time: {
+        start: '2021-03-01'
+      },
+      status: 'active',
+      url: 'https://theme.sugarat.top'
+    },
+    {
+      title: '博客主题 @sugarat/theme',
+      description: '基于 vitepress 实现的博客主题',
+      time: {
+        start: '2021-04-01',
+        lastupdate: '2021-04-01'
+      },
+      status: 'active',
+      github: 'https://github.com/ATQQ/sugar-blog/tree/master/packages/theme',
+      links: [
+        {
+          title: '123',
+          url: 'https://theme.sugarat.top'
+        },
+        {
+          title: '123',
+          url: 'https://theme.sugarat.top'
+        }
+      ]
+    },
+    {
+      title: '博客主题 @sugarat/theme',
+      description: '基于 vitepress 实现的博客主题',
+      time: {
+        start: '2022-03-01'
+      },
+      status: 'active'
+    }
+  ]
 })
 const extraHead: any =
   process.env.NODE_ENV === 'production'
