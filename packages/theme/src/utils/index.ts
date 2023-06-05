@@ -89,3 +89,52 @@ export function chineseSearchOptimize(input: string) {
     .replace(/\s+/g, ' ')
     .trim()
 }
+
+/**
+ * 根据Github地址跨域获取最后更新时间
+ * @param url
+ * @returns
+ */
+export function getGithubUpdateTime(url: string) {
+  // 提取Github url中的用户名和仓库名
+  const match = url.match(/github.com\/(.+)/)
+  if (!match?.[1]) {
+    return Promise.reject(new Error('Github地址格式错误'))
+  }
+  const [owner, repo] = match[1].split('/')
+  return fetch(`https://api.github.com/repos/${owner}/${repo}`)
+    .then((res) => res.json())
+    .then((res) => {
+      return res.updated_at
+    })
+}
+
+/**
+ * 跨域获取某个Github仓库的指定目录最后更新时间
+ */
+export function getGithubDirUpdateTime(url: string, dir: string) {
+  // 提取Github url中的用户名和仓库名
+  const match = url.match(/github.com\/(.+)/)
+  if (!match?.[1]) {
+    return Promise.reject(new Error('Github地址格式错误'))
+  }
+  const [owner, repo] = match[1].split('/')
+  return fetch(
+    `https://api.github.com/repos/${owner}/${repo}/contents/${dir}?ref=master`
+  )
+    .then((res) => res.json())
+    .then((res) => {
+      return res[0].commit.committer.date
+    })
+}
+
+// 解析页面获取最后更新时间（跨域）
+// export async function getGithubUpdateTime(url: string) {
+//   const res = await fetch(url)
+//   const html = await res.text()
+//   const match = html.match(/<relative-time datetime="(.+?)"/)
+//   if (match) {
+//     return match[1]
+//   }
+//   return ''
+// }

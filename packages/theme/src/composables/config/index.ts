@@ -170,7 +170,14 @@ export namespace Theme {
           text: string
         }
     url?: string
-    github?: string
+    github?:
+      | string
+      | {
+          owner: string
+          repo: string
+          branch?: string
+          path?: string
+        }
     cover?:
       | string
       | string[]
@@ -182,6 +189,8 @@ export namespace Theme {
       title: string
       url: string
     }[]
+    tags?: string[]
+    top?: number
   }
   export type SearchConfig =
     | boolean

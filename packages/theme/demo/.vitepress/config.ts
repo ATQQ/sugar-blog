@@ -76,11 +76,10 @@ const blogTheme = getThemeConfig({
       title: '博客主题 @sugarat/theme',
       description: '基于 vitepress 实现的博客主题',
       time: {
-        start: '2021-04-01',
-        lastupdate: '2021-04-01'
+        start: '2021-04-01'
       },
       status: 'active',
-      github: 'https://github.com/ATQQ/sugar-blog/tree/master/packages/theme',
+      github: 'https://github.com/ATQQ/sugar-blog',
       links: [
         {
           title: '123',
