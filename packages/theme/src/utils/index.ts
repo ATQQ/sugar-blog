@@ -112,19 +112,23 @@ export function getGithubUpdateTime(url: string) {
 /**
  * 跨域获取某个Github仓库的指定目录最后更新时间
  */
-export function getGithubDirUpdateTime(url: string, dir: string) {
-  // 提取Github url中的用户名和仓库名
-  const match = url.match(/github.com\/(.+)/)
-  if (!match?.[1]) {
-    return Promise.reject(new Error('Github地址格式错误'))
+export function getGithubDirUpdateTime(
+  owner: string,
+  repo: string,
+  dir?: string,
+  branch?: string
+) {
+  let baseUrl = `https://api.github.com/repos/${owner}/${repo}/commits`
+  if (branch) {
+    baseUrl += `/${branch}`
   }
-  const [owner, repo] = match[1].split('/')
-  return fetch(
-    `https://api.github.com/repos/${owner}/${repo}/contents/${dir}?ref=master`
-  )
+  if (dir) {
+    baseUrl += `?path=${dir}`
+  }
+  return fetch(baseUrl)
     .then((res) => res.json())
     .then((res) => {
-      return res[0].commit.committer.date
+      return [res].flat()[0].commit.committer.date
     })
 }
 

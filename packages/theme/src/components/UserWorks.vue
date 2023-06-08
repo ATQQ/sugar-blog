@@ -133,8 +133,12 @@
 
 <script lang="ts" setup>
 import { ElImage } from 'element-plus'
-import { reactive, watch, watchEffect } from 'vue'
-import { getGithubUpdateTime, formatDate } from '../utils'
+import { reactive, ref, watch, watchEffect } from 'vue'
+import {
+  getGithubUpdateTime,
+  formatDate,
+  getGithubDirUpdateTime
+} from '../utils'
 import { useUserWorks } from '../composables/config/blog'
 import { Theme } from '../composables/config'
 
@@ -171,23 +175,48 @@ watch(
   { immediate: true }
 )
 
+const init = ref(true)
 // 更新时间信息
 watchEffect(() => {
-  if (workList.length) {
+  if (workList.length && init.value) {
+    init.value = false
     workList.forEach((data) => {
       // 接口获取最后更新时间
       if (!data.time.lastupdate && data.github) {
         data.time.lastupdate = '获取中...'
-        getGithubUpdateTime(data.github)
-          .then((time) => {
-            data.time = {
-              ...data.time,
-              lastupdate: formatDate(time, 'yyyy-MM-dd')
-            }
-          })
-          .catch(() => {
-            data.time.lastupdate = '地址解析失败'
-          })
+        const { github } = data
+        if (typeof github === 'string') {
+          getGithubUpdateTime(github)
+            .then((time) => {
+              data.time = {
+                ...data.time,
+                lastupdate: formatDate(time, 'yyyy-MM-dd')
+              }
+            })
+            .catch(() => {
+              data.time.lastupdate = '地址解析失败'
+            })
+        } else {
+          const { owner, repo, path, branch } = github
+          // 拼接Github链接
+          let githubUrl = `https://github.com/${owner}/${repo}`
+          if (path) {
+            githubUrl += `/tree/${branch || 'master'}/${path}`
+          } else {
+            githubUrl += `/tree/${branch}`
+          }
+          data.github = githubUrl
+          getGithubDirUpdateTime(owner, repo, path ?? '', branch)
+            .then((time) => {
+              data.time = {
+                ...data.time,
+                lastupdate: formatDate(time, 'yyyy-MM-dd')
+              }
+            })
+            .catch(() => {
+              data.time.lastupdate = '地址解析失败'
+            })
+        }
       }
     })
   }
