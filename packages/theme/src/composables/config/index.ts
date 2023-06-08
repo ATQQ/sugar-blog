@@ -157,11 +157,13 @@ export namespace Theme {
   export interface UserWork {
     title: string
     description: string
-    time: {
-      start: string
-      end?: string
-      lastupdate?: string
-    }
+    time:
+      | string
+      | {
+          start: string
+          end?: string
+          lastupdate?: string
+        }
     status?:
       | 'active'
       | 'negative'
@@ -207,6 +209,11 @@ export namespace Theme {
         mode?: boolean | 'pagefind'
       }
 
+  export interface UserWorks {
+    title: string
+    description?: string
+    list: UserWork[]
+  }
   export interface BlogConfig {
     blog?: false
     pagesData: PageData[]
@@ -240,7 +247,7 @@ export namespace Theme {
      * @default false
      */
     tabs?: boolean
-    works?: UserWork[]
+    works?: UserWorks
   }
 
   export interface Config extends DefaultTheme.Config {

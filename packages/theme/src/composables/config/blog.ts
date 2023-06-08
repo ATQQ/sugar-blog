@@ -19,7 +19,7 @@ const activeTagSymbol: InjectionKey<Ref<Theme.activeTag>> = Symbol('active-tag')
 const currentPageNum: InjectionKey<Ref<number>> = Symbol('home-page-num')
 const homeConfigSymbol: InjectionKey<Theme.HomeConfig> = Symbol('home-config')
 
-const userWorks: InjectionKey<Ref<Theme.UserWork[]>> = Symbol('user-works')
+const userWorks: InjectionKey<Ref<Theme.UserWorks>> = Symbol('user-works')
 
 export function withConfigProvider(App: Component) {
   return defineComponent({
@@ -36,7 +36,16 @@ export function withConfigProvider(App: Component) {
       const { theme } = useData()
       const config = computed(() => resolveConfig(theme.value))
       provide(configSymbol, config)
-      provide(userWorks, ref(config.value.blog?.works || []))
+      provide(
+        userWorks,
+        ref(
+          config.value.blog?.works || {
+            title: '',
+            description: '',
+            list: []
+          }
+        )
+      )
 
       const activeTag = ref<Theme.activeTag>({
         label: '',
