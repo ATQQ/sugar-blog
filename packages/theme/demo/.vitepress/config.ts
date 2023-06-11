@@ -60,7 +60,6 @@ const blogTheme = getThemeConfig({
     emptyText: 'No results found',
     heading: 'Total: {{searchResult}} search results.'
   },
-  // TODO: tabs bug?
   tabs: true
   // works: {
   //   title: '个人的一些项目/线上作品',
