@@ -1,7 +1,7 @@
 <template>
   <div class="user-works-page">
-    <h1>个人的一些项目/线上作品</h1>
-    <p class="description">描述信息</p>
+    <h1>{{ works.title }}</h1>
+    <p v-if="works.description" class="description">{{ works.description }}</p>
     <!-- TODO：侧导筛选时间 -->
     <!-- 过滤，可吸顶 -->
     <div class="filter">
@@ -41,15 +41,15 @@
                 ></path>
               </svg>
             </span>
-            <span>{{ work.time.start }}</span>
-            <span v-if="work.time.end"> - {{ work.time.end }}</span>
+            <span>{{ work.startTime }}</span>
+            <span v-if="work.endTime"> - {{ work.endTime }}</span>
           </div>
           <!-- GitHub links-->
           <div class="links" v-if="work.github">
             <a
               class="github-link"
               v-if="work.github"
-              :href="work.github"
+              :href="(work.github as string)"
               target="_blank"
               rel="noopener"
             >
@@ -65,8 +65,8 @@
                   ></path>
                 </svg>
               </i>
-              <span class="lastupdate" v-if="work.time.lastupdate"
-                >最后更新时间：{{ work.time.lastupdate }}</span
+              <span class="lastupdate" v-if="work.lastUpdate"
+                >最后更新时间：{{ work.lastUpdate }}</span
               >
             </a>
           </div>
@@ -124,8 +124,7 @@
           </div>
           <!-- card -->
         </div>
-        <!-- TODO：支持HTML复杂内容 -->
-        <div class="description">很不错呀</div>
+        <div class="description" v-html="work.description"></div>
       </div>
     </div>
   </div>
@@ -146,6 +145,9 @@ const works = useUserWorks()
 const workList = reactive<
   (Theme.UserWork & {
     year?: string | undefined
+    startTime: string
+    lastUpdate?: string
+    endTime?: string
   })[]
 >([])
 
@@ -153,13 +155,33 @@ const workList = reactive<
 watch(
   works,
   (val) => {
-    const sortDate = [...val]
+    const sortDate = [...val.list].map((v) => {
+      const { time } = v
+      const metaInfo =
+        typeof time === 'string'
+          ? {
+              startTime: time,
+              endTime: '',
+              lastUpdate: ''
+            }
+          : {
+              startTime: time.start,
+              endTime: time.end,
+              lastUpdate: time.lastupdate
+            }
+
+      return {
+        ...v,
+        ...metaInfo
+      }
+    })
     // 数据排序
-    sortDate.sort((a, b) => +new Date(b.time.start) - +new Date(a.time.start))
+    sortDate.sort((a, b) => +new Date(b.startTime) - +new Date(a.startTime))
 
     // 数据分组
     const groupDate = sortDate.reduce((prev, cur) => {
-      const year = new Date(cur.time.start).getFullYear()
+      const { startTime } = cur
+      const year = new Date(startTime).getFullYear()
       const data = { ...cur }
       if (!prev[year]) {
         prev[year] = []
@@ -169,7 +191,7 @@ watch(
       }
       prev[year].push(data)
       return prev
-    }, {} as Record<string, (Theme.UserWork & { year?: string })[]>)
+    }, {} as Record<string, (Theme.UserWork & { year?: string; startTime: string })[]>)
     workList.push(...Object.values(groupDate).reverse().flat())
   },
   { immediate: true }
@@ -182,19 +204,16 @@ watchEffect(() => {
     init.value = false
     workList.forEach((data) => {
       // 接口获取最后更新时间
-      if (!data.time.lastupdate && data.github) {
-        data.time.lastupdate = '获取中...'
+      if (!data.lastUpdate && data.github) {
+        data.lastUpdate = '获取中...'
         const { github } = data
         if (typeof github === 'string') {
           getGithubUpdateTime(github)
             .then((time) => {
-              data.time = {
-                ...data.time,
-                lastupdate: formatDate(time, 'yyyy-MM-dd')
-              }
+              data.lastUpdate = formatDate(time, 'yyyy-MM-dd')
             })
             .catch(() => {
-              data.time.lastupdate = '地址解析失败'
+              data.lastUpdate = '地址解析失败'
             })
         } else {
           const { owner, repo, path, branch } = github
@@ -208,13 +227,10 @@ watchEffect(() => {
           data.github = githubUrl
           getGithubDirUpdateTime(owner, repo, path ?? '', branch)
             .then((time) => {
-              data.time = {
-                ...data.time,
-                lastupdate: formatDate(time, 'yyyy-MM-dd')
-              }
+              data.lastUpdate = formatDate(time, 'yyyy-MM-dd')
             })
             .catch(() => {
-              data.time.lastupdate = '地址解析失败'
+              data.lastUpdate = '地址解析失败'
             })
         }
       }

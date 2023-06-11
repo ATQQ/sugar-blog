@@ -1,5 +1,5 @@
 import type { ElButton } from 'element-plus'
-import { DefaultTheme } from 'vitepress'
+import type { DefaultTheme } from 'vitepress'
 
 export namespace BlogPopover {
   export interface Title {
@@ -32,6 +32,11 @@ export namespace BlogPopover {
 }
 
 export namespace Theme {
+  export type ThemeableImage =
+    | string
+    | { src: string; alt?: string }
+    | { light: string; dark: string; alt?: string }
+
   export interface PageMeta {
     title: string
     date: string
@@ -151,7 +156,7 @@ export namespace Theme {
     nickname: string
     des: string
     url: string
-    avatar: string
+    avatar: ThemeableImage
   }
 
   export interface UserWork {
