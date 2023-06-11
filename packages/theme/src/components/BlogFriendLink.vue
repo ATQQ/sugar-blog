@@ -8,7 +8,7 @@
     <ol class="friend-list">
       <li v-for="v in friendList" :key="v.nickname">
         <a :href="v.url" target="_blank">
-          <el-avatar :size="50" :src="v.avatar" :alt="v.nickname" />
+          <el-avatar :size="50" :src="v.avatar" :alt="v.alt" />
           <div>
             <span class="nickname">{{ v.nickname }}</span>
             <p class="des">{{ v.des }}</p>
@@ -24,30 +24,22 @@ import { ElAvatar } from 'element-plus'
 import { useDark } from '@vueuse/core'
 import { computed } from 'vue'
 import { useBlogConfig } from '../composables/config/blog'
+import { getImageUrl } from '../utils'
 
 const isDark = useDark({
   storageKey: 'vitepress-theme-appearance'
 })
+
 const { friend } = useBlogConfig()
 const friendList = computed(() => {
   return friend?.map((v) => {
     const { avatar, nickname } = v
-    let avatarUrl = ''
+    const avatarUrl = getImageUrl(avatar, isDark.value)
     let alt = nickname
-    if (typeof avatar === 'string') {
-      avatarUrl = avatar
-    } else {
-      alt = avatar.alt ?? alt
-      // @ts-ignore
-      if (avatar?.src) {
-        avatarUrl = avatar.src
-      } else  if (isDark.value) {
-        avatarUrl = avatar.dark
-      } else {
-        avatarUrl = avatar.light
-      }
-      }
+    if (typeof avatar !== 'string') {
+      alt = avatar.alt || ''
     }
+
     return {
       ...v,
       avatar: avatarUrl,

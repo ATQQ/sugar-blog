@@ -655,14 +655,48 @@ const blogTheme = getThemeConfig({
 ```
 
 ```ts [type]
+type ThemeableImage =
+  | string
+  | { src: string; alt?: string }
+  | { light: string; dark: string; alt?: string }
+
 interface FriendLink {
   nickname: string
   des: string
   url: string
-  avatar: string
+  avatar: ThemeableImage
 }
 ```
 :::
+
+同时也支持设置logo `alt` 信息（默认取 nickname）
+
+```ts
+const blogTheme = getThemeConfig({
+  friend: [
+    {
+      // 省略其他配置项 
+      avatar: {
+        // 单独设置 alt
+        alt: '粥里有勺糖23',
+        src:
+          'https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTI2NzY1Ng==674995267656'
+      }
+    },
+    {
+      // 省略其他配置项 
+      avatar: {
+        // 暗黑模式下使用不一样的logo
+        dark:
+          'https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTI2NzY1Ng==674995267656',
+        light:
+          'https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTI2NzY1Ng==674995267656'
+      }
+    }
+  ]
+})
+
+```
 ## authorList
 用于设置文章页作者信息跳转相关信息，默认情况下`author`仅做展示
 

@@ -1,3 +1,5 @@
+import type { ThemeableImage } from '../composables/config'
+
 export function formatDate(d: any, fmt = 'yyyy-MM-dd hh:mm:ss') {
   if (!(d instanceof Date)) {
     d = new Date(d)
@@ -143,7 +145,10 @@ export function getGithubDirUpdateTime(
 //   return ''
 // }
 
-function getImageUrl(image: ThemeableImage, isDarkMode: boolean): string {
+export function getImageUrl(
+  image: ThemeableImage,
+  isDarkMode: boolean
+): string {
   if (typeof image === 'string') {
     // 如果 ThemeableImage 类型为 string，则直接返回字符串
     return image

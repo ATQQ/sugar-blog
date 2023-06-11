@@ -31,12 +31,12 @@ export namespace BlogPopover {
   export type Value = Title | Text | Image | Button
 }
 
-export namespace Theme {
-  export type ThemeableImage =
-    | string
-    | { src: string; alt?: string }
-    | { light: string; dark: string; alt?: string }
+export type ThemeableImage =
+  | string
+  | { src: string; alt?: string }
+  | { light: string; dark: string; alt?: string }
 
+export namespace Theme {
   export interface PageMeta {
     title: string
     date: string
