@@ -1,5 +1,11 @@
 # @sugarat/theme
 
+## 0.1.30
+
+### Patch Changes
+
+- feat: friend link 支持设置 alt
+
 ## 0.1.29
 
 ### Patch Changes
