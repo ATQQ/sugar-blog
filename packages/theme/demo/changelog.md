@@ -12,6 +12,13 @@ tag: 日志
 ```sh
 pnpm up @sugarat/theme
 ```
+
+## 0.1.30 (2023/06/11)
+
+### Patch Changes
+
+- feat: friend link 支持设置图片的 `alt`
+
 ## 0.1.29 (2023/05/13)
 
 ### Patch Changes

@@ -1,5 +1,5 @@
 import type { ElButton } from 'element-plus'
-import { DefaultTheme } from 'vitepress'
+import type { DefaultTheme } from 'vitepress'
 
 export namespace BlogPopover {
   export interface Title {
@@ -30,6 +30,11 @@ export namespace BlogPopover {
 
   export type Value = Title | Text | Image | Button
 }
+
+export type ThemeableImage =
+  | string
+  | { src: string; alt?: string }
+  | { light: string; dark: string; alt?: string }
 
 export namespace Theme {
   export interface PageMeta {
@@ -151,7 +156,48 @@ export namespace Theme {
     nickname: string
     des: string
     url: string
-    avatar: string
+    avatar: ThemeableImage
+  }
+
+  export interface UserWork {
+    title: string
+    description: string
+    time:
+      | string
+      | {
+          start: string
+          end?: string
+          lastupdate?: string
+        }
+    status?:
+      | 'active'
+      | 'negative'
+      | 'off'
+      | {
+          text: string
+        }
+    url?: string
+    github?:
+      | string
+      | {
+          owner: string
+          repo: string
+          branch?: string
+          path?: string
+        }
+    cover?:
+      | string
+      | string[]
+      | {
+          urls: string[]
+          layout?: 'swiper' | 'list' | 'card'
+        }
+    links?: {
+      title: string
+      url: string
+    }[]
+    tags?: string[]
+    top?: number
   }
   export type SearchConfig =
     | boolean
@@ -168,6 +214,11 @@ export namespace Theme {
         mode?: boolean | 'pagefind'
       }
 
+  export interface UserWorks {
+    title: string
+    description?: string
+    list: UserWork[]
+  }
   export interface BlogConfig {
     blog?: false
     pagesData: PageData[]
@@ -200,7 +251,8 @@ export namespace Theme {
      * 启用 [vitepress-plugin-tabs](https://www.npmjs.com/package/vitepress-plugin-tabs)
      * @default false
      */
-    tabs: boolean
+    tabs?: boolean
+    works?: UserWorks
   }
 
   export interface Config extends DefaultTheme.Config {

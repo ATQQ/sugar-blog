@@ -1,3 +1,5 @@
+import type { ThemeableImage } from '../composables/config'
+
 export function formatDate(d: any, fmt = 'yyyy-MM-dd hh:mm:ss') {
   if (!(d instanceof Date)) {
     d = new Date(d)
@@ -88,4 +90,76 @@ export function chineseSearchOptimize(input: string) {
     .replace(/[\u4e00-\u9fa5]/g, ' $& ')
     .replace(/\s+/g, ' ')
     .trim()
+}
+
+/**
+ * 根据Github地址跨域获取最后更新时间
+ * @param url
+ * @returns
+ */
+export function getGithubUpdateTime(url: string) {
+  // 提取Github url中的用户名和仓库名
+  const match = url.match(/github.com\/(.+)/)
+  if (!match?.[1]) {
+    return Promise.reject(new Error('Github地址格式错误'))
+  }
+  const [owner, repo] = match[1].split('/')
+  return fetch(`https://api.github.com/repos/${owner}/${repo}`)
+    .then((res) => res.json())
+    .then((res) => {
+      return res.updated_at
+    })
+}
+
+/**
+ * 跨域获取某个Github仓库的指定目录最后更新时间
+ */
+export function getGithubDirUpdateTime(
+  owner: string,
+  repo: string,
+  dir?: string,
+  branch?: string
+) {
+  let baseUrl = `https://api.github.com/repos/${owner}/${repo}/commits`
+  if (branch) {
+    baseUrl += `/${branch}`
+  }
+  if (dir) {
+    baseUrl += `?path=${dir}`
+  }
+  return fetch(baseUrl)
+    .then((res) => res.json())
+    .then((res) => {
+      return [res].flat()[0].commit.committer.date
+    })
+}
+
+// 解析页面获取最后更新时间（跨域）
+// export async function getGithubUpdateTime(url: string) {
+//   const res = await fetch(url)
+//   const html = await res.text()
+//   const match = html.match(/<relative-time datetime="(.+?)"/)
+//   if (match) {
+//     return match[1]
+//   }
+//   return ''
+// }
+
+export function getImageUrl(
+  image: ThemeableImage,
+  isDarkMode: boolean
+): string {
+  if (typeof image === 'string') {
+    // 如果 ThemeableImage 类型为 string，则直接返回字符串
+    return image
+  }
+  if ('src' in image) {
+    // 如果 ThemeableImage 类型是一个对象，并且对象有 src 属性，则返回 src 属性对应的字符串
+    return image.src
+  }
+  if ('light' in image && 'dark' in image) {
+    // 如果 ThemeableImage 类型是一个对象，并且对象同时有 light 和 dark 属性，则根据 isDarkMode 返回对应的 URL
+    return isDarkMode ? image.dark : image.light
+  } // 如果 ThemeableImage 类型不是上述情况，则返回空字符串
+  return ''
 }

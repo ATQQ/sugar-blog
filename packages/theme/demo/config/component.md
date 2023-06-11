@@ -78,8 +78,7 @@ export default defineConfig({
 ```
 :::
 
-
-简答的使用方式如下
+简单的使用方式如下
 
 ```md
 :::=tabs
