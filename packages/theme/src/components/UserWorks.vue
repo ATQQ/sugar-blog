@@ -1,24 +1,29 @@
 <template>
-  <div class="user-works-page">
-    <h1>{{ works.title }}</h1>
-    <p v-if="works.description" class="description">{{ works.description }}</p>
-    <!-- TODO：侧导筛选时间 -->
-    <!-- 过滤，可吸顶 -->
-    <div class="filter">
-      <!-- 时间： -->
-      <div></div>
-      <!-- TODO: tags -->
-      <div></div>
+  <div class="user-works-page VPDoc">
+    <div class="aside-container">
+      <!-- TODO:过滤，可吸顶 -->
+      <div class="filter">
+        <!-- 时间： -->
+        <div></div>
+        <!-- TODO: tags -->
+        <div></div>
+      </div>
     </div>
     <!-- 作品列表 -->
     <div class="works">
+      <h1>{{ works.title }}</h1>
+      <p v-if="works.description" class="description">
+        {{ works.description }}
+      </p>
       <!-- 标题，描述信息，时间，线上链接，代码仓库，示例图片（几张，多种展示样式支持） -->
       <div class="work" v-for="(work, idx) in workList" :key="idx">
         <!-- 大日期标题 -->
-        <!-- TODO: 支持锚点 -->
-        <h2 v-if="work.year">{{ work.year }}</h2>
+        <h2 :id="`work_${work.year}`" v-if="work.year">
+          <a :href="`#work_${work.year}`">{{ work.year }}</a>
+        </h2>
         <!-- 作品标题 -->
-        <h3 class="title">
+        <h3 class="title" :id="slugify(work.title)">
+          <a class="pin" :href="'#' + slugify(work.title)"></a>
           <a v-if="work.url" rel="noopener" target="_blank" :href="work.url">{{
             work.title
           }}</a>
@@ -127,19 +132,50 @@
         <div class="description" v-html="work.description"></div>
       </div>
     </div>
+    <div class="aside-container">
+      <div class="aside-outline-container">
+        <VPDocAsideOutline />
+      </div>
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ElImage } from 'element-plus'
+import VPDocAsideOutline from 'vitepress/dist/client/theme-default/components/VPDocAsideOutline.vue'
 import { reactive, ref, watch, watchEffect } from 'vue'
+import { slugify } from '@mdit-vue/shared'
 import {
   getGithubUpdateTime,
   formatDate,
   getGithubDirUpdateTime
 } from '../utils'
-import { useUserWorks } from '../composables/config/blog'
+import {
+  useUserWorks,
+  useActiveAnchor,
+  useAutoUpdateAnchor
+} from '../composables/config/blog'
 import { Theme } from '../composables/config'
+
+const currentAnchor = useAutoUpdateAnchor()
+// 更新锚点的时候更新 url 中的 hash
+watch(
+  () => currentAnchor.id,
+  (val) => {
+    if (val) {
+      window.history.replaceState(null, '', `#${val}`)
+    }
+  }
+)
+const mountActiveAnchorEl = useActiveAnchor()
+watch(mountActiveAnchorEl, () => {
+  const { value } = mountActiveAnchorEl
+  if (value) {
+    value.scroll({
+      behavior: 'smooth'
+    })
+  }
+})
 
 const works = useUserWorks()
 const workList = reactive<
@@ -251,7 +287,9 @@ const covers = [
 
 <style lang="scss" scoped>
 .user-works-page {
-  max-width: 900px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
   margin: 20px auto;
   padding: 16px;
   h1 {
@@ -259,7 +297,7 @@ const covers = [
     font-weight: bold;
   }
   .description {
-    margin-top: 10px;
+    margin-top: 16px;
     color: #999;
     font-size: 16px;
   }
@@ -268,16 +306,53 @@ const covers = [
     color: var(--vp-c-brand);
   }
 }
+.works-container {
+  display: flex;
+  justify-content: center;
+}
 .work {
+  max-width: 900px;
+
   h2 {
     padding-top: 24px;
     line-height: 32px;
     font-size: 24px;
+    &:hover {
+      a {
+        &::before {
+          opacity: 1;
+        }
+      }
+    }
+    a {
+      position: relative;
+      &::before {
+        position: absolute;
+        left: -16px;
+        opacity: 0;
+        content: var(--vp-header-anchor-symbol);
+      }
+    }
   }
   h3 {
     margin: 32px 0 0;
     line-height: 28px;
     font-size: 20px;
+    position: relative;
+    &.title > a.pin {
+      position: absolute;
+      left: -16px;
+      &::before {
+        left: -16px;
+        opacity: 0;
+        content: var(--vp-header-anchor-symbol);
+      }
+    }
+    &:hover > a.pin {
+      &::before {
+        opacity: 1;
+      }
+    }
   }
   .info {
     display: flex;
@@ -321,6 +396,25 @@ const covers = [
       }
     }
   }
+}
+.aside-container {
+  display: none;
+  flex: 1;
+  padding-left: 32px;
+  width: 100%;
+  max-width: 256px;
+}
+@media screen and (min-width: 960px) {
+  .aside-container {
+    display: block;
+  }
+}
+.aside-outline-container {
+  position: sticky;
+  top: calc(
+    var(--vp-nav-height) + var(--vp-layout-top-height, 0px) +
+      var(--vp-doc-top-height, 0px) + 32px
+  );
 }
 .lastupdate {
   color: var(--vp-c-text-1);

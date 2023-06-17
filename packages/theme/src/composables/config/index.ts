@@ -60,12 +60,13 @@ export namespace Theme {
      * 手动控制相关文章列表的顺序
      */
     recommend?: number | false
-    // TODO: 待开发
     /**
+     * TODO: 待开发
      * 时间线
      */
     timeline: string
     /**
+     * TODO: 待开发
      * 专栏&合集
      */
     album: string
