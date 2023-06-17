@@ -28,6 +28,9 @@
             work.title
           }}</a>
           <span v-else>{{ work.title }}</span>
+          <Badge v-if="work.status" :type="work.status?.type || 'danger'">{{
+            work.status.text
+          }}</Badge>
         </h3>
         <!-- 补充信息 -->
         <div class="info">

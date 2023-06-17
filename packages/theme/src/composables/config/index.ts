@@ -170,13 +170,10 @@ export namespace Theme {
           end?: string
           lastupdate?: string
         }
-    status?:
-      | 'active'
-      | 'negative'
-      | 'off'
-      | {
-          text: string
-        }
+    status?: {
+      text: string
+      type?: 'tip' | 'warning' | 'danger'
+    }
     url?: string
     github?:
       | string
