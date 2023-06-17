@@ -116,21 +116,44 @@
           </div>
         </div>
         <!-- 封面图 -->
-        <div class="images">
+        <div class="images" v-if="work.covers?.length">
           <!-- swiper -->
-          <!-- list -->
-          <div class="list-mode">
+          <div v-if="work.coverLayout === 'swiper'" class="list-mode">
             <el-image
-              v-for="(url, idx) in covers"
+              v-for="(url, idx) in work.covers"
               :key="url"
               :src="url"
               loading="lazy"
-              :preview-src-list="covers"
+              :preview-src-list="work.covers"
+              :initial-index="idx"
+              hide-on-click-modal
+              :alt="work.title + '-' + idx"
+            />
+          </div>
+          <!-- list -->
+          <div v-if="work.coverLayout === 'list'" class="list-mode">
+            <el-image
+              v-for="(url, idx) in work.covers"
+              :key="url"
+              :src="url"
+              loading="lazy"
+              :preview-src-list="work.covers"
               :initial-index="idx"
               hide-on-click-modal
             />
           </div>
           <!-- card -->
+          <div v-if="work.coverLayout === 'card'" class="card-mode">
+            <el-image
+              v-for="(url, idx) in work.covers"
+              :key="url"
+              :src="url"
+              loading="lazy"
+              :preview-src-list="work.covers"
+              :initial-index="idx"
+              hide-on-click-modal
+            />
+          </div>
         </div>
         <div class="description" v-html="work.description"></div>
       </div>
@@ -187,6 +210,8 @@ const workList = reactive<
     startTime: string
     lastUpdate?: string
     endTime?: string
+    covers?: string[]
+    coverLayout?: string
   })[]
 >([])
 
@@ -196,6 +221,8 @@ watch(
   (val) => {
     const sortDate = [...val.list].map((v) => {
       const { time } = v
+
+      // 格式化时间
       const metaInfo =
         typeof time === 'string'
           ? {
@@ -209,9 +236,23 @@ watch(
               lastUpdate: time.lastupdate
             }
 
+      // 格式化封面信息
+      const covers: string[] = []
+      let coverLayout = 'list'
+
+      if (typeof v.cover === 'string') {
+        covers.push(v.cover)
+      } else if (Array.isArray(v.cover)) {
+        covers.push(...v.cover)
+      } else if (typeof v.cover === 'object') {
+        covers.push(...v.cover.urls)
+        coverLayout = v.cover.layout ?? coverLayout
+      }
       return {
         ...v,
-        ...metaInfo
+        ...metaInfo,
+        covers,
+        coverLayout
       }
     })
     // 数据排序
@@ -276,16 +317,6 @@ watchEffect(() => {
     })
   }
 })
-
-const covers = [
-  'https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg',
-  'https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg',
-  'https://fuss10.elemecdn.com/0/6f/e35ff375812e6b0020b6b4e8f9583jpeg.jpeg',
-  'https://fuss10.elemecdn.com/9/bb/e27858e973f5d7d3904835f46abbdjpeg.jpeg',
-  'https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg',
-  'https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg',
-  'https://fuss10.elemecdn.com/2/11/6535bcfb26e4c79b48ddde44f4b6fjpeg.jpeg'
-]
 </script>
 
 <style lang="scss" scoped>
@@ -423,9 +454,21 @@ const covers = [
   color: var(--vp-c-text-1);
 }
 .list-mode {
-  height: 360px;
-  margin: 10px auto;
+  height: 370px;
   overflow-y: auto;
+}
+.card-mode,
+.list-mode {
+  margin: 10px auto;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  .el-image {
+    :deep(img) {
+      object-fit: contain;
+      max-height: 360px;
+    }
+  }
 }
 .split {
   display: inline-block;
