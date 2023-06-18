@@ -78,7 +78,7 @@
               >
             </a>
           </div>
-          <!-- 其它链接 -->
+          <!-- 其它自定义链接 -->
           <div class="links" v-if="work.links?.length">
             <i class="icon" v-if="work.links?.length">
               <svg
@@ -113,6 +113,28 @@
             >
               {{ link.title }}
             </a>
+          </div>
+          <!-- tags -->
+          <div class="tags" v-if="work.tags?.length">
+            <i class="icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 1024 1024"
+                data-v-d328c40a=""
+              >
+                <path
+                  fill="currentColor"
+                  d="M256 128v698.88l196.032-156.864a96 96 0 0 1 119.936 0L768 826.816V128H256zm-32-64h576a32 32 0 0 1 32 32v797.44a32 32 0 0 1-51.968 24.96L531.968 720a32 32 0 0 0-39.936 0L243.968 918.4A32 32 0 0 1 192 893.44V96a32 32 0 0 1 32-32z"
+                ></path>
+              </svg>
+            </i>
+            <span
+              @click="handleChooseTag(tag)"
+              class="tag"
+              v-for="tag in work.tags"
+              :key="tag"
+              >{{ tag }}
+            </span>
           </div>
         </div>
         <!-- 封面图 -->
@@ -167,7 +189,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ElImage, ElCarousel, ElCarouselItem } from 'element-plus'
+import { ElImage, ElCarousel, ElCarouselItem, ElMessage } from 'element-plus'
 import VPDocAsideOutline from 'vitepress/dist/client/theme-default/components/VPDocAsideOutline.vue'
 import { computed, reactive, ref, watch, watchEffect } from 'vue'
 import { slugify } from '@mdit-vue/shared'
@@ -328,6 +350,12 @@ watchEffect(() => {
 
 const { width } = useWindowSize()
 const isCardMode = computed(() => width.value > 768)
+const handleChooseTag = (tag: string) => {
+  ElMessage({
+    message: `点击了${tag}标签，标签过滤功能开发中ing...`,
+    type: 'warning'
+  })
+}
 </script>
 
 <style lang="scss" scoped>
@@ -411,7 +439,8 @@ const isCardMode = computed(() => width.value > 768)
     flex-wrap: wrap;
   }
   .links,
-  .times {
+  .times,
+  .tags {
     display: flex;
     align-items: center;
     .icon {
@@ -443,6 +472,18 @@ const isCardMode = computed(() => width.value > 768)
       }
       &:last-child::after {
         content: '';
+      }
+    }
+  }
+  .tags {
+    span.tag {
+      cursor: pointer;
+    }
+    span.tag:not(:last-child) {
+      &::after {
+        content: '·';
+        display: inline-block;
+        padding: 0 4px;
       }
     }
   }
