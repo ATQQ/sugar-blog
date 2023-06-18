@@ -331,7 +331,7 @@ watchEffect(() => {
           let githubUrl = `https://github.com/${owner}/${repo}`
           if (path) {
             githubUrl += `/tree/${branch || 'master'}/${path}`
-          } else {
+          } else if (branch) {
             githubUrl += `/tree/${branch}`
           }
           data.github = githubUrl

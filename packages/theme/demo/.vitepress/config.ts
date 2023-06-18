@@ -1,87 +1,7 @@
 import path from 'path'
-import { getThemeConfig, defineConfig } from '@sugarat/theme/node'
+import { defineConfig } from '@sugarat/theme/node'
 import packageJSON from '../../package.json'
-import userWorksJson from './work'
-
-const blogTheme = getThemeConfig({
-  friend: [
-    {
-      nickname: '粥里有勺糖',
-      des: '你的指尖用于改变世界的力量',
-      avatar:
-        'https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTE2NzAzMA==674995167030',
-      url: 'https://sugarat.top'
-    },
-    {
-      nickname: 'Vitepress',
-      des: 'Vite & Vue Powered Static Site Generator',
-      avatar:
-        'https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTI2NzY1Ng==674995267656',
-      url: 'https://vitepress.vuejs.org/'
-    }
-  ],
-  // 文章默认作者
-  author: '粥里有勺糖',
-  // 评论
-  comment: {
-    repo: 'ATQQ/sugar-blog',
-    repoId: 'MDEwOlJlcG9zaXRvcnkyNDEyNDUyOTk',
-    category: 'Announcements',
-    categoryId: 'DIC_kwDODmEcc84COVc6',
-    inputPosition: 'top'
-  },
-  popover: {
-    title: '公告',
-    body: [
-      {
-        type: 'text',
-        content: 'QQ交流群：681489336 🎉🎉'
-      },
-      { type: 'text', content: '👇公众号👇---👇 微信 👇' },
-      {
-        type: 'image',
-        src: 'https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210'
-      },
-      {
-        type: 'text',
-        content: '欢迎大家加群&私信交流'
-      },
-      {
-        type: 'button',
-        content: '博客',
-        link: 'https://sugarat.top'
-      }
-    ],
-    duration: 0
-  },
-  search: {
-    mode: 'pagefind',
-    btnPlaceholder: 'Search',
-    placeholder: 'Search Docs',
-    emptyText: 'No results found',
-    heading: 'Total: {{searchResult}} search results.'
-  },
-  tabs: true,
-  works: userWorksJson
-})
-const extraHead: any =
-  process.env.NODE_ENV === 'production'
-    ? [
-        [
-          'script',
-          {
-            charset: 'UTF-8',
-            id: 'LA_COLLECT',
-            src: '//sdk.51.la/js-sdk-pro.min.js'
-          }
-        ],
-        [
-          'script',
-          {},
-          'LA.init({id:"Jyzk2AcXA3JsYbrG",ck:"Jyzk2AcXA3JsYbrG",hashMode:true})'
-        ]
-      ]
-    : []
+import { blogTheme, extraHead } from './sugar-theme-config'
 
 export default defineConfig({
   extends: blogTheme,
@@ -111,6 +31,10 @@ export default defineConfig({
       {
         text: `v${packageJSON.version}`,
         link: '/changelog'
+      },
+      {
+        text: '个人作品展示',
+        link: '/work'
       },
       {
         text: '线上作品',
