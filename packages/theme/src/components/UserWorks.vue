@@ -28,7 +28,7 @@
             work.title
           }}</a>
           <span v-else>{{ work.title }}</span>
-          <Badge v-if="work.status" :type="work.status?.type || 'danger'">{{
+          <Badge v-if="work.status" :type="work.status?.type || 'tip'">{{
             work.status.text
           }}</Badge>
         </h3>
@@ -256,11 +256,18 @@ watch(
         coverLayout
       }
     })
+    // 过滤出置顶数据
+    const topDate = sortDate.filter((v) => v.top !== undefined)
+    const normalDate = sortDate.filter((v) => v.top === undefined)
     // 数据排序
-    sortDate.sort((a, b) => +new Date(b.startTime) - +new Date(a.startTime))
-
+    topDate.sort((a, b) => a.top! - b.top!)
+    normalDate.sort((a, b) => +new Date(b.startTime) - +new Date(a.startTime))
+    if (topDate.length) {
+      // @ts-ignore
+      topDate[0].year = works.value.topTitle ?? '置顶'
+    }
     // 数据分组
-    const groupDate = sortDate.reduce((prev, cur) => {
+    const groupDate = normalDate.reduce((prev, cur) => {
       const { startTime } = cur
       const year = new Date(startTime).getFullYear()
       const data = { ...cur }
@@ -273,7 +280,7 @@ watch(
       prev[year].push(data)
       return prev
     }, {} as Record<string, (Theme.UserWork & { year?: string; startTime: string })[]>)
-    workList.push(...Object.values(groupDate).reverse().flat())
+    workList.push(...topDate, ...Object.values(groupDate).reverse().flat())
   },
   { immediate: true }
 )
@@ -352,9 +359,14 @@ const isCardMode = computed(() => width.value > 768)
   max-width: 900px;
 
   h2 {
-    padding-top: 24px;
+    margin-top: 6px;
+    padding-top: 18px;
     line-height: 32px;
     font-size: 24px;
+    border-top: 1px solid var(--vp-c-divider);
+    a {
+      color: inherit;
+    }
     &:hover {
       a {
         &::before {

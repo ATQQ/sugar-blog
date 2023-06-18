@@ -215,6 +215,7 @@ export namespace Theme {
   export interface UserWorks {
     title: string
     description?: string
+    topTitle?: string
     list: UserWork[]
   }
   export interface BlogConfig {
