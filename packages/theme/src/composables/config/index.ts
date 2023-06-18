@@ -60,12 +60,13 @@ export namespace Theme {
      * 手动控制相关文章列表的顺序
      */
     recommend?: number | false
-    // TODO: 待开发
     /**
+     * TODO: 待开发
      * 时间线
      */
     timeline: string
     /**
+     * TODO: 待开发
      * 专栏&合集
      */
     album: string
@@ -169,13 +170,10 @@ export namespace Theme {
           end?: string
           lastupdate?: string
         }
-    status?:
-      | 'active'
-      | 'negative'
-      | 'off'
-      | {
-          text: string
-        }
+    status?: {
+      text: string
+      type?: 'tip' | 'warning' | 'danger'
+    }
     url?: string
     github?:
       | string
@@ -190,7 +188,7 @@ export namespace Theme {
       | string[]
       | {
           urls: string[]
-          layout?: 'swiper' | 'list' | 'card'
+          layout?: 'swiper' | 'list'
         }
     links?: {
       title: string
@@ -217,6 +215,7 @@ export namespace Theme {
   export interface UserWorks {
     title: string
     description?: string
+    topTitle?: string
     list: UserWork[]
   }
   export interface BlogConfig {
@@ -238,7 +237,10 @@ export namespace Theme {
      * power by https://giscus.app/zh-CN
      */
     comment?: GiscusConfig | false
-    recommend?: RecommendArticle
+    /**
+     * 阅读文章左侧的推荐文章（替代默认的sidebar）
+     */
+    recommend?: RecommendArticle | false
     article?: ArticleConfig
     /**
      * el-alert

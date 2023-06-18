@@ -1,5 +1,13 @@
 # @sugarat/theme
 
+## 0.1.31
+
+### Patch Changes
+
+- feat: 内置单独的作品展示页组件
+- fix: 修复使用主题默认 Badge 不生效的问题
+- fix: recommend 和 sidebar 展示冲突
+
 ## 0.1.30
 
 ### Patch Changes

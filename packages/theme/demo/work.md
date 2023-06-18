@@ -1,7 +1,8 @@
 ---
 layout: page
-# TODO: sidebar 联动
+title: 个人作品展示
 sidebar: false
-hidden: true
+outline: [2,3]
+sticky: 1
 ---
 <UserWorksPage />

@@ -1,28 +1,36 @@
 <template>
-  <div class="user-works-page">
-    <h1>{{ works.title }}</h1>
-    <p v-if="works.description" class="description">{{ works.description }}</p>
-    <!-- TODO：侧导筛选时间 -->
-    <!-- 过滤，可吸顶 -->
-    <div class="filter">
-      <!-- 时间： -->
-      <div></div>
-      <!-- TODO: tags -->
-      <div></div>
+  <div class="user-works-page VPDoc">
+    <div class="aside-container">
+      <!-- TODO:过滤，可吸顶 -->
+      <div class="filter">
+        <!-- 时间： -->
+        <div></div>
+        <!-- TODO: tags -->
+        <div></div>
+      </div>
     </div>
     <!-- 作品列表 -->
     <div class="works">
+      <h1>{{ works.title }}</h1>
+      <p v-if="works.description" class="description">
+        {{ works.description }}
+      </p>
       <!-- 标题，描述信息，时间，线上链接，代码仓库，示例图片（几张，多种展示样式支持） -->
       <div class="work" v-for="(work, idx) in workList" :key="idx">
         <!-- 大日期标题 -->
-        <!-- TODO: 支持锚点 -->
-        <h2 v-if="work.year">{{ work.year }}</h2>
+        <h2 :id="`work_${work.year}`" v-if="work.year">
+          <a :href="`#work_${work.year}`">{{ work.year }}</a>
+        </h2>
         <!-- 作品标题 -->
-        <h3 class="title">
+        <h3 class="title" :id="slugify(work.title)">
+          <a class="pin" :href="'#' + slugify(work.title)"></a>
           <a v-if="work.url" rel="noopener" target="_blank" :href="work.url">{{
             work.title
           }}</a>
           <span v-else>{{ work.title }}</span>
+          <Badge v-if="work.status" :type="work.status?.type || 'tip'">{{
+            work.status.text
+          }}</Badge>
         </h3>
         <!-- 补充信息 -->
         <div class="info">
@@ -70,7 +78,7 @@
               >
             </a>
           </div>
-          <!-- 其它链接 -->
+          <!-- 其它自定义链接 -->
           <div class="links" v-if="work.links?.length">
             <i class="icon" v-if="work.links?.length">
               <svg
@@ -106,40 +114,117 @@
               {{ link.title }}
             </a>
           </div>
+          <!-- tags -->
+          <div class="tags" v-if="work.tags?.length">
+            <i class="icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 1024 1024"
+                data-v-d328c40a=""
+              >
+                <path
+                  fill="currentColor"
+                  d="M256 128v698.88l196.032-156.864a96 96 0 0 1 119.936 0L768 826.816V128H256zm-32-64h576a32 32 0 0 1 32 32v797.44a32 32 0 0 1-51.968 24.96L531.968 720a32 32 0 0 0-39.936 0L243.968 918.4A32 32 0 0 1 192 893.44V96a32 32 0 0 1 32-32z"
+                ></path>
+              </svg>
+            </i>
+            <span
+              @click="handleChooseTag(tag)"
+              class="tag"
+              v-for="tag in work.tags"
+              :key="tag"
+              >{{ tag }}
+            </span>
+          </div>
         </div>
         <!-- 封面图 -->
-        <div class="images">
+        <div class="images" v-if="work.covers?.length">
           <!-- swiper -->
+          <div v-if="work.coverLayout === 'swiper'" class="swiper-mode">
+            <el-carousel
+              autoplay
+              height="260px"
+              :type="isCardMode && work.covers.length >= 3 ? 'card' : ''"
+            >
+              <el-carousel-item
+                style="text-align: center"
+                v-for="(url, idx) in work.covers"
+                :key="url"
+              >
+                <el-image
+                  preview-teleported
+                  :key="url"
+                  :src="url"
+                  loading="lazy"
+                  :preview-src-list="work.covers"
+                  :initial-index="idx"
+                  hide-on-click-modal
+                  :alt="work.title + '-' + idx"
+                />
+              </el-carousel-item>
+            </el-carousel>
+          </div>
           <!-- list -->
-          <div class="list-mode">
+          <div v-if="work.coverLayout === 'list'" class="list-mode">
             <el-image
-              v-for="(url, idx) in covers"
+              v-for="(url, idx) in work.covers"
               :key="url"
               :src="url"
               loading="lazy"
-              :preview-src-list="covers"
+              :preview-src-list="work.covers"
               :initial-index="idx"
               hide-on-click-modal
             />
           </div>
-          <!-- card -->
         </div>
         <div class="description" v-html="work.description"></div>
+      </div>
+    </div>
+    <div class="aside-container">
+      <div class="aside-outline-container">
+        <VPDocAsideOutline />
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ElImage } from 'element-plus'
-import { reactive, ref, watch, watchEffect } from 'vue'
+import { ElImage, ElCarousel, ElCarouselItem, ElMessage } from 'element-plus'
+import VPDocAsideOutline from 'vitepress/dist/client/theme-default/components/VPDocAsideOutline.vue'
+import { computed, reactive, ref, watch, watchEffect } from 'vue'
+import { slugify } from '@mdit-vue/shared'
+import { useWindowSize } from '@vueuse/core'
 import {
   getGithubUpdateTime,
   formatDate,
   getGithubDirUpdateTime
 } from '../utils'
-import { useUserWorks } from '../composables/config/blog'
+import {
+  useUserWorks,
+  useActiveAnchor,
+  useAutoUpdateAnchor
+} from '../composables/config/blog'
 import { Theme } from '../composables/config'
+
+const currentAnchor = useAutoUpdateAnchor()
+// 更新锚点的时候更新 url 中的 hash
+watch(
+  () => currentAnchor.id,
+  (val) => {
+    if (val) {
+      window.history.replaceState(null, '', `#${val}`)
+    }
+  }
+)
+const mountActiveAnchorEl = useActiveAnchor()
+watch(mountActiveAnchorEl, () => {
+  const { value } = mountActiveAnchorEl
+  if (value) {
+    value.scroll({
+      behavior: 'smooth'
+    })
+  }
+})
 
 const works = useUserWorks()
 const workList = reactive<
@@ -148,6 +233,8 @@ const workList = reactive<
     startTime: string
     lastUpdate?: string
     endTime?: string
+    covers?: string[]
+    coverLayout?: string
   })[]
 >([])
 
@@ -157,6 +244,8 @@ watch(
   (val) => {
     const sortDate = [...val.list].map((v) => {
       const { time } = v
+
+      // 格式化时间
       const metaInfo =
         typeof time === 'string'
           ? {
@@ -170,16 +259,37 @@ watch(
               lastUpdate: time.lastupdate
             }
 
+      // 格式化封面信息
+      const covers: string[] = []
+      let coverLayout = 'swiper'
+
+      if (typeof v.cover === 'string') {
+        covers.push(v.cover)
+      } else if (Array.isArray(v.cover)) {
+        covers.push(...v.cover)
+      } else if (typeof v.cover === 'object') {
+        covers.push(...v.cover.urls)
+        coverLayout = v.cover.layout ?? coverLayout
+      }
       return {
         ...v,
-        ...metaInfo
+        ...metaInfo,
+        covers,
+        coverLayout
       }
     })
+    // 过滤出置顶数据
+    const topDate = sortDate.filter((v) => v.top !== undefined)
+    const normalDate = sortDate.filter((v) => v.top === undefined)
     // 数据排序
-    sortDate.sort((a, b) => +new Date(b.startTime) - +new Date(a.startTime))
-
+    topDate.sort((a, b) => a.top! - b.top!)
+    normalDate.sort((a, b) => +new Date(b.startTime) - +new Date(a.startTime))
+    if (topDate.length) {
+      // @ts-ignore
+      topDate[0].year = works.value.topTitle ?? '置顶'
+    }
     // 数据分组
-    const groupDate = sortDate.reduce((prev, cur) => {
+    const groupDate = normalDate.reduce((prev, cur) => {
       const { startTime } = cur
       const year = new Date(startTime).getFullYear()
       const data = { ...cur }
@@ -192,7 +302,7 @@ watch(
       prev[year].push(data)
       return prev
     }, {} as Record<string, (Theme.UserWork & { year?: string; startTime: string })[]>)
-    workList.push(...Object.values(groupDate).reverse().flat())
+    workList.push(...topDate, ...Object.values(groupDate).reverse().flat())
   },
   { immediate: true }
 )
@@ -221,7 +331,7 @@ watchEffect(() => {
           let githubUrl = `https://github.com/${owner}/${repo}`
           if (path) {
             githubUrl += `/tree/${branch || 'master'}/${path}`
-          } else {
+          } else if (branch) {
             githubUrl += `/tree/${branch}`
           }
           data.github = githubUrl
@@ -238,20 +348,21 @@ watchEffect(() => {
   }
 })
 
-const covers = [
-  'https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg',
-  'https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg',
-  'https://fuss10.elemecdn.com/0/6f/e35ff375812e6b0020b6b4e8f9583jpeg.jpeg',
-  'https://fuss10.elemecdn.com/9/bb/e27858e973f5d7d3904835f46abbdjpeg.jpeg',
-  'https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg',
-  'https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg',
-  'https://fuss10.elemecdn.com/2/11/6535bcfb26e4c79b48ddde44f4b6fjpeg.jpeg'
-]
+const { width } = useWindowSize()
+const isCardMode = computed(() => width.value > 768)
+const handleChooseTag = (tag: string) => {
+  ElMessage({
+    message: `点击了${tag}标签，标签过滤功能开发中ing...`,
+    type: 'warning'
+  })
+}
 </script>
 
 <style lang="scss" scoped>
 .user-works-page {
-  max-width: 900px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
   margin: 20px auto;
   padding: 16px;
   h1 {
@@ -259,7 +370,7 @@ const covers = [
     font-weight: bold;
   }
   .description {
-    margin-top: 10px;
+    margin-top: 16px;
     color: #999;
     font-size: 16px;
   }
@@ -268,16 +379,58 @@ const covers = [
     color: var(--vp-c-brand);
   }
 }
+.works-container {
+  display: flex;
+  justify-content: center;
+}
 .work {
+  max-width: 900px;
+
   h2 {
-    padding-top: 24px;
+    margin-top: 6px;
+    padding-top: 18px;
     line-height: 32px;
     font-size: 24px;
+    border-top: 1px solid var(--vp-c-divider);
+    a {
+      color: inherit;
+    }
+    &:hover {
+      a {
+        &::before {
+          opacity: 1;
+        }
+      }
+    }
+    a {
+      position: relative;
+      &::before {
+        position: absolute;
+        left: -16px;
+        opacity: 0;
+        content: var(--vp-header-anchor-symbol);
+      }
+    }
   }
   h3 {
     margin: 32px 0 0;
     line-height: 28px;
     font-size: 20px;
+    position: relative;
+    &.title > a.pin {
+      position: absolute;
+      left: -16px;
+      &::before {
+        left: -16px;
+        opacity: 0;
+        content: var(--vp-header-anchor-symbol);
+      }
+    }
+    &:hover > a.pin {
+      &::before {
+        opacity: 1;
+      }
+    }
   }
   .info {
     display: flex;
@@ -286,7 +439,8 @@ const covers = [
     flex-wrap: wrap;
   }
   .links,
-  .times {
+  .times,
+  .tags {
     display: flex;
     align-items: center;
     .icon {
@@ -321,14 +475,65 @@ const covers = [
       }
     }
   }
+  .tags {
+    span.tag {
+      cursor: pointer;
+    }
+    span.tag:not(:last-child) {
+      &::after {
+        content: '·';
+        display: inline-block;
+        padding: 0 4px;
+      }
+    }
+  }
+}
+.aside-container {
+  display: none;
+  flex: 1;
+  padding-left: 32px;
+  width: 100%;
+  max-width: 256px;
+}
+@media screen and (min-width: 960px) {
+  .aside-container {
+    display: block;
+  }
+}
+.aside-outline-container {
+  position: sticky;
+  top: calc(
+    var(--vp-nav-height) + var(--vp-layout-top-height, 0px) +
+      var(--vp-doc-top-height, 0px) + 32px
+  );
 }
 .lastupdate {
   color: var(--vp-c-text-1);
 }
+
 .list-mode {
-  height: 360px;
-  margin: 10px auto;
+  max-height: 370px;
   overflow-y: auto;
+  margin: 10px auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  .el-image {
+    :deep(img) {
+      object-fit: contain;
+      // max-height: 360px;
+    }
+  }
+}
+
+.swiper-mode {
+  margin-top: 16px;
+  .el-image {
+    :deep(img) {
+      object-fit: contain;
+      max-height: 260px;
+    }
+  }
 }
 .split {
   display: inline-block;

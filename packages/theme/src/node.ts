@@ -175,7 +175,7 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
         pagesData: data as Theme.PageData[],
         ...cfg
       },
-      ...(cfg?.blog !== false
+      ...(cfg?.blog !== false && cfg?.recommend !== false
         ? {
             sidebar: [
               {

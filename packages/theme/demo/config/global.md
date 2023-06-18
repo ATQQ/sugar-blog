@@ -384,6 +384,8 @@ interface GiscusConfig {
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMDc2MDIxMw==674920760213)
 
 ## recommend
+* Type: `false | RecommendArticle`
+
 用于控制推荐文章的展示卡片
 ::: code-group
 
@@ -431,6 +433,12 @@ interface RecommendArticle {
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMTI2MDQyNQ==674921260425)
 
+设置为 false 时，不展示
+```ts
+const blogTheme = getThemeConfig({
+  recommend: false
+})
+```
 ## article
 设置文章全局相关能力
 ::: code-group
