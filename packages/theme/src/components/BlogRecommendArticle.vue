@@ -1,7 +1,7 @@
 <template>
   <div
     class="card recommend"
-    v-if="recommendList.length || emptyText"
+    v-if="_recommend !== false && (recommendList.length || emptyText)"
     data-pagefind-ignore="all"
   >
     <!-- 头部 -->
@@ -52,11 +52,15 @@ import { useRoute, withBase } from 'vitepress'
 import { formatShowDate } from '../utils/index'
 import { useArticles, useBlogConfig } from '../composables/config/blog'
 
-const { recommend } = useBlogConfig()
-const title = computed(() => recommend?.title || '🔍 相关文章')
-const pageSize = computed(() => recommend?.pageSize || 9)
-const nextText = computed(() => recommend?.nextText || '换一组')
-const emptyText = computed(() => recommend?.empty ?? '暂无推荐文章')
+const { recommend: _recommend } = useBlogConfig()
+
+const recommend = computed(() =>
+  _recommend === false ? undefined : _recommend
+)
+const title = computed(() => recommend.value?.title || '🔍 相关文章')
+const pageSize = computed(() => recommend.value?.pageSize || 9)
+const nextText = computed(() => recommend.value?.nextText || '换一组')
+const emptyText = computed(() => recommend.value?.empty ?? '暂无推荐文章')
 
 const docs = useArticles()
 
@@ -80,12 +84,12 @@ const recommendList = computed(() => {
     // 过滤掉自己
     .filter(
       (v) =>
-        (recommend?.showSelf ?? true) ||
+        (recommend.value?.showSelf ?? true) ||
         v.route !== decodeURIComponent(route.path).replace(/.html$/, '')
     )
     // 过滤掉不需要展示的
     .filter((v) => v.meta.recommend !== false)
-    .filter((v) => recommend?.filter?.(v) ?? true)
+    .filter((v) => recommend.value?.filter?.(v) ?? true)
 
   const topList = origin.filter((v) => v.meta?.recommend)
   topList.sort((a, b) => Number(a.meta.recommend) - Number(b.meta.recommend))

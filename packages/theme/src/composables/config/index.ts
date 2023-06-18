@@ -237,7 +237,10 @@ export namespace Theme {
      * power by https://giscus.app/zh-CN
      */
     comment?: GiscusConfig | false
-    recommend?: RecommendArticle
+    /**
+     * 阅读文章左侧的推荐文章（替代默认的sidebar）
+     */
+    recommend?: RecommendArticle | false
     article?: ArticleConfig
     /**
      * el-alert

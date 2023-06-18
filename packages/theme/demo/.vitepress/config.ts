@@ -1,6 +1,7 @@
 import path from 'path'
 import { getThemeConfig, defineConfig } from '@sugarat/theme/node'
 import packageJSON from '../../package.json'
+import userWorksJson from './work'
 
 const blogTheme = getThemeConfig({
   friend: [
@@ -60,53 +61,8 @@ const blogTheme = getThemeConfig({
     emptyText: 'No results found',
     heading: 'Total: {{searchResult}} search results.'
   },
-  tabs: true
-  // works: {
-  //   title: '个人的一些项目/线上作品',
-  //   description: '记录开发的点点滴滴',
-  //   list: [
-  //     {
-  //       title: '博客主题 @sugarat/theme',
-  //       description: '基于 vitepress 实现的博客主题',
-  //       time: {
-  //         start: '2021-03-01'
-  //       },
-  //       github: {
-  //         owner: 'ATQQ',
-  //         repo: 'sugar-blog'
-  //       },
-  //       status: 'active',
-  //       url: 'https://theme.sugarat.top'
-  //     },
-  //     {
-  //       title: '博客主题 @sugarat/theme',
-  //       description: '基于 vitepress 实现的博客主题',
-  //       time: {
-  //         start: '2021-04-01'
-  //       },
-  //       status: 'active',
-  //       github: 'https://github.com/ATQQ/sugar-blog',
-  //       links: [
-  //         {
-  //           title: '123',
-  //           url: 'https://theme.sugarat.top'
-  //         },
-  //         {
-  //           title: '123',
-  //           url: 'https://theme.sugarat.top'
-  //         }
-  //       ]
-  //     },
-  //     {
-  //       title: '博客主题 @sugarat/theme',
-  //       description: '基于 vitepress 实现的博客主题',
-  //       time: {
-  //         start: '2022-03-01'
-  //       },
-  //       status: 'active'
-  //     }
-  //   ]
-  // }
+  tabs: true,
+  works: userWorksJson
 })
 const extraHead: any =
   process.env.NODE_ENV === 'production'
