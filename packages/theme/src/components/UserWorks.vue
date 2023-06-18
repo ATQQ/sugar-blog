@@ -118,32 +118,32 @@
         <!-- 封面图 -->
         <div class="images" v-if="work.covers?.length">
           <!-- swiper -->
-          <div v-if="work.coverLayout === 'swiper'" class="list-mode">
-            <el-image
-              v-for="(url, idx) in work.covers"
-              :key="url"
-              :src="url"
-              loading="lazy"
-              :preview-src-list="work.covers"
-              :initial-index="idx"
-              hide-on-click-modal
-              :alt="work.title + '-' + idx"
-            />
+          <div v-if="work.coverLayout === 'swiper'" class="swiper-mode">
+            <el-carousel
+              autoplay
+              height="260px"
+              :type="isCardMode && work.covers.length >= 3 ? 'card' : ''"
+            >
+              <el-carousel-item
+                style="text-align: center"
+                v-for="(url, idx) in work.covers"
+                :key="url"
+              >
+                <el-image
+                  preview-teleported
+                  :key="url"
+                  :src="url"
+                  loading="lazy"
+                  :preview-src-list="work.covers"
+                  :initial-index="idx"
+                  hide-on-click-modal
+                  :alt="work.title + '-' + idx"
+                />
+              </el-carousel-item>
+            </el-carousel>
           </div>
           <!-- list -->
           <div v-if="work.coverLayout === 'list'" class="list-mode">
-            <el-image
-              v-for="(url, idx) in work.covers"
-              :key="url"
-              :src="url"
-              loading="lazy"
-              :preview-src-list="work.covers"
-              :initial-index="idx"
-              hide-on-click-modal
-            />
-          </div>
-          <!-- card -->
-          <div v-if="work.coverLayout === 'card'" class="card-mode">
             <el-image
               v-for="(url, idx) in work.covers"
               :key="url"
@@ -167,10 +167,11 @@
 </template>
 
 <script lang="ts" setup>
-import { ElImage } from 'element-plus'
+import { ElImage, ElCarousel, ElCarouselItem } from 'element-plus'
 import VPDocAsideOutline from 'vitepress/dist/client/theme-default/components/VPDocAsideOutline.vue'
-import { reactive, ref, watch, watchEffect } from 'vue'
+import { computed, reactive, ref, watch, watchEffect } from 'vue'
 import { slugify } from '@mdit-vue/shared'
+import { useWindowSize } from '@vueuse/core'
 import {
   getGithubUpdateTime,
   formatDate,
@@ -238,7 +239,7 @@ watch(
 
       // 格式化封面信息
       const covers: string[] = []
-      let coverLayout = 'list'
+      let coverLayout = 'swiper'
 
       if (typeof v.cover === 'string') {
         covers.push(v.cover)
@@ -317,6 +318,9 @@ watchEffect(() => {
     })
   }
 })
+
+const { width } = useWindowSize()
+const isCardMode = computed(() => width.value > 768)
 </script>
 
 <style lang="scss" scoped>
@@ -453,20 +457,28 @@ watchEffect(() => {
 .lastupdate {
   color: var(--vp-c-text-1);
 }
+
 .list-mode {
-  height: 370px;
+  max-height: 370px;
   overflow-y: auto;
-}
-.card-mode,
-.list-mode {
   margin: 10px auto;
   display: flex;
   flex-wrap: wrap;
-  flex-direction: column;
+  justify-content: center;
   .el-image {
     :deep(img) {
       object-fit: contain;
-      max-height: 360px;
+      // max-height: 360px;
+    }
+  }
+}
+
+.swiper-mode {
+  margin-top: 16px;
+  .el-image {
+    :deep(img) {
+      object-fit: contain;
+      max-height: 260px;
     }
   }
 }

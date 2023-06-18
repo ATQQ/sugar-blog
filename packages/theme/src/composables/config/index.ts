@@ -188,7 +188,7 @@ export namespace Theme {
       | string[]
       | {
           urls: string[]
-          layout?: 'swiper' | 'list' | 'card'
+          layout?: 'swiper' | 'list'
         }
     links?: {
       title: string
