@@ -70,6 +70,8 @@ export namespace Theme {
      * 专栏&合集
      */
     album: string
+    // 是否发布
+    publish?: boolean
   }
   export interface PageData {
     route: string

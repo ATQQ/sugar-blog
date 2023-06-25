@@ -48,6 +48,7 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
       const meta: Partial<Theme.PageMeta> = {
         ...matter(fileContent).data
       }
+      console.log(meta)
       if (!meta.title) {
         meta.title = getDefaultTitle(fileContent)
       }
@@ -85,6 +86,10 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
         meta.cover ||
         fileContent.match(/[!]\[.*?\]\((https:\/\/.+)\)/)?.[1] ||
         ''
+
+      // 是否发布 默认发布
+      meta.publish = meta.publish !== false
+
       return {
         route: `/${route}`,
         meta
