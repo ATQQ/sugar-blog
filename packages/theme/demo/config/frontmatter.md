@@ -295,3 +295,28 @@ recommend: false
 ```
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY3NzI0NjQ2NzIyNA==677246467224)
+
+### publish
+* type: `false`
+
+表明文章是否发布，用于设置文章是否出现在首页和侧边栏里
+
+```md
+---
+publish: false
+---
+```
+等价于
+```md
+---
+hidden: true
+recommend: false
+---
+```
+
+
+比如设置在`changelog.md`里，首页将不会展示此项
+
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MTcwMDU4MQ==673181700581)
+
+同时，左侧边栏也不会展示

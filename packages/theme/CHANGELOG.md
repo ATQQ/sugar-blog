@@ -1,5 +1,12 @@
 # @sugarat/theme
 
+## 0.1.32
+
+### Patch Changes
+
+- feat: 支持 publish 参数控制文章是否展示
+- feat: scrollbar 美化
+
 ## 0.1.31
 
 ### Patch Changes
