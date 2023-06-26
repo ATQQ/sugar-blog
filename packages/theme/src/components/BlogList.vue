@@ -51,7 +51,7 @@ const activeTag = useActiveTag()
 const activeTagLabel = computed(() => activeTag.value.label)
 
 const wikiList = computed(() => {
-  const topList = docs.value.filter((v) => !!v.meta.top)
+  const topList = docs.value.filter((v) => !v.meta.hidden && !!v.meta.top)
   topList.sort((a, b) => {
     const aTop = a?.meta?.top
     const bTop = b?.meta.top

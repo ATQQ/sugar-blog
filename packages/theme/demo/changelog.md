@@ -4,11 +4,13 @@ description: 最近更新💯：① 内置单独的作品展示页组件 ② 修
 author: 粥里有勺糖
 top: 1
 tag: 日志
+publish: true
 ---
 
 # Changelog
 
 升级主题，原项目执行如下指令即可
+
 ```sh
 pnpm up @sugarat/theme
 ```
@@ -35,28 +37,34 @@ pnpm up @sugarat/theme
 - feat: 内置 [vitepress-plugin-tabs](https://www.npmjs.com/package/vitepress-plugin-tabs) 能力，使用见[主题配置 - 组件能力](./config/component.md)
 
 ## 0.1.28 (2023/05/01)
+
 ### Patch Changes
-- fix: tag设置为字符串时展示异常
+
+- fix: tag 设置为字符串时展示异常
 
 ## 0.1.27 (2023/04/30)
+
 ### Patch Changes
+
 - fix: element ui 分页组件展示异常
 
 ## 0.1.26 (2023/04/29)
+
 ### Patch Changes
+
 - fix: 翻页后回到首页又回到开头
 
 ## 0.1.25 (2023/04/22)
 
 ### Patch Changes
 
-- feat: 文章页支持tag展示和跳转 [tag](./config/frontmatter.md#tag)
+- feat: 文章页支持 tag 展示和跳转 [tag](./config/frontmatter.md#tag)
 - feat: 作者支持跳转外链 [authorList](./config/global.md#authorlist)
 - feat: 优化时间展示，支持单独控制显隐 [date](./config/frontmatter.md#date)
 - feat: 支持文章封面展示 [cover](./config/frontmatter.md#cover)
 - feat: 支持通过配置控制文章里的封面的展示 [hiddenCover](./config/frontmatter.md#hiddencover)
 - fix: 标签回退不生效
-- chore: 一些TODO更新
+- chore: 一些 TODO 更新
 - chore: 移动端首页卡片样式微调
 
 ## 0.1.24 (2023/04/20)
@@ -79,7 +87,9 @@ pnpm up @sugarat/theme
 - fix: ctrl+k open browser search
 
 ## 0.1.21 (2023/04/15)
+
 ### Patch Changes
+
 - fix: index.md 路径无法正常展示时间信息
 
 ## 0.1.20 (2023/04/08)
@@ -87,8 +97,8 @@ pnpm up @sugarat/theme
 ### Patch Changes
 
 - feat: 内置 pagefind 搜索针对中文优化
-- fix: 内置 pagefind 在自定义base后无效
-- chore: 没有git仓库时，打印Not日志
+- fix: 内置 pagefind 在自定义 base 后无效
+- chore: 没有 git 仓库时，打印 Not 日志
 - chore: pagefind 引导使用独立的插件 [vitepress-plugin-pagefind](https://github.com/ATQQ/sugar-blog/blob/master/packages/vitepress-plugin-pagefind/README-zh.md)
 
 ## 0.1.19 (2023/04/02)
@@ -96,57 +106,66 @@ pnpm up @sugarat/theme
 ### Patch Changes
 
 - fix: dev not defined error
-- chore: 主题的exports 添加 package.json
+- chore: 主题的 exports 添加 package.json
 - fix: default template lang error
 
 ## 0.1.18 (2023/03/31)
 
 ### Patch Changes
 
-- fix: 设置base路径后发布时间显示0秒
+- fix: 设置 base 路径后发布时间显示 0 秒
 - fix: 评论跳转按钮在部分场景展示异常
 
 ## 0.1.17 (2023/03/26)
+
 - fix: search: false 不生效
 
 ## 0.1.16 (2023/03/26)
-- fix: 全局BG色和Vitepress主题样式冲突
+
+- fix: 全局 BG 色和 Vitepress 主题样式冲突
 
 ## 0.1.15 (2023/03/26)
 
 - feat: 分离可独立使用的的 搜索插件[pagefind](https://github.com/ATQQ/sugar-blog/tree/master/packages/vitepress-plugin-pagefind)
-- feat: 搜索框展示UI优化，支持定制文案，展示适配移动端
+- feat: 搜索框展示 UI 优化，支持定制文案，展示适配移动端
 - fix: 搜索结果未全部展示
-- fix: 中文文件名文章时间显示NaN
+- fix: 中文文件名文章时间显示 NaN
 
 ## 0.1.14 (2023/03/19)
+
 - chore: 主题配置改为继承的方式引入
 
 ## 0.1.13 (2023/03/19)
+
 - fix: route support [withBase](https://vitepress.dev/reference/runtime-api#withbase)
 
 ## 0.1.12 (2023/03/18)
+
 - fix: 搜索框影响首页样式
 
 ## 0.1.11 (2023/03/18)
+
 - chore: 文档内容完善
-- feat：内置搜索弹窗UI更新 - 类似algolia（基于 [vue-command-palette](https://github.com/xiaoluoboding/vue-command-palette/blob/main/src/assets/scss/algolia.scss)）
+- feat：内置搜索弹窗 UI 更新 - 类似 algolia（基于 [vue-command-palette](https://github.com/xiaoluoboding/vue-command-palette/blob/main/src/assets/scss/algolia.scss)）
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY3OTEyNDM0ODQ4OA==679124348488)
 
 ## 0.1.10 (2023/03/12)
+
 - feat: 支持全文搜索（基于 [pagefind](https://pagefind.app/) 实现）
   - `search: 'pagefind'`
 
 ## 0.1.9 (2023/02/24)
+
 ### Patch Changes
+
 - feat: 支持自定义推荐文章的展示顺序，详见[frontmatter.recommend](./config/frontmatter.md#recommend)
 
-
 ## 0.1.8 (2023/02/22)
+
 ### Patch Changes
 
-- feat: 支持首页文章置顶能力 (详见[frontmatter.top](./config/frontmatter.md#top)样式较粗糙，欢迎PR改进)
+- feat: 支持首页文章置顶能力 (详见[frontmatter.top](./config/frontmatter.md#top)样式较粗糙，欢迎 PR 改进)
 
 ## 0.1.7 (2023/02/21)
 
@@ -161,8 +180,8 @@ pnpm up @sugarat/theme
 
 ### Patch Changes
 
-- fix: 最新版vitepress首页顶部Nav穿透背景图
-- fix: 修复window路径问题
+- fix: 最新版 vitepress 首页顶部 Nav 穿透背景图
+- fix: 修复 window 路径问题
 
 ## 0.1.5 (2023/02/19)
 
