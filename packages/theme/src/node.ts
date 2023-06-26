@@ -48,7 +48,7 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
       const meta: Partial<Theme.PageMeta> = {
         ...matter(fileContent).data
       }
-      console.log(meta)
+
       if (!meta.title) {
         meta.title = getDefaultTitle(fileContent)
       }
@@ -89,6 +89,10 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
 
       // 是否发布 默认发布
       meta.publish = meta.publish !== false
+      if (!meta.publish) {
+        meta.hidden = true
+        meta.recommend = false
+      }
 
       return {
         route: `/${route}`,
