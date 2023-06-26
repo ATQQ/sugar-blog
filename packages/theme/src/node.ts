@@ -88,8 +88,7 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
         ''
 
       // 是否发布 默认发布
-      meta.publish = meta.publish !== false
-      if (!meta.publish) {
+      if (meta.publish === false) {
         meta.hidden = true
         meta.recommend = false
       }
