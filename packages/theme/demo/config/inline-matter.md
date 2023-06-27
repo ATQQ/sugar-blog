@@ -14,7 +14,7 @@ tag:
 * Type: `number | [number, number] | 'deep' | false`
 * Default: `2`
 
-设置文章自动生成的目录，和 [config.themeConfig.outline](https://vitepress.vuejs.org/config/theme-config#outline) 表现一样，文章里单独设置的优先级更高
+设置文章自动生成的目录，和 [config.themeConfig.outline](https://vitepress.dev/reference/default-theme-config#outline) 表现一样，文章里单独设置的优先级更高
 
 ```md
 ---
