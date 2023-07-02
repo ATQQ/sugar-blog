@@ -38,7 +38,7 @@ tag:
 开启方式如下
 :::code-group
 ```sh [① 安装依赖]
-pnpm add vitepress-plugin-tabs
+pnpm add vitepress-plugin-tabs@0.2.0
 ```
 
 ```ts [② 引入组件]
