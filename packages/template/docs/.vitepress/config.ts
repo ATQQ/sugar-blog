@@ -1,5 +1,7 @@
 import { getThemeConfig, defineConfig } from '@sugarat/theme/node'
 
+// 主题独有配置
+// 详见文档: https://theme.sugarat.top/
 const blogTheme = getThemeConfig({
   // 文章默认作者
   author: '粥里有勺糖',
@@ -51,6 +53,8 @@ const blogTheme = getThemeConfig({
   }
 })
 
+// Vitepress 默认配置
+// 详见文档：https://vitepress.dev/reference/site-config
 export default defineConfig({
   extends: blogTheme,
   lang: 'zh-cn',
@@ -76,6 +80,10 @@ export default defineConfig({
     //     'https://github.com/ATQQ/sugar-blog/tree/master/packages/blogpress/:path',
     //   text: '去 GitHub 上编辑内容'
     // },
+    nav: [
+      { text: '首页', link: '/' },
+      { text: '关于作者', link: 'https://sugarat.top/aboutme.html' }
+    ],
     socialLinks: [
       {
         icon: 'github',
