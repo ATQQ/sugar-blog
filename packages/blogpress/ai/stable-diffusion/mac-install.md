@@ -1,6 +1,7 @@
 ---
 outline: [2,3]
-description: Mac 实操安装 stable-diffusion
+description: Mac 实操安装 stable-diffusion，包含环境配置，sd插件安装，模型安装等内容
+cover: https://img.cdn.sugarat.top/mdImg/MTY4ODMwOTEzMzUzNA==688309133534
 ---
 # Mac 安装 stable-diffusion
 
@@ -170,23 +171,23 @@ url设置为`http://127.0.0.1:8080/sd.json`即可，点击 加载 即可看到�
 我这里把步数调成了30
 
 ::: code-group
-```[① 提示词]
+```txt [① 提示词]
 extremely detailed CG uniform 8k illustrations, high color substitution, sketches graffiti art, illustrations photo, masterpiece, hyper detailed, best quality, ultra high res, high resolution, (intricate details), perfect lighting, best shadow, (graffiti wall:1.4), 1 girl, (extremely detailed face and eyes), (shiny big eyes), (shiny graffiti long hair:1.2), ((colorful)), ((colorful illustrations)), face focus, lip gloss, random eyes color,
 ```
 
-```[② 反向提示词]
+```txt [② 反向提示词]
 by bad-picture-chill-75v, nude, porn, nipples, pussy, pornography, canvas frame, cartoon, 3d, ((disfigured)), ((bad art)), ((deformed)),((extra limbs)),((close up)),((b&w)), wierd colors, blurry, (((duplicate))), ((morbid)), ((mutilated)), [out of frame], extra fingers, mutated hands, ((poorly drawn hands)), ((poorly drawn face)), (((mutation))), (((deformed))), ((ugly)), blurry, ((bad anatomy)), (((bad proportions))), ((extra limbs)), cloned face, (((disfigured))), out of frame, ugly, extra limbs, (bad anatomy), gross proportions, (malformed limbs), ((missing arms)), ((missing legs)), (((extra arms))), (((extra legs))), mutated hands, (fused fingers), (too many fingers), (((long neck))), Photoshop, video game, ugly, tiling, poorly drawn hands, poorly drawn feet, poorly drawn face, out of frame, mutation, mutated, extra limbs, extra legs, extra arms, disfigured, deformed, cross-eye, body out of frame, blurry, bad art, bad anatomy, 3d render, background blur, (blurred background),  (briefs), (triangle pants), watermark, astigmatism, scattered light, lens astigmatism, chest light, shiny boobs, glowing boobs, halo, fog, hazy,
 ```
 
-```[③ 采样器]
+```txt [③ 采样器]
 DPM++ SDE Karras
 ```
 
-```[④ 步数]
+```txt [④ 步数]
 30
 ```
 
-```[⑤ 引导系数]
+```txt [⑤ 引导系数]
 9
 ```
 :::
