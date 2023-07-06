@@ -148,7 +148,9 @@ url设置为`http://127.0.0.1:8080/sd.json`即可，点击 加载 即可看到�
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY4ODMwOTUyMDk4MA==688309520980)
 
-然后重启服务即可看到模型
+然后重启服务或者点击刷新
+
+![](https://img.cdn.sugarat.top/mdImg/MTY4ODU3MDA2NDczNA==688570064734)
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY4ODMwOTYxMDkyOA==688309610928)
 
