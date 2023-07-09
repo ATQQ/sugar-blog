@@ -257,6 +257,10 @@ export namespace Theme {
      */
     tabs?: boolean
     works?: UserWorks
+    /**
+     * https://mermaid.js.org/config/setup/modules/mermaidAPI.html#mermaidapi-configuration-defaults for options
+     */
+    mermaid?: any
   }
 
   export interface Config extends DefaultTheme.Config {

@@ -195,6 +195,8 @@ export const blogTheme = getThemeConfig({
   },
   tabs: true,
   works: workConfig
+  // 关闭流程
+  // mermaid: false
 })
 
 export const extraHead: any =
