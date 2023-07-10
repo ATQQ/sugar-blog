@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新💯：① 内置单独的作品展示页组件 ② 修复使用主题默认 Badge 不生效的问题 ③ 解决recommend 和 sidebar 展示冲突 ④ 内置 vitepress-plugin-tabs 能力 ⑤ scrollbar 美化 ⑥ 支持 publish 参数控制文章是否展示
+description: 最近更新 v0.1.33 💯：① 支持markdown流程图 ② 单独的作品页
 author: 粥里有勺糖
 top: 1
 tag: 日志
@@ -14,6 +14,12 @@ publish: true
 ```sh
 pnpm up @sugarat/theme
 ```
+
+## 0.1.33 (2023/07/10)
+
+### Patch Changes
+
+- feat: 流程图支持 ([vitepress-plugin-mermaid](https://github.com/emersonbottero/vitepress-plugin-mermaid/tree/main))
 
 ## 0.1.32 (2023/06/26)
 
