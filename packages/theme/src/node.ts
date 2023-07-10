@@ -178,6 +178,10 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
       }
     }
   }
+  if (cfg) {
+    cfg.mermaid = cfg?.mermaid ?? false
+  }
+
   // 流程图支持
   if (cfg?.mermaid !== false) {
     extraConfig.vite = {
@@ -329,7 +333,11 @@ export function defineConfig(config: UserConfig<Theme.Config>) {
   const resultConfig =
     extendThemeConfig.mermaid === false
       ? config
-      : withMermaid({ ...config, mermaid: extendThemeConfig.mermaid })
+      : withMermaid({
+          ...config,
+          mermaid:
+            extendThemeConfig.mermaid === true ? {} : extendThemeConfig.mermaid
+        })
 
   // 处理markdown插件
   if (!resultConfig.markdown) resultConfig.markdown = {}

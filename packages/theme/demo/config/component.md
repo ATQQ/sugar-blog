@@ -244,6 +244,8 @@ interface UserWork {
 :::
 
 ## Mermaid - 图表
+* Type: `boolean`|`object`
+
 >通过解析类 Markdown 的文本语法来实现图表的创建和动态修改。
 
 :::tip 一点说明
@@ -267,19 +269,19 @@ flowchart TD
   Start --> Stop
 ```
 
-默认开启，可以通过`mermaid`进行进一步配置，或关闭 
+默认关闭，可以通过`mermaid`进行进一步配置，或开启
 
 :::code-group
-```ts [① 进一步配置]
+```ts [① 开启]
+const blogTheme = getThemeConfig({
+  mermaid: true
+})
+```
+```ts [② 进一步配置]
 const blogTheme = getThemeConfig({
   mermaid: {
     // refer https://mermaid.js.org/config/setup/modules/mermaidAPI.html#mermaidapi-configuration-defaults for options
   }
-})
-```
-```ts [② 关闭]
-const blogTheme = getThemeConfig({
-  mermaid: false
 })
 ```
 :::
