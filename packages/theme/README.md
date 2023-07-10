@@ -37,3 +37,6 @@ pnpm build
 * [@vue/theme](https://github.com/vuejs/theme)
 * [vitest](https://vitest.dev/)
 * [element-plus](https://github.com/element-plus/element-plus)
+* [charles7c.github.io](https://github.com/Charles7c/charles7c.github.io)
+* [vitepress-blog-zaun](https://github.com/clark-cui/vitepress-blog-zaun)
+* [surmon](https://surmon.me/)

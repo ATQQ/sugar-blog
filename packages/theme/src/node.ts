@@ -6,6 +6,7 @@ import { execSync, spawn, spawnSync } from 'child_process'
 import path from 'path'
 import type { SiteConfig, UserConfig } from 'vitepress'
 import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
+import { withMermaid } from 'vitepress-plugin-mermaid'
 import { formatDate } from './utils/index'
 import type { Theme } from './composables/config/index'
 
@@ -177,6 +178,17 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
       }
     }
   }
+  // 流程图支持
+  if (cfg?.mermaid !== false) {
+    extraConfig.vite = {
+      ...extraConfig.vite,
+      resolve: {
+        alias: {
+          mermaid: 'mermaid/dist/mermaid.esm.mjs'
+        }
+      }
+    }
+  }
   return {
     themeConfig: {
       blog: {
@@ -309,7 +321,32 @@ export function defineConfig(config: UserConfig<Theme.Config>) {
       console.warn('https://theme.sugarat.top/config/global.html')
     }, 1200)
   }
-  return config
+  // @ts-ignore
+  const extendThemeConfig = config.extends?.themeConfig
+    ?.blog as Theme.BlogConfig
+
+  // 开关支持Mermaid
+  const resultConfig =
+    extendThemeConfig.mermaid === false
+      ? config
+      : withMermaid({ ...config, mermaid: extendThemeConfig.mermaid })
+
+  // 处理markdown插件
+  if (!resultConfig.markdown) resultConfig.markdown = {}
+  // @ts-ignore
+  if (config.extends?.markdown?.config) {
+    const markdownExtendsConfigOriginal =
+      // @ts-ignore
+      config.extends?.markdown?.config
+    const selfMarkdownConfig = resultConfig.markdown?.config
+
+    resultConfig.markdown.config = (...rest: any[]) => {
+      // @ts-ignore
+      selfMarkdownConfig?.(...rest)
+      markdownExtendsConfigOriginal?.(...rest)
+    }
+  }
+  return resultConfig
 }
 
 export { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'

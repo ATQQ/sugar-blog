@@ -1,5 +1,11 @@
 # @sugarat/theme
 
+## 0.1.33
+
+### Patch Changes
+
+- feat: 流程图支持
+
 ## 0.1.32
 
 ### Patch Changes
