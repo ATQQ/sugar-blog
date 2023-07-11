@@ -52,6 +52,12 @@ const blogTheme = getThemeConfig({
       avatar:
         'https://pic.fmcat.top/head.jpg?x-oss-process=image/auto-orient,1/resize,m_fill,w_110,h_110/quality,q_90',
       url: 'https://www.fmcat.top'
+    },
+    {
+      nickname: '张成威的网络日志',
+      des: '知不足而奋进，望远山而前行',
+      avatar: 'https://www.zhangchengwei.work/logo.png',
+      url: 'https://www.zhangchengwei.work'
     }
   ],
   search: false,
