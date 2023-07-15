@@ -30,7 +30,9 @@
     "build:theme": "pnpm --filter '@sugarat/theme' build",
     "build:theme-only": "pnpm --filter '@sugarat/theme' build:node",
     "release": "pnpm build:theme && pnpm release:only",
-    "release:only": "changeset publish"
+    "release:only": "changeset publish",
+    "pc": "pnpm changeset",
+    "pc:version": "pnpm changeset version"
   },
   "repository": {
     "type": "git",
