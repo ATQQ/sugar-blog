@@ -42,6 +42,7 @@ export namespace Theme {
     date: string
     tag?: string[]
     description?: string
+    descriptionHTML?: string
     cover?: string
     hiddenCover?: boolean
     readingTime?: boolean
