@@ -1,5 +1,11 @@
 # @sugarat/theme
 
+## 0.1.35
+
+### Patch Changes
+
+- chore: update quickStart sop
+
 ## 0.1.34
 
 ### Patch Changes
