@@ -5,7 +5,7 @@ readingTime: false
 outline: [2,3]
 tag:
  - 配置
-top: 1
+top: 2
 recommend: 1
 ---
 
@@ -111,12 +111,22 @@ description: 简单介绍主题的由来和实现原理
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MTUyMTExOQ==673181521119)
 
 ### cover
+* Type: `string|boolean`
+
 用于设置文章在首页卡片列表里展示的 `封面信息`
-```md
+::: code-group
+```md [① 设置封面]
 ---
 cover: https://img.cdn.sugarat.top/mdImg/MTY3MzE0Njg5NDY4OQ==673146894689
 ---
 ```
+
+```md [② 不展示封面]
+---
+cover: false
+---
+```
+:::
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4NTk3MDM3OQ==673185970379)
 
@@ -137,7 +147,7 @@ cover: url
 ---
 ```
 
-如果`hiddenCover`为false则不会在文章页展示上述的封面
+如果`hiddenCover`为 true 则不会在文章页展示上述的封面
 
 ### hidden
 

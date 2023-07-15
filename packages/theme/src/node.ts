@@ -84,9 +84,8 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
 
       // 获取封面图
       meta.cover =
-        meta.cover ||
-        fileContent.match(/[!]\[.*?\]\((https:\/\/.+)\)/)?.[1] ||
-        ''
+        meta.cover ??
+        (fileContent.match(/[!]\[.*?\]\((https:\/\/.+)\)/)?.[1] || '')
 
       // 是否发布 默认发布
       if (meta.publish === false) {
