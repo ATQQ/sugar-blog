@@ -8,7 +8,7 @@
 这是一个 monorepo 仓库，目前有如下四个部分
 * [blogpress](./packages/blogpress/)：博客内容本身
 * [@sugarat/theme](./packages/theme/)：博客分离出的通用VitePress主题
-* [主题模板](./packages/template/)：用于快速创建和作者一样风格的博客
+* [创建主题模板项目CLI](./packages/create-theme/)：用于快速创建和作者一样风格的博客
 * [vitepress-plugin-pagefind](./packages/vitepress-plugin-pagefind/)：基于pagefind实现的VitePress离线全文搜索支持插件
 
 ## 运行本项目
