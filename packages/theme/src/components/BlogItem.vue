@@ -151,6 +151,7 @@ const showTime = computed(() => {
   -webkit-box-orient: vertical;
 }
 .description-html {
+  font-size: 14px;
 }
 .badge-list {
   font-size: 13px;

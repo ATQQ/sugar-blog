@@ -110,6 +110,26 @@ description: 简单介绍主题的由来和实现原理
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MTUyMTExOQ==673181521119)
 
+### descriptionHTML
+
+使用自定义的HTML内容设置文章在首页卡片列表里展示的 `描述信息`
+
+```md
+---
+descriptionHTML: '
+<span style="color:var(--description-font-color);">1分钟内完成自己的博客创建</span>
+<pre style="background-color: #292b30; padding: 15px; border-radius: 10px;" class="shiki material-theme-palenight"><code>
+    <span class="line"><span style="color:#FFCB6B;">npm</span><span style="color:#A6ACCD;"> </span><span style="color:#C3E88D;">create</span><span style="color:#A6ACCD;"> </span><span style="color:#C3E88D;">@sugarat/theme@latest</span></span>
+</code>
+</pre>'
+---
+
+![](https://img.cdn.sugarat.top/mdImg/MTY4OTQzMTQyMzE1MA==689431423150)
+
+# 快速开始
+
+```
+
 ### cover
 * Type: `string|boolean`
 
