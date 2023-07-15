@@ -15,6 +15,20 @@ publish: true
 pnpm up @sugarat/theme
 ```
 
+## 0.1.35
+
+### Patch Changes
+
+- feat: 新的项目创建方式使用 [@sugarat/create-theme](https://github.com/ATQQ/sugar-blog/tree/master/packages/create-theme) 快速创建模板项目
+- feat: 支持使用自定义的HTML内容设置文章在首页卡片列表里展示的 `描述信息`
+- feat: 支持使用 `cover:false` 隐藏首页展示的封面
+
+## 0.1.34
+
+### Patch Changes
+
+- chore: 流程图dev启动报错，不默认开启
+
 ## 0.1.33 (2023/07/10)
 
 ### Patch Changes
