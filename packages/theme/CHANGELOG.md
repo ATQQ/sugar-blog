@@ -1,5 +1,13 @@
 # @sugarat/theme
 
+## 0.1.35
+
+### Patch Changes
+
+- chore: update quickStart sop
+- feat: Add support for rendering HTML in blog descriptions
+- fix: logic for getting theme cover image
+
 ## 0.1.34
 
 ### Patch Changes

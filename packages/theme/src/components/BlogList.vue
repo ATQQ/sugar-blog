@@ -5,6 +5,7 @@
         :route="v.route"
         :title="v.meta.title"
         :description="v.meta.description"
+        :description-h-t-m-l="v.meta.descriptionHTML"
         :date="v.meta.date"
         :tag="v.meta.tag"
         :cover="v.meta.cover"

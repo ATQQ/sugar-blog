@@ -9,7 +9,12 @@
         <!-- 标题 -->
         <p class="title" v-if="!inMobile">{{ title }}</p>
         <!-- 简短描述 -->
-        <p class="description" v-if="!!description">{{ description }}</p>
+        <p class="description" v-if="!descriptionHTML && !!description">
+          {{ description }}
+        </p>
+        <template v-if="descriptionHTML">
+          <div class="description-html" v-html="descriptionHTML"></div>
+        </template>
         <!-- 底部补充描述 -->
         <div class="badge-list" v-if="!inMobile">
           <span class="split" v-if="author">{{ author }}</span>
@@ -47,15 +52,29 @@ const props = defineProps<{
   date: string | Date
   sticky?: number
   description?: string
+  descriptionHTML?: string
   tag?: string[]
   author?: string
-  cover?: string
+  cover?: string | boolean
   pin?: number
 }>()
 
 const showTime = computed(() => {
   return formatShowDate(props.date)
 })
+
+// function isWrappedWithPreventDefault(element: HTMLElement) {
+//   let parent = element.parentElement
+
+//   while (parent) {
+//     if (parent.hasAttribute('preventDefault')) {
+//       return true
+//     }
+//     parent = parent.parentElement
+//   }
+
+//   return false
+// }
 </script>
 
 <style lang="scss" scoped>
@@ -130,6 +149,9 @@ const showTime = computed(() => {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+}
+.description-html {
+  font-size: 14px;
 }
 .badge-list {
   font-size: 13px;
