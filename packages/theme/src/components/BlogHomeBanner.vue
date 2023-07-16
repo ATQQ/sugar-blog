@@ -10,9 +10,9 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useData } from 'vitepress'
-import { useHomeConfig, useBlogConfig } from '../composables/config/blog'
+import { useBlogConfig } from '../composables/config/blog'
 
 const { site, frontmatter } = useData()
 const { home } = useBlogConfig()
@@ -21,34 +21,61 @@ const name = computed(
   () => (frontmatter.value.blog?.name ?? site.value.title) || home?.name || ''
 )
 const motto = computed(() => frontmatter.value.blog?.motto || home?.motto || '')
-const initInspiring = ref<string>(
-  frontmatter.value.blog?.inspiring || home?.inspiring || ''
+
+const inspiring = ref('')
+const inspiringList = computed<string[]>(() => {
+  return [
+    ...new Set(
+      [frontmatter.value.blog?.inspiring, home?.inspiring]
+        .flat()
+        .filter((v) => !!v)
+    )
+  ]
+})
+const inspiringIndex = ref<number>(-1)
+const inspiringTimeout = computed<number>(
+  () => frontmatter.value.blog?.inspiringTimeout || home?.inspiringTimeout || 0
 )
-const inspiring = computed({
-  get() {
-    return initInspiring.value
-  },
-  set(newValue) {
-    initInspiring.value = newValue
+
+watch(inspiringTimeout, () => {
+  startTimer()
+})
+const timer = ref<any>(0)
+const startTimer = () => {
+  if (timer.value) {
+    clearTimeout(timer.value)
+  }
+  if (inspiringTimeout.value > 0) {
+    timer.value = setTimeout(() => {
+      changeSlogan()
+    }, inspiringTimeout.value)
+  }
+}
+onMounted(() => {
+  changeSlogan()
+})
+
+onUnmounted(() => {
+  if (timer.value) {
+    clearTimeout(timer.value)
   }
 })
 
-const homeConfig = useHomeConfig()
-
 const changeSlogan = async () => {
-  if (typeof homeConfig?.handleChangeSlogan !== 'function') {
-    return
-  }
-  const newSlogan = await homeConfig.handleChangeSlogan(inspiring.value)
-  if (typeof newSlogan !== 'string' || !newSlogan.trim()) {
-    return
-  }
+  // 顺手启动定时器
+  startTimer()
+
+  if (inspiringList.value.length < 1) return
+
+  inspiringIndex.value = (inspiringIndex.value + 1) % inspiringList.value.length
+  const newValue = inspiringList.value[inspiringIndex.value]
+  if (newValue === inspiring.value) return
 
   // 重新渲染数据，同时触发动画
   inspiring.value = ''
-  setTimeout(async () => {
-    inspiring.value = newSlogan
-  })
+  setTimeout(() => {
+    inspiring.value = newValue
+  }, 100)
 }
 </script>
 <style lang="scss" scoped>

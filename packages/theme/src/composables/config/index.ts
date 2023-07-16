@@ -116,7 +116,8 @@ export namespace Theme {
   export interface HomeBlog {
     name?: string
     motto?: string
-    inspiring?: string
+    inspiring?: string | string[]
+    inspiringTimeout?: number
     pageSize?: number
   }
 
@@ -269,6 +270,10 @@ export namespace Theme {
     blog?: BlogConfig
   }
   export interface HomeConfig {
+    /**
+     * @deprecated
+     * 此方法已经废弃，这个定义将在未来某一刻被移除，请为 inspiring 配置数租来实现相同的效果
+     */
     handleChangeSlogan?: (oldSlogan: string) => string | Promise<string>
   }
 }
