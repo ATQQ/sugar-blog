@@ -1,0 +1,13 @@
+{
+  "mode": "pre",
+  "tag": "beta",
+  "initialVersions": {
+    "blogpress": "2.0.0",
+    "@sugarat/create-theme": "0.0.4",
+    "@sugarat/theme": "0.1.35",
+    "vitepress-plugin-pagefind": "0.2.4"
+  },
+  "changesets": [
+    "selfish-worms-judge"
+  ]
+}

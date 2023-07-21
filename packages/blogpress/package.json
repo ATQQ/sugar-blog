@@ -14,7 +14,7 @@
   "license": "MIT",
   "dependencies": {
     "@element-plus/icons-vue": "^2.1.0",
-    "@sugarat/theme": "^0.1.30",
+    "@sugarat/theme": "0.1.36-beta.0",
     "@vueuse/core": "^9.6.0",
     "axios": "^0.27.2",
     "clipboard-copy": "^4.0.1",

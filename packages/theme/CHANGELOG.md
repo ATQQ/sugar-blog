@@ -1,5 +1,11 @@
 # @sugarat/theme
 
+## 0.1.36-beta.0
+
+### Patch Changes
+
+- chore: merpaid
+
 ## 0.1.35
 
 ### Patch Changes
