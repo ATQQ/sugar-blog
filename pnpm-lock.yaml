@@ -53,7 +53,7 @@ importers:
         specifier: ^2.1.0
         version: 2.1.0(vue@3.2.45)
       '@sugarat/theme':
-        specifier: 0.1.36-beta.0
+        specifier: 0.1.36-beta.1
         version: link:../theme
       '@vueuse/core':
         specifier: ^9.6.0
