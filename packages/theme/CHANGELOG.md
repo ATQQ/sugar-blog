@@ -1,5 +1,12 @@
 # @sugarat/theme
 
+## 0.1.36
+
+### Patch Changes
+
+- feat: 默认开启 Mermaid 流程图支持
+- fix: vitepress-plugin-mermaid 报错
+
 ## 0.1.36-beta.2
 
 ### Patch Changes
