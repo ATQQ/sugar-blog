@@ -25,6 +25,7 @@ pnpm up @sugarat/theme
 ### Patch Changes
 
 - feat: 默认开启 Mermaid 流程图支持
+- feat: blog.inspiring 支持设置维数组，同时支持设置 inspiringTimeout 来实现自动切换
 - fix: vitepress-plugin-mermaid 报错
 
 ## 0.1.35 (2023/07/15)
