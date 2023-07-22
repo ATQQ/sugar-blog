@@ -178,19 +178,11 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
 
   // 流程图支持
   if (cfg) {
-    cfg.mermaid = cfg?.mermaid ?? false
+    cfg.mermaid = cfg?.mermaid ?? true
   }
   if (cfg?.mermaid !== false) {
     const { MermaidMarkdown } = require('vitepress-plugin-mermaid')
     markdownPlugin.push(MermaidMarkdown)
-    // extraConfig.vite = {
-    //   ...extraConfig.vite,
-    //   resolve: {
-    //     alias: {
-    //       mermaid: 'mermaid/dist/mermaid.esm.mjs'
-    //     }
-    //   }
-    // }
   }
 
   // 注册markdown插件

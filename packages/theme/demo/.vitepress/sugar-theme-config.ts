@@ -194,8 +194,7 @@ export const blogTheme = getThemeConfig({
     heading: 'Total: {{searchResult}} search results.'
   },
   tabs: true,
-  works: workConfig,
-  mermaid: true
+  works: workConfig
 })
 
 export const extraHead: any =

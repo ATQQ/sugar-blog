@@ -1,5 +1,12 @@
 # blogpress
 
+## 2.0.2
+
+### Patch Changes
+
+- Updated dependencies
+  - @sugarat/theme@0.1.37
+
 ## 2.0.1
 
 ### Patch Changes

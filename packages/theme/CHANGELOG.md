@@ -1,5 +1,11 @@
 # @sugarat/theme
 
+## 0.1.37
+
+### Patch Changes
+
+- chore: 默认打开流程图支持
+
 ## 0.1.36
 
 ### Patch Changes
