@@ -1,6 +1,6 @@
 {
   "name": "@sugarat/theme",
-  "version": "0.1.36-beta.1",
+  "version": "0.1.36-beta.2",
   "description": "简约风的 Vitepress 博客主题，sugarat vitepress blog theme",
   "main": "src/index.ts",
   "exports": {
@@ -38,7 +38,7 @@
     "dev:node": "npx tsup src/node.ts --dts --out-dir=./ --watch",
     "build": "npm run build:node && npm run build:docs",
     "build:docs": "vitepress build demo",
-    "build:node": "npx tsup src/node.ts --dts --out-dir=./",
+    "build:node": "npx tsup src/node.ts --dts --out-dir=./ --external vitepress-plugin-mermaid",
     "serve": "vitepress serve demo"
   },
   "dependencies": {

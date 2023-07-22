@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 /* eslint-disable prefer-rest-params */
 import glob from 'fast-glob'
 import matter from 'gray-matter'
@@ -6,7 +7,6 @@ import { execSync, spawn, spawnSync } from 'child_process'
 import path from 'path'
 import type { SiteConfig, UserConfig } from 'vitepress'
 import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
-import { MermaidMarkdown, MermaidPlugin } from 'vitepress-plugin-mermaid'
 import { formatDate } from './utils/index'
 import type { Theme } from './composables/config/index'
 
@@ -181,6 +181,7 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
     cfg.mermaid = cfg?.mermaid ?? false
   }
   if (cfg?.mermaid !== false) {
+    const { MermaidMarkdown } = require('vitepress-plugin-mermaid')
     markdownPlugin.push(MermaidMarkdown)
     // extraConfig.vite = {
     //   ...extraConfig.vite,
@@ -321,31 +322,26 @@ export function assignMermaid(config: any) {
 
   if (!config.vite) config.vite = {}
   if (!config.vite.plugins) config.vite.plugins = []
+  const { MermaidPlugin } = require('vitepress-plugin-mermaid')
   config.vite.plugins.push(MermaidPlugin(config.mermaid))
-  if (!config.vite.optimizeDeps) config.vite.optimizeDeps = {}
-  config.vite.optimizeDeps = {
-    ...config.vite.optimizeDeps,
-    include: [
-      '@braintree/sanitize-url',
-      'dayjs',
-      'debug',
-      'cytoscape-cose-bilkent',
-      'cytoscape'
-    ]
-  }
   if (!config.vite.resolve) config.vite.resolve = {}
   if (!config.vite.resolve.alias) config.vite.resolve.alias = {}
 
-  config.vite.resolve.alias = {
-    ...config.vite.resolve.alias,
-    'dayjs/plugin/advancedFormat.js': 'dayjs/esm/plugin/advancedFormat',
-    'dayjs/plugin/customParseFormat.js': 'dayjs/esm/plugin/customParseFormat',
-    'dayjs/plugin/isoWeek.js': 'dayjs/esm/plugin/isoWeek',
-    'cytoscape/dist/cytoscape.umd.js': 'cytoscape/dist/cytoscape.esm.js',
-    mermaid: 'mermaid/dist/mermaid.esm.mjs'
-  }
+  config.vite.resolve.alias = [
+    ...aliasObjectToArray({
+      ...config.vite.resolve.alias,
+      'cytoscape/dist/cytoscape.umd.js': 'cytoscape/dist/cytoscape.esm.js',
+      mermaid: 'mermaid/dist/mermaid.esm.mjs'
+    }),
+    { find: /^dayjs\/(.*).js/, replacement: 'dayjs/esm/$1' }
+  ]
 }
-
+function aliasObjectToArray(obj: Record<string, string>) {
+  return Object.entries(obj).map(([find, replacement]) => ({
+    find,
+    replacement
+  }))
+}
 export function defineConfig(config: UserConfig<Theme.Config>): any {
   // 兼容低版本主题配置
   // @ts-ignore

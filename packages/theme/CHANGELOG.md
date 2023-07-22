@@ -1,5 +1,11 @@
 # @sugarat/theme
 
+## 0.1.36-beta.2
+
+### Patch Changes
+
+- fix: mermaid error
+
 ## 0.1.36-beta.1
 
 ### Patch Changes

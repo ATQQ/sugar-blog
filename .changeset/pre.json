@@ -1,6 +1,6 @@
 {
   "mode": "pre",
-  "tag": "exit",
+  "tag": "beta",
   "initialVersions": {
     "blogpress": "2.0.1-beta.0",
     "@sugarat/create-theme": "0.0.4",
@@ -8,6 +8,7 @@
     "vitepress-plugin-pagefind": "0.2.4"
   },
   "changesets": [
+    "few-seals-whisper",
     "selfish-worms-judge",
     "violet-dots-explode"
   ]
