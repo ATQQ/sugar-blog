@@ -1,6 +1,6 @@
 {
   "name": "blogpress",
-  "version": "2.0.0",
+  "version": "2.0.1-beta.0",
   "description": "",
   "main": "index.js",
   "private": true,
@@ -14,7 +14,7 @@
   "license": "MIT",
   "dependencies": {
     "@element-plus/icons-vue": "^2.1.0",
-    "@sugarat/theme": "0.1.36-beta.0",
+    "@sugarat/theme": "0.1.36-beta.1",
     "@vueuse/core": "^9.6.0",
     "axios": "^0.27.2",
     "clipboard-copy": "^4.0.1",

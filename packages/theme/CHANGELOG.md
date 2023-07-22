@@ -1,5 +1,11 @@
 # @sugarat/theme
 
+## 0.1.36-beta.1
+
+### Patch Changes
+
+- chore: devDependencies
+
 ## 0.1.36-beta.0
 
 ### Patch Changes

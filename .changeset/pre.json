@@ -1,13 +1,14 @@
 {
   "mode": "pre",
-  "tag": "beta",
+  "tag": "exit",
   "initialVersions": {
-    "blogpress": "2.0.0",
+    "blogpress": "2.0.1-beta.0",
     "@sugarat/create-theme": "0.0.4",
-    "@sugarat/theme": "0.1.35",
+    "@sugarat/theme": "0.1.36-beta.1",
     "vitepress-plugin-pagefind": "0.2.4"
   },
   "changesets": [
-    "selfish-worms-judge"
+    "selfish-worms-judge",
+    "violet-dots-explode"
   ]
 }
