@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新 v0.1.33 💯：① 默认开启markdown流程图支持
+description: 最近更新 v0.1.37 💯：① 默认开启markdown流程图支持
 author: 粥里有勺糖
 top: 2
 tag: 日志
