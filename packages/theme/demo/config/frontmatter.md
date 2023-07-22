@@ -55,7 +55,8 @@ blog:
 interface HomeBlog {
   name?: string
   motto?: string
-  inspiring?: string
+  inspiring?: string | string[]
+  inspiringTimeout?: number
   pageSize?: number
 }
 ```
@@ -67,6 +68,35 @@ interface HomeBlog {
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MDczMzQ2OQ==673180733469)
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMDIwMzE5MQ==674920203192)
+
+其中`inspiring`可以是一个数组，点击的时候就会按照设定顺序切换
+
+```md
+---
+# 省略其它配置
+blog:
+ name: '@sugarat/theme'
+ motto: 粥里有勺糖的博客主题
+ inspiring:
+  - 基于 Vitepress 定制的主题🎨
+  - 千万不要因为走得太久，而忘记了我们为什么出发
+  - 人生就像一场修行，你不可能一开始就修成正果
+---
+```
+
+![](https://img.cdn.sugarat.top/mdImg/MTY4OTQ5NjEyMDIxMg==689496120212)
+
+也可以设置`inspiringTimeout`，实现自动切换
+
+```md
+---
+blog:
+ # 省略其它配置
+ inspiringTimeout: 1000
+---
+```
+
+![](https://img.cdn.sugarat.top/mdImg/MTY4OTQ5NjQxNDA3Nw==689496414077)
 
 ## Article
 ### title
@@ -123,12 +153,9 @@ descriptionHTML: '
 </code>
 </pre>'
 ---
+```
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY4OTQzMTQyMzE1MA==689431423150)
-
-# 快速开始
-
-```
 
 ### cover
 * Type: `string|boolean`

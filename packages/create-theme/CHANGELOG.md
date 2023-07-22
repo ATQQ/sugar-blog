@@ -1,10 +1,16 @@
 # @sugarat/create-theme
 
+## 0.0.5
+
+### Patch Changes
+
+- feat: 默认模板更新
+
 ## 0.0.4
 
 ### Patch Changes
 
-- chore: 修改package.json中描述信息
+- chore: 修改 package.json 中描述信息
 
 ## 0.0.3
 

@@ -24,10 +24,12 @@ sticky: 1
 * 阅读时间计算
 * 全局的提示弹窗 (由 el-alert 驱动)
 * 全局的公告弹窗，支持设置图片，文字，按钮
+* 作品聚合页（为个人作品提供一个展示）
+* tabs（[vitepress-plugin-tabs](https://vitepress-plugins.sapphi.red/tabs/)）
+* 流程图（[vitepress-plugin-mermaid](https://github.com/emersonbottero/vitepress-plugin-mermaid#readme)）
 
 ## 规划中功能
 * Valine 评论系统
-* 作品聚合页（为个人作品提供一个展示）
 * 文章合集（类似于聚合一个内容专题）
 * 更多可定制的主题样式
 * RSS
@@ -43,11 +45,11 @@ sticky: 1
 * [reco](https://vuepress-theme-reco.recoluan.com/)
 * [掘金](https://juejin.cn/)
 * [surmon](https://surmon.me/) 
-* [查尔斯的知识库](https://blog.charles7c.top/)
 * [@vue/theme](https://github.com/vuejs/theme)
 * [vitest](https://vitest.dev/)
 * [element-plus](https://element-plus.gitee.io/zh-CN/)
-
+* [charles7c.github.io](https://github.com/Charles7c/charles7c.github.io)
+* [vitepress-blog-zaun](https://github.com/clark-cui/vitepress-blog-zaun)
 
 ## 主题相关资源
 * 主题地址：https://theme.sugarat.top/

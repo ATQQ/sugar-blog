@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新 v0.1.33 💯：① 支持markdown流程图 ② 单独的作品页
+description: 最近更新 v0.1.33 💯：① 默认开启markdown流程图支持
 author: 粥里有勺糖
 top: 2
 tag: 日志
@@ -14,8 +14,21 @@ publish: true
 ```sh
 pnpm up @sugarat/theme
 ```
+## 0.1.37 (2023/07/22)
 
-## 0.1.35
+### Patch Changes
+
+- chore: 默认打开流程图支持
+
+## 0.1.36 (2023/07/22)
+
+### Patch Changes
+
+- feat: 默认开启 Mermaid 流程图支持
+- feat: blog.inspiring 支持设置维数组，同时支持设置 inspiringTimeout 来实现自动切换
+- fix: vitepress-plugin-mermaid 报错
+
+## 0.1.35 (2023/07/15)
 
 ### Patch Changes
 
@@ -23,7 +36,7 @@ pnpm up @sugarat/theme
 - feat: 支持使用自定义的HTML内容设置文章在首页卡片列表里展示的 `描述信息`
 - feat: 支持使用 `cover:false` 隐藏首页展示的封面
 
-## 0.1.34
+## 0.1.34 (2023/07/15)
 
 ### Patch Changes
 

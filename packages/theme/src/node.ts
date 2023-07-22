@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 /* eslint-disable prefer-rest-params */
 import glob from 'fast-glob'
 import matter from 'gray-matter'
@@ -6,7 +7,6 @@ import { execSync, spawn, spawnSync } from 'child_process'
 import path from 'path'
 import type { SiteConfig, UserConfig } from 'vitepress'
 import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
-import { withMermaid } from 'vitepress-plugin-mermaid'
 import { formatDate } from './utils/index'
 import type { Theme } from './composables/config/index'
 
@@ -170,25 +170,28 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
       ]
     }
   }
+  const markdownPlugin: any[] = []
+  // tabs支持
   if (cfg?.tabs) {
-    extraConfig.markdown = {
-      config(md: any) {
-        tabsMarkdownPlugin(md)
-      }
-    }
-  }
-  if (cfg) {
-    cfg.mermaid = cfg?.mermaid ?? false
+    markdownPlugin.push(tabsMarkdownPlugin)
   }
 
   // 流程图支持
+  if (cfg) {
+    cfg.mermaid = cfg?.mermaid ?? true
+  }
   if (cfg?.mermaid !== false) {
-    extraConfig.vite = {
-      ...extraConfig.vite,
-      resolve: {
-        alias: {
-          mermaid: 'mermaid/dist/mermaid.esm.mjs'
-        }
+    const { MermaidMarkdown } = require('vitepress-plugin-mermaid')
+    markdownPlugin.push(MermaidMarkdown)
+  }
+
+  // 注册markdown插件
+  if (markdownPlugin.length) {
+    extraConfig.markdown = {
+      config(...rest: any[]) {
+        markdownPlugin.forEach((plugin) => {
+          plugin?.(...rest)
+        })
       }
     }
   }
@@ -306,7 +309,32 @@ function getTextSummary(text: string, count = 100) {
   )
 }
 
-export function defineConfig(config: UserConfig<Theme.Config>) {
+export function assignMermaid(config: any) {
+  if (!config.mermaid) return
+
+  if (!config.vite) config.vite = {}
+  if (!config.vite.plugins) config.vite.plugins = []
+  const { MermaidPlugin } = require('vitepress-plugin-mermaid')
+  config.vite.plugins.push(MermaidPlugin(config.mermaid))
+  if (!config.vite.resolve) config.vite.resolve = {}
+  if (!config.vite.resolve.alias) config.vite.resolve.alias = {}
+
+  config.vite.resolve.alias = [
+    ...aliasObjectToArray({
+      ...config.vite.resolve.alias,
+      'cytoscape/dist/cytoscape.umd.js': 'cytoscape/dist/cytoscape.esm.js',
+      mermaid: 'mermaid/dist/mermaid.esm.mjs'
+    }),
+    { find: /^dayjs\/(.*).js/, replacement: 'dayjs/esm/$1' }
+  ]
+}
+function aliasObjectToArray(obj: Record<string, string>) {
+  return Object.entries(obj).map(([find, replacement]) => ({
+    find,
+    replacement
+  }))
+}
+export function defineConfig(config: UserConfig<Theme.Config>): any {
   // 兼容低版本主题配置
   // @ts-ignore
   if (config.themeConfig?.themeConfig) {
@@ -332,11 +360,12 @@ export function defineConfig(config: UserConfig<Theme.Config>) {
   const resultConfig =
     extendThemeConfig.mermaid === false
       ? config
-      : withMermaid({
+      : {
           ...config,
           mermaid:
             extendThemeConfig.mermaid === true ? {} : extendThemeConfig.mermaid
-        })
+        }
+  assignMermaid(resultConfig)
 
   // 处理markdown插件
   if (!resultConfig.markdown) resultConfig.markdown = {}

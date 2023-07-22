@@ -1,5 +1,36 @@
 # @sugarat/theme
 
+## 0.1.37
+
+### Patch Changes
+
+- chore: 默认打开流程图支持
+
+## 0.1.36
+
+### Patch Changes
+
+- feat: 默认开启 Mermaid 流程图支持
+- fix: vitepress-plugin-mermaid 报错
+
+## 0.1.36-beta.2
+
+### Patch Changes
+
+- fix: mermaid error
+
+## 0.1.36-beta.1
+
+### Patch Changes
+
+- chore: devDependencies
+
+## 0.1.36-beta.0
+
+### Patch Changes
+
+- chore: merpaid
+
 ## 0.1.35
 
 ### Patch Changes
