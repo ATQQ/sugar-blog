@@ -38,7 +38,7 @@
     "dev:node": "npx tsup src/node.ts --dts --out-dir=./ --watch",
     "build": "npm run build:node && npm run build:docs",
     "build:docs": "vitepress build demo",
-    "build:node": "npx tsup src/node.ts --dts --out-dir=./ --external vitepress-plugin-mermaid",
+    "build:node": "npx tsup src/node.ts --dts --out-dir=./",
     "serve": "vitepress serve demo"
   },
   "dependencies": {
@@ -48,12 +48,12 @@
     "fast-glob": "^3.2.12",
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.7.0",
-    "vue-command-palette": "^0.1.4"
-  },
-  "devDependencies": {
+    "vue-command-palette": "^0.1.4",
     "@mermaid-js/mermaid-mindmap": "^9.3.0",
     "mermaid": "^10.2.4",
-    "vitepress-plugin-mermaid": "^2.0.13",
+    "vitepress-plugin-mermaid": "^2.0.13"
+  },
+  "devDependencies": {
     "@element-plus/icons-vue": "^2.1.0",
     "element-plus": "^2.3.4",
     "sass": "^1.56.1",
