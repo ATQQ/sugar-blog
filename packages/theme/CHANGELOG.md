@@ -1,5 +1,11 @@
 # @sugarat/theme
 
+## 0.1.38
+
+### Patch Changes
+
+- fix: 搜索默认情况下无法展示 index.md 内容
+
 ## 0.1.37
 
 ### Patch Changes
