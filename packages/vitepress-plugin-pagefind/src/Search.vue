@@ -249,11 +249,12 @@ watch(
             search.results.map((v: any) => v.data())
           )
           let newSearchResult = []
+          // TODO：未来优化，避免O(n^2)
           if (searchOptimization.value) {
             // 仅展示检索到的路由结果
             docs.value.forEach((v) => {
               const match = result.find((r) =>
-                r.url.startsWith(withBase(v.route))
+                r.url.startsWith(withBase(v.route.replace(/index$/, '')))
               )
               if (match) {
                 newSearchResult.push({
@@ -269,7 +270,7 @@ watch(
             // 展示所有pagefind结果
             newSearchResult = result.map((r) => {
               const match = docs.value.find((d) =>
-                r.url.startsWith(withBase(d.route))
+                r.url.startsWith(withBase(d.route.replace(/index$/, '')))
               )
               if (match) {
                 return {

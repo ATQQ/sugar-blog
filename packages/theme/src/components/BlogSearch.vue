@@ -32,7 +32,7 @@
             <Command.Group v-else :heading="headingText">
               <Command.Item
                 v-for="item in searchResult"
-                :data-value="withBase(item.route)"
+                :data-value="item.route"
                 :key="item.route"
                 @select="handleSelect"
               >
@@ -185,6 +185,13 @@ onMounted(() => {
 const searchModal = ref(false)
 const searchWords = ref('')
 const docs = useArticles()
+const docsMap = computed(() => {
+  const map = new Map<string, Theme.PageData.meta>()
+  docs.value.forEach((doc) => {
+    map.set(withBase(doc.route.replace(/index$/, '')), doc.meta)
+  })
+  return map
+})
 
 const keys = useMagicKeys({
   passive: false,
@@ -257,19 +264,25 @@ watch(
             const result = await Promise.all(
               search.results.map((v: any) => v.data())
             )
-            searchResult.value = []
-            docs.value.forEach((v) => {
-              const match = result.find((r) =>
-                r.url.startsWith(withBase(v.route))
-              )
-              if (match) {
-                searchResult.value.push({
-                  ...v,
+            searchResult.value = result.map((result) => {
+              const { url, excerpt } = result
+              const targetRoute = url.replace(/\.html$/, '')
+              const meta = docsMap.value.get(targetRoute)
+              if (meta) {
+                return {
+                  route: targetRoute,
                   meta: {
-                    ...v.meta,
-                    description: match.excerpt
+                    ...meta,
+                    description: excerpt
                   }
-                })
+                }
+              }
+              return {
+                route: url,
+                meta: {
+                  ...result.meta,
+                  description: excerpt
+                }
               }
             })
           })

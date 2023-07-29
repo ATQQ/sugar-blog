@@ -32,7 +32,7 @@ const { Layout } = Theme
       <BlogImagePreview />
     </template>
 
-    <!-- 自定义搜索，临时替代Algolia -->
+    <!-- 自定义搜索，替代Algolia，未来择机移除 -->
     <template #nav-bar-content-before>
       <BlogSearch />
     </template>

@@ -70,7 +70,7 @@ export default defineConfig({
     ],
     editLink: {
       pattern:
-        'https://github.com/ATQQ/sugar-blog/tree/master/packages/theme/demo/:path',
+        'https://github.com/ATQQ/sugar-blog/tree/master/packages/theme/docs/:path',
       text: '去 GitHub 上编辑内容'
     },
     lastUpdatedText: '上次更新于'

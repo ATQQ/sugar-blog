@@ -1,5 +1,11 @@
 # vitepress-plugin-pagefind
 
+## 0.2.5
+
+### Patch Changes
+
+- fix: 搜索默认情况下无法展示 index.md 内容
+
 ## 0.2.4
 
 ### Patch Changes
