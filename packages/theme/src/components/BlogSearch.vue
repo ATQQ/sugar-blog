@@ -258,9 +258,10 @@ watch(
               search.results.map((v: any) => v.data())
             )
             searchResult.value = []
+            // TODO：未来优化，避免O(n^2)
             docs.value.forEach((v) => {
               const match = result.find((r) =>
-                r.url.startsWith(withBase(v.route))
+                r.url.startsWith(withBase(v.route.replace(/index$/, '')))
               )
               if (match) {
                 searchResult.value.push({
