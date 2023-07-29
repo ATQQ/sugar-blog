@@ -14,7 +14,7 @@ const destDir = ''
 await $`pnpm build:theme`
 
 await $`echo ==🔧 压缩dist ==`
-await $`cd packages/theme/demo/.vitepress && tar -zvcf ${compressPkgName} dist && rm -rf dist && mv ${compressPkgName} ./../../../../`
+await $`cd packages/theme/docs/.vitepress && tar -zvcf ${compressPkgName} dist && rm -rf dist && mv ${compressPkgName} ./../../../../`
 
 await $`echo ==🚀 上传到服务器 ==`
 await $`scp ${compressPkgName} ${user}@${origin}:./`
