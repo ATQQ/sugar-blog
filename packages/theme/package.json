@@ -34,24 +34,24 @@
   },
   "scripts": {
     "dev": "npm run build:node && npm run dev:docs",
-    "dev:docs": "vitepress dev demo",
+    "dev:docs": "vitepress dev docs",
     "dev:node": "npx tsup src/node.ts --dts --out-dir=./ --watch",
     "build": "npm run build:node && npm run build:docs",
-    "build:docs": "vitepress build demo",
+    "build:docs": "vitepress build docs",
     "build:node": "npx tsup src/node.ts --dts --out-dir=./",
-    "serve": "vitepress serve demo"
+    "serve": "vitepress serve docs"
   },
   "dependencies": {
     "@mdit-vue/shared": "^0.12.0",
+    "@mermaid-js/mermaid-mindmap": "^9.3.0",
     "@vue/shared": "^3.2.45",
     "@vueuse/core": "^9.6.0",
     "fast-glob": "^3.2.12",
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.7.0",
-    "vue-command-palette": "^0.1.4",
-    "@mermaid-js/mermaid-mindmap": "^9.3.0",
     "mermaid": "^10.2.4",
-    "vitepress-plugin-mermaid": "^2.0.13"
+    "vitepress-plugin-mermaid": "^2.0.13",
+    "vue-command-palette": "^0.1.4"
   },
   "devDependencies": {
     "@element-plus/icons-vue": "^2.1.0",
