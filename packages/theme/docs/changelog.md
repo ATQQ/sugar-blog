@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新 v0.1.37 💯：① 默认开启markdown流程图支持
+description: 最近更新 v0.1.38 💯：① 修复搜索结果不包含 index.md 内容
 author: 粥里有勺糖
 top: 2
 tag: 日志
@@ -14,6 +14,12 @@ publish: true
 ```sh
 pnpm up @sugarat/theme
 ```
+## 0.1.38 (2023/07/29)
+
+### Patch Changes
+
+- fix: 搜索默认情况下无法展示 index.md 内容
+
 ## 0.1.37 (2023/07/22)
 
 ### Patch Changes
