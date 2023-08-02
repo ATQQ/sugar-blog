@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.7
+
+### Patch Changes
+
+- fix: vitepress error
+
 ## 0.0.6
 
 ### Patch Changes
