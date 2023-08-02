@@ -6,7 +6,7 @@
   >
     <!-- 头部 -->
     <div class="card-header">
-      <span class="title">{{ title }}</span>
+      <span class="title" v-if="title">{{ title }}</span>
       <el-button
         v-if="showChangeBtn"
         size="small"
@@ -47,7 +47,6 @@
 
 <script lang="ts" setup>
 import { ref, computed } from 'vue'
-import { ElButton, ElLink } from 'element-plus'
 import { useRoute, withBase } from 'vitepress'
 import { formatShowDate } from '../utils/index'
 import { useArticles, useBlogConfig } from '../composables/config/blog'
@@ -57,7 +56,7 @@ const { recommend: _recommend } = useBlogConfig()
 const recommend = computed(() =>
   _recommend === false ? undefined : _recommend
 )
-const title = computed(() => recommend.value?.title || '🔍 相关文章')
+const title = computed(() => recommend.value?.title ?? '🔍 相关文章')
 const pageSize = computed(() => recommend.value?.pageSize || 9)
 const nextText = computed(() => recommend.value?.nextText || '换一组')
 const emptyText = computed(() => recommend.value?.empty ?? '暂无推荐文章')

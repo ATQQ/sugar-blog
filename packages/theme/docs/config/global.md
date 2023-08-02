@@ -419,7 +419,7 @@ interface RecommendArticle {
   empty?: string | boolean
   /**
    * 是否展示当前正在浏览的文章在左侧
-   * @default false
+   * @default true
    */
   showSelf?: boolean;
   /**

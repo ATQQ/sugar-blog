@@ -106,11 +106,16 @@ export namespace Theme {
     nextText?: string
     /**
      * 是否展示当前正在浏览的文章在左侧
-     * @default false
+     * @default true
      */
     showSelf?: boolean
     filter?: (page: Theme.PageData) => boolean
     empty?: string | boolean
+    /**
+     * 设置推荐文章的展示风格
+     * @default 'card'
+     */
+    style?: 'card' | 'sidebar'
   }
 
   export interface HomeBlog {
