@@ -45,7 +45,6 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
 
       const fileContent = fs.readFileSync(v, 'utf-8')
 
-      // TODO: 支持JSON
       const meta: Partial<Theme.PageMeta> = {
         ...matter(fileContent).data
       }
