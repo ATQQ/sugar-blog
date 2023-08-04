@@ -278,6 +278,11 @@ interface SearchConfig {
    */
   showDate?: boolean
   /**
+   * Set the time zone for parsing date in frontmatter
+   * @default 8 => 'UTC+8'
+   */
+  timeZone?: number
+  /**
    * i18n
    */
   locales?: Record<string, Omit<SearchConfig, 'locales'>>

@@ -1,5 +1,13 @@
 # @sugarat/theme
 
+## 0.1.39
+
+### Patch Changes
+
+- feat: 支持配置解析 `frontmatter` 的时区
+- fix: 单独使用主题的define方法报错
+- feat: 支持切换主题 sidebar 风格
+
 ## 0.1.38
 
 ### Patch Changes
