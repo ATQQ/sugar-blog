@@ -269,6 +269,11 @@ export namespace Theme {
      * @default false
      */
     mermaid?: any
+    /**
+     * 设置解析 frontmatter 里 date 的时区
+     * @default 8 => 'UTC+8'
+     * */
+    timeZone?: number
   }
 
   export interface Config extends DefaultTheme.Config {

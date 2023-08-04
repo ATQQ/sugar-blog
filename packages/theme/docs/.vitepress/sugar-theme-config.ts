@@ -136,8 +136,8 @@ export const workConfig: Theme.UserWorks = {
 }
 
 export const blogTheme = getThemeConfig({
-  recommend:{
-    style : 'sidebar',
+  recommend: {
+    style: 'sidebar'
   },
   friend: [
     {

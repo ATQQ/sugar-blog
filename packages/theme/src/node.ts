@@ -59,9 +59,9 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
         // })
         meta.date = getFileBirthTime(v)
       } else {
-        // TODO: 开放配置，设置时区
+        const timeZone = cfg?.timeZone ?? 8
         meta.date = formatDate(
-          new Date(`${new Date(meta.date).toUTCString()}+8`)
+          new Date(`${new Date(meta.date).toUTCString()}+${timeZone}`)
         )
       }
 
