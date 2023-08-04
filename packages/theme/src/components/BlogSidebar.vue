@@ -14,7 +14,6 @@ const marginTop = computed(() =>
 const marginTopMini = computed(() =>
   sidebarStyle.value === 'card' ? '60px' : '0px'
 )
-// TODO: 流程图bug
 // VPSidebarItem 样式隐藏
 </script>
 
