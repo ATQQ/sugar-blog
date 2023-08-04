@@ -1,6 +1,7 @@
 <template>
   <div
-    class="card recommend"
+    class="recommend"
+    :class="{ card: sidebarStyle === 'card' }"
     v-if="_recommend !== false && (recommendList.length || emptyText)"
     data-pagefind-ignore="all"
   >
@@ -48,11 +49,20 @@
 <script lang="ts" setup>
 import { ref, computed } from 'vue'
 import { useRoute, withBase } from 'vitepress'
+import { ElButton, ElLink } from 'element-plus'
 import { formatShowDate } from '../utils/index'
 import { useArticles, useBlogConfig } from '../composables/config/blog'
 
 const { recommend: _recommend } = useBlogConfig()
 
+const sidebarStyle = computed(() =>
+  _recommend && _recommend?.style ? _recommend.style : 'card'
+)
+
+// TODO: 样式测试
+const recommendPadding = computed(() =>
+  sidebarStyle.value === 'card' ? '10px' : '0px'
+)
 const recommend = computed(() =>
   _recommend === false ? undefined : _recommend
 )
@@ -142,7 +152,7 @@ const showChangeBtn = computed(() => {
 
 .recommend {
   flex-direction: column;
-  padding: 16px 10px;
+  padding: v-bind(recommendPadding);
 }
 
 .recommend-container {
