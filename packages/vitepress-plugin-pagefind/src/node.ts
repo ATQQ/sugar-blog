@@ -7,7 +7,7 @@ import type { SiteConfig } from 'vitepress'
 import { formatDate } from './utils'
 import type { PagefindOption } from './type'
 
-export function getPagesData(_srcDir?: string) {
+export function getPagesData(_srcDir?: string, pluginSiteConfig?: any) {
   const srcDir = _srcDir || process.argv.slice(2)?.[1] || '.'
   const files = glob.sync(`${srcDir}/**/*.md`, { ignore: ['node_modules'] })
 
@@ -40,7 +40,6 @@ export function getPagesData(_srcDir?: string) {
 
       const fileContent = fs.readFileSync(v, 'utf-8')
 
-      // TODO: 支持JSON
       const meta = {
         ...matter(fileContent).data
       }
@@ -53,9 +52,9 @@ export function getPagesData(_srcDir?: string) {
         // })
         meta.date = getFileBirthTime(v)
       } else {
-        // TODO: 开放配置，设置时区
+        const timeZone = pluginSiteConfig?.timeZone ?? 8
         meta.date = formatDate(
-          new Date(`${new Date(meta.date).toUTCString()}+8`)
+          new Date(`${new Date(meta.date).toUTCString()}+${timeZone}`)
         )
       }
 
