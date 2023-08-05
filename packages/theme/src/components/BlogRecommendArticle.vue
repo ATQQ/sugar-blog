@@ -173,7 +173,7 @@ const showChangeBtn = computed(() => {
       color: var(--description-font-color);
       font-weight: 600;
       margin: 6px 8px 10px 0;
-      width: 18px;
+      width: 22px;
       height: 18px;
       line-height: 18px;
       text-align: center;
