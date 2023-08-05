@@ -21,7 +21,7 @@
     <ol class="recommend-container" v-if="currentWikiData.length">
       <li v-for="(v, idx) in currentWikiData" :key="v.route">
         <!-- 序号 -->
-        <i class="num">{{ idx + 1 }}</i>
+        <i class="num">{{ startIdx + idx + 1 }}</i>
         <!-- 简介 -->
         <div class="des">
           <!-- title -->
@@ -59,7 +59,6 @@ const sidebarStyle = computed(() =>
   _recommend && _recommend?.style ? _recommend.style : 'card'
 )
 
-// TODO: 样式测试
 const recommendPadding = computed(() =>
   sidebarStyle.value === 'card' ? '10px' : '0px'
 )
@@ -69,7 +68,7 @@ const recommend = computed(() =>
 const title = computed(() => recommend.value?.title ?? '🔍 相关文章')
 const pageSize = computed(() => recommend.value?.pageSize || 9)
 const nextText = computed(() => recommend.value?.nextText || '换一组')
-const emptyText = computed(() => recommend.value?.empty ?? '暂无推荐文章')
+const emptyText = computed(() => recommend.value?.empty ?? '暂无相关文章')
 
 const docs = useArticles()
 
@@ -119,6 +118,8 @@ const changePage = () => {
     currentPage.value % Math.ceil(recommendList.value.length / pageSize.value)
   currentPage.value = newIdx + 1
 }
+// 当前页开始的序号
+const startIdx = computed(() => (currentPage.value - 1) * pageSize.value)
 
 const currentWikiData = computed(() => {
   const startIdx = (currentPage.value - 1) * pageSize.value

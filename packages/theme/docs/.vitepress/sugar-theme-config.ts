@@ -137,7 +137,8 @@ export const workConfig: Theme.UserWorks = {
 
 export const blogTheme = getThemeConfig({
   recommend: {
-    style: 'sidebar'
+    style: 'sidebar',
+    nextText: '下一页'
   },
   friend: [
     {
