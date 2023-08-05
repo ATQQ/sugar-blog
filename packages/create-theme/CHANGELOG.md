@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.8
+
+### Patch Changes
+
+- chore: update deps
+
 ## 0.0.7
 
 ### Patch Changes
