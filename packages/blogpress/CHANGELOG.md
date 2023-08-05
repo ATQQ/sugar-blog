@@ -1,3 +1,6 @@
+---
+publish: false
+---
 # blogpress
 
 ## 2.0.4
