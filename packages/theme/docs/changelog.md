@@ -23,6 +23,7 @@ pnpm up @sugarat/theme
 - fix: 单独使用主题的define方法报错
 - feat: 支持切换主题 sidebar 风格
 - fix: 相关文章的序号又从 1 开始
+- fix: 2位数序号展示折行
 
 ## 0.1.38 (2023/07/29)
 
