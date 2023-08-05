@@ -10,7 +10,7 @@
     </span>
   </div>
   <div class="meta-des" ref="$des" id="hack-article-des">
-    <!-- TODO：是否需要原创？转载等标签，理论上可以添加标签解决 -->
+    <!-- TODO：是否需要原创？转载等标签，理论上可以添加标签解决，可以参考 charles7c -->
     <span v-if="author && !hiddenAuthor" class="author">
       <el-icon title="本文作者"><UserFilled /></el-icon>
       <a

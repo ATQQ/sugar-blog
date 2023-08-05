@@ -45,7 +45,6 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
 
       const fileContent = fs.readFileSync(v, 'utf-8')
 
-      // TODO: 支持JSON
       const meta: Partial<Theme.PageMeta> = {
         ...matter(fileContent).data
       }
@@ -59,9 +58,9 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
         // })
         meta.date = getFileBirthTime(v)
       } else {
-        // TODO: 开放配置，设置时区
+        const timeZone = cfg?.timeZone ?? 8
         meta.date = formatDate(
-          new Date(`${new Date(meta.date).toUTCString()}+8`)
+          new Date(`${new Date(meta.date).toUTCString()}+${timeZone}`)
         )
       }
 
@@ -310,7 +309,7 @@ function getTextSummary(text: string, count = 100) {
 }
 
 export function assignMermaid(config: any) {
-  if (!config.mermaid) return
+  if (!config?.mermaid) return
 
   if (!config.vite) config.vite = {}
   if (!config.vite.plugins) config.vite.plugins = []
@@ -353,8 +352,8 @@ export function defineConfig(config: UserConfig<Theme.Config>): any {
     }, 1200)
   }
   // @ts-ignore
-  const extendThemeConfig = config.extends?.themeConfig
-    ?.blog as Theme.BlogConfig
+  const extendThemeConfig = (config.extends?.themeConfig?.blog ||
+    {}) as Theme.BlogConfig
 
   // 开关支持Mermaid
   const resultConfig =

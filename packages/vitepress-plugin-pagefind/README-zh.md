@@ -272,10 +272,15 @@ interface SearchConfig {
    */
   filter?: (searchItem: SearchItem, idx: number, array: SearchItem[]) => boolean
   /**
-   * Search result Displays the date the document was last modified
+   * 搜索结果是否展示日期
    * @default true
    */
   showDate?: boolean
+  /**
+   * 设置解析 frontmatter 的日期时区
+   * @default 8 => 'UTC+8'
+   */
+  timeZone?: number
   /**
    * i18n
    */

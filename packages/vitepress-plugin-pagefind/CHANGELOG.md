@@ -1,5 +1,11 @@
 # vitepress-plugin-pagefind
 
+## 0.2.6
+
+### Patch Changes
+
+- feat: 支持配置解析 `frontmatter` 的时区
+
 ## 0.2.5
 
 ### Patch Changes

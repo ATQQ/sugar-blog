@@ -63,7 +63,8 @@ export function pagefindPlugin(
       const docsData = getPagesData(
         resolveConfig.vitepress.srcDir
           .replace(resolveConfig.vitepress.root, '')
-          .replace(/^\//, '')
+          .replace(/^\//, ''),
+        searchConfig
       )
       return `
       import { ref } from 'vue'

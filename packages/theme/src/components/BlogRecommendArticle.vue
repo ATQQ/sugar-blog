@@ -1,12 +1,13 @@
 <template>
   <div
-    class="card recommend"
+    class="recommend"
+    :class="{ card: sidebarStyle === 'card' }"
     v-if="_recommend !== false && (recommendList.length || emptyText)"
     data-pagefind-ignore="all"
   >
     <!-- 头部 -->
     <div class="card-header">
-      <span class="title">{{ title }}</span>
+      <span class="title" v-if="title">{{ title }}</span>
       <el-button
         v-if="showChangeBtn"
         size="small"
@@ -20,7 +21,7 @@
     <ol class="recommend-container" v-if="currentWikiData.length">
       <li v-for="(v, idx) in currentWikiData" :key="v.route">
         <!-- 序号 -->
-        <i class="num">{{ idx + 1 }}</i>
+        <i class="num">{{ startIdx + idx + 1 }}</i>
         <!-- 简介 -->
         <div class="des">
           <!-- title -->
@@ -47,20 +48,27 @@
 
 <script lang="ts" setup>
 import { ref, computed } from 'vue'
-import { ElButton, ElLink } from 'element-plus'
 import { useRoute, withBase } from 'vitepress'
+import { ElButton, ElLink } from 'element-plus'
 import { formatShowDate } from '../utils/index'
 import { useArticles, useBlogConfig } from '../composables/config/blog'
 
 const { recommend: _recommend } = useBlogConfig()
 
+const sidebarStyle = computed(() =>
+  _recommend && _recommend?.style ? _recommend.style : 'card'
+)
+
+const recommendPadding = computed(() =>
+  sidebarStyle.value === 'card' ? '10px' : '0px'
+)
 const recommend = computed(() =>
   _recommend === false ? undefined : _recommend
 )
-const title = computed(() => recommend.value?.title || '🔍 相关文章')
+const title = computed(() => recommend.value?.title ?? '🔍 相关文章')
 const pageSize = computed(() => recommend.value?.pageSize || 9)
 const nextText = computed(() => recommend.value?.nextText || '换一组')
-const emptyText = computed(() => recommend.value?.empty ?? '暂无推荐文章')
+const emptyText = computed(() => recommend.value?.empty ?? '暂无相关文章')
 
 const docs = useArticles()
 
@@ -110,6 +118,8 @@ const changePage = () => {
     currentPage.value % Math.ceil(recommendList.value.length / pageSize.value)
   currentPage.value = newIdx + 1
 }
+// 当前页开始的序号
+const startIdx = computed(() => (currentPage.value - 1) * pageSize.value)
 
 const currentWikiData = computed(() => {
   const startIdx = (currentPage.value - 1) * pageSize.value
@@ -143,7 +153,7 @@ const showChangeBtn = computed(() => {
 
 .recommend {
   flex-direction: column;
-  padding: 16px 10px;
+  padding: v-bind(recommendPadding);
 }
 
 .recommend-container {
@@ -163,7 +173,7 @@ const showChangeBtn = computed(() => {
       color: var(--description-font-color);
       font-weight: 600;
       margin: 6px 8px 10px 0;
-      width: 18px;
+      width: 22px;
       height: 18px;
       line-height: 18px;
       text-align: center;

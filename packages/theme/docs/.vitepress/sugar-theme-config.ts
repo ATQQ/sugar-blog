@@ -136,6 +136,10 @@ export const workConfig: Theme.UserWorks = {
 }
 
 export const blogTheme = getThemeConfig({
+  recommend: {
+    style: 'sidebar',
+    nextText: '下一页'
+  },
   friend: [
     {
       nickname: '粥里有勺糖',

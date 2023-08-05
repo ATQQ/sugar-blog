@@ -395,7 +395,8 @@ const blogTheme = getThemeConfig({
     title: '🔍 相关文章',
     nextText: '换一组',
     pageSize: 9,
-    empty: '暂无推荐文章'
+    empty: '暂无相关文章',
+    style: 'card'
   }
 })
 ```
@@ -416,16 +417,18 @@ interface RecommendArticle {
   title?: string
   pageSize?: number
   nextText?: string
-  empty?: string | boolean
   /**
    * 是否展示当前正在浏览的文章在左侧
-   * @default false
+   * @default true
    */
-  showSelf?: boolean;
+  showSelf?: boolean
+  filter?: (page: Theme.PageData) => boolean
+  empty?: string | boolean
   /**
-   * 自定义过滤规则
+   * 设置推荐文章的展示风格
+   * @default 'card'
    */
-  filter?: (page: Theme.PageData) => boolean;
+  style?: 'card' | 'sidebar'
 }
 ```
 
@@ -439,6 +442,18 @@ const blogTheme = getThemeConfig({
   recommend: false
 })
 ```
+
+style: `'sidebar'` 时，展示类似默认主题的侧边栏
+
+```ts
+const blogTheme = getThemeConfig({
+  recommend: {
+    style: 'sidebar'
+  }
+})
+```
+![](https://img.cdn.sugarat.top/mdImg/MTY5MTIxODc4NDYzNw==691218784637)
+
 ## article
 设置文章全局相关能力
 ::: code-group

@@ -63,7 +63,8 @@ const blogTheme = getThemeConfig({
   search: false,
   recommend: {
     showSelf: true,
-    nextText: '下一页'
+    nextText: '下一页',
+    style: 'sidebar'
   },
   authorList: [
     {
