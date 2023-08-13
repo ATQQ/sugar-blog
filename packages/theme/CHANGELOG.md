@@ -1,14 +1,21 @@
 # @sugarat/theme
 
+## 0.1.40
+
+### Patch Changes
+
+- chore: 依赖升级
+- chore: recommend 卡片默认样式调整为sidebar
+
 ## 0.1.39
 
 ### Patch Changes
 
 - feat: 支持配置解析 `frontmatter` 的时区
-- fix: 单独使用主题的define方法报错
+- fix: 单独使用主题的 define 方法报错
 - feat: 支持切换主题 sidebar 风格
 - fix: 相关文章的序号又从 1 开始
-- fix: 2位数序号展示折行
+- fix: 2 位数序号展示折行
 
 ## 0.1.38
 

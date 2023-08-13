@@ -1,6 +1,6 @@
 {
   "name": "blogpress",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "private": true,
   "scripts": {
     "dev": "vitepress dev",
