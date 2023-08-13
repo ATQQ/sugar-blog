@@ -3,15 +3,25 @@
 import glob from 'fast-glob'
 import matter from 'gray-matter'
 import fs from 'fs'
-import { execSync, spawn, spawnSync } from 'child_process'
+import { execSync } from 'child_process'
 import path from 'path'
 import type { SiteConfig, UserConfig } from 'vitepress'
-import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
 import { formatDate } from './utils/client/index'
 import type { Theme } from './composables/config/index'
+import { getTextSummary, getDefaultTitle, getFileBirthTime } from './utils/node'
+import {
+  getMarkdownPlugins,
+  registerMdPlugins,
+  wrapperCfgWithMermaid,
+  supportRunExtendsPlugin
+} from './utils/node/mdPlugins'
+import { patchDefaultThemeSideBar } from './utils/node/theme'
 
-const checkKeys = ['themeConfig']
-
+/**
+ *
+ * @param cfg 获取主题的配置
+ * @returns
+ */
 export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
   const srcDir = cfg?.srcDir || process.argv.slice(2)?.[1] || '.'
   const files = glob.sync(`${srcDir}/**/*.md`, { ignore: ['node_modules'] })
@@ -106,8 +116,6 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
     cfg?.search === 'pagefind' ||
     (cfg?.search instanceof Object && cfg.search.mode === 'pagefind')
   ) {
-    checkKeys.push('vite')
-
     let resolveConfig: any
     extraConfig.vite = {
       plugins: [
@@ -170,219 +178,35 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
       ]
     }
   }
-  const markdownPlugin: any[] = []
-  // tabs支持
-  if (cfg?.tabs) {
-    markdownPlugin.push(tabsMarkdownPlugin)
-  }
 
-  // 流程图支持
-  if (cfg) {
-    cfg.mermaid = cfg?.mermaid ?? true
-  }
-  if (cfg?.mermaid !== false) {
-    const { MermaidMarkdown } = require('vitepress-plugin-mermaid')
-    markdownPlugin.push(MermaidMarkdown)
-  }
-
+  // 获取要加载的markdown插件
+  const markdownPlugin = getMarkdownPlugins(cfg)
   // 注册markdown插件
-  if (markdownPlugin.length) {
-    extraConfig.markdown = {
-      config(...rest: any[]) {
-        markdownPlugin.forEach((plugin) => {
-          plugin?.(...rest)
-        })
-      }
-    }
-  }
+  registerMdPlugins(extraConfig, markdownPlugin)
+
+  // 用于自定义sidebar卡片slot
+  const extraSidebar = patchDefaultThemeSideBar(cfg)
+
   return {
     themeConfig: {
       blog: {
         pagesData: data as Theme.PageData[],
         ...cfg
       },
-      ...(cfg?.blog !== false && cfg?.recommend !== false
-        ? {
-            sidebar: [
-              {
-                text: '',
-                items: []
-              }
-            ]
-          }
-        : undefined)
+      ...extraSidebar
     },
     ...extraConfig
   }
 }
 
-export function getDefaultTitle(content: string) {
-  const title =
-    clearMatterContent(content)
-      .split('\n')
-      ?.find((str) => {
-        return str.startsWith('# ')
-      })
-      ?.slice(2)
-      .replace(/^\s+|\s+$/g, '') || ''
-  return title
-}
-
-export function clearMatterContent(content: string) {
-  let first___: unknown
-  let second___: unknown
-
-  const lines = content.split('\n').reduce<string[]>((pre, line) => {
-    // 移除开头的空白行
-    if (!line.trim() && pre.length === 0) {
-      return pre
-    }
-    if (line.trim() === '---') {
-      if (first___ === undefined) {
-        first___ = pre.length
-      } else if (second___ === undefined) {
-        second___ = pre.length
-      }
-    }
-    pre.push(line)
-    return pre
-  }, [])
-  return (
-    lines
-      // 剔除---之间的内容
-      .slice((second___ as number) || 0)
-      .join('\n')
-  )
-}
-
-export function getFileBirthTime(url: string) {
-  let date = new Date()
-
-  try {
-    // 参考 vitepress 中的 getGitTimestamp 实现
-    const infoStr = spawnSync('git', ['log', '-1', '--pretty="%ci"', url])
-      .stdout?.toString()
-      .replace(/["']/g, '')
-      .trim()
-    if (infoStr) {
-      date = new Date(infoStr)
-    }
-  } catch (error) {
-    return formatDate(date)
-  }
-
-  return formatDate(date)
-}
-
-export function getGitTimestamp(file: string) {
-  return new Promise((resolve, reject) => {
-    const child = spawn('git', ['log', '-1', '--pretty="%ci"', file])
-    let output = ''
-    child.stdout.on('data', (d) => {
-      output += String(d)
-    })
-    child.on('close', () => {
-      resolve(+new Date(output))
-    })
-    child.on('error', reject)
-  })
-}
-
-function getTextSummary(text: string, count = 100) {
-  return (
-    clearMatterContent(text)
-      .match(/^# ([\s\S]+)/m)?.[1]
-      // 除去标题
-      ?.replace(/#/g, '')
-      // 除去图片
-      ?.replace(/!\[.*?\]\(.*?\)/g, '')
-      // 除去链接
-      ?.replace(/\[(.*?)\]\(.*?\)/g, '$1')
-      // 除去加粗
-      ?.replace(/\*\*(.*?)\*\*/g, '$1')
-      ?.split('\n')
-      ?.filter((v) => !!v)
-      ?.slice(1)
-      ?.join('\n')
-      ?.replace(/>(.*)/, '')
-      ?.slice(0, count)
-  )
-}
-
-export function assignMermaid(config: any) {
-  if (!config?.mermaid) return
-
-  if (!config.vite) config.vite = {}
-  if (!config.vite.plugins) config.vite.plugins = []
-  const { MermaidPlugin } = require('vitepress-plugin-mermaid')
-  config.vite.plugins.push(MermaidPlugin(config.mermaid))
-  if (!config.vite.resolve) config.vite.resolve = {}
-  if (!config.vite.resolve.alias) config.vite.resolve.alias = {}
-
-  config.vite.resolve.alias = [
-    ...aliasObjectToArray({
-      ...config.vite.resolve.alias,
-      'cytoscape/dist/cytoscape.umd.js': 'cytoscape/dist/cytoscape.esm.js',
-      mermaid: 'mermaid/dist/mermaid.esm.mjs'
-    }),
-    { find: /^dayjs\/(.*).js/, replacement: 'dayjs/esm/$1' }
-  ]
-}
-function aliasObjectToArray(obj: Record<string, string>) {
-  return Object.entries(obj).map(([find, replacement]) => ({
-    find,
-    replacement
-  }))
-}
+/**
+ * 代替默认的 defineConfig
+ */
 export function defineConfig(config: UserConfig<Theme.Config>): any {
-  // 兼容低版本主题配置
-  // @ts-ignore
-  if (config.themeConfig?.themeConfig) {
-    config.extends = checkKeys.reduce((pre, key) => {
-      // @ts-ignore
-      pre[key] = config.themeConfig[key]
-      // @ts-ignore
-      delete config.themeConfig[key]
-      return pre
-    }, {})
-
-    // 打印warn信息
-    setTimeout(() => {
-      console.warn('==↓ 主题配置方式过期，请尽快参照文档更新 ↓==')
-      console.warn('https://theme.sugarat.top/config/global.html')
-    }, 1200)
-  }
-  // @ts-ignore
-  const extendThemeConfig = (config.extends?.themeConfig?.blog ||
-    {}) as Theme.BlogConfig
-
-  // 开关支持Mermaid
-  const resultConfig =
-    extendThemeConfig.mermaid === false
-      ? config
-      : {
-          ...config,
-          mermaid:
-            extendThemeConfig.mermaid === true ? {} : extendThemeConfig.mermaid
-        }
-  assignMermaid(resultConfig)
-
-  // 处理markdown插件
-  if (!resultConfig.markdown) resultConfig.markdown = {}
-  // @ts-ignore
-  if (config.extends?.markdown?.config) {
-    const markdownExtendsConfigOriginal =
-      // @ts-ignore
-      config.extends?.markdown?.config
-    const selfMarkdownConfig = resultConfig.markdown?.config
-
-    resultConfig.markdown.config = (...rest: any[]) => {
-      // @ts-ignore
-      selfMarkdownConfig?.(...rest)
-      markdownExtendsConfigOriginal?.(...rest)
-    }
-  }
+  const resultConfig = wrapperCfgWithMermaid(config)
+  supportRunExtendsPlugin(resultConfig)
   return resultConfig
 }
 
+// 重新导包 tabsMarkdownPlugin 导出CJS格式支持
 export { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
