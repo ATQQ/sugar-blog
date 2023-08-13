@@ -1,16 +1,25 @@
 /* eslint-disable no-console */
 import path from 'path'
-import { writeFileSync } from 'fs'
+import fs, { writeFileSync } from 'fs'
 import { Feed } from 'feed'
 import type { SiteConfig } from 'vitepress'
 import type { Theme } from '../../composables/config/index'
 import { withBase } from './index'
+import { pageMap } from './theme'
 
-export function genFeed(config: SiteConfig) {
+export async function genFeed(config: SiteConfig) {
   const blogCfg: Theme.BlogConfig = config.userConfig.themeConfig.blog
   const posts: Theme.PageData[] = blogCfg.pagesData
   const { RSS, authorList = [] } = blogCfg
   if (!RSS) return
+  const { createMarkdownRenderer } = await import('vitepress')
+
+  const mdRender = await createMarkdownRenderer(
+    config.srcDir,
+    config.markdown,
+    config.site.base,
+    config.logger
+  )
   console.log()
   console.log('=== feed: https://github.com/jpmonette/feed ===')
   const { base } = config.userConfig
@@ -27,16 +36,29 @@ export function genFeed(config: SiteConfig) {
     const { title, description, date, hidden } = meta
     if (hidden) continue
     const author = meta.author ?? blogCfg.author
-    const link = `${baseUrl}${withBase(base || '', route)}.html`
+    let link = `${baseUrl}${withBase(
+      base || '',
+      // 移除末尾的index
+      route.replace(/(^|\/)index$/, '$1')
+    )}`
+    // 补全后缀
+    link = link.endsWith('/')
+      ? link
+      : `${link}${config?.cleanUrls ? '' : '.html'}`
     const authorLink = authorList.find((v) => v.nickname === author)?.url
+    let html
+    const filepath = pageMap.get(route)
+    if (filepath) {
+      const fileContent = fs.readFileSync(filepath, 'utf-8')
+      html = mdRender.render(fileContent)
+    }
+
     feed.addItem({
       title,
       id: link,
-      // TODO: 待定，添加transform
       link,
       description,
-      // TODO: 待定，文章多的时候，会导致 RSS 文件过大
-      // content: html,
+      content: html,
       author: [
         {
           name: author,

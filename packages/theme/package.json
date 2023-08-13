@@ -35,10 +35,10 @@
   "scripts": {
     "dev": "npm run build:node && npm run dev:docs",
     "dev:docs": "vitepress dev docs",
-    "dev:node": "npx tsup src/node.ts --dts --out-dir=./ --watch",
+    "dev:node": "npx tsup src/node.ts --dts --out-dir=./ --watch --external vitepress",
     "build": "npm run build:node && npm run build:docs",
     "build:docs": "vitepress build docs",
-    "build:node": "npx tsup src/node.ts --dts --out-dir=./",
+    "build:node": "npx tsup src/node.ts --dts --out-dir=./ --external vitepress",
     "serve": "vitepress serve docs"
   },
   "dependencies": {
