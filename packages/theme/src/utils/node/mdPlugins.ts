@@ -57,7 +57,7 @@ export function assignMermaid(config: any) {
   ]
 }
 
-export function wrapperCfgWithMermaid(config: UserConfig<Theme.Config>) {
+export function wrapperCfgWithMermaid(config: UserConfig<Theme.Config>): any {
   // @ts-ignore
   const extendThemeConfig = (config.extends?.themeConfig?.blog ||
     {}) as Theme.BlogConfig
