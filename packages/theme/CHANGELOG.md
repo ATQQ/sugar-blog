@@ -1,5 +1,11 @@
 # @sugarat/theme
 
+## 0.1.41
+
+### Patch Changes
+
+- feat: RSS html 内容渲染
+
 ## 0.1.40
 
 ### Patch Changes
@@ -8,7 +14,7 @@
 - fix：nav title 样式异常
 - chore：重新组织源码结构
 - chore: 依赖升级
-- chore: recommend 卡片默认样式调整为sidebar
+- chore: recommend 卡片默认样式调整为 sidebar
 
 ## 0.1.39
 

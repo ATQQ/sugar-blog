@@ -15,6 +15,12 @@ publish: true
 pnpm up @sugarat/theme
 ```
 
+## 0.1.41 (2023/08/13)
+
+### Patch Changes
+
+- feat: RSS html 内容渲染
+
 ## 0.1.40 (2023/08/13)
 
 ### Patch Changes
