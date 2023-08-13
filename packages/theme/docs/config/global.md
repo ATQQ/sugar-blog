@@ -788,3 +788,77 @@ hero:
 ```
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY3NzE2Mjk1NzczNw==677162957737)
+
+## RSS
+* Type：`RSSOptions`
+
+开启 RSS 支持，自动生成 `feed.rss` 文件
+
+:::tip
+参考 [Vue.js blog](https://github.com/vuejs/blog/tree/main) 基于 [jpmonette/feed](https://www.npmjs.com/package/feed) 实现
+:::
+
+::: code-group
+
+```ts [example]
+import type { Theme } from '@sugarat/theme'
+
+const baseUrl = 'https://theme.sugarat.top'
+const RSS: Theme.RSSOptions = {
+  title: '@sugarat/theme',
+  baseUrl,
+  description: '简约风的 Vitepress 博客主题',
+  id: baseUrl,
+  link: baseUrl,
+  language: 'zh-cn',
+  image: 'https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTE2NzAzMA==674995167030',
+  favicon: 'https://theme.sugarat.top/favicon.ico',
+  copyright: 'Copyright (c) 2023-present, 粥里有勺糖',
+  url: `${baseUrl}/feed.rss`
+}
+
+const blogTheme = getThemeConfig({
+  RSS
+})
+```
+
+```ts [type]
+type RSSOptions = FeedOptions & {
+  baseUrl: string
+  /**
+   * 线上访问的RSS地址
+   */
+  url: string
+  /**
+   * 输出的RSS文件名
+   * @default 'feed.rss'
+   */
+  filename?: string
+  /**
+   * 是否展示RSS的图标
+   * @default true
+   */
+  showIcon?: boolean
+}
+
+interface FeedOptions {
+  id: string;
+  title: string;
+  updated?: Date;
+  generator?: string;
+  language?: string;
+  ttl?: number;
+  feed?: string;
+  feedLinks?: any;
+  hub?: string;
+  docs?: string;
+  author?: Author;
+  link?: string;
+  description?: string;
+  image?: string;
+  favicon?: string;
+  copyright: string;
+}
+```
+
+![](https://img.cdn.sugarat.top/mdImg/MTY5MTkyODAxMDEwMQ==691928010101)
