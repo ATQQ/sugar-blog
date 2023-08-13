@@ -65,7 +65,7 @@ html[class='dark'] {
 @media screen and (min-width: 768px) and (max-width: 1200px) {
   .VPNavBarMenuGroup .button span.text,
   .VPNavBarMenuLink {
-    font-size: 10px;
+    font-size: 12px !important;
   }
   .VPNavBar {
     height: auto !important;
