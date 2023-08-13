@@ -113,7 +113,7 @@ export namespace Theme {
     empty?: string | boolean
     /**
      * 设置推荐文章的展示风格
-     * @default 'card'
+     * @default 'sidebar'
      */
     style?: 'card' | 'sidebar'
   }

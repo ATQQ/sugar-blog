@@ -396,7 +396,7 @@ const blogTheme = getThemeConfig({
     nextText: '换一组',
     pageSize: 9,
     empty: '暂无相关文章',
-    style: 'card'
+    style: 'sidebar'
   }
 })
 ```
@@ -407,6 +407,7 @@ const blogTheme = getThemeConfig({
     title: '🔍 推荐文章',
     nextText: '下一页',
     pageSize: 1,
+    style: 'card'
     // empty: false // false时无推荐文章不展示此模块
   }
 })
@@ -426,7 +427,7 @@ interface RecommendArticle {
   empty?: string | boolean
   /**
    * 设置推荐文章的展示风格
-   * @default 'card'
+   * @default 'sidebar'
    */
   style?: 'card' | 'sidebar'
 }

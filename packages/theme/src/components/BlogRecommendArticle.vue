@@ -56,7 +56,7 @@ import { useArticles, useBlogConfig } from '../composables/config/blog'
 const { recommend: _recommend } = useBlogConfig()
 
 const sidebarStyle = computed(() =>
-  _recommend && _recommend?.style ? _recommend.style : 'card'
+  _recommend && _recommend?.style ? _recommend.style : 'sidebar'
 )
 
 const recommendPadding = computed(() =>
