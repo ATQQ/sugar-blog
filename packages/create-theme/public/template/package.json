@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.1.0",
-    "@sugarat/theme": "^0.1.39",
+    "@sugarat/theme": "^0.1.40",
     "element-plus": "^2.3.8",
     "vue": "^3.3.4"
   },
