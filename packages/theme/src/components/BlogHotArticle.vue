@@ -44,7 +44,7 @@ import { ref, computed } from 'vue'
 import { ElButton, ElLink } from 'element-plus'
 import { withBase } from 'vitepress'
 import { useArticles, useBlogConfig } from '../composables/config/blog'
-import { formatShowDate } from '../utils/index'
+import { formatShowDate } from '../utils/client'
 
 const { hotArticle } = useBlogConfig()
 const title = computed(() => hotArticle?.title || '🔥 精选文章')

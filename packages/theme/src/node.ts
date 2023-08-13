@@ -7,7 +7,7 @@ import { execSync, spawn, spawnSync } from 'child_process'
 import path from 'path'
 import type { SiteConfig, UserConfig } from 'vitepress'
 import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
-import { formatDate } from './utils/index'
+import { formatDate } from './utils/client/index'
 import type { Theme } from './composables/config/index'
 
 const checkKeys = ['themeConfig']
@@ -16,6 +16,7 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
   const srcDir = cfg?.srcDir || process.argv.slice(2)?.[1] || '.'
   const files = glob.sync(`${srcDir}/**/*.md`, { ignore: ['node_modules'] })
 
+  // 文章数据
   const data = files
     .map((v) => {
       let route = v

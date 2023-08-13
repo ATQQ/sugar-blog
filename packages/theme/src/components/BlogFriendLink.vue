@@ -24,7 +24,7 @@ import { ElAvatar } from 'element-plus'
 import { useDark } from '@vueuse/core'
 import { computed } from 'vue'
 import { useBlogConfig } from '../composables/config/blog'
-import { getImageUrl } from '../utils'
+import { getImageUrl } from '../utils/client'
 
 const isDark = useDark({
   storageKey: 'vitepress-theme-appearance'
