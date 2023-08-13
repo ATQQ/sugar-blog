@@ -19,7 +19,7 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-import { isCurrentWeek } from '../utils'
+import { isCurrentWeek } from '../utils/client'
 import { useArticles } from '../composables/config/blog'
 
 const docs = useArticles()

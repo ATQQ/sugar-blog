@@ -51,3 +51,4 @@ pnpm serve
 * [charles7c.github.io](https://github.com/Charles7c/charles7c.github.io)
 * [vitepress-blog-zaun](https://github.com/clark-cui/vitepress-blog-zaun)
 * [surmon](https://surmon.me/)
+* [vuejs/blog](https://github.com/vuejs/blog/tree/main)

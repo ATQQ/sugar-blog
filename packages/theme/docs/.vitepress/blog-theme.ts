@@ -135,9 +135,23 @@ export const workConfig: Theme.UserWorks = {
   ]
 }
 
+const baseUrl = 'https://theme.sugarat.top'
+const RSS: Theme.RSSOptions = {
+  title: '@sugarat/theme',
+  baseUrl,
+  description: '简约风的 Vitepress 博客主题',
+  id: baseUrl,
+  link: baseUrl,
+  language: 'zh-cn',
+  image: 'https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTE2NzAzMA==674995167030',
+  favicon: 'https://theme.sugarat.top/favicon.ico',
+  copyright: 'Copyright (c) 2023-present, 粥里有勺糖',
+  url: `${baseUrl}/feed.rss`
+}
+
 export const blogTheme = getThemeConfig({
+  RSS,
   recommend: {
-    style: 'sidebar',
     nextText: '下一页'
   },
   friend: [
@@ -151,9 +165,8 @@ export const blogTheme = getThemeConfig({
     {
       nickname: 'Vitepress',
       des: 'Vite & Vue Powered Static Site Generator',
-      avatar:
-        'https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTI2NzY1Ng==674995267656',
-      url: 'https://vitepress.vuejs.org/'
+      avatar: 'https://vitepress.dev/vitepress-logo-large.webp',
+      url: 'https://vitepress.dev/'
     }
   ],
   // 文章默认作者

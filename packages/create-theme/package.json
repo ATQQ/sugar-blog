@@ -1,10 +1,13 @@
 {
   "name": "@sugarat/create-theme",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "简约风的 Vitepress 博客主题，sugarat vitepress blog theme",
   "bin": {
     "create-theme": "./dist/index.js"
   },
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ATQQ/sugar-blog.git"
@@ -12,7 +15,7 @@
   "homepage": "https://github.com/ATQQ/sugar-blog/tree/master/packages/create-theme",
   "scripts": {
     "dev": "tsup --watch --publicDir",
-    "build": "tsup --minify --publicDir"
+    "build": "rimraf dist && tsup --minify --publicDir"
   },
   "keywords": [
     "blog",
@@ -23,6 +26,7 @@
   "author": "粥里有勺糖",
   "license": "MIT",
   "devDependencies": {
+    "rimraf": "^5.0.1",
     "tsup": " ^6.5.0"
   },
   "dependencies": {

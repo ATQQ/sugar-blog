@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新 v0.1.39 💯：① 支持配置解析 frontmatter 的时区 ② 支持切换主题 sidebar 风格 ③ 一系列问题修复
+description: 最近更新 v0.1.40 💯：① RSS 支持 ② 修复 nav title 样式异常 ③ 同步最新vitepress主题 ④ 重新组织源码
 author: 粥里有勺糖
 top: 2
 tag: 日志
@@ -14,6 +14,16 @@ publish: true
 ```sh
 pnpm up @sugarat/theme
 ```
+
+## 0.1.40 (2023/08/13)
+
+### Patch Changes
+
+- feat: RSS 支持
+- fix：nav title 样式异常
+- chore：重新组织源码结构
+- chore: 依赖升级，使用 vitepress（1.0.0-rc.4）
+- chore: recommend 卡片默认样式调整为sidebar
 
 ## 0.1.39 (2023/08/05)
 

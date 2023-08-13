@@ -56,7 +56,7 @@ import {
   CollectionTag
 } from '@element-plus/icons-vue'
 import { useBlogConfig, useCurrentArticle } from '../composables/config/blog'
-import countWord, { formatShowDate } from '../utils/index'
+import countWord, { formatShowDate } from '../utils/client'
 import { Theme } from '../composables/config'
 import BlogDocCover from './BlogDocCover.vue'
 

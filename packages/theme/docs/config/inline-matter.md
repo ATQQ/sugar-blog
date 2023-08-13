@@ -7,7 +7,7 @@ tag:
 
 # 文章配置
 介绍常用的一些 官方默认主题 提供的能力: 
-* https://vitepress.vuejs.org/guide/markdown
+* https://vitepress.dev/guide/markdown
 * https://vitepress.dev/reference/site-config
 
 ## outline

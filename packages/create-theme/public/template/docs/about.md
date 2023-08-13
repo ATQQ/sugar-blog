@@ -27,12 +27,12 @@ sticky: 1
 * 作品聚合页（为个人作品提供一个展示）
 * tabs（[vitepress-plugin-tabs](https://vitepress-plugins.sapphi.red/tabs/)）
 * 流程图（[vitepress-plugin-mermaid](https://github.com/emersonbottero/vitepress-plugin-mermaid#readme)）
+* RSS
 
 ## 规划中功能
 * Valine 评论系统
 * 文章合集（类似于聚合一个内容专题）
 * 更多可定制的主题样式
-* RSS
 * 文章时间线页面支持
 * 博客案例集合
 * 背景图自动更换
@@ -50,6 +50,7 @@ sticky: 1
 * [element-plus](https://element-plus.gitee.io/zh-CN/)
 * [charles7c.github.io](https://github.com/Charles7c/charles7c.github.io)
 * [vitepress-blog-zaun](https://github.com/clark-cui/vitepress-blog-zaun)
+* [vuejs/blog](https://github.com/vuejs/blog/tree/main)
 
 ## 主题相关资源
 * 主题地址：https://theme.sugarat.top/

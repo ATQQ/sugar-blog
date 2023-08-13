@@ -1,4 +1,4 @@
-import type { ThemeableImage } from '../composables/config'
+import type { ThemeableImage } from '../../composables/config'
 
 export function formatDate(d: any, fmt = 'yyyy-MM-dd hh:mm:ss') {
   if (!(d instanceof Date)) {

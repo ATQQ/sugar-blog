@@ -198,7 +198,7 @@ import {
   getGithubUpdateTime,
   formatDate,
   getGithubDirUpdateTime
-} from '../utils'
+} from '../utils/client'
 import {
   useUserWorks,
   useActiveAnchor,

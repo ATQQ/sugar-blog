@@ -8,3 +8,5 @@ packages/theme/src/node.js
 packages/theme/node.d.ts
 packages/theme/node.js
 packages/blogpress/public/service-worker.js
+*.json
+*.md

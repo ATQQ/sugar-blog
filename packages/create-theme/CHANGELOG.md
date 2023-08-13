@@ -1,5 +1,13 @@
 # @sugarat/create-theme
 
+## 0.0.9
+
+### Patch Changes
+
+- feat: 模板修改
+- chore: update deps
+- fix: 创建模板时缺少.prefix文件
+
 ## 0.0.8
 
 ### Patch Changes

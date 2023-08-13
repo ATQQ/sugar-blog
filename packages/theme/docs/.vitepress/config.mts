@@ -1,7 +1,7 @@
 import path from 'path'
 import { defineConfig } from '@sugarat/theme/node'
 import packageJSON from '../../package.json'
-import { blogTheme, extraHead } from './sugar-theme-config'
+import { blogTheme, extraHead } from './blog-theme'
 
 export default defineConfig({
   extends: blogTheme,

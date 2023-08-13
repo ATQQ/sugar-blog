@@ -85,5 +85,41 @@ export default BlogTheme
 ![](https://img.cdn.sugarat.top/mdImg/MTY3NzA3OTIwODAzNg==677079208036)
 
 
+## 主题色
+vitepress 最新的默认主题色偏紫色，看着感觉有点不习惯
+
+![](https://img.cdn.sugarat.top/mdImg/MTY5MTkyODQ0ODUzOQ==691928448539)
+
+可以默认将其还原了为之前的绿色
+
+绿色主题的代码如下
+
+`.vitepress/theme/green-theme.var.css`
+
+```css
+:root{
+  /* 使用之前的绿色主题，重写当前紫色的 */
+  /* 所有变量：https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css */
+  --vp-c-brand: var(--vp-c-green);
+  --vp-c-brand-light: var(--vp-c-green-light);
+  --vp-c-brand-lighter: var(--vp-c-green-lighter);
+  --vp-c-brand-dark: var(--vp-c-green-dark);
+  --vp-c-brand-darker: var(--vp-c-green-darker);
+  --vp-c-brand-dimm-1: var(--vp-c-green-dimm-1);
+  --vp-c-brand-dimm-2: var(--vp-c-green-dimm-2);
+  --vp-c-brand-dimm-3: var(--vp-c-green-dimm-3);
+  --vp-c-brand-text: var(--vp-c-green);
+}
+```
+将其引入到`.vitepress/theme/index.ts`中即可
+
+```ts
+import BlogTheme from '@sugarat/theme'
+// 导入绿色主题
+import './green-theme.var.css'
+
+export default BlogTheme
+```
+
 ## More
 ... wait a moment

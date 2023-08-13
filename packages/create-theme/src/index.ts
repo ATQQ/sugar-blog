@@ -7,7 +7,16 @@ import path from 'path'
 function createThemeProject(destination) {
   const templatePath = path.join(__dirname, 'template')
 
-  fs.copy(templatePath, destination, (err) => {
+  fs.copy(templatePath, destination, async (err) => {
+    // 同步创建.gitignore文件和.npmrc文件
+    await fs.copy(
+      path.join(__dirname, 'move/gitignore'),
+      path.join(destination, '.gitignore')
+    )
+    await fs.copy(
+      path.join(__dirname, 'move/npmrc'),
+      path.join(destination, '.npmrc')
+    )
     if (err) {
       console.error('An error occurred while copying template files:', err)
     } else {

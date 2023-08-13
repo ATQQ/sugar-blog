@@ -76,15 +76,14 @@ pnpm dev
 * 阅读时间计算
 * 全局的提示弹窗 (由 [el-alert](https://element-plus.gitee.io/zh-CN/component/alert.html) 驱动)
 * 全局的公告弹窗，支持设置图片，文字，按钮
+* 全文搜索
+* RSS
 * ...
-
 
 ## 规划中功能
 * Valine 评论系统
 * 文章合集
 * 更多可定制的主题样式
-* 全文搜索
-* RSS
 * 。。。
 
 ## 最后

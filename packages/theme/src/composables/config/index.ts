@@ -1,5 +1,6 @@
 import type { ElButton } from 'element-plus'
 import type { DefaultTheme } from 'vitepress'
+import type { FeedOptions } from 'feed'
 
 export namespace BlogPopover {
   export interface Title {
@@ -113,7 +114,7 @@ export namespace Theme {
     empty?: string | boolean
     /**
      * 设置推荐文章的展示风格
-     * @default 'card'
+     * @default 'sidebar'
      */
     style?: 'card' | 'sidebar'
   }
@@ -266,7 +267,7 @@ export namespace Theme {
     works?: UserWorks
     /**
      * https://mermaid.js.org/config/setup/modules/mermaidAPI.html#mermaidapi-configuration-defaults for options
-     * @default false
+     * @default true
      */
     mermaid?: any
     /**
@@ -274,8 +275,29 @@ export namespace Theme {
      * @default 8 => 'UTC+8'
      * */
     timeZone?: number
+    /**
+     * 启用RSS配置
+     */
+    RSS?: RSSOptions
   }
 
+  export type RSSOptions = FeedOptions & {
+    baseUrl: string
+    /**
+     * 线上访问的RSS地址
+     */
+    url: string
+    /**
+     * 输出的RSS文件名
+     * @default 'feed.rss'
+     */
+    filename?: string
+    /**
+     * 是否展示RSS的图标
+     * @default true
+     */
+    showIcon?: boolean
+  }
   export interface Config extends DefaultTheme.Config {
     blog?: BlogConfig
   }
