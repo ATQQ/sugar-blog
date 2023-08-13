@@ -1,7 +1,23 @@
 import { getThemeConfig, defineConfig } from '@sugarat/theme/node'
 import themePkg from '@sugarat/theme/package.json'
+import type { Theme } from '@sugarat/theme'
+
+const baseUrl = 'https://sugarat.top'
+const RSS: Theme.RSSOptions = {
+  title: '粥里有勺糖',
+  baseUrl,
+  description: '你的指尖,拥有改变世界的力量（大前端相关技术分享）',
+  id: baseUrl,
+  link: baseUrl,
+  language: 'zh-cn',
+  image: 'https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTE2NzAzMA==674995167030',
+  favicon: 'https://sugarat.top/favicon.ico',
+  copyright: 'Copyright (c) 2018-present, 粥里有勺糖',
+  url: `${baseUrl}/feed.rss`
+}
 
 const blogTheme = getThemeConfig({
+  RSS,
   author: '粥里有勺糖',
   comment: {
     repo: 'ATQQ/sugar-blog',
