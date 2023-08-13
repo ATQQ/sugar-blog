@@ -2,6 +2,7 @@ import type { SiteConfig } from 'vitepress'
 import path from 'path'
 import { execSync } from 'child_process'
 import type { Theme } from '../../composables/config/index'
+import { genFeed } from './genFeed'
 
 export function getVitePlugins(cfg?: Partial<Theme.BlogConfig>) {
   const plugins: any[] = []
@@ -18,7 +19,8 @@ export function getVitePlugins(cfg?: Partial<Theme.BlogConfig>) {
   ) {
     plugins.push(inlinePagefindPlugin(buildEndFn))
   }
-  // TODO: RSS
+
+  buildEndFn.push(genFeed)
   return plugins
 }
 

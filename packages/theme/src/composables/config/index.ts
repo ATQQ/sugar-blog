@@ -1,5 +1,6 @@
 import type { ElButton } from 'element-plus'
 import type { DefaultTheme } from 'vitepress'
+import type { FeedOptions } from 'feed'
 
 export namespace BlogPopover {
   export interface Title {
@@ -274,8 +275,20 @@ export namespace Theme {
      * @default 8 => 'UTC+8'
      * */
     timeZone?: number
+    /**
+     * 启用RSS配置
+     */
+    RSS?: RSSOptions
   }
 
+  export type RSSOptions = FeedOptions & {
+    baseUrl: string
+    /**
+     * 输出的RSS文件名
+     * @default 'feed.rss'
+     */
+    filename?: string
+  }
   export interface Config extends DefaultTheme.Config {
     blog?: BlogConfig
   }

@@ -4,6 +4,9 @@
 
 ### Patch Changes
 
+- feat: RSS 支持
+- fix：nan title 样式异常
+- chore：重新组织源码结构
 - chore: 依赖升级
 - chore: recommend 卡片默认样式调整为sidebar
 

@@ -101,3 +101,18 @@ export function aliasObjectToArray(obj: Record<string, string>) {
     replacement
   }))
 }
+
+export const EXTERNAL_URL_RE = /^[a-z]+:/i
+
+/**
+ * Join two paths by resolving the slash collision.
+ */
+export function joinPath(base: string, path: string): string {
+  return `${base}${path}`.replace(/\/+/g, '/')
+}
+
+export function withBase(base: string, path: string) {
+  return EXTERNAL_URL_RE.test(path) || path.startsWith('.')
+    ? path
+    : joinPath(base, path)
+}
