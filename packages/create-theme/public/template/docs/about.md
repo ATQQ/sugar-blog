@@ -50,6 +50,7 @@ sticky: 1
 * [element-plus](https://element-plus.gitee.io/zh-CN/)
 * [charles7c.github.io](https://github.com/Charles7c/charles7c.github.io)
 * [vitepress-blog-zaun](https://github.com/clark-cui/vitepress-blog-zaun)
+* [vuejs/blog](https://github.com/vuejs/blog/tree/main)
 
 ## 主题相关资源
 * 主题地址：https://theme.sugarat.top/
