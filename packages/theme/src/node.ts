@@ -8,7 +8,7 @@ import {
   wrapperCfgWithMermaid,
   supportRunExtendsPlugin
 } from './utils/node/mdPlugins'
-import { getArticles, patchDefaultThemeSideBar } from './utils/node/theme'
+import { getArticles, patchVPThemeConfig } from './utils/node/theme'
 import { getVitePlugins, registerVitePlugins } from './utils/node/vitePlugins'
 
 /**
@@ -30,16 +30,14 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
   // 注册markdown插件
   registerMdPlugins(extraVPConfig, markdownPlugin)
 
-  // 用于自定义sidebar卡片slot
-  const extraSidebar = patchDefaultThemeSideBar(cfg)
-
   return {
     themeConfig: {
       blog: {
         pagesData,
         ...cfg
       },
-      ...extraSidebar
+      // 补充一些额外的配置用于继承
+      ...patchVPThemeConfig(cfg)
     },
     ...extraVPConfig
   }
