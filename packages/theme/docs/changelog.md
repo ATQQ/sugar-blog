@@ -15,6 +15,16 @@ publish: true
 pnpm up @sugarat/theme
 ```
 
+## 0.1.40 (2023/08/13)
+
+### Patch Changes
+
+- feat: RSS 支持
+- fix：nav title 样式异常
+- chore：重新组织源码结构
+- chore: 依赖升级
+- chore: recommend 卡片默认样式调整为sidebar
+
 ## 0.1.39 (2023/08/05)
 
 ### Patch Changes
