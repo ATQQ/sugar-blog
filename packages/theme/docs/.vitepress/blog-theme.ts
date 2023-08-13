@@ -151,9 +151,8 @@ export const blogTheme = getThemeConfig({
     {
       nickname: 'Vitepress',
       des: 'Vite & Vue Powered Static Site Generator',
-      avatar:
-        'https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTI2NzY1Ng==674995267656',
-      url: 'https://vitepress.vuejs.org/'
+      avatar: 'https://vitepress.dev/vitepress-logo-large.webp',
+      url: 'https://vitepress.dev/'
     }
   ],
   // 文章默认作者
