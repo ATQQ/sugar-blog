@@ -1,0 +1,50 @@
+{
+  "name": "vitepress-plugin-rss",
+  "version": "0.0.0",
+  "description": "vitepress plugin, generate feed.rss",
+  "module": "dist/index.mjs",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "dev": "npx tsup src/index.ts --dts --watch --format esm,cjs --external vitepress",
+    "build": "npx tsup src/index.ts --dts --format esm,cjs --external vitepress"
+  },
+  "keywords": [
+    "vitepress",
+    "plugin",
+    "rss"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ATQQ/sugar-blog.git"
+  },
+  "author": "sugar",
+  "license": "MIT",
+  "homepage": "https://github.com/ATQQ/sugar-blog/tree/master/packages/vitepress-plugin-rss",
+  "bugs": {
+    "url": "https://github.com/ATQQ/sugar-blog/issues"
+  },
+  "peerDependencies": {
+    "vitepress": "1.0.0-rc.4"
+  },
+  "devDependencies": {
+    "@types/node": "^16.18.4",
+    "tsup": " ^6.5.0",
+    "vite": "^4.3.3",
+    "vitepress": "1.0.0-rc.4"
+  },
+  "dependencies": {
+    "fast-glob": "^3.2.12",
+    "gray-matter": "^4.0.3",
+    "feed": "^4.2.2"
+  }
+}

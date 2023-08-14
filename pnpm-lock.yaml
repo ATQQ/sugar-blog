@@ -189,6 +189,31 @@ importers:
         specifier: 1.0.0-alpha.75
         version: 1.0.0-alpha.75(@algolia/client-search@4.19.1)(@types/node@16.18.4)(search-insights@2.7.0)
 
+  packages/vitepress-plugin-rss:
+    dependencies:
+      fast-glob:
+        specifier: ^3.2.12
+        version: 3.2.12
+      feed:
+        specifier: ^4.2.2
+        version: 4.2.2
+      gray-matter:
+        specifier: ^4.0.3
+        version: 4.0.3
+    devDependencies:
+      '@types/node':
+        specifier: ^16.18.4
+        version: 16.18.4
+      tsup:
+        specifier: ' ^6.5.0'
+        version: 6.5.0(typescript@5.1.6)
+      vite:
+        specifier: ^4.3.3
+        version: 4.4.6(@types/node@16.18.4)(sass@1.64.1)
+      vitepress:
+        specifier: 1.0.0-rc.4
+        version: 1.0.0-rc.4(@algolia/client-search@4.19.1)(@types/node@16.18.4)(axios@0.27.2)(sass@1.64.1)(search-insights@2.7.0)
+
 packages:
 
   /@algolia/autocomplete-core@1.9.2(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)(search-insights@2.7.0):
@@ -1452,7 +1477,7 @@ packages:
       vite: ^4.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 4.4.9(@types/node@16.18.4)(sass@1.56.1)
+      vite: 4.4.9(@types/node@16.18.4)(sass@1.64.1)
       vue: 3.3.4
 
   /@vue/compiler-core@3.2.47:
@@ -3814,6 +3839,7 @@ packages:
 
   /immutable@4.1.0:
     resolution: {integrity: sha512-oNkuqVTA8jqG1Q6c+UglTOD1xhC1BtjKI7XkCXRkZHrN5m18/XsnUp8Q89GkQO/z+0WjonSvl0FLhDYftp46nQ==}
+    dev: true
 
   /immutable@4.3.1:
     resolution: {integrity: sha512-lj9cnmB/kVS0QHsJnYKD1uo3o39nrbKxszjnqS9Fr6NB7bZzW45U6WSGBPKXDL/CvDKqDNPA4r3DoDQ8GTxo2A==}
@@ -5194,6 +5220,7 @@ packages:
       chokidar: 3.5.3
       immutable: 4.1.0
       source-map-js: 1.0.2
+    dev: true
 
   /sass@1.64.1:
     resolution: {integrity: sha512-16rRACSOFEE8VN7SCgBu1MpYCyN7urj9At898tyzdXFhC+a+yOX5dXwAR7L8/IdPJ1NB8OYoXmD55DM30B2kEQ==}
@@ -5895,42 +5922,6 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
-
-  /vite@4.4.9(@types/node@16.18.4)(sass@1.56.1):
-    resolution: {integrity: sha512-2mbUn2LlUmNASWwSCNSJ/EG2HuSRTnVNaydp6vMCm5VIqJsjMfbIWtbH2kDuwUVW5mMUKKZvGPX/rqeqVvv1XA==}
-    engines: {node: ^14.18.0 || >=16.0.0}
-    hasBin: true
-    peerDependencies:
-      '@types/node': '>= 14'
-      less: '*'
-      lightningcss: ^1.21.0
-      sass: '*'
-      stylus: '*'
-      sugarss: '*'
-      terser: ^5.4.0
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-      less:
-        optional: true
-      lightningcss:
-        optional: true
-      sass:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      terser:
-        optional: true
-    dependencies:
-      '@types/node': 16.18.4
-      esbuild: 0.18.15
-      postcss: 8.4.27
-      rollup: 3.28.0
-      sass: 1.56.1
-    optionalDependencies:
-      fsevents: 2.3.2
 
   /vite@4.4.9(@types/node@16.18.4)(sass@1.64.1):
     resolution: {integrity: sha512-2mbUn2LlUmNASWwSCNSJ/EG2HuSRTnVNaydp6vMCm5VIqJsjMfbIWtbH2kDuwUVW5mMUKKZvGPX/rqeqVvv1XA==}
