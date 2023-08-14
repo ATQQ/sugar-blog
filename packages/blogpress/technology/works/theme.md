@@ -1,6 +1,8 @@
 ---
 cover: https://img.cdn.sugarat.top/mdImg/MTY3MzE3MDUxOTMwMw==673170519303
 description: 简约风的vitepress博客主题介绍
+date: 2023-02-5 14:00:00
+sticky: 800
 ---
 
 # 一个简约风的vitepress博客主题
@@ -32,12 +34,37 @@ description: 简约风的vitepress博客主题介绍
 只需3步，即可体验
 
 ① 拉取 Github 模板
-```sh
-npx degit ATQQ/sugar-blog/packages/template my-blog-demo
+
+:::code-group
+```bash [npm]
+npm create @sugarat/theme@latest
 ```
-```sh
-cd my-blog-demo
+
+```bash [yarn]
+yarn create @sugarat/theme
 ```
+
+```bash [pnpm]
+pnpm create @sugarat/theme
+```
+:::
+
+也可以指定项目名
+
+:::code-group
+```bash [npm]
+npm create @sugarat/theme@latest my-first-blog
+```
+```bash [yarn]
+yarn create @sugarat/theme my-first-blog
+```
+```bash [pnpm]
+pnpm create @sugarat/theme my-first-blog
+```
+:::
+
+![](https://img.cdn.sugarat.top/mdImg/MTY4OTQyMDE1NTcxMA==689420155710)
+
 
 ② 安装依赖
 ::: code-group
