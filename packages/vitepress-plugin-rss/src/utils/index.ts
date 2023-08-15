@@ -1,4 +1,6 @@
-/* eslint-disable prefer-rest-params */
+import os from 'os'
+import path from 'path'
+import { spawnSync } from 'child_process'
 
 export function formatDate(d: any, fmt = 'yyyy-MM-dd hh:mm:ss') {
   if (!(d instanceof Date)) {
@@ -30,57 +32,111 @@ export function formatDate(d: any, fmt = 'yyyy-MM-dd hh:mm:ss') {
   return fmt
 }
 
-export function isCurrentWeek(date: Date, target?: Date) {
-  const now = target || new Date()
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
-  const oneDay = 1000 * 60 * 60 * 24
-  const nowWeek = today.getDay()
-  // 本周一的时间
-  const startWeek = today.getTime() - (nowWeek === 0 ? 6 : nowWeek - 1) * oneDay
-  return +date >= startWeek && +date <= startWeek + 7 * oneDay
+const windowsSlashRE = /\\/g
+export const isWindows = os.platform() === 'win32'
+
+export function slash(p: string): string {
+  return p.replace(windowsSlashRE, '/')
 }
 
-export function formatShowDate(date: Date | string) {
-  const source = +new Date(date)
-  const now = +new Date()
-  const diff = now - source
-  const oneSeconds = 1000
-  const oneMinute = oneSeconds * 60
-  const oneHour = oneMinute * 60
-  const oneDay = oneHour * 24
-  const oneWeek = oneDay * 7
-  if (diff < oneMinute) {
-    return `${Math.floor(diff / oneSeconds)}秒前`
-  }
-  if (diff < oneHour) {
-    return `${Math.floor(diff / oneMinute)}分钟前`
-  }
-  if (diff < oneDay) {
-    return `${Math.floor(diff / oneHour)}小时前`
-  }
-  if (diff < oneWeek) {
-    return `${Math.floor(diff / oneDay)}天前`
-  }
-
-  return formatDate(new Date(date), 'yyyy-MM-dd')
+export function normalizePath(id: string): string {
+  return path.posix.normalize(isWindows ? slash(id) : id)
 }
 
-const pattern =
-  /[a-zA-Z0-9_\u0392-\u03c9\u00c0-\u00ff\u0600-\u06ff\u0400-\u04ff]+|[\u4e00-\u9fff\u3400-\u4dbf\uf900-\ufaff\u3040-\u309f\uac00-\ud7af]+/g
+export function getDefaultTitle(content: string) {
+  const title =
+    clearMatterContent(content)
+      .split('\n')
+      ?.find((str) => {
+        return str.startsWith('# ')
+      })
+      ?.slice(2)
+      .replace(/[\s]/g, '') || ''
+  return title
+}
 
-// copy from https://github.com/youngjuning/vscode-juejin-wordcount/blob/main/count-word.ts
-export default function countWord(data: string) {
-  const m = data.match(pattern)
-  let count = 0
-  if (!m) {
-    return 0
-  }
-  for (let i = 0; i < m.length; i += 1) {
-    if (m[i].charCodeAt(0) >= 0x4e00) {
-      count += m[i].length
-    } else {
-      count += 1
+export function clearMatterContent(content: string) {
+  let first___: unknown
+  let second___: unknown
+
+  const lines = content.split('\n').reduce<string[]>((pre, line) => {
+    // 移除开头的空白行
+    if (!line.trim() && pre.length === 0) {
+      return pre
     }
+    if (line.trim() === '---') {
+      if (first___ === undefined) {
+        first___ = pre.length
+      } else if (second___ === undefined) {
+        second___ = pre.length
+      }
+    }
+    pre.push(line)
+    return pre
+  }, [])
+  return (
+    lines
+      // 剔除---之间的内容
+      .slice((second___ as number) || 0)
+      .join('\n')
+  )
+}
+
+export function getFileBirthTime(url: string) {
+  let date = new Date()
+
+  try {
+    // 参考 vitepress 中的 getGitTimestamp 实现
+    // const infoStr = execSync(`git log -1 --pretty="%ci" ${url}`)
+    //   .toString('utf-8')
+    //   .trim()
+
+    const infoStr = spawnSync('git', ['log', '-1', '--pretty="%ci"', url])
+      .stdout?.toString()
+      .replace(/["']/g, '')
+      .trim()
+    if (infoStr) {
+      date = new Date(infoStr)
+    }
+  } catch (error) {
+    return formatDate(date)
   }
-  return count
+
+  return formatDate(date)
+}
+
+export function getTextSummary(text: string, count = 100) {
+  return (
+    clearMatterContent(text)
+      .match(/^# ([\s\S]+)/m)?.[1]
+      // 除去标题
+      ?.replace(/#/g, '')
+      // 除去图片
+      ?.replace(/!\[.*?\]\(.*?\)/g, '')
+      // 除去链接
+      ?.replace(/\[(.*?)\]\(.*?\)/g, '$1')
+      // 除去加粗
+      ?.replace(/\*\*(.*?)\*\*/g, '$1')
+      ?.split('\n')
+      ?.filter((v) => !!v)
+      ?.slice(1)
+      ?.join('\n')
+      ?.replace(/>(.*)/, '')
+      ?.slice(0, count)
+  )
+}
+
+export const EXTERNAL_URL_RE = /^[a-z]+:/i
+
+/**
+ * Join two paths by resolving the slash collision.
+ */
+export function joinPath(base: string, path: string): string {
+  return `${base}${path}`.replace(/\/+/g, '/')
+}
+
+export function withBase(base: string, path: string) {
+  return EXTERNAL_URL_RE.test(path) || path.startsWith('.')
+    ? path
+    : joinPath(base, path)
 }

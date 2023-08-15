@@ -31,4 +31,6 @@ export function RssPlugin(rssOptions: RSSOptions): any {
   return pluginOps
 }
 
+export { genFeed }
+export * from './utils/index'
 export * from './type'
