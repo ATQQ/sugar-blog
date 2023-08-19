@@ -30,4 +30,24 @@ export type RSSOptions = FeedOptions & {
    * @default true
    */
   ignoreHome?: boolean
+  /**
+   * 自定义文章摘要生成逻辑
+   */
+  renderExpect?: (
+    fileContent: string,
+    frontmatter: Record<string, any>
+  ) => string | Promise<string>
+}
+
+export interface PostInfo {
+  filepath: string
+  fileContent: string
+  html: string
+  description: string
+  date: string
+  title: string
+  url: string
+  frontmatter: {
+    [key: string]: any
+  }
 }

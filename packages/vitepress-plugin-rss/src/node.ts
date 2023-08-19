@@ -11,9 +11,13 @@ import {
   getDefaultTitle,
   getFileBirthTime
 } from './utils'
-import { RSSOptions } from './type'
+import { PostInfo, RSSOptions } from './type'
 
-export async function getPagesData(srcDir: string, config: SiteConfig) {
+export async function getPostsData(
+  srcDir: string,
+  config: SiteConfig,
+  ops?: Pick<RSSOptions, 'renderExpect'>
+) {
   const files = glob.sync(`${srcDir}/**/*.md`, { ignore: ['node_modules'] })
 
   const { createMarkdownRenderer } = await import('vitepress')
@@ -24,7 +28,8 @@ export async function getPagesData(srcDir: string, config: SiteConfig) {
     config.site.base,
     config.logger
   )
-  const pages = files.map((file) => {
+  const posts: PostInfo[] = []
+  for (const file of files) {
     const fileContent = fs.readFileSync(file, 'utf-8')
 
     const { data: frontmatter, excerpt } = matter(fileContent, {
@@ -42,8 +47,10 @@ export async function getPagesData(srcDir: string, config: SiteConfig) {
     }
 
     // 获取摘要信息
-    // TODO：支持自定义摘要
-    frontmatter.description = frontmatter.description || excerpt
+    frontmatter.description =
+      // eslint-disable-next-line no-await-in-loop
+      (await ops?.renderExpect?.(fileContent, { ...frontmatter })) ??
+      (frontmatter.description || excerpt)
 
     // 获取封面图
     // TODO：用上封面图
@@ -58,7 +65,8 @@ export async function getPagesData(srcDir: string, config: SiteConfig) {
       normalizePath(path.relative(config.srcDir, file))
         .replace(/(^|\/)index\.md$/, '$1')
         .replace(/\.md$/, config.cleanUrls ? '' : '.html')
-    return {
+
+    posts.push({
       filepath: file,
       fileContent,
       html,
@@ -67,10 +75,10 @@ export async function getPagesData(srcDir: string, config: SiteConfig) {
       title: frontmatter.title,
       url,
       frontmatter
-    }
-  })
+    })
+  }
 
-  return pages
+  return posts
 }
 
 export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
@@ -82,7 +90,9 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
     '.'
 
   // 获取所有文章
-  const posts = await getPagesData(srcDir, config)
+  const posts = await getPostsData(srcDir, config, {
+    renderExpect: rssOptions.renderExpect
+  })
 
   const { baseUrl, filename, ignoreHome = true } = rssOptions
 
