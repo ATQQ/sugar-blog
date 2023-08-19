@@ -15,7 +15,7 @@ recommend: -999
 
 [[toc]]
 
-
+<!-- TODO：自动生成可翻页目录 -->
 ## 2023
 * [技术视野周刊第49期](./2023-08-12.md)
 * [技术视野周刊第48期](./2023-08-04.md)
@@ -65,6 +65,7 @@ recommend: -999
 * [童欧巴：前端食堂](https://github.com/Geekhyt/weekly) - 你的前端食堂，吃好每一顿饭
 * [rottenpen：FE News](https://rottenpen.zhubai.love/) - 分享前端，生活
 * [知识星球：咲奈的平行时空](https://wx.zsxq.com/dweb2/index/group/15552285284822) - 前端前沿技术、资讯、方法论分享
+* [前端技术文章](https://fed.chanceyu.com/)
 
 ### 技术社区
 * [掘金](https://juejin.cn/)
