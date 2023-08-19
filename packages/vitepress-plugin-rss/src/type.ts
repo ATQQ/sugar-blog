@@ -9,8 +9,12 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
   baseUrl: string
   /**
    * 线上访问的RSS地址
+   * @default
+   * ```ts
+   * `${baseUrl + VPConfig.site.base + (filename || 'feed.rss'}`
+   * ```
    */
-  url: string
+  url?: string
   /**
    * 输出的RSS文件名
    * @default 'feed.rss'
