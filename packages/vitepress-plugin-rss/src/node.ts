@@ -53,7 +53,6 @@ export async function getPostsData(
       (frontmatter.description || excerpt)
 
     // 获取封面图
-    // TODO：用上封面图
     frontmatter.cover =
       frontmatter.cover ||
       fileContent.match(/[!]\[.*?\]\((https:\/\/.+)\)/)?.[1] ||
@@ -133,6 +132,7 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
           // link: authorLink
         }
       ],
+      image: frontmatter?.cover,
       date: new Date(date)
     })
   }
