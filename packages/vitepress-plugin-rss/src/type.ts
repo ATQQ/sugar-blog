@@ -1,4 +1,4 @@
-import type { FeedOptions } from 'feed'
+import type { FeedOptions, Author } from 'feed'
 
 export type RSSOptions = FeedOptions & {
   /**
@@ -30,6 +30,10 @@ export type RSSOptions = FeedOptions & {
    * @default true
    */
   ignoreHome?: boolean
+  /**
+   * 博客站点内容涉及的作者列表
+   */
+  authors?: Author[]
   /**
    * 自定义文章摘要生成逻辑
    */

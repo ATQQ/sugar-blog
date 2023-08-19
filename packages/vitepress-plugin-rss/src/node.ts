@@ -112,14 +112,10 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
     // 跳过未发布的文章
     if (frontmatter.publish === false) continue
 
-    // TODO：全局默认作者
-    // TODO: 作者链接
-    // const authorLink = authorList.find((v) => v.nickname === author)?.url
-    const { author } = frontmatter
-
+    const author = frontmatter.author || rssOptions.author?.name
+    const authorInfo = rssOptions.authors?.find((v) => v.name === author)
     // 最后的文章链接
     const link = `${baseUrl}${url}`
-
     feed.addItem({
       title,
       id: link,
@@ -128,8 +124,8 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
       content: html,
       author: [
         {
-          name: author
-          // link: authorLink
+          name: author,
+          ...authorInfo
         }
       ],
       image: frontmatter?.cover,
