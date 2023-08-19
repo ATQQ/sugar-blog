@@ -84,9 +84,7 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
   // 获取所有文章
   const posts = await getPagesData(srcDir, config)
 
-  // TODO: filter
-  // TODO：include layout home
-  const { baseUrl, filename } = rssOptions
+  const { baseUrl, filename, ignoreHome = true } = rssOptions
 
   const feed = new Feed(rssOptions)
 
@@ -98,6 +96,10 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
   for (const post of posts) {
     const { title, description, date, frontmatter, url, html } = post
 
+    // 忽略 layout:home
+    if (frontmatter.layout === 'home' && ignoreHome) {
+      continue
+    }
     // 跳过未发布的文章
     if (frontmatter.publish === false) continue
 

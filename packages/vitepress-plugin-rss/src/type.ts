@@ -1,6 +1,10 @@
 import type { FeedOptions } from 'feed'
 
 export type RSSOptions = FeedOptions & {
+  /**
+   * 你的站点地址
+   * @example 'https://sugarat.top'
+   */
   baseUrl: string
   /**
    * 线上访问的RSS地址
@@ -21,4 +25,9 @@ export type RSSOptions = FeedOptions & {
    * @default true
    */
   log?: boolean
+  /**
+   * 是否过滤 layout:home
+   * @default true
+   */
+  ignoreHome?: boolean
 }
