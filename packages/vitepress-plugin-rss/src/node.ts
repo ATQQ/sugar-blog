@@ -127,8 +127,10 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
   const RSSFilename = filename || 'feed.rss'
   const RSSFilepath = path.join(config.outDir, RSSFilename)
   writeFileSync(RSSFilepath, feed.rss2())
-  console.log('🎉 RSS generated', RSSFilename)
-  console.log('rss filepath:', RSSFilepath)
-  console.log('rss url:', `${baseUrl}${config.site.base + RSSFilename}`)
-  console.log()
+  if (rssOptions.log ?? true) {
+    console.log('🎉 RSS generated', RSSFilename)
+    console.log('rss filepath:', RSSFilepath)
+    console.log('rss url:', `${baseUrl}${config.site.base + RSSFilename}`)
+    console.log()
+  }
 }

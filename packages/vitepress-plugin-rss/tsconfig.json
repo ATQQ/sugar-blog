@@ -3,7 +3,7 @@
     "baseUrl": ".",
     "module": "esnext",
     "outDir": "dist",
-    "target": "esnext",
+    "target": "es2015",
     "moduleResolution": "node",
     "strict": true,
     "jsx": "preserve",

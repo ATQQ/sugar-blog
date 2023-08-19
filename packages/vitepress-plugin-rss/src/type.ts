@@ -20,5 +20,5 @@ export type RSSOptions = FeedOptions & {
    * 是否打印过程提示
    * @default true
    */
-  verbose?: boolean
+  log?: boolean
 }
