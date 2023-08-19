@@ -95,7 +95,11 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
 
   const { baseUrl, filename, ignoreHome = true } = rssOptions
 
-  const feed = new Feed(rssOptions)
+  const feed = new Feed({
+    id: rssOptions.baseUrl,
+    link: rssOptions.baseUrl,
+    ...rssOptions
+  })
 
   // 按日期排序
   posts.sort(

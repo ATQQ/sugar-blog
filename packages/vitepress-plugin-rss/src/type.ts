@@ -1,6 +1,7 @@
 import type { FeedOptions, Author } from 'feed'
 
-export type RSSOptions = FeedOptions & {
+export type RSSOptions = Omit<FeedOptions, 'id'> & {
+  id?: string
   /**
    * 你的站点地址
    * @example 'https://sugarat.top'
