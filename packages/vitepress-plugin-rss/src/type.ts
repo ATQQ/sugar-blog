@@ -21,10 +21,10 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
    */
   filename?: string
   /**
-   * 是否展示RSS的图标
+   * RSS的图标展示（你也可以传入一个svg字符串进行自定义，SVG 图标可访问 https://www.xicons.org/# 获取）
    * @default true
    */
-  showIcon?: boolean
+  icon?: boolean | string
   /**
    * 是否打印过程提示
    * @default true
