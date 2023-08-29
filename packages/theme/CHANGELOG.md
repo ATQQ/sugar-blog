@@ -1,5 +1,11 @@
 # @sugarat/theme
 
+## 0.1.42
+
+### Patch Changes
+
+- feat: RSS 功能优化
+
 ## 0.1.41
 
 ### Patch Changes

@@ -139,14 +139,7 @@ const baseUrl = 'https://theme.sugarat.top'
 const RSS: Theme.RSSOptions = {
   title: '@sugarat/theme',
   baseUrl,
-  description: '简约风的 Vitepress 博客主题',
-  id: baseUrl,
-  link: baseUrl,
-  language: 'zh-cn',
-  image: 'https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTE2NzAzMA==674995167030',
-  favicon: 'https://theme.sugarat.top/favicon.ico',
   copyright: 'Copyright (c) 2023-present, 粥里有勺糖',
-  url: `${baseUrl}/feed.rss`
 }
 
 export const blogTheme = getThemeConfig({

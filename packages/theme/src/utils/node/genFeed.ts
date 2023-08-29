@@ -9,7 +9,7 @@ import { pageMap } from './theme'
 
 export async function genFeed(config: SiteConfig) {
   const blogCfg: Theme.BlogConfig = config.userConfig.themeConfig.blog
-  const posts: Theme.PageData[] = blogCfg.pagesData
+  let posts: Theme.PageData[] = blogCfg.pagesData
   const { RSS, authorList = [] } = blogCfg
   if (!RSS) return
   const { createMarkdownRenderer } = await import('vitepress')
@@ -25,16 +25,30 @@ export async function genFeed(config: SiteConfig) {
   const { base } = config.userConfig
 
   const { baseUrl, filename } = RSS
-  const feed = new Feed(RSS)
+  const feed = new Feed({
+    id: baseUrl,
+    link: baseUrl,
+    ...RSS
+  })
 
   posts.sort(
     (a, b) =>
       +new Date(b.meta.date as string) - +new Date(a.meta.date as string)
   )
 
+  posts = posts
+    // 过滤掉 layout:home
+    .filter((v) => v.meta.layout !== 'home')
+    // 过滤掉不展示的
+    .filter((v) => v.meta.hidden !== true)
+
+  if (undefined !== RSS?.limit && RSS?.limit > 0) {
+    posts.splice(RSS.limit)
+  }
+
   for (const { route, meta } of posts) {
-    const { title, description, date, hidden } = meta
-    if (hidden) continue
+    const { title, description, date } = meta
+
     const author = meta.author ?? blogCfg.author
     let link = `${baseUrl}${withBase(
       base || '',
@@ -68,8 +82,13 @@ export async function genFeed(config: SiteConfig) {
       date: new Date(date)
     })
   }
-  const RSSFile = path.join(config.outDir, filename || 'feed.rss')
+  const RSSFilename = filename || 'feed.rss'
+  const RSSFile = path.join(config.outDir, RSSFilename)
   writeFileSync(RSSFile, feed.rss2())
-  console.log('🎉 RSS generated', filename || 'feed.rss')
+  console.log('🎉 RSS generated', RSSFilename)
+  console.log('rss filepath:', RSSFile)
+  console.log('rss url:', `${baseUrl}${config.site.base + RSSFilename}`)
+  console.log('include', posts.length, 'posts')
+  console.log()
   console.log()
 }

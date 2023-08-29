@@ -652,7 +652,7 @@ export namespace BlogPopover {
 ## friend
 用于设置首页展示的友链信息
 
-![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTMxMTE4Ng==674995311186)
+![](https://img.cdn.sugarat.top/mdImg/MTY5MzMxODIxNDY0Mg==693318214642)
 
 
 ::: code-group
@@ -800,7 +800,21 @@ hero:
 
 ::: code-group
 
-```ts [example]
+```ts [example 基础配置]
+import type { Theme } from '@sugarat/theme'
+
+const baseUrl = 'https://theme.sugarat.top'
+const RSS: Theme.RSSOptions = {
+  title: '@sugarat/theme',
+  baseUrl,
+  copyright: 'Copyright (c) 2023-present, 粥里有勺糖',
+}
+
+const blogTheme = getThemeConfig({
+  RSS
+})
+```
+```ts [example2 复杂配置]
 import type { Theme } from '@sugarat/theme'
 
 const baseUrl = 'https://theme.sugarat.top'
@@ -808,8 +822,6 @@ const RSS: Theme.RSSOptions = {
   title: '@sugarat/theme',
   baseUrl,
   description: '简约风的 Vitepress 博客主题',
-  id: baseUrl,
-  link: baseUrl,
   language: 'zh-cn',
   image: 'https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTE2NzAzMA==674995167030',
   favicon: 'https://theme.sugarat.top/favicon.ico',
@@ -822,23 +834,39 @@ const blogTheme = getThemeConfig({
 })
 ```
 
-```ts [type]
-type RSSOptions = FeedOptions & {
+```ts [type 完整配置项]
+type RSSOptions = Omit<FeedOptions, 'id'> & {
+  id?: string
+  /**
+   * 你的站点地址
+   * @example 'https://sugarat.top'
+   */
   baseUrl: string
   /**
    * 线上访问的RSS地址
+   * @default
+   * @example https://sugarat.top/feed.rss
+   * ```ts
+   * `${baseUrl + VPConfig.site.base + (filename || 'feed.rss'}`
+   * ```
    */
-  url: string
+  url?: string
   /**
    * 输出的RSS文件名
    * @default 'feed.rss'
    */
   filename?: string
   /**
-   * 是否展示RSS的图标
+   * RSS的图标展示
    * @default true
    */
-  showIcon?: boolean
+  icon?: boolean
+  /**
+   * 限制输出文件包含的文章数量
+   * @default 0
+   * @description (0 不限制；> 1 会按照日期排序对输出内容进行调整)
+   */
+  limit?: number
 }
 
 interface FeedOptions {
@@ -862,3 +890,9 @@ interface FeedOptions {
 ```
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY5MTkyODAxMDEwMQ==691928010101)
+
+:::warning 特别提示
+你也可以使用单独的插件 [vitepress-plugin-rss](https://www.npmjs.com/package/vitepress-plugin-rss) 来添加同样的能力，其支持更加丰富的定制
+
+实现原理见文章：[如何快速为 VitePress 添加 RSS 订阅支持 - 掘金](https://juejin.cn/post/7270046196642005049)
+:::

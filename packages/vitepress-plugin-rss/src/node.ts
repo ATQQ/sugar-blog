@@ -88,11 +88,6 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
     process.argv.slice(2)?.[1] ||
     '.'
 
-  // 获取所有文章
-  const posts = await getPostsData(srcDir, config, {
-    renderExpect: rssOptions.renderExpect
-  })
-
   const { baseUrl, filename, ignoreHome = true } = rssOptions
 
   const feed = new Feed({
@@ -101,20 +96,32 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
     ...rssOptions
   })
 
+  // 获取所有文章
+  const posts = (
+    await getPostsData(srcDir, config, {
+      renderExpect: rssOptions.renderExpect
+    })
+  ).filter((p) => {
+    // 忽略 layout:home
+    if (p.frontmatter.layout === 'home' && ignoreHome) {
+      return false
+    }
+    // 跳过未发布的文章
+    if (p.frontmatter.publish === false) return false
+
+    return true
+  })
+
   // 按日期排序
   posts.sort(
     (a, b) => +new Date(b.date as string) - +new Date(a.date as string)
   )
+  if (undefined !== rssOptions?.limit && rssOptions?.limit > 0) {
+    posts.splice(rssOptions.limit)
+  }
 
   for (const post of posts) {
     const { title, description, date, frontmatter, url, html } = post
-
-    // 忽略 layout:home
-    if (frontmatter.layout === 'home' && ignoreHome) {
-      continue
-    }
-    // 跳过未发布的文章
-    if (frontmatter.publish === false) continue
 
     const author = frontmatter.author || rssOptions.author?.name
     const authorInfo = rssOptions.authors?.find((v) => v.name === author)
@@ -143,6 +150,7 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
     console.log('🎉 RSS generated', RSSFilename)
     console.log('rss filepath:', RSSFilepath)
     console.log('rss url:', `${baseUrl}${config.site.base + RSSFilename}`)
+    console.log('include', posts.length, 'posts')
     console.log()
   }
 }

@@ -281,22 +281,38 @@ export namespace Theme {
     RSS?: RSSOptions
   }
 
-  export type RSSOptions = FeedOptions & {
+  export type RSSOptions = Omit<FeedOptions, 'id'> & {
+    id?: string
+    /**
+     * 你的站点地址
+     * @example 'https://sugarat.top'
+     */
     baseUrl: string
     /**
      * 线上访问的RSS地址
+     * @default
+     * @example https://sugarat.top/feed.rss
+     * ```ts
+     * `${baseUrl + VPConfig.site.base + (filename || 'feed.rss'}`
+     * ```
      */
-    url: string
+    url?: string
     /**
      * 输出的RSS文件名
      * @default 'feed.rss'
      */
     filename?: string
     /**
-     * 是否展示RSS的图标
+     * RSS的图标展示
      * @default true
      */
-    showIcon?: boolean
+    icon?: boolean
+    /**
+     * 限制输出文件包含的文章数量
+     * @default 0
+     * @description (0 不限制；> 1 会按照日期排序对输出内容进行调整)
+     */
+    limit?: number
   }
   export interface Config extends DefaultTheme.Config {
     blog?: BlogConfig
