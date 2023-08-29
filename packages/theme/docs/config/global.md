@@ -814,7 +814,7 @@ const blogTheme = getThemeConfig({
   RSS
 })
 ```
-```ts [example2 更多配置]
+```ts [example2 复杂配置]
 import type { Theme } from '@sugarat/theme'
 
 const baseUrl = 'https://theme.sugarat.top'
@@ -834,7 +834,7 @@ const blogTheme = getThemeConfig({
 })
 ```
 
-```ts [type]
+```ts [type 完整配置项]
 type RSSOptions = Omit<FeedOptions, 'id'> & {
   id?: string
   /**
@@ -861,6 +861,12 @@ type RSSOptions = Omit<FeedOptions, 'id'> & {
    * @default true
    */
   icon?: boolean
+  /**
+   * 限制输出文件包含的文章数量
+   * @default 0
+   * @description (0 不限制；> 1 会按照日期排序对输出内容进行调整)
+   */
+  limit?: number
 }
 
 interface FeedOptions {

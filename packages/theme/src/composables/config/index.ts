@@ -307,6 +307,12 @@ export namespace Theme {
      * @default true
      */
     icon?: boolean
+    /**
+     * 限制输出文件包含的文章数量
+     * @default 0
+     * @description (0 不限制；> 1 会按照日期排序对输出内容进行调整)
+     */
+    limit?: number
   }
   export interface Config extends DefaultTheme.Config {
     blog?: BlogConfig

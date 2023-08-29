@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.11
+
+### Patch Changes
+
+- feat: RSS 功能优化
+
 ## 0.0.10
 
 ### Patch Changes

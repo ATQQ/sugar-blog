@@ -132,6 +132,12 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
     fileContent: string,
     frontmatter: Record<string, any>
   ) => string | Promise<string>
+  /**
+   * 限制输出文件包含的文章数量
+   * @default 0
+   * @description (0 不限制；> 1 会按照日期排序对输出内容进行调整)
+   */
+  limit?: number
 }
 ```
 

@@ -15,6 +15,12 @@ publish: true
 pnpm up @sugarat/theme
 ```
 
+## 0.1.42 (2023/08/29)
+
+### Patch Changes
+
+- feat: RSS 功能&使用文档优化
+
 ## 0.1.41 (2023/08/13)
 
 ### Patch Changes
