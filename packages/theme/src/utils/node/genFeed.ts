@@ -25,7 +25,11 @@ export async function genFeed(config: SiteConfig) {
   const { base } = config.userConfig
 
   const { baseUrl, filename } = RSS
-  const feed = new Feed(RSS)
+  const feed = new Feed({
+    id: baseUrl,
+    link: baseUrl,
+    ...RSS
+  })
 
   posts.sort(
     (a, b) =>

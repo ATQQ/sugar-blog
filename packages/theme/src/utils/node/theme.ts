@@ -129,7 +129,7 @@ export function patchVPThemeConfig(
 ) {
   // 添加 icon
   const RSS = cfg?.RSS
-  if (RSS && RSS.showIcon !== false) {
+  if (RSS && RSS.icon !== false) {
     vpThemeConfig.socialLinks = [
       {
         icon: {

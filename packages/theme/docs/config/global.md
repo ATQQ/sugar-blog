@@ -800,7 +800,21 @@ hero:
 
 ::: code-group
 
-```ts [example]
+```ts [example 基础配置]
+import type { Theme } from '@sugarat/theme'
+
+const baseUrl = 'https://theme.sugarat.top'
+const RSS: Theme.RSSOptions = {
+  title: '@sugarat/theme',
+  baseUrl,
+  copyright: 'Copyright (c) 2023-present, 粥里有勺糖',
+}
+
+const blogTheme = getThemeConfig({
+  RSS
+})
+```
+```ts [example2 更多配置]
 import type { Theme } from '@sugarat/theme'
 
 const baseUrl = 'https://theme.sugarat.top'
@@ -808,8 +822,6 @@ const RSS: Theme.RSSOptions = {
   title: '@sugarat/theme',
   baseUrl,
   description: '简约风的 Vitepress 博客主题',
-  id: baseUrl,
-  link: baseUrl,
   language: 'zh-cn',
   image: 'https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTE2NzAzMA==674995167030',
   favicon: 'https://theme.sugarat.top/favicon.ico',
@@ -823,22 +835,32 @@ const blogTheme = getThemeConfig({
 ```
 
 ```ts [type]
-type RSSOptions = FeedOptions & {
+type RSSOptions = Omit<FeedOptions, 'id'> & {
+  id?: string
+  /**
+   * 你的站点地址
+   * @example 'https://sugarat.top'
+   */
   baseUrl: string
   /**
    * 线上访问的RSS地址
+   * @default
+   * @example https://sugarat.top/feed.rss
+   * ```ts
+   * `${baseUrl + VPConfig.site.base + (filename || 'feed.rss'}`
+   * ```
    */
-  url: string
+  url?: string
   /**
    * 输出的RSS文件名
    * @default 'feed.rss'
    */
   filename?: string
   /**
-   * 是否展示RSS的图标
+   * RSS的图标展示
    * @default true
    */
-  showIcon?: boolean
+  icon?: boolean
 }
 
 interface FeedOptions {

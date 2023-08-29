@@ -141,7 +141,7 @@ export function useActiveAnchor() {
   onMounted(() => {
     const { hash } = window.location
     if (hash) {
-      el.value = document.querySelector(decodeURIComponent(hash))
+      el.value = document.querySelector(decodeURIComponent(hash)) as any
     }
   })
   return el
