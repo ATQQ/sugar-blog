@@ -652,7 +652,7 @@ export namespace BlogPopover {
 ## friend
 用于设置首页展示的友链信息
 
-![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTMxMTE4Ng==674995311186)
+![](https://img.cdn.sugarat.top/mdImg/MTY5MzMxODIxNDY0Mg==693318214642)
 
 
 ::: code-group
@@ -884,3 +884,9 @@ interface FeedOptions {
 ```
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY5MTkyODAxMDEwMQ==691928010101)
+
+:::warning 特别提示
+你也可以使用单独的插件 [vitepress-plugin-rss](https://www.npmjs.com/package/vitepress-plugin-rss) 来添加同样的能力，其支持更加丰富的定制
+
+实现原理见文章：[如何快速为 VitePress 添加 RSS 订阅支持 - 掘金](https://juejin.cn/post/7270046196642005049)
+:::
