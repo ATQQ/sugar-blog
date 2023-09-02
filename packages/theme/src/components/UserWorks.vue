@@ -376,7 +376,7 @@ const handleChooseTag = (tag: string) => {
   }
   a {
     font-weight: 500;
-    color: var(--vp-c-brand);
+    color: var(--vp-c-brand-1);
   }
 }
 .works-container {

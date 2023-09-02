@@ -206,7 +206,7 @@ watch(
   .link {
     color: var(--vp-c-text-2);
     &:hover {
-      color: var(--vp-c-brand);
+      color: var(--vp-c-brand-1);
       cursor: pointer;
     }
   }

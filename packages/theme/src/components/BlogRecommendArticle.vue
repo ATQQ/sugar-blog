@@ -191,7 +191,7 @@ const showChangeBtn = computed(() => {
       word-break: break-all;
       white-space: break-spaces;
       &.current {
-        color: var(--vp-c-brand);
+        color: var(--vp-c-brand-1);
       }
     }
 

@@ -386,7 +386,7 @@ watch(
   font-size: 12px;
 }
 .blog-search .nav-search-btn-wait:hover {
-  border: 1px solid var(--vp-c-brand);
+  border: 1px solid var(--vp-c-brand-1);
   border-radius: 6px;
 }
 .blog-search .nav-search-btn-wait .search-tip {
