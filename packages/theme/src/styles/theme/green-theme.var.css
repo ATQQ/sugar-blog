@@ -1,13 +1,11 @@
 :root {
   /* 使用之前的绿色主题，重写当前靛蓝 */
   /* 所有变量：https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css */
-  /* --vp-c-brand-1: var(--vp-c-green-1);
+  --vp-c-brand-1: var(--vp-c-green-1);
   --vp-c-brand-2: var(--vp-c-green-2);
   --vp-c-brand-3: var(--vp-c-green-3);
   --vp-c-brand: var(--vp-c-brand-1);
   --vp-c-tip-1: var(--vp-c-brand-1);
   --vp-c-tip-2: var(--vp-c-brand-2);
-  --vp-c-tip-3: var(--vp-c-brand-3); */
-
-  /* 自定义主题色 */
+  --vp-c-tip-3: var(--vp-c-brand-3);
 }

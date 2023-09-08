@@ -8,7 +8,8 @@ html {
   --nav-bgc: rgba(255, 255, 255, 0.9);
   --badge-font-color: #4e5969;
   --description-font-color: #86909c;
-  --blog-theme-color: #409eff;
+  --blog-theme-color: var(--vp-c-brand-1);
+  // --blog-theme-color: #409eff;
 }
 
 html[class='dark'] {
@@ -105,8 +106,8 @@ html[class='dark'] {
 }
 
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 4px;
+  height: 4px;
 }
 
 ::-webkit-scrollbar-track-piece {
@@ -114,13 +115,13 @@ html[class='dark'] {
 }
 
 ::-webkit-scrollbar-thumb:vertical {
-  height: 5px;
+  height: 4px;
   border-radius: 4px;
-  background-color: var(--el-color-primary);
+  background-color: var(--vp-c-brand-1);
 }
 
 ::-webkit-scrollbar-thumb:horizontal {
-  width: 5px;
+  width: 4px;
   border-radius: 4px;
-  background-color: var(--el-color-primary);
+  background-color: var(--vp-c-brand-1);
 }

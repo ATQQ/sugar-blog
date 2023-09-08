@@ -138,10 +138,14 @@ const PopoverValue = (
   right: 20px;
   z-index: 19;
   box-sizing: border-box;
-  border: 1px solid var(--el-color-primary-light-3);
+  border: 1px solid var(--vp-c-brand-3);
   border-radius: 6px;
   background-color: rgba(var(--bg-gradient-home));
   box-shadow: var(--box-shadow);
+  :deep(.el-button.el-button--primary) {
+    background-color: var(--vp-c-brand-2);
+    border-color: var(--vp-c-brand-2);
+  }
 }
 @media screen and (min-width: 760px) and (max-width: 1140px) {
   .theme-blog-popover {
@@ -149,7 +153,7 @@ const PopoverValue = (
   }
 }
 .header {
-  background-color: var(--el-color-primary-light-3);
+  background-color: var(--vp-c-brand-3);
   color: #fff;
   padding: 6px 4px;
   display: flex;
@@ -207,7 +211,7 @@ const PopoverValue = (
   top: 80px;
   right: 10px;
   position: fixed;
-  background-color: var(--el-color-primary-light-3);
+  background-color: var(--vp-c-brand-3);
   padding: 8px;
   color: #fff;
   font-size: 12px;

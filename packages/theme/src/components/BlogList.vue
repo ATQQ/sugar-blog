@@ -16,17 +16,19 @@
   </ul>
   <!-- 解决element-ui bug -->
   <ClientOnly>
-    <el-pagination
-      v-if="wikiList.length >= pageSize"
-      small
-      background
-      :default-current-page="1"
-      :current-page="currentPage"
-      @update:current-page="handleUpdatePageNum"
-      :page-size="pageSize"
-      :total="filterData.length"
-      layout="prev, pager, next, jumper"
-    />
+    <div class="el-pagination-wrapper">
+      <el-pagination
+        v-if="wikiList.length >= pageSize"
+        small
+        background
+        :default-current-page="1"
+        :current-page="currentPage"
+        @update:current-page="handleUpdatePageNum"
+        :page-size="pageSize"
+        :total="filterData.length"
+        layout="prev, pager, next, jumper"
+      />
+    </div>
   </ClientOnly>
 </template>
 <script setup lang="ts">
@@ -116,3 +118,20 @@ watch(
   }
 )
 </script>
+<style lang="scss" scoped>
+.el-pagination-wrapper {
+  :deep(.el-pagination li.is-active.number) {
+    background-color: var(--vp-c-brand-2);
+  }
+  :deep(.el-pagination button:hover) {
+    color: var(--vp-c-brand-2);
+  }
+
+  :deep(.el-pager li:not(.is-active):hover) {
+    color: var(--vp-c-brand-2);
+  }
+  :deep(.el-input__wrapper.is-focus) {
+    box-shadow: 0 0 0 1px var(--vp-c-brand-2) inset;
+  }
+}
+</style>
