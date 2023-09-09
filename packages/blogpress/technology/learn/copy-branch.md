@@ -2,6 +2,9 @@
 outline: [2,3]
 cover: https://img.cdn.sugarat.top/mdImg/MTY5MTMxNzA1MDQ0OA==691317050448
 description: 本文简单介绍了如何通过`Shell`和`Node.js`实现复制当前分支名到剪贴板
+tags:
+ - CLI
+ - 技术笔记
 ---
 # 如何优雅的复制当前项目分支名
 
