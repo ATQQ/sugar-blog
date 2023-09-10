@@ -132,6 +132,7 @@ const PopoverValue = (
 
 <style lang="scss" scoped>
 .theme-blog-popover {
+  color: rgba(60, 60, 67);
   width: 258px;
   position: fixed;
   top: 80px;
