@@ -123,7 +123,7 @@ importers:
         version: 10.2.4
       vitepress-plugin-mermaid:
         specifier: ^2.0.13
-        version: 2.0.13(mermaid@10.2.4)(vitepress@1.0.0-rc.10)
+        version: 2.0.13(mermaid@10.2.4)(vitepress@1.0.0-rc.11)
       vue-command-palette:
         specifier: ^0.1.4
         version: 0.1.4
@@ -144,11 +144,11 @@ importers:
         specifier: ^4.8.2
         version: 4.9.4
       vitepress:
-        specifier: 1.0.0-rc.10
-        version: 1.0.0-rc.10(@algolia/client-search@4.19.1)(@types/node@16.18.4)(sass@1.56.1)(search-insights@2.7.0)
+        specifier: 1.0.0-rc.11
+        version: 1.0.0-rc.11(@algolia/client-search@4.19.1)(@types/node@16.18.4)(sass@1.56.1)(search-insights@2.7.0)
       vitepress-plugin-tabs:
         specifier: ^0.2.0
-        version: 0.2.0(vitepress@1.0.0-rc.10)(vue@3.3.4)
+        version: 0.2.0(vitepress@1.0.0-rc.11)(vue@3.3.4)
       vue:
         specifier: ^3.3.4
         version: 3.3.4
@@ -216,7 +216,7 @@ importers:
         version: 4.4.6(@types/node@16.18.4)(sass@1.64.1)
       vitepress:
         specifier: 1.0.0-rc.4
-        version: 1.0.0-rc.4(@algolia/client-search@4.19.1)(@types/node@16.18.4)(axios@0.27.2)(sass@1.64.1)(search-insights@2.7.0)
+        version: 1.0.0-rc.4(@algolia/client-search@4.19.1)(@types/node@16.18.4)(search-insights@2.7.0)
 
 packages:
 
@@ -652,7 +652,7 @@ packages:
     resolution: {integrity: sha512-WqB+z+zVKSXDkGq028nClT9RvMzfFlemZuIulX5ZwWkdUtl4k7M9cmZA/c6kuZf7FG24XQsMHWuBjeUo9hLRyA==}
     dependencies:
       '@docsearch/react': 3.5.0(@algolia/client-search@4.19.1)(search-insights@2.7.0)
-      preact: 10.13.1
+      preact: 10.16.0
     transitivePeerDependencies:
       - '@algolia/client-search'
       - '@types/react'
@@ -5077,10 +5077,6 @@ packages:
       picocolors: 1.0.0
       source-map-js: 1.0.2
 
-  /preact@10.13.1:
-    resolution: {integrity: sha512-KyoXVDU5OqTpG9LXlB3+y639JAGzl8JSBXLn1J9HTSB3gbKcuInga7bZnXLlxmK94ntTs1EFeZp0lrja2AuBYQ==}
-    dev: true
-
   /preact@10.16.0:
     resolution: {integrity: sha512-XTSj3dJ4roKIC93pald6rWuB2qQJO9gO2iLLyTe87MrjQN+HklueLsmskbywEWqCHlclgz3/M4YLL2iBr9UmMA==}
 
@@ -6108,25 +6104,25 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
 
-  /vitepress-plugin-mermaid@2.0.13(mermaid@10.2.4)(vitepress@1.0.0-rc.10):
+  /vitepress-plugin-mermaid@2.0.13(mermaid@10.2.4)(vitepress@1.0.0-rc.11):
     resolution: {integrity: sha512-2c0ywXHE7kOK88Ygla9aGgkyF2JbfqfjE36JnoljW/3hQTR9rYBmfTFM5tvs4TUjCUfedUYT4CeyNolCY9t3uw==}
     peerDependencies:
       mermaid: '10'
       vitepress: ^0.21.6 || ^1.0.0 || ^1.0.0-alpha
     dependencies:
       mermaid: 10.2.4
-      vitepress: 1.0.0-rc.10(@algolia/client-search@4.19.1)(@types/node@16.18.4)(sass@1.56.1)(search-insights@2.7.0)
+      vitepress: 1.0.0-rc.11(@algolia/client-search@4.19.1)(@types/node@16.18.4)(sass@1.56.1)(search-insights@2.7.0)
     optionalDependencies:
       '@mermaid-js/mermaid-mindmap': 9.3.0
     dev: false
 
-  /vitepress-plugin-tabs@0.2.0(vitepress@1.0.0-rc.10)(vue@3.3.4):
+  /vitepress-plugin-tabs@0.2.0(vitepress@1.0.0-rc.11)(vue@3.3.4):
     resolution: {integrity: sha512-jTdtz4Z5fHllzcDAJaJK/bxE/2PhJSqetFUFgiB7xzw23O4yI+ntJrN+D3oP8XH/0559QUbrYd0K3YLoRaHbAA==}
     peerDependencies:
       vitepress: ^1.0.0-alpha.29
       vue: ^3.2.45
     dependencies:
-      vitepress: 1.0.0-rc.10(@algolia/client-search@4.19.1)(@types/node@16.18.4)(sass@1.56.1)(search-insights@2.7.0)
+      vitepress: 1.0.0-rc.11(@algolia/client-search@4.19.1)(@types/node@16.18.4)(sass@1.56.1)(search-insights@2.7.0)
       vue: 3.3.4
     dev: true
 
@@ -6160,8 +6156,8 @@ packages:
       - terser
     dev: true
 
-  /vitepress@1.0.0-rc.10(@algolia/client-search@4.19.1)(@types/node@16.18.4)(sass@1.56.1)(search-insights@2.7.0):
-    resolution: {integrity: sha512-+MsahIWqq5WUEmj6MR4obcKYbT7im07jZPCQPdNJExkeOSbOAJ4xypSLx88x7rvtzWHhHc5aXbOhCRvGEGjFrw==}
+  /vitepress@1.0.0-rc.11(@algolia/client-search@4.19.1)(@types/node@16.18.4)(sass@1.56.1)(search-insights@2.7.0):
+    resolution: {integrity: sha512-HUnfYOadqwLSahtgQxKt9/wiNHdd80BaUfQ+DIMpfq03Iv9CWX1SCBK4gxK/bMWns3Q0ArhXajQbU/fmBwYUMg==}
     hasBin: true
     dependencies:
       '@docsearch/css': 3.5.2
@@ -6243,6 +6239,51 @@ packages:
       - sugarss
       - terser
       - universal-cookie
+    dev: false
+
+  /vitepress@1.0.0-rc.4(@algolia/client-search@4.19.1)(@types/node@16.18.4)(search-insights@2.7.0):
+    resolution: {integrity: sha512-JCQ89Bm6ECUTnyzyas3JENo00UDJeK8q1SUQyJYou+4Yz5BKEc/F3O21cu++DnUT2zXc0kvQ2Aj4BZCc/nioXQ==}
+    hasBin: true
+    dependencies:
+      '@docsearch/css': 3.5.1
+      '@docsearch/js': 3.5.1(@algolia/client-search@4.19.1)(search-insights@2.7.0)
+      '@vitejs/plugin-vue': 4.2.3(vite@4.4.9)(vue@3.3.4)
+      '@vue/devtools-api': 6.5.0
+      '@vueuse/core': 10.3.0(vue@3.3.4)
+      '@vueuse/integrations': 10.3.0(axios@0.27.2)(focus-trap@7.5.2)(vue@3.3.4)
+      body-scroll-lock: 4.0.0-beta.0
+      focus-trap: 7.5.2
+      mark.js: 8.11.1
+      minisearch: 6.1.0
+      shiki: 0.14.3
+      vite: 4.4.9(@types/node@16.18.4)(sass@1.56.1)
+      vue: 3.3.4
+    transitivePeerDependencies:
+      - '@algolia/client-search'
+      - '@types/node'
+      - '@types/react'
+      - '@vue/composition-api'
+      - async-validator
+      - axios
+      - change-case
+      - drauu
+      - fuse.js
+      - idb-keyval
+      - jwt-decode
+      - less
+      - lightningcss
+      - nprogress
+      - qrcode
+      - react
+      - react-dom
+      - sass
+      - search-insights
+      - sortablejs
+      - stylus
+      - sugarss
+      - terser
+      - universal-cookie
+    dev: true
 
   /vscode-oniguruma@1.7.0:
     resolution: {integrity: sha512-L9WMGRfrjOhgHSdOYgCt/yRMsXzLDJSL7BPrOZt73gU0iWO4mpqzqQzOz5srxqTvMBaR0XZTSrVWo4j55Rc6cA==}
