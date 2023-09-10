@@ -143,7 +143,6 @@ const RSS: Theme.RSSOptions = {
 }
 
 export const blogTheme = getThemeConfig({
-  themeColor: 'el-blue',
   RSS,
   recommend: {
     nextText: '下一页'
@@ -151,7 +150,7 @@ export const blogTheme = getThemeConfig({
   friend: [
     {
       nickname: '粥里有勺糖',
-      des: '你的指尖用于改变世界的力量',
+      des: '你的指尖,拥有改变世界的力量',
       avatar:
         'https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTE2NzAzMA==674995167030',
       url: 'https://sugarat.top'

@@ -229,6 +229,7 @@ export namespace Theme {
     list: UserWork[]
   }
   export type ThemeColor =
+    | 'vp-default'
     | 'vp-green'
     | 'vp-yellow'
     | 'vp-red'
@@ -240,7 +241,7 @@ export namespace Theme {
     blog?: false
     /**
      * 内置一些主题色
-     * @default 'el-blue'
+     * @default 'vp-default'
      * 也可以自定义颜色，详见 TODO：文档
      */
     themeColor?: ThemeColor

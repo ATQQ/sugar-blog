@@ -56,6 +56,7 @@ export function withConfigProvider(App: Component) {
         attribute: 'theme',
         modes: {
           // 内置的颜色主题
+          'vp-default': 'vp-default',
           'vp-green': 'vp-green',
           'vp-yellow': 'vp-yellow',
           'vp-red': 'vp-red',
@@ -65,7 +66,7 @@ export function withConfigProvider(App: Component) {
           'el-red': 'el-red'
         }
       })
-      mode.value = config.value.blog?.themeColor ?? 'el-blue'
+      mode.value = config.value.blog?.themeColor ?? 'vp-default'
       return () => h(App, null, slots)
     }
   })
