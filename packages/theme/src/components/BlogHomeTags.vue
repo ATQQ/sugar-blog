@@ -136,9 +136,5 @@ watch(
     margin-bottom: 10px;
     cursor: pointer;
   }
-  :deep(.el-tag:not(.el-tag--success, .el-tag--info)) {
-    background-color: var(--vp-c-brand-2);
-    border-color: var(--vp-c-brand-2);
-  }
 }
 </style>
