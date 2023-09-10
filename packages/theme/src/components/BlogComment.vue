@@ -109,6 +109,16 @@ watch(
   width: 100%;
   text-align: center;
   padding: 40px 0;
+  :deep(.el-button.el-button--primary:hover) {
+    background-color: var(--vp-c-brand-2);
+    border-color: var(--vp-c-brand-2);
+    color: #fff;
+  }
+  :deep(.el-button.el-button--primary) {
+    background-color: var(--vp-c-brand-soft);
+    border-color: var(--vp-c-brand-2);
+    color: var(--vp-c-brand-2);
+  }
 }
 
 .hidden {

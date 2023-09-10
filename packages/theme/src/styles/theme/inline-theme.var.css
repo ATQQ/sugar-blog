@@ -1,0 +1,25 @@
+/* 所有变量：https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css */
+
+/* VitePress 绿色 */
+html[theme="vp-green"] {
+  --vp-c-brand-1: var(--vp-c-green-1);
+  --vp-c-brand-2: var(--vp-c-green-2);
+  --vp-c-brand-3: var(--vp-c-green-3);
+  --vp-c-brand-soft: var(--vp-c-green-soft);
+}
+/* VitePress 黄色 */
+html[theme="vp-yellow"]{
+  --vp-c-brand-1: var(--vp-c-yellow-1);
+  --vp-c-brand-2: var(--vp-c-yellow-2);
+  --vp-c-brand-3: var(--vp-c-yellow-3);
+  --vp-c-brand-soft: var(--vp-c-yellow-soft);
+}
+
+/* VitePress 红色 */
+html[theme="vp-red"]{
+  --vp-c-brand-1: var(--vp-c-red-1);
+  --vp-c-brand-2: var(--vp-c-red-2);
+  --vp-c-brand-3: var(--vp-c-red-3);
+  --vp-c-brand-soft: var(--vp-c-red-soft);
+}
+

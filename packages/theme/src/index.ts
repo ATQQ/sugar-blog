@@ -14,8 +14,8 @@ import { withConfigProvider } from './composables/config/blog'
 import TimelinePage from './components/TimelinePage.vue'
 import UserWorksPage from './components/UserWorks.vue'
 
-// TODO： 未来设计主题色时使用
-// import './styles/theme/green-theme.var.css'
+// 内置一些特殊的主题色
+import './styles/theme/inline-theme.var.css'
 
 export const BlogTheme: Theme = {
   ...DefaultTheme,
