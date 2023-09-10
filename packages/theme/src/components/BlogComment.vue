@@ -102,6 +102,7 @@ watch(
   }
 )
 
+// TODO：可以优化，不需要重载
 watch(isDark, () => {
   showComment.value = false
   nextTick(() => {
