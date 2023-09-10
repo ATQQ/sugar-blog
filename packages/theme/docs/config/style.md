@@ -90,25 +90,32 @@ vitepress 最新的默认主题色偏紫色，看着感觉有点不习惯
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY5MTkyODQ0ODUzOQ==691928448539)
 
-可以默认将其还原了为之前的绿色
+主题包内置了一些主题色，可以自行选择，详见[全局配置:themeColor](./global.md#themecolor)
 
-绿色主题的代码如下
-
-`.vitepress/theme/green-theme.var.css`
+如果内置的不满足要求，也可以进行自定义，自定义的方式是通过覆盖变量的方式
 
 ```css
-:root{
-  /* 使用之前的绿色主题，重写当前紫色的 */
-  /* 所有变量：https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css */
-  --vp-c-brand: var(--vp-c-green);
-  --vp-c-brand-light: var(--vp-c-green-light);
-  --vp-c-brand-lighter: var(--vp-c-green-lighter);
-  --vp-c-brand-dark: var(--vp-c-green-dark);
-  --vp-c-brand-darker: var(--vp-c-green-darker);
-  --vp-c-brand-dimm-1: var(--vp-c-green-dimm-1);
-  --vp-c-brand-dimm-2: var(--vp-c-green-dimm-2);
-  --vp-c-brand-dimm-3: var(--vp-c-green-dimm-3);
-  --vp-c-brand-text: var(--vp-c-green);
+/* 所有变量：https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css */
+
+/* 自定义主题色，绿色 */
+html[theme] {
+  --vp-c-green: #10b981;
+  --vp-c-green-light: #34d399;
+  --vp-c-green-lighter: #6ee7b7;
+  --vp-c-green-dark: #059669;
+  --vp-c-green-darker: #047857;
+
+  --vp-c-brand-1: var(--vp-c-green);
+  --vp-c-brand-2: var(--vp-c-green-light);
+  --vp-c-brand-3: var(--vp-c-green-lighter);
+  --vp-c-brand-soft: rgba(110, 231, 183, 0.22);
+}
+
+html[theme].dark {
+  --vp-c-brand-1: var(--vp-c-green);
+  --vp-c-brand-2: var(--vp-c-green-dark);
+  --vp-c-brand-3: var(--vp-c-green-darker);
+  --vp-c-brand-soft: rgba(4, 120, 87, 0.25);
 }
 ```
 将其引入到`.vitepress/theme/index.ts`中即可
