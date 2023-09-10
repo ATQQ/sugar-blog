@@ -228,8 +228,22 @@ export namespace Theme {
     topTitle?: string
     list: UserWork[]
   }
+  export type ThemeColor =
+    | 'vp-green'
+    | 'vp-yellow'
+    | 'vp-red'
+    | 'el-blue'
+    | 'el-yellow'
+    | 'el-green'
+    | 'el-red'
   export interface BlogConfig {
     blog?: false
+    /**
+     * 内置一些主题色
+     * @default 'el-blue'
+     * 也可以自定义颜色，详见 TODO：文档
+     */
+    themeColor?: ThemeColor
     pagesData: PageData[]
     srcDir?: string
     author?: string

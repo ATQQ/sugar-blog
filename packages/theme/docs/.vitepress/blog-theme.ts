@@ -143,6 +143,7 @@ const RSS: Theme.RSSOptions = {
 }
 
 export const blogTheme = getThemeConfig({
+  themeColor: 'el-blue',
   RSS,
   recommend: {
     nextText: '下一页'
