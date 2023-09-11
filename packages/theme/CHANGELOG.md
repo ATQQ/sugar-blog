@@ -1,5 +1,11 @@
 # @sugarat/theme
 
+## 0.1.44
+
+### Patch Changes
+
+- fix: 首页背景色失效
+
 ## 0.1.43
 
 ### Patch Changes

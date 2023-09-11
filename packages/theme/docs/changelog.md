@@ -17,7 +17,11 @@ pnpm up @sugarat/theme
 # 更新 vitepress 版本
 pnpm add vitepress@latest
 ```
+## 0.1.44 (2023/09/11)
 
+### Patch Changes
+
+- fix: 首页背景色失效
 ## 0.1.43 (2023/09/10)
 
 ### Patch Changes
