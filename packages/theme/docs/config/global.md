@@ -896,3 +896,32 @@ interface FeedOptions {
 
 实现原理见文章：[如何快速为 VitePress 添加 RSS 订阅支持 - 掘金](https://juejin.cn/post/7270046196642005049)
 :::
+
+## themeColor
+* Type: `ThemeColor`
+
+用于设置博客整体的主题色，内置了多套（从 `VP` 和 `Element` 移植的主题色）
+
+::: code-group
+```ts [default]
+const blogTheme = getThemeConfig({
+  themeColor: 'vp-default'
+})
+```
+
+```ts [example]
+const blogTheme = getThemeConfig({
+  themeColor: 'el-blue'
+})
+```
+
+```ts [type]
+type ThemeColor = 'vp-default' | 'vp-green' | 'vp-yellow' | 'vp-red' | 'el-blue' | 'el-yellow' | 'el-green' | 'el-red';
+```
+:::
+
+|                               vp-default                                |                                vp-green                                 |                                 el-blue                                 |
+| :---------------------------------------------------------------------: | :---------------------------------------------------------------------: | :---------------------------------------------------------------------: |
+| ![](https://img.cdn.sugarat.top/mdImg/MTY5NDM1NTU5Nzg4MA==694355597880) | ![](https://img.cdn.sugarat.top/mdImg/MTY5NDM1NTYxOTE4OQ==694355619189) | ![](https://img.cdn.sugarat.top/mdImg/MTY5NDM1NTY5MTk0Nw==694355691947) |
+
+<ChangeThemeDemo />

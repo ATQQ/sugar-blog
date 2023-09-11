@@ -138,7 +138,7 @@ const showChangeBtn = computed(() => {
     }
 
     &:nth-child(3) .num {
-      background-color: #409eff;
+      background-color: var(--vp-c-brand-2);
       color: #fff;
       font-size: 12px;
       border-radius: 6px;

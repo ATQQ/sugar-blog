@@ -24,6 +24,7 @@ const { Layout } = Theme
     </template>
 
     <template #doc-before>
+      <slot name="doc-before" />
       <!-- 阅读时间分析 -->
       <ClientOnly>
         <BlogArticleAnalyze />
@@ -34,10 +35,12 @@ const { Layout } = Theme
 
     <!-- 自定义搜索，替代Algolia，未来择机移除 -->
     <template #nav-bar-content-before>
+      <slot name="nav-bar-content-before" />
       <BlogSearch />
     </template>
     <!-- 自定义首页 -->
     <template #home-hero-before v-if="isBlogTheme">
+      <slot name="home-hero-before" />
       <div class="home">
         <div class="header-banner">
           <BlogHomeBanner />
@@ -51,12 +54,66 @@ const { Layout } = Theme
       </div>
     </template>
     <template #sidebar-nav-after v-if="isBlogTheme">
+      <slot name="sidebar-nav-after" />
       <BlogSidebar />
     </template>
     <!-- 评论 -->
     <template #doc-after>
+      <slot name="doc-after" />
       <BlogComment />
     </template>
+
+    <!-- 透传默认主题的其它插槽 -->
+    <!-- navbar -->
+    <template #nav-bar-title-before
+      ><slot name="nav-bar-title-before"
+    /></template>
+    <template #nav-bar-title-after
+      ><slot name="nav-bar-title-after"
+    /></template>
+    <template #nav-bar-content-after
+      ><slot name="nav-bar-content-after"
+    /></template>
+    <template #nav-screen-content-before
+      ><slot name="nav-screen-content-before"
+    /></template>
+    <template #nav-screen-content-after
+      ><slot name="nav-screen-content-after"
+    /></template>
+
+    <!-- sidebar -->
+    <template #sidebar-nav-before><slot name="sidebar-nav-before" /></template>
+
+    <!-- content -->
+    <template #page-top><slot name="page-top" /></template>
+    <template #page-bottom><slot name="page-bottom" /></template>
+
+    <template #not-found><slot name="not-found" /></template>
+    <template #home-hero-info><slot name="home-hero-info" /></template>
+    <template #home-hero-image><slot name="home-hero-image" /></template>
+    <template #home-hero-after><slot name="home-hero-after" /></template>
+    <template #home-features-before
+      ><slot name="home-features-before"
+    /></template>
+    <template #home-features-after
+      ><slot name="home-features-after"
+    /></template>
+
+    <template #doc-footer-before><slot name="doc-footer-before" /></template>
+
+    <template #doc-top><slot name="doc-top" /></template>
+    <template #doc-bottom><slot name="doc-bottom" /></template>
+
+    <template #aside-top><slot name="aside-top" /></template>
+    <template #aside-bottom><slot name="aside-bottom" /></template>
+    <template #aside-outline-before
+      ><slot name="aside-outline-before"
+    /></template>
+    <template #aside-outline-after
+      ><slot name="aside-outline-after"
+    /></template>
+    <template #aside-ads-before><slot name="aside-ads-before" /></template>
+    <template #aside-ads-after><slot name="aside-ads-after" /></template>
   </Layout>
 </template>
 <style scoped lang="scss">

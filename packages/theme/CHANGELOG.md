@@ -1,5 +1,21 @@
 # @sugarat/theme
 
+## 0.1.44
+
+### Patch Changes
+
+- fix: 首页背景色失效
+
+## 0.1.43
+
+### Patch Changes
+
+- feat: 适配 rc11 版本
+- feat: 内置多套主题色（不一定好看，从 VP 和 element 移植，欢迎自荐）
+- feat: 统一博客整体的颜色
+- feat: 支持透传默认主题的插槽
+- fix: 模式切换，评论组件未跟随
+
 ## 0.1.42
 
 ### Patch Changes

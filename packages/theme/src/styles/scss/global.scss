@@ -24,7 +24,7 @@ ul {
 
   --lowContrast: #ffffff;
   --highContrast: #000000;
-  --vcp-c-brand: #44bd87;
+  --vcp-c-brand: var(--vp-c-brand-2);
   --vcp-c-accent: #35495e;
 
   --gray1: hsl(0, 0%, 98%);

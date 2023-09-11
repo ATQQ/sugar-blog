@@ -13,6 +13,7 @@ import {
   reactive,
   ref
 } from 'vue'
+import { useColorMode } from '@vueuse/core'
 
 import type { Theme } from './index'
 
@@ -21,22 +22,13 @@ const configSymbol: InjectionKey<Ref<Theme.Config>> = Symbol('theme-config')
 const activeTagSymbol: InjectionKey<Ref<Theme.activeTag>> = Symbol('active-tag')
 
 const currentPageNum: InjectionKey<Ref<number>> = Symbol('home-page-num')
-const homeConfigSymbol: InjectionKey<Theme.HomeConfig> = Symbol('home-config')
 
 const userWorks: InjectionKey<Ref<Theme.UserWorks>> = Symbol('user-works')
 
 export function withConfigProvider(App: Component) {
   return defineComponent({
     name: 'ConfigProvider',
-    props: {
-      handleChangeSlogan: {
-        type: Function,
-        required: false
-      }
-    },
-    setup(props, { slots }) {
-      provide(homeConfigSymbol, props as Theme.HomeConfig)
-
+    setup(_, { slots }) {
       const { theme } = useData()
       const config = computed(() => resolveConfig(theme.value))
       provide(configSymbol, config)
@@ -59,6 +51,22 @@ export function withConfigProvider(App: Component) {
 
       const pageNum = ref(1)
       provide(currentPageNum, pageNum)
+
+      const mode = useColorMode({
+        attribute: 'theme',
+        modes: {
+          // 内置的颜色主题
+          'vp-default': 'vp-default',
+          'vp-green': 'vp-green',
+          'vp-yellow': 'vp-yellow',
+          'vp-red': 'vp-red',
+          'el-blue': 'el-blue',
+          'el-yellow': 'el-yellow',
+          'el-green': 'el-green',
+          'el-red': 'el-red'
+        }
+      })
+      mode.value = config.value.blog?.themeColor ?? 'vp-default'
       return () => h(App, null, slots)
     }
   })
@@ -76,9 +84,6 @@ export function useBlogConfig() {
 
 export function useBlogThemeMode() {
   return inject(configSymbol)!.value?.blog?.blog ?? true
-}
-export function useHomeConfig() {
-  return inject(homeConfigSymbol)!
 }
 
 export function useGiscusConfig() {

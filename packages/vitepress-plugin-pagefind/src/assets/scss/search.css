@@ -521,7 +521,7 @@ div[command-item] {
 }
 .search-dialog div[command-item] mark {
   background: none;
-  color: var(--vp-c-brand);
+  color: var(--vp-c-brand-1);
 }
 .search-dialog div[command-item][aria-selected='true'] mark,
 .search-dialog div[command-item]:hover mark {

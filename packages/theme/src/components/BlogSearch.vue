@@ -362,7 +362,7 @@ const handleSelect = (target: any) => {
     }
 
     &:hover {
-      border: 1px solid var(--vp-c-brand);
+      border: 1px solid var(--vp-c-brand-1);
       border-radius: 6px;
     }
 
@@ -406,7 +406,7 @@ div[command-item] {
   }
   div[command-item] mark {
     background: none;
-    color: var(--vp-c-brand);
+    color: var(--vp-c-brand-1);
   }
 
   div[command-item][aria-selected='true'] mark,

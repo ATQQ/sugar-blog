@@ -1,0 +1,23 @@
+/* 所有变量：https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css */
+
+
+/* 自定义主题色，绿色 */
+/* html[theme] {
+  --vp-c-green: #10b981;
+  --vp-c-green-light: #34d399;
+  --vp-c-green-lighter: #6ee7b7;
+  --vp-c-green-dark: #059669;
+  --vp-c-green-darker: #047857;
+
+  --vp-c-brand-1: var(--vp-c-green);
+  --vp-c-brand-2: var(--vp-c-green-light);
+  --vp-c-brand-3: var(--vp-c-green-lighter);
+  --vp-c-brand-soft: rgba(110, 231, 183, 0.22);
+}
+
+html[theme].dark {
+  --vp-c-brand-1: var(--vp-c-green);
+  --vp-c-brand-2: var(--vp-c-green-dark);
+  --vp-c-brand-3: var(--vp-c-green-darker);
+  --vp-c-brand-soft: rgba(4, 120, 87, 0.25);
+} */

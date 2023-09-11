@@ -43,9 +43,9 @@
   </div>
 </template>
 <script setup lang="ts">
-import { useDark, useElementVisibility } from '@vueuse/core'
+import { useElementVisibility } from '@vueuse/core'
 import { useData, useRoute } from 'vitepress'
-import { computed, ref, watch } from 'vue'
+import { computed, nextTick, ref, watch } from 'vue'
 import { ElAffix, ElButton } from 'element-plus'
 import { Comment } from '@element-plus/icons-vue'
 import { useGiscusConfig } from '../composables/config/blog'
@@ -85,9 +85,7 @@ const show = computed(() => {
   )
 })
 
-const isDark = useDark({
-  storageKey: 'vitepress-theme-appearance'
-})
+const { isDark } = useData()
 
 const route = useRoute()
 const showComment = ref(true)
@@ -103,12 +101,30 @@ watch(
     immediate: true
   }
 )
+
+// TODO：可以优化，不需要重载
+watch(isDark, () => {
+  showComment.value = false
+  nextTick(() => {
+    showComment.value = true
+  })
+})
 </script>
 <style scoped lang="scss">
 .comment {
   width: 100%;
   text-align: center;
   padding: 40px 0;
+  :deep(.el-button.el-button--primary:hover) {
+    background-color: var(--vp-c-brand-2);
+    border-color: var(--vp-c-brand-2);
+    color: #fff;
+  }
+  :deep(.el-button.el-button--primary) {
+    background-color: var(--vp-c-brand-soft);
+    border-color: var(--vp-c-brand-2);
+    color: var(--vp-c-brand-2);
+  }
 }
 
 .hidden {

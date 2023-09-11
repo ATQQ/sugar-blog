@@ -14,6 +14,9 @@ import { withConfigProvider } from './composables/config/blog'
 import TimelinePage from './components/TimelinePage.vue'
 import UserWorksPage from './components/UserWorks.vue'
 
+// 内置一些特殊的主题色
+import './styles/theme/inline-theme.var.css'
+
 export const BlogTheme: Theme = {
   ...DefaultTheme,
   Layout: withConfigProvider(BlogApp),

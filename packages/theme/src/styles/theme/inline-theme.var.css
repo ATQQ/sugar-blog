@@ -1,0 +1,56 @@
+/* 所有变量：https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css */
+
+/* VitePress 绿色 */
+html[theme="vp-green"] {
+  --vp-c-brand-1: var(--vp-c-green-1);
+  --vp-c-brand-2: var(--vp-c-green-2);
+  --vp-c-brand-3: var(--vp-c-green-3);
+  --vp-c-brand-soft: var(--vp-c-green-soft);
+}
+/* VitePress 黄色 */
+html[theme="vp-yellow"]{
+  --vp-c-brand-1: var(--vp-c-yellow-1);
+  --vp-c-brand-2: var(--vp-c-yellow-2);
+  --vp-c-brand-3: var(--vp-c-yellow-3);
+  --vp-c-brand-soft: var(--vp-c-yellow-soft);
+}
+
+/* VitePress 红色 */
+html[theme="vp-red"]{
+  --vp-c-brand-1: var(--vp-c-red-1);
+  --vp-c-brand-2: var(--vp-c-red-2);
+  --vp-c-brand-3: var(--vp-c-red-3);
+  --vp-c-brand-soft: var(--vp-c-red-soft);
+}
+
+/* element plus 蓝色 */
+html[theme="el-blue"]{
+  --vp-c-brand-1: var(--el-color-primary);
+  --vp-c-brand-2: var(--el-color-primary-light-3);
+  --vp-c-brand-3: var(--el-color-primary-light-5);
+  --vp-c-brand-soft: var(--el-color-primary-light-9);
+}
+
+/* element plus 绿色 */
+html[theme="el-green"]{
+  --vp-c-brand-1: var(--el-color-success);
+  --vp-c-brand-2: var(--el-color-success-light-3);
+  --vp-c-brand-3: var(--el-color-success-light-5);
+  --vp-c-brand-soft: var(--el-color-success-light-9);
+}
+
+/* element plus 黄色 */
+html[theme="el-yellow"]{
+  --vp-c-brand-1: var(--el-color-warning);
+  --vp-c-brand-2: var(--el-color-warning-light-3);
+  --vp-c-brand-3: var(--el-color-warning-light-5);
+  --vp-c-brand-soft: var(--el-color-warning-light-9);
+}
+
+/* element plus 红色 */
+html[theme="el-red"]{
+  --vp-c-brand-1: var(--el-color-danger);
+  --vp-c-brand-2: var(--el-color-danger-light-3);
+  --vp-c-brand-3: var(--el-color-danger-light-5);
+  --vp-c-brand-soft: var(--el-color-danger-light-9);
+}
