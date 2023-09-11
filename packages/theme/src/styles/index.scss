@@ -125,3 +125,11 @@ html.dark {
   border-radius: 4px;
   background-color: var(--vp-c-brand-1);
 }
+
+
+main .vp-doc a{
+  text-decoration: none;
+}
+main .vp-doc a:hover{
+  text-decoration: underline dotted;
+}

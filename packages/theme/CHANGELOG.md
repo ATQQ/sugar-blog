@@ -1,5 +1,11 @@
 # @sugarat/theme
 
+## 0.1.45
+
+### Patch Changes
+
+- style: 链接样式调整
+
 ## 0.1.44
 
 ### Patch Changes

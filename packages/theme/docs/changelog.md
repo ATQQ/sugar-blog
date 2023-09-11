@@ -17,6 +17,13 @@ pnpm up @sugarat/theme
 # 更新 vitepress 版本
 pnpm add vitepress@latest
 ```
+
+## 0.1.45 (2023/09/11)
+
+### Patch Changes
+
+- style: 链接样式调整
+
 ## 0.1.44 (2023/09/11)
 
 ### Patch Changes
