@@ -3,10 +3,8 @@ import { useColorMode } from '@vueuse/core'
 import { watchEffect, ref } from 'vue'
 
 const mode = useColorMode({
-  emitAuto: true,
-  modes: {
-    'el-blue': 'el-blue'
-  }
+  attribute: 'theme',
+  emitAuto: true
 })
 const themeList = [
   'vp-default',
