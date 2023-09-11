@@ -10,10 +10,10 @@
   "license": "MIT",
   "dependencies": {
     "@element-plus/icons-vue": "^2.1.0",
-    "@sugarat/theme": "workspace:*",
+    "@sugarat/theme": "0.1.45",
     "axios": "^0.27.2",
     "element-plus": "^2.3.8",
-    "vitepress": "1.0.0-rc.4",
+    "vitepress": "1.0.0-rc.12",
     "vue": "^3.3.4"
   },
   "devDependencies": {

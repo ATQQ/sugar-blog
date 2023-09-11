@@ -17,6 +17,7 @@ const RSS: Theme.RSSOptions = {
 }
 
 const blogTheme = getThemeConfig({
+  themeColor: 'el-blue',
   RSS,
   author: '粥里有勺糖',
   comment: {

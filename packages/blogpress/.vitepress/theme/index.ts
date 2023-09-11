@@ -1,7 +1,5 @@
 import { EnhanceAppContext } from 'vitepress'
 import BlogTheme from '@sugarat/theme'
-// 使用之前的绿色主题
-import './green-theme.var.css'
 // 全局组件
 import redirectBtn from './src/components/redirectBtn.vue'
 import Solve from './src/components/solve.vue'
