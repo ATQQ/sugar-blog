@@ -16,6 +16,8 @@ import { getThemeConfig } from '@sugarat/theme/node';
 // }
 // 详见文档: https://theme.sugarat.top/
 const blogTheme = getThemeConfig({
+  // 主题色修改
+  themeColor: 'el-blue',
   // 开启RSS支持
   // RSS,
   // 文章默认作者

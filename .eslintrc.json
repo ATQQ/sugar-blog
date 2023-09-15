@@ -61,6 +61,7 @@
         "@typescript-eslint/no-non-null-assertion":"off",
         "non-null-expression":"off",
         "@typescript-eslint/ban-ts-comment":"off",
-        "consistent-return":"off"
+        "consistent-return":"off",
+        "no-console":"off"
     }
 }
