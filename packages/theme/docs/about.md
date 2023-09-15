@@ -28,6 +28,7 @@ sticky: 1
 * tabs（[vitepress-plugin-tabs](https://vitepress-plugins.sapphi.red/tabs/)）
 * 流程图（[vitepress-plugin-mermaid](https://github.com/emersonbottero/vitepress-plugin-mermaid#readme)）
 * RSS
+* 主题色统一
 
 ## 规划中功能
 * Valine 评论系统
@@ -37,7 +38,6 @@ sticky: 1
 * 博客案例集合
 * 背景图自动更换
 * 首屏铺满slogan，参考reco
-* 主题色统一
 
 ## 参考项目
 或多或少借鉴&使用了如下的一下开源项目，博客，网站的能力或者UI样式
