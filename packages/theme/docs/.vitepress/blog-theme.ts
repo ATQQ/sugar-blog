@@ -196,13 +196,6 @@ export const blogTheme = getThemeConfig({
     ],
     duration: 0
   },
-  search: {
-    mode: 'pagefind',
-    btnPlaceholder: 'Search',
-    placeholder: 'Search Docs',
-    emptyText: 'No results found',
-    heading: 'Total: {{searchResult}} search results.'
-  },
   tabs: true,
   works: workConfig
 })

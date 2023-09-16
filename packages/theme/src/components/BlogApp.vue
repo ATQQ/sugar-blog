@@ -4,7 +4,7 @@ import BlogHomeInfo from './BlogHomeInfo.vue'
 import BlogHomeBanner from './BlogHomeBanner.vue'
 import BlogList from './BlogList.vue'
 import BlogComment from './BlogComment.vue'
-import BlogSearch from './BlogSearch.vue'
+// import BlogSearch from './BlogSearch.vue'
 import BlogSidebar from './BlogSidebar.vue'
 import BlogImagePreview from './BlogImagePreview.vue'
 import BlogArticleAnalyze from './BlogArticleAnalyze.vue'
@@ -34,10 +34,10 @@ const { Layout } = Theme
     </template>
 
     <!-- 自定义搜索，替代Algolia，未来择机移除 -->
-    <template #nav-bar-content-before>
+    <!-- <template #nav-bar-content-before>
       <slot name="nav-bar-content-before" />
       <BlogSearch />
-    </template>
+    </template> -->
     <!-- 自定义首页 -->
     <template #home-hero-before v-if="isBlogTheme">
       <slot name="home-hero-before" />

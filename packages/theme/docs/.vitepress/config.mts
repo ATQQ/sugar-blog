@@ -10,9 +10,6 @@ export default defineConfig({
   description: '粥里有勺糖的博客主题，基于 vitepress 实现',
   head: [...extraHead],
   vite: {
-    server: {
-      host: '0.0.0.0'
-    },
     resolve: {
       alias: {
         '@sugarat/theme': path.join(__dirname, '../../src/index.ts')
