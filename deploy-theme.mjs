@@ -11,7 +11,7 @@ const fullOrigin = `${originName}.${origin}`
 const baseServerDir = '/www/wwwroot'
 const destDir = ''
 
-await $`pnpm build:theme`
+await $`pnpm buildTheme`
 
 await $`echo ==🔧 压缩dist ==`
 await $`cd packages/theme/docs/.vitepress && tar -zvcf ${compressPkgName} dist && rm -rf dist && mv ${compressPkgName} ./../../../../`

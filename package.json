@@ -24,16 +24,15 @@
     "dev:theme": "pnpm --filter '@sugarat/theme' dev",
     "build": "pnpm --filter 'blogpress' build",
     "buildTheme": "pnpm --filter '@sugarat/theme' build",
-    "buildlib":"pnpm run '/^build:.*/'",
-    "build:pagefind":"pnpm --filter 'vitepress-plugin-pagefind' build",
-    "build:rss":"pnpm --filter 'vitepress-plugin-rss' build",
-    "build:create":"pnpm --filter '@sugarat/create-theme' build",
+    "buildlib": "pnpm run '/^build:.*/'",
+    "build:pagefind": "pnpm --filter 'vitepress-plugin-pagefind' build",
+    "build:rss": "pnpm --filter 'vitepress-plugin-rss' build",
+    "build:create": "pnpm --filter '@sugarat/create-theme' build",
     "build:theme-only": "pnpm --filter '@sugarat/theme' build:node",
     "serve": "pnpm --filter 'blogpress' serve",
     "lint": "eslint --ext .js,.ts,.vue --fix packages/**",
     "deploy": "zx deploy.mjs",
     "deploy:theme": "zx deploy-theme.mjs",
-    "release": "pnpm build:theme && pnpm release:only",
     "release:only": "changeset publish",
     "release:beta": "changeset publish --tag beta",
     "pc": "pnpm changeset",
@@ -59,5 +58,8 @@
         "search-insights"
       ]
     }
+  },
+  "dependencies": {
+    "pagefind": "^1.0.2"
   }
 }
