@@ -32,9 +32,7 @@
             <Command.Group v-else :heading="headingText">
               <Command.Item
                 v-for="item in showSearchResult"
-                :data-value="
-                  searchOptimization ? withBase(item.route) : item.route
-                "
+                :data-value="item.route"
                 :key="item.route"
                 @select="handleSelect"
               >
@@ -248,40 +246,9 @@ watch(
           const result = await Promise.all(
             search.results.map((v: any) => v.data())
           )
-          let newSearchResult = []
-          // TODO：未来优化，避免O(n^2)
-          if (searchOptimization.value) {
-            // 仅展示检索到的路由结果
-            docs.value.forEach((v) => {
-              const match = result.find((r) =>
-                r.url.startsWith(withBase(v.route.replace(/index$/, '')))
-              )
-              if (match) {
-                newSearchResult.push({
-                  ...v,
-                  meta: {
-                    ...v.meta,
-                    description: match.excerpt
-                  }
-                })
-              }
-            })
-          } else {
-            // 展示所有pagefind结果
-            newSearchResult = result.map((r) => {
-              const match = docs.value.find((d) =>
-                r.url.startsWith(withBase(d.route.replace(/index$/, '')))
-              )
-              if (match) {
-                return {
-                  ...match,
-                  route: r.url,
-                  meta: {
-                    ...match.meta,
-                    description: r.excerpt
-                  }
-                }
-              }
+          // 展示所有pagefind结果
+          const pagefindSearchResult = result
+            .map((r) => {
               return {
                 route: r.url,
                 meta: {
@@ -291,10 +258,16 @@ watch(
                 }
               }
             })
-          }
+            // 过滤掉不在docs里的
+            .filter((v) => {
+              return (
+                !searchOptimization.value ||
+                docs.value.some((d) => d.route === v.route)
+              )
+            })
 
-          searchResult.value = newSearchResult.filter(
-            // 调用自定义过滤
+          // 调用自定义过滤
+          searchResult.value = pagefindSearchResult.filter(
             finalSearchConfig.value.filter ?? (() => true)
           )
         })

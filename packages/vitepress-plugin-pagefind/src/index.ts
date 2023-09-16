@@ -60,10 +60,15 @@ export function pagefindPlugin(
     // 文章数据
     load(this, id) {
       if (id !== resolvedVirtualModuleId) return
-      const docsData = getPagesData(
+      const srcDir =
         resolveConfig.vitepress.srcDir
           .replace(resolveConfig.vitepress.root, '')
-          .replace(/^\//, ''),
+          .replace(/^\//, '') ||
+        process.argv.slice(2)?.[1] ||
+        '.'
+      const docsData = getPagesData(
+        srcDir,
+        resolveConfig.vitepress,
         searchConfig
       )
       return `

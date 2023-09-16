@@ -4,83 +4,66 @@ import fs from 'fs'
 import { execSync, spawn, spawnSync } from 'child_process'
 import path from 'path'
 import type { SiteConfig } from 'vitepress'
+import os from 'os'
 import { formatDate } from './utils'
 import type { PagefindOption } from './type'
 
-export function getPagesData(_srcDir?: string, pluginSiteConfig?: any) {
-  const srcDir = _srcDir || process.argv.slice(2)?.[1] || '.'
+export function getPagesData(
+  srcDir: string,
+  config: SiteConfig,
+  pluginSiteConfig?: any
+) {
   const files = glob.sync(`${srcDir}/**/*.md`, { ignore: ['node_modules'] })
 
-  const data = files
-    .map((v) => {
-      let route = v
-        // 处理文件后缀名
-        .replace('.md', '')
+  return files
+    .map((file) => {
+      // page url
+      const route =
+        config.site.base +
+        normalizePath(path.relative(config.srcDir, file))
+          .replace(/(^|\/)index\.md$/, '$1')
+          .replace(/\.md$/, config.cleanUrls ? '' : '.html')
 
-      // 去除 srcDir 处理目录名
-      if (route.startsWith('./')) {
-        route = route.replace(
-          new RegExp(
-            `^\\.\\/${path
-              .join(srcDir, '/')
-              .replace(new RegExp(`\\${path.sep}`, 'g'), '/')}`
-          ),
-          ''
-        )
-      } else {
-        route = route.replace(
-          new RegExp(
-            `^${path
-              .join(srcDir, '/')
-              .replace(new RegExp(`\\${path.sep}`, 'g'), '/')}`
-          ),
-          ''
-        )
-      }
+      const fileContent = fs.readFileSync(file, 'utf-8')
 
-      const fileContent = fs.readFileSync(v, 'utf-8')
+      const { data: frontmatter, excerpt } = matter(fileContent, {
+        excerpt: true
+      })
 
-      const meta = {
-        ...matter(fileContent).data
+      // frontmatter
+      const meta: Record<string, string | undefined> = {
+        description: excerpt,
+        ...frontmatter
       }
       if (!meta.title) {
         meta.title = getDefaultTitle(fileContent)
       }
+
       if (!meta.date) {
-        // getGitTimestamp(v).then((v) => {
-        //   meta.date = formatDate(v)
-        // })
-        meta.date = getFileBirthTime(v)
+        meta.date = getFileBirthTime(file)
       } else {
         const timeZone = pluginSiteConfig?.timeZone ?? 8
         meta.date = formatDate(
           new Date(`${new Date(meta.date).toUTCString()}+${timeZone}`)
         )
       }
-
-      // 处理tags和categories,兼容历史文章
-      meta.tag = (meta.tag || []).concat([
-        ...new Set([...(meta.categories || []), ...(meta.tags || [])])
-      ])
-
-      // 获取摘要信息
-      const wordCount = 100
-      meta.description =
-        meta.description || getTextSummary(fileContent, wordCount)
-
-      // 获取封面图
-      meta.cover =
-        meta.cover ||
-        fileContent.match(/[!]\[.*?\]\((https:\/\/.+)\)/)?.[1] ||
-        ''
       return {
-        route: `/${route}`,
+        route,
         meta
       }
     })
     .filter((v) => v.meta.layout !== 'home')
+}
 
-  return data
+const windowsSlashRE = /\\/g
+export const isWindows = os.platform() === 'win32'
+
+export function slash(p: string): string {
+  return p.replace(windowsSlashRE, '/')
+}
+
+export function normalizePath(id: string): string {
+  return path.posix.normalize(isWindows ? slash(id) : id)
 }
 
 export function getDefaultTitle(content: string) {
@@ -159,7 +142,7 @@ export function getGitTimestamp(file: string) {
   })
 }
 
-function getTextSummary(text: string, count = 100) {
+export function getTextSummary(text: string, count = 100) {
   return (
     clearMatterContent(text)
       .match(/^# ([\s\S]+)/m)?.[1]
@@ -220,7 +203,7 @@ export const pluginSiteConfig: Partial<SiteConfig> = {
       process.argv.slice(2)?.[1] || '.',
       '.vitepress/dist'
     )
-    let command = `npx pagefind --site ${siteDir} --output-subdir "_pagefind"`
+    let command = `npx pagefind --site ${siteDir}`
 
     if (ignore.length) {
       command += ` --exclude-selectors "${ignore.join(', ')}"`
@@ -241,11 +224,9 @@ export const pluginSiteConfig: Partial<SiteConfig> = {
       [
         'script',
         {},
-        `import('${withBase(
-          ctx.siteData.base || '',
-          '/_pagefind/pagefind.js'
-        )}')
+        `import('${withBase(ctx.siteData.base || '', '/pagefind/pagefind.js')}')
     .then((module) => {
+      module.init()
       window.__pagefind__ = module
     })
     .catch(() => {
