@@ -1,8 +1,19 @@
 import type { PluginOption } from 'vite'
 import type { SiteConfig } from 'vitepress'
 import { stringify } from 'javascript-stringify'
+import path from 'path'
+import { fileURLToPath } from 'url'
 import { pluginSiteConfig, getPagesData } from './node'
 import type { SearchConfig, PagefindOption } from './type'
+
+const isESM = () => {
+  return typeof __filename === 'undefined' || typeof __dirname === 'undefined'
+}
+function getDirname() {
+  return isESM() ? path.dirname(fileURLToPath(import.meta.url)) : __dirname
+}
+
+const aliasSearchVueFile = `${getDirname()}/../src/Search.vue`
 
 export function pagefindPlugin(
   searchConfig: SearchConfig & PagefindOption = {}
@@ -17,7 +28,7 @@ export function pagefindPlugin(
     config: () => ({
       resolve: {
         alias: {
-          './VPNavBarSearch.vue': 'vitepress-plugin-pagefind/Search.vue'
+          './VPNavBarSearch.vue': aliasSearchVueFile
         }
       }
     }),

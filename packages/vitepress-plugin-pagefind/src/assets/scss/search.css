@@ -216,7 +216,7 @@ ul {
   --command-shadow: 0 16px 70px rgb(0 0 0 / 20%);
   --lowContrast: #ffffff;
   --highContrast: #000000;
-  --vcp-c-brand: #44bd87;
+  --vcp-c-brand: var(--vp-c-brand-2);
   --vcp-c-accent: #35495e;
   --gray1: hsl(0, 0%, 98%);
   --gray2: hsl(0, 0%, 97.3%);

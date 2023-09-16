@@ -1,5 +1,12 @@
 # vitepress-plugin-pagefind
 
+## 0.2.9
+
+### Patch Changes
+
+- fix: search modal style
+- fix：not found Search.vue
+
 ## 0.2.8
 
 ### Patch Changes
