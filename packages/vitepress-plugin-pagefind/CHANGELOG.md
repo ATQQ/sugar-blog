@@ -1,5 +1,11 @@
 # vitepress-plugin-pagefind
 
+## 0.2.7
+
+### Patch Changes
+
+- feat: update pagefind v1
+
 ## 0.2.6
 
 ### Patch Changes

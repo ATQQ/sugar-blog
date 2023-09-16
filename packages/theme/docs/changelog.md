@@ -18,6 +18,13 @@ pnpm up @sugarat/theme
 pnpm add vitepress@latest
 ```
 
+## 0.1.46 (2023/09/16)
+
+### Patch Changes
+
+- chore: pagefind 兼容 V1 版本
+
+
 ## 0.1.45 (2023/09/11)
 
 ### Patch Changes

@@ -16,11 +16,11 @@
 
 ①: 安装插件
 ```sh
-npm i vitepress-plugin-pagefind
+pnpm add vitepress-plugin-pagefind pagefind
 # or
-yarn add vitepress-plugin-pagefind
+npm i vitepress-plugin-pagefind pagefind
 # or
-pnpm add vitepress-plugin-pagefind
+yarn add vitepress-plugin-pagefind pagefind
 ```
 
 ②: 引入插件

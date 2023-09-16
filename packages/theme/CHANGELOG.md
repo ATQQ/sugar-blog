@@ -1,5 +1,11 @@
 # @sugarat/theme
 
+## 0.1.46
+
+### Patch Changes
+
+- chore: pagefind 兼容 V1 版本
+
 ## 0.1.45
 
 ### Patch Changes

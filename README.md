@@ -12,6 +12,25 @@
 * [vitepress-plugin-pagefind](./packages/vitepress-plugin-pagefind/)：基于pagefind实现的VitePress离线全文搜索支持插件
 * [vitepress-plugin-rss](./packages/vitepress-plugin-rss/)：基于 feed 实现的 VitePress RSS 支持插件
 
+## 快速创建博客模板
+With NPM:
+
+```sh
+npm create @sugarat/theme@latest
+```
+
+With Yarn:
+
+```sh
+yarn create @sugarat/theme
+```
+
+With PNPM:
+
+```sh
+pnpm create @sugarat/theme
+```
+
 ## 运行本项目
 博客基于[vitepress](https://vitepress.vuejs.org/)构建
 

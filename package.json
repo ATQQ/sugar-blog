@@ -23,12 +23,16 @@
     "dev": "pnpm --filter 'blogpress' dev",
     "dev:theme": "pnpm --filter '@sugarat/theme' dev",
     "build": "pnpm --filter 'blogpress' build",
+    "buildTheme": "pnpm --filter '@sugarat/theme' build",
+    "buildlib":"pnpm run '/^build:.*/'",
+    "build:pagefind":"pnpm --filter 'vitepress-plugin-pagefind' build",
+    "build:rss":"pnpm --filter 'vitepress-plugin-rss' build",
+    "build:create":"pnpm --filter '@sugarat/create-theme' build",
+    "build:theme-only": "pnpm --filter '@sugarat/theme' build:node",
     "serve": "pnpm --filter 'blogpress' serve",
     "lint": "eslint --ext .js,.ts,.vue --fix packages/**",
     "deploy": "zx deploy.mjs",
     "deploy:theme": "zx deploy-theme.mjs",
-    "build:theme": "pnpm --filter '@sugarat/theme' build",
-    "build:theme-only": "pnpm --filter '@sugarat/theme' build:node",
     "release": "pnpm build:theme && pnpm release:only",
     "release:only": "changeset publish",
     "release:beta": "changeset publish --tag beta",
@@ -47,5 +51,13 @@
   "bugs": {
     "url": "https://github.com/ATQQ/sugar-blog/issues"
   },
-  "homepage": "https://github.com/ATQQ/sugar-blog#readme"
+  "homepage": "https://github.com/ATQQ/sugar-blog#readme",
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "@algolia/client-search",
+        "search-insights"
+      ]
+    }
+  }
 }

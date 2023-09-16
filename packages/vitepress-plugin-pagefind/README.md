@@ -16,11 +16,11 @@ Offline full-text search based on [pagefind](https://github.com/cloudcannon/page
 
 step1: install plugin
 ```sh
-npm i vitepress-plugin-pagefind
+pnpm add vitepress-plugin-pagefind pagefind
 # or
-yarn add vitepress-plugin-pagefind
+npm i vitepress-plugin-pagefind pagefind
 # or
-pnpm add vitepress-plugin-pagefind
+yarn add vitepress-plugin-pagefind pagefind
 ```
 
 step2: import plugin

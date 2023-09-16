@@ -216,10 +216,11 @@ export const pluginSiteConfig: Partial<SiteConfig> = {
     const { log } = console
     log()
     log('=== pagefind: https://pagefind.app/ ===')
-    let command = `npx pagefind --source ${path.join(
+    const siteDir = path.join(
       process.argv.slice(2)?.[1] || '.',
       '.vitepress/dist'
-    )}`
+    )
+    let command = `npx pagefind --site ${siteDir} --output-subdir "_pagefind"`
 
     if (ignore.length) {
       command += ` --exclude-selectors "${ignore.join(', ')}"`
