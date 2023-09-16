@@ -204,6 +204,20 @@ export default defineConfig({
 | :---------------------------------------------------------------------: | :---------------------------------------------------------------------: |
 | ![](https://img.cdn.sugarat.top/mdImg/MTY4MTIyNjM1NzEyOQ==681226357129) | ![](https://img.cdn.sugarat.top/mdImg/MTY4MTIyNjMzNTU5Nw==681226335597) |
 
+### Example 6: Custom indexing Command
+You may need this if you are using a lower version or another version of pagefind; You can also use this to customize some CLI configurations when the default configuration is not satisfied
+
+CLI Options See： https://pagefind.app/docs/config-options/
+
+```sh
+# use pagefind 0.12.0
+pnpm add pagefind@0.12.0
+```
+```ts
+pagefindPlugin({
+  indexingCommand:'npx pagefind --source "docs/.vitepress/dist" --bundle-dir "pagefind" --exclude-selectors "div.aside, a.header-anchor"'
+})
+```
 
 See options below for more details
 ## Options
@@ -227,6 +241,11 @@ interface PagefindOption {
    * @see https://pagefind.app/docs/config-options/#force-language
    */
   forceLanguage?: string
+  /**
+   * You can customize the instructions to generate the index, which is useful when you customize your version of pagefind
+   * @see https://pagefind.app/docs/config-options/
+   */
+  indexingCommand?: string
 }
 
 interface SearchConfig {

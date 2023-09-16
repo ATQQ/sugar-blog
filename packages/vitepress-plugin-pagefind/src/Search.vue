@@ -137,7 +137,8 @@ import type { SearchConfig } from './type'
 
 const searchConfig: SearchConfig = _searchConfig
 
-const { localeIndex } = useData()
+const { localeIndex, site } = useData()
+
 const finalSearchConfig = computed<SearchConfig>(() => ({
   ...searchConfig,
   // i18n支持
@@ -250,7 +251,9 @@ watch(
           const pagefindSearchResult = result
             .map((r) => {
               return {
-                route: r.url,
+                route: r.url.startsWith(site.value.base)
+                  ? r.url
+                  : withBase(r.url),
                 meta: {
                   title: r.meta.title,
                   description: r.excerpt,

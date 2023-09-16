@@ -1,6 +1,6 @@
 {
   "name": "vitepress-plugin-pagefind",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "vitepress plugin, Offline full-text search based on pagefind implementation.",
   "module": "dist/index.mjs",
   "main": "dist/index.js",
@@ -35,10 +35,6 @@
   "homepage": "https://github.com/ATQQ/sugar-blog/tree/master/packages/vitepress-plugin-pagefind",
   "bugs": {
     "url": "https://github.com/ATQQ/sugar-blog/issues"
-  },
-  "peerDependencies": {
-    "vitepress": "^1.0.0-alpha.42",
-    "vue": "^3"
   },
   "devDependencies": {
     "@types/node": "^16.18.4",

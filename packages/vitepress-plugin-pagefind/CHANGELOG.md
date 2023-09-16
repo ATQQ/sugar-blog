@@ -1,5 +1,11 @@
 # vitepress-plugin-pagefind
 
+## 0.2.8
+
+### Patch Changes
+
+- feat: 支持用户自定义生成索引的指令
+
 ## 0.2.7
 
 ### Patch Changes

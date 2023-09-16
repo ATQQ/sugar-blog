@@ -212,7 +212,10 @@ export const pluginSiteConfig: Partial<SiteConfig> = {
     if (typeof pagefindOps.forceLanguage === 'string') {
       command += ` --force-language ${pagefindOps.forceLanguage}`
     }
-
+    // 用户自定义指令
+    if (pagefindOps.indexingCommand) {
+      command = pagefindOps.indexingCommand
+    }
     log(command)
     log()
     execSync(command, {
@@ -226,11 +229,11 @@ export const pluginSiteConfig: Partial<SiteConfig> = {
         {},
         `import('${withBase(ctx.siteData.base || '', '/pagefind/pagefind.js')}')
     .then((module) => {
-      module.init()
       window.__pagefind__ = module
+      module.init()
     })
     .catch(() => {
-      console.log('not load /_pagefind/pagefind.js')
+      // console.log('not load /pagefind/pagefind.js')
     })`
       ]
     ]

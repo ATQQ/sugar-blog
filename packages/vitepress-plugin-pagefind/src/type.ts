@@ -12,6 +12,11 @@ export interface PagefindOption {
    * @see https://pagefind.app/docs/config-options/#force-language
    */
   forceLanguage?: string
+  /**
+   * You can customize the instructions to generate the index, which is useful when you customize your version of pagefind
+   * @see https://pagefind.app/docs/config-options/
+   */
+  indexingCommand?: string
 }
 
 export interface SearchItem {

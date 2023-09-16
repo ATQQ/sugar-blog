@@ -202,6 +202,21 @@ export default defineConfig({
 | :---------------------------------------------------------------------: | :---------------------------------------------------------------------: |
 | ![](https://img.cdn.sugarat.top/mdImg/MTY4MTIyNjM1NzEyOQ==681226357129) | ![](https://img.cdn.sugarat.top/mdImg/MTY4MTIyNjMzNTU5Nw==681226335597) |
 
+### 示例6：自定义生成索引的指令
+如果你使用了低版本或者其他版本的pagefind 你可能很需要这个；当默认的配置不满足时，你也可以使用这个自定义一些CLI配置
+
+CLI 参数见： https://pagefind.app/docs/config-options/
+
+```sh
+# 例如使用 pagefind 0.12.0
+pnpm add pagefind@0.12.0
+```
+```ts
+pagefindPlugin({
+  indexingCommand:'npx pagefind --source "docs/.vitepress/dist" --bundle-dir "pagefind" --exclude-selectors "div.aside, a.header-anchor"'
+})
+```
+
 更多可配置的选项请查看下面的完整配置项
 
 ## 完整配置项如下
@@ -225,6 +240,11 @@ interface PagefindOption {
    * @see https://pagefind.app/docs/config-options/#force-language
    */
   forceLanguage?: string
+  /**
+   * You can customize the instructions to generate the index, which is useful when you customize your version of pagefind
+   * @see https://pagefind.app/docs/config-options/
+   */
+  indexingCommand?: string
 }
 
 interface SearchConfig {
@@ -250,9 +270,9 @@ interface SearchConfig {
   heading?: string
 
   /**
-   * Automatically reloads the page when the page language changes.
+   * 当页面语言改变时自动重新加载页面
    *
-   * The purpose is to reload the index file for the target language.
+   * 目的是重新加载目标语言的索引文件
    * @default true
    */
   langReload?: boolean
@@ -282,7 +302,7 @@ interface SearchConfig {
    */
   timeZone?: number
   /**
-   * i18n
+   * 国际化
    */
   locales?: Record<string, Omit<SearchConfig, 'locales'>>
 }
