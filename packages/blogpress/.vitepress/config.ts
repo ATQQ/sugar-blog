@@ -108,21 +108,15 @@ const extraHead: any =
           {},
           'LA.init({id: "Jgmg5avjAUvoyePS",ck: "Jgmg5avjAUvoyePS",hashMode: true})'
         ],
-        [
-          'script',
-          {},
-          `if ('serviceWorker' in navigator) {
-          navigator.serviceWorker.getRegistrations().then((registrations) => {
-            registrations.forEach(sw => sw.unregister())
-          })
-        }`
-        ]
       ]
     : []
 
 export default defineConfig({
   extends: blogTheme,
   ignoreDeadLinks: true,
+  sitemap: {
+    hostname: 'https://sugarat.top',
+  },
   lang: 'zh-cn',
   title: '粥里有勺糖',
   description:
