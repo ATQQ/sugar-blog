@@ -61,8 +61,8 @@ importers:
         specifier: ^2.1.0
         version: 2.1.0(vue@3.3.4)
       '@sugarat/theme':
-        specifier: 0.1.45
-        version: 0.1.45(vitepress@1.0.0-rc.14)(vue@3.3.4)
+        specifier: 0.1.47
+        version: link:../theme
       axios:
         specifier: ^0.27.2
         version: 0.27.2
@@ -1393,27 +1393,6 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
-
-  /@sugarat/theme@0.1.45(vitepress@1.0.0-rc.14)(vue@3.3.4):
-    resolution: {integrity: sha512-74puneOXB7Fd+xfUKTx6oH8L6r91MG1CmFFmbtH8yLLINvKfpirPwOuZDlxYVcb3sA3c7upo3lVVSAXNqiMr4Q==}
-    dependencies:
-      '@mdit-vue/shared': 0.12.0
-      '@mermaid-js/mermaid-mindmap': 9.3.0
-      '@vue/shared': 3.3.4
-      '@vueuse/core': 9.13.0(vue@3.3.4)
-      fast-glob: 3.3.1
-      feed: 4.2.2
-      gray-matter: 4.0.3
-      highlight.js: 11.7.0
-      mermaid: 10.2.4
-      vitepress-plugin-mermaid: 2.0.13(mermaid@10.2.4)(vitepress@1.0.0-rc.14)
-      vue-command-palette: 0.1.4
-    transitivePeerDependencies:
-      - '@vue/composition-api'
-      - supports-color
-      - vitepress
-      - vue
-    dev: false
 
   /@sxzz/popperjs-es@2.11.7:
     resolution: {integrity: sha512-Ccy0NlLkzr0Ex2FKvh2X+OyERHXJ88XJ1MXtsI9y9fGexlaXaVTPzBCRBwIxFkORuOb+uBqeu+RqnpgYTEZRUQ==}
@@ -3668,6 +3647,7 @@ packages:
       glob-parent: 5.1.2
       merge2: 1.4.1
       micromatch: 4.0.5
+    dev: true
 
   /fast-json-stable-stringify@2.1.0:
     resolution: {integrity: sha512-lhd/wF+Lk98HZoTCtlVraHtfh5XYijIjalXck7saUtuanSDyLMxnHhSXEDJqHxD7msR8D0uCmqlkwjCV8xvwHw==}
@@ -4805,6 +4785,7 @@ packages:
     dependencies:
       braces: 3.0.2
       picomatch: 2.3.1
+    dev: true
 
   /mime-db@1.52.0:
     resolution: {integrity: sha512-sPU4uV7dYlvtWJxwwxHD0PuihVNiE7TyAbQ5SWxDCB9mUYvOgroQOwYQQOKPJ8CIbE+1ETVlOoK1UC2nU3gYvg==}
