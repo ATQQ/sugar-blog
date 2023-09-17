@@ -122,6 +122,8 @@ export default defineConfig({
   description:
     '粥里有勺糖的个人博客，记录随笔与学习笔记，大前端相关的知识，高频面试题，个人面经等',
   head: [
+    // <meta name="baidu-site-verification" content="codeva-b08avp82Uj" />
+    ['meta', { name: 'baidu-site-verification', content: 'codeva-b08avp82Uj' }],
     ['meta', { name: 'theme-color', content: '#ffffff' }],
     ['link', { rel: 'icon', href: '/favicon.ico', type: 'image/png' }],
     [
