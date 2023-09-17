@@ -115,7 +115,7 @@ export default defineConfig({
   extends: blogTheme,
   ignoreDeadLinks: true,
   sitemap: {
-    hostname: 'https://sugarat.top'
+    hostname: 'https://sugarat.top',
   },
   lang: 'zh-cn',
   title: '粥里有勺糖',

@@ -5,6 +5,9 @@ import { blogTheme, extraHead } from './blog-theme'
 
 export default defineConfig({
   extends: blogTheme,
+  sitemap: {
+    hostname: 'https://theme.sugarat.top',
+  },
   lang: 'zh-cn',
   title: '@sugarat/theme',
   description: '粥里有勺糖的博客主题，基于 vitepress 实现',
