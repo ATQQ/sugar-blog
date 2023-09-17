@@ -29,4 +29,4 @@ sidebar: false
 |      描述      | 状态  |
 | :------------: | :---: |
 | emoji 展示缺陷 |   ❌   |
-|  集成sitemap   |   ❌   |
+|  集成sitemap   |   ✅   |
