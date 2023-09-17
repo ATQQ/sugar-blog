@@ -13,7 +13,7 @@
     "@sugarat/theme": "0.1.45",
     "axios": "^0.27.2",
     "element-plus": "^2.3.8",
-    "vitepress": "1.0.0-rc.13",
+    "vitepress": "1.0.0-rc.14",
     "vue": "^3.3.4"
   },
   "devDependencies": {

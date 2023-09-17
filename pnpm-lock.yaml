@@ -62,7 +62,7 @@ importers:
         version: 2.1.0(vue@3.3.4)
       '@sugarat/theme':
         specifier: 0.1.45
-        version: 0.1.45(vitepress@1.0.0-rc.13)(vue@3.3.4)
+        version: 0.1.45(vitepress@1.0.0-rc.14)(vue@3.3.4)
       axios:
         specifier: ^0.27.2
         version: 0.27.2
@@ -70,8 +70,8 @@ importers:
         specifier: ^2.3.8
         version: 2.3.8(vue@3.3.4)
       vitepress:
-        specifier: 1.0.0-rc.13
-        version: 1.0.0-rc.13(@types/node@16.18.4)(axios@0.27.2)(sass@1.64.1)
+        specifier: 1.0.0-rc.14
+        version: 1.0.0-rc.14(@types/node@16.18.4)(axios@0.27.2)(sass@1.64.1)
       vue:
         specifier: ^3.3.4
         version: 3.3.4
@@ -127,7 +127,7 @@ importers:
         version: 10.2.4
       vitepress-plugin-mermaid:
         specifier: ^2.0.13
-        version: 2.0.13(mermaid@10.2.4)(vitepress@1.0.0-rc.13)
+        version: 2.0.13(mermaid@10.2.4)(vitepress@1.0.0-rc.14)
       vitepress-plugin-pagefind:
         specifier: 0.2.9
         version: link:../vitepress-plugin-pagefind
@@ -142,8 +142,8 @@ importers:
         specifier: ^2.3.4
         version: 2.3.4(vue@3.3.4)
       pagefind:
-        specifier: 1.0.3-rc1
-        version: 1.0.3-rc1
+        specifier: 1.0.3
+        version: 1.0.3
       sass:
         specifier: ^1.56.1
         version: 1.56.1
@@ -154,11 +154,11 @@ importers:
         specifier: ^4.8.2
         version: 4.9.4
       vitepress:
-        specifier: 1.0.0-rc.13
-        version: 1.0.0-rc.13(@types/node@16.18.4)(sass@1.56.1)
+        specifier: 1.0.0-rc.14
+        version: 1.0.0-rc.14(@types/node@16.18.4)(sass@1.56.1)
       vitepress-plugin-tabs:
         specifier: ^0.2.0
-        version: 0.2.0(vitepress@1.0.0-rc.13)(vue@3.3.4)
+        version: 0.2.0(vitepress@1.0.0-rc.14)(vue@3.3.4)
       vue:
         specifier: ^3.3.4
         version: 3.3.4
@@ -1315,8 +1315,8 @@ packages:
     dev: false
     optional: true
 
-  /@pagefind/darwin-arm64@1.0.3-rc1:
-    resolution: {integrity: sha512-yajkIx+iskQ0V3H4QyeFl/pSl8Ar4lPHJvcRUMu51HyzjJE4B1hTZ+LbbXTxITy7P0f6XD9P98oB0QyzcTmqpg==}
+  /@pagefind/darwin-arm64@1.0.3:
+    resolution: {integrity: sha512-vsHDtvao3W4iFCxVc4S0BVhpj3E2MAoIVM7RmuQfGp1Ng22nGLRaMP6FguLO8TMabRJdvp4SVr227hL4WGKOHA==}
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
@@ -1331,8 +1331,8 @@ packages:
     dev: false
     optional: true
 
-  /@pagefind/darwin-x64@1.0.3-rc1:
-    resolution: {integrity: sha512-rd5e9LAfJsVtzILUP6fbfod22nynpfrooFz73RsFl02Q3DxI5mSLQ7SBo5uSU7kgmFtKqjXNIvbtU1EJIWWuFA==}
+  /@pagefind/darwin-x64@1.0.3:
+    resolution: {integrity: sha512-NhEXHHYmB/hT6lx5rCcmnVTxH+uIkMAd43bzEqMwHQosqTZEIQfwihmV39H+m8yo7jFvz3zRbJNzhAh7G4PiwA==}
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
@@ -1347,8 +1347,8 @@ packages:
     dev: false
     optional: true
 
-  /@pagefind/linux-arm64@1.0.3-rc1:
-    resolution: {integrity: sha512-rL09CCYh/mRbr4fmi+cgsUQ8i1mQXusM4tPHBMLJNqgmV9e1Y/C6+RuQAvEytQfKlfg5yE+zTb1B92o0ucaWPA==}
+  /@pagefind/linux-arm64@1.0.3:
+    resolution: {integrity: sha512-RGsMt4AmGT8WxCSeP09arU7Za6Vf/We4TWHVSbY7vDMuwWql9Ngoib/q1cP9dIAIMdkXh9ePG/S3mGnJYsdzuQ==}
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
@@ -1363,8 +1363,8 @@ packages:
     dev: false
     optional: true
 
-  /@pagefind/linux-x64@1.0.3-rc1:
-    resolution: {integrity: sha512-uqNLCZ+TPQszwtYBtmYLonSY3reJUYjbm/0betn3uoeb85uXdB/bOavhCq3BX+euMIBJXUFAsFxp0HuIOhCXUA==}
+  /@pagefind/linux-x64@1.0.3:
+    resolution: {integrity: sha512-o+VCKaqImL42scSH1n5gUfppYSNyu3BuGTvtKKgWHmycbL+A3fkFH+ZOFbaLeN7LVTvJqJIOYbk4j2yaq9784Q==}
     cpu: [x64]
     os: [linux]
     requiresBuild: true
@@ -1379,8 +1379,8 @@ packages:
     dev: false
     optional: true
 
-  /@pagefind/windows-x64@1.0.3-rc1:
-    resolution: {integrity: sha512-S4S3vk7CN8sSbXKbfeZrFJG3Gi1tx2a2bt1QWNfSHz9UJZ+3wyuX0pUAERTx2ePcuzaC47EOu8VFBj/oMtHRDQ==}
+  /@pagefind/windows-x64@1.0.3:
+    resolution: {integrity: sha512-S+Yq4FyvXJm4F+iN/wRiLvEEF8Xs9lTKGtQGaRHXJslQyl65dytDDPIULXJXIadrDbnMrnTt4C2YHmEUIyUIHg==}
     cpu: [x64]
     os: [win32]
     requiresBuild: true
@@ -1394,7 +1394,7 @@ packages:
     dev: true
     optional: true
 
-  /@sugarat/theme@0.1.45(vitepress@1.0.0-rc.13)(vue@3.3.4):
+  /@sugarat/theme@0.1.45(vitepress@1.0.0-rc.14)(vue@3.3.4):
     resolution: {integrity: sha512-74puneOXB7Fd+xfUKTx6oH8L6r91MG1CmFFmbtH8yLLINvKfpirPwOuZDlxYVcb3sA3c7upo3lVVSAXNqiMr4Q==}
     dependencies:
       '@mdit-vue/shared': 0.12.0
@@ -1406,7 +1406,7 @@ packages:
       gray-matter: 4.0.3
       highlight.js: 11.7.0
       mermaid: 10.2.4
-      vitepress-plugin-mermaid: 2.0.13(mermaid@10.2.4)(vitepress@1.0.0-rc.13)
+      vitepress-plugin-mermaid: 2.0.13(mermaid@10.2.4)(vitepress@1.0.0-rc.14)
       vue-command-palette: 0.1.4
     transitivePeerDependencies:
       - '@vue/composition-api'
@@ -5105,15 +5105,15 @@ packages:
       '@pagefind/windows-x64': 1.0.2
     dev: false
 
-  /pagefind@1.0.3-rc1:
-    resolution: {integrity: sha512-oGv/nZMzD9gAJmYic4GttODaNjjXRaoUIw4aMK26K2wyotHyO5HFHV6XBi98POIprEBFgxnQluotK76B66zIkg==}
+  /pagefind@1.0.3:
+    resolution: {integrity: sha512-ws7kmMxW6OuxzsOjj3YAx6TYq/54MiE3wfyBM3J5CInbZyBBvM2Z8c8IYvnMkBcb5v2EoB9DewXEekOEiDRu5g==}
     hasBin: true
     optionalDependencies:
-      '@pagefind/darwin-arm64': 1.0.3-rc1
-      '@pagefind/darwin-x64': 1.0.3-rc1
-      '@pagefind/linux-arm64': 1.0.3-rc1
-      '@pagefind/linux-x64': 1.0.3-rc1
-      '@pagefind/windows-x64': 1.0.3-rc1
+      '@pagefind/darwin-arm64': 1.0.3
+      '@pagefind/darwin-x64': 1.0.3
+      '@pagefind/linux-arm64': 1.0.3
+      '@pagefind/linux-x64': 1.0.3
+      '@pagefind/windows-x64': 1.0.3
     dev: true
 
   /parent-module@1.0.1:
@@ -6261,25 +6261,25 @@ packages:
       fsevents: 2.3.2
     dev: false
 
-  /vitepress-plugin-mermaid@2.0.13(mermaid@10.2.4)(vitepress@1.0.0-rc.13):
+  /vitepress-plugin-mermaid@2.0.13(mermaid@10.2.4)(vitepress@1.0.0-rc.14):
     resolution: {integrity: sha512-2c0ywXHE7kOK88Ygla9aGgkyF2JbfqfjE36JnoljW/3hQTR9rYBmfTFM5tvs4TUjCUfedUYT4CeyNolCY9t3uw==}
     peerDependencies:
       mermaid: '10'
       vitepress: ^0.21.6 || ^1.0.0 || ^1.0.0-alpha
     dependencies:
       mermaid: 10.2.4
-      vitepress: 1.0.0-rc.13(@types/node@16.18.4)(sass@1.56.1)
+      vitepress: 1.0.0-rc.14(@types/node@16.18.4)(sass@1.56.1)
     optionalDependencies:
       '@mermaid-js/mermaid-mindmap': 9.3.0
     dev: false
 
-  /vitepress-plugin-tabs@0.2.0(vitepress@1.0.0-rc.13)(vue@3.3.4):
+  /vitepress-plugin-tabs@0.2.0(vitepress@1.0.0-rc.14)(vue@3.3.4):
     resolution: {integrity: sha512-jTdtz4Z5fHllzcDAJaJK/bxE/2PhJSqetFUFgiB7xzw23O4yI+ntJrN+D3oP8XH/0559QUbrYd0K3YLoRaHbAA==}
     peerDependencies:
       vitepress: ^1.0.0-alpha.29
       vue: ^3.2.45
     dependencies:
-      vitepress: 1.0.0-rc.13(@types/node@16.18.4)(sass@1.56.1)
+      vitepress: 1.0.0-rc.14(@types/node@16.18.4)(sass@1.56.1)
       vue: 3.3.4
     dev: true
 
@@ -6313,9 +6313,14 @@ packages:
       - terser
     dev: true
 
-  /vitepress@1.0.0-rc.13(@types/node@16.18.4)(axios@0.27.2)(sass@1.64.1):
-    resolution: {integrity: sha512-TnVydQOZE38rtXu9gHCb7EGdN03jTcmYkDdhCqox6+pfKYgiyfm1qk2Uy8BZatnM9wXpa64f+T5p30R8P/9Z+A==}
+  /vitepress@1.0.0-rc.14(@types/node@16.18.4)(axios@0.27.2)(sass@1.64.1):
+    resolution: {integrity: sha512-yChIeXOAcNvVnSVjhziH1vte0uhKb00PuZf7KdIMfx3ixTMAz73Nn+6gREvCv0SdH+anteGUKz5eljv0ygcgGQ==}
     hasBin: true
+    peerDependencies:
+      markdown-it-mathjax3: ^4.3.2
+    peerDependenciesMeta:
+      markdown-it-mathjax3:
+        optional: true
     dependencies:
       '@docsearch/css': 3.5.2
       '@docsearch/js': 3.5.2
@@ -6355,9 +6360,14 @@ packages:
       - universal-cookie
     dev: false
 
-  /vitepress@1.0.0-rc.13(@types/node@16.18.4)(sass@1.56.1):
-    resolution: {integrity: sha512-TnVydQOZE38rtXu9gHCb7EGdN03jTcmYkDdhCqox6+pfKYgiyfm1qk2Uy8BZatnM9wXpa64f+T5p30R8P/9Z+A==}
+  /vitepress@1.0.0-rc.14(@types/node@16.18.4)(sass@1.56.1):
+    resolution: {integrity: sha512-yChIeXOAcNvVnSVjhziH1vte0uhKb00PuZf7KdIMfx3ixTMAz73Nn+6gREvCv0SdH+anteGUKz5eljv0ygcgGQ==}
     hasBin: true
+    peerDependencies:
+      markdown-it-mathjax3: ^4.3.2
+    peerDependenciesMeta:
+      markdown-it-mathjax3:
+        optional: true
     dependencies:
       '@docsearch/css': 3.5.2
       '@docsearch/js': 3.5.2

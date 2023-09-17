@@ -173,7 +173,7 @@ interface HomeBlog {
 * Type: `boolean | 'pagefind' | Object`
 * Default: `true`
 
-控制是否启用主题自带的搜索功能
+控制是否启用主题自带的搜索功能（简化版的[pagefind](https://pagefind.app/)）
 :::code-group
 ```ts [关闭搜索]
 const blogTheme = getThemeConfig({

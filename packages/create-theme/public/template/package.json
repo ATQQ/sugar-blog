@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.1.0",
-    "@sugarat/theme": "^0.1.46",
+    "@sugarat/theme": "^0.1.47",
     "element-plus": "^2.3.8",
     "vue": "^3.3.4"
   },
@@ -19,7 +19,7 @@
   "devDependencies": {
     "sass": "^1.64.1",
     "typescript": "^5.1.6",
-    "vitepress": "1.0.0-rc.13"
+    "vitepress": "1.0.0-rc.14"
   },
   "author": "粥里有勺糖",
   "license": "MIT"

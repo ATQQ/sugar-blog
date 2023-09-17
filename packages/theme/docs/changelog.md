@@ -18,6 +18,14 @@ pnpm up @sugarat/theme
 pnpm add vitepress@latest
 ```
 
+## 0.1.47 (2023/09/17)
+
+### Patch Changes
+- 内置搜索默认使用 pagefind
+- Updated dependencies
+  - vitepress-plugin-pagefind@0.2.9
+- VitePress rc14
+
 ## 0.1.46 (2023/09/16)
 
 ### Patch Changes

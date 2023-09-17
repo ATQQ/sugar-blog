@@ -1,7 +1,7 @@
 // 主题独有配置
 import { getThemeConfig } from '@sugarat/theme/node';
 
-// 开启RSS支持
+// 开启RSS支持（RSS配置）
 // import type { Theme } from '@sugarat/theme'
 
 // const baseUrl = 'https://sugarat.top'
@@ -14,14 +14,23 @@ import { getThemeConfig } from '@sugarat/theme/node';
 //   image: 'https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTE2NzAzMA==674995167030',
 //   favicon: 'https://sugarat.top/favicon.ico',
 // }
-// 详见文档: https://theme.sugarat.top/
+
+
+// 所有配置项，详见文档: https://theme.sugarat.top/
 const blogTheme = getThemeConfig({
-  // 主题色修改
-  themeColor: 'el-blue',
   // 开启RSS支持
   // RSS,
+  
+  // 默认开启pagefind离线的全文搜索支持（如使用其它的可以设置为false）
+  // 如果npx pagefind 时间过长，可以手动将其安装为项目依赖 pnpm add pagefind
+  // search: false,
+
+  // 主题色修改
+  themeColor: 'el-blue',
+
   // 文章默认作者
   author: '粥里有勺糖',
+
   // 友链
   friend: [
     {
@@ -39,8 +48,8 @@ const blogTheme = getThemeConfig({
       url: 'https://vitepress.dev/',
     },
   ],
-  // 开启离线的全文搜索支持（如构建报错可注释下面的配置再次尝试）
-  search: 'pagefind',
+
+  // 公告
   popover: {
     title: '公告',
     body: [
