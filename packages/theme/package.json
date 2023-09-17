@@ -1,6 +1,6 @@
 {
   "name": "@sugarat/theme",
-  "version": "0.1.46",
+  "version": "0.1.47",
   "description": "简约风的 Vitepress 博客主题，sugarat vitepress blog theme",
   "main": "src/index.ts",
   "exports": {
@@ -52,6 +52,7 @@
     "highlight.js": "^11.7.0",
     "mermaid": "^10.2.4",
     "vitepress-plugin-mermaid": "^2.0.13",
+    "vitepress-plugin-pagefind": "0.2.9",
     "vue-command-palette": "^0.1.4"
   },
   "devDependencies": {
@@ -60,9 +61,10 @@
     "sass": "^1.56.1",
     "tsup": " ^6.5.0",
     "typescript": "^4.8.2",
-    "vitepress": "1.0.0-rc.13",
+    "vitepress": "1.0.0-rc.14",
     "vitepress-plugin-tabs": "^0.2.0",
-    "vue": "^3.3.4"
+    "vue": "^3.3.4",
+    "pagefind": "1.0.3"
   },
   "pnpm": {
     "peerDependencyRules": {

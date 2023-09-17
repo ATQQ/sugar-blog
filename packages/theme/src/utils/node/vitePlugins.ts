@@ -1,6 +1,10 @@
 import type { SiteConfig } from 'vitepress'
 import path from 'path'
 import { execSync } from 'child_process'
+import {
+  pagefindPlugin,
+  chineseSearchOptimize
+} from 'vitepress-plugin-pagefind'
 import type { Theme } from '../../composables/config/index'
 import { genFeed } from './genFeed'
 
@@ -13,12 +17,18 @@ export function getVitePlugins(cfg?: Partial<Theme.BlogConfig>) {
   plugins.push(inlineBuildEndPlugin(buildEndFn))
 
   // 内置简化版的pagefind
-  if (
-    cfg?.search === 'pagefind' ||
-    (cfg?.search instanceof Object && cfg.search.mode === 'pagefind')
-  ) {
-    plugins.push(inlinePagefindPlugin(buildEndFn))
+  if (cfg && cfg.search !== false) {
+    const ops = cfg.search instanceof Object ? cfg.search : {}
+    plugins.push(
+      pagefindPlugin({ ...ops, customSearchQuery: chineseSearchOptimize })
+    )
   }
+  // 未来移除使用
+  // if (cfg && cfg.search !== undefined) {
+  //   console.log(
+  //     '已从内部移除 pagefind 支持，请单独安装 vitepress-plugin-pagefind 插件使用'
+  //   )
+  // }
 
   buildEndFn.push(genFeed)
   return plugins
