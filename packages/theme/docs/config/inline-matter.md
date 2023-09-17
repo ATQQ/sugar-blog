@@ -3,6 +3,7 @@ description: 介绍Vitepress内置常用能力
 title: VitePress - 常用能力
 tag:
  - 配置
+sticky: 5
 ---
 
 # 文章配置
