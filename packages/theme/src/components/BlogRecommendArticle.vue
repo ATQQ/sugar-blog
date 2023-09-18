@@ -1,21 +1,10 @@
 <template>
-  <div
-    class="recommend"
-    :class="{ card: sidebarStyle === 'card' }"
-    v-if="_recommend !== false && (recommendList.length || emptyText)"
-    data-pagefind-ignore="all"
-  >
+  <div class="recommend" :class="{ card: sidebarStyle === 'card' }"
+    v-if="_recommend !== false && (recommendList.length || emptyText)" data-pagefind-ignore="all">
     <!-- 头部 -->
     <div class="card-header">
-      <span class="title" v-if="title">{{ title }}</span>
-      <el-button
-        v-if="showChangeBtn"
-        size="small"
-        type="primary"
-        text
-        @click="changePage"
-        >{{ nextText }}</el-button
-      >
+      <span class="title" v-if="title" v-html="title"></span>
+      <el-button v-if="showChangeBtn" size="small" type="primary" text @click="changePage">{{ nextText }}</el-button>
     </div>
     <!-- 文章列表 -->
     <ol class="recommend-container" v-if="currentWikiData.length">
@@ -25,15 +14,9 @@
         <!-- 简介 -->
         <div class="des">
           <!-- title -->
-          <el-link
-            type="info"
-            class="title"
-            :class="{
-              current: isCurrentDoc(v.route)
-            }"
-            :href="v.route"
-            >{{ v.meta.title }}</el-link
-          >
+          <el-link type="info" class="title" :class="{
+            current: isCurrentDoc(v.route)
+          }" :href="v.route">{{ v.meta.title }}</el-link>
           <!-- 描述信息 -->
           <div class="suffix">
             <!-- 日期 -->
@@ -52,6 +35,7 @@ import { useRoute, withBase } from 'vitepress'
 import { ElButton, ElLink } from 'element-plus'
 import { formatShowDate } from '../utils/client'
 import { useArticles, useBlogConfig } from '../composables/config/blog'
+import { recommendSVG } from '../constants/svg'
 
 const { recommend: _recommend } = useBlogConfig()
 
@@ -65,7 +49,7 @@ const recommendPadding = computed(() =>
 const recommend = computed(() =>
   _recommend === false ? undefined : _recommend
 )
-const title = computed(() => recommend.value?.title ?? '🔍 相关文章')
+const title = computed(() => recommend.value?.title ?? (`<span class="svg-icon">${recommendSVG}</span>` + '相关文章'))
 const pageSize = computed(() => recommend.value?.pageSize || 9)
 const nextText = computed(() => recommend.value?.nextText || '换一组')
 const emptyText = computed(() => recommend.value?.empty ?? '暂无相关文章')
@@ -190,6 +174,7 @@ const showChangeBtn = computed(() => {
       color: var(--vp-c-text-1);
       word-break: break-all;
       white-space: break-spaces;
+
       &.current {
         color: var(--vp-c-brand-1);
       }
@@ -208,10 +193,14 @@ const showChangeBtn = computed(() => {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+
   .title {
-    font-size: 16px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
   }
 }
+
 .empty-text {
   padding: 6px;
   font-size: 14px;

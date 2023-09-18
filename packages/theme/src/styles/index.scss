@@ -133,3 +133,13 @@ main .vp-doc a{
 main .vp-doc a:hover{
   text-decoration: underline dotted;
 }
+
+
+// 自定义全局样式
+span.svg-icon{
+  svg{
+    width: 14px;
+    height: 14px;
+    margin-right: 4px;
+  }
+}

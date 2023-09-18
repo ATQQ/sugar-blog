@@ -1,20 +1,9 @@
 <template>
-  <div
-    class="card recommend"
-    v-if="recommendList.length || empty"
-    data-pagefind-ignore="all"
-  >
+  <div class="card recommend" v-if="recommendList.length || empty" data-pagefind-ignore="all">
     <!-- 头部 -->
     <div class="card-header">
-      <span class="title">{{ title }}</span>
-      <el-button
-        v-if="showChangeBtn"
-        size="small"
-        type="primary"
-        text
-        @click="changePage"
-        >{{ nextText }}</el-button
-      >
+      <span class="title" v-html="title"></span>
+      <el-button v-if="showChangeBtn" size="small" type="primary" text @click="changePage">{{ nextText }}</el-button>
     </div>
     <!-- 文章列表 -->
     <ol class="recommend-container" v-if="currentWikiData.length">
@@ -45,9 +34,9 @@ import { ElButton, ElLink } from 'element-plus'
 import { withBase } from 'vitepress'
 import { useArticles, useBlogConfig } from '../composables/config/blog'
 import { formatShowDate } from '../utils/client'
-
+import { fireSVG } from '../constants/svg'
 const { hotArticle } = useBlogConfig()
-const title = computed(() => hotArticle?.title || '🔥 精选文章')
+const title = computed(() => hotArticle?.title || (`<span class="svg-icon">${fireSVG}</span>` + ' 精选文章'))
 const nextText = computed(() => hotArticle?.nextText || '换一组')
 const pageSize = computed(() => hotArticle?.pageSize || 9)
 const empty = computed(() => hotArticle?.empty ?? '暂无精选内容')
@@ -105,6 +94,8 @@ const showChangeBtn = computed(() => {
 
   .title {
     font-size: 12px;
+    display: flex;
+    align-items: center;
   }
 }
 
