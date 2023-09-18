@@ -136,7 +136,7 @@ const PopoverValue = (
   position: fixed;
   top: 80px;
   right: 20px;
-  z-index: 19;
+  z-index: 22;
   box-sizing: border-box;
   border: 1px solid var(--vp-c-brand-3);
   border-radius: 6px;
@@ -207,7 +207,7 @@ const PopoverValue = (
   cursor: pointer;
   opacity: 0.5;
   position: fixed;
-  z-index: 19;
+  z-index: 22;
   top: 80px;
   right: 10px;
   position: fixed;
