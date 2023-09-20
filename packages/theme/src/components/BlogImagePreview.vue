@@ -25,6 +25,11 @@ const previewImage = (e: Event) => {
     previewImageInfo.list = urls
     previewImageInfo.idx = idx
 
+    // 兼容点击main之外的图片
+    if (idx === -1 && url) {
+      previewImageInfo.list.push(url)
+      previewImageInfo.idx = previewImageInfo.list.length - 1
+    }
     show.value = true
   }
 }
@@ -40,13 +45,6 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <ElImageViewer
-    :infinite="false"
-    hide-on-click-modal
-    teleported
-    @close="show = false"
-    :url-list="previewImageInfo.list"
-    :initial-index="previewImageInfo.idx"
-    v-if="show"
-  />
+  <ElImageViewer :infinite="false" hide-on-click-modal teleported @close="show = false" :url-list="previewImageInfo.list"
+    :initial-index="previewImageInfo.idx" v-if="show" />
 </template>
