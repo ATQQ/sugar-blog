@@ -18,6 +18,12 @@ pnpm up @sugarat/theme
 pnpm add vitepress@latest
 ```
 
+## 0.1.49 (2023/09/20)
+
+### Patch Changes
+
+- feat: 支持设置 RSS 图标的 ariaLabel 同时添加默认 title
+
 ## 0.1.48 (2023/09/20)
 
 ### Patch Changes

@@ -1,13 +1,19 @@
 # @sugarat/theme
 
+## 0.1.49
+
+### Patch Changes
+
+- feat: 支持设置 RSS 图标的 ariaLabel 同时添加默认 title
+
 ## 0.1.48
 
 ### Patch Changes
 
 - fix: 移动端公告被遮挡
-- fix: 默认 emoji 在部分设备上不展示，使用SVG替代
+- fix: 默认 emoji 在部分设备上不展示，使用 SVG 替代
 - fix: 插槽图片无法预览
-- fix: 未统计hidden的文章数量
+- fix: 未统计 hidden 的文章数量
 
 ## 0.1.47
 

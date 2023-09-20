@@ -52,6 +52,7 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
    * @description (0 不限制；> 1 会按照日期排序对输出内容进行调整)
    */
   limit?: number
+  ariaLabel?: string
 }
 
 export interface PostInfo {

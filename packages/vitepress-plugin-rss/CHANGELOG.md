@@ -1,5 +1,11 @@
 # vitepress-plugin-rss
 
+## 0.1.2
+
+### Patch Changes
+
+- feat: 支持设置 RSS 图标的 ariaLabel 同时添加默认 title
+
 ## 0.1.1
 
 ### Patch Changes

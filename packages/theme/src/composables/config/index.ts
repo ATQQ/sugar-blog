@@ -328,6 +328,7 @@ export namespace Theme {
      * @description (0 不限制；> 1 会按照日期排序对输出内容进行调整)
      */
     limit?: number
+    ariaLabel?: string
   }
   export interface Config extends DefaultTheme.Config {
     blog?: BlogConfig

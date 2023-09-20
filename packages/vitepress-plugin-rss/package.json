@@ -1,6 +1,6 @@
 {
   "name": "vitepress-plugin-rss",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "vitepress plugin, generate feed.rss",
   "module": "dist/index.mjs",
   "main": "dist/index.js",
