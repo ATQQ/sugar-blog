@@ -71,6 +71,8 @@ npm i -g pnpm
 pnpm dev
 ```
 
+![](https://img.cdn.sugarat.top/mdImg/MTY5NTIxODUyMDU4MQ==695218520581)
+
 你就会得到一个这样的页面
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY3Njk4OTk2Mjc0Nw==676989962747)
@@ -79,17 +81,35 @@ pnpm dev
 ```sh
 pnpm build
 ```
+![](https://img.cdn.sugarat.top/mdImg/MTY5NTIxODYwNzA3Nw==695218607077)
+
+默认会开启内置的离线全文搜索（基于 `pagefind` 实现）
+
+如果不需要可以在 `docs/.vitepress/blog-theme.ts` 中关闭
+* 如果`npx pagefind` 时间过长，可以手动将其安装为项目依赖 `pnpm add pagefind`
+```ts
+const blogTheme = getThemeConfig({
+  // 默认开启pagefind离线的全文搜索支持（如使用其它的可以设置为false）
+  // 如果npx pagefind 时间过长，可以手动将其安装为项目依赖 pnpm add pagefind
+  search: false,
+});
+```
 
 ⑤ 预览构建产物
 ```sh
 pnpm serve
 ```
 
+![](https://img.cdn.sugarat.top/mdImg/MTY5NTIxODY1NzAzNg==695218657036)
+
 ## 升级
 
 如果主题更新了，升级主题，原项目只需执行如下指令即可
 ```sh
 pnpm up @sugarat/theme
+
+# 更新 vitepress 版本（通常安装最新的即可，主题包每次更新不出意外都会使用最新的VitePress）
+pnpm add vitepress@latest
 ```
 
 ## 更多

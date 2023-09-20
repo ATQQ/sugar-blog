@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.15
+
+### Patch Changes
+
+- chore: 一些列问题修复
+
 ## 0.0.14
 
 ### Patch Changes

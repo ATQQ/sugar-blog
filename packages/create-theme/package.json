@@ -1,6 +1,6 @@
 {
   "name": "@sugarat/create-theme",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "简约风的 Vitepress 博客主题，sugarat vitepress blog theme",
   "bin": {
     "create-theme": "./dist/index.js"
