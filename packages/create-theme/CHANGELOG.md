@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.16
+
+### Patch Changes
+
+- feat: 支持设置 RSS 图标的 ariaLabel 同时添加默认 title
+
 ## 0.0.15
 
 ### Patch Changes
