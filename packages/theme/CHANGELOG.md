@@ -1,5 +1,14 @@
 # @sugarat/theme
 
+## 0.1.48
+
+### Patch Changes
+
+- fix: 移动端公告被遮挡
+- fix: 默认 emoji 在部分设备上不展示，使用SVG替代
+- fix: 插槽图片无法预览
+- fix: 未统计hidden的文章数量
+
 ## 0.1.47
 
 ### Patch Changes

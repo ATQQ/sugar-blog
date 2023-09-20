@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新 v0.1.43 💯：① 适配 rc11 版本 ② 内置多套主题色一键切换 ③ 统一博客整体的颜色 ④ 一系列bug修复和优化
+description: 最近更新 v0.1.48 💯：① 一系列bug修复和优化
 author: 粥里有勺糖
 top: 2
 tag: 日志
@@ -17,6 +17,15 @@ pnpm up @sugarat/theme
 # 更新 vitepress 版本
 pnpm add vitepress@latest
 ```
+
+## 0.1.48 (2023/09/20)
+
+### Patch Changes
+
+- fix: 移动端公告被遮挡
+- fix: 默认 emoji 在部分设备上不展示，使用SVG替代
+- fix: 插槽图片无法预览
+- fix: 未统计hidden的文章数量
 
 ## 0.1.47 (2023/09/17)
 
