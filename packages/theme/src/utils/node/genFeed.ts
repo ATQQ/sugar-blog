@@ -1,17 +1,18 @@
 /* eslint-disable no-console */
-import path from 'path'
-import fs, { writeFileSync } from 'fs'
+import path from 'node:path'
+import fs, { writeFileSync } from 'node:fs'
 import { Feed } from 'feed'
 import type { SiteConfig } from 'vitepress'
 import type { Theme } from '../../composables/config/index'
-import { withBase } from './index'
 import { pageMap } from './theme'
+import { withBase } from './index'
 
 export async function genFeed(config: SiteConfig) {
   const blogCfg: Theme.BlogConfig = config.userConfig.themeConfig.blog
   let posts: Theme.PageData[] = blogCfg.pagesData
   const { RSS, authorList = [] } = blogCfg
-  if (!RSS) return
+  if (!RSS)
+    return
   const { createMarkdownRenderer } = await import('vitepress')
 
   const mdRender = await createMarkdownRenderer(
@@ -38,9 +39,9 @@ export async function genFeed(config: SiteConfig) {
 
   posts = posts
     // 过滤掉 layout:home
-    .filter((v) => v.meta.layout !== 'home')
+    .filter(v => v.meta.layout !== 'home')
     // 过滤掉不展示的
-    .filter((v) => v.meta.hidden !== true)
+    .filter(v => v.meta.hidden !== true)
 
   if (undefined !== RSS?.limit && RSS?.limit > 0) {
     posts.splice(RSS.limit)
@@ -59,7 +60,7 @@ export async function genFeed(config: SiteConfig) {
     link = link.endsWith('/')
       ? link
       : `${link}${config?.cleanUrls ? '' : '.html'}`
-    const authorLink = authorList.find((v) => v.nickname === author)?.url
+    const authorLink = authorList.find(v => v.nickname === author)?.url
     let html
     const filepath = pageMap.get(route)
     if (filepath) {

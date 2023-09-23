@@ -1,9 +1,10 @@
+import path from 'node:path'
+import { execSync } from 'node:child_process'
+import process from 'node:process'
 import type { SiteConfig } from 'vitepress'
-import path from 'path'
-import { execSync } from 'child_process'
 import {
-  pagefindPlugin,
-  chineseSearchOptimize
+  chineseSearchOptimize,
+  pagefindPlugin
 } from 'vitepress-plugin-pagefind'
 import type { Theme } from '../../composables/config/index'
 import { genFeed } from './genFeed'
@@ -101,8 +102,8 @@ export function inlineBuildEndPlugin(buildEndFn: any[]) {
       vitepressConfig.buildEnd = (siteCfg) => {
         selfBuildEnd?.(siteCfg)
         buildEndFn
-          .filter((fn) => typeof fn === 'function')
-          .forEach((fn) => fn(siteCfg))
+          .filter(fn => typeof fn === 'function')
+          .forEach(fn => fn(siteCfg))
       }
     }
   }

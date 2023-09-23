@@ -1,10 +1,11 @@
-import glob from 'fast-glob'
-import matter from 'gray-matter'
-import fs from 'fs'
-import { execSync, spawn, spawnSync } from 'child_process'
-import path from 'path'
+import fs from 'node:fs'
+import { execSync, spawn, spawnSync } from 'node:child_process'
+import path from 'node:path'
+import os from 'node:os'
+import process from 'node:process'
 import type { SiteConfig } from 'vitepress'
-import os from 'os'
+import matter from 'gray-matter'
+import glob from 'fast-glob'
 import { formatDate } from './utils'
 import type { PagefindOption } from './type'
 
@@ -18,9 +19,9 @@ export function getPagesData(
   return files
     .map((file) => {
       // page url
-      const route =
-        config.site.base +
-        normalizePath(path.relative(config.srcDir, file))
+      const route
+        = config.site.base
+        + normalizePath(path.relative(config.srcDir, file))
           .replace(/(^|\/)index\.md$/, '$1')
           .replace(/\.md$/, config.cleanUrls ? '' : '.html')
 
@@ -41,7 +42,8 @@ export function getPagesData(
 
       if (!meta.date) {
         meta.date = getFileBirthTime(file)
-      } else {
+      }
+      else {
         const timeZone = pluginSiteConfig?.timeZone ?? 8
         meta.date = formatDate(
           new Date(`${new Date(meta.date).toUTCString()}+${timeZone}`)
@@ -52,7 +54,7 @@ export function getPagesData(
         meta
       }
     })
-    .filter((v) => v.meta.layout !== 'home')
+    .filter(v => v.meta.layout !== 'home')
 }
 
 const windowsSlashRE = /\\/g
@@ -67,8 +69,8 @@ export function normalizePath(id: string): string {
 }
 
 export function getDefaultTitle(content: string) {
-  const title =
-    clearMatterContent(content)
+  const title
+    = clearMatterContent(content)
       .split('\n')
       ?.find((str) => {
         return str.startsWith('# ')
@@ -90,7 +92,8 @@ export function clearMatterContent(content: string) {
     if (line.trim() === '---') {
       if (first___ === undefined) {
         first___ = pre.length
-      } else if (second___ === undefined) {
+      }
+      else if (second___ === undefined) {
         second___ = pre.length
       }
     }
@@ -121,7 +124,8 @@ export function getFileBirthTime(url: string) {
     if (infoStr) {
       date = new Date(infoStr)
     }
-  } catch (error) {
+  }
+  catch (error) {
     return formatDate(date)
   }
 
@@ -155,7 +159,7 @@ export function getTextSummary(text: string, count = 100) {
       // 除去加粗
       ?.replace(/\*\*(.*?)\*\*/g, '$1')
       ?.split('\n')
-      ?.filter((v) => !!v)
+      ?.filter(v => !!v)
       ?.slice(1)
       ?.join('\n')
       ?.replace(/>(.*)/, '')
@@ -242,7 +246,7 @@ export const pluginSiteConfig: Partial<SiteConfig> = {
 
 export function chineseSearchOptimize(input: string) {
   return input
-    .replace(/[\u4e00-\u9fa5]/g, ' $& ')
+    .replace(/[\u4E00-\u9FA5]/g, ' $& ')
     .replace(/\s+/g, ' ')
     .trim()
 }

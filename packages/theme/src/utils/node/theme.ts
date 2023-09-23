@@ -1,11 +1,12 @@
 /* eslint-disable prefer-rest-params */
+import fs from 'node:fs'
+import path from 'node:path'
+import process from 'node:process'
 import glob from 'fast-glob'
 import matter from 'gray-matter'
-import fs from 'fs'
-import path from 'path'
 import type { Theme } from '../../composables/config/index'
-import { getDefaultTitle, getFileBirthTime, getTextSummary } from './index'
 import { formatDate } from '../client'
+import { getDefaultTitle, getFileBirthTime, getTextSummary } from './index'
 
 export function patchDefaultThemeSideBar(cfg?: Partial<Theme.BlogConfig>) {
   return cfg?.blog !== false && cfg?.recommend !== false
@@ -44,7 +45,8 @@ export function getArticles(cfg?: Partial<Theme.BlogConfig>) {
           ),
           ''
         )
-      } else {
+      }
+      else {
         route = route.replace(
           new RegExp(
             `^${path
@@ -75,7 +77,8 @@ export function getArticles(cfg?: Partial<Theme.BlogConfig>) {
         //   meta.date = formatDate(v)
         // })
         meta.date = getFileBirthTime(v)
-      } else {
+      }
+      else {
         const timeZone = cfg?.timeZone ?? 8
         meta.date = formatDate(
           new Date(`${new Date(meta.date).toUTCString()}+${timeZone}`)
@@ -83,8 +86,8 @@ export function getArticles(cfg?: Partial<Theme.BlogConfig>) {
       }
 
       // 处理tags和categories,兼容历史文章
-      meta.categories =
-        typeof meta.categories === 'string'
+      meta.categories
+        = typeof meta.categories === 'string'
           ? [meta.categories]
           : meta.categories
       meta.tags = typeof meta.tags === 'string' ? [meta.tags] : meta.tags
@@ -96,13 +99,13 @@ export function getArticles(cfg?: Partial<Theme.BlogConfig>) {
 
       // 获取摘要信息
       const wordCount = 100
-      meta.description =
-        meta.description || getTextSummary(fileContent, wordCount)
+      meta.description
+        = meta.description || getTextSummary(fileContent, wordCount)
 
       // 获取封面图
-      meta.cover =
-        meta.cover ??
-        (fileContent.match(/[!]\[.*?\]\((https:\/\/.+)\)/)?.[1] || '')
+      meta.cover
+        = meta.cover
+        ?? (fileContent.match(/[!]\[.*?\]\((https:\/\/.+)\)/)?.[1] || '')
 
       // 是否发布 默认发布
       if (meta.publish === false) {
@@ -115,7 +118,7 @@ export function getArticles(cfg?: Partial<Theme.BlogConfig>) {
         meta
       }
     })
-    .filter((v) => v.meta.layout !== 'home')
+    .filter(v => v.meta.layout !== 'home')
   return data as Theme.PageData[]
 }
 

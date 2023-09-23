@@ -1,49 +1,16 @@
-<template>
-  <ul data-pagefind-ignore="all">
-    <li v-for="v in currentWikiData" :key="v.route">
-      <blog-item
-        :route="v.route"
-        :title="v.meta.title"
-        :description="v.meta.description"
-        :description-h-t-m-l="v.meta.descriptionHTML"
-        :date="v.meta.date"
-        :tag="v.meta.tag"
-        :cover="v.meta.cover"
-        :author="v.meta.author || globalAuthor"
-        :pin="v.meta.top"
-      />
-    </li>
-  </ul>
-  <!-- 解决element-ui bug -->
-  <ClientOnly>
-    <div class="el-pagination-wrapper">
-      <el-pagination
-        v-if="wikiList.length >= pageSize"
-        small
-        background
-        :default-current-page="1"
-        :current-page="currentPage"
-        @update:current-page="handleUpdatePageNum"
-        :page-size="pageSize"
-        :total="filterData.length"
-        layout="prev, pager, next, jumper"
-      />
-    </div>
-  </ClientOnly>
-</template>
 <script setup lang="ts">
 import { computed, watch } from 'vue'
 import { ElPagination } from 'element-plus'
 import { useData, useRouter } from 'vitepress'
 import { useBrowserLocation } from '@vueuse/core'
-import BlogItem from './BlogItem.vue'
 import {
-  useArticles,
   useActiveTag,
+  useArticles,
   useBlogConfig,
   useCurrentPageNum
 } from '../composables/config/blog'
-import { Theme } from '../composables/config'
+import type { Theme } from '../composables/config'
+import BlogItem from './BlogItem.vue'
 
 const { theme, frontmatter } = useData<Theme.Config>()
 const globalAuthor = computed(() => theme.value.blog?.author || '')
@@ -54,22 +21,23 @@ const activeTag = useActiveTag()
 const activeTagLabel = computed(() => activeTag.value.label)
 
 const wikiList = computed(() => {
-  const topList = docs.value.filter((v) => !v.meta.hidden && !!v.meta.top)
+  const topList = docs.value.filter(v => !v.meta.hidden && !!v.meta.top)
   topList.sort((a, b) => {
     const aTop = a?.meta?.top
     const bTop = b?.meta.top
     return Number(aTop) - Number(bTop)
   })
   const data = docs.value.filter(
-    (v) => v.meta.date && v.meta.title && !v.meta.top && !v.meta.hidden
+    v => v.meta.date && v.meta.title && !v.meta.top && !v.meta.hidden
   )
   data.sort((a, b) => +new Date(b.meta.date) - +new Date(a.meta.date))
   return topList.concat(data)
 })
 
 const filterData = computed(() => {
-  if (!activeTagLabel.value) return wikiList.value
-  return wikiList.value.filter((v) =>
+  if (!activeTagLabel.value)
+    return wikiList.value
+  return wikiList.value.filter(v =>
     v.meta?.tag?.includes(activeTagLabel.value)
   )
 })
@@ -88,7 +56,7 @@ const currentWikiData = computed(() => {
 const router = useRouter()
 const location = useBrowserLocation()
 const queryPageNumKey = 'pageNum'
-const handleUpdatePageNum = (current: number) => {
+function handleUpdatePageNum(current: number) {
   if (currentPage.value === current) {
     return
   }
@@ -108,7 +76,8 @@ watch(
       const { searchParams } = new URL(location.value.href)
       if (searchParams.has(queryPageNumKey)) {
         currentPage.value = Number(searchParams.get(queryPageNumKey))
-      } else {
+      }
+      else {
         currentPage.value = 1
       }
     }
@@ -118,6 +87,41 @@ watch(
   }
 )
 </script>
+
+<template>
+  <ul data-pagefind-ignore="all">
+    <li v-for="v in currentWikiData" :key="v.route">
+      <BlogItem
+        :route="v.route"
+        :title="v.meta.title"
+        :description="v.meta.description"
+        :description-h-t-m-l="v.meta.descriptionHTML"
+        :date="v.meta.date"
+        :tag="v.meta.tag"
+        :cover="v.meta.cover"
+        :author="v.meta.author || globalAuthor"
+        :pin="v.meta.top"
+      />
+    </li>
+  </ul>
+  <!-- 解决element-ui bug -->
+  <ClientOnly>
+    <div class="el-pagination-wrapper">
+      <ElPagination
+        v-if="wikiList.length >= pageSize"
+        small
+        background
+        :default-current-page="1"
+        :current-page="currentPage"
+        :page-size="pageSize"
+        :total="filterData.length"
+        layout="prev, pager, next, jumper"
+        @update:current-page="handleUpdatePageNum"
+      />
+    </div>
+  </ClientOnly>
+</template>
+
 <style lang="scss" scoped>
 .el-pagination-wrapper {
   :deep(.el-pagination li.is-active.number) {

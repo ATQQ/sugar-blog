@@ -2,21 +2,15 @@
   "name": "vitepress-plugin-rss",
   "version": "0.1.2",
   "description": "vitepress plugin, generate feed.rss",
-  "module": "dist/index.mjs",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
-  "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
-    }
+  "author": "sugar",
+  "license": "MIT",
+  "homepage": "https://github.com/ATQQ/sugar-blog/tree/master/packages/vitepress-plugin-rss",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ATQQ/sugar-blog.git"
   },
-  "scripts": {
-    "dev": "npx tsup src/index.ts --dts --watch --format esm,cjs --external vitepress",
-    "build": "npx tsup src/index.ts --dts --format esm,cjs --external vitepress"
+  "bugs": {
+    "url": "https://github.com/ATQQ/sugar-blog/issues"
   },
   "keywords": [
     "vitepress",
@@ -24,28 +18,34 @@
     "rss",
     "feed"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ATQQ/sugar-blog.git"
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
   },
-  "author": "sugar",
-  "license": "MIT",
-  "homepage": "https://github.com/ATQQ/sugar-blog/tree/master/packages/vitepress-plugin-rss",
-  "bugs": {
-    "url": "https://github.com/ATQQ/sugar-blog/issues"
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "npx tsup src/index.ts --dts --watch --format esm,cjs --external vitepress",
+    "build": "npx tsup src/index.ts --dts --format esm,cjs --external vitepress"
   },
   "peerDependencies": {
     "vitepress": "1.0.0-rc.4"
+  },
+  "dependencies": {
+    "fast-glob": "^3.2.12",
+    "feed": "^4.2.2",
+    "gray-matter": "^4.0.3"
   },
   "devDependencies": {
     "@types/node": "^16.18.4",
     "tsup": " ^6.5.0",
     "vite": "^4.3.3",
     "vitepress": "1.0.0-rc.4"
-  },
-  "dependencies": {
-    "fast-glob": "^3.2.12",
-    "gray-matter": "^4.0.3",
-    "feed": "^4.2.2"
   }
 }

@@ -1,51 +1,9 @@
-<template>
-  <a class="blog-item" :href="withBase(route)">
-    <i class="pin" v-if="!!pin"></i>
-    <!-- 标题 -->
-    <p class="title" v-if="inMobile">{{ title }}</p>
-    <div class="info-container">
-      <!-- 左侧信息 -->
-      <div class="info-part">
-        <!-- 标题 -->
-        <p class="title" v-if="!inMobile">{{ title }}</p>
-        <!-- 简短描述 -->
-        <p class="description" v-if="!descriptionHTML && !!description">
-          {{ description }}
-        </p>
-        <template v-if="descriptionHTML">
-          <div class="description-html" v-html="descriptionHTML"></div>
-        </template>
-        <!-- 底部补充描述 -->
-        <div class="badge-list" v-if="!inMobile">
-          <span class="split" v-if="author">{{ author }}</span>
-          <span class="split">{{ showTime }}</span>
-          <span class="split" v-if="tag?.length">{{ tag.join(' · ') }}</span>
-        </div>
-      </div>
-      <!-- 右侧封面图 -->
-      <div
-        v-if="cover"
-        class="cover-img"
-        :style="`background-image: url(${cover});`"
-      ></div>
-    </div>
-    <!-- 底部补充描述 -->
-    <div class="badge-list" v-if="inMobile">
-      <span class="split" v-if="author">{{ author }}</span>
-      <span class="split">{{ showTime }}</span>
-      <span class="split" v-if="tag?.length">{{ tag.join(' · ') }}</span>
-    </div>
-  </a>
-</template>
-
 <script lang="ts" setup>
 import { withBase } from 'vitepress'
 import { computed } from 'vue'
 import { useWindowSize } from '@vueuse/core'
 import { formatShowDate } from '../utils/client'
 
-const { width } = useWindowSize()
-const inMobile = computed(() => width.value <= 500)
 const props = defineProps<{
   route: string
   title: string
@@ -58,7 +16,8 @@ const props = defineProps<{
   cover?: string | boolean
   pin?: number
 }>()
-
+const { width } = useWindowSize()
+const inMobile = computed(() => width.value <= 500)
 const showTime = computed(() => {
   return formatShowDate(props.date)
 })
@@ -76,6 +35,46 @@ const showTime = computed(() => {
 //   return false
 // }
 </script>
+
+<template>
+  <a class="blog-item" :href="withBase(route)">
+    <i v-if="!!pin" class="pin" />
+    <!-- 标题 -->
+    <p v-if="inMobile" class="title">{{ title }}</p>
+    <div class="info-container">
+      <!-- 左侧信息 -->
+      <div class="info-part">
+        <!-- 标题 -->
+        <p v-if="!inMobile" class="title">{{ title }}</p>
+        <!-- 简短描述 -->
+        <p v-if="!descriptionHTML && !!description" class="description">
+          {{ description }}
+        </p>
+        <template v-if="descriptionHTML">
+          <div class="description-html" v-html="descriptionHTML" />
+        </template>
+        <!-- 底部补充描述 -->
+        <div v-if="!inMobile" class="badge-list">
+          <span v-if="author" class="split">{{ author }}</span>
+          <span class="split">{{ showTime }}</span>
+          <span v-if="tag?.length" class="split">{{ tag.join(' · ') }}</span>
+        </div>
+      </div>
+      <!-- 右侧封面图 -->
+      <div
+        v-if="cover"
+        class="cover-img"
+        :style="`background-image: url(${cover});`"
+      />
+    </div>
+    <!-- 底部补充描述 -->
+    <div v-if="inMobile" class="badge-list">
+      <span v-if="author" class="split">{{ author }}</span>
+      <span class="split">{{ showTime }}</span>
+      <span v-if="tag?.length" class="split">{{ tag.join(' · ') }}</span>
+    </div>
+  </a>
+</template>
 
 <style lang="scss" scoped>
 .blog-item .pin {

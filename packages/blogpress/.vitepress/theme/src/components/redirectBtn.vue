@@ -1,13 +1,3 @@
-<template>
-  <p class="action">
-    <a :href="href"
-      ><el-button type="success" round size="large"
-        >戳我 {{ text }}</el-button
-      ></a
-    >
-  </p>
-</template>
-
 <script setup lang="ts">
 import { ElButton } from 'element-plus'
 
@@ -16,6 +6,12 @@ const props = defineProps<{
   text?: string
 }>()
 </script>
+
+<template>
+  <p class="action">
+    <a :href="href"><ElButton type="success" round size="large">戳我 {{ text }}</ElButton></a>
+  </p>
+</template>
 
 <style scoped>
 .action {

@@ -1,4 +1,4 @@
-import type { FeedOptions, Author } from 'feed'
+import type { Author, FeedOptions } from 'feed'
 
 export type RSSOptions = Omit<FeedOptions, 'id'> & {
   id?: string

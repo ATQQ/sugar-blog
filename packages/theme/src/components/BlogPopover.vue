@@ -1,39 +1,7 @@
-<template>
-  <div class="theme-blog-popover" v-show="show" data-pagefind-ignore="all">
-    <div class="header">
-      <div class="title-wrapper">
-        <el-icon size="20px"><Flag /></el-icon>
-        <span class="title">{{ popoverProps?.title }}</span>
-      </div>
-      <el-icon @click="show = false" class="close-icon" size="20px"
-        ><CircleCloseFilled
-      /></el-icon>
-    </div>
-    <div class="body content" v-if="bodyContent.length">
-      <PopoverValue v-for="(v, idx) in bodyContent" :key="idx" :item="v">
-        {{ v.type !== 'image' ? v.content : '' }}
-      </PopoverValue>
-      <hr v-if="footerContent.length" />
-    </div>
-    <div class="footer content">
-      <PopoverValue v-for="(v, idx) in footerContent" :key="idx" :item="v">
-        {{ v.type !== 'image' ? v.content : '' }}
-      </PopoverValue>
-    </div>
-  </div>
-  <div
-    class="theme-blog-popover-close"
-    v-show="!show && (popoverProps?.reopen ?? true) && popoverProps?.title"
-    @click="show = true"
-  >
-    <el-icon size="20px"><Flag /></el-icon>
-  </div>
-</template>
-
 <script lang="ts" setup>
-import { ElIcon, ElButton } from 'element-plus'
-import { Flag, CircleCloseFilled } from '@element-plus/icons-vue'
-import { computed, onMounted, ref, h } from 'vue'
+import { ElButton, ElIcon } from 'element-plus'
+import { CircleCloseFilled, Flag } from '@element-plus/icons-vue'
+import { computed, h, onMounted, ref } from 'vue'
 import type { BlogPopover } from '@sugarat/theme'
 import { parseStringStyle } from '@vue/shared'
 import { useBlogConfig } from '../composables/config/blog'
@@ -77,10 +45,8 @@ onMounted(() => {
   }
 })
 
-const PopoverValue = (
-  props: { key: number; item: BlogPopover.Value },
-  { slots }: any
-) => {
+function PopoverValue(props: { key: number; item: BlogPopover.Value },
+  { slots }: any) {
   const { key, item } = props
   if (item.type === 'title') {
     return h(
@@ -129,6 +95,42 @@ const PopoverValue = (
   )
 }
 </script>
+
+<template>
+  <div v-show="show" class="theme-blog-popover" data-pagefind-ignore="all">
+    <div class="header">
+      <div class="title-wrapper">
+        <ElIcon size="20px">
+          <Flag />
+        </ElIcon>
+        <span class="title">{{ popoverProps?.title }}</span>
+      </div>
+      <ElIcon class="close-icon" size="20px" @click="show = false">
+        <CircleCloseFilled />
+      </ElIcon>
+    </div>
+    <div v-if="bodyContent.length" class="body content">
+      <PopoverValue v-for="(v, idx) in bodyContent" :key="idx" :item="v">
+        {{ v.type !== 'image' ? v.content : '' }}
+      </PopoverValue>
+      <hr v-if="footerContent.length">
+    </div>
+    <div class="footer content">
+      <PopoverValue v-for="(v, idx) in footerContent" :key="idx" :item="v">
+        {{ v.type !== 'image' ? v.content : '' }}
+      </PopoverValue>
+    </div>
+  </div>
+  <div
+    v-show="!show && (popoverProps?.reopen ?? true) && popoverProps?.title"
+    class="theme-blog-popover-close"
+    @click="show = true"
+  >
+    <ElIcon size="20px">
+      <Flag />
+    </ElIcon>
+  </div>
+</template>
 
 <style lang="scss" scoped>
 .theme-blog-popover {

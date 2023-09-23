@@ -11,7 +11,7 @@ export function formatDate(d: any, fmt = 'yyyy-MM-dd hh:mm:ss') {
     'm+': d.getMinutes(), // 分
     's+': d.getSeconds(), // 秒
     'q+': Math.floor((d.getMonth() + 3) / 3), // 季度
-    S: d.getMilliseconds() // 毫秒
+    'S': d.getMilliseconds() // 毫秒
   }
   if (/(y+)/.test(fmt)) {
     fmt = fmt.replace(
@@ -65,8 +65,8 @@ export function formatShowDate(date: Date | string) {
   return formatDate(new Date(date), 'yyyy-MM-dd')
 }
 
-const pattern =
-  /[a-zA-Z0-9_\u0392-\u03c9\u00c0-\u00ff\u0600-\u06ff\u0400-\u04ff]+|[\u4e00-\u9fff\u3400-\u4dbf\uf900-\ufaff\u3040-\u309f\uac00-\ud7af]+/g
+const pattern
+  = /[a-zA-Z0-9_\u0392-\u03C9\u00C0-\u00FF\u0600-\u06FF\u0400-\u04FF]+|[\u4E00-\u9FFF\u3400-\u4DBF\uF900-\uFAFF\u3040-\u309F\uAC00-\uD7AF]+/g
 
 // copy from https://github.com/youngjuning/vscode-juejin-wordcount/blob/main/count-word.ts
 export default function countWord(data: string) {
@@ -76,9 +76,10 @@ export default function countWord(data: string) {
     return 0
   }
   for (let i = 0; i < m.length; i += 1) {
-    if (m[i].charCodeAt(0) >= 0x4e00) {
+    if (m[i].charCodeAt(0) >= 0x4E00) {
       count += m[i].length
-    } else {
+    }
+    else {
       count += 1
     }
   }

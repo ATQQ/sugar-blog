@@ -1,14 +1,3 @@
-<template>
-  <div>
-    <h1>
-      <span class="name">{{ name }}</span>
-      <span class="motto" v-show="motto">{{ motto }}</span>
-    </h1>
-    <div class="inspiring-wrapper">
-      <h2 @click="changeSlogan" v-show="!!inspiring">{{ inspiring }}</h2>
-    </div>
-  </div>
-</template>
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useData } from 'vitepress'
@@ -28,7 +17,7 @@ const inspiringList = computed<string[]>(() => {
     ...new Set(
       [frontmatter.value.blog?.inspiring, home?.inspiring]
         .flat()
-        .filter((v) => !!v)
+        .filter(v => !!v)
     )
   ]
 })
@@ -41,7 +30,7 @@ watch(inspiringTimeout, () => {
   startTimer()
 })
 const timer = ref<any>(0)
-const startTimer = () => {
+function startTimer() {
   if (timer.value) {
     clearTimeout(timer.value)
   }
@@ -61,15 +50,17 @@ onUnmounted(() => {
   }
 })
 
-const changeSlogan = async () => {
+async function changeSlogan() {
   // 顺手启动定时器
   startTimer()
 
-  if (inspiringList.value.length < 1) return
+  if (inspiringList.value.length < 1)
+    return
 
   inspiringIndex.value = (inspiringIndex.value + 1) % inspiringList.value.length
   const newValue = inspiringList.value[inspiringIndex.value]
-  if (newValue === inspiring.value) return
+  if (newValue === inspiring.value)
+    return
 
   // 重新渲染数据，同时触发动画
   inspiring.value = ''
@@ -78,6 +69,21 @@ const changeSlogan = async () => {
   }, 100)
 }
 </script>
+
+<template>
+  <div>
+    <h1>
+      <span class="name">{{ name }}</span>
+      <span v-show="motto" class="motto">{{ motto }}</span>
+    </h1>
+    <div class="inspiring-wrapper">
+      <h2 v-show="!!inspiring" @click="changeSlogan">
+        {{ inspiring }}
+      </h2>
+    </div>
+  </div>
+</template>
+
 <style lang="scss" scoped>
 h1 {
   text-align: center;

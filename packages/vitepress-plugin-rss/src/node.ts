@@ -1,17 +1,18 @@
 /* eslint-disable no-console */
+import fs, { writeFileSync } from 'node:fs'
+import path from 'node:path'
+import process from 'node:process'
 import glob from 'fast-glob'
 import matter from 'gray-matter'
-import fs, { writeFileSync } from 'fs'
-import path from 'path'
-import { SiteConfig } from 'vitepress'
+import type { SiteConfig } from 'vitepress'
 import { Feed } from 'feed'
 import {
   formatDate,
-  normalizePath,
   getDefaultTitle,
-  getFileBirthTime
+  getFileBirthTime,
+  normalizePath
 } from './utils'
-import { PostInfo, RSSOptions } from './type'
+import type { PostInfo, RSSOptions } from './type'
 
 export async function getPostsData(
   srcDir: string,
@@ -42,26 +43,27 @@ export async function getPostsData(
 
     if (!frontmatter.date) {
       frontmatter.date = getFileBirthTime(file)
-    } else {
+    }
+    else {
       frontmatter.date = formatDate(new Date(frontmatter.date))
     }
 
     // 获取摘要信息
-    frontmatter.description =
+    frontmatter.description
       // eslint-disable-next-line no-await-in-loop
-      (await ops?.renderExpect?.(fileContent, { ...frontmatter })) ??
-      (frontmatter.description || excerpt)
+      = (await ops?.renderExpect?.(fileContent, { ...frontmatter }))
+      ?? (frontmatter.description || excerpt)
 
     // 获取封面图
-    frontmatter.cover =
-      frontmatter.cover ||
-      fileContent.match(/[!]\[.*?\]\((https:\/\/.+)\)/)?.[1] ||
-      ''
+    frontmatter.cover
+      = frontmatter.cover
+      || fileContent.match(/[!]\[.*?\]\((https:\/\/.+)\)/)?.[1]
+      || ''
 
     const html = mdRender.render(fileContent)
-    const url =
-      config.site.base +
-      normalizePath(path.relative(config.srcDir, file))
+    const url
+      = config.site.base
+      + normalizePath(path.relative(config.srcDir, file))
         .replace(/(^|\/)index\.md$/, '$1')
         .replace(/\.md$/, config.cleanUrls ? '' : '.html')
 
@@ -81,12 +83,13 @@ export async function getPostsData(
 }
 
 export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
-  if (!rssOptions) return
+  if (!rssOptions)
+    return
 
-  const srcDir =
-    config.srcDir.replace(config.root, '').replace(/^\//, '') ||
-    process.argv.slice(2)?.[1] ||
-    '.'
+  const srcDir
+    = config.srcDir.replace(config.root, '').replace(/^\//, '')
+    || process.argv.slice(2)?.[1]
+    || '.'
 
   const { baseUrl, filename, ignoreHome = true } = rssOptions
 
@@ -107,7 +110,8 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
       return false
     }
     // 跳过未发布的文章
-    if (p.frontmatter.publish === false) return false
+    if (p.frontmatter.publish === false)
+      return false
 
     return true
   })
@@ -124,7 +128,7 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
     const { title, description, date, frontmatter, url, html } = post
 
     const author = frontmatter.author || rssOptions.author?.name
-    const authorInfo = rssOptions.authors?.find((v) => v.name === author)
+    const authorInfo = rssOptions.authors?.find(v => v.name === author)
     // 最后的文章链接
     const link = `${baseUrl}${url}`
     feed.addItem({

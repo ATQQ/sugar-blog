@@ -23,8 +23,8 @@ export function RssPlugin(rssOptions: RSSOptions): any {
 
       // 添加RSS icon
       if (rssOptions.icon ?? true) {
-        const icon =
-          typeof rssOptions.icon === 'string'
+        const icon
+          = typeof rssOptions.icon === 'string'
             ? rssOptions.icon
             : svgIcon
         VPConfig.site.themeConfig.socialLinks = [
@@ -33,8 +33,8 @@ export function RssPlugin(rssOptions: RSSOptions): any {
               svg: icon
             },
             link:
-              rssOptions.url ||
-              `${rssOptions.baseUrl}${
+              rssOptions.url
+              || `${rssOptions.baseUrl}${
                 VPConfig.site.base + (rssOptions.filename || 'feed.rss')
               }`,
             ariaLabel: rssOptions?.ariaLabel || 'RSS'

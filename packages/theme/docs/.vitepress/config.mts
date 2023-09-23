@@ -1,4 +1,4 @@
-import path from 'path'
+import path from 'node:path'
 import { defineConfig } from '@sugarat/theme/node'
 import packageJSON from '../../package.json'
 import { blogTheme, extraHead } from './blog-theme'
@@ -68,8 +68,8 @@ export default defineConfig({
         link: 'https://github.com/ATQQ/sugar-blog/tree/master/packages/theme'
       },
       {
-        icon:'x',
-        link:'https://x.com/Mr_XiaoZou'
+        icon: 'x',
+        link: 'https://x.com/Mr_XiaoZou'
       }
     ],
     editLink: {

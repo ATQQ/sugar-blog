@@ -2,7 +2,21 @@
   "name": "@sugarat/theme",
   "version": "0.1.49",
   "description": "简约风的 Vitepress 博客主题，sugarat vitepress blog theme",
-  "main": "src/index.ts",
+  "author": "sugar",
+  "license": "MIT",
+  "homepage": "https://theme.sugarat.top",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ATQQ/sugar-blog.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ATQQ/sugar-blog/issues"
+  },
+  "keywords": [
+    "vitepress",
+    "theme",
+    "粥里有勺糖"
+  ],
   "exports": {
     "./node": {
       "types": "./node.d.ts",
@@ -11,27 +25,13 @@
     "./package.json": "./package.json",
     ".": "./src/index.ts"
   },
+  "main": "src/index.ts",
   "files": [
-    "src",
-    "types",
+    "node.d.ts",
     "node.js",
-    "node.d.ts"
+    "src",
+    "types"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ATQQ/sugar-blog.git"
-  },
-  "keywords": [
-    "vitepress",
-    "theme",
-    "粥里有勺糖"
-  ],
-  "author": "sugar",
-  "license": "MIT",
-  "homepage": "https://theme.sugarat.top",
-  "bugs": {
-    "url": "https://github.com/ATQQ/sugar-blog/issues"
-  },
   "scripts": {
     "dev": "npm run build:node && npm run dev:docs",
     "dev:docs": "vitepress dev docs",
@@ -58,13 +58,13 @@
   "devDependencies": {
     "@element-plus/icons-vue": "^2.1.0",
     "element-plus": "^2.3.4",
+    "pagefind": "1.0.3",
     "sass": "^1.56.1",
     "tsup": " ^6.5.0",
     "typescript": "^4.8.2",
     "vitepress": "1.0.0-rc.14",
     "vitepress-plugin-tabs": "^0.2.0",
-    "vue": "^3.3.4",
-    "pagefind": "1.0.3"
+    "vue": "^3.3.4"
   },
   "pnpm": {
     "peerDependencyRules": {

@@ -1,8 +1,10 @@
+/* eslint-disable ts/no-namespace */
 import type { ElButton } from 'element-plus'
 import type { DefaultTheme } from 'vitepress'
 import type { FeedOptions } from 'feed'
 
-export namespace BlogPopover {
+// TODO: 重构 lint 问题
+export declare namespace BlogPopover {
   export interface Title {
     type: 'title'
     content: string
@@ -174,32 +176,32 @@ export namespace Theme {
     title: string
     description: string
     time:
-      | string
-      | {
-          start: string
-          end?: string
-          lastupdate?: string
-        }
+    | string
+    | {
+      start: string
+      end?: string
+      lastupdate?: string
+    }
     status?: {
       text: string
       type?: 'tip' | 'warning' | 'danger'
     }
     url?: string
     github?:
-      | string
-      | {
-          owner: string
-          repo: string
-          branch?: string
-          path?: string
-        }
+    | string
+    | {
+      owner: string
+      repo: string
+      branch?: string
+      path?: string
+    }
     cover?:
-      | string
-      | string[]
-      | {
-          urls: string[]
-          layout?: 'swiper' | 'list'
-        }
+    | string
+    | string[]
+    | {
+      urls: string[]
+      layout?: 'swiper' | 'list'
+    }
     links?: {
       title: string
       url: string
@@ -211,16 +213,16 @@ export namespace Theme {
     | boolean
     | 'pagefind'
     | {
-        btnPlaceholder?: string
-        placeholder?: string
-        emptyText?: string
-        /**
-         * @example
-         * 'Total: {{searchResult}} search results.'
-         */
-        heading?: string
-        mode?: boolean | 'pagefind'
-      }
+      btnPlaceholder?: string
+      placeholder?: string
+      emptyText?: string
+      /**
+       * @example
+       * 'Total: {{searchResult}} search results.'
+       */
+      heading?: string
+      mode?: boolean | 'pagefind'
+    }
 
   export interface UserWorks {
     title: string
@@ -288,7 +290,7 @@ export namespace Theme {
     /**
      * 设置解析 frontmatter 里 date 的时区
      * @default 8 => 'UTC+8'
-     * */
+     */
     timeZone?: number
     /**
      * 启用RSS配置

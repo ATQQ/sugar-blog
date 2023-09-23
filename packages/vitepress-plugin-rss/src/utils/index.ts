@@ -1,6 +1,6 @@
-import os from 'os'
-import path from 'path'
-import { spawnSync } from 'child_process'
+import os from 'node:os'
+import path from 'node:path'
+import { spawnSync } from 'node:child_process'
 
 export function formatDate(d: any, fmt = 'yyyy-MM-dd hh:mm:ss') {
   if (!(d instanceof Date)) {
@@ -13,7 +13,7 @@ export function formatDate(d: any, fmt = 'yyyy-MM-dd hh:mm:ss') {
     'm+': d.getMinutes(), // 分
     's+': d.getSeconds(), // 秒
     'q+': Math.floor((d.getMonth() + 3) / 3), // 季度
-    S: d.getMilliseconds() // 毫秒
+    'S': d.getMilliseconds() // 毫秒
   }
   if (/(y+)/.test(fmt)) {
     fmt = fmt.replace(
@@ -44,8 +44,8 @@ export function normalizePath(id: string): string {
 }
 
 export function getDefaultTitle(content: string) {
-  const title =
-    clearMatterContent(content)
+  const title
+    = clearMatterContent(content)
       .split('\n')
       ?.find((str) => {
         return str.startsWith('# ')
@@ -67,7 +67,8 @@ export function clearMatterContent(content: string) {
     if (line.trim() === '---') {
       if (first___ === undefined) {
         first___ = pre.length
-      } else if (second___ === undefined) {
+      }
+      else if (second___ === undefined) {
         second___ = pre.length
       }
     }
@@ -98,7 +99,8 @@ export function getFileBirthTime(url: string) {
     if (infoStr) {
       date = new Date(infoStr)
     }
-  } catch (error) {
+  }
+  catch (error) {
     return formatDate(date)
   }
 
@@ -118,7 +120,7 @@ export function getTextSummary(text: string, count = 100) {
       // 除去加粗
       ?.replace(/\*\*(.*?)\*\*/g, '$1')
       ?.split('\n')
-      ?.filter((v) => !!v)
+      ?.filter(v => !!v)
       ?.slice(1)
       ?.join('\n')
       ?.replace(/>(.*)/, '')
