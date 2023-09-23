@@ -1,24 +1,20 @@
 {
   "name": "sugar-wiki-monorepo",
+  "type": "module",
   "version": "2.0.0",
   "private": true,
   "description": "个人博客&知识&文档站集",
-  "devDependencies": {
-    "@changesets/cli": "^2.26.1",
-    "@types/node": "^16.18.4",
-    "@typescript-eslint/eslint-plugin": "^4.33.0",
-    "@typescript-eslint/parser": "^4.33.0",
-    "eslint": "^7.32.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-todo-ddl": "^1.1.1",
-    "eslint-plugin-vue": "^7.20.0",
-    "prettier": "^2.8.1",
-    "typescript": "5.1.6",
-    "zx": "^5.1.0"
+  "author": "sugar",
+  "license": "MIT",
+  "homepage": "https://github.com/ATQQ/sugar-blog#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ATQQ/sugar-blog.git"
   },
+  "bugs": {
+    "url": "https://github.com/ATQQ/sugar-blog/issues"
+  },
+  "keywords": [],
   "scripts": {
     "dev": "pnpm --filter 'blogpress' dev",
     "dev:theme": "pnpm --filter '@sugarat/theme' dev",
@@ -30,7 +26,7 @@
     "build:create": "pnpm --filter '@sugarat/create-theme' build",
     "build:theme-only": "pnpm --filter '@sugarat/theme' build:node",
     "serve": "pnpm --filter 'blogpress' serve",
-    "lint": "eslint --ext .js,.ts,.vue --fix packages/**",
+    "lint": "eslint . --fix",
     "deploy": "zx deploy.mjs",
     "deploy:theme": "zx deploy-theme.mjs",
     "release:only": "changeset publish",
@@ -40,17 +36,21 @@
     "pcpe": "changeset pre enter beta",
     "pcpe:exit": "changeset pre enter exit"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ATQQ/sugar-blog.git"
+  "dependencies": {
+    "pagefind": "^1.0.3"
   },
-  "keywords": [],
-  "author": "sugar",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ATQQ/sugar-blog/issues"
+  "devDependencies": {
+    "@antfu/eslint-config": "1.0.0-beta.3",
+    "@changesets/cli": "^2.26.2",
+    "@types/node": "^20.6.3",
+    "eslint": "^8.50.0",
+    "eslint-plugin-todo-ddl": "^1.1.1",
+    "lint-staged": "^14.0.1",
+    "prettier": "^3.0.3",
+    "simple-git-hooks": "^2.9.0",
+    "typescript": "5.1.6",
+    "zx": "^5.3.0"
   },
-  "homepage": "https://github.com/ATQQ/sugar-blog#readme",
   "pnpm": {
     "peerDependencyRules": {
       "ignoreMissing": [
@@ -59,7 +59,10 @@
       ]
     }
   },
-  "dependencies": {
-    "pagefind": "^1.0.2"
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
   }
 }

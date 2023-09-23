@@ -1,5 +1,6 @@
-import { EnhanceAppContext } from 'vitepress'
+import type { EnhanceAppContext } from 'vitepress'
 import BlogTheme from '@sugarat/theme'
+
 // 全局组件
 import redirectBtn from './src/components/redirectBtn.vue'
 import Solve from './src/components/solve.vue'
