@@ -1,22 +1,25 @@
-<template>
-    <div class="join-group">
-        <p>🎉 欢迎加群交流
-            <a href="https://qm.qq.com/q/rqMyNvGyvS" target="_blank" rel="noopener noreferrer">主题QQ交流群：681489336</a>
-            ，微信交流群：加好友备注“主题”
-        </p>
-        <p v-if="showImg">
-            <img src="https://img.cdn.sugarat.top/mdImg/MTY5NTA0NTAzMjAzMQ==695045032031" alt="QQ交流群">
-        </p>
-    </div>
-</template>
 <script setup>
 const props = defineProps({
-    showImg: {
-        type: Boolean,
-        default: false
-    }
+  showImg: {
+    type: Boolean,
+    default: false
+  }
 })
 </script>
+
+<template>
+  <div class="join-group">
+    <p>
+      🎉 欢迎加群交流
+      <a href="https://qm.qq.com/q/rqMyNvGyvS" target="_blank" rel="noopener noreferrer">主题QQ交流群：681489336</a>
+      ，微信交流群：加好友备注“主题”
+    </p>
+    <p v-if="showImg">
+      <img src="https://img.cdn.sugarat.top/mdImg/MTY5NTA0NTAzMjAzMQ==695045032031" alt="QQ交流群">
+    </p>
+  </div>
+</template>
+
 <style scoped>
 .join-group {
     text-align: center;

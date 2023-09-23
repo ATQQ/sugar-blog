@@ -1,36 +1,5 @@
-<template>
-  <div class="recommend" :class="{ card: sidebarStyle === 'card' }"
-    v-if="_recommend !== false && (recommendList.length || emptyText)" data-pagefind-ignore="all">
-    <!-- 头部 -->
-    <div class="card-header">
-      <span class="title" v-if="title" v-html="title"></span>
-      <el-button v-if="showChangeBtn" size="small" type="primary" text @click="changePage">{{ nextText }}</el-button>
-    </div>
-    <!-- 文章列表 -->
-    <ol class="recommend-container" v-if="currentWikiData.length">
-      <li v-for="(v, idx) in currentWikiData" :key="v.route">
-        <!-- 序号 -->
-        <i class="num">{{ startIdx + idx + 1 }}</i>
-        <!-- 简介 -->
-        <div class="des">
-          <!-- title -->
-          <el-link type="info" class="title" :class="{
-            current: isCurrentDoc(v.route)
-          }" :href="v.route">{{ v.meta.title }}</el-link>
-          <!-- 描述信息 -->
-          <div class="suffix">
-            <!-- 日期 -->
-            <span class="tag">{{ formatShowDate(v.meta.date) }}</span>
-          </div>
-        </div>
-      </li>
-    </ol>
-    <div class="empty-text" v-else>{{ emptyText }}</div>
-  </div>
-</template>
-
 <script lang="ts" setup>
-import { ref, computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useRoute, withBase } from 'vitepress'
 import { ElButton, ElLink } from 'element-plus'
 import { formatShowDate } from '../utils/client'
@@ -63,43 +32,43 @@ const recommendList = computed(() => {
   const paths = decodeURIComponent(route.path).split('/')
 
   const origin = docs.value
-    .map((v) => ({ ...v, route: withBase(v.route) }))
+    .map(v => ({ ...v, route: withBase(v.route) }))
     // 过滤出公共路由前缀
     // 限制为同路由前缀
     .filter(
-      (v) =>
-        v.route.split('/').length === paths.length &&
-        v.route.startsWith(paths.slice(0, paths.length - 1).join('/'))
+      v =>
+        v.route.split('/').length === paths.length
+        && v.route.startsWith(paths.slice(0, paths.length - 1).join('/'))
     )
     // 过滤出带标题的
-    .filter((v) => !!v.meta.title)
+    .filter(v => !!v.meta.title)
     // 过滤掉自己
     .filter(
-      (v) =>
-        (recommend.value?.showSelf ?? true) ||
-        v.route !== decodeURIComponent(route.path).replace(/.html$/, '')
+      v =>
+        (recommend.value?.showSelf ?? true)
+        || v.route !== decodeURIComponent(route.path).replace(/.html$/, '')
     )
     // 过滤掉不需要展示的
-    .filter((v) => v.meta.recommend !== false)
-    .filter((v) => recommend.value?.filter?.(v) ?? true)
+    .filter(v => v.meta.recommend !== false)
+    .filter(v => recommend.value?.filter?.(v) ?? true)
 
-  const topList = origin.filter((v) => v.meta?.recommend)
+  const topList = origin.filter(v => v.meta?.recommend)
   topList.sort((a, b) => Number(a.meta.recommend) - Number(b.meta.recommend))
 
-  const normalList = origin.filter((v) => !v.meta?.recommend)
+  const normalList = origin.filter(v => !v.meta?.recommend)
   normalList.sort((a, b) => +new Date(b.meta.date) - +new Date(a.meta.date))
 
   return topList.concat(normalList)
 })
 
-const isCurrentDoc = (value: string) => {
+function isCurrentDoc(value: string) {
   return value === decodeURIComponent(route.path).replace(/.html$/, '')
 }
 
 const currentPage = ref(1)
-const changePage = () => {
-  const newIdx =
-    currentPage.value % Math.ceil(recommendList.value.length / pageSize.value)
+function changePage() {
+  const newIdx
+    = currentPage.value % Math.ceil(recommendList.value.length / pageSize.value)
   currentPage.value = newIdx + 1
 }
 // 当前页开始的序号
@@ -115,6 +84,47 @@ const showChangeBtn = computed(() => {
   return recommendList.value.length > pageSize.value
 })
 </script>
+
+<template>
+  <div
+    v-if="_recommend !== false && (recommendList.length || emptyText)" class="recommend"
+    :class="{ card: sidebarStyle === 'card' }" data-pagefind-ignore="all"
+  >
+    <!-- 头部 -->
+    <div class="card-header">
+      <span v-if="title" class="title" v-html="title" />
+      <ElButton v-if="showChangeBtn" size="small" type="primary" text @click="changePage">
+        {{ nextText }}
+      </ElButton>
+    </div>
+    <!-- 文章列表 -->
+    <ol v-if="currentWikiData.length" class="recommend-container">
+      <li v-for="(v, idx) in currentWikiData" :key="v.route">
+        <!-- 序号 -->
+        <i class="num">{{ startIdx + idx + 1 }}</i>
+        <!-- 简介 -->
+        <div class="des">
+          <!-- title -->
+          <ElLink
+            type="info" class="title" :class="{
+              current: isCurrentDoc(v.route),
+            }" :href="v.route"
+          >
+            {{ v.meta.title }}
+          </ElLink>
+          <!-- 描述信息 -->
+          <div class="suffix">
+            <!-- 日期 -->
+            <span class="tag">{{ formatShowDate(v.meta.date) }}</span>
+          </div>
+        </div>
+      </li>
+    </ol>
+    <div v-else class="empty-text">
+      {{ emptyText }}
+    </div>
+  </div>
+</template>
 
 <style lang="scss" scoped>
 .card {

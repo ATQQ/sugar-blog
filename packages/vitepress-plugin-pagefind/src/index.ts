@@ -1,12 +1,13 @@
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import process from 'node:process'
 import type { PluginOption } from 'vite'
 import type { SiteConfig } from 'vitepress'
 import { stringify } from 'javascript-stringify'
-import path from 'path'
-import { fileURLToPath } from 'url'
-import { pluginSiteConfig, getPagesData } from './node'
-import type { SearchConfig, PagefindOption } from './type'
+import { getPagesData, pluginSiteConfig } from './node'
+import type { PagefindOption, SearchConfig } from './type'
 
-const isESM = () => {
+function isESM() {
   return typeof __filename === 'undefined' || typeof __dirname === 'undefined'
 }
 function getDirname() {
@@ -58,8 +59,8 @@ export function pagefindPlugin(
       const selfTransformHead = vitepressConfig.transformHead
       vitepressConfig.transformHead = async (ctx) => {
         const selfHead = (await Promise.resolve(selfTransformHead?.(ctx))) || []
-        const pluginHead =
-          (await Promise.resolve(pluginSiteConfig?.transformHead?.(ctx))) || []
+        const pluginHead
+          = (await Promise.resolve(pluginSiteConfig?.transformHead?.(ctx))) || []
         return selfHead.concat(pluginHead)
       }
     },
@@ -70,13 +71,14 @@ export function pagefindPlugin(
     },
     // 文章数据
     load(this, id) {
-      if (id !== resolvedVirtualModuleId) return
-      const srcDir =
-        resolveConfig.vitepress.srcDir
+      if (id !== resolvedVirtualModuleId)
+        return
+      const srcDir
+        = resolveConfig.vitepress.srcDir
           .replace(resolveConfig.vitepress.root, '')
-          .replace(/^\//, '') ||
-        process.argv.slice(2)?.[1] ||
-        '.'
+          .replace(/^\//, '')
+        || process.argv.slice(2)?.[1]
+        || '.'
       const docsData = getPagesData(
         srcDir,
         resolveConfig.vitepress,

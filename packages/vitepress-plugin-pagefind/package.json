@@ -2,12 +2,21 @@
   "name": "vitepress-plugin-pagefind",
   "version": "0.2.9",
   "description": "vitepress plugin, Offline full-text search based on pagefind implementation.",
-  "module": "dist/index.mjs",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist",
-    "src"
+  "author": "sugar",
+  "license": "MIT",
+  "homepage": "https://github.com/ATQQ/sugar-blog/tree/master/packages/vitepress-plugin-pagefind",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ATQQ/sugar-blog.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ATQQ/sugar-blog/issues"
+  },
+  "keywords": [
+    "vitepress",
+    "search",
+    "offline",
+    "pagefind"
   ],
   "exports": {
     ".": {
@@ -16,31 +25,16 @@
     },
     "./Search.vue": "./src/Search.vue"
   },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
   "scripts": {
     "dev": "npx tsup src/index.ts --dts --watch --format esm,cjs",
     "build": "npx tsup src/index.ts --dts --format esm,cjs"
-  },
-  "keywords": [
-    "vitepress",
-    "search",
-    "offline",
-    "pagefind"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ATQQ/sugar-blog.git"
-  },
-  "author": "sugar",
-  "license": "MIT",
-  "homepage": "https://github.com/ATQQ/sugar-blog/tree/master/packages/vitepress-plugin-pagefind",
-  "bugs": {
-    "url": "https://github.com/ATQQ/sugar-blog/issues"
-  },
-  "devDependencies": {
-    "@types/node": "^16.18.4",
-    "tsup": " ^6.5.0",
-    "vite": "^4.3.3",
-    "vitepress": "1.0.0-alpha.75"
   },
   "dependencies": {
     "@vue/shared": "^3.2.45",
@@ -51,5 +45,11 @@
     "javascript-stringify": "^2.1.0",
     "vue": "^3",
     "vue-command-palette": "^0.1.4"
+  },
+  "devDependencies": {
+    "@types/node": "^16.18.4",
+    "tsup": " ^6.5.0",
+    "vite": "^4.3.3",
+    "vitepress": "1.0.0-alpha.75"
   }
 }

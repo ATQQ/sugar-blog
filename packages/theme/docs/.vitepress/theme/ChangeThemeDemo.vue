@@ -1,6 +1,6 @@
 <script setup>
 import { useColorMode } from '@vueuse/core'
-import { watchEffect, ref } from 'vue'
+import { ref, watchEffect } from 'vue'
 
 const mode = useColorMode({
   attribute: 'theme',
@@ -17,7 +17,7 @@ const themeList = [
   'el-red'
 ]
 const current = ref(themeList[0])
-const nextThemeColor = () => {
+function nextThemeColor() {
   const index = themeList.indexOf(current.value)
   const nextIndex = index + 1 >= themeList.length ? 0 : index + 1
   current.value = themeList[nextIndex]
@@ -25,6 +25,7 @@ const nextThemeColor = () => {
 
 watchEffect(() => (mode.value = current.value))
 </script>
+
 <template>
   <span
     style="
@@ -35,6 +36,5 @@ watchEffect(() => (mode.value = current.value))
       padding: 10px 20px;
     "
     @click="nextThemeColor()"
-    >点我切换一个主题色试试 ({{ current }})</span
-  >
+  >点我切换一个主题色试试 ({{ current }})</span>
 </template>

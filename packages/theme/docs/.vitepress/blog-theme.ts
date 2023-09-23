@@ -1,3 +1,4 @@
+import process from 'node:process'
 import type { Theme } from '@sugarat/theme'
 import { getThemeConfig } from '@sugarat/theme/node'
 
@@ -204,8 +205,8 @@ export const blogTheme = getThemeConfig({
   works: workConfig
 })
 
-export const extraHead: any =
-  process.env.NODE_ENV === 'production'
+export const extraHead: any
+  = process.env.NODE_ENV === 'production'
     ? [
         [
           'script',

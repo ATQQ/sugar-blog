@@ -1,14 +1,6 @@
-<template>
-  <p class="solve">
-    <i v-if="ok" class="ok">✅</i>
-    <i v-else class="wait">❌</i>
-    <slot></slot>
-  </p>
-</template>
-
 <script>
 export default {
-  name: 'solve',
+  name: 'Solve',
   props: {
     ok: {
       default: false,
@@ -17,6 +9,14 @@ export default {
   }
 }
 </script>
+
+<template>
+  <p class="solve">
+    <i v-if="ok" class="ok">✅</i>
+    <i v-else class="wait">❌</i>
+    <slot />
+  </p>
+</template>
 
 <style scoped lang="scss">
 .solve {

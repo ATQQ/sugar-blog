@@ -1,40 +1,11 @@
-<template>
-  <div class="card recommend" v-if="recommendList.length || empty" data-pagefind-ignore="all">
-    <!-- 头部 -->
-    <div class="card-header">
-      <span class="title" v-html="title"></span>
-      <el-button v-if="showChangeBtn" size="small" type="primary" text @click="changePage">{{ nextText }}</el-button>
-    </div>
-    <!-- 文章列表 -->
-    <ol class="recommend-container" v-if="currentWikiData.length">
-      <li v-for="(v, idx) in currentWikiData" :key="v.route">
-        <!-- 序号 -->
-        <i class="num">{{ idx + 1 }}</i>
-        <!-- 简介 -->
-        <div class="des">
-          <!-- title -->
-          <el-link type="info" class="title" :href="withBase(v.route)">{{
-            v.meta.title
-          }}</el-link>
-          <!-- 描述信息 -->
-          <div class="suffix">
-            <!-- 日期 -->
-            <span class="tag">{{ formatShowDate(v.meta.date) }}</span>
-          </div>
-        </div>
-      </li>
-    </ol>
-    <div class="empty-text" v-else>{{ empty }}</div>
-  </div>
-</template>
-
 <script lang="ts" setup>
-import { ref, computed } from 'vue'
+import { computed, ref } from 'vue'
 import { ElButton, ElLink } from 'element-plus'
 import { withBase } from 'vitepress'
 import { useArticles, useBlogConfig } from '../composables/config/blog'
 import { formatShowDate } from '../utils/client'
 import { fireSVG } from '../constants/svg'
+
 const { hotArticle } = useBlogConfig()
 const title = computed(() => hotArticle?.title || (`<span class="svg-icon">${fireSVG}</span>` + ' 精选文章'))
 const nextText = computed(() => hotArticle?.nextText || '换一组')
@@ -44,15 +15,15 @@ const empty = computed(() => hotArticle?.empty ?? '暂无精选内容')
 const docs = useArticles()
 
 const recommendList = computed(() => {
-  const data = docs.value.filter((v) => v.meta.sticky)
+  const data = docs.value.filter(v => v.meta.sticky)
   data.sort((a, b) => b.meta.sticky! - a.meta.sticky!)
   return [...data]
 })
 
 const currentPage = ref(1)
-const changePage = () => {
-  const newIdx =
-    currentPage.value % Math.ceil(recommendList.value.length / pageSize.value)
+function changePage() {
+  const newIdx
+    = currentPage.value % Math.ceil(recommendList.value.length / pageSize.value)
   currentPage.value = newIdx + 1
 }
 
@@ -66,6 +37,42 @@ const showChangeBtn = computed(() => {
   return recommendList.value.length > pageSize.value
 })
 </script>
+
+<template>
+  <div v-if="recommendList.length || empty" class="card recommend" data-pagefind-ignore="all">
+    <!-- 头部 -->
+    <div class="card-header">
+      <span class="title" v-html="title" />
+      <ElButton v-if="showChangeBtn" size="small" type="primary" text @click="changePage">
+        {{ nextText }}
+      </ElButton>
+    </div>
+    <!-- 文章列表 -->
+    <ol v-if="currentWikiData.length" class="recommend-container">
+      <li v-for="(v, idx) in currentWikiData" :key="v.route">
+        <!-- 序号 -->
+        <i class="num">{{ idx + 1 }}</i>
+        <!-- 简介 -->
+        <div class="des">
+          <!-- title -->
+          <ElLink type="info" class="title" :href="withBase(v.route)">
+            {{
+              v.meta.title
+            }}
+          </ElLink>
+          <!-- 描述信息 -->
+          <div class="suffix">
+            <!-- 日期 -->
+            <span class="tag">{{ formatShowDate(v.meta.date) }}</span>
+          </div>
+        </div>
+      </li>
+    </ol>
+    <div v-else class="empty-text">
+      {{ empty }}
+    </div>
+  </div>
+</template>
 
 <style lang="scss" scoped>
 .card {

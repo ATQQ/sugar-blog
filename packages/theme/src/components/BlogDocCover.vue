@@ -1,7 +1,3 @@
-<template>
-  <img class="blog-doc-cover" v-if="cover && !hiddenCover" :src="cover" />
-</template>
-
 <script lang="ts" setup>
 import { useData } from 'vitepress'
 import { computed } from 'vue'
@@ -14,6 +10,10 @@ const hiddenCover = computed(
   () => frontmatter.value?.hiddenCover ?? article?.hiddenCover ?? false
 )
 </script>
+
+<template>
+  <img v-if="cover && !hiddenCover" class="blog-doc-cover" :src="cover">
+</template>
 
 <style lang="scss" scoped>
 img.blog-doc-cover.blog-doc-cover.blog-doc-cover {

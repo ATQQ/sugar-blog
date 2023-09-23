@@ -1,22 +1,3 @@
-<template>
-  <div class="card overview-data">
-    <div class="overview-item">
-      <span class="count">{{ notHiddenArticles.length }}</span>
-      <span class="label">博客文章</span>
-    </div>
-    <div class="split"></div>
-    <div class="overview-item">
-      <span class="count">+{{ currentMonth?.length }}</span>
-      <span class="label">本月更新</span>
-    </div>
-    <div class="split"></div>
-    <div class="overview-item">
-      <span class="count">+{{ currentWeek?.length }}</span>
-      <span class="label">本周更新</span>
-    </div>
-  </div>
-</template>
-
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { isCurrentWeek } from '../utils/client'
@@ -24,7 +5,7 @@ import { useArticles } from '../composables/config/blog'
 
 const docs = useArticles()
 const notHiddenArticles = computed(() => {
-  return docs.value.filter((v) => v.meta?.publish !== false)
+  return docs.value.filter(v => v.meta?.publish !== false)
 })
 const nowMonth = new Date().getMonth()
 const nowYear = new Date().getFullYear()
@@ -42,6 +23,25 @@ const currentWeek = computed(() => {
   })
 })
 </script>
+
+<template>
+  <div class="card overview-data">
+    <div class="overview-item">
+      <span class="count">{{ notHiddenArticles.length }}</span>
+      <span class="label">博客文章</span>
+    </div>
+    <div class="split" />
+    <div class="overview-item">
+      <span class="count">+{{ currentMonth?.length }}</span>
+      <span class="label">本月更新</span>
+    </div>
+    <div class="split" />
+    <div class="overview-item">
+      <span class="count">+{{ currentWeek?.length }}</span>
+      <span class="label">本周更新</span>
+    </div>
+  </div>
+</template>
 
 <style lang="scss" scoped>
 .card {

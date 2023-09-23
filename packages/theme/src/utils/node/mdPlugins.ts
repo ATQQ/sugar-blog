@@ -1,8 +1,8 @@
 /* eslint-disable global-require */
 import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
 import type { UserConfig } from 'vitepress'
-import { aliasObjectToArray } from './index'
 import type { Theme } from '../../composables/config/index'
+import { aliasObjectToArray } from './index'
 
 export function getMarkdownPlugins(cfg?: Partial<Theme.BlogConfig>) {
   const markdownPlugin: any[] = []
@@ -38,33 +38,39 @@ export function registerMdPlugins(vpCfg: any, plugins: any[]) {
  * 流程图支持，配置mermaid
  */
 export function assignMermaid(config: any) {
-  if (!config?.mermaid) return
+  if (!config?.mermaid)
+    return
 
-  if (!config.vite) config.vite = {}
-  if (!config.vite.plugins) config.vite.plugins = []
+  if (!config.vite)
+    config.vite = {}
+  if (!config.vite.plugins)
+    config.vite.plugins = []
   const { MermaidPlugin } = require('vitepress-plugin-mermaid')
   config.vite.plugins.push(MermaidPlugin(config.mermaid))
-  if (!config.vite.resolve) config.vite.resolve = {}
-  if (!config.vite.resolve.alias) config.vite.resolve.alias = {}
+  if (!config.vite.resolve)
+    config.vite.resolve = {}
+  if (!config.vite.resolve.alias)
+    config.vite.resolve.alias = {}
 
   config.vite.resolve.alias = [
     ...aliasObjectToArray({
       ...config.vite.resolve.alias,
       'cytoscape/dist/cytoscape.umd.js': 'cytoscape/dist/cytoscape.esm.js',
-      mermaid: 'mermaid/dist/mermaid.esm.mjs'
+      'mermaid': 'mermaid/dist/mermaid.esm.mjs'
     }),
     { find: /^dayjs\/(.*).js/, replacement: 'dayjs/esm/$1' }
   ]
 }
 
 export function wrapperCfgWithMermaid(config: UserConfig<Theme.Config>): any {
-  // @ts-ignore
-  const extendThemeConfig = (config.extends?.themeConfig?.blog ||
-    {}) as Theme.BlogConfig
+  // eslint-disable-next-line ts/ban-ts-comment
+  // @ts-expect-error
+  const extendThemeConfig = (config.extends?.themeConfig?.blog
+    || {}) as Theme.BlogConfig
 
   // 开关支持Mermaid
-  const resultConfig =
-    extendThemeConfig.mermaid === false
+  const resultConfig
+    = extendThemeConfig.mermaid === false
       ? config
       : {
           ...config,
@@ -77,17 +83,18 @@ export function wrapperCfgWithMermaid(config: UserConfig<Theme.Config>): any {
 
 export function supportRunExtendsPlugin(config: UserConfig<Theme.Config>) {
   // 处理markdown插件
-  if (!config.markdown) config.markdown = {}
+  if (!config.markdown)
+    config.markdown = {}
   // 支持运行继承的markdown插件
-  // @ts-ignore
+  // @ts-expect-error
   if (config.extends?.markdown?.config) {
-    const markdownExtendsConfigOriginal =
-      // @ts-ignore
-      config.extends?.markdown?.config
+    const markdownExtendsConfigOriginal
+      // @ts-expect-error
+      = config.extends?.markdown?.config
     const selfMarkdownConfig = config.markdown?.config
 
     config.markdown.config = (...rest: any[]) => {
-      // @ts-ignore
+      // @ts-expect-error
       selfMarkdownConfig?.(...rest)
       markdownExtendsConfigOriginal?.(...rest)
     }
@@ -97,10 +104,10 @@ export function supportRunExtendsPlugin(config: UserConfig<Theme.Config>) {
   const inlineConfig = config.extends as UserConfig<Theme.Config>
 
   if (
-    inlineConfig.themeConfig?.blog?.RSS &&
-    inlineConfig.themeConfig?.blog?.RSS?.icon !== false &&
-    inlineConfig.themeConfig?.socialLinks?.length &&
-    !inlineConfig.themeConfig?.socialLinks?.[0].link
+    inlineConfig.themeConfig?.blog?.RSS
+    && inlineConfig.themeConfig?.blog?.RSS?.icon !== false
+    && inlineConfig.themeConfig?.socialLinks?.length
+    && !inlineConfig.themeConfig?.socialLinks?.[0].link
   ) {
     const { RSS } = inlineConfig.themeConfig?.blog
     inlineConfig.themeConfig.socialLinks[0].link = `${RSS.baseUrl}${

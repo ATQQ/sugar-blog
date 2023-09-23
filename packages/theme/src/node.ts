@@ -5,8 +5,8 @@ import type { Theme } from './composables/config/index'
 import {
   getMarkdownPlugins,
   registerMdPlugins,
-  wrapperCfgWithMermaid,
-  supportRunExtendsPlugin
+  supportRunExtendsPlugin,
+  wrapperCfgWithMermaid
 } from './utils/node/mdPlugins'
 import { getArticles, patchVPThemeConfig } from './utils/node/theme'
 import { getVitePlugins, registerVitePlugins } from './utils/node/vitePlugins'

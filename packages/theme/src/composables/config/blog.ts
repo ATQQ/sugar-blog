@@ -1,15 +1,17 @@
 import { useData, useRoute, withBase } from 'vitepress'
-import {
+import type {
   Component,
+  InjectionKey,
+  Ref
+} from 'vue'
+import {
   computed,
   defineComponent,
   h,
   inject,
-  InjectionKey,
-  provide,
-  Ref,
   onMounted,
   onUnmounted,
+  provide,
   reactive,
   ref
 } from 'vue'
@@ -119,7 +121,7 @@ export function useCurrentArticle() {
         ...[`${currentPath}index`, `${decodeURIComponent(currentPath)}index`]
       )
     }
-    return docs.value?.find((v) => okPaths.includes(withBase(v.route)))
+    return docs.value?.find(v => okPaths.includes(withBase(v.route)))
   })
 
   return currentArticle

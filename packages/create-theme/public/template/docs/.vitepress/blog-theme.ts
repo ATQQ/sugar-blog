@@ -1,5 +1,5 @@
 // 主题独有配置
-import { getThemeConfig } from '@sugarat/theme/node';
+import { getThemeConfig } from '@sugarat/theme/node'
 
 // 开启RSS支持（RSS配置）
 // import type { Theme } from '@sugarat/theme'
@@ -15,12 +15,11 @@ import { getThemeConfig } from '@sugarat/theme/node';
 //   favicon: 'https://sugarat.top/favicon.ico',
 // }
 
-
 // 所有配置项，详见文档: https://theme.sugarat.top/
 const blogTheme = getThemeConfig({
   // 开启RSS支持
   // RSS,
-  
+
   // 默认开启pagefind离线的全文搜索支持（如使用其它的可以设置为false）
   // 如果npx pagefind 时间过长，可以手动将其安装为项目依赖 pnpm add pagefind
   // search: false,
@@ -80,6 +79,6 @@ const blogTheme = getThemeConfig({
     ],
     duration: 0,
   },
-});
+})
 
-export { blogTheme };
+export { blogTheme }

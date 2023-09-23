@@ -1,6 +1,6 @@
 /* eslint-disable global-require */
 /* eslint-disable prefer-rest-params */
-import { spawn, spawnSync } from 'child_process'
+import { spawn, spawnSync } from 'node:child_process'
 import { formatDate } from '../client'
 
 export function clearMatterContent(content: string) {
@@ -15,7 +15,8 @@ export function clearMatterContent(content: string) {
     if (line.trim() === '---') {
       if (first___ === undefined) {
         first___ = pre.length
-      } else if (second___ === undefined) {
+      }
+      else if (second___ === undefined) {
         second___ = pre.length
       }
     }
@@ -30,8 +31,8 @@ export function clearMatterContent(content: string) {
   )
 }
 export function getDefaultTitle(content: string) {
-  const title =
-    clearMatterContent(content)
+  const title
+    = clearMatterContent(content)
       .split('\n')
       ?.find((str) => {
         return str.startsWith('# ')
@@ -53,7 +54,8 @@ export function getFileBirthTime(url: string) {
     if (infoStr) {
       date = new Date(infoStr)
     }
-  } catch (error) {
+  }
+  catch (error) {
     return formatDate(date)
   }
 
@@ -87,7 +89,7 @@ export function getTextSummary(text: string, count = 100) {
       // 除去加粗
       ?.replace(/\*\*(.*?)\*\*/g, '$1')
       ?.split('\n')
-      ?.filter((v) => !!v)
+      ?.filter(v => !!v)
       ?.slice(1)
       ?.join('\n')
       ?.replace(/>(.*)/, '')

@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
+import path from 'node:path'
+import process from 'process'
 import fs from 'fs-extra'
-import path from 'path'
 
 function createThemeProject(destination) {
   const templatePath = path.join(__dirname, 'template')
@@ -18,7 +19,8 @@ function createThemeProject(destination) {
     )
     if (err) {
       console.error('An error occurred while copying template files:', err)
-    } else {
+    }
+    else {
       console.log('🎉 🎉 created successfully!')
       console.log()
 
@@ -28,7 +30,7 @@ function createThemeProject(destination) {
 
       const msg = `Done. Now run:
 
-  ①  cd ${path.parse(projectName).name}
+  ①  cd ${path.parse(destination).name}
   ②  pnpm install
   ③  pnpm run dev`
 
