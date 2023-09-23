@@ -1,5 +1,13 @@
 # @sugarat/theme
 
+## 0.1.50
+
+### Patch Changes
+
+- fix: setActiveLink [#138](https://github.com/ATQQ/sugar-blog/issues/138)
+- Updated dependencies
+  - vitepress-plugin-pagefind@0.2.10
+
 ## 0.1.49
 
 ### Patch Changes
