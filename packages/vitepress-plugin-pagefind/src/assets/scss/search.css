@@ -195,11 +195,7 @@ html.dark .hljs-deletion {
 code.hljs {
   border-radius: 16px;
 }
-html,
-body,
-#app {
-  height: 100%;
-}
+
 body {
   margin: 0;
   padding: 0;

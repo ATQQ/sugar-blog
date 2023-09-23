@@ -1,6 +1,6 @@
 {
   "name": "@sugarat/theme",
-  "version": "0.1.49",
+  "version": "0.1.50",
   "description": "简约风的 Vitepress 博客主题，sugarat vitepress blog theme",
   "author": "sugar",
   "license": "MIT",
@@ -52,7 +52,7 @@
     "highlight.js": "^11.7.0",
     "mermaid": "^10.2.4",
     "vitepress-plugin-mermaid": "^2.0.13",
-    "vitepress-plugin-pagefind": "0.2.9",
+    "vitepress-plugin-pagefind": "0.2.10",
     "vue-command-palette": "^0.1.4"
   },
   "devDependencies": {

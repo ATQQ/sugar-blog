@@ -18,6 +18,14 @@ pnpm up @sugarat/theme
 pnpm add vitepress@latest
 ```
 
+## 0.1.50 (2023/09/23)
+
+### Patch Changes
+
+- fix: setActiveLink [#138](https://github.com/ATQQ/sugar-blog/issues/138)
+- Updated dependencies
+  - vitepress-plugin-pagefind@0.2.10
+
 ## 0.1.49 (2023/09/20)
 
 ### Patch Changes
