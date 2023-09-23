@@ -175,14 +175,18 @@ export const blogTheme = getThemeConfig({
   popover: {
     title: '公告',
     body: [
-      {
-        type: 'text',
-        content: 'QQ交流群：681489336 🎉🎉'
-      },
       { type: 'text', content: '👇公众号👇---👇 微信 👇' },
       {
         type: 'image',
         src: 'https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210'
+      },
+      {
+        type: 'text',
+        content: 'QQ交流群：681489336 🎉🎉',
+      },
+      {
+        type: 'text',
+        content: '微信交流群：加好友备注“主题”'
       },
       {
         type: 'text',

@@ -66,6 +66,10 @@ export default defineConfig({
       {
         icon: 'github',
         link: 'https://github.com/ATQQ/sugar-blog/tree/master/packages/theme'
+      },
+      {
+        icon:'x',
+        link:'https://x.com/Mr_XiaoZou'
       }
     ],
     editLink: {
