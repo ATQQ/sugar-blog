@@ -927,3 +927,114 @@ type ThemeColor = 'vp-default' | 'vp-green' | 'vp-yellow' | 'vp-red' | 'el-blue'
 | ![](https://img.cdn.sugarat.top/mdImg/MTY5NDM1NTU5Nzg4MA==694355597880) | ![](https://img.cdn.sugarat.top/mdImg/MTY5NDM1NTYxOTE4OQ==694355619189) | ![](https://img.cdn.sugarat.top/mdImg/MTY5NDM1NTY5MTk0Nw==694355691947) |
 
 <ChangeThemeDemo />
+
+## footer
+* Type: `Footer`
+
+设置首页页脚的内容（可用于设置版权，备案信息，自定义内容等）
+
+![](https://img.cdn.sugarat.top/mdImg/MTY5NTU0NTUxMTUxNA==695545511514)
+
+::: code-group
+
+```ts [example]
+const blogTheme = getThemeConfig({
+  footer: {
+    version: true,
+    copyright: 'MIT License | 粥里有勺糖'
+  }
+})
+```
+
+```ts [type]
+interface Footer {
+  /**
+   * 自定义补充信息
+   */
+  message?: string
+  /**
+   * 是否展示主题版本信息
+   */
+  version?: boolean
+  /**
+   * copyright
+   */
+  copyright?: string | {
+    message: string
+    link: string
+    icon?: boolean | string
+  }
+  /**
+   * ICP 备案信息
+   */
+  icpRecord?: {
+    name: string
+    link: string
+    icon?: boolean | string
+  }
+  /**
+   * 公安备案信息
+   */
+  securityRecord?: {
+    name: string
+    link: string
+    icon?: boolean | string
+  }
+}
+```
+:::
+
+下面是一个较完整例子
+
+![](https://img.cdn.sugarat.top/mdImg/MTY5NTU0NTkwMTk1OA==695545901958)
+
+```ts
+const blogTheme = getThemeConfig({
+  footer: {
+    message: '下面 的内容和图标都是可以修改的噢（当然本条内容也是可以隐藏的）',
+    copyright: 'MIT License | 粥里有勺糖',
+    icpRecord: {
+      name: '蜀ICP备19011724号',
+      link: 'https://beian.miit.gov.cn/'
+    },
+    securityRecord: {
+      name: '公网安备xxxxx',
+      link: 'https://www.beian.gov.cn/portal/index.do'
+    },
+  }
+})
+```
+
+不想显示主题版本也可主动关闭(不过还是希望大家展示 😄)
+```ts
+const blogTheme = getThemeConfig({
+  footer: {
+    version: false
+  }
+})
+```
+
+自定义 icon 也是可以的
+
+![](https://img.cdn.sugarat.top/mdImg/MTY5NTU0NjQwNDE2MQ==695546404161)
+
+```ts
+const blogTheme = getThemeConfig({
+  footer: {
+    copyright: {
+      message: '自定义SVG图标',
+      icon: `<svg width="128" height="128" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none">
+          <path fill="#FF822D" d="M13.638 3.202a2.936 2.936 0 0 1 4.724 0a2.936 2.936 0 0 0 3.25 1.055a2.936 2.936 0 0 1 3.822 2.778a2.936 2.936 0 0 0 2.008 2.763a2.936 2.936 0 0 1 1.46 4.494a2.936 2.936 0 0 0 0 3.416a2.936 2.936 0 0 1-1.46 4.494a2.936 2.936 0 0 0-2.008 2.763a2.936 2.936 0 0 1-3.823 2.778a2.936 2.936 0 0 0-3.249 1.055a2.936 2.936 0 0 1-4.724 0a2.936 2.936 0 0 0-3.25-1.055a2.936 2.936 0 0 1-3.822-2.778a2.936 2.936 0 0 0-2.008-2.763a2.936 2.936 0 0 1-1.46-4.494a2.936 2.936 0 0 0 0-3.416a2.936 2.936 0 0 1 1.46-4.494a2.936 2.936 0 0 0 2.008-2.763a2.936 2.936 0 0 1 3.823-2.778a2.936 2.936 0 0 0 3.249-1.055Z"/>
+          <path fill="#FCD53F" d="M25.062 21.232c-2.89 5.005-9.29 6.72-14.294 3.83c-5.005-2.89-6.72-9.29-3.83-14.294c2.89-5.005 9.29-6.72 14.294-3.83c5.005 2.89 6.72 9.29 3.83 14.294Z"/>
+      </g>
+  </svg>`
+    },
+    icpRecord: {
+      name: '自定义 img 图标',
+      icon: '<img src="/logo.png"/>',
+      link: 'https://beian.miit.gov.cn/'
+    },
+  }
+})
+```

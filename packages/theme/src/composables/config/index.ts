@@ -353,7 +353,7 @@ export namespace Theme {
      */
     copyright?: string | {
       message: string
-      link: string
+      link?: string
       icon?: boolean | string
     }
     /**
