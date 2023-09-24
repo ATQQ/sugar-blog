@@ -23,10 +23,7 @@ export default defineConfig({
     }
   },
   themeConfig: {
-    footer: {
-      message: `Power By <a target="_blank" href="https://theme.sugarat.top/"> @sugarat/theme@${packageJSON.version} </a>`,
-      copyright: 'MIT License | Copyright © 粥里有勺糖'
-    },
+    logo: '/logo.png',
     nav: [
       {
         text: `v${packageJSON.version}`,

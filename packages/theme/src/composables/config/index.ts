@@ -127,6 +127,8 @@ export namespace Theme {
     inspiring?: string | string[]
     inspiringTimeout?: number
     pageSize?: number
+    author?: string | boolean
+    logo?: string | boolean
   }
 
   export interface ArticleConfig {
@@ -296,6 +298,10 @@ export namespace Theme {
      * 启用RSS配置
      */
     RSS?: RSSOptions
+    /**
+     * 首页页脚
+     */
+    footer?: Footer
   }
 
   export type RSSOptions = Omit<FeedOptions, 'id'> & {
@@ -331,6 +337,41 @@ export namespace Theme {
      */
     limit?: number
     ariaLabel?: string
+  }
+
+  export interface Footer {
+    /**
+     * 自定义补充信息
+     */
+    message?: string
+    /**
+     * 是否展示主题版本信息
+     */
+    version?: boolean
+    /**
+     * copyright
+     */
+    copyright?: string | {
+      message: string
+      link?: string
+      icon?: boolean | string
+    }
+    /**
+     * ICP 备案信息
+     */
+    icpRecord?: {
+      name: string
+      link: string
+      icon?: boolean | string
+    }
+    /**
+     * 公安备案信息
+     */
+    securityRecord?: {
+      name: string
+      link: string
+      icon?: boolean | string
+    }
   }
   export interface Config extends DefaultTheme.Config {
     blog?: BlogConfig

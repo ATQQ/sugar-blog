@@ -26,7 +26,7 @@ const props = defineProps({
             <br>
           </div>
         </div>
-        <p>扫码无法加入，可加好友备注“主题”</p>
+        <p>如扫码无法加入，可加好友备注“主题”</p>
       </details>
     </template>
     <template v-else>

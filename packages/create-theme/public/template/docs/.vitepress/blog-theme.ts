@@ -20,10 +20,24 @@ const blogTheme = getThemeConfig({
   // 开启RSS支持
   // RSS,
 
+  // 搜索
   // 默认开启pagefind离线的全文搜索支持（如使用其它的可以设置为false）
   // 如果npx pagefind 时间过长，可以手动将其安装为项目依赖 pnpm add pagefind
   // search: false,
 
+  // 页脚
+  footer: {
+    // message: '下面 的内容和图标都是可以修改的噢（当然本条内容也是可以隐藏的）',
+    copyright: 'MIT License | 粥里有勺糖',
+    // icpRecord: {
+    //   name: '蜀ICP备19011724号',
+    //   link: 'https://beian.miit.gov.cn/'
+    // },
+    // securityRecord: {
+    //   name: '公网安备xxxxx',
+    //   link: 'https://www.beian.gov.cn/portal/index.do'
+    // },
+  },
   // 主题色修改
   themeColor: 'el-blue',
 

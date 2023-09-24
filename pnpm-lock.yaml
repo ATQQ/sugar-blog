@@ -49,7 +49,7 @@ importers:
         specifier: ^2.1.0
         version: 2.1.0(vue@3.3.4)
       '@sugarat/theme':
-        specifier: 0.1.49
+        specifier: 0.2.1
         version: link:../theme
       axios:
         specifier: ^0.27.2
@@ -58,8 +58,8 @@ importers:
         specifier: ^2.3.8
         version: 2.3.8(vue@3.3.4)
       vitepress:
-        specifier: 1.0.0-rc.14
-        version: 1.0.0-rc.14(@types/node@20.6.3)(axios@0.27.2)(sass@1.64.1)
+        specifier: 1.0.0-rc.17
+        version: 1.0.0-rc.17(@types/node@20.6.3)(axios@0.27.2)(sass@1.64.1)
       vue:
         specifier: ^3.3.4
         version: 3.3.4
@@ -115,9 +115,9 @@ importers:
         version: 10.2.4
       vitepress-plugin-mermaid:
         specifier: ^2.0.13
-        version: 2.0.13(mermaid@10.2.4)(vitepress@1.0.0-rc.14)
+        version: 2.0.13(mermaid@10.2.4)(vitepress@1.0.0-rc.17)
       vitepress-plugin-pagefind:
-        specifier: 0.2.9
+        specifier: 0.2.10
         version: link:../vitepress-plugin-pagefind
       vue-command-palette:
         specifier: ^0.1.4
@@ -142,11 +142,11 @@ importers:
         specifier: ^4.8.2
         version: 4.9.4
       vitepress:
-        specifier: 1.0.0-rc.14
-        version: 1.0.0-rc.14(@types/node@20.6.3)(sass@1.56.1)
+        specifier: 1.0.0-rc.17
+        version: 1.0.0-rc.17(@types/node@20.6.3)(sass@1.56.1)
       vitepress-plugin-tabs:
         specifier: ^0.2.0
-        version: 0.2.0(vitepress@1.0.0-rc.14)(vue@3.3.4)
+        version: 0.2.0(vitepress@1.0.0-rc.17)(vue@3.3.4)
       vue:
         specifier: ^3.3.4
         version: 3.3.4
@@ -6607,25 +6607,25 @@ packages:
       fsevents: 2.3.2
     dev: false
 
-  /vitepress-plugin-mermaid@2.0.13(mermaid@10.2.4)(vitepress@1.0.0-rc.14):
+  /vitepress-plugin-mermaid@2.0.13(mermaid@10.2.4)(vitepress@1.0.0-rc.17):
     resolution: {integrity: sha512-2c0ywXHE7kOK88Ygla9aGgkyF2JbfqfjE36JnoljW/3hQTR9rYBmfTFM5tvs4TUjCUfedUYT4CeyNolCY9t3uw==}
     peerDependencies:
       mermaid: '10'
       vitepress: ^0.21.6 || ^1.0.0 || ^1.0.0-alpha
     dependencies:
       mermaid: 10.2.4
-      vitepress: 1.0.0-rc.14(@types/node@20.6.3)(sass@1.56.1)
+      vitepress: 1.0.0-rc.17(@types/node@20.6.3)(sass@1.56.1)
     optionalDependencies:
       '@mermaid-js/mermaid-mindmap': 9.3.0
     dev: false
 
-  /vitepress-plugin-tabs@0.2.0(vitepress@1.0.0-rc.14)(vue@3.3.4):
+  /vitepress-plugin-tabs@0.2.0(vitepress@1.0.0-rc.17)(vue@3.3.4):
     resolution: {integrity: sha512-jTdtz4Z5fHllzcDAJaJK/bxE/2PhJSqetFUFgiB7xzw23O4yI+ntJrN+D3oP8XH/0559QUbrYd0K3YLoRaHbAA==}
     peerDependencies:
       vitepress: ^1.0.0-alpha.29
       vue: ^3.2.45
     dependencies:
-      vitepress: 1.0.0-rc.14(@types/node@20.6.3)(sass@1.56.1)
+      vitepress: 1.0.0-rc.17(@types/node@20.6.3)(sass@1.56.1)
       vue: 3.3.4
     dev: true
 
@@ -6659,8 +6659,8 @@ packages:
       - terser
     dev: true
 
-  /vitepress@1.0.0-rc.14(@types/node@20.6.3)(axios@0.27.2)(sass@1.64.1):
-    resolution: {integrity: sha512-yChIeXOAcNvVnSVjhziH1vte0uhKb00PuZf7KdIMfx3ixTMAz73Nn+6gREvCv0SdH+anteGUKz5eljv0ygcgGQ==}
+  /vitepress@1.0.0-rc.17(@types/node@20.6.3)(axios@0.27.2)(sass@1.64.1):
+    resolution: {integrity: sha512-OPyP/VExNUk1aiErOgLE7Vv9Tgr9i9DZHDlDzqBcLfvDpXq33CDfn42JSzpsKGA020HOFOnV+t3/S1i/T5n7bg==}
     hasBin: true
     peerDependencies:
       markdown-it-mathjax3: ^4.3.2
@@ -6706,8 +6706,8 @@ packages:
       - universal-cookie
     dev: false
 
-  /vitepress@1.0.0-rc.14(@types/node@20.6.3)(sass@1.56.1):
-    resolution: {integrity: sha512-yChIeXOAcNvVnSVjhziH1vte0uhKb00PuZf7KdIMfx3ixTMAz73Nn+6gREvCv0SdH+anteGUKz5eljv0ygcgGQ==}
+  /vitepress@1.0.0-rc.17(@types/node@20.6.3)(sass@1.56.1):
+    resolution: {integrity: sha512-OPyP/VExNUk1aiErOgLE7Vv9Tgr9i9DZHDlDzqBcLfvDpXq33CDfn42JSzpsKGA020HOFOnV+t3/S1i/T5n7bg==}
     hasBin: true
     peerDependencies:
       markdown-it-mathjax3: ^4.3.2

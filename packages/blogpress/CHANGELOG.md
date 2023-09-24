@@ -3,8 +3,22 @@ publish: false
 ---
 
 # blogpress
+## 2.0.11
+
+### Patch Changes
+
+- Updated dependencies
+  - @sugarat/theme@0.2.1
+
+## 2.0.10
+
+### Patch Changes
+
+- Updated dependencies
+  - @sugarat/theme@0.2.0
 
 ## 2.0.9
+
 ### Patch Changes
 
 - Updated dependencies

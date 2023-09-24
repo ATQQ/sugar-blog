@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新 v0.1.48 💯：① 一系列bug修复和优化
+description: 最近更新 v0.2.0 💯：① 支持首页展示头像，支持自定义页脚
 author: 粥里有勺糖
 top: 2
 tag: 日志
@@ -17,6 +17,19 @@ pnpm up @sugarat/theme
 # 更新 vitepress 版本
 pnpm add vitepress@latest
 ```
+## 0.2.1
+
+### Patch Changes
+
+- chore: update version link
+
+## 0.2.0 (2023/09/24)
+
+### Minor Changes
+
+- feat: 支持首页展示头像
+- feat: 支持更加简单的定义底部footer
+- chore: 默认使用rc17
 
 ## 0.1.50 (2023/09/23)
 

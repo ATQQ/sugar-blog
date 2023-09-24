@@ -3,10 +3,14 @@ import BlogHomeOverview from './BlogHomeOverview.vue'
 import BlogHotArticle from './BlogHotArticle.vue'
 import BlogHomeTags from './BlogHomeTags.vue'
 import BlogFriendLink from './BlogFriendLink.vue'
+import BlogAuthor from './BlogAuthor.vue'
 </script>
 
 <template>
   <div class="blog-info" data-pagefind-ignore="all">
+    <!-- 头像信息 -->
+    <BlogAuthor />
+
     <!-- 统计数据，日后支持，点击筛选出左侧的数据 -->
     <BlogHomeOverview />
 

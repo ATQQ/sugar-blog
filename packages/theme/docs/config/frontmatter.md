@@ -58,6 +58,8 @@ interface HomeBlog {
   inspiring?: string | string[]
   inspiringTimeout?: number
   pageSize?: number
+  author?: string
+  logo?: string
 }
 ```
 
@@ -68,6 +70,8 @@ interface HomeBlog {
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MDczMzQ2OQ==673180733469)
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMDIwMzE5MQ==674920203192)
+
+![](https://img.cdn.sugarat.top/mdImg/MTY5NTQ3MTc4NjYzMA==695471786630)
 
 其中`inspiring`可以是一个数组，点击的时候就会按照设定顺序切换
 
@@ -97,6 +101,33 @@ blog:
 ```
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY4OTQ5NjQxNDA3Nw==689496414077)
+
+通过设置 `author` 和 `logo` 可以重载（最高优先级）右侧的作者名和头像信息
+
+:::code-group
+```md [配置示例]
+blog:
+ # 设置作者信息
+ author: Sugar
+ logo: /logo.png
+```
+
+```ts [生效优先级]
+const author = computed(() =>
+  frontmatter.value.author
+  ?? frontmatter.value?.blog?.author
+  ?? home?.author
+  ?? site.value.themeConfig?.blog?.author
+)
+const logo = computed(() =>
+  frontmatter.value.logo
+  ?? frontmatter.value?.blog?.logo
+  ?? home?.logo
+  ?? site.value.themeConfig.logo
+)
+```
+:::
+![](https://img.cdn.sugarat.top/mdImg/MTY5NTUyMjY1MjA1Nw==theme-avatar.gif)
 
 ## Article
 ### title
