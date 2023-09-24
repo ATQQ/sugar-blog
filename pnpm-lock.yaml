@@ -58,8 +58,8 @@ importers:
         specifier: ^2.3.8
         version: 2.3.8(vue@3.3.4)
       vitepress:
-        specifier: 1.0.0-rc.14
-        version: 1.0.0-rc.14(@types/node@20.6.3)(axios@0.27.2)(sass@1.64.1)
+        specifier: 1.0.0-rc.17
+        version: 1.0.0-rc.17(@types/node@20.6.3)(axios@0.27.2)(sass@1.64.1)
       vue:
         specifier: ^3.3.4
         version: 3.3.4
@@ -6659,8 +6659,8 @@ packages:
       - terser
     dev: true
 
-  /vitepress@1.0.0-rc.14(@types/node@20.6.3)(axios@0.27.2)(sass@1.64.1):
-    resolution: {integrity: sha512-yChIeXOAcNvVnSVjhziH1vte0uhKb00PuZf7KdIMfx3ixTMAz73Nn+6gREvCv0SdH+anteGUKz5eljv0ygcgGQ==}
+  /vitepress@1.0.0-rc.17(@types/node@20.6.3)(axios@0.27.2)(sass@1.64.1):
+    resolution: {integrity: sha512-OPyP/VExNUk1aiErOgLE7Vv9Tgr9i9DZHDlDzqBcLfvDpXq33CDfn42JSzpsKGA020HOFOnV+t3/S1i/T5n7bg==}
     hasBin: true
     peerDependencies:
       markdown-it-mathjax3: ^4.3.2
