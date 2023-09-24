@@ -49,7 +49,7 @@ importers:
         specifier: ^2.1.0
         version: 2.1.0(vue@3.3.4)
       '@sugarat/theme':
-        specifier: 0.2.0
+        specifier: 0.2.1
         version: link:../theme
       axios:
         specifier: ^0.27.2
