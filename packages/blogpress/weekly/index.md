@@ -18,6 +18,7 @@ hidden: true
 
 <!-- TODO：自动生成可翻页目录 -->
 ## 2023
+* [技术视野周刊第55期](./2023-09-24.md)
 * [技术视野周刊第54期](./2023-09-17.md)
 * [技术视野周刊第53期](./2023-09-10.md)
 * [技术视野周刊第52期](./2023-09-02.md)
@@ -65,7 +66,7 @@ hidden: true
 
 也推荐大家同时关注以下渠道，也欢迎读者在评论区补充推荐的渠道
 
-### 技术周刊
+### 技术资讯
 * [阮一峰: 科技爱好者周刊](https://www.ruanyifeng.com/blog/archives.html) - 记录每周值得分享的科技内容，周五发布
 * [云谦：MDH 前端周刊](https://www.yuque.com/chencheng/mdh-weekly) - 前端资讯和分享
 * [童欧巴：前端食堂](https://github.com/Geekhyt/weekly) - 你的前端食堂，吃好每一顿饭
@@ -73,6 +74,7 @@ hidden: true
 * [知识星球：咲奈的平行时空](https://wx.zsxq.com/dweb2/index/group/15552285284822) - 前端前沿技术、资讯、方法论分享
 * [前端技术文章](https://fed.chanceyu.com/)
 * [省流](https://shengliu.tech/)
+* [值得一读技术博客](https://daily-blog.chlinlearn.top/)
 
 ### 技术社区
 * [掘金](https://juejin.cn/)
