@@ -1,6 +1,5 @@
 import process from 'node:process'
 import { defineConfig, getThemeConfig } from '@sugarat/theme/node'
-import themePkg from '@sugarat/theme/package.json'
 import type { Theme } from '@sugarat/theme'
 
 const baseUrl = 'https://sugarat.top'
@@ -90,7 +89,14 @@ const blogTheme = getThemeConfig({
       url: 'https://sugarat.top/aboutme.html',
       des: '你的指尖,拥有改变世界的力量'
     }
-  ]
+  ],
+  footer: {
+    copyright: `粥里有勺糖 2018 - ${new Date().getFullYear()}`,
+    icpRecord: {
+      name: '蜀ICP备19011724号',
+      link: 'https://beian.miit.gov.cn/'
+    }
+  }
 })
 
 const extraHead: any
@@ -166,11 +172,6 @@ export default defineConfig({
       }
     },
     lastUpdatedText: '上次更新于',
-    footer: {
-      message:
-        '<a target="_blank" href="https://beian.miit.gov.cn/">蜀ICP备19011724号</a>',
-      copyright: `© 2018-present 粥里有勺糖 | <a href="https://theme.sugarat.top">@sugarat/theme@${themePkg.version} </a>`
-    },
     logo: '/logo.png',
     editLink: {
       pattern:
@@ -309,7 +310,11 @@ export default defineConfig({
       }
     ],
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/ATQQ/sugar-blog' }
+      { icon: 'github', link: 'https://github.com/ATQQ/sugar-blog' },
+      {
+        icon: 'x',
+        link: 'https://x.com/Mr_XiaoZou'
+      }
     ]
   }
 })

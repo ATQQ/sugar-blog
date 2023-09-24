@@ -40,8 +40,7 @@ categories:
 
 老板挺好的，挺年轻的海归创业者，技术大佬
 
-![图片](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8e7e29e55e734d4cad660881bd9c76a2~tplv-k3u1fbpfcp-zoom-1.image)
-
+![](https://img.cdn.sugarat.top/mdImg/MTY5NTU1MTI1MTU2NQ==695551251565)
 
 #### 2020-01-11 -- 第一次面试大厂--字节跳动
 恰巧周末不上班
