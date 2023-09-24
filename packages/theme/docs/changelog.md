@@ -17,6 +17,11 @@ pnpm up @sugarat/theme
 # 更新 vitepress 版本
 pnpm add vitepress@latest
 ```
+## 0.2.1
+
+### Patch Changes
+
+- chore: update version link
 
 ## 0.2.0 (2023/09/24)
 
@@ -24,6 +29,7 @@ pnpm add vitepress@latest
 
 - feat: 支持首页展示头像
 - feat: 支持更加简单的定义底部footer
+- chore: 默认使用rc17
 
 ## 0.1.50 (2023/09/23)
 

@@ -19,7 +19,7 @@ onMounted(() => {
   if (version !== false) {
     data.value.push({
       name: `@sugarat/theme@${packageJSON.version}`,
-      link: 'https://www.npmjs.com/package/@sugarat/create-theme',
+      link: 'https://theme.sugarat.top/',
       icon: themeSVG
     })
   }

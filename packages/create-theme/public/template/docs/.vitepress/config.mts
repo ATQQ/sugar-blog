@@ -18,11 +18,6 @@ export default defineConfig({
   lastUpdated: true,
   themeConfig: {
     lastUpdatedText: '上次更新于',
-    footer: {
-      message: '自定义底部内容',
-      copyright:
-        'MIT Licensed | <a target="_blank" href="https://theme.sugarat.top/"> @sugarat/theme </a>'
-    },
     logo: '/logo.png',
     // editLink: {
     //   pattern:

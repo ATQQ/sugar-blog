@@ -1,5 +1,11 @@
 # @sugarat/theme
 
+## 0.2.1
+
+### Patch Changes
+
+- chore: update version link
+
 ## 0.2.0
 
 ### Minor Changes
