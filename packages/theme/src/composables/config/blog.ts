@@ -27,12 +27,15 @@ const currentPageNum: InjectionKey<Ref<number>> = Symbol('home-page-num')
 
 const userWorks: InjectionKey<Ref<Theme.UserWorks>> = Symbol('user-works')
 
+const homeFooter: InjectionKey<Theme.Footer | undefined> = Symbol('home-footer')
+
 export function withConfigProvider(App: Component) {
   return defineComponent({
     name: 'ConfigProvider',
     setup(_, { slots }) {
       const { theme } = useData()
       const config = computed(() => resolveConfig(theme.value))
+      provide(homeFooter, config.value.blog?.footer)
       provide(configSymbol, config)
       provide(
         userWorks,
@@ -196,4 +199,8 @@ export function useAutoUpdateAnchor() {
 
   // 返回当前锚点的响应式对象
   return currentAnchor
+}
+
+export function useHomeFooterConfig() {
+  return inject(homeFooter)
 }

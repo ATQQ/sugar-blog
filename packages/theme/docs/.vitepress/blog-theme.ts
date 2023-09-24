@@ -207,7 +207,19 @@ export const blogTheme = getThemeConfig({
     duration: 0
   },
   tabs: true,
-  works: workConfig
+  works: workConfig,
+  footer: {
+    // message: '下面 的内容和图标都是可以修改的噢（当然本条内容也是可以隐藏的）',
+    copyright: 'MIT License | 粥里有勺糖',
+    // icpRecord: {
+    //   name: '蜀ICP备19011724号',
+    //   link: 'https://beian.miit.gov.cn/'
+    // },
+    // securityRecord: {
+    //   name: '公网安备xxxxx',
+    //   link: 'https://www.beian.gov.cn/portal/index.do'
+    // },
+  }
 })
 
 export const extraHead: any

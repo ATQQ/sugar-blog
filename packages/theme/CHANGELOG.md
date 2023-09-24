@@ -1,5 +1,12 @@
 # @sugarat/theme
 
+## 0.2.0
+
+### Minor Changes
+
+- feat: 支持首页展示头像
+- feat: 支持更加简单的定义底部footer
+
 ## 0.1.50
 
 ### Patch Changes

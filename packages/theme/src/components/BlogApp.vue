@@ -1,5 +1,7 @@
 <script setup lang="ts" name="BlogApp">
 import Theme from 'vitepress/theme'
+import { useData } from 'vitepress'
+import { computed } from 'vue'
 import { useBlogThemeMode } from '../composables/config/blog'
 import BlogHomeInfo from './BlogHomeInfo.vue'
 import BlogHomeBanner from './BlogHomeBanner.vue'
@@ -12,7 +14,10 @@ import BlogImagePreview from './BlogImagePreview.vue'
 import BlogArticleAnalyze from './BlogArticleAnalyze.vue'
 import BlogAlert from './BlogAlert.vue'
 import BlogPopover from './BlogPopover.vue'
+import BlogFooter from './BlogFooter.vue'
 
+const { frontmatter } = useData()
+const layout = computed(() => frontmatter.value.layout)
 const isBlogTheme = useBlogThemeMode()
 const { Layout } = Theme
 </script>
@@ -20,6 +25,7 @@ const { Layout } = Theme
 <template>
   <Layout>
     <template #layout-top>
+      <slot name="layout-top" />
       <BlogAlert />
       <BlogPopover />
     </template>
@@ -65,7 +71,10 @@ const { Layout } = Theme
       <slot name="doc-after" />
       <BlogComment />
     </template>
-
+    <template #layout-bottom>
+      <BlogFooter v-if="layout === 'home'" />
+      <slot name="layout-bottom" />
+    </template>
     <!-- 透传默认主题的其它插槽 -->
     <!-- navbar -->
     <template #nav-bar-title-before>

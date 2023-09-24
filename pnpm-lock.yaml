@@ -49,7 +49,7 @@ importers:
         specifier: ^2.1.0
         version: 2.1.0(vue@3.3.4)
       '@sugarat/theme':
-        specifier: 0.1.49
+        specifier: 0.2.0
         version: link:../theme
       axios:
         specifier: ^0.27.2
@@ -117,7 +117,7 @@ importers:
         specifier: ^2.0.13
         version: 2.0.13(mermaid@10.2.4)(vitepress@1.0.0-rc.14)
       vitepress-plugin-pagefind:
-        specifier: 0.2.9
+        specifier: 0.2.10
         version: link:../vitepress-plugin-pagefind
       vue-command-palette:
         specifier: ^0.1.4
