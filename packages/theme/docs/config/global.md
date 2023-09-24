@@ -160,6 +160,8 @@ interface HomeBlog {
   motto?: string
   inspiring?: string
   pageSize?: number
+  author?: string | boolean
+  logo?: string | boolean
 }
 ```
 

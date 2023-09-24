@@ -127,6 +127,8 @@ export namespace Theme {
     inspiring?: string | string[]
     inspiringTimeout?: number
     pageSize?: number
+    author?: string | boolean
+    logo?: string | boolean
   }
 
   export interface ArticleConfig {
