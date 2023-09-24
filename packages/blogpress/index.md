@@ -3,7 +3,7 @@ layout: home
 blog:
  name: 粥里有勺糖
  motto: 你的指尖,拥有改变世界的力量
- pageSize: 8
+ pageSize: 12
  # 设置 inspiringTimeout 可以实现自动切换
  inspiringTimeout: 3000
  inspiring: 
