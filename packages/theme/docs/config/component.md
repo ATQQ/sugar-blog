@@ -49,6 +49,7 @@ import { enhanceAppWithTabs } from 'vitepress-plugin-tabs/client'
 export default {
   ...BlogTheme,
   enhanceApp(ctx:any) {
+    BlogTheme?.enhanceApp?.(ctx)
     enhanceAppWithTabs(ctx.app)
   }
 }
@@ -67,14 +68,14 @@ const blogTheme = getThemeConfig({
   tabs: true
 })
 
-export default defineConfig({
-  extends: blogTheme,
-  vite: {
-    optimizeDeps: {
-      exclude: ['vitepress-plugin-tabs']
-    }
-  }
-})
+export default defineConfig({ // [!code focus]
+  extends: blogTheme, // [!code focus]
+  vite: { // [!code focus]
+    optimizeDeps: { // [!code focus]
+      exclude: ['vitepress-plugin-tabs'] // [!code focus]
+    } // [!code focus]
+  } // [!code focus]
+}) // [!code focus]
 ```
 :::
 

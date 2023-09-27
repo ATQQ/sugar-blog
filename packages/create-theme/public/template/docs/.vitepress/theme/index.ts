@@ -1,9 +1,9 @@
 import BlogTheme from '@sugarat/theme'
 
-// 默认颜色仍然使用绿色
-import './green-theme.var.css'
-
 // 自定义样式重载
 // import './style.scss'
+
+// 自定义主题色
+// import './user-theme.css'
 
 export default BlogTheme
