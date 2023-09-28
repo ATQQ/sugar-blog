@@ -18,7 +18,7 @@ recommend: 3
 博客模板里，提供了一个如下例子
 
 ```ts
-// .vitepress/theme/index.ts [!code focus]
+// .vitepress/theme/index.ts
 import BlogTheme from '@sugarat/theme'
 // 自定义样式重载 // [!code focus]
 import './style.scss' // [!code focus]

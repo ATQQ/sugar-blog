@@ -56,14 +56,14 @@ export default {
 ```
 
 ```ts [③ 开启支持]
-// .vitepress/config.ts
+// .vitepress/blog-theme.ts
 const blogTheme = getThemeConfig({
   tabs: true
 })
 ```
 
 ```ts [④ 预构建排除依赖]
-// .vitepress/config.ts
+// .vitepress/config.mts
 const blogTheme = getThemeConfig({
   tabs: true
 })
