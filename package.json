@@ -26,7 +26,7 @@
     "build:create": "pnpm --filter '@sugarat/create-theme' build",
     "build:theme-only": "pnpm --filter '@sugarat/theme' build:node",
     "serve": "pnpm --filter 'blogpress' serve",
-    "lint": "eslint . --fix",
+    "lint": "eslint .",
     "deploy": "zx deploy.mjs",
     "deploy:theme": "zx deploy-theme.mjs",
     "release:only": "changeset publish",

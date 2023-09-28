@@ -3,7 +3,6 @@ import antfu from '@antfu/eslint-config'
 
 // TODO DDL 迭代
 export default antfu({
-  markdown: false,
 },
 {
   ignores: [
