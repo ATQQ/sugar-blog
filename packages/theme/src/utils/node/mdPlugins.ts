@@ -114,19 +114,4 @@ export function supportRunExtendsPlugin(config: UserConfig<Theme.Config>) {
       markdownExtendsConfigOriginal?.(...rest)
     }
   }
-
-  // 特殊处理RSS，自动生成url(未来统一维护到 RSS插件里，待下一版主题架构升级)
-  const inlineConfig = config.extends as UserConfig<Theme.Config>
-
-  if (
-    inlineConfig.themeConfig?.blog?.RSS
-    && inlineConfig.themeConfig?.blog?.RSS?.icon !== false
-    && inlineConfig.themeConfig?.socialLinks?.length
-    && !inlineConfig.themeConfig?.socialLinks?.[0].link
-  ) {
-    const { RSS } = inlineConfig.themeConfig?.blog
-    inlineConfig.themeConfig.socialLinks[0].link = `${RSS.baseUrl}${
-      (config.base || '/') + (RSS.filename || 'feed.rss')
-    }`
-  }
 }

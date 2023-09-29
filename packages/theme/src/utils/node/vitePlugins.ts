@@ -6,8 +6,8 @@ import {
   chineseSearchOptimize,
   pagefindPlugin
 } from 'vitepress-plugin-pagefind'
+import { RssPlugin } from 'vitepress-plugin-rss'
 import type { Theme } from '../../composables/config/index'
-import { genFeed } from './genFeed'
 
 export function getVitePlugins(cfg?: Partial<Theme.BlogConfig>) {
   const plugins: any[] = []
@@ -31,6 +31,10 @@ export function getVitePlugins(cfg?: Partial<Theme.BlogConfig>) {
     plugins.push(MermaidPlugin(cfg?.mermaid === true ? {} : (cfg?.mermaid ?? {})))
   }
 
+  // 内置支持RSS
+  if (cfg?.RSS) {
+    plugins.push(RssPlugin(cfg.RSS))
+  }
   // 未来移除使用
   // if (cfg && cfg.search !== undefined) {
   //   console.log(
@@ -38,7 +42,6 @@ export function getVitePlugins(cfg?: Partial<Theme.BlogConfig>) {
   //   )
   // }
 
-  buildEndFn.push(genFeed)
   return plugins
 }
 

@@ -47,12 +47,12 @@
     "@vue/shared": "^3.2.45",
     "@vueuse/core": "^9.6.0",
     "fast-glob": "^3.2.12",
-    "feed": "^4.2.2",
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.7.0",
     "mermaid": "^10.2.4",
     "vitepress-plugin-mermaid": "^2.0.13",
     "vitepress-plugin-pagefind": "0.2.10",
+    "vitepress-plugin-rss": "0.1.2",
     "vue-command-palette": "^0.1.4"
   },
   "devDependencies": {
