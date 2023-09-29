@@ -3,6 +3,7 @@ import type { Theme } from './composables/config/index'
 import {
   getMarkdownPlugins,
   patchMermaidPluginCfg,
+  patchOptimizeDeps,
   registerMdPlugins,
 } from './utils/node/mdPlugins'
 import { getArticles, patchVPThemeConfig } from './utils/node/theme'
@@ -29,7 +30,7 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
 
   // patch extraVPConfig
   patchMermaidPluginCfg(extraVPConfig)
-
+  patchOptimizeDeps(extraVPConfig)
   return {
     themeConfig: {
       blog: {

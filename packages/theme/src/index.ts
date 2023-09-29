@@ -7,6 +7,7 @@ import 'element-plus/theme-chalk/dark/css-vars.css'
 
 import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
+import { enhanceAppWithTabs } from 'vitepress-plugin-tabs/client'
 import BlogApp from './components/BlogApp.vue'
 import { withConfigProvider } from './composables/config/blog'
 
@@ -21,6 +22,7 @@ export const BlogTheme: Theme = {
   ...DefaultTheme,
   Layout: withConfigProvider(BlogApp),
   enhanceApp(ctx) {
+    enhanceAppWithTabs(ctx.app)
     DefaultTheme.enhanceApp(ctx)
     ctx.app.component('TimelinePage', TimelinePage)
     ctx.app.component('UserWorksPage', UserWorksPage)

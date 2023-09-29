@@ -6,8 +6,8 @@ import { aliasObjectToArray } from './index'
 
 export function getMarkdownPlugins(cfg?: Partial<Theme.BlogConfig>) {
   const markdownPlugin: any[] = []
-  // tabs支持
-  if (cfg?.tabs) {
+  // tabs支持,默认开启
+  if (cfg?.tabs !== false) {
     markdownPlugin.push(tabsMarkdownPlugin)
   }
 
@@ -76,6 +76,14 @@ export function patchMermaidPluginCfg(config: any) {
     }),
     { find: /^dayjs\/(.*).js/, replacement: 'dayjs/esm/$1' }
   ]
+}
+
+export function patchOptimizeDeps(config: any) {
+  if (!config.vite.optimizeDeps) {
+    config.vite.optimizeDeps = {}
+  }
+  config.vite.optimizeDeps.exclude = ['vitepress-plugin-tabs', '@sugarat/theme']
+  config.vite.optimizeDeps.include = ['element-plus']
 }
 
 export function wrapperCfgWithMermaid(config: UserConfig<Theme.Config>): any {

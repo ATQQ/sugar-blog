@@ -35,10 +35,10 @@
   "scripts": {
     "dev": "npm run build:node && npm run dev:docs",
     "dev:docs": "vitepress dev docs",
-    "dev:node": "npx tsup src/node.ts --dts --out-dir=./ --watch --external vitepress",
+    "dev:node": "npx tsup",
     "build": "npm run build:node && npm run build:docs",
     "build:docs": "vitepress build docs",
-    "build:node": "npx tsup src/node.ts --dts --out-dir=./ --external vitepress",
+    "build:node": "npx tsup",
     "serve": "vitepress serve docs"
   },
   "dependencies": {
@@ -51,7 +51,8 @@
     "mermaid": "^10.2.4",
     "vitepress-plugin-mermaid": "^2.0.13",
     "vitepress-plugin-pagefind": "0.2.10",
-    "vitepress-plugin-rss": "0.1.2"
+    "vitepress-plugin-rss": "0.1.2",
+    "vitepress-plugin-tabs": "0.2.0"
   },
   "devDependencies": {
     "@element-plus/icons-vue": "^2.1.0",
@@ -60,7 +61,6 @@
     "sass": "^1.56.1",
     "typescript": "^4.8.2",
     "vitepress": "1.0.0-rc.17",
-    "vitepress-plugin-tabs": "^0.2.0",
     "vue": "^3.3.4"
   },
   "pnpm": {

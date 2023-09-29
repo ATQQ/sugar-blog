@@ -86,9 +86,6 @@ importers:
       rimraf:
         specifier: ^5.0.1
         version: 5.0.1
-      tsup:
-        specifier: ' ^6.5.0'
-        version: 6.5.0(typescript@5.1.6)
 
   packages/theme:
     dependencies:
@@ -122,6 +119,9 @@ importers:
       vitepress-plugin-rss:
         specifier: 0.1.2
         version: link:../vitepress-plugin-rss
+      vitepress-plugin-tabs:
+        specifier: 0.2.0
+        version: 0.2.0(vitepress@1.0.0-rc.17)(vue@3.3.4)
     devDependencies:
       '@element-plus/icons-vue':
         specifier: ^2.1.0
@@ -141,9 +141,6 @@ importers:
       vitepress:
         specifier: 1.0.0-rc.17
         version: 1.0.0-rc.17(@types/node@20.6.3)(sass@1.56.1)
-      vitepress-plugin-tabs:
-        specifier: ^0.2.0
-        version: 0.2.0(vitepress@1.0.0-rc.17)(vue@3.3.4)
       vue:
         specifier: ^3.3.4
         version: 3.3.4
@@ -6601,7 +6598,7 @@ packages:
     dependencies:
       vitepress: 1.0.0-rc.17(@types/node@20.6.3)(sass@1.56.1)
       vue: 3.3.4
-    dev: true
+    dev: false
 
   /vitepress@1.0.0-alpha.75(@types/node@16.18.4):
     resolution: {integrity: sha512-twpPZ/6UnDR8X0Nmj767KwKhXlTQQM9V/J1i2BP9ryO29/w4hpxBfEum6nvfpNhJ4H3h+cIhwzAK/e9crZ6HEQ==}

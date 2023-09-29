@@ -18,9 +18,6 @@ export default defineConfig({
         '@sugarat/theme': path.join(__dirname, '../../src/index.ts')
       }
     },
-    optimizeDeps: {
-      exclude: ['vitepress-plugin-tabs']
-    }
   },
   themeConfig: {
     logo: '/logo.png',
