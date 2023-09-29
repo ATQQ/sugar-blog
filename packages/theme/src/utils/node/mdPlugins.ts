@@ -62,8 +62,23 @@ export function assignMermaid(config: any) {
   ]
 }
 
+export function patchMermaidPluginCfg(config: any) {
+  if (!config.vite.resolve)
+    config.vite.resolve = {}
+  if (!config.vite.resolve.alias)
+    config.vite.resolve.alias = {}
+
+  config.vite.resolve.alias = [
+    ...aliasObjectToArray({
+      ...config.vite.resolve.alias,
+      'cytoscape/dist/cytoscape.umd.js': 'cytoscape/dist/cytoscape.esm.js',
+      'mermaid': 'mermaid/dist/mermaid.esm.mjs'
+    }),
+    { find: /^dayjs\/(.*).js/, replacement: 'dayjs/esm/$1' }
+  ]
+}
+
 export function wrapperCfgWithMermaid(config: UserConfig<Theme.Config>): any {
-  // eslint-disable-next-line ts/ban-ts-comment
   // @ts-expect-error
   const extendThemeConfig = (config.extends?.themeConfig?.blog
     || {}) as Theme.BlogConfig

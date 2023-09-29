@@ -4,9 +4,9 @@ import type { UserConfig } from 'vitepress'
 import type { Theme } from './composables/config/index'
 import {
   getMarkdownPlugins,
+  patchMermaidPluginCfg,
   registerMdPlugins,
   supportRunExtendsPlugin,
-  wrapperCfgWithMermaid
 } from './utils/node/mdPlugins'
 import { getArticles, patchVPThemeConfig } from './utils/node/theme'
 import { getVitePlugins, registerVitePlugins } from './utils/node/vitePlugins'
@@ -30,6 +30,9 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
   // 注册markdown插件
   registerMdPlugins(extraVPConfig, markdownPlugin)
 
+  // patch extraVPConfig
+  patchMermaidPluginCfg(extraVPConfig)
+
   return {
     themeConfig: {
       blog: {
@@ -47,7 +50,7 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
  * defineConfig Helper
  */
 export function defineConfig(config: UserConfig<Theme.Config>): any {
-  const resultConfig = wrapperCfgWithMermaid(config)
+  const resultConfig = config
   supportRunExtendsPlugin(resultConfig)
   return resultConfig
 }

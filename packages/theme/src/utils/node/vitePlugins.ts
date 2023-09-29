@@ -24,6 +24,13 @@ export function getVitePlugins(cfg?: Partial<Theme.BlogConfig>) {
       pagefindPlugin({ ...ops, customSearchQuery: chineseSearchOptimize })
     )
   }
+
+  // 内置支持Mermaid
+  if (cfg?.mermaid !== false) {
+    const { MermaidPlugin } = require('vitepress-plugin-mermaid')
+    plugins.push(MermaidPlugin(cfg?.mermaid === true ? {} : (cfg?.mermaid ?? {})))
+  }
+
   // 未来移除使用
   // if (cfg && cfg.search !== undefined) {
   //   console.log(
