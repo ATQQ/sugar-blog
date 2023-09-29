@@ -1,7 +1,9 @@
 /* eslint-disable ts/no-namespace */
 import type { ElButton } from 'element-plus'
 import type { DefaultTheme } from 'vitepress'
-import type { RSSOptions as RSSPluginOptions } from 'vitepress-plugin-rss'
+import type { RSSOptions } from 'vitepress-plugin-rss'
+
+type RSSPluginOptions = RSSOptions
 
 // TODO: 重构 lint 问题
 export declare namespace BlogPopover {
