@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新 v0.2.2 💯：① 主题架构优化，简化配置项，默认开启多项能力
+description: 最近更新 v0.2.2 💯：主题架构优化，简化配置项，默认开启多项能力
 author: 粥里有勺糖
 top: 2
 tag: 日志
@@ -17,6 +17,13 @@ pnpm up @sugarat/theme
 # 更新 vitepress 版本
 pnpm add vitepress@latest
 ```
+
+## 0.2.3 (2023/09/29)
+
+### Patch Changes
+
+- Updated dependencies
+  - vitepress-plugin-rss@0.1.3
 
 ## 0.2.2 (2023/09/29)
 

@@ -1,5 +1,11 @@
 # vitepress-plugin-rss
 
+## 0.1.3
+
+### Patch Changes
+
+- chore: remove peer deps
+
 ## 0.1.2
 
 ### Patch Changes
