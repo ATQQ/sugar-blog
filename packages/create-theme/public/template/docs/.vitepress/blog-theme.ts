@@ -38,6 +38,7 @@ const blogTheme = getThemeConfig({
     //   link: 'https://www.beian.gov.cn/portal/index.do'
     // },
   },
+
   // 主题色修改
   themeColor: 'el-blue',
 

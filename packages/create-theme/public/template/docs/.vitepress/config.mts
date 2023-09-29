@@ -1,10 +1,12 @@
-import { defineConfig } from '@sugarat/theme/node'
+import { defineConfig } from 'vitepress'
+
+// 导入主题的配置
 import { blogTheme } from './blog-theme'
 
 // Vitepress 默认配置
 // 详见文档：https://vitepress.dev/reference/site-config
 export default defineConfig({
-  // 继承博客主题配置
+  // 继承博客主题(@sugarat/theme)
   extends: blogTheme,
   lang: 'zh-cn',
   title: '@sugarat/theme',
