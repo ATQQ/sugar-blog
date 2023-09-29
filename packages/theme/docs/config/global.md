@@ -14,7 +14,7 @@ outline: [2,3]
 
 默认配置如下
 ```ts
-import { getThemeConfig, defineConfig } from '@sugarat/theme/node'
+import { defineConfig, getThemeConfig } from '@sugarat/theme/node'
 
 const blogTheme = getThemeConfig()
 
@@ -31,11 +31,12 @@ export default defineConfig({
 
 ```ts
 // .vitepress/config.ts
-import { getThemeConfig, defineConfig } from '@sugarat/theme/node'
+import { defineConfig, getThemeConfig } from '@sugarat/theme/node'
+
 const blogTheme = getThemeConfig()
 
 export default defineConfig({
-  extends: blogTheme // [!code ++]
+  extends: blogTheme, // [!code ++]
   themeConfig: {
     ...blogTheme // [!code --]
   }
@@ -53,7 +54,7 @@ export default defineConfig({
 
 下面是简单示例 **关闭主题自带搜索**
 ```ts
-import { getThemeConfig, defineConfig } from '@sugarat/theme/node'
+import { defineConfig, getThemeConfig } from '@sugarat/theme/node'
 
 const blogTheme = getThemeConfig({ // [!code focus]
   search: false // [!code focus]
@@ -88,7 +89,7 @@ const blogTheme = getThemeConfig({
 
 ```ts [default]
 const blogTheme = getThemeConfig({
-  hotArticle:{
+  hotArticle: {
     title: '🔥 精选文章',
     nextText: '换一组',
     pageSize: 9,
@@ -109,7 +110,7 @@ const blogTheme = getThemeConfig({
 ```
 
 ```ts [type]
-interface HotArticle{
+interface HotArticle {
   title?: string
   pageSize?: number
   nextText?: string
@@ -197,16 +198,16 @@ type SearchConfig =
     | boolean
     | 'pagefind'
     | {
-        btnPlaceholder?: string
-        placeholder?: string
-        emptyText?: string
-        /**
-         * @example
-         * 'Total: {{searchResult}} search results.'
-         */
-        heading?: string
-        mode?: boolean | 'pagefind'
-      }
+      btnPlaceholder?: string
+      placeholder?: string
+      emptyText?: string
+      /**
+       * @example
+       * 'Total: {{searchResult}} search results.'
+       */
+      heading?: string
+      mode?: boolean | 'pagefind'
+    }
 ```
 :::
 
@@ -342,6 +343,7 @@ pnpm add vitepress-plugin-search markdown-it flexsearch -D
 ```ts [② .vitepress/config 加入配置]
 import { defineConfig } from '@sugarat/theme/node'
 import { SearchPlugin } from 'vitepress-plugin-search'
+
 export default defineConfig({
   vite: {
     plugins: [SearchPlugin()]
@@ -467,7 +469,7 @@ const blogTheme = getThemeConfig({
     /**
      * 是否展示文章的预计阅读时间
      */
-    readingTime: true
+    readingTime: true,
     /**
      * 是否隐藏文章页的封面展示
      */
@@ -701,7 +703,7 @@ interface FriendLink {
 const blogTheme = getThemeConfig({
   friend: [
     {
-      // 省略其他配置项 
+      // 省略其他配置项
       avatar: {
         // 单独设置 alt
         alt: '粥里有勺糖23',
@@ -710,7 +712,7 @@ const blogTheme = getThemeConfig({
       }
     },
     {
-      // 省略其他配置项 
+      // 省略其他配置项
       avatar: {
         // 暗黑模式下使用不一样的logo
         dark:
@@ -721,7 +723,6 @@ const blogTheme = getThemeConfig({
     }
   ]
 })
-
 ```
 ## authorList
 用于设置文章页作者信息跳转相关信息，默认情况下`author`仅做展示
@@ -797,7 +798,7 @@ hero:
 开启 RSS 支持，自动生成 `feed.rss` 文件
 
 :::tip
-参考 [Vue.js blog](https://github.com/vuejs/blog/tree/main) 基于 [jpmonette/feed](https://www.npmjs.com/package/feed) 实现
+参考 [Vue.js blog](https://github.com/vuejs/blog/tree/main) 基于 [jpmonette/feed](https://www.npmjs.com/package/feed) 实现，通过内置 [vitepress-plugin-rss](https://www.npmjs.com/package/vitepress-plugin-rss) 插件，支持灵活的配置
 :::
 
 ::: code-group
@@ -847,7 +848,6 @@ type RSSOptions = Omit<FeedOptions, 'id'> & {
   /**
    * 线上访问的RSS地址
    * @default
-   * @example https://sugarat.top/feed.rss
    * ```ts
    * `${baseUrl + VPConfig.site.base + (filename || 'feed.rss'}`
    * ```
@@ -859,35 +859,54 @@ type RSSOptions = Omit<FeedOptions, 'id'> & {
    */
   filename?: string
   /**
-   * RSS的图标展示
+   * RSS的图标展示（你也可以传入一个svg字符串进行自定义，SVG 图标可访问 https://www.xicons.org/# 获取）
    * @default true
    */
-  icon?: boolean
+  icon?: boolean | string
+  /**
+   * 是否打印过程提示
+   * @default true
+   */
+  log?: boolean
+  /**
+   * 是否过滤 layout:home
+   * @default true
+   */
+  ignoreHome?: boolean
+  /**
+   * 博客站点内容涉及的作者列表
+   */
+  authors?: Author[]
+  /**
+   * 自定义文章摘要生成逻辑
+   */
+  renderExpect?: (fileContent: string, frontmatter: Record<string, any>) => string | Promise<string>
   /**
    * 限制输出文件包含的文章数量
    * @default 0
    * @description (0 不限制；> 1 会按照日期排序对输出内容进行调整)
    */
   limit?: number
+  ariaLabel?: string
 }
 
 interface FeedOptions {
-  id: string;
-  title: string;
-  updated?: Date;
-  generator?: string;
-  language?: string;
-  ttl?: number;
-  feed?: string;
-  feedLinks?: any;
-  hub?: string;
-  docs?: string;
-  author?: Author;
-  link?: string;
-  description?: string;
-  image?: string;
-  favicon?: string;
-  copyright: string;
+  id: string
+  title: string
+  updated?: Date
+  generator?: string
+  language?: string
+  ttl?: number
+  feed?: string
+  feedLinks?: any
+  hub?: string
+  docs?: string
+  author?: Author
+  link?: string
+  description?: string
+  image?: string
+  favicon?: string
+  copyright: string
 }
 ```
 
@@ -918,7 +937,7 @@ const blogTheme = getThemeConfig({
 ```
 
 ```ts [type]
-type ThemeColor = 'vp-default' | 'vp-green' | 'vp-yellow' | 'vp-red' | 'el-blue' | 'el-yellow' | 'el-green' | 'el-red';
+type ThemeColor = 'vp-default' | 'vp-green' | 'vp-yellow' | 'vp-red' | 'el-blue' | 'el-yellow' | 'el-green' | 'el-red'
 ```
 :::
 

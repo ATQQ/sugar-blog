@@ -4,10 +4,13 @@
 
 ### Patch Changes
 
+- feat: 默认开启 tabs 支持
 - chore: 优化 Mermaid 配置的生成逻辑
 - chore: 内置RSS替换为vitepress-plugin-rss
-- chore: 架构优化，便于独立在VitePress使用
-- chore: 无用依赖清理
+- chore: 架构优化
+  - 便于独立在VitePress使用
+  - 无用依赖清理
+  - 主题无关配置屏蔽
 
 ## 0.2.1
 
