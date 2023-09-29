@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.20
+
+### Patch Changes
+
+- feat: 简化模板配置
+
 ## 0.0.19
 
 ### Patch Changes

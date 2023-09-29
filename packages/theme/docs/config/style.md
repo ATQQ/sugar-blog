@@ -20,6 +20,7 @@ recommend: 3
 ```ts
 // .vitepress/theme/index.ts
 import BlogTheme from '@sugarat/theme'
+
 // 自定义样式重载 // [!code focus]
 import './style.scss' // [!code focus]
 

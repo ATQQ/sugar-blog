@@ -17,8 +17,9 @@ recommend: 3
 博客模板里，提供了一个如下例子
 
 ```ts
-// .vitepress/theme/index.ts [!code focus]
+// .vitepress/theme/index.ts
 import BlogTheme from '@sugarat/theme'
+
 // 自定义样式重载 // [!code focus]
 import './style.scss' // [!code focus]
 
@@ -93,36 +94,42 @@ vitepress 最新的默认主题色偏紫色，看着感觉有点不习惯
 
 如果内置的不满足要求，也可以进行自定义，自定义的方式是通过覆盖变量的方式
 
+例如可以创建`user-theme.css`文件，内容如下
 ```css
 /* 所有变量：https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css */
+/* 自定义主题色示例，如下 */
 
-/* 自定义主题色，绿色 */
+/* 浅色模式使用的变量 */
 html[theme] {
-  --vp-c-green: #10b981;
-  --vp-c-green-light: #34d399;
-  --vp-c-green-lighter: #6ee7b7;
-  --vp-c-green-dark: #059669;
-  --vp-c-green-darker: #047857;
-
-  --vp-c-brand-1: var(--vp-c-green);
-  --vp-c-brand-2: var(--vp-c-green-light);
-  --vp-c-brand-3: var(--vp-c-green-lighter);
-  --vp-c-brand-soft: rgba(110, 231, 183, 0.22);
+  --vp-c-user-1:red;
+  --vp-c-user-2:blue;
+  --vp-c-user-3:green;
+  --vp-c-user-soft:rgba(255,0,0,.5);
 }
 
+/* 深色模式使用的变量 */
 html[theme].dark {
-  --vp-c-brand-1: var(--vp-c-green);
-  --vp-c-brand-2: var(--vp-c-green-dark);
-  --vp-c-brand-3: var(--vp-c-green-darker);
-  --vp-c-brand-soft: rgba(4, 120, 87, 0.25);
+  --vp-c-user-1:yellow;
+  --vp-c-user-2:purple;
+  --vp-c-user-3:orange;
+  --vp-c-user-soft:rgba(255,255,0,.5);
+}
+
+/* 覆盖默认变量 */
+html[theme],html[theme].dark {
+  --vp-c-brand-1: var(--vp-c-user-1);
+  --vp-c-brand-2: var(--vp-c-user-2);
+  --vp-c-brand-3: var(--vp-c-user-3);
+  --vp-c-brand-soft: var(--vp-c-user-soft);
 }
 ```
 将其引入到`.vitepress/theme/index.ts`中即可
 
 ```ts
 import BlogTheme from '@sugarat/theme'
-// 导入绿色主题
-import './green-theme.var.css'
+
+// 导入自定义主题色 // [!code focus]
+import './user-theme.css' // [!code focus]
 
 export default BlogTheme
 ```
