@@ -1,6 +1,6 @@
 {
   "name": "@sugarat/theme",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "简约风的 Vitepress 博客主题，sugarat vitepress blog theme",
   "author": "sugar",
   "license": "MIT",
@@ -48,19 +48,16 @@
     "@vueuse/core": "^9.6.0",
     "fast-glob": "^3.2.12",
     "gray-matter": "^4.0.3",
-    "highlight.js": "^11.7.0",
     "mermaid": "^10.2.4",
     "vitepress-plugin-mermaid": "^2.0.13",
     "vitepress-plugin-pagefind": "0.2.10",
-    "vitepress-plugin-rss": "0.1.2",
-    "vue-command-palette": "^0.1.4"
+    "vitepress-plugin-rss": "0.1.2"
   },
   "devDependencies": {
     "@element-plus/icons-vue": "^2.1.0",
     "element-plus": "^2.3.4",
     "pagefind": "1.0.3",
     "sass": "^1.56.1",
-    "tsup": " ^6.5.0",
     "typescript": "^4.8.2",
     "vitepress": "1.0.0-rc.17",
     "vitepress-plugin-tabs": "^0.2.0",

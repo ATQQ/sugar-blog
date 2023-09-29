@@ -1,5 +1,14 @@
 # @sugarat/theme
 
+## 0.2.2
+
+### Patch Changes
+
+- chore: 优化 Mermaid 配置的生成逻辑
+- chore: 内置RSS替换为vitepress-plugin-rss
+- chore: 架构优化，便于独立在VitePress使用
+- chore: 无用依赖清理
+
 ## 0.2.1
 
 ### Patch Changes

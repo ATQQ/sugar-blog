@@ -42,9 +42,9 @@ npm i -g pnpm
 pnpm install
 ```
 
-② 构建主题包
+② 构建依赖包的npm包
 ```sh
-pnpm build:theme-only
+pnpm buildlib
 ```
 
 ③ 运行
