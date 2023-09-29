@@ -1,7 +1,96 @@
 ---
-description: 通过解析类 Markdown 的文本语法来实现图表的创建和动态修改。
+description: 默认支持流程图，tabs面板
 ---
-# Mermaid - 流程图
+
+# 内置第三方插件能力
+
+## tabs
+* Type: `boolean`
+
+支持局部的`tabs`面板，**默认开启**
+
+:::tip 一点说明
+基于 [vitepress-plugin-tabs@0.2.0](https://www.npmjs.com/package/vitepress-plugin-tabs) 内置实现
+:::
+
+效果如下
+
+:::=tabs
+::tab1
+一些内容
+
+一些内容
+
+一些内容
+
+::tab2
+一些内容 。。。
+:::
+
+简单的使用方式如下（效果如上面的示例）
+
+```md
+:::=tabs
+::tab1
+一些内容
+
+一些内容
+
+一些内容
+
+::tab2
+一些内容 。。。
+:::
+```
+
+共享状态的使用方式如下
+
+```md
+:::=tabs=ab
+::a
+a content
+
+::b
+b content
+:::
+
+:::=tabs=ab
+::a
+a content 2
+
+::b
+b content 2
+:::
+```
+
+
+:::=tabs=ab
+::a
+a content
+
+::b
+b content
+:::
+
+:::=tabs=ab
+::a
+a content 2
+
+::b
+b content 2
+:::
+
+不需要也可以关闭
+
+```ts
+// .vitepress/blog-theme.ts
+const blogTheme = getThemeConfig({
+  tabs: false
+})
+```
+
+## Mermaid - 图表
+* Type: `boolean`|`object`
 
 >通过解析类 Markdown 的文本语法来实现图表的创建和动态修改。
 
@@ -26,7 +115,7 @@ flowchart TD
   Start --> Stop
 ```
 
-默认开启，可以通过`mermaid`进行进一步配置，或关闭
+**默认开启**，可以通过`mermaid`进行进一步配置，或关闭
 
 :::code-group
 ```ts [① 关闭]
