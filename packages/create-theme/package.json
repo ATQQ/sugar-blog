@@ -1,6 +1,6 @@
 {
   "name": "@sugarat/create-theme",
-  "version": "0.0.18",
+  "version": "0.0.20",
   "description": "简约风的 Vitepress 博客主题，sugarat vitepress blog theme",
   "author": "粥里有勺糖",
   "license": "MIT",
@@ -29,7 +29,6 @@
     "fs-extra": "^11.1.1"
   },
   "devDependencies": {
-    "rimraf": "^5.0.1",
-    "tsup": " ^6.5.0"
+    "rimraf": "^5.0.1"
   }
 }

@@ -6,8 +6,8 @@ import { aliasObjectToArray } from './index'
 
 export function getMarkdownPlugins(cfg?: Partial<Theme.BlogConfig>) {
   const markdownPlugin: any[] = []
-  // tabs支持
-  if (cfg?.tabs) {
+  // tabs支持,默认开启
+  if (cfg?.tabs !== false) {
     markdownPlugin.push(tabsMarkdownPlugin)
   }
 
@@ -62,8 +62,31 @@ export function assignMermaid(config: any) {
   ]
 }
 
+export function patchMermaidPluginCfg(config: any) {
+  if (!config.vite.resolve)
+    config.vite.resolve = {}
+  if (!config.vite.resolve.alias)
+    config.vite.resolve.alias = {}
+
+  config.vite.resolve.alias = [
+    ...aliasObjectToArray({
+      ...config.vite.resolve.alias,
+      'cytoscape/dist/cytoscape.umd.js': 'cytoscape/dist/cytoscape.esm.js',
+      'mermaid': 'mermaid/dist/mermaid.esm.mjs'
+    }),
+    { find: /^dayjs\/(.*).js/, replacement: 'dayjs/esm/$1' }
+  ]
+}
+
+export function patchOptimizeDeps(config: any) {
+  if (!config.vite.optimizeDeps) {
+    config.vite.optimizeDeps = {}
+  }
+  config.vite.optimizeDeps.exclude = ['vitepress-plugin-tabs', '@sugarat/theme']
+  config.vite.optimizeDeps.include = ['element-plus']
+}
+
 export function wrapperCfgWithMermaid(config: UserConfig<Theme.Config>): any {
-  // eslint-disable-next-line ts/ban-ts-comment
   // @ts-expect-error
   const extendThemeConfig = (config.extends?.themeConfig?.blog
     || {}) as Theme.BlogConfig
@@ -98,20 +121,5 @@ export function supportRunExtendsPlugin(config: UserConfig<Theme.Config>) {
       selfMarkdownConfig?.(...rest)
       markdownExtendsConfigOriginal?.(...rest)
     }
-  }
-
-  // 特殊处理RSS，自动生成url(未来统一维护到 RSS插件里，待下一版主题架构升级)
-  const inlineConfig = config.extends as UserConfig<Theme.Config>
-
-  if (
-    inlineConfig.themeConfig?.blog?.RSS
-    && inlineConfig.themeConfig?.blog?.RSS?.icon !== false
-    && inlineConfig.themeConfig?.socialLinks?.length
-    && !inlineConfig.themeConfig?.socialLinks?.[0].link
-  ) {
-    const { RSS } = inlineConfig.themeConfig?.blog
-    inlineConfig.themeConfig.socialLinks[0].link = `${RSS.baseUrl}${
-      (config.base || '/') + (RSS.filename || 'feed.rss')
-    }`
   }
 }

@@ -1,12 +1,10 @@
-/* eslint-disable global-require */
-/* eslint-disable prefer-rest-params */
 import type { UserConfig } from 'vitepress'
 import type { Theme } from './composables/config/index'
 import {
   getMarkdownPlugins,
+  patchMermaidPluginCfg,
+  patchOptimizeDeps,
   registerMdPlugins,
-  supportRunExtendsPlugin,
-  wrapperCfgWithMermaid
 } from './utils/node/mdPlugins'
 import { getArticles, patchVPThemeConfig } from './utils/node/theme'
 import { getVitePlugins, registerVitePlugins } from './utils/node/vitePlugins'
@@ -30,6 +28,9 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
   // 注册markdown插件
   registerMdPlugins(extraVPConfig, markdownPlugin)
 
+  // patch extraVPConfig
+  patchMermaidPluginCfg(extraVPConfig)
+  patchOptimizeDeps(extraVPConfig)
   return {
     themeConfig: {
       blog: {
@@ -47,9 +48,7 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
  * defineConfig Helper
  */
 export function defineConfig(config: UserConfig<Theme.Config>): any {
-  const resultConfig = wrapperCfgWithMermaid(config)
-  supportRunExtendsPlugin(resultConfig)
-  return resultConfig
+  return config
 }
 
 // 重新导包 tabsMarkdownPlugin 导出CJS格式支持

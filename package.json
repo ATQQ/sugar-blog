@@ -24,9 +24,9 @@
     "build:pagefind": "pnpm --filter 'vitepress-plugin-pagefind' build",
     "build:rss": "pnpm --filter 'vitepress-plugin-rss' build",
     "build:create": "pnpm --filter '@sugarat/create-theme' build",
-    "build:theme-only": "pnpm --filter '@sugarat/theme' build:node",
+    "build:theme-only": "wait-on packages/vitepress-plugin-rss/dist packages/vitepress-plugin-pagefind/dist && pnpm --filter '@sugarat/theme' build:node",
     "serve": "pnpm --filter 'blogpress' serve",
-    "lint": "eslint . --fix",
+    "lint": "eslint .",
     "deploy": "zx deploy.mjs",
     "deploy:theme": "zx deploy-theme.mjs",
     "release:only": "changeset publish",
@@ -49,7 +49,9 @@
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.3",
     "simple-git-hooks": "^2.9.0",
+    "tsup": " ^7.2.0",
     "typescript": "5.1.6",
+    "wait-on": "^7.0.1",
     "zx": "^5.3.0"
   },
   "pnpm": {

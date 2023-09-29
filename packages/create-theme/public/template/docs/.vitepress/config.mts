@@ -9,12 +9,6 @@ export default defineConfig({
   lang: 'zh-cn',
   title: '@sugarat/theme',
   description: '粥里有勺糖的博客主题，基于 vitepress 实现',
-  vite: {
-    optimizeDeps: {
-      include: ['element-plus'],
-      exclude: ['@sugarat/theme']
-    }
-  },
   lastUpdated: true,
   themeConfig: {
     lastUpdatedText: '上次更新于',

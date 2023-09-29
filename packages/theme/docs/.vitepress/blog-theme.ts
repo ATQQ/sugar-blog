@@ -206,7 +206,6 @@ export const blogTheme = getThemeConfig({
     ],
     duration: 0
   },
-  tabs: true,
   works: workConfig,
   footer: {
     copyright: 'MIT License | 粥里有勺糖',
