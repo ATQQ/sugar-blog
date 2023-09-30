@@ -1,5 +1,11 @@
 # @sugarat/theme
 
+## 0.2.4
+
+### Patch Changes
+
+- feat: recommend 支持多种排序
+
 ## 0.2.3
 
 ### Patch Changes

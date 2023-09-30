@@ -400,7 +400,8 @@ const blogTheme = getThemeConfig({
     nextText: '换一组',
     pageSize: 9,
     empty: '暂无相关文章',
-    style: 'sidebar'
+    style: 'sidebar',
+    sort: 'date'
   }
 })
 ```
@@ -411,7 +412,8 @@ const blogTheme = getThemeConfig({
     title: '🔍 推荐文章',
     nextText: '下一页',
     pageSize: 1,
-    style: 'card'
+    style: 'card',
+    sort: 'filename' // 文件名排序
     // empty: false // false时无推荐文章不展示此模块
   }
 })
@@ -427,7 +429,19 @@ interface RecommendArticle {
    * @default true
    */
   showSelf?: boolean
+  /**
+   * 自定义文章过滤
+   */
   filter?: (page: Theme.PageData) => boolean
+  /**
+   * 自定义排序
+   * @default 'date'
+   */
+  sort?: 'date' | 'filename' | ((a: Theme.PageData, b: Theme.PageData) => number)
+  /**
+   * 当没有推荐文章时的提示，设置为 false 则不展示
+   * @default '暂无相关文章'
+   */
   empty?: string | boolean
   /**
    * 设置推荐文章的展示风格
@@ -458,6 +472,28 @@ const blogTheme = getThemeConfig({
 })
 ```
 ![](https://img.cdn.sugarat.top/mdImg/MTY5MTIxODc4NDYzNw==691218784637)
+
+通过 `sort` 属性可以自定义排序规则，默认按照时间排序`date`，例如按照文件名排序
+
+:::code-group
+```ts [文件名]
+const blogTheme = getThemeConfig({
+  recommend: {
+    sort: 'filename'
+  }
+})
+```
+
+```ts [自定义排序]
+const blogTheme = getThemeConfig({
+  recommend: {
+    sort(a, b) {
+      return +new Date(b.meta.date) - +new Date(a.meta.date)
+    },
+  }
+})
+```
+:::
 
 ## article
 设置文章全局相关能力

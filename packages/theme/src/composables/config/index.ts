@@ -114,7 +114,19 @@ export namespace Theme {
      * @default true
      */
     showSelf?: boolean
+    /**
+     * 自定义文章过滤
+     */
     filter?: (page: Theme.PageData) => boolean
+    /**
+     * 自定义排序
+     * @default 'date'
+     */
+    sort?: 'date' | 'filename' | ((a: Theme.PageData, b: Theme.PageData) => number)
+    /**
+     * 当没有推荐文章时的提示，设置为 false 则不展示
+     * @default '暂无相关文章'
+     */
     empty?: string | boolean
     /**
      * 设置推荐文章的展示风格

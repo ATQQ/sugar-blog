@@ -2,12 +2,19 @@
 publish: false
 ---
 
-# blogpress
+# CHANGELOG
 
-## 2.0.13
+## 2.0.14
 ### Patch Changes
 
-  - @sugarat/theme@0.2.3
+- Updated dependencies
+  - @sugarat/theme@0.2.4
+
+## 2.0.13
+
+### Patch Changes
+
+- @sugarat/theme@0.2.3
 
 ## 2.0.12
 

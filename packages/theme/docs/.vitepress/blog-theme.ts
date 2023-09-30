@@ -146,7 +146,10 @@ const RSS: Theme.RSSOptions = {
 export const blogTheme = getThemeConfig({
   RSS,
   recommend: {
-    nextText: '下一页'
+    nextText: '下一页',
+    sort(a, b) {
+      return +new Date(b.meta.date) - +new Date(a.meta.date)
+    },
   },
   friend: [
     {
