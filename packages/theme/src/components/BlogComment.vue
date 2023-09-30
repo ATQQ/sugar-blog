@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { useElementVisibility } from '@vueuse/core'
 import { useData, useRoute } from 'vitepress'
-import { computed, nextTick, ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { ElAffix, ElButton } from 'element-plus'
 import { Comment } from '@element-plus/icons-vue'
+import Giscus from '@giscus/vue'
 import { useGiscusConfig } from '../composables/config/blog'
 import type { Theme } from '../composables/config/index'
 
@@ -19,9 +20,9 @@ function handleScrollToComment() {
 }
 const giscusConfig = useGiscusConfig()
 
-const commentConfig = computed<Partial<Theme.GiscusConfig>>(() => {
+const commentConfig = computed<Theme.GiscusConfig>(() => {
   if (!giscusConfig) {
-    return {}
+    return {} as any
   }
   return giscusConfig
 })
@@ -57,14 +58,6 @@ watch(
     immediate: true
   }
 )
-
-// TODO：可以优化，不需要重载
-watch(isDark, () => {
-  showComment.value = false
-  nextTick(() => {
-    showComment.value = true
-  })
-})
 </script>
 
 <template>
@@ -91,24 +84,19 @@ watch(isDark, () => {
         评论
       </ElButton>
     </ElAffix>
-    <!-- eslint-disable-next-line vue/require-component-is -->
-    <component
-      is="script"
+    <Giscus
       v-if="showComment"
-      src="https://giscus.app/client.js"
-      :data-repo="commentConfig.repo"
-      :data-repo-id="commentConfig.repoId"
-      :data-category="commentConfig.category"
-      :data-category-id="commentConfig.categoryId"
-      :data-mapping="commentConfig.mapping || 'pathname'"
-      data-reactions-enabled="1"
-      data-emit-metadata="0"
-      :data-input-position="commentConfig.inputPosition || 'top'"
-      :data-theme="isDark ? 'dark' : 'light'"
-      :data-lang="commentConfig.lang || 'zh-CN'"
-      crossorigin="anonymous"
-      :data-loading="commentConfig.loading || 'eager'"
-      async
+      :repo="commentConfig.repo"
+      :repo-id="commentConfig.repoId"
+      :category="commentConfig.category"
+      :category-id="commentConfig.categoryId"
+      :mapping="commentConfig.mapping || 'pathname'"
+      reactions-enabled="1"
+      emit-metadata="0"
+      :input-position="commentConfig.inputPosition || 'top'"
+      :theme="isDark ? 'dark' : 'light'"
+      :lang="commentConfig.lang || 'zh-CN'"
+      :loading="commentConfig.loading || 'eager'"
     />
   </div>
 </template>

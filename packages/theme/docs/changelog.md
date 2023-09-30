@@ -23,6 +23,8 @@ pnpm add vitepress@latest
 ### Patch Changes
 
 - feat: recommend 支持多种排序
+- chore: 评论更加丝滑的切换深色模式
+  - 使用 [@giscus/vue](https://github.com/giscus/giscus-component) 替换 giscus 脚本
 
 ## 0.2.3 (2023/09/29)
 

@@ -42,6 +42,7 @@
     "serve": "vitepress serve docs"
   },
   "dependencies": {
+    "@giscus/vue": "^2.3.0",
     "@mdit-vue/shared": "^0.12.0",
     "@mermaid-js/mermaid-mindmap": "^9.3.0",
     "@vue/shared": "^3.2.45",

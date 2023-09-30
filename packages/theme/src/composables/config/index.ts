@@ -2,6 +2,7 @@
 import type { ElButton } from 'element-plus'
 import type { DefaultTheme } from 'vitepress'
 import type { RSSOptions } from 'vitepress-plugin-rss'
+import type { Mapping, Repo } from '@giscus/vue'
 
 type RSSPluginOptions = RSSOptions
 
@@ -89,14 +90,14 @@ export namespace Theme {
   }
 
   export interface GiscusConfig {
-    repo: string
+    repo: Repo
     repoId: string
     category: string
     categoryId: string
-    mapping?: string
+    mapping?: Mapping
     inputPosition?: 'top' | 'bottom'
     lang?: string
-    loading?: 'lazy' | 'auto' | 'eager'
+    loading?: 'lazy' | 'eager'
   }
 
   export interface HotArticle {
