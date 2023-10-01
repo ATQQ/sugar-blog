@@ -16,6 +16,9 @@ npm create @sugarat/theme@latest
 
 # With Yarn:
 yarn create @sugarat/theme
+
+# With Bun
+bunx @sugarat/create-theme --bun
 ```
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY4OTQyMDE1NTcxMA==689420155710)
