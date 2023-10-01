@@ -87,56 +87,6 @@ importers:
         specifier: ^5.0.1
         version: 5.0.1
 
-  packages/create-theme/dist/template:
-    dependencies:
-      '@element-plus/icons-vue':
-        specifier: ^2.1.0
-        version: 2.1.0(vue@3.3.4)
-      '@sugarat/theme':
-        specifier: ^0.2.3
-        version: link:../../../theme
-      element-plus:
-        specifier: ^2.3.8
-        version: 2.3.8(vue@3.3.4)
-      vue:
-        specifier: ^3.3.4
-        version: 3.3.4
-    devDependencies:
-      sass:
-        specifier: ^1.64.1
-        version: 1.64.1
-      typescript:
-        specifier: ^5.1.6
-        version: 5.1.6
-      vitepress:
-        specifier: 1.0.0-rc.20
-        version: 1.0.0-rc.20(@types/node@20.6.3)(axios@0.27.2)(sass@1.64.1)
-
-  packages/create-theme/public/template:
-    dependencies:
-      '@element-plus/icons-vue':
-        specifier: ^2.1.0
-        version: 2.1.0(vue@3.3.4)
-      '@sugarat/theme':
-        specifier: ^0.2.3
-        version: link:../../../theme
-      element-plus:
-        specifier: ^2.3.8
-        version: 2.3.8(vue@3.3.4)
-      vue:
-        specifier: ^3.3.4
-        version: 3.3.4
-    devDependencies:
-      sass:
-        specifier: ^1.64.1
-        version: 1.64.1
-      typescript:
-        specifier: ^5.1.6
-        version: 5.1.6
-      vitepress:
-        specifier: 1.0.0-rc.20
-        version: 1.0.0-rc.20(@types/node@20.6.3)(axios@0.27.2)(sass@1.64.1)
-
   packages/theme:
     dependencies:
       '@giscus/vue':
@@ -6196,6 +6146,7 @@ packages:
       sass: 1.64.1
     optionalDependencies:
       fsevents: 2.3.2
+    dev: false
 
   /vitepress-plugin-mermaid@2.0.13(mermaid@10.2.4)(vitepress@1.0.0-rc.20):
     resolution: {integrity: sha512-2c0ywXHE7kOK88Ygla9aGgkyF2JbfqfjE36JnoljW/3hQTR9rYBmfTFM5tvs4TUjCUfedUYT4CeyNolCY9t3uw==}
@@ -6319,6 +6270,7 @@ packages:
       - sugarss
       - terser
       - universal-cookie
+    dev: false
 
   /vitepress@1.0.0-rc.20(@types/node@20.6.3)(sass@1.56.1):
     resolution: {integrity: sha512-CykMUJ8JLxLcGWek0ew3wln4RYbsOd1+0YzXITTpajggpynm2S331TNkJVOkHrMRc6GYe3y4pS40GfgcW0ZwAw==}

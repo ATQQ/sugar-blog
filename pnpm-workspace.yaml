@@ -4,3 +4,4 @@ packages:
   # 不包括在 test/demos 文件夹下的 package
   - '!**/__test__/**'
   - '!**/demos/**'
+  - '!**/template/**'

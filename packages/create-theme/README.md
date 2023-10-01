@@ -23,6 +23,12 @@ With PNPM:
 $ pnpm create @sugarat/theme
 ```
 
+With Bun:
+
+```bash
+$ bunx @sugarat/create-theme --bun
+```
+
 Then follow the prompts!
 
 You can also directly specify the project name you want to use via additional command line options. For example, to scaffold a my-first-blog, run:
@@ -36,4 +42,7 @@ yarn create @sugarat/theme my-first-blog
 
 # pnpm
 pnpm create @sugarat/theme my-first-blog
+
+# bun
+bunx @sugarat/create-theme my-first-blog --bun
 ```
