@@ -1,7 +1,16 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
+import { useData } from 'vitepress'
 import { isCurrentWeek } from '../utils/client'
-import { useArticles } from '../composables/config/blog'
+import { useArticles, useBlogConfig } from '../composables/config/blog'
+import BlogAuthor from './BlogAuthor.vue'
+
+const { home } = useBlogConfig()
+const { frontmatter } = useData()
+const avatarMode = computed(() => frontmatter.value?.blog?.avatarMode || home?.avatarMode || 'card')
+
+const showCardAvatar = computed(() => avatarMode.value === 'card')
+const showSplitCard = computed(() => avatarMode.value === 'split')
 
 const docs = useArticles()
 const notHiddenArticles = computed(() => {
@@ -25,20 +34,25 @@ const currentWeek = computed(() => {
 </script>
 
 <template>
-  <div class="card overview-data">
-    <div class="overview-item">
-      <span class="count">{{ notHiddenArticles.length }}</span>
-      <span class="label">博客文章</span>
-    </div>
-    <div class="split" />
-    <div class="overview-item">
-      <span class="count">+{{ currentMonth?.length }}</span>
-      <span class="label">本月更新</span>
-    </div>
-    <div class="split" />
-    <div class="overview-item">
-      <span class="count">+{{ currentWeek?.length }}</span>
-      <span class="label">本周更新</span>
+  <!-- 头像信息 -->
+  <BlogAuthor v-if="showSplitCard" />
+  <div class="card">
+    <BlogAuthor v-if="showCardAvatar" />
+    <div class="overview-data">
+      <div class="overview-item">
+        <span class="count">{{ notHiddenArticles.length }}</span>
+        <span class="label">博客文章</span>
+      </div>
+      <div class="split" />
+      <div class="overview-item">
+        <span class="count">+{{ currentMonth?.length }}</span>
+        <span class="label">本月更新</span>
+      </div>
+      <div class="split" />
+      <div class="overview-item">
+        <span class="count">+{{ currentWeek?.length }}</span>
+        <span class="label">本周更新</span>
+      </div>
     </div>
   </div>
 </template>
@@ -56,6 +70,7 @@ const currentWeek = computed(() => {
   transition: all 0.3s;
   background-color: rgba(var(--bg-gradient));
   display: flex;
+  flex-direction: column;
 
   &:hover {
     box-shadow: var(--box-shadow-hover);

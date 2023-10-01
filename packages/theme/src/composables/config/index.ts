@@ -144,6 +144,10 @@ export namespace Theme {
     pageSize?: number
     author?: string | boolean
     logo?: string | boolean
+    /**
+     * @default 'card'
+     */
+    avatarMode?: 'card' | 'split'
   }
 
   export interface ArticleConfig {

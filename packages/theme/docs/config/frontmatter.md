@@ -60,6 +60,10 @@ interface HomeBlog {
   pageSize?: number
   author?: string
   logo?: string
+  /**
+   * @default 'card'
+   */
+  avatarMode?: 'card' | 'split'
 }
 ```
 
@@ -106,10 +110,12 @@ blog:
 
 :::code-group
 ```md [配置示例]
+---
 blog:
  # 设置作者信息
  author: Sugar
  logo: /logo.png
+---
 ```
 
 ```ts [生效优先级]
@@ -127,7 +133,18 @@ const logo = computed(() =>
 )
 ```
 :::
-![](https://img.cdn.sugarat.top/mdImg/MTY5NTUyMjY1MjA1Nw==theme-avatar.gif)
+
+设置展示风格`avatarMode`
+```md
+---
+blog:
+ avatarMode: split
+---
+```
+|                               card(默认)                                |                                    split                                    |
+| :---------------------------------------------------------------------: | :-------------------------------------------------------------------------: |
+| ![](https://img.cdn.sugarat.top/mdImg/MTY5NjE1NTk3MjkxMQ==696155972911) | ![](https://img.cdn.sugarat.top/mdImg/MTY5NTUyMjY1MjA1Nw==theme-avatar.gif) |
+
 
 ## Article
 ### title

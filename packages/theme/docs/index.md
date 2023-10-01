@@ -4,6 +4,7 @@ layout: home
 blog:
 #  author: Sugar
 #  logo: /logo.png
+#  avatarMode: split
  name: '@sugarat/theme'
  motto: 简约风的 Vitepress 博客主题
  inspiring:

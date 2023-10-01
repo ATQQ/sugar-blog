@@ -163,6 +163,10 @@ interface HomeBlog {
   pageSize?: number
   author?: string | boolean
   logo?: string | boolean
+  /**
+   * @default 'card'
+   */
+  avatarMode?: 'card' | 'split'
 }
 ```
 
@@ -172,6 +176,7 @@ interface HomeBlog {
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMDIwMzE5MQ==674920203192)
 
+![](https://img.cdn.sugarat.top/mdImg/MTY5NjE1NTk3MjkxMQ==696155972911)
 ## search
 * Type: `boolean | 'pagefind' | Object`
 * Default: `true`
