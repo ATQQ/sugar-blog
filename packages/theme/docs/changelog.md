@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新 v0.2.4 💯：主题架构优化，简化配置项，默认开启多项能力，recommend 支持多种排序
+description: 最近更新 v0.2.4 💯：主题架构优化，简化配置项，默认开启多项能力，recommend 支持多种排序，footer 配置支持flat模式
 author: 粥里有勺糖
 top: 2
 tag: 日志
@@ -24,6 +24,7 @@ pnpm add vitepress@latest
 
 - feat: recommend 支持多种排序
 - feat: 支持创建基于 bun 的模板
+- feat: footer 配置支持flat模式
 - chore: 评论更加丝滑的切换深色模式
   - 使用 [@giscus/vue](https://github.com/giscus/giscus-component) 替换 giscus 脚本
 

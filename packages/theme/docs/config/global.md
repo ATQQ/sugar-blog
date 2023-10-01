@@ -984,7 +984,7 @@ type ThemeColor = 'vp-default' | 'vp-green' | 'vp-yellow' | 'vp-red' | 'el-blue'
 <ChangeThemeDemo />
 
 ## footer
-* Type: `Footer`
+* Type: `Footer | Footer[]`
 
 设置首页页脚的内容（可用于设置版权，备案信息，自定义内容等）
 
@@ -1006,7 +1006,7 @@ interface Footer {
   /**
    * 自定义补充信息
    */
-  message?: string
+  message?: string | string[]
   /**
    * 是否展示主题版本信息
    */
@@ -1093,3 +1093,30 @@ const blogTheme = getThemeConfig({
   }
 })
 ```
+
+footer（ message 字段也支持） 支持配置为数组，可以用于灵活设置底部信息的布局
+
+```ts
+const blogTheme = getThemeConfig({
+  footer: [{
+    message: '下面 的内容和图标都是可以修改的噢（当然本条内容也是可以隐藏的）',
+    copyright: 'MIT License | 粥里有勺糖',
+  }, {
+    message: ['自定义多条内容', '自定义多条内容'],
+    copyright: 'MIT License | 粥里有勺糖',
+    version: true
+  }, {
+    version: false,
+    icpRecord: {
+      name: '蜀ICP备19011724号',
+      link: 'https://beian.miit.gov.cn/'
+    },
+    securityRecord: {
+      name: '公网安备xxxxx',
+      link: 'https://www.beian.gov.cn/portal/index.do'
+    },
+  }]
+})
+```
+
+![](https://img.cdn.sugarat.top/mdImg/MTY5NjE1NDYyMjI3NQ==696154622275)

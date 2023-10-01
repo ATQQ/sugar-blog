@@ -27,7 +27,7 @@ const currentPageNum: InjectionKey<Ref<number>> = Symbol('home-page-num')
 
 const userWorks: InjectionKey<Ref<Theme.UserWorks>> = Symbol('user-works')
 
-const homeFooter: InjectionKey<Theme.Footer | undefined> = Symbol('home-footer')
+const homeFooter: InjectionKey<Theme.Footer | Theme.Footer[] | undefined> = Symbol('home-footer')
 
 export function withConfigProvider(App: Component) {
   return defineComponent({

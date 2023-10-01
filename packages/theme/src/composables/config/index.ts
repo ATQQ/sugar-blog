@@ -316,7 +316,7 @@ export namespace Theme {
     /**
      * 首页页脚
      */
-    footer?: Footer
+    footer?: Footer | Footer[]
   }
 
   export type RSSOptions = RSSPluginOptions
@@ -325,7 +325,7 @@ export namespace Theme {
     /**
      * 自定义补充信息
      */
-    message?: string
+    message?: string | string[]
     /**
      * 是否展示主题版本信息
      */
