@@ -15,6 +15,7 @@ import BlogArticleAnalyze from './BlogArticleAnalyze.vue'
 import BlogAlert from './BlogAlert.vue'
 import BlogPopover from './BlogPopover.vue'
 import BlogFooter from './BlogFooter.vue'
+import BlogHomeHeaderAvatar from './BlogHomeHeaderAvatar.vue'
 
 const { frontmatter } = useData()
 const layout = computed(() => frontmatter.value.layout)
@@ -49,6 +50,7 @@ const { Layout } = Theme
     <template v-if="isBlogTheme" #home-hero-before>
       <slot name="home-hero-before" />
       <div class="home">
+        <BlogHomeHeaderAvatar />
         <div class="header-banner">
           <BlogHomeBanner />
         </div>

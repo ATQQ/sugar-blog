@@ -2,6 +2,7 @@
 import type { ElButton } from 'element-plus'
 import type { DefaultTheme } from 'vitepress'
 import type { RSSOptions } from 'vitepress-plugin-rss'
+import type { Mapping, Repo } from '@giscus/vue'
 
 type RSSPluginOptions = RSSOptions
 
@@ -89,14 +90,14 @@ export namespace Theme {
   }
 
   export interface GiscusConfig {
-    repo: string
+    repo: Repo
     repoId: string
     category: string
     categoryId: string
-    mapping?: string
+    mapping?: Mapping
     inputPosition?: 'top' | 'bottom'
     lang?: string
-    loading?: 'lazy' | 'auto' | 'eager'
+    loading?: 'lazy' | 'eager'
   }
 
   export interface HotArticle {
@@ -114,7 +115,19 @@ export namespace Theme {
      * @default true
      */
     showSelf?: boolean
+    /**
+     * 自定义文章过滤
+     */
     filter?: (page: Theme.PageData) => boolean
+    /**
+     * 自定义排序
+     * @default 'date'
+     */
+    sort?: 'date' | 'filename' | ((a: Theme.PageData, b: Theme.PageData) => number)
+    /**
+     * 当没有推荐文章时的提示，设置为 false 则不展示
+     * @default '暂无相关文章'
+     */
     empty?: string | boolean
     /**
      * 设置推荐文章的展示风格
@@ -131,6 +144,10 @@ export namespace Theme {
     pageSize?: number
     author?: string | boolean
     logo?: string | boolean
+    /**
+     * @default 'card'
+     */
+    avatarMode?: 'card' | 'split'
   }
 
   export interface ArticleConfig {
@@ -303,7 +320,7 @@ export namespace Theme {
     /**
      * 首页页脚
      */
-    footer?: Footer
+    footer?: Footer | Footer[]
   }
 
   export type RSSOptions = RSSPluginOptions
@@ -312,7 +329,7 @@ export namespace Theme {
     /**
      * 自定义补充信息
      */
-    message?: string
+    message?: string | string[]
     /**
      * 是否展示主题版本信息
      */

@@ -56,7 +56,24 @@ const recommendList = computed(() => {
   topList.sort((a, b) => Number(a.meta.recommend) - Number(b.meta.recommend))
 
   const normalList = origin.filter(v => !v.meta?.recommend)
-  normalList.sort((a, b) => +new Date(b.meta.date) - +new Date(a.meta.date))
+
+  // 排序
+  const sortMode = recommend.value?.sort ?? 'date'
+  // 默认时间排序
+  let compareFn = (a: any, b: any) => +new Date(b.meta.date) - +new Date(a.meta.date)
+  // 文件名排序
+  if (sortMode === 'filename') {
+    compareFn = (a: any, b: any) => {
+      const aName = a.route.split('/').pop()
+      const bName = b.route.split('/').pop()
+      return aName.localeCompare(bName)
+    }
+  }
+  // 自定义排序
+  if (typeof sortMode === 'function') {
+    compareFn = sortMode
+  }
+  normalList.sort(compareFn)
 
   return topList.concat(normalList)
 })

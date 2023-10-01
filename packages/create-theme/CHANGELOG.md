@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.23
+
+### Patch Changes
+
+- feat: 模板支持使用 bun
+
 ## 0.0.22
 
 ### Patch Changes

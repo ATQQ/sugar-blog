@@ -1,5 +1,18 @@
 # @sugarat/theme
 
+## 0.2.4
+
+### Patch Changes
+
+- feat: recommend 支持多种排序
+- feat: 支持基于 bun 的模板
+- feat: footer 配置支持flat模式
+- feat: 头像合入卡片展示(支持切换为`split`模式)
+- feat: 移动端支持头像展示（可关闭`minScreenAvatar: false`）
+- chore: 深色模式调整卡片背景色
+- chore: 评论更加丝滑的切换深色模式
+  - 使用 [@giscus/vue](https://github.com/giscus/giscus-component) 组件替换 giscus 脚本
+
 ## 0.2.3
 
 ### Patch Changes

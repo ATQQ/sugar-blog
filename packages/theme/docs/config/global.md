@@ -163,6 +163,10 @@ interface HomeBlog {
   pageSize?: number
   author?: string | boolean
   logo?: string | boolean
+  /**
+   * @default 'card'
+   */
+  avatarMode?: 'card' | 'split'
 }
 ```
 
@@ -172,6 +176,7 @@ interface HomeBlog {
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMDIwMzE5MQ==674920203192)
 
+![](https://img.cdn.sugarat.top/mdImg/MTY5NjE1NTk3MjkxMQ==696155972911)
 ## search
 * Type: `boolean | 'pagefind' | Object`
 * Default: `true`
@@ -400,7 +405,8 @@ const blogTheme = getThemeConfig({
     nextText: '换一组',
     pageSize: 9,
     empty: '暂无相关文章',
-    style: 'sidebar'
+    style: 'sidebar',
+    sort: 'date'
   }
 })
 ```
@@ -411,7 +417,8 @@ const blogTheme = getThemeConfig({
     title: '🔍 推荐文章',
     nextText: '下一页',
     pageSize: 1,
-    style: 'card'
+    style: 'card',
+    sort: 'filename' // 文件名排序
     // empty: false // false时无推荐文章不展示此模块
   }
 })
@@ -427,7 +434,19 @@ interface RecommendArticle {
    * @default true
    */
   showSelf?: boolean
+  /**
+   * 自定义文章过滤
+   */
   filter?: (page: Theme.PageData) => boolean
+  /**
+   * 自定义排序
+   * @default 'date'
+   */
+  sort?: 'date' | 'filename' | ((a: Theme.PageData, b: Theme.PageData) => number)
+  /**
+   * 当没有推荐文章时的提示，设置为 false 则不展示
+   * @default '暂无相关文章'
+   */
   empty?: string | boolean
   /**
    * 设置推荐文章的展示风格
@@ -458,6 +477,28 @@ const blogTheme = getThemeConfig({
 })
 ```
 ![](https://img.cdn.sugarat.top/mdImg/MTY5MTIxODc4NDYzNw==691218784637)
+
+通过 `sort` 属性可以自定义排序规则，默认按照时间排序`date`，例如按照文件名排序
+
+:::code-group
+```ts [文件名]
+const blogTheme = getThemeConfig({
+  recommend: {
+    sort: 'filename'
+  }
+})
+```
+
+```ts [自定义排序]
+const blogTheme = getThemeConfig({
+  recommend: {
+    sort(a, b) {
+      return +new Date(b.meta.date) - +new Date(a.meta.date)
+    },
+  }
+})
+```
+:::
 
 ## article
 设置文章全局相关能力
@@ -948,7 +989,7 @@ type ThemeColor = 'vp-default' | 'vp-green' | 'vp-yellow' | 'vp-red' | 'el-blue'
 <ChangeThemeDemo />
 
 ## footer
-* Type: `Footer`
+* Type: `Footer | Footer[]`
 
 设置首页页脚的内容（可用于设置版权，备案信息，自定义内容等）
 
@@ -970,7 +1011,7 @@ interface Footer {
   /**
    * 自定义补充信息
    */
-  message?: string
+  message?: string | string[]
   /**
    * 是否展示主题版本信息
    */
@@ -1057,3 +1098,30 @@ const blogTheme = getThemeConfig({
   }
 })
 ```
+
+footer（ message 字段也支持） 支持配置为数组，可以用于灵活设置底部信息的布局
+
+```ts
+const blogTheme = getThemeConfig({
+  footer: [{
+    message: '下面 的内容和图标都是可以修改的噢（当然本条内容也是可以隐藏的）',
+    copyright: 'MIT License | 粥里有勺糖',
+  }, {
+    message: ['自定义多条内容', '自定义多条内容'],
+    copyright: 'MIT License | 粥里有勺糖',
+    version: true
+  }, {
+    version: false,
+    icpRecord: {
+      name: '蜀ICP备19011724号',
+      link: 'https://beian.miit.gov.cn/'
+    },
+    securityRecord: {
+      name: '公网安备xxxxx',
+      link: 'https://www.beian.gov.cn/portal/index.do'
+    },
+  }]
+})
+```
+
+![](https://img.cdn.sugarat.top/mdImg/MTY5NjE1NDYyMjI3NQ==696154622275)

@@ -113,6 +113,7 @@ h1 {
     display: none;
   }
 }
+
 @keyframes fade-in {
   0% {
     opacity: 0;
@@ -127,6 +128,7 @@ h1 {
   margin: 16px 0;
   height: 24px;
   width: auto;
+
   h2 {
     animation: fade-in 0.5s ease-in-out;
     cursor: pointer;

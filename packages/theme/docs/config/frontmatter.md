@@ -48,6 +48,12 @@ blog:
  inspiring: 基于 Vitepress 定制的主题🎨
  # 设置首页列表每页展示数量
  pageSize: 2
+
+ # 设置头像分离展示模式
+ # avatarMode: split
+
+ # 移动端隐藏头部头像展示
+ # minScreenAvatar: false
 ---
 ```
 
@@ -60,6 +66,14 @@ interface HomeBlog {
   pageSize?: number
   author?: string
   logo?: string
+  /**
+   * @default 'card'
+   */
+  avatarMode?: 'card' | 'split'
+  /**
+   * @default true
+   */
+  minScreenAvatar?: boolean
 }
 ```
 
@@ -106,10 +120,12 @@ blog:
 
 :::code-group
 ```md [配置示例]
+---
 blog:
  # 设置作者信息
  author: Sugar
  logo: /logo.png
+---
 ```
 
 ```ts [生效优先级]
@@ -127,7 +143,28 @@ const logo = computed(() =>
 )
 ```
 :::
-![](https://img.cdn.sugarat.top/mdImg/MTY5NTUyMjY1MjA1Nw==theme-avatar.gif)
+
+设置展示风格`avatarMode`
+```md
+---
+blog:
+ avatarMode: split
+---
+```
+|                               card(默认)                                |                                    split                                    |
+| :---------------------------------------------------------------------: | :-------------------------------------------------------------------------: |
+| ![](https://img.cdn.sugarat.top/mdImg/MTY5NjE1NTk3MjkxMQ==696155972911) | ![](https://img.cdn.sugarat.top/mdImg/MTY5NTUyMjY1MjA1Nw==theme-avatar.gif) |
+
+移动端隐藏头部头像展示`minScreenAvatar`
+```md
+---
+blog:
+ minScreenAvatar: true
+---
+```
+|                      minScreenAvatar: true (默认)                       |                           minScreenAvatar: false                            |
+| :---------------------------------------------------------------------: | :-------------------------------------------------------------------------: |
+| ![](https://img.cdn.sugarat.top/mdImg/MTY5NjE2MjE0MTI5Mw==696162141293) | ![](https://img.cdn.sugarat.top/mdImg/MTY5NjE2MjE4NjM3MQ==696162186371) |
 
 ## Article
 ### title
