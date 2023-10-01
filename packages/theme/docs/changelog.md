@@ -26,6 +26,7 @@ pnpm add vitepress@latest
 - feat: 支持创建基于 bun 的模板
 - feat: footer 配置支持flat模式
 - feat: 头像合入卡片展示(支持切换为`split`模式)
+- chore: 深色模式调整卡片背景色
 - chore: 评论更加丝滑的切换深色模式
   - 使用 [@giscus/vue](https://github.com/giscus/giscus-component) 替换 giscus 脚本
 
