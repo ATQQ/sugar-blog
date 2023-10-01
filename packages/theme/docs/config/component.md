@@ -14,6 +14,13 @@ tag:
 
 支持局部的`tabs`面板，**默认开启**
 
+:::details 我之前手动安装配置了怎么办？
+① package.json 中移除 vitepress-plugin-tabs 依赖
+
+② .vitepress/theme/index.ts 中移除注册的组件`enhanceAppWithTabs`
+
+③ （可选）`getThemeConfig` 中移除配置项`tabs`
+:::
 :::tip 一点说明
 基于 [vitepress-plugin-tabs@0.2.0](https://www.npmjs.com/package/vitepress-plugin-tabs) 内置实现
 :::
