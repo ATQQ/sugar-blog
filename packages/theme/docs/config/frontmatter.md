@@ -48,6 +48,12 @@ blog:
  inspiring: 基于 Vitepress 定制的主题🎨
  # 设置首页列表每页展示数量
  pageSize: 2
+
+ # 设置头像分离展示模式
+ # avatarMode: split
+
+ # 移动端隐藏头部头像展示
+ # minScreenAvatar: false
 ---
 ```
 
@@ -64,6 +70,10 @@ interface HomeBlog {
    * @default 'card'
    */
   avatarMode?: 'card' | 'split'
+  /**
+   * @default true
+   */
+  minScreenAvatar?: boolean
 }
 ```
 
@@ -145,6 +155,16 @@ blog:
 | :---------------------------------------------------------------------: | :-------------------------------------------------------------------------: |
 | ![](https://img.cdn.sugarat.top/mdImg/MTY5NjE1NTk3MjkxMQ==696155972911) | ![](https://img.cdn.sugarat.top/mdImg/MTY5NTUyMjY1MjA1Nw==theme-avatar.gif) |
 
+移动端隐藏头部头像展示`minScreenAvatar`
+```md
+---
+blog:
+ minScreenAvatar: true
+---
+```
+|                      minScreenAvatar: true (默认)                       |                           minScreenAvatar: false                            |
+| :---------------------------------------------------------------------: | :-------------------------------------------------------------------------: |
+| ![](https://img.cdn.sugarat.top/mdImg/MTY5NjE2MjE0MTI5Mw==696162141293) | ![](https://img.cdn.sugarat.top/mdImg/MTY5NjE2MjE4NjM3MQ==696162186371) |
 
 ## Article
 ### title
