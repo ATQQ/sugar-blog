@@ -47,7 +47,7 @@ export default defineConfig({
 :::tip
 主题继承[默认主题配置](https://vitepress.dev/reference/site-config)，即原主题配置依然生效
 
-官方内置的👉🏻 [markdown 能力](https://vitepress.vuejs.org/guide/markdown) 👈🏻
+官方内置的👉🏻 [markdown 能力](https://vitepress.dev/guide/markdown) 👈🏻
 :::
 
 本主题的拓展配置都在导出的`getThemeConfig`方法中
@@ -314,7 +314,7 @@ export default defineConfig({
 :::
 
 ### 全文搜索 - algolia
-当然也推荐大家接入[algolia](https://vitepress.vuejs.org/guide/theme-search)使用，申请教程可以参考 [博客优化之开启 Algolia 全文搜索](https://github.com/mqyqingfeng/Blog/issues/267)
+当然也推荐大家接入[algolia](https://vitepress.dev/guide/theme-search)使用，申请教程可以参考 [博客优化之开启 Algolia 全文搜索](https://github.com/mqyqingfeng/Blog/issues/267)
 
 ```ts
 export default defineConfig({
@@ -536,7 +536,7 @@ interface ArticleConfig {
 * Type: `string`
 * Default: `.`
 
-相对于项目根目录，文章所在位置，同 [App Configs #srcdir](https://vitepress.vuejs.org/config/app-configs#srcdir)
+相对于项目根目录，文章所在位置，同 [App Configs #srcdir](https://vitepress.dev/config/app-configs#srcdir)
 
 **通常情况下无需设置**，默认从 CLI 指令取值 
 
@@ -717,7 +717,7 @@ const blogTheme = getThemeConfig({
       des: 'Vite & Vue Powered Static Site Generator',
       avatar:
         'https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTI2NzY1Ng==674995267656',
-      url: 'https://vitepress.vuejs.org/'
+      url: 'https://vitepress.dev/'
     }
   ]
 })

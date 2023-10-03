@@ -14,7 +14,7 @@ sticky: 800
 
 当然使用频率最高的就是本地启动，构建是个相对比较低频的动作。
 
-恰好此时 [VitePress](https://vitepress.vuejs.org/) 也比较成熟了（alpha），相比 VuePress 更加的简洁，可玩性强，上手成本也低。
+恰好此时 [VitePress](https://vitepress.dev/) 也比较成熟了（alpha），相比 VuePress 更加的简洁，可玩性强，上手成本也低。
 
 按照官方的给的定位，VitePress 主打是主题（个人感觉就像[Hexo](https://hexo.io/zh-cn/)丰富多彩的主题一样），不提供插件系统
 

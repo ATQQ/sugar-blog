@@ -1,11 +1,17 @@
 # @sugarat/create-theme
 
+## 0.0.25
+
+### Patch Changes
+
+- chore: 模板内链接更新
+
 ## 0.0.24
 
 ### Patch Changes
 
 - fix: ERR_REQUIRE_ESM
-  - lock vitepress-plugin-mermaid version@2.0.13 
+  - lock vitepress-plugin-mermaid version@2.0.13
 
 ## 0.0.23
 

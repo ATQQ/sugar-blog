@@ -14,26 +14,22 @@
 * [vitepress-plugin-rss](./packages/vitepress-plugin-rss/)：基于 feed 实现的 VitePress RSS 支持插件
 
 ## 快速创建博客模板
-With NPM:
-
+支持多种包管理工具
 ```sh
-npm create @sugarat/theme@latest
-```
-
-With Yarn:
-
-```sh
-yarn create @sugarat/theme
-```
-
-With PNPM:
-
-```sh
+# With PNPM:
 pnpm create @sugarat/theme
-```
 
+# With NPM:
+npm create @sugarat/theme@latest
+
+# With Yarn:
+yarn create @sugarat/theme
+
+# With Bun
+bunx @sugarat/create-theme --bun
+```
 ## 运行本项目
-博客基于[vitepress](https://vitepress.vuejs.org/)构建
+这是一个 monorepo 仓库，博客基于[vitepress](https://vitepress.dev/)搭建，运行前需先安装依赖，构建主题包
 
 ① 先安装 `pnpm`
 ```sh
@@ -86,4 +82,4 @@ pnpm dev:theme
 * [kweku](http://kweku.top/)
 * [炽翎](https://juejin.im/user/3122268753634541/posts)
 * [冴羽](https://github.com/mqyqingfeng/Blog)
-* [神三元](http://47.98.159.95/my_blog/)
+* [神三元](https://juejin.cn/user/430664257382462/posts)

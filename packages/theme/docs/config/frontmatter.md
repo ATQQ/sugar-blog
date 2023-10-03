@@ -17,7 +17,7 @@ recommend: 1
 :::tip
 主题继承[默认主题配置](https://vitepress.dev/reference/site-config)，即原主题配置依然生效
 
-官方内置的👉🏻 [markdown 能力](https://vitepress.vuejs.org/guide/markdown) 👈🏻
+官方内置的👉🏻 [markdown 能力](https://vitepress.dev/guide/markdown) 👈🏻
 :::
 ## Home
 ### layout
@@ -197,7 +197,7 @@ description: 简单介绍主题的由来和实现原理
 
 # 关于主题
 
-基于 [vitepress](https://vitepress.vuejs.org/) 的自定义主题实现
+基于 [vitepress](https://vitepress.dev/) 的自定义主题实现
 ```
 
 在首页就会有如下展示

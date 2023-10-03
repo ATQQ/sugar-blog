@@ -9,7 +9,7 @@ recommend: 3
 ---
 
 # 样式配置
-样式自定义，参考[官方文档思路](https://vitepress.vuejs.org/guide/theme-introduction#customizing-css)
+样式自定义，参考[官方文档思路](https://vitepress.dev/guide/extending-default-theme#customizing-css)
 
 在 `.vitepress/theme/index.ts` 中引入自定义的样式文件，覆盖默认主题样式即可
 
