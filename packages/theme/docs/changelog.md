@@ -18,6 +18,13 @@ pnpm up @sugarat/theme
 pnpm add vitepress@latest
 ```
 
+## 0.2.5 (2023/10/03)
+
+### Patch Changes
+
+- fix: ERR_REQUIRE_ESM
+  - lock vitepress-plugin-mermaid version@2.0.13 
+
 ## 0.2.4 (2023/09/30)
 
 ### Patch Changes

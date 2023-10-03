@@ -1,5 +1,12 @@
 # @sugarat/theme
 
+## 0.2.5
+
+### Patch Changes
+
+- fix: ERR_REQUIRE_ESM
+  - lock vitepress-plugin-mermaid version 2.0.13
+
 ## 0.2.4
 
 ### Patch Changes
