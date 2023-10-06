@@ -26,6 +26,12 @@ bun install vitepress@latest
 ```
 :::
 
+## 0.2.6 (2023/10/06)
+
+### Patch Changes
+
+- fix: nav-bar-content-before slot
+
 ## 0.2.5 (2023/10/03)
 
 ### Patch Changes

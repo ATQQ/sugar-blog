@@ -1,5 +1,11 @@
 # @sugarat/theme
 
+## 0.2.6
+
+### Patch Changes
+
+- fix: nav-bar-content-before slot
+
 ## 0.2.5
 
 ### Patch Changes

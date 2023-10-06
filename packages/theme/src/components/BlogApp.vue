@@ -41,11 +41,9 @@ const { Layout } = Theme
       <BlogImagePreview />
     </template>
 
-    <!-- 自定义搜索，替代Algolia，未来择机移除 -->
-    <!-- <template #nav-bar-content-before>
+    <template #nav-bar-content-before>
       <slot name="nav-bar-content-before" />
-      <BlogSearch />
-    </template> -->
+    </template>
     <!-- 自定义首页 -->
     <template v-if="isBlogTheme" #home-hero-before>
       <slot name="home-hero-before" />

@@ -1,6 +1,6 @@
 {
   "name": "@sugarat/theme",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "简约风的 Vitepress 博客主题，sugarat vitepress blog theme",
   "author": "sugar",
   "license": "MIT",
@@ -39,7 +39,8 @@
     "build": "npm run build:node && npm run build:docs",
     "build:docs": "vitepress build docs",
     "build:node": "npx tsup",
-    "serve": "vitepress serve docs"
+    "serve": "vitepress serve docs",
+    "documate:upload": "documate upload"
   },
   "dependencies": {
     "@giscus/vue": "^2.3.0",
@@ -56,6 +57,8 @@
     "vitepress-plugin-tabs": "0.2.0"
   },
   "devDependencies": {
+    "@documate/documate": "^0.2.1",
+    "@documate/vue": "^0.3.1",
     "@element-plus/icons-vue": "^2.1.0",
     "element-plus": "^2.3.4",
     "pagefind": "1.0.3",
