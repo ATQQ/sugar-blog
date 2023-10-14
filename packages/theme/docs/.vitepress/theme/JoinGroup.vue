@@ -21,7 +21,7 @@ const props = defineProps({
             <a href="https://qm.qq.com/q/rqMyNvGyvS" target="_blank" rel="noopener noreferrer">681489336</a>
           </div>
           <div class="scan-card">
-            <img src="https://img.cdn.sugarat.top/mdImg/MTY5NTk5Nzg2OTAzOQ==695997869039" alt="微信群">
+            <img src="/wechat-scan.png" alt="微信群">
             <span>微信交流群</span>
             <br>
           </div>
@@ -42,7 +42,7 @@ const props = defineProps({
           <a href="https://qm.qq.com/q/rqMyNvGyvS" target="_blank" rel="noopener noreferrer">681489336</a>
         </div>
         <div class="scan-card">
-          <img src="https://img.cdn.sugarat.top/mdImg/MTY5NTk5Nzg2OTAzOQ==695997869039" alt="微信群">
+          <img src="/wechat-scan.png" alt="微信群">
           <span>微信交流群</span>
           <br>
         </div>
