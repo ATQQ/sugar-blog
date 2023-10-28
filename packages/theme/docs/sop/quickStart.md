@@ -161,7 +161,7 @@ bun run --bun serve
 如果主题更新了，升级主题，原项目只需执行如下指令即可
 :::code-group
 ```sh [pnpm]
-pnpm up @sugarat/theme
+pnpm add @sugarat/theme@latest
 
 # 更新 vitepress 版本（通常安装最新的即可，主题包每次更新不出意外都会使用最新的VitePress）
 pnpm add vitepress@latest
