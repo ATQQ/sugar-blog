@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.1.0",
-    "@sugarat/theme": "^0.2.5",
+    "@sugarat/theme": "^0.2.6",
     "element-plus": "^2.3.8",
     "vue": "^3.3.4"
   },
@@ -21,6 +21,6 @@
   "devDependencies": {
     "sass": "^1.64.1",
     "typescript": "^5.1.6",
-    "vitepress": "1.0.0-rc.20"
+    "vitepress": "1.0.0-rc.24"
   }
 }
