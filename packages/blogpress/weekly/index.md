@@ -16,8 +16,41 @@ hidden: true
 
 [[toc]]
 
+
+## 渠道来源
+笔者每周会从各大`技术平台`，`其余周刊`，`优质公众号`中精选一部分内容
+
+也推荐大家同时关注以下渠道，也欢迎读者在评论区补充推荐的渠道
+
+### 技术资讯
+* [阮一峰: 科技爱好者周刊](https://www.ruanyifeng.com/blog/archives.html) - 记录每周值得分享的科技内容，周五发布
+* [云谦：MDH 前端周刊](https://mdhweekly.com/) - 前端资讯和分享
+* [童欧巴：前端食堂](https://github.com/Geekhyt/weekly) - 你的前端食堂，吃好每一顿饭
+* [rottenpen：FE News](https://rottenpen.zhubai.love/) - 分享前端，生活
+* [知识星球：咲奈的平行时空](https://wx.zsxq.com/dweb2/index/group/15552285284822) - 前端前沿技术、资讯、方法论分享
+* [前端技术文章](https://fed.chanceyu.com/)
+* [省流](https://shengliu.tech/)
+* [值得一读技术博客](https://daily-blog.chlinlearn.top/)
+
+### 技术社区
+* [掘金](https://juejin.cn/)
+* [开源中国](https://www.oschina.net/)
+* [V2EX](https://www.v2ex.com/)
+* [codenews](https://codenews.cc/)
+
+### 优质公众号
+* ELab团队
+* 奇舞精选
+* 大淘宝技术
+* 大淘宝前端技术
+* 支付宝体验科技
+* 字节跳动技术团队​
+
+
 <!-- TODO：自动生成可翻页目录 -->
 ## 2023
+* [技术视野周刊第60期](./2023-11-05.md)
+* [技术视野周刊第59期](./2023-10-29.md)
 * [技术视野周刊第58期](./2023-10-22.md)
 * [技术视野周刊第57期](./2023-10-15.md)
 * [技术视野周刊第56期](./2023-10-06.md)
@@ -62,35 +95,3 @@ hidden: true
 
 ## 2022
 * [技术视野周刊第18期](./2022-12-30.md)
-
-
-## 渠道来源
-笔者每周会从各大`技术平台`，`其余周刊`，`优质公众号`中精选一部分内容
-
-也推荐大家同时关注以下渠道，也欢迎读者在评论区补充推荐的渠道
-
-### 技术资讯
-* [阮一峰: 科技爱好者周刊](https://www.ruanyifeng.com/blog/archives.html) - 记录每周值得分享的科技内容，周五发布
-* [云谦：MDH 前端周刊](https://www.yuque.com/chencheng/mdh-weekly) - 前端资讯和分享
-* [童欧巴：前端食堂](https://github.com/Geekhyt/weekly) - 你的前端食堂，吃好每一顿饭
-* [rottenpen：FE News](https://rottenpen.zhubai.love/) - 分享前端，生活
-* [知识星球：咲奈的平行时空](https://wx.zsxq.com/dweb2/index/group/15552285284822) - 前端前沿技术、资讯、方法论分享
-* [前端技术文章](https://fed.chanceyu.com/)
-* [省流](https://shengliu.tech/)
-* [值得一读技术博客](https://daily-blog.chlinlearn.top/)
-
-### 技术社区
-* [掘金](https://juejin.cn/)
-* [开源中国](https://www.oschina.net/)
-* [V2EX](https://www.v2ex.com/)
-* [codenews](https://codenews.cc/)
-
-### 优质公众号
-* ELab团队
-* 奇舞精选
-* 大淘宝技术
-* 大淘宝前端技术
-* 支付宝体验科技
-* 字节跳动技术团队​
-
-

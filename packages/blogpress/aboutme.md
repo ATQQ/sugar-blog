@@ -8,7 +8,7 @@ tags:
 # 关于自己
 99年出生，标准的理工男一枚,毕业于([西南石油大学](https://www.swpu.edu.cn/)),热爱开源与知识分享
 
-目前就职于 🛵**美团**🛵（Base 北京）
+目前就职于 🛵**美团**🛵 (前端打杂)
 
 ## :sparkles:当下
 ![图片](https://img.cdn.sugarat.top/mdImg/MTYwNDcyMTQ4NTMyOA==604721485328)
