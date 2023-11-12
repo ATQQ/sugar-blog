@@ -1,5 +1,5 @@
 <script setup>
-import { useData } from 'vitepress'
+import { useData, withBase } from 'vitepress'
 import { computed } from 'vue'
 import { useBlogConfig } from '../composables/config/blog'
 
@@ -22,7 +22,7 @@ const show = computed(() => author.value || logo.value)
 
 <template>
   <div v-if="show" class="blog-author">
-    <img v-if="logo" :src="logo" alt="avatar">
+    <img v-if="logo" :src="withBase(logo)" alt="avatar">
     <p v-if="author">
       {{ author }}
     </p>
