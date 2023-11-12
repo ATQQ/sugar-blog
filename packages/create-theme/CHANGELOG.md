@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.27
+
+### Patch Changes
+
+- chore: 更新依赖
+
 ## 0.0.26
 
 ### Patch Changes

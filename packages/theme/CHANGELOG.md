@@ -1,5 +1,11 @@
 # @sugarat/theme
 
+## 0.2.7
+
+### Patch Changes
+
+- fix: 设置base后logo不生效
+
 ## 0.2.6
 
 ### Patch Changes
