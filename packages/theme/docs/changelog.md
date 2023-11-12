@@ -26,6 +26,12 @@ bun install vitepress@latest
 ```
 :::
 
+## 0.2.7 (2023/11/12)
+
+### Patch Changes
+
+- fix: 设置base后logo不生效
+
 ## 0.2.6 (2023/10/06)
 
 ### Patch Changes

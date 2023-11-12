@@ -1,5 +1,5 @@
 <script  setup lang="ts">
-import { useData } from 'vitepress'
+import { useData, withBase } from 'vitepress'
 import { computed } from 'vue'
 import { useWindowSize } from '@vueuse/core'
 import { useBlogConfig } from '../composables/config/blog'
@@ -20,7 +20,7 @@ const alwaysHide = computed(() => frontmatter.value.blog?.minScreenAvatar === fa
 
 <template>
   <div v-show="inMiniScreen && !alwaysHide" class="blog-home-header-avatar">
-    <img :src="logo" alt="avatar">
+    <img :src="withBase(logo)" alt="avatar">
   </div>
 </template>
 
