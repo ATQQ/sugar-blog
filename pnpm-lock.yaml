@@ -55,17 +55,17 @@ importers:
         specifier: ^2.1.0
         version: 2.1.0(vue@3.3.4)
       '@sugarat/theme':
-        specifier: 0.2.6
+        specifier: 0.2.7
         version: link:../theme
       axios:
-        specifier: ^0.27.2
-        version: 0.27.2
+        specifier: ^1.6.0
+        version: 1.6.0
       element-plus:
         specifier: ^2.3.8
         version: 2.3.8(vue@3.3.4)
       vitepress:
         specifier: 1.0.0-rc.24
-        version: 1.0.0-rc.24(@types/node@20.6.3)(axios@0.27.2)(sass@1.64.1)(typescript@5.1.6)
+        version: 1.0.0-rc.24(@types/node@20.6.3)(axios@1.6.0)(sass@1.64.1)(typescript@5.1.6)
       vue:
         specifier: ^3.3.4
         version: 3.3.4
@@ -149,7 +149,7 @@ importers:
         version: 4.9.4
       vitepress:
         specifier: 1.0.0-rc.24
-        version: 1.0.0-rc.24(@types/node@20.6.3)(postcss@8.4.27)(sass@1.56.1)(typescript@4.9.4)
+        version: 1.0.0-rc.24(@types/node@20.6.3)(postcss@8.4.31)(sass@1.56.1)(typescript@4.9.4)
       vue:
         specifier: ^3.3.4
         version: 3.3.4
@@ -672,7 +672,7 @@ packages:
     resolution: {integrity: sha512-FhbDmWBNyezbzoSOwBpv8SdWEF/OtcSS3GYTcHvLS41IXLi0MZJNx3t+/m73S+CmYLE1M5WgEzcZsO1E8NqeyA==}
     hasBin: true
     dependencies:
-      axios: 1.5.1
+      axios: 1.6.0
       commander: 11.0.0
       detect-package-manager: 3.0.1
       execa: 8.0.1
@@ -2017,7 +2017,7 @@ packages:
       - vue
     dev: true
 
-  /@vueuse/integrations@10.5.0(axios@0.27.2)(focus-trap@7.5.4)(vue@3.3.7):
+  /@vueuse/integrations@10.5.0(axios@1.6.0)(focus-trap@7.5.4)(vue@3.3.7):
     resolution: {integrity: sha512-fm5sXLCK0Ww3rRnzqnCQRmfjDURaI4xMsx+T+cec0ngQqHx/JgUtm8G0vRjwtonIeTBsH1Q8L3SucE+7K7upJQ==}
     peerDependencies:
       async-validator: '*'
@@ -2060,7 +2060,7 @@ packages:
     dependencies:
       '@vueuse/core': 10.5.0(vue@3.3.7)
       '@vueuse/shared': 10.5.0(vue@3.3.7)
-      axios: 0.27.2
+      axios: 1.6.0
       focus-trap: 7.5.4
       vue-demi: 0.14.6(vue@3.3.7)
     transitivePeerDependencies:
@@ -2275,16 +2275,16 @@ packages:
       form-data: 4.0.0
     transitivePeerDependencies:
       - debug
+    dev: true
 
-  /axios@1.5.1:
-    resolution: {integrity: sha512-Q28iYCWzNHjAm+yEAot5QaAMxhMghWLFVf7rRdwhUI+c2jix2DUXjAHXVi+s1ibs3mjPO/cCgbA++3BjD0vP/A==}
+  /axios@1.6.0:
+    resolution: {integrity: sha512-EZ1DYihju9pwVB+jg67ogm+Tmqc6JmhamRN6I4Zt8DfZu5lbcQGw3ozH9lFejSJgs/ibaef3A9PMXPLeefFGJg==}
     dependencies:
       follow-redirects: 1.15.2
       form-data: 4.0.0
       proxy-from-env: 1.1.0
     transitivePeerDependencies:
       - debug
-    dev: true
 
   /balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
@@ -5546,29 +5546,29 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /postcss-import@15.1.0(postcss@8.4.27):
+  /postcss-import@15.1.0(postcss@8.4.31):
     resolution: {integrity: sha512-hpr+J05B2FVYUAXHeK1YyI267J/dDDhMU6B6civm8hSY1jYJnBXxzKDKDswzJmtLHryrjhnDjqqp/49t8FALew==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       postcss: ^8.0.0
     dependencies:
-      postcss: 8.4.27
+      postcss: 8.4.31
       postcss-value-parser: 4.2.0
       read-cache: 1.0.0
       resolve: 1.22.6
     dev: true
 
-  /postcss-js@4.0.1(postcss@8.4.27):
+  /postcss-js@4.0.1(postcss@8.4.31):
     resolution: {integrity: sha512-dDLF8pEO191hJMtlHFPRa8xsizHaM82MLfNkUHdUtVEV3tgTp5oj+8qbEqYM57SLfc74KSbw//4SeJma2LRVIw==}
     engines: {node: ^12 || ^14 || >= 16}
     peerDependencies:
       postcss: ^8.4.21
     dependencies:
       camelcase-css: 2.0.1
-      postcss: 8.4.27
+      postcss: 8.4.31
     dev: true
 
-  /postcss-load-config@4.0.1(postcss@8.4.27):
+  /postcss-load-config@4.0.1(postcss@8.4.31):
     resolution: {integrity: sha512-vEJIc8RdiBRu3oRAI0ymerOn+7rPuMvRXslTvZUKZonDHFIczxztIyJ1urxM1x9JXEikvpWWTUUqal5j/8QgvA==}
     engines: {node: '>= 14'}
     peerDependencies:
@@ -5581,17 +5581,17 @@ packages:
         optional: true
     dependencies:
       lilconfig: 2.1.0
-      postcss: 8.4.27
+      postcss: 8.4.31
       yaml: 2.3.2
     dev: true
 
-  /postcss-nested@6.0.1(postcss@8.4.27):
+  /postcss-nested@6.0.1(postcss@8.4.31):
     resolution: {integrity: sha512-mEp4xPMi5bSWiMbsgoPfcP74lsWLHkQbZc3sY+jWYd65CUwXrUaTp0fmNpa01ZcETKlIgUdFN/MpS2xZtqL9dQ==}
     engines: {node: '>=12.0'}
     peerDependencies:
       postcss: ^8.2.14
     dependencies:
-      postcss: 8.4.27
+      postcss: 8.4.31
       postcss-selector-parser: 6.0.13
     dev: true
 
@@ -5672,7 +5672,6 @@ packages:
 
   /proxy-from-env@1.1.0:
     resolution: {integrity: sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==}
-    dev: true
 
   /prr@1.0.1:
     resolution: {integrity: sha512-yPw4Sng1gWghHQWj0B3ZggWUm4qVbPwPFcRG8KyxiU7J2OHFSoEHKS+EZ3fv5l1t9CyCiop6l/ZYeWbrgoQejw==}
@@ -6306,11 +6305,11 @@ packages:
       normalize-path: 3.0.0
       object-hash: 3.0.0
       picocolors: 1.0.0
-      postcss: 8.4.27
-      postcss-import: 15.1.0(postcss@8.4.27)
-      postcss-js: 4.0.1(postcss@8.4.27)
-      postcss-load-config: 4.0.1(postcss@8.4.27)
-      postcss-nested: 6.0.1(postcss@8.4.27)
+      postcss: 8.4.31
+      postcss-import: 15.1.0(postcss@8.4.31)
+      postcss-js: 4.0.1(postcss@8.4.31)
+      postcss-load-config: 4.0.1(postcss@8.4.31)
+      postcss-nested: 6.0.1(postcss@8.4.31)
       postcss-selector-parser: 6.0.13
       resolve: 1.22.6
       sucrase: 3.34.0
@@ -6423,7 +6422,7 @@ packages:
       execa: 5.1.1
       globby: 11.1.0
       joycon: 3.1.1
-      postcss-load-config: 4.0.1(postcss@8.4.27)
+      postcss-load-config: 4.0.1(postcss@8.4.31)
       resolve-from: 5.0.0
       rollup: 3.28.0
       source-map: 0.8.0-beta.0
@@ -6778,7 +6777,7 @@ packages:
       vitepress: ^0.21.6 || ^1.0.0 || ^1.0.0-alpha
     dependencies:
       mermaid: 10.2.4
-      vitepress: 1.0.0-rc.24(@types/node@20.6.3)(postcss@8.4.27)(sass@1.56.1)(typescript@4.9.4)
+      vitepress: 1.0.0-rc.24(@types/node@20.6.3)(postcss@8.4.31)(sass@1.56.1)(typescript@4.9.4)
     optionalDependencies:
       '@mermaid-js/mermaid-mindmap': 9.3.0
     dev: false
@@ -6789,7 +6788,7 @@ packages:
       vitepress: ^1.0.0-alpha.29
       vue: ^3.2.45
     dependencies:
-      vitepress: 1.0.0-rc.24(@types/node@20.6.3)(postcss@8.4.27)(sass@1.56.1)(typescript@4.9.4)
+      vitepress: 1.0.0-rc.24(@types/node@20.6.3)(postcss@8.4.31)(sass@1.56.1)(typescript@4.9.4)
       vue: 3.3.4
     dev: false
 
@@ -6844,7 +6843,7 @@ packages:
       - universal-cookie
     dev: true
 
-  /vitepress@1.0.0-rc.24(@types/node@20.6.3)(axios@0.27.2)(sass@1.64.1)(typescript@5.1.6):
+  /vitepress@1.0.0-rc.24(@types/node@20.6.3)(axios@1.6.0)(sass@1.64.1)(typescript@5.1.6):
     resolution: {integrity: sha512-RpnL8cnOGwiRlBbrYQUm9sYkJbtyOt/wYXk2diTcokY4yvks/5lq9LuSt+MURWB6ZqwpSNHvTmxgaSfLoG0/OA==}
     hasBin: true
     peerDependencies:
@@ -6862,7 +6861,7 @@ packages:
       '@vitejs/plugin-vue': 4.3.1(vite@4.5.0)(vue@3.3.7)
       '@vue/devtools-api': 6.5.1
       '@vueuse/core': 10.5.0(vue@3.3.7)
-      '@vueuse/integrations': 10.5.0(axios@0.27.2)(focus-trap@7.5.4)(vue@3.3.7)
+      '@vueuse/integrations': 10.5.0(axios@1.6.0)(focus-trap@7.5.4)(vue@3.3.7)
       focus-trap: 7.5.4
       mark.js: 8.11.1
       minisearch: 6.1.0
@@ -6897,7 +6896,7 @@ packages:
       - universal-cookie
     dev: false
 
-  /vitepress@1.0.0-rc.24(@types/node@20.6.3)(postcss@8.4.27)(sass@1.56.1)(typescript@4.9.4):
+  /vitepress@1.0.0-rc.24(@types/node@20.6.3)(postcss@8.4.31)(sass@1.56.1)(typescript@4.9.4):
     resolution: {integrity: sha512-RpnL8cnOGwiRlBbrYQUm9sYkJbtyOt/wYXk2diTcokY4yvks/5lq9LuSt+MURWB6ZqwpSNHvTmxgaSfLoG0/OA==}
     hasBin: true
     peerDependencies:
@@ -6915,11 +6914,11 @@ packages:
       '@vitejs/plugin-vue': 4.3.1(vite@4.5.0)(vue@3.3.7)
       '@vue/devtools-api': 6.5.1
       '@vueuse/core': 10.5.0(vue@3.3.7)
-      '@vueuse/integrations': 10.5.0(axios@0.27.2)(focus-trap@7.5.4)(vue@3.3.7)
+      '@vueuse/integrations': 10.5.0(axios@1.6.0)(focus-trap@7.5.4)(vue@3.3.7)
       focus-trap: 7.5.4
       mark.js: 8.11.1
       minisearch: 6.1.0
-      postcss: 8.4.27
+      postcss: 8.4.31
       shiki: 0.14.5
       vite: 4.5.0(@types/node@20.6.3)(sass@1.56.1)
       vue: 3.3.7(typescript@4.9.4)
