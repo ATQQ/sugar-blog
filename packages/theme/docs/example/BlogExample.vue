@@ -1,8 +1,22 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import { ElPagination } from 'element-plus'
 import data from './config'
 
 const pageSize = ref(6)
+const currentPage = ref(1)
+const dataList = computed(() => {
+  const start = (currentPage.value - 1) * pageSize.value
+  const end = start + pageSize.value
+  return data.slice(start, end)
+})
+const total = computed(() => data.length)
+function handleUpdatePageNum(current: number) {
+  if (currentPage.value === current) {
+    return
+  }
+  currentPage.value = current
+}
 </script>
 
 <template>
@@ -11,7 +25,7 @@ const pageSize = ref(6)
     <!-- 列表 -->
     <div class="example-list">
       <!-- 卡片 -->
-      <div v-for="(d) in data" :key="d.blog.link" class="example-card">
+      <div v-for="(d) in dataList" :key="d.blog.link" class="example-card">
         <div class="blog-info">
           <div class="cover-content">
             <!-- 封面 -->
@@ -31,15 +45,44 @@ const pageSize = ref(6)
             <!-- 头像 -->
             <img v-if="d.author?.avatar" :src="d.author?.avatar" :alt="d.author.name">
             <!-- 作者名 -->
-            <a target="_blank" :href="d.author.link || d.blog.link">{{ d.author.name }}</a>
+            <a class="author-name" target="_blank" :href="d.author.link || d.blog.link">{{ d.author.name }}</a>
           </div>
         </div>
       </div>
     </div>
     <!-- 翻页 -->
+    <div class="el-pagination-wrapper">
+      <ElPagination
+        v-if="data.length >= pageSize"
+        small
+        background
+        :default-current-page="1"
+        :current-page="currentPage"
+        :page-size="pageSize"
+        :total="total"
+        layout="prev, pager, next, jumper"
+        @update:current-page="handleUpdatePageNum"
+      />
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 @import './style.scss';
+
+.el-pagination-wrapper {
+  :deep(.el-pagination li.is-active.number) {
+    background-color: var(--vp-c-brand-2);
+  }
+  :deep(.el-pagination button:hover) {
+    color: var(--vp-c-brand-2);
+  }
+
+  :deep(.el-pager li:not(.is-active):hover) {
+    color: var(--vp-c-brand-2);
+  }
+  :deep(.el-input__wrapper.is-focus) {
+    box-shadow: 0 0 0 1px var(--vp-c-brand-2) inset;
+  }
+}
 </style>
