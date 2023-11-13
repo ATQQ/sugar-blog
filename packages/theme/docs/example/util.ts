@@ -38,7 +38,11 @@ interface BlogInfo {
   desc?: string
 }
 
-type Author = TeamMember
+interface Author {
+  avatar: string
+  name: string
+  link?: string
+}
 
 interface TeamMember {
   // Avatar image for the member.

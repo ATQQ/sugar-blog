@@ -1,16 +1,6 @@
 <script lang="ts" setup>
-import { VPTeamMembers } from 'vitepress/theme'
 import { ref } from 'vue'
-import { useIntervalFn } from '@vueuse/core'
 import data from './config'
-
-const randomIdx = ref(random())
-useIntervalFn(() => {
-  randomIdx.value = random()
-}, 1000)
-function random() {
-  return Math.floor(Math.random() * data.length)
-}
 
 const pageSize = ref(6)
 </script>
@@ -25,13 +15,15 @@ const pageSize = ref(6)
         <div class="blog-info">
           <div class="cover-content">
             <!-- 封面 -->
-            <img src="https://img.cdn.sugarat.top/mdImg/MTY3MzE3MDUxOTMwMw==673170519303" alt="cover">
+            <img :src="d.blog.cover" alt="cover">
             <!-- 博客介绍，hover 展示 -->
             <div class="blog-info-content">
-              <h3>标题</h3>
-              <p>描述</p>
+              <h3 v-if="d.blog.name">
+                {{ d.blog.name }}
+              </h3>
+              <p>{{ d.blog.desc }}</p>
               <!-- 外链打开 -->
-              <i><a target="_blank" href="">Go！</a></i>
+              <i><a target="_blank" :href="d.blog.link">Go！</a></i>
             </div>
           </div>
           <!-- 作者信息 -->
@@ -39,13 +31,7 @@ const pageSize = ref(6)
             <!-- 头像 -->
             <img v-if="d.author?.avatar" :src="d.author?.avatar" :alt="d.author.name">
             <!-- 作者名 -->
-            <label class="author-name">{{ d.author.name }}
-              <input hidden type="checkbox">
-            </label>
-          </div>
-          <!-- active 展示详情 -->
-          <div v-if="d.members.length" class="user-content">
-            <VPTeamMembers size="small" :members="d.members" />
+            <a target="_blank" :href="d.author.link || d.blog.link">{{ d.author.name }}</a>
           </div>
         </div>
       </div>
