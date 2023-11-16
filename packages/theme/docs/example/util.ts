@@ -1,31 +1,17 @@
 import type { DefaultTheme } from 'vitepress/theme'
 
 export function defineExamples(examples: IExample[]) {
-  return examples.map((v) => {
-    return {
-      ...v,
-      members: [v.author].flat().filter(Boolean)
-    }
-  })
+  return examples
 }
 
-interface IExample {
+type IExample = SiteInfo & Author
+interface SiteInfo {
   /**
-   * 博客信息
-   */
-  blog: BlogInfo
-  /**
-   * 作者信息
-   */
-  author?: Author
-}
-interface BlogInfo {
-  /**
-   * 博客封面
+   * 站点封面
    */
   cover: string
   /**
-   * 博客链接
+   * 站点链接
    */
   link: string
   /**
@@ -39,9 +25,18 @@ interface BlogInfo {
 }
 
 interface Author {
+  /**
+   * 头像
+   */
   avatar: string
-  name: string
-  link?: string
+  /**
+   * 昵称
+   */
+  nickname: string
+  /**
+   * 个人主页（介绍页）
+   */
+  home?: string
 }
 
 interface TeamMember {
