@@ -31,6 +31,10 @@ export default defineConfig({
         link: '/work'
       },
       {
+        text: '案例',
+        link: '/example/'
+      },
+      {
         text: '线上作品',
         items: [
           {
@@ -54,7 +58,8 @@ export default defineConfig({
             link: 'https://resume.sugarat.top/'
           }
         ]
-      }
+      },
+
     ],
     socialLinks: [
       {
