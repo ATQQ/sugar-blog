@@ -9,5 +9,21 @@ export default defineExamples([
     avatar: 'https://sugarat.top/logo.png',
     nickname: '粥里有勺糖',
     home: 'https://github.com/atqq'
+  },
+  {
+    cover: 'https://img.cdn.sugarat.top/mdImg/MTcwMDE0MjE1NDM2MA==700142154360',
+    link: 'https://docs.ep.sugarat.top/',
+    name: 'EastPicker（轻取）',
+    desc: '在线文件收取平台',
+    avatar: 'https://docs.ep.sugarat.top/logo.png',
+    nickname: 'EastPicker'
+  },
+  {
+    cover: 'https://img.cdn.sugarat.top/mdImg/MTcwMDE0Mjc1Nzc4OQ==700142757789',
+    link: 'https://www.imufeng.cn/',
+    name: 'MBlog',
+    desc: '沐风的个人空间',
+    avatar: 'https://cravatar.cn/avatar/f1dcdc8fa782b81824df5d67022e4d4a?s=160',
+    nickname: 'MuFeng'
   }
 ])
