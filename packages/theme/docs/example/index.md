@@ -21,7 +21,7 @@ import BlogExample from './BlogExample.vue'
 * 博主头像（可选）：
 ```
 
-*部分链接来源于GitHub的统计数据，如不想要展示可以联系作者 或 创建PR 移除相关配置项*
+*部分案例来源于 [GitHub 统计数据](https://github.com/ATQQ/sugar-blog/network/dependents?package_id=UGFja2FnZS0zNTM2NjgwMzI1)，如不想要展示可以联系作者移除 或 创建PR 移除相关配置项*
 :::
 
 <BlogExample />
