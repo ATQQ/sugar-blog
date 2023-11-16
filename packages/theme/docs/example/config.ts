@@ -21,7 +21,7 @@ export default defineExamples([
   {
     cover: 'https://img.cdn.sugarat.top/mdImg/MTcwMDE0Mjc1Nzc4OQ==700142757789',
     link: 'https://www.imufeng.cn/',
-    name: 'MBlog',
+    name: '沐风的小站',
     desc: '沐风的个人空间',
     avatar: 'https://cravatar.cn/avatar/f1dcdc8fa782b81824df5d67022e4d4a?s=160',
     nickname: 'MuFeng'
