@@ -91,7 +91,7 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
     || process.argv.slice(2)?.[1]
     || '.'
 
-  const { baseUrl, filename, ignoreHome = true } = rssOptions
+  const { baseUrl, filename, ignoreHome = true, filter: filterPost = () => true } = rssOptions
 
   const feed = new Feed({
     id: rssOptions.baseUrl,
@@ -115,6 +115,8 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
 
     return true
   })
+  // 自定义过滤逻辑
+    .filter(filterPost)
 
   // 按日期排序
   posts.sort(

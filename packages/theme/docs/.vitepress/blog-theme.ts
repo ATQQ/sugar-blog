@@ -141,6 +141,7 @@ const RSS: Theme.RSSOptions = {
   title: '@sugarat/theme',
   baseUrl,
   copyright: 'Copyright (c) 2023-present, 粥里有勺糖',
+  description: '基于 vitepress 实现的简约博客主题'
 }
 
 export const blogTheme = getThemeConfig({

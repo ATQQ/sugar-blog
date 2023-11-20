@@ -85,6 +85,9 @@ const RSS: RSSOptions = {
   filename: 'feed.rss',
   log: true,
   ignoreHome: true,
+  filter: (post, idx) => {
+    return true
+  }
 }
 ```
 ### Options
@@ -98,6 +101,11 @@ import type { Author, FeedOptions } from 'feed'
 
 export type RSSOptions = Omit<FeedOptions, 'id'> & {
   id?: string
+  /**
+   * 过滤目标文章
+   * @param post 文章相关信息
+   */
+  filter?: (value: PostInfo, index: number, array: PostInfo[]) => boolean
   /**
    * 你的站点地址
    * @example 'https://sugarat.top'
