@@ -13,7 +13,8 @@ use in `.vitepress/config.ts`
 
 add basic config
 ```ts
-import { RssPlugin, RSSOptions } from 'vitepress-plugin-rss'
+import { RSSOptions, RssPlugin } from 'vitepress-plugin-rss'
+
 const baseUrl = 'https://sugarat.top'
 const RSS: RSSOptions = {
   title: '粥里有勺糖',
@@ -42,6 +43,15 @@ the rss icon is also added to page nav socialLinks.
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY5MjQ1NTQ4MDYxMg==692455480612)
 
+## frontmatter
+### publish
+Posts that `publish: false` will not appear in the final rss file，can be used to ignore target articles
+```md
+---
+publish: false
+---
+```
+
 ## Advanced Usage
 ### Example
 ```ts
@@ -60,7 +70,7 @@ const RSS: RSSOptions = {
     link: 'https://sugarat.top'
   },
   icon: true,
-  authors:[
+  authors: [
     {
       name: '粥里有勺糖',
       email: 'engineerzjl@foxmail.com',
@@ -84,7 +94,7 @@ plugin also defines some
 
 here is the type definition
 ```ts
-import type { FeedOptions, Author } from 'feed'
+import type { Author, FeedOptions } from 'feed'
 
 export type RSSOptions = Omit<FeedOptions, 'id'> & {
   id?: string

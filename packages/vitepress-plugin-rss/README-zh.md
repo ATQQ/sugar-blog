@@ -12,7 +12,8 @@ pnpm add vitepress-plugin-rss
 
 下面是最基础的使用配置
 ```ts
-import { RssPlugin, RSSOptions } from 'vitepress-plugin-rss'
+import { RSSOptions, RssPlugin } from 'vitepress-plugin-rss'
+
 const baseUrl = 'https://sugarat.top'
 const RSS: RSSOptions = {
   title: '粥里有勺糖',
@@ -41,6 +42,15 @@ pnpm run build
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY5MjQ1NTQ4MDYxMg==692455480612)
 
+## frontmatter
+### publish
+包含 `publish: false` 的文章将不会出现在最终的 rss 文件中，可以用来忽略目标文章
+```md
+---
+publish: false
+---
+```
+
 ## 高级用法
 ### 使用示例
 ```ts
@@ -59,7 +69,7 @@ const RSS: RSSOptions = {
     link: 'https://sugarat.top'
   },
   icon: true,
-  authors:[
+  authors: [
     {
       name: '粥里有勺糖',
       email: 'engineerzjl@foxmail.com',
@@ -83,7 +93,7 @@ const RSS: RSSOptions = {
 
 下面是类型的定义
 ```ts
-import type { FeedOptions, Author } from 'feed'
+import type { Author, FeedOptions } from 'feed'
 
 export type RSSOptions = Omit<FeedOptions, 'id'> & {
   id?: string
