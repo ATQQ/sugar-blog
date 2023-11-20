@@ -1,5 +1,11 @@
 # vitepress-plugin-rss
 
+## 0.2.0
+
+### Minor Changes
+
+- feat: 支持filter过滤目标文章
+
 ## 0.1.3
 
 ### Patch Changes
