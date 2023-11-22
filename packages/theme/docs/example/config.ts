@@ -25,5 +25,13 @@ export default defineExamples([
     desc: '沐风的个人空间',
     avatar: 'https://cravatar.cn/avatar/f1dcdc8fa782b81824df5d67022e4d4a?s=160',
     nickname: 'MuFeng'
+  },
+  {
+    cover: 'https://img.cdn.sugarat.top/mdImg/MTcwMDY2MDYzNDI1Mg==700660634252',
+    link: 'http://itmei.cn/',
+    name: '荷游@iTmei',
+    desc: 'vue3学习,typescript学习,typescript/es6学习,qt学习,单片机学习',
+    avatar: 'http://itmei.cn/logo.png',
+    nickname: '荷游'
   }
 ])
