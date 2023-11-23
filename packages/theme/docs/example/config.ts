@@ -33,5 +33,13 @@ export default defineExamples([
     desc: 'vue3学习,typescript学习,typescript/es6学习,qt学习,单片机学习',
     avatar: 'http://itmei.cn/logo.png',
     nickname: '荷游'
+  },
+  {
+    cover: 'http://haitang.icu:9999/i/2023/11/24/655f94a9034e7.png',
+    link: 'http://haitang.icu',
+    name: '海棠的小屋',
+    desc: '记录海棠的成长点滴',
+    avatar: 'http://haitang.icu:9999/i/2023/11/24/655f79321cceb.png',
+    nickname: 'Haitang'
   }
 ])
