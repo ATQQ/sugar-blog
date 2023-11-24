@@ -35,11 +35,11 @@ export default defineExamples([
     nickname: '荷游'
   },
   {
-    cover: 'http://haitang.icu:9999/i/2023/11/24/655f94a9034e7.png',
+    cover: '/imgs/example/haitang/cover.png',
     link: 'http://haitang.icu',
     name: '海棠的小屋',
     desc: '记录海棠的成长点滴',
-    avatar: 'http://haitang.icu:9999/i/2023/11/24/655f79321cceb.png',
+    avatar: '/imgs/example/haitang/avatar.png',
     nickname: 'Haitang'
   }
 ])
