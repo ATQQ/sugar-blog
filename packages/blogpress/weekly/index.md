@@ -26,11 +26,16 @@ hidden: true
 * [阮一峰: 科技爱好者周刊](https://www.ruanyifeng.com/blog/archives.html) - 记录每周值得分享的科技内容，周五发布
 * [云谦：MDH 前端周刊](https://mdhweekly.com/) - 前端资讯和分享
 * [童欧巴：前端食堂](https://github.com/Geekhyt/weekly) - 你的前端食堂，吃好每一顿饭
-* [rottenpen：FE News](https://rottenpen.zhubai.love/) - 分享前端，生活
+* [值得一读技术博客](https://daily-blog.chlinlearn.top/) - 每天进步一点点，每天分享有料的技术文章！
+* [前端技术文章](https://fed.chanceyu.com/) - 根据 RSS 订阅源抓取最新前端技术文章
+* [frontendfoc](https://frontendfoc.us/issues) - 🚀 Frontend **Focus**
+* [ShowMeAI](https://juejin.cn/user/554605767047053/posts) - 为AI硬核资料库(cool)而生
+
+:::details 已停更
 * [知识星球：咲奈的平行时空](https://wx.zsxq.com/dweb2/index/group/15552285284822) - 前端前沿技术、资讯、方法论分享
-* [前端技术文章](https://fed.chanceyu.com/)
-* [省流](https://shengliu.tech/)
-* [值得一读技术博客](https://daily-blog.chlinlearn.top/)
+* [省流](https://shengliu.tech/) - 有关行业📱、代码👨‍💻、科研🔬的有趣内容，每个工作日更新
+* [rottenpen：FE News](https://rottenpen.zhubai.love/) - 分享前端，生活
+:::
 
 ### 技术社区
 * [掘金](https://juejin.cn/)
