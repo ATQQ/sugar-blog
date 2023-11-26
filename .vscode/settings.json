@@ -41,5 +41,6 @@
     "json",
     "jsonc",
     "yaml"
-  ]
+  ],
+  "editor.inlineSuggest.showToolbar": "onHover"
 }

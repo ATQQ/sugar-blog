@@ -75,6 +75,12 @@ const blogTheme = getThemeConfig({
       des: '知不足而奋进，望远山而前行',
       avatar: 'https://www.zhangchengwei.work/logo.png',
       url: 'https://www.zhangchengwei.work'
+    },
+    {
+      url: 'https://leelaa.cn',
+      avatar: 'https://leelaa.cn/pwa-192x192.png',
+      des: '肯了个德的博客',
+      nickname: 'LEEDAISEN'
     }
   ],
   search: false,
