@@ -193,6 +193,24 @@ export namespace Theme {
     avatar: ThemeableImage
   }
 
+  export interface FriendConfig {
+    list: FriendLink[]
+    /**
+     * 是否随机展示
+     * @default false
+     */
+    random?: boolean
+    /**
+     * 是否限制展示数量（超出自动切换）
+     */
+    limit?: number
+    /**
+     * 滚动速度(ms)
+     * @default 500
+     */
+    scrollSpeed?: number
+  }
+
   export interface UserWork {
     title: string
     description: string
@@ -295,7 +313,7 @@ export namespace Theme {
      */
     alert?: Alert
     popover?: Popover
-    friend?: FriendLink[]
+    friend?: FriendLink[] | FriendConfig
     authorList?: Omit<FriendLink, 'avatar'>[]
     /**
      * 启用 [vitepress-plugin-tabs](https://www.npmjs.com/package/vitepress-plugin-tabs)

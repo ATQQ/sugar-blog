@@ -4,14 +4,28 @@ import { useDark } from '@vueuse/core'
 import { computed } from 'vue'
 import { useBlogConfig } from '../composables/config/blog'
 import { getImageUrl } from '../utils/client'
+import type { Theme } from '../'
 
 const isDark = useDark({
   storageKey: 'vitepress-theme-appearance'
 })
 
 const { friend } = useBlogConfig()
+const friendConfig = computed<Theme.FriendConfig>(() => ({
+  list: [],
+  random: false,
+  scrollSpeed: 500,
+  limit: Number.MAX_SAFE_INTEGER,
+  ...(Array.isArray(friend) ? { list: friend } : friend)
+}))
+
 const friendList = computed(() => {
-  return friend?.map((v) => {
+  const data = friendConfig.value.list
+  // 简单的随机打乱
+  if (friendConfig.value.random) {
+    data.sort(() => Math.random() - 0.5)
+  }
+  return data.map((v) => {
     const { avatar, nickname } = v
     const avatarUrl = getImageUrl(avatar, isDark.value)
     let alt = nickname
