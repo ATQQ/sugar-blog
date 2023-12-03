@@ -3,7 +3,7 @@ import { ElAvatar } from 'element-plus'
 import { useDark } from '@vueuse/core'
 import { computed } from 'vue'
 import { useBlogConfig } from '../composables/config/blog'
-import { getImageUrl } from '../utils/client'
+import { getImageUrl, shuffleArray } from '../utils/client'
 import type { Theme } from '../'
 
 const isDark = useDark({
@@ -20,11 +20,17 @@ const friendConfig = computed<Theme.FriendConfig>(() => ({
 }))
 
 const friendList = computed(() => {
-  const data = friendConfig.value.list
+  const data = [...friendConfig.value.list]
   // 简单的随机打乱
   if (friendConfig.value.random) {
-    data.sort(() => Math.random() - 0.5)
+    data.splice(0, data.length, ...shuffleArray(data))
   }
+
+  // 展示个数限制，删除多余的
+  if (friendConfig.value.scrollSpeed === 0 && friendConfig.value.limit) {
+    data.splice(friendConfig.value.limit)
+  }
+
   return data.map((v) => {
     const { avatar, nickname } = v
     const avatarUrl = getImageUrl(avatar, isDark.value)
@@ -65,7 +71,7 @@ const friendList = computed(() => {
         />
       </svg> 友情链接</span>
     </div>
-    <!-- 文章列表 -->
+    <!-- 友链列表 -->
     <ol class="friend-list">
       <li v-for="v in friendList" :key="v.nickname">
         <a :href="v.url" target="_blank">
