@@ -1,14 +1,15 @@
 <script lang="ts" setup>
 import { computed, watch } from 'vue'
 import { ElTag } from 'element-plus'
-import { useBrowserLocation, useDark } from '@vueuse/core'
-import { useRouter } from 'vitepress'
+import { useBrowserLocation, useDark, useUrlSearchParams } from '@vueuse/core'
+import { useRouter, useRoute } from 'vitepress'
 import {
   useActiveTag,
   useArticles,
   useCurrentPageNum
 } from '../composables/config/blog'
 
+const route = useRoute()
 const docs = useArticles()
 
 const tags = computed(() => {
@@ -60,6 +61,17 @@ watch(
   },
   {
     immediate: true
+  }
+)
+
+watch(
+  route,
+  () => {
+    const params = useUrlSearchParams()
+    if (!params.tag) {
+      activeTag.value.type = ''
+      activeTag.value.label = ''
+    }
   }
 )
 </script>
