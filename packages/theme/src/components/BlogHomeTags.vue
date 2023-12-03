@@ -68,7 +68,8 @@ watch(
   route,
   () => {
     const params = useUrlSearchParams()
-    if (!params.type) {
+    if (!params.tag) {
+      activeTag.value.type = ''
       activeTag.value.label = ''
     }
   }
