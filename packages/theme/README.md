@@ -55,3 +55,4 @@ pnpm serve
 * [vitepress-blog-zaun](https://github.com/clark-cui/vitepress-blog-zaun)
 * [surmon](https://surmon.me/)
 * [vuejs/blog](https://github.com/vuejs/blog/tree/main)
+* [列表无限滚动轮播效果](https://code.juejin.cn/pen/7145007064350195748)

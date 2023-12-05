@@ -11,13 +11,28 @@ const isDark = useDark({
 })
 
 const { friend } = useBlogConfig()
+const defaultScrollSpeed = 10000
 const friendConfig = computed<Theme.FriendConfig>(() => ({
   list: [],
   random: false,
-  scrollSpeed: 500,
+  scrollSpeed: defaultScrollSpeed,
   limit: Number.MAX_SAFE_INTEGER,
   ...(Array.isArray(friend) ? { list: friend } : friend)
 }))
+
+const scrollSpeed = computed(() => {
+  const { scrollSpeed } = friendConfig.value
+  return (!scrollSpeed || scrollSpeed <= 0) ? 0 : scrollSpeed || defaultScrollSpeed
+})
+
+const limit = computed(() => {
+  const { limit } = friendConfig.value
+  return (!limit || limit <= 0) ? 0 : limit || Number.MAX_SAFE_INTEGER
+})
+
+const openScroll = computed(() => {
+  return scrollSpeed.value > 0 && limit.value < friendConfig.value.list.length
+})
 
 const friendList = computed(() => {
   const data = [...friendConfig.value.list]
@@ -27,11 +42,10 @@ const friendList = computed(() => {
   }
 
   // 展示个数限制，删除多余的
-  if (friendConfig.value.scrollSpeed === 0 && friendConfig.value.limit) {
-    data.splice(friendConfig.value.limit)
+  if (scrollSpeed.value === 0 && limit.value) {
+    data.splice(limit.value)
   }
-
-  return data.map((v) => {
+  const list = data.map((v) => {
     const { avatar, nickname } = v
     const avatarUrl = getImageUrl(avatar, isDark.value)
     let alt = nickname
@@ -45,6 +59,18 @@ const friendList = computed(() => {
       alt
     }
   })
+  return openScroll.value ? [...list, ...list] : list
+})
+
+const cardHeight = 83
+const scrollWrapperHeight = computed(() => {
+  return openScroll.value ? limit.value * cardHeight : 0
+})
+const containerHeight = computed(() => {
+  return scrollWrapperHeight.value ? `${scrollWrapperHeight.value}px` : 'auto'
+})
+const scrollTop = computed(() => {
+  return `-${scrollWrapperHeight.value * 2}px`
 })
 </script>
 
@@ -72,17 +98,29 @@ const friendList = computed(() => {
       </svg> 友情链接</span>
     </div>
     <!-- 友链列表 -->
-    <ol class="friend-list">
-      <li v-for="v in friendList" :key="v.nickname">
-        <a :href="v.url" target="_blank">
-          <ElAvatar :size="50" :src="v.avatar" :alt="v.alt" />
-          <div>
-            <span class="nickname">{{ v.nickname }}</span>
-            <p class="des">{{ v.des }}</p>
-          </div>
-        </a>
-      </li>
-    </ol>
+    <div
+      class="scroll-wrapper" :style="{
+        height: containerHeight,
+      }"
+    >
+      <ol
+        class="friend-list" :style="{
+          animationPlayState: openScroll ? 'running' : 'paused',
+          animationDuration: `${scrollSpeed / 1000}s`,
+        }
+        "
+      >
+        <li v-for="v in friendList" :key="v.nickname">
+          <a :href="v.url" target="_blank">
+            <ElAvatar :size="50" :src="v.avatar" :alt="v.alt" />
+            <div>
+              <span class="nickname">{{ v.nickname }}</span>
+              <p class="des">{{ v.des }}</p>
+            </div>
+          </a>
+        </li>
+      </ol>
+    </div>
   </div>
 </template>
 
@@ -122,6 +160,20 @@ const friendList = computed(() => {
   flex-direction: column;
 }
 
+@keyframes scrollList {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: v-bind(scrollTop);
+  }
+}
+
+.scroll-wrapper {
+  overflow: hidden;
+  position: relative;
+}
+
 .friend-list {
   display: flex;
   flex-direction: column;
@@ -129,6 +181,16 @@ const friendList = computed(() => {
   margin: 0;
   padding: 0 10px 0 0px;
   width: 100%;
+
+  position: relative;
+  width: 100%;
+  animation-name: scrollList;
+  animation-timing-function:linear;
+  animation-iteration-count:infinite;
+
+  &:hover {
+    animation-play-state: paused !important;
+  }
 
   li {
     padding: 6px;

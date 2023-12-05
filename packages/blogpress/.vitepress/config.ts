@@ -84,7 +84,8 @@ const blogTheme = getThemeConfig({
         nickname: 'LEEDAISEN'
       }
     ],
-    random: true
+    random: true,
+    limit: 4
   },
   search: false,
   recommend: {
