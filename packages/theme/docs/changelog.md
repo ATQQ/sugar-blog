@@ -26,6 +26,15 @@ bun install vitepress@latest
 ```
 :::
 
+## 0.2.9 (2023/12/05)
+
+### Patch Changes
+
+- feat: 友链支持随机顺序和滚动
+- fix: tag error ([#154](https://github.com/ATQQ/sugar-blog/pull/154)) ([@itcatplayit](https://github.com/itcatplayit))
+- chore: update rc31
+- chore: devtool warn fix
+
 ## 0.2.8 (2023/11/20)
 
 ### Patch Changes

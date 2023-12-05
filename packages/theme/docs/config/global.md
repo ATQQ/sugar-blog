@@ -735,6 +735,27 @@ interface FriendLink {
   url: string
   avatar: ThemeableImage
 }
+
+interface FriendConfig {
+  list: FriendLink[]
+  /**
+   * 是否随机展示
+   * @default false
+   */
+  random?: boolean
+  /**
+   * 是否限制展示数量（超出自动切换）
+   */
+  limit?: number
+  /**
+   * 滚动速度(ms)，设置为 0 不滚动直接截取
+   * @default "动态计算"
+   */
+  scrollSpeed?: number
+}
+interface BlogConfig {
+  friend?: FriendLink[] | FriendConfig
+}
 ```
 :::
 
@@ -765,6 +786,27 @@ const blogTheme = getThemeConfig({
   ]
 })
 ```
+
+支持设置列表`展示数量`，`自动滚动`，`随机顺序`
+
+![](https://img.cdn.sugarat.top/mdImg/MTcwMTc4NjIxMjY2MA==701786212660)
+
+```ts
+const blogTheme = getThemeConfig({
+  friend: {
+    list: [
+      // 省略设置的友链
+    ],
+    // 开启顺序随机
+    random: true,
+    // 限制列表只展示 3 个
+    limit: 3,
+    // 自定义滚动速度（可选）
+    // scrollSpeed: 10000
+  },
+})
+```
+
 ## authorList
 用于设置文章页作者信息跳转相关信息，默认情况下`author`仅做展示
 

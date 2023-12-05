@@ -9,8 +9,8 @@ import '@documate/vue/dist/style.css'
 export default {
   ...BlogTheme,
   Layout: h(BlogTheme.Layout, undefined, {
-    'doc-before': h(JoinGroup),
-    'doc-after': h(JoinGroup, { showImg: true }),
+    'doc-before': () => h(JoinGroup),
+    'doc-after': () => h(JoinGroup, { showImg: true }),
     'nav-bar-content-before': () => h(Documate, {
       endpoint: 'https://sfueei2j1g.us.aircode.run/ask',
     }),

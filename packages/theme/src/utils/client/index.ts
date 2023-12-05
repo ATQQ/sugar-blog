@@ -1,5 +1,13 @@
 import type { ThemeableImage } from '../../composables/config'
 
+export function shuffleArray(arr: any[]) {
+  const array = [...arr]
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]]
+  }
+  return array
+}
 export function formatDate(d: any, fmt = 'yyyy-MM-dd hh:mm:ss') {
   if (!(d instanceof Date)) {
     d = new Date(d)

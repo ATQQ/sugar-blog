@@ -42,47 +42,51 @@ const blogTheme = getThemeConfig({
     ],
     duration: -1
   },
-  friend: [
-    {
-      nickname: '冴羽',
-      des: '冴羽的JavaScript博客',
-      avatar:
-        'https://img.cdn.sugarat.top/mdImg/MTYyNjQ4MzkxMzIxMA==626483913210',
-      url: 'https://github.com/mqyqingfeng/Blog'
-    },
-    {
-      nickname: 'Linbudu',
-      des: '未来的不可知，是前进的原动力',
-      avatar:
-        'https://linbudu-img-store.oss-cn-shenzhen.aliyuncs.com/img/48507806.jfif',
-      url: 'https://linbudu.top/'
-    },
-    {
-      nickname: '小九',
-      des: '日益努力，而后风生水起',
-      avatar: 'https://jiangly.com/favicon.ico',
-      url: 'https://jiangly.com/'
-    },
-    {
-      nickname: '花喵电台      ',
-      des: '曹豪侠和余湾湾还有两只猫的生活记录~',
-      avatar:
-        'https://pic.fmcat.top/head.jpg?x-oss-process=image/auto-orient,1/resize,m_fill,w_110,h_110/quality,q_90',
-      url: 'https://www.fmcat.top'
-    },
-    {
-      nickname: '张成威的网络日志',
-      des: '知不足而奋进，望远山而前行',
-      avatar: 'https://www.zhangchengwei.work/logo.png',
-      url: 'https://www.zhangchengwei.work'
-    },
-    {
-      url: 'https://leelaa.cn',
-      avatar: 'https://leelaa.cn/pwa-192x192.png',
-      des: '肯了个德的博客',
-      nickname: 'LEEDAISEN'
-    }
-  ],
+  friend: {
+    list: [
+      {
+        nickname: '冴羽',
+        des: '冴羽的JavaScript博客',
+        avatar:
+          'https://img.cdn.sugarat.top/mdImg/MTYyNjQ4MzkxMzIxMA==626483913210',
+        url: 'https://github.com/mqyqingfeng/Blog'
+      },
+      {
+        nickname: 'Linbudu',
+        des: '未来的不可知，是前进的原动力',
+        avatar:
+          'https://linbudu-img-store.oss-cn-shenzhen.aliyuncs.com/img/48507806.jfif',
+        url: 'https://linbudu.top/'
+      },
+      {
+        nickname: '小九',
+        des: '日益努力，而后风生水起',
+        avatar: 'https://jiangly.com/favicon.ico',
+        url: 'https://jiangly.com/'
+      },
+      {
+        nickname: '花喵电台      ',
+        des: '曹豪侠和余湾湾还有两只猫的生活记录~',
+        avatar:
+          'https://pic.fmcat.top/head.jpg?x-oss-process=image/auto-orient,1/resize,m_fill,w_110,h_110/quality,q_90',
+        url: 'https://www.fmcat.top'
+      },
+      {
+        nickname: '张成威的网络日志',
+        des: '知不足而奋进，望远山而前行',
+        avatar: 'https://www.zhangchengwei.work/logo.png',
+        url: 'https://www.zhangchengwei.work'
+      },
+      {
+        url: 'https://leelaa.cn',
+        avatar: 'https://leelaa.cn/pwa-192x192.png',
+        des: '肯了个德的博客',
+        nickname: 'LEEDAISEN'
+      }
+    ],
+    random: true,
+    limit: 3
+  },
   search: false,
   recommend: {
     showSelf: true,
