@@ -205,8 +205,8 @@ export namespace Theme {
      */
     limit?: number
     /**
-     * 滚动速度(ms),设置为 0 不滚动直接截取
-     * @default 10000
+     * 滚动速度(ms)，设置为 0 不滚动直接截取
+     * @default "动态计算"
      */
     scrollSpeed?: number
   }

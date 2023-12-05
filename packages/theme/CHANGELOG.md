@@ -1,11 +1,13 @@
 # @sugarat/theme
 
 ## 0.2.9
+
 ### Patch Changes
-* feat: support random friend links
-* fix: tag error ([#154](https://github.com/ATQQ/sugar-blog/pull/154)) ([@itcatplayit](https://github.com/itcatplayit))
-* chore: update rc31
-* chore: devtool warn fix
+
+- feat: 友链支持随机顺序和滚动
+- fix: tag error ([#154](https://github.com/ATQQ/sugar-blog/pull/154)) ([@itcatplayit](https://github.com/itcatplayit))
+- chore: update rc31
+- chore: devtool warn fix
 
 ## 0.2.8
 
