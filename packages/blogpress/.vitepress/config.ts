@@ -85,7 +85,7 @@ const blogTheme = getThemeConfig({
       }
     ],
     random: true,
-    limit: 4
+    limit: 3
   },
   search: false,
   recommend: {

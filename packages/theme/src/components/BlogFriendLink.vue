@@ -11,23 +11,22 @@ const isDark = useDark({
 })
 
 const { friend } = useBlogConfig()
-const defaultScrollSpeed = 10000
 const friendConfig = computed<Theme.FriendConfig>(() => ({
   list: [],
   random: false,
-  scrollSpeed: defaultScrollSpeed,
   limit: Number.MAX_SAFE_INTEGER,
   ...(Array.isArray(friend) ? { list: friend } : friend)
 }))
 
-const scrollSpeed = computed(() => {
-  const { scrollSpeed } = friendConfig.value
-  return (!scrollSpeed || scrollSpeed <= 0) ? 0 : scrollSpeed || defaultScrollSpeed
-})
-
+// TODO: 待优化
 const limit = computed(() => {
   const { limit } = friendConfig.value
   return (!limit || limit <= 0) ? 0 : limit || Number.MAX_SAFE_INTEGER
+})
+
+const scrollSpeed = computed(() => {
+  const { scrollSpeed } = friendConfig.value
+  return (!scrollSpeed || scrollSpeed <= 0) ? (friendConfig.value.list.length - 1) * (friendConfig.value.list.length / limit.value) * 1000 : scrollSpeed
 })
 
 const openScroll = computed(() => {
