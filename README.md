@@ -77,6 +77,8 @@ pnpm dev:theme
 
 **邮箱:engineerzjl@foxmail.com**
 
+![公众号](packages/blogpress/public/mp-code.png)
+
 ## :fire: 巨佬博客 - 记得三连
 * [Linbudu](https://github.com/linbudu599/FE-Basics)
 * [kweku](http://kweku.top/)

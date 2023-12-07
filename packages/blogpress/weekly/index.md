@@ -30,6 +30,7 @@ hidden: true
 * [前端技术文章](https://fed.chanceyu.com/) - 根据 RSS 订阅源抓取最新前端技术文章
 * [frontendfoc](https://frontendfoc.us/issues) - 🚀 Frontend **Focus**
 * [ShowMeAI](https://juejin.cn/user/554605767047053/posts) - 为AI硬核资料库(cool)而生
+* [FRE123 技术周刊精选推荐](https://www.fre123.com/weekly) - 前后端技术周刊精选推荐信息流
 
 :::details 已停更
 * [知识星球：咲奈的平行时空](https://wx.zsxq.com/dweb2/index/group/15552285284822) - 前端前沿技术、资讯、方法论分享
