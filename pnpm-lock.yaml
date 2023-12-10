@@ -66,6 +66,9 @@ importers:
       vitepress:
         specifier: 1.0.0-rc.31
         version: 1.0.0-rc.31(@types/node@20.6.3)(axios@0.27.2)(sass@1.64.1)(typescript@5.1.6)
+      vitepress-plugin-rss:
+        specifier: workspace:0.2.0
+        version: link:../vitepress-plugin-rss
       vue:
         specifier: ^3.3.4
         version: 3.3.4

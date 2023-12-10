@@ -1,8 +1,29 @@
 import process from 'node:process'
 import { defineConfig, getThemeConfig } from '@sugarat/theme/node'
 import type { Theme } from '@sugarat/theme'
+import type { RSSOptions } from 'vitepress-plugin-rss'
+import { RssPlugin } from 'vitepress-plugin-rss'
 
 const baseUrl = 'https://sugarat.top'
+const weekly = `${baseUrl}/weekly`
+const RSSWeekly: RSSOptions = {
+  title: '视野修炼 - 技术周刊',
+  baseUrl: weekly,
+  description: '你的指尖,拥有改变世界的力量（大前端相关技术分享）',
+  id: weekly,
+  link: weekly,
+  language: 'zh-cn',
+  filter(value) {
+    return value.url.startsWith('/weekly/')
+  },
+  // TODO 更新周更logo
+  image: 'https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTE2NzAzMA==674995167030',
+  favicon: 'https://sugarat.top/favicon.ico',
+  copyright: 'Copyright (c) 2018-present, 粥里有勺糖',
+  url: `${baseUrl}/weekly.rss`,
+  icon: false,
+  filename: 'weekly.rss',
+}
 const RSS: Theme.RSSOptions = {
   title: '粥里有勺糖',
   baseUrl,
@@ -169,6 +190,9 @@ export default defineConfig({
       port: 4000,
       host: '0.0.0.0'
     },
+    plugins: [
+      RssPlugin(RSSWeekly)
+    ],
     optimizeDeps: {
       include: ['element-plus'],
       exclude: ['@sugarat/theme']
