@@ -38,6 +38,10 @@ const blogTheme = getThemeConfig({
       {
         type: 'text',
         content: '欢迎大家私信交流'
+      },
+      {
+        type: 'text',
+        content: '备注”加群“拉你一起学习'
       }
     ],
     duration: -1
