@@ -8,13 +8,13 @@ const baseUrl = 'https://sugarat.top'
 const weekly = `${baseUrl}/weekly`
 const RSSWeekly: RSSOptions = {
   title: '视野修炼 - 技术周刊',
-  baseUrl: weekly,
-  description: '你的指尖,拥有改变世界的力量（大前端相关技术分享）',
+  baseUrl,
+  description: '每周会精选出一些 优质&有趣 的内容做推送（大前端为主），包含但不限于 优质文章，开源库，工具网站，有意思的知识',
   id: weekly,
   link: weekly,
   language: 'zh-cn',
   filter(value) {
-    return value.url.startsWith('/weekly/')
+    return value.url.startsWith('/weekly/') && !value.url.endsWith('/weekly/')
   },
   // TODO 更新周更logo
   image: 'https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTE2NzAzMA==674995167030',
