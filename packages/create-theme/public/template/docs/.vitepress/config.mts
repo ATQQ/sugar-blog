@@ -12,7 +12,11 @@ export default defineConfig({
   title: '@sugarat/theme',
   description: '粥里有勺糖的博客主题，基于 vitepress 实现',
   lastUpdated: true,
-  head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
+  // 详见：https://vitepress.dev/reference/site-config#head
+  head: [
+    // 配置网站的图标（显示在浏览器的 tab 上）
+    ['link', { rel: 'icon', href: '/favicon.ico' }]
+  ],
   themeConfig: {
     lastUpdatedText: '上次更新于',
     logo: '/logo.png',
