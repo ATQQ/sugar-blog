@@ -43,7 +43,7 @@ export default BlogTheme
   );
 }
 ```
-解除注释后，就能看到模板首页背景图发生了变化
+解除文件`index.ts` 中`import './style.scss'` 注释后，就能看到模板首页背景图发生了变化
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY3Njk5MTAzODkzOQ==676991038939)
 
