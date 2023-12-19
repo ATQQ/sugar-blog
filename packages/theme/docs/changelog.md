@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.2.8） 💯：依赖升级rc29(Vite5.0)，修复设置base后logo不生效
+description: 最近更新（v0.2.9） ⏰ 2023/12/05
 author: 粥里有勺糖
 top: 2
 tag: 日志

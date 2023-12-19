@@ -1,5 +1,5 @@
 import path from 'node:path'
-import { defineConfig } from '@sugarat/theme/node'
+import { defineConfig } from 'vitepress'
 import packageJSON from '../../package.json'
 import { blogTheme, extraHead } from './blog-theme'
 

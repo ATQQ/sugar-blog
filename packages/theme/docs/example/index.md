@@ -1,6 +1,7 @@
 ---
 readingTime: false
 sidebar: false
+hidden: true
 ---
 <script setup>
 import BlogExample from './BlogExample.vue'
