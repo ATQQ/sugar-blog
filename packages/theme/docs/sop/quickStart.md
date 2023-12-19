@@ -7,7 +7,7 @@ descriptionHTML: '
     <span class="line"><span style="color:#FFCB6B;">npm</span><span style="color:#A6ACCD;"> </span><span style="color:#C3E88D;">create</span><span style="color:#A6ACCD;"> </span><span style="color:#C3E88D;">@sugarat/theme@latest</span></span>
     <br/>
     <br/>
-    <span class="line"><span style="color:#B392F0;">bunx</span><span style="color:#E1E4E8;"> </span><span style="color:#9ECBFF;">@sugarat/create-theme</span><span style="color:#E1E4E8;"> </span><span style="color:#79B8FF;">--bun</span></span>
+    <span class="line"><span style="color:#B392F0;">bun create</span><span style="color:#E1E4E8;"> </span><span style="color:#9ECBFF;">@sugarat/theme</span></span>
 </code>
 </pre>'
 tag:
@@ -50,7 +50,7 @@ yarn create @sugarat/theme
 pnpm create @sugarat/theme
 ```
 ```sh [bun]
-bunx @sugarat/create-theme --bun
+bun create @sugarat/theme
 ```
 :::
 
@@ -74,7 +74,7 @@ yarn create @sugarat/theme my-first-blog
 pnpm create @sugarat/theme my-first-blog
 ```
 ```sh [bun]
-bunx @sugarat/create-theme my-first-blog --bun
+bun create @sugarat/theme my-first-blog
 ```
 :::
 

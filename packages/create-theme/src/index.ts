@@ -5,11 +5,25 @@ import process from 'process'
 import fs from 'fs-extra'
 
 const argvs = process.argv.slice(2)
-const bolleanFlag = argvs.filter(item => item.startsWith('--'))
 const stringFlag = argvs.filter(item => !item.startsWith('--'))
 
 const projectName = stringFlag[stringFlag.length - 1] || 'my-blog'
-const isBun = bolleanFlag.includes('--bun')
+
+const pkgInfo = pkgFromUserAgent(process.env.npm_config_user_agent)
+const pkgManager = pkgInfo ? pkgInfo.name : 'npm'
+
+const isBun = pkgManager === 'bun'
+
+function pkgFromUserAgent(userAgent: string | undefined) {
+  if (!userAgent)
+    return undefined
+  const pkgSpec = userAgent.split(' ')[0]
+  const pkgSpecArr = pkgSpec.split('/')
+  return {
+    name: pkgSpecArr[0],
+    version: pkgSpecArr[1],
+  }
+}
 
 function createThemeProject(destination) {
   const templatePath = path.join(__dirname, 'template')
@@ -46,14 +60,13 @@ function createThemeProject(destination) {
 
       console.log()
 
-      const command = isBun ? 'bun' : 'pnpm'
       const msg = `Done. Now run:
-
+      
   ①  cd ${path.parse(destination).name}
-  ②  ${command} install
-  ③  ${command} run ${isBun ? '--bun ' : ''}dev
-  ④  ${command} run ${isBun ? '--bun ' : ''}build
-  ⑤  ${command} run ${isBun ? '--bun ' : ''}serve`
+  ②  ${pkgManager} install
+  ③  ${pkgManager} run ${isBun ? '--bun ' : ''}dev
+  ④  ${pkgManager} run ${isBun ? '--bun ' : ''}build
+  ⑤  ${pkgManager} run ${isBun ? '--bun ' : ''}serve`
 
       console.log(msg)
     }

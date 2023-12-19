@@ -26,7 +26,7 @@ npm create @sugarat/theme@latest
 yarn create @sugarat/theme
 
 # With Bun
-bunx @sugarat/create-theme --bun
+bun create @sugarat/theme
 ```
 ## 运行本项目
 这是一个 monorepo 仓库，博客基于[vitepress](https://vitepress.dev/)搭建，运行前需先安装依赖，构建主题包

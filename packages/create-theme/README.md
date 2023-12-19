@@ -26,7 +26,7 @@ $ pnpm create @sugarat/theme
 With Bun:
 
 ```bash
-$ bunx @sugarat/create-theme --bun
+$ bun create @sugarat/theme
 ```
 
 Then follow the prompts!
@@ -44,5 +44,5 @@ yarn create @sugarat/theme my-first-blog
 pnpm create @sugarat/theme my-first-blog
 
 # bun
-bunx @sugarat/create-theme my-first-blog --bun
+bun create @sugarat/theme my-first-blog
 ```
