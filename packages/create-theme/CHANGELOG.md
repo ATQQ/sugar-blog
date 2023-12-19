@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.30
+
+### Patch Changes
+
+- fix: dead links
+
 ## 0.0.29
 
 ### Patch Changes

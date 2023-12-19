@@ -171,7 +171,7 @@ gantt
 
 用于作品列表展示
 
-效果如下，详见 [个人作品展示](./../work.md)
+效果如下，详见 [个人作品展示](https://theme.sugarat.top/work.html)
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY4NzA4ODczMzkwNg==687088733906)
 
