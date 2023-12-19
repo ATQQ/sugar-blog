@@ -9,6 +9,13 @@ description: 默认支持流程图，tabs面板
 
 支持局部的`tabs`面板，**默认开启**
 
+:::details 我之前手动安装配置了怎么办？
+① package.json 中移除 vitepress-plugin-tabs 依赖
+
+② .vitepress/theme/index.ts 中移除注册的组件`enhanceAppWithTabs`
+
+③ （可选）`getThemeConfig` 中移除配置项`tabs`
+:::
 :::tip 一点说明
 基于 [vitepress-plugin-tabs@0.2.0](https://www.npmjs.com/package/vitepress-plugin-tabs) 内置实现
 :::
@@ -158,3 +165,115 @@ gantt
     Parallel 3   :         des5, after des3, 1d
     Parallel 4   :         des6, after des4, 1d
 ```
+
+## UserWorksPage
+* Type: `UserWorks`
+
+用于作品列表展示
+
+效果如下，详见 [个人作品展示](./../work.md)
+
+![](https://img.cdn.sugarat.top/mdImg/MTY4NzA4ODczMzkwNg==687088733906)
+
+新建一个`works.md`文件，放入以下内容
+  
+```md
+---
+layout: page
+title: 个人作品展示
+sidebar: false
+outline: [2,3]
+sticky: 1
+---
+<UserWorksPage />
+```
+
+内容配置方式如下
+
+::: code-group
+
+```ts [default]
+const blogTheme = getThemeConfig({
+  works: {
+    title: '个人项目/线上作品',
+    description: '记录开发的点点滴滴',
+    topTitle: '举些🌰',
+    list: [
+      {
+        title: '博客主题 @sugarat/theme',
+        description: '基于 vitepress 实现的博客主题',
+        time: {
+          start: '2023/01/29'
+        },
+        github: {
+          owner: 'ATQQ',
+          repo: 'sugar-blog',
+          branch: 'master',
+          path: 'packages/theme'
+        },
+        status: {
+          text: '自定义badge'
+        },
+        url: 'https://theme.sugarat.top',
+        cover:
+          'https://img.cdn.sugarat.top/mdImg/MTY3MzE3MDUxOTMwMw==673170519303',
+        tags: ['Vitepress', 'Vue'],
+        links: [
+          {
+            title: '一个简约风的VitePress博客主题',
+            url: 'https://juejin.cn/post/7196517835380293693'
+          }
+        ]
+      }
+    ]
+  }
+})
+```
+
+```ts [type]
+interface UserWorks {
+  title: string
+  description?: string
+  topTitle?: string
+  list: UserWork[]
+}
+interface UserWork {
+  title: string
+  description: string
+  time:
+  | string
+  | {
+    start: string
+    end?: string
+    lastupdate?: string
+  }
+  status?: {
+    text: string
+    type?: 'tip' | 'warning' | 'danger'
+  }
+  url?: string
+  github?:
+  | string
+  | {
+    owner: string
+    repo: string
+    branch?: string
+    path?: string
+  }
+  cover?:
+  | string
+  | string[]
+  | {
+    urls: string[]
+    layout?: 'swiper' | 'list'
+  }
+  links?: {
+    title: string
+    url: string
+  }[]
+  tags?: string[]
+  top?: number
+}
+```
+
+:::

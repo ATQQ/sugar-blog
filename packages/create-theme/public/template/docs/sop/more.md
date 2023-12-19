@@ -3,7 +3,7 @@ top: 3
 ---
 # 更多能力
 
-主题还提供了许多开箱即用的能力，项见文档 https://theme.sugarat.top
+主题还提供了许多开箱即用的能力，详见文档 https://theme.sugarat.top
 
 * [主题配置：首页&文章](https://theme.sugarat.top/config/frontmatter.html) - 主题提供的一些 `frontmatter`
 * [主题配置：全局](https://theme.sugarat.top/config/global.html) - 主题提供的额外能力

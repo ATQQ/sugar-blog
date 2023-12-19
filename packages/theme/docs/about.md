@@ -29,13 +29,12 @@ sticky: 1
 * 流程图（[vitepress-plugin-mermaid](https://github.com/emersonbottero/vitepress-plugin-mermaid#readme)）
 * RSS
 * 主题色统一
+* 更多可定制的主题样式
 
 ## 规划中功能
 * Valine 评论系统
 * 文章合集（类似于聚合一个内容专题）
-* 更多可定制的主题样式
 * 文章时间线页面支持
-* 博客案例集合
 * 背景图自动更换
 * 首屏铺满slogan，参考reco
 
@@ -51,6 +50,7 @@ sticky: 1
 * [charles7c.github.io](https://github.com/Charles7c/charles7c.github.io)
 * [vitepress-blog-zaun](https://github.com/clark-cui/vitepress-blog-zaun)
 * [vuejs/blog](https://github.com/vuejs/blog/tree/main)
+* [列表无限滚动轮播效果](https://code.juejin.cn/pen/7145007064350195748)
 
 ## 主题相关资源
 * 主题地址：https://theme.sugarat.top/
