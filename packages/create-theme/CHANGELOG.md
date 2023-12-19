@@ -5,6 +5,7 @@
 ### Patch Changes
 
 - feat: 更新模板
+- feat(create-theme): update bun command in README and quickStart.md
 
 ## 0.0.28
 
