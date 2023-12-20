@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.2.9） ⏰ 2023/12/05
+description: 最近更新（v0.2.10） ⏰ 2023/12/20：popover 和 Alert 需手动关闭后才真正隐藏
 author: 粥里有勺糖
 top: 2
 tag: 日志
@@ -25,6 +25,13 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.2.10 (2023/12/20)
+
+### Patch Changes
+
+- feat: Remember the closed state.
+- chore: update rc32
 
 ## 0.2.9 (2023/12/05)
 

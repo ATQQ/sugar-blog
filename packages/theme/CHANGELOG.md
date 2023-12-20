@@ -1,5 +1,12 @@
 # @sugarat/theme
 
+## 0.2.10
+
+### Patch Changes
+
+- feat: Remember the closed state.
+- chore: update rc32
+
 ## 0.2.9
 
 ### Patch Changes

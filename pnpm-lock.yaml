@@ -55,7 +55,7 @@ importers:
         specifier: ^2.1.0
         version: 2.1.0(vue@3.3.4)
       '@sugarat/theme':
-        specifier: 0.2.9
+        specifier: 0.2.10
         version: link:../theme
       axios:
         specifier: ^0.27.2
@@ -152,7 +152,7 @@ importers:
         version: 4.9.4
       vitepress:
         specifier: 1.0.0-rc.32
-        version: 1.0.0-rc.32(@types/node@20.6.3)(postcss@8.4.31)(sass@1.56.1)(typescript@4.9.4)
+        version: 1.0.0-rc.32(@types/node@20.6.3)(postcss@8.4.32)(sass@1.56.1)(typescript@4.9.4)
       vue:
         specifier: ^3.3.4
         version: 3.3.4
@@ -6036,29 +6036,29 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /postcss-import@15.1.0(postcss@8.4.31):
+  /postcss-import@15.1.0(postcss@8.4.32):
     resolution: {integrity: sha512-hpr+J05B2FVYUAXHeK1YyI267J/dDDhMU6B6civm8hSY1jYJnBXxzKDKDswzJmtLHryrjhnDjqqp/49t8FALew==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       postcss: ^8.0.0
     dependencies:
-      postcss: 8.4.31
+      postcss: 8.4.32
       postcss-value-parser: 4.2.0
       read-cache: 1.0.0
       resolve: 1.22.6
     dev: true
 
-  /postcss-js@4.0.1(postcss@8.4.31):
+  /postcss-js@4.0.1(postcss@8.4.32):
     resolution: {integrity: sha512-dDLF8pEO191hJMtlHFPRa8xsizHaM82MLfNkUHdUtVEV3tgTp5oj+8qbEqYM57SLfc74KSbw//4SeJma2LRVIw==}
     engines: {node: ^12 || ^14 || >= 16}
     peerDependencies:
       postcss: ^8.4.21
     dependencies:
       camelcase-css: 2.0.1
-      postcss: 8.4.31
+      postcss: 8.4.32
     dev: true
 
-  /postcss-load-config@4.0.1(postcss@8.4.31):
+  /postcss-load-config@4.0.1(postcss@8.4.32):
     resolution: {integrity: sha512-vEJIc8RdiBRu3oRAI0ymerOn+7rPuMvRXslTvZUKZonDHFIczxztIyJ1urxM1x9JXEikvpWWTUUqal5j/8QgvA==}
     engines: {node: '>= 14'}
     peerDependencies:
@@ -6071,17 +6071,17 @@ packages:
         optional: true
     dependencies:
       lilconfig: 2.1.0
-      postcss: 8.4.31
+      postcss: 8.4.32
       yaml: 2.3.2
     dev: true
 
-  /postcss-nested@6.0.1(postcss@8.4.31):
+  /postcss-nested@6.0.1(postcss@8.4.32):
     resolution: {integrity: sha512-mEp4xPMi5bSWiMbsgoPfcP74lsWLHkQbZc3sY+jWYd65CUwXrUaTp0fmNpa01ZcETKlIgUdFN/MpS2xZtqL9dQ==}
     engines: {node: '>=12.0'}
     peerDependencies:
       postcss: ^8.2.14
     dependencies:
-      postcss: 8.4.31
+      postcss: 8.4.32
       postcss-selector-parser: 6.0.13
     dev: true
 
@@ -6108,14 +6108,6 @@ packages:
 
   /postcss@8.4.27:
     resolution: {integrity: sha512-gY/ACJtJPSmUFPDCHtX78+01fHa64FaU4zaaWfuh1MhGJISufJAH4cun6k/8fwsHYeK4UQmENQK+tRLCFJE8JQ==}
-    engines: {node: ^10 || ^12 || >=14}
-    dependencies:
-      nanoid: 3.3.6
-      picocolors: 1.0.0
-      source-map-js: 1.0.2
-
-  /postcss@8.4.31:
-    resolution: {integrity: sha512-PS08Iboia9mts/2ygV3eLpY5ghnUcfLV/EXTOW1E2qYxJKGGBUtNjN76FYHnMs36RmARn41bC0AZmn+rR0OVpQ==}
     engines: {node: ^10 || ^12 || >=14}
     dependencies:
       nanoid: 3.3.6
@@ -6838,11 +6830,11 @@ packages:
       normalize-path: 3.0.0
       object-hash: 3.0.0
       picocolors: 1.0.0
-      postcss: 8.4.31
-      postcss-import: 15.1.0(postcss@8.4.31)
-      postcss-js: 4.0.1(postcss@8.4.31)
-      postcss-load-config: 4.0.1(postcss@8.4.31)
-      postcss-nested: 6.0.1(postcss@8.4.31)
+      postcss: 8.4.32
+      postcss-import: 15.1.0(postcss@8.4.32)
+      postcss-js: 4.0.1(postcss@8.4.32)
+      postcss-load-config: 4.0.1(postcss@8.4.32)
+      postcss-nested: 6.0.1(postcss@8.4.32)
       postcss-selector-parser: 6.0.13
       resolve: 1.22.6
       sucrase: 3.34.0
@@ -6958,7 +6950,7 @@ packages:
       execa: 5.1.1
       globby: 11.1.0
       joycon: 3.1.1
-      postcss-load-config: 4.0.1(postcss@8.4.31)
+      postcss-load-config: 4.0.1(postcss@8.4.32)
       resolve-from: 5.0.0
       rollup: 3.28.0
       source-map: 0.8.0-beta.0
@@ -7360,7 +7352,7 @@ packages:
       vitepress: ^0.21.6 || ^1.0.0 || ^1.0.0-alpha
     dependencies:
       mermaid: 10.2.4
-      vitepress: 1.0.0-rc.32(@types/node@20.6.3)(postcss@8.4.31)(sass@1.56.1)(typescript@4.9.4)
+      vitepress: 1.0.0-rc.32(@types/node@20.6.3)(postcss@8.4.32)(sass@1.56.1)(typescript@4.9.4)
     optionalDependencies:
       '@mermaid-js/mermaid-mindmap': 9.3.0
     dev: false
@@ -7371,7 +7363,7 @@ packages:
       vitepress: ^1.0.0-alpha.29
       vue: ^3.2.45
     dependencies:
-      vitepress: 1.0.0-rc.32(@types/node@20.6.3)(postcss@8.4.31)(sass@1.56.1)(typescript@4.9.4)
+      vitepress: 1.0.0-rc.32(@types/node@20.6.3)(postcss@8.4.32)(sass@1.56.1)(typescript@4.9.4)
       vue: 3.3.4
     dev: false
 
@@ -7481,7 +7473,7 @@ packages:
       - universal-cookie
     dev: false
 
-  /vitepress@1.0.0-rc.32(@types/node@20.6.3)(postcss@8.4.31)(sass@1.56.1)(typescript@4.9.4):
+  /vitepress@1.0.0-rc.32(@types/node@20.6.3)(postcss@8.4.32)(sass@1.56.1)(typescript@4.9.4):
     resolution: {integrity: sha512-yf00Skn5BGP+YOQvTbSrB5s9qEb/cV+i+wM5rw+mlaxcIYtK+ORvyBEYZLvKogs7OO70TppJtixb4ofeo5K7HA==}
     hasBin: true
     peerDependencies:
@@ -7504,7 +7496,7 @@ packages:
       mark.js: 8.11.1
       minisearch: 6.3.0
       mrmime: 1.0.1
-      postcss: 8.4.31
+      postcss: 8.4.32
       shikiji: 0.9.2
       shikiji-transformers: 0.9.2
       vite: 5.0.10(@types/node@20.6.3)(sass@1.56.1)
