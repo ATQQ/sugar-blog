@@ -17,13 +17,14 @@ const bodyContent = computed(() => {
 const footerContent = computed(() => {
   return popoverProps?.footer || []
 })
+const storageKey = 'theme-blog-popover'
+const closeFlag = `${storageKey}-close`
 
 onMounted(() => {
   if (!popoverProps?.title) {
     return
   }
 
-  const storageKey = 'theme-blog-popover'
   // 取旧值
   const oldValue = localStorage.getItem(storageKey)
   const newValue = JSON.stringify(popoverProps)
@@ -37,13 +38,28 @@ onMounted(() => {
         show.value = false
       }, popoverProps?.duration)
     }
+    return
   }
 
   if (oldValue !== newValue && popoverProps?.duration === -1) {
     // 当做新值处理
     show.value = true
+    localStorage.removeItem(closeFlag)
+    return
+  }
+
+  // 新旧相等，判断是否点击过close，没点击关闭依然展示
+  if (oldValue === newValue && popoverProps?.duration === -1 && !localStorage.getItem(closeFlag)) {
+    show.value = true
   }
 })
+
+function handleClose() {
+  show.value = false
+  if (popoverProps?.duration === -1) {
+    localStorage.setItem(closeFlag, `${+new Date()}`)
+  }
+}
 
 function PopoverValue(props: { key: number; item: BlogPopover.Value },
   { slots }: any) {
@@ -105,7 +121,7 @@ function PopoverValue(props: { key: number; item: BlogPopover.Value },
         </ElIcon>
         <span class="title">{{ popoverProps?.title }}</span>
       </div>
-      <ElIcon class="close-icon" size="20px" @click="show = false">
+      <ElIcon class="close-icon" size="20px" @click="handleClose">
         <CircleCloseFilled />
       </ElIcon>
     </div>

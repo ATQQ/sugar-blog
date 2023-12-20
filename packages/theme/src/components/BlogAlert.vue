@@ -5,9 +5,9 @@ import { useBlogConfig } from '../composables/config/blog'
 
 const { alert: alertProps } = useBlogConfig()
 const show = ref(false)
-
+const storageKey = 'theme-blog-alert'
+const closeFlag = `${storageKey}-close`
 onMounted(() => {
-  const storageKey = 'theme-blog-alert'
   // 取旧值
   const oldValue = localStorage.getItem(storageKey)
   const newValue = JSON.stringify(alertProps)
@@ -21,13 +21,28 @@ onMounted(() => {
         show.value = false
       }, alertProps?.duration)
     }
+    return
   }
 
   if (oldValue !== newValue && alertProps?.duration === -1) {
     // 当做新值处理
     show.value = true
+    localStorage.removeItem(closeFlag)
+    return
+  }
+
+  // 新旧相等，判断是否点击过close，没点击关闭依然展示
+  if (oldValue === newValue && alertProps?.duration === -1 && !localStorage.getItem(closeFlag)) {
+    show.value = true
   }
 })
+
+function handleClose() {
+  show.value = false
+  if (alertProps?.duration === -1) {
+    localStorage.setItem(closeFlag, `${+new Date()}`)
+  }
+}
 </script>
 
 <template>
@@ -40,6 +55,7 @@ onMounted(() => {
       :closable="alertProps?.closable"
       :close-text="alertProps?.closeText"
       :description="alertProps?.description"
+      @close="handleClose"
     >
       <div v-if="alertProps?.html" v-html="alertProps?.html" />
     </ElAlert>
