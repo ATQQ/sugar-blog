@@ -40,4 +40,5 @@ sidebar: false
 | 移动端支持头像展示（可关闭） |   ✅   |
 |           回到顶部           |   🔧   |
 |    主题部分能力分离为插件    |   🔧   |
-|   support img noreferrer    |   ❌   |
+|       frontmatter汇总        |   🔧   |
+|    support img noreferrer    |   ❌   |

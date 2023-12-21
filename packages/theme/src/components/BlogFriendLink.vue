@@ -109,7 +109,7 @@ const scrollTop = computed(() => {
         }
         "
       >
-        <li v-for="v in friendList" :key="v.nickname">
+        <li v-for="(v, idx) in friendList" :key="idx">
           <a :href="v.url" target="_blank">
             <ElAvatar :size="50" :src="v.avatar" :alt="v.alt" />
             <div>

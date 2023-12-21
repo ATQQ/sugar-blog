@@ -26,6 +26,12 @@ bun install vitepress@latest
 ```
 :::
 
+## 0.2.11 (2023/12/21)
+
+### Patch Changes
+
+- fix: randomFriendLink Error
+
 ## 0.2.10 (2023/12/20)
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.32
+
+### Patch Changes
+
+- fix: randomFriendLink Error
+
 ## 0.0.31
 
 ### Patch Changes
