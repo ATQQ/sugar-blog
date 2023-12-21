@@ -107,6 +107,12 @@ const blogTheme = getThemeConfig({
         avatar: 'https://leelaa.cn/pwa-192x192.png',
         des: '肯了个德的博客',
         nickname: 'LEEDAISEN'
+      },
+      {
+        url: 'https://next.blackcell.fun/',
+        avatar: 'https://avatars.githubusercontent.com/u/45719798?v=4',
+        des: '物以类聚 人以群分',
+        nickname: 'BlackCell'
       }
     ],
     random: true,
