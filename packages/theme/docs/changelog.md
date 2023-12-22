@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.2.10） ⏰ 2023/12/20：popover 和 Alert 需手动关闭后才真正隐藏
+description: 最近更新（v0.2.12） ⏰ 2023/12/22：问题修复：相对路径的图片无法自动识别cover；randomFriendLink Error
 author: 粥里有勺糖
 top: 2
 tag: 日志
