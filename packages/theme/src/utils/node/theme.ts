@@ -6,7 +6,7 @@ import glob from 'fast-glob'
 import matter from 'gray-matter'
 import type { Theme } from '../../composables/config/index'
 import { formatDate } from '../client'
-import { getDefaultTitle, getFileBirthTime, getTextSummary } from './index'
+import { getDefaultTitle, getFileBirthTime, getFirstImagURLFromMD, getTextSummary } from './index'
 
 export function patchDefaultThemeSideBar(cfg?: Partial<Theme.BlogConfig>) {
   return cfg?.blog !== false && cfg?.recommend !== false
@@ -105,7 +105,7 @@ export function getArticles(cfg?: Partial<Theme.BlogConfig>) {
       // 获取封面图
       meta.cover
         = meta.cover
-        ?? (fileContent.match(/[!]\[.*?\]\((https:\/\/.+)\)/)?.[1] || '')
+        ?? (getFirstImagURLFromMD(fileContent, `/${route}`))
 
       // 是否发布 默认发布
       if (meta.publish === false) {

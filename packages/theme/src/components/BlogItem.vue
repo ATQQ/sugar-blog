@@ -64,7 +64,7 @@ const showTime = computed(() => {
       <div
         v-if="cover"
         class="cover-img"
-        :style="`background-image: url(${cover});`"
+        :style="`background-image: url(${withBase(`${cover}`)});`"
       />
     </div>
     <!-- 底部补充描述 -->

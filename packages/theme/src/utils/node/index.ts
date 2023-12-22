@@ -1,6 +1,7 @@
 /* eslint-disable global-require */
 /* eslint-disable prefer-rest-params */
 import { spawn, spawnSync } from 'node:child_process'
+import path from 'node:path'
 import { formatDate } from '../client'
 
 export function clearMatterContent(content: string) {
@@ -117,4 +118,34 @@ export function withBase(base: string, path: string) {
   return EXTERNAL_URL_RE.test(path) || path.startsWith('.')
     ? path
     : joinPath(base, path)
+}
+
+function isBase64ImageURL(url: string) {
+  // Base64 图片链接的格式为 data:image/[image format];base64,[Base64 编码的数据]
+  const regex = /^data:image\/[a-z]+;base64,/
+  return regex.test(url)
+}
+
+/**
+ * 从文档内容中提取封面
+ * @param content 文档内容
+ */
+export function getFirstImagURLFromMD(content: string, route: string) {
+  const url = content.match(/!\[.*\]\((.*)\)/)?.[1]?.replace(/['"]/g, '')
+  const isHTTPSource = url && url.startsWith('http')
+  if (!url) {
+    return ''
+  }
+
+  if (isHTTPSource || isBase64ImageURL(url)) {
+    return url
+  }
+
+  // TODO: 其它协议，待补充
+
+  const paths = joinPath('/', route).split('/')
+  paths.splice(paths.length - 1, 1)
+  const relativePath = url.startsWith('/') ? url : path.join(paths.join('/') || '', url)
+
+  return joinPath('/', relativePath)
 }

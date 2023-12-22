@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.33
+
+### Patch Changes
+
+- fix: 相对路径的图片无法自动识别cover
+
 ## 0.0.32
 
 ### Patch Changes

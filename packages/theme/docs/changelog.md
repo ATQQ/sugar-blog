@@ -26,6 +26,12 @@ bun install vitepress@latest
 ```
 :::
 
+## 0.2.12 (2023/12/22)
+
+### Patch Changes
+
+- fix: 相对路径的图片无法自动识别cover
+
 ## 0.2.11 (2023/12/21)
 
 ### Patch Changes
