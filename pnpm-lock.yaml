@@ -55,7 +55,7 @@ importers:
         specifier: ^2.1.0
         version: 2.1.0(vue@3.3.4)
       '@sugarat/theme':
-        specifier: 0.2.12
+        specifier: 0.2.13
         version: link:../theme
       axios:
         specifier: ^0.27.2
@@ -141,6 +141,9 @@ importers:
       element-plus:
         specifier: ^2.3.4
         version: 2.3.4(vue@3.3.4)
+      javascript-stringify:
+        specifier: ^2.1.0
+        version: 2.1.0
       pagefind:
         specifier: 1.0.3
         version: 1.0.3
@@ -4875,7 +4878,6 @@ packages:
 
   /javascript-stringify@2.1.0:
     resolution: {integrity: sha512-JVAfqNPTvNq3sB/VHQJAFxN/sPgKnsKrCwyRt15zwNCdrMMJDdcEOdubuy+DuJYYdm0ox1J4uzEuYKkN+9yhVg==}
-    dev: false
 
   /jiti@1.20.0:
     resolution: {integrity: sha512-3TV69ZbrvV6U5DfQimop50jE9Dl6J8O1ja1dvBbMba/sZ3YBEQqJ2VZRoQPVnhlzjNtU1vaXRZVrVjU4qtm8yA==}

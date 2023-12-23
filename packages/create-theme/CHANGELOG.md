@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.34
+
+### Patch Changes
+
+- fix: 自动取封面图,相对路径构建后不生效的问题
+
 ## 0.0.33
 
 ### Patch Changes

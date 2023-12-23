@@ -26,6 +26,12 @@ bun install vitepress@latest
 ```
 :::
 
+## 0.2.13 (2023/12/23)
+
+### Patch Changes
+
+- fix: 自动取封面图,相对路径构建后不生效的问题
+
 ## 0.2.12 (2023/12/22)
 
 ### Patch Changes

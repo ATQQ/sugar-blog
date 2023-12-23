@@ -1,13 +1,17 @@
 import path from 'node:path'
 import { execSync } from 'node:child_process'
 import process from 'node:process'
+import { readFileSync } from 'node:fs'
+import { Buffer } from 'node:buffer'
 import type { SiteConfig } from 'vitepress'
+
 import {
   chineseSearchOptimize,
   pagefindPlugin
 } from 'vitepress-plugin-pagefind'
 import { RssPlugin } from 'vitepress-plugin-rss'
 import type { Theme } from '../../composables/config/index'
+import { joinPath } from './index'
 
 export function getVitePlugins(cfg?: Partial<Theme.BlogConfig>) {
   const plugins: any[] = []
@@ -16,7 +20,8 @@ export function getVitePlugins(cfg?: Partial<Theme.BlogConfig>) {
   const buildEndFn: any[] = []
   // 执行自定义的 buildEnd 钩子
   plugins.push(inlineBuildEndPlugin(buildEndFn))
-
+  // 处理cover image的路径（暂只支持自动识别的文章首图）
+  plugins.push(coverImgTransform())
   // 内置简化版的pagefind
   if (cfg && cfg.search !== false) {
     const ops = cfg.search instanceof Object ? cfg.search : {}
@@ -114,6 +119,47 @@ export function inlineBuildEndPlugin(buildEndFn: any[]) {
         buildEndFn
           .filter(fn => typeof fn === 'function')
           .forEach(fn => fn(siteCfg))
+      }
+    }
+  }
+}
+
+// TODO: 支持frontmatter中的相对路径图片自动处理
+export function coverImgTransform() {
+  let blogConfig: Theme.BlogConfig
+  let vitepressConfig: SiteConfig
+  let assetsDir: string
+  return {
+    name: '@sugarat/theme-plugin-cover-transform',
+    apply: 'build',
+    enforce: 'pre',
+    configResolved(config: any) {
+      vitepressConfig = config.vitepress
+      assetsDir = vitepressConfig.assetsDir
+      blogConfig = config.vitepress.site.themeConfig.blog
+    },
+    async generateBundle(_: any, bundle: Record<string, any>) {
+      const assetsMap = Object.entries(bundle).filter(([key]) => {
+        return key.startsWith(assetsDir)
+      }).map(([_, value]) => {
+        return value
+      })
+      for (const page of blogConfig.pagesData) {
+        const { cover } = page.meta
+        // 是否相对路径引用
+        if (!cover?.startsWith('/')) {
+          continue
+        }
+        try {
+          // 寻找构建后的
+          const realPath = path.join(vitepressConfig.root, cover)
+          const fileBuffer = readFileSync(realPath)
+          const matchAsset = assetsMap.find(v => Buffer.compare(fileBuffer, v.source))
+          page.meta.cover = joinPath('/', matchAsset.fileName)
+        }
+        catch (e: any) {
+          vitepressConfig.logger.warn(e?.message)
+        }
       }
     }
   }
