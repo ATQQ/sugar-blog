@@ -41,5 +41,13 @@ export default defineExamples([
     desc: '记录海棠的成长点滴',
     avatar: '/imgs/example/haitang/avatar.png',
     nickname: 'Haitang'
-  }
+  },
+  {
+    cover: 'https://mywisteria.ym94.cn/cover.png',
+    link: 'https://blog.ym94.cn/',
+    name: 'Ymri',
+    desc: '语雀同步到个人博客',
+    avatar: 'https://mywisteria.ym94.cn/header.jpg',
+    nickname: 'Ymri'
+  },
 ])
