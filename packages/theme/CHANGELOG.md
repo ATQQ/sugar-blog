@@ -1,5 +1,11 @@
 # @sugarat/theme
 
+## 0.2.14
+
+### Patch Changes
+
+- fix: build cover error
+
 ## 0.2.13
 
 ### Patch Changes

@@ -1,7 +1,7 @@
 import path from 'node:path'
 import { execSync } from 'node:child_process'
 import process from 'node:process'
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import { Buffer } from 'node:buffer'
 import type { SiteConfig } from 'vitepress'
 
@@ -153,9 +153,14 @@ export function coverImgTransform() {
         try {
           // 寻找构建后的
           const realPath = path.join(vitepressConfig.root, cover)
+          if (!existsSync(realPath)) {
+            continue
+          }
           const fileBuffer = readFileSync(realPath)
-          const matchAsset = assetsMap.find(v => Buffer.compare(fileBuffer, v.source))
-          page.meta.cover = joinPath('/', matchAsset.fileName)
+          const matchAsset = assetsMap.find(v => Buffer.compare(fileBuffer, v.source) === 0)
+          if (matchAsset) {
+            page.meta.cover = joinPath('/', matchAsset.fileName)
+          }
         }
         catch (e: any) {
           vitepressConfig.logger.warn(e?.message)

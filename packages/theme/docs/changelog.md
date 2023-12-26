@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.2.12） ⏰ 2023/12/22：问题修复：相对路径的图片无法自动识别cover；randomFriendLink Error
+description: 最近更新（v0.2.14） ⏰ 2023/12/26：问题修复：相对路径的图片无法正确自动识别cover；
 author: 粥里有勺糖
 top: 2
 tag: 日志
@@ -25,6 +25,12 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.2.14 (2023/12/26)
+
+### Patch Changes
+
+- fix: build cover error
 
 ## 0.2.13 (2023/12/23)
 
