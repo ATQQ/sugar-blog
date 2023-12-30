@@ -13,7 +13,7 @@
     "@element-plus/icons-vue": "^2.1.0",
     "@sugarat/theme": "^0.2.14",
     "element-plus": "^2.3.8",
-    "vue": "^3.3.4"
+    "vue": "3.3.13"
   },
   "directories": {
     "doc": "docs"

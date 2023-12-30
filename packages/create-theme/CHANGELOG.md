@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.36
+
+### Patch Changes
+
+- chore: lock vue version 3.3.13
+
 ## 0.0.35
 
 ### Patch Changes
