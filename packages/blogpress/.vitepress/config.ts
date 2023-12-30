@@ -119,7 +119,13 @@ const blogTheme = getThemeConfig({
         avatar: 'https://img.yovvis.top/avatar.png',
         des: '工夫为艺，笃志成技',
         nickname: 'Yovvis\'s Blog'
-      }
+      },
+      {
+        nickname: '强少来了',
+        des: '互联网产品经理',
+        avatar: 'https://fengxiaoqiang.com/images/logo.png',
+        url: 'https://fengxiaoqiang.com/'
+      },
     ],
     random: true,
     limit: 3
