@@ -113,6 +113,12 @@ const blogTheme = getThemeConfig({
         avatar: 'https://avatars.githubusercontent.com/u/45719798?v=4',
         des: '物以类聚 人以群分',
         nickname: 'BlackCell'
+      },
+      {
+        url: 'https://blog.yovvis.top',
+        avatar: 'https://avatars.githubusercontent.com/u/45719798?v=4',
+        des: '工夫为艺，笃志成技',
+        nickname: 'Yovvis\'s Blog'
       }
     ],
     random: true,
