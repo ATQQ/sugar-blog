@@ -116,7 +116,7 @@ const blogTheme = getThemeConfig({
       },
       {
         url: 'https://blog.yovvis.top',
-        avatar: 'https://avatars.githubusercontent.com/u/45719798?v=4',
+        avatar: 'https://img.yovvis.top/avatar.png',
         des: '工夫为艺，笃志成技',
         nickname: 'Yovvis\'s Blog'
       }
