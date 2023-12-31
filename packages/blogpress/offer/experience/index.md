@@ -4,6 +4,7 @@ hidden: true
 # 心得总结
 
 ## 目录
+* [2023年度总结](./2023summary.md)
 * [2022年度总结](./2022summary.md)
 * [2021年度总结](./2021summary.md)
 * [2020年度总结](./2020summary.md)
