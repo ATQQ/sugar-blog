@@ -2,7 +2,6 @@
 outline: [2,3]
 cover: https://img.cdn.sugarat.top/mdImg/MTcwNDAwMzUwMzY3OA==704003503678
 description: 时间不在于你拥有多少，而在于你怎样使用
-publish: false
 ---
 # 2023年度总结
 
