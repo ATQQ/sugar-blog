@@ -26,6 +26,15 @@ bun install vitepress@latest
 ```
 :::
 
+## 0.2.15 (2024/01/03)
+
+### Patch Changes
+
+- fix: recommend active error in index.md
+- fix: error in coverImgTransform function
+- feat: support for customizing docMeta insert position
+- feat: 内置 markdown-it-task-checkbox 插件 
+
 ## 0.2.14 (2023/12/26)
 
 ### Patch Changes

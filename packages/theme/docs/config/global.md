@@ -1167,3 +1167,17 @@ const blogTheme = getThemeConfig({
 ```
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY5NjE1NDYyMjI3NQ==696154622275)
+
+## 🚧 docMetaInsert
+
+主要是指 
+* `docMetaInsertSelector`：
+  * default: `'h1'`
+* `docMetaInsertPosition`
+  * default: `'after'`
+
+设置 `作者，标签，时间等` 信息区块的展示位置  
+
+![](https://img.cdn.sugarat.top/mdImg/MTcwNDI5MTUyMTAwMg==704291521002)
+
+同样可以在文章的 forntmatter 里设置
