@@ -56,7 +56,7 @@ importers:
         version: 2.1.0(vue@3.3.4)
       '@sugarat/theme':
         specifier: 0.2.14
-        version: link:../theme
+        version: 0.2.14(typescript@5.1.6)(vitepress@1.0.0-rc.32)(vue@3.3.4)
       axios:
         specifier: ^0.27.2
         version: 0.27.2
@@ -113,6 +113,9 @@ importers:
       gray-matter:
         specifier: ^4.0.3
         version: 4.0.3
+      markdown-it-task-checkbox:
+        specifier: ^1.0.6
+        version: 1.0.6
       mermaid:
         specifier: ^10.2.4
         version: 10.2.4
@@ -1687,6 +1690,29 @@ packages:
       - supports-color
     dev: true
 
+  /@sugarat/theme@0.2.14(typescript@5.1.6)(vitepress@1.0.0-rc.32)(vue@3.3.4):
+    resolution: {integrity: sha512-Lrt5jPY6/EFlRg/r1O7ehT3A3VpGcZT68Rb+tnW1Uc91s/QcKllvUC7ctr9Th6aNm/AxwNUd6n+rCvHy16T1+w==}
+    dependencies:
+      '@giscus/vue': 2.3.0(vue@3.3.4)
+      '@mdit-vue/shared': 0.12.0
+      '@mermaid-js/mermaid-mindmap': 9.3.0
+      '@vue/shared': 3.3.13
+      '@vueuse/core': 9.13.0(vue@3.3.4)
+      fast-glob: 3.3.1
+      gray-matter: 4.0.3
+      mermaid: 10.2.4
+      vitepress-plugin-mermaid: 2.0.13(mermaid@10.2.4)(vitepress@1.0.0-rc.32)
+      vitepress-plugin-pagefind: 0.2.10(typescript@5.1.6)
+      vitepress-plugin-rss: 0.2.0
+      vitepress-plugin-tabs: 0.2.0(vitepress@1.0.0-rc.32)(vue@3.3.4)
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - supports-color
+      - typescript
+      - vitepress
+      - vue
+    dev: false
+
   /@sxzz/popperjs-es@2.11.7:
     resolution: {integrity: sha512-Ccy0NlLkzr0Ex2FKvh2X+OyERHXJ88XJ1MXtsI9y9fGexlaXaVTPzBCRBwIxFkORuOb+uBqeu+RqnpgYTEZRUQ==}
 
@@ -1974,8 +2000,8 @@ packages:
       vite: ^4.0.0 || ^5.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 5.0.10(@types/node@20.6.3)(sass@1.64.1)
-      vue: 3.3.13(typescript@5.1.6)
+      vite: 5.0.10(@types/node@20.6.3)(sass@1.56.1)
+      vue: 3.3.13(typescript@4.9.4)
 
   /@vue/compiler-core@3.2.47:
     resolution: {integrity: sha512-p4D7FDnQb7+YJmO2iPEv0SQNeNzcbHdGByJDsT4lynf63AFkOTFN07HsiRSvjGo0QrxR/o3d0hUyNCUnBU2Tig==}
@@ -2192,7 +2218,7 @@ packages:
     dependencies:
       '@vue/compiler-ssr': 3.3.13
       '@vue/shared': 3.3.13
-      vue: 3.3.13(typescript@5.1.6)
+      vue: 3.3.13(typescript@4.9.4)
 
   /@vue/server-renderer@3.3.4(vue@3.3.4):
     resolution: {integrity: sha512-Q6jDDzR23ViIb67v+vM1Dqntu+HUexQcsWKhhQa4ARVzxOY2HbC7QRW/ggkDBd5BU+uM1sV6XOAP0b216o34JQ==}
@@ -2247,6 +2273,18 @@ packages:
       '@vueuse/metadata': 9.13.0
       '@vueuse/shared': 9.13.0(vue@3.2.47)
       vue-demi: 0.13.11(vue@3.2.47)
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
+    dev: false
+
+  /@vueuse/core@9.13.0(vue@3.3.13):
+    resolution: {integrity: sha512-pujnclbeHWxxPRqXWmdkKV5OX4Wk4YeK7wusHqRwU0Q7EFusHoqNA/aPhB6KCh9hEqJkLAJo7bb0Lh9b+OIVzw==}
+    dependencies:
+      '@types/web-bluetooth': 0.0.16
+      '@vueuse/metadata': 9.13.0
+      '@vueuse/shared': 9.13.0(vue@3.3.13)
+      vue-demi: 0.13.11(vue@3.3.13)
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -2410,6 +2448,15 @@ packages:
     resolution: {integrity: sha512-UrnhU+Cnufu4S6JLCPZnkWh0WwZGUp72ktOF2DFptMlOs3TOdVv8xJN53zhHGARmVOsz5KqOls09+J1NR6sBKw==}
     dependencies:
       vue-demi: 0.14.5(vue@3.2.47)
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
+    dev: false
+
+  /@vueuse/shared@9.13.0(vue@3.3.13):
+    resolution: {integrity: sha512-UrnhU+Cnufu4S6JLCPZnkWh0WwZGUp72ktOF2DFptMlOs3TOdVv8xJN53zhHGARmVOsz5KqOls09+J1NR6sBKw==}
+    dependencies:
+      vue-demi: 0.14.5(vue@3.3.13)
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -4075,7 +4122,6 @@ packages:
       glob-parent: 5.1.2
       merge2: 1.4.1
       micromatch: 4.0.5
-    dev: true
 
   /fast-json-stable-stringify@2.1.0:
     resolution: {integrity: sha512-lhd/wF+Lk98HZoTCtlVraHtfh5XYijIjalXck7saUtuanSDyLMxnHhSXEDJqHxD7msR8D0uCmqlkwjCV8xvwHw==}
@@ -5255,6 +5301,10 @@ packages:
       highlight.js: 11.7.0
     dev: true
 
+  /markdown-it-task-checkbox@1.0.6:
+    resolution: {integrity: sha512-7pxkHuvqTOu3iwVGmDPeYjQg+AIS9VQxzyLP9JCg9lBjgPAJXGEkChK6A2iFuj3tS0GV3HG2u5AMNhcQqwxpJw==}
+    dev: false
+
   /markdown-it@13.0.1:
     resolution: {integrity: sha512-lTlxriVoy2criHP0JKRhO2VDG9c2ypWCsT237eDiLqi09rmbKoUetyGHq2uOIRoRS//kfoJckS0eUzzkDR+k2Q==}
     hasBin: true
@@ -5593,7 +5643,6 @@ packages:
     dependencies:
       braces: 3.0.2
       picomatch: 2.3.1
-    dev: true
 
   /mime-db@1.52.0:
     resolution: {integrity: sha512-sPU4uV7dYlvtWJxwwxHD0PuihVNiE7TyAbQ5SWxDCB9mUYvOgroQOwYQQOKPJ8CIbE+1ETVlOoK1UC2nU3gYvg==}
@@ -7346,6 +7395,7 @@ packages:
       sass: 1.64.1
     optionalDependencies:
       fsevents: 2.3.3
+    dev: false
 
   /vitepress-plugin-mermaid@2.0.13(mermaid@10.2.4)(vitepress@1.0.0-rc.32):
     resolution: {integrity: sha512-2c0ywXHE7kOK88Ygla9aGgkyF2JbfqfjE36JnoljW/3hQTR9rYBmfTFM5tvs4TUjCUfedUYT4CeyNolCY9t3uw==}
@@ -7357,6 +7407,30 @@ packages:
       vitepress: 1.0.0-rc.32(@types/node@20.6.3)(postcss@8.4.32)(sass@1.56.1)(typescript@4.9.4)
     optionalDependencies:
       '@mermaid-js/mermaid-mindmap': 9.3.0
+    dev: false
+
+  /vitepress-plugin-pagefind@0.2.10(typescript@5.1.6):
+    resolution: {integrity: sha512-4mn8+xjz6MuVV1ksYAbFeG4STn1jf87mIQFBrihAUsgjcIPoEhQhYWPln/vYnfD2LPEjB6rqLWCxDHTB7dqKXA==}
+    dependencies:
+      '@vue/shared': 3.3.13
+      '@vueuse/core': 9.13.0(vue@3.3.13)
+      fast-glob: 3.3.1
+      gray-matter: 4.0.3
+      highlight.js: 11.7.0
+      javascript-stringify: 2.1.0
+      vue: 3.3.13(typescript@5.1.6)
+      vue-command-palette: 0.1.4
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - typescript
+    dev: false
+
+  /vitepress-plugin-rss@0.2.0:
+    resolution: {integrity: sha512-NA4EwCkvf6hZ2Vr6d64ItKOjs598SSL2DG+NL6GkiIp/jTdfoIs96BQ3FI/ARLC4i3V558D7NroVheGF8xc5Gw==}
+    dependencies:
+      fast-glob: 3.3.1
+      feed: 4.2.2
+      gray-matter: 4.0.3
     dev: false
 
   /vitepress-plugin-tabs@0.2.0(vitepress@1.0.0-rc.32)(vue@3.3.4):
@@ -7561,6 +7635,21 @@ packages:
       vue: 3.2.47
     dev: false
 
+  /vue-demi@0.13.11(vue@3.3.13):
+    resolution: {integrity: sha512-IR8HoEEGM65YY3ZJYAjMlKygDQn25D5ajNFNoKh9RSDMQtlzCxtfQjdQgv9jjK+m3377SsJXY8ysq8kLCZL25A==}
+    engines: {node: '>=12'}
+    hasBin: true
+    requiresBuild: true
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0-rc.1
+      vue: ^3.0.0-0 || ^2.6.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    dependencies:
+      vue: 3.3.13(typescript@5.1.6)
+    dev: false
+
   /vue-demi@0.13.11(vue@3.3.4):
     resolution: {integrity: sha512-IR8HoEEGM65YY3ZJYAjMlKygDQn25D5ajNFNoKh9RSDMQtlzCxtfQjdQgv9jjK+m3377SsJXY8ysq8kLCZL25A==}
     engines: {node: '>=12'}
@@ -7590,6 +7679,21 @@ packages:
       vue: 3.2.47
     dev: false
 
+  /vue-demi@0.14.5(vue@3.3.13):
+    resolution: {integrity: sha512-o9NUVpl/YlsGJ7t+xuqJKx8EBGf1quRhCiT6D/J0pfwmk9zUwYkC7yrF4SZCe6fETvSM3UNL2edcbYrSyc4QHA==}
+    engines: {node: '>=12'}
+    hasBin: true
+    requiresBuild: true
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0-rc.1
+      vue: ^3.0.0-0 || ^2.6.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    dependencies:
+      vue: 3.3.13(typescript@5.1.6)
+    dev: false
+
   /vue-demi@0.14.5(vue@3.3.4):
     resolution: {integrity: sha512-o9NUVpl/YlsGJ7t+xuqJKx8EBGf1quRhCiT6D/J0pfwmk9zUwYkC7yrF4SZCe6fETvSM3UNL2edcbYrSyc4QHA==}
     engines: {node: '>=12'}
@@ -7616,7 +7720,7 @@ packages:
       '@vue/composition-api':
         optional: true
     dependencies:
-      vue: 3.3.13(typescript@5.1.6)
+      vue: 3.3.13(typescript@4.9.4)
 
   /vue-eslint-parser@9.3.1(eslint@8.50.0):
     resolution: {integrity: sha512-Clr85iD2XFZ3lJ52/ppmUDG/spxQu6+MAeHXjjyI4I1NUYZ9xmenQp4N0oaHJhrA8OOxltCVxMRfANGa70vU0g==}
@@ -7675,6 +7779,7 @@ packages:
       '@vue/server-renderer': 3.3.13(vue@3.3.13)
       '@vue/shared': 3.3.13
       typescript: 5.1.6
+    dev: false
 
   /vue@3.3.4:
     resolution: {integrity: sha512-VTyEYn3yvIeY1Py0WaYGZsXnz3y5UnGi62GjVEqvEGPl6nxbOrCXbVOTQWBEJUqAyTUk2uJ5JLVnYJ6ZzGbrSw==}

@@ -359,6 +359,20 @@ export namespace Theme {
      * @default 'after'
      */
     docMetaInsertPosition?: 'before' | 'after'
+    /**
+     * 配置内置的 markdown-it-task-checkbox 插件，设置 false 则关闭
+     * 详见 https://github.com/linsir/markdown-it-task-checkbox
+     */
+    taskCheckbox?: TaskCheckbox | boolean
+  }
+
+  export interface TaskCheckbox {
+    disabled?: boolean
+    divWrap?: boolean
+    divClass?: string
+    idPrefix?: string
+    ulClass?: string
+    liClass?: string
   }
 
   export type RSSOptions = RSSPluginOptions

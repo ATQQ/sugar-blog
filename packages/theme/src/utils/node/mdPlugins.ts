@@ -19,7 +19,21 @@ export function getMarkdownPlugins(cfg?: Partial<Theme.BlogConfig>) {
       markdownPlugin.push(MermaidMarkdown)
     }
   }
+
+  if (cfg) {
+    cfg.taskCheckbox = cfg?.taskCheckbox ?? true
+    if (cfg.taskCheckbox !== false) {
+      markdownPlugin.push(taskCheckboxPlugin(cfg.taskCheckbox))
+    }
+  }
+
   return markdownPlugin
+}
+
+export function taskCheckboxPlugin(ops: Theme.TaskCheckbox | boolean) {
+  return (md: any) => {
+    md.use(require('markdown-it-task-checkbox'), ops)
+  }
 }
 
 export function registerMdPlugins(vpCfg: any, plugins: any[]) {
