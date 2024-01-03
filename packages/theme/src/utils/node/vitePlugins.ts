@@ -147,7 +147,7 @@ export function coverImgTransform() {
       for (const page of blogConfig.pagesData) {
         const { cover } = page.meta
         // 是否相对路径引用
-        if (!cover?.startsWith('/')) {
+        if (!cover?.startsWith?.('/')) {
           continue
         }
         try {
