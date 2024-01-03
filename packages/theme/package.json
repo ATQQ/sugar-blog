@@ -66,7 +66,7 @@
     "pagefind": "1.0.3",
     "sass": "^1.56.1",
     "typescript": "^4.8.2",
-    "vitepress": "1.0.0-rc.32",
+    "vitepress": "1.0.0-rc.35",
     "vue": "^3.3.4"
   },
   "pnpm": {

@@ -79,7 +79,6 @@ function analyze() {
   if (!el) {
     el = docDomContainer?.querySelector('h1')
   }
-  console.log('docMetaInsertPosition.value', docMetaInsertPosition.value)
   el?.[docMetaInsertPosition.value]?.($des.value!)
 }
 
