@@ -80,7 +80,7 @@ const recommendList = computed(() => {
 
 function isCurrentDoc(value: string) {
   const path = decodeURIComponent(route.path).replace(/.html$/, '')
-  return [value, value.replace(/index$/, '')].inclues(path)
+  return [value, value.replace(/index$/, '')].includes(path)
 }
 
 const currentPage = ref(1)
