@@ -61,6 +61,7 @@ export function getArticles(cfg?: Partial<Theme.BlogConfig>) {
 
       const fileContent = fs.readFileSync(v, 'utf-8')
       // TODO：摘要生成优化
+      // TODO: 用上内容content
       const { data: frontmatter, excerpt } = matter(fileContent, {
         excerpt: true
       })
@@ -70,6 +71,7 @@ export function getArticles(cfg?: Partial<Theme.BlogConfig>) {
       }
 
       if (!meta.title) {
+        // TODO：优化标题的采集
         meta.title = getDefaultTitle(fileContent)
       }
       if (!meta.date) {

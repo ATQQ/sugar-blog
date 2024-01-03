@@ -79,6 +79,16 @@ export namespace Theme {
     album: string
     // 是否发布
     publish?: boolean
+    /**
+     * 文章作者，标签等信息插入位置
+     * @default 'h1'
+     */
+    docMetaInsertSelector?: string
+    /**
+     * 文章作者，标签等信息插入位置
+     * @default 'after'
+     */
+    docMetaInsertPosition?: 'before' | 'after'
   }
   export interface PageData {
     route: string
@@ -339,6 +349,16 @@ export namespace Theme {
      * 首页页脚
      */
     footer?: Footer | Footer[]
+    /**
+     * 文章作者，标签等信息插入位置
+     * @default 'h1'
+     */
+    docMetaInsertSelector?: string
+    /**
+     * 文章作者，标签等信息插入位置
+     * @default 'after'
+     */
+    docMetaInsertPosition?: 'before' | 'after'
   }
 
   export type RSSOptions = RSSPluginOptions
