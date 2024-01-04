@@ -1168,16 +1168,47 @@ const blogTheme = getThemeConfig({
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY5NjE1NDYyMjI3NQ==696154622275)
 
-## 🚧 docMetaInsert
+## docMetaInsert
 
 主要是指 
-* `docMetaInsertSelector`：
+* `docMetaInsertSelector`：可配配置 CSS 选择器 (`querySelector` 可解析即可)
+  * type: `string`
   * default: `'h1'`
 * `docMetaInsertPosition`
+  * type: `'before' | 'after'`
   * default: `'after'`
 
-设置 `作者，标签，时间等` 信息区块的展示位置  
+两者配合设置 `作者，标签，时间等` 信息区块的展示位置
 
 ![](https://img.cdn.sugarat.top/mdImg/MTcwNDI5MTUyMTAwMg==704291521002)
 
-同样可以在文章的 forntmatter 里设置
+::: code-group
+
+```ts [默认值]
+const blogTheme = getThemeConfig({
+  docMetaInsertSelector: 'h1',
+  docMetaInsertPosition: 'after'
+})
+```
+
+:::
+
+同样可以在文章的 forntmatter 里设置，优先级高于全局的配置
+
+```md
+---
+docMetaInsertSelector: 'h1'
+docMetaInsertPosition: 'after'
+---
+```
+
+修改示例：插入到文章最前面
+
+```ts
+const blogTheme = getThemeConfig({
+  docMetaInsertSelector: 'div.content-container',
+  docMetaInsertPosition: 'before'
+})
+```
+
+![](https://img.cdn.sugarat.top/mdImg/MTcwNDM0NjAxNjg3NQ==704346016875)
