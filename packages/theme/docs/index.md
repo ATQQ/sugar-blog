@@ -18,3 +18,30 @@ blog:
  inspiringTimeout: 3000
  pageSize: 10
 ---
+
+<style scoped>
+@import './home-layout-wrapper.css';
+</style>
+
+<div class="vp-doc home-wrapper">
+
+# ⚡ 快速开始
+
+:::code-group
+```sh [npm]
+npm create @sugarat/theme@latest
+```
+```sh [yarn]
+yarn create @sugarat/theme
+```
+```sh [pnpm]
+pnpm create @sugarat/theme
+```
+```sh [bun]
+bun create @sugarat/theme
+```
+:::
+
+期待你提交[案例](./example/index.md) 😄
+
+</div>
