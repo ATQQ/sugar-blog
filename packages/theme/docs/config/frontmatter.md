@@ -19,6 +19,17 @@ recommend: 1
 
 官方内置的👉🏻 [markdown 能力](https://vitepress.dev/guide/markdown) 👈🏻
 :::
+
+:::details 🚧主题定制的 `frontmatter` 汇总
+```ts
+const frontmatter = []
+```
+
+对照表
+| 属性  | 描述  |
+| :---: | :---: |
+|       |       |
+:::
 ## Home
 ### layout
 主要针对主页的部分内容调整
@@ -162,8 +173,8 @@ blog:
  minScreenAvatar: true
 ---
 ```
-|                      minScreenAvatar: true (默认)                       |                           minScreenAvatar: false                            |
-| :---------------------------------------------------------------------: | :-------------------------------------------------------------------------: |
+|                      minScreenAvatar: true (默认)                       |                         minScreenAvatar: false                          |
+| :---------------------------------------------------------------------: | :---------------------------------------------------------------------: |
 | ![](https://img.cdn.sugarat.top/mdImg/MTY5NjE2MjE0MTI5Mw==696162141293) | ![](https://img.cdn.sugarat.top/mdImg/MTY5NjE2MjE4NjM3MQ==696162186371) |
 
 ## Article

@@ -23,7 +23,7 @@ html.dark {
 }
 .VPHome {
   &::before {
-    content: '';
+    content: "";
     inset: 0;
     position: fixed;
     top: 0;
@@ -33,17 +33,13 @@ html.dark {
     min-height: 100%;
   }
   min-height: calc(100vh - var(--vp-nav-height));
-  background: radial-gradient(
-    ellipse,
-    rgba(var(--bg-gradient-home), 1) 0%,
-    rgba(var(--bg-gradient-home), 0) 700%
-  );
+  background: radial-gradient(ellipse, rgba(var(--bg-gradient-home), 1) 0%, rgba(var(--bg-gradient-home), 0) 700%);
 }
 
 @media screen and (min-width: 960px) {
-  #VPContent.is-home.VPContent{
+  #VPContent.is-home.VPContent {
     padding-top: 0;
-    .VPHome{
+    .VPHome {
       min-height: 100vh;
     }
   }
@@ -85,10 +81,7 @@ html.dark {
 // sidebar
 @media (min-width: 1440px) {
   aside.VPSidebar {
-    padding-left: max(
-      32px,
-      calc((100% - (var(--vp-layout-max-width) - 16px)) / 2)
-    ) !important;
+    padding-left: max(32px, calc((100% - (var(--vp-layout-max-width) - 16px)) / 2)) !important;
     padding-right: 10px !important;
   }
 }
@@ -126,20 +119,53 @@ html.dark {
   background-color: var(--vp-c-brand-1);
 }
 
-
-main .vp-doc a{
+main .vp-doc a {
   text-decoration: none;
 }
-main .vp-doc a:hover{
+main .vp-doc a:hover {
   text-decoration: underline dotted;
 }
 
-
 // 自定义全局样式
-span.svg-icon{
-  svg{
+span.svg-icon {
+  svg {
     width: 14px;
     height: 14px;
     margin-right: 4px;
+  }
+}
+
+.vp-doc ul.task-list {
+  list-style: none;
+  padding-left: 10px;
+
+  input[type="checkbox"] {
+    cursor: pointer;
+    position: relative;
+    width: 13px;
+    height: 13px;
+  }
+
+  input[type="checkbox"]::after {
+    position: absolute;
+    top: 0;
+    color: #000;
+    width: 13px;
+    height: 13px;
+    display: inline-block;
+    visibility: visible;
+    padding-left: 0px;
+    text-align: center;
+    content: " ";
+    border-radius: 3px;
+  }
+
+  input[type="checkbox"]:checked::after {
+    content: "✓";
+    color: #fff;
+    line-height: 14px;
+    font-size: 10px;
+    font-weight: bold;
+    background-color: var(--vp-c-brand-1);
   }
 }

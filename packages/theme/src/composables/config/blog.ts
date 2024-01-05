@@ -77,6 +77,18 @@ export function withConfigProvider(App: Component) {
   })
 }
 
+export function useDocMetaInsertSelector() {
+  const blogConfig = useConfig()
+  const { frontmatter } = useData()
+  return computed(() => frontmatter.value?.docMetaInsertSelector || blogConfig.config?.blog?.docMetaInsertSelector || 'h1')
+}
+
+export function useDocMetaInsertPosition() {
+  const blogConfig = useConfig()
+  const { frontmatter } = useData()
+  return computed(() => frontmatter.value?.docMetaInsertPosition || blogConfig.config?.blog?.docMetaInsertPosition || 'after')
+}
+
 export function useConfig() {
   return {
     config: inject(configSymbol)!.value

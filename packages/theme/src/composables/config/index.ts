@@ -79,6 +79,16 @@ export namespace Theme {
     album: string
     // 是否发布
     publish?: boolean
+    /**
+     * 文章作者，标签等信息插入位置
+     * @default 'h1'
+     */
+    docMetaInsertSelector?: string
+    /**
+     * 文章作者，标签等信息插入位置
+     * @default 'after'
+     */
+    docMetaInsertPosition?: 'before' | 'after'
   }
   export interface PageData {
     route: string
@@ -339,6 +349,30 @@ export namespace Theme {
      * 首页页脚
      */
     footer?: Footer | Footer[]
+    /**
+     * 文章作者，标签等信息插入位置
+     * @default 'h1'
+     */
+    docMetaInsertSelector?: string
+    /**
+     * 文章作者，标签等信息插入位置
+     * @default 'after'
+     */
+    docMetaInsertPosition?: 'before' | 'after'
+    /**
+     * 配置内置的 markdown-it-task-checkbox 插件，设置 false 则关闭
+     * 详见 https://github.com/linsir/markdown-it-task-checkbox
+     */
+    taskCheckbox?: TaskCheckbox | boolean
+  }
+
+  export interface TaskCheckbox {
+    disabled?: boolean
+    divWrap?: boolean
+    divClass?: string
+    idPrefix?: string
+    ulClass?: string
+    liClass?: string
   }
 
   export type RSSOptions = RSSPluginOptions

@@ -11,7 +11,7 @@ import {
   EditPen,
   UserFilled
 } from '@element-plus/icons-vue'
-import { useBlogConfig, useCurrentArticle } from '../composables/config/blog'
+import { useBlogConfig, useCurrentArticle, useDocMetaInsertPosition, useDocMetaInsertSelector } from '../composables/config/blog'
 import countWord, { formatShowDate } from '../utils/client'
 import type { Theme } from '../composables/config'
 import BlogDocCover from './BlogDocCover.vue'
@@ -52,6 +52,9 @@ const readTime = computed(() => {
   return Math.ceil((wordTime.value + imageTime.value) / 60)
 })
 
+const docMetaInsertSelector = useDocMetaInsertSelector()
+const docMetaInsertPosition = useDocMetaInsertPosition()
+
 const route = useRoute()
 const $des = ref<HTMLDivElement>()
 
@@ -71,7 +74,12 @@ function analyze() {
     || ''
 
   wordCount.value = countWord(words)
-  docDomContainer?.querySelector('h1')?.after($des.value!)
+
+  let el = docDomContainer?.querySelector(docMetaInsertSelector.value)
+  if (!el) {
+    el = docDomContainer?.querySelector('h1')
+  }
+  el?.[docMetaInsertPosition.value]?.($des.value!)
 }
 
 onMounted(() => {
