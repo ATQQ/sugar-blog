@@ -79,9 +79,23 @@ pnpm dev:theme
 
 ![公众号](packages/blogpress/public/mp-code.png)
 
-## :fire: 巨佬博客 - 记得三连
-* [Linbudu](https://github.com/linbudu599/FE-Basics)
-* [kweku](http://kweku.top/)
-* [炽翎](https://juejin.im/user/3122268753634541/posts)
-* [冴羽](https://github.com/mqyqingfeng/Blog)
-* [神三元](https://juejin.cn/user/430664257382462/posts)
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=atqq/sugar-blog&type=Date)](https://star-history.com/#atqq/sugar-blog&Date)
+
+## Stargazers over time
+[![Stargazers over time](https://starchart.cc/ATQQ/sugar-blog.svg?variant=adaptive)](https://starchart.cc/ATQQ/sugar-blog)
+
+## Project Status
+
+![status](https://repobeats.axiom.co/api/embed/49625195d138fdaccc82ef70c9645d9a85afda5f.svg "Repobeats analytics image")
+
+## Contributors
+
+Thanks to all the contributors!
+
+<a href="https://github.com/atqq/sugar-blog/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=atqq/sugar-blog" />
+</a>
+
+Made with [contrib.rocks](https://contrib.rocks).
