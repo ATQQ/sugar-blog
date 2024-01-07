@@ -8,7 +8,7 @@ tags:
 categories:
  - 备战春秋
  - 心得总结
-sticky: 3
+sticky: 6
 ---
 # 如何编写一份好的互联网校招简历
 

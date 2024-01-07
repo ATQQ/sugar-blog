@@ -11,7 +11,7 @@ tags:
  - 面试经验
 categories:
  - 备战春秋
-sticky: 99
+sticky: 4
 ---
 # 前端校招考点汇总
 
