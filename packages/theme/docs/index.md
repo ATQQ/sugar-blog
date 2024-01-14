@@ -1,4 +1,5 @@
 ---
+title: 'VitePress 博客主题'
 layout: home
 # 首页部分元素定制
 blog:
