@@ -126,6 +126,12 @@ const blogTheme = getThemeConfig({
         avatar: 'https://fengxiaoqiang.com/images/logo.png',
         url: 'https://fengxiaoqiang.com/'
       },
+      {
+        nickname: '博友圈',
+        des: '独立博客人的专属朋友圈！在这里可以发布您的独立博客，获取一个免费的流量入口，也可以发现更多优质的独立博客',
+        avatar: '',
+        url: 'https://www.boyouquan.com/home'
+      },
     ],
     random: true,
     limit: 3
