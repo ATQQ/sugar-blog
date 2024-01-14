@@ -16,8 +16,7 @@ const RSSWeekly: RSSOptions = {
   filter(value) {
     return value.url.startsWith('/weekly/') && !value.url.endsWith('/weekly/')
   },
-  // TODO 更新周更logo
-  image: 'https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTE2NzAzMA==674995167030',
+  image: 'https://img.cdn.sugarat.top/mdImg/MTcwNTIwMDEzNjM5Mw==705200136393',
   favicon: 'https://sugarat.top/favicon.ico',
   copyright: 'Copyright (c) 2018-present, 粥里有勺糖',
   url: `${baseUrl}/weekly.rss`,
@@ -34,7 +33,11 @@ const RSS: Theme.RSSOptions = {
   image: 'https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTE2NzAzMA==674995167030',
   favicon: 'https://sugarat.top/favicon.ico',
   copyright: 'Copyright (c) 2018-present, 粥里有勺糖',
-  url: `${baseUrl}/feed.rss`
+  url: `${baseUrl}/feed.rss`,
+  /**
+   * 最近100篇，避免太大影响解析
+   */
+  limit: 100
 }
 
 const blogTheme = getThemeConfig({
