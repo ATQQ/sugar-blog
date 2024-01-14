@@ -158,6 +158,9 @@ const blogTheme = getThemeConfig({
       name: '蜀ICP备19011724号',
       link: 'https://beian.miit.gov.cn/'
     }
+  },
+  hotArticle: {
+    pageSize: 12
   }
 })
 
