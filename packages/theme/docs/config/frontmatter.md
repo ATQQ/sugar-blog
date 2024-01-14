@@ -20,15 +20,33 @@ recommend: 1
 官方内置的👉🏻 [markdown 能力](https://vitepress.dev/guide/markdown) 👈🏻
 :::
 
-:::details 🚧主题定制的 `frontmatter` 汇总
+:::details 主题相关的 `frontmatter` 汇总
 ```ts
-const frontmatter = []
+const frontmatter = ['layout', 'blog', 'title', 'description', 'descriptionHTML', 'cover', 'hiddenCover', 'hidden', 'author', 'readingTime', 'comment', 'date', 'tag', 'tags', 'categories', 'sticky', 'top', 'recommend', 'publish']
 ```
 
 对照表
-| 属性  | 描述  |
-| :---: | :---: |
-|       |       |
+|      属性       |     描述     |
+| :-------------: | :----------: |
+|     layout      |     布局     |
+|      blog       |   博客首页   |
+|      title      |     标题     |
+|   description   |     描述     |
+| descriptionHTML |   描述HTML   |
+|      cover      |     封面     |
+|   hiddenCover   |   隐藏封面   |
+|     hidden      | 隐藏首页展示 |
+|     author      |     作者     |
+|   readingTime   |   阅读时间   |
+|     comment     |     评论     |
+|      date       |     日期     |
+|       tag       |     标签     |
+|      tags       |    同标签    |
+|   categories    |    同标签    |
+|     sticky      |   精选置顶   |
+|       top       |   首页置顶   |
+|    recommend    | 推荐列表控制 |
+|     publish     |   是否发布   |
 :::
 ## Home
 ### layout
