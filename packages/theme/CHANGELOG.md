@@ -1,5 +1,14 @@
 # @sugarat/theme
 
+## 0.2.16
+
+### Patch Changes
+
+- fix: get cover fail in table
+- Updated dependencies
+  - vitepress-plugin-rss@0.2.1
+  - vitepress@1.0.0-rc.36
+
 ## 0.2.15
 
 ### Patch Changes
@@ -7,7 +16,7 @@
 - fix: recommend active error in index.md
 - fix: error in coverImgTransform function
 - feat: support for customizing docMeta insert position
-- feat: 内置 markdown-it-task-checkbox 插件 
+- feat: 内置 markdown-it-task-checkbox 插件
 
 ## 0.2.14
 

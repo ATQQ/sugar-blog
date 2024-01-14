@@ -1,5 +1,11 @@
 # vitepress-plugin-rss
 
+## 0.2.1
+
+### Patch Changes
+
+- fix: get cover fail in table
+
 ## 0.2.0
 
 ### Minor Changes

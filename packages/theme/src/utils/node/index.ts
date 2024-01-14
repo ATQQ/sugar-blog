@@ -126,12 +126,14 @@ function isBase64ImageURL(url: string) {
   return regex.test(url)
 }
 
+const imageRegex = /!\[.*?\]\((.*?)\s*(".*?")?\)/
+
 /**
  * 从文档内容中提取封面
  * @param content 文档内容
  */
 export function getFirstImagURLFromMD(content: string, route: string) {
-  const url = content.match(/!\[.*\]\((.*)\)/)?.[1]?.replace(/['"]/g, '')
+  const url = content.match(imageRegex)?.[1]
   const isHTTPSource = url && url.startsWith('http')
   if (!url) {
     return ''

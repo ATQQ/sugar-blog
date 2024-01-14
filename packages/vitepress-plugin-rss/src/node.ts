@@ -14,6 +14,7 @@ import {
 } from './utils'
 import type { PostInfo, RSSOptions } from './type'
 
+const imageRegex = /!\[.*?\]\((.*?)\s*(".*?")?\)/
 export async function getPostsData(
   srcDir: string,
   config: SiteConfig,
@@ -56,9 +57,8 @@ export async function getPostsData(
 
     // 获取封面图
     frontmatter.cover
-      = frontmatter.cover
-      || fileContent.match(/[!]\[.*?\]\((https:\/\/.+)\)/)?.[1]
-      || ''
+      = (frontmatter.cover
+      ?? (fileContent.match(imageRegex)?.[1])) || ''
 
     const html = mdRender.render(fileContent)
     const url
@@ -145,7 +145,7 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
           ...authorInfo
         }
       ],
-      image: frontmatter?.cover,
+      image: frontmatter?.cover ? new URL(frontmatter?.cover, baseUrl).href : '',
       date: new Date(date)
     })
   }

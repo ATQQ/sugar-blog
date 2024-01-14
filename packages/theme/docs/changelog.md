@@ -26,6 +26,16 @@ bun install vitepress@latest
 ```
 :::
 
+## 0.2.16 (2024/01/14)
+
+### Patch Changes
+
+- fix: get cover fail in table
+- Updated dependencies
+  - vitepress-plugin-rss@0.2.1
+  - vitepress@1.0.0-rc.36
+
+
 ## 0.2.15 (2024/01/03)
 
 ### Patch Changes
