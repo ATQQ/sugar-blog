@@ -61,11 +61,20 @@ const blogTheme = getThemeConfig({
       },
       {
         type: 'text',
-        content: '欢迎大家私信交流'
+        content: '欢迎大家私信&加群交流'
       },
       {
-        type: 'text',
-        content: '备注”加群“拉你一起学习'
+        type: 'button',
+        content: '关于作者',
+        link: '/aboutme'
+      },
+      {
+        type: 'button',
+        content: '加群交流',
+        props: {
+          type: 'success'
+        },
+        link: '/group',
       }
     ],
     duration: -1
