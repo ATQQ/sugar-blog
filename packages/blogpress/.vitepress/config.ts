@@ -140,13 +140,19 @@ const blogTheme = getThemeConfig({
       },
       {
         nickname: '博友圈',
-        des: '独立博客人的专属朋友圈！在这里可以发布您的独立博客，获取一个免费的流量入口，也可以发现更多优质的独立博客',
+        des: '独立博客人的专属朋友圈！',
         avatar: '',
         url: 'https://www.boyouquan.com/home'
       },
+      {
+        nickname: 'Simon He',
+        des: '除了coding，我什么都不会',
+        avatar: 'https://simonme.netlify.app/black.png',
+        url: 'https://simonme.netlify.app/'
+      }
     ],
     random: true,
-    limit: 3
+    limit: 6
   },
   search: false,
   recommend: {
