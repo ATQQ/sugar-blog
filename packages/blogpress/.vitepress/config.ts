@@ -245,6 +245,9 @@ export default defineConfig({
   },
   lastUpdated: true,
   themeConfig: {
+    outline: {
+      level: [2, 3]
+    },
     search: {
       provider: 'algolia',
       options: {
