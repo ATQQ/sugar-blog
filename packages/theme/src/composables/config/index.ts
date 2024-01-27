@@ -201,8 +201,19 @@ export namespace Theme {
     footer?: BlogPopover.Value[]
     /**
      * 手动重新打开
+     * @default true
      */
     reopen?: boolean
+    /**
+     * 设置展示图标，svg
+     * @recommend https://iconbuddy.app/search?q=fire
+     */
+    icon?: string
+    /**
+     * 设置关闭图标，svg
+     * @recommend https://iconbuddy.app/search?q=fire
+     */
+    closeIcon?: string
   }
   export interface FriendLink {
     nickname: string

@@ -22,7 +22,7 @@ export const BlogTheme: Theme = {
   ...DefaultTheme,
   Layout: withConfigProvider(BlogApp),
   enhanceApp(ctx) {
-    enhanceAppWithTabs(ctx.app)
+    enhanceAppWithTabs(ctx.app as any)
     DefaultTheme.enhanceApp(ctx)
     ctx.app.component('TimelinePage', TimelinePage)
     ctx.app.component('UserWorksPage', UserWorksPage)

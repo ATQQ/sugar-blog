@@ -605,7 +605,7 @@ interface Alert {
 
 设置一个全局的公告弹窗，支持设置图片，文字，按钮（[el-button](https://element-plus.gitee.io/zh-CN/component/button.html)）跳链
 
-![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDk5NDY3Nzc5NQ==674994677795)
+![](https://img.cdn.sugarat.top/mdImg/MTY3NDk5NDY3Nzc5NQ==674994677795)
 
 
 ::: code-group
@@ -666,6 +666,16 @@ interface Popover {
    * 手动重新打开
    */
   reopen?: boolean
+  /**
+   * 设置展示图标，svg
+   * @recommend https://iconbuddy.app/search?q=fire
+   */
+  icon?: string
+  /**
+   * 设置关闭图标，svg
+   * @recommend https://iconbuddy.app/search?q=fire
+   */
+  closeIcon?: string
 }
 
 export namespace BlogPopover {
@@ -699,6 +709,8 @@ export namespace BlogPopover {
 }
 ```
 :::
+
+公告图标也可使用 `icon`, `closeIcon` 进行自定义
 
 ## friend
 用于设置首页展示的友链信息
