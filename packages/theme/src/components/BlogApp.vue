@@ -16,6 +16,7 @@ import BlogAlert from './BlogAlert.vue'
 import BlogPopover from './BlogPopover.vue'
 import BlogFooter from './BlogFooter.vue'
 import BlogHomeHeaderAvatar from './BlogHomeHeaderAvatar.vue'
+import BlogBackToTop from './BlogBackToTop.vue'
 
 const { frontmatter } = useData()
 const layout = computed(() => frontmatter.value.layout)
@@ -70,6 +71,7 @@ const { Layout } = Theme
       <slot name="doc-after" />
       <!-- 评论 -->
       <ClientOnly>
+        <BlogBackToTop />
         <BlogComment />
       </ClientOnly>
     </template>

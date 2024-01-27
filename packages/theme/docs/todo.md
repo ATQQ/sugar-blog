@@ -6,15 +6,15 @@ sidebar: false
 # 🥔 开发计划
 
 ## 正在进行中
-* [ ] VitePress 资源推荐
 * [ ] 回到顶部
-* 主题部分能力分离为插件
-  * [ ] 公告
-  * [ ] 评论
 * [ ] 默认主题配置文案
-* [ ] 内置高频使用的 markdown插件 (https://vitepress.yiov.top/plugin.html)
-* [ ] 更新实践使用文档（github,markdown,deadLink...）
-* [ ] github pages example
+* 文档
+  * [ ] VitePress 资源推荐
+  * [ ] github pages example
+  * [ ] VitePress 常见问题解答（deadLink，markdown，frontmatter）
+* [ ] 主题部分能力分离为插件（公告，评论，回到顶部）
+* 内置高频使用的 markdown插件
+  * [ ] (https://vitepress.yiov.top/plugin.html)
 
 ## 已完成
 
