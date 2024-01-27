@@ -615,6 +615,7 @@ const blogTheme = getThemeConfig({
   popover: {
     title: '📢 广而周知 📢',
     duration: -1,
+    mobileMinify: false,
     body: [
       {
         type: 'title',
@@ -654,6 +655,11 @@ interface Popover {
    * 配置改变时，会重新触发展示
    */
   duration: number
+  /**
+   * 移动端自动最小化
+   * @default false
+   */
+  mobileMinify?: boolean
   body?: BlogPopover.Value[]
   footer?: BlogPopover.Value[]
   /**

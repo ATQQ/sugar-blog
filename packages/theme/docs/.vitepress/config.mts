@@ -59,7 +59,6 @@ export default defineConfig({
           }
         ]
       },
-
     ],
     socialLinks: [
       {

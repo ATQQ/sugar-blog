@@ -4,6 +4,7 @@ import { CircleCloseFilled, Flag } from '@element-plus/icons-vue'
 import { computed, h, onMounted, ref } from 'vue'
 import type { BlogPopover } from '@sugarat/theme'
 import { parseStringStyle } from '@vue/shared'
+import { useWindowSize } from '@vueuse/core'
 import { useBlogConfig } from '../composables/config/blog'
 
 const { popover: popoverProps } = useBlogConfig()
@@ -20,6 +21,9 @@ const footerContent = computed(() => {
 const storageKey = 'theme-blog-popover'
 const closeFlag = `${storageKey}-close`
 
+// 移动端最小化
+const { width } = useWindowSize()
+
 onMounted(() => {
   if (!popoverProps?.title) {
     return
@@ -29,6 +33,12 @@ onMounted(() => {
   const oldValue = localStorage.getItem(storageKey)
   const newValue = JSON.stringify(popoverProps)
   localStorage.setItem(storageKey, newValue)
+
+  // 移动端最小化
+  if (width.value < 768 && popoverProps?.mobileMinify) {
+    show.value = false
+    return
+  }
 
   // >= 0 每次都展示，区别是否自动消失
   if (Number(popoverProps?.duration ?? '') >= 0) {
@@ -138,8 +148,7 @@ function PopoverValue(props: { key: number; item: BlogPopover.Value },
     </div>
   </div>
   <div
-    v-show="!show && (popoverProps?.reopen ?? true) && popoverProps?.title"
-    class="theme-blog-popover-close"
+    v-show="!show && (popoverProps?.reopen ?? true) && popoverProps?.title" class="theme-blog-popover-close"
     @click="show = true"
   >
     <ElIcon size="20px">
@@ -160,16 +169,13 @@ function PopoverValue(props: { key: number; item: BlogPopover.Value },
   border-radius: 6px;
   background-color: rgba(var(--bg-gradient-home));
   box-shadow: var(--box-shadow);
+
   :deep(.el-button.el-button--primary) {
     background-color: var(--vp-c-brand-2);
     border-color: var(--vp-c-brand-2);
   }
 }
-@media screen and (min-width: 760px) and (max-width: 1140px) {
-  .theme-blog-popover {
-    top: 200px;
-  }
-}
+
 .header {
   background-color: var(--vp-c-brand-3);
   color: #fff;
@@ -177,6 +183,7 @@ function PopoverValue(props: { key: number; item: BlogPopover.Value },
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   .close-icon {
     cursor: pointer;
   }
@@ -185,6 +192,7 @@ function PopoverValue(props: { key: number; item: BlogPopover.Value },
 .title-wrapper {
   display: flex;
   align-items: center;
+
   .title {
     font-size: 14px;
     padding-left: 6px;
@@ -194,11 +202,13 @@ function PopoverValue(props: { key: number; item: BlogPopover.Value },
 .body {
   box-sizing: border-box;
   padding: 10px 10px 0;
+
   hr {
     border: none;
     border-bottom: 1px solid #eaecef;
   }
 }
+
 .footer {
   box-sizing: border-box;
   padding: 10px;
@@ -207,15 +217,18 @@ function PopoverValue(props: { key: number; item: BlogPopover.Value },
 .body.content,
 .footer.content {
   text-align: center;
+
   h4 {
     text-align: center;
     font-size: 12px;
   }
+
   p {
     text-align: center;
     padding: 10px 0;
     font-size: 14px;
   }
+
   img {
     width: 100%;
   }

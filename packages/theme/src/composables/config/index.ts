@@ -181,6 +181,9 @@ export namespace Theme {
     html?: string
   }
 
+  /**
+   * 公告
+   */
   export interface Popover {
     title: string
     /**
@@ -189,6 +192,11 @@ export namespace Theme {
      * 配置改变时，会重新触发展示
      */
     duration: number
+    /**
+     * 移动端自动最小化
+     * @default false
+     */
+    mobileMinify?: boolean
     body?: BlogPopover.Value[]
     footer?: BlogPopover.Value[]
     /**
