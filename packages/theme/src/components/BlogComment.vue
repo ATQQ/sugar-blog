@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useElementVisibility } from '@vueuse/core'
+import { useElementVisibility, useWindowSize } from '@vueuse/core'
 import { useData, useRoute } from 'vitepress'
-import { computed, ref, watch } from 'vue'
+import { computed, h, ref, watch } from 'vue'
 import { ElAffix, ElButton } from 'element-plus'
 import { Comment } from '@element-plus/icons-vue'
 import Giscus from '@giscus/vue'
@@ -20,7 +20,7 @@ function handleScrollToComment() {
 }
 const giscusConfig = useGiscusConfig()
 
-const commentConfig = computed<Theme.GiscusConfig>(() => {
+const commentConfig = computed<Theme.CommentConfig>(() => {
   if (!giscusConfig) {
     return {} as any
   }
@@ -58,6 +58,19 @@ watch(
     immediate: true
   }
 )
+
+const { width } = useWindowSize()
+const mobileMinify = computed(() => width.value < 768 && (commentConfig.value.mobileMinify ?? true))
+
+const CommentIcon = commentConfig.value?.icon
+  ? h('i', {
+    onVnodeMounted(vnode) {
+      if (vnode.el) {
+        vnode.el.outerHTML = commentConfig.value?.icon
+      }
+    },
+  })
+  : h(Comment)
 </script>
 
 <template>
@@ -76,12 +89,21 @@ watch(
       :offset="40"
     >
       <ElButton
+        v-if="mobileMinify"
         plain
-        :icon="Comment"
+        :icon="CommentIcon"
+        type="primary"
+        circle
+        @click="handleScrollToComment"
+      />
+      <ElButton
+        v-else
+        plain
+        :icon="CommentIcon"
         type="primary"
         @click="handleScrollToComment"
       >
-        评论
+        {{ commentConfig.label || '评论' }}
       </ElButton>
     </ElAffix>
     <Giscus

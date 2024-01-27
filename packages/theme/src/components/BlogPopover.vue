@@ -6,6 +6,7 @@ import type { BlogPopover } from '@sugarat/theme'
 import { parseStringStyle } from '@vue/shared'
 import { useWindowSize } from '@vueuse/core'
 import { useBlogConfig } from '../composables/config/blog'
+import { vOuterHtml } from '../directives'
 
 const { popover: popoverProps } = useBlogConfig()
 
@@ -119,11 +120,6 @@ function PopoverValue(props: { key: number; item: BlogPopover.Value },
     },
     ''
   )
-}
-const vOuterHtml = {
-  mounted: (el: HTMLElement, binding: any) => {
-    el.outerHTML = binding.value
-  }
 }
 </script>
 

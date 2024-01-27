@@ -66,10 +66,12 @@ const { Layout } = Theme
       <slot name="sidebar-nav-after" />
       <BlogSidebar />
     </template>
-    <!-- 评论 -->
     <template #doc-after>
       <slot name="doc-after" />
-      <BlogComment />
+      <!-- 评论 -->
+      <ClientOnly>
+        <BlogComment />
+      </ClientOnly>
     </template>
     <template #layout-bottom>
       <BlogFooter v-if="layout === 'home'" />

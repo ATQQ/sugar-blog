@@ -99,6 +99,22 @@ export namespace Theme {
     type: string
   }
 
+  export interface CommentConfig extends GiscusConfig {
+    /**
+     * @default '评论'
+     */
+    label?: string
+    /**
+     * 自定义图标，SVG 格式
+     * @recommend https://iconbuddy.app/search?q=fire
+     */
+    icon?: string
+    /**
+     * 移动端最小化按钮
+     * @default true
+     */
+    mobileMinify?: boolean
+  }
   export interface GiscusConfig {
     repo: Repo
     repoId: string
@@ -331,7 +347,7 @@ export namespace Theme {
      * 配置评论
      * power by https://giscus.app/zh-CN
      */
-    comment?: GiscusConfig | false
+    comment?: CommentConfig | false
     /**
      * 阅读文章左侧的推荐文章（替代默认的sidebar）
      */

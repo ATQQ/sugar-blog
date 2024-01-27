@@ -8,8 +8,9 @@ sidebar: false
 ## 正在进行中
 * [ ] VitePress 资源推荐
 * [ ] 回到顶部
-* [ ] 主题部分能力分离为插件
-* [ ] 评论移动端优化处理
+* 主题部分能力分离为插件
+  * [ ] 公告
+  * [ ] 评论
 * [ ] 默认主题配置文案
 * [ ] 内置高频使用的 markdown插件 (https://vitepress.yiov.top/plugin.html)
 * [ ] 更新实践使用文档（github,markdown,deadLink...）
@@ -18,7 +19,8 @@ sidebar: false
 ## 已完成
 
 近期完成：
-* [x] 公告自动收起移动端
+* [x] 公告（支持：自动收起移动端，自定义图标）
+* [x] 评论（支持：自定义文案&图标，移动端自动最小化）
 * [x] frontmatter汇总
 * [x] 博客案例集合
 * [x] 内置 [markdown-it-task-checkbox](https://github.com/linsir/markdown-it-task-checkbox) 插件
