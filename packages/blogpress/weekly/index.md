@@ -24,11 +24,13 @@ hidden: true
 
 ### 技术资讯
 * [阮一峰: 科技爱好者周刊](https://www.ruanyifeng.com/blog/archives.html) - 记录每周值得分享的科技内容，周五发布
-* [云谦：MDH 前端周刊](https://mdhweekly.com/) - 前端资讯和分享
+* [云谦：MDH 前端周刊](https://sorrycc.com/mdh/) - 前端资讯和分享
+  * [（旧）云谦：MDH 前端周刊](https://mdhweekly.com/) - 前端资讯和分享
 * [童欧巴：前端食堂](https://github.com/Geekhyt/weekly) - 你的前端食堂，吃好每一顿饭
 * [值得一读技术博客](https://daily-blog.chlinlearn.top/) - 每天进步一点点，每天分享有料的技术文章！
 * [前端技术文章](https://fed.chanceyu.com/) - 根据 RSS 订阅源抓取最新前端技术文章
 * [frontendfoc](https://frontendfoc.us/issues) - 🚀 Frontend **Focus**
+* [JavaScript Weekly](https://javascriptweekly.com/issues/672) - A newsletter of JavaScript articles, news and cool projects
 * [ShowMeAI](https://juejin.cn/user/554605767047053/posts) - 为AI硬核资料库(cool)而生
 * [FRE123 技术周刊精选](https://www.fre123.com/weekly) - 前后端技术周刊精选推荐信息流
 
