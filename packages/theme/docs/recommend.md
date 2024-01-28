@@ -2,6 +2,7 @@
 sticky: 997
 description: VitePress相关的主题，博客，插件汇总推荐
 sidebar: false
+top: 2
 ---
 # 【🔥持续更新】 VitePress资源推荐
 
