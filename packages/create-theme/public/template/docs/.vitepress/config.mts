@@ -12,13 +12,23 @@ export default defineConfig({
   title: '@sugarat/theme',
   description: '粥里有勺糖的博客主题，基于 vitepress 实现',
   lastUpdated: true,
-  // 详见：https://vitepress.dev/reference/site-config#head
+  // 详见：https://vitepress.dev/zh/reference/site-config#head
   head: [
     // 配置网站的图标（显示在浏览器的 tab 上）
     ['link', { rel: 'icon', href: '/favicon.ico' }]
   ],
   themeConfig: {
+    // 展示 2,3 级标题在目录中
+    outline: {
+      level: [2, 3],
+      label: '目录'
+    },
+    // 默认文案修改
+    returnToTopLabel: '回到顶部',
+    sidebarMenuLabel: '相关文章',
     lastUpdatedText: '上次更新于',
+
+    // 设置logo
     logo: '/logo.png',
     // editLink: {
     //   pattern:

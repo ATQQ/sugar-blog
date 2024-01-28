@@ -1,8 +1,52 @@
 ---
-description: 默认支持流程图，tabs面板
+description: 默认支持流程图，tabs面板，待办列表，作品页面
 ---
 
 # 内置第三方插件能力
+## task-checkbox
+* Type: `boolean | TaskCheckbox`
+
+支持渲染 markdown 任务列表，内置 [markdown-it-task-checkbox](https://github.com/linsir/markdown-it-task-checkbox) 插件提供支持
+
+* [ ] 🥔 TODO
+* [ ] 真不戳
+* [x] 内置任务列表
+
+语法如下
+```md
+* [ ] 🥔 TODO
+* [ ] 真不戳
+* [x] 内置任务列表
+```
+
+默认开启，你可以进一步配置
+
+:::code-group
+```ts [① 关闭]
+const blogTheme = getThemeConfig({
+  taskCheckbox: false
+})
+```
+```ts [② 进一步配置]
+const blogTheme = getThemeConfig({
+  taskCheckbox: {
+    // refer https://github.com/linsir/markdown-it-task-checkbox for options
+  }
+})
+```
+```ts [③ type]
+interface TaskCheckbox {
+  disabled?: boolean
+  divWrap?: boolean
+  divClass?: string
+  idPrefix?: string
+  ulClass?: string
+  liClass?: string
+}
+```
+:::
+
+
 
 ## tabs
 * Type: `boolean`
