@@ -11,6 +11,7 @@ import {
 } from 'vitepress-plugin-pagefind'
 import { RssPlugin } from 'vitepress-plugin-rss'
 import type { Theme } from '../../composables/config/index'
+import { _require } from './mdPlugins'
 import { joinPath } from './index'
 
 export function getVitePlugins(cfg?: Partial<Theme.BlogConfig>) {
@@ -32,7 +33,7 @@ export function getVitePlugins(cfg?: Partial<Theme.BlogConfig>) {
 
   // 内置支持Mermaid
   if (cfg?.mermaid !== false) {
-    const { MermaidPlugin } = require('vitepress-plugin-mermaid')
+    const { MermaidPlugin } = _require('vitepress-plugin-mermaid')
     plugins.push(MermaidPlugin(cfg?.mermaid === true ? {} : (cfg?.mermaid ?? {})))
   }
 

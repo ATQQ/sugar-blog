@@ -158,7 +158,7 @@ importers:
         version: 4.9.4
       vitepress:
         specifier: 1.0.0-rc.40
-        version: 1.0.0-rc.40(@types/node@20.6.3)(postcss@8.4.32)(sass@1.56.1)(typescript@4.9.4)
+        version: 1.0.0-rc.40(@types/node@20.6.3)(postcss@8.4.33)(sass@1.56.1)(typescript@4.9.4)
       vue:
         specifier: ^3.3.4
         version: 3.3.4
@@ -1969,8 +1969,8 @@ packages:
       vite: ^5.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 5.0.12(@types/node@20.6.3)(sass@1.64.1)
-      vue: 3.4.15(typescript@5.1.6)
+      vite: 5.0.12(@types/node@20.6.3)(sass@1.56.1)
+      vue: 3.4.15(typescript@4.9.4)
 
   /@vue/compiler-core@3.2.47:
     resolution: {integrity: sha512-p4D7FDnQb7+YJmO2iPEv0SQNeNzcbHdGByJDsT4lynf63AFkOTFN07HsiRSvjGo0QrxR/o3d0hUyNCUnBU2Tig==}
@@ -2256,7 +2256,7 @@ packages:
     dependencies:
       '@vue/compiler-ssr': 3.4.15
       '@vue/shared': 3.4.15
-      vue: 3.4.15(typescript@5.1.6)
+      vue: 3.4.15(typescript@4.9.4)
 
   /@vue/shared@3.2.45:
     resolution: {integrity: sha512-Ewzq5Yhimg7pSztDV+RH1UDKBzmtqieXQlpTVm2AwraoRL/Rks96mvd8Vgi7Lj+h+TH8dv7mXD3FRZR3TUvbSg==}
@@ -6039,29 +6039,29 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /postcss-import@15.1.0(postcss@8.4.32):
+  /postcss-import@15.1.0(postcss@8.4.33):
     resolution: {integrity: sha512-hpr+J05B2FVYUAXHeK1YyI267J/dDDhMU6B6civm8hSY1jYJnBXxzKDKDswzJmtLHryrjhnDjqqp/49t8FALew==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       postcss: ^8.0.0
     dependencies:
-      postcss: 8.4.32
+      postcss: 8.4.33
       postcss-value-parser: 4.2.0
       read-cache: 1.0.0
       resolve: 1.22.6
     dev: true
 
-  /postcss-js@4.0.1(postcss@8.4.32):
+  /postcss-js@4.0.1(postcss@8.4.33):
     resolution: {integrity: sha512-dDLF8pEO191hJMtlHFPRa8xsizHaM82MLfNkUHdUtVEV3tgTp5oj+8qbEqYM57SLfc74KSbw//4SeJma2LRVIw==}
     engines: {node: ^12 || ^14 || >= 16}
     peerDependencies:
       postcss: ^8.4.21
     dependencies:
       camelcase-css: 2.0.1
-      postcss: 8.4.32
+      postcss: 8.4.33
     dev: true
 
-  /postcss-load-config@4.0.1(postcss@8.4.32):
+  /postcss-load-config@4.0.1(postcss@8.4.33):
     resolution: {integrity: sha512-vEJIc8RdiBRu3oRAI0ymerOn+7rPuMvRXslTvZUKZonDHFIczxztIyJ1urxM1x9JXEikvpWWTUUqal5j/8QgvA==}
     engines: {node: '>= 14'}
     peerDependencies:
@@ -6074,17 +6074,17 @@ packages:
         optional: true
     dependencies:
       lilconfig: 2.1.0
-      postcss: 8.4.32
+      postcss: 8.4.33
       yaml: 2.3.2
     dev: true
 
-  /postcss-nested@6.0.1(postcss@8.4.32):
+  /postcss-nested@6.0.1(postcss@8.4.33):
     resolution: {integrity: sha512-mEp4xPMi5bSWiMbsgoPfcP74lsWLHkQbZc3sY+jWYd65CUwXrUaTp0fmNpa01ZcETKlIgUdFN/MpS2xZtqL9dQ==}
     engines: {node: '>=12.0'}
     peerDependencies:
       postcss: ^8.2.14
     dependencies:
-      postcss: 8.4.32
+      postcss: 8.4.33
       postcss-selector-parser: 6.0.13
     dev: true
 
@@ -6848,11 +6848,11 @@ packages:
       normalize-path: 3.0.0
       object-hash: 3.0.0
       picocolors: 1.0.0
-      postcss: 8.4.32
-      postcss-import: 15.1.0(postcss@8.4.32)
-      postcss-js: 4.0.1(postcss@8.4.32)
-      postcss-load-config: 4.0.1(postcss@8.4.32)
-      postcss-nested: 6.0.1(postcss@8.4.32)
+      postcss: 8.4.33
+      postcss-import: 15.1.0(postcss@8.4.33)
+      postcss-js: 4.0.1(postcss@8.4.33)
+      postcss-load-config: 4.0.1(postcss@8.4.33)
+      postcss-nested: 6.0.1(postcss@8.4.33)
       postcss-selector-parser: 6.0.13
       resolve: 1.22.6
       sucrase: 3.34.0
@@ -6965,7 +6965,7 @@ packages:
       execa: 5.1.1
       globby: 11.1.0
       joycon: 3.1.1
-      postcss-load-config: 4.0.1(postcss@8.4.32)
+      postcss-load-config: 4.0.1(postcss@8.4.33)
       resolve-from: 5.0.0
       rollup: 3.28.0
       source-map: 0.8.0-beta.0
@@ -7312,6 +7312,7 @@ packages:
       sass: 1.64.1
     optionalDependencies:
       fsevents: 2.3.3
+    dev: false
 
   /vitepress-plugin-mermaid@2.0.13(mermaid@10.2.4)(vitepress@1.0.0-rc.40):
     resolution: {integrity: sha512-2c0ywXHE7kOK88Ygla9aGgkyF2JbfqfjE36JnoljW/3hQTR9rYBmfTFM5tvs4TUjCUfedUYT4CeyNolCY9t3uw==}
@@ -7320,7 +7321,7 @@ packages:
       vitepress: ^0.21.6 || ^1.0.0 || ^1.0.0-alpha
     dependencies:
       mermaid: 10.2.4
-      vitepress: 1.0.0-rc.40(@types/node@20.6.3)(postcss@8.4.32)(sass@1.56.1)(typescript@4.9.4)
+      vitepress: 1.0.0-rc.40(@types/node@20.6.3)(postcss@8.4.33)(sass@1.56.1)(typescript@4.9.4)
     optionalDependencies:
       '@mermaid-js/mermaid-mindmap': 9.3.0
     dev: false
@@ -7331,7 +7332,7 @@ packages:
       vitepress: ^1.0.0-alpha.29
       vue: ^3.2.45
     dependencies:
-      vitepress: 1.0.0-rc.40(@types/node@20.6.3)(postcss@8.4.32)(sass@1.56.1)(typescript@4.9.4)
+      vitepress: 1.0.0-rc.40(@types/node@20.6.3)(postcss@8.4.33)(sass@1.56.1)(typescript@4.9.4)
       vue: 3.3.4
     dev: false
 
@@ -7496,7 +7497,7 @@ packages:
       - universal-cookie
     dev: false
 
-  /vitepress@1.0.0-rc.40(@types/node@20.6.3)(postcss@8.4.32)(sass@1.56.1)(typescript@4.9.4):
+  /vitepress@1.0.0-rc.40(@types/node@20.6.3)(postcss@8.4.33)(sass@1.56.1)(typescript@4.9.4):
     resolution: {integrity: sha512-1x9PCrcsJwqhpccyTR93uD6jpiPDeRC98CBCAQLLBb44a3VSXYBPzhCahi+2kwAYylu49p0XhseMPVM4IVcWcw==}
     hasBin: true
     peerDependencies:
@@ -7518,7 +7519,7 @@ packages:
       focus-trap: 7.5.4
       mark.js: 8.11.1
       minisearch: 6.3.0
-      postcss: 8.4.32
+      postcss: 8.4.33
       shikiji: 0.10.2
       shikiji-core: 0.10.2
       shikiji-transformers: 0.10.2
@@ -7652,7 +7653,7 @@ packages:
       '@vue/composition-api':
         optional: true
     dependencies:
-      vue: 3.4.15(typescript@5.1.6)
+      vue: 3.4.15(typescript@4.9.4)
 
   /vue-eslint-parser@9.3.1(eslint@8.50.0):
     resolution: {integrity: sha512-Clr85iD2XFZ3lJ52/ppmUDG/spxQu6+MAeHXjjyI4I1NUYZ9xmenQp4N0oaHJhrA8OOxltCVxMRfANGa70vU0g==}
@@ -7736,6 +7737,7 @@ packages:
       '@vue/server-renderer': 3.4.15(vue@3.4.15)
       '@vue/shared': 3.4.15
       typescript: 5.1.6
+    dev: false
 
   /wait-on@7.0.1:
     resolution: {integrity: sha512-9AnJE9qTjRQOlTZIldAaf/da2eW0eSRSgcqq85mXQja/DW3MriHxkpODDSUEg+Gri/rKEcXUZHe+cevvYItaog==}

@@ -175,7 +175,8 @@ export const blogTheme = getThemeConfig({
     repoId: 'MDEwOlJlcG9zaXRvcnkyNDEyNDUyOTk',
     category: 'Announcements',
     categoryId: 'DIC_kwDODmEcc84COVc6',
-    inputPosition: 'top'
+    inputPosition: 'top',
+    label: ''
   },
   popover: {
     title: '公告',
