@@ -399,6 +399,22 @@ export namespace Theme {
      * 详见 https://github.com/linsir/markdown-it-task-checkbox
      */
     taskCheckbox?: TaskCheckbox | boolean
+
+    backToTop?: boolean | BackToTop
+  }
+
+  export interface BackToTop {
+    /**
+     * 距离顶部多少距离出现
+     * @default 450
+     */
+    top?: number
+
+    /**
+     * 设置展示图标，svg
+     * @recommend https://iconbuddy.app/search?q=fire
+     */
+    icon?: string
   }
 
   export interface TaskCheckbox {

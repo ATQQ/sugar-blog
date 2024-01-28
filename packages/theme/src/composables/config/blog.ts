@@ -216,3 +216,7 @@ export function useAutoUpdateAnchor() {
 export function useHomeFooterConfig() {
   return inject(homeFooter)
 }
+
+export function useBackToTopConfig() {
+  return useBlogConfig().backToTop
+}

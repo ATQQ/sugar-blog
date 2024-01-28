@@ -1271,3 +1271,43 @@ const blogTheme = getThemeConfig({
 ```
 
 ![](https://img.cdn.sugarat.top/mdImg/MTcwNDM0NjAxNjg3NQ==704346016875)
+
+## backToTop
+设置回到顶部，默认开启
+
+* type: `boolean|BackToTop`
+* default: `true`
+
+![](https://img.cdn.sugarat.top/mdImg/sugar/258187044dcf166044e722f879317e14)
+
+:::code-group
+```ts [example]
+const blogTheme = getThemeConfig({
+  backToTop: true
+})
+
+const blogTheme = getThemeConfig({
+  backToTop: {
+    // 自定义触发高度
+    top: 450,
+    // 自定义图标
+    icon: ''
+  }
+})
+```
+```ts [type]
+interface BackToTop {
+  /**
+   * 距离顶部多少距离出现
+   * @default 450
+   */
+  top?: number
+
+  /**
+   * 设置展示图标，svg
+   * @recommend https://iconbuddy.app/search?q=fire
+   */
+  icon?: string
+}
+```
+:::
