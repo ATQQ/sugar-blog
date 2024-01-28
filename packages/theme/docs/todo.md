@@ -6,7 +6,6 @@ sidebar: false
 # 🥔 开发计划
 
 ## 正在进行中
-* [ ] 默认主题配置文案
 * [ ] SSG 生成内容优化
 * 文档
   * [ ] VitePress 资源推荐
@@ -19,15 +18,16 @@ sidebar: false
 ## 已完成
 
 近期完成：
+* [x] 默认主题配置文案
 * [x] 流程图配置构建无效
 * [x] 回到顶部
 * [x] 公告（支持：自动收起移动端，自定义图标）
 * [x] 评论（支持：自定义文案&图标，移动端自动最小化）
+
+:::details 更多归档
 * [x] frontmatter汇总
 * [x] 博客案例集合
 * [x] 内置 [markdown-it-task-checkbox](https://github.com/linsir/markdown-it-task-checkbox) 插件
-
-:::details 更多归档
 * [x] 未统计hidden的文章数量
 * [x] 首页支持头像展示
 * [x] 图片懒加载(vitepress 官方支持)
