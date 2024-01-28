@@ -21,7 +21,7 @@ const { y } = useScroll(window)
 const defaultTriggerHeight = 450
 const triggerTop = computed(() => (typeof backToTopConfig === 'boolean' ? undefined : backToTopConfig?.top) ?? defaultTriggerHeight)
 
-const show = computed(() => y.value > triggerTop.value)
+const show = computed(() => width && y.value > triggerTop.value)
 
 const iconSVGStr = computed(() => typeof backToTopConfig === 'boolean' ? '' : backToTopConfig?.icon)
 </script>
@@ -29,7 +29,7 @@ const iconSVGStr = computed(() => typeof backToTopConfig === 'boolean' ? '' : ba
 <template>
   <div v-if="open" v-show="show" class="back-to-top">
     <span class="icon-wrapper">
-      <ElIcon size="20px" @click="handleBackRoTop">
+      <ElIcon @click="handleBackRoTop">
         <i v-if="iconSVGStr" v-outer-html="iconSVGStr" />
         <svg v-else width="512" height="512" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path

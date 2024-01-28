@@ -8,6 +8,7 @@ sidebar: false
 ## 正在进行中
 * [ ] 默认主题配置文案
 * [ ] 流程图配置构建无效
+* [ ] SSG 生成内容优化
 * 文档
   * [ ] VitePress 资源推荐
   * [ ] github pages example
