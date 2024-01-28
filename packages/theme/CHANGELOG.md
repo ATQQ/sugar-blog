@@ -1,5 +1,14 @@
 # @sugarat/theme
 
+## 0.2.17
+
+### Patch Changes
+
+- feat: 添加回到顶部组件
+- feat: 支持移动端自动收起公告
+- feat：评论组件优化（最小化新样式）
+- feat：图标自定义（公告，评论，回到顶部）
+
 ## 0.2.16
 
 ### Patch Changes
