@@ -99,6 +99,22 @@ export namespace Theme {
     type: string
   }
 
+  export interface CommentConfig extends GiscusConfig {
+    /**
+     * @default '评论'
+     */
+    label?: string
+    /**
+     * 自定义图标，SVG 格式
+     * @recommend https://iconbuddy.app/search?q=fire
+     */
+    icon?: string
+    /**
+     * 移动端最小化按钮
+     * @default true
+     */
+    mobileMinify?: boolean
+  }
   export interface GiscusConfig {
     repo: Repo
     repoId: string
@@ -181,6 +197,9 @@ export namespace Theme {
     html?: string
   }
 
+  /**
+   * 公告
+   */
   export interface Popover {
     title: string
     /**
@@ -189,12 +208,28 @@ export namespace Theme {
      * 配置改变时，会重新触发展示
      */
     duration: number
+    /**
+     * 移动端自动最小化
+     * @default false
+     */
+    mobileMinify?: boolean
     body?: BlogPopover.Value[]
     footer?: BlogPopover.Value[]
     /**
      * 手动重新打开
+     * @default true
      */
     reopen?: boolean
+    /**
+     * 设置展示图标，svg
+     * @recommend https://iconbuddy.app/search?q=fire
+     */
+    icon?: string
+    /**
+     * 设置关闭图标，svg
+     * @recommend https://iconbuddy.app/search?q=fire
+     */
+    closeIcon?: string
   }
   export interface FriendLink {
     nickname: string
@@ -312,7 +347,7 @@ export namespace Theme {
      * 配置评论
      * power by https://giscus.app/zh-CN
      */
-    comment?: GiscusConfig | false
+    comment?: CommentConfig | false
     /**
      * 阅读文章左侧的推荐文章（替代默认的sidebar）
      */
@@ -364,6 +399,22 @@ export namespace Theme {
      * 详见 https://github.com/linsir/markdown-it-task-checkbox
      */
     taskCheckbox?: TaskCheckbox | boolean
+
+    backToTop?: boolean | BackToTop
+  }
+
+  export interface BackToTop {
+    /**
+     * 距离顶部多少距离出现
+     * @default 450
+     */
+    top?: number
+
+    /**
+     * 设置展示图标，svg
+     * @recommend https://iconbuddy.app/search?q=fire
+     */
+    icon?: string
   }
 
   export interface TaskCheckbox {

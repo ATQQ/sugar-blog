@@ -1,8 +1,13 @@
 /* eslint-disable global-require */
+import { createRequire } from 'module'
 import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
 import type { UserConfig } from 'vitepress'
 import type { Theme } from '../../composables/config/index'
 import { aliasObjectToArray } from './index'
+
+export function _require(module: any) {
+  return (typeof import.meta?.url !== 'undefined' ? createRequire(import.meta.url) : require)(module)
+}
 
 export function getMarkdownPlugins(cfg?: Partial<Theme.BlogConfig>) {
   const markdownPlugin: any[] = []
@@ -15,7 +20,7 @@ export function getMarkdownPlugins(cfg?: Partial<Theme.BlogConfig>) {
   if (cfg) {
     cfg.mermaid = cfg?.mermaid ?? true
     if (cfg?.mermaid !== false) {
-      const { MermaidMarkdown } = require('vitepress-plugin-mermaid')
+      const { MermaidMarkdown } = _require('vitepress-plugin-mermaid')
       markdownPlugin.push(MermaidMarkdown)
     }
   }
@@ -32,7 +37,7 @@ export function getMarkdownPlugins(cfg?: Partial<Theme.BlogConfig>) {
 
 export function taskCheckboxPlugin(ops: Theme.TaskCheckbox | boolean) {
   return (md: any) => {
-    md.use(require('markdown-it-task-checkbox'), ops)
+    md.use(_require('markdown-it-task-checkbox'), ops)
   }
 }
 
@@ -46,34 +51,6 @@ export function registerMdPlugins(vpCfg: any, plugins: any[]) {
       }
     }
   }
-}
-
-/**
- * 流程图支持，配置mermaid
- */
-export function assignMermaid(config: any) {
-  if (!config?.mermaid)
-    return
-
-  if (!config.vite)
-    config.vite = {}
-  if (!config.vite.plugins)
-    config.vite.plugins = []
-  const { MermaidPlugin } = require('vitepress-plugin-mermaid')
-  config.vite.plugins.push(MermaidPlugin(config.mermaid))
-  if (!config.vite.resolve)
-    config.vite.resolve = {}
-  if (!config.vite.resolve.alias)
-    config.vite.resolve.alias = {}
-
-  config.vite.resolve.alias = [
-    ...aliasObjectToArray({
-      ...config.vite.resolve.alias,
-      'cytoscape/dist/cytoscape.umd.js': 'cytoscape/dist/cytoscape.esm.js',
-      'mermaid': 'mermaid/dist/mermaid.esm.mjs'
-    }),
-    { find: /^dayjs\/(.*).js/, replacement: 'dayjs/esm/$1' }
-  ]
 }
 
 export function patchMermaidPluginCfg(config: any) {
@@ -98,24 +75,6 @@ export function patchOptimizeDeps(config: any) {
   }
   config.vite.optimizeDeps.exclude = ['vitepress-plugin-tabs', '@sugarat/theme']
   config.vite.optimizeDeps.include = ['element-plus']
-}
-
-export function wrapperCfgWithMermaid(config: UserConfig<Theme.Config>): any {
-  // @ts-expect-error
-  const extendThemeConfig = (config.extends?.themeConfig?.blog
-    || {}) as Theme.BlogConfig
-
-  // 开关支持Mermaid
-  const resultConfig
-    = extendThemeConfig.mermaid === false
-      ? config
-      : {
-          ...config,
-          mermaid:
-            extendThemeConfig.mermaid === true ? {} : extendThemeConfig.mermaid
-        }
-  assignMermaid(resultConfig)
-  return resultConfig
 }
 
 export function supportRunExtendsPlugin(config: UserConfig<Theme.Config>) {

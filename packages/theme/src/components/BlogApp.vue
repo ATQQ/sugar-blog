@@ -16,6 +16,7 @@ import BlogAlert from './BlogAlert.vue'
 import BlogPopover from './BlogPopover.vue'
 import BlogFooter from './BlogFooter.vue'
 import BlogHomeHeaderAvatar from './BlogHomeHeaderAvatar.vue'
+import BlogBackToTop from './BlogBackToTop.vue'
 
 const { frontmatter } = useData()
 const layout = computed(() => frontmatter.value.layout)
@@ -66,10 +67,13 @@ const { Layout } = Theme
       <slot name="sidebar-nav-after" />
       <BlogSidebar />
     </template>
-    <!-- 评论 -->
     <template #doc-after>
       <slot name="doc-after" />
-      <BlogComment />
+      <!-- 评论 -->
+      <ClientOnly>
+        <BlogBackToTop />
+        <BlogComment />
+      </ClientOnly>
     </template>
     <template #layout-bottom>
       <BlogFooter v-if="layout === 'home'" />

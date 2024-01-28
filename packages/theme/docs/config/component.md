@@ -11,7 +11,7 @@ tag:
 ## task-checkbox
 * Type: `boolean | TaskCheckbox`
 
-支持渲染 markdown 任务列表，内置 markdown-it-task-checkbox 插件提供支持
+支持渲染 markdown 任务列表，内置 [markdown-it-task-checkbox](https://github.com/linsir/markdown-it-task-checkbox) 插件提供支持
 
 * [ ] 🥔 TODO
 * [ ] 真不戳

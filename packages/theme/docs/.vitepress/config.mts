@@ -59,7 +59,6 @@ export default defineConfig({
           }
         ]
       },
-
     ],
     socialLinks: [
       {
@@ -76,7 +75,13 @@ export default defineConfig({
         'https://github.com/ATQQ/sugar-blog/tree/master/packages/theme/docs/:path',
       text: '去 GitHub 上编辑内容'
     },
-    lastUpdatedText: '上次更新于'
+    lastUpdatedText: '上次更新于',
+    outline: {
+      level: [2, 3],
+      label: '目录'
+    },
+    returnToTopLabel: '回到顶部',
+    sidebarMenuLabel: '相关推荐'
   },
   lastUpdated: true
 })
