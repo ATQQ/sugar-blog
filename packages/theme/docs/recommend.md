@@ -3,6 +3,7 @@ sticky: 997
 description: VitePress相关的主题，博客，插件汇总推荐
 sidebar: false
 top: 2
+outline: [2,4]
 ---
 # 【🔥持续更新】 VitePress资源推荐
 
@@ -90,13 +91,110 @@ git clone https://github.com/airene/vitepress-blog-pure.git
 git clone https://github.com/harlan-zw/harlanzw.com-vitepress.git
 ```
 
-## 插件
-### VitePress插件
+## VitePress插件
+### 拓展功能
+#### [vitepress-plugin-mermaid](https://github.com/emersonbottero/vitepress-plugin-mermaid)
 
-<!-- https://vitepress.yiov.top/plugin.html -->
+基于 [mermaid](https://mermaid.js.org/) 实现的 md 流程图插件。
+
+```ts
+// .vitepress/config.js
+import { withMermaid } from 'vitepress-plugin-mermaid'
+
+export default withMermaid({
+  // your existing vitepress config...
+  mermaid: {
+    // mermaidConfig !theme here works for ligth mode since dark theme is forced in dark mode
+  },
+})
+```
+
+![](https://img.cdn.sugarat.top/mdImg/sugar/9238f8f2ddebc56daba7c45819b88974)
+
+#### [vitepress-plugin-rss](https://github.com/ATQQ/sugar-blog/tree/master/packages/vitepress-plugin-rss)
+
+给 vitepress 提供 RSS 订阅源链接生成支持。
+
+```ts
+import { RSSOptions, RssPlugin } from 'vitepress-plugin-rss'
+
+const baseUrl = 'https://sugarat.top'
+const RSS: RSSOptions = {
+  title: '粥里有勺糖',
+  baseUrl,
+  copyright: 'Copyright (c) 2018-present, 粥里有勺糖',
+}
+
+export default defineConfig({
+  vite: {
+    // ↓↓↓↓↓
+    plugins: [RssPlugin(RSS)]
+    // ↑↑↑↑↑
+  }
+})
+```
+
+![](https://img.cdn.sugarat.top/mdImg/MTY5MjQ1NTQ4MDYxMg==692455480612)
+
+### 搜索
+#### [vitepress-plugin-search](https://github.com/emersonbottero/vitepress-plugin-search)
+
+基于 [flexsearch](https://github.com/nextapps-de/flexsearch) 实现的离线全文搜索插件。
+
+```ts
+import { SearchPlugin } from 'vitepress-plugin-search'
+import { defineConfig } from 'vitepress'
+
+// default options
+const options = {
+  ...flexSearchIndexOptions,
+  previewLength: 62,
+  buttonLabel: 'Search',
+  placeholder: 'Search docs',
+  allow: [],
+  ignore: [],
+}
+
+export default defineConfig({
+  vite: { plugins: [SearchPlugin(options)] }
+})
+```
+#### [vitepress-plugin-pagefind](https://github.com/ATQQ/sugar-blog/tree/master/packages/vitepress-plugin-pagefind)
+
+基于 [pagefind](https://github.com/cloudcannon/pagefind) 实现的离线全文搜索插件。
+
+```ts
+import { defineConfig } from 'vitepress'
+import { pagefindPlugin } from 'vitepress-plugin-pagefind'
+
+// https://vitepress.dev/reference/site-config
+export default defineConfig({
+  vite: {
+    plugins: [pagefindPlugin()],
+  }
+})
+```
+
+![](https://img.cdn.sugarat.top/mdImg/MTY3OTgxOTE1MDQ0OA==679819150448)
+
+### 易用性提升
+#### [vitepress-plugin-autobar](https://github.com/luciozhang/vitepress-plugin-autobar)
+
+根据目录结构自动生成 sidebar 信息。
+```ts
+import { getSideBar } from 'vitepress-plugin-autobar'
+
+module.exports = {
+  // ...
+  themeConfig: {
+    // ...
+    sidebar: getSideBar('./docs'),
+  },
+}
+```
 
 TODO：wait a moment
 
-### markdown-it 插件
+## markdown-it 插件
 
 TODO：wait a moment
