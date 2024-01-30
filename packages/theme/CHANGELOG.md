@@ -1,5 +1,13 @@
 # @sugarat/theme
 
+## 0.2.18
+
+### Patch Changes
+
+- feat: 内置时间线组件
+- fix: 修复回到顶部按钮点击不生效
+- chore: SSG 内容优化
+
 ## 0.2.17
 
 ### Patch Changes

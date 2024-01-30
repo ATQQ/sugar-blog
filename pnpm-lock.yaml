@@ -55,7 +55,7 @@ importers:
         specifier: ^2.1.0
         version: 2.1.0(vue@3.3.4)
       '@sugarat/theme':
-        specifier: 0.2.17
+        specifier: 0.2.18
         version: link:../theme
       axios:
         specifier: ^0.27.2
@@ -119,6 +119,9 @@ importers:
       mermaid:
         specifier: ^10.2.4
         version: 10.2.4
+      vitepress-markdown-timeline:
+        specifier: ^1.2.1
+        version: 1.2.1
       vitepress-plugin-mermaid:
         specifier: 2.0.13
         version: 2.0.13(mermaid@10.2.4)(vitepress@1.0.0-rc.40)
@@ -7312,6 +7315,12 @@ packages:
       sass: 1.64.1
     optionalDependencies:
       fsevents: 2.3.3
+    dev: false
+
+  /vitepress-markdown-timeline@1.2.1:
+    resolution: {integrity: sha512-XPYl/btTcTzW+XF20ITB51L8jPjbS72tSKPcv/CHJgM+3LbBvW8Az/X7RcBTJSXDNOwCY5mGkjA7CXQtuxOKgw==}
+    dependencies:
+      dayjs: 1.11.9
     dev: false
 
   /vitepress-plugin-mermaid@2.0.13(mermaid@10.2.4)(vitepress@1.0.0-rc.40):
