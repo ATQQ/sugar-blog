@@ -94,15 +94,15 @@ const labelText = computed(() => {
 
     <div v-show="!commentIsVisible" class="comment-btn-wrapper">
       <span v-if="!mobileMinify && labelText" class="icon-wrapper-text" @click="handleScrollToComment">
-        <ElIcon>
+        <ElIcon :size="20">
           <CommentIcon />
         </ElIcon>
         <span class="text">
           {{ labelText }}
         </span>
       </span>
-      <span v-else class="icon-wrapper">
-        <ElIcon @click="handleScrollToComment">
+      <span v-else class="icon-wrapper" @click="handleScrollToComment">
+        <ElIcon :size="20">
           <CommentIcon />
         </ElIcon>
       </span>

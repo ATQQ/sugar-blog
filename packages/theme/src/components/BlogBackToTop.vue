@@ -28,8 +28,8 @@ const iconSVGStr = computed(() => typeof backToTopConfig === 'boolean' ? '' : ba
 
 <template>
   <div v-if="open" v-show="show" class="back-to-top">
-    <span class="icon-wrapper">
-      <ElIcon @click="handleBackRoTop">
+    <span class="icon-wrapper" @click="handleBackRoTop">
+      <ElIcon :size="20">
         <i v-if="iconSVGStr" v-outer-html="iconSVGStr" />
         <svg v-else width="512" height="512" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path
