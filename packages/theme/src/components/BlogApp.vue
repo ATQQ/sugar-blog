@@ -37,9 +37,9 @@ const { Layout } = Theme
       <!-- 阅读时间分析 -->
       <ClientOnly>
         <BlogArticleAnalyze />
+        <!-- 图片预览 -->
+        <BlogImagePreview />
       </ClientOnly>
-      <!-- 图片预览 -->
-      <BlogImagePreview />
     </template>
 
     <template #nav-bar-content-before>
