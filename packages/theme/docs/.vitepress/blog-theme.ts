@@ -43,7 +43,6 @@ export const blogTheme = getThemeConfig({
     category: 'Announcements',
     categoryId: 'DIC_kwDODmEcc84COVc6',
     inputPosition: 'top',
-    label: ''
   },
   popover: {
     title: '公告',

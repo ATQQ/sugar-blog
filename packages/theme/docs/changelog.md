@@ -1,10 +1,9 @@
 ---
 title: 更新日志
-description: 最近更新（v0.2.17） ⏰ 2024/01/28：新功能：回到顶部，评论组件样式优化，支持移动端自动收起公告，内置 checkbox；修复：mermaid 图表构建后失效；
+description: 最近更新（v0.2.18） ⏰ 2024/01/30：新功能：时间线语法支持，回到顶部，评论组件样式优化，支持移动端自动收起公告，内置 checkbox；修复：mermaid 图表构建后失效；
 author: 粥里有勺糖
 top: 2
 tag: 日志
-publish: true
 ---
 
 # Changelog
@@ -25,6 +24,14 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.2.18 (2024/01/30)
+
+### Patch Changes
+
+- feat: 内置时间线组件
+- fix: 修复回到顶部按钮点击不生效
+- chore: SSG 内容优化
 
 ## 0.2.17 (2024/01/28)
 

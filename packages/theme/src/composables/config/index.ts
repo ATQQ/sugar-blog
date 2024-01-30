@@ -397,9 +397,19 @@ export namespace Theme {
     /**
      * 配置内置的 markdown-it-task-checkbox 插件，设置 false 则关闭
      * 详见 https://github.com/linsir/markdown-it-task-checkbox
+     * @default true
      */
     taskCheckbox?: TaskCheckbox | boolean
-
+    /**
+     * 支持 markdown 时间线语法，在 vitepress 中使用 markdown 渲染时间线（时间轴）样式。
+     * 详见 https://github.com/HanochMa/vitepress-markdown-timeline
+     * @default true
+     */
+    timeline?: boolean
+    /**
+     * 回到顶部
+     * @default true
+     */
     backToTop?: boolean | BackToTop
   }
 

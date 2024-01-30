@@ -6,25 +6,29 @@ sidebar: false
 # 🥔 开发计划
 
 ## 正在进行中
-* [ ] SSG 生成内容优化
+
+* [ ] 友链列表实现调整
+* [ ] 左侧推荐列表可以自定义
+* [ ] pagefind 支持跳转目录
 * 文档
   * [ ] VitePress 资源推荐
   * [ ] github pages example
   * [ ] VitePress 常见问题解答（deadLink，markdown，frontmatter）
 * [ ] 主题部分能力分离为插件（公告，评论，回到顶部）
-* 内置高频使用的 markdown插件
-  * [ ] (https://vitepress.yiov.top/plugin.html)
 
 ## 已完成
 
 近期完成：
-* [x] 默认主题配置文案
+
+* [x] 内置高频使用的 markdown插件，参考 https://vitepress.yiov.top/plugin.html
+* [x] SSG 生成内容优化
 * [x] 流程图配置构建无效
-* [x] 回到顶部
+* [x] 文章页支持快速回到顶部功能
 * [x] 公告（支持：自动收起移动端，自定义图标）
 * [x] 评论（支持：自定义文案&图标，移动端自动最小化）
 
 :::details 更多归档
+* [x] 默认主题配置文案
 * [x] frontmatter汇总
 * [x] 博客案例集合
 * [x] 内置 [markdown-it-task-checkbox](https://github.com/linsir/markdown-it-task-checkbox) 插件
@@ -59,4 +63,6 @@ sidebar: false
 |                 首屏铺满slogan，自动展开                 |   ❌   |
 |                  support img noreferrer                  |   ❌   |
 |                        顶导航折叠                        |   ❌   |
-|                  左侧推荐列表可以自定义                  |   ❌   |
+|                         独立标签                         |   ❌   |
+|                        独立分类页                        |   ❌   |
+|                      独立时间线页面                      |   ❌   |

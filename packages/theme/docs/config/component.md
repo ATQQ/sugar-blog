@@ -8,6 +8,8 @@ tag:
 ---
 
 # 组件配置
+
+部分内置组件（插件），来源 [vitepress.yiov.top](https://vitepress.yiov.top/plugin.html) 推荐
 ## task-checkbox
 * Type: `boolean | TaskCheckbox`
 
@@ -51,8 +53,48 @@ interface TaskCheckbox {
 ```
 :::
 
+## timeline
+* Type: `boolean`
+* default: `true`
 
+提供 markdown 时间线语法，在 vitepress 中使用 markdown 渲染时间线（时间轴）样式。
 
+:::tip 一点说明
+内置 [vitepress-markdown-timeline](https://github.com/HanochMa/vitepress-markdown-timeline) 实现
+:::
+
+效果如下
+
+::: timeline 2023-05-24
+- **do some thing1**
+- do some thing2
+:::
+
+::: timeline 2023-05-23
+do some thing3
+do some thing4
+:::
+
+语法如下
+```md
+::: timeline 2023-05-24
+- **do some thing1**
+- do some thing2
+:::
+
+::: timeline 2023-05-23
+do some thing3
+do some thing4
+:::
+```
+
+:::code-group
+```ts [关闭]
+const blogTheme = getThemeConfig({
+  timeline: false
+})
+```
+:::
 ## tabs
 * Type: `boolean`
 

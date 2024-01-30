@@ -2,6 +2,7 @@
 import { createRequire } from 'module'
 import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
 import type { UserConfig } from 'vitepress'
+import timeline from 'vitepress-markdown-timeline'
 import type { Theme } from '../../composables/config/index'
 import { aliasObjectToArray } from './index'
 
@@ -17,25 +18,22 @@ export function getMarkdownPlugins(cfg?: Partial<Theme.BlogConfig>) {
   }
 
   // 添加mermaid markdown 插件
-  if (cfg) {
-    cfg.mermaid = cfg?.mermaid ?? true
-    if (cfg?.mermaid !== false) {
-      const { MermaidMarkdown } = _require('vitepress-plugin-mermaid')
-      markdownPlugin.push(MermaidMarkdown)
-    }
+  if (cfg?.mermaid !== false) {
+    const { MermaidMarkdown } = _require('vitepress-plugin-mermaid')
+    markdownPlugin.push(MermaidMarkdown)
   }
 
-  if (cfg) {
-    cfg.taskCheckbox = cfg?.taskCheckbox ?? true
-    if (cfg.taskCheckbox !== false) {
-      markdownPlugin.push(taskCheckboxPlugin(cfg.taskCheckbox))
-    }
+  if (cfg.taskCheckbox !== false) {
+    markdownPlugin.push(taskCheckboxPlugin(typeof cfg?.taskCheckbox === 'boolean' ? {} : cfg?.taskCheckbox))
   }
 
+  if (cfg?.timeline !== false) {
+    markdownPlugin.push(timeline)
+  }
   return markdownPlugin
 }
 
-export function taskCheckboxPlugin(ops: Theme.TaskCheckbox | boolean) {
+export function taskCheckboxPlugin(ops?: Theme.TaskCheckbox) {
   return (md: any) => {
     md.use(_require('markdown-it-task-checkbox'), ops)
   }
