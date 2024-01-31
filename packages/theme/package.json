@@ -52,6 +52,7 @@
     "gray-matter": "^4.0.3",
     "markdown-it-task-checkbox": "^1.0.6",
     "mermaid": "^10.2.4",
+    "swiper": "^11.0.5",
     "vitepress-markdown-timeline": "^1.2.1",
     "vitepress-plugin-mermaid": "2.0.13",
     "vitepress-plugin-pagefind": "0.2.10",
