@@ -152,7 +152,7 @@ const blogTheme = getThemeConfig({
       }
     ],
     random: true,
-    limit: 6
+    limit: 6,
   },
   search: false,
   recommend: {

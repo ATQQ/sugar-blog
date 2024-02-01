@@ -25,6 +25,12 @@ bun install vitepress@latest
 ```
 :::
 
+## 0.2.19 (2024/02/01)
+
+### Patch Changes
+
+- feat: 友链列表实现使用swiper
+
 ## 0.2.18 (2024/01/30)
 
 ### Patch Changes

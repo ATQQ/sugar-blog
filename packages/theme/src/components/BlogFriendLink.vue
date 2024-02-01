@@ -2,7 +2,7 @@
 import { ElAvatar } from 'element-plus'
 import { useDark, useIntervalFn } from '@vueuse/core'
 import { computed, onMounted, onUnmounted, ref } from 'vue'
-import type Swiper from 'swiper'
+import Swiper from 'swiper'
 import { useBlogConfig } from '../composables/config/blog'
 import { getImageUrl, shuffleArray } from '../utils/client'
 import type { Theme } from '../'
@@ -19,7 +19,6 @@ const friendConfig = computed<Theme.FriendConfig>(() => ({
   ...(Array.isArray(friend) ? { list: friend } : friend)
 }))
 
-// TODO: 待优化
 const limit = computed(() => {
   const { limit } = friendConfig.value
   return (!limit || limit <= 0) ? 0 : limit || Number.MAX_SAFE_INTEGER
@@ -27,7 +26,7 @@ const limit = computed(() => {
 
 const scrollSpeed = computed(() => {
   const { scrollSpeed } = friendConfig.value
-  return scrollSpeed || 1000
+  return scrollSpeed ?? 1500
 })
 
 const openScroll = computed(() => {
@@ -62,31 +61,28 @@ const friendList = computed(() => {
   return list
 })
 
-const cardHeight = 80
+const cardHeight = 76
 const scrollWrapperHeight = computed(() => {
   return openScroll.value ? limit.value * cardHeight : 0
 })
 const containerHeight = computed(() => {
   return scrollWrapperHeight.value ? `${scrollWrapperHeight.value}px` : 'auto'
 })
-const scrollTop = computed(() => {
-  return `-${scrollWrapperHeight.value * 2}px`
-})
 
 const swiper = ref<Swiper>()
 const { resume, pause } = useIntervalFn(() => {
-  // swiper.value?.slideNext()
+  swiper.value?.slideNext()
 }, scrollSpeed.value)
 
 onMounted(() => {
   pause()
   if (openScroll.value) {
     // eslint-disable-next-line no-new
-    // swiper.value = new Swiper('.scroll-wrapper', {
-    //   direction: 'vertical',
-    //   slidesPerView: limit.value,
-    //   loop: true,
-    // })
+    swiper.value = new Swiper('.scroll-wrapper', {
+      direction: 'vertical',
+      slidesPerView: limit.value,
+      loop: true,
+    })
     resume()
   }
 })
@@ -129,7 +125,7 @@ onUnmounted(() => {
         <li v-for=" (v, idx) in friendList" :key="idx" class="swiper-slide">
           <a :href="v.url" target="_blank">
             <ElAvatar :size="50" :src="v.avatar" :alt="v.alt" />
-            <div>
+            <div class="info-wrapper">
               <span class="nickname">{{ v.nickname }}</span>
               <p class="des">{{ v.des }}</p>
             </div>
@@ -195,9 +191,7 @@ onUnmounted(() => {
   li {
     box-sizing: border-box;
     padding: 0 5px;
-    height: 80px;
-    margin-bottom: 10px;
-
+    height: 76px;
     .el-avatar {
       min-width: 50px;
     }
@@ -211,6 +205,12 @@ onUnmounted(() => {
       padding-left: 10px;
     }
 
+    .info-wrapper {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
     .nickname {
       font-size: 16px;
       font-weight: 450;
@@ -219,6 +219,9 @@ onUnmounted(() => {
     .des {
       color: var(--vp-c-text-2);
       font-size: 14px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
   }
 }
