@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import { ElAvatar } from 'element-plus'
-import { useDark } from '@vueuse/core'
-import { computed } from 'vue'
+import { useDark, useIntervalFn } from '@vueuse/core'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
+import Swiper from 'swiper'
 import { useBlogConfig } from '../composables/config/blog'
 import { getImageUrl, shuffleArray } from '../utils/client'
 import type { Theme } from '../'
@@ -18,7 +19,6 @@ const friendConfig = computed<Theme.FriendConfig>(() => ({
   ...(Array.isArray(friend) ? { list: friend } : friend)
 }))
 
-// TODO: 待优化
 const limit = computed(() => {
   const { limit } = friendConfig.value
   return (!limit || limit <= 0) ? 0 : limit || Number.MAX_SAFE_INTEGER
@@ -26,7 +26,7 @@ const limit = computed(() => {
 
 const scrollSpeed = computed(() => {
   const { scrollSpeed } = friendConfig.value
-  return (!scrollSpeed || scrollSpeed <= 0) ? (friendConfig.value.list.length - 1) * (friendConfig.value.list.length / limit.value) * 1000 : scrollSpeed
+  return scrollSpeed ?? 1500
 })
 
 const openScroll = computed(() => {
@@ -58,18 +58,37 @@ const friendList = computed(() => {
       alt
     }
   })
-  return openScroll.value ? [...list, ...list] : list
+  return list
 })
 
-const cardHeight = 83
+const cardHeight = 76
 const scrollWrapperHeight = computed(() => {
   return openScroll.value ? limit.value * cardHeight : 0
 })
 const containerHeight = computed(() => {
   return scrollWrapperHeight.value ? `${scrollWrapperHeight.value}px` : 'auto'
 })
-const scrollTop = computed(() => {
-  return `-${scrollWrapperHeight.value * 2}px`
+
+const swiper = ref<Swiper>()
+const { resume, pause } = useIntervalFn(() => {
+  swiper.value?.slideNext()
+}, scrollSpeed.value)
+
+onMounted(() => {
+  pause()
+  if (openScroll.value) {
+    // eslint-disable-next-line no-new
+    swiper.value = new Swiper('.scroll-wrapper', {
+      direction: 'vertical',
+      slidesPerView: limit.value,
+      loop: true,
+    })
+    resume()
+  }
+})
+
+onUnmounted(() => {
+  pause()
 })
 </script>
 
@@ -102,17 +121,11 @@ const scrollTop = computed(() => {
         height: containerHeight,
       }"
     >
-      <ol
-        class="friend-list" :style="{
-          animationPlayState: openScroll ? 'running' : 'paused',
-          animationDuration: `${scrollSpeed / 1000}s`,
-        }
-        "
-      >
-        <li v-for="(v, idx) in friendList" :key="idx">
+      <ol class="friend-list swiper-wrapper">
+        <li v-for=" (v, idx) in friendList" :key="idx" class="swiper-slide">
           <a :href="v.url" target="_blank">
             <ElAvatar :size="50" :src="v.avatar" :alt="v.alt" />
-            <div>
+            <div class="info-wrapper">
               <span class="nickname">{{ v.nickname }}</span>
               <p class="des">{{ v.des }}</p>
             </div>
@@ -159,15 +172,6 @@ const scrollTop = computed(() => {
   flex-direction: column;
 }
 
-@keyframes scrollList {
-  0% {
-    top: 0;
-  }
-  100% {
-    top: v-bind(scrollTop);
-  }
-}
-
 .scroll-wrapper {
   overflow: hidden;
   position: relative;
@@ -178,33 +182,33 @@ const scrollTop = computed(() => {
   flex-direction: column;
   list-style: none;
   margin: 0;
-  padding: 0 10px 0 0px;
+  padding: 10px 10px 0 0px;
   width: 100%;
 
   position: relative;
   width: 100%;
-  animation-name: scrollList;
-  animation-timing-function:linear;
-  animation-iteration-count:infinite;
-
-  &:hover {
-    animation-play-state: paused !important;
-  }
 
   li {
-    padding: 6px;
-    margin-top: 10px;
-
+    box-sizing: border-box;
+    padding: 0 5px;
+    height: 76px;
     .el-avatar {
       min-width: 50px;
     }
 
     a {
       display: flex;
+      align-items: center;
     }
 
     div {
       padding-left: 10px;
+    }
+
+    .info-wrapper {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
     }
 
     .nickname {
@@ -215,6 +219,9 @@ const scrollTop = computed(() => {
     .des {
       color: var(--vp-c-text-2);
       font-size: 14px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
   }
 }

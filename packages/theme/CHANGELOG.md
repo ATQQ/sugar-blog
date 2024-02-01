@@ -1,5 +1,11 @@
 # @sugarat/theme
 
+## 0.2.19
+
+### Patch Changes
+
+- feat: 友链列表实现使用swiper
+
 ## 0.2.18
 
 ### Patch Changes
