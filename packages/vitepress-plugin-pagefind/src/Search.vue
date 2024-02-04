@@ -353,6 +353,9 @@ watch(
   justify-content: center;
   padding: 6px;
   box-sizing: border-box;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  transition: .2s border;
 }
 .blog-search .nav-search-btn-wait .metaKey {
   margin-left: 10px;
