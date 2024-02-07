@@ -353,6 +353,9 @@ function handleSelect(target: any) {
     justify-content: center;
     padding: 6px;
     box-sizing: border-box;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    transition: .2s border;
 
     .metaKey {
       margin-left: 10px;
