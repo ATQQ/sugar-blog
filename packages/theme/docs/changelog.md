@@ -25,6 +25,13 @@ bun install vitepress@latest
 ```
 :::
 
+## 0.2.20 (2024/02/07)
+
+### Patch Changes
+
+- Updated dependencies
+  - vitepress-plugin-pagefind@0.2.11
+
 ## 0.2.19 (2024/02/01)
 
 ### Patch Changes

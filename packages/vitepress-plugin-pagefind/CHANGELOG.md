@@ -1,5 +1,11 @@
 # vitepress-plugin-pagefind
 
+## 0.2.11
+
+### Patch Changes
+
+- fix: 鼠标移入抖动
+
 ## 0.2.10
 
 ### Patch Changes
