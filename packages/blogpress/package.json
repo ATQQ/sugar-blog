@@ -1,5 +1,6 @@
 {
   "name": "blogpress",
+  "type": "module",
   "version": "2.0.29",
   "private": true,
   "license": "MIT",

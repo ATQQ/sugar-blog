@@ -1,8 +1,9 @@
 import process from 'node:process'
-import { defineConfig, getThemeConfig } from '@sugarat/theme/node'
+import { getThemeConfig } from '@sugarat/theme/node'
 import type { Theme } from '@sugarat/theme'
 import type { RSSOptions } from 'vitepress-plugin-rss'
 import { RssPlugin } from 'vitepress-plugin-rss'
+import { defineConfig } from 'vitepress'
 
 const baseUrl = 'https://sugarat.top'
 const weekly = `${baseUrl}/weekly`
@@ -200,6 +201,11 @@ const extraHead: any
 
 export default defineConfig({
   extends: blogTheme,
+  markdown: {
+    image: {
+      lazyLoading: true
+    }
+  },
   ignoreDeadLinks: true,
   sitemap: {
     hostname: 'https://sugarat.top',
