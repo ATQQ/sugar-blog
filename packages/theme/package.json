@@ -39,8 +39,7 @@
     "build": "npm run build:node && npm run build:docs",
     "build:docs": "vitepress build docs",
     "build:node": "npx tsup",
-    "serve": "vitepress serve docs",
-    "documate:upload": "documate upload"
+    "serve": "vitepress serve docs"
   },
   "dependencies": {
     "@giscus/vue": "^2.3.0",
@@ -60,8 +59,6 @@
     "vitepress-plugin-tabs": "0.2.0"
   },
   "devDependencies": {
-    "@documate/documate": "^0.2.1",
-    "@documate/vue": "^0.3.1",
     "@element-plus/icons-vue": "^2.1.0",
     "element-plus": "^2.3.4",
     "javascript-stringify": "^2.1.0",
