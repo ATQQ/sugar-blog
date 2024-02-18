@@ -85,6 +85,7 @@ const RSS: RSSOptions = {
   filename: 'feed.rss',
   log: true,
   ignoreHome: true,
+  ignorePublish: false,
   filter: (post, idx) => {
     return true
   }
@@ -102,17 +103,17 @@ import type { Author, FeedOptions } from 'feed'
 export type RSSOptions = Omit<FeedOptions, 'id'> & {
   id?: string
   /**
-   * 过滤目标文章
-   * @param post 文章相关信息
+   * Filter target docs
+   * @param post Information related to the doc.
    */
   filter?: (value: PostInfo, index: number, array: PostInfo[]) => boolean
   /**
-   * 你的站点地址
+   * your site address
    * @example 'https://sugarat.top'
    */
   baseUrl: string
   /**
-   * 线上访问的RSS地址
+   * online RSS address
    * @default
    * ```ts
    * `${baseUrl + VPConfig.site.base + (filename || 'feed.rss'}`
@@ -120,40 +121,45 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
    */
   url?: string
   /**
-   * 输出的RSS文件名
+   * output filename
    * @default 'feed.rss'
    */
   filename?: string
   /**
-   * RSS的图标展示（你也可以传入一个svg字符串进行自定义，SVG 图标可访问 https://www.xicons.org/# 获取）
+   * RSS icon display (you can also pass in an svg string to customize, the SVG icon can be obtained by visiting https://www.xicons.org/#)
    * @default true
    */
   icon?: boolean | string
   /**
-   * 是否打印过程提示
+   * Whether to print process prompts
    * @default true
    */
   log?: boolean
   /**
-   * 是否过滤 layout:home
+   * Whether to filter layout:home
    * @default true
    */
   ignoreHome?: boolean
   /**
-   * 博客站点内容涉及的作者列表
+   * Whether to ignore frontmatter publish control
+   * @default false
+   */
+  ignorePublish?: boolean
+  /**
+   * List of authors involved in blog site content
    */
   authors?: Author[]
   /**
-   * 自定义文章摘要生成逻辑
+   * Customize doc summary generation logic
    */
   renderExpect?: (
     fileContent: string,
     frontmatter: Record<string, any>
   ) => string | Promise<string>
   /**
-   * 限制输出文件包含的文章数量
+   * Limit the number of docs the output file contains
    * @default 0
-   * @description (0 不限制；> 1 会按照日期排序对输出内容进行调整)
+   * @description (0 no limit; > 1 will adjust the output content according to date sorting)
    */
   limit?: number
 }

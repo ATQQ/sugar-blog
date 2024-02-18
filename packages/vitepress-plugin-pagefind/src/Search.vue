@@ -139,6 +139,18 @@ watch(
                 }
               }
             })
+            // 补充 frontmatter => meta
+            // TODO: 存在优化空间
+            .map((v) => {
+              const origin = docs.value.find(d => d.route === v.route)
+              return {
+                ...v,
+                meta: {
+                  ...v.meta,
+                  ...origin?.meta
+                }
+              }
+            })
             // 过滤掉不在docs里的
             .filter((v) => {
               return (

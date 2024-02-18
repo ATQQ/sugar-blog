@@ -1,5 +1,11 @@
 # vitepress-plugin-rss
 
+## 0.2.2
+
+### Patch Changes
+
+- feat: support `ignorePublish` option，include `publish: false` frontmatter docs
+
 ## 0.2.1
 
 ### Patch Changes

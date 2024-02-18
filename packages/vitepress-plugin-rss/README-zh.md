@@ -84,6 +84,7 @@ const RSS: RSSOptions = {
   filename: 'feed.rss',
   log: true,
   ignoreHome: true,
+  ignorePublish: false,
   filter: (post, idx) => {
     return true
   }
@@ -138,6 +139,11 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
    * @default true
    */
   ignoreHome?: boolean
+  /**
+   * 是否忽略 frontmatter publish 控制
+   * @default false
+   */
+  ignorePublish?: boolean
   /**
    * 博客站点内容涉及的作者列表
    */

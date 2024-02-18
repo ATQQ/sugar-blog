@@ -91,7 +91,7 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
     || process.argv.slice(2)?.[1]
     || '.'
 
-  const { baseUrl, filename, ignoreHome = true, filter: filterPost = () => true } = rssOptions
+  const { baseUrl, filename, ignoreHome = true, filter: filterPost = () => true, ignorePublish = false } = rssOptions
 
   const feed = new Feed({
     id: rssOptions.baseUrl,
@@ -110,7 +110,7 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
       return false
     }
     // 跳过未发布的文章
-    if (p.frontmatter.publish === false)
+    if (p.frontmatter.publish === false && !ignorePublish)
       return false
 
     return true

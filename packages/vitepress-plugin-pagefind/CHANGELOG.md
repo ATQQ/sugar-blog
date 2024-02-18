@@ -1,5 +1,11 @@
 # vitepress-plugin-pagefind
 
+## 0.2.12
+
+### Patch Changes
+
+- chore: 补充meta中丢失的 frontmatter 数据
+
 ## 0.2.11
 
 ### Patch Changes
