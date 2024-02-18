@@ -41,6 +41,11 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
    */
   ignoreHome?: boolean
   /**
+   * 是否忽略 frontmatter publish 控制
+   * @default false
+   */
+  ignorePublish?: boolean
+  /**
    * 博客站点内容涉及的作者列表
    */
   authors?: Author[]

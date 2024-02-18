@@ -27,7 +27,13 @@ export function getVitePlugins(cfg?: Partial<Theme.BlogConfig>) {
   if (cfg && cfg.search !== false) {
     const ops = cfg.search instanceof Object ? cfg.search : {}
     plugins.push(
-      pagefindPlugin({ ...ops, customSearchQuery: chineseSearchOptimize })
+      pagefindPlugin({
+        ...ops,
+        customSearchQuery: chineseSearchOptimize,
+        filter(searchItem) {
+          return searchItem.meta.publish !== false
+        }
+      })
     )
   }
 

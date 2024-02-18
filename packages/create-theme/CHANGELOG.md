@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.44
+
+### Patch Changes
+
+- feat: rss 与 pagefind 插件升级
+
 ## 0.0.43
 
 ### Patch Changes

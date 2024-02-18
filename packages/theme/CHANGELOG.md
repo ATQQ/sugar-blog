@@ -1,5 +1,15 @@
 # @sugarat/theme
 
+## 0.2.22
+
+### Patch Changes
+
+- Updated dependencies
+  - vitepress-plugin-pagefind@0.2.12
+  - vitepress-plugin-rss@0.2.2
+- feat: 内置 pagefind 搜索自动过滤 `publish:false` 文章
+- feat: RSS 插件支持配置忽略 `publish:false` 的影响
+
 ## 0.2.21
 
 ### Patch Changes
