@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.43
+
+### Patch Changes
+
+- chore: adapt to rc43
+
 ## 0.0.42
 
 ### Patch Changes

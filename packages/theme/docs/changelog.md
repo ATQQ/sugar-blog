@@ -25,6 +25,12 @@ bun install vitepress@latest
 ```
 :::
 
+## 0.2.21 (2024/02/18)
+
+### Patch Changes
+
+- chore: 适配 [vitepress@1.0.0-rc.43](https://github.com/vuejs/vitepress/blob/main/CHANGELOG.md)
+
 ## 0.2.20 (2024/02/07)
 
 ### Patch Changes
