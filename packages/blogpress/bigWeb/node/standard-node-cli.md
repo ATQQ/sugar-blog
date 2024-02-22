@@ -1,12 +1,13 @@
 ---
 sidebar: false
+description: 只使用 Node.js 的标准库，不安装任何外部依赖，写一个命令行工具
 ---
 # 译：使用现代的 Node.js 构建简单的CLI工具
 >原文地址（Bun Blog）： https://evertpot.com/node-changelog-cli-tool/
 ><br/>作者： [Evert Pot](https://evertpot.com/)
 ><br/>发布时间：2023-02-13
 
-**本文介绍只使用 Node.js 的标准库，不依赖任何外部依赖，写一个命令行工具。**
+**只使用 Node.js 的标准库，不安装任何外部依赖，写一个命令行工具。**
 
 ## 前言
 
