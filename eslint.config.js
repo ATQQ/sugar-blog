@@ -51,6 +51,7 @@ export default antfu({
     'ts/no-var-requires': 'off',
     'ts/no-require-imports': 'off',
     'ts/ban-ts-comment': 'off',
-    'vue/prefer-import-from-vue': 'off'
+    'vue/prefer-import-from-vue': 'off',
+    'jsdoc/no-types': 'off'
   },
 })
