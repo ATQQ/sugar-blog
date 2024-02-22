@@ -306,7 +306,6 @@ ok 1 - /home/evert/src/changelog-tool/test/parse.mjs
 
 结果是我更有可能最终得到一些简约、维护成本低的东西，并且让我对所使用的工具有更深入的理解。
 
-In the near future I would probably make all these choices again. The Node test runner is fast and low-cruft, ESM is great when it works and not needing a build step feels right for a project this size.
 未来我可能会再次做出这些选择。Node 的测试工具快速又简单，ESM 也非常Nice，还不需要引入构建，对于我这种规模的项目来说，感觉非常合适。
 
 **我希望这能鼓励将来的人从空目录来开始他们的下一个项目，而不是复制大型项目模板。**
