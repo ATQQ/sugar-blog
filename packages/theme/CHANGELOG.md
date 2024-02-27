@@ -1,5 +1,20 @@
 # @sugarat/theme
 
+## 0.2.23
+
+### Patch Changes
+
+- feat: 兼容 cover 指向非public 目录文件封面展示
+```md
+---
+cover: /abc.png
+---
+# 标题
+
+<img src="./abc.png" style="display: none;"/>
+
+```
+
 ## 0.2.22
 
 ### Patch Changes
