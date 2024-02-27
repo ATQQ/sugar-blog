@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.2.22） ⏰ 2024/02/18：新功能：适配 rc43，rss 与 pagefind 优化，时间线语法支持，回到顶部，评论组件样式优化，支持移动端自动收起公告，内置 checkbox；修复：mermaid 图表构建后失效；
+description: 最近更新（v0.2.23） ⏰ 2024/02/27：新功能：适配 rc43，rss 与 pagefind 优化，时间线语法支持，回到顶部，评论组件样式优化，支持移动端自动收起公告，内置 checkbox；修复：mermaid 图表构建后失效；
 author: 粥里有勺糖
 top: 2
 tag: 日志
@@ -24,6 +24,22 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.2.23 (2024/02/27)
+
+### Patch Changes
+
+- fix: 左侧推荐列表在很多文章时，首次展示页码不正确
+- feat: 兼容 cover 指向非public 目录文件封面展示
+```md
+---
+cover: /abc.png
+---
+# 标题
+
+<img src="./abc.png" style="display: none;"/>
+
+```
 
 ## 0.2.22 (2024/02/18)
 

@@ -4,6 +4,7 @@
 
 ### Patch Changes
 
+- fix: 左侧推荐列表在很多文章时，首次展示页码不正确
 - feat: 兼容 cover 指向非public 目录文件封面展示
 ```md
 ---
