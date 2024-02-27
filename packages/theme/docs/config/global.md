@@ -290,6 +290,7 @@ pnpm add vitepress-plugin-pagefind
 // 在 `.vitepress/config.ts` 引入
 import { defineConfig } from 'vitepress'
 import { chineseSearchOptimize, pagefindPlugin } from 'vitepress-plugin-pagefind'
+import { getThemeConfig } from '@sugarat/theme/node'
 
 const blogTheme = getThemeConfig({
   // 关闭主题内置
