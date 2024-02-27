@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRoute, withBase } from 'vitepress'
 import { ElButton, ElLink } from 'element-plus'
 import { formatShowDate } from '../utils/client'
@@ -88,6 +88,7 @@ function changePage() {
   const newIdx
     = currentPage.value % Math.ceil(recommendList.value.length / pageSize.value)
   currentPage.value = newIdx + 1
+  return newIdx + 1
 }
 // 当前页开始的序号
 const startIdx = computed(() => (currentPage.value - 1) * pageSize.value)
@@ -100,6 +101,22 @@ const currentWikiData = computed(() => {
 
 const showChangeBtn = computed(() => {
   return recommendList.value.length > pageSize.value
+})
+
+onMounted(() => {
+  const checkHaveActive = () => {
+    const have = currentWikiData.value.some(v => isCurrentDoc(v.route))
+    if (have) {
+      return
+    }
+    if (currentPage.value >= changePage()) {
+      return
+    }
+
+    // TODO：存在理论闪烁情况，未来优化
+    setTimeout(checkHaveActive)
+  }
+  checkHaveActive()
 })
 </script>
 
