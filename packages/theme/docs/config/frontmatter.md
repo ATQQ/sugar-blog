@@ -430,25 +430,42 @@ top: 1
 ![](https://img.cdn.sugarat.top/mdImg/MTY3NzA3ODA4MDM5NA==677078080394)
 
 ### recommend
-* type: `number | false`
+* type: `number | false | string | string[] | [...string[], number]`
 
-用于设置文章左侧展示的 `推荐文章` 顺序（越小越靠前），或者在推荐列表中隐藏掉不展示
+可用于配置左侧推荐列表数据表现，默认只展示同级目录下的文章
+* 文章左侧展示的 `推荐文章` 顺序（越小越靠前）
+* 在推荐列表中隐藏掉不展示
+* 手动关联不同目录的文章进行展现
 
-```md
+:::code-group
+```md [① 只调整顺序]
 ---
 recommend: 1
 ---
 ```
 
-![](https://img.cdn.sugarat.top/mdImg/MTY3NzI0NTYyNDEyOA==677245624128)
-
-```md
+```md [② 在列表中隐藏]
 ---
 recommend: false
 ---
 ```
 
-![](https://img.cdn.sugarat.top/mdImg/MTY3NzI0NjQ2NzIyNA==677246467224)
+```md [③ 关联不同目录的文章]
+---
+# 直接设置文章的关键词
+recommend: 'Node.js'
+# 设置多个关键词
+recommend: ['Node.js', 'css', 'html']
+# 设置关键词并设置顺序
+recommend: ['Node.js', 'css', 'html', 1]
+---
+```
+:::
+
+| 手动设置顺序                                                            | 隐藏                                                                    | 自定义关联 |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ---------- |
+| ![](https://img.cdn.sugarat.top/mdImg/MTY3NzI0NTYyNDEyOA==677245624128) | ![](https://img.cdn.sugarat.top/mdImg/MTY3NzI0NjQ2NzIyNA==677246467224) |            |
+
 
 ### publish
 * type: `false`

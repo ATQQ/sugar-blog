@@ -28,21 +28,25 @@ const docs = useArticles()
 
 const route = useRoute()
 
-function getRecommendCategory(page?: Theme.PageData) {
+function getRecommendCategory(page?: Theme.PageData): string[] {
   if (!page)
-    return ''
+    return []
   const { meta } = page
   if (Array.isArray(meta.recommend)) {
-    return meta.recommend[0]
+    return meta.recommend.filter(v => typeof v === 'string') as string[]
   }
   if (typeof meta.recommend === 'string') {
-    return meta.recommend
+    return [meta.recommend]
   }
-  return ''
+  return []
 }
 
 function getRecommendValue(page?: Theme.PageData) {
-  return Array.isArray(page?.meta?.recommend) ? page.meta.recommend[1] : page?.meta.recommend
+  return Array.isArray(page?.meta?.recommend) ? page.meta.recommend[page.meta.recommend.length - 1] : page?.meta.recommend
+}
+
+function hasIntersection(arr1: any[], arr2: any[]) {
+  return arr1.some(item => arr2.includes(item))
 }
 
 const recommendList = computed(() => {
@@ -54,9 +58,9 @@ const recommendList = computed(() => {
     .map(v => ({ ...v, route: withBase(v.route) }))
     .filter(
       (v) => {
-        // 筛选出同类别
-        if (currentRecommendCategory) {
-          return currentRecommendCategory === getRecommendCategory(v)
+        // 筛选出类别有交集的
+        if (currentRecommendCategory.length) {
+          return hasIntersection(currentRecommendCategory, getRecommendCategory(v))
         }
         // 如果没有自定义归类则保持原逻辑
         // 过滤出公共路由前缀

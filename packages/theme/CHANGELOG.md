@@ -4,7 +4,8 @@
 
 ### Patch Changes
 
-- feat: 支持调整阅读时间分析组件位置，详见 `global.article` 配置
+- feat: 支持调整阅读时间分析组件位置，详见全局配置 `article` 属性
+- feat: 左侧推荐列表可以自定义关联关键词，详见文章配置 `recommend` 属性
 
 | top(原) | inline(新) | newLine(新) |
 | ------- | ---------- | ----------- |
