@@ -5,6 +5,7 @@ import { ElButton, ElLink } from 'element-plus'
 import { formatShowDate } from '../utils/client'
 import { useArticles, useBlogConfig } from '../composables/config/blog'
 import { recommendSVG } from '../constants/svg'
+import type { Theme } from '../composables/config/index'
 
 const { recommend: _recommend } = useBlogConfig()
 
@@ -27,14 +28,36 @@ const docs = useArticles()
 
 const route = useRoute()
 
+function getRecommendCategory(page?: Theme.PageData) {
+  if (!page)
+    return ''
+  const { meta } = page
+  if (Array.isArray(meta.recommend)) {
+    return meta.recommend[0]
+  }
+  if (typeof meta.recommend === 'string') {
+    return meta.recommend
+  }
+  return ''
+}
+
+function getRecommendValue(page?: Theme.PageData) {
+  return Array.isArray(page?.meta?.recommend) ? page.meta.recommend[1] : page?.meta.recommend
+}
+
 const recommendList = computed(() => {
   // 中文支持
   const paths = decodeURIComponent(route.path).split('/')
-
+  const currentPage = docs.value.find(v => isCurrentDoc(v.route))
+  const currentRecommendCategory = getRecommendCategory(currentPage)
   const origin = docs.value
     .map(v => ({ ...v, route: withBase(v.route) }))
     .filter(
       (v) => {
+        // 筛选出同类别
+        if (currentRecommendCategory) {
+          return currentRecommendCategory === getRecommendCategory(v)
+        }
         // 如果没有自定义归类则保持原逻辑
         // 过滤出公共路由前缀
         // 限制为同路由前缀
@@ -56,10 +79,13 @@ const recommendList = computed(() => {
     // 自定义过滤
     .filter(v => recommend.value?.filter?.(v) ?? true)
 
-  const topList = origin.filter(v => v.meta?.recommend)
-  topList.sort((a, b) => Number(a.meta.recommend) - Number(b.meta.recommend))
+  const topList = origin.filter((v) => {
+    const value = getRecommendValue(v)
+    return typeof value === 'number'
+  })
+  topList.sort((a, b) => Number(getRecommendValue(a)) - Number(getRecommendValue(b)))
 
-  const normalList = origin.filter(v => !v.meta?.recommend)
+  const normalList = origin.filter(v => typeof getRecommendValue(v) !== 'number')
 
   // 排序
   const sortMode = recommend.value?.sort ?? 'date'

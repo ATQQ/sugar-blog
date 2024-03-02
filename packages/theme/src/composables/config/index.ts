@@ -66,7 +66,7 @@ export namespace Theme {
     /**
      * 手动控制相关文章列表的顺序
      */
-    recommend?: number | false
+    recommend?: number | false | string | [string, number]
     /**
      * TODO: 待开发
      * 时间线
