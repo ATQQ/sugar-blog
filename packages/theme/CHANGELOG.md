@@ -1,19 +1,30 @@
 # @sugarat/theme
 
+## 0.2.24
+
+### Patch Changes
+
+- feat: 支持调整阅读时间分析组件位置，详见 `global.article` 配置
+
+| top(原) | inline(新) | newLine(新) |
+| ------- | ---------- | ----------- |
+|  ![](https://img.cdn.sugarat.top/mdImg/sugar/21aa2571b60f76e7401b66af851009bb)       |  ![](https://img.cdn.sugarat.top/mdImg/sugar/5da6e5e56bde48265e706bc004e2ad41)          | ![](https://img.cdn.sugarat.top/mdImg/sugar/50e9ec84b37af64f723c3b477b99283a)            |
+
 ## 0.2.23
 
 ### Patch Changes
 
 - fix: 左侧推荐列表在很多文章时，首次展示页码不正确
 - feat: 兼容 cover 指向非public 目录文件封面展示
+
 ```md
 ---
 cover: /abc.png
 ---
+
 # 标题
 
 <img src="./abc.png" style="display: none;"/>
-
 ```
 
 ## 0.2.22

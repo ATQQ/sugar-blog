@@ -11,19 +11,33 @@ tag: 日志
 升级主题，原项目执行如下指令即可
 
 :::code-group
+
 ```sh [pnpm]
 pnpm add @sugarat/theme@latest
 
 # 更新 vitepress 版本（通常安装最新的即可，主题包每次更新不出意外都会使用最新的VitePress）
 pnpm add vitepress@latest
 ```
+
 ```sh [bun]
 bun update @sugarat/theme
 
 # 更新 vitepress 版本（通常安装最新的即可，主题包每次更新不出意外都会使用最新的VitePress）
 bun install vitepress@latest
 ```
+
 :::
+
+## 0.2.24 (2024/03/02)
+
+### Patch Changes
+
+- feat: 支持调整阅读时间分析组件位置，详见 `global.article` 配置
+
+| top(原) | inline(新) | newLine(新) |
+| ------- | ---------- | ----------- |
+|  ![](https://img.cdn.sugarat.top/mdImg/sugar/21aa2571b60f76e7401b66af851009bb)       |  ![](https://img.cdn.sugarat.top/mdImg/sugar/5da6e5e56bde48265e706bc004e2ad41)          | ![](https://img.cdn.sugarat.top/mdImg/sugar/50e9ec84b37af64f723c3b477b99283a)            |
+
 
 ## 0.2.23 (2024/02/27)
 
@@ -31,6 +45,7 @@ bun install vitepress@latest
 
 - fix: 左侧推荐列表在很多文章时，首次展示页码不正确
 - feat: 兼容 cover 指向非public 目录文件封面展示
+
 ```md
 ---
 cover: /abc.png
@@ -97,7 +112,6 @@ cover: /abc.png
   - vitepress-plugin-rss@0.2.1
   - vitepress@1.0.0-rc.36
 
-
 ## 0.2.15 (2024/01/03)
 
 ### Patch Changes
@@ -105,7 +119,7 @@ cover: /abc.png
 - fix: recommend active error in index.md
 - fix: error in coverImgTransform function
 - feat: support for customizing docMeta insert position
-- feat: 内置 markdown-it-task-checkbox 插件 
+- feat: 内置 markdown-it-task-checkbox 插件
 
 ## 0.2.14 (2023/12/26)
 
@@ -172,7 +186,7 @@ cover: /abc.png
 ### Patch Changes
 
 - fix: ERR_REQUIRE_ESM
-  - lock vitepress-plugin-mermaid version@2.0.13 
+  - lock vitepress-plugin-mermaid version@2.0.13
 
 ## 0.2.4 (2023/09/30)
 
@@ -247,6 +261,7 @@ cover: /abc.png
 ## 0.1.47 (2023/09/17)
 
 ### Patch Changes
+
 - 内置搜索默认使用 pagefind
 - Updated dependencies
   - vitepress-plugin-pagefind@0.2.9
@@ -257,7 +272,6 @@ cover: /abc.png
 ### Patch Changes
 
 - chore: pagefind 兼容 V1 版本
-
 
 ## 0.1.45 (2023/09/11)
 
@@ -270,6 +284,7 @@ cover: /abc.png
 ### Patch Changes
 
 - fix: 首页背景色失效
+
 ## 0.1.43 (2023/09/10)
 
 ### Patch Changes

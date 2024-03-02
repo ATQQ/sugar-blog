@@ -10,9 +10,11 @@ outline: [2,3]
 ---
 
 # 全局配置
+
 全局配置通常是 添加到 `.vitepress/config.ts`文件中
 
 默认配置如下
+
 ```ts
 import { defineConfig, getThemeConfig } from '@sugarat/theme/node'
 
@@ -23,10 +25,12 @@ export default defineConfig({
   // ...other config
 })
 ```
+
 :::details 我启动时遇到配置方式过期提示？
 ![](https://img.cdn.sugarat.top/mdImg/MTY3OTIxNDY5MjE3NQ==679214692175)
 
 只需动动手指将配置按照如上最新的方式做个替换即可
+
 * 将 `...blogTheme` 改成通过 `extends` 的方式引入
 
 ```ts
@@ -42,6 +46,7 @@ export default defineConfig({
   }
 })
 ```
+
 :::
 
 :::tip
@@ -53,6 +58,7 @@ export default defineConfig({
 本主题的拓展配置都在导出的`getThemeConfig`方法中
 
 下面是简单示例 **关闭主题自带搜索**
+
 ```ts
 import { defineConfig, getThemeConfig } from '@sugarat/theme/node'
 
@@ -65,11 +71,13 @@ export default defineConfig({
   // ...other config
 })
 ```
+
 ![](https://img.cdn.sugarat.top/mdImg/MTY3OTEyMjg5Nzc1Mg==679122897752)
 
 下面开始详细介绍 [Theme.BlogConfig](https://github.com/ATQQ/sugar-blog/blob/255c4b1e6a85a529be3a72c88e365077e067ecba/packages/theme/src/composables/config/index.ts#L69-L137)
 
 ## author
+
 * Type: `string`
 
 设置文章默认的作者名字，优先级低于[单独在文章中设置](./frontmatter.md#author)的情况
@@ -83,6 +91,7 @@ const blogTheme = getThemeConfig({
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkxMzUxNzQxMg==674913517412)
 
 ## hotArticle
+
 用于控制首页右侧的精选文章内容，其中精选的文章由 [frontmatter: sticky](./frontmatter.md#sticky) 进行控制
 
 ::: code-group
@@ -130,6 +139,7 @@ sticky: 1
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkxNzkzMjY5Nw==674917932697)
 
 ## home
+
 用于设置首页的自定义内容
 ::: code-group
 
@@ -177,17 +187,21 @@ interface HomeBlog {
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMDIwMzE5MQ==674920203192)
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY5NjE1NTk3MjkxMQ==696155972911)
+
 ## search
+
 * Type: `boolean | 'pagefind' | Object`
 * Default: `true`
 
 控制是否启用主题自带的搜索功能（简化版的[pagefind](https://pagefind.app/)）
 :::code-group
+
 ```ts [关闭搜索]
 const blogTheme = getThemeConfig({
   search: false
 })
 ```
+
 ```ts [修改搜索文案]
 const blogTheme = getThemeConfig({
   search: {
@@ -198,6 +212,7 @@ const blogTheme = getThemeConfig({
   }
 })
 ```
+
 ```ts [type]
 type SearchConfig =
     | boolean
@@ -214,8 +229,8 @@ type SearchConfig =
       mode?: boolean | 'pagefind'
     }
 ```
-:::
 
+:::
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY3OTEyMjg5Nzc1Mg==679122897752)
 
@@ -244,9 +259,11 @@ export default defineConfig({
 ![](https://img.cdn.sugarat.top/mdImg/MTY4MjE3NDYxOTczMA==682174619730)
 
 ### 全文搜索 - pagefind
+
 开启全文搜索（基于 [pagefind](https://pagefind.app/) 实现）
 
 :::code-group
+
 ```ts [demo1]
 const blogTheme = getThemeConfig({
   search: 'pagefind'
@@ -264,6 +281,7 @@ const blogTheme = getThemeConfig({
   }
 })
 ```
+
 :::
 
 :::tip
@@ -276,7 +294,6 @@ const blogTheme = getThemeConfig({
 :::
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY3OTEyMzQ0NDAwOA==679123444008)
-
 
 如果需要自定义更多的内容可以使用独立的插件 [vitepress-plugin-pagefind](https://github.com/ATQQ/sugar-blog/blob/master/packages/vitepress-plugin-pagefind/README-zh.md)
 
@@ -312,9 +329,11 @@ export default defineConfig({
   },
 })
 ```
+
 :::
 
 ### 全文搜索 - algolia
+
 当然也推荐大家接入[algolia](https://vitepress.dev/guide/theme-search)使用，申请教程可以参考 [博客优化之开启 Algolia 全文搜索](https://github.com/mqyqingfeng/Blog/issues/267)
 
 ```ts
@@ -342,6 +361,7 @@ export default defineConfig({
 如下接入步骤
 
 ::: code-group
+
 ```sh [① 安装必要依赖]
 pnpm add vitepress-plugin-search markdown-it flexsearch -D
 ```
@@ -356,12 +376,14 @@ export default defineConfig({
   }
 })
 ```
+
 :::
 
 ## comment
+
 配置文章的评论，使用 [giscus](https://giscus.app/zh-CN)（由 GitHub Discussions 驱动的评论系统）
 
-访问 https://giscus.app/zh-CN 获取下述的参数
+访问 <https://giscus.app/zh-CN> 获取下述的参数
 
 ::: code-group
 
@@ -435,6 +457,7 @@ interface GiscusConfig {
 ![](https://img.cdn.sugarat.top/mdImg/sugar/4f5883d87e53fbea63b9231beed0d52f)
 
 ## recommend
+
 * Type: `false | RecommendArticle`
 
 用于控制推荐文章的展示卡片
@@ -503,6 +526,7 @@ interface RecommendArticle {
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMTI2MDQyNQ==674921260425)
 
 设置为 false 时，不展示
+
 ```ts
 const blogTheme = getThemeConfig({
   recommend: false
@@ -518,11 +542,13 @@ const blogTheme = getThemeConfig({
   }
 })
 ```
+
 ![](https://img.cdn.sugarat.top/mdImg/MTY5MTIxODc4NDYzNw==691218784637)
 
 通过 `sort` 属性可以自定义排序规则，默认按照时间排序`date`，例如按照文件名排序
 
 :::code-group
+
 ```ts [文件名]
 const blogTheme = getThemeConfig({
   recommend: {
@@ -540,13 +566,16 @@ const blogTheme = getThemeConfig({
   }
 })
 ```
+
 :::
 
 ## article
+
 设置文章全局相关能力
 ::: code-group
 
 ```ts [default]
+// 内置默认配置如下
 const blogTheme = getThemeConfig({
   article: {
     /**
@@ -556,7 +585,11 @@ const blogTheme = getThemeConfig({
     /**
      * 是否隐藏文章页的封面展示
      */
-    hiddenCover: false
+    hiddenCover: false,
+    /**
+     * 阅读时间分析展示位置
+     */
+    readingTimePosition: 'inline'
   }
 })
 ```
@@ -564,6 +597,11 @@ const blogTheme = getThemeConfig({
 ```ts [type]
 interface ArticleConfig {
   readingTime?: boolean
+  /**
+   * 阅读时间分析展示位置
+   * @default 'inline'
+   */
+  readingTimePosition?: 'inline' | 'newLine' | 'top'
   hiddenCover?: boolean
 }
 ```
@@ -574,17 +612,24 @@ interface ArticleConfig {
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY4MjE3NDAzNzMxMw==682174037313)
 
+不同配置效果
+| top                                                                           | inline                                                                        | newLine                                                                       |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| ![](https://img.cdn.sugarat.top/mdImg/sugar/21aa2571b60f76e7401b66af851009bb) | ![](https://img.cdn.sugarat.top/mdImg/sugar/5da6e5e56bde48265e706bc004e2ad41) | ![](https://img.cdn.sugarat.top/mdImg/sugar/50e9ec84b37af64f723c3b477b99283a) |
+
 ## srcDir
+
 * Type: `string`
 * Default: `.`
 
 相对于项目根目录，文章所在位置，同 [App Configs #srcdir](https://vitepress.dev/config/app-configs#srcdir)
 
-**通常情况下无需设置**，默认从 CLI 指令取值 
+**通常情况下无需设置**，默认从 CLI 指令取值
 
 例如 `vitepress dev docs`，取值即为`docs`
 
 等价于
+
 ```ts
 const blogTheme = getThemeConfig({
   srcDir: './docs'
@@ -592,6 +637,7 @@ const blogTheme = getThemeConfig({
 ```
 
 ## alert
+
 设置一个全局的提示弹窗 (由 [el-alert](https://element-plus.gitee.io/zh-CN/component/alert.html) 驱动)
 
 ::: code-group
@@ -637,6 +683,7 @@ interface Alert {
   html?: string
 }
 ```
+
 :::
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDk5MzQwNTQwOA==674993405408)
@@ -648,7 +695,6 @@ interface Alert {
 设置一个全局的公告弹窗，支持设置图片，文字，按钮（[el-button](https://element-plus.gitee.io/zh-CN/component/button.html)）跳链
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY3NDk5NDY3Nzc5NQ==674994677795)
-
 
 ::: code-group
 
@@ -750,15 +796,16 @@ export namespace BlogPopover {
   export type Value = Title | Text | Image | Button
 }
 ```
+
 :::
 
 公告图标也可使用 `icon`, `closeIcon` 进行自定义
 
 ## friend
+
 用于设置首页展示的友链信息
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY5MzMxODIxNDY0Mg==693318214642)
-
 
 ::: code-group
 
@@ -817,6 +864,7 @@ interface BlogConfig {
   friend?: FriendLink[] | FriendConfig
 }
 ```
+
 :::
 
 同时也支持设置logo `alt` 信息（默认取 nickname）
@@ -868,6 +916,7 @@ const blogTheme = getThemeConfig({
 ```
 
 ## authorList
+
 用于设置文章页作者信息跳转相关信息，默认情况下`author`仅做展示
 
 设置这个列表后，作者信息如果匹配上，即可跳转
@@ -895,10 +944,11 @@ interface AuthorInfo {
   url: string
 }
 ```
+
 :::
 
-
 ## blog
+
 * Type: `boolean`
 * Default: `true`
 
@@ -936,6 +986,7 @@ hero:
 ![](https://img.cdn.sugarat.top/mdImg/MTY3NzE2Mjk1NzczNw==677162957737)
 
 ## RSS
+
 * Type：`RSSOptions`
 
 开启 RSS 支持，自动生成 `feed.rss` 文件
@@ -960,6 +1011,7 @@ const blogTheme = getThemeConfig({
   RSS
 })
 ```
+
 ```ts [example2 复杂配置]
 import type { Theme } from '@sugarat/theme'
 
@@ -1069,11 +1121,13 @@ interface FeedOptions {
 :::
 
 ## themeColor
+
 * Type: `ThemeColor`
 
 用于设置博客整体的主题色，内置了多套（从 `VP` 和 `Element` 移植的主题色）
 
 ::: code-group
+
 ```ts [default]
 const blogTheme = getThemeConfig({
   themeColor: 'vp-default'
@@ -1089,6 +1143,7 @@ const blogTheme = getThemeConfig({
 ```ts [type]
 type ThemeColor = 'vp-default' | 'vp-green' | 'vp-yellow' | 'vp-red' | 'el-blue' | 'el-yellow' | 'el-green' | 'el-red'
 ```
+
 :::
 
 |                               vp-default                                |                                vp-green                                 |                                 el-blue                                 |
@@ -1098,6 +1153,7 @@ type ThemeColor = 'vp-default' | 'vp-green' | 'vp-yellow' | 'vp-red' | 'el-blue'
 <ChangeThemeDemo />
 
 ## footer
+
 * Type: `Footer | Footer[]`
 
 设置首页页脚的内容（可用于设置版权，备案信息，自定义内容等）
@@ -1151,6 +1207,7 @@ interface Footer {
   }
 }
 ```
+
 :::
 
 下面是一个较完整例子
@@ -1175,6 +1232,7 @@ const blogTheme = getThemeConfig({
 ```
 
 不想显示主题版本也可主动关闭(不过还是希望大家展示 😄)
+
 ```ts
 const blogTheme = getThemeConfig({
   footer: {
@@ -1237,7 +1295,8 @@ const blogTheme = getThemeConfig({
 
 ## docMetaInsert
 
-主要是指 
+主要是指
+
 * `docMetaInsertSelector`：可配配置 CSS 选择器 (`querySelector` 可解析即可)
   * type: `string`
   * default: `'h1'`
@@ -1281,6 +1340,7 @@ const blogTheme = getThemeConfig({
 ![](https://img.cdn.sugarat.top/mdImg/MTcwNDM0NjAxNjg3NQ==704346016875)
 
 ## backToTop
+
 设置回到顶部，默认开启
 
 * type: `boolean|BackToTop`
@@ -1289,6 +1349,7 @@ const blogTheme = getThemeConfig({
 ![](https://img.cdn.sugarat.top/mdImg/sugar/258187044dcf166044e722f879317e14)
 
 :::code-group
+
 ```ts [example]
 const blogTheme = getThemeConfig({
   backToTop: true
@@ -1303,6 +1364,7 @@ const blogTheme = getThemeConfig({
   }
 })
 ```
+
 ```ts [type]
 interface BackToTop {
   /**
@@ -1318,4 +1380,5 @@ interface BackToTop {
   icon?: string
 }
 ```
+
 :::

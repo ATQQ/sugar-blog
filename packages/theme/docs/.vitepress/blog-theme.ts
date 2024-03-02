@@ -13,6 +13,13 @@ const RSS: Theme.RSSOptions = {
 
 export const blogTheme = getThemeConfig({
   RSS,
+  authorList: [
+    {
+      nickname: '粥里有勺糖',
+      url: 'https://sugarat.top/aboutme.html',
+      des: '你的指尖,拥有改变世界的力量'
+    }
+  ],
   recommend: {
     nextText: '下一页',
     sort(a, b) {

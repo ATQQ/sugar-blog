@@ -178,6 +178,11 @@ export namespace Theme {
 
   export interface ArticleConfig {
     readingTime?: boolean
+    /**
+     * 阅读时间分析展示位置
+     * @default 'inline'
+     */
+    readingTimePosition?: 'inline' | 'newLine' | 'top'
     hiddenCover?: boolean
   }
   export interface Alert {

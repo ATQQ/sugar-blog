@@ -10,7 +10,10 @@ sidebar: false
 * [ ] 左侧推荐列表可以自定义
 * [ ] 文章支持短链
 * [ ] 时区问题（对齐 VitePress默认逻辑），同时支持自定义时区（引入第三方时间处理库）
-* [ ] pagefind 支持跳转目录
+* [ ] pagefind 系列优化
+  * [ ] 支持跳转目录
+  * [ ] 结果优化，支持预览
+* [ ] 首页独立BG图，参考 [友人Aの博客](http://niubin.site/)
 * 文档
   * [ ] VitePress 资源推荐
   * [ ] github pages example
@@ -20,14 +23,16 @@ sidebar: false
 ## 已完成
 
 近期完成：
-* [x] 左侧推荐列表在很多文章时，首次展示页码不正确
-* [x] 兼容 cover 指向非public 目录文件封面展示 
+
+* [x] 阅读时间分析支持手动设置位置
+* [x] 左侧推荐列表在很多文章时，首次展示页码不正确。
+* [x] 兼容 cover 指向非public 目录文件封面展示。
 * [x] 友链列表实现调整
-* [x] 内置高频使用的 markdown插件，参考 https://vitepress.yiov.top/plugin.html
+* [x] 内置高频使用的 markdown插件，参考 <https://vitepress.yiov.top/plugin.html>
 * [x] SSG 生成内容优化
 
-
 :::details 更多归档
+
 * [x] 流程图配置构建无效
 * [x] 文章页支持快速回到顶部功能
 * [x] 公告（支持：自动收起移动端，自定义图标）
@@ -50,7 +55,6 @@ sidebar: false
 * [x] 移动端支持头像展示（可关闭）
 * [x] pagefind search error
 :::
-
 
 ## 规划&反馈&建议&优化
 
