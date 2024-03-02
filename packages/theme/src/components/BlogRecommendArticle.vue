@@ -33,12 +33,15 @@ const recommendList = computed(() => {
 
   const origin = docs.value
     .map(v => ({ ...v, route: withBase(v.route) }))
-    // 过滤出公共路由前缀
-    // 限制为同路由前缀
     .filter(
-      v =>
-        v.route.split('/').length === paths.length
+      (v) => {
+        // 如果没有自定义归类则保持原逻辑
+        // 过滤出公共路由前缀
+        // 限制为同路由前缀
+        return v.route.split('/').length === paths.length
         && v.route.startsWith(paths.slice(0, paths.length - 1).join('/'))
+      }
+
     )
     // 过滤出带标题的
     .filter(v => !!v.meta.title)
@@ -50,6 +53,7 @@ const recommendList = computed(() => {
     )
     // 过滤掉不需要展示的
     .filter(v => v.meta.recommend !== false)
+    // 自定义过滤
     .filter(v => recommend.value?.filter?.(v) ?? true)
 
   const topList = origin.filter(v => v.meta?.recommend)
@@ -104,19 +108,10 @@ const showChangeBtn = computed(() => {
 })
 
 onMounted(() => {
-  const checkHaveActive = () => {
-    const have = currentWikiData.value.some(v => isCurrentDoc(v.route))
-    if (have) {
-      return
-    }
-    if (currentPage.value >= changePage()) {
-      return
-    }
-
-    // TODO：存在理论闪烁情况，未来优化
-    setTimeout(checkHaveActive)
-  }
-  checkHaveActive()
+  // 更新当前页，确保访问页面在列表中
+  const currentPageIndex = recommendList.value.findIndex(v => isCurrentDoc(v.route))
+  const currentPageNum = Math.floor(currentPageIndex / pageSize.value) + 1
+  currentPage.value = currentPageNum
 })
 </script>
 
