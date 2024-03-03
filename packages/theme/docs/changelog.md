@@ -28,7 +28,7 @@ bun install vitepress@latest
 
 :::
 
-## 0.2.24 (2024/03/02)
+## 0.2.24 (2024/03/03)
 
 ### Patch Changes
 
@@ -39,6 +39,9 @@ bun install vitepress@latest
 | ------- | ---------- | ----------- |
 |  ![](https://img.cdn.sugarat.top/mdImg/sugar/21aa2571b60f76e7401b66af851009bb)       |  ![](https://img.cdn.sugarat.top/mdImg/sugar/5da6e5e56bde48265e706bc004e2ad41)          | ![](https://img.cdn.sugarat.top/mdImg/sugar/50e9ec84b37af64f723c3b477b99283a)            |
 
+| 手动设置顺序                                                            | 隐藏                                                                    | 自定义关联                                                                    |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| ![](https://img.cdn.sugarat.top/mdImg/MTY3NzI0NTYyNDEyOA==677245624128) | ![](https://img.cdn.sugarat.top/mdImg/MTY3NzI0NjQ2NzIyNA==677246467224) | ![](https://img.cdn.sugarat.top/mdImg/sugar/21db9f87e7b64958dad2c24ed94e40d3) |
 
 ## 0.2.23 (2024/02/27)
 
