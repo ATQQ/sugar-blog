@@ -31,6 +31,7 @@ hidden: true
 * [前端技术文章](https://fed.chanceyu.com/) - 根据 RSS 订阅源抓取最新前端技术文章
 * [frontendfoc](https://frontendfoc.us/issues) - 🚀 Frontend **Focus**
 * [JavaScript Weekly](https://javascriptweekly.com/issues) - A newsletter of JavaScript articles, news and cool projects
+* [nodejs Weekly](https://nodeweekly.com/issues) - A free, once–weekly e-mail round-up of Node.js news and articles.
 * [ShowMeAI](https://juejin.cn/user/554605767047053/posts) - 为AI硬核资料库(cool)而生
 * [FRE123 技术周刊精选](https://www.fre123.com/weekly) - 前后端技术周刊精选推荐信息流
 
@@ -57,6 +58,7 @@ hidden: true
 
 <!-- TODO：自动生成可翻页目录 -->
 ## 2024
+* [技术视野周刊第75期](./2024-03-03.md)
 * [技术视野周刊第74期](./2024-02-25.md)
 * [技术视野周刊第73期](./2024-02-10.md)
 * [技术视野周刊第72期](./2024-02-03.md)
