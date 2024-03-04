@@ -7,7 +7,7 @@ description: 记录一下每天干的杂事，写的杂七杂八的代码，用�
 
 [[toc]]
 
-## 2023-03-04
+## 2024-03-04
 
 ### 周刊自动化创建工具
 *[@sugarat/cli-plugin-blog@0.0.10](https://www.npmjs.com/package/@sugarat/cli-plugin-blog)*
