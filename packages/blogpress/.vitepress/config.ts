@@ -150,6 +150,12 @@ const blogTheme = getThemeConfig({
         des: '除了coding，我什么都不会',
         avatar: 'https://simonme.netlify.app/black.png',
         url: 'https://simonme.netlify.app/'
+      },
+      {
+        nickname: 'laiky',
+        des: '一名全栈开发工程师，.NET全栈经验',
+        avatar: 'https://img.cdn.sugarat.top/mdImg/sugar/509b6159ec91560d997ca0aa280435e3',
+        url: 'http://llxz.top/'
       }
     ],
     random: true,
