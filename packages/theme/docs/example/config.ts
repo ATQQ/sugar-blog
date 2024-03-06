@@ -50,4 +50,12 @@ export default defineExamples([
     avatar: 'https://mywisteria.ym94.cn/header.jpg',
     nickname: 'Ymri'
   },
+  {
+    cover: 'https://img.cdn.sugarat.top/mdImg/sugar/9386993268a4010fbd4fb9249b876ab2',
+    link: 'http://llxz.top/',
+    name: '赖小栈',
+    desc: '一名全栈开发工程师，.NET全栈经验',
+    avatar: 'https://img.cdn.sugarat.top/mdImg/sugar/509b6159ec91560d997ca0aa280435e3',
+    nickname: 'laiky'
+  },
 ])
