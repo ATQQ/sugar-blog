@@ -7,6 +7,22 @@ description: 记录一下每天干的杂事，写的杂七杂八的代码，用�
 
 [[toc]]
 
+## 2024-03-09
+### 七牛云图床
+*[image-bed-qiniu](https://github.com/ATQQ/image-bed-qiniu/tree/master/packages/client#-%E4%B8%83%E7%89%9B%E4%BA%91oss%E5%9B%BE%E5%BA%8A-)*
+
+* 基于 [UPNG.js](https://github.com/photopea/UPNG.js) 支持 PNG 图片的上传自动压缩
+
+![](https://img.cdn.sugarat.top/mdImg/sugar/727ade06e155fd9541cfcab78bdaab7f)
+
+## 2024-03-05
+### 七牛云图床
+
+*[image-bed-qiniu](https://github.com/ATQQ/image-bed-qiniu/tree/master/packages/client#-%E4%B8%83%E7%89%9B%E4%BA%91oss%E5%9B%BE%E5%BA%8A-)*
+
+* 文案优化
+* 尝试本地压缩部分图片资源
+
 ## 2024-03-04
 
 ### 周刊自动化创建工具
