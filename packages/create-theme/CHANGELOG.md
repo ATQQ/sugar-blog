@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.47
+
+### Patch Changes
+
+- feat: 模板更新
+
 ## 0.0.46
 
 ### Patch Changes

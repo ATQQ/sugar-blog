@@ -1174,7 +1174,7 @@ const blogTheme = getThemeConfig({
 ```ts [type]
 interface Footer {
   /**
-   * 自定义补充信息
+   * 自定义补充信息（支持配置为HTML）
    */
   message?: string | string[]
   /**
@@ -1217,7 +1217,7 @@ interface Footer {
 ```ts
 const blogTheme = getThemeConfig({
   footer: {
-    message: '下面 的内容和图标都是可以修改的噢（当然本条内容也是可以隐藏的）',
+    message: '下面 的内容和图标都是可以修改的噢（当然本条内容也是可以隐藏的，也可以配置为HTML）',
     copyright: 'MIT License | 粥里有勺糖',
     icpRecord: {
       name: '蜀ICP备19011724号',
