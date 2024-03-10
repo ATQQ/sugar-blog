@@ -445,7 +445,7 @@ export namespace Theme {
 
   export interface Footer {
     /**
-     * 自定义补充信息
+     * 自定义补充信息（支持配置为HTML）
      */
     message?: string | string[]
     /**
