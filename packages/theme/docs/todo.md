@@ -16,13 +16,13 @@ sidebar: false
 * [ ] 首页独立BG图，参考 [友人Aの博客](http://niubin.site/)
 * 文档
   * [ ] VitePress 资源推荐
-  * [ ] github pages example
   * [ ] VitePress 常见问题解答（deadLink，markdown，frontmatter）
 * [ ] 主题部分能力分离为插件（公告，评论，回到顶部）
 
 ## 已完成
 
 近期完成：
+* [x] github pages example
 * [x] 左侧推荐列表可以自定义
 * [x] 阅读时间分析支持手动设置位置
 * [x] 左侧推荐列表在很多文章时，首次展示页码不正确。

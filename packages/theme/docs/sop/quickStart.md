@@ -13,7 +13,6 @@ descriptionHTML: '
 tag:
  - SOP
 top: 1
-sidebar: false
 ---
 
 # 快速上手
@@ -178,3 +177,4 @@ bun install vitepress@latest
 * [主题配置：首页&文章](./../config/frontmatter.md) - 主题提供的一些 `frontmatter`
 * [主题配置：全局](./../config/global.md) - 主题提供的额外能力
 * [主题配置：样式](./../config/style.md) - 自定义博客样式介绍
+* [使用 GitHub/Gitee Pages 部署博客](./gh-pages.md)

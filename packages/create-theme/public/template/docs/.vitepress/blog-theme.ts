@@ -27,6 +27,7 @@ const blogTheme = getThemeConfig({
 
   // 页脚
   footer: {
+    // message 字段支持配置为HTML内容，配置多条可以配置为数组
     // message: '下面 的内容和图标都是可以修改的噢（当然本条内容也是可以隐藏的）',
     copyright: 'MIT License | 粥里有勺糖',
     // icpRecord: {
