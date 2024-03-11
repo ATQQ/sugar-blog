@@ -28,6 +28,14 @@ bun install vitepress@latest
 
 :::
 
+## 0.2.25 (2024/03/11)
+
+### Patch Changes
+
+- fix: showSelf 渲染异常
+- Updated dependencies
+  - vitepress-plugin-pagefind@0.2.13
+
 ## 0.2.24 (2024/03/03)
 
 ### Patch Changes
