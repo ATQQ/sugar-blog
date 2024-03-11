@@ -1,5 +1,11 @@
 # vitepress-plugin-pagefind
 
+## 0.2.13
+
+### Patch Changes
+
+- fix: 与其它库 build 时存在冲突
+
 ## 0.2.12
 
 ### Patch Changes

@@ -11,9 +11,9 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
-    "@sugarat/theme": "^0.2.24",
+    "@sugarat/theme": "^0.2.25",
     "element-plus": "^2.5.3",
-    "vue": "3.4.15"
+    "vue": "3.4.21"
   },
   "directories": {
     "doc": "docs"

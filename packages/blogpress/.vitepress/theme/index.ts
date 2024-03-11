@@ -11,6 +11,7 @@ export default {
   ...BlogTheme,
   enhanceApp: (ctx: EnhanceAppContext) => {
     const { app } = ctx
+    BlogTheme?.enhanceApp?.(ctx)
     app.component('redirectBtn', redirectBtn)
     app.component('solve', Solve)
 
