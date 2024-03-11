@@ -140,6 +140,8 @@ const showChangeBtn = computed(() => {
 onMounted(() => {
   // 更新当前页，确保访问页面在列表中
   const currentPageIndex = recommendList.value.findIndex(v => isCurrentDoc(v.route))
+  if (currentPageIndex === -1)
+    return
   const currentPageNum = Math.floor(currentPageIndex / pageSize.value) + 1
   currentPage.value = currentPageNum
 })
