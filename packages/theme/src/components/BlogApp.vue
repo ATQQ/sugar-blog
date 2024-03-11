@@ -2,7 +2,7 @@
 import Theme from 'vitepress/theme'
 import { useData } from 'vitepress'
 import { computed } from 'vue'
-import { useOml2d } from '../hooks/oml2d'
+import { useOml2d } from '../hooks/useOml2d'
 import { useBlogThemeMode } from '../composables/config/blog'
 import BlogHomeInfo from './BlogHomeInfo.vue'
 import BlogHomeBanner from './BlogHomeBanner.vue'
@@ -216,4 +216,4 @@ useOml2d()
     width: 100%;
   }
 }
-</style>
+</style>../hooks/useOml2d
