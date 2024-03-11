@@ -419,7 +419,8 @@ export namespace Theme {
     backToTop?: boolean | BackToTop
 
     /**
-     * oh-my-live2d
+     * oh-my-live2d 的 loadOml2d 方法的配置选项
+     * 详见 https://oml2d.com/options/Options.html
      */
     oml2d?: Oml2dOptions
   }
