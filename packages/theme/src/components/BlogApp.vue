@@ -2,6 +2,7 @@
 import Theme from 'vitepress/theme'
 import { useData } from 'vitepress'
 import { computed } from 'vue'
+import { useOml2d } from '../hooks/oml2d'
 import { useBlogThemeMode } from '../composables/config/blog'
 import BlogHomeInfo from './BlogHomeInfo.vue'
 import BlogHomeBanner from './BlogHomeBanner.vue'
@@ -22,6 +23,9 @@ const { frontmatter } = useData()
 const layout = computed(() => frontmatter.value.layout)
 const isBlogTheme = useBlogThemeMode()
 const { Layout } = Theme
+
+// oh-my-live2d 扩展
+useOml2d()
 </script>
 
 <template>
