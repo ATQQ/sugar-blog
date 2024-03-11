@@ -1,5 +1,13 @@
 # @sugarat/theme
 
+## 0.2.25
+
+### Patch Changes
+
+- fix: showSelf 渲染异常
+- Updated dependencies
+  - vitepress-plugin-pagefind@0.2.13
+
 ## 0.2.24
 
 ### Patch Changes
@@ -7,9 +15,9 @@
 - feat: 支持调整阅读时间分析组件位置，详见全局配置 `article` 属性
 - feat: 左侧推荐列表可以自定义关联关键词，详见文章配置 `recommend` 属性
 
-| top(原) | inline(新) | newLine(新) |
-| ------- | ---------- | ----------- |
-|  ![](https://img.cdn.sugarat.top/mdImg/sugar/21aa2571b60f76e7401b66af851009bb)       |  ![](https://img.cdn.sugarat.top/mdImg/sugar/5da6e5e56bde48265e706bc004e2ad41)          | ![](https://img.cdn.sugarat.top/mdImg/sugar/50e9ec84b37af64f723c3b477b99283a)            |
+| top(原)                                                                       | inline(新)                                                                    | newLine(新)                                                                   |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| ![](https://img.cdn.sugarat.top/mdImg/sugar/21aa2571b60f76e7401b66af851009bb) | ![](https://img.cdn.sugarat.top/mdImg/sugar/5da6e5e56bde48265e706bc004e2ad41) | ![](https://img.cdn.sugarat.top/mdImg/sugar/50e9ec84b37af64f723c3b477b99283a) |
 
 ## 0.2.23
 
