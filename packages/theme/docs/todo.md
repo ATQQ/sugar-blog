@@ -7,6 +7,8 @@ sidebar: false
 
 ## 正在进行中
 
+* [ ] pagefind插件冲突，水合问题
+* [ ] 博客概览信息（文章数，网站运行天数，字数，访问量等等）
 * [ ] 文章支持短链
 * [ ] 时区问题（对齐 VitePress默认逻辑），同时支持自定义时区（引入第三方时间处理库）
 * [ ] 文章时间：支持选择显示创建时间，而非最后更新时间
@@ -14,22 +16,29 @@ sidebar: false
   * [ ] 支持跳转目录
   * [ ] 结果优化，支持预览
 * [ ] 首页独立BG图，参考 [友人Aの博客](http://niubin.site/)
+* [ ] 公告优化
+  * [ ] 移动端收起自动闪动
+  * [ ] 支持自定义展示策略
+  * [ ] 图片展示优化
+* [ ] 内置看板娘 [oh-my-live2d](https://github.com/oh-my-live2d/oh-my-live2d)
 * 文档
   * [ ] VitePress 资源推荐
   * [ ] VitePress 常见问题解答（deadLink，markdown，frontmatter）
+  * [ ] Layout 插槽用法
 * [ ] 主题部分能力分离为插件（公告，评论，回到顶部）
 
 ## 已完成
 
 近期完成：
+* [x] 问题修复：showSelf
 * [x] github pages example
 * [x] 左侧推荐列表可以自定义
 * [x] 阅读时间分析支持手动设置位置
 * [x] 左侧推荐列表在很多文章时，首次展示页码不正确。
-* [x] 兼容 cover 指向非public 目录文件封面展示。
-* [x] 友链列表实现调整
 
 :::details 更多归档
+* [x] 兼容 cover 指向非public 目录文件封面展示。
+* [x] 友链列表实现调整
 * [x] 内置高频使用的 markdown插件，参考 <https://vitepress.yiov.top/plugin.html>
 * [x] SSG 生成内容优化
 * [x] 流程图配置构建无效
