@@ -6,7 +6,7 @@ import {
   patchOptimizeDeps,
   registerMdPlugins,
 } from './utils/node/mdPlugins'
-import { getArticles, patchVPThemeConfig } from './utils/node/theme'
+import { checkConfig, getArticles, patchVPThemeConfig } from './utils/node/theme'
 import { getVitePlugins, registerVitePlugins } from './utils/node/vitePlugins'
 
 /**
@@ -14,6 +14,9 @@ import { getVitePlugins, registerVitePlugins } from './utils/node/vitePlugins'
  * @param cfg 主题配置
  */
 export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
+  // 配置校验
+  checkConfig(cfg)
+
   // 文章数据
   const pagesData = getArticles(cfg)
   const extraVPConfig: any = {}

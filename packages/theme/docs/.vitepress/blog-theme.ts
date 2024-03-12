@@ -12,6 +12,34 @@ const RSS: Theme.RSSOptions = {
 }
 
 export const blogTheme = getThemeConfig({
+  oml2d: {
+    mobileDisplay: true,
+    models: [
+      {
+        path: 'https://cdn.jsdelivr.net/gh/Eikanya/Live2d-model/Live2D/Senko_Normals/senko.model3.json',
+        scale: 0.08,
+        position: [-30, 0],
+        stageStyle: {
+          width: 220
+        },
+        mobilePosition: [-10, 0],
+        mobileScale: 0.05,
+        mobileStageStyle: {
+          width: 150
+        },
+      }
+    ],
+    tips: {
+      copyTips: {
+        duration: 2000,
+        message: ['复制成功，感谢您的支持！'],
+      },
+      style: {
+        top: '-40px',
+        fontSize: '16px',
+      }
+    }
+  },
   RSS,
   authorList: [
     {

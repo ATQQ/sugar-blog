@@ -137,3 +137,7 @@ export function patchVPThemeConfig(
 
   return vpThemeConfig
 }
+
+export function checkConfig(cfg?: Partial<Theme.BlogConfig>) {
+  // TODO：保留
+}
