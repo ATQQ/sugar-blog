@@ -52,6 +52,13 @@ const blogTheme = getThemeConfig({
     categoryId: 'DIC_kwDODmEcc84COVc6',
     inputPosition: 'top'
   },
+  // oml2d: {
+  //   models: [
+  //     {
+  //       path: 'https://cdn.jsdelivr.net/gh/Eikanya/Live2d-model/Live2D/Senko_Normals/senko.model3.json'
+  //     }
+  //   ]
+  // },
   popover: {
     title: '公告',
     body: [

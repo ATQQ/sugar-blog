@@ -3,6 +3,7 @@ import type { ElButton } from 'element-plus'
 import type { DefaultTheme } from 'vitepress'
 import type { RSSOptions } from 'vitepress-plugin-rss'
 import type { Mapping, Repo } from '@giscus/vue'
+import type { Options as Oml2dOptions } from 'oh-my-live2d'
 
 type RSSPluginOptions = RSSOptions
 
@@ -416,6 +417,12 @@ export namespace Theme {
      * @default true
      */
     backToTop?: boolean | BackToTop
+
+    /**
+     * oh-my-live2d 的 loadOml2d 方法的配置选项
+     * 详见 https://oml2d.com/options/Options.html
+     */
+    oml2d?: Oml2dOptions
   }
 
   export interface BackToTop {
