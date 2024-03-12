@@ -1,5 +1,5 @@
 ---
-description: 详细介绍主题提供的组件能力
+description: 详细介绍主题内置提供的全局组件，三方插件，三方组件等能力。
 title: 🔧 主题配置 - 组件能力
 recommend: 5
 top: 5
@@ -10,6 +10,37 @@ tag:
 # 组件配置
 
 部分内置组件（插件），来源 [vitepress.yiov.top](https://vitepress.yiov.top/plugin.html) 推荐
+
+## oml2d - 看板娘集成
+* Type：[oml2dOptions](https://oml2d.com/options/Options.html)
+
+为网站提供一个 Live2D 看板组件。
+
+:::tip 一点说明
+通过内置 [oh-my-live2d](https://oml2d.com) 实现, 可以通过 `oml2d` 选项配置。
+
+通过这个能力可以快速加入并定制属于自己的看板娘, 开启只需要为其传递一个 [配置选项](https://oml2d.com/options/Options.html) 即可
+:::
+
+以下是一个简单的使用示例，当模型加载成功时它将出现在您网站的左下角。
+
+```ts
+const blogTheme = getThemeConfig({
+  oml2d: {
+    models: [
+      {
+        path: 'https://registry.npmmirror.com/oml2d-models/latest/files/models/Senko_Normals/senko.model3.json'
+      }
+    ]
+  }
+})
+```
+效果图如下
+
+![](https://loclink-1259720482.cos.ap-beijing.myqcloud.com/image/%E5%BD%95%E5%B1%8F2024-03-11%2023.51.51.gif)
+
+之后您还可以前往[配置选项](https://oml2d.com/options/Options.html)查阅更多自定义内容
+
 ## task-checkbox
 * Type: `boolean | TaskCheckbox`
 

@@ -1,5 +1,11 @@
 # @sugarat/theme
 
+## 0.2.26
+
+### Patch Changes
+
+- feat: 内置 oml2d 看板娘
+
 ## 0.2.25
 
 ### Patch Changes

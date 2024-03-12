@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.2.24） ⏰ 2024/03/03：新功能：支持调整阅读时间分析组件位置；左侧推荐列表可以自定义关联关键词
+description: 最近更新（v0.2.26） ⏰ 2024/03/12：新功能：内置看板娘组件；一系列反馈问题修复
 author: 粥里有勺糖
 top: 2
 tag: 日志
@@ -27,6 +27,11 @@ bun install vitepress@latest
 ```
 
 :::
+## 0.2.26 (2024/03/12)
+
+### Patch Changes
+
+- feat: 内置 [oml2d](./config/component.md#oml2d-%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%9B%86%E6%88%90) 看板娘
 
 ## 0.2.25 (2024/03/11)
 
