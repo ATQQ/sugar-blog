@@ -17,37 +17,8 @@ export const blogTheme = getThemeConfig({
     models: [
       {
         path: 'https://cdn.jsdelivr.net/gh/Eikanya/Live2d-model/Live2D/Senko_Normals/senko.model3.json',
-        scale: 0.08,
-        position: [-30, 0],
-        stageStyle: {
-          width: 220
-        },
-        mobilePosition: [-10, 0],
-        mobileScale: 0.05,
-        mobileStageStyle: {
-          width: 150
-        },
       }
     ],
-    tips: {
-      copyTips: {
-        duration: 2000,
-        message: ['复制成功，感谢您的支持！'],
-      },
-      style: {
-        top: '-50px',
-        fontSize: '14px',
-        padding: '10px',
-        width: '200px'
-      },
-      mobileStyle: {
-        top: '-70px',
-        left: '80px',
-        fontSize: '12px',
-        padding: '4px',
-        width: '100px'
-      }
-    }
   },
   RSS,
   authorList: [
