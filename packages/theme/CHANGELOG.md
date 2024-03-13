@@ -1,5 +1,11 @@
 # @sugarat/theme
 
+## 0.2.27
+
+### Patch Changes
+
+- chore: oh-my-live2d 依赖升级，添加外部覆盖版本操作引导
+
 ## 0.2.26
 
 ### Patch Changes

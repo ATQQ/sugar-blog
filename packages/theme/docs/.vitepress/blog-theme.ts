@@ -12,6 +12,14 @@ const RSS: Theme.RSSOptions = {
 }
 
 export const blogTheme = getThemeConfig({
+  oml2d: {
+    mobileDisplay: true,
+    models: [
+      {
+        path: 'https://registry.npmmirror.com/oml2d-models/latest/files/models/Senko_Normals/senko.model3.json',
+      }
+    ],
+  },
   RSS,
   authorList: [
     {

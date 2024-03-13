@@ -27,6 +27,7 @@ tag:
 ```ts
 const blogTheme = getThemeConfig({
   oml2d: {
+    mobileDisplay: true,
     models: [
       {
         path: 'https://registry.npmmirror.com/oml2d-models/latest/files/models/Senko_Normals/senko.model3.json'
@@ -41,6 +42,18 @@ const blogTheme = getThemeConfig({
 
 之后您还可以前往[配置选项](https://oml2d.com/options/Options.html)查阅更多自定义内容
 
+:::tip 版本说明
+由于时间原因，主题内置的版本不一定都是最新的，可以通过 `resolutions` 配置指定要使用的版本。
+
+下面是使用示例，配置在 `package.json` 中，其它依赖覆盖版本也是这样操作。
+```json
+{
+  "resolutions": {
+    "oh-my-live2d": "^0.10.0"
+  }
+}
+```
+:::
 ## task-checkbox
 * Type: `boolean | TaskCheckbox`
 

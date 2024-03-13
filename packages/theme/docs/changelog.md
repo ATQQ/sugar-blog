@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.2.26） ⏰ 2024/03/12：新功能：内置看板娘组件；一系列反馈问题修复
+description: 最近更新（v0.2.27） ⏰ 2024/03/13：新功能：内置看板娘组件；一系列反馈问题修复
 author: 粥里有勺糖
 top: 2
 tag: 日志
@@ -25,8 +25,14 @@ bun update @sugarat/theme
 # 更新 vitepress 版本（通常安装最新的即可，主题包每次更新不出意外都会使用最新的VitePress）
 bun install vitepress@latest
 ```
-
 :::
+
+## 0.2.27 (2024/03/13)
+
+### Patch Changes
+
+- chore: oh-my-live2d 依赖升级，添加外部覆盖版本操作引导
+
 ## 0.2.26 (2024/03/12)
 
 ### Patch Changes

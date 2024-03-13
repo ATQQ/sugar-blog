@@ -11,6 +11,7 @@ sidebar: false
 * [ ] 博客概览信息（文章数，网站运行天数，字数，访问量等等）
 * [ ] 文章支持短链
 * [ ] 时区问题（对齐 VitePress默认逻辑），同时支持自定义时区（引入第三方时间处理库）
+  * [ ] 支持显示发布时间后最后修改时间选择
 * [ ] 文章时间：支持选择显示创建时间，而非最后更新时间
 * [ ] pagefind 系列优化
   * [ ] 支持跳转目录
@@ -21,7 +22,6 @@ sidebar: false
   * [ ] 移动端收起自动闪动
   * [ ] 支持自定义展示策略
   * [ ] 图片展示优化
-* [ ] 内置看板娘 [oh-my-live2d](https://github.com/oh-my-live2d/oh-my-live2d)
 * 文档
   * [ ] VitePress 资源推荐
   * [ ] VitePress 常见问题解答（deadLink，markdown，frontmatter）
@@ -31,6 +31,7 @@ sidebar: false
 ## 已完成
 
 近期完成：
+* [x] 内置看板娘 [oh-my-live2d](https://github.com/oh-my-live2d/oh-my-live2d)
 * [x] 问题修复：showSelf，pagefind插件冲突
 * [x] github pages example
 * [x] 左侧推荐列表可以自定义
