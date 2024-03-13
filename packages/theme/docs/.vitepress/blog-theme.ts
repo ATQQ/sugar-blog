@@ -35,8 +35,17 @@ export const blogTheme = getThemeConfig({
         message: ['复制成功，感谢您的支持！'],
       },
       style: {
-        top: '-40px',
-        fontSize: '16px',
+        top: '-50px',
+        fontSize: '14px',
+        padding: '10px',
+        width: '200px'
+      },
+      mobileStyle: {
+        top: '-70px',
+        left: '80px',
+        fontSize: '12px',
+        padding: '4px',
+        width: '100px'
       }
     }
   },
