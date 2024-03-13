@@ -16,7 +16,7 @@ export const blogTheme = getThemeConfig({
     mobileDisplay: true,
     models: [
       {
-        path: 'https://cdn.jsdelivr.net/gh/Eikanya/Live2d-model/Live2D/Senko_Normals/senko.model3.json',
+        path: 'https://registry.npmmirror.com/oml2d-models/latest/files/models/Senko_Normals/senko.model3.json',
       }
     ],
   },
