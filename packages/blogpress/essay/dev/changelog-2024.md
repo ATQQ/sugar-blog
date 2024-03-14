@@ -6,6 +6,28 @@ description: 记录一下每天干的杂事，写的杂七杂八的代码，用�
 记录一下每天干的杂事，写的杂七杂八的代码，用于日后回顾，翻开尘封的记忆。
 
 [[toc]]
+
+## 2024/03/14
+### 七牛云图床
+*[image-bed-qiniu](https://github.com/ATQQ/image-bed-qiniu/tree/master/packages/client#-%E4%B8%83%E7%89%9B%E4%BA%91oss%E5%9B%BE%E5%BA%8A-)*
+
+* fix：压缩后更大，仍使用了压缩的图片
+* feat：查看详情增加压缩率展示
+
+## 2024/03/13
+### 博客主题
+*[@sugarat/theme](https://github.com/ATQQ/sugar-blog/tree/master/packages/theme)*
+
+* 内置开箱即用的看板娘支持（[oh-my-live2d](https://github.com/oh-my-live2d/oh-my-live2d)）
+
+## 2024/03/11
+### 博客主题
+*[@sugarat/theme](https://github.com/ATQQ/sugar-blog/tree/master/packages/theme)*
+
+* fix：主题 `showSelf: false` 失效的问题
+* fix：pagefind 搜索插件 SSR 编译时影响 SVG 图标导入
+
+
 ## 2024-03-10
 ### 博客主题CLI
 *[@sugarat/create-theme](https://github.com/ATQQ/sugar-blog/tree/master/packages/create-theme)*
