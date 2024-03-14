@@ -17,11 +17,10 @@ sidebar: false
   * [ ] 支持跳转目录
   * [ ] 结果优化，支持预览
   * [ ] 搜索关键词没高亮
-* [ ] 首页独立BG图，参考 [友人Aの博客](http://niubin.site/)
+* [ ] 首页独立 BG 图，参考 [友人Aの博客](http://niubin.site/)
 * [ ] 公告优化
   * [ ] 移动端收起自动闪动
   * [ ] 支持自定义展示策略
-  * [ ] 图片展示优化
 * 文档
   * [ ] VitePress 资源推荐
   * [ ] VitePress 常见问题解答（deadLink，markdown，frontmatter）
@@ -32,6 +31,7 @@ sidebar: false
 
 近期完成：
 * [x] 内置看板娘 [oh-my-live2d](https://github.com/oh-my-live2d/oh-my-live2d)
+* [x] 图片展示优化（已补充文档）
 * [x] 问题修复：showSelf，pagefind插件冲突
 * [x] github pages example
 * [x] 左侧推荐列表可以自定义

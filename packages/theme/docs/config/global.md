@@ -801,6 +801,27 @@ export namespace BlogPopover {
 
 公告图标也可使用 `icon`, `closeIcon` 进行自定义
 
+常见问题：**如果希望 2 个图片并排展示**，自定义如下样式实现
+```ts
+const blogTheme = getThemeConfig({
+  popover: {
+    body: [
+      { type: 'text', content: '👇公众号👇---👇 微信 👇' },
+      {
+        type: 'image',
+        src: '二维码1链接',
+        style: 'display: inline-block;width:46%;padding-right:6px'
+      },
+      {
+        type: 'image',
+        src: '二维码2链接',
+        style: 'display: inline-block;width:46%;padding-left:6px'
+      }
+    ],
+  },
+})
+```
+
 ## friend
 
 用于设置首页展示的友链信息
