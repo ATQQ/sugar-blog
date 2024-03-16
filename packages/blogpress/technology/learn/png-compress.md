@@ -3,7 +3,7 @@ tag: 技术笔记
 ---
 # 纯前端实现 PNG 图片压缩 | UPNG.js
 
->在线 Demo 体验地址 → ：
+>**在线 Demo 体验地址 →:** https://demos.sugarat.top/pages/png-compress/
 
 ## 前言
 最近在迭代自己的 [图床](https://imgbed.sugarat.top/) 应用，由于使用时间的累计，存储空间占用越来越大了，在做 Web 应用的时候会随手拿 [tinypng](https://tinypng.com/) 压缩一下图片。
@@ -169,10 +169,16 @@ window.UPNG.encode
 UPNG.encode
 ```
 
-## 体验 demo
-笔者将本节内容整理成了一个 Demo，可以直接在线体验：。
+## 完整 demo
+笔者将本节内容整理成了一个 Demo，可以直接在线体验。
 
+>**在线 Demo 体验地址 →:** https://demos.sugarat.top/pages/png-compress/
+
+大概界面如下（纯血 HTML/CSS/JS，复制粘贴就能运行）
+
+![](https://img.cdn.sugarat.top/mdImg/sugar/5d461c425ea18f501262017bdeca8a9a)
+
+完整源码见：[GitHub:ATQQ/demos - png-compress](https://github.com/ATQQ/demos/tree/main/pages/png-compress)
 
 ## 最后
-
-
+后续将继续学习&探索一下其它格式的图片**纯前端实现**（JPG，GIF，MP4转GIF）。
