@@ -7,11 +7,9 @@ description: 最近在迭代应用的时候用到了 UPNG.js 压缩 PNG 图片�
 >**在线 Demo 体验地址 →:** https://demos.sugarat.top/pages/png-compress/
 
 ## 前言
-最近在迭代自己的 [图床](https://imgbed.sugarat.top/) 应用，由于使用时间的累计，存储空间占用越来越大了，在做 Web 应用的时候会随手拿 [tinypng](https://tinypng.com/) 压缩一下图片。
+最近在迭代自己的 [图床](https://imgbed.sugarat.top/) 应用，由于使用时间的累计，存储空间占用越来越大了，在做 Web 应用的时候会随手拿 [tinypng](https://tinypng.com/) 压缩一下图片。想着给咱图床也加个压缩的功能，这样上传/访问也能省点 💰。
 
 ![](https://img.cdn.sugarat.top/mdImg/sugar/d666613614e04da1e6e135c982cfc42e)
-
-想着给咱图床也加个压缩的功能，这样上传/访问也能省点 💰。
 
 图片类型众多，常用的主要就是`PNG/JPG/GIF`。
 
