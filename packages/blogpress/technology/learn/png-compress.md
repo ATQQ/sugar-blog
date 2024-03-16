@@ -1,5 +1,6 @@
 ---
 tag: 技术笔记
+description: 最近在迭代应用的时候用到了 UPNG.js 压缩 PNG 图片，这里记录分享一下使用经验，并附上完整 Demo。
 ---
 # 纯前端实现 PNG 图片压缩 | UPNG.js
 
@@ -21,13 +22,15 @@ tag: 技术笔记
 ## 如何判断图片是 PNG
 第一步当然是判断图片类型，不然 `UPNG.js` 就不能正常工作咯，通过文件后缀 .png 判断肯定是不靠谱的。
 
-下来搜索了解了一下，可以使用 `魔数` 判断：**一个PNG文件的前8个字节是固定的**。
+搜索了解了一下，可以使用 `魔数` 判断：**一个PNG文件的前8个字节是固定的**。
 
 `PNG` 的前 8 个字节是（16进制表示）：`89 50 4E 47 0D 0A 1A 0A`。
 
-我们可以拿工具看一下，我这里用 VS Code 插件 [Hex Editor](https://marketplace.visualstudio.com/items?itemName=ms-vscode.hexeditor) 查看一个 PNG 图片的 16 进制表示信息 。
+我们可以拿工具看一下，我这里用 VS Code 插件 [Hex Editor](https://marketplace.visualstudio.com/items?itemName=ms-vscode.hexeditor) 查看一个 PNG 图片的 16 进制表示信息。
 
 ![](https://img.cdn.sugarat.top/mdImg/sugar/a10803276d251362424af66453c301ba)
+
+可以看到前八个字节和上面表示的一样。
 
 于是可以根据这个特性判断，于是就有如下的判断代码。
 
@@ -86,7 +89,12 @@ async function compressPNG(file: File) {
 
   // 关键的压缩方
   // 这里 保持宽高不变，保持80%的质量（接近于 tinypng 的压缩效果）
-  const compressed = UPNG.encode(rgba8, decoded.width, decoded.height, 256 * 0.8)
+  const compressed = UPNG.encode(
+    rgba8,
+    decoded.width,
+    decoded.height,
+    256 * 0.8
+  )
   return new File([compressed], file.name, { type: 'image/png' })
 }
 ```
@@ -181,4 +189,4 @@ UPNG.encode
 完整源码见：[GitHub:ATQQ/demos - png-compress](https://github.com/ATQQ/demos/tree/main/pages/png-compress)
 
 ## 最后
-后续将继续学习&探索一下其它格式的图片**纯前端实现**（JPG，GIF，MP4转GIF）。
+后续将继续学习&探索一下其它格式的**纯前端压缩实现**（JPG，GIF，MP4转GIF）。
