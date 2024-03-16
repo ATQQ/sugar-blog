@@ -7,7 +7,9 @@ description: 最近在迭代应用的时候用到了 UPNG.js 压缩 PNG 图片�
 >**在线 Demo 体验地址 →:** https://demos.sugarat.top/pages/png-compress/
 
 ## 前言
-最近在迭代自己的 [图床](https://imgbed.sugarat.top/) 应用，由于使用时间的累计，存储空间占用越来越大了，在做 Web 应用的时候会随手拿 [tinypng](https://tinypng.com/) 压缩一下图片。想着给咱图床也加个压缩的功能，这样上传/访问也能省点 💰。
+最近在迭代自己的 [图床](https://imgbed.sugarat.top/) 应用，由于使用时间的累计，存储空间占用越来越大了，在做 Web 应用的时候会随手拿 [tinypng](https://tinypng.com/) 压缩一下图片。
+
+想着给咱图床也加个压缩的功能，这样上传/访问也能省点 💰。
 
 ![](https://img.cdn.sugarat.top/mdImg/sugar/d666613614e04da1e6e135c982cfc42e)
 
@@ -99,8 +101,8 @@ async function compressPNG(file: File) {
 
 其中压缩后的宽高，压缩质量都是可以调整的。
 
-### 完善后的最终实现
-下面方法（TS 实现）可以直接 CV 运行，提供了可配置的参数
+### 可配置封装
+下面方法（TS 实现），提供了一些常用的配置选项。
 ```ts
 import UPNG from 'upng-js'
 
@@ -151,7 +153,7 @@ async function compressPNGImage(file: File, ops: CompressOptions = {}) {
 ```
 
 ### CDN 加载
-不通过 npm 引入，也可以使用 `<script>` 标签的方式全局引入 SDK。
+不通过 npm 安装，也可以使用 `<script>` 标签的方式进行全局引入。
 
 可以使用[Static file](https://www.staticfile.org/)提供的 CDN 资源。
 
@@ -180,9 +182,11 @@ UPNG.encode
 
 >**在线 Demo 体验地址 →:** https://demos.sugarat.top/pages/png-compress/
 
-大概界面如下（纯血 HTML/CSS/JS，复制粘贴就能运行）
+大概界面如下：
 
 ![](https://img.cdn.sugarat.top/mdImg/sugar/5d461c425ea18f501262017bdeca8a9a)
+
+*纯血 HTML/CSS/JS，复制粘贴就能运行。*
 
 完整源码见：[GitHub:ATQQ/demos - png-compress](https://github.com/ATQQ/demos/tree/main/pages/png-compress)
 
