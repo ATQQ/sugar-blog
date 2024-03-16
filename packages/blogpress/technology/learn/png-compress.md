@@ -87,7 +87,7 @@ async function compressPNG(file: File) {
   const decoded = UPNG.decode(arrayBuffer)
   const rgba8 = UPNG.toRGBA8(decoded)
 
-  // 关键的压缩方
+  // 关键的压缩方法
   // 这里 保持宽高不变，保持80%的质量（接近于 tinypng 的压缩效果）
   const compressed = UPNG.encode(
     rgba8,
