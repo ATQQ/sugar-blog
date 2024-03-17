@@ -7,6 +7,11 @@ description: 记录一下每天干的杂事，写的杂七杂八的代码，用�
 
 [[toc]]
 
+## 2024/03/16
+*[PNG 图片压缩 | UPNG.js](https://github.com/ATQQ/demos/tree/main/pages/png-compress)*
+
+* 编写 UPNG.js 在线 Demo
+
 ## 2024/03/14
 ### 七牛云图床
 *[image-bed-qiniu](https://github.com/ATQQ/image-bed-qiniu/tree/master/packages/client#-%E4%B8%83%E7%89%9B%E4%BA%91oss%E5%9B%BE%E5%BA%8A-)*
