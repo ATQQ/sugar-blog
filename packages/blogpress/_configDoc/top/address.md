@@ -78,6 +78,8 @@ categories:
 ## 在线工具
 * [CODELF](https://unbug.github.io/codelf/) - 解决变量命名难题
 * [carbon](https://carbon.now.sh/) - 为各种语言代码上色然后 导出 SVG/PNG 用于分享或者演示
+* [cyrilex](https://extendsclass.com/regex-tester.html) - 正则表达式测试器和可视化工具
+* [pyrexp](https://pythonium.net/regex) - Python 正则表达式测试和可视化工具
 * [regexper](https://regexper.com/) - 正则逻辑可视化
 * [cubic-bezier](https://cubic-bezier.com) - 贝塞尔曲线
 * [tool.lu](https://tool.lu/nav/) - 在线工具合集
