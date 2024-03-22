@@ -1193,11 +1193,25 @@ const blogTheme = getThemeConfig({
 ```
 
 ```ts [type]
+interface FooterItem {
+  text: string
+  link?: string
+  icon?: boolean | string
+}
+
 interface Footer {
   /**
-   * 自定义补充信息（支持配置为HTML）
+   * 自定义补充信息（支持配置为HTML），在内置的 footer 上方
    */
   message?: string | string[]
+  /**
+   * 自定义补充信息（支持配置为HTML），在内置的 footer 下方
+   */
+  bottomMessage?: string | string[]
+  /**
+   * 自定义补充信息（支持配置为HTML），紧随内置的后方
+   */
+  list?: string | string[] | FooterItem | FooterItem[]
   /**
    * 是否展示主题版本信息
    */
@@ -1207,7 +1221,7 @@ interface Footer {
    */
   copyright?: string | {
     message: string
-    link: string
+    link?: string
     icon?: boolean | string
   }
   /**
@@ -1314,6 +1328,25 @@ const blogTheme = getThemeConfig({
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY5NjE1NDYyMjI3NQ==696154622275)
 
+同时提供方了一个配置简化的方法，用于生成和主题一样风格的标签的 HTML 代码。
+```ts
+import { footerHTML } from '@sugarat/theme/node'
+
+const blogTheme = getThemeConfig({
+  footer: {
+    message: footerHTML([
+      {
+        text: '<div style="display:flex;align-items:center;justify-content:center;">本网站由 <img src="/upyun.png" style="height:24px;"> 提供CDN加速/云存储服务</div>',
+        link: 'https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral'
+      },
+      {
+        text: '标题，图标支持SVG 或 emoji',
+        icon: '🎉'
+      }
+    ]),
+  }
+})
+```
 ## docMetaInsert
 
 主要是指

@@ -9,6 +9,7 @@ sidebar: false
 
 * [ ] 问题修复：水合问题，侧栏切换页面闪烁
 * [ ] 博客概览信息（文章数，网站运行天数，字数，访问量等等）
+* [ ] windows 上运行本项目
 * [ ] 文章支持短链
 * [ ] 时区问题（对齐 VitePress默认逻辑），同时支持自定义时区（引入第三方时间处理库）
   * [ ] 支持显示发布时间后最后修改时间选择
@@ -30,6 +31,7 @@ sidebar: false
 ## 已完成
 
 近期完成：
+* [x] footer 支持更简化的格式，支持指定 message 位置同时
 * [x] 内置看板娘 [oh-my-live2d](https://github.com/oh-my-live2d/oh-my-live2d)
 * [x] 图片展示优化（已补充文档）
 * [x] 问题修复：showSelf，pagefind插件冲突

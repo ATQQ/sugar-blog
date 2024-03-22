@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import { useHomeFooterConfig } from '../composables/config/blog'
 import packageJSON from '../../package.json'
 import { copyrightSVG, icpSVG, themeSVG } from '../constants/svg'
+import { vOuterHtml } from '../directives'
 
 const footerData = useHomeFooterConfig()
 
@@ -12,14 +13,15 @@ const renderData = computed(() => {
   }
   const flatData = [footerData].flat()
   return flatData.flat().map((footer, idx) => {
-    const { icpRecord, securityRecord, copyright, version, message } = footer
-    const data: {
+    const { icpRecord, securityRecord, copyright, version, message, bottomMessage, list } = footer
+    const data: ({
       name: string
       link?: string
       icon?: string | boolean
-    }[] = []
+    } | string) [] = []
     // message
-    const messageData: string[] = [message || []].flat()
+    const messageData = [message || []].flat()
+    const bottomMessageData = [bottomMessage || []].flat()
 
     // version
     const isLast = idx === flatData.length - 1
@@ -58,9 +60,23 @@ const renderData = computed(() => {
         ...securityRecord
       })
     }
+    if (list) {
+      const listData = [list || []].flat()
+      data.push(...listData.map((v) => {
+        if (typeof v === 'string') {
+          return v
+        }
+        return {
+          name: v.text,
+          icon: v.icon,
+          link: v.link
+        }
+      }))
+    }
     return {
       data,
-      messageData
+      messageData,
+      bottomMessageData
     }
   })
 })
@@ -70,20 +86,27 @@ const renderData = computed(() => {
   <footer v-if="renderData.length" class="blog-footer">
     <!-- eslint-disable vue/require-v-for-key -->
     <!-- see https://cn.vuejs.org/guide/essentials/list.html#v-for-on-template -->
-    <template v-for="({ data, messageData }) in renderData">
+    <template v-for="({ data, messageData, bottomMessageData }) in renderData">
+      <!-- 在内置footer上方渲染 -->
       <p v-for="message in messageData" v-html="message" />
+      <!-- 内置的列表 -->
       <p class="footer-item-list">
-        <span v-for="item in data" class="footer-item">
-          <i v-if="item.icon === 'security'">
-            <img src="./../styles/gongan.png" alt="公网安备">
-          </i>
-          <i v-else-if="item.icon" v-html="item.icon" />
-          <a v-if="item.link" :href="item.link" target="_blank" rel="noopener noreferrer">
-            {{ item.name }}
-          </a>
-          <span v-else>{{ item.name }}</span>
-        </span>
+        <template v-for="item in data">
+          <span v-if="typeof item !== 'string'" class="footer-item">
+            <i v-if="item.icon === 'security'">
+              <img src="./../styles/gongan.png" alt="公网安备">
+            </i>
+            <i v-else-if="item.icon" v-html="item.icon" />
+            <a v-if="item.link" :href="item.link" target="_blank" rel="noopener noreferrer">
+              {{ item.name }}
+            </a>
+            <span v-else>{{ item.name }}</span>
+          </span>
+          <span v-else v-outer-html="item" />
+        </template>
       </p>
+      <!-- 在内置的footer下方渲染 -->
+      <p v-for="message in bottomMessageData" v-html="message" />
     </template>
   </footer>
 </template>
@@ -124,6 +147,7 @@ footer.blog-footer {
 
   i {
     margin-right: 4px;
+    font-style: normal;
   }
 
   i :deep(svg) {

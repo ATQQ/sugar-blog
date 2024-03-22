@@ -1,6 +1,6 @@
 import process from 'node:process'
 import type { Theme } from '@sugarat/theme'
-import { getThemeConfig } from '@sugarat/theme/node'
+import { footerHTML, getThemeConfig } from '@sugarat/theme/node'
 import workConfig from './works'
 
 const baseUrl = 'https://theme.sugarat.top'
@@ -95,6 +95,10 @@ export const blogTheme = getThemeConfig({
   works: workConfig,
   footer: {
     copyright: 'MIT License | 粥里有勺糖',
+    message: footerHTML({
+      text: '<div style="display:flex;align-items:center;justify-content:center;">本网站由 <img src="/upyun.png" style="height:24px;"> 提供CDN加速/云存储服务</div>',
+      link: 'https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral'
+    })
   }
 })
 

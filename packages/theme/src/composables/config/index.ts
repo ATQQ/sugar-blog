@@ -450,11 +450,25 @@ export namespace Theme {
 
   export type RSSOptions = RSSPluginOptions
 
+  export interface FooterItem {
+    text: string
+    link?: string
+    icon?: boolean | string
+  }
+
   export interface Footer {
     /**
-     * 自定义补充信息（支持配置为HTML）
+     * 自定义补充信息（支持配置为HTML），在内置的 footer 上方
      */
     message?: string | string[]
+    /**
+     * 自定义补充信息（支持配置为HTML），在内置的 footer 下方
+     */
+    bottomMessage?: string | string[]
+    /**
+     * 自定义补充信息（支持配置为HTML），紧随内置的后方
+     */
+    list?: string | string[] | FooterItem | FooterItem[]
     /**
      * 是否展示主题版本信息
      */
