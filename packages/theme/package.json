@@ -51,7 +51,7 @@
     "gray-matter": "^4.0.3",
     "markdown-it-task-checkbox": "^1.0.6",
     "mermaid": "^10.2.4",
-    "oh-my-live2d": "^0.10.0",
+    "oh-my-live2d": "^0.13.0",
     "swiper": "^11.0.5",
     "vitepress-markdown-timeline": "^1.2.1",
     "vitepress-plugin-mermaid": "2.0.13",
@@ -66,7 +66,7 @@
     "pagefind": "1.0.3",
     "sass": "^1.56.1",
     "typescript": "^4.8.2",
-    "vitepress": "1.0.0-rc.45",
+    "vitepress": "1.0.1",
     "vue": "^3.4.21"
   },
   "pnpm": {
