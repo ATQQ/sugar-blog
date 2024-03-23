@@ -7,10 +7,21 @@ description: 记录一下每天干的杂事，写的杂七杂八的代码，用�
 
 [[toc]]
 
+## 2024/03/23
+*[JPG 图片压缩](https://github.com/ATQQ/demos/tree/main/pages/jpg-compress)*
+
+* 编写 [JPG 压缩在线 Demo](https://demos.sugarat.top/pages/jpg-compress/)
+
+
 ## 2024/03/16
 *[PNG 图片压缩 | UPNG.js](https://github.com/ATQQ/demos/tree/main/pages/png-compress)*
 
 * 编写 UPNG.js 在线 Demo
+
+*[@sugarat/theme](https://github.com/ATQQ/sugar-blog/tree/master/packages/theme)*
+
+* 依赖更新 看板娘 和 VitePress1.0.1
+* footer 支持更丰富的定制（参加[又拍云活动](https://www.upyun.com/league)）
 
 ## 2024/03/14
 ### 七牛云图床
