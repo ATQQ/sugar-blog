@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.2.27） ⏰ 2024/03/13：新功能：内置看板娘组件；一系列反馈问题修复
+description: 最近更新（v0.2.28） ⏰ 2024/03/23：新功能：footer 支持更丰富的配置；依赖升级
 author: 粥里有勺糖
 top: 2
 tag: 日志
@@ -26,6 +26,13 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.2.28 (2024/03/23)
+
+### Patch Changes
+
+- feat: footer 支持更丰富的配置
+- chore: 依赖升级
 
 ## 0.2.27 (2024/03/13)
 

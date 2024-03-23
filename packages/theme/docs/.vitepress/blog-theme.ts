@@ -95,7 +95,6 @@ export const blogTheme = getThemeConfig({
   works: workConfig,
   footer: {
     copyright: 'MIT License | 粥里有勺糖',
-    message: '<a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank" style="display:flex;align-items:center;justify-content:center;">本网站由 <img src="/upyun.png" style="height:24px;"> 提供CDN加速/云存储服务</a>'
   }
 })
 

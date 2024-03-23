@@ -1,5 +1,12 @@
 # @sugarat/theme
 
+## 0.2.28
+
+### Patch Changes
+
+- feat: footer 支持更丰富的配置
+- chore: 依赖升级
+
 ## 0.2.27
 
 ### Patch Changes
