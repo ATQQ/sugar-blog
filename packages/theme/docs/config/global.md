@@ -1336,8 +1336,9 @@ const blogTheme = getThemeConfig({
   footer: {
     message: footerHTML([
       {
-        text: '<div style="display:flex;align-items:center;justify-content:center;">本网站由 <img src="/upyun.png" style="height:24px;"> 提供CDN加速/云存储服务</div>',
-        link: 'https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral'
+        text: '本网站由 又拍云 提供CDN加速/云存储服务',
+        link: 'https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral',
+        icon: '又拍云SVG图标'
       },
       {
         text: '标题，图标支持SVG 或 emoji',
