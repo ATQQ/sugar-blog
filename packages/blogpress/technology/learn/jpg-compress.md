@@ -135,7 +135,7 @@ function compressJPGByCompressor(file, ops) {
 
 ![](https://img.cdn.sugarat.top/mdImg/sugar/3619ac65a3399e4b8e1928bb4e2c28a2)
 
-其中多线程压缩使用 [OffscreenCanvas](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas#browser_compatibility): 一个可以脱离屏幕渲染的 canvas 对象。在窗口环境和 `web worker` 环境均可工作。
+其中多线程压缩使用 [OffscreenCanvas](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas#browser_compatibility): 一个可以脱离屏幕渲染的 canvas 对象。在 `web worker` 环境也可工作。
 
 ### 使用
 同样的也支持 `npm` 和 `cdn` 两种引入方式。
