@@ -34,7 +34,7 @@
   ],
   "scripts": {
     "dev": "npx tsup src/index.ts --dts --watch --format esm,cjs",
-    "build": "npx tsup src/index.ts --dts --format esm,cjs"
+    "build": "npx tsup src/index.ts --dts --format esm,cjs --silent"
   },
   "dependencies": {
     "@vue/shared": "^3.2.45",

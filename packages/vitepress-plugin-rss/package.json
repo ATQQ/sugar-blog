@@ -32,7 +32,7 @@
   ],
   "scripts": {
     "dev": "npx tsup src/index.ts --dts --watch --format esm,cjs --external vitepress",
-    "build": "npx tsup src/index.ts --dts --format esm,cjs --external vitepress"
+    "build": "npx tsup src/index.ts --dts --format esm,cjs --external vitepress --silent"
   },
   "dependencies": {
     "fast-glob": "^3.2.12",
