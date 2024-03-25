@@ -172,3 +172,8 @@ export function getImageUrl(
   } // 如果 ThemeableImage 类型不是上述情况，则返回空字符串
   return ''
 }
+
+export function wrapperCleanUrls(cleanUrls: boolean, route: string) {
+  const tempUrl = route.replace(/\.html$/, '')
+  return cleanUrls ? tempUrl : `${tempUrl}.html`
+}

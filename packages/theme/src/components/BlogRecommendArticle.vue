@@ -2,8 +2,8 @@
 import { computed, onMounted, ref } from 'vue'
 import { useRoute, withBase } from 'vitepress'
 import { ElButton, ElLink } from 'element-plus'
-import { formatShowDate } from '../utils/client'
-import { useArticles, useBlogConfig } from '../composables/config/blog'
+import { formatShowDate, wrapperCleanUrls } from '../utils/client'
+import { useArticles, useBlogConfig, useCleanUrls } from '../composables/config/blog'
 import { recommendSVG } from '../constants/svg'
 import type { Theme } from '../composables/config/index'
 
@@ -145,6 +145,8 @@ onMounted(() => {
   const currentPageNum = Math.floor(currentPageIndex / pageSize.value) + 1
   currentPage.value = currentPageNum
 })
+
+const cleanUrls = useCleanUrls()
 </script>
 
 <template>
@@ -170,7 +172,7 @@ onMounted(() => {
           <ElLink
             type="info" class="title" :class="{
               current: isCurrentDoc(v.route),
-            }" :href="v.route"
+            }" :href="wrapperCleanUrls(cleanUrls, v.route)"
           >
             {{ v.meta.title }}
           </ElLink>

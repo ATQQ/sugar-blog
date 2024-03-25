@@ -2,8 +2,8 @@
 import { computed, ref } from 'vue'
 import { ElButton, ElLink } from 'element-plus'
 import { withBase } from 'vitepress'
-import { useArticles, useBlogConfig } from '../composables/config/blog'
-import { formatShowDate } from '../utils/client'
+import { useArticles, useBlogConfig, useCleanUrls } from '../composables/config/blog'
+import { formatShowDate, wrapperCleanUrls } from '../utils/client'
 import { fireSVG } from '../constants/svg'
 
 const { hotArticle } = useBlogConfig()
@@ -27,10 +27,14 @@ function changePage() {
   currentPage.value = newIdx + 1
 }
 
+const cleanUrls = useCleanUrls()
 const currentWikiData = computed(() => {
   const startIdx = (currentPage.value - 1) * pageSize.value
   const endIdx = startIdx + pageSize.value
-  return recommendList.value.slice(startIdx, endIdx)
+  return recommendList.value.slice(startIdx, endIdx).map(v => ({
+    ...v,
+    route: wrapperCleanUrls(cleanUrls, v.route)
+  }))
 })
 
 const showChangeBtn = computed(() => {

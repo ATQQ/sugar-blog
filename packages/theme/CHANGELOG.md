@@ -1,5 +1,11 @@
 # @sugarat/theme
 
+## 0.2.29
+
+### Patch Changes
+
+- fix: 生成的链接兼容 `cleanUrls` 配置
+
 ## 0.2.28
 
 ### Patch Changes

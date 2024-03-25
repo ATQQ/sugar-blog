@@ -2,7 +2,8 @@
 import { withBase } from 'vitepress'
 import { computed } from 'vue'
 import { useWindowSize } from '@vueuse/core'
-import { formatShowDate } from '../utils/client'
+import { formatShowDate, wrapperCleanUrls } from '../utils/client'
+import { useCleanUrls } from '../composables/config/blog'
 
 const props = defineProps<{
   route: string
@@ -22,22 +23,12 @@ const showTime = computed(() => {
   return formatShowDate(props.date)
 })
 
-// function isWrappedWithPreventDefault(element: HTMLElement) {
-//   let parent = element.parentElement
-
-//   while (parent) {
-//     if (parent.hasAttribute('preventDefault')) {
-//       return true
-//     }
-//     parent = parent.parentElement
-//   }
-
-//   return false
-// }
+const cleanUrls = useCleanUrls()
+const link = computed(() => withBase(wrapperCleanUrls(!!cleanUrls, props.route)))
 </script>
 
 <template>
-  <a class="blog-item" :href="withBase(route)">
+  <a class="blog-item" :href="link">
     <i v-if="!!pin" class="pin" />
     <!-- 标题 -->
     <p v-if="inMobile" class="title">{{ title }}</p>

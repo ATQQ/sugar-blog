@@ -8,6 +8,7 @@ export default defineConfig({
   sitemap: {
     hostname: 'https://theme.sugarat.top',
   },
+  cleanUrls: false,
   lang: 'zh-cn',
   title: '@sugarat/theme',
   description: '粥里有勺糖的博客主题，基于 vitepress 实现',

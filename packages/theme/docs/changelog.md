@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.2.28） ⏰ 2024/03/23：新功能：footer 支持更丰富的配置；依赖升级
+description: 最近更新（v0.2.28） ⏰ 2024/03/25：一系列问题修复
 author: 粥里有勺糖
 top: 2
 tag: 日志
@@ -26,6 +26,12 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.2.29 (2024/03/25)
+
+### Patch Changes
+
+- fix: 生成的链接兼容 `cleanUrls` 配置
 
 ## 0.2.28 (2024/03/23)
 

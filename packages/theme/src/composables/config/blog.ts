@@ -225,3 +225,8 @@ export function useHomeFooterConfig() {
 export function useBackToTopConfig() {
   return useBlogConfig().backToTop
 }
+
+export function useCleanUrls() {
+  const { site } = useData()
+  return !!site.value.cleanUrls
+}
