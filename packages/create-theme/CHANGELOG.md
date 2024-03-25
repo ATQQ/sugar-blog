@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.53
+
+### Patch Changes
+
+- chore: remove pnpm warn
+
 ## 0.0.52
 
 ### Patch Changes

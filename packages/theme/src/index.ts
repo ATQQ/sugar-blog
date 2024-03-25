@@ -31,7 +31,9 @@ export const BlogTheme: Theme = {
     DefaultTheme.enhanceApp(ctx)
     ctx.app.component('TimelinePage', TimelinePage)
     ctx.app.component('UserWorksPage', UserWorksPage)
-    ctx.app.component('Mermaid', Mermaid as any)
+    if (!ctx.app.component('Mermaid')) {
+      ctx.app.component('Mermaid', Mermaid as any)
+    }
   }
 }
 
