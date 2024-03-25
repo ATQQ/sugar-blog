@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.2.28） ⏰ 2024/03/25：一系列问题修复
+description: 最近更新（v0.2.29） ⏰ 2024/03/25：问题修复
 author: 粥里有勺糖
 top: 2
 tag: 日志

@@ -7,9 +7,8 @@ sidebar: false
 
 ## 正在进行中
 
-* [ ] 问题修复：水合问题，侧栏切换页面闪烁
+* [ ] 问题修复：水合问题
 * [ ] 博客概览信息（文章数，网站运行天数，字数，访问量等等）
-* [ ] windows 上运行本项目
 * [ ] 文章支持短链
 * [ ] 时区问题（对齐 VitePress默认逻辑），同时支持自定义时区（引入第三方时间处理库）
   * [ ] 支持显示发布时间后最后修改时间选择
@@ -31,16 +30,19 @@ sidebar: false
 ## 已完成
 
 近期完成：
+* [x] windows 上运行本项目
+* [x] cleanUrls 适配，访问侧边栏未配置服务端的情况下404
+* [ ] ~~侧栏切换页面闪烁（弱网出现）~~
 * [x] footer 支持更简化的格式，支持指定 message 位置同时
 * [x] 内置看板娘 [oh-my-live2d](https://github.com/oh-my-live2d/oh-my-live2d)
 * [x] 图片展示优化（已补充文档）
 * [x] 问题修复：showSelf，pagefind插件冲突
 * [x] github pages example
+
+:::details 更多归档
 * [x] 左侧推荐列表可以自定义
 * [x] 阅读时间分析支持手动设置位置
 * [x] 左侧推荐列表在很多文章时，首次展示页码不正确。
-
-:::details 更多归档
 * [x] 兼容 cover 指向非public 目录文件封面展示。
 * [x] 友链列表实现调整
 * [x] 内置高频使用的 markdown插件，参考 <https://vitepress.yiov.top/plugin.html>
