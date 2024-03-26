@@ -150,7 +150,7 @@ const blogTheme = getThemeConfig({
 
 ## homeTags
 
-* Type: `true | false`
+* Type: `boolean`
 
 用于控制首页右侧的标签内容
 
