@@ -2,12 +2,14 @@
 import { computed, watch } from 'vue'
 import { ElTag } from 'element-plus'
 import { useBrowserLocation, useDark, useUrlSearchParams } from '@vueuse/core'
-import { useRouter, useRoute } from 'vitepress'
+import { useRoute, useRouter } from 'vitepress'
 import {
   useActiveTag,
   useArticles,
+  useConfig,
   useCurrentPageNum
 } from '../composables/config/blog'
+import type { Theme } from '../'
 
 const route = useRoute()
 const docs = useArticles()
@@ -17,6 +19,9 @@ const tags = computed(() => {
 })
 
 const activeTag = useActiveTag()
+const homeTagsConfig = computed<Theme.HomeTagsConfig>(() => {
+  return useConfig()?.config?.blog?.homeTags ?? {}
+})
 
 const isDark = useDark({
   storageKey: 'vitepress-theme-appearance'
@@ -77,7 +82,7 @@ watch(
 </script>
 
 <template>
-  <div v-if="tags.length" class="card tags" data-pagefind-ignore="all">
+  <div v-if="homeTagsConfig?.enable && tags.length" class="card tags" data-pagefind-ignore="all">
     <!-- 头部 -->
     <div class="card-header">
       <span class="title svg-icon"><svg

@@ -43,7 +43,7 @@ const showChangeBtn = computed(() => {
 </script>
 
 <template>
-  <div v-if="recommendList.length || empty" class="card recommend" data-pagefind-ignore="all">
+  <div v-if="hotArticle?.enable && (recommendList.length || empty)" class="card recommend" data-pagefind-ignore="all">
     <!-- 头部 -->
     <div class="card-header">
       <span class="title" v-html="title" />

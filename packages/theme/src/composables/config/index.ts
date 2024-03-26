@@ -126,8 +126,19 @@ export namespace Theme {
     lang?: string
     loading?: 'lazy' | 'eager'
   }
-
+  export interface HomeTagsConfig {
+    /**
+     * 是否启用
+     * @default true
+     */
+    enable?: boolean
+  }
   export interface HotArticle {
+    /**
+     * 是否启用
+     * @default true
+     */
+    enable?: boolean
     title?: string
     pageSize?: number
     nextText?: string
@@ -161,6 +172,11 @@ export namespace Theme {
      * @default 'sidebar'
      */
     style?: 'card' | 'sidebar'
+    /**
+     * 是否启用
+     * @default true
+     */
+    enable?: boolean
   }
 
   export interface HomeBlog {
@@ -245,6 +261,11 @@ export namespace Theme {
   }
 
   export interface FriendConfig {
+    /**
+     * 是否启用
+     * @default true
+     */
+    enable?: boolean
     list: FriendLink[]
     /**
      * 是否随机展示
@@ -357,7 +378,7 @@ export namespace Theme {
     /**
      * 阅读文章左侧的推荐文章（替代默认的sidebar）
      */
-    recommend?: RecommendArticle | false
+    recommend?: RecommendArticle
     article?: ArticleConfig
     /**
      * el-alert
@@ -423,6 +444,8 @@ export namespace Theme {
      * 详见 https://oml2d.com/options/Options.html
      */
     oml2d?: Oml2dOptions
+
+    homeTags?: HomeTagsConfig
   }
 
   export interface BackToTop {
