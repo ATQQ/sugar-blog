@@ -340,7 +340,7 @@ export namespace Theme {
     pagesData: PageData[]
     srcDir?: string
     author?: string
-    hotArticle?: HotArticle
+    hotArticle?: HotArticle | false
     home?: HomeBlog
     /**
      * 本地全文搜索定制
@@ -423,6 +423,7 @@ export namespace Theme {
      * 详见 https://oml2d.com/options/Options.html
      */
     oml2d?: Oml2dOptions
+    homeTags?: boolean
   }
 
   export interface BackToTop {

@@ -2,16 +2,17 @@
 import { computed, watch } from 'vue'
 import { ElTag } from 'element-plus'
 import { useBrowserLocation, useDark, useUrlSearchParams } from '@vueuse/core'
-import { useRouter, useRoute } from 'vitepress'
+import { useRoute, useRouter } from 'vitepress'
 import {
   useActiveTag,
   useArticles,
-  useCurrentPageNum
+  useConfig,
+  useCurrentPageNum,
 } from '../composables/config/blog'
 
 const route = useRoute()
 const docs = useArticles()
-
+const showTags = useConfig()?.config?.blog?.homeTags ??  true
 const tags = computed(() => {
   return [...new Set(docs.value.map(v => v.meta.tag || []).flat(3))]
 })
@@ -77,7 +78,7 @@ watch(
 </script>
 
 <template>
-  <div v-if="tags.length" class="card tags" data-pagefind-ignore="all">
+  <div v-if="showTags && tags.length" class="card tags" data-pagefind-ignore="all">
     <!-- 头部 -->
     <div class="card-header">
       <span class="title svg-icon"><svg
