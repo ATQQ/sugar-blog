@@ -92,6 +92,8 @@ const blogTheme = getThemeConfig({
 
 ## hotArticle
 
+* Type: `false | HotArticle`
+
 用于控制首页右侧的精选文章内容，其中精选的文章由 [frontmatter: sticky](./frontmatter.md#sticky) 进行控制
 
 ::: code-group
@@ -137,6 +139,28 @@ sticky: 1
 :::
 
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkxNzkzMjY5Nw==674917932697)
+
+设置为 false 时，不展示
+
+```ts
+const blogTheme = getThemeConfig({
+  hotArticle: false
+})
+```
+
+## homeTags
+
+* Type: `true | false`
+
+用于控制首页右侧的标签内容
+
+设置为 false 时，不展示
+
+```ts
+const blogTheme = getThemeConfig({
+  homeTags: false
+})
+```
 
 ## home
 
