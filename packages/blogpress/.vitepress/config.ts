@@ -192,8 +192,7 @@ const blogTheme = getThemeConfig({
   },
   hotArticle: {
     pageSize: 12
-  },
-  homeTags: true
+  }
 })
 
 const extraHead: any
