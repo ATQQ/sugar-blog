@@ -58,6 +58,7 @@ useOml2d()
         </div>
         <div class="content-wrapper">
           <div class="blog-list-wrapper">
+            <!-- TODO: 水合问题移动端 -->
             <BlogList />
           </div>
           <div class="blog-info-wrapper">
