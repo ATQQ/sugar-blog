@@ -7,21 +7,17 @@ import {
   useActiveTag,
   useArticles,
   useConfig,
-  useCurrentPageNum
+  useCurrentPageNum,
 } from '../composables/config/blog'
-import type { Theme } from '../'
 
 const route = useRoute()
 const docs = useArticles()
-
+const showTags = useConfig()?.config?.blog?.homeTags
 const tags = computed(() => {
   return [...new Set(docs.value.map(v => v.meta.tag || []).flat(3))]
 })
 
 const activeTag = useActiveTag()
-const homeTagsConfig = computed<Theme.HomeTagsConfig>(() => {
-  return useConfig()?.config?.blog?.homeTags ?? {}
-})
 
 const isDark = useDark({
   storageKey: 'vitepress-theme-appearance'
@@ -82,7 +78,7 @@ watch(
 </script>
 
 <template>
-  <div v-if="homeTagsConfig?.enable && tags.length" class="card tags" data-pagefind-ignore="all">
+  <div v-if="showTags && tags.length" class="card tags" data-pagefind-ignore="all">
     <!-- 头部 -->
     <div class="card-header">
       <span class="title svg-icon"><svg

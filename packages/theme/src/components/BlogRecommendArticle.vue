@@ -10,14 +10,14 @@ import type { Theme } from '../composables/config/index'
 const { recommend: _recommend } = useBlogConfig()
 
 const sidebarStyle = computed(() =>
-  _recommend?.enable && _recommend?.style ? _recommend.style : 'sidebar'
+  _recommend && _recommend?.style ? _recommend.style : 'sidebar'
 )
 
 const recommendPadding = computed(() =>
   sidebarStyle.value === 'card' ? '10px' : '0px'
 )
 const recommend = computed(() =>
-  _recommend?.enable === false ? undefined : _recommend
+  _recommend === false ? undefined : _recommend
 )
 const title = computed(() => recommend.value?.title ?? (`<span class="svg-icon">${recommendSVG}</span>` + '相关文章'))
 const pageSize = computed(() => recommend.value?.pageSize || 9)
@@ -151,7 +151,7 @@ const cleanUrls = useCleanUrls()
 
 <template>
   <div
-    v-if="_recommend?.enable !== false && (recommendList.length || emptyText)" class="recommend"
+    v-if="_recommend !== false && (recommendList.length || emptyText)" class="recommend"
     :class="{ card: sidebarStyle === 'card' }" data-pagefind-ignore="all"
   >
     <!-- 头部 -->

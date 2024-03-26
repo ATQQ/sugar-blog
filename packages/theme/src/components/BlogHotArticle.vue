@@ -6,11 +6,16 @@ import { useArticles, useBlogConfig, useCleanUrls } from '../composables/config/
 import { formatShowDate, wrapperCleanUrls } from '../utils/client'
 import { fireSVG } from '../constants/svg'
 
-const { hotArticle } = useBlogConfig()
-const title = computed(() => hotArticle?.title || (`<span class="svg-icon">${fireSVG}</span>` + ' 精选文章'))
-const nextText = computed(() => hotArticle?.nextText || '换一组')
-const pageSize = computed(() => hotArticle?.pageSize || 9)
-const empty = computed(() => hotArticle?.empty ?? '暂无精选内容')
+const { hotArticle: _hotArticle } = useBlogConfig()
+
+const hotArticle = computed(() =>
+  _hotArticle === false ? undefined : _hotArticle
+)
+
+const title = computed(() => hotArticle.value?.title || (`<span class="svg-icon">${fireSVG}</span>` + ' 精选文章'))
+const nextText = computed(() => hotArticle.value?.nextText || '换一组')
+const pageSize = computed(() => hotArticle.value?.pageSize || 9)
+const empty = computed(() => hotArticle.value?.empty ?? '暂无精选内容')
 
 const docs = useArticles()
 
@@ -43,7 +48,7 @@ const showChangeBtn = computed(() => {
 </script>
 
 <template>
-  <div v-if="hotArticle?.enable && (recommendList.length || empty)" class="card recommend" data-pagefind-ignore="all">
+  <div v-if="_hotArticle !== false && (recommendList.length || empty) " class="card recommend" data-pagefind-ignore="all">
     <!-- 头部 -->
     <div class="card-header">
       <span class="title" v-html="title" />

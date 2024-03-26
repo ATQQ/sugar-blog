@@ -93,7 +93,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div v-if="friendList?.length && friendConfig.enable" class="card friend-wrapper">
+  <div v-if="friendList?.length" class="card friend-wrapper">
     <!-- 头部 -->
     <div class="card-header">
       <span class="title svg-icon"><svg width="512" height="512" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">

@@ -168,14 +168,12 @@ const blogTheme = getThemeConfig({
     ],
     random: true,
     limit: 6,
-    enable: true
   },
   search: false,
   recommend: {
     showSelf: true,
     nextText: '下一页',
-    style: 'sidebar',
-    enable: true
+    style: 'sidebar'
   },
   authorList: [
     {
@@ -193,12 +191,9 @@ const blogTheme = getThemeConfig({
     message: '<a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank" style="display:flex;align-items:center;justify-content:center;">本网站由 <img src="/upyun.png" style="height:24px;"> 提供CDN加速/云存储服务</a>'
   },
   hotArticle: {
-    pageSize: 12,
-    enable: true
+    pageSize: 12
   },
-  homeTags: {
-    enable: true
-  },
+  homeTags: true
 })
 
 const extraHead: any
