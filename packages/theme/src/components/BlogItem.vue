@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { withBase } from 'vitepress'
 import { computed } from 'vue'
-import { useWindowSize } from '@vueuse/core'
 import { formatShowDate, wrapperCleanUrls } from '../utils/client'
 import { useCleanUrls } from '../composables/config/blog'
 
@@ -17,8 +16,6 @@ const props = defineProps<{
   cover?: string | boolean
   pin?: number
 }>()
-const { width } = useWindowSize()
-const inMobile = computed(() => width.value <= 500)
 const showTime = computed(() => {
   return formatShowDate(props.date)
 })
@@ -28,15 +25,16 @@ const link = computed(() => withBase(wrapperCleanUrls(!!cleanUrls, props.route))
 </script>
 
 <template>
+  <!-- TODO: 响应式优化使用纯 CSS -->
   <a class="blog-item" :href="link">
     <i v-if="!!pin" class="pin" />
     <!-- 标题 -->
-    <p v-if="inMobile" class="title">{{ title }}</p>
+    <p class="title mobile-visible">{{ title }}</p>
     <div class="info-container">
       <!-- 左侧信息 -->
       <div class="info-part">
         <!-- 标题 -->
-        <p v-if="!inMobile" class="title">{{ title }}</p>
+        <p class="title pc-visible">{{ title }}</p>
         <!-- 简短描述 -->
         <p v-if="!descriptionHTML && !!description" class="description">
           {{ description }}
@@ -45,21 +43,17 @@ const link = computed(() => withBase(wrapperCleanUrls(!!cleanUrls, props.route))
           <div class="description-html" v-html="descriptionHTML" />
         </template>
         <!-- 底部补充描述 -->
-        <div v-if="!inMobile" class="badge-list">
+        <div class="badge-list pc-visible">
           <span v-if="author" class="split">{{ author }}</span>
           <span class="split">{{ showTime }}</span>
           <span v-if="tag?.length" class="split">{{ tag.join(' · ') }}</span>
         </div>
       </div>
       <!-- 右侧封面图 -->
-      <div
-        v-if="cover"
-        class="cover-img"
-        :style="`background-image: url(${withBase(`${cover}`)});`"
-      />
+      <div v-if="cover" class="cover-img" :style="`background-image: url(${withBase(`${cover}`)});`" />
     </div>
     <!-- 底部补充描述 -->
-    <div v-if="inMobile" class="badge-list">
+    <div class="badge-list mobile-visible">
       <span v-if="author" class="split">{{ author }}</span>
       <span class="split">{{ showTime }}</span>
       <span v-if="tag?.length" class="split">{{ tag.join(' · ') }}</span>
@@ -77,19 +71,19 @@ const link = computed(() => withBase(wrapperCleanUrls(!!cleanUrls, props.route))
   left: -4px;
   opacity: 0.5;
 }
+
 .blog-item:hover .pin {
   opacity: 1;
 }
+
 .blog-item .pin::before {
   content: '';
   position: absolute;
   width: 120%;
   height: 30px;
-  background-image: linear-gradient(
-    45deg,
-    var(--blog-theme-color),
-    var(--blog-theme-color)
-  );
+  background-image: linear-gradient(45deg,
+      var(--blog-theme-color),
+      var(--blog-theme-color));
   transform: rotate(-45deg) translateY(-20px);
   display: flex;
   align-items: center;
@@ -111,10 +105,12 @@ const link = computed(() => withBase(wrapperCleanUrls(!!cleanUrls, props.route))
   cursor: pointer;
   display: flex;
   flex-direction: column;
+
   &:hover {
     box-shadow: var(--box-shadow-hover);
   }
 }
+
 .info-container {
   display: flex;
   align-items: center;
@@ -124,11 +120,13 @@ const link = computed(() => withBase(wrapperCleanUrls(!!cleanUrls, props.route))
 .info-part {
   flex: 1;
 }
+
 .title {
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 8px;
 }
+
 .description {
   color: var(--description-font-color);
   font-size: 14px;
@@ -140,13 +138,16 @@ const link = computed(() => withBase(wrapperCleanUrls(!!cleanUrls, props.route))
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
+
 .description-html {
   font-size: 14px;
 }
+
 .badge-list {
   font-size: 13px;
   color: var(--badge-font-color);
   margin-top: 8px;
+
   .split:not(:last-child) {
     &::after {
       content: '';
@@ -158,6 +159,7 @@ const link = computed(() => withBase(wrapperCleanUrls(!!cleanUrls, props.route))
     }
   }
 }
+
 .cover-img {
   width: 120px;
   height: 80px;
@@ -167,11 +169,27 @@ const link = computed(() => withBase(wrapperCleanUrls(!!cleanUrls, props.route))
   background-size: 120px 80px;
 }
 
+.pc-visible {
+  display: block;
+}
+
+.mobile-visible {
+  display: none;
+}
+
 @media screen and (max-width: 500px) {
   .cover-img {
     width: 100px;
     height: 60px;
     background-size: 100px 60px;
+  }
+
+  .pc-visible {
+    display: none;
+  }
+
+  .mobile-visible {
+    display: block;
   }
 }
 </style>
