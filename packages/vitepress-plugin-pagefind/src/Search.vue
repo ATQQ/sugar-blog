@@ -235,7 +235,6 @@ watch(
 </script>
 
 <template>
-  <!-- TODO: 水合问题移动端  -->
   <div class="blog-search" data-pagefind-ignore="all">
     <div class="nav-search-btn-wait" @click="searchModal = true">
       <span>
@@ -250,12 +249,10 @@ watch(
           />
         </svg>
       </span>
-      <template v-if="!isMinimized">
-        <span class="search-tip">{{
-          finalSearchConfig?.btnPlaceholder || 'Search'
-        }}</span>
-        <span class="metaKey"> {{ metaKey }} K </span>
-      </template>
+      <span v-show="!isMinimized" class="search-tip">{{
+        finalSearchConfig?.btnPlaceholder || 'Search'
+      }}</span>
+      <span v-show="!isMinimized" class="metaKey"> {{ metaKey }} K </span>
     </div>
     <ClientOnly>
       <Command.Dialog :visible="searchModal" theme="algolia">
