@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.2.29） ⏰ 2024/03/25：问题修复
+description: 最近更新（v0.2.30） ⏰ 2024/03/25：新增各个模块可选开启的开关，水合问题修复，依赖升级。
 author: 粥里有勺糖
 top: 2
 tag: 日志
@@ -26,6 +26,16 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.2.30 (2024/03/27)
+
+### Patch Changes
+
+- feat: 新增各个模块可选开启的开关
+- fix: Hydration error
+- Updated dependencies
+  - vitepress-plugin-pagefind@0.2.14
+  - oh-my-live2d@0.15.2
 
 ## 0.2.29 (2024/03/25)
 

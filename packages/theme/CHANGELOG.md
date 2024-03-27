@@ -1,5 +1,15 @@
 # @sugarat/theme
 
+## 0.2.30
+
+### Patch Changes
+
+- feat: 新增各个模块可选开启的开关
+- fix: Hydration error
+- Updated dependencies
+  - vitepress-plugin-pagefind@0.2.14
+  - oh-my-live2d@0.15.2
+
 ## 0.2.29
 
 ### Patch Changes

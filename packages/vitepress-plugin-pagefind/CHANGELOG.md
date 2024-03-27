@@ -1,5 +1,11 @@
 # vitepress-plugin-pagefind
 
+## 0.2.14
+
+### Patch Changes
+
+- fix: Hydration error
+
 ## 0.2.13
 
 ### Patch Changes

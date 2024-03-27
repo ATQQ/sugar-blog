@@ -58,7 +58,7 @@ importers:
         specifier: ^2.1.0
         version: 2.1.0(vue@3.4.21)
       '@sugarat/theme':
-        specifier: 0.2.29
+        specifier: 0.2.30
         version: link:../theme
       axios:
         specifier: ^0.27.2
@@ -123,8 +123,8 @@ importers:
         specifier: ^10.2.4
         version: 10.2.4
       oh-my-live2d:
-        specifier: ^0.13.0
-        version: 0.13.0
+        specifier: ^0.15.2
+        version: 0.15.2
       swiper:
         specifier: ^11.0.5
         version: 11.0.5
@@ -135,7 +135,7 @@ importers:
         specifier: 2.0.13
         version: 2.0.13(mermaid@10.2.4)(vitepress@1.0.1)
       vitepress-plugin-pagefind:
-        specifier: 0.2.13
+        specifier: 0.2.14
         version: link:../vitepress-plugin-pagefind
       vitepress-plugin-rss:
         specifier: 0.2.2
@@ -5857,8 +5857,8 @@ packages:
       object-keys: 1.1.1
     dev: true
 
-  /oh-my-live2d@0.13.0:
-    resolution: {integrity: sha512-H9Gti6tUeXbFvWuRx3NT3g/z/mIyNHeWpvmx0mz0zVWPdZ2gjSebg2EGPrUoGd2pJhG2On30v8wDiUVjk1KGXA==}
+  /oh-my-live2d@0.15.2:
+    resolution: {integrity: sha512-0+K48pgUrJOzo6ey16KiUCdGX/pWWogRY2JeOf4JnlYo9Rnd1RCfbzMQ4sX85aAMfavNfKfx9XGw6jEl4er9Xw==}
     dev: false
 
   /once@1.4.0:
