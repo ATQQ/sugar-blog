@@ -1197,6 +1197,58 @@ type ThemeColor = 'vp-default' | 'vp-green' | 'vp-yellow' | 'vp-red' | 'el-blue'
 
 <ChangeThemeDemo />
 
+## donate
+
+* Type: `false | DonateConfig`
+
+用于控制文章底部打赏按钮
+
+::: code-group
+
+```ts [default]
+const blogTheme = getThemeConfig({
+  donate: {
+    openTitle: '赞赏我',
+    closeTitle: '下次吧',
+    description: '如果你喜欢我的文章，可以请我喝一杯咖啡~',
+    qrCodeSrc: 'https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210',
+    paymentWay: 'wechaPay'
+  }
+})
+```
+
+```ts [example]
+const blogTheme = getThemeConfig({
+  donate: {
+    openTitle: '给钱',
+    closeTitle: '不给',
+    description: '看了就得给',
+    qrCodeSrc: 'https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210',
+    paymentWay: 'aliPay'
+  }
+})
+```
+
+```ts [type]
+interface DonateConfig {
+  openTitle?: string
+  closeTitle?: string
+  description?: string
+  qrCodeSrc?: string
+  paymentWay?: string
+}
+```
+
+:::
+
+设置为 false 时，不展示
+
+```ts
+const blogTheme = getThemeConfig({
+  donate: false
+})
+```
+
 ## footer
 
 * Type: `Footer | Footer[]`
@@ -1372,6 +1424,7 @@ const blogTheme = getThemeConfig({
   }
 })
 ```
+
 ## docMetaInsert
 
 主要是指

@@ -8,6 +8,7 @@ import BlogHomeInfo from './BlogHomeInfo.vue'
 import BlogHomeBanner from './BlogHomeBanner.vue'
 import BlogList from './BlogList.vue'
 import BlogComment from './BlogComment.vue'
+import BlogDonate from './BlogDonate.vue'
 
 import BlogSidebar from './BlogSidebar.vue'
 import BlogImagePreview from './BlogImagePreview.vue'
@@ -74,6 +75,7 @@ useOml2d()
       <slot name="doc-after" />
       <!-- 评论 -->
       <ClientOnly>
+        <BlogDonate />
         <BlogBackToTop />
         <BlogComment />
       </ClientOnly>

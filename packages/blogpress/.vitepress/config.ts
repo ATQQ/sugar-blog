@@ -192,6 +192,13 @@ const blogTheme = getThemeConfig({
   },
   hotArticle: {
     pageSize: 12
+  },
+  donate: {
+    openTitle: '赞赏我',
+    closeTitle: '下次吧',
+    description: '如果你喜欢我的文章，可以请我喝一杯咖啡~',
+    qrCodeSrc: 'https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210',
+    paymentWay: 'wechaPay'
   }
 })
 

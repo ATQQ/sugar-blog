@@ -424,6 +424,7 @@ export namespace Theme {
      */
     oml2d?: Oml2dOptions
     homeTags?: boolean
+    donate?: DonateConfig | false
   }
 
   export interface BackToTop {
@@ -508,5 +509,12 @@ export namespace Theme {
      * 此方法已经废弃，这个定义将在未来某一刻被移除，请为 inspiring 配置数租来实现相同的效果
      */
     handleChangeSlogan?: (oldSlogan: string) => string | Promise<string>
+  }
+  export interface DonateConfig {
+    openTitle?: string
+    closeTitle?: string
+    description?: string
+    qrCodeSrc?: string
+    paymentWay?: string
   }
 }
