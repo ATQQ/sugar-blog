@@ -100,7 +100,7 @@ export namespace Theme {
     type: string
   }
 
-  export interface CommentConfig extends GiscusConfig {
+  export interface CommentConfig {
     /**
      * @default '评论'
      */
@@ -115,6 +115,12 @@ export namespace Theme {
      * @default true
      */
     mobileMinify?: boolean
+
+    type?: 'giscus' | 'artalk'
+
+    giscus?: GiscusConfig
+
+    artalk?: ArtalkConfig
   }
   export interface GiscusConfig {
     repo: Repo
@@ -125,6 +131,10 @@ export namespace Theme {
     inputPosition?: 'top' | 'bottom'
     lang?: string
     loading?: 'lazy' | 'eager'
+  }
+  export interface ArtalkConfig {
+    site: string
+    server: string
   }
 
   export interface HotArticle {
@@ -351,7 +361,8 @@ export namespace Theme {
     search?: SearchConfig
     /**
      * 配置评论
-     * power by https://giscus.app/zh-CN
+     * giscus: https://giscus.app/zh-CN
+     * artalk: https://artalk.js.org/
      */
     comment?: CommentConfig | false
     /**
@@ -515,6 +526,6 @@ export namespace Theme {
     closeTitle?: string
     description?: string
     qrCodeSrc?: string
-    paymentWay?: string
+    paymentWay?: 'aliPay' | 'wechatPay'
   }
 }

@@ -12,7 +12,7 @@ import {
 
 const route = useRoute()
 const docs = useArticles()
-const showTags = useConfig()?.config?.blog?.homeTags ??  true
+const showTags = useConfig()?.config?.blog?.homeTags ?? true
 const tags = computed(() => {
   return [...new Set(docs.value.map(v => v.meta.tag || []).flat(3))]
 })

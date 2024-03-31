@@ -108,11 +108,6 @@ export function useBlogThemeMode() {
   return inject(configSymbol)!.value?.blog?.blog ?? true
 }
 
-export function useGiscusConfig() {
-  const blogConfig = useConfig()
-  return blogConfig.config?.blog?.comment
-}
-
 export function useArticles() {
   const blogConfig = useConfig()
   const articles = computed(() => blogConfig.config?.blog?.pagesData || [])

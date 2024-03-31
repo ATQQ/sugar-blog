@@ -3,11 +3,13 @@ import Theme from 'vitepress/theme'
 import { useData } from 'vitepress'
 import { computed } from 'vue'
 import { useOml2d } from '../hooks/useOml2d'
-import { useBlogThemeMode } from '../composables/config/blog'
+import { useBlogConfig, useBlogThemeMode } from '../composables/config/blog'
 import BlogHomeInfo from './BlogHomeInfo.vue'
 import BlogHomeBanner from './BlogHomeBanner.vue'
 import BlogList from './BlogList.vue'
-import BlogComment from './BlogComment.vue'
+
+import BlogCommentGiscus from './BlogCommentGiscus.vue'
+import BlogCommentArtalk from './BlogCommentArtalk.vue'
 import BlogDonate from './BlogDonate.vue'
 
 import BlogSidebar from './BlogSidebar.vue'
@@ -23,6 +25,12 @@ const { frontmatter } = useData()
 const layout = computed(() => frontmatter.value.layout)
 const isBlogTheme = useBlogThemeMode()
 const { Layout } = Theme
+
+const { comment: _comment } = useBlogConfig()
+
+const commentConfig = computed(() =>
+  _comment === false ? undefined : _comment
+)
 
 // oh-my-live2d 扩展
 useOml2d()
@@ -77,11 +85,12 @@ useOml2d()
       <ClientOnly>
         <BlogDonate />
         <BlogBackToTop />
-        <BlogComment />
+        <BlogCommentGiscus v-if="commentConfig && commentConfig?.type === 'giscus'" />
+        <BlogCommentArtalk v-else-if="commentConfig && commentConfig?.type === 'artalk' " />
       </ClientOnly>
     </template>
     <template #layout-bottom>
-      <BlogFooter v-if="layout === 'home'" />
+      <BlogFooter v-if=" layout === 'home' " />
       <slot name="layout-bottom" />
     </template>
     <!-- 透传默认主题的其它插槽 -->
@@ -193,6 +202,7 @@ useOml2d()
 .blog-list-wrapper {
   width: 100%;
 }
+
 .blog-info-wrapper {
   margin-left: 16px;
   position: sticky;

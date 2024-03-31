@@ -47,6 +47,7 @@
     "@mermaid-js/mermaid-mindmap": "^9.3.0",
     "@vue/shared": "^3.2.45",
     "@vueuse/core": "^9.6.0",
+    "artalk": "^2.8.3",
     "fast-glob": "^3.2.12",
     "gray-matter": "^4.0.3",
     "markdown-it-task-checkbox": "^1.0.6",

@@ -46,11 +46,14 @@ const blogTheme = getThemeConfig({
   RSS,
   author: '粥里有勺糖',
   comment: {
-    repo: 'ATQQ/sugar-blog',
-    repoId: 'MDEwOlJlcG9zaXRvcnkyNDEyNDUyOTk',
-    category: 'Announcements',
-    categoryId: 'DIC_kwDODmEcc84COVc6',
-    inputPosition: 'top'
+    type: 'giscus',
+    giscus: {
+      repo: 'ATQQ/sugar-blog',
+      repoId: 'MDEwOlJlcG9zaXRvcnkyNDEyNDUyOTk',
+      category: 'Announcements',
+      categoryId: 'DIC_kwDODmEcc84COVc6',
+      inputPosition: 'top'
+    }
   },
   oml2d: {
     mobileDisplay: true,
@@ -256,6 +259,8 @@ export default defineConfig({
       'link',
       { rel: 'apple-touch-icon', href: '/favicon.ico', sizes: '180x180' }
     ],
+    // ['link', { href: 'Artalk Server地址/dist/Artalk.css', rel: 'stylesheet' }],
+    // ['script', { src: 'Artalk Server地址/dist/Artalk.js' }],
     ...extraHead
   ],
   vite: {

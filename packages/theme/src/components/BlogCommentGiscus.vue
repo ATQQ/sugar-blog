@@ -5,7 +5,7 @@ import { computed, h, ref, watch } from 'vue'
 import { ElIcon } from 'element-plus'
 import { Comment } from '@element-plus/icons-vue'
 import Giscus from '@giscus/vue'
-import { useGiscusConfig } from '../composables/config/blog'
+import { useBlogConfig } from '../composables/config/blog'
 import type { Theme } from '../composables/config/index'
 
 const { frontmatter } = useData()
@@ -18,27 +18,32 @@ function handleScrollToComment() {
     block: 'start'
   })
 }
-const giscusConfig = useGiscusConfig()
 
-const commentConfig = computed<Theme.CommentConfig>(() => {
-  if (!giscusConfig) {
+const { comment: _comment } = useBlogConfig()
+
+const commentConfig = computed(() =>
+  _comment === false ? undefined : _comment
+)
+
+const giscusConfig = computed<Theme.GiscusConfig>(() => {
+  if (!commentConfig.value) {
     return {} as any
   }
-  return giscusConfig
+  return commentConfig.value.giscus
 })
 
 const show = computed(() => {
   if (frontmatter.value.comment === false) {
     return frontmatter.value.comment
   }
-  if (!giscusConfig) {
-    return giscusConfig
+  if (!giscusConfig.value) {
+    return giscusConfig.value
   }
   return (
-    giscusConfig.repo
-    && giscusConfig.repoId
-    && giscusConfig.category
-    && giscusConfig.categoryId
+    giscusConfig.value.repo
+    && giscusConfig.value.repoId
+    && giscusConfig.value.category
+    && giscusConfig.value.categoryId
   )
 })
 
@@ -60,7 +65,7 @@ watch(
 )
 
 const { width } = useWindowSize()
-const mobileMinify = computed(() => width.value < 768 && (commentConfig.value.mobileMinify ?? true))
+const mobileMinify = computed(() => width.value < 768 && (commentConfig.value?.mobileMinify ?? true))
 
 const CommentIcon = commentConfig.value?.icon
   ? h('i', {
@@ -78,18 +83,18 @@ const { width: _docWidth } = useElementSize(el)
 const docWidth = computed(() => `${_docWidth.value}px`)
 
 const labelText = computed(() => {
-  return commentConfig.value.label ?? '评论'
+  return commentConfig.value?.label ?? '评论'
 })
 </script>
 
 <template>
   <div v-if="show && _docWidth" id="giscus-comment" ref="commentEl" class="comment" data-pagefind-ignore="all">
     <Giscus
-      v-if="showComment" :repo="commentConfig.repo" :repo-id="commentConfig.repoId"
-      :category="commentConfig.category" :category-id="commentConfig.categoryId"
-      :mapping="commentConfig.mapping || 'pathname'" reactions-enabled="1" emit-metadata="0"
-      :input-position="commentConfig.inputPosition || 'top'" :theme="isDark ? 'dark' : 'light'"
-      :lang="commentConfig.lang || 'zh-CN'" :loading="commentConfig.loading || 'eager'"
+      v-if="showComment" :repo="giscusConfig.repo" :repo-id="giscusConfig.repoId"
+      :category="giscusConfig.category" :category-id="giscusConfig.categoryId"
+      :mapping="giscusConfig.mapping || 'pathname'" reactions-enabled="1" emit-metadata="0"
+      :input-position="giscusConfig.inputPosition || 'top'" :theme="isDark ? 'dark' : 'light'"
+      :lang="giscusConfig.lang || 'zh-CN'" :loading="giscusConfig.loading || 'eager'"
     />
 
     <div v-show="!commentIsVisible" class="comment-btn-wrapper">
@@ -151,7 +156,7 @@ const labelText = computed(() => {
     border-radius: 2px;
     padding: 2px 6px;
 
-    span.text{
+    span.text {
       font-size: 12px;
       margin-left: 4px;
     }
