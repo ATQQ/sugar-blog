@@ -79,6 +79,11 @@ pnpm dev:theme
 
 ![公众号](packages/blogpress/public/mp-code.png)
 
+## :coffee:赞赏
+|                                  微信                                   |                                微信赞赏                                 |                                 支付宝                                  |
+| :---------------------------------------------------------------------: | :---------------------------------------------------------------------: | :---------------------------------------------------------------------: |
+| ![](https://img.cdn.sugarat.top/mdImg/MTY1MTU0NzQ0MjMzNA==651547442334) | ![](https://img.cdn.sugarat.top/mdImg/MTY0Nzc1NTYyOTE5Mw==647755629193) | ![](https://img.cdn.sugarat.top/mdImg/MTY1MTU0NzQyOTg0OA==651547429848) |
+
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=atqq/sugar-blog&type=Date)](https://star-history.com/#atqq/sugar-blog&Date)
