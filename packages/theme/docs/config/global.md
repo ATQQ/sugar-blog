@@ -413,11 +413,24 @@ export default defineConfig({
 
 ::: code-group
 
+```ts [兼容旧配置]
+const blogTheme = getThemeConfig({
+  comment: {
+    repo: 'ATQQ/sugar-blog',
+    repoId: 'MDEwOlJlcG9zaXRvcnkyNDEyNDUyOTk',
+    category: 'Announcements',
+    categoryId: 'DIC_kwDODmEcc84COVc6',
+    inputPosition: 'top',
+    mobileMinify: false
+  }
+})
+```
+
 ```ts [配置示例]
 const blogTheme = getThemeConfig({
   comment: {
     type: 'giscus',
-    giscus: {
+    options: {
       repo: 'ATQQ/sugar-blog',
       repoId: 'MDEwOlJlcG9zaXRvcnkyNDEyNDUyOTk',
       category: 'Announcements',
@@ -433,7 +446,7 @@ const blogTheme = getThemeConfig({
 const blogTheme = getThemeConfig({
   comment: {
     type: 'giscus',
-    giscus: {
+    options: {
       repo: 'ATQQ/sugar-blog',
       repoId: 'MDEwOlJlcG9zaXRvcnkyNDEyNDUyOTk',
       category: 'Announcements',
@@ -455,7 +468,9 @@ const blogTheme = getThemeConfig({
 ```
 
 ```ts [type]
-interface CommentConfig {
+type CommentConfig = ((GiscusOption & CommentCommonConfig) | GiscusConfig | ArtalkConfig)
+
+interface CommentCommonConfig {
   /**
    * @default '评论'
    */
@@ -470,23 +485,28 @@ interface CommentConfig {
    * @default true
    */
   mobileMinify?: boolean
-
-  type?: 'giscus' | 'artalk'
-
-  giscus?: GiscusConfig
-
-  artalk?: ArtalkConfig
 }
-
-interface GiscusConfig {
-  repo: string
+interface GiscusConfig extends CommentCommonConfig {
+  type: 'giscus'
+  options: GiscusOption
+}
+interface ArtalkConfig extends CommentCommonConfig {
+  type: 'artalk'
+  options: ArtalkOption
+}
+interface GiscusOption {
+  repo: Repo
   repoId: string
   category: string
   categoryId: string
-  mapping?: string
+  mapping?: Mapping
   inputPosition?: 'top' | 'bottom'
   lang?: string
-  loading?: 'lazy' | ''
+  loading?: 'lazy' | 'eager'
+}
+interface ArtalkOption {
+  site: string
+  server: string
 }
 ```
 
@@ -510,7 +530,7 @@ interface GiscusConfig {
 const blogTheme = getThemeConfig({
   comment: {
     type: 'artalk',
-    artalk: {
+    options: {
       server: 'http://localhost:8080',
       site: 'Default Site'
     },
@@ -530,7 +550,7 @@ export default defineConfig({
 const blogTheme = getThemeConfig({
   comment: {
     type: 'artalk',
-    artalk: {
+    options: {
       server: 'http://localhost:8080',
       site: 'Default Site'
     },
@@ -556,7 +576,9 @@ export default defineConfig({
 ```
 
 ```ts [type]
-interface CommentConfig {
+type CommentConfig = ((GiscusOption & CommentCommonConfig) | GiscusConfig | ArtalkConfig)
+
+interface CommentCommonConfig {
   /**
    * @default '评论'
    */
@@ -571,15 +593,26 @@ interface CommentConfig {
    * @default true
    */
   mobileMinify?: boolean
-
-  type?: 'giscus' | 'artalk'
-
-  giscus?: GiscusConfig
-
-  artalk?: ArtalkConfig
 }
-
-interface ArtalkConfig {
+interface GiscusConfig extends CommentCommonConfig {
+  type: 'giscus'
+  options: GiscusOption
+}
+interface ArtalkConfig extends CommentCommonConfig {
+  type: 'artalk'
+  options: ArtalkOption
+}
+interface GiscusOption {
+  repo: Repo
+  repoId: string
+  category: string
+  categoryId: string
+  mapping?: Mapping
+  inputPosition?: 'top' | 'bottom'
+  lang?: string
+  loading?: 'lazy' | 'eager'
+}
+interface ArtalkOption {
   site: string
   server: string
 }
@@ -1305,22 +1338,31 @@ type ThemeColor = 'vp-default' | 'vp-green' | 'vp-yellow' | 'vp-red' | 'el-blue'
 
 <ChangeThemeDemo />
 
-## donate
+## buttonAfterArticle
 
-* Type: `false | DonateConfig`
+* Type: `false | ButtonAfterArticleConfig`
 
-用于控制文章底部打赏按钮
+用于控制文章底部按钮，点击按钮会在按钮下方渲染一个自定义的html内容，例如可以用来做赞赏按钮，内置了wechatPay和aliPay两个图标，也可自定义图标(svg)。  
+
+在文章 `Frontmatter` 处可设置 `buttonAfterArticle` 为 `false` 以控制单独一篇文章是否展示该按钮
+
+```yaml
+---
+title: Docs with VitePress
+editLink: true
+buttonAfterArticle: false
+---
+```
 
 ::: code-group
 
 ```ts [default]
 const blogTheme = getThemeConfig({
-  donate: {
+  buttonAfterArticle: {
     openTitle: '赞赏我',
     closeTitle: '下次吧',
-    description: '如果你喜欢我的文章，可以请我喝一杯咖啡~',
-    qrCodeSrc: 'https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210',
-    paymentWay: 'wechaPay'
+    content: '<img src="https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210">',
+    icon: 'wechatPay'
   }
 })
 ```
@@ -1331,19 +1373,18 @@ const blogTheme = getThemeConfig({
     openTitle: '给钱',
     closeTitle: '不给',
     description: '看了就得给',
-    qrCodeSrc: 'https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210',
-    paymentWay: 'aliPay'
+    content: '<img src="https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210">',
+    icon: 'aliPay'
   }
 })
 ```
 
 ```ts [type]
-interface DonateConfig {
+interface ButtonAfterArticleConfig {
   openTitle?: string
   closeTitle?: string
-  description?: string
-  qrCodeSrc?: string
-  paymentWay?: string
+  content?: string
+  icon?: 'aliPay' | 'wechatPay' | string
 }
 ```
 
