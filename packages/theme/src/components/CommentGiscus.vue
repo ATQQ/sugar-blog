@@ -20,16 +20,31 @@ function handleScrollToComment() {
 }
 
 const { comment: _comment } = useBlogConfig()
-
 const commentConfig = computed(() =>
   _comment === false ? undefined : _comment
 )
-
-const giscusConfig = computed<Theme.GiscusConfig>(() => {
+const giscusConfig = computed(() => {
   if (!commentConfig.value) {
     return {} as any
   }
-  return commentConfig.value.giscus
+  if ('type' in commentConfig.value && (commentConfig.value as Theme.GiscusConfig).type === 'giscus') {
+    const g = commentConfig.value as Theme.GiscusConfig
+    return {
+      repo: g.options.repo,
+      repoId: g.options.repoId,
+      category: g.options.category,
+      categoryId: g.options.categoryId
+    }
+  }
+  else {
+    const g = commentConfig.value as Theme.GiscusOption & Theme.CommentCommonConfig
+    return {
+      repo: g.repo,
+      repoId: g.repoId,
+      category: g.category,
+      categoryId: g.categoryId
+    }
+  }
 })
 
 const show = computed(() => {

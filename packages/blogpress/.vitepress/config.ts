@@ -46,14 +46,11 @@ const blogTheme = getThemeConfig({
   RSS,
   author: '粥里有勺糖',
   comment: {
-    type: 'giscus',
-    giscus: {
-      repo: 'ATQQ/sugar-blog',
-      repoId: 'MDEwOlJlcG9zaXRvcnkyNDEyNDUyOTk',
-      category: 'Announcements',
-      categoryId: 'DIC_kwDODmEcc84COVc6',
-      inputPosition: 'top'
-    }
+    repo: 'ATQQ/sugar-blog',
+    repoId: 'MDEwOlJlcG9zaXRvcnkyNDEyNDUyOTk',
+    category: 'Announcements',
+    categoryId: 'DIC_kwDODmEcc84COVc6',
+    inputPosition: 'top'
   },
   oml2d: {
     mobileDisplay: true,
@@ -196,12 +193,11 @@ const blogTheme = getThemeConfig({
   hotArticle: {
     pageSize: 12
   },
-  donate: {
+  buttonAfterArticle: {
     openTitle: '赞赏我',
     closeTitle: '下次吧',
-    description: '如果你喜欢我的文章，可以请我喝一杯咖啡~',
-    qrCodeSrc: 'https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210',
-    paymentWay: 'wechaPay'
+    content: '<img src="https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210">',
+    icon: 'wechatPay'
   }
 })
 

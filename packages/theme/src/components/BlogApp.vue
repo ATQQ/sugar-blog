@@ -7,11 +7,6 @@ import { useBlogConfig, useBlogThemeMode } from '../composables/config/blog'
 import BlogHomeInfo from './BlogHomeInfo.vue'
 import BlogHomeBanner from './BlogHomeBanner.vue'
 import BlogList from './BlogList.vue'
-
-import BlogCommentGiscus from './BlogCommentGiscus.vue'
-import BlogCommentArtalk from './BlogCommentArtalk.vue'
-import BlogDonate from './BlogDonate.vue'
-
 import BlogSidebar from './BlogSidebar.vue'
 import BlogImagePreview from './BlogImagePreview.vue'
 import BlogArticleAnalyze from './BlogArticleAnalyze.vue'
@@ -20,6 +15,10 @@ import BlogPopover from './BlogPopover.vue'
 import BlogFooter from './BlogFooter.vue'
 import BlogHomeHeaderAvatar from './BlogHomeHeaderAvatar.vue'
 import BlogBackToTop from './BlogBackToTop.vue'
+import CommentWrapper from './CommentWrapper.vue'
+import CommentGiscus from './CommentGiscus.vue'
+import CommentArtalk from './CommentArtalk.vue'
+import BlogButtonAfterArticle from './BlogButtonAfterArticle.vue'
 
 const { frontmatter } = useData()
 const layout = computed(() => frontmatter.value.layout)
@@ -28,8 +27,8 @@ const { Layout } = Theme
 
 const { comment: _comment } = useBlogConfig()
 
-const commentConfig = computed(() =>
-  _comment === false ? undefined : _comment
+const isShowComment = computed(() =>
+  _comment !== false
 )
 
 // oh-my-live2d 扩展
@@ -83,14 +82,16 @@ useOml2d()
       <slot name="doc-after" />
       <!-- 评论 -->
       <ClientOnly>
-        <BlogDonate />
+        <BlogButtonAfterArticle />
         <BlogBackToTop />
-        <BlogCommentGiscus v-if="commentConfig && commentConfig?.type === 'giscus'" />
-        <BlogCommentArtalk v-else-if="commentConfig && commentConfig?.type === 'artalk' " />
+        <CommentWrapper v-if="isShowComment">
+          <CommentArtalk />
+          <CommentGiscus />
+        </CommentWrapper>
       </ClientOnly>
     </template>
     <template #layout-bottom>
-      <BlogFooter v-if=" layout === 'home' " />
+      <BlogFooter v-if="layout === 'home'" />
       <slot name="layout-bottom" />
     </template>
     <!-- 透传默认主题的其它插槽 -->

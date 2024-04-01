@@ -100,7 +100,9 @@ export namespace Theme {
     type: string
   }
 
-  export interface CommentConfig {
+  export type CommentConfig = ((GiscusOption & CommentCommonConfig) | GiscusConfig | ArtalkConfig)
+
+  export interface CommentCommonConfig {
     /**
      * @default '评论'
      */
@@ -115,14 +117,16 @@ export namespace Theme {
      * @default true
      */
     mobileMinify?: boolean
-
-    type?: 'giscus' | 'artalk'
-
-    giscus?: GiscusConfig
-
-    artalk?: ArtalkConfig
   }
-  export interface GiscusConfig {
+  export interface GiscusConfig extends CommentCommonConfig {
+    type: 'giscus'
+    options: GiscusOption
+  }
+  export interface ArtalkConfig extends CommentCommonConfig {
+    type: 'artalk'
+    options: ArtalkOption
+  }
+  export interface GiscusOption {
     repo: Repo
     repoId: string
     category: string
@@ -132,7 +136,7 @@ export namespace Theme {
     lang?: string
     loading?: 'lazy' | 'eager'
   }
-  export interface ArtalkConfig {
+  export interface ArtalkOption {
     site: string
     server: string
   }
@@ -435,7 +439,7 @@ export namespace Theme {
      */
     oml2d?: Oml2dOptions
     homeTags?: boolean
-    donate?: DonateConfig | false
+    buttonAfterArticle?: ButtonAfterArticleConfig | false
   }
 
   export interface BackToTop {
@@ -521,11 +525,10 @@ export namespace Theme {
      */
     handleChangeSlogan?: (oldSlogan: string) => string | Promise<string>
   }
-  export interface DonateConfig {
+  export interface ButtonAfterArticleConfig {
     openTitle?: string
     closeTitle?: string
-    description?: string
-    qrCodeSrc?: string
-    paymentWay?: 'aliPay' | 'wechatPay'
+    content?: string
+    icon?: 'aliPay' | 'wechatPay' | string
   }
 }

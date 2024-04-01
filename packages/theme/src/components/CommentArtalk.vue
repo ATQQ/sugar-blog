@@ -3,7 +3,8 @@ import { computed, h, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useElementSize, useElementVisibility, useWindowSize } from '@vueuse/core'
 import { useData, useRouter } from 'vitepress'
 import Artalk from 'artalk'
-import 'artalk/dist/Artalk.css'
+
+// import 'artalk/dist/Artalk.css'
 import { ElIcon } from 'element-plus'
 import { Comment } from '@element-plus/icons-vue'
 import { useBlogConfig } from '../composables/config/blog'
@@ -18,16 +19,10 @@ const page = useData().page
 let artalk: Artalk
 
 const { comment: _comment } = useBlogConfig()
-
 const commentConfig = computed(() =>
   _comment === false ? undefined : _comment
 )
-const artalkConfig = computed<Theme.ArtalkConfig>(() => {
-  if (!commentConfig.value) {
-    return {} as any
-  }
-  return commentConfig.value.artalk
-})
+const artalkConfig = computed(() => commentConfig.value ? (commentConfig.value as Theme.ArtalkConfig) : undefined)
 
 const commentIsVisible = useElementVisibility(el)
 
@@ -74,8 +69,8 @@ function getConfByPage() {
   return {
     pageKey: router.route.path,
     pageTitle: page.value.title,
-    server: artalkConfig.value.server,
-    site: artalkConfig.value.site,
+    server: artalkConfig.value?.options.server,
+    site: artalkConfig.value?.options.site,
   }
 }
 
@@ -142,7 +137,10 @@ const labelText = computed(() => {
 </script>
 
 <template>
-  <div v-if="artalkConfig && docWidth" id="artalk-comment" ref="el" style="margin-top: 20px;" />
+  <div
+    v-if="artalkConfig && artalkConfig.type === 'artalk' && docWidth" id="artalk-comment" ref="el"
+    style="margin-top: 20px;"
+  />
   <div v-show="!commentIsVisible" class="comment-btn-wrapper">
     <span v-if="!mobileMinify && labelText" class="icon-wrapper-text" @click="handleScrollToComment">
       <ElIcon :size="20">
