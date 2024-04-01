@@ -166,7 +166,7 @@ const link = computed(() => withBase(wrapperCleanUrls(!!cleanUrls, props.route))
   margin-left: 24px;
   border-radius: 2px;
   background-repeat: no-repeat;
-  background-size: 120px 80px;
+  background-size: contain;
 }
 
 .pc-visible {
@@ -181,7 +181,7 @@ const link = computed(() => withBase(wrapperCleanUrls(!!cleanUrls, props.route))
   .cover-img {
     width: 100px;
     height: 60px;
-    background-size: 100px 60px;
+    background-size: contain;
   }
 
   .pc-visible {
