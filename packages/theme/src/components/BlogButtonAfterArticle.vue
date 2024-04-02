@@ -5,36 +5,34 @@ import { useData } from 'vitepress'
 import { useBlogConfig } from '../composables/config/blog'
 import { aliPaySVG, weChatPaySVG } from '../constants/svg'
 
-// import type { Theme } from '../composables/config/index'
-
 const { buttonAfterArticle: _buttonAfterArticle } = useBlogConfig()
 const { frontmatter } = useData()
 const frontmatterConfig = computed(() => frontmatter.value.buttonAfterArticle)
 
 const buttonAfterArticleConfig = computed(() => {
+  if (frontmatterConfig.value === undefined) {
+    return _buttonAfterArticle === false ? undefined : _buttonAfterArticle
+  }
   if (frontmatterConfig.value === false) {
-    // return frontmatterConfig.value === false ? undefined : frontmatterConfig.value as Theme.ButtonAfterArticleConfig
     return undefined
   }
-  return _buttonAfterArticle === false ? undefined :{..._buttonAfterArticle,...frontmatterConfig.value}
+  return { ..._buttonAfterArticle, ...frontmatterConfig.value }
 })
 
 const showContent = ref(false)
-const content = buttonAfterArticleConfig.value?.content
-const openTitle = buttonAfterArticleConfig.value?.openTitle
-const closeTitle = buttonAfterArticleConfig.value?.closeTitle
-const icon = buttonAfterArticleConfig.value?.icon
 
-let svg = weChatPaySVG
-if (icon === 'aliPay') {
-  svg = aliPaySVG
-}
-else if (icon === 'wechatPay') {
-  svg = weChatPaySVG
-}
-else {
-  svg = icon as string
-}
+const svg = computed(() => {
+  const icon = buttonAfterArticleConfig.value?.icon
+  if (icon === 'aliPay') {
+    return aliPaySVG
+  }
+  else if (icon === 'wechatPay') {
+    return weChatPaySVG
+  }
+  else {
+    return icon as string
+  }
+})
 
 function toggleContent() {
   showContent.value = !showContent.value
@@ -45,10 +43,10 @@ function toggleContent() {
   <div v-if="buttonAfterArticleConfig" class="appreciation-container">
     <ElButton class="content-button" :type="showContent ? 'danger' : 'primary'" @click="toggleContent">
       <span class="content-icon" v-html="svg" />
-      {{ showContent ? closeTitle : openTitle }}
+      {{ showContent ? buttonAfterArticleConfig.closeTitle : buttonAfterArticleConfig.openTitle }}
     </ElButton>
     <transition name="content">
-      <div v-if="showContent" class="content-container" v-html="content" />
+      <div v-if="showContent" class="content-container" v-html="buttonAfterArticleConfig.content" />
     </transition>
   </div>
 </template>
@@ -68,6 +66,7 @@ function toggleContent() {
   align-items: center;
   height: 200px;
   overflow: hidden;
+  margin-top: 20px;
 }
 
 .content-icon {

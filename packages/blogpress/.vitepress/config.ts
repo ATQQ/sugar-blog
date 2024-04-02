@@ -192,12 +192,6 @@ const blogTheme = getThemeConfig({
   },
   hotArticle: {
     pageSize: 12
-  },
-  buttonAfterArticle: {
-    openTitle: '赞赏我',
-    closeTitle: '下次吧',
-    content: '<img src="https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210">',
-    icon: 'wechatPay'
   }
 })
 

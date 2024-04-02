@@ -3,14 +3,11 @@ import { computed, h, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useElementSize, useElementVisibility, useWindowSize } from '@vueuse/core'
 import { useData, useRouter } from 'vitepress'
 import Artalk from 'artalk'
-
-// import 'artalk/dist/Artalk.css'
 import { ElIcon } from 'element-plus'
 import { Comment } from '@element-plus/icons-vue'
 import { useBlogConfig } from '../composables/config/blog'
 import type { Theme } from '../composables/config/index'
 
-// const el = ref<HTMLElement | null>(null)
 const el = ref(null)
 
 const router = useRouter()
@@ -22,7 +19,16 @@ const { comment: _comment } = useBlogConfig()
 const commentConfig = computed(() =>
   _comment === false ? undefined : _comment
 )
-const artalkConfig = computed(() => commentConfig.value ? (commentConfig.value as Theme.ArtalkConfig) : undefined)
+const artalkConfig = computed(() => {
+  if (!commentConfig.value) {
+    return {} as any
+  }
+  if ('type' in commentConfig.value && (commentConfig.value as Theme.ArtalkConfig).type === 'artalk') {
+    const g = commentConfig.value as Theme.ArtalkConfig
+    return g
+  }
+  return undefined
+})
 
 const commentIsVisible = useElementVisibility(el)
 
@@ -43,22 +49,22 @@ onMounted(() => {
 
 watch(() => router.route.path, () => {
   nextTick(() => {
-    artalk.update(getConfByPage())
-    artalk.reload()
+    if (artalk) {
+      artalk.update(getConfByPage())
+      artalk.reload()
+    }
   })
 })
 
 onUnmounted(() => {
-  artalk.destroy()
+  if (artalk) {
+    artalk.destroy()
+  }
 })
 
 function initArtalk(conf: any) {
   artalk = Artalk.init({
     el: el.value,
-    emoticons: '/assets/emoticons/default.json',
-    gravatar: {
-      mirror: 'https://cravatar.cn/avatar/'
-    },
     ...conf
   })
 
@@ -69,31 +75,12 @@ function getConfByPage() {
   return {
     pageKey: router.route.path,
     pageTitle: page.value.title,
-    server: artalkConfig.value?.options.server,
-    site: artalkConfig.value?.options.site,
+    server: artalkConfig.value?.options?.server,
+    site: artalkConfig.value?.options?.site,
   }
 }
 
 function loadExtraFuncs() {
-  // // 图片灯箱插件
-  // artalk.on('list-loaded', () => {
-  //   document.querySelectorAll('.atk-comment .atk-content').forEach(($content) => {
-  //     const imgEls = $content.querySelectorAll<HTMLImageElement>('img:not([atk-emoticon]):not([atk-lightbox])')
-  //     imgEls.forEach((imgEl) => {
-  //       imgEl.setAttribute('atk-lightbox', '')
-  //       const linkEl = document.createElement('a')
-  //       linkEl.setAttribute('class', 'atk-img-link')
-  //       linkEl.setAttribute('href', imgEl.src)
-  //       linkEl.setAttribute('data-src', imgEl.src)
-  //       linkEl.append(imgEl.cloneNode())
-  //       imgEl.replaceWith(linkEl)
-  //     })
-  //     // @ts-expect-error
-  //     if (imgEls.length)
-  //       lightGallery($content, { selector: '.atk-img-link' })
-  //   })
-  // })
-
   // 夜间模式
   const HTMLElement = document.querySelector('html')
   if (HTMLElement) {
@@ -137,10 +124,7 @@ const labelText = computed(() => {
 </script>
 
 <template>
-  <div
-    v-if="artalkConfig && artalkConfig.type === 'artalk' && docWidth" id="artalk-comment" ref="el"
-    style="margin-top: 20px;"
-  />
+  <div v-if="artalkConfig && docWidth" id="artalk-comment" ref="el" style="margin-top: 20px;" />
   <div v-show="!commentIsVisible" class="comment-btn-wrapper">
     <span v-if="!mobileMinify && labelText" class="icon-wrapper-text" @click="handleScrollToComment">
       <ElIcon :size="20">

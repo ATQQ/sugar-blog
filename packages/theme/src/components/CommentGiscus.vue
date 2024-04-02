@@ -29,21 +29,11 @@ const giscusConfig = computed(() => {
   }
   if ('type' in commentConfig.value && (commentConfig.value as Theme.GiscusConfig).type === 'giscus') {
     const g = commentConfig.value as Theme.GiscusConfig
-    return {
-      repo: g.options.repo,
-      repoId: g.options.repoId,
-      category: g.options.category,
-      categoryId: g.options.categoryId
-    }
+    return g.options
   }
   else {
     const g = commentConfig.value as Theme.GiscusOption & Theme.CommentCommonConfig
-    return {
-      repo: g.repo,
-      repoId: g.repoId,
-      category: g.category,
-      categoryId: g.categoryId
-    }
+    return g
   }
 })
 

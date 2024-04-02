@@ -405,6 +405,49 @@ export default defineConfig({
 
 ## comment
 
+```ts [type]
+type CommentConfig = ((GiscusOption & CommentCommonConfig) | GiscusConfig | ArtalkConfig)
+
+interface CommentCommonConfig {
+  /**
+   * @default '评论'
+   */
+  label?: string
+  /**
+   * 自定义图标，SVG 格式
+   * @recommend https://iconbuddy.app/search?q=fire
+   */
+  icon?: string
+  /**
+   * 移动端最小化按钮
+   * @default true
+   */
+  mobileMinify?: boolean
+}
+interface GiscusConfig extends CommentCommonConfig {
+  type: 'giscus'
+  options: GiscusOption
+}
+interface ArtalkConfig extends CommentCommonConfig {
+  type: 'artalk'
+  options: ArtalkOption
+}
+interface GiscusOption {
+  repo: Repo
+  repoId: string
+  category: string
+  categoryId: string
+  mapping?: Mapping
+  inputPosition?: 'top' | 'bottom'
+  lang?: string
+  loading?: 'lazy' | 'eager'
+}
+interface ArtalkOption {
+  site: string
+  server: string
+}
+```
+
 ### giscus
 
 配置文章的评论，使用 [giscus](https://giscus.app/zh-CN)（由 GitHub Discussions 驱动的评论系统）
@@ -465,51 +508,6 @@ const blogTheme = getThemeConfig({
     mobileMinify: false
   }
 })
-```
-
-```ts [type]
-type CommentConfig = ((GiscusOption & CommentCommonConfig) | GiscusConfig | ArtalkConfig)
-
-interface CommentCommonConfig {
-  /**
-   * @default '评论'
-   */
-  label?: string
-  /**
-   * 自定义图标，SVG 格式
-   * @recommend https://iconbuddy.app/search?q=fire
-   */
-  icon?: string
-  /**
-   * 移动端最小化按钮
-   * @default true
-   */
-  mobileMinify?: boolean
-}
-interface GiscusConfig extends CommentCommonConfig {
-  type: 'giscus'
-  options: GiscusOption
-}
-interface ArtalkConfig extends CommentCommonConfig {
-  type: 'artalk'
-  options: ArtalkOption
-}
-
-type Mapping = "number" | "title" | "url" | "og:title" | "specific" | "pathname"
-interface GiscusOption {
-  repo: Repo
-  repoId: string
-  category: string
-  categoryId: string
-  mapping?: Mapping
-  inputPosition?: 'top' | 'bottom'
-  lang?: string
-  loading?: 'lazy' | 'eager'
-}
-interface ArtalkOption {
-  site: string
-  server: string
-}
 ```
 
 :::
@@ -575,49 +573,6 @@ export default defineConfig({
     ['script', { src: 'http://localhost:8080/dist/Artalk.js' }],
   ]
 })
-```
-
-```ts [type]
-type CommentConfig = ((GiscusOption & CommentCommonConfig) | GiscusConfig | ArtalkConfig)
-
-interface CommentCommonConfig {
-  /**
-   * @default '评论'
-   */
-  label?: string
-  /**
-   * 自定义图标，SVG 格式
-   * @recommend https://iconbuddy.app/search?q=fire
-   */
-  icon?: string
-  /**
-   * 移动端最小化按钮
-   * @default true
-   */
-  mobileMinify?: boolean
-}
-interface GiscusConfig extends CommentCommonConfig {
-  type: 'giscus'
-  options: GiscusOption
-}
-interface ArtalkConfig extends CommentCommonConfig {
-  type: 'artalk'
-  options: ArtalkOption
-}
-interface GiscusOption {
-  repo: Repo
-  repoId: string
-  category: string
-  categoryId: string
-  mapping?: Mapping
-  inputPosition?: 'top' | 'bottom'
-  lang?: string
-  loading?: 'lazy' | 'eager'
-}
-interface ArtalkOption {
-  site: string
-  server: string
-}
 ```
 
 :::
@@ -1352,7 +1307,11 @@ type ThemeColor = 'vp-default' | 'vp-green' | 'vp-yellow' | 'vp-red' | 'el-blue'
 ---
 title: Docs with VitePress
 editLink: true
-buttonAfterArticle: false
+buttonAfterArticle:
+  openTitle: 给钱
+  closeTitle: 不给
+  content: '<img src="https://img.cdn.sugarat.top/mdImg/MTY4NTIwMTQwMTAzNg==685201401036">'
+  icon: aliPay
 ---
 ```
 
@@ -1371,10 +1330,9 @@ const blogTheme = getThemeConfig({
 
 ```ts [example]
 const blogTheme = getThemeConfig({
-  donate: {
+  buttonAfterArticle: {
     openTitle: '给钱',
     closeTitle: '不给',
-    description: '看了就得给',
     content: '<img src="https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210">',
     icon: 'aliPay'
   }

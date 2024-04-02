@@ -15,7 +15,6 @@ import BlogPopover from './BlogPopover.vue'
 import BlogFooter from './BlogFooter.vue'
 import BlogHomeHeaderAvatar from './BlogHomeHeaderAvatar.vue'
 import BlogBackToTop from './BlogBackToTop.vue'
-import CommentWrapper from './CommentWrapper.vue'
 import CommentGiscus from './CommentGiscus.vue'
 import CommentArtalk from './CommentArtalk.vue'
 import BlogButtonAfterArticle from './BlogButtonAfterArticle.vue'
@@ -84,10 +83,10 @@ useOml2d()
       <ClientOnly>
         <BlogButtonAfterArticle />
         <BlogBackToTop />
-        <CommentWrapper v-if="isShowComment">
+        <template v-if="isShowComment">
           <CommentArtalk />
           <CommentGiscus />
-        </CommentWrapper>
+        </template>
       </ClientOnly>
     </template>
     <template #layout-bottom>
