@@ -167,6 +167,7 @@ const link = computed(() => withBase(wrapperCleanUrls(!!cleanUrls, props.route))
   border-radius: 2px;
   background-repeat: no-repeat;
   background-size: contain;
+  background-position: center;
 }
 
 .pc-visible {
