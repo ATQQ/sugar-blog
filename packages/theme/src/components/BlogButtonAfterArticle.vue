@@ -16,7 +16,7 @@ const buttonAfterArticleConfig = computed(() => {
     // return frontmatterConfig.value === false ? undefined : frontmatterConfig.value as Theme.ButtonAfterArticleConfig
     return undefined
   }
-  return _buttonAfterArticle === false ? undefined : _buttonAfterArticle
+  return _buttonAfterArticle === false ? undefined :{..._buttonAfterArticle,...frontmatterConfig.value}
 })
 
 const showContent = ref(false)
