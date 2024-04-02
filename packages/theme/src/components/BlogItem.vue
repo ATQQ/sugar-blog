@@ -183,6 +183,7 @@ const link = computed(() => withBase(wrapperCleanUrls(!!cleanUrls, props.route))
     width: 100px;
     height: 60px;
     background-size: contain;
+    background-position: center;
   }
 
   .pc-visible {
