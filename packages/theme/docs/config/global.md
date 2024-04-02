@@ -494,6 +494,8 @@ interface ArtalkConfig extends CommentCommonConfig {
   type: 'artalk'
   options: ArtalkOption
 }
+
+type Mapping = "number" | "title" | "url" | "og:title" | "specific" | "pathname"
 interface GiscusOption {
   repo: Repo
   repoId: string
