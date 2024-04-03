@@ -404,7 +404,9 @@ export default defineConfig({
 :::
 
 ## comment
+* type: `false | CommentConfig`
 
+:::details 查看类型定义
 ```ts [type]
 type CommentConfig = ((GiscusOption & CommentCommonConfig) | GiscusConfig | ArtalkConfig)
 
@@ -448,6 +450,8 @@ interface ArtalkOption {
 }
 ```
 
+:::
+
 ### giscus
 
 配置文章的评论，使用 [giscus](https://giscus.app/zh-CN)（由 GitHub Discussions 驱动的评论系统）
@@ -464,7 +468,6 @@ const blogTheme = getThemeConfig({
     category: 'Announcements',
     categoryId: 'DIC_kwDODmEcc84COVc6',
     inputPosition: 'top',
-    mobileMinify: false
   }
 })
 ```
@@ -480,7 +483,7 @@ const blogTheme = getThemeConfig({
       categoryId: 'DIC_kwDODmEcc84COVc6',
       inputPosition: 'top'
     },
-    mobileMinify: false
+    mobileMinify: true
   }
 })
 ```
@@ -533,18 +536,11 @@ const blogTheme = getThemeConfig({
   comment: {
     type: 'artalk',
     options: {
-      server: 'http://localhost:8080',
+      // 建议通过反向代理处理跨域问题，将路径指向服务地址 例如 http://localhost:23366
+      server: '/artalk',
       site: 'Default Site'
     },
-    mobileMinify: false
   }
-})
-
-export default defineConfig({
-  head: [
-    ['link', { href: 'http://localhost:8080/dist/Artalk.css', rel: 'stylesheet' }],
-    ['script', { src: 'http://localhost:8080/dist/Artalk.js' }],
-  ]
 })
 ```
 
