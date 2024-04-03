@@ -564,13 +564,6 @@ const blogTheme = getThemeConfig({
     mobileMinify: false
   }
 })
-
-export default defineConfig({
-  head: [
-    ['link', { href: 'http://localhost:8080/dist/Artalk.css', rel: 'stylesheet' }],
-    ['script', { src: 'http://localhost:8080/dist/Artalk.js' }],
-  ]
-})
 ```
 
 :::
