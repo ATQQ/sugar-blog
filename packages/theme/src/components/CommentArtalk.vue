@@ -16,18 +16,11 @@ const page = useData().page
 let artalk: Artalk
 
 const { comment: _comment } = useBlogConfig()
-const commentConfig = computed(() =>
-  _comment === false ? undefined : _comment
-)
 const artalkConfig = computed(() => {
-  if (!commentConfig.value) {
-    return {} as any
+  if(!_comment?.type !== 'artalk'){
+    return false
   }
-  if ('type' in commentConfig.value && (commentConfig.value as Theme.ArtalkConfig).type === 'artalk') {
-    const g = commentConfig.value as Theme.ArtalkConfig
-    return g
-  }
-  return undefined
+  return _comment
 })
 
 const commentIsVisible = useElementVisibility(el)
