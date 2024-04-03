@@ -249,8 +249,6 @@ export default defineConfig({
       'link',
       { rel: 'apple-touch-icon', href: '/favicon.ico', sizes: '180x180' }
     ],
-    // ['link', { href: 'Artalk Server地址/dist/Artalk.css', rel: 'stylesheet' }],
-    // ['script', { src: 'Artalk Server地址/dist/Artalk.js' }],
     ...extraHead
   ],
   vite: {
