@@ -3,7 +3,7 @@ import Theme from 'vitepress/theme'
 import { useData } from 'vitepress'
 import { computed } from 'vue'
 import { useOml2d } from '../hooks/useOml2d'
-import { useBlogConfig, useBlogThemeMode } from '../composables/config/blog'
+import { useBlogThemeMode } from '../composables/config/blog'
 import BlogHomeInfo from './BlogHomeInfo.vue'
 import BlogHomeBanner from './BlogHomeBanner.vue'
 import BlogList from './BlogList.vue'
@@ -16,19 +16,15 @@ import BlogFooter from './BlogFooter.vue'
 import BlogHomeHeaderAvatar from './BlogHomeHeaderAvatar.vue'
 import BlogBackToTop from './BlogBackToTop.vue'
 import CommentGiscus from './CommentGiscus.vue'
-import CommentArtalk from './CommentArtalk.vue'
+
+// import CommentArtalk from './CommentArtalk.vue'
 import BlogButtonAfterArticle from './BlogButtonAfterArticle.vue'
+import BlogCommentWrapper from './BlogCommentWrapper.vue'
 
 const { frontmatter } = useData()
 const layout = computed(() => frontmatter.value.layout)
 const isBlogTheme = useBlogThemeMode()
 const { Layout } = Theme
-
-const { comment: _comment } = useBlogConfig()
-
-const isShowComment = computed(() =>
-  _comment !== false
-)
 
 // oh-my-live2d 扩展
 useOml2d()
@@ -83,10 +79,10 @@ useOml2d()
       <ClientOnly>
         <BlogButtonAfterArticle />
         <BlogBackToTop />
-        <template v-if="isShowComment">
-          <CommentArtalk />
+        <BlogCommentWrapper>
+          <!-- <CommentArtalk /> -->
           <CommentGiscus />
-        </template>
+        </BlogCommentWrapper>
       </ClientOnly>
     </template>
     <template #layout-bottom>
