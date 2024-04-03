@@ -17,7 +17,7 @@ import BlogHomeHeaderAvatar from './BlogHomeHeaderAvatar.vue'
 import BlogBackToTop from './BlogBackToTop.vue'
 import CommentGiscus from './CommentGiscus.vue'
 
-// import CommentArtalk from './CommentArtalk.vue'
+import CommentArtalk from './CommentArtalk.vue'
 import BlogButtonAfterArticle from './BlogButtonAfterArticle.vue'
 import BlogCommentWrapper from './BlogCommentWrapper.vue'
 
@@ -80,7 +80,7 @@ useOml2d()
         <BlogButtonAfterArticle />
         <BlogBackToTop />
         <BlogCommentWrapper>
-          <!-- <CommentArtalk /> -->
+          <CommentArtalk />
           <CommentGiscus />
         </BlogCommentWrapper>
       </ClientOnly>

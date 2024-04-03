@@ -134,7 +134,6 @@ export function patchVPConfig(vpConfig: any, cfg?: Partial<Theme.BlogConfig>) {
       vpConfig.head.push(['script', { src: `${server}/dist/Artalk.js` }])
     }
   }
-  console.log(vpConfig.head)
 }
 
 export function patchVPThemeConfig(

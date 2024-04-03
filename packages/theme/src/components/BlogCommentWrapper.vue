@@ -23,7 +23,7 @@ const commentConfig = computed(() =>
 )
 
 const show = computed(() => {
-  return _comment !== false && frontmatter.value.comment !== false
+  return _comment && frontmatter.value.comment !== false
 })
 
 const { width } = useWindowSize()

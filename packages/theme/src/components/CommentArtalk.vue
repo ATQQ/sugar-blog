@@ -1,224 +1,93 @@
 <script setup lang="ts">
-import { computed, h, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
-import { useElementSize, useElementVisibility, useWindowSize } from '@vueuse/core'
-import { useData, useRouter } from 'vitepress'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
+import { useData, useRoute } from 'vitepress'
 import Artalk from 'artalk'
-import { ElIcon } from 'element-plus'
-import { Comment } from '@element-plus/icons-vue'
 import { useBlogConfig } from '../composables/config/blog'
-import type { Theme } from '../composables/config/index'
 
-const el = ref(null)
+const { isDark, page } = useData()
 
-const router = useRouter()
-const page = useData().page
+const el = ref<HTMLDivElement>()
 
-let artalk: Artalk
+const route = useRoute()
 
-const { comment: _comment } = useBlogConfig()
-const artalkConfig = computed(() => {
-  if(!_comment?.type !== 'artalk'){
-    return false
+const artalk = ref<Artalk>()
+
+const { comment } = useBlogConfig()
+const commentConfig = computed(() => {
+  if (comment && 'type' in comment && comment.type === 'artalk') {
+    return comment.options
   }
-  return _comment
+
+  return false
 })
-
-const commentIsVisible = useElementVisibility(el)
-
-function handleScrollToComment() {
-  document.querySelector('#artalk-comment')?.scrollIntoView({
-    behavior: 'smooth',
-    block: 'start'
-  })
-}
 
 onMounted(() => {
-  nextTick(() => {
-    if (artalkConfig.value) {
-      initArtalk(getConfByPage())
-    }
-  })
+  if (commentConfig.value && el.value) {
+    artalk.value = Artalk.init({
+      el: el.value,
+      darkMode: isDark.value,
+      pageKey: route.path,
+      pageTitle: page.value.title,
+      server: commentConfig.value?.server,
+      site: commentConfig.value?.site,
+    })
+  }
 })
 
-watch(() => router.route.path, () => {
-  nextTick(() => {
-    if (artalk) {
-      artalk.update(getConfByPage())
-      artalk.reload()
-    }
-  })
+watch(() => route.path, () => {
+  if (artalk.value) {
+    artalk.value.update({
+      pageKey: route.path,
+      pageTitle: page.value.title,
+    })
+    artalk.value.reload()
+  }
 })
 
 onUnmounted(() => {
-  if (artalk) {
-    artalk.destroy()
+  if (artalk.value) {
+    artalk.value.destroy()
   }
 })
 
-function initArtalk(conf: any) {
-  artalk = Artalk.init({
-    el: el.value,
-    ...conf
-  })
-
-  loadExtraFuncs()
-}
-
-function getConfByPage() {
-  return {
-    pageKey: router.route.path,
-    pageTitle: page.value.title,
-    server: artalkConfig.value?.options?.server,
-    site: artalkConfig.value?.options?.site,
+watch(isDark, () => {
+  if (artalk.value) {
+    artalk.value.setDarkMode(isDark.value)
   }
-}
-
-function loadExtraFuncs() {
-  // 夜间模式
-  const HTMLElement = document.querySelector('html')
-  if (HTMLElement) {
-    const darkMode = HTMLElement.classList.contains('dark')
-    artalk.setDarkMode(darkMode)
-
-    new MutationObserver((mList) => {
-      mList.forEach((m) => {
-        if (m.attributeName !== 'class')
-          return
-
-        // @ts-expect-error
-        const darkMode = m.target.classList.contains('dark')
-        artalk.setDarkMode(darkMode)
-      })
-    }).observe(HTMLElement, { attributes: true })
-  }
-}
-
-const { width } = useWindowSize()
-const mobileMinify = computed(() => width.value < 768 && (commentConfig.value?.mobileMinify ?? true))
-
-const CommentIcon = commentConfig.value?.icon
-  ? h('i', {
-    onVnodeMounted(vnode) {
-      if (vnode.el) {
-        vnode.el.outerHTML = commentConfig.value?.icon
-      }
-    },
-  })
-  : h(Comment)
-
-const $vpDoc = document.querySelector('.vp-doc')
-const e = ref<any>($vpDoc)
-const { width: _docWidth } = useElementSize(e)
-const docWidth = computed(() => `${_docWidth.value}px`)
-
-const labelText = computed(() => {
-  return commentConfig.value?.label ?? '评论'
 })
 </script>
 
 <template>
-  <div v-if="artalkConfig && docWidth" id="artalk-comment" ref="el" style="margin-top: 20px;" />
-  <div v-show="!commentIsVisible" class="comment-btn-wrapper">
-    <span v-if="!mobileMinify && labelText" class="icon-wrapper-text" @click="handleScrollToComment">
-      <ElIcon :size="20">
-        <CommentIcon />
-      </ElIcon>
-      <span class="text">
-        {{ labelText }}
-      </span>
-    </span>
-    <span v-else class="icon-wrapper" @click="handleScrollToComment">
-      <ElIcon :size="20">
-        <CommentIcon />
-      </ElIcon>
-    </span>
-  </div>
+  <div v-if="commentConfig" ref="el" style="margin-top: 20px;" />
 </template>
 
 <style scoped lang="scss">
-.comment-btn-wrapper {
-  position: fixed;
-  width: v-bind(docWidth);
-  text-align: right;
-  bottom: 40px;
-  font-size: 16px;
-  transition: all 0.3s ease-in-out;
-  opacity: 0.6;
-  display: flex;
-  justify-content: right;
-  z-index: 200;
+// :root {
+//   --vp-c-brand: #558fb5;
+//   --vp-c-brand-light: #498cb8;
+//   --vp-c-brand-lighter: #549ccc;
+//   --vp-c-brand-dark: #366482;
+//   --vp-c-brand-darker: #244f6b;
+//   --vp-code-block-bg: #f6f8fa;
+//   --vp-c-divider: #dfe2e5;
 
-  &:hover {
-    opacity: 1;
-  }
+//   --vp-home-hero-name-color: transparent;
+//   --vp-home-hero-name-background: linear-gradient(90deg, #0083ff, #37dfd9);
+// }
 
-  .icon-wrapper,
-  .icon-wrapper-text {
-    cursor: pointer;
-    border-radius: 50%;
-    position: relative;
-    right: -80px;
-    background-color: var(--vp-c-bg);
-    box-shadow: var(--box-shadow);
-    padding: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--vp-c-brand-soft);
-    color: var(--vp-c-brand-1);
-
-    &:hover {
-      box-shadow: var(--box-shadow-hover);
-    }
-  }
-
-  .icon-wrapper-text {
-    border-radius: 2px;
-    padding: 2px 6px;
-
-    span.text {
-      font-size: 12px;
-      margin-left: 4px;
-    }
-  }
-}
-
-@media screen and (max-width: 1200px) {
-  .comment-btn-wrapper {
-
-    .icon-wrapper,
-    .icon-wrapper-text {
-      position: static;
-    }
-  }
-}
-
-:root {
-  --vp-c-brand: #558fb5;
-  --vp-c-brand-light: #498cb8;
-  --vp-c-brand-lighter: #549ccc;
-  --vp-c-brand-dark: #366482;
-  --vp-c-brand-darker: #244f6b;
-  --vp-code-block-bg: #f6f8fa;
-  --vp-c-divider: #dfe2e5;
-
-  --vp-home-hero-name-color: transparent;
-  --vp-home-hero-name-background: linear-gradient(90deg, #0083ff, #37dfd9);
-}
-
-.dark {
-  --vp-c-bg: #22272e;
-  --vp-c-bg-alt: #22272e;
-  --vp-code-block-bg: #2b313a;
-  --vp-c-text-2: #8094a8;
-  --vp-button-alt-bg: #1e2224;
-  --vp-button-alt-border: #2d3235;
-  --vp-c-bg-soft: #1e2224;
-  --vp-c-divider-light: #2d3235;
-  --vp-c-divider: #34404c;
-  --vp-c-black: #22272e;
-  --vp-c-bg-soft: #2b313a;
-}
+// .dark {
+//   --vp-c-bg: #22272e;
+//   --vp-c-bg-alt: #22272e;
+//   --vp-code-block-bg: #2b313a;
+//   --vp-c-text-2: #8094a8;
+//   --vp-button-alt-bg: #1e2224;
+//   --vp-button-alt-border: #2d3235;
+//   --vp-c-bg-soft: #1e2224;
+//   --vp-c-divider-light: #2d3235;
+//   --vp-c-divider: #34404c;
+//   --vp-c-black: #22272e;
+//   --vp-c-bg-soft: #2b313a;
+// }
 
 .VPHome .clip {
   font-weight: 500;
@@ -227,17 +96,17 @@ const labelText = computed(() => {
   display: inline-block;
 }
 
-.VPHome .VPButton.brand {
-  border-color: #0083ff;
-  color: #fff;
-  background-color: #0083ff;
+// .VPHome .VPButton.brand {
+//   border-color: #0083ff;
+//   color: #fff;
+//   background-color: #0083ff;
 
-  &:hover {
-    border-color: #007CF0;
-    color: #fff;
-    background-color: #007CF0;
-  }
-}
+//   &:hover {
+//     border-color: #007CF0;
+//     color: #fff;
+//     background-color: #007CF0;
+//   }
+// }
 
 /** 一起摇摆 **/
 .wave {

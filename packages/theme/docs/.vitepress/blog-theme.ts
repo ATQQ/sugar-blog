@@ -53,11 +53,14 @@ export const blogTheme = getThemeConfig({
   author: '粥里有勺糖',
   // 评论
   comment: {
-    repo: 'ATQQ/sugar-blog',
-    repoId: 'MDEwOlJlcG9zaXRvcnkyNDEyNDUyOTk',
-    category: 'Announcements',
-    categoryId: 'DIC_kwDODmEcc84COVc6',
-    inputPosition: 'top',
+    type: 'giscus',
+    options: {
+      repo: 'ATQQ/sugar-blog',
+      repoId: 'MDEwOlJlcG9zaXRvcnkyNDEyNDUyOTk',
+      category: 'Announcements',
+      categoryId: 'DIC_kwDODmEcc84COVc6',
+      inputPosition: 'top',
+    },
   },
   popover: {
     title: '公告',
