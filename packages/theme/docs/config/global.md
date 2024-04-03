@@ -522,6 +522,8 @@ const blogTheme = getThemeConfig({
 
 访问 <https://artalk.js.org/> 获取具体部署文档
 
+![](https://img.cdn.sugarat.top/mdImg/sugar/826637f9ade0aae08c19bb58ece08f22)
+
 **本主题采用Artalk后端控制前端配置，这样能让前后端始终保持兼容性，且无需在程序升级后手动更换 Artalk 前端资源的引入地址。**
 
 ::: code-group
@@ -577,6 +579,34 @@ export default defineConfig({
 
 :::
 
+本地测试验证可以使用 `Vite Proxy` 解决跨域问题
+```ts
+// config.mts
+const blogTheme = getThemeConfig({
+  comment: {
+    type: 'artalk',
+    options: {
+      site: '粥里有勺糖',
+      server: '/artalk',
+    },
+  },
+})
+export default defineConfig({
+  extends: blogTheme,
+  // 省略其他配置
+  vite: {
+    server: {
+      proxy: {
+        '/artalk': {
+          target: 'http://localhost:23366',
+          changeOrigin: true,
+          rewrite: path => path.replace(/^\/artalk/, '')
+        }
+      }
+    }
+  },
+})
+```
 ## recommend
 
 * Type: `false | RecommendArticle`
