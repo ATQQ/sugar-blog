@@ -10,13 +10,11 @@ const { frontmatter } = useData()
 const frontmatterConfig = computed(() => frontmatter.value.buttonAfterArticle)
 
 const buttonAfterArticleConfig = computed(() => {
-  if (frontmatterConfig.value === undefined) {
-    return _buttonAfterArticle === false ? undefined : _buttonAfterArticle
-  }
-  if (frontmatterConfig.value === false) {
-    return undefined
-  }
-  return { ..._buttonAfterArticle, ...frontmatterConfig.value }
+    if (frontmatterConfig.value === false || (!frontmatterConfig.value && !_buttonAfterArticle)) {
+        return false
+    }
+
+    return { ..._buttonAfterArticle, ...frontmatterConfig.value }
 })
 
 const showContent = ref(false)
