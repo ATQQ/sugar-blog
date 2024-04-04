@@ -1,66 +1,33 @@
 <script setup lang="ts">
 import { useElementSize, useElementVisibility, useWindowSize } from '@vueuse/core'
-import { useData, useRoute } from 'vitepress'
-import { computed, h, ref, watch } from 'vue'
+import { useData } from 'vitepress'
+import { computed, h, ref } from 'vue'
 import { ElIcon } from 'element-plus'
 import { Comment } from '@element-plus/icons-vue'
-import Giscus from '@giscus/vue'
-import { useGiscusConfig } from '../composables/config/blog'
-import type { Theme } from '../composables/config/index'
+import { useBlogConfig } from '../composables/config/blog'
 
 const { frontmatter } = useData()
 const commentEl = ref(null)
 const commentIsVisible = useElementVisibility(commentEl)
 
 function handleScrollToComment() {
-  document.querySelector('#giscus-comment')?.scrollIntoView({
+  document.querySelector('#blog-comment-wrapper')?.scrollIntoView({
     behavior: 'smooth',
     block: 'start'
   })
 }
-const giscusConfig = useGiscusConfig()
 
-const commentConfig = computed<Theme.CommentConfig>(() => {
-  if (!giscusConfig) {
-    return {} as any
-  }
-  return giscusConfig
-})
-
-const show = computed(() => {
-  if (frontmatter.value.comment === false) {
-    return frontmatter.value.comment
-  }
-  if (!giscusConfig) {
-    return giscusConfig
-  }
-  return (
-    giscusConfig.repo
-    && giscusConfig.repoId
-    && giscusConfig.category
-    && giscusConfig.categoryId
-  )
-})
-
-const { isDark } = useData()
-
-const route = useRoute()
-const showComment = ref(true)
-watch(
-  () => route.path,
-  () => {
-    showComment.value = false
-    setTimeout(() => {
-      showComment.value = true
-    }, 200)
-  },
-  {
-    immediate: true
-  }
+const { comment: _comment } = useBlogConfig()
+const commentConfig = computed(() =>
+  _comment === false ? undefined : _comment
 )
 
+const show = computed(() => {
+  return _comment && frontmatter.value.comment !== false
+})
+
 const { width } = useWindowSize()
-const mobileMinify = computed(() => width.value < 768 && (commentConfig.value.mobileMinify ?? true))
+const mobileMinify = computed(() => width.value < 768 && (commentConfig.value?.mobileMinify ?? true))
 
 const CommentIcon = commentConfig.value?.icon
   ? h('i', {
@@ -78,20 +45,13 @@ const { width: _docWidth } = useElementSize(el)
 const docWidth = computed(() => `${_docWidth.value}px`)
 
 const labelText = computed(() => {
-  return commentConfig.value.label ?? '评论'
+  return commentConfig.value?.label ?? '评论'
 })
 </script>
 
 <template>
-  <div v-if="show && _docWidth" id="giscus-comment" ref="commentEl" class="comment" data-pagefind-ignore="all">
-    <Giscus
-      v-if="showComment" :repo="commentConfig.repo" :repo-id="commentConfig.repoId"
-      :category="commentConfig.category" :category-id="commentConfig.categoryId"
-      :mapping="commentConfig.mapping || 'pathname'" reactions-enabled="1" emit-metadata="0"
-      :input-position="commentConfig.inputPosition || 'top'" :theme="isDark ? 'dark' : 'light'"
-      :lang="commentConfig.lang || 'zh-CN'" :loading="commentConfig.loading || 'eager'"
-    />
-
+  <div v-if="show && _docWidth" id="blog-comment-wrapper" ref="commentEl" class="blog-comment-wrapper" data-pagefind-ignore="all">
+    <slot />
     <div v-show="!commentIsVisible" class="comment-btn-wrapper">
       <span v-if="!mobileMinify && labelText" class="icon-wrapper-text" @click="handleScrollToComment">
         <ElIcon :size="20">
@@ -151,7 +111,7 @@ const labelText = computed(() => {
     border-radius: 2px;
     padding: 2px 6px;
 
-    span.text{
+    span.text {
       font-size: 12px;
       margin-left: 4px;
     }

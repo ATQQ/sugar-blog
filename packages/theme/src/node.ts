@@ -6,7 +6,7 @@ import {
   patchOptimizeDeps,
   registerMdPlugins,
 } from './utils/node/mdPlugins'
-import { checkConfig, getArticles, patchVPThemeConfig } from './utils/node/theme'
+import { checkConfig, getArticles, patchVPConfig, patchVPThemeConfig } from './utils/node/theme'
 import { getVitePlugins, registerVitePlugins } from './utils/node/vitePlugins'
 
 /**
@@ -34,6 +34,8 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
   // patch extraVPConfig
   patchMermaidPluginCfg(extraVPConfig)
   patchOptimizeDeps(extraVPConfig)
+
+  patchVPConfig(extraVPConfig, cfg)
   return {
     themeConfig: {
       blog: {

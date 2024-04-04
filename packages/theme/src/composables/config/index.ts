@@ -100,7 +100,9 @@ export namespace Theme {
     type: string
   }
 
-  export interface CommentConfig extends GiscusConfig {
+  export type CommentConfig = ((GiscusOption & CommentCommonConfig) | GiscusConfig | ArtalkConfig)
+
+  export interface CommentCommonConfig {
     /**
      * @default '评论'
      */
@@ -116,7 +118,15 @@ export namespace Theme {
      */
     mobileMinify?: boolean
   }
-  export interface GiscusConfig {
+  export interface GiscusConfig extends CommentCommonConfig {
+    type: 'giscus'
+    options: GiscusOption
+  }
+  export interface ArtalkConfig extends CommentCommonConfig {
+    type: 'artalk'
+    options: ArtalkOption
+  }
+  export interface GiscusOption {
     repo: Repo
     repoId: string
     category: string
@@ -125,6 +135,10 @@ export namespace Theme {
     inputPosition?: 'top' | 'bottom'
     lang?: string
     loading?: 'lazy' | 'eager'
+  }
+  export interface ArtalkOption {
+    site: string
+    server: string
   }
 
   export interface HotArticle {
@@ -351,7 +365,8 @@ export namespace Theme {
     search?: SearchConfig
     /**
      * 配置评论
-     * power by https://giscus.app/zh-CN
+     * giscus: https://giscus.app/zh-CN
+     * artalk: https://artalk.js.org/
      */
     comment?: CommentConfig | false
     /**
@@ -424,6 +439,7 @@ export namespace Theme {
      */
     oml2d?: Oml2dOptions
     homeTags?: boolean
+    buttonAfterArticle?: ButtonAfterArticleConfig | false
   }
 
   export interface BackToTop {
@@ -508,5 +524,21 @@ export namespace Theme {
      * 此方法已经废弃，这个定义将在未来某一刻被移除，请为 inspiring 配置数租来实现相同的效果
      */
     handleChangeSlogan?: (oldSlogan: string) => string | Promise<string>
+  }
+  export interface ButtonAfterArticleConfig {
+    openTitle?: string
+    closeTitle?: string
+    content?: string
+    icon?: 'aliPay' | 'wechatPay' | string
+    /**
+     * 按钮尺寸
+     * @default 'default'
+     */
+    size?: 'small' | 'default' | 'large'
+    /**
+     * 默认展开
+     * @default false
+     */
+    expand?: boolean
   }
 }

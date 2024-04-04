@@ -61,6 +61,7 @@
   },
   "devDependencies": {
     "@element-plus/icons-vue": "^2.1.0",
+    "artalk": "^2.8.3",
     "element-plus": "^2.3.4",
     "javascript-stringify": "^2.1.0",
     "pagefind": "1.0.3",

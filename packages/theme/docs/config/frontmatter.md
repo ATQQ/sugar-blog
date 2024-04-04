@@ -22,31 +22,32 @@ recommend: 1
 
 :::details 主题相关的 `frontmatter` 汇总
 ```ts
-const frontmatter = ['layout', 'blog', 'title', 'description', 'descriptionHTML', 'cover', 'hiddenCover', 'hidden', 'author', 'readingTime', 'comment', 'date', 'tag', 'tags', 'categories', 'sticky', 'top', 'recommend', 'publish']
+const frontmatter = ['layout', 'blog', 'title', 'description', 'descriptionHTML', 'cover', 'hiddenCover', 'hidden', 'author', 'readingTime', 'comment', 'date', 'tag', 'tags', 'categories', 'sticky', 'top', 'recommend', 'publish', 'buttonAfterArticle']
 ```
 
 对照表
-|      属性       |     描述     |
-| :-------------: | :----------: |
-|     layout      |     布局     |
-|      blog       |   博客首页   |
-|      title      |     标题     |
-|   description   |     描述     |
-| descriptionHTML |   描述HTML   |
-|      cover      |     封面     |
-|   hiddenCover   |   隐藏封面   |
-|     hidden      | 隐藏首页展示 |
-|     author      |     作者     |
-|   readingTime   |   阅读时间   |
-|     comment     |     评论     |
-|      date       |     日期     |
-|       tag       |     标签     |
-|      tags       |    同标签    |
-|   categories    |    同标签    |
-|     sticky      |   精选置顶   |
-|       top       |   首页置顶   |
-|    recommend    | 推荐列表控制 |
-|     publish     |   是否发布   |
+|        属性        |         描述         |
+| :----------------: | :------------------: |
+|       layout       |         布局         |
+|        blog        |       博客首页       |
+|       title        |         标题         |
+|    description     |         描述         |
+|  descriptionHTML   |       描述HTML       |
+|       cover        |         封面         |
+|    hiddenCover     |       隐藏封面       |
+|       hidden       |     隐藏首页展示     |
+|       author       |         作者         |
+|    readingTime     |       阅读时间       |
+|      comment       |         评论         |
+|        date        |         日期         |
+|        tag         |         标签         |
+|        tags        |        同标签        |
+|     categories     |        同标签        |
+|       sticky       |       精选置顶       |
+|        top         |       首页置顶       |
+|     recommend      |     推荐列表控制     |
+|      publish       |       是否发布       |
+| buttonAfterArticle | 文章底部引导操作按钮 |
 :::
 ## Home
 ### layout
@@ -491,3 +492,24 @@ recommend: false
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MTcwMDU4MQ==673181700581)
 
 同时，左侧边栏也不会展示
+
+### buttonAfterArticle
+* Type: `false | ButtonAfterArticleConfig`
+
+用于单独控制某篇文章底部按钮，点击按钮会在按钮下方渲染一个自定义的html内容，例如可以用来做赞赏按钮，内置了 `wechatPay` 和 `aliPay` 两个图标，也可自定义图标(svg)。
+
+```yaml
+---
+buttonAfterArticle:
+  openTitle: 投币
+  closeTitle: 下次一定
+  content: '<img src="https://img.cdn.sugarat.top/mdImg/MTY0Nzc1NTYyOTE5Mw==647755629193">'
+  icon: aliPay
+  # size: small
+  # expand: true
+---
+```
+
+![](https://img.cdn.sugarat.top/mdImg/sugar/4d429bea65b8840f5cfda875fac50926)
+
+也支持在全局设置，对所有页面都生效。

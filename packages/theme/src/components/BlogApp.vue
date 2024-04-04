@@ -7,8 +7,6 @@ import { useBlogThemeMode } from '../composables/config/blog'
 import BlogHomeInfo from './BlogHomeInfo.vue'
 import BlogHomeBanner from './BlogHomeBanner.vue'
 import BlogList from './BlogList.vue'
-import BlogComment from './BlogComment.vue'
-
 import BlogSidebar from './BlogSidebar.vue'
 import BlogImagePreview from './BlogImagePreview.vue'
 import BlogArticleAnalyze from './BlogArticleAnalyze.vue'
@@ -17,6 +15,11 @@ import BlogPopover from './BlogPopover.vue'
 import BlogFooter from './BlogFooter.vue'
 import BlogHomeHeaderAvatar from './BlogHomeHeaderAvatar.vue'
 import BlogBackToTop from './BlogBackToTop.vue'
+import CommentGiscus from './CommentGiscus.vue'
+
+import CommentArtalk from './CommentArtalk.vue'
+import BlogButtonAfterArticle from './BlogButtonAfterArticle.vue'
+import BlogCommentWrapper from './BlogCommentWrapper.vue'
 
 const { frontmatter } = useData()
 const layout = computed(() => frontmatter.value.layout)
@@ -74,8 +77,12 @@ useOml2d()
       <slot name="doc-after" />
       <!-- 评论 -->
       <ClientOnly>
+        <BlogButtonAfterArticle />
         <BlogBackToTop />
-        <BlogComment />
+        <BlogCommentWrapper>
+          <CommentArtalk />
+          <CommentGiscus />
+        </BlogCommentWrapper>
       </ClientOnly>
     </template>
     <template #layout-bottom>
@@ -191,6 +198,7 @@ useOml2d()
 .blog-list-wrapper {
   width: 100%;
 }
+
 .blog-info-wrapper {
   margin-left: 16px;
   position: sticky;

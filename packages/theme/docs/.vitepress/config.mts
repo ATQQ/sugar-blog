@@ -19,6 +19,16 @@ export default defineConfig({
         '@sugarat/theme': path.join(__dirname, '../../src/index.ts')
       }
     },
+    // 用于本地测试 artalk 评论反向代理
+    server: {
+      proxy: {
+        '/artalk': {
+          target: 'http://localhost:23366',
+          changeOrigin: true,
+          rewrite: path => path.replace(/^\/artalk/, '')
+        }
+      }
+    }
   },
   themeConfig: {
     logo: '/logo.png',

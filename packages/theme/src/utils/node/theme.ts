@@ -125,7 +125,15 @@ export function getArticles(cfg?: Partial<Theme.BlogConfig>) {
 }
 
 export function patchVPConfig(vpConfig: any, cfg?: Partial<Theme.BlogConfig>) {
-  // TODO: 待确定场景
+  vpConfig.head = vpConfig.head || []
+  // Artalk 资源地址
+  if (cfg?.comment && 'type' in cfg.comment && cfg?.comment?.type === 'artalk') {
+    const server = cfg.comment?.options?.server
+    if (server) {
+      vpConfig.head.push(['link', { href: `${server}/dist/Artalk.css`, rel: 'stylesheet' }])
+      vpConfig.head.push(['script', { src: `${server}/dist/Artalk.js`, id: 'artalk-script' }])
+    }
+  }
 }
 
 export function patchVPThemeConfig(
