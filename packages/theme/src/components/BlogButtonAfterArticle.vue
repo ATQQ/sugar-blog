@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ElButton } from 'element-plus'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useData } from 'vitepress'
 import { useBlogConfig } from '../composables/config/blog'
 import { aliPaySVG, weChatPaySVG } from '../constants/svg'
@@ -10,14 +10,20 @@ const { frontmatter } = useData()
 const frontmatterConfig = computed(() => frontmatter.value.buttonAfterArticle)
 
 const buttonAfterArticleConfig = computed(() => {
-    if (frontmatterConfig.value === false || (!frontmatterConfig.value && !_buttonAfterArticle)) {
-        return false
-    }
+  if (frontmatterConfig.value === false || (!frontmatterConfig.value && !_buttonAfterArticle)) {
+    return false
+  }
 
-    return { ..._buttonAfterArticle, ...frontmatterConfig.value }
+  return { ..._buttonAfterArticle, ...frontmatterConfig.value }
 })
 
 const showContent = ref(false)
+
+watch(buttonAfterArticleConfig, () => {
+  showContent.value = !!buttonAfterArticleConfig.value?.expand
+}, {
+  immediate: true
+})
 
 const svg = computed(() => {
   const icon = buttonAfterArticleConfig.value?.icon
@@ -39,7 +45,7 @@ function toggleContent() {
 
 <template>
   <div v-if="buttonAfterArticleConfig" class="appreciation-container">
-    <ElButton class="content-button" :type="showContent ? 'danger' : 'primary'" @click="toggleContent">
+    <ElButton :size="buttonAfterArticleConfig.size || 'default'" class="content-button" :type="showContent ? 'danger' : 'primary'" @click="toggleContent">
       <span class="content-icon" v-html="svg" />
       {{ showContent ? buttonAfterArticleConfig.closeTitle : buttonAfterArticleConfig.openTitle }}
     </ElButton>
@@ -49,12 +55,17 @@ function toggleContent() {
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .appreciation-container {
   text-align: center;
   padding: 20px;
   font-size: 14px;
   color: #606266;
+
+  :deep(.el-button.el-button--primary){
+    background-color: var(--vp-c-brand-2);
+    border-color: var(--vp-c-brand-2);
+  }
 }
 
 .content-container {
@@ -62,9 +73,10 @@ function toggleContent() {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 200px;
-  overflow: hidden;
   margin-top: 20px;
+  :deep(img){
+    height: 260px;
+  }
 }
 
 .content-icon {

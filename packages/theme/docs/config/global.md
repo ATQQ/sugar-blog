@@ -1318,41 +1318,18 @@ type ThemeColor = 'vp-default' | 'vp-green' | 'vp-yellow' | 'vp-red' | 'el-blue'
 
 * Type: `false | ButtonAfterArticleConfig`
 
-用于控制文章底部按钮，点击按钮会在按钮下方渲染一个自定义的html内容，例如可以用来做赞赏按钮，内置了wechatPay和aliPay两个图标，也可自定义图标(svg)。  
+用于控制文章底部按钮，点击按钮会在按钮下方渲染一个自定义的html内容，例如可以用来做赞赏按钮，内置了 `wechatPay` 和 `aliPay` 两个图标，也可自定义图标(svg)。
 
-在文章 `Frontmatter` 处可设置 `buttonAfterArticle` 为 `false` 以控制单独一篇文章是否展示该按钮
-
-```yaml
----
-title: Docs with VitePress
-editLink: true
-buttonAfterArticle:
-  openTitle: 给钱
-  closeTitle: 不给
-  content: '<img src="https://img.cdn.sugarat.top/mdImg/MTY4NTIwMTQwMTAzNg==685201401036">'
-  icon: aliPay
----
-```
+![](https://img.cdn.sugarat.top/mdImg/sugar/4d429bea65b8840f5cfda875fac50926)
 
 ::: code-group
-
-```ts [default]
-const blogTheme = getThemeConfig({
-  buttonAfterArticle: {
-    openTitle: '赞赏我',
-    closeTitle: '下次吧',
-    content: '<img src="https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210">',
-    icon: 'wechatPay'
-  }
-})
-```
 
 ```ts [example]
 const blogTheme = getThemeConfig({
   buttonAfterArticle: {
-    openTitle: '给钱',
-    closeTitle: '不给',
-    content: '<img src="https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210">',
+    openTitle: '赞赏',
+    closeTitle: '下次一定',
+    content: '<img src="https://img.cdn.sugarat.top/mdImg/MTY0Nzc1NTYyOTE5Mw==647755629193">',
     icon: 'aliPay'
   }
 })
@@ -1364,6 +1341,16 @@ interface ButtonAfterArticleConfig {
   closeTitle?: string
   content?: string
   icon?: 'aliPay' | 'wechatPay' | string
+  /**
+   * 按钮尺寸
+   * @default 'default'
+   */
+  size?: 'small' | 'default' | 'large'
+  /**
+   * 默认展开
+   * @default false
+   */
+  expand?: boolean
 }
 ```
 
@@ -1373,8 +1360,22 @@ interface ButtonAfterArticleConfig {
 
 ```ts
 const blogTheme = getThemeConfig({
-  donate: false
+  buttonAfterArticle: false
 })
+```
+
+也可以在文章 `Frontmatter` 处单独设置 `buttonAfterArticle` 或 `false` 以控制单独一篇文章的展示内容
+
+```yaml
+---
+buttonAfterArticle:
+  openTitle: 投币
+  closeTitle: 下次一定
+  content: '<img src="https://img.cdn.sugarat.top/mdImg/MTY4NTIwMTQwMTAzNg==685201401036">'
+  icon: aliPay
+  # size: small
+  # expand: true
+---
 ```
 
 ## footer

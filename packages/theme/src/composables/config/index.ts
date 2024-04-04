@@ -530,5 +530,15 @@ export namespace Theme {
     closeTitle?: string
     content?: string
     icon?: 'aliPay' | 'wechatPay' | string
+    /**
+     * 按钮尺寸
+     * @default 'default'
+     */
+    size?: 'small' | 'default' | 'large'
+    /**
+     * 默认展开
+     * @default false
+     */
+    expand?: boolean
   }
 }
