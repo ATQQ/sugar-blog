@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.2.30） ⏰ 2024/03/25：新增各个模块可选开启的开关，水合问题修复，依赖升级。
+description: 最近更新（v0.3.0） ⏰ 2024/04/04：新增artaalk评论系统，新增文章底部打赏按钮，首页文章列表封面拉伸异常修复，依赖升级。
 author: 粥里有勺糖
 top: 2
 tag: 日志
@@ -26,6 +26,16 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.3.0 (2024/04/04)
+
+### Minor Changes
+
+- feat: 支持 [artalk](https://artalk.js.org/) 评论系统
+- feat: 支持文章底部打赏按钮
+- fix: 首页文章列表的封面拉伸异常
+- chore: 依赖升级
+  - vitepress 1.0.2
 
 ## 0.2.30 (2024/03/27)
 

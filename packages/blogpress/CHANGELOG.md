@@ -4,6 +4,12 @@ publish: false
 
 # CHANGELOG
 
+## 2.0.40
+### Patch Changes
+
+- Updated dependencies
+  - @sugarat/theme@0.3.0
+
 ## 2.0.39
 
 ### Patch Changes

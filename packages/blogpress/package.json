@@ -1,7 +1,7 @@
 {
   "name": "blogpress",
   "type": "module",
-  "version": "2.0.39",
+  "version": "2.0.40",
   "private": true,
   "license": "MIT",
   "scripts": {
@@ -11,10 +11,10 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.1.0",
-    "@sugarat/theme": "0.2.30",
+    "@sugarat/theme": "0.3.0",
     "axios": "^0.27.2",
     "element-plus": "^2.3.8",
-    "vitepress": "1.0.1",
+    "vitepress": "1.0.2",
     "vitepress-plugin-rss": "0.2.2",
     "vue": "^3.4.21"
   },

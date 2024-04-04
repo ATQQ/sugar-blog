@@ -1,5 +1,15 @@
 # @sugarat/theme
 
+## 0.3.0
+
+### Minor Changes
+
+- feat: 支持 [artalk](https://artalk.js.org/) 评论系统
+- feat: 支持文章底部打赏按钮
+- fix: 首页文章列表的封面拉伸异常
+- chore: 依赖升级
+  - vitepress 1.0.2
+
 ## 0.2.30
 
 ### Patch Changes
