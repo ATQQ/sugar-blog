@@ -131,7 +131,7 @@ export function patchVPConfig(vpConfig: any, cfg?: Partial<Theme.BlogConfig>) {
     const server = cfg.comment?.options?.server
     if (server) {
       vpConfig.head.push(['link', { href: `${server}/dist/Artalk.css`, rel: 'stylesheet' }])
-      vpConfig.head.push(['script', { src: `${server}/dist/Artalk.js` }])
+      vpConfig.head.push(['script', { src: `${server}/dist/Artalk.js`, id: 'artalk-script' }])
     }
   }
 }

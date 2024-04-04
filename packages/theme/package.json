@@ -47,7 +47,6 @@
     "@mermaid-js/mermaid-mindmap": "^9.3.0",
     "@vue/shared": "^3.2.45",
     "@vueuse/core": "^9.6.0",
-    "artalk": "^2.8.3",
     "fast-glob": "^3.2.12",
     "gray-matter": "^4.0.3",
     "markdown-it-task-checkbox": "^1.0.6",
@@ -62,6 +61,7 @@
   },
   "devDependencies": {
     "@element-plus/icons-vue": "^2.1.0",
+    "artalk": "^2.8.3",
     "element-plus": "^2.3.4",
     "javascript-stringify": "^2.1.0",
     "pagefind": "1.0.3",

@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useData, useRoute } from 'vitepress'
-import Artalk from 'artalk'
+import type Artalk from 'artalk'
+
 import { useBlogConfig } from '../composables/config/blog'
 
 const { isDark, page } = useData()
-
 const el = ref<HTMLDivElement>()
 
 const route = useRoute()
@@ -22,16 +22,22 @@ const commentConfig = computed(() => {
 })
 
 onMounted(() => {
-  if (commentConfig.value && el.value) {
-    artalk.value = Artalk.init({
-      el: el.value,
-      darkMode: isDark.value,
-      pageKey: route.path,
-      pageTitle: page.value.title,
-      server: commentConfig.value?.server,
-      site: commentConfig.value?.site,
-    })
-  }
+  // CDN 异步加载，有优化空间
+  const observer = new MutationObserver((mutationsList, observer) => {
+    if (window.Artalk && commentConfig.value && el.value) {
+      artalk.value = window.Artalk.init({
+        el: el.value,
+        darkMode: isDark.value,
+        pageKey: route.path,
+        pageTitle: page.value.title,
+        server: commentConfig.value?.server,
+        site: commentConfig.value?.site,
+      })
+      observer.disconnect()
+    }
+  })
+
+  observer.observe(document.head, { subtree: true, childList: true, attributes: true, attributeFilter: ['id'] })
 })
 
 watch(() => route.path, () => {
