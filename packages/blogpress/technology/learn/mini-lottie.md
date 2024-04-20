@@ -3,7 +3,7 @@ tags: 技术笔记
 ---
 # 小程序中使用 lottie 动画 | 踩坑经验分享
 
-本周被拉去支援紧急需求（赶在五一节假日前上线的，双休需要加班😱），参与到项目中才知道，开发的项目是微信小程序技术栈的。由于是临时支援，所以我挑选了独立性大，业务属性相对轻薄的模块介入。
+本周被拉去支援紧急需求（赶在五一节假日前上线的，双休需要加班😱），参与到项目中才知道，开发的项目是微信小程序技术栈的。由于是临时支援，笔者也很久没开发过微信小程序了，所以挑选了相对独立，业务属性相对轻薄的模块参与。
 
 其中有个营销活动（领红包🧧😁）的弹窗动画就要用到 lottie 动画。
 
@@ -155,3 +155,4 @@ canvas.height = windowHeight * pixelRatio
 
 `demo` 完整源码见 [GitHub：lottie-demo](https://github.com/ATQQ/demos/tree/main/miniprogram/lottie-demo)
 
+![](https://img.cdn.sugarat.top/mdImg/sugar/c5a59914529f4b50a969ec7f1caadc36)
