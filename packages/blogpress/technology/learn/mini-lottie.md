@@ -151,5 +151,7 @@ canvas.height = windowHeight * pixelRatio
 ![](https://img.cdn.sugarat.top/mdImg/sugar/3dd8a0483aba8a07d9a85692197e5ce5)
 
 ## 最后
-完整 demo 源码见 [GitHub：lottie-demo](https://github.com/ATQQ/demos/tree/main/miniprogram/lottie-demo)
+时间匆忙，介绍的不是非常的详细，感兴趣的同学可以评论区交流。
+
+`demo` 完整源码见 [GitHub：lottie-demo](https://github.com/ATQQ/demos/tree/main/miniprogram/lottie-demo)
 
