@@ -1,9 +1,9 @@
 import path from 'node:path'
-import { execSync } from 'node:child_process'
+import { execSync, spawn } from 'node:child_process'
 import process from 'node:process'
-import { existsSync, readFileSync } from 'node:fs'
+import fs, { existsSync, readFileSync } from 'node:fs'
 import { Buffer } from 'node:buffer'
-import type { SiteConfig } from 'vitepress'
+import type { Plugin, SiteConfig } from 'vitepress'
 
 import {
   chineseSearchOptimize,
@@ -23,6 +23,8 @@ export function getVitePlugins(cfg?: Partial<Theme.BlogConfig>) {
   plugins.push(inlineBuildEndPlugin(buildEndFn))
   // 处理cover image的路径（暂只支持自动识别的文章首图）
   plugins.push(coverImgTransform())
+  // 处理新增md文档重启服务器
+  plugins.push(observeMdfileAndRestartViteServer())
   // 内置简化版的pagefind
   if (cfg && cfg.search !== false) {
     const ops = cfg.search instanceof Object ? cfg.search : {}
@@ -175,4 +177,89 @@ export function coverImgTransform() {
       }
     }
   }
+}
+
+export function observeMdfileAndRestartViteServer(): Plugin {
+  return {
+    name: 'observe-md-and-restart-server',
+    configureServer(server) {
+      const folderPath = path.join(__dirname, '/docs')
+      watchFolder(folderPath)
+    }
+  }
+}
+
+function watchFolder(folderPath: string) {
+  fs.watch(folderPath, (eventType: string, filename: string | null) => {
+    if (eventType === 'rename') {
+      if (filename) {
+        const filePath = path.join(folderPath, filename)
+        if (isMarkdownfile(filePath)) {
+          watchFile(filePath)
+        }
+      }
+    }
+  })
+}
+
+// 判断是否为markdown文件
+function isMarkdownfile(filePath: string) {
+  const extname = path.extname(filePath)
+  return extname === '.md' || extname === '.markdown'
+}
+
+function watchFile(filePath: string) {
+  fs.watchFile(filePath, (curr, prev) => {
+    // 判断文件是否发生修改
+    if (curr.mtime !== prev.mtime) {
+      console.log(`文件内容发生了修改: ${filePath}`)
+      readFile(filePath)
+    }
+  })
+}
+
+function readFile(filePath: string) {
+  fs.readFile(filePath, 'utf-8', (err, data) => {
+    if (err) {
+      console.error(err)
+      return
+    }
+
+    console.log(data)
+
+    const hasTitle = /---\ntitle : .*\n---/.test(data)
+    const hasHeading = /^# .*/.test(data)
+
+    if (hasTitle) {
+      console.log('文件包含 ---title---')
+      restartViteServer()
+    }
+    else {
+      console.log('文件不包含 ---title---')
+    }
+
+    if (hasHeading) {
+      console.log('文件包含标题 #')
+      restartViteServer()
+    }
+    else {
+      console.log('文件不包含标题 #')
+    }
+  })
+}
+
+function restartViteServer() {
+  const restartProcess = spawn('pnpm', ['run', 'dev'])
+
+  restartProcess.stdout.on('data', (data) => {
+    console.log(`stdout: ${data}`)
+  })
+
+  restartProcess.stderr.on('data', (data) => {
+    console.error(`stderr: ${data}`)
+  })
+
+  restartProcess.on('close', (code) => {
+    console.log(`服务启动发生错误，退出码： ${code}`)
+  })
 }
