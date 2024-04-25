@@ -1,5 +1,7 @@
 ---
-tags: 技术笔记
+tags: 
+ - 技术笔记
+ - 小程序
 ---
 # 小程序中使用 lottie 动画 | 踩坑经验分享
 
@@ -187,21 +189,67 @@ canvas.height = windowHeight * pixelRatio
 ![](https://img.cdn.sugarat.top/mdImg/sugar/3dd8a0483aba8a07d9a85692197e5ce5)
 
 
-### 动态金额
+### 动态文案
 由于是红包，需要动态展示金额（当然也可能是不固定内容的动态标题）。
 
 思路可以参考这篇文章[知乎： 动态修改 Lottie 中的文本](https://zhuanlan.zhihu.com/p/102334701?s_r=0)
 
 可以使用固定格式的文本 `${文本}` 进行替换
 
-
 ```js
 // 伪代码
 get('sourceUrl').then((res) => {
   const jsonText = res.data
-  const animationData = JSON.parse(jsonText.replace('${金额}', 100))
+  const animationData = JSON.parse(jsonText.replace('${金额}', '目标金额'))
 })
 ```
+
+比如我在 demo 里加一个文字
+* 需要展示的文本里放入 `${num}` 用于替换匹配
+* 在添加一个文本藏在看不见的地方,里面写入替换后需要用到的文字（确保和上面的文本为同一种字体）
+
+![](https://cdn.upyun.sugarat.top/test/sugar/f2bd93aa21e7cd2328c987948d4557a7)
+
+接着导出 JSON 文件。
+
+调用方法如下
+```js
+// 拉取JSON文件内容
+const jsonData = await new Promise((resolve) => {
+  wx.request({
+    url: 'http://127.0.0.1:8080/json/text-replace/data.json',
+    success: (res) => {
+      resolve(res.data)
+    }
+  })
+})
+
+// 随机生成1-100元的数字，保留两位小数
+const num = (Math.random() * 100).toFixed(2)
+// 替换内容
+const animationData = JSON.parse(
+  JSON.stringify(jsonData)
+    .replace(/\$\{num\}/g, `${num}元`)
+)
+
+lottie.loadAnimation({
+  // 指定json内容
+  animationData,
+  // 设置依赖的图片资源位置
+  assetsPath: 'http://127.0.0.1:8080/json/text-replace/images/',
+  // ...省略其它配置
+})
+```
+
+效果如下
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/290fee264246526131c5048c67125711)
+
+
+### style 引发的渲染错误
+
+TODO: 未完待续
+
 
 ## 最后
 时间匆忙，介绍的不是非常的详细，感兴趣的同学可以评论区交流。
