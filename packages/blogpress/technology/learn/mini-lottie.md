@@ -2,6 +2,7 @@
 tags: 
  - 技术笔记
  - 小程序
+date: 2024-04-20 23:16:00
 ---
 # 小程序中使用 lottie 动画 | 踩坑经验分享
 
@@ -248,8 +249,43 @@ lottie.loadAnimation({
 
 ### style 引发的渲染错误
 
-TODO: 未完待续
+在 canvas 标签上设置 `display`控制显隐，偶现会提示渲染层错误。
 
+```html
+<canvas style="display:{{show?'block':'none'}}" id="c1" type="2d"></canvas>
+```
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/cedddb72f45046ca974cb594be964eeb)
+
+解决办法，给套了一层 `view`，用`wx:if`控制咯。
+```html
+<view  wx:if="{{show}}">
+  <canvas id="c1" type="2d"></canvas>
+</view>
+
+```
+
+### iOS 播放闪退问题
+
+现象是，非冷启动小程序的时候，动画还没播放完毕就提前结束了。
+
+看代码log，3s的动画，播放不到 1s 就触发了 `complete` 事件，看现象就是一闪而逝。
+
+```js
+const ani = lottie.loadAnimation({
+  // 3s 的动画
+  animationData,
+  // ...省略其它配置
+})
+
+ani.addEventListener('complete', () => {
+  console.log('动画播放结束')
+})
+```
+
+解决办法
+
+*TODO：未完待续*
 
 ## 最后
 时间匆忙，介绍的不是非常的详细，感兴趣的同学可以评论区交流。
