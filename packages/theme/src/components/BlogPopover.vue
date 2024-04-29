@@ -239,6 +239,10 @@ function PopoverValue(props: { key: number; item: BlogPopover.Value },
 
   img {
     width: 100%;
+    // TODO: 未来优化，自动预获取图片高度填充
+    height: 100px;
+    object-fit: contain;
+    margin: 0 auto;
   }
 }
 
