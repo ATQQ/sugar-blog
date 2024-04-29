@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
-import { ElButton, ElLink } from 'element-plus'
-import { withBase } from 'vitepress'
+import { ElButton } from 'element-plus'
+import { useRouter, withBase } from 'vitepress'
 import { useArticles, useBlogConfig, useCleanUrls } from '../composables/config/blog'
 import { formatShowDate, wrapperCleanUrls } from '../utils/client'
 import { fireSVG } from '../constants/svg'
@@ -26,6 +26,11 @@ const recommendList = computed(() => {
 })
 
 const currentPage = ref(1)
+
+const router = useRouter()
+function handleLinkClick(link: string) {
+  router.go(link)
+}
 function changePage() {
   const newIdx
     = currentPage.value % Math.ceil(recommendList.value.length / pageSize.value)
@@ -48,7 +53,10 @@ const showChangeBtn = computed(() => {
 </script>
 
 <template>
-  <div v-if="_hotArticle !== false && (recommendList.length || empty) " class="card recommend" data-pagefind-ignore="all">
+  <div
+    v-if="_hotArticle !== false && (recommendList.length || empty)" class="card recommend"
+    data-pagefind-ignore="all"
+  >
     <!-- 头部 -->
     <div class="card-header">
       <span class="title" v-html="title" />
@@ -64,11 +72,19 @@ const showChangeBtn = computed(() => {
         <!-- 简介 -->
         <div class="des">
           <!-- title -->
-          <ElLink type="info" class="title" :href="withBase(v.route)">
-            {{
-              v.meta.title
-            }}
-          </ElLink>
+          <a
+            :href="withBase(v.route)"
+            class="title" @click="(e) => {
+              e.preventDefault()
+              handleLinkClick(withBase(v.route))
+            }"
+          >
+            <span>
+              {{
+                v.meta.title
+              }}
+            </span>
+          </a>
           <!-- 描述信息 -->
           <div class="suffix">
             <!-- 日期 -->
@@ -172,6 +188,19 @@ const showChangeBtn = computed(() => {
     .title {
       font-size: 14px;
       color: var(--vp-c-text-1);
+      font-weight: 500;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .title:hover::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 0;
+      bottom: -3px;
+      border-bottom: 1px solid #b1b3b8;
     }
 
     .suffix {
