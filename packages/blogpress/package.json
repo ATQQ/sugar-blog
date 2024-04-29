@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.1.0",
-    "@sugarat/theme": "0.3.0",
+    "@sugarat/theme": "workspace:*",
     "axios": "^0.27.2",
     "element-plus": "^2.3.8",
     "vitepress": "1.1.3",
