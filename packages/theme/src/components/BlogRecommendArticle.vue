@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { computed, onMounted, ref } from 'vue'
-import { useRoute, withBase } from 'vitepress'
-import { ElButton, ElLink } from 'element-plus'
+import { useRoute, useRouter, withBase } from 'vitepress'
+import { ElButton } from 'element-plus'
 import { formatShowDate, wrapperCleanUrls } from '../utils/client'
 import { useArticles, useBlogConfig, useCleanUrls } from '../composables/config/blog'
 import { recommendSVG } from '../constants/svg'
@@ -147,6 +147,11 @@ onMounted(() => {
 })
 
 const cleanUrls = useCleanUrls()
+
+const router = useRouter()
+function handleLinkClick(link: string) {
+  router.go(link)
+}
 </script>
 
 <template>
@@ -169,13 +174,18 @@ const cleanUrls = useCleanUrls()
         <!-- 简介 -->
         <div class="des">
           <!-- title -->
-          <ElLink
-            type="info" class="title" :class="{
+          <a
+            class="title" :class="{
               current: isCurrentDoc(v.route),
-            }" :href="wrapperCleanUrls(cleanUrls, v.route)"
+            }"
+            :href="wrapperCleanUrls(cleanUrls, v.route)"
+            @click="(e) => {
+              e.preventDefault()
+              handleLinkClick(wrapperCleanUrls(cleanUrls, v.route))
+            }"
           >
-            {{ v.meta.title }}
-          </ElLink>
+            <span>{{ v.meta.title }}</span>
+          </a>
           <!-- 描述信息 -->
           <div class="suffix">
             <!-- 日期 -->
@@ -248,10 +258,23 @@ const cleanUrls = useCleanUrls()
       color: var(--vp-c-text-1);
       word-break: break-all;
       white-space: break-spaces;
+      font-weight: 500;
+      position: relative;
+      cursor: pointer;
 
       &.current {
         color: var(--vp-c-brand-1);
       }
+    }
+
+    .title:hover::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 0;
+      bottom: -3px;
+      border-bottom: 1px solid #b1b3b8;
     }
 
     .suffix {

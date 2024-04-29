@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { withBase } from 'vitepress'
+import { useRouter, withBase } from 'vitepress'
 import { computed } from 'vue'
 import { formatShowDate, wrapperCleanUrls } from '../utils/client'
 import { useCleanUrls } from '../composables/config/blog'
@@ -19,22 +19,34 @@ const props = defineProps<{
 const showTime = computed(() => {
   return formatShowDate(props.date)
 })
-
 const cleanUrls = useCleanUrls()
 const link = computed(() => withBase(wrapperCleanUrls(!!cleanUrls, props.route)))
+
+const router = useRouter()
+function handleSkipDoc() {
+  router.go(link.value)
+}
 </script>
 
 <template>
-  <!-- TODO: 响应式优化使用纯 CSS -->
-  <a class="blog-item" :href="link">
+  <a
+    class="blog-item" :href="link" @click="(e) => {
+      e.preventDefault()
+      handleSkipDoc()
+    }"
+  >
     <i v-if="!!pin" class="pin" />
     <!-- 标题 -->
-    <p class="title mobile-visible">{{ title }}</p>
+    <p class="title mobile-visible">
+      {{ title }}
+    </p>
     <div class="info-container">
       <!-- 左侧信息 -->
       <div class="info-part">
         <!-- 标题 -->
-        <p class="title pc-visible">{{ title }}</p>
+        <p class="title pc-visible">
+          {{ title }}
+        </p>
         <!-- 简短描述 -->
         <p v-if="!descriptionHTML && !!description" class="description">
           {{ description }}
