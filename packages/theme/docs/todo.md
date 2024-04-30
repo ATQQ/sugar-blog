@@ -30,6 +30,7 @@ sidebar: false
 ## 已完成
 
 近期完成：
+* [x] [添加切换颜色模式时使用过渡动画](https://github.com/ATQQ/sugar-blog/pull/185)
 * [x] SSG优化，水合优化
 * [x] 侧栏切换页面闪烁
 * [x] 问题修复：水合问题
