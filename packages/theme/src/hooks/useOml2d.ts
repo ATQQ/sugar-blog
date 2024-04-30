@@ -59,15 +59,21 @@ export function useOml2d() {
           ...defaultOptions.tips,
           ...oml2dOptions.tips,
           style: {
+            // @ts-expect-error
             ...defaultOptions?.tips?.style,
+            // @ts-expect-error
             ...oml2dOptions?.tips?.style
           },
           mobileStyle: {
+            // @ts-expect-error
             ...defaultOptions?.tips?.mobileStyle,
+            // @ts-expect-error
             ...oml2dOptions?.tips?.mobileStyle
           },
           copyTips: {
+            // @ts-expect-error
             ...defaultOptions?.tips?.copyTips,
+            // @ts-expect-error
             ...oml2dOptions?.tips?.copyTips
           }
         }
