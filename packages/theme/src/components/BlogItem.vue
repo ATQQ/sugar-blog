@@ -35,7 +35,7 @@ function handleSkipDoc() {
       handleSkipDoc()
     }"
   >
-    <i v-if="!!pin" class="pin" />
+    <i v-show="!!pin" class="pin" />
     <!-- 标题 -->
     <p class="title mobile-visible">
       {{ title }}
@@ -48,7 +48,7 @@ function handleSkipDoc() {
           {{ title }}
         </p>
         <!-- 简短描述 -->
-        <p v-if="!descriptionHTML && !!description" class="description">
+        <p v-show="!descriptionHTML && !!description" class="description">
           {{ description }}
         </p>
         <template v-if="descriptionHTML">
@@ -56,19 +56,19 @@ function handleSkipDoc() {
         </template>
         <!-- 底部补充描述 -->
         <div class="badge-list pc-visible">
-          <span v-if="author" class="split">{{ author }}</span>
+          <span v-show="author" class="split">{{ author }}</span>
           <span class="split">{{ showTime }}</span>
-          <span v-if="tag?.length" class="split">{{ tag.join(' · ') }}</span>
+          <span v-show="tag?.length" class="split">{{ tag?.join(' · ') }}</span>
         </div>
       </div>
       <!-- 右侧封面图 -->
-      <div v-if="cover" class="cover-img" :style="`background-image: url(${withBase(`${cover}`)});`" />
+      <div v-show="cover" class="cover-img" :style="`background-image: url(${withBase(`${cover}`)});`" />
     </div>
     <!-- 底部补充描述 -->
     <div class="badge-list mobile-visible">
-      <span v-if="author" class="split">{{ author }}</span>
+      <span v-show="author" class="split">{{ author }}</span>
       <span class="split">{{ showTime }}</span>
-      <span v-if="tag?.length" class="split">{{ tag.join(' · ') }}</span>
+      <span v-show="tag?.length" class="split">{{ tag?.join(' · ') }}</span>
     </div>
   </a>
 </template>
