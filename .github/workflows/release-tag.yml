@@ -17,6 +17,7 @@ jobs:
         id: release_tag
         uses: ncipollo/release-action@v1
         with:
-          generateReleaseNotes: 'true'
+          generateReleaseNotes: true
+          draft: true
           body: |
             > Please refer to CHANGELOG.md
