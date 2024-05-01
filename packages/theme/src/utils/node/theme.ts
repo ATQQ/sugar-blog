@@ -99,7 +99,7 @@ export function getArticleMeta(filepath: string, route: string, timeZone = defau
     meta.hidden = true
     meta.recommend = false
   }
-  return meta
+  return meta as Theme.PageMeta
 }
 export function getArticles(cfg?: Partial<Theme.BlogConfig>) {
   const srcDir = cfg?.srcDir || process.argv.slice(2)?.[1] || '.'

@@ -145,3 +145,43 @@ export function getFirstImagURLFromMD(content: string, route: string) {
 
   return joinPath('/', relativePath)
 }
+
+export function debounce(func: any, delay = 1000) {
+  let timeoutId: any
+  return (...rest: any[]) => {
+    clearTimeout(timeoutId)
+    timeoutId = setTimeout(() => {
+      func(...rest)
+    }, delay)
+  }
+}
+
+export function isEqual(obj1: any, obj2: any, excludeKeys: string[] = []) {
+  const keys1 = Object.keys(obj1).filter(key => !excludeKeys.includes(key))
+  const keys2 = Object.keys(obj2).filter(key => !excludeKeys.includes(key))
+
+  if (keys1.length !== keys2.length) {
+    return false
+  }
+
+  for (const key of keys1) {
+    if (!keys2.includes(key)) {
+      return false
+    }
+    const val1 = obj1[key]
+    const val2 = obj2[key]
+    const areObjects = isObject(val1) && isObject(val2)
+    if (
+      (areObjects && !isEqual(val1, val2, excludeKeys))
+      || (!areObjects && val1 !== val2)
+    ) {
+      return false
+    }
+  }
+
+  return true
+}
+
+export function isObject(obj: any) {
+  return obj != null && typeof obj === 'object'
+}

@@ -33,7 +33,6 @@ useOml2d()
 // https://vitepress.dev/zh/guide/extending-default-theme#on-appearance-toggle
 useDarkTransition()
 const openTransition = useDarkTransitionConfig()
-console.log('openTransition', openTransition)
 </script>
 
 <template>
