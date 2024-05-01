@@ -42,12 +42,7 @@ export async function getPostsData(
       frontmatter.title = getDefaultTitle(fileContent)
     }
 
-    if (!frontmatter.date) {
-      frontmatter.date = getFileBirthTime(file)
-    }
-    else {
-      frontmatter.date = formatDate(new Date(frontmatter.date))
-    }
+    frontmatter.date = formatDate(frontmatter.date ? frontmatter.date : getFileBirthTime(file))
 
     // 获取摘要信息
     frontmatter.description
