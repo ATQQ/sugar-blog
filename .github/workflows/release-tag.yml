@@ -1,0 +1,23 @@
+name: Create Release Tag
+
+on:
+  push:
+    tags:
+      - '@sugarat/theme*' # Push events to matching @sugarat/theme*
+
+jobs:
+  build:
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create Release for Tag
+        id: release_tag
+        uses: ncipollo/release-action@v1
+        with:
+          generateReleaseNotes: true
+          draft: true
+          body: |
+            > Please refer to [CHANGELOG.md](https://github.com/ATQQ/sugar-blog/blob/master/packages/theme/CHANGELOG.md) for details.
