@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.57
+
+### Patch Changes
+
+- fix: description xss error
+
 ## 0.0.56
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.3.1） ⏰ 2024/05/01：编写支持首页内容自动刷新，支持深色模式更加丝滑的过渡动画，首页加载优化，水合问题优化，修复首页和侧边栏跳转导致页面刷新问题。
+description: 最近更新（v0.3.2） ⏰ 2024/05/01：编写支持首页内容自动刷新，支持深色模式更加丝滑的过渡动画，首页加载优化，水合问题优化，修复首页和侧边栏跳转导致页面刷新问题。
 author: 粥里有勺糖
 top: 2
 tag: 日志
@@ -26,6 +26,12 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.3.2 (2024/05/01)
+
+### Patch Changes
+
+- fix: description xss error
 
 ## 0.3.1 (2024/05/01)
 
