@@ -67,6 +67,7 @@
     "pagefind": "1.0.3",
     "sass": "^1.56.1",
     "typescript": "^4.8.2",
+    "vite": "^5",
     "vitepress": "1.1.4",
     "vue": "^3.4.21"
   }

@@ -2,7 +2,6 @@
 /* eslint-disable prefer-rest-params */
 import { spawn, spawnSync } from 'node:child_process'
 import path from 'node:path'
-import { formatDate } from '../client'
 
 export function clearMatterContent(content: string) {
   let first___: unknown
@@ -31,16 +30,10 @@ export function clearMatterContent(content: string) {
       .join('\n')
   )
 }
+
 export function getDefaultTitle(content: string) {
-  const title
-    = clearMatterContent(content)
-      .split('\n')
-      ?.find((str) => {
-        return str.startsWith('# ')
-      })
-      ?.slice(2)
-      .replace(/^\s+|\s+$/g, '') || ''
-  return title
+  const match = content.match(/^(#+)\s+(.+)/m)
+  return match?.[2] || ''
 }
 
 export function getFileBirthTime(url: string) {
@@ -57,10 +50,10 @@ export function getFileBirthTime(url: string) {
     }
   }
   catch (error) {
-    return formatDate(date)
+    return date
   }
 
-  return formatDate(date)
+  return date
 }
 
 export function getGitTimestamp(file: string) {
@@ -79,8 +72,9 @@ export function getGitTimestamp(file: string) {
 
 export function getTextSummary(text: string, count = 100) {
   return (
-    clearMatterContent(text)
-      .match(/^# ([\s\S]+)/m)?.[1]
+    text
+      // 首个标题
+      ?.replace(/^#+\s+.*/, '')
       // 除去标题
       ?.replace(/#/g, '')
       // 除去图片
@@ -91,9 +85,9 @@ export function getTextSummary(text: string, count = 100) {
       ?.replace(/\*\*(.*?)\*\*/g, '$1')
       ?.split('\n')
       ?.filter(v => !!v)
-      ?.slice(1)
       ?.join('\n')
       ?.replace(/>(.*)/, '')
+      ?.trim()
       ?.slice(0, count)
   )
 }
@@ -150,4 +144,44 @@ export function getFirstImagURLFromMD(content: string, route: string) {
   const relativePath = url.startsWith('/') ? url : path.join(paths.join('/') || '', url)
 
   return joinPath('/', relativePath)
+}
+
+export function debounce(func: any, delay = 1000) {
+  let timeoutId: any
+  return (...rest: any[]) => {
+    clearTimeout(timeoutId)
+    timeoutId = setTimeout(() => {
+      func(...rest)
+    }, delay)
+  }
+}
+
+export function isEqual(obj1: any, obj2: any, excludeKeys: string[] = []) {
+  const keys1 = Object.keys(obj1).filter(key => !excludeKeys.includes(key))
+  const keys2 = Object.keys(obj2).filter(key => !excludeKeys.includes(key))
+
+  if (keys1.length !== keys2.length) {
+    return false
+  }
+
+  for (const key of keys1) {
+    if (!keys2.includes(key)) {
+      return false
+    }
+    const val1 = obj1[key]
+    const val2 = obj2[key]
+    const areObjects = isObject(val1) && isObject(val2)
+    if (
+      (areObjects && !isEqual(val1, val2, excludeKeys))
+      || (!areObjects && val1 !== val2)
+    ) {
+      return false
+    }
+  }
+
+  return true
+}
+
+export function isObject(obj: any) {
+  return obj != null && typeof obj === 'object'
 }

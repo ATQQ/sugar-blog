@@ -21,107 +21,102 @@ export function patchDefaultThemeSideBar(cfg?: Partial<Theme.BlogConfig>) {
     : undefined
 }
 
-// hack：RSS用
-export const pageMap = new Map<string, string>()
+export function getPageRoute(filepath: string, srcDir: string) {
+  let route = filepath.replace('.md', '')
+  // 去除 srcDir 处理目录名
+  // TODO：优化 路径处理，同VitePress 内部一致
+  if (route.startsWith('./')) {
+    route = route.replace(
+      new RegExp(
+        `^\\.\\/${path
+          .join(srcDir, '/')
+          .replace(new RegExp(`\\${path.sep}`, 'g'), '/')}`
+      ),
+      ''
+    )
+  }
+  else {
+    route = route.replace(
+      new RegExp(
+        `^${path
+          .join(srcDir, '/')
+          .replace(new RegExp(`\\${path.sep}`, 'g'), '/')}`
+      ),
+      ''
+    )
+  }
+  return `/${route}`
+}
 
+const defaultTimeZoneOffset = new Date().getTimezoneOffset() / -60
+export function getArticleMeta(filepath: string, route: string, timeZone = defaultTimeZoneOffset) {
+  const fileContent = fs.readFileSync(filepath, 'utf-8')
+
+  const { data: frontmatter, excerpt, content } = matter(fileContent, {
+    excerpt: true,
+  })
+
+  const meta: Partial<Theme.PageMeta> = {
+    ...frontmatter
+  }
+
+  if (!meta.title) {
+    meta.title = getDefaultTitle(content)
+  }
+  if (!meta.date) {
+    meta.date = formatDate(getFileBirthTime(filepath))
+  }
+  else {
+    meta.date = formatDate(
+      new Date(`${new Date(meta.date).toUTCString()}+${timeZone}`)
+    )
+  }
+
+  // 处理tags和categories,兼容历史文章
+  meta.categories
+        = typeof meta.categories === 'string'
+      ? [meta.categories]
+      : meta.categories
+  meta.tags = typeof meta.tags === 'string' ? [meta.tags] : meta.tags
+  meta.tag = [meta.tag || []]
+    .flat()
+    .concat([
+      ...new Set([...(meta.categories || []), ...(meta.tags || [])])
+    ])
+
+  // 获取摘要信息
+  // TODO：摘要生成优化
+  meta.description
+        = meta.description || getTextSummary(content, 100) || excerpt
+
+  // 获取封面图
+  meta.cover
+        = meta.cover
+        ?? (getFirstImagURLFromMD(fileContent, route))
+
+  // 是否发布 默认发布
+  if (meta.publish === false) {
+    meta.hidden = true
+    meta.recommend = false
+  }
+  return meta as Theme.PageMeta
+}
 export function getArticles(cfg?: Partial<Theme.BlogConfig>) {
   const srcDir = cfg?.srcDir || process.argv.slice(2)?.[1] || '.'
   const files = glob.sync(`${srcDir}/**/*.md`, { ignore: ['node_modules'] })
 
   // 文章数据
-  const data = files
-    .map((v) => {
-      let route = v
-        // 处理文件后缀名
-        .replace('.md', '')
-
-      // 去除 srcDir 处理目录名
-      if (route.startsWith('./')) {
-        route = route.replace(
-          new RegExp(
-            `^\\.\\/${path
-              .join(srcDir, '/')
-              .replace(new RegExp(`\\${path.sep}`, 'g'), '/')}`
-          ),
-          ''
-        )
-      }
-      else {
-        route = route.replace(
-          new RegExp(
-            `^${path
-              .join(srcDir, '/')
-              .replace(new RegExp(`\\${path.sep}`, 'g'), '/')}`
-          ),
-          ''
-        )
-      }
-      // hack：RSS使用
-      pageMap.set(`/${route}`, v)
-
-      const fileContent = fs.readFileSync(v, 'utf-8')
-      // TODO：摘要生成优化
-      // TODO: 用上内容content
-      const { data: frontmatter, excerpt } = matter(fileContent, {
-        excerpt: true
-      })
-
-      const meta: Partial<Theme.PageMeta> = {
-        ...frontmatter
-      }
-
-      if (!meta.title) {
-        // TODO：优化标题的采集
-        meta.title = getDefaultTitle(fileContent)
-      }
-      if (!meta.date) {
-        // getGitTimestamp(v).then((v) => {
-        //   meta.date = formatDate(v)
-        // })
-        meta.date = getFileBirthTime(v)
-      }
-      else {
-        const timeZone = cfg?.timeZone ?? 8
-        meta.date = formatDate(
-          new Date(`${new Date(meta.date).toUTCString()}+${timeZone}`)
-        )
-      }
-
-      // 处理tags和categories,兼容历史文章
-      meta.categories
-        = typeof meta.categories === 'string'
-          ? [meta.categories]
-          : meta.categories
-      meta.tags = typeof meta.tags === 'string' ? [meta.tags] : meta.tags
-      meta.tag = [meta.tag || []]
-        .flat()
-        .concat([
-          ...new Set([...(meta.categories || []), ...(meta.tags || [])])
-        ])
-
-      // 获取摘要信息
-      const wordCount = 100
-      meta.description
-        = meta.description || getTextSummary(fileContent, wordCount)
-
-      // 获取封面图
-      meta.cover
-        = meta.cover
-        ?? (getFirstImagURLFromMD(fileContent, `/${route}`))
-
-      // 是否发布 默认发布
-      if (meta.publish === false) {
-        meta.hidden = true
-        meta.recommend = false
-      }
-
+  const pageData = files
+    .map((filepath) => {
+      const route = getPageRoute(filepath, srcDir)
+      const meta = getArticleMeta(filepath, route, cfg?.timeZone)
       return {
-        route: `/${route}`,
+        route,
         meta
       }
     })
     .filter(v => v.meta.layout !== 'home')
-  return data as Theme.PageData[]
+  return pageData as Theme.PageData[]
 }
 
 export function patchVPConfig(vpConfig: any, cfg?: Partial<Theme.BlogConfig>) {
