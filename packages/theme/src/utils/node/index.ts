@@ -87,6 +87,7 @@ export function getTextSummary(text: string, count = 100) {
       ?.filter(v => !!v)
       ?.join('\n')
       ?.replace(/>(.*)/, '')
+      ?.replace(/</g, '&lt;').replace(/>/g, '&gt;')
       ?.trim()
       ?.slice(0, count)
   )

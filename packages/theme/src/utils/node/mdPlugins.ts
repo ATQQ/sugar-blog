@@ -23,7 +23,7 @@ export function getMarkdownPlugins(cfg?: Partial<Theme.BlogConfig>) {
     markdownPlugin.push(MermaidMarkdown)
   }
 
-  if (cfg.taskCheckbox !== false) {
+  if (cfg?.taskCheckbox !== false) {
     markdownPlugin.push(taskCheckboxPlugin(typeof cfg?.taskCheckbox === 'boolean' ? {} : cfg?.taskCheckbox))
   }
 
