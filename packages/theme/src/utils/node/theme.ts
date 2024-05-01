@@ -21,9 +21,6 @@ export function patchDefaultThemeSideBar(cfg?: Partial<Theme.BlogConfig>) {
     : undefined
 }
 
-// hack：RSS用
-export const pageMap = new Map<string, string>()
-
 export function getArticles(cfg?: Partial<Theme.BlogConfig>) {
   const srcDir = cfg?.srcDir || process.argv.slice(2)?.[1] || '.'
   const files = glob.sync(`${srcDir}/**/*.md`, { ignore: ['node_modules'] })
@@ -56,8 +53,6 @@ export function getArticles(cfg?: Partial<Theme.BlogConfig>) {
           ''
         )
       }
-      // hack：RSS使用
-      pageMap.set(`/${route}`, v)
 
       const fileContent = fs.readFileSync(v, 'utf-8')
       // TODO：摘要生成优化
