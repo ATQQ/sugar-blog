@@ -1,5 +1,14 @@
 # @sugarat/theme
 
+## 0.3.1
+
+### Patch Changes
+
+- feat: dev mode 支持首页内容自动刷新
+- feat: 支持深色模式更加丝滑的过渡动画
+- chore：首页加载优化，水合问题优化
+- fix: 首页和侧边栏跳转导致页面刷新
+
 ## 0.3.0
 
 ### Minor Changes

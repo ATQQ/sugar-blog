@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.56
+
+### Patch Changes
+
+- feat: support theme auto reload
+
 ## 0.0.55
 
 ### Patch Changes
