@@ -104,6 +104,10 @@ export function useOml2dOptions() {
   return inject(configSymbol)!.value.blog?.oml2d
 }
 
+export function useDarkTransitionConfig() {
+  return inject(configSymbol)!.value.blog?.darkTransition ?? true
+}
+
 export function useBlogThemeMode() {
   return inject(configSymbol)!.value?.blog?.blog ?? true
 }

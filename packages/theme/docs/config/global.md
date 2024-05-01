@@ -1644,3 +1644,17 @@ interface BackToTop {
 ```
 
 :::
+
+## darkTransition
+是否开启深色模式过渡动画
+
+* type：`boolean`
+* default：`true`
+
+```ts
+const blogTheme = getThemeConfig({
+  // 默认开启
+  darkTransition: true
+})
+```
+![深色模式过渡动画](https://vitepress.dev/appearance-toggle-transition.webp)
