@@ -31,16 +31,10 @@ export function clearMatterContent(content: string) {
       .join('\n')
   )
 }
+
 export function getDefaultTitle(content: string) {
-  const title
-    = clearMatterContent(content)
-      .split('\n')
-      ?.find((str) => {
-        return str.startsWith('# ')
-      })
-      ?.slice(2)
-      .replace(/^\s+|\s+$/g, '') || ''
-  return title
+  const match = content.match(/^(#+)\s+(.+)/m)
+  return match?.[2] || ''
 }
 
 export function getFileBirthTime(url: string) {
@@ -57,10 +51,10 @@ export function getFileBirthTime(url: string) {
     }
   }
   catch (error) {
-    return formatDate(date)
+    return date
   }
 
-  return formatDate(date)
+  return date
 }
 
 export function getGitTimestamp(file: string) {
@@ -79,8 +73,7 @@ export function getGitTimestamp(file: string) {
 
 export function getTextSummary(text: string, count = 100) {
   return (
-    clearMatterContent(text)
-      .match(/^# ([\s\S]+)/m)?.[1]
+    text
       // 除去标题
       ?.replace(/#/g, '')
       // 除去图片
@@ -94,6 +87,7 @@ export function getTextSummary(text: string, count = 100) {
       ?.slice(1)
       ?.join('\n')
       ?.replace(/>(.*)/, '')
+      ?.trim()
       ?.slice(0, count)
   )
 }
