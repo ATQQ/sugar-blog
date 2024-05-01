@@ -126,7 +126,7 @@ h1 {
 
 .inspiring-wrapper {
   margin: 16px 0;
-  height: 24px;
+  height: 32px;
   width: auto;
 
   h2 {

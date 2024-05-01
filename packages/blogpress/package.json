@@ -11,10 +11,10 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.1.0",
-    "@sugarat/theme": "0.3.0",
+    "@sugarat/theme": "workspace:*",
     "axios": "^0.27.2",
     "element-plus": "^2.3.8",
-    "vitepress": "1.1.3",
+    "vitepress": "1.1.4",
     "vitepress-plugin-rss": "0.2.2",
     "vue": "^3.4.21"
   },

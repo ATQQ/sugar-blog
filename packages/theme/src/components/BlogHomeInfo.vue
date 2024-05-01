@@ -34,7 +34,7 @@ import BlogFriendLink from './BlogFriendLink.vue'
 
 @media screen and (min-width: 767px) {
   .blog-info {
-    max-width: 300px;
+    width: 280px;
   }
 }
 </style>

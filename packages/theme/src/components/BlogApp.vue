@@ -34,8 +34,10 @@ useOml2d()
   <Layout>
     <template #layout-top>
       <slot name="layout-top" />
-      <BlogAlert />
-      <BlogPopover />
+      <ClientOnly>
+        <BlogAlert />
+        <BlogPopover />
+      </ClientOnly>
     </template>
 
     <template #doc-before>
