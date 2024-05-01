@@ -2,7 +2,6 @@
 /* eslint-disable prefer-rest-params */
 import { spawn, spawnSync } from 'node:child_process'
 import path from 'node:path'
-import { formatDate } from '../client'
 
 export function clearMatterContent(content: string) {
   let first___: unknown
@@ -74,6 +73,8 @@ export function getGitTimestamp(file: string) {
 export function getTextSummary(text: string, count = 100) {
   return (
     text
+      // 首个标题
+      ?.replace(/^#+\s+.*/, '')
       // 除去标题
       ?.replace(/#/g, '')
       // 除去图片
@@ -84,7 +85,6 @@ export function getTextSummary(text: string, count = 100) {
       ?.replace(/\*\*(.*?)\*\*/g, '$1')
       ?.split('\n')
       ?.filter(v => !!v)
-      ?.slice(1)
       ?.join('\n')
       ?.replace(/>(.*)/, '')
       ?.trim()
