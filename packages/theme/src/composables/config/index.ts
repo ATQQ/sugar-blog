@@ -97,7 +97,10 @@ export namespace Theme {
   }
   export interface activeTag {
     label: string
-    type: string
+    /**
+     * @type {string}
+     */
+    type: any
   }
 
   export type CommentConfig = ((GiscusOption & CommentCommonConfig) | GiscusConfig | ArtalkConfig)
