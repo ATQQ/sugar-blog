@@ -70,8 +70,8 @@ importers:
         specifier: 1.1.4
         version: 1.1.4(@algolia/client-search@4.19.1)(@types/node@20.6.3)(async-validator@4.2.5)(axios@0.27.2)(fuse.js@6.6.2)(postcss@8.4.38)(sass@1.64.1)(search-insights@2.13.0)(typescript@4.9.4)
       vitepress-plugin-rss:
-        specifier: 0.2.2
-        version: 0.2.2
+        specifier: workspace:*
+        version: link:../vitepress-plugin-rss
       vue:
         specifier: ^3.4.21
         version: 3.4.21(typescript@4.9.4)
@@ -138,8 +138,8 @@ importers:
         specifier: 0.2.14
         version: 0.2.14(typescript@4.9.4)
       vitepress-plugin-rss:
-        specifier: 0.2.2
-        version: 0.2.2
+        specifier: workspace:*
+        version: link:../vitepress-plugin-rss
       vitepress-plugin-tabs:
         specifier: 0.2.0
         version: 0.2.0(vitepress@1.1.4(@algolia/client-search@4.19.1)(@types/node@20.6.3)(async-validator@4.2.5)(axios@0.27.2)(fuse.js@6.6.2)(postcss@8.4.38)(sass@1.56.1)(search-insights@2.13.0)(typescript@4.9.4))(vue@3.4.21(typescript@4.9.4))
@@ -3645,9 +3645,6 @@ packages:
 
   vitepress-plugin-pagefind@0.2.14:
     resolution: {integrity: sha512-xwx3JtINalPNyMs4NHvgIbzZXwa3wIjj2d5E6+OWbV3FQu9lorHT34mazaDkJxKVdVs8rKucOuxpYLkR9aTYPA==}
-
-  vitepress-plugin-rss@0.2.2:
-    resolution: {integrity: sha512-d/IkQffeNe3HO9gFmJS6hk/dfX085tmOcezYM4EAPraaN+zz1UdZiYTpvQsxRQTYLpQZt/OsmL7Ker4bVRQ0Cw==}
 
   vitepress-plugin-tabs@0.2.0:
     resolution: {integrity: sha512-jTdtz4Z5fHllzcDAJaJK/bxE/2PhJSqetFUFgiB7xzw23O4yI+ntJrN+D3oP8XH/0559QUbrYd0K3YLoRaHbAA==}
@@ -7734,12 +7731,6 @@ snapshots:
     transitivePeerDependencies:
       - '@vue/composition-api'
       - typescript
-
-  vitepress-plugin-rss@0.2.2:
-    dependencies:
-      fast-glob: 3.3.1
-      feed: 4.2.2
-      gray-matter: 4.0.3
 
   vitepress-plugin-tabs@0.2.0(vitepress@1.1.4(@algolia/client-search@4.19.1)(@types/node@20.6.3)(async-validator@4.2.5)(axios@0.27.2)(fuse.js@6.6.2)(postcss@8.4.38)(sass@1.56.1)(search-insights@2.13.0)(typescript@4.9.4))(vue@3.4.21(typescript@4.9.4)):
     dependencies:

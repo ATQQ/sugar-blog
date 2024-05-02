@@ -1,5 +1,12 @@
 # vitepress-plugin-rss
 
+## 0.2.3
+
+### Patch Changes
+
+- chore: add peerdeps
+- chore: clean code
+
 ## 0.2.2
 
 ### Patch Changes

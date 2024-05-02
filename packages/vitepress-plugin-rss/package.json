@@ -1,6 +1,6 @@
 {
   "name": "vitepress-plugin-rss",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "vitepress plugin, generate feed.rss",
   "author": "sugar",
   "license": "MIT",
@@ -33,6 +33,9 @@
   "scripts": {
     "dev": "npx tsup src/index.ts --dts --watch --format esm,cjs --external vitepress",
     "build": "npx tsup src/index.ts --dts --format esm,cjs --external vitepress --silent"
+  },
+  "peerDependencies": {
+    "vitepress": "^1"
   },
   "dependencies": {
     "fast-glob": "^3.2.12",
