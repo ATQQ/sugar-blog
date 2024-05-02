@@ -264,10 +264,16 @@ export default defineConfig({
     },
     plugins: [
       RssPlugin(RSSWeekly)
-    ],
-    optimizeDeps: {
-      include: ['element-plus'],
-      exclude: ['@sugarat/theme']
+    ]
+  },
+  vue: {
+    template: {
+      compilerOptions: {
+        // https://github.com/vuejs/vitepress/discussions/468
+        isCustomElement: (tag) => {
+          return ['center'].includes(tag.toLocaleLowerCase())
+        }
+      }
     }
   },
   lastUpdated: true,

@@ -41,6 +41,10 @@
     "build:node": "npx tsup",
     "serve": "vitepress serve docs"
   },
+  "peerDependencies": {
+    "@element-plus/icons-vue": "^2.3.1",
+    "element-plus": "^2.7"
+  },
   "dependencies": {
     "@giscus/vue": "^2.4.0",
     "@mdit-vue/shared": "^0.12.1",
@@ -63,7 +67,6 @@
     "@element-plus/icons-vue": "^2.3.1",
     "artalk": "^2.8.5",
     "element-plus": "^2.7.2",
-    "javascript-stringify": "^2.1.0",
     "pagefind": "1.1.0",
     "sass": "^1.76.0",
     "typescript": "^5.4.5",
