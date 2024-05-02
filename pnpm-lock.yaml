@@ -138,8 +138,8 @@ importers:
         specifier: 0.2.14
         version: 0.2.14(typescript@4.9.4)
       vitepress-plugin-rss:
-        specifier: 0.2.2
-        version: 0.2.2
+        specifier: workspace:*
+        version: link:../vitepress-plugin-rss
       vitepress-plugin-tabs:
         specifier: 0.2.0
         version: 0.2.0(vitepress@1.1.4(@algolia/client-search@4.19.1)(@types/node@20.6.3)(async-validator@4.2.5)(axios@0.27.2)(fuse.js@6.6.2)(postcss@8.4.38)(sass@1.56.1)(search-insights@2.13.0)(typescript@4.9.4))(vue@3.4.21(typescript@4.9.4))

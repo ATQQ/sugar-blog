@@ -34,6 +34,9 @@
     "dev": "npx tsup src/index.ts --dts --watch --format esm,cjs --external vitepress",
     "build": "npx tsup src/index.ts --dts --format esm,cjs --external vitepress --silent"
   },
+  "peerDependencies": {
+    "vitepress": "^1"
+  },
   "dependencies": {
     "fast-glob": "^3.2.12",
     "feed": "^4.2.2",

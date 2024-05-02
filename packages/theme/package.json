@@ -56,7 +56,7 @@
     "vitepress-markdown-timeline": "^1.2.1",
     "vitepress-plugin-mermaid": "2.0.13",
     "vitepress-plugin-pagefind": "0.2.14",
-    "vitepress-plugin-rss": "0.2.2",
+    "vitepress-plugin-rss": "workspace:*",
     "vitepress-plugin-tabs": "0.2.0"
   },
   "devDependencies": {
