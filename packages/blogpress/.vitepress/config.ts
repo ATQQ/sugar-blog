@@ -94,75 +94,75 @@ const blogTheme = getThemeConfig({
         nickname: '冴羽',
         des: '冴羽的JavaScript博客',
         avatar:
-          'https://img.cdn.sugarat.top/mdImg/MTYyNjQ4MzkxMzIxMA==626483913210',
+          'https://sugarat.s3.bitiful.net/avatar/blog/mqyqingfeng.png',
         url: 'https://github.com/mqyqingfeng/Blog'
       },
       {
         nickname: 'Linbudu',
         des: '未来的不可知，是前进的原动力',
         avatar:
-          'https://linbudu-img-store.oss-cn-shenzhen.aliyuncs.com/img/48507806.jfif',
+          'https://sugarat.s3.bitiful.net/avatar/blog/linbudu.jfif',
         url: 'https://linbudu.top/'
       },
       {
         nickname: '小九',
         des: '日益努力，而后风生水起',
-        avatar: 'https://jiangly.com/favicon.ico',
+        avatar: 'https://sugarat.s3.bitiful.net/avatar/blog/jiangly.ico',
         url: 'https://jiangly.com/'
       },
       {
         nickname: '花喵电台      ',
         des: '曹豪侠和余湾湾还有两只猫的生活记录~',
         avatar:
-          'https://pic.fmcat.top/head.jpg?x-oss-process=image/auto-orient,1/resize,m_fill,w_110,h_110/quality,q_90',
+          'https://sugarat.s3.bitiful.net/avatar/blog/fmcat.jpeg',
         url: 'https://www.fmcat.top'
       },
       {
         nickname: '张成威的网络日志',
         des: '知不足而奋进，望远山而前行',
-        avatar: 'https://www.zhangchengwei.work/logo.png',
+        avatar: 'https://sugarat.s3.bitiful.net/avatar/blog/zhangchengwei.png',
         url: 'https://www.zhangchengwei.work'
       },
       {
         url: 'https://leelaa.cn',
-        avatar: 'https://leelaa.cn/pwa-192x192.png',
+        avatar: 'https://sugarat.s3.bitiful.net/avatar/blog/leelaa.png',
         des: '肯了个德的博客',
         nickname: 'LEEDAISEN'
       },
       {
         url: 'https://next.blackcell.fun/',
-        avatar: 'https://avatars.githubusercontent.com/u/45719798?v=4',
+        avatar: 'https://sugarat.s3.bitiful.net/avatar/blog/blackcell.jpeg',
         des: '物以类聚 人以群分',
         nickname: 'BlackCell'
       },
       {
-        url: 'https://blog.yovvis.top',
-        avatar: 'https://img.yovvis.top/avatar.png',
+        url: 'https://blog.cuuxx.com',
+        avatar: 'https://sugarat.s3.bitiful.net/avatar/blog/tenyon.webp',
         des: '工夫为艺，笃志成技',
         nickname: 'Yovvis\'s Blog'
       },
       {
         nickname: '强少来了',
         des: '互联网产品经理',
-        avatar: 'https://fengxiaoqiang.com/images/logo.png',
+        avatar: 'https://sugarat.s3.bitiful.net/avatar/blog/fengxiaoqiang.png',
         url: 'https://fengxiaoqiang.com/'
       },
       {
         nickname: '博友圈',
         des: '独立博客人的专属朋友圈！',
-        avatar: '',
+        avatar: 'https://cdn.upyun.sugarat.top/mdImg/sugar/bdee5d11a1e036ca3634943d34469f59',
         url: 'https://www.boyouquan.com/home'
       },
       {
         nickname: 'Simon He',
         des: '除了coding，我什么都不会',
-        avatar: 'https://simonme.netlify.app/black.png',
+        avatar: 'https://sugarat.s3.bitiful.net/avatar/blog/simonme.png',
         url: 'https://simonme.netlify.app/'
       },
       {
         nickname: 'laiky',
         des: '一名全栈开发工程师，.NET全栈经验',
-        avatar: 'https://img.cdn.sugarat.top/mdImg/sugar/509b6159ec91560d997ca0aa280435e3',
+        avatar: 'https://sugarat.s3.bitiful.net/avatar/blog/llxz.png',
         url: 'http://llxz.top/'
       }
     ],

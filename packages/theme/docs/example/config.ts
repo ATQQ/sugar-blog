@@ -6,7 +6,7 @@ export default defineExamples([
     link: 'https://sugarat.top',
     name: '粥里有勺糖',
     desc: '记录随笔与学习笔记',
-    avatar: 'https://sugarat.top/logo.png',
+    avatar: 'https://sugarat.s3.bitiful.net/avatar/theme/sugarat.png',
     nickname: '粥里有勺糖',
     home: 'https://github.com/atqq'
   },
@@ -15,7 +15,7 @@ export default defineExamples([
     link: 'https://docs.ep.sugarat.top/',
     name: 'EastPicker（轻取）',
     desc: '在线文件收取平台',
-    avatar: 'https://docs.ep.sugarat.top/logo.png',
+    avatar: 'https://sugarat.s3.bitiful.net/avatar/theme/easypicker.png',
     nickname: 'EastPicker'
   },
   {
@@ -23,7 +23,7 @@ export default defineExamples([
     link: 'https://www.imufeng.cn/',
     name: '沐风的小站',
     desc: '沐风的个人空间',
-    avatar: 'https://cravatar.cn/avatar/f1dcdc8fa782b81824df5d67022e4d4a?s=160',
+    avatar: 'https://sugarat.s3.bitiful.net/avatar/theme/imufeng.png',
     nickname: 'MuFeng'
   },
   {
@@ -31,23 +31,23 @@ export default defineExamples([
     link: 'http://itmei.cn/',
     name: '荷游@iTmei',
     desc: 'vue3学习,typescript学习,typescript/es6学习,qt学习,单片机学习',
-    avatar: 'http://itmei.cn/logo.png',
+    avatar: 'https://sugarat.s3.bitiful.net/avatar/theme/itmei.png',
     nickname: '荷游'
   },
   {
-    cover: '/imgs/example/haitang/cover.png',
+    cover: 'https://cdn.upyun.sugarat.top/mdImg/sugar/cfbe7989b5fc4d3c2e9283f07d2540f4',
     link: 'http://haitang.icu',
     name: '海棠的小屋',
     desc: '记录海棠的成长点滴',
-    avatar: '/imgs/example/haitang/avatar.png',
+    avatar: 'https://sugarat.s3.bitiful.net/avatar/theme/haitang.png',
     nickname: 'Haitang'
   },
   {
-    cover: 'https://mywisteria.ym94.cn/cover.png',
+    cover: 'https://cdn.upyun.sugarat.top/mdImg/sugar/878f87ec28d48fd9a77f8bc04849af05',
     link: 'https://blog.ym94.cn/',
     name: 'Ymri',
     desc: '语雀同步到个人博客',
-    avatar: 'https://mywisteria.ym94.cn/header.jpg',
+    avatar: 'https://sugarat.s3.bitiful.net/avatar/theme/ym94.jpeg',
     nickname: 'Ymri'
   },
   {
@@ -55,7 +55,7 @@ export default defineExamples([
     link: 'http://llxz.top/',
     name: '赖小栈',
     desc: '一名全栈开发工程师，.NET全栈经验',
-    avatar: 'https://img.cdn.sugarat.top/mdImg/sugar/509b6159ec91560d997ca0aa280435e3',
+    avatar: 'https://sugarat.s3.bitiful.net/avatar/blog/llxz.png',
     nickname: 'laiky'
   },
 ])
