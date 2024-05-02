@@ -3,7 +3,15 @@ publish: false
 ---
 
 # CHANGELOG
+
+## 2.0.43
+### Patch Changes
+
+- Updated dependencies
+  - vitepress-plugin-rss@0.2.3
+
 ## 2.0.42
+
 ### Patch Changes
 
 - Updated dependencies
