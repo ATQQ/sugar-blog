@@ -10,6 +10,6 @@ publish: false
 
 |             QQ交流群             |         微信交流群          |
 | :------------------------------: | :-------------------------: |
-| ![QQ群](/qq-scan.jpg) | ![微信群](/wechat-scan.jpg) |
+| ![QQ群](/qq-scan.jpg) | ![微信群](https://sugarat.s3.bitiful.net/qrcode/wechat/network/group.jpg) |
 
 如扫码无法加入，可[加好友](./aboutme.md)备注“主题”，我拉你进群
