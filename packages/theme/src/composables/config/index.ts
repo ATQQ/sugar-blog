@@ -97,7 +97,10 @@ export namespace Theme {
   }
   export interface activeTag {
     label: string
-    type: string
+    /**
+     * @type {string}
+     */
+    type: any
   }
 
   export type CommentConfig = ((GiscusOption & CommentCommonConfig) | GiscusConfig | ArtalkConfig)
@@ -446,6 +449,10 @@ export namespace Theme {
      * @default true
      */
     darkTransition?: boolean
+    /**
+     * 渲染时替换图片地址
+     */
+    imageStyle?: ImageStyleConfig
   }
 
   export interface BackToTop {
@@ -546,5 +553,26 @@ export namespace Theme {
      * @default false
      */
     expand?: boolean
+  }
+
+  export interface ReplaceRule {
+    /**
+     * 匹配规则
+     */
+    rule: string | RegExp
+    /**
+     * 直接追加后缀
+     */
+    suffix?: string
+    /**
+     * 替换函数或字符串(优先级高于 suffix)
+     */
+    replace?: string | ((match: string) => string)
+  }
+  export interface ImageStyleConfig {
+    /**
+     * 首页封面预览图
+     */
+    coverPreview?: ReplaceRule | ReplaceRule[]
   }
 }

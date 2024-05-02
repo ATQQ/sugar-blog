@@ -102,7 +102,7 @@ watch(
           fill="#D3D3D3" p-id="4294"
         />
       </svg> 标签</span>
-      <ElTag v-if="activeTag.label" :type="activeTag.type as any" :effect="colorMode" closable @close="handleCloseTag">
+      <ElTag v-if="activeTag.label" :type="activeTag.type || 'primary'" :effect="colorMode" closable @close="handleCloseTag">
         {{ activeTag.label }}
       </ElTag>
     </div>
@@ -110,7 +110,7 @@ watch(
     <ul class="tag-list">
       <li v-for="(tag, idx) in tags" :key="tag">
         <ElTag
-          :type="tagType[idx % tagType.length]" :effect="colorMode"
+          :type="tagType[idx % tagType.length] || 'primary'" :effect="colorMode"
           @click="handleTagClick(tag, tagType[idx % tagType.length])"
         >
           {{ tag }}

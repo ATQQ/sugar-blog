@@ -12,6 +12,12 @@ const RSS: Theme.RSSOptions = {
 }
 
 export const blogTheme = getThemeConfig({
+  imageStyle: {
+    coverPreview: {
+      rule: '//img.cdn.sugarat.top',
+      suffix: '~cover.webp'
+    }
+  },
   oml2d: {
     mobileDisplay: true,
     models: [

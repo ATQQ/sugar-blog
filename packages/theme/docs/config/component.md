@@ -49,7 +49,7 @@ const blogTheme = getThemeConfig({
 ```json
 {
   "resolutions": {
-    "oh-my-live2d": "^0.10.0"
+    "oh-my-live2d": "^0.17.0"
   }
 }
 ```
