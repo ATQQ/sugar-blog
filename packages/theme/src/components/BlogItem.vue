@@ -2,7 +2,7 @@
 import { useRouter, withBase } from 'vitepress'
 import { computed } from 'vue'
 import { formatShowDate, wrapperCleanUrls } from '../utils/client'
-import { useCleanUrls } from '../composables/config/blog'
+import { useCleanUrls, useImageStyle } from '../composables/config/blog'
 
 const props = defineProps<{
   route: string
@@ -13,7 +13,7 @@ const props = defineProps<{
   descriptionHTML?: string
   tag?: string[]
   author?: string
-  cover?: string | boolean
+  cover?: string | false
   pin?: number
 }>()
 const showTime = computed(() => {
@@ -26,6 +26,40 @@ const router = useRouter()
 function handleSkipDoc() {
   router.go(link.value)
 }
+
+const { coverPreview } = useImageStyle()
+
+const resultCover = computed(() => {
+  if (!props.cover) {
+    return ''
+  }
+  const baseCover = withBase(props.cover)
+  const coverRule = [coverPreview]
+    .flat()
+    .filter(v => !!v)
+    .find((coverRule) => {
+      if (!coverRule) {
+        return false
+      }
+      return coverRule.rule instanceof RegExp ? coverRule.rule.test(baseCover) : baseCover.includes(coverRule.rule)
+    })
+
+  if (!coverRule) {
+    return baseCover
+  }
+  const { suffix, replace, rule } = coverRule
+  if (!replace && suffix) {
+    return `${baseCover}${suffix}`
+  }
+  if (typeof replace === 'function') {
+    return replace(baseCover)
+  }
+  if (typeof replace === 'string') {
+    return baseCover.replace(rule, replace)
+  }
+
+  return baseCover
+})
 </script>
 
 <template>
@@ -62,7 +96,7 @@ function handleSkipDoc() {
         </div>
       </div>
       <!-- 右侧封面图 -->
-      <div v-show="cover" class="cover-img" :style="`background-image: url(${withBase(`${cover}`)});`" />
+      <div v-show="cover" class="cover-img" :style="`background-image: url(${resultCover});`" />
     </div>
     <!-- 底部补充描述 -->
     <div class="badge-list mobile-visible">

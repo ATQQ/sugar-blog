@@ -256,7 +256,7 @@ descriptionHTML: '
 ![](https://img.cdn.sugarat.top/mdImg/MTY4OTQzMTQyMzE1MA==689431423150)
 
 ### cover
-* Type: `string|boolean`
+* Type: `string|false`
 
 用于设置文章在首页卡片列表里展示的 `封面信息`
 ::: code-group

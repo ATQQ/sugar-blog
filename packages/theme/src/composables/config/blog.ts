@@ -229,3 +229,7 @@ export function useCleanUrls() {
   const { site } = useData()
   return !!site.value.cleanUrls
 }
+
+export function useImageStyle() {
+  return inject(configSymbol)?.value?.blog?.imageStyle || {} as Theme.ImageStyleConfig
+}

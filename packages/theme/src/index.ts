@@ -12,6 +12,7 @@ import DefaultTheme from 'vitepress/theme'
 import { enhanceAppWithTabs } from 'vitepress-plugin-tabs/client'
 
 // 图表渲染组件
+// @ts-expect-error
 import Mermaid from 'vitepress-plugin-mermaid/Mermaid.vue'
 import BlogApp from './components/BlogApp.vue'
 import { withConfigProvider } from './composables/config/blog'
