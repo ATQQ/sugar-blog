@@ -122,7 +122,7 @@ const blogTheme = getThemeConfig({
       {
         nickname: '小九',
         des: '日益努力，而后风生水起',
-        avatar: 'https://sugarat.s3.bitiful.net/avatar/blog/jiangly.ico',
+        avatar: 'https://sugarat.s3.bitiful.net/avatar/blog/jiangly.png',
         url: 'https://jiangly.com/'
       },
       {
@@ -180,7 +180,12 @@ const blogTheme = getThemeConfig({
         avatar: 'https://sugarat.s3.bitiful.net/avatar/blog/llxz.png',
         url: 'http://llxz.top/'
       }
-    ],
+    ].map((v) => {
+      if (v.avatar.includes('//sugarat.s3.bitiful.net')) {
+        v.avatar = `${v.avatar}?w=50&h=50&fmt=webp&mode=crop`
+      }
+      return v
+    }),
     random: true,
     limit: 6,
   },
