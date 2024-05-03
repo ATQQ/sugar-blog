@@ -150,9 +150,6 @@ importers:
       element-plus:
         specifier: ^2.7.2
         version: 2.7.2(vue@3.4.26(typescript@5.4.5))
-      javascript-stringify:
-        specifier: ^2.1.0
-        version: 2.1.0
       pagefind:
         specifier: 1.1.0
         version: 1.1.0
