@@ -6,7 +6,7 @@ export default defineExamples([
     link: 'https://sugarat.top',
     name: '粥里有勺糖',
     desc: '记录随笔与学习笔记',
-    avatar: 'https://sugarat.s3.bitiful.net/avatar/theme/sugarat.png',
+    avatar: 'https://sugarat.s3.bitiful.net/avatar/blog/zlyst-avatar.jpeg',
     nickname: '粥里有勺糖',
     home: 'https://github.com/atqq'
   },

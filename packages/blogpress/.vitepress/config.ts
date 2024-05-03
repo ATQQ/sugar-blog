@@ -45,11 +45,16 @@ const RSS: Theme.RSSOptions = {
 const blogTheme = getThemeConfig({
   imageStyle: {
     coverPreview: [
+      // 七牛云
       {
         rule: '//img.cdn.sugarat.top',
         suffix: '~cover.webp'
       },
       // 又拍云CDN
+      {
+        rule: '//cdn.upyun.sugarat.top',
+        suffix: '-cover'
+      }
     ]
   },
   themeColor: 'el-blue',
@@ -301,7 +306,7 @@ export default defineConfig({
       }
     },
     lastUpdatedText: '上次更新于',
-    logo: '/logo.png',
+    logo: 'https://sugarat.s3.bitiful.net/avatar/blog/zlyst-avatar.jpeg!style:avatar',
     editLink: {
       pattern:
         'https://github.com/ATQQ/sugar-blog/tree/master/packages/blogpress/:path',

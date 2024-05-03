@@ -1,7 +1,12 @@
 import type { DefaultTheme } from 'vitepress/theme'
 
 export function defineExamples(examples: IExample[]) {
-  return examples
+  return examples.map((v) => {
+    if (v.avatar.includes('//sugarat.s3.bitiful.net')) {
+      v.avatar = `${v.avatar}?w=30&h=30&fmt=webp&mode=crop`
+    }
+    return v
+  })
 }
 
 type IExample = SiteInfo & Author

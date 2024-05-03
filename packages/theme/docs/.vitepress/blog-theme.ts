@@ -13,10 +13,18 @@ const RSS: Theme.RSSOptions = {
 
 export const blogTheme = getThemeConfig({
   imageStyle: {
-    coverPreview: {
-      rule: '//img.cdn.sugarat.top',
-      suffix: '~cover.webp'
-    }
+    coverPreview: [
+      // 七牛云
+      {
+        rule: '//img.cdn.sugarat.top',
+        suffix: '~cover.webp'
+      },
+      // 又拍云CDN
+      {
+        rule: '//cdn.upyun.sugarat.top',
+        suffix: '-cover'
+      }
+    ]
   },
   oml2d: {
     mobileDisplay: true,
