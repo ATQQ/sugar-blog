@@ -81,7 +81,7 @@ const blogTheme = getThemeConfig({
       { type: 'text', content: '👇公众号👇---👇 微信 👇' },
       {
         type: 'image',
-        src: 'https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210'
+        src: 'https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210~fmt.webp'
       },
       {
         type: 'text',
@@ -208,7 +208,7 @@ const blogTheme = getThemeConfig({
       name: '蜀ICP备19011724号',
       link: 'https://beian.miit.gov.cn/'
     },
-    message: '<a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank" style="display:flex;align-items:center;justify-content:center;">本网站由 <img src="/upyun.png" style="height:24px;"> 提供CDN加速/云存储服务</a>'
+    message: '<a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank" style="display:flex;align-items:center;justify-content:center;">本网站由 <img src="https://sugarat.s3.bitiful.net/logo/upyun.png?w=56&h=24&fmt=webp" style="width:56px;height:24px;"> 提供CDN加速/云存储服务</a>'
   },
   hotArticle: {
     pageSize: 12
