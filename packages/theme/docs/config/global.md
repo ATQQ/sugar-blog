@@ -1658,3 +1658,55 @@ const blogTheme = getThemeConfig({
 })
 ```
 ![深色模式过渡动画](https://vitepress.dev/appearance-toggle-transition.webp)
+
+
+## imageStyle
+设置图片处理样式（图片资源路径调整），比如图片路径替换，添加图片压缩参数等，可以根据自己的需求进行配置。
+
+*目前仅支持首页文章列表的封面图。*
+
+* type：`ImageStyleConfig`
+
+:::code-group
+```ts [example]
+const blogTheme = getThemeConfig({
+  imageStyle: {
+    coverPreview: [
+      // 七牛云
+      {
+        rule: '//img.cdn.sugarat.top',
+        suffix: '~cover.webp'
+      },
+      // 又拍云CDN
+      {
+        rule: '//cdn.upyun.sugarat.top',
+        suffix: '-cover'
+      }
+    ]
+  },
+})
+```
+
+```ts [type]
+interface ReplaceRule {
+  /**
+   * 匹配规则
+   */
+  rule: string | RegExp
+  /**
+   * 直接追加后缀
+   */
+  suffix?: string
+  /**
+   * 替换函数或字符串(优先级高于 suffix)
+   */
+  replace?: string | ((match: string) => string)
+}
+interface ImageStyleConfig {
+  /**
+   * 首页封面预览图
+   */
+  coverPreview?: ReplaceRule | ReplaceRule[]
+}
+```
+:::
