@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted } from 'vue'
 import { ElPagination } from 'element-plus'
 import { useData, useRouter } from 'vitepress'
 import { useBrowserLocation } from '@vueuse/core'
@@ -85,15 +85,13 @@ router.onBeforeRouteChange = (to) => {
 router.onAfterRouteChanged = (to) => {
   refreshCurrentPage(to.slice(to.indexOf('?') + 1))
 }
-const ready = ref(false)
 onMounted(() => {
   refreshCurrentPage()
-  ready.value = true
 })
 </script>
 
 <template>
-  <ul data-pagefind-ignore="all" :hidden="!ready">
+  <ul data-pagefind-ignore="all">
     <li v-for="v in currentWikiData" :key="v.route">
       <BlogItem
         :route="v.route"
