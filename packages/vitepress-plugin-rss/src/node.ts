@@ -10,6 +10,7 @@ import {
   formatDate,
   getDefaultTitle,
   getFileBirthTime,
+  getTextSummary,
   normalizePath
 } from './utils'
 import type { PostInfo, RSSOptions } from './type'
@@ -34,12 +35,12 @@ export async function getPostsData(
   for (const file of files) {
     const fileContent = fs.readFileSync(file, 'utf-8')
 
-    const { data: frontmatter, excerpt } = matter(fileContent, {
+    const { data: frontmatter, excerpt, content } = matter(fileContent, {
       excerpt: true
     })
 
     if (!frontmatter.title) {
-      frontmatter.title = getDefaultTitle(fileContent)
+      frontmatter.title = getDefaultTitle(content)
     }
 
     frontmatter.date = formatDate(frontmatter.date ? frontmatter.date : getFileBirthTime(file))
@@ -47,8 +48,8 @@ export async function getPostsData(
     // 获取摘要信息
     frontmatter.description
       // eslint-disable-next-line no-await-in-loop
-      = (await ops?.renderExpect?.(fileContent, { ...frontmatter }))
-      ?? (frontmatter.description || excerpt)
+      = (await ops?.renderExpect?.(content, { ...frontmatter }))
+      ?? (frontmatter.description || excerpt || getTextSummary(content, 100))
 
     // 获取封面图
     frontmatter.cover

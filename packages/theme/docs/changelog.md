@@ -27,6 +27,13 @@ bun install vitepress@latest
 ```
 :::
 
+## 0.3.4 (2024/05/06)
+
+### Patch Changes
+
+- Updated dependencies
+  - vitepress-plugin-rss@0.2.4
+
 ## 0.3.3 (2024/05/03)
 
 ### Patch Changes

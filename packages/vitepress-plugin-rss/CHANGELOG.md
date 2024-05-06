@@ -1,5 +1,11 @@
 # vitepress-plugin-rss
 
+## 0.2.4
+
+### Patch Changes
+
+- fix: generate title error
+
 ## 0.2.3
 
 ### Patch Changes
