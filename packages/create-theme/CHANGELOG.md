@@ -1,5 +1,12 @@
 # @sugarat/create-theme
 
+## 0.0.59
+
+### Patch Changes
+
+- Updated dependencies
+  - vitepress-plugin-rss@0.2.4
+
 ## 0.0.58
 
 ### Patch Changes
