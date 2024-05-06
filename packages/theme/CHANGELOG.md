@@ -1,11 +1,18 @@
 # @sugarat/theme
 
+## 0.3.4
+
+### Patch Changes
+
+- Updated dependencies
+  - vitepress-plugin-rss@0.2.4
+
 ## 0.3.3
 
 ### Patch Changes
 
 - feat：支持首页 cover 图添加 image style
-- chore：导航 logo 样式优化 
+- chore：导航 logo 样式优化
 - chore: reduce element css size
 - chore: 依赖升级，无用依赖移除，peerDeps 调整
 
