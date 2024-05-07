@@ -234,13 +234,14 @@ const extraHead: any
           {
             charset: 'UTF-8',
             id: 'LA_COLLECT',
-            src: '//sdk.51.la/js-sdk-pro.min.js'
+            defer: true,
+            src: '//sugarat.s3.bitiful.net/npm/51la-analysis-sdk/js-sdk-pro.min.js',
           }
         ],
         [
           'script',
           {},
-          'LA.init({id: "Jgmg5avjAUvoyePS",ck: "Jgmg5avjAUvoyePS",hashMode: true})'
+          'document.addEventListener(\'DOMContentLoaded\', function() {typeof LA !==\'undefined\' && LA.init({id: "Jgmg5avjAUvoyePS",ck: "Jgmg5avjAUvoyePS",hashMode: true})});'
         ],
       ]
     : []
