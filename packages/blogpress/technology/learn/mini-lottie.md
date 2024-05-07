@@ -2,7 +2,8 @@
 tags: 
  - 技术笔记
  - 小程序
-date: 2024-04-20 23:16:00
+# date: 2024-04-20 23:16:00
+description: 记录分享在小程序中使用 lottie 播放AE动画的方法，以及踩坑经验。
 ---
 # 小程序中使用 lottie 动画 | 踩坑经验分享
 
@@ -283,9 +284,95 @@ ani.addEventListener('complete', () => {
 })
 ```
 
-解决办法
+问题排查：
 
-*TODO：未完待续*
+① 翻看源码[lottie-miniprogram](https://github.com/wechat-miniprogram/lottie-miniprogram/tree/master)
+
+在 `src/adapter/index.js` 中看到[下面这段代码](https://github.com/wechat-miniprogram/lottie-miniprogram/blob/49066a6479d710b5863754613a518c65487912db/src/adapter/index.js#L89-L101)
+
+```js
+window.requestAnimationFrame = function requestAnimationFrame(cb) {
+  let called = false
+  setTimeout(() => {
+    if (called) {
+      return
+    }
+    called = true
+    typeof cb === 'function' && cb(Date.now())
+  }, 100)
+  canvas.requestAnimationFrame((timeStamp) => {
+    if (called) {
+      return
+    }
+    called = true
+    typeof cb === 'function' && cb(timeStamp)
+  })
+}
+```
+在翻看一下小程序文档里 [canvas.requestAnimationFrame](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/Canvas.requestAnimationFrame.html) 文档说明。
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/36b0cfb5ce7dca2c6916caf71aeff2ff)
+
+有点悟了上面的 `setTimeout` 代码，应该是为了兼容低版本的小程序，里面还有 `called` 变量控制，不重复执行。
+
+猜测可能是在播放的时候执行了 `setTimeout` 里的逻辑导致动画提前结束。
+
+于是我就加上了 `console.log` 发布到线上验证一下。
+
+```js
+setTimeout(() => {
+  if (called) {
+    return
+  }
+  called = true
+  console.log('setTimeout', Date.now()) // [!code ++]
+  typeof cb === 'function' && cb(Date.now())
+}, 100)
+
+canvas.requestAnimationFrame((timeStamp) => {
+  if (called) {
+    return
+  }
+  console.log('canvas.requestAnimationFrame', timeStamp) // [!code ++]
+  called = true
+  typeof cb === 'function' && cb(timeStamp)
+})
+```
+
+vconsole 打印结果如下：
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/8ee7e4cf3535cb2e4caba929abfe205c)
+
+*一点补充，针对 `canvas.requestAnimationFrame` 回到函数的入参，小程序文档里虽没有详细介绍，但可以对标 Web 的
+ [Window：requestAnimationFrame() 方法](https://developer.mozilla.org/zh-CN/docs/Web/API/window/requestAnimationFrame) 看一下 MDN 上的解释。*
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/2d307758e0873a89aa4fb33602547ed7)
+
+从上面的 `console` 日志看，原因确实是执行 setTimeout 里面的逻辑导致的动画结束。
+
+可以得到引发bug的原因：↓
+
+**某种情况下，`setTimeout(callback, 100)` 比 `canvas.requestAnimationFrame` 更快执行。**
+
+*这个库很久没迭代了（现有版本是3年前发布的），每周还是有一些下载量，issue 里也没有提到 iOS 有这个问题！（切换渲染模式为 skyline 也没有触发这个问题，问题只在 webview 模式下有，且仅使用简单Demo也无法复现这个问题）*
+
+*也不清楚小程序里 canvas.requestAnimationFrame 实现机制。*
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/5c5a97df02d19c6b7248b1c983b5a639)
+
+大胆揣测一下原因：
+
+**页面实现可能过于复杂，复杂的业务逻辑执行阻塞在逻辑层，导致 setTimeout 时间到了以后回调函数入栈，接着就在逻辑层调用执行了**
+
+解决办法：
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/182858ba4f246bf28417cda3fb029b8f)
+
+**既然是兼容实现，就判断一下是否存在 `requestAnimationFrame` 方法，存在就不执行 `setTimeout` 相关逻辑。**
+
+完整解决 PR 见：https://github.com/wechat-miniprogram/lottie-miniprogram/pull/50
+
+将打包后的产物替换到 `node_modules` 里对应位置后，再使用 [patch-package](https://www.npmjs.com/package/patch-package) 生成 patch，以便后续安装依赖自动更新
 
 ## 最后
 时间匆忙，介绍的不是非常的详细，感兴趣的同学可以评论区交流。
