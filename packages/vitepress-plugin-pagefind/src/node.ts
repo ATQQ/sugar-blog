@@ -27,7 +27,7 @@ export function getPagesData(
 
       const fileContent = fs.readFileSync(file, 'utf-8')
 
-      const { data: frontmatter, excerpt } = matter(fileContent, {
+      const { data: frontmatter, excerpt, content } = matter(fileContent, {
         excerpt: true
       })
 
@@ -37,7 +37,7 @@ export function getPagesData(
         ...frontmatter
       }
       if (!meta.title) {
-        meta.title = getDefaultTitle(fileContent)
+        meta.title = getDefaultTitle(content)
       }
 
       if (!meta.date) {
@@ -69,43 +69,8 @@ export function normalizePath(id: string): string {
 }
 
 export function getDefaultTitle(content: string) {
-  const title
-    = clearMatterContent(content)
-      .split('\n')
-      ?.find((str) => {
-        return str.startsWith('# ')
-      })
-      ?.slice(2)
-      .replace(/[\s]/g, '') || ''
-  return title
-}
-
-export function clearMatterContent(content: string) {
-  let first___: unknown
-  let second___: unknown
-
-  const lines = content.split('\n').reduce<string[]>((pre, line) => {
-    // 移除开头的空白行
-    if (!line.trim() && pre.length === 0) {
-      return pre
-    }
-    if (line.trim() === '---') {
-      if (first___ === undefined) {
-        first___ = pre.length
-      }
-      else if (second___ === undefined) {
-        second___ = pre.length
-      }
-    }
-    pre.push(line)
-    return pre
-  }, [])
-  return (
-    lines
-      // 剔除---之间的内容
-      .slice((second___ as number) || 0)
-      .join('\n')
-  )
+  const match = content.match(/^(#+)\s+(.+)/m)
+  return match?.[2] || ''
 }
 
 export function getFileBirthTime(url: string) {
@@ -144,27 +109,6 @@ export function getGitTimestamp(file: string) {
     })
     child.on('error', reject)
   })
-}
-
-export function getTextSummary(text: string, count = 100) {
-  return (
-    clearMatterContent(text)
-      .match(/^# ([\s\S]+)/m)?.[1]
-      // 除去标题
-      ?.replace(/#/g, '')
-      // 除去图片
-      ?.replace(/!\[.*?\]\(.*?\)/g, '')
-      // 除去链接
-      ?.replace(/\[(.*?)\]\(.*?\)/g, '$1')
-      // 除去加粗
-      ?.replace(/\*\*(.*?)\*\*/g, '$1')
-      ?.split('\n')
-      ?.filter(v => !!v)
-      ?.slice(1)
-      ?.join('\n')
-      ?.replace(/>(.*)/, '')
-      ?.slice(0, count)
-  )
 }
 
 // 需要忽略检索的内容

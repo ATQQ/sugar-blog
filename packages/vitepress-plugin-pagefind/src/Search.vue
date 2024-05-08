@@ -146,8 +146,8 @@ watch(
               return {
                 ...v,
                 meta: {
+                  ...origin?.meta,
                   ...v.meta,
-                  ...origin?.meta
                 }
               }
             })
