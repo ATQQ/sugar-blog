@@ -29,24 +29,24 @@ in `.vitepress/config.ts`
 ```ts
 import { defineConfig } from 'vitepress'
 import { pagefindPlugin } from 'vitepress-plugin-pagefind'
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  vite:{
-    plugins:[pagefindPlugin()],
+  vite: {
+    plugins: [pagefindPlugin()],
   }
 })
-
 ```
 
 or in `vite.config.ts`
 ```ts
-//vite.config.ts
-import { pagefindPlugin } from "vitepress-plugin-pagefind";
-import { defineConfig } from "vite";
+// vite.config.ts
+import { pagefindPlugin } from 'vitepress-plugin-pagefind'
+import { defineConfig } from 'vite'
 
 export default defineConfig({
   plugins: [pagefindPlugin()],
-});
+})
 ```
 
 **(optional)** step3: customSearchQuery
@@ -87,7 +87,7 @@ The main goal is to exclude public content from each article
 
 ```ts
 pagefindPlugin({
-  excludeSelector:['img','a.header-anchor']
+  excludeSelector: ['img', 'a.header-anchor']
 })
 ```
 
@@ -96,18 +96,19 @@ Different languages have different strategies for generating content index，mor
 
 ```ts
 pagefindPlugin({
-  forceLanguage:'zh-cn'
+  forceLanguage: 'zh-cn'
 })
 ```
 
 **recommend**：default use vitepress siteConfig `lang`
 ```ts
 import { defineConfig } from 'vitepress'
+
 export default defineConfig({
-  title: "My Awesome Project",
-  description: "A VitePress Site",
+  title: 'My Awesome Project',
+  description: 'A VitePress Site',
   // ...other config
-  lang:'zh-cn',
+  lang: 'zh-cn',
   // ^^^^^^^^^
 })
 ```
@@ -128,11 +129,11 @@ like this below
 问题主要是自动分词这一块，咱们可以在搜索词的时候做一下优化，比如自动把搜索输入的内容拆成1个个的单字
 ```ts
 pagefindPlugin({
-  customSearchQuery(input){
+  customSearchQuery(input) {
     // 将搜索的每个中文单字两侧加上空格
-    return input.replace(/[\u4e00-\u9fa5]/g, ' $& ')
-    .replace(/\s+/g,' ')
-    .trim();
+    return input.replace(/[\u4E00-\u9FA5]/g, ' $& ')
+      .replace(/\s+/g, ' ')
+      .trim()
   }
 })
 ```
@@ -151,8 +152,8 @@ Implement it yourself using the `filter` method
 pagefindPlugin({
   resultOptimization: false,
   filter(searchItem, idx, originArray) {
-    console.log(searchItem);
-    return !searchItem.route.includes('404') 
+    console.log(searchItem)
+    return !searchItem.route.includes('404')
   }
 })
 ```
@@ -179,7 +180,7 @@ export default defineConfig({
     plugins: [pagefindPlugin(
       {
         locales: {
-          root:{
+          root: {
             btnPlaceholder: 'Search',
             placeholder: 'Search Docs...',
             emptyText: 'No results',
@@ -215,7 +216,7 @@ pnpm add pagefind@0.12.0
 ```
 ```ts
 pagefindPlugin({
-  indexingCommand:'npx pagefind --source "docs/.vitepress/dist" --bundle-dir "pagefind" --exclude-selectors "div.aside, a.header-anchor"'
+  indexingCommand: 'npx pagefind --source "docs/.vitepress/dist" --bundle-dir "pagefind" --exclude-selectors "div.aside, a.header-anchor"'
 })
 ```
 
@@ -234,18 +235,18 @@ interface PagefindOption {
    * @default
    * ['div.aside' ,'a.header-anchor']
    */
-  excludeSelector?: string[]
-  /**
-   * Ignores any detected languages and creates a single index for the entire site as the provided language.
-   * Expects an ISO 639-1 code, such as en or zh.
-   * @see https://pagefind.app/docs/config-options/#force-language
-   */
-  forceLanguage?: string
-  /**
-   * You can customize the instructions to generate the index, which is useful when you customize your version of pagefind
-   * @see https://pagefind.app/docs/config-options/
-   */
-  indexingCommand?: string
+    excludeSelector?: string[]
+    /**
+     * Ignores any detected languages and creates a single index for the entire site as the provided language.
+     * Expects an ISO 639-1 code, such as en or zh.
+     * @see https://pagefind.app/docs/config-options/#force-language
+     */
+    forceLanguage?: string
+    /**
+     * You can customize the instructions to generate the index, which is useful when you customize your version of pagefind
+     * @see https://pagefind.app/docs/config-options/
+     */
+    indexingCommand?: string
 }
 
 interface SearchConfig {
@@ -253,58 +254,58 @@ interface SearchConfig {
    * @default
    * 'Search'
    */
-  btnPlaceholder?: string
-  /**
-   * @default
-   * 'Search Docs'
-   */
-  placeholder?: string
-  /**
-   * @default
-   * 'No results found.'
-   */
-  emptyText?: string
-  /**
-   * @default
-   * 'Total: {{searchResult}} search results.'
-   */
-  heading?: string
+    btnPlaceholder?: string
+    /**
+     * @default
+     * 'Search Docs'
+     */
+    placeholder?: string
+    /**
+     * @default
+     * 'No results found.'
+     */
+    emptyText?: string
+    /**
+     * @default
+     * 'Total: {{searchResult}} search results.'
+     */
+    heading?: string
 
-  /**
-   * Automatically reloads the page when the page language changes.
-   *
-   * The purpose is to reload the index file for the target language.
-   * @default true
-   */
-  langReload?: boolean
-  /**
-   * For some special languages.
-   * Customize the conversion of user input
-   * @see https://pagefind.app/docs/multilingual/#specialized-languages
-   */
-  customSearchQuery?: (input: string) => string
-  /**
-   * @default true
-   */
-  resultOptimization?: boolean
-  /**
-   * Customize the filtering schema
-   */
-  filter?: (searchItem: SearchItem, idx: number, array: SearchItem[]) => boolean
-  /**
-   * Search result Displays the date the document was last modified
-   * @default true
-   */
-  showDate?: boolean
-  /**
-   * Set the time zone for parsing date in frontmatter
-   * @default 8 => 'UTC+8'
-   */
-  timeZone?: number
-  /**
-   * i18n
-   */
-  locales?: Record<string, Omit<SearchConfig, 'locales'>>
+    /**
+     * Automatically reloads the page when the page language changes.
+     *
+     * The purpose is to reload the index file for the target language.
+     * @default true
+     */
+    langReload?: boolean
+    /**
+     * For some special languages.
+     * Customize the conversion of user input
+     * @see https://pagefind.app/docs/multilingual/#specialized-languages
+     */
+    customSearchQuery?: (input: string) => string
+    /**
+     * @default true
+     */
+    resultOptimization?: boolean
+    /**
+     * Customize the filtering schema
+     */
+    filter?: (searchItem: SearchItem, idx: number, array: SearchItem[]) => boolean
+    /**
+     * Search result Displays the date the document was last modified
+     * @default true
+     */
+    showDate?: boolean
+    /**
+     * i18n
+     */
+    locales?: Record<string, Omit<SearchConfig, 'locales'>>
+    /**
+     * ignore publish frontmatter
+     * @default false
+     */
+    ignorePublish?: boolean
 }
 ```
 </details>
