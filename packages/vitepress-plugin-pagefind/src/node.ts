@@ -1,5 +1,5 @@
 import fs from 'node:fs'
-import { execSync, spawn, spawnSync } from 'node:child_process'
+import { execSync, spawn } from 'node:child_process'
 import path from 'node:path'
 import os from 'node:os'
 import process from 'node:process'
@@ -7,13 +7,21 @@ import type { SiteConfig } from 'vitepress'
 import matter from 'gray-matter'
 import glob from 'fast-glob'
 import { formatDate } from './utils'
-import type { PagefindOption } from './type'
+import type { PagefindOption, SearchConfig } from './type'
 
 export async function getPagesData(
   srcDir: string,
   config: SiteConfig,
+  searchConfig: SearchConfig
 ) {
   const files = glob.sync(`${srcDir}/**/*.md`, { ignore: ['node_modules'] })
+  const fileContentPromises = files.reduce((prev, f) => {
+    prev[f] = {
+      content: fs.promises.readFile(f, 'utf-8'),
+      date: (searchConfig.showDate ?? true) ? getFileBirthTime(f) : undefined
+    }
+    return prev
+  }, {} as Record<string, { content: Promise<string>; date: Promise<Date | undefined> | undefined }>)
   const pageData = []
   for (const file of files) {
     // page url
@@ -21,7 +29,7 @@ export async function getPagesData(
       .replace(/(^|\/)index\.md$/, '$1')
       .replace(/\.md$/, config.cleanUrls ? '' : '.html')
 
-    const fileContent = await fs.promises.readFile(file, 'utf-8')
+    const fileContent = await fileContentPromises[file].content
 
     const { data: frontmatter, content } = matter(fileContent, {
       excerpt: true
@@ -38,7 +46,7 @@ export async function getPagesData(
       meta.title = getDefaultTitle(content)
     }
 
-    const date = meta.date || getFileBirthTime(file)
+    const date = await (meta.date || fileContentPromises[file].date)
     if (date) {
       meta.date = formatDate(date)
     }
@@ -66,22 +74,28 @@ export function getDefaultTitle(content: string) {
   return match?.[2] || ''
 }
 
-export function getFileBirthTime(url: string) {
-  try {
+export function getFileBirthTime(url: string): Promise<Date | undefined> {
+  return new Promise((resolve) => {
     // 参考 vitepress 中的 getGitTimestamp 实现
     // const infoStr = execSync(`git log -1 --pretty="%ci" ${url}`)
     //   .toString('utf-8')
     //   .trim()
+    // const infoStr = spawnSync('git', ['log', '-1', '--pretty="%ci"', url])
+    //   .stdout?.toString()
+    //   .replace(/["']/g, '')
+    //   .trim()
 
-    const infoStr = spawnSync('git', ['log', '-1', '--pretty="%ci"', url])
-      .stdout?.toString()
-      .replace(/["']/g, '')
-      .trim()
-    if (infoStr) {
-      return new Date(infoStr)
-    }
-  }
-  catch { /* empty */ }
+    // 使用异步回调
+    const child = spawn('git', ['log', '-1', '--pretty="%ci"', url])
+    child.stdout.on('data', (d) => {
+      const infoStr = d?.toString().replace(/["']/g, '')
+        .trim()
+      resolve(new Date(infoStr))
+    })
+    child.stderr.on('data', () => {
+      resolve(undefined)
+    })
+  })
 }
 
 export function getGitTimestamp(file: string) {
