@@ -133,11 +133,8 @@ div [command-dialog-footer] {
   outline: none;
   background: var(--bg);
   color: var(--gray12);
-  border-bottom: 1px solid var(--gray6);
-  border-radius: 4px;
   caret-color: var(--vcp-c-brand);
   margin: 0;
-  border: 1px solid var(--vcp-c-brand);
 }
 .algolia [command-input]::placeholder {
   color: var(--gray9);
@@ -241,7 +238,7 @@ div [command-dialog-footer] {
   font-weight: 600;
   line-height: 32px;
   margin: 0 -4px;
-  padding: 8px 4px 0;
+  padding: 0 4px;
   top: 0;
   z-index: 10;
   width: 100%;
