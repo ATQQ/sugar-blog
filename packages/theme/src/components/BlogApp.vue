@@ -3,7 +3,6 @@ import Theme from 'vitepress/theme'
 import { useData } from 'vitepress'
 import { computed } from 'vue'
 import { useDarkTransition } from '../hooks/useDarkTransition'
-import { useOml2d } from '../hooks/useOml2d'
 import { useBlogThemeMode, useDarkTransitionConfig } from '../composables/config/blog'
 import BlogHomeInfo from './BlogHomeInfo.vue'
 import BlogHomeBanner from './BlogHomeBanner.vue'
@@ -17,6 +16,7 @@ import BlogFooter from './BlogFooter.vue'
 import BlogHomeHeaderAvatar from './BlogHomeHeaderAvatar.vue'
 import BlogBackToTop from './BlogBackToTop.vue'
 import CommentGiscus from './CommentGiscus.vue'
+import BlogOml2d from './BlogOml2d.vue'
 
 import CommentArtalk from './CommentArtalk.vue'
 import BlogButtonAfterArticle from './BlogButtonAfterArticle.vue'
@@ -27,8 +27,6 @@ const layout = computed(() => frontmatter.value.layout)
 const isBlogTheme = useBlogThemeMode()
 const { Layout } = Theme
 
-// oh-my-live2d 扩展
-useOml2d()
 // 切换深色模式过渡
 // https://vitepress.dev/zh/guide/extending-default-theme#on-appearance-toggle
 useDarkTransition()
@@ -40,6 +38,7 @@ const openTransition = useDarkTransitionConfig()
     <template #layout-top>
       <slot name="layout-top" />
       <ClientOnly>
+        <BlogOml2d />
         <BlogAlert />
         <BlogPopover />
       </ClientOnly>

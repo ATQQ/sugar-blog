@@ -120,8 +120,8 @@ importers:
         specifier: ^10.9.0
         version: 10.9.0
       oh-my-live2d:
-        specifier: ^0.17.0
-        version: 0.17.0
+        specifier: ^0.19.3
+        version: 0.19.3
       swiper:
         specifier: ^11.1.1
         version: 11.1.1
@@ -2838,8 +2838,8 @@ packages:
     resolution: {integrity: sha512-1mxKf0e58bvyjSCtKYY4sRe9itRk3PJpquJOjeIkz885CczcI4IvJJDLPS72oowuSh+pBxUFROpX+TU++hxhZQ==}
     engines: {node: '>= 0.4'}
 
-  oh-my-live2d@0.17.0:
-    resolution: {integrity: sha512-rsDCoGiHpCoEXTUxTkni5WJpdZwPMk4fT7wh56VlTue/9AAC+CiNR/VYVC3esIg4LtQqqcXb/5+PahXCFZC1yw==}
+  oh-my-live2d@0.19.3:
+    resolution: {integrity: sha512-EWva8OUmcExIFIhqGkeiVPQt44RvYYFg+nmpkrZgQVQ+xofVFq4SDYAg5NcdK40HxyV4vORBJEg4OHIHP96MrA==}
 
   once@1.4.0:
     resolution: {integrity: sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==}
@@ -6748,7 +6748,7 @@ snapshots:
       has-symbols: 1.0.3
       object-keys: 1.1.1
 
-  oh-my-live2d@0.17.0: {}
+  oh-my-live2d@0.19.3: {}
 
   once@1.4.0:
     dependencies:

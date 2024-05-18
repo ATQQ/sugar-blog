@@ -55,7 +55,7 @@
     "gray-matter": "^4.0.3",
     "markdown-it-task-checkbox": "^1.0.6",
     "mermaid": "^10.9.0",
-    "oh-my-live2d": "^0.17.0",
+    "oh-my-live2d": "^0.19.3",
     "swiper": "^11.1.1",
     "vitepress-markdown-timeline": "^1.2.1",
     "vitepress-plugin-mermaid": "2.0.13",
