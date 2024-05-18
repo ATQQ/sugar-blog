@@ -73,11 +73,16 @@ export interface SearchConfig {
   showDate?: boolean
   /**
    * Set the time zone for parsing date in frontmatter
-   * @default 8 => 'UTC+8'
+   * @deprecated
    */
   timeZone?: number
   /**
    * i18n
    */
   locales?: Record<string, Omit<SearchConfig, 'locales'>>
+  /**
+   * ignore publish frontmatter
+   * @default false
+   */
+  ignorePublish?: boolean
 }

@@ -29,24 +29,24 @@ yarn add vitepress-plugin-pagefind pagefind
 ```ts
 import { defineConfig } from 'vitepress'
 import { pagefindPlugin } from 'vitepress-plugin-pagefind'
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  vite:{
-    plugins:[pagefindPlugin()],
+  vite: {
+    plugins: [pagefindPlugin()],
   }
 })
-
 ```
 
 当然也可以是在 `vite.config.ts`中引入
 ```ts
-//vite.config.ts
-import { pagefindPlugin } from "vitepress-plugin-pagefind";
-import { defineConfig } from "vite";
+// vite.config.ts
+import { pagefindPlugin } from 'vitepress-plugin-pagefind'
+import { defineConfig } from 'vite'
 
 export default defineConfig({
   plugins: [pagefindPlugin()],
-});
+})
 ```
 
 **(可选)** ③: 搜索优化
@@ -87,7 +87,7 @@ pagefindPlugin({
 
 ```ts
 pagefindPlugin({
-  excludeSelector:['img','a.header-anchor']
+  excludeSelector: ['img', 'a.header-anchor']
 })
 ```
 
@@ -96,18 +96,19 @@ pagefindPlugin({
 
 ```ts
 pagefindPlugin({
-  forceLanguage:'zh-cn'
+  forceLanguage: 'zh-cn'
 })
 ```
 
 **建议**：不设置的前提下，插件会默认使用 `vitepress` 配置中设置的 `lang` 值
 ```ts
 import { defineConfig } from 'vitepress'
+
 export default defineConfig({
-  title: "My Awesome Project",
-  description: "A VitePress Site",
+  title: 'My Awesome Project',
+  description: 'A VitePress Site',
   // ...其它配置
-  lang:'zh-cn',
+  lang: 'zh-cn',
   // ^^^^^^^^^
 })
 ```
@@ -126,11 +127,11 @@ export default defineConfig({
 问题主要是自动分词这一块，咱们可以在搜索词的时候做一下优化，比如自动把搜索输入的内容拆成1个个的单字
 ```ts
 pagefindPlugin({
-  customSearchQuery(input){
+  customSearchQuery(input) {
     // 将搜索的每个中文单字两侧加上空格
-    return input.replace(/[\u4e00-\u9fa5]/g, ' $& ')
-    .replace(/\s+/g,' ')
-    .trim();
+    return input.replace(/[\u4E00-\u9FA5]/g, ' $& ')
+      .replace(/\s+/g, ' ')
+      .trim()
   }
 })
 ```
@@ -148,8 +149,8 @@ pagefindPlugin({
 pagefindPlugin({
   resultOptimization: false,
   filter(searchItem, idx, originArray) {
-    console.log(searchItem);
-    return !searchItem.route.includes('404') 
+    console.log(searchItem)
+    return !searchItem.route.includes('404')
   }
 })
 ```
@@ -177,7 +178,7 @@ export default defineConfig({
     plugins: [pagefindPlugin(
       {
         locales: {
-          root:{
+          root: {
             btnPlaceholder: 'Search',
             placeholder: 'Search Docs...',
             emptyText: 'No results',
@@ -213,7 +214,7 @@ pnpm add pagefind@0.12.0
 ```
 ```ts
 pagefindPlugin({
-  indexingCommand:'npx pagefind --source "docs/.vitepress/dist" --bundle-dir "pagefind" --exclude-selectors "div.aside, a.header-anchor"'
+  indexingCommand: 'npx pagefind --source "docs/.vitepress/dist" --bundle-dir "pagefind" --exclude-selectors "div.aside, a.header-anchor"'
 })
 ```
 
@@ -233,18 +234,18 @@ interface PagefindOption {
    * @default
    * ['div.aside' ,'a.header-anchor']
    */
-  excludeSelector?: string[]
-  /**
-   * Ignores any detected languages and creates a single index for the entire site as the provided language.
-   * Expects an ISO 639-1 code, such as en or zh.
-   * @see https://pagefind.app/docs/config-options/#force-language
-   */
-  forceLanguage?: string
-  /**
-   * You can customize the instructions to generate the index, which is useful when you customize your version of pagefind
-   * @see https://pagefind.app/docs/config-options/
-   */
-  indexingCommand?: string
+    excludeSelector?: string[]
+    /**
+     * Ignores any detected languages and creates a single index for the entire site as the provided language.
+     * Expects an ISO 639-1 code, such as en or zh.
+     * @see https://pagefind.app/docs/config-options/#force-language
+     */
+    forceLanguage?: string
+    /**
+     * You can customize the instructions to generate the index, which is useful when you customize your version of pagefind
+     * @see https://pagefind.app/docs/config-options/
+     */
+    indexingCommand?: string
 }
 
 interface SearchConfig {
@@ -252,59 +253,59 @@ interface SearchConfig {
    * @default
    * 'Search'
    */
-  btnPlaceholder?: string
-  /**
-   * @default
-   * 'Search Docs'
-   */
-  placeholder?: string
-  /**
-   * @default
-   * 'No results found.'
-   */
-  emptyText?: string
-  /**
-   * @default
-   * 'Total: {{searchResult}} search results.'
-   */
-  heading?: string
+    btnPlaceholder?: string
+    /**
+     * @default
+     * 'Search Docs'
+     */
+    placeholder?: string
+    /**
+     * @default
+     * 'No results found.'
+     */
+    emptyText?: string
+    /**
+     * @default
+     * 'Total: {{searchResult}} search results.'
+     */
+    heading?: string
 
-  /**
-   * 当页面语言改变时自动重新加载页面
-   *
-   * 目的是重新加载目标语言的索引文件
-   * @default true
-   */
-  langReload?: boolean
-  /**
-   * 针对一些特殊的语言
-   * 自定义用户输入内容的分词逻辑
-   * @see https://pagefind.app/docs/multilingual/#specialized-languages
-   */
-  customSearchQuery?: (input: string) => string
-  /**
-   * 搜索结果优化
-   * @default true
-   */
-  resultOptimization?: boolean
-  /**
-   * 自定义搜索结果过滤规则
-   */
-  filter?: (searchItem: SearchItem, idx: number, array: SearchItem[]) => boolean
-  /**
-   * 搜索结果是否展示日期
-   * @default true
-   */
-  showDate?: boolean
-  /**
-   * 设置解析 frontmatter 的日期时区
-   * @default 8 => 'UTC+8'
-   */
-  timeZone?: number
-  /**
-   * 国际化
-   */
-  locales?: Record<string, Omit<SearchConfig, 'locales'>>
+    /**
+     * 当页面语言改变时自动重新加载页面
+     *
+     * 目的是重新加载目标语言的索引文件
+     * @default true
+     */
+    langReload?: boolean
+    /**
+     * 针对一些特殊的语言
+     * 自定义用户输入内容的分词逻辑
+     * @see https://pagefind.app/docs/multilingual/#specialized-languages
+     */
+    customSearchQuery?: (input: string) => string
+    /**
+     * 搜索结果优化
+     * @default true
+     */
+    resultOptimization?: boolean
+    /**
+     * 自定义搜索结果过滤规则
+     */
+    filter?: (searchItem: SearchItem, idx: number, array: SearchItem[]) => boolean
+    /**
+     * 搜索结果是否展示日期
+     * @default true
+     */
+    showDate?: boolean
+    /**
+     * 国际化
+     */
+    locales?: Record<string, Omit<SearchConfig, 'locales'>>
+    /**
+     * 是否忽略 frontmatter publish 控制
+     * @default false
+     */
+    ignorePublish?: boolean
 }
 ```
 </details>

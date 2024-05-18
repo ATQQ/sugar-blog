@@ -1,5 +1,18 @@
 # vitepress-plugin-pagefind
 
+## 0.3.0
+
+### Minor Changes
+
+- feat: 支持过滤 `publish: false` 文章
+- feat: 搜索框样式对齐 `vitepress local search`，支持展示更多的搜索内容
+- feat: 移动端样式调整，展示更多的数据
+- fix: 描述信息生成错误
+- chore: 移除 `timeZone` 配置
+- chore: 数据改用异步方式获取
+- chore: 使用媒体查询替代 `useWindowSize`
+- chore: 无关代码/依赖移除
+
 ## 0.2.14
 
 ### Patch Changes

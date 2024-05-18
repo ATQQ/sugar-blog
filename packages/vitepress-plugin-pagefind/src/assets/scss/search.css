@@ -1,212 +1,6 @@
-html {
-  /*!
-      Theme: GitHub
-      Description: Light theme as seen on github.com
-      Author: github.com
-      Maintainer: @Hirse
-      Updated: 2021-05-15
-  
-      Outdated base version: https://github.com/primer/github-syntax-light
-      Current colors taken from GitHub's CSS
-    */
-}
-html pre code.hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 1em;
-}
-html code.hljs {
-  padding: 3px 5px;
-}
-html .hljs {
-  color: #24292e;
-  background: #fff;
-}
-html .hljs-doctag,
-html .hljs-keyword,
-html .hljs-meta .hljs-keyword,
-html .hljs-template-tag,
-html .hljs-template-variable,
-html .hljs-type,
-html .hljs-variable.language_ {
-  color: #d73a49;
-}
-html .hljs-title,
-html .hljs-title.class_,
-html .hljs-title.class_.inherited__,
-html .hljs-title.function_ {
-  color: #6f42c1;
-}
-html .hljs-attr,
-html .hljs-attribute,
-html .hljs-literal,
-html .hljs-meta,
-html .hljs-number,
-html .hljs-operator,
-html .hljs-selector-attr,
-html .hljs-selector-class,
-html .hljs-selector-id,
-html .hljs-variable {
-  color: #005cc5;
-}
-html .hljs-meta .hljs-string,
-html .hljs-regexp,
-html .hljs-string {
-  color: #032f62;
-}
-html .hljs-built_in,
-html .hljs-symbol {
-  color: #e36209;
-}
-html .hljs-code,
-html .hljs-comment,
-html .hljs-formula {
-  color: #6a737d;
-}
-html .hljs-name,
-html .hljs-quote,
-html .hljs-selector-pseudo,
-html .hljs-selector-tag {
-  color: #22863a;
-}
-html .hljs-subst {
-  color: #24292e;
-}
-html .hljs-section {
-  color: #005cc5;
-  font-weight: 700;
-}
-html .hljs-bullet {
-  color: #735c0f;
-}
-html .hljs-emphasis {
-  color: #24292e;
-  font-style: italic;
-}
-html .hljs-strong {
-  color: #24292e;
-  font-weight: 700;
-}
-html .hljs-addition {
-  color: #22863a;
-  background-color: #f0fff4;
-}
-html .hljs-deletion {
-  color: #b31d28;
-  background-color: #ffeef0;
-}
-html.dark {
-  /*!
-      Theme: GitHub Dark
-      Description: Dark theme as seen on github.com
-      Author: github.com
-      Maintainer: @Hirse
-      Updated: 2021-05-15
-  
-      Outdated base version: https://github.com/primer/github-syntax-dark
-      Current colors taken from GitHub's CSS
-    */
-}
-html.dark pre code.hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 1em;
-}
-html.dark code.hljs {
-  padding: 3px 5px;
-}
-html.dark .hljs {
-  color: #c9d1d9;
-  background: #0d1117;
-}
-html.dark .hljs-doctag,
-html.dark .hljs-keyword,
-html.dark .hljs-meta .hljs-keyword,
-html.dark .hljs-template-tag,
-html.dark .hljs-template-variable,
-html.dark .hljs-type,
-html.dark .hljs-variable.language_ {
-  color: #ff7b72;
-}
-html.dark .hljs-title,
-html.dark .hljs-title.class_,
-html.dark .hljs-title.class_.inherited__,
-html.dark .hljs-title.function_ {
-  color: #d2a8ff;
-}
-html.dark .hljs-attr,
-html.dark .hljs-attribute,
-html.dark .hljs-literal,
-html.dark .hljs-meta,
-html.dark .hljs-number,
-html.dark .hljs-operator,
-html.dark .hljs-selector-attr,
-html.dark .hljs-selector-class,
-html.dark .hljs-selector-id,
-html.dark .hljs-variable {
-  color: #79c0ff;
-}
-html.dark .hljs-meta .hljs-string,
-html.dark .hljs-regexp,
-html.dark .hljs-string {
-  color: #a5d6ff;
-}
-html.dark .hljs-built_in,
-html.dark .hljs-symbol {
-  color: #ffa657;
-}
-html.dark .hljs-code,
-html.dark .hljs-comment,
-html.dark .hljs-formula {
-  color: #8b949e;
-}
-html.dark .hljs-name,
-html.dark .hljs-quote,
-html.dark .hljs-selector-pseudo,
-html.dark .hljs-selector-tag {
-  color: #7ee787;
-}
-html.dark .hljs-subst {
-  color: #c9d1d9;
-}
-html.dark .hljs-section {
-  color: #1f6feb;
-  font-weight: 700;
-}
-html.dark .hljs-bullet {
-  color: #f2cc60;
-}
-html.dark .hljs-emphasis {
-  color: #c9d1d9;
-  font-style: italic;
-}
-html.dark .hljs-strong {
-  color: #c9d1d9;
-  font-weight: 700;
-}
-html.dark .hljs-addition {
-  color: #aff5b4;
-  background-color: #033a16;
-}
-html.dark .hljs-deletion {
-  color: #ffdcd7;
-  background-color: #67060c;
-}
-code.hljs {
-  border-radius: 16px;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-}
-ul {
-  margin: 0;
-  padding: 0;
-}
 :root {
-  --font-sans: 'Inter', --apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  --font-sans: "Inter", --apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans,
+    Droid Sans, Helvetica Neue, sans-serif;
   --app-bg: var(--gray1);
   --app-text: #000000;
   --command-shadow: 0 16px 70px rgb(0 0 0 / 20%);
@@ -293,9 +87,7 @@ ul {
   --blue11: hsl(210, 100%, 66.1%);
   --blue12: hsl(206, 98%, 95.8%);
 }
-body {
-  /* background: var(--app-bg); */
-}
+
 div [command-dialog-mask] {
   background-color: rgba(0, 0, 0, 0.3);
   height: 100vh;
@@ -341,11 +133,8 @@ div [command-dialog-footer] {
   outline: none;
   background: var(--bg);
   color: var(--gray12);
-  border-bottom: 1px solid var(--gray6);
-  border-radius: 4px;
   caret-color: var(--vcp-c-brand);
   margin: 0;
-  border: 1px solid var(--vcp-c-brand);
 }
 .algolia [command-input]::placeholder {
   color: var(--gray9);
@@ -357,6 +146,20 @@ div [command-dialog-footer] {
   overscroll-behavior: contain;
   transition: 100ms ease;
   transition-property: height;
+}
+.algolia .detail-list [command-item] {
+  min-height: 56px;
+  max-height: 112px;
+  padding: 10px 16px;
+  height: auto;
+}
+.algolia .detail-list [command-item] .des {
+  word-break: break-all;
+  white-space: wrap;
+  margin-top: 6px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 .algolia [command-item] {
   position: relative;
@@ -380,22 +183,22 @@ div [command-dialog-footer] {
 .algolia [command-item]:first-child {
   margin-top: 0px;
 }
-.algolia [command-item][aria-selected='true'],
+.algolia [command-item][aria-selected="true"],
 .algolia [command-item]:hover {
   background: var(--vcp-c-brand);
   color: #fff;
 }
-.algolia [command-item][aria-selected='true'] svg,
+.algolia [command-item][aria-selected="true"] svg,
 .algolia [command-item]:hover svg {
   color: #fff;
 }
-.algolia [command-item][aria-selected='true'] [command-linear-shortcuts],
+.algolia [command-item][aria-selected="true"] [command-linear-shortcuts],
 .algolia [command-item]:hover [command-linear-shortcuts] {
   display: flex;
   margin-left: auto;
   gap: 8px;
 }
-.algolia [command-item][aria-selected='true'] [command-linear-shortcuts] kbd,
+.algolia [command-item][aria-selected="true"] [command-linear-shortcuts] kbd,
 .algolia [command-item]:hover [command-linear-shortcuts] kbd {
   font-family: var(--font-sans);
   font-size: 13px;
@@ -410,7 +213,7 @@ div [command-dialog-footer] {
   height: 16px;
   color: var(--gray10);
 }
-.algolia [command-empty=''] {
+.algolia [command-empty=""] {
   font-size: 14px;
   display: flex;
   align-items: center;
@@ -431,7 +234,9 @@ div [command-dialog-footer] {
 .algolia [command-dialog-footer] {
   align-items: center;
   border-radius: 0 0 8px 8px;
-  box-shadow: 0 -1px 0 0 #e0e3e8, 0 -3px 6px 0 rgba(69, 98, 155, 0.12);
+  box-shadow:
+    0 -1px 0 0 #e0e3e8,
+    0 -3px 6px 0 rgba(69, 98, 155, 0.12);
   display: flex;
   flex-direction: row-reverse;
   flex-shrink: 0;
@@ -449,17 +254,37 @@ div [command-dialog-footer] {
   font-weight: 600;
   line-height: 32px;
   margin: 0 -4px;
-  padding: 8px 4px 0;
+  padding: 0 4px;
   top: 0;
   z-index: 10;
   width: 100%;
 }
+
 .algolia .command-palette-commands {
   color: var(--docsearch-muted-color);
   display: flex;
   list-style: none;
   margin: 0;
   padding: 0;
+}
+@media screen and (max-width: 560px) {
+  .algolia .command-palette-commands {
+    display: none;
+  }
+
+  div [command-dialog-wrapper] {
+    margin: 0;
+    height: 100vh;
+  }
+  .algolia [command-dialog-footer] {
+    justify-content: center;
+  }
+  .algolia [command-input]{
+    padding: 6px 4px;
+  }
+  .algolia [command-list] {
+    max-height: calc(100vh - 120px);
+  }
 }
 .algolia .command-palette-commands li {
   display: flex;
@@ -519,7 +344,7 @@ div[command-item] {
   background: none;
   color: var(--vp-c-brand-1);
 }
-.search-dialog div[command-item][aria-selected='true'] mark,
+.search-dialog div[command-item][aria-selected="true"] mark,
 .search-dialog div[command-item]:hover mark {
   color: inherit;
   text-decoration: underline;

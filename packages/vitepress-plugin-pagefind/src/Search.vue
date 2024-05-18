@@ -1,34 +1,36 @@
 <script lang="ts" setup>
-// eslint-disable-next-line ts/ban-ts-comment
 // @ts-nocheck
+import { title } from 'process'
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import { Command } from 'vue-command-palette'
 import { useData, useRoute, useRouter, withBase } from 'vitepress'
-import { useMagicKeys, useWindowSize } from '@vueuse/core'
+import { useLocalStorage, useMagicKeys } from '@vueuse/core'
 import { searchConfig as _searchConfig, docs } from 'virtual:pagefind'
-import { formatDate } from './utils'
 import LogoPagefind from './LogoPagefind.vue'
 import type { SearchConfig } from './type'
+import { formatPagefindResult } from './search'
 
-const searchResult = ref<any[]>([])
-
+// 搜索结果
+const searchResult = ref<{ route: string; meta: Record<string, any> }[]>([])
+// 配置获取
 const searchConfig: SearchConfig = _searchConfig
 
-const { localeIndex, site } = useData()
+const { localeIndex, site, lang } = useData()
 
+// 合并后的最终配置
 const finalSearchConfig = computed<SearchConfig>(() => ({
   ...searchConfig,
   // i18n支持
   ...(searchConfig?.locales?.[localeIndex.value] || {})
 }))
 
+// 忽略 publish: false 的控制
+const ignorePublish = computed(() => finalSearchConfig.value?.ignorePublish ?? false)
+
+// 展示日期信息
 const showDateInfo = computed(() => finalSearchConfig.value?.showDate ?? true)
 
-const windowSize = useWindowSize()
-
-const isMinimized = computed(() => windowSize.width.value < 760)
-const flexValue = computed(() => (isMinimized.value ? 0 : 1))
-
+// 搜索条数展示
 const headingText = computed(() => {
   return finalSearchConfig.value?.heading
     ? finalSearchConfig.value.heading.replace(
@@ -38,14 +40,22 @@ const headingText = computed(() => {
     : `Total: ${searchResult.value.length} search results.`
 })
 
+// 展示的快捷键
 const metaKey = ref('')
 onMounted(() => {
   metaKey.value = /(Mac|iPhone|iPod|iPad)/i.test(navigator?.platform)
     ? '⌘'
     : 'Ctrl'
 })
+
+// 控制搜索框的展示
 const searchModal = ref(false)
-const searchWords = ref('')
+function showSearchModal() {
+  searchModal.value = true
+}
+function hideSearchModal() {
+  searchModal.value = false
+}
 
 const keys = useMagicKeys({
   passive: false,
@@ -54,6 +64,7 @@ const keys = useMagicKeys({
       e.preventDefault()
   }
 })
+
 const CmdK = keys['Meta+K']
 const CtrlK = keys['Ctrl+K']
 // eslint-disable-next-line dot-notation, prefer-destructuring
@@ -61,110 +72,111 @@ const Escape = keys['Escape']
 
 watch(CmdK, (v) => {
   if (v) {
-    searchModal.value = true
+    showSearchModal()
   }
 })
 watch(CtrlK, (v) => {
   if (v) {
-    searchModal.value = true
+    showSearchModal()
   }
 })
 watch(Escape, (v) => {
   if (v) {
-    searchModal.value = false
+    hideSearchModal()
   }
 })
 
+// 搜索的关键词
+const searchWords = ref('')
 function inlineSearch() {
   if (!searchWords.value) {
     searchResult.value = []
     return
   }
-  searchResult.value = docs.value
-    .filter(v =>
-      `${v.meta.description}${v.meta.title}`.includes(searchWords.value)
-    )
-    .map((v) => {
-      return {
-        ...v,
-        meta: {
-          ...v.meta,
-          description:
-            v.meta?.description?.replace(
-              new RegExp(`(${searchWords.value})`, 'g'),
-              '<mark>$1</mark>'
-            ) || ''
-        }
-      }
-    })
-  searchResult.value.sort((a, b) => {
-    return +new Date(b.meta.date) - +new Date(a.meta.date)
-  })
+  searchResult.value = [{
+    route: '#',
+    meta: {
+      title: '只在构建后才生效',
+      description: '<mark>only support after build</mark>, only support after build'
+    }
+  }]
 }
 
+// 默认只展示docs里存在的
 const searchOptimization = computed(
   () => finalSearchConfig.value?.resultOptimization ?? true
 )
 
+const chineseRegex = /[\u4E00-\u9FA5]/g
+function chineseSearchOptimize(input: string) {
+  return input
+    .replace(chineseRegex, ' $& ')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+// 触发搜索
 watch(
   () => searchWords.value,
   async () => {
     // dev-server兜底
     if (!window?.__pagefind__?.search) {
       inlineSearch()
+      return
     }
-    else {
-      const searchText
-        = typeof finalSearchConfig.value.customSearchQuery === 'function'
-          ? finalSearchConfig.value.customSearchQuery(searchWords.value)
-          : searchWords.value
 
-      await window?.__pagefind__
-        ?.search?.(searchText)
-        .then(async (search: any) => {
-          const result = await Promise.all(
-            search.results.map((v: any) => v.data())
-          )
-          // 展示所有pagefind结果
-          const pagefindSearchResult = result
-            .map((r) => {
-              return {
-                route: r.url.startsWith(site.value.base)
-                  ? r.url
-                  : withBase(r.url),
-                meta: {
-                  title: r.meta.title,
-                  description: r.excerpt,
-                  date: r?.meta?.date
-                }
-              }
-            })
-            // 补充 frontmatter => meta
-            // TODO: 存在优化空间
-            .map((v) => {
-              const origin = docs.value.find(d => d.route === v.route)
-              return {
-                ...v,
-                meta: {
-                  ...v.meta,
-                  ...origin?.meta
-                }
-              }
-            })
-            // 过滤掉不在docs里的
-            .filter((v) => {
-              return (
-                !searchOptimization.value
-                || docs.value.some(d => d.route === v.route)
-              )
-            })
+    // 拆分搜索的关键词
+    const searchText
+      = typeof finalSearchConfig.value.customSearchQuery === 'function'
+        ? finalSearchConfig.value.customSearchQuery(searchWords.value)
+        // 判断有中文，默认启用优化
+        : (chineseRegex.test(searchWords.value) ? chineseSearchOptimize(searchWords.value) : searchWords.value)
 
-          // 调用自定义过滤
-          searchResult.value = pagefindSearchResult.filter(
-            finalSearchConfig.value.filter ?? (() => true)
-          )
-        })
-    }
+    await window?.__pagefind__
+      ?.search?.(searchText)
+      .then(async (pagefindSearchResult: any) => {
+        // pagefind 搜索结果
+        const pagefindResults = await Promise.all(
+          pagefindSearchResult.results.map((v: any) => v.data())
+        )
+        // 格式化搜索结果
+        const formattedResults = pagefindResults
+          .map((r) => {
+            const result = formatPagefindResult(r)
+            // base 兼容
+            result.route = result.route.startsWith(site.value.base)
+              ? result.route
+              : withBase(result.route)
+            return result
+          })
+          // 补充 frontmatter => meta
+          .map((v) => {
+            const origin = docs.value.find(d => v.route.includes(d.route))
+            return {
+              ...v,
+              meta: {
+                ...origin?.meta,
+                ...v.meta,
+              }
+            }
+          })
+          // 过滤掉不在docs里的
+          .filter((v) => {
+            return (
+              !searchOptimization.value
+              || docs.value.some(d => v.route.includes(d.route))
+            )
+          })
+          // 过滤掉未发布的
+          .filter((v) => {
+            return ignorePublish.value || v.meta.publish !== false
+          })
+
+        // 调用自定义过滤
+        searchResult.value = formattedResults.filter(
+          finalSearchConfig.value.filter ?? (() => true)
+        )
+      })
+
     nextTick(() => {
       // hack 原组件实现
       document.querySelectorAll('div[aria-disabled="true"]').forEach((v) => {
@@ -176,7 +188,7 @@ watch(
 
 function handleClickMask(e: any) {
   if (e.target === e.currentTarget) {
-    searchModal.value = false
+    hideSearchModal()
   }
 }
 watch(
@@ -207,17 +219,17 @@ const showSearchResult = computed(() => {
   return searchResult.value.slice(startIdx, startIdx + pageSize.value)
 })
 
+// 选择搜索结果跳转
 const router = useRouter()
 const route = useRoute()
 function handleSelect(target: any) {
-  searchModal.value = false
+  hideSearchModal()
   if (route.path !== target.value) {
-    // searchWords.value = ''
     router.go(target.value)
   }
 }
 
-const { lang } = useData()
+// 语言切换，重载页面
 const langReload = computed(() => finalSearchConfig.value.langReload ?? true)
 watch(
   () => lang.value,
@@ -232,6 +244,21 @@ watch(
     }
   }
 )
+
+// 清空搜索关键词
+const searchInput = ref<HTMLInputElement>()
+function handleClearSearch() {
+  searchWords.value = ''
+  nextTick(() => {
+    searchInput.value.$el.value = ''
+  })
+}
+
+// 控制结果展示形式
+const showDetail = useLocalStorage('pagefind-search-showDetail', false)
+function handleToggleDetail() {
+  showDetail.value = !showDetail.value
+}
 </script>
 
 <template>
@@ -241,45 +268,60 @@ watch(
         <svg width="14" height="14" viewBox="0 0 20 20">
           <path
             d="M14.386 14.386l4.0877 4.0877-4.0877-4.0877c-2.9418 2.9419-7.7115 2.9419-10.6533 0-2.9419-2.9418-2.9419-7.7115 0-10.6533 2.9418-2.9419 7.7115-2.9419 10.6533 0 2.9419 2.9418 2.9419 7.7115 0 10.6533z"
-            stroke="currentColor"
-            fill="none"
-            fill-rule="evenodd"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            stroke="currentColor" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"
           />
         </svg>
       </span>
-      <span v-show="!isMinimized" class="search-tip">{{
+      <span class="search-tip">{{
         finalSearchConfig?.btnPlaceholder || 'Search'
       }}</span>
-      <span v-show="!isMinimized" class="metaKey"> {{ metaKey }} K </span>
+      <span class="metaKey"> {{ metaKey }} K </span>
     </div>
     <ClientOnly>
       <Command.Dialog :visible="searchModal" theme="algolia">
         <template #header>
-          <Command.Input
-            v-model:value="searchWords"
-            :placeholder="finalSearchConfig?.placeholder || 'Search Docs'"
-          />
+          <div class="search-bar">
+            <div class="search-actions before">
+              <button class="back-button" title="Close search" @click="searchModal = false">
+                <span class="vpi-arrow-left local-search-icon" />
+              </button>
+            </div>
+            <Command.Input
+              ref="searchInput" v-model:value="searchWords"
+              :placeholder="finalSearchConfig?.placeholder || 'Search Docs'"
+            />
+            <div class="search-actions">
+              <button
+                :class="{ active: showDetail }" class="toggle-layout-button" type="button"
+                title="Display detailed list" @click="handleToggleDetail"
+              >
+                <span class="vpi-layout-list local-search-icon" />
+              </button>
+              <button
+                :disabled="!searchWords" class="clear-button" type="reset" title="Reset search"
+                @click="handleClearSearch"
+              >
+                <span class="vpi-delete local-search-icon" />
+              </button>
+            </div>
+          </div>
         </template>
         <template #body>
-          <div class="search-dialog">
+          <div class="search-dialog" :class="{ 'detail-list': showDetail }">
             <Command.List>
               <Command.Empty v-if="!searchResult.length">
                 {{ finalSearchConfig?.emptyText || 'No results found.' }}
               </Command.Empty>
               <Command.Group v-else :heading="headingText">
                 <Command.Item
-                  v-for="item in showSearchResult"
-                  :key="item.route"
-                  :data-value="item.route"
+                  v-for="item in showSearchResult" :key="item.route" :data-value="item.route"
                   @select="handleSelect"
                 >
                   <div class="link">
                     <div class="title">
                       <span>{{ item.meta.title }}</span>
                       <span v-if="showDateInfo && item.meta.date" class="date">
-                        {{ formatDate(item.meta.date, 'yyyy-MM-dd') }}</span>
+                        {{ item.meta.date }}</span>
                     </div>
                     <div class="des" v-html="item.meta.description" />
                   </div>
@@ -290,11 +332,7 @@ watch(
         </template>
         <template v-if="searchResult.length" #footer>
           <div class="command-palette-logo">
-            <a
-              href="https://github.com/cloudcannon/pagefind"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href="https://github.com/cloudcannon/pagefind" target="_blank" rel="noopener noreferrer">
               <span class="command-palette-Label">Search by</span>
               <LogoPagefind style="width: 77px" />
             </a>
@@ -303,51 +341,44 @@ watch(
             <li>
               <kbd class="command-palette-commands-key"><svg width="15" height="15" aria-label="Enter key" role="img">
                 <g
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                   stroke-width="1.2"
                 >
-                  <path
-                    d="M12 3.53088v3c0 1-1 2-2 2H4M7 11.53088l-3-3 3-3"
-                  />
-                </g></svg></kbd><span class="command-palette-Label">to select</span>
+                  <path d="M12 3.53088v3c0 1-1 2-2 2H4M7 11.53088l-3-3 3-3" />
+                </g>
+              </svg></kbd><span class="command-palette-Label">to select</span>
             </li>
             <li>
               <kbd class="command-palette-commands-key"><svg width="15" height="15" aria-label="Arrow down" role="img">
                 <g
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                   stroke-width="1.2"
                 >
                   <path d="M7.5 3.5v8M10.5 8.5l-3 3-3-3" />
-                </g></svg></kbd><kbd class="command-palette-commands-key"><svg width="15" height="15" aria-label="Arrow up" role="img">
+                </g>
+              </svg></kbd><kbd class="command-palette-commands-key"><svg
+                width="15" height="15" aria-label="Arrow up"
+                role="img"
+              >
                 <g
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                   stroke-width="1.2"
                 >
                   <path d="M7.5 11.5v-8M10.5 6.5l-3-3-3 3" />
-                </g></svg></kbd><span class="command-palette-Label">to navigate</span>
+                </g>
+              </svg></kbd><span class="command-palette-Label">to navigate</span>
             </li>
             <li>
               <kbd class="command-palette-commands-key"><svg width="15" height="15" aria-label="Escape key" role="img">
                 <g
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                   stroke-width="1.2"
                 >
                   <path
                     d="M13.6167 8.936c-.1065.3583-.6883.962-1.4875.962-.7993 0-1.653-.9165-1.653-2.1258v-.5678c0-1.2548.7896-2.1016 1.653-2.1016.8634 0 1.3601.4778 1.4875 1.0724M9 6c-.1352-.4735-.7506-.9219-1.46-.8972-.7092.0246-1.344.57-1.344 1.2166s.4198.8812 1.3445.9805C8.465 7.3992 8.968 7.9337 9 8.5c.032.5663-.454 1.398-1.4595 1.398C6.6593 9.898 6 9 5.963 8.4851m-1.4748.5368c-.2635.5941-.8099.876-1.5443.876s-1.7073-.6248-1.7073-2.204v-.4603c0-1.0416.721-2.131 1.7073-2.131.9864 0 1.6425 1.031 1.5443 2.2492h-2.956"
                   />
-                </g></svg></kbd><span class="command-palette-Label">to close</span>
+                </g>
+              </svg></kbd><span class="command-palette-Label">to close</span>
             </li>
           </ul>
         </template>
@@ -358,10 +389,11 @@ watch(
 
 <style lang="css" scoped>
 .blog-search {
-  flex: v-bind(flexValue);
+  flex: 1;
   display: flex;
   padding-left: 32px;
 }
+
 .blog-search .nav-search-btn-wait {
   cursor: pointer;
   display: flex;
@@ -373,18 +405,85 @@ watch(
   border-radius: 6px;
   transition: .2s border;
 }
+
 .blog-search .nav-search-btn-wait .metaKey {
   margin-left: 10px;
   font-size: 12px;
 }
+
 .blog-search .nav-search-btn-wait:hover {
   border: 1px solid var(--vp-c-brand-1);
   border-radius: 6px;
 }
+
 .blog-search .nav-search-btn-wait .search-tip {
   color: #909399;
   font-size: 12px;
   padding-left: 10px;
+}
+
+@media screen and (max-width: 759px) {
+  .metaKey {
+    display: none;
+  }
+
+  .search-tip {
+    display: none;
+  }
+
+  .blog-search {
+    flex: 0;
+  }
+}
+
+.search-bar {
+  display: flex;
+  cursor: text;
+  align-items: center;
+  border-radius: 4px;
+  border: 1px solid var(--vcp-c-brand);
+}
+
+.search-bar input {
+  width: 100%;
+}
+
+.search-bar .search-actions {
+  display: flex;
+  gap: 4px;
+  padding-right: 12px;
+}
+
+.search-bar .search-actions.before {
+  padding: 0;
+}
+
+.search-actions button {
+  padding: 8px;
+}
+
+.local-search-icon {
+  display: block;
+  font-size: 18px;
+}
+
+.search-actions button.clear-button:disabled {
+  opacity: 0.37;
+}
+
+.search-actions button:not([disabled]):hover,
+.search-actions button.active:not([disabled]) {
+  color: var(--vp-c-brand-1);
+}
+
+.search-actions.before {
+  display: none;
+}
+
+@media screen and (max-width: 560px) {
+  .search-actions.before {
+    display: flex;
+  }
 }
 </style>
 

@@ -8,7 +8,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="join-group">
+  <div class="join-group" data-pagefind-ignore="all">
     <template v-if="!showImg">
       <details>
         <summary>🎉 <span>欢迎加入主题交流群，查看二维码</span></summary>

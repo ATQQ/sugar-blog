@@ -1,6 +1,6 @@
 {
   "name": "vitepress-plugin-pagefind",
-  "version": "0.2.14",
+  "version": "0.3.0",
   "description": "vitepress plugin, Offline full-text search based on pagefind implementation.",
   "author": "sugar",
   "license": "MIT",
@@ -37,14 +37,12 @@
     "build": "npx tsup src/index.ts --dts --format esm,cjs --silent"
   },
   "dependencies": {
-    "@vue/shared": "^3.2.45",
     "@vueuse/core": "^9.6.0",
     "fast-glob": "^3.2.12",
     "gray-matter": "^4.0.3",
-    "highlight.js": "^11.7.0",
     "javascript-stringify": "^2.1.0",
     "vue": "^3",
-    "vue-command-palette": "^0.1.4"
+    "vue-command-palette": "0.1.4"
   },
   "devDependencies": {
     "vite": "^5",
