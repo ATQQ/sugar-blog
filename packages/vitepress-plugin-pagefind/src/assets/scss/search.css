@@ -1,6 +1,6 @@
 :root {
-  --font-sans: 'Inter', --apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  --font-sans: "Inter", --apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans,
+    Droid Sans, Helvetica Neue, sans-serif;
   --app-bg: var(--gray1);
   --app-text: #000000;
   --command-shadow: 0 16px 70px rgb(0 0 0 / 20%);
@@ -147,6 +147,20 @@ div [command-dialog-footer] {
   transition: 100ms ease;
   transition-property: height;
 }
+.algolia .detail-list [command-item] {
+  min-height: 56px;
+  max-height: 112px;
+  padding: 10px 16px;
+  height: auto;
+}
+.algolia .detail-list [command-item] .des {
+  word-break: break-all;
+  white-space: wrap;
+  margin-top: 6px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
 .algolia [command-item] {
   position: relative;
   content-visibility: auto;
@@ -169,22 +183,22 @@ div [command-dialog-footer] {
 .algolia [command-item]:first-child {
   margin-top: 0px;
 }
-.algolia [command-item][aria-selected='true'],
+.algolia [command-item][aria-selected="true"],
 .algolia [command-item]:hover {
   background: var(--vcp-c-brand);
   color: #fff;
 }
-.algolia [command-item][aria-selected='true'] svg,
+.algolia [command-item][aria-selected="true"] svg,
 .algolia [command-item]:hover svg {
   color: #fff;
 }
-.algolia [command-item][aria-selected='true'] [command-linear-shortcuts],
+.algolia [command-item][aria-selected="true"] [command-linear-shortcuts],
 .algolia [command-item]:hover [command-linear-shortcuts] {
   display: flex;
   margin-left: auto;
   gap: 8px;
 }
-.algolia [command-item][aria-selected='true'] [command-linear-shortcuts] kbd,
+.algolia [command-item][aria-selected="true"] [command-linear-shortcuts] kbd,
 .algolia [command-item]:hover [command-linear-shortcuts] kbd {
   font-family: var(--font-sans);
   font-size: 13px;
@@ -199,7 +213,7 @@ div [command-dialog-footer] {
   height: 16px;
   color: var(--gray10);
 }
-.algolia [command-empty=''] {
+.algolia [command-empty=""] {
   font-size: 14px;
   display: flex;
   align-items: center;
@@ -220,7 +234,9 @@ div [command-dialog-footer] {
 .algolia [command-dialog-footer] {
   align-items: center;
   border-radius: 0 0 8px 8px;
-  box-shadow: 0 -1px 0 0 #e0e3e8, 0 -3px 6px 0 rgba(69, 98, 155, 0.12);
+  box-shadow:
+    0 -1px 0 0 #e0e3e8,
+    0 -3px 6px 0 rgba(69, 98, 155, 0.12);
   display: flex;
   flex-direction: row-reverse;
   flex-shrink: 0;
@@ -243,12 +259,29 @@ div [command-dialog-footer] {
   z-index: 10;
   width: 100%;
 }
+
 .algolia .command-palette-commands {
   color: var(--docsearch-muted-color);
   display: flex;
   list-style: none;
   margin: 0;
   padding: 0;
+}
+@media screen and (max-width: 560px) {
+  .algolia .command-palette-commands {
+    display: none;
+  }
+
+  div [command-dialog-wrapper] {
+    margin: 0;
+    height: 100vh;
+  }
+  .algolia [command-dialog-footer] {
+    justify-content: center;
+  }
+  .algolia [command-input]{
+    padding: 6px 4px;
+  }
 }
 .algolia .command-palette-commands li {
   display: flex;
@@ -308,7 +341,7 @@ div[command-item] {
   background: none;
   color: var(--vp-c-brand-1);
 }
-.search-dialog div[command-item][aria-selected='true'] mark,
+.search-dialog div[command-item][aria-selected="true"] mark,
 .search-dialog div[command-item]:hover mark {
   color: inherit;
   text-decoration: underline;

@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 // @ts-nocheck
+import { title } from 'process'
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import { Command } from 'vue-command-palette'
 import { useData, useRoute, useRouter, withBase } from 'vitepress'
@@ -83,6 +84,7 @@ function inlineSearch() {
   searchResult.value = [{
     route: '#',
     meta: {
+      title: '只在构建后生效',
       description: '<mark>only support after build</mark>'
     }
   }]
@@ -309,12 +311,20 @@ function handleToggleDetail() {
       <Command.Dialog :visible="searchModal" theme="algolia">
         <template #header>
           <div class="search-bar">
+            <div class="search-actions before">
+              <button class="back-button" title="Close search" @click="searchModal = false">
+                <span class="vpi-arrow-left local-search-icon" />
+              </button>
+            </div>
             <Command.Input
               ref="searchInput" v-model:value="searchWords"
               :placeholder="finalSearchConfig?.placeholder || 'Search Docs'"
             />
             <div class="search-actions">
-              <button :class="{ active: showDetail }" class="toggle-layout-button" type="button" title="Display detailed list" @click="handleToggleDetail">
+              <button
+                :class="{ active: showDetail }" class="toggle-layout-button" type="button"
+                title="Display detailed list" @click="handleToggleDetail"
+              >
                 <span class="vpi-layout-list local-search-icon" />
               </button>
               <button
@@ -327,7 +337,7 @@ function handleToggleDetail() {
           </div>
         </template>
         <template #body>
-          <div class="search-dialog">
+          <div class="search-dialog" :class="{ 'detail-list': showDetail }">
             <Command.List>
               <Command.Empty v-if="!searchResult.length">
                 {{ finalSearchConfig?.emptyText || 'No results found.' }}
@@ -474,6 +484,10 @@ function handleToggleDetail() {
   padding-right: 12px;
 }
 
+.search-bar .search-actions.before {
+  padding: 0;
+}
+
 .search-actions button {
   padding: 8px;
 }
@@ -487,8 +501,17 @@ function handleToggleDetail() {
   opacity: 0.37;
 }
 
-.search-actions button:not([disabled]):hover,.search-actions button.active:not([disabled]) {
+.search-actions button:not([disabled]):hover,
+.search-actions button.active:not([disabled]) {
   color: var(--vp-c-brand-1);
+}
+.search-actions.before{
+  display: none;
+}
+@media screen and (max-width: 560px) {
+  .search-actions.before {
+    display: flex;
+  }
 }
 </style>
 
