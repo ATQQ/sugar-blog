@@ -9,45 +9,45 @@ import glob from 'fast-glob'
 import { formatDate } from './utils'
 import type { PagefindOption } from './type'
 
-export function getPagesData(
+export async function getPagesData(
   srcDir: string,
   config: SiteConfig,
 ) {
   const files = glob.sync(`${srcDir}/**/*.md`, { ignore: ['node_modules'] })
+  const pageData = []
+  for (const file of files) {
+    // page url
+    const route = config.site.base + normalizePath(path.relative(config.srcDir, file))
+      .replace(/(^|\/)index\.md$/, '$1')
+      .replace(/\.md$/, config.cleanUrls ? '' : '.html')
 
-  return files
-    .map((file) => {
-      // page url
-      const route
-        = config.site.base
-        + normalizePath(path.relative(config.srcDir, file))
-          .replace(/(^|\/)index\.md$/, '$1')
-          .replace(/\.md$/, config.cleanUrls ? '' : '.html')
+    const fileContent = await fs.promises.readFile(file, 'utf-8')
 
-      const fileContent = fs.readFileSync(file, 'utf-8')
-
-      const { data: frontmatter, content } = matter(fileContent, {
-        excerpt: true
-      })
-
-      // frontmatter
-      const meta: Record<string, string | undefined> = {
-        ...frontmatter
-      }
-      if (!meta.title) {
-        meta.title = getDefaultTitle(content)
-      }
-
-      const date = meta.date || getFileBirthTime(file)
-      if (date) {
-        meta.date = formatDate(date)
-      }
-      return {
-        route,
-        meta
-      }
+    const { data: frontmatter, content } = matter(fileContent, {
+      excerpt: true
     })
-    .filter(v => v.meta.layout !== 'home')
+
+    // frontmatter
+    const meta: Record<string, string | undefined> = {
+      ...frontmatter
+    }
+    if (meta.layout === 'home') {
+      continue
+    }
+    if (!meta.title) {
+      meta.title = getDefaultTitle(content)
+    }
+
+    const date = meta.date || getFileBirthTime(file)
+    if (date) {
+      meta.date = formatDate(date)
+    }
+    pageData.push({
+      route,
+      meta
+    })
+  }
+  return pageData
 }
 
 const windowsSlashRE = /\\/g

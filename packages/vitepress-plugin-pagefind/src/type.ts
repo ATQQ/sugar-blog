@@ -80,4 +80,9 @@ export interface SearchConfig {
    * i18n
    */
   locales?: Record<string, Omit<SearchConfig, 'locales'>>
+  /**
+   * 是否忽略 frontmatter publish 控制
+   * @default false
+   */
+  ignorePublish?: boolean
 }

@@ -70,7 +70,7 @@ export function pagefindPlugin(
       }
     },
     // 文章数据
-    load(this, id) {
+    async load(this, id) {
       if (id !== resolvedVirtualModuleId)
         return
       const srcDir
@@ -79,7 +79,7 @@ export function pagefindPlugin(
           .replace(/^\//, '')
         || process.argv.slice(2)?.[1]
         || '.'
-      const docsData = getPagesData(
+      const docsData = await getPagesData(
         srcDir,
         resolveConfig.vitepress,
       )

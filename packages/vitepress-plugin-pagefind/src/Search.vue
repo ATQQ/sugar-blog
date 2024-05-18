@@ -21,6 +21,7 @@ const finalSearchConfig = computed<SearchConfig>(() => ({
   // i18n支持
   ...(searchConfig?.locales?.[localeIndex.value] || {})
 }))
+const ignorePublish = computed(() => finalSearchConfig.value?.ignorePublish ?? false)
 
 const showDateInfo = computed(() => finalSearchConfig.value?.showDate ?? true)
 
@@ -209,6 +210,10 @@ watch(
                 !searchOptimization.value
                 || docs.value.some(d => v.route.includes(d.route))
               )
+            })
+            // 过滤掉未发布的
+            .filter((v) => {
+              return ignorePublish.value || v.meta.publish !== false
             })
 
           // 调用自定义过滤
