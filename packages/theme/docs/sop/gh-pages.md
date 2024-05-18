@@ -133,7 +133,13 @@ export default defineConfig({
 需要进一步修改部署和构建配置，详见`deploy.yml` 文件。
 
 ## Gitee Pages 部署
-*Gitee Pages 需要实名才能使用，同时需要人工审核。*
+~~Gitee Pages 需要实名才能使用，同时需要人工审核。~~
+
+**Gitee Pages 已经下线，无法使用咯**
+
+**Gitee Pages 已经下线，无法使用咯**
+
+**Gitee Pages 已经下线，无法使用咯**
 
 ① 按照 [SPA](https://help.gitee.com/services/gitee-pages/spa-support) 要求添加 `.spa` 文件在`docs/public` 目录下
 
