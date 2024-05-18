@@ -282,6 +282,9 @@ div [command-dialog-footer] {
   .algolia [command-input]{
     padding: 6px 4px;
   }
+  .algolia [command-list] {
+    max-height: calc(100vh - 120px);
+  }
 }
 .algolia .command-palette-commands li {
   display: flex;
