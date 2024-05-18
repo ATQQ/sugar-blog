@@ -6,30 +6,31 @@ import { Command } from 'vue-command-palette'
 import { useData, useRoute, useRouter, withBase } from 'vitepress'
 import { useLocalStorage, useMagicKeys } from '@vueuse/core'
 import { searchConfig as _searchConfig, docs } from 'virtual:pagefind'
-import { formatDate } from './utils'
 import LogoPagefind from './LogoPagefind.vue'
 import type { SearchConfig } from './type'
+import { formatPagefindResult } from './search'
 
+// 搜索结果
 const searchResult = ref<{ route: string; meta: Record<string, any> }[]>([])
-
+// 配置获取
 const searchConfig: SearchConfig = _searchConfig
 
-const { localeIndex, site } = useData()
+const { localeIndex, site, lang } = useData()
 
+// 合并后的最终配置
 const finalSearchConfig = computed<SearchConfig>(() => ({
   ...searchConfig,
   // i18n支持
   ...(searchConfig?.locales?.[localeIndex.value] || {})
 }))
+
+// 忽略 publish: false 的控制
 const ignorePublish = computed(() => finalSearchConfig.value?.ignorePublish ?? false)
 
+// 展示日期信息
 const showDateInfo = computed(() => finalSearchConfig.value?.showDate ?? true)
 
-// const windowSize = useWindowSize()
-
-// const isMinimized = computed(() => windowSize.width.value < 760)
-// const flexValue = computed(() => (isMinimized.value ? 0 : 1))
-
+// 搜索条数展示
 const headingText = computed(() => {
   return finalSearchConfig.value?.heading
     ? finalSearchConfig.value.heading.replace(
@@ -39,14 +40,22 @@ const headingText = computed(() => {
     : `Total: ${searchResult.value.length} search results.`
 })
 
+// 展示的快捷键
 const metaKey = ref('')
 onMounted(() => {
   metaKey.value = /(Mac|iPhone|iPod|iPad)/i.test(navigator?.platform)
     ? '⌘'
     : 'Ctrl'
 })
+
+// 控制搜索框的展示
 const searchModal = ref(false)
-const searchWords = ref('')
+function showSearchModal() {
+  searchModal.value = true
+}
+function hideSearchModal() {
+  searchModal.value = false
+}
 
 const keys = useMagicKeys({
   passive: false,
@@ -55,6 +64,7 @@ const keys = useMagicKeys({
       e.preventDefault()
   }
 })
+
 const CmdK = keys['Meta+K']
 const CtrlK = keys['Ctrl+K']
 // eslint-disable-next-line dot-notation, prefer-destructuring
@@ -62,20 +72,22 @@ const Escape = keys['Escape']
 
 watch(CmdK, (v) => {
   if (v) {
-    searchModal.value = true
+    showSearchModal()
   }
 })
 watch(CtrlK, (v) => {
   if (v) {
-    searchModal.value = true
+    showSearchModal()
   }
 })
 watch(Escape, (v) => {
   if (v) {
-    searchModal.value = false
+    hideSearchModal()
   }
 })
 
+// 搜索的关键词
+const searchWords = ref('')
 function inlineSearch() {
   if (!searchWords.value) {
     searchResult.value = []
@@ -84,131 +96,87 @@ function inlineSearch() {
   searchResult.value = [{
     route: '#',
     meta: {
-      title: '只在构建后生效',
-      description: '<mark>only support after build</mark>'
+      title: '只在构建后才生效',
+      description: '<mark>only support after build</mark>, only support after build'
     }
   }]
 }
 
+// 默认只展示docs里存在的
 const searchOptimization = computed(
   () => finalSearchConfig.value?.resultOptimization ?? true
 )
 
+const chineseRegex = /[\u4E00-\u9FA5]/g
+function chineseSearchOptimize(input: string) {
+  return input
+    .replace(chineseRegex, ' $& ')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+// 触发搜索
 watch(
   () => searchWords.value,
   async () => {
     // dev-server兜底
     if (!window?.__pagefind__?.search) {
       inlineSearch()
+      return
     }
-    else {
-      const searchText
-        = typeof finalSearchConfig.value.customSearchQuery === 'function'
-          ? finalSearchConfig.value.customSearchQuery(searchWords.value)
-          : searchWords.value
 
-      await window?.__pagefind__
-        ?.search?.(searchText)
-        .then(async (search: any) => {
-          const result = await Promise.all(
-            search.results.map((v: any) => v.data())
-          )
-          // 展示所有pagefind结果
-          const pagefindSearchResult = result
-            .map((r) => {
-              const { sub_results: subResults, anchors, weighted_locations: weightedLocations } = r
-              // 找到subResults权重最大的
-              // 按照权重排序，从大到小
-              weightedLocations.sort((a, b) => {
-                // 权重相等按照 location 排序
-                if (b.weight === a.weight) {
-                  return b.location - a.location
-                }
-                return b.weight - a.weight
-              })
-              let sub
-              for (const { location } of weightedLocations) {
-                sub = subResults.filter((sub) => {
-                  const { locations } = sub
-                  const [min] = locations || []
-                  if (!min) {
-                    return false
-                  }
-                  const max = locations.length === 1 ? Number.POSITIVE_INFINITY : locations[locations.length - 1]
-                  return min <= location && location <= max
-                })
+    // 拆分搜索的关键词
+    const searchText
+      = typeof finalSearchConfig.value.customSearchQuery === 'function'
+        ? finalSearchConfig.value.customSearchQuery(searchWords.value)
+        // 判断有中文，默认启用优化
+        : (chineseRegex.test(searchWords.value) ? chineseSearchOptimize(searchWords.value) : searchWords.value)
 
-                sub = sub.reduce((prev, curr) => {
-                  if (!prev) {
-                    return curr
-                  }
-                  return prev.locations.length > curr.locations.length ? prev : curr
-                }, null)
-
-                if (sub) {
-                  break
-                }
+    await window?.__pagefind__
+      ?.search?.(searchText)
+      .then(async (pagefindSearchResult: any) => {
+        // pagefind 搜索结果
+        const pagefindResults = await Promise.all(
+          pagefindSearchResult.results.map((v: any) => v.data())
+        )
+        // 格式化搜索结果
+        const formattedResults = pagefindResults
+          .map((r) => {
+            const result = formatPagefindResult(r)
+            // base 兼容
+            result.route = result.route.startsWith(site.value.base)
+              ? result.route
+              : withBase(result.route)
+            return result
+          })
+          // 补充 frontmatter => meta
+          .map((v) => {
+            const origin = docs.value.find(d => v.route.includes(d.route))
+            return {
+              ...v,
+              meta: {
+                ...origin?.meta,
+                ...v.meta,
               }
-              const targetUrl = sub.url || r.url
-              const route = targetUrl.startsWith(site.value.base)
-                ? targetUrl
-                : withBase(targetUrl)
-              const description = sub.excerpt || r.excerpt
+            }
+          })
+          // 过滤掉不在docs里的
+          .filter((v) => {
+            return (
+              !searchOptimization.value
+              || docs.value.some(d => v.route.includes(d.route))
+            )
+          })
+          // 过滤掉未发布的
+          .filter((v) => {
+            return ignorePublish.value || v.meta.publish !== false
+          })
 
-              const filteredAnchors = anchors?.filter((a) => {
-                // 直接比较
-                return a.location <= sub.anchor.location && a.element <= sub.anchor.element
-              }) || []
+        // 调用自定义过滤
+        searchResult.value = formattedResults.filter(
+          finalSearchConfig.value.filter ?? (() => true)
+        )
+      })
 
-              filteredAnchors.reverse()
-              const titles = filteredAnchors.reduce((prev, curr) => {
-                const isHave = prev.some(p => p.element === curr.element)
-                if (isHave) {
-                  return prev
-                }
-                prev.unshift(curr)
-                return prev
-              }, [])
-              // 构造完整的 title 层级 信息
-              const title = titles.length ? titles.map(t => t.text).join(' > ') : r.meta.title
-
-              return {
-                route,
-                meta: {
-                  title,
-                  description,
-                }
-              }
-            })
-            // 补充 frontmatter => meta
-            .map((v) => {
-              const origin = docs.value.find(d => v.route.includes(d.route))
-              return {
-                ...v,
-                meta: {
-                  ...origin?.meta,
-                  ...v.meta,
-                }
-              }
-            })
-            // 过滤掉不在docs里的
-            .filter((v) => {
-              return (
-                !searchOptimization.value
-                || docs.value.some(d => v.route.includes(d.route))
-              )
-            })
-            // 过滤掉未发布的
-            .filter((v) => {
-              return ignorePublish.value || v.meta.publish !== false
-            })
-
-          // 调用自定义过滤
-          searchResult.value = pagefindSearchResult.filter(
-            finalSearchConfig.value.filter ?? (() => true)
-          )
-        })
-    }
     nextTick(() => {
       // hack 原组件实现
       document.querySelectorAll('div[aria-disabled="true"]').forEach((v) => {
@@ -220,7 +188,7 @@ watch(
 
 function handleClickMask(e: any) {
   if (e.target === e.currentTarget) {
-    searchModal.value = false
+    hideSearchModal()
   }
 }
 watch(
@@ -251,16 +219,17 @@ const showSearchResult = computed(() => {
   return searchResult.value.slice(startIdx, startIdx + pageSize.value)
 })
 
+// 选择搜索结果跳转
 const router = useRouter()
 const route = useRoute()
 function handleSelect(target: any) {
-  searchModal.value = false
+  hideSearchModal()
   if (route.path !== target.value) {
     router.go(target.value)
   }
 }
 
-const { lang } = useData()
+// 语言切换，重载页面
 const langReload = computed(() => finalSearchConfig.value.langReload ?? true)
 watch(
   () => lang.value,
@@ -285,6 +254,7 @@ function handleClearSearch() {
   })
 }
 
+// 控制结果展示形式
 const showDetail = useLocalStorage('pagefind-search-showDetail', false)
 function handleToggleDetail() {
   showDetail.value = !showDetail.value
@@ -351,7 +321,7 @@ function handleToggleDetail() {
                     <div class="title">
                       <span>{{ item.meta.title }}</span>
                       <span v-if="showDateInfo && item.meta.date" class="date">
-                        {{ formatDate(item.meta.date, 'yyyy-MM-dd') }}</span>
+                        {{ item.meta.date }}</span>
                     </div>
                     <div class="des" v-html="item.meta.description" />
                   </div>
@@ -505,9 +475,11 @@ function handleToggleDetail() {
 .search-actions button.active:not([disabled]) {
   color: var(--vp-c-brand-1);
 }
-.search-actions.before{
+
+.search-actions.before {
   display: none;
 }
+
 @media screen and (max-width: 560px) {
   .search-actions.before {
     display: flex;

@@ -48,7 +48,7 @@ export async function getPagesData(
 
     const date = await (meta.date || fileContentPromises[file].date)
     if (date) {
-      meta.date = formatDate(date)
+      meta.date = formatDate(date, 'yyyy-MM-dd')
     }
     pageData.push({
       route,
