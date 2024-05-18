@@ -12,7 +12,6 @@ import type { PagefindOption } from './type'
 export function getPagesData(
   srcDir: string,
   config: SiteConfig,
-  pluginSiteConfig?: any
 ) {
   const files = glob.sync(`${srcDir}/**/*.md`, { ignore: ['node_modules'] })
 
@@ -27,27 +26,21 @@ export function getPagesData(
 
       const fileContent = fs.readFileSync(file, 'utf-8')
 
-      const { data: frontmatter, excerpt, content } = matter(fileContent, {
+      const { data: frontmatter, content } = matter(fileContent, {
         excerpt: true
       })
 
       // frontmatter
       const meta: Record<string, string | undefined> = {
-        description: excerpt,
         ...frontmatter
       }
       if (!meta.title) {
         meta.title = getDefaultTitle(content)
       }
 
-      if (!meta.date) {
-        meta.date = getFileBirthTime(file)
-      }
-      else {
-        const timeZone = pluginSiteConfig?.timeZone ?? 8
-        meta.date = formatDate(
-          new Date(`${new Date(meta.date).toUTCString()}+${timeZone}`)
-        )
+      const date = meta.date || getFileBirthTime(file)
+      if (date) {
+        meta.date = formatDate(date)
       }
       return {
         route,
@@ -74,8 +67,6 @@ export function getDefaultTitle(content: string) {
 }
 
 export function getFileBirthTime(url: string) {
-  let date = new Date()
-
   try {
     // 参考 vitepress 中的 getGitTimestamp 实现
     // const infoStr = execSync(`git log -1 --pretty="%ci" ${url}`)
@@ -87,14 +78,10 @@ export function getFileBirthTime(url: string) {
       .replace(/["']/g, '')
       .trim()
     if (infoStr) {
-      date = new Date(infoStr)
+      return new Date(infoStr)
     }
   }
-  catch (error) {
-    return formatDate(date)
-  }
-
-  return formatDate(date)
+  catch { /* empty */ }
 }
 
 export function getGitTimestamp(file: string) {

@@ -128,21 +128,73 @@ watch(
           // 展示所有pagefind结果
           const pagefindSearchResult = result
             .map((r) => {
+              const { sub_results: subResults, anchors, weighted_locations: weightedLocations } = r
+              // 找到subResults权重最大的
+              // 按照权重排序，从大到小
+              weightedLocations.sort((a, b) => {
+                // 权重相等按照 location 排序
+                if (b.weight === a.weight) {
+                  return b.location - a.location
+                }
+                return b.weight - a.weight
+              })
+              let sub
+              for (const { location } of weightedLocations) {
+                sub = subResults.filter((sub) => {
+                  const { locations } = sub
+                  const [min] = locations || []
+                  if (!min) {
+                    return false
+                  }
+                  const max = locations.length === 1 ? Number.POSITIVE_INFINITY : locations[locations.length - 1]
+                  return min <= location && location <= max
+                })
+
+                sub = sub.reduce((prev, curr) => {
+                  if (!prev) {
+                    return curr
+                  }
+                  return prev.locations.length > curr.locations.length ? prev : curr
+                }, null)
+
+                if (sub) {
+                  break
+                }
+              }
+              const targetUrl = sub.url || r.url
+              const route = targetUrl.startsWith(site.value.base)
+                ? targetUrl
+                : withBase(targetUrl)
+              const description = sub.excerpt || r.excerpt
+
+              const filteredAnchors = anchors?.filter((a) => {
+                // 直接比较
+                return a.location <= sub.anchor.location && a.element <= sub.anchor.element
+              }) || []
+
+              filteredAnchors.reverse()
+              const titles = filteredAnchors.reduce((prev, curr) => {
+                const isHave = prev.some(p => p.element === curr.element)
+                if (isHave) {
+                  return prev
+                }
+                prev.unshift(curr)
+                return prev
+              }, [])
+              // 构造完整的 title 层级 信息
+              const title = titles.length ? titles.map(t => t.text).join(' > ') : r.meta.title
+
               return {
-                route: r.url.startsWith(site.value.base)
-                  ? r.url
-                  : withBase(r.url),
+                route,
                 meta: {
-                  title: r.meta.title,
-                  description: r.excerpt,
-                  date: r?.meta?.date
+                  title,
+                  description,
                 }
               }
             })
             // 补充 frontmatter => meta
-            // TODO: 存在优化空间
             .map((v) => {
-              const origin = docs.value.find(d => d.route === v.route)
+              const origin = docs.value.find(d => v.route.includes(d.route))
               return {
                 ...v,
                 meta: {
@@ -155,7 +207,7 @@ watch(
             .filter((v) => {
               return (
                 !searchOptimization.value
-                || docs.value.some(d => d.route === v.route)
+                || docs.value.some(d => v.route.includes(d.route))
               )
             })
 
@@ -212,7 +264,6 @@ const route = useRoute()
 function handleSelect(target: any) {
   searchModal.value = false
   if (route.path !== target.value) {
-    // searchWords.value = ''
     router.go(target.value)
   }
 }
