@@ -171,9 +171,6 @@ importers:
 
   packages/vitepress-plugin-pagefind:
     dependencies:
-      '@vue/shared':
-        specifier: ^3.2.45
-        version: 3.2.47
       '@vueuse/core':
         specifier: ^9.6.0
         version: 9.13.0(vue@3.2.47)
@@ -183,9 +180,6 @@ importers:
       gray-matter:
         specifier: ^4.0.3
         version: 4.0.3
-      highlight.js:
-        specifier: ^11.7.0
-        version: 11.7.0
       javascript-stringify:
         specifier: ^2.1.0
         version: 2.1.0
@@ -193,7 +187,7 @@ importers:
         specifier: ^3
         version: 3.2.47
       vue-command-palette:
-        specifier: ^0.1.4
+        specifier: 0.1.4
         version: 0.1.4
     devDependencies:
       vite:
@@ -2220,10 +2214,6 @@ packages:
   heap@0.2.7:
     resolution: {integrity: sha512-2bsegYkkHO+h/9MGbn6KWcE45cHZgPANo5LXF7EvWdT0yT2EguSVO1nDgU5c8+ZOPwp2vMNa7YFsJhVcDR9Sdg==}
 
-  highlight.js@11.7.0:
-    resolution: {integrity: sha512-1rRqesRFhMO/PRF+G86evnyJkCgaZFOI+Z6kdj15TA18funfoqJXvgPCLSf0SWq3SRfg1j3HlDs8o4s3EGq1oQ==}
-    engines: {node: '>=12.0.0'}
-
   hookable@5.5.3:
     resolution: {integrity: sha512-Yc+BQe8SvoXH1643Qez1zqLRmbA5rCL+sSmk6TVos0LWVfNIB7PGncdlId77WzLGSIB5KaWgTaNTs2lNVEI6VQ==}
 
@@ -2767,9 +2757,6 @@ packages:
 
   minisearch@6.3.0:
     resolution: {integrity: sha512-ihFnidEeU8iXzcVHy74dhkxh/dn8Dc08ERl0xwoMMGqp4+LvRSCgicb+zGqWthVokQKvCSxITlh3P08OzdTYCQ==}
-
-  mitt@3.0.0:
-    resolution: {integrity: sha512-7dX2/10ITVyqh4aOSVI9gdape+t9l2/8QxHrFmUXu4EEUpdlxl6RudZUPZoc+zuY2hk1j7XxVroIVIan/pD/SQ==}
 
   mitt@3.0.1:
     resolution: {integrity: sha512-vKivATfr97l2/QBCYAkXYDbrIWPM2IIKEl7YPhjCvKlG3kE2gm+uBo6nEXK3M5/Ffh/FLpKExzOQ3JJoJGFKBw==}
@@ -6061,8 +6048,6 @@ snapshots:
 
   heap@0.2.7: {}
 
-  highlight.js@11.7.0: {}
-
   hookable@5.5.3: {}
 
   hosted-git-info@2.8.9: {}
@@ -6694,8 +6679,6 @@ snapshots:
   minipass@7.0.3: {}
 
   minisearch@6.3.0: {}
-
-  mitt@3.0.0: {}
 
   mitt@3.0.1: {}
 
@@ -7521,7 +7504,7 @@ snapshots:
   vue-command-palette@0.1.4:
     dependencies:
       fuse.js: 6.6.2
-      mitt: 3.0.0
+      mitt: 3.0.1
       nanoid: 4.0.1
 
   vue-demi@0.14.5(vue@3.2.47):
