@@ -1,16 +1,15 @@
 <script lang="ts" setup>
-// eslint-disable-next-line ts/ban-ts-comment
 // @ts-nocheck
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import { Command } from 'vue-command-palette'
 import { useData, useRoute, useRouter, withBase } from 'vitepress'
-import { useMagicKeys, useWindowSize } from '@vueuse/core'
+import { useMagicKeys } from '@vueuse/core'
 import { searchConfig as _searchConfig, docs } from 'virtual:pagefind'
 import { formatDate } from './utils'
 import LogoPagefind from './LogoPagefind.vue'
 import type { SearchConfig } from './type'
 
-const searchResult = ref<any[]>([])
+const searchResult = ref<{ route: string;meta: Record<string, any> }[]>([])
 
 const searchConfig: SearchConfig = _searchConfig
 
@@ -25,10 +24,10 @@ const ignorePublish = computed(() => finalSearchConfig.value?.ignorePublish ?? f
 
 const showDateInfo = computed(() => finalSearchConfig.value?.showDate ?? true)
 
-const windowSize = useWindowSize()
+// const windowSize = useWindowSize()
 
-const isMinimized = computed(() => windowSize.width.value < 760)
-const flexValue = computed(() => (isMinimized.value ? 0 : 1))
+// const isMinimized = computed(() => windowSize.width.value < 760)
+// const flexValue = computed(() => (isMinimized.value ? 0 : 1))
 
 const headingText = computed(() => {
   return finalSearchConfig.value?.heading
@@ -81,26 +80,12 @@ function inlineSearch() {
     searchResult.value = []
     return
   }
-  searchResult.value = docs.value
-    .filter(v =>
-      `${v.meta.description}${v.meta.title}`.includes(searchWords.value)
-    )
-    .map((v) => {
-      return {
-        ...v,
-        meta: {
-          ...v.meta,
-          description:
-            v.meta?.description?.replace(
-              new RegExp(`(${searchWords.value})`, 'g'),
-              '<mark>$1</mark>'
-            ) || ''
-        }
-      }
-    })
-  searchResult.value.sort((a, b) => {
-    return +new Date(b.meta.date) - +new Date(a.meta.date)
-  })
+  searchResult.value = [{
+    route: '#',
+    meta: {
+      description: '<mark>only support after build</mark>'
+    }
+  }]
 }
 
 const searchOptimization = computed(
@@ -305,10 +290,10 @@ watch(
           />
         </svg>
       </span>
-      <span v-show="!isMinimized" class="search-tip">{{
+      <span class="search-tip">{{
         finalSearchConfig?.btnPlaceholder || 'Search'
       }}</span>
-      <span v-show="!isMinimized" class="metaKey"> {{ metaKey }} K </span>
+      <span class="metaKey"> {{ metaKey }} K </span>
     </div>
     <ClientOnly>
       <Command.Dialog :visible="searchModal" theme="algolia">
@@ -414,7 +399,7 @@ watch(
 
 <style lang="css" scoped>
 .blog-search {
-  flex: v-bind(flexValue);
+  flex: 1;
   display: flex;
   padding-left: 32px;
 }
@@ -441,6 +426,18 @@ watch(
   color: #909399;
   font-size: 12px;
   padding-left: 10px;
+}
+
+@media screen and (max-width: 759px) {
+  .metaKey{
+    display: none;
+  }
+  .search-tip{
+    display: none;
+  }
+  .blog-search{
+    flex: 0;
+  }
 }
 </style>
 
