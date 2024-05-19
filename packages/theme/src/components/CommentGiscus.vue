@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useData, useRoute } from 'vitepress'
-import { computed, ref, watch } from 'vue'
+import { computed, nextTick, ref, watch } from 'vue'
 import Giscus from '@giscus/vue'
 import { useBlogConfig } from '../composables/config/blog'
 
@@ -23,14 +23,14 @@ const commentConfig = computed(() => {
 const { isDark } = useData()
 
 const route = useRoute()
-const showComment = ref(true)
+const showComment = ref(false)
 watch(
-  () => route.path,
+  route,
   () => {
     showComment.value = false
-    setTimeout(() => {
+    nextTick(() => {
       showComment.value = true
-    }, 200)
+    })
   },
   {
     immediate: true
@@ -40,7 +40,7 @@ watch(
 
 <template>
   <Giscus
-    v-if="commentConfig" :repo="commentConfig.repo" :repo-id="commentConfig.repoId"
+    v-if="commentConfig && showComment" :repo="commentConfig.repo" :repo-id="commentConfig.repoId"
     :category="commentConfig.category" :category-id="commentConfig.categoryId"
     :mapping="commentConfig.mapping || 'pathname'" reactions-enabled="1" emit-metadata="0"
     :input-position="commentConfig.inputPosition || 'top'" :theme="isDark ? 'dark' : 'light'"
