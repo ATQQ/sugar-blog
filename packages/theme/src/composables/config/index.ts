@@ -1,9 +1,10 @@
 /* eslint-disable ts/no-namespace */
 import type { ElButton } from 'element-plus'
-import type { DefaultTheme } from 'vitepress'
+import type { DefaultTheme, Route } from 'vitepress'
 import type { RSSOptions } from 'vitepress-plugin-rss'
 import type { Mapping, Repo } from '@giscus/vue'
 import type { Options as Oml2dOptions } from 'oh-my-live2d'
+import type { Ref } from 'vue'
 
 type RSSPluginOptions = RSSOptions
 
@@ -244,6 +245,11 @@ export namespace Theme {
      */
     reopen?: boolean
     /**
+     * 是否打开闪烁提示，通常需要和 reopen 搭配使用
+     * @default true
+     */
+    twinkle?: boolean
+    /**
      * 设置展示图标，svg
      * @recommend https://iconbuddy.app/search?q=fire
      */
@@ -253,6 +259,11 @@ export namespace Theme {
      * @recommend https://iconbuddy.app/search?q=fire
      */
     closeIcon?: string
+    /**
+     * 自定义展示策略
+     * @param to 切换到的目标路由
+     */
+    onRouteChanged?: (to: Route, show: Ref<boolean>) => void
   }
   export interface FriendLink {
     nickname: string

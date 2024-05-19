@@ -1,10 +1,11 @@
 <script lang="ts" setup>
 import { ElButton, ElIcon } from 'element-plus'
 import { CircleCloseFilled } from '@element-plus/icons-vue'
-import { computed, h, onMounted, ref } from 'vue'
+import { computed, h, onMounted, ref, watch } from 'vue'
 import type { BlogPopover } from '@sugarat/theme'
 import { parseStringStyle } from '@vue/shared'
-import { useWindowSize } from '@vueuse/core'
+import { useDebounceFn, useWindowSize } from '@vueuse/core'
+import { useRoute, useRouter } from 'vitepress'
 import { useBlogConfig } from '../composables/config/blog'
 import { vOuterHtml } from '../directives'
 
@@ -24,7 +25,8 @@ const closeFlag = `${storageKey}-close`
 
 // 移动端最小化
 const { width } = useWindowSize()
-
+const router = useRouter()
+const route = useRoute()
 onMounted(() => {
   if (!popoverProps?.title) {
     return
@@ -64,6 +66,12 @@ onMounted(() => {
     show.value = true
   }
 })
+
+const onAfterRouteChanged = useDebounceFn(() => {
+  popoverProps?.onRouteChanged?.(route, show)
+}, 10)
+
+watch(route, onAfterRouteChanged, { immediate: true })
 
 function handleClose() {
   show.value = false
@@ -105,7 +113,12 @@ function PopoverValue(props: { key: number; item: BlogPopover.Value },
       {
         type: 'primary',
         onClick: () => {
-          window.open(item.link, '_self')
+          if (/^\s*http(s)?:\/\//.test(item.link)) {
+            window.open(item.link)
+          }
+          else {
+            router.go(item.link)
+          }
         },
         style: parseStringStyle(item.style || ''),
         ...item.props
@@ -129,9 +142,7 @@ function PopoverValue(props: { key: number; item: BlogPopover.Value },
       <div class="title-wrapper">
         <ElIcon size="20px">
           <i v-if="popoverProps?.icon" v-outer-html="popoverProps.icon" />
-          <svg v-else width="512" height="512" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
-            <path fill="currentColor" d="M880 112c-3.8 0-7.7.7-11.6 2.3L292 345.9H128c-8.8 0-16 7.4-16 16.6v299c0 9.2 7.2 16.6 16 16.6h101.6c-3.7 11.6-5.6 23.9-5.6 36.4c0 65.9 53.8 119.5 120 119.5c55.4 0 102.1-37.6 115.9-88.4l408.6 164.2c3.9 1.5 7.8 2.3 11.6 2.3c16.9 0 32-14.2 32-33.2V145.2C912 126.2 897 112 880 112M344 762.3c-26.5 0-48-21.4-48-47.8c0-11.2 3.9-21.9 11-30.4l84.9 34.1c-2 24.6-22.7 44.1-47.9 44.1" />
-          </svg>
+          <svg v-else t="1716085184855" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4274" width="200" height="200"><path d="M660.48 872.448q6.144 0-3.584 15.36t-29.696 33.792-47.104 33.792-57.856 15.36q-27.648 0-53.248-15.36t-45.056-33.792-29.696-33.792-6.144-15.36l272.384 0zM914.432 785.408q7.168 9.216 6.656 17.92t-4.608 14.848-10.24 9.728-12.288 3.584l-747.52 0q-14.336 0-20.992-11.776t4.608-29.184q17.408-30.72 40.96-68.608t44.544-81.408 36.352-92.16 15.36-101.888q0-51.2 14.336-92.16t37.376-71.68 53.248-52.224 62.976-32.768q-16.384-26.624-16.384-55.296 0-41.984 28.672-70.656t70.656-28.672 70.656 28.672 28.672 70.656q0 14.336-4.096 28.16t-11.264 25.088q34.816 11.264 66.048 32.768t54.272 53.248 36.864 72.704 13.824 91.136q0 51.2 15.36 100.864t36.864 94.208 45.568 81.408 43.52 63.488zM478.208 142.336q0 16.384 11.264 28.16t27.648 11.776l2.048 0q16.384-1.024 27.648-12.288t11.264-27.648q0-17.408-11.264-28.672t-28.672-11.264-28.672 11.264-11.264 28.672z" p-id="4275" /></svg>
         </ElIcon>
         <span class="title">{{ popoverProps?.title }}</span>
       </div>
@@ -154,13 +165,12 @@ function PopoverValue(props: { key: number; item: BlogPopover.Value },
   </div>
   <div
     v-show="!show && (popoverProps?.reopen ?? true) && popoverProps?.title" class="theme-blog-popover-close"
+    :class="{ twinkle: !show && (popoverProps?.twinkle ?? true) }"
     @click="show = true"
   >
     <ElIcon>
       <i v-if="popoverProps?.icon" v-outer-html="popoverProps.icon" />
-      <svg v-else width="512" height="512" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
-        <path fill="currentColor" d="M880 112c-3.8 0-7.7.7-11.6 2.3L292 345.9H128c-8.8 0-16 7.4-16 16.6v299c0 9.2 7.2 16.6 16 16.6h101.6c-3.7 11.6-5.6 23.9-5.6 36.4c0 65.9 53.8 119.5 120 119.5c55.4 0 102.1-37.6 115.9-88.4l408.6 164.2c3.9 1.5 7.8 2.3 11.6 2.3c16.9 0 32-14.2 32-33.2V145.2C912 126.2 897 112 880 112M344 762.3c-26.5 0-48-21.4-48-47.8c0-11.2 3.9-21.9 11-30.4l84.9 34.1c-2 24.6-22.7 44.1-47.9 44.1" />
-      </svg>
+      <svg v-else t="1716085184855" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4274" width="200" height="200"><path d="M660.48 872.448q6.144 0-3.584 15.36t-29.696 33.792-47.104 33.792-57.856 15.36q-27.648 0-53.248-15.36t-45.056-33.792-29.696-33.792-6.144-15.36l272.384 0zM914.432 785.408q7.168 9.216 6.656 17.92t-4.608 14.848-10.24 9.728-12.288 3.584l-747.52 0q-14.336 0-20.992-11.776t4.608-29.184q17.408-30.72 40.96-68.608t44.544-81.408 36.352-92.16 15.36-101.888q0-51.2 14.336-92.16t37.376-71.68 53.248-52.224 62.976-32.768q-16.384-26.624-16.384-55.296 0-41.984 28.672-70.656t70.656-28.672 70.656 28.672 28.672 70.656q0 14.336-4.096 28.16t-11.264 25.088q34.816 11.264 66.048 32.768t54.272 53.248 36.864 72.704 13.824 91.136q0 51.2 15.36 100.864t36.864 94.208 45.568 81.408 43.52 63.488zM478.208 142.336q0 16.384 11.264 28.16t27.648 11.776l2.048 0q16.384-1.024 27.648-12.288t11.264-27.648q0-17.408-11.264-28.672t-28.672-11.264-28.672 11.264-11.264 28.672z" p-id="4275" /></svg>
     </ElIcon>
   </div>
 </template>
@@ -261,5 +271,20 @@ function PopoverValue(props: { key: number; item: BlogPopover.Value },
   border-radius: 50%;
   display: flex;
   flex-direction: column;
+}
+.theme-blog-popover-close.twinkle {
+  animation: twinkle 1s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.5;
+  }
 }
 </style>
