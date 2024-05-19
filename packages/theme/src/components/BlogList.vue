@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
+import { computed, watch } from 'vue'
 import { ElPagination } from 'element-plus'
-import { useData, useRouter } from 'vitepress'
-import { useBrowserLocation } from '@vueuse/core'
+import { useData, useRoute, useRouter } from 'vitepress'
 import {
   useActiveTag,
   useArticles,
@@ -54,12 +53,12 @@ const currentWikiData = computed(() => {
 })
 
 const router = useRouter()
-const location = useBrowserLocation()
 const queryPageNumKey = 'pageNum'
 function handleUpdatePageNum(current: number) {
   if (currentPage.value === current) {
     return
   }
+  currentPage.value = current
   const { searchParams } = new URL(window.location.href!)
   searchParams.delete(queryPageNumKey)
   searchParams.append(queryPageNumKey, String(current))
@@ -69,25 +68,19 @@ function handleUpdatePageNum(current: number) {
   )
 }
 
-function refreshCurrentPage(search?: string) {
-  if (location.value?.href) {
-    const searchParams = new URLSearchParams(search || location.value.search)
-    const pageNum = Number(searchParams.get(queryPageNumKey)) || 1
-    if (pageNum !== currentPage.value) {
-      currentPage.value = pageNum
-    }
+const route = useRoute()
+
+function refreshCurrentPage() {
+  const search = window.location.search.slice(1)
+  const searchParams = new URLSearchParams(search)
+  const pageNum = Number(searchParams.get(queryPageNumKey)) || 1
+  if (pageNum !== currentPage.value) {
+    currentPage.value = pageNum
   }
 }
-router.onBeforeRouteChange = (to) => {
-  refreshCurrentPage(to.slice(to.indexOf('?') + 1))
-}
-// 未覆盖的场景处理
-router.onAfterRouteChanged = (to) => {
-  refreshCurrentPage(to.slice(to.indexOf('?') + 1))
-}
-onMounted(() => {
+watch(route, () => {
   refreshCurrentPage()
-})
+}, { immediate: true })
 </script>
 
 <template>
