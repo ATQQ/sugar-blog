@@ -244,6 +244,11 @@ export namespace Theme {
      */
     reopen?: boolean
     /**
+     * 是否打开闪烁提示，通常需要和 reopen 搭配使用
+     * @default true
+     */
+    twinkle?: boolean
+    /**
      * 设置展示图标，svg
      * @recommend https://iconbuddy.app/search?q=fire
      */
