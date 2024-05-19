@@ -71,6 +71,8 @@ function handleUpdatePageNum(current: number) {
 const route = useRoute()
 
 function refreshCurrentPage() {
+  if (typeof window === 'undefined')
+    return
   const search = window.location.search.slice(1)
   const searchParams = new URLSearchParams(search)
   const pageNum = Number(searchParams.get(queryPageNumKey)) || 1
