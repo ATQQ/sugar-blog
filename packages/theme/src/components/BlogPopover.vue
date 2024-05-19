@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import { ElButton, ElIcon } from 'element-plus'
 import { CircleCloseFilled } from '@element-plus/icons-vue'
-import { computed, h, onMounted, ref } from 'vue'
+import { computed, h, onMounted, ref, watch } from 'vue'
 import type { BlogPopover } from '@sugarat/theme'
 import { parseStringStyle } from '@vue/shared'
-import { useWindowSize } from '@vueuse/core'
-import { useRouter } from 'vitepress'
+import { useDebounceFn, useWindowSize } from '@vueuse/core'
+import { useRoute, useRouter } from 'vitepress'
 import { useBlogConfig } from '../composables/config/blog'
 import { vOuterHtml } from '../directives'
 
@@ -25,7 +25,8 @@ const closeFlag = `${storageKey}-close`
 
 // 移动端最小化
 const { width } = useWindowSize()
-
+const router = useRouter()
+const route = useRoute()
 onMounted(() => {
   if (!popoverProps?.title) {
     return
@@ -65,7 +66,13 @@ onMounted(() => {
     show.value = true
   }
 })
-const router = useRouter()
+
+const onAfterRouteChanged = useDebounceFn(() => {
+  popoverProps?.onRouteChanged?.(route, show)
+}, 10)
+
+watch(route, onAfterRouteChanged, { immediate: true })
+
 function handleClose() {
   show.value = false
   if (popoverProps?.duration === -1) {

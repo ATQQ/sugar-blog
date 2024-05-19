@@ -904,6 +904,16 @@ interface Popover {
    * @recommend https://iconbuddy.app/search?q=fire
    */
   closeIcon?: string
+  /**
+   * 是否打开闪烁提示，通常需要和 reopen 搭配使用
+   * @default true
+   */
+  twinkle?: boolean
+  /**
+   * 自定义展示策略
+   * @param to 切换到的目标路由
+   */
+  onRouteChanged?: (to: Route, show: Ref<boolean>) => void
 }
 
 export namespace BlogPopover {
@@ -962,6 +972,9 @@ const blogTheme = getThemeConfig({
   },
 })
 ```
+
+也支持根据不同路由自定义展示策略，详见`onRouteChanged` 方法。
+
 
 ## friend
 
