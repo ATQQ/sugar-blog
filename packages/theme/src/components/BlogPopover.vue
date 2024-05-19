@@ -5,6 +5,7 @@ import { computed, h, onMounted, ref } from 'vue'
 import type { BlogPopover } from '@sugarat/theme'
 import { parseStringStyle } from '@vue/shared'
 import { useWindowSize } from '@vueuse/core'
+import { useRouter } from 'vitepress'
 import { useBlogConfig } from '../composables/config/blog'
 import { vOuterHtml } from '../directives'
 
@@ -64,7 +65,7 @@ onMounted(() => {
     show.value = true
   }
 })
-
+const router = useRouter()
 function handleClose() {
   show.value = false
   if (popoverProps?.duration === -1) {
@@ -105,7 +106,12 @@ function PopoverValue(props: { key: number; item: BlogPopover.Value },
       {
         type: 'primary',
         onClick: () => {
-          window.open(item.link, '_self')
+          if (/^\s*http(s)?:\/\//.test(item.link)) {
+            window.open(item.link)
+          }
+          else {
+            router.go(item.link)
+          }
         },
         style: parseStringStyle(item.style || ''),
         ...item.props
