@@ -1,5 +1,11 @@
 # vitepress-plugin-pagefind
 
+## 0.3.1
+
+### Patch Changes
+
+- chore: 搜索结果标题添加#
+
 ## 0.3.0
 
 ### Minor Changes

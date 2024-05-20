@@ -279,7 +279,7 @@ div [command-dialog-footer] {
   .algolia [command-dialog-footer] {
     justify-content: center;
   }
-  .algolia [command-input]{
+  .algolia [command-input] {
     padding: 6px 4px;
   }
   .algolia [command-list] {
@@ -331,6 +331,15 @@ div[command-item] {
   display: flex;
   justify-content: space-between;
 }
+
+.search-dialog div[command-item] .title i.prefix {
+  color: var(--vp-c-brand-1);
+}
+.search-dialog div[command-item]:hover .title i.prefix,
+.search-dialog div[command-item][aria-selected="true"] .title i.prefix {
+  color: #fff;
+}
+
 .search-dialog div[command-item] .des {
   text-overflow: ellipsis;
   overflow: hidden;

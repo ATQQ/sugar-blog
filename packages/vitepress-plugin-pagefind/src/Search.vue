@@ -319,7 +319,7 @@ function handleToggleDetail() {
                 >
                   <div class="link">
                     <div class="title">
-                      <span>{{ item.meta.title }}</span>
+                      <span><i v-if="item.meta.title" class="prefix"># </i>{{ item.meta.title }}</span>
                       <span v-if="showDateInfo && item.meta.date" class="date">
                         {{ item.meta.date }}</span>
                     </div>
