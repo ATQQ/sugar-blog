@@ -194,7 +194,7 @@ const blogTheme = getThemeConfig({
     random: true,
     limit: 6,
   },
-  search: false,
+  // search: false,
   recommend: {
     showSelf: true,
     nextText: '下一页',
@@ -307,15 +307,15 @@ export default defineConfig({
     outline: {
       level: [2, 3]
     },
-    search: {
-      provider: 'algolia',
-      options: {
-        appId: 'F919JCK8WY',
-        apiKey: '3eca209ad24bdfc26db63382dd5e4490',
-        indexName: 'sugarat_top',
-        placeholder: '请输入要搜索的内容...'
-      }
-    },
+    // search: {
+    //   provider: 'algolia',
+    //   options: {
+    //     appId: 'F919JCK8WY',
+    //     apiKey: '3eca209ad24bdfc26db63382dd5e4490',
+    //     indexName: 'sugarat_top',
+    //     placeholder: '请输入要搜索的内容...'
+    //   }
+    // },
     lastUpdatedText: '上次更新于',
     logo: 'https://sugarat.s3.bitiful.net/avatar/blog/zlyst-avatar.jpeg!style:avatar',
     editLink: {
