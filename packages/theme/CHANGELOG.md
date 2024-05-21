@@ -4,8 +4,22 @@
 
 ### Patch Changes
 
+- feat: 公告优化
+  - 支持收起自动闪动
+  - 跳转优化，同站点不再刷新页面
+  - 支持自定义展示策略（页面维度）
+- feat: pagefind 插件更新
+  - 支持跳转目录
+  * 结果优化，支持预览
+  * 搜索关键词没高亮问题修复
+  * 构建时间优化
+  * 添加 peer deps 减少偶现构建失败的问题
+- fix: 首页分页跳动问题
+- fix: 评论数据展示异常（切换路由不刷新）
 - Updated dependencies
   - vitepress-plugin-pagefind@0.3.2
+  - oh-my-live2d@0.19.3
+  - vitepress@1.2.2
 
 ## 0.3.4
 

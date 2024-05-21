@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.3.3） ⏰ 2024/05/03：依赖优化，首页优化，编写支持首页内容自动刷新，支持深色模式更加丝滑的过渡动画，首页加载优化，水合问题优化，修复首页和侧边栏跳转导致页面刷新问题。
+description: 最近更新（v0.3.5） ⏰ 2024/05/21：依赖优化，首页优化，搜索优化，公告优化。
 author: 粥里有勺糖
 top: 2
 tag: 日志
@@ -26,6 +26,27 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.3.5 (2024/05/21)
+
+### Patch Changes
+
+- feat: 公告优化
+  - 支持收起自动闪动
+  - 跳转优化，同站点不再刷新页面
+  - 支持自定义展示策略（页面维度）
+- feat: pagefind 插件更新
+  - 支持跳转目录
+  * 结果优化，支持预览
+  * 搜索关键词没高亮问题修复
+  * 构建时间优化
+  * 添加 peer deps 减少偶现构建失败的问题
+- fix: 首页分页跳动问题
+- fix: 评论数据展示异常（切换路由不刷新）
+- Updated dependencies
+  - vitepress-plugin-pagefind@0.3.2
+  - oh-my-live2d@0.19.3
+  - vitepress@1.2.2
 
 ## 0.3.4 (2024/05/06)
 
