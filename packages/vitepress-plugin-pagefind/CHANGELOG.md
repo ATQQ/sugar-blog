@@ -1,5 +1,11 @@
 # vitepress-plugin-pagefind
 
+## 0.3.2
+
+### Patch Changes
+
+- chore: add peer deps
+
 ## 0.3.1
 
 ### Patch Changes

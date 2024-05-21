@@ -5,7 +5,7 @@
 ### Patch Changes
 
 - Updated dependencies
-  - vitepress-plugin-pagefind@0.3.1
+  - vitepress-plugin-pagefind@0.3.2
 
 ## 0.3.4
 

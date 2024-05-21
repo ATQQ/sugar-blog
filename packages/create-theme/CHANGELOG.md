@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.60
+
+### Patch Changes
+
+- chore: add peer deps
+
 ## 0.0.59
 
 ### Patch Changes
