@@ -22,7 +22,7 @@
     "pagefind": "^1.1.0",
     "sass": "^1.76.0",
     "typescript": "^5.4.5",
-    "vitepress": "1.1.4"
+    "vitepress": "1.2.2"
   },
   "pnpm": {
     "peerDependencyRules": {

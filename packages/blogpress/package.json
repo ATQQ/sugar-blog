@@ -13,7 +13,7 @@
     "@element-plus/icons-vue": "^2.3.1",
     "@sugarat/theme": "workspace:*",
     "element-plus": "^2.7.2",
-    "vitepress": "1.1.4",
+    "vitepress": "1.2.2",
     "vitepress-plugin-rss": "workspace:*",
     "vue": "^3.4.26"
   },
