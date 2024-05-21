@@ -38,9 +38,6 @@
     "postinstall": "npx simple-git-hooks",
     "preinstall": "npx only-allow pnpm"
   },
-  "dependencies": {
-    "pagefind": "^1.1.0"
-  },
   "devDependencies": {
     "@antfu/eslint-config": "1.0.0-beta.3",
     "@changesets/cli": "^2.26.2",

@@ -36,6 +36,9 @@
     "dev": "npx tsup src/index.ts --dts --watch --format esm,cjs",
     "build": "npx tsup src/index.ts --dts --format esm,cjs --silent"
   },
+  "peerDependencies": {
+    "pagefind": "^1.1.0"
+  },
   "dependencies": {
     "@vueuse/core": "^9.6.0",
     "fast-glob": "^3.2.12",
