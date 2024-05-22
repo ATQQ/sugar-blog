@@ -83,6 +83,11 @@ function refreshCurrentPage() {
 watch(route, () => {
   refreshCurrentPage()
 }, { immediate: true })
+
+// 未覆盖的场景处理 左上回到首页
+router.onAfterRouteChanged = () => {
+  refreshCurrentPage()
+}
 </script>
 
 <template>
