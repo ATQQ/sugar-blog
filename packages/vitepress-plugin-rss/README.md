@@ -162,6 +162,11 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
    * @description (0 no limit; > 1 will adjust the output content according to date sorting)
    */
   limit?: number
+  /**
+   * Manually control the logic for generating HTML, or not use vitepress' built-in HTML rendering logic
+   * @default true
+   */
+  renderHTML?: ((filecontent: string) => string | Promise<string>) | boolean
 }
 ```
 

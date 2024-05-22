@@ -161,6 +161,11 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
    * @description (0 不限制；> 1 会按照日期排序对输出内容进行调整)
    */
   limit?: number
+  /**
+   * 手动控制生成 HTML的逻辑，或不是用 vitepress 内置的 HTML 渲染逻辑
+   * @default true
+   */
+  renderHTML?: ((filecontent: string) => string | Promise<string>) | boolean
 }
 ```
 

@@ -1,5 +1,11 @@
 # vitepress-plugin-rss
 
+## 0.2.5
+
+### Patch Changes
+
+- feat: Support for customized HTML generation logic
+
 ## 0.2.4
 
 ### Patch Changes

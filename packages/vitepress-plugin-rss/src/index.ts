@@ -48,11 +48,8 @@ export function RssPlugin(rssOptions: RSSOptions): any {
       VPConfig.buildEnd = async (siteConfig: any) => {
         // 调用自己的
         await selfBuildEnd?.(siteConfig)
-        const date = Date.now()
-        console.time(`${date}：Generate RSS`)
         // 生成 rss 文件
         await genFeed(siteConfig, rssOptions)
-        console.timeEnd(`${date}：Generate RSS`)
       }
     }
   }

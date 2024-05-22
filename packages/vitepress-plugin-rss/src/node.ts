@@ -18,7 +18,7 @@ const imageRegex = /!\[.*?\]\((.*?)\s*(".*?")?\)/
 export async function getPostsData(
   srcDir: string,
   config: SiteConfig,
-  ops?: Pick<RSSOptions, 'renderExpect'>
+  ops?: Pick<RSSOptions, 'renderExpect' | 'renderHTML'>
 ) {
   const files = glob.sync(`${srcDir}/**/*.md`, { ignore: ['node_modules'] })
 
@@ -38,9 +38,9 @@ export async function getPostsData(
     }
     return prev
   }, {} as Record<string, { contentPromise: Promise<string>; datePromise: Promise<Date | undefined> | undefined }>)
-  console.time('getPostsData')
+
   await Promise.all(Object.values(fileContentPromises).map(v => [v.contentPromise, v.datePromise]).flat())
-  console.timeEnd('getPostsData')
+
   for (const file of files) {
     const { contentPromise, datePromise } = fileContentPromises[file]
     const fileContent = await contentPromise
@@ -67,7 +67,13 @@ export async function getPostsData(
       = (frontmatter.cover
       ?? (fileContent.match(imageRegex)?.[1])) || ''
 
-    const html = mdRender.render(fileContent)
+    let html: string | undefined
+    if (ops?.renderHTML === true) {
+      html = mdRender.render(fileContent)
+    }
+    else if (typeof ops?.renderHTML === 'function') {
+      html = await ops.renderHTML(fileContent)
+    }
     const url
       = config.site.base
       + normalizePath(path.relative(config.srcDir, file))
@@ -100,16 +106,18 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
 
   const { baseUrl, filename, ignoreHome = true, filter: filterPost = () => true, ignorePublish = false } = rssOptions
 
+  const { renderHTML = true, ...restOps } = rssOptions
   const feed = new Feed({
     id: rssOptions.baseUrl,
     link: rssOptions.baseUrl,
-    ...rssOptions
+    ...restOps,
   })
 
   // 获取所有文章
   const posts = (
     await getPostsData(srcDir, config, {
-      renderExpect: rssOptions.renderExpect
+      renderExpect: rssOptions.renderExpect,
+      renderHTML
     })
   ).filter((p) => {
     // 忽略 layout:home
