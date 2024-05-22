@@ -48,7 +48,6 @@ export function RssPlugin(rssOptions: RSSOptions): any {
       VPConfig.buildEnd = async (siteConfig: any) => {
         // 调用自己的
         await selfBuildEnd?.(siteConfig)
-
         // 生成 rss 文件
         await genFeed(siteConfig, rssOptions)
       }

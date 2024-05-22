@@ -1,6 +1,6 @@
 import os from 'node:os'
 import path from 'node:path'
-import { spawnSync } from 'node:child_process'
+import { spawn } from 'node:child_process'
 
 export function formatDate(d: any, fmt = 'yyyy-MM-dd hh:mm:ss') {
   if (!(d instanceof Date)) {
@@ -48,23 +48,28 @@ export function getDefaultTitle(content: string) {
   return match?.[2] || ''
 }
 
-export function getFileBirthTime(url: string) {
-  let date = new Date()
+export function getFileBirthTime(url: string): Promise<Date | undefined> {
+  return new Promise((resolve) => {
+    // 参考 vitepress 中的 getGitTimestamp 实现
+    // const infoStr = execSync(`git log -1 --pretty="%ci" ${url}`)
+    //   .toString('utf-8')
+    //   .trim()
+    // const infoStr = spawnSync('git', ['log', '-1', '--pretty="%ci"', url])
+    //   .stdout?.toString()
+    //   .replace(/["']/g, '')
+    //   .trim()
 
-  try {
-    const infoStr = spawnSync('git', ['log', '-1', '--pretty="%ci"', url])
-      .stdout?.toString()
-      .replace(/["']/g, '')
-      .trim()
-    if (infoStr) {
-      date = new Date(infoStr)
-    }
-  }
-  catch (error) {
-    return date
-  }
-
-  return date
+    // 使用异步回调
+    const child = spawn('git', ['log', '-1', '--pretty="%ci"', url])
+    child.stdout.on('data', (d) => {
+      const infoStr = d?.toString().replace(/["']/g, '')
+        .trim()
+      resolve(new Date(infoStr))
+    })
+    child.stderr.on('data', () => {
+      resolve(undefined)
+    })
+  })
 }
 
 export function getTextSummary(text: string, count = 100) {
