@@ -7,6 +7,8 @@ import { stringify } from 'javascript-stringify'
 import { getPagesData, pluginSiteConfig } from './node'
 import type { PagefindOption, SearchConfig } from './type'
 
+// const okMark = '\x1B[32m✓\x1B[0m'
+
 function isESM() {
   return typeof __filename === 'undefined' || typeof __dirname === 'undefined'
 }
@@ -23,16 +25,20 @@ export function pagefindPlugin(
   const resolvedVirtualModuleId = `\0${virtualModuleId}`
 
   let resolveConfig: any
+  let runCommand: 'build' | 'serve'
   const pluginOps: PluginOption = {
     name: 'vitepress-plugin-pagefind',
     enforce: 'pre',
-    config: () => ({
-      resolve: {
-        alias: {
-          './VPNavBarSearch.vue': aliasSearchVueFile
+    config: (_, { command }) => {
+      runCommand = command
+      return {
+        resolve: {
+          alias: {
+            './VPNavBarSearch.vue': aliasSearchVueFile
+          }
         }
       }
-    }),
+    },
     configResolved(config: any) {
       if (resolveConfig) {
         return
@@ -64,7 +70,7 @@ export function pagefindPlugin(
         return selfHead.concat(pluginHead)
       }
     },
-    async resolveId(id: string) {
+    resolveId(id: string) {
       if (id === virtualModuleId) {
         return resolvedVirtualModuleId
       }
@@ -79,11 +85,16 @@ export function pagefindPlugin(
           .replace(/^\//, '')
         || process.argv.slice(2)?.[1]
         || '.'
-      const docsData = await getPagesData(
-        srcDir,
-        resolveConfig.vitepress,
-        searchConfig
-      )
+
+      let docsData: any[] = []
+      if (runCommand === 'build') {
+        docsData = await getPagesData(
+          srcDir,
+          resolveConfig.vitepress,
+          searchConfig
+        )
+      }
+
       return `
       import { ref } from 'vue'
       export const docs = ref(${JSON.stringify(docsData)})

@@ -1,8 +1,9 @@
 import fs from 'node:fs'
-import { execSync, spawn } from 'node:child_process'
+import { execSync } from 'node:child_process'
 import path from 'node:path'
 import os from 'node:os'
 import process from 'node:process'
+import { spawn } from 'cross-spawn'
 import type { SiteConfig } from 'vitepress'
 import matter from 'gray-matter'
 import glob from 'fast-glob'
@@ -21,7 +22,7 @@ export async function getPagesData(
       date: (searchConfig.showDate ?? true) ? getFileBirthTime(f) : undefined
     }
     return prev
-  }, {} as Record<string, { content: Promise<string>; date: Promise<Date | undefined> | undefined }>)
+  }, {} as Record<string, { content: Promise<string>; date: Promise<Date | undefined> | undefined | Date }>)
   const pageData = []
   for (const file of files) {
     // page url
@@ -74,25 +75,23 @@ export function getDefaultTitle(content: string) {
   return match?.[2] || ''
 }
 
-export function getFileBirthTime(url: string): Promise<Date | undefined> {
-  return new Promise((resolve) => {
-    // 参考 vitepress 中的 getGitTimestamp 实现
-    // const infoStr = execSync(`git log -1 --pretty="%ci" ${url}`)
-    //   .toString('utf-8')
-    //   .trim()
-    // const infoStr = spawnSync('git', ['log', '-1', '--pretty="%ci"', url])
-    //   .stdout?.toString()
-    //   .replace(/["']/g, '')
-    //   .trim()
+const cache = new Map<string, Date>()
+export function getFileBirthTime(url: string): Promise<Date | undefined> | Date {
+  const cached = cache.get(url)
+  if (cached)
+    return cached
 
+  return new Promise((resolve) => {
     // 使用异步回调
-    const child = spawn('git', ['log', '-1', '--pretty="%ci"', url])
-    child.stdout.on('data', (d) => {
-      const infoStr = d?.toString().replace(/["']/g, '')
-        .trim()
-      resolve(new Date(infoStr))
+    const child = spawn('git', ['log', '-1', '--pretty="%ai"', url])
+    let output = ''
+    child.stdout.on('data', d => (output += String(d)))
+    child.on('close', () => {
+      const date = new Date(output)
+      cache.set(url, date)
+      resolve(date)
     })
-    child.stderr.on('data', () => {
+    child.on('error', () => {
       resolve(undefined)
     })
   })
