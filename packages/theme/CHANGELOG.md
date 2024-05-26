@@ -1,5 +1,14 @@
 # @sugarat/theme
 
+## 0.3.6
+
+### Patch Changes
+
+- fix: 分页通过左上角无法回到首页
+- chore: Updated dependencies
+  - vitepress-plugin-pagefind@0.3.3
+  - vitepress-plugin-rss@0.2.6
+
 ## 0.3.5
 
 ### Patch Changes

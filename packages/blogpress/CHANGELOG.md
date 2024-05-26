@@ -4,10 +4,19 @@ publish: false
 
 # CHANGELOG
 
-## 2.0.46
+
+## 2.0.47
 ### Patch Changes
 
-  - @sugarat/theme@0.3.5
+- Updated dependencies
+  - vitepress-plugin-rss@0.2.6
+  - @sugarat/theme@0.3.6
+
+## 2.0.46
+
+### Patch Changes
+
+- @sugarat/theme@0.3.5
 
 ## 2.0.45
 

@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.3.5） ⏰ 2024/05/21：依赖优化，首页优化，搜索优化，公告优化。
+description: 最近更新（v0.3.6） ⏰ 2024/05/26：依赖优化，首页优化，搜索优化，公告优化。
 author: 粥里有勺糖
 top: 2
 tag: 日志
@@ -26,6 +26,15 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.3.6 (2024/05/26)
+
+### Patch Changes
+
+- fix: 分页通过左上角无法回到首页
+- chore: Updated dependencies
+  - vitepress-plugin-pagefind@0.3.3
+  - vitepress-plugin-rss@0.2.6
 
 ## 0.3.5 (2024/05/21)
 
