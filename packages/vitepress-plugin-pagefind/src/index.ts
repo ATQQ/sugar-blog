@@ -25,16 +25,20 @@ export function pagefindPlugin(
   const resolvedVirtualModuleId = `\0${virtualModuleId}`
 
   let resolveConfig: any
+  let runCommand: 'build' | 'serve'
   const pluginOps: PluginOption = {
     name: 'vitepress-plugin-pagefind',
     enforce: 'pre',
-    config: () => ({
-      resolve: {
-        alias: {
-          './VPNavBarSearch.vue': aliasSearchVueFile
+    config: (_, { command }) => {
+      runCommand = command
+      return {
+        resolve: {
+          alias: {
+            './VPNavBarSearch.vue': aliasSearchVueFile
+          }
         }
       }
-    }),
+    },
     configResolved(config: any) {
       if (resolveConfig) {
         return
@@ -81,11 +85,16 @@ export function pagefindPlugin(
           .replace(/^\//, '')
         || process.argv.slice(2)?.[1]
         || '.'
-      const docsData = await getPagesData(
-        srcDir,
-        resolveConfig.vitepress,
-        searchConfig
-      )
+
+      let docsData: any[] = []
+      if (runCommand === 'build') {
+        docsData = await getPagesData(
+          srcDir,
+          resolveConfig.vitepress,
+          searchConfig
+        )
+      }
+
       return `
       import { ref } from 'vue'
       export const docs = ref(${JSON.stringify(docsData)})
