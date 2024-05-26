@@ -201,6 +201,9 @@ importers:
 
   packages/vitepress-plugin-rss:
     dependencies:
+      cross-spawn:
+        specifier: ^7.0.3
+        version: 7.0.3
       fast-glob:
         specifier: ^3.2.12
         version: 3.2.12
@@ -211,6 +214,9 @@ importers:
         specifier: ^4.0.3
         version: 4.0.3
     devDependencies:
+      '@types/cross-spawn':
+        specifier: ^6.0.6
+        version: 6.0.6
       vite:
         specifier: ^5
         version: 5.2.2(@types/node@20.6.3)(sass@1.76.0)
@@ -909,6 +915,9 @@ packages:
 
   '@types/bun@1.0.4':
     resolution: {integrity: sha512-2DO7sqwtpko3d3XP2kLpJsOkV12sSRt8cFR955JVB60m1DiXE56T+gJq+DcCczQ5khxgCDQKkyBRlgg5VH33Dw==}
+
+  '@types/cross-spawn@6.0.6':
+    resolution: {integrity: sha512-fXRhhUkG4H3TQk5dBhQ7m/JDdSNHKwR2BBia62lhwEIq9xGiQKLxd6LymNhn47SjXhsUEPmxi+PKw2OkW4LLjA==}
 
   '@types/d3-scale-chromatic@3.0.3':
     resolution: {integrity: sha512-laXM4+1o5ImZv3RpFAsTRn3TEkzqkytiOY0Dz0sq5cnd1dtNlk6sHLon4OvqaiJb28T0S/TdsBI3Sjsy+keJrw==}
@@ -4494,6 +4503,10 @@ snapshots:
   '@types/bun@1.0.4':
     dependencies:
       bun-types: 1.0.25
+
+  '@types/cross-spawn@6.0.6':
+    dependencies:
+      '@types/node': 20.6.3
 
   '@types/d3-scale-chromatic@3.0.3': {}
 

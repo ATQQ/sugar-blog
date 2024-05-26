@@ -37,9 +37,7 @@ export async function getPostsData(
       datePromise: getFileBirthTime(f)
     }
     return prev
-  }, {} as Record<string, { contentPromise: Promise<string>; datePromise: Promise<Date | undefined> | undefined }>)
-
-  await Promise.all(Object.values(fileContentPromises).map(v => [v.contentPromise, v.datePromise]).flat())
+  }, {} as Record<string, { contentPromise: Promise<string>; datePromise: Promise<Date | undefined> | undefined | Date }>)
 
   for (const file of files) {
     const { contentPromise, datePromise } = fileContentPromises[file]
@@ -172,6 +170,5 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
     console.log('rss filepath:', RSSFilepath)
     console.log('rss url:', `${baseUrl}${config.site.base + RSSFilename}`)
     console.log('include', posts.length, 'posts')
-    console.log()
   }
 }
