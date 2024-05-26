@@ -1,5 +1,11 @@
 # vitepress-plugin-rss
 
+## 0.2.6
+
+### Patch Changes
+
+- fix: dev pending and build failed
+
 ## 0.2.5
 
 ### Patch Changes

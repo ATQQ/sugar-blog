@@ -1,5 +1,11 @@
 # vitepress-plugin-pagefind
 
+## 0.3.3
+
+### Patch Changes
+
+- fix: dev pending and build failed
+
 ## 0.3.2
 
 ### Patch Changes
