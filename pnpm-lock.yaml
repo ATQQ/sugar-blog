@@ -173,6 +173,9 @@ importers:
       '@vueuse/core':
         specifier: ^9.6.0
         version: 9.13.0(vue@3.2.47)
+      cross-spawn:
+        specifier: ^7.0.3
+        version: 7.0.3
       fast-glob:
         specifier: ^3.2.12
         version: 3.2.12
@@ -192,6 +195,9 @@ importers:
         specifier: 0.1.4
         version: 0.1.4
     devDependencies:
+      '@types/cross-spawn':
+        specifier: ^6.0.6
+        version: 6.0.6
       vite:
         specifier: ^5
         version: 5.2.2(@types/node@20.6.3)(sass@1.76.0)

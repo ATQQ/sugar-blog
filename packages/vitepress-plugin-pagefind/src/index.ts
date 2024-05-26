@@ -7,6 +7,8 @@ import { stringify } from 'javascript-stringify'
 import { getPagesData, pluginSiteConfig } from './node'
 import type { PagefindOption, SearchConfig } from './type'
 
+// const okMark = '\x1B[32m✓\x1B[0m'
+
 function isESM() {
   return typeof __filename === 'undefined' || typeof __dirname === 'undefined'
 }
@@ -64,7 +66,7 @@ export function pagefindPlugin(
         return selfHead.concat(pluginHead)
       }
     },
-    async resolveId(id: string) {
+    resolveId(id: string) {
       if (id === virtualModuleId) {
         return resolvedVirtualModuleId
       }
