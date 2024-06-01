@@ -42,7 +42,7 @@ pnpm build
 ```sh
 pnpm serve
 ```
-## Advanced Ssage
+## Advanced Usage
 详细配置见文档 https://theme.sugarat.top
 
 ## Thanks
