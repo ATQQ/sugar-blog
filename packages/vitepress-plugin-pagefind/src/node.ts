@@ -7,6 +7,7 @@ import { spawn } from 'cross-spawn'
 import type { SiteConfig } from 'vitepress'
 import matter from 'gray-matter'
 import glob from 'fast-glob'
+import pLimit from 'p-limit'
 import { formatDate } from './utils'
 import type { PagefindOption, SearchConfig } from './type'
 
@@ -15,11 +16,12 @@ export async function getPagesData(
   config: SiteConfig,
   searchConfig: SearchConfig
 ) {
+  const limit = pLimit(+(process.env.P_LIMT_MAX || 4))
   const files = glob.sync(`${srcDir}/**/*.md`, { ignore: ['node_modules'] })
   const fileContentPromises = files.reduce((prev, f) => {
     prev[f] = {
-      content: fs.promises.readFile(f, 'utf-8'),
-      date: (searchConfig.showDate ?? true) ? getFileBirthTime(f) : undefined
+      content: limit(() => fs.promises.readFile(f, 'utf-8')),
+      date: (searchConfig.showDate ?? false) ? limit(() => getFileBirthTime(f)) : undefined
     }
     return prev
   }, {} as Record<string, { content: Promise<string>; date: Promise<Date | undefined> | undefined | Date }>)

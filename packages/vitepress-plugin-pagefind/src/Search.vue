@@ -102,11 +102,6 @@ function inlineSearch() {
   }]
 }
 
-// 默认只展示docs里存在的
-const searchOptimization = computed(
-  () => finalSearchConfig.value?.resultOptimization ?? true
-)
-
 const chineseRegex = /[\u4E00-\u9FA5]/g
 function chineseSearchOptimize(input: string) {
   return input
@@ -148,7 +143,7 @@ watch(
               : withBase(result.route)
             return result
           })
-          // 补充 frontmatter => meta
+          // TODO： 补充 frontmatter => meta
           .map((v) => {
             const origin = docs.value.find(d => v.route.includes(d.route))
             return {
@@ -158,13 +153,6 @@ watch(
                 ...v.meta,
               }
             }
-          })
-          // 过滤掉不在docs里的
-          .filter((v) => {
-            return (
-              !searchOptimization.value
-              || docs.value.some(d => v.route.includes(d.route))
-            )
           })
           // 过滤掉未发布的
           .filter((v) => {
