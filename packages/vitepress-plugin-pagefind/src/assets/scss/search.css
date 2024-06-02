@@ -346,8 +346,16 @@ div[command-item] {
   word-break: keep-all;
   white-space: nowrap;
 }
+.search-dialog div[command-item] .headings {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+}
+
 .search-dialog div[command-item] .date {
-  min-width: 80px;
+  min-width: 86px;
+  text-align: right;
 }
 .search-dialog div[command-item] mark {
   background: none;
