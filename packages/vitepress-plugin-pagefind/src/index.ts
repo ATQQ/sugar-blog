@@ -77,7 +77,7 @@ export function pagefindPlugin(
       }
     },
     // 文章数据
-    async load(this, id) {
+    load(this, id) {
       if (id !== resolvedVirtualModuleId)
         return
       // TODO: 历史逻辑，先保留注释
