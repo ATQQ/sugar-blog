@@ -1,13 +1,12 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import process from 'node:process'
+import { Buffer } from 'node:buffer'
 import type { PluginOption } from 'vite'
 import type { SiteConfig } from 'vitepress'
 import { stringify } from 'javascript-stringify'
-import { getPagesData, pluginSiteConfig } from './node'
+import matter from 'gray-matter'
+import { getFileBirthTime, pluginSiteConfig } from './node'
 import type { PagefindOption, SearchConfig } from './type'
-
-// const okMark = '\x1B[32m✓\x1B[0m'
 
 function isESM() {
   return typeof __filename === 'undefined' || typeof __dirname === 'undefined'
@@ -18,6 +17,10 @@ function getDirname() {
 
 const aliasSearchVueFile = `${getDirname()}/../src/Search.vue`
 
+function meta2string(frontmatter: Record<string, any>) {
+  return `base64:${Buffer.from(encodeURIComponent(JSON.stringify(frontmatter))).toString('base64')}`
+}
+
 export function pagefindPlugin(
   searchConfig: SearchConfig & PagefindOption = {}
 ): any {
@@ -25,12 +28,10 @@ export function pagefindPlugin(
   const resolvedVirtualModuleId = `\0${virtualModuleId}`
 
   let resolveConfig: any
-  let runCommand: 'build' | 'serve'
   const pluginOps: PluginOption = {
     name: 'vitepress-plugin-pagefind',
     enforce: 'pre',
-    config: (_, { command }) => {
-      runCommand = command
+    config: () => {
       return {
         resolve: {
           alias: {
@@ -79,33 +80,42 @@ export function pagefindPlugin(
     async load(this, id) {
       if (id !== resolvedVirtualModuleId)
         return
-      const srcDir
-        = resolveConfig.vitepress.srcDir
-          .replace(resolveConfig.vitepress.root, '')
-          .replace(/^\//, '')
-        || process.argv.slice(2)?.[1]
-        || '.'
+      // TODO: 历史逻辑，先保留注释
+      // const srcDir
+      //   = resolveConfig.vitepress.srcDir
+      //     .replace(resolveConfig.vitepress.root, '')
+      //     .replace(/^\//, '')
+      //   || process.argv.slice(2)?.[1]
+      //   || '.'
 
-      let docsData: any[] = []
-      if (runCommand === 'build') {
-        docsData = await getPagesData(
-          srcDir,
-          resolveConfig.vitepress,
-          searchConfig
-        )
-      }
+      // let docsData: any[] = []
+      // if (runCommand === 'build') {
+      //   docsData = await getPagesData(
+      //     srcDir,
+      //     resolveConfig.vitepress,
+      //     searchConfig
+      //   )
+      // }
 
       return `
       import { ref } from 'vue'
-      export const docs = ref(${JSON.stringify(docsData)})
       export const searchConfig = ${stringify(searchConfig)}
       `
     },
     // 添加检索的内容标识
-    transform(code, id) {
+    async transform(code, id) {
       // 只检索文章内容
       if (id.endsWith('theme-default/Layout.vue')) {
         return code.replace('<VPContent>', '<VPContent data-pagefind-body>')
+      }
+      if (id.endsWith('.md')) {
+        const { data: frontmatter } = matter(code, {
+          excerpt: true
+        })
+        if (searchConfig?.showDate && !frontmatter.date) {
+          frontmatter.date = await getFileBirthTime(id)
+        }
+        return `${code}\n\n<div style="display:none" data-pagefind-meta="${meta2string(frontmatter)}"></div>`
       }
       return code
     }

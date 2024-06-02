@@ -1,5 +1,3 @@
-/* eslint-disable prefer-rest-params */
-
 export function formatDate(d: any, fmt = 'yyyy-MM-dd hh:mm:ss') {
   if (!(d instanceof Date)) {
     d = new Date(d)
@@ -30,16 +28,6 @@ export function formatDate(d: any, fmt = 'yyyy-MM-dd hh:mm:ss') {
   return fmt
 }
 
-export function isCurrentWeek(date: Date, target?: Date) {
-  const now = target || new Date()
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
-  const oneDay = 1000 * 60 * 60 * 24
-  const nowWeek = today.getDay()
-  // 本周一的时间
-  const startWeek = today.getTime() - (nowWeek === 0 ? 6 : nowWeek - 1) * oneDay
-  return +date >= startWeek && +date <= startWeek + 7 * oneDay
-}
-
 export function formatShowDate(date: Date | string) {
   const source = +new Date(date)
   const now = +new Date()
@@ -63,25 +51,4 @@ export function formatShowDate(date: Date | string) {
   }
 
   return formatDate(new Date(date), 'yyyy-MM-dd')
-}
-
-const pattern
-  = /[a-zA-Z0-9_\u0392-\u03C9\u00C0-\u00FF\u0600-\u06FF\u0400-\u04FF]+|[\u4E00-\u9FFF\u3400-\u4DBF\uF900-\uFAFF\u3040-\u309F\uAC00-\uD7AF]+/g
-
-// copy from https://github.com/youngjuning/vscode-juejin-wordcount/blob/main/count-word.ts
-export default function countWord(data: string) {
-  const m = data.match(pattern)
-  let count = 0
-  if (!m) {
-    return 0
-  }
-  for (let i = 0; i < m.length; i += 1) {
-    if (m[i].charCodeAt(0) >= 0x4E00) {
-      count += m[i].length
-    }
-    else {
-      count += 1
-    }
-  }
-  return count
 }
