@@ -285,7 +285,7 @@ interface SearchConfig {
     customSearchQuery?: (input: string) => string
     /**
      * 搜索结果优化
-     * @default true
+     * @default false
      */
     resultOptimization?: boolean
     /**
@@ -294,7 +294,7 @@ interface SearchConfig {
     filter?: (searchItem: SearchItem, idx: number, array: SearchItem[]) => boolean
     /**
      * 搜索结果是否展示日期
-     * @default true
+     * @default false
      */
     showDate?: boolean
     /**

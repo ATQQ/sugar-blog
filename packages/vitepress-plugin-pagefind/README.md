@@ -285,7 +285,7 @@ interface SearchConfig {
      */
     customSearchQuery?: (input: string) => string
     /**
-     * @default true
+     * @default false
      */
     resultOptimization?: boolean
     /**
@@ -294,7 +294,7 @@ interface SearchConfig {
     filter?: (searchItem: SearchItem, idx: number, array: SearchItem[]) => boolean
     /**
      * Search result Displays the date the document was last modified
-     * @default true
+     * @default false
      */
     showDate?: boolean
     /**

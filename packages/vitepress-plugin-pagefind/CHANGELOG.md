@@ -1,5 +1,16 @@
 # vitepress-plugin-pagefind
 
+## 0.4.0
+
+### Minor Changes
+
+The build speed has been significantly improved.
+- style: search text title overflow
+- style: empty title space
+- chore: meta build inject page
+- chore: showDate option default false
+- chore: remove resultOptimization option
+
 ## 0.3.3
 
 ### Patch Changes
