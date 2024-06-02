@@ -120,7 +120,7 @@ export function formatPagefindResult(result: PagefindResult) {
     return prev
   }, [] as Anchor[])
   // 构造完整的 title 层级 信息
-  const title = filteredAnchors.length ? filteredAnchors.map(t => t.text).join(' > ') : result.meta.title
+  const title = filteredAnchors.length ? filteredAnchors.map(t => t.text.trim()).filter(v => !!v).join(' > ') : result.meta.title
 
   const { base64, ...otherMeta } = result.meta
   return {
