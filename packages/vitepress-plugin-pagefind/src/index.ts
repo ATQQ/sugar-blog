@@ -57,6 +57,8 @@ export function pagefindPlugin(
         // 调用自己的
         await selfBuildEnd?.(siteConfig)
         await buildEnd(searchConfig)
+        const okMark = '\x1B[32m✓\x1B[0m'
+        console.log(`${okMark} generating pagefind Indexing...`)
       }
 
       // 通过 head 添加额外的脚本注入
