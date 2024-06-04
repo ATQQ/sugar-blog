@@ -221,6 +221,54 @@ pagefindPlugin({
 })
 ```
 
+### Example 7: Custom indexing location
+
+*If the plugin cannot execute normally in the buildEnd stage, or custom indexing file location.*
+
+① modify script
+
+add pagefind indexing generation script
+
+CLI Options See： https://pagefind.app/docs/config-options/
+
+```json
+{
+  "scripts": {
+    "docs:build": "vitepress build docs && npx pagefind --site docs/.vitepress/dist --exclude-selectors div.aside,a.header-anchor"
+  }
+}
+```
+
+② add head script
+```ts
+import { defineConfig } from 'vitepress'
+import { pagefindPlugin } from 'vitepress-plugin-pagefind'
+
+export default defineConfig({
+  head: [
+    // add script，manually specify the location of the import index file
+    [
+      'script',
+      {},
+      `import('/pagefind/pagefind.js')
+        .then((module) => {
+          window.__pagefind__ = module
+          module.init()
+        })
+        .catch(() => {
+          // console.log('not load /pagefind/pagefind.js')
+        })`
+    ]
+  ],
+  vite: {
+    plugins: [pagefindPlugin({
+      manual: true
+    })]
+  },
+  lastUpdated: true
+})
+```
+
 See options below for more details
 ## Options
 TS DTS see [src/type.ts](./src/type.ts)
@@ -308,6 +356,12 @@ interface SearchConfig {
      * @default false
      */
     ignorePublish?: boolean
+    /**
+     * Manually control index generation instructions and resource loading scripts
+     * @see README.md Example7
+     * @default false
+     */
+    manual?: boolean
 }
 ```
 </details>

@@ -223,6 +223,55 @@ pagefindPlugin({
 })
 ```
 
+### 示例7: 自定义生成索引的位置
+
+*如果插件未能正常在 buildEnd 阶段，执行生成索引的指令，也可以按此种方式调整配置*
+
+① 修改运行脚本
+
+在 vitepress 构建完成后，添加索引生成的脚本
+
+CLI 参数见： https://pagefind.app/docs/config-options/
+
+```json
+{
+  "scripts": {
+    "docs:build": "vitepress build docs && npx pagefind --site docs/.vitepress/dist --exclude-selectors div.aside,a.header-anchor"
+  }
+}
+```
+
+② add head script
+```ts
+import { defineConfig } from 'vitepress'
+import { pagefindPlugin } from 'vitepress-plugin-pagefind'
+
+export default defineConfig({
+  head: [
+    // 添加脚本，按实际情况指定索引脚本的位置
+    [
+      'script',
+      {},
+      `import('/pagefind/pagefind.js')
+        .then((module) => {
+          window.__pagefind__ = module
+          module.init()
+        })
+        .catch(() => {
+          // console.log('not load /pagefind/pagefind.js')
+        })`
+    ]
+  ],
+  vite: {
+    plugins: [pagefindPlugin({
+      // 设置 manul 属性为 true
+      manual: true
+    })]
+  },
+  lastUpdated: true
+})
+```
+
 更多可配置的选项请查看下面的完整配置项
 
 ## 完整配置项如下
@@ -312,6 +361,12 @@ interface SearchConfig {
      * @default false
      */
     ignorePublish?: boolean
+    /**
+     * 手动控制索引生成指令和资源加载脚本
+     * @see README.md 示例7
+     * @default false
+     */
+    manual?: boolean
 }
 ```
 </details>
