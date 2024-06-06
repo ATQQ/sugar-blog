@@ -6,7 +6,7 @@
 
 - chore: fix readme spelling error.
 - Updated dependencies
-  - vitepress-plugin-pagefind@0.4.0
+  - vitepress-plugin-pagefind@0.4.1
 
 ## 0.3.6
 
