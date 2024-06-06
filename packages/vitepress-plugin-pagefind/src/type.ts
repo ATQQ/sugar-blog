@@ -86,4 +86,11 @@ export interface SearchConfig {
    * @default false
    */
   ignorePublish?: boolean
+
+  /**
+   * Manually control index generation instructions and resource loading scripts
+   * @see README.md Example7
+   * @default false
+   */
+  manual?: boolean
 }

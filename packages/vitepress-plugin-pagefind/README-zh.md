@@ -14,7 +14,7 @@
 
 ## 如何使用
 
-①: 安装插件
+①: 安装插件和必要的依赖
 ```sh
 pnpm add vitepress-plugin-pagefind pagefind
 # or
@@ -49,7 +49,10 @@ export default defineConfig({
 })
 ```
 
-**(可选)** ③: 搜索优化
+<details>
+<summary>
+(可选) ③: 中文搜索优化
+</summary>
 
 如果你的文档主要内容是中文，推荐做以下设置，优化一下搜索
 
@@ -70,6 +73,9 @@ export default defineConfig({
 ```
 
 详见下面的示例4了解为什么要这样做
+
+</details>
+
 ## 高级用法
 
 ### 示例1：自定义搜素框文案
@@ -100,7 +106,7 @@ pagefindPlugin({
 })
 ```
 
-**建议**：不设置的前提下，插件会默认使用 `vitepress` 配置中设置的 `lang` 值
+**提示**：不设置的前提下，插件会默认使用 `vitepress` 配置中设置的 `lang` 值
 ```ts
 import { defineConfig } from 'vitepress'
 
@@ -142,12 +148,11 @@ pagefindPlugin({
 
 如果你有更好的实现，欢迎分享
 
-#### 4.2 搜索结果优化
-可以关闭内置的搜索结果优化，使用`filter`方法自定义过滤行为
+#### 4.2 搜索结果过滤
+使用`filter`方法自定义过滤行为
 
 ```js
 pagefindPlugin({
-  resultOptimization: false,
   filter(searchItem, idx, originArray) {
     console.log(searchItem)
     return !searchItem.route.includes('404')
@@ -215,6 +220,62 @@ pnpm add pagefind@0.12.0
 ```ts
 pagefindPlugin({
   indexingCommand: 'npx pagefind --source "docs/.vitepress/dist" --bundle-dir "pagefind" --exclude-selectors "div.aside, a.header-anchor"'
+})
+```
+
+### 示例7: 自定义生成索引的位置
+
+*如果插件未能正常在 buildEnd 阶段，执行生成索引的指令，也可以按此种方式调整配置*
+
+```js
+pagefindPlugin({
+  // 设置 manul 属性为 true
+  manual: true
+})
+```
+
+① 修改运行脚本
+
+在 vitepress 构建完成后，添加索引生成的脚本
+
+CLI 参数见： https://pagefind.app/docs/config-options/
+
+```json
+{
+  "scripts": {
+    "docs:build": "vitepress build docs && npx pagefind --site docs/.vitepress/dist --exclude-selectors div.aside,a.header-anchor"
+  }
+}
+```
+
+② add head script
+```ts
+import { defineConfig } from 'vitepress'
+import { pagefindPlugin } from 'vitepress-plugin-pagefind'
+
+export default defineConfig({
+  head: [
+    // 添加脚本，按实际情况指定索引脚本的位置
+    [
+      'script',
+      {},
+      `import('/pagefind/pagefind.js')
+        .then((module) => {
+          window.__pagefind__ = module
+          module.init()
+        })
+        .catch(() => {
+          // console.log('not load /pagefind/pagefind.js')
+        })`
+    ]
+  ],
+  vite: {
+    plugins: [pagefindPlugin({
+      // 设置 manul 属性为 true
+      manual: true
+    })]
+  },
+  lastUpdated: true
 })
 ```
 
@@ -286,6 +347,7 @@ interface SearchConfig {
     /**
      * 搜索结果优化
      * @default false
+     * @deprecated
      */
     resultOptimization?: boolean
     /**
@@ -306,6 +368,12 @@ interface SearchConfig {
      * @default false
      */
     ignorePublish?: boolean
+    /**
+     * 手动控制索引生成指令和资源加载脚本
+     * @see README.md 示例7
+     * @default false
+     */
+    manual?: boolean
 }
 ```
 </details>

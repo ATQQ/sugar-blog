@@ -136,60 +136,52 @@ export function withBase(base: string, path: string) {
     : joinPath(base, path)
 }
 
-export const pluginSiteConfig: Partial<SiteConfig> = {
-  /**
-   * TODO：支持更多pagefind配置项
-   * vitepress buildEnd钩子调用
-   */
-  buildEnd(ctx) {
-    const pagefindOps: PagefindOption = (ctx as any).PagefindOption
-    const ignore = [
-      ...new Set(ignoreSelectors.concat(pagefindOps?.excludeSelector || []))
-    ]
-    const { log } = console
-    log()
-    log('=== pagefind: https://pagefind.app/ ===')
-    const siteDir = path.join(
-      process.argv.slice(2)?.[1] || '.',
-      '.vitepress/dist'
-    )
-    let command = `npx pagefind --site ${siteDir}`
+export async function buildEnd(pagefindOps: PagefindOption) {
+  const ignore = [
+    ...new Set(ignoreSelectors.concat(pagefindOps?.excludeSelector || []))
+  ]
+  const { log } = console
+  log()
+  log('=== pagefind: https://pagefind.app/ ===')
+  const siteDir = path.join(
+    process.argv.slice(2)?.[1] || '.',
+    '.vitepress/dist'
+  )
+  let command = `npx pagefind --site ${siteDir}`
 
-    if (ignore.length) {
-      command += ` --exclude-selectors "${ignore.join(', ')}"`
-    }
-
-    if (typeof pagefindOps.forceLanguage === 'string') {
-      command += ` --force-language ${pagefindOps.forceLanguage}`
-    }
-    // 用户自定义指令
-    if (pagefindOps.indexingCommand) {
-      command = pagefindOps.indexingCommand
-    }
-    log(command)
-    log()
-    execSync(command, {
-      stdio: 'inherit'
-    })
-  },
-  transformHead(ctx) {
-    return [
-      [
-        'script',
-        {},
-        `import('${withBase(ctx.siteData.base || '', '/pagefind/pagefind.js')}')
-    .then((module) => {
-      window.__pagefind__ = module
-      module.init()
-    })
-    .catch(() => {
-      // console.log('not load /pagefind/pagefind.js')
-    })`
-      ]
-    ]
+  if (ignore.length) {
+    command += ` --exclude-selectors "${ignore.join(', ')}"`
   }
-}
 
+  if (typeof pagefindOps.forceLanguage === 'string') {
+    command += ` --force-language ${pagefindOps.forceLanguage}`
+  }
+  // 用户自定义指令
+  if (pagefindOps.indexingCommand) {
+    command = pagefindOps.indexingCommand
+  }
+  log(command)
+  log()
+  execSync(command, {
+    stdio: 'inherit'
+  })
+}
+export function getPagefindHead(base: string) {
+  return [
+    [
+      'script',
+      {},
+      `import('${withBase(base || '', '/pagefind/pagefind.js')}')
+  .then((module) => {
+    window.__pagefind__ = module
+    module.init()
+  })
+  .catch(() => {
+    // console.log('not load /pagefind/pagefind.js')
+  })`
+    ]
+  ]
+}
 export function chineseSearchOptimize(input: string) {
   return input
     .replace(/[\u4E00-\u9FA5]/g, ' $& ')

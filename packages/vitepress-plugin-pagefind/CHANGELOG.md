@@ -1,10 +1,17 @@
 # vitepress-plugin-pagefind
 
+## 0.4.1
+
+### Patch Changes
+
+- feat: add manual attr
+
 ## 0.4.0
 
 ### Minor Changes
 
 The build speed has been significantly improved.
+
 - style: search text title overflow
 - style: empty title space
 - chore: meta build inject page

@@ -46,9 +46,17 @@ interface Filters {
 }
 
 function decodeBase64AndDeserialize(base64String: string) {
-  const serialized = decodeURIComponent(atob(base64String))
-  const obj = JSON.parse(serialized)
-  return obj
+  if (!base64String) {
+    return {}
+  }
+  try {
+    const serialized = decodeURIComponent(atob(base64String))
+    const obj = JSON.parse(serialized)
+    return obj
+  }
+  catch {
+    return {}
+  }
 }
 
 export function formatPagefindResult(result: PagefindResult) {
