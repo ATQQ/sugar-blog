@@ -227,6 +227,13 @@ pagefindPlugin({
 
 *如果插件未能正常在 buildEnd 阶段，执行生成索引的指令，也可以按此种方式调整配置*
 
+```js
+pagefindPlugin({
+  // 设置 manul 属性为 true
+  manual: true
+})
+```
+
 ① 修改运行脚本
 
 在 vitepress 构建完成后，添加索引生成的脚本

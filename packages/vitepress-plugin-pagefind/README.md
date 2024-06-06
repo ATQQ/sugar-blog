@@ -225,6 +225,12 @@ pagefindPlugin({
 
 *If the plugin cannot execute normally in the buildEnd stage, or custom indexing file location.*
 
+```js
+pagefindPlugin({
+  manual: true
+})
+```
+
 ① modify script
 
 add pagefind indexing generation script
