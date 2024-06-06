@@ -41,6 +41,9 @@ export function pagefindPlugin(
       }
     },
     configResolved(config: any) {
+      if (searchConfig.manual) {
+        return
+      }
       if (resolveConfig) {
         return
       }
@@ -89,7 +92,7 @@ export function pagefindPlugin(
       if (id.endsWith('theme-default/Layout.vue')) {
         return code.replace('<VPContent>', '<VPContent data-pagefind-body>')
       }
-      if (id.endsWith('.md')) {
+      if (id.endsWith('.md') && !searchConfig.manual) {
         const { data: frontmatter } = matter(code, {
           excerpt: true
         })
