@@ -12,7 +12,7 @@ const hotArticle = computed(() =>
   _hotArticle === false ? undefined : _hotArticle
 )
 
-const title = computed(() => hotArticle.value?.title || (`<span class="svg-icon">${fireSVG}</span>` + ' 精选文章'))
+const title = computed(() => hotArticle.value?.title || `${fireSVG}精选文章`)
 const nextText = computed(() => hotArticle.value?.nextText || '换一组')
 const pageSize = computed(() => hotArticle.value?.pageSize || 9)
 const empty = computed(() => hotArticle.value?.empty ?? '暂无精选内容')
@@ -59,7 +59,7 @@ const showChangeBtn = computed(() => {
   >
     <!-- 头部 -->
     <div class="card-header">
-      <span class="title" v-html="title" />
+      <span class="title svg-icon" v-html="title" />
       <ElButton v-if="showChangeBtn" size="small" type="primary" text @click="changePage">
         {{ nextText }}
       </ElButton>

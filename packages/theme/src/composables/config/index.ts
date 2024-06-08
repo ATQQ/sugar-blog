@@ -146,6 +146,10 @@ export namespace Theme {
   }
 
   export interface HotArticle {
+    /**
+     * 自定义标题，支持SVG + 文字
+     * @default '🔥 精选文章'
+     */
     title?: string
     pageSize?: number
     nextText?: string
@@ -288,6 +292,11 @@ export namespace Theme {
      * @default "动态计算"
      */
     scrollSpeed?: number
+    /**
+     * 自定义展示标题，支持SVG + 文字
+     * @default '🤝 友情链接'
+     */
+    title?: string
   }
 
   export interface UserWork {
@@ -453,7 +462,7 @@ export namespace Theme {
      * 详见 https://oml2d.com/options/Options.html
      */
     oml2d?: Oml2dOptions
-    homeTags?: boolean
+    homeTags?: boolean | HomeTagsConfig
     buttonAfterArticle?: ButtonAfterArticleConfig | false
     /**
      * 是否开启深色模式过渡动画
@@ -586,5 +595,13 @@ export namespace Theme {
      * 首页封面预览图
      */
     coverPreview?: ReplaceRule | ReplaceRule[]
+  }
+
+  export interface HomeTagsConfig {
+    /**
+     * 自定义标题，支持SVG + 文字
+     * @default '🏷 标签'
+     */
+    title?: string
   }
 }
