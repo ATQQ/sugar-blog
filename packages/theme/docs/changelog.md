@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.3.6） ⏰ 2024/05/26：依赖优化，首页优化，搜索优化，公告优化。
+description: 最近更新（v0.4.0） ⏰ 2024/06/08：构建优化，显著减少使用主题后增加的耗时，支持自定义友链和标签标题，一系列问题修复。
 author: 粥里有勺糖
 top: 2
 tag: 日志
@@ -26,6 +26,20 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.4.0 (2024/06/08)
+
+### Minor Changes
+
+- feat: 友链&标签支持自定义标题
+- fix: README 文档拼写错误
+- fix: 空标签首页展示冗余问题
+- chore: 构建优化，显著减少使用主题后增加的耗时
+  - break change: markdown 图表能力默认关闭，需手动打开（对构建耗时影响较大，即便不使用）
+- Updated dependencies
+  - vitepress-plugin-pagefind@0.4.1
+  - vitepress@1.2.3
+
 
 ## 0.3.6 (2024/05/26)
 

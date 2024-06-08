@@ -1,12 +1,19 @@
 # @sugarat/theme
 
-## 0.3.7
+## 0.4.0
 
 ### Patch Changes
 
-- chore: fix readme spelling error.
+**break change!**
+
+- feat: support diy friend & tags title
+- fix: readme spelling error.
+- fix: Empty label home page display redundant problem
+- chore: build speed up
+  - break change: mermaid default value change to false
 - Updated dependencies
   - vitepress-plugin-pagefind@0.4.1
+  - vitepress@1.2.3
 
 ## 0.3.6
 
