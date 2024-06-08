@@ -20,9 +20,9 @@ export function themeReloadPlugin() {
       const restart = debounce(() => {
         server.restart()
       }, 500)
-      server.watcher.on('add', (path) => {
+      server.watcher.on('add', async (path) => {
         const route = generateRoute(path)
-        const meta = getArticleMeta(path, route, blogConfig?.timeZone)
+        const meta = await getArticleMeta(path, route, blogConfig?.timeZone)
         blogConfig.pagesData.push({
           route,
           meta
@@ -30,9 +30,9 @@ export function themeReloadPlugin() {
         restart()
       })
 
-      server.watcher.on('change', (path: string) => {
+      server.watcher.on('change', async (path: string) => {
         const route = generateRoute(path)
-        const meta = getArticleMeta(path, route, blogConfig?.timeZone)
+        const meta = await getArticleMeta(path, route, blogConfig?.timeZone)
         const matched = blogConfig.pagesData.find(v => v.route === route)
 
         if (matched && !isEqual(matched.meta, meta, ['date', 'description'])) {

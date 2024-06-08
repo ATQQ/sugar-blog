@@ -92,7 +92,7 @@ const resultCover = computed(() => {
         <div class="badge-list pc-visible">
           <span v-show="author" class="split">{{ author }}</span>
           <span class="split">{{ showTime }}</span>
-          <span v-show="tag?.length" class="split">{{ tag?.join(' · ') }}</span>
+          <span v-if="tag?.length" class="split">{{ tag?.join(' · ') }}</span>
         </div>
       </div>
       <!-- 右侧封面图 -->

@@ -5,6 +5,7 @@ import { blogTheme, extraHead } from './blog-theme'
 
 export default defineConfig({
   extends: blogTheme,
+  metaChunk: true,
   sitemap: {
     hostname: 'https://theme.sugarat.top',
   },

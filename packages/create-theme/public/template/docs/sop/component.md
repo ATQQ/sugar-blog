@@ -3,6 +3,53 @@ description: 默认支持流程图，tabs面板，待办列表，作品页面
 ---
 
 # 内置第三方插件能力
+
+部分内置组件（插件），来源 [vitepress.yiov.top](https://vitepress.yiov.top/plugin.html) 推荐
+
+## oml2d - 看板娘集成
+* Type：[oml2dOptions](https://oml2d.com/options/Options.html)
+
+为网站提供一个 Live2D 看板组件。
+
+:::tip 一点说明
+通过内置 [oh-my-live2d](https://oml2d.com) 实现, 可以通过 `oml2d` 选项配置。
+
+通过这个能力可以快速加入并定制属于自己的看板娘, 开启只需要为其传递一个 [配置选项](https://oml2d.com/options/Options.html) 即可
+:::
+
+以下是一个简单的使用示例，当模型加载成功时它将出现在您网站的左下角。
+
+```ts
+const blogTheme = getThemeConfig({
+  oml2d: {
+    mobileDisplay: true,
+    models: [
+      {
+        path: 'https://registry.npmmirror.com/oml2d-models/latest/files/models/Senko_Normals/senko.model3.json'
+      }
+    ]
+  }
+})
+```
+效果图如下
+
+![](https://loclink-1259720482.cos.ap-beijing.myqcloud.com/image/%E5%BD%95%E5%B1%8F2024-03-11%2023.51.51.gif)
+
+之后您还可以前往[配置选项](https://oml2d.com/options/Options.html)查阅更多自定义内容
+
+:::tip 版本说明
+由于时间原因，主题内置的版本不一定都是最新的，可以通过 `resolutions` 配置指定要使用的版本。
+
+下面是使用示例，配置在 `package.json` 中，其它依赖覆盖版本也是这样操作。
+```json
+{
+  "resolutions": {
+    "oh-my-live2d": "^0.17.0"
+  }
+}
+```
+:::
+
 ## task-checkbox
 * Type: `boolean | TaskCheckbox`
 
@@ -46,8 +93,48 @@ interface TaskCheckbox {
 ```
 :::
 
+## timeline
+* Type: `boolean`
+* default: `true`
 
+提供 markdown 时间线语法，在 vitepress 中使用 markdown 渲染时间线（时间轴）样式。
 
+:::tip 一点说明
+内置 [vitepress-markdown-timeline](https://github.com/HanochMa/vitepress-markdown-timeline) 实现
+:::
+
+效果如下
+
+::: timeline 2023-05-24
+- **do some thing1**
+- do some thing2
+:::
+
+::: timeline 2023-05-23
+do some thing3
+do some thing4
+:::
+
+语法如下
+```md
+::: timeline 2023-05-24
+- **do some thing1**
+- do some thing2
+:::
+
+::: timeline 2023-05-23
+do some thing3
+do some thing4
+:::
+```
+
+:::code-group
+```ts [关闭]
+const blogTheme = getThemeConfig({
+  timeline: false
+})
+```
+:::
 ## tabs
 * Type: `boolean`
 
@@ -166,12 +253,12 @@ flowchart TD
   Start --> Stop
 ```
 
-**默认开启**，可以通过`mermaid`进行进一步配置，或关闭
+**默认关闭**，可以通过设置 `mermaid: true` 开启，或进行进一步配置。
 
 :::code-group
-```ts [① 关闭]
+```ts [① 开启]
 const blogTheme = getThemeConfig({
-  mermaid: false
+  mermaid: true
 })
 ```
 ```ts [② 进一步配置]
@@ -210,12 +297,13 @@ gantt
     Parallel 4   :         des6, after des4, 1d
 ```
 
+
 ## UserWorksPage
 * Type: `UserWorks`
 
 用于作品列表展示
 
-效果如下，详见 [个人作品展示](https://theme.sugarat.top/work.html)
+效果如下，详见 [个人作品展示](./../work.md)
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY4NzA4ODczMzkwNg==687088733906)
 

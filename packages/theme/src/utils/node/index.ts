@@ -36,24 +36,27 @@ export function getDefaultTitle(content: string) {
   return match?.[2] || ''
 }
 
-export function getFileBirthTime(url: string) {
-  let date = new Date()
-
-  try {
-    // 参考 vitepress 中的 getGitTimestamp 实现
-    const infoStr = spawnSync('git', ['log', '-1', '--pretty="%ci"', url])
-      .stdout?.toString()
-      .replace(/["']/g, '')
-      .trim()
-    if (infoStr) {
-      date = new Date(infoStr)
-    }
-  }
-  catch (error) {
-    return date
+const cache = new Map<string, Date>()
+export function getFileBirthTime(url: string): Promise<Date | undefined> | Date {
+  const cached = cache.get(url)
+  if (cached) {
+    return cached
   }
 
-  return date
+  return new Promise((resolve) => {
+    // 使用异步回调
+    const child = spawn('git', ['log', '-1', '--pretty="%ai"', url])
+    let output = ''
+    child.stdout.on('data', d => (output += String(d)))
+    child.on('close', () => {
+      const date = new Date(output)
+      cache.set(url, date)
+      resolve(date)
+    })
+    child.on('error', () => {
+      resolve(undefined)
+    })
+  })
 }
 
 export function getGitTimestamp(file: string) {

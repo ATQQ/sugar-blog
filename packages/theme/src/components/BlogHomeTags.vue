@@ -9,10 +9,16 @@ import {
   useConfig,
   useCurrentPageNum,
 } from '../composables/config/blog'
+import { tagsSvgStr } from '../constants/svg'
 
 const route = useRoute()
 const docs = useArticles()
-const showTags = useConfig()?.config?.blog?.homeTags ?? true
+const homeTagsConfig = useConfig()?.config?.blog?.homeTags
+const showTags = computed(() => !!(homeTagsConfig ?? true))
+const title = computed(() => (typeof homeTagsConfig === 'boolean' || !homeTagsConfig?.title)
+  ? `${tagsSvgStr}标签`
+  : homeTagsConfig?.title
+)
 const tags = computed(() => {
   return [...new Set(docs.value.map(v => v.meta.tag || []).flat(3))]
 })
@@ -81,28 +87,11 @@ watch(
   <div v-if="showTags && tags.length" class="card tags" data-pagefind-ignore="all">
     <!-- 头部 -->
     <div class="card-header">
-      <span class="title svg-icon"><svg
-        t="1695048840129" class="icon" viewBox="0 0 1024 1024" version="1.1"
-        xmlns="http://www.w3.org/2000/svg" p-id="4290" width="200" height="200"
+      <span class="title svg-icon" v-html="title" />
+      <ElTag
+        v-if="activeTag.label" :type="activeTag.type || 'primary'" :effect="colorMode" closable
+        @close="handleCloseTag"
       >
-        <path
-          d="M810.88 245.888a118.432 118.432 0 1 0 0 236.864 118.432 118.432 0 0 0 0-236.864z m-151.008 118.432a151.008 151.008 0 1 1 302.016 0 151.008 151.008 0 0 1-302.016 0z"
-          fill="#D3D3D3" p-id="4291"
-        />
-        <path
-          d="M774.08 565.6l61.76-160.64c6.4-16.64 2.56-35.84-10.24-48.64l-151.04-151.04c-12.8-12.8-31.68-16.64-48.64-10.24l-160.64 61.76c-12.16 4.8-23.36 11.84-32.64 21.12l-355.2 355.2c-17.92 17.92-17.92 46.72 0 64.32l256 256c17.92 17.92 46.72 17.92 64.32 0l355.2-355.2c9.28-9.28 16.32-20.16 21.12-32.64z m-159.36-149.12c-22.08-22.08-22.08-57.6 0-79.68 22.08-22.08 57.6-22.08 79.68 0 22.08 22.08 22.08 57.6 0 79.68-22.08 21.76-57.92 21.76-79.68 0z"
-          fill="#FCD53F" p-id="4292"
-        />
-        <path
-          d="M654.4 320.48c14.4 0 28.8 5.44 39.68 16.64 22.08 22.08 22.08 57.6 0 79.68-10.88 10.88-25.28 16.64-39.68 16.64-14.4 0-28.8-5.44-39.68-16.64-22.08-22.08-22.08-57.6 0-79.68 10.88-11.2 25.28-16.64 39.68-16.64z m0-30.08c-23.04 0-44.8 8.96-61.12 25.28a86.72 86.72 0 0 0 0 122.24c16.32 16.32 38.08 25.28 61.12 25.28s44.8-8.96 61.12-25.28a86.72 86.72 0 0 0 0-122.24c-16.32-16.32-38.08-25.28-61.12-25.28z"
-          fill="#F8312F" p-id="4293"
-        />
-        <path
-          d="M676.16 348.032c8.992 0 16.288 7.296 16.288 16.288a118.144 118.144 0 0 0 64.288 105.44h0.064c22.24 11.296 47.36 15.264 71.68 11.84a16.288 16.288 0 0 1 4.48 32.32 154.24 154.24 0 0 1-90.848-15.04 150.72 150.72 0 0 1-82.24-134.56c0-8.992 7.296-16.288 16.288-16.288z"
-          fill="#D3D3D3" p-id="4294"
-        />
-      </svg> 标签</span>
-      <ElTag v-if="activeTag.label" :type="activeTag.type || 'primary'" :effect="colorMode" closable @close="handleCloseTag">
         {{ activeTag.label }}
       </ElTag>
     </div>

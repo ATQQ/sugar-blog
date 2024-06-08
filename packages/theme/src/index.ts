@@ -1,3 +1,4 @@
+// @sugarat/theme index
 // override style
 import './styles/index.scss'
 
@@ -23,13 +24,12 @@ import DefaultTheme from 'vitepress/theme'
 import { enhanceAppWithTabs } from 'vitepress-plugin-tabs/client'
 
 // 图表渲染组件
-// @ts-expect-error
-import Mermaid from 'vitepress-plugin-mermaid/Mermaid.vue'
+// replace-mermaid-import-code
+// import Mermaid from 'vitepress-plugin-mermaid/Mermaid.vue'
 import BlogApp from './components/BlogApp.vue'
 import { withConfigProvider } from './composables/config/blog'
 
 // page
-import TimelinePage from './components/TimelinePage.vue'
 import UserWorksPage from './components/UserWorks.vue'
 
 // 内置一些特殊的主题色
@@ -41,11 +41,9 @@ export const BlogTheme: Theme = {
   enhanceApp(ctx) {
     enhanceAppWithTabs(ctx.app as any)
     DefaultTheme.enhanceApp(ctx)
-    ctx.app.component('TimelinePage', TimelinePage)
-    ctx.app.component('UserWorksPage', UserWorksPage)
-    if (!ctx.app.component('Mermaid')) {
-      ctx.app.component('Mermaid', Mermaid as any)
-    }
+    ctx.app.component('UserWorksPage', UserWorksPage as any)
+    // replace-mermaid-mounted-code
+    // if (!ctx.app.component('Mermaid')) { ctx.app.component('Mermaid', Mermaid as any) }
   }
 }
 

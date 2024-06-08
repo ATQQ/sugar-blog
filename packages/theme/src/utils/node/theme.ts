@@ -2,8 +2,10 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
+import os from 'node:os'
 import glob from 'fast-glob'
 import matter from 'gray-matter'
+import pLimit from 'p-limit'
 import type { Theme } from '../../composables/config/index'
 import { formatDate } from '../client'
 import { getDefaultTitle, getFileBirthTime, getFirstImagURLFromMD, getTextSummary } from './index'
@@ -49,8 +51,8 @@ export function getPageRoute(filepath: string, srcDir: string) {
 }
 
 const defaultTimeZoneOffset = new Date().getTimezoneOffset() / -60
-export function getArticleMeta(filepath: string, route: string, timeZone = defaultTimeZoneOffset) {
-  const fileContent = fs.readFileSync(filepath, 'utf-8')
+export async function getArticleMeta(filepath: string, route: string, timeZone = defaultTimeZoneOffset) {
+  const fileContent = await fs.promises.readFile(filepath, 'utf-8')
 
   const { data: frontmatter, excerpt, content } = matter(fileContent, {
     excerpt: true,
@@ -63,13 +65,13 @@ export function getArticleMeta(filepath: string, route: string, timeZone = defau
   if (!meta.title) {
     meta.title = getDefaultTitle(content)
   }
-  if (!meta.date) {
-    meta.date = formatDate(getFileBirthTime(filepath))
-  }
-  else {
-    meta.date = formatDate(
-      new Date(`${new Date(meta.date).toUTCString()}+${timeZone}`)
-    )
+  const date = await (
+    (meta.date
+       && new Date(`${new Date(meta.date).toUTCString()}+${timeZone}`))
+     || getFileBirthTime(filepath)
+  )
+  if (date) {
+    meta.date = formatDate(date)
   }
 
   // 处理tags和categories,兼容历史文章
@@ -101,22 +103,40 @@ export function getArticleMeta(filepath: string, route: string, timeZone = defau
   }
   return meta as Theme.PageMeta
 }
-export function getArticles(cfg?: Partial<Theme.BlogConfig>) {
+export async function getArticles(cfg?: Partial<Theme.BlogConfig>) {
   const srcDir = cfg?.srcDir || process.argv.slice(2)?.[1] || '.'
   const files = glob.sync(`${srcDir}/**/*.md`, { ignore: ['node_modules'] })
+  const limit = pLimit(+(process.env.P_LIMT_MAX || os.cpus().length))
 
-  // 文章数据
-  const pageData = files
-    .map((filepath) => {
-      const route = getPageRoute(filepath, srcDir)
-      const meta = getArticleMeta(filepath, route, cfg?.timeZone)
-      return {
-        route,
-        meta
-      }
+  const metaResults = files.reduce((prev, curr) => {
+    const route = getPageRoute(curr, srcDir)
+    const metaPromise = limit(() => getArticleMeta(curr, route, cfg?.timeZone))
+
+    // 提前获取，有缓存取缓存
+    prev[curr] = {
+      route,
+      metaPromise
+    }
+    return prev
+  }, {} as Record<string, {
+    route: string
+    metaPromise: Promise<Theme.PageMeta>
+  }>)
+
+  const pageData: Theme.PageData[] = []
+
+  for (const file of files) {
+    const { route, metaPromise } = metaResults[file]
+    const meta = await metaPromise
+    if (meta.layout === 'home') {
+      continue
+    }
+    pageData.push({
+      route,
+      meta
     })
-    .filter(v => v.meta.layout !== 'home')
-  return pageData as Theme.PageData[]
+  }
+  return pageData
 }
 
 export function patchVPConfig(vpConfig: any, cfg?: Partial<Theme.BlogConfig>) {

@@ -6,20 +6,22 @@ import {
   patchOptimizeDeps,
   registerMdPlugins,
 } from './utils/node/mdPlugins'
-import { checkConfig, getArticles, patchVPConfig, patchVPThemeConfig } from './utils/node/theme'
+import { checkConfig, patchVPConfig, patchVPThemeConfig } from './utils/node/theme'
 import { getVitePlugins, registerVitePlugins } from './utils/node/vitePlugins'
 
 /**
  * 获取主题的配置
  * @param cfg 主题配置
  */
-export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
+export function getThemeConfig(cfg: Partial<Theme.BlogConfig> = {}) {
   // 配置校验
   checkConfig(cfg)
 
   // 文章数据
-  const pagesData = getArticles(cfg)
-  const extraVPConfig: any = {}
+  const pagesData: Theme.PageData[] = []
+  const extraVPConfig: any = {
+    vite: {}
+  }
 
   // 获取要加载的vite插件
   const vitePlugins = getVitePlugins(cfg)
@@ -32,7 +34,11 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
   registerMdPlugins(extraVPConfig, markdownPlugin)
 
   // patch extraVPConfig
-  patchMermaidPluginCfg(extraVPConfig)
+  // 默认不开启 markdown 图表，会明显影响构建速度
+  cfg.mermaid = cfg.mermaid ?? false
+  if (cfg?.mermaid !== false) {
+    patchMermaidPluginCfg(extraVPConfig)
+  }
   patchOptimizeDeps(extraVPConfig)
 
   patchVPConfig(extraVPConfig, cfg)
