@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.4.0） ⏰ 2024/06/08：构建优化，显著减少使用主题后增加的耗时，支持自定义友链和标签标题，一系列问题修复。
+description: 最近更新（v0.4.1） ⏰ 2024/06/08：构建优化，显著减少使用主题后增加的耗时，支持自定义友链和标签标题，一系列问题修复。
 author: 粥里有勺糖
 top: 2
 tag: 日志
@@ -26,6 +26,12 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.4.1 (2024/06/08)
+
+### Patch Changes
+
+- fix: mermaid build error
 
 ## 0.4.0 (2024/06/08)
 
