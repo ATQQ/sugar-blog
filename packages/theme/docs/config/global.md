@@ -109,6 +109,17 @@ const blogTheme = getThemeConfig({
 })
 ```
 
+```ts [使用 SVG 图标]
+// 可以上 iconfont 直接复制 SVG 图标
+// 也可以是 emoji 表情 😝
+const svgIconStr = '<svg>省略内部代码</svg>'
+const blogTheme = getThemeConfig({
+  hotArticle: {
+    title: `${svgIconStr} 精选文章`
+  }
+})
+```
+
 ```ts [example]
 const blogTheme = getThemeConfig({
   hotArticle: {
@@ -148,9 +159,13 @@ const blogTheme = getThemeConfig({
 })
 ```
 
+自定义 SVG 图标标题
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/ae3edb8de7b5f574f9cdaeb08ac042b2)
+
 ## homeTags
 
-* Type: `boolean`
+* Type: `boolean` | `HomeTagsConfig`
 
 用于控制首页右侧的标签内容
 
@@ -159,6 +174,19 @@ const blogTheme = getThemeConfig({
 ```ts
 const blogTheme = getThemeConfig({
   homeTags: false
+})
+```
+
+可自定义 标题 和 图标。
+
+```ts
+// 可以上 iconfont 直接复制 SVG 图标
+// 也可以是 emoji 表情 😝
+const svgIconStr = '<svg>省略内部代码</svg>'
+const blogTheme = getThemeConfig({
+  homeTags: {
+    title: `${svgIconStr} 标签`
+  }
 })
 ```
 
@@ -1087,6 +1115,22 @@ const blogTheme = getThemeConfig({
     // 自定义滚动速度（可选）
     // scrollSpeed: 10000
   },
+})
+```
+
+可自定义 标题 和 图标，
+
+```ts [使用 SVG 图标]
+// 可以上 iconfont 直接复制 SVG 图标
+// 也可以是 emoji 表情 😝
+const svgIconStr = '<svg>省略内部代码</svg>'
+const blogTheme = getThemeConfig({
+  friend: {
+    title: `${svgIconStr} 友链`,
+    list: [
+      /* 友链数据 */
+    ]
+  }
 })
 ```
 
