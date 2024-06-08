@@ -190,6 +190,8 @@ const blogTheme = getThemeConfig({
 })
 ```
 
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/aaf374bfeec13dba4014448ce6a16e7b)
+
 ## home
 
 用于设置首页的自定义内容
