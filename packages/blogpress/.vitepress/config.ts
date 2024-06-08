@@ -248,6 +248,7 @@ const extraHead: any
 
 export default defineConfig({
   extends: blogTheme,
+  metaChunk: true,
   markdown: {
     image: {
       lazyLoading: true

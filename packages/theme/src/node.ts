@@ -13,7 +13,7 @@ import { getVitePlugins, registerVitePlugins } from './utils/node/vitePlugins'
  * 获取主题的配置
  * @param cfg 主题配置
  */
-export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
+export function getThemeConfig(cfg: Partial<Theme.BlogConfig> = {}) {
   // 配置校验
   checkConfig(cfg)
 
@@ -34,6 +34,8 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
   registerMdPlugins(extraVPConfig, markdownPlugin)
 
   // patch extraVPConfig
+  // 默认不开启 markdown 图表，会明显影响构建速度
+  cfg.mermaid = cfg.mermaid ?? false
   if (cfg?.mermaid !== false) {
     patchMermaidPluginCfg(extraVPConfig)
   }

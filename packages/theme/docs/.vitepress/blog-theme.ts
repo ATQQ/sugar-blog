@@ -12,6 +12,8 @@ const RSS: Theme.RSSOptions = {
 }
 
 export const blogTheme = getThemeConfig({
+  // 图表支持
+  mermaid: true,
   imageStyle: {
     coverPreview: [
       // 七牛云

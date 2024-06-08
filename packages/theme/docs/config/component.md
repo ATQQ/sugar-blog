@@ -257,12 +257,12 @@ flowchart TD
   Start --> Stop
 ```
 
-**默认开启**，可以通过`mermaid`进行进一步配置，或关闭
+**默认关闭**，可以通过设置 `mermaid: true` 开启，或进行进一步配置。
 
 :::code-group
-```ts [① 关闭]
+```ts [① 开启]
 const blogTheme = getThemeConfig({
-  mermaid: false
+  mermaid: true
 })
 ```
 ```ts [② 进一步配置]
