@@ -1,6 +1,4 @@
 import path from 'node:path'
-import { execSync } from 'node:child_process'
-import process from 'node:process'
 import { existsSync, readFileSync } from 'node:fs'
 import { Buffer } from 'node:buffer'
 import type { SiteConfig } from 'vitepress'
@@ -10,25 +8,28 @@ import {
   pagefindPlugin
 } from 'vitepress-plugin-pagefind'
 import { RssPlugin } from 'vitepress-plugin-rss'
+import type { PluginOption } from 'vite'
 import type { Theme } from '../../composables/config/index'
 import { _require } from './mdPlugins'
 import { themeReloadPlugin } from './hot-reload-plugin'
+import { getArticles } from './theme'
 import { joinPath } from './index'
 
 export function getVitePlugins(cfg?: Partial<Theme.BlogConfig>) {
   const plugins: any[] = []
 
-  // Build完后运行的一系列列方法
-  const buildEndFn: any[] = []
-
-  // 执行自定义的 buildEnd 钩子
-  plugins.push(inlineBuildEndPlugin(buildEndFn))
+  // const buildEndFn: any[] = []
+  // Build完后运行的一系列列方法，执行自定义的 buildEnd 钩子
+  // plugins.push(inlineBuildEndPlugin(buildEndFn))
 
   // 处理cover image的路径（暂只支持自动识别的文章首图）
   plugins.push(coverImgTransform())
 
   // 自动重载首页
   plugins.push(themeReloadPlugin())
+
+  // 主题pageData生成
+  plugins.push(providePageData(cfg))
 
   // 内置简化版的pagefind
   if (cfg && cfg.search !== false) {
@@ -60,47 +61,6 @@ export function getVitePlugins(cfg?: Partial<Theme.BlogConfig>) {
 export function registerVitePlugins(vpCfg: any, plugins: any[]) {
   vpCfg.vite = {
     plugins
-  }
-}
-
-export function inlinePagefindPlugin(buildEndFn: any[]) {
-  buildEndFn.push(() => {
-    // 调用pagefind
-    const ignore: string[] = [
-      // 侧边栏内容
-      'div.aside',
-      // 标题锚点
-      'a.header-anchor'
-    ]
-    const { log } = console
-    log()
-    log('=== pagefind: https://pagefind.app/ ===')
-    const siteDir = path.join(
-      process.argv.slice(2)?.[1] || '.',
-      '.vitepress/dist'
-    )
-    let command = `npx pagefind --site ${siteDir} --output-subdir "_pagefind"`
-
-    if (ignore.length) {
-      command += ` --exclude-selectors "${ignore.join(', ')}"`
-    }
-
-    log(command)
-    log()
-    execSync(command, {
-      stdio: 'inherit'
-    })
-  })
-  return {
-    name: '@sugarar/theme-plugin-pagefind',
-    enforce: 'pre',
-    // 添加检索的内容标识
-    transform(code: string, id: string) {
-      if (id.endsWith('theme-default/Layout.vue')) {
-        return code.replace('<VPContent>', '<VPContent data-pagefind-body>')
-      }
-      return code
-    }
   }
 }
 
@@ -175,4 +135,14 @@ export function coverImgTransform() {
       }
     }
   }
+}
+
+export function providePageData(cfg?: Partial<Theme.BlogConfig>) {
+  return {
+    name: '@sugarat/theme-plugin-provide-page-data',
+    async config(config: any) {
+      const pagesData = await getArticles(cfg)
+      config.vitepress.site.themeConfig.blog.pagesData = pagesData
+    },
+  } as PluginOption
 }

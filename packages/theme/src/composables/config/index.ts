@@ -408,7 +408,8 @@ export namespace Theme {
     mermaid?: any
     /**
      * 设置解析 frontmatter 里 date 的时区
-     * @default 8 => 'UTC+8'
+     * @default new Date().getTimezoneOffset() / -60
+     * @example 8 => 'UTC+8'
      */
     timeZone?: number
     /**

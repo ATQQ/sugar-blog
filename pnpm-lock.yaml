@@ -106,6 +106,9 @@ importers:
       '@vueuse/core':
         specifier: ^9.13.0
         version: 9.13.0(vue@3.4.26(typescript@5.4.5))
+      cross-spawn:
+        specifier: ^7.0.3
+        version: 7.0.3
       fast-glob:
         specifier: ^3.3.2
         version: 3.3.2
@@ -149,6 +152,9 @@ importers:
       element-plus:
         specifier: ^2.7.2
         version: 2.7.2(vue@3.4.26(typescript@5.4.5))
+      p-limit:
+        specifier: '4'
+        version: 4.0.0
       pagefind:
         specifier: ^1.1.0
         version: 1.1.0
