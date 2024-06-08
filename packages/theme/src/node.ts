@@ -17,6 +17,9 @@ export function getThemeConfig(cfg: Partial<Theme.BlogConfig> = {}) {
   // 配置校验
   checkConfig(cfg)
 
+  // 默认不开启 markdown 图表，会明显影响构建速度
+  cfg.mermaid = cfg.mermaid ?? false
+
   // 文章数据
   const pagesData: Theme.PageData[] = []
   const extraVPConfig: any = {
@@ -34,8 +37,6 @@ export function getThemeConfig(cfg: Partial<Theme.BlogConfig> = {}) {
   registerMdPlugins(extraVPConfig, markdownPlugin)
 
   // patch extraVPConfig
-  // 默认不开启 markdown 图表，会明显影响构建速度
-  cfg.mermaid = cfg.mermaid ?? false
   if (cfg?.mermaid !== false) {
     patchMermaidPluginCfg(extraVPConfig)
   }
