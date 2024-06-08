@@ -19,7 +19,9 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
 
   // 文章数据
   const pagesData: Theme.PageData[] = []
-  const extraVPConfig: any = {}
+  const extraVPConfig: any = {
+    vite: {}
+  }
 
   // 获取要加载的vite插件
   const vitePlugins = getVitePlugins(cfg)
@@ -32,7 +34,9 @@ export function getThemeConfig(cfg?: Partial<Theme.BlogConfig>) {
   registerMdPlugins(extraVPConfig, markdownPlugin)
 
   // patch extraVPConfig
-  patchMermaidPluginCfg(extraVPConfig)
+  if (cfg?.mermaid !== false) {
+    patchMermaidPluginCfg(extraVPConfig)
+  }
   patchOptimizeDeps(extraVPConfig)
 
   patchVPConfig(extraVPConfig, cfg)
