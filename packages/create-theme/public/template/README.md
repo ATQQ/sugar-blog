@@ -52,6 +52,8 @@ pnpm serve
 
 ③ 修改 `docs/.vitepress/config.mts` 里的构建配置
 
+**如果项目名已经为 name.github.io 域名，则不需要修改，保持默认值 `/` 即可**
+
 `base` 改为 `"/仓库名/"` 即可
 
 ```ts

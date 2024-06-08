@@ -2,9 +2,7 @@
 
 ## 0.4.0
 
-### Patch Changes
-
-**break change!**
+### Minor Changes
 
 - feat: support diy friend & tags title
 - fix: readme spelling error.
