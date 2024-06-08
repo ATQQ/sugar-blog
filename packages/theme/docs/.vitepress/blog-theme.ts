@@ -30,13 +30,13 @@ export const blogTheme = getThemeConfig({
     mobileDisplay: true,
     models: [
       {
-        path: 'https://sugarat.s3.bitiful.net/npm/oml2d-model/models/Senko_Normals/senko.model3.json',
+        path: 'https://cdn.bitiful.sugarat.top/npm/oml2d-model/models/Senko_Normals/senko.model3.json',
       }
     ],
     libraryUrls: {
-      complete: 'https://sugarat.s3.bitiful.net/npm/oh-my-live2d/latest/lib/complete.js',
-      cubism2: 'https://sugarat.s3.bitiful.net/npm/oh-my-live2d/latest/lib/cubism2.js',
-      cubism5: 'https://sugarat.s3.bitiful.net/npm/oh-my-live2d/latest/lib/cubism5.js'
+      complete: 'https://cdn.bitiful.sugarat.top/npm/oh-my-live2d/latest/lib/complete.js',
+      cubism2: 'https://cdn.bitiful.sugarat.top/npm/oh-my-live2d/latest/lib/cubism2.js',
+      cubism5: 'https://cdn.bitiful.sugarat.top/npm/oh-my-live2d/latest/lib/cubism5.js'
     }
   },
   RSS,
