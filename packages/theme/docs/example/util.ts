@@ -2,7 +2,7 @@ import type { DefaultTheme } from 'vitepress/theme'
 
 export function defineExamples(examples: IExample[]) {
   return examples.map((v) => {
-    if (v.avatar.includes('//sugarat.s3.bitiful.net')) {
+    if (v.avatar.includes('//cdn.bitiful.sugarat.top')) {
       v.avatar = `${v.avatar}?w=30&h=30&fmt=webp&mode=crop`
     }
     return v

@@ -186,7 +186,7 @@ const blogTheme = getThemeConfig({
         url: 'http://llxz.top/'
       }
     ].map((v) => {
-      if (v.avatar.includes('//sugarat.s3.bitiful.net')) {
+      if (v.avatar.includes('//cdn.bitiful.sugarat.top')) {
         v.avatar = `${v.avatar}?w=50&h=50&fmt=webp&mode=crop`
       }
       return v
