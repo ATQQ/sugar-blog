@@ -70,9 +70,8 @@ export async function getArticleMeta(filepath: string, route: string, timeZone =
        && new Date(`${new Date(meta.date).toUTCString()}+${timeZone}`))
      || getFileBirthTime(filepath)
   )
-  if (date) {
-    meta.date = formatDate(date)
-  }
+  // 无法获取时兜底当前时间
+  meta.date = formatDate(date || new Date())
 
   // 处理tags和categories,兼容历史文章
   meta.categories

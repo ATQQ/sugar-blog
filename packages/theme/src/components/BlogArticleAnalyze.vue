@@ -12,7 +12,7 @@ import {
   UserFilled
 } from '@element-plus/icons-vue'
 import { useBlogConfig, useCurrentArticle, useDocMetaInsertPosition, useDocMetaInsertSelector } from '../composables/config/blog'
-import countWord, { formatShowDate } from '../utils/client'
+import countWord, { formatDate, formatShowDate } from '../utils/client'
 import type { Theme } from '../composables/config'
 import BlogDocCover from './BlogDocCover.vue'
 
@@ -108,6 +108,10 @@ const publishDate = computed(() => {
   return formatShowDate(currentArticle.value?.meta?.date || '')
 })
 
+const hoverDate = computed(() => {
+  return currentArticle.value?.meta?.date ? `: ${formatDate(currentArticle.value?.meta?.date)}` : ''
+})
+
 const timeTitle = computed(() =>
   frontmatter.value.date ? '发布时间' : '最近修改时间'
 )
@@ -164,7 +168,7 @@ watch(
         {{ author }}
       </template>
     </span>
-    <span v-if="publishDate && !hiddenTime" class="publishDate" :title="timeTitle">
+    <span v-if="publishDate && !hiddenTime" class="publishDate" :title="timeTitle + hoverDate">
       <ElIcon><Clock /></ElIcon>
       {{ publishDate }}
     </span>

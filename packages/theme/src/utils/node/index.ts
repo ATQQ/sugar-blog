@@ -1,7 +1,8 @@
 /* eslint-disable global-require */
 /* eslint-disable prefer-rest-params */
-import { spawn, spawnSync } from 'node:child_process'
+import { spawn } from 'node:child_process'
 import path from 'node:path'
+import fs from 'node:fs'
 
 export function clearMatterContent(content: string) {
   let first___: unknown
@@ -36,7 +37,7 @@ export function getDefaultTitle(content: string) {
   return match?.[2] || ''
 }
 
-const cache = new Map<string, Date>()
+const cache = new Map<string, Date | undefined>()
 export function getFileBirthTime(url: string): Promise<Date | undefined> | Date {
   const cached = cache.get(url)
   if (cached) {
@@ -48,15 +49,32 @@ export function getFileBirthTime(url: string): Promise<Date | undefined> | Date 
     const child = spawn('git', ['log', '-1', '--pretty="%ai"', url])
     let output = ''
     child.stdout.on('data', d => (output += String(d)))
-    child.on('close', () => {
-      const date = new Date(output)
+    child.on('close', async () => {
+      let date: Date | undefined
+      if (output.trim()) {
+        date = new Date(output)
+      }
+      else {
+        date = await getFileBirthTimeByFs(url)
+      }
       cache.set(url, date)
       resolve(date)
     })
-    child.on('error', () => {
-      resolve(undefined)
+    child.on('error', async () => {
+      const fsDate = await getFileBirthTimeByFs(url)
+      resolve(fsDate)
     })
   })
+}
+
+export async function getFileBirthTimeByFs(url: string) {
+  try {
+    const fsStat = await fs.promises.stat(url)
+    return fsStat.birthtime
+  }
+  catch {
+    return undefined
+  }
 }
 
 export function getGitTimestamp(file: string) {
