@@ -233,3 +233,7 @@ export function useCleanUrls() {
 export function useImageStyle() {
   return inject(configSymbol)?.value?.blog?.imageStyle || {} as Theme.ImageStyleConfig
 }
+
+export function useHomeAnalysis() {
+  return inject(configSymbol)?.value?.blog?.home?.analysis
+}

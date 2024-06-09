@@ -219,6 +219,18 @@ const blogTheme = getThemeConfig({
 })
 ```
 
+```ts [数据分析卡片标题]
+const blogTheme = getThemeConfig({
+  home: {
+    analysis: {
+      articles: {
+        title: ['博客文章', '月更新', '周更新']
+      }
+    }
+  }
+})
+```
+
 ```ts [type]
 interface HomeBlog {
   name?: string
@@ -231,6 +243,10 @@ interface HomeBlog {
    * @default 'card'
    */
   avatarMode?: 'card' | 'split'
+  /**
+   * 首页数据分析卡片
+   */
+  analysis?: HomeAnalysis
 }
 ```
 
@@ -241,6 +257,8 @@ interface HomeBlog {
 ![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMDIwMzE5MQ==674920203192)
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY5NjE1NTk3MjkxMQ==696155972911)
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/8128001649cb35413a0575b2749b8099)
 
 ## search
 

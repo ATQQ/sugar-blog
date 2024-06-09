@@ -185,6 +185,12 @@ export namespace Theme {
     style?: 'card' | 'sidebar'
   }
 
+  export interface HomeAnalysis {
+    articles?: {
+      title?: string[]
+    }
+  }
+
   export interface HomeBlog {
     name?: string
     motto?: string
@@ -197,6 +203,10 @@ export namespace Theme {
      * @default 'card'
      */
     avatarMode?: 'card' | 'split'
+    /**
+     * 首页数据分析卡片
+     */
+    analysis?: HomeAnalysis
   }
 
   export interface ArticleConfig {

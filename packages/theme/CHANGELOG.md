@@ -1,5 +1,11 @@
 # @sugarat/theme
 
+## 0.4.2
+
+### Patch Changes
+
+- feat: 支持设置数据卡片的标题
+
 ## 0.4.1
 
 ### Patch Changes

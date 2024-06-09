@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import { useData } from 'vitepress'
 import { isCurrentWeek } from '../utils/client'
-import { useArticles, useBlogConfig } from '../composables/config/blog'
+import { useArticles, useBlogConfig, useHomeAnalysis } from '../composables/config/blog'
 import BlogAuthor from './BlogAuthor.vue'
 
 const { home } = useBlogConfig()
@@ -31,6 +31,9 @@ const currentWeek = computed(() => {
     return isCurrentWeek(pubDate)
   })
 })
+
+const analysis = useHomeAnalysis()
+const titles = computed(() => (frontmatter.value?.blog?.analysis?.articles?.title || analysis?.articles?.title || []))
 </script>
 
 <template>
@@ -41,17 +44,17 @@ const currentWeek = computed(() => {
     <div class="overview-data">
       <div class="overview-item">
         <span class="count">{{ notHiddenArticles.length }}</span>
-        <span class="label">博客文章</span>
+        <span class="label">{{ titles[0] || '博客文章' }}</span>
       </div>
       <div class="split" />
       <div class="overview-item">
         <span class="count">+{{ currentMonth?.length }}</span>
-        <span class="label">本月更新</span>
+        <span class="label">{{ titles[1] || '本月更新' }}</span>
       </div>
       <div class="split" />
       <div class="overview-item">
         <span class="count">+{{ currentWeek?.length }}</span>
-        <span class="label">本周更新</span>
+        <span class="label">{{ titles[2] || '本周更新' }}</span>
       </div>
     </div>
   </div>

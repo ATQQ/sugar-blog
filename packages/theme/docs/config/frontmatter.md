@@ -104,6 +104,15 @@ interface HomeBlog {
    * @default true
    */
   minScreenAvatar?: boolean
+  /**
+   * 首页数据分析卡片
+   */
+  analysis?: HomeAnalysis
+}
+interface HomeAnalysis {
+  articles?: {
+    title?: string[]
+  }
 }
 ```
 
@@ -195,6 +204,20 @@ blog:
 |                      minScreenAvatar: true (默认)                       |                         minScreenAvatar: false                          |
 | :---------------------------------------------------------------------: | :---------------------------------------------------------------------: |
 | ![](https://img.cdn.sugarat.top/mdImg/MTY5NjE2MjE0MTI5Mw==696162141293) | ![](https://img.cdn.sugarat.top/mdImg/MTY5NjE2MjE4NjM3MQ==696162186371) |
+
+文章数据卡片标题修改
+```md
+---
+layout: home
+blog:
+ # 文章数据分析卡片标题定义
+ analysis: 
+  articles: 
+    title: ['博客文章', '月更新', '周更新']
+---
+```
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/8128001649cb35413a0575b2749b8099)
 
 ## Article
 ### title
