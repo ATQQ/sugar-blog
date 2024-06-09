@@ -1,5 +1,12 @@
 # @sugarat/theme
 
+## 0.4.3
+
+### Patch Changes
+
+- fix: 新建文件时间获取失败显示 NaN
+- feat: 文章页 hover 时完整展示缩略的时间
+
 ## 0.4.2
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.65
+
+### Patch Changes
+
+- fix: 新建文件时间获取失败显示 NaN
+
 ## 0.0.64
 
 ### Patch Changes
