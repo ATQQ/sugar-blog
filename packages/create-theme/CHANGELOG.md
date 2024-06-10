@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.66
+
+### Patch Changes
+
+- fix: deadlink error
+
 ## 0.0.65
 
 ### Patch Changes
