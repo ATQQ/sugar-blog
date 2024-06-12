@@ -176,3 +176,9 @@ const html = mdRender.render(fileContent)
 
 ## 最后
 个人觉得代码应该还有优化空间，下来再探索一下，攒一波有重大突破再来分享分享。
+
+博客本身的优化，之前也发文章分享过来，感兴趣的可以看看：[博客性能优化笔记](./2024-blog-perf.md)
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/32ad0f558070d69b3f50bbcdc7a8c988)
+
+没错：已经拉满了！
