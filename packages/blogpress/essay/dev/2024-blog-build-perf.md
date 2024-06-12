@@ -75,6 +75,8 @@ console.timeEnd('flag') // 打印出耗时
 
 ### 异步操作文件
 
+读取文件内容用于提取 `frontmatter` 信息，生成描述，标题等内容，会用于首页渲染。
+
 使用 `fs.promises` 异步操作文件，这样可以避免阻塞进程。
 
 ```js
@@ -86,6 +88,10 @@ fs.promises.readFile(filePath, 'utf-8')
 
 ### 异步创建子进程
 
+主要通过调用 `git` 指令获取文件最后的修改时间，用于展示文章的最后的修改时间。
+
+原来使用的 `spawnSync`，同样也是同步执行的方法。
+
 使用 `spawn + Promise` 替换 `spawnSync`，避免阻塞进程。
 
 ```js
@@ -96,7 +102,7 @@ spawnSync('git', ['log', '-1', '--pretty="%ci"', url])
 const child = spawn('git', ['log', '-1', '--pretty="%ai"', url])
 ```
 
-### 添加缓存逻辑
+### 使用缓存
 
 在日志里可以发现，Vite 插件里 `load` 钩子在 vitepress build 时执行了2次。
 
@@ -133,7 +139,7 @@ const contentPromises = files.reduce((prev, f) => {
 }, {})
 ```
 
-但在测试的时候发现这样写偶尔会执行出错或提升不明显，估计是并发的执行的 Promise 和 spawn 创建子进程过多的关系。
+但在测试的时候发现这样写偶尔会执行出错或提升不明显，大概是并发的执行的 Promise 和 spawn 创建子进程过多的关系。
 
 于是引入 [p-limit](https://www.npmjs.com/package/p-limit) 来控制并发的 promise 数。
 
@@ -147,7 +153,7 @@ const metaPromise = limit(() => getArticleMeta())
 
 这里默认值使用`os.cpus().length`来获取 CPU 核心的数量，这样创建的子进程能充分利用上多核的能力，不然并行值调得再大，也不会有明显的提升。
 
-### 非必要能力提供开关
+### 非必要第三方能力提供开关
 
 有些能力，可能没有用到，但是打开就是会增加额外的耗时，**对文件做了不改变内容的分析与处理**。
 
@@ -160,8 +166,13 @@ const mdRender = await createMarkdownRenderer()
 const html = mdRender.render(fileContent)
 ```
 
-`vitepress` 内置使用的 `markdown-it` ，并且内置了许多的插件，html 作为 RSS 内容的组成也不是必要的部分，因此可以做成可选的能力，交由用户选择是否开启。
+`vitepress` 内置使用的 `markdown-it` ，并且内置了许多的插件，html 作为 RSS 内容的组成也不是必要的部分，因此可以做成可选的能力，交由用户选择是否开启，同时将生成的方式也做成可配置的，用户可以传入更加精简的生成方法。
 
-另一个是 markdown 图表的渲染，主题内置的 [mermaid](https://mermaid.nodejs.cn/) 相关插件，发现打开即时没使用
+另一个是 markdown 图表的渲染，主题内置的 [mermaid](https://mermaid.nodejs.cn/) 相关插件，发现打开即使页面里没有使用，也会增加额外的耗时，且会增加非常的多。
 
-### 
+因此将这个也弄成默认关闭，由用户自己选择是否开启，深度优化需要修改对应插件的源码，还没来得及研究这个计划后续再做。
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/8ef3d9d54c4589808965322186e69426)
+
+## 最后
+个人觉得代码应该还有优化空间，下来再探索一下，攒一波有重大突破再来分享分享。
