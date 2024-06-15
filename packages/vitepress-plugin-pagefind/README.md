@@ -352,7 +352,7 @@ interface SearchConfig {
      * Search result Displays the date the document was last modified
      * @default false
      */
-    showDate?: boolean
+    showDate?: boolean | ((date: number) => string)
     /**
      * i18n
      */

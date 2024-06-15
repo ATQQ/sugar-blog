@@ -33,6 +33,8 @@ const ignorePublish = computed(() => finalSearchConfig.value?.ignorePublish ?? f
 // 展示日期信息
 const showDateInfo = computed(() => finalSearchConfig.value?.showDate ?? false)
 
+const formatShowDateFn = computed(() => typeof finalSearchConfig.value.showDate === 'function' ? finalSearchConfig.value.showDate : formatShowDate)
+
 // 搜索条数展示
 const headingText = computed(() => {
   return finalSearchConfig.value?.heading
@@ -305,7 +307,7 @@ function handleToggleDetail() {
                     <div class="title">
                       <span class="headings"><i v-if="item.meta.title" class="prefix"># </i>{{ item.meta.title }}</span>
                       <span v-if="showDateInfo && item.meta.date" class="date">
-                        {{ formatShowDate(item.meta.date) }}</span>
+                        {{ formatShowDateFn(item.meta.date) }}</span>
                     </div>
                     <div class="des" v-html="item.meta.description" />
                   </div>

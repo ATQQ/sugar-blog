@@ -358,7 +358,7 @@ interface SearchConfig {
      * 搜索结果是否展示日期
      * @default false
      */
-    showDate?: boolean
+    showDate?: boolean | ((date: number) => string)
     /**
      * 国际化
      */
