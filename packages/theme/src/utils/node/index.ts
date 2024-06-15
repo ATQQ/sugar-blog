@@ -1,36 +1,6 @@
-/* eslint-disable global-require */
-/* eslint-disable prefer-rest-params */
 import { spawn } from 'node:child_process'
 import path from 'node:path'
 import fs from 'node:fs'
-
-export function clearMatterContent(content: string) {
-  let first___: unknown
-  let second___: unknown
-
-  const lines = content.split('\n').reduce<string[]>((pre, line) => {
-    // 移除开头的空白行
-    if (!line.trim() && pre.length === 0) {
-      return pre
-    }
-    if (line.trim() === '---') {
-      if (first___ === undefined) {
-        first___ = pre.length
-      }
-      else if (second___ === undefined) {
-        second___ = pre.length
-      }
-    }
-    pre.push(line)
-    return pre
-  }, [])
-  return (
-    lines
-      // 剔除---之间的内容
-      .slice((second___ as number) || 0)
-      .join('\n')
-  )
-}
 
 export function getDefaultTitle(content: string) {
   const match = content.match(/^(#+)\s+(.+)/m)
@@ -75,20 +45,6 @@ export async function getFileBirthTimeByFs(url: string) {
   catch {
     return undefined
   }
-}
-
-export function getGitTimestamp(file: string) {
-  return new Promise((resolve, reject) => {
-    const child = spawn('git', ['log', '-1', '--pretty="%ci"', file])
-    let output = ''
-    child.stdout.on('data', (d) => {
-      output += String(d)
-    })
-    child.on('close', () => {
-      resolve(+new Date(output))
-    })
-    child.on('error', reject)
-  })
 }
 
 export function getTextSummary(text: string, count = 100) {

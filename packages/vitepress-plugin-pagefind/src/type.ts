@@ -94,3 +94,5 @@ export interface SearchConfig {
    */
   manual?: boolean
 }
+
+export type PagefindConfig = PagefindOption & SearchConfig
