@@ -2,19 +2,13 @@ import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 import glob from 'fast-glob'
-import matter from 'gray-matter'
 import type { SiteConfig } from 'vitepress'
 import { Feed } from 'feed'
-import {
-  formatDate,
-  getDefaultTitle,
-  getFileBirthTime,
-  getTextSummary,
-  normalizePath
-} from './utils'
+import { formatDate, getDefaultTitle, getFileLastModifyTime, getTextSummary, grayMatter, normalizePath } from '@sugarat/theme-shared'
 import type { PostInfo, RSSOptions } from './type'
 
 const imageRegex = /!\[.*?\]\((.*?)\s*(".*?")?\)/
+const htmlCache = new Map<string, string | undefined>()
 export async function getPostsData(
   srcDir: string,
   config: SiteConfig,
@@ -34,7 +28,7 @@ export async function getPostsData(
   const fileContentPromises = files.reduce((prev, f) => {
     prev[f] = {
       contentPromise: fs.promises.readFile(f, 'utf-8'),
-      datePromise: getFileBirthTime(f)
+      datePromise: getFileLastModifyTime(f)
     }
     return prev
   }, {} as Record<string, { contentPromise: Promise<string>; datePromise: Promise<Date | undefined> | undefined | Date }>)
@@ -43,7 +37,8 @@ export async function getPostsData(
     const { contentPromise, datePromise } = fileContentPromises[file]
     const fileContent = await contentPromise
 
-    const { data: frontmatter, excerpt, content } = matter(fileContent, {
+    // TODO：提前的 filter 过滤
+    const { data: frontmatter, excerpt, content } = grayMatter(fileContent, {
       excerpt: true
     })
 
@@ -65,13 +60,25 @@ export async function getPostsData(
       = (frontmatter.cover
       ?? (fileContent.match(imageRegex)?.[1])) || ''
 
-    let html: string | undefined
-    if (ops?.renderHTML === true) {
-      html = mdRender.render(fileContent)
+    // TODO: cache 未生效
+    let html = htmlCache.get(file)
+
+    if (html) {
+      console.log('缓存复用', file)
     }
-    else if (typeof ops?.renderHTML === 'function') {
-      html = await ops.renderHTML(fileContent)
+    if (!html) {
+      if (ops?.renderHTML === true) {
+        html = mdRender.render(fileContent)
+      }
+      else if (typeof ops?.renderHTML === 'function') {
+        html = await ops.renderHTML(fileContent)
+      }
+      // 缓存一下，生成多个时加速
+      if (html) {
+        htmlCache.set(file, html)
+      }
     }
+
     const url
       = config.site.base
       + normalizePath(path.relative(config.srcDir, file))

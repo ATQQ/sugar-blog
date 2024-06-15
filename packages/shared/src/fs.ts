@@ -1,4 +1,6 @@
 import fs from 'node:fs'
+import os from 'node:os'
+import path from 'node:path'
 import { spawn } from 'cross-spawn'
 import matter from 'gray-matter'
 
@@ -85,3 +87,37 @@ export function withBase(base: string, path: string) {
 }
 
 export const grayMatter = matter
+
+export function getTextSummary(text: string, count = 100) {
+  return (
+    text
+      // 首个标题
+      ?.replace(/^#+\s+.*/, '')
+      // 除去标题
+      ?.replace(/#/g, '')
+      // 除去图片
+      ?.replace(/!\[.*?\]\(.*?\)/g, '')
+      // 除去链接
+      ?.replace(/\[(.*?)\]\(.*?\)/g, '$1')
+      // 除去加粗
+      ?.replace(/\*\*(.*?)\*\*/g, '$1')
+      ?.split('\n')
+      ?.filter(v => !!v)
+      ?.join('\n')
+      ?.replace(/>(.*)/, '')
+      ?.replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      ?.trim()
+      ?.slice(0, count)
+  )
+}
+
+const windowsSlashRE = /\\/g
+export const isWindows = os.platform() === 'win32'
+
+export function slash(p: string): string {
+  return p.replace(windowsSlashRE, '/')
+}
+
+export function normalizePath(id: string): string {
+  return path.posix.normalize(isWindows ? slash(id) : id)
+}

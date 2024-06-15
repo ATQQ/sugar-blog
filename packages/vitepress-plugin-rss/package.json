@@ -38,13 +38,11 @@
     "vitepress": "^1"
   },
   "dependencies": {
-    "cross-spawn": "^7.0.3",
+    "@sugarat/theme-shared": "workspace:*",
     "fast-glob": "^3.2.12",
-    "feed": "^4.2.2",
-    "gray-matter": "^4.0.3"
+    "feed": "^4.2.2"
   },
   "devDependencies": {
-    "@types/cross-spawn": "^6.0.6",
     "vite": "^5",
     "vitepress": "1.1.3"
   }
