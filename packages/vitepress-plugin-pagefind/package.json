@@ -40,10 +40,8 @@
     "pagefind": "^1.1.0"
   },
   "dependencies": {
+    "@sugarat/theme-shared": "workspace:*",
     "@vueuse/core": "^9.6.0",
-    "cross-spawn": "^7.0.3",
-    "fast-glob": "^3.2.12",
-    "gray-matter": "^4.0.3",
     "javascript-stringify": "^2.1.0",
     "vue": "^3",
     "vue-command-palette": "0.1.4"

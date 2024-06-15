@@ -1,0 +1,43 @@
+{
+  "name": "@sugarat/theme-shared",
+  "version": "0.0.0",
+  "description": "@sugarat/theme-shared",
+  "author": "sugar",
+  "license": "MIT",
+  "homepage": "https://github.com/ATQQ/sugar-blog/tree/master/packages/shared",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ATQQ/sugar-blog.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ATQQ/sugar-blog/issues"
+  },
+  "keywords": [
+    "shared",
+    "utils",
+    "vitepress"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "npx tsup src/index.ts --dts --watch --format esm,cjs",
+    "build": "npx tsup src/index.ts --dts --format esm,cjs --silent"
+  },
+  "dependencies": {
+    "cross-spawn": "^7.0.3",
+    "gray-matter": "^4.0.3"
+  },
+  "devDependencies": {
+    "@types/cross-spawn": "^6.0.6"
+  }
+}
