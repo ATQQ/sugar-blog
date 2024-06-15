@@ -116,10 +116,16 @@ export interface SearchConfig {
    */
   filter?: (searchItem: SearchItem, idx: number, array: SearchItem[]) => boolean
   /**
+   * Sorts search results array.
+   *
+   * like array.sort()
+   */
+  sort?: (a: SearchItem, b: SearchItem) => number
+  /**
    * Search result Displays the date the document was last modified
    * @default false
    */
-  showDate?: boolean | ((date: number) => string)
+  showDate?: boolean | ((date: number, lang: string) => string)
   /**
    * Set the time zone for parsing date in frontmatter
    * @deprecated

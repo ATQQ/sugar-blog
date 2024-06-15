@@ -279,7 +279,12 @@ export default defineConfig({
 })
 ```
 
+### 其它
 更多可配置的选项请查看下面的完整配置项
+* 搜索结果过滤
+* 搜索结果排序
+* 展示文章最后修改日期
+* 。。。等
 
 ## 完整配置项如下
 详细类型定义见文件 [src/type.ts](./src/type.ts)
@@ -355,10 +360,14 @@ interface SearchConfig {
      */
     filter?: (searchItem: SearchItem, idx: number, array: SearchItem[]) => boolean
     /**
+     * 自定义搜索结果排序
+     */
+    sort?: (a: SearchItem, b: SearchItem) => number
+    /**
      * 搜索结果是否展示日期
      * @default false
      */
-    showDate?: boolean | ((date: number) => string)
+    showDate?: boolean | ((date: number, lang: string) => string)
     /**
      * 国际化
      */

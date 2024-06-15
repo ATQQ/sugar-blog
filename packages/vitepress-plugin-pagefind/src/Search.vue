@@ -154,6 +154,9 @@ watch(
             return ignorePublish.value || v.meta.publish !== false
           })
 
+        if (finalSearchConfig.value.sort) {
+          formattedResults.sort(finalSearchConfig.value.sort)
+        }
         // 调用自定义过滤
         searchResult.value = formattedResults.filter(
           finalSearchConfig.value.filter ?? (() => true)
@@ -307,7 +310,7 @@ function handleToggleDetail() {
                     <div class="title">
                       <span class="headings"><i v-if="item.meta.title" class="prefix"># </i>{{ item.meta.title }}</span>
                       <span v-if="showDateInfo && item.meta.date" class="date">
-                        {{ formatShowDateFn(item.meta.date) }}</span>
+                        {{ formatShowDateFn(item.meta.date, lang) }}</span>
                     </div>
                     <div class="des" v-html="item.meta.description" />
                   </div>

@@ -109,3 +109,4 @@ export function pagefindPlugin(
 export * from './type'
 
 export { chineseSearchOptimize } from './node'
+export { formatShowDate } from './utils/index'

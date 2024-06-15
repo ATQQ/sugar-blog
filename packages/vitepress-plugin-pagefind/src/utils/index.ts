@@ -28,7 +28,7 @@ export function formatDate(d: any, fmt = 'yyyy-MM-dd hh:mm:ss') {
   return fmt
 }
 
-export function formatShowDate(date: Date | string) {
+export function formatShowDate(date: Date | string, lang: string) {
   const source = +new Date(date)
   const now = +new Date()
   const diff = now - source
@@ -37,17 +37,41 @@ export function formatShowDate(date: Date | string) {
   const oneHour = oneMinute * 60
   const oneDay = oneHour * 24
   const oneWeek = oneDay * 7
+
+  const langMap = {
+    'zh-cn': {
+      justNow: '刚刚',
+      secondsAgo: '秒前',
+      minutesAgo: '分钟前',
+      hoursAgo: '小时前',
+      daysAgo: '天前',
+      weeksAgo: '周前'
+    },
+    'en-us': {
+      justNow: ' just now',
+      secondsAgo: ' seconds ago',
+      minutesAgo: ' minutes ago',
+      hoursAgo: ' hours ago',
+      daysAgo: ' days ago',
+      weeksAgo: ' weeks ago'
+    }
+  }
+  const mapValue = langMap[lang.toLowerCase() as 'zh-cn' | 'en-us'] || langMap['en-us']
+
+  if (diff < 10) {
+    return mapValue.justNow
+  }
   if (diff < oneMinute) {
-    return `${Math.floor(diff / oneSeconds)}秒前`
+    return `${Math.floor(diff / oneSeconds)}${mapValue.secondsAgo}`
   }
   if (diff < oneHour) {
-    return `${Math.floor(diff / oneMinute)}分钟前`
+    return `${Math.floor(diff / oneMinute)}${mapValue.minutesAgo}`
   }
   if (diff < oneDay) {
-    return `${Math.floor(diff / oneHour)}小时前`
+    return `${Math.floor(diff / oneHour)}${mapValue.hoursAgo}`
   }
   if (diff < oneWeek) {
-    return `${Math.floor(diff / oneDay)}天前`
+    return `${Math.floor(diff / oneDay)}${mapValue.daysAgo}`
   }
 
   return formatDate(new Date(date), 'yyyy-MM-dd')

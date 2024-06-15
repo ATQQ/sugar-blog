@@ -62,12 +62,12 @@ importers:
       vitepress:
         specifier: 1.2.3
         version: 1.2.3(@algolia/client-search@4.19.1)(@types/node@20.6.3)(async-validator@4.2.5)(axios@0.27.2)(fuse.js@6.6.2)(postcss@8.4.38)(sass@1.76.0)(search-insights@2.13.0)(typescript@5.4.5)
-      vitepress-plugin-pagefind:
-        specifier: workspace:*
-        version: link:../vitepress-plugin-pagefind
       vitepress-plugin-rss:
         specifier: workspace:*
         version: link:../vitepress-plugin-rss
+      vue:
+        specifier: ^3.4.26
+        version: 3.4.27(typescript@5.4.5)
     devDependencies:
       pagefind:
         specifier: ^1.1.0
