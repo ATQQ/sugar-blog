@@ -2,11 +2,8 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
-import os from 'node:os'
 import glob from 'fast-glob'
-import matter from 'gray-matter'
-import pLimit from 'p-limit'
-import { getDefaultTitle, getFileLastModifyTime, getTextSummary, normalizePath } from '@sugarat/theme-shared'
+import { getDefaultTitle, getFileLastModifyTime, getTextSummary, grayMatter, normalizePath } from '@sugarat/theme-shared'
 import type { SiteConfig } from 'vitepress'
 import type { Theme } from '../../composables/config/index'
 import { formatDate } from '../client'
@@ -35,7 +32,7 @@ const defaultTimeZoneOffset = new Date().getTimezoneOffset() / -60
 export async function getArticleMeta(filepath: string, route: string, timeZone = defaultTimeZoneOffset) {
   const fileContent = await fs.promises.readFile(filepath, 'utf-8')
 
-  const { data: frontmatter, excerpt, content } = matter(fileContent, {
+  const { data: frontmatter, excerpt, content } = grayMatter(fileContent, {
     excerpt: true,
   })
 
@@ -89,11 +86,10 @@ export async function getArticles(cfg: Partial<Theme.BlogConfig>, vpConfig: Site
   || process.argv.slice(2)?.[1]
   || '.'
   const files = glob.sync(`${srcDir}/**/*.md`, { ignore: ['node_modules'], absolute: true })
-  const limit = pLimit(+(process.env.P_LIMT_MAX || os.cpus().length))
 
   const metaResults = files.reduce((prev, curr) => {
     const route = getPageRoute(curr, vpConfig.srcDir)
-    const metaPromise = limit(() => getArticleMeta(curr, route, cfg?.timeZone))
+    const metaPromise = getArticleMeta(curr, route, cfg?.timeZone)
 
     // 提前获取，有缓存取缓存
     prev[curr] = {

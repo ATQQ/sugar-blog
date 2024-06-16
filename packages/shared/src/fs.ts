@@ -1,8 +1,12 @@
 import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
+import process from 'node:process'
 import { spawn } from 'cross-spawn'
 import matter from 'gray-matter'
+import pLimit from 'p-limit'
+
+const timeLimit = pLimit(+(process.env.P_LIMT_MAX || os.cpus().length))
 
 /**
  * 获取 markdown 内容中的标题
@@ -22,7 +26,7 @@ export async function getFileLastModifyTime(url: string) {
   if (cached) {
     return cached
   }
-  let date = await getFileLastModifyTimeByGit(url)
+  let date = await timeLimit(() => getFileLastModifyTimeByGit(url))
   if (!date) {
     date = await getFileLastModifyTimeByFs(url)
   }

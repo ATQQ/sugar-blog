@@ -38,6 +38,7 @@
     "gray-matter": "^4.0.3"
   },
   "devDependencies": {
-    "@types/cross-spawn": "^6.0.6"
+    "@types/cross-spawn": "^6.0.6",
+    "p-limit": "4"
   }
 }

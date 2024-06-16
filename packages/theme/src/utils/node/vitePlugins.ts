@@ -48,7 +48,7 @@ export function getVitePlugins(cfg: Partial<Theme.BlogConfig> = {}) {
 
   // 内置支持RSS
   if (cfg?.RSS) {
-    plugins.push(RssPlugin(cfg.RSS))
+    ;[cfg?.RSS].flat().forEach(rssConfig => plugins.push(RssPlugin(rssConfig)))
   }
   return plugins
 }

@@ -62,9 +62,6 @@ importers:
       vitepress:
         specifier: 1.2.3
         version: 1.2.3(@algolia/client-search@4.19.1)(@types/node@20.6.3)(async-validator@4.2.5)(axios@0.27.2)(fuse.js@6.6.2)(postcss@8.4.38)(sass@1.76.0)(search-insights@2.13.0)(typescript@5.4.5)
-      vitepress-plugin-rss:
-        specifier: workspace:*
-        version: link:../vitepress-plugin-rss
       vue:
         specifier: ^3.4.26
         version: 3.4.27(typescript@5.4.5)
@@ -101,6 +98,9 @@ importers:
       '@types/cross-spawn':
         specifier: ^6.0.6
         version: 6.0.6
+      p-limit:
+        specifier: '4'
+        version: 4.0.0
 
   packages/theme:
     dependencies:
@@ -122,15 +122,9 @@ importers:
       '@vueuse/core':
         specifier: ^9.13.0
         version: 9.13.0(vue@3.4.26(typescript@5.4.5))
-      cross-spawn:
-        specifier: ^7.0.3
-        version: 7.0.3
       fast-glob:
         specifier: ^3.3.2
         version: 3.3.2
-      gray-matter:
-        specifier: ^4.0.3
-        version: 4.0.3
       markdown-it-task-checkbox:
         specifier: ^1.0.6
         version: 1.0.6
@@ -168,9 +162,6 @@ importers:
       element-plus:
         specifier: ^2.7.2
         version: 2.7.2(vue@3.4.26(typescript@5.4.5))
-      p-limit:
-        specifier: '4'
-        version: 4.0.0
       pagefind:
         specifier: ^1.1.0
         version: 1.1.0
@@ -214,9 +205,6 @@ importers:
       '@types/cross-spawn':
         specifier: ^6.0.6
         version: 6.0.6
-      p-limit:
-        specifier: ^4.0.0
-        version: 4.0.0
       vite:
         specifier: ^5
         version: 5.2.2(@types/node@20.6.3)(sass@1.76.0)

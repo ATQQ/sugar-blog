@@ -424,7 +424,7 @@ export namespace Theme {
     /**
      * 启用RSS配置
      */
-    RSS?: RSSOptions
+    RSS?: RSSOptions | RSSOptions[]
     /**
      * 首页页脚
      */

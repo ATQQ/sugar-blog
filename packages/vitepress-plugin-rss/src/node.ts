@@ -60,12 +60,8 @@ export async function getPostsData(
       = (frontmatter.cover
       ?? (fileContent.match(imageRegex)?.[1])) || ''
 
-    // TODO: cache 未生效
     let html = htmlCache.get(file)
 
-    if (html) {
-      console.log('缓存复用', file)
-    }
     if (!html) {
       if (ops?.renderHTML === true) {
         html = mdRender.render(fileContent)
