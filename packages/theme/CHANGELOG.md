@@ -4,7 +4,8 @@
 
 ### Patch Changes
 
-- chore: RSS 生成支持配置多个
+- feat: RSS 生成支持配置多个
+- feat: pagefind 配置复用插件配置
 - chore: 分离 shared 方法库
 - Updated dependencies
   - vitepress-plugin-pagefind@0.4.2

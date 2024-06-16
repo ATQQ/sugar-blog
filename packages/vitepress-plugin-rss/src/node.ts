@@ -39,7 +39,6 @@ export async function getPostsData(
     const { contentPromise, datePromise } = fileContentPromises[file]
     const fileContent = await contentPromise
 
-    // TODO：提前的 filter 过滤
     const { data: frontmatter, excerpt, content } = grayMatter(fileContent, {
       excerpt: true
     })
