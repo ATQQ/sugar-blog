@@ -14,7 +14,7 @@ export async function getPostsData(
   config: SiteConfig,
   ops?: Pick<RSSOptions, 'renderExpect' | 'renderHTML'>
 ) {
-  const files = glob.sync(`${srcDir}/**/*.md`, { ignore: ['node_modules'] })
+  const files = glob.sync(`${srcDir}/**/*.md`, { ignore: ['node_modules'], absolute: true })
 
   const { createMarkdownRenderer } = await import('vitepress')
 

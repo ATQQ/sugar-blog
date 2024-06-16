@@ -2,20 +2,18 @@ import path from 'node:path'
 import { existsSync, readFileSync } from 'node:fs'
 import { Buffer } from 'node:buffer'
 import type { SiteConfig } from 'vitepress'
-
 import {
-  chineseSearchOptimize,
   pagefindPlugin
 } from 'vitepress-plugin-pagefind'
 import { RssPlugin } from 'vitepress-plugin-rss'
 import type { PluginOption } from 'vite'
+import { joinPath } from '@sugarat/theme-shared'
 import type { Theme } from '../../composables/config/index'
 import { _require } from './mdPlugins'
 import { themeReloadPlugin } from './hot-reload-plugin'
 import { getArticles } from './theme'
-import { joinPath } from './index'
 
-export function getVitePlugins(cfg?: Partial<Theme.BlogConfig>) {
+export function getVitePlugins(cfg: Partial<Theme.BlogConfig> = {}) {
   const plugins: any[] = []
 
   // const buildEndFn: any[] = []
@@ -149,11 +147,11 @@ export function coverImgTransform() {
   }
 }
 
-export function providePageData(cfg?: Partial<Theme.BlogConfig>) {
+export function providePageData(cfg: Partial<Theme.BlogConfig>) {
   return {
     name: '@sugarat/theme-plugin-provide-page-data',
     async config(config: any) {
-      const pagesData = await getArticles(cfg)
+      const pagesData = await getArticles(cfg, config.vitepress)
       config.vitepress.site.themeConfig.blog.pagesData = pagesData
     },
   } as PluginOption

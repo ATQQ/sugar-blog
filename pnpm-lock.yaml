@@ -113,6 +113,9 @@ importers:
       '@mermaid-js/mermaid-mindmap':
         specifier: ^9.3.0
         version: 9.3.0
+      '@sugarat/theme-shared':
+        specifier: workspace:*
+        version: link:../shared
       '@vue/shared':
         specifier: ^3.4.26
         version: 3.4.26

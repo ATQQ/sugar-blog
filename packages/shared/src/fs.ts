@@ -23,7 +23,7 @@ export async function getFileLastModifyTime(url: string) {
     return cached
   }
   let date = await getFileLastModifyTimeByGit(url)
-  if (date) {
+  if (!date) {
     date = await getFileLastModifyTimeByFs(url)
   }
   if (date) {

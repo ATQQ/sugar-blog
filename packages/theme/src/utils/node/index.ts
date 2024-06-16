@@ -1,95 +1,11 @@
-import { spawn } from 'node:child_process'
 import path from 'node:path'
-import fs from 'node:fs'
-
-export function getDefaultTitle(content: string) {
-  const match = content.match(/^(#+)\s+(.+)/m)
-  return match?.[2] || ''
-}
-
-const cache = new Map<string, Date | undefined>()
-export function getFileBirthTime(url: string): Promise<Date | undefined> | Date {
-  const cached = cache.get(url)
-  if (cached) {
-    return cached
-  }
-
-  return new Promise((resolve) => {
-    // 使用异步回调
-    const child = spawn('git', ['log', '-1', '--pretty="%ai"', url])
-    let output = ''
-    child.stdout.on('data', d => (output += String(d)))
-    child.on('close', async () => {
-      let date: Date | undefined
-      if (output.trim()) {
-        date = new Date(output)
-      }
-      else {
-        date = await getFileBirthTimeByFs(url)
-      }
-      cache.set(url, date)
-      resolve(date)
-    })
-    child.on('error', async () => {
-      const fsDate = await getFileBirthTimeByFs(url)
-      resolve(fsDate)
-    })
-  })
-}
-
-export async function getFileBirthTimeByFs(url: string) {
-  try {
-    const fsStat = await fs.promises.stat(url)
-    return fsStat.birthtime
-  }
-  catch {
-    return undefined
-  }
-}
-
-export function getTextSummary(text: string, count = 100) {
-  return (
-    text
-      // 首个标题
-      ?.replace(/^#+\s+.*/, '')
-      // 除去标题
-      ?.replace(/#/g, '')
-      // 除去图片
-      ?.replace(/!\[.*?\]\(.*?\)/g, '')
-      // 除去链接
-      ?.replace(/\[(.*?)\]\(.*?\)/g, '$1')
-      // 除去加粗
-      ?.replace(/\*\*(.*?)\*\*/g, '$1')
-      ?.split('\n')
-      ?.filter(v => !!v)
-      ?.join('\n')
-      ?.replace(/>(.*)/, '')
-      ?.replace(/</g, '&lt;').replace(/>/g, '&gt;')
-      ?.trim()
-      ?.slice(0, count)
-  )
-}
+import { joinPath } from '@sugarat/theme-shared'
 
 export function aliasObjectToArray(obj: Record<string, string>) {
   return Object.entries(obj).map(([find, replacement]) => ({
     find,
     replacement
   }))
-}
-
-export const EXTERNAL_URL_RE = /^[a-z]+:/i
-
-/**
- * Join two paths by resolving the slash collision.
- */
-export function joinPath(base: string, path: string): string {
-  return `${base}${path}`.replace(/\/+/g, '/')
-}
-
-export function withBase(base: string, path: string) {
-  return EXTERNAL_URL_RE.test(path) || path.startsWith('.')
-    ? path
-    : joinPath(base, path)
 }
 
 function isBase64ImageURL(url: string) {

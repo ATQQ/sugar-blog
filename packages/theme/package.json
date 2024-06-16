@@ -49,6 +49,7 @@
     "@giscus/vue": "^2.4.0",
     "@mdit-vue/shared": "^0.12.1",
     "@mermaid-js/mermaid-mindmap": "^9.3.0",
+    "@sugarat/theme-shared": "workspace:*",
     "@vue/shared": "^3.4.26",
     "@vueuse/core": "^9.13.0",
     "cross-spawn": "^7.0.3",
@@ -63,6 +64,7 @@
     "vitepress-plugin-pagefind": "workspace:*",
     "vitepress-plugin-rss": "workspace:*",
     "vitepress-plugin-tabs": "0.2.0"
+
   },
   "devDependencies": {
     "@element-plus/icons-vue": "^2.3.1",
