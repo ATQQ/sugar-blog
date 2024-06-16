@@ -192,7 +192,9 @@ const blogTheme = getThemeConfig({
     random: true,
     limit: 6,
   },
-  // search: false,
+  search: {
+    showDate: true,
+  },
   recommend: {
     showSelf: true,
     nextText: '下一页',

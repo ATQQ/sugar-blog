@@ -62,7 +62,6 @@
     "vitepress-plugin-pagefind": "workspace:*",
     "vitepress-plugin-rss": "workspace:*",
     "vitepress-plugin-tabs": "0.2.0"
-
   },
   "devDependencies": {
     "@element-plus/icons-vue": "^2.3.1",

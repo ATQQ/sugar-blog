@@ -1,5 +1,11 @@
 # vitepress-plugin-rss
 
+## 0.2.7
+
+### Patch Changes
+
+- chore: render html and filter perf
+
 ## 0.2.6
 
 ### Patch Changes
