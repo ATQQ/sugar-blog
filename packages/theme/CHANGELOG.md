@@ -1,5 +1,16 @@
 # @sugarat/theme
 
+## 0.4.4
+
+### Patch Changes
+
+- feat: RSS 生成支持配置多个
+- feat: pagefind 配置复用插件配置
+- chore: 分离 shared 方法库
+- Updated dependencies
+  - vitepress-plugin-pagefind@0.4.2
+  - vitepress-plugin-rss@0.2.7
+
 ## 0.4.3
 
 ### Patch Changes

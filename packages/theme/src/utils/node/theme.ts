@@ -2,13 +2,12 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
-import os from 'node:os'
 import glob from 'fast-glob'
-import matter from 'gray-matter'
-import pLimit from 'p-limit'
+import { getDefaultTitle, getFileLastModifyTime, getTextSummary, grayMatter, normalizePath } from '@sugarat/theme-shared'
+import type { SiteConfig } from 'vitepress'
 import type { Theme } from '../../composables/config/index'
 import { formatDate } from '../client'
-import { getDefaultTitle, getFileBirthTime, getFirstImagURLFromMD, getTextSummary } from './index'
+import { getFirstImagURLFromMD } from './index'
 
 export function patchDefaultThemeSideBar(cfg?: Partial<Theme.BlogConfig>) {
   return cfg?.blog !== false && cfg?.recommend !== false
@@ -24,29 +23,8 @@ export function patchDefaultThemeSideBar(cfg?: Partial<Theme.BlogConfig>) {
 }
 
 export function getPageRoute(filepath: string, srcDir: string) {
-  let route = filepath.replace('.md', '')
-  // 去除 srcDir 处理目录名
-  // TODO：优化 路径处理，同VitePress 内部一致
-  if (route.startsWith('./')) {
-    route = route.replace(
-      new RegExp(
-        `^\\.\\/${path
-          .join(srcDir, '/')
-          .replace(new RegExp(`\\${path.sep}`, 'g'), '/')}`
-      ),
-      ''
-    )
-  }
-  else {
-    route = route.replace(
-      new RegExp(
-        `^${path
-          .join(srcDir, '/')
-          .replace(new RegExp(`\\${path.sep}`, 'g'), '/')}`
-      ),
-      ''
-    )
-  }
+  const route = normalizePath(path.relative(srcDir, filepath))
+    .replace(/\.md$/, '')
   return `/${route}`
 }
 
@@ -54,7 +32,7 @@ const defaultTimeZoneOffset = new Date().getTimezoneOffset() / -60
 export async function getArticleMeta(filepath: string, route: string, timeZone = defaultTimeZoneOffset) {
   const fileContent = await fs.promises.readFile(filepath, 'utf-8')
 
-  const { data: frontmatter, excerpt, content } = matter(fileContent, {
+  const { data: frontmatter, excerpt, content } = grayMatter(fileContent, {
     excerpt: true,
   })
 
@@ -68,7 +46,7 @@ export async function getArticleMeta(filepath: string, route: string, timeZone =
   const date = await (
     (meta.date
        && new Date(`${new Date(meta.date).toUTCString()}+${timeZone}`))
-     || getFileBirthTime(filepath)
+     || getFileLastModifyTime(filepath)
   )
   // 无法获取时兜底当前时间
   meta.date = formatDate(date || new Date())
@@ -102,14 +80,16 @@ export async function getArticleMeta(filepath: string, route: string, timeZone =
   }
   return meta as Theme.PageMeta
 }
-export async function getArticles(cfg?: Partial<Theme.BlogConfig>) {
-  const srcDir = cfg?.srcDir || process.argv.slice(2)?.[1] || '.'
-  const files = glob.sync(`${srcDir}/**/*.md`, { ignore: ['node_modules'] })
-  const limit = pLimit(+(process.env.P_LIMT_MAX || os.cpus().length))
+export async function getArticles(cfg: Partial<Theme.BlogConfig>, vpConfig: SiteConfig) {
+  const srcDir
+  = cfg?.srcDir || vpConfig.srcDir.replace(vpConfig.root, '').replace(/^\//, '')
+  || process.argv.slice(2)?.[1]
+  || '.'
+  const files = glob.sync(`${srcDir}/**/*.md`, { ignore: ['node_modules'], absolute: true })
 
   const metaResults = files.reduce((prev, curr) => {
-    const route = getPageRoute(curr, srcDir)
-    const metaPromise = limit(() => getArticleMeta(curr, route, cfg?.timeZone))
+    const route = getPageRoute(curr, vpConfig.srcDir)
+    const metaPromise = getArticleMeta(curr, route, cfg?.timeZone)
 
     // 提前获取，有缓存取缓存
     prev[curr] = {

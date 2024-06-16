@@ -65,5 +65,4 @@ export function RssPlugin(rssOptions: RSSOptions): any {
 }
 
 export { genFeed }
-export * from './utils/index'
 export * from './type'

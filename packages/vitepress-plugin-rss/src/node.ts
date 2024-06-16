@@ -2,25 +2,21 @@ import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 import glob from 'fast-glob'
-import matter from 'gray-matter'
 import type { SiteConfig } from 'vitepress'
 import { Feed } from 'feed'
-import {
-  formatDate,
-  getDefaultTitle,
-  getFileBirthTime,
-  getTextSummary,
-  normalizePath
-} from './utils'
+import { formatDate, getDefaultTitle, getFileLastModifyTime, getTextSummary, grayMatter, normalizePath } from '@sugarat/theme-shared'
 import type { PostInfo, RSSOptions } from './type'
 
 const imageRegex = /!\[.*?\]\((.*?)\s*(".*?")?\)/
+const htmlCache = new Map<string, string | undefined>()
 export async function getPostsData(
   srcDir: string,
   config: SiteConfig,
-  ops?: Pick<RSSOptions, 'renderExpect' | 'renderHTML'>
+  ops: RSSOptions
 ) {
-  const files = glob.sync(`${srcDir}/**/*.md`, { ignore: ['node_modules'] })
+  const { ignoreHome = true, ignorePublish = false, renderHTML = true } = ops
+
+  const files = glob.sync(`${srcDir}/**/*.md`, { ignore: ['node_modules'], absolute: true })
 
   const { createMarkdownRenderer } = await import('vitepress')
 
@@ -30,11 +26,11 @@ export async function getPostsData(
     config.site.base,
     config.logger
   )
-  const posts: PostInfo[] = []
+  let posts: PostInfo[] = []
   const fileContentPromises = files.reduce((prev, f) => {
     prev[f] = {
       contentPromise: fs.promises.readFile(f, 'utf-8'),
-      datePromise: getFileBirthTime(f)
+      datePromise: getFileLastModifyTime(f)
     }
     return prev
   }, {} as Record<string, { contentPromise: Promise<string>; datePromise: Promise<Date | undefined> | undefined | Date }>)
@@ -43,7 +39,7 @@ export async function getPostsData(
     const { contentPromise, datePromise } = fileContentPromises[file]
     const fileContent = await contentPromise
 
-    const { data: frontmatter, excerpt, content } = matter(fileContent, {
+    const { data: frontmatter, excerpt, content } = grayMatter(fileContent, {
       excerpt: true
     })
 
@@ -65,13 +61,6 @@ export async function getPostsData(
       = (frontmatter.cover
       ?? (fileContent.match(imageRegex)?.[1])) || ''
 
-    let html: string | undefined
-    if (ops?.renderHTML === true) {
-      html = mdRender.render(fileContent)
-    }
-    else if (typeof ops?.renderHTML === 'function') {
-      html = await ops.renderHTML(fileContent)
-    }
     const url
       = config.site.base
       + normalizePath(path.relative(config.srcDir, file))
@@ -81,13 +70,55 @@ export async function getPostsData(
     posts.push({
       filepath: file,
       fileContent,
-      html,
       description: frontmatter.description,
       date: frontmatter.date,
       title: frontmatter.title,
       url,
       frontmatter
     })
+  }
+
+  posts = posts.filter((p) => {
+    // 忽略 layout:home
+    if (p.frontmatter.layout === 'home' && ignoreHome) {
+      return false
+    }
+    // 跳过未发布的文章
+    if (p.frontmatter.publish === false && !ignorePublish)
+      return false
+
+    return true
+  })
+  if (ops?.filter) {
+    posts = posts.filter(ops.filter)
+  }
+
+  // 按日期排序
+  posts.sort(
+    (a, b) => +new Date(b.date as string) - +new Date(a.date as string)
+  )
+
+  // 限制数量
+  if (undefined !== ops?.limit && ops?.limit > 0) {
+    posts.splice(ops.limit)
+  }
+
+  // render html
+  for (const post of posts) {
+    const { fileContent, filepath } = post
+    if (!htmlCache.has(filepath)) {
+      let html
+      if (renderHTML === true) {
+        html = mdRender.render(fileContent)
+      }
+      else if (typeof renderHTML === 'function') {
+        html = await renderHTML(fileContent)
+      }
+      // 缓存一下，避免生成多个时重复 render
+      if (html) {
+        htmlCache.set(filepath, html)
+      }
+    }
   }
 
   return posts
@@ -102,9 +133,10 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
     || process.argv.slice(2)?.[1]
     || '.'
 
-  const { baseUrl, filename, ignoreHome = true, filter: filterPost = () => true, ignorePublish = false } = rssOptions
+  const { baseUrl, filename } = rssOptions
 
-  const { renderHTML = true, ...restOps } = rssOptions
+  // eslint-disable-next-line unused-imports/no-unused-vars
+  const { renderHTML, ...restOps } = rssOptions
   const feed = new Feed({
     id: rssOptions.baseUrl,
     link: rssOptions.baseUrl,
@@ -112,36 +144,11 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
   })
 
   // 获取所有文章
-  const posts = (
-    await getPostsData(srcDir, config, {
-      renderExpect: rssOptions.renderExpect,
-      renderHTML
-    })
-  ).filter((p) => {
-    // 忽略 layout:home
-    if (p.frontmatter.layout === 'home' && ignoreHome) {
-      return false
-    }
-    // 跳过未发布的文章
-    if (p.frontmatter.publish === false && !ignorePublish)
-      return false
-
-    return true
-  })
-  // 自定义过滤逻辑
-    .filter(filterPost)
-
-  // 按日期排序
-  posts.sort(
-    (a, b) => +new Date(b.date as string) - +new Date(a.date as string)
-  )
-  if (undefined !== rssOptions?.limit && rssOptions?.limit > 0) {
-    posts.splice(rssOptions.limit)
-  }
+  const posts
+    = await getPostsData(srcDir, config, rssOptions)
 
   for (const post of posts) {
-    const { title, description, date, frontmatter, url, html } = post
-
+    const { title, description, date, frontmatter, url } = post
     const author = frontmatter.author || rssOptions.author?.name
     const authorInfo = rssOptions.authors?.find(v => v.name === author)
     // 最后的文章链接
@@ -151,7 +158,7 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
       id: link,
       link,
       description,
-      content: html,
+      content: htmlCache.get(post.filepath),
       author: [
         {
           name: author,

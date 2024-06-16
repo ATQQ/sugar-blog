@@ -1,3 +1,50 @@
+export interface PagefindResult {
+  url: string
+  content: string
+  word_count: number
+  filters: Filters
+  meta: Meta
+  anchors: Anchor[]
+  weighted_locations: WeightedLocation[]
+  locations: number[]
+  raw_content: string
+  raw_url: string
+  excerpt: string
+  sub_results: SubResult[]
+}
+
+interface SubResult {
+  title: string
+  url: string
+  anchor: Anchor
+  weighted_locations: WeightedLocation[]
+  locations: number[]
+  excerpt: string
+}
+
+interface WeightedLocation {
+  weight: number
+  balanced_score: number
+  location: number
+}
+
+interface Anchor {
+  element: string
+  id: string
+  text: string
+  location: number
+}
+
+interface Meta {
+  image_alt: string
+  title: string
+  image: string
+  base64: string
+}
+
+interface Filters {
+}
+
 export interface PagefindOption {
   /**
    * Pass extra element selectors that Pagefind should ignore when indexing
@@ -22,6 +69,7 @@ export interface PagefindOption {
 export interface SearchItem {
   route: string
   meta: Record<string, any>
+  result: PagefindResult
 }
 export interface SearchConfig {
   /**
@@ -68,10 +116,16 @@ export interface SearchConfig {
    */
   filter?: (searchItem: SearchItem, idx: number, array: SearchItem[]) => boolean
   /**
+   * Sorts search results array.
+   *
+   * like array.sort()
+   */
+  sort?: (a: SearchItem, b: SearchItem) => number
+  /**
    * Search result Displays the date the document was last modified
    * @default false
    */
-  showDate?: boolean
+  showDate?: boolean | ((date: number, lang: string) => string)
   /**
    * Set the time zone for parsing date in frontmatter
    * @deprecated
@@ -94,3 +148,5 @@ export interface SearchConfig {
    */
   manual?: boolean
 }
+
+export type PagefindConfig = PagefindOption & SearchConfig

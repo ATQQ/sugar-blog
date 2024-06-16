@@ -275,7 +275,13 @@ export default defineConfig({
 })
 ```
 
-See options below for more details
+### Others
+For more configurable options please see the full configuration below
+* Filtering of search results
+* Sort search results
+* Display the last modified date of the article
+* Display the last modified date of the article. etc.
+
 ## Options
 TS DTS see [src/type.ts](./src/type.ts)
 
@@ -349,10 +355,16 @@ interface SearchConfig {
      */
     filter?: (searchItem: SearchItem, idx: number, array: SearchItem[]) => boolean
     /**
+     * Sorts search results array.
+     *
+     * like array.sort()
+     */
+    sort?: (a: SearchItem, b: SearchItem) => number
+    /**
      * Search result Displays the date the document was last modified
      * @default false
      */
-    showDate?: boolean
+    showDate?: boolean | ((date: number, lang: string) => string)
     /**
      * i18n
      */

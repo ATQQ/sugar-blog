@@ -1,13 +1,11 @@
 import process from 'node:process'
 import { getThemeConfig } from '@sugarat/theme/node'
 import type { Theme } from '@sugarat/theme'
-import type { RSSOptions } from 'vitepress-plugin-rss'
-import { RssPlugin } from 'vitepress-plugin-rss'
 import { defineConfig } from 'vitepress'
 
 const baseUrl = 'https://sugarat.top'
 const weekly = `${baseUrl}/weekly`
-const RSSWeekly: RSSOptions = {
+const RSSWeekly: Theme.RSSOptions = {
   title: '视野修炼 - 技术周刊',
   baseUrl,
   description: '每周会精选出一些 优质&有趣 的内容做推送（大前端为主），包含但不限于 优质文章，开源库，工具网站，有意思的知识',
@@ -58,7 +56,7 @@ const blogTheme = getThemeConfig({
     ]
   },
   themeColor: 'el-blue',
-  RSS,
+  RSS: [RSS, RSSWeekly],
   author: '粥里有勺糖',
   comment: {
     repo: 'ATQQ/sugar-blog',
@@ -194,7 +192,9 @@ const blogTheme = getThemeConfig({
     random: true,
     limit: 6,
   },
-  // search: false,
+  search: {
+    showDate: true,
+  },
   recommend: {
     showSelf: true,
     nextText: '下一页',
@@ -288,10 +288,7 @@ export default defineConfig({
     server: {
       port: 4000,
       host: '0.0.0.0'
-    },
-    plugins: [
-      RssPlugin(RSSWeekly)
-    ]
+    }
   },
   vue: {
     template: {

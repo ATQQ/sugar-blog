@@ -5,6 +5,7 @@ import type { RSSOptions } from 'vitepress-plugin-rss'
 import type { Mapping, Repo } from '@giscus/vue'
 import type { Options as Oml2dOptions } from 'oh-my-live2d'
 import type { Ref } from 'vue'
+import type { PagefindConfig } from 'vitepress-plugin-pagefind'
 
 type RSSPluginOptions = RSSOptions
 
@@ -347,19 +348,8 @@ export namespace Theme {
     top?: number
   }
   export type SearchConfig =
-    | boolean
-    | 'pagefind'
-    | {
-      btnPlaceholder?: string
-      placeholder?: string
-      emptyText?: string
-      /**
-       * @example
-       * 'Total: {{searchResult}} search results.'
-       */
-      heading?: string
-      mode?: boolean | 'pagefind'
-    }
+    | false
+    | PagefindConfig
 
   export interface UserWorks {
     title: string
@@ -434,7 +424,7 @@ export namespace Theme {
     /**
      * 启用RSS配置
      */
-    RSS?: RSSOptions
+    RSS?: RSSOptions | RSSOptions[]
     /**
      * 首页页脚
      */

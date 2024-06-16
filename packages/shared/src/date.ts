@@ -14,7 +14,7 @@ export function formatDate(d: any, fmt = 'yyyy-MM-dd hh:mm:ss') {
   if (/(y+)/.test(fmt)) {
     fmt = fmt.replace(
       RegExp.$1,
-      `${d.getFullYear()}`.substr(4 - RegExp.$1.length)
+        `${d.getFullYear()}`.substr(4 - RegExp.$1.length)
     )
   }
   // eslint-disable-next-line no-restricted-syntax
@@ -28,7 +28,7 @@ export function formatDate(d: any, fmt = 'yyyy-MM-dd hh:mm:ss') {
   return fmt
 }
 
-export function formatShowDate(date: Date | string, lang: string) {
+export function formatShowDate(date: Date | string) {
   const source = +new Date(date)
   const now = +new Date()
   const diff = now - source
@@ -37,41 +37,17 @@ export function formatShowDate(date: Date | string, lang: string) {
   const oneHour = oneMinute * 60
   const oneDay = oneHour * 24
   const oneWeek = oneDay * 7
-
-  const langMap = {
-    'zh-cn': {
-      justNow: '刚刚',
-      secondsAgo: '秒前',
-      minutesAgo: '分钟前',
-      hoursAgo: '小时前',
-      daysAgo: '天前',
-      weeksAgo: '周前'
-    },
-    'en-us': {
-      justNow: ' just now',
-      secondsAgo: ' seconds ago',
-      minutesAgo: ' minutes ago',
-      hoursAgo: ' hours ago',
-      daysAgo: ' days ago',
-      weeksAgo: ' weeks ago'
-    }
-  }
-  const mapValue = langMap[lang.toLowerCase() as 'zh-cn' | 'en-us'] || langMap['en-us']
-
-  if (diff < 10) {
-    return mapValue.justNow
-  }
   if (diff < oneMinute) {
-    return `${Math.floor(diff / oneSeconds)}${mapValue.secondsAgo}`
+    return `${Math.floor(diff / oneSeconds)}秒前`
   }
   if (diff < oneHour) {
-    return `${Math.floor(diff / oneMinute)}${mapValue.minutesAgo}`
+    return `${Math.floor(diff / oneMinute)}分钟前`
   }
   if (diff < oneDay) {
-    return `${Math.floor(diff / oneHour)}${mapValue.hoursAgo}`
+    return `${Math.floor(diff / oneHour)}小时前`
   }
   if (diff < oneWeek) {
-    return `${Math.floor(diff / oneDay)}${mapValue.daysAgo}`
+    return `${Math.floor(diff / oneDay)}天前`
   }
 
   return formatDate(new Date(date), 'yyyy-MM-dd')

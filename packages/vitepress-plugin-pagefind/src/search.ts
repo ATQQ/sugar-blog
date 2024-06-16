@@ -138,6 +138,7 @@ export function formatPagefindResult(result: PagefindResult) {
       ...otherMeta,
       title,
       description,
-    }
+    },
+    result
   }
 }

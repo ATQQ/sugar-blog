@@ -1,5 +1,16 @@
 # vitepress-plugin-pagefind
 
+## 0.4.2
+
+### Patch Changes
+
+- feat: support sort function
+- chore: Built-in `zh-cn` and `en-us` date formatting display
+- chore: meta include file last update time(date)
+- Updated dependencies
+  - @sugarat/theme-shared@0.0.1
+- remove unused dependencies
+
 ## 0.4.1
 
 ### Patch Changes

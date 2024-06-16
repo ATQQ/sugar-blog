@@ -1,11 +1,11 @@
+import { Buffer } from 'node:buffer'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { Buffer } from 'node:buffer'
 import type { PluginOption } from 'vite'
 import type { HeadConfig, SiteConfig } from 'vitepress'
 import { stringify } from 'javascript-stringify'
-import matter from 'gray-matter'
-import { buildEnd, getFileBirthTime, getPagefindHead } from './node'
+import { getFileLastModifyTime, grayMatter } from '@sugarat/theme-shared'
+import { buildEnd, getPagefindHead } from './node'
 import type { PagefindOption, SearchConfig } from './type'
 
 function isESM() {
@@ -76,11 +76,11 @@ export function pagefindPlugin(
         return resolvedVirtualModuleId
       }
     },
-    // 文章数据
     load(this, id) {
       if (id !== resolvedVirtualModuleId)
         return
 
+      // 动态模块处理
       return `
       import { ref } from 'vue'
       export const searchConfig = ${stringify(searchConfig)}
@@ -92,13 +92,12 @@ export function pagefindPlugin(
       if (id.endsWith('theme-default/Layout.vue')) {
         return code.replace('<VPContent>', '<VPContent data-pagefind-body>')
       }
+      // 添加 frontmatter 元数据
       if (id.endsWith('.md') && !searchConfig.manual) {
-        const { data: frontmatter } = matter(code, {
+        const { data: frontmatter } = grayMatter(code, {
           excerpt: true
         })
-        if (searchConfig?.showDate && !frontmatter.date) {
-          frontmatter.date = await getFileBirthTime(id)
-        }
+        frontmatter.date = +new Date(frontmatter.date || await getFileLastModifyTime(id))
         return `${code}\n\n<div style="display:none" data-pagefind-meta="${meta2string(frontmatter)}"></div>`
       }
       return code
@@ -110,3 +109,4 @@ export function pagefindPlugin(
 export * from './type'
 
 export { chineseSearchOptimize } from './node'
+export { formatShowDate } from './utils/index'

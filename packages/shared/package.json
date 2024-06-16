@@ -1,10 +1,10 @@
 {
-  "name": "vitepress-plugin-pagefind",
-  "version": "0.4.2",
-  "description": "vitepress plugin, Offline full-text search based on pagefind implementation.",
+  "name": "@sugarat/theme-shared",
+  "version": "0.0.1",
+  "description": "@sugarat/theme-shared",
   "author": "sugar",
   "license": "MIT",
-  "homepage": "https://github.com/ATQQ/sugar-blog/tree/master/packages/vitepress-plugin-pagefind",
+  "homepage": "https://github.com/ATQQ/sugar-blog/tree/master/packages/shared",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ATQQ/sugar-blog.git"
@@ -13,42 +13,32 @@
     "url": "https://github.com/ATQQ/sugar-blog/issues"
   },
   "keywords": [
-    "vitepress",
-    "search",
-    "offline",
-    "pagefind"
+    "shared",
+    "utils",
+    "vitepress"
   ],
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
-    },
-    "./Search.vue": "./src/Search.vue"
+    }
   },
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "scripts": {
     "dev": "npx tsup src/index.ts --dts --watch --format esm,cjs",
     "build": "npx tsup src/index.ts --dts --format esm,cjs --silent"
   },
-  "peerDependencies": {
-    "pagefind": "^1.1.0"
-  },
   "dependencies": {
-    "@sugarat/theme-shared": "workspace:*",
-    "@vueuse/core": "^9.6.0",
-    "javascript-stringify": "^2.1.0",
-    "vue": "^3",
-    "vue-command-palette": "0.1.4"
+    "cross-spawn": "^7.0.3",
+    "gray-matter": "^4.0.3"
   },
   "devDependencies": {
     "@types/cross-spawn": "^6.0.6",
-    "vite": "^5",
-    "vitepress": "1.1.3"
+    "p-limit": "4"
   }
 }

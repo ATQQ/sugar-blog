@@ -332,20 +332,19 @@ export default defineConfig({
 
 ### 全文搜索 - pagefind
 
-开启全文搜索（基于 [pagefind](https://pagefind.app/) 实现）
+开启全文搜索（基于 [pagefind](https://pagefind.app/) 实现），主题默认开启
 
 :::code-group
 
-```ts [demo1]
+```ts [① 关闭]
 const blogTheme = getThemeConfig({
-  search: 'pagefind'
+  search: false
 })
 ```
 
-```ts [demo2]
+```ts [② 进一步配置]
 const blogTheme = getThemeConfig({
   search: {
-    mode: 'pagefind',
     btnPlaceholder: 'Search',
     placeholder: 'Search Docs',
     emptyText: 'No results found',
@@ -354,6 +353,111 @@ const blogTheme = getThemeConfig({
 })
 ```
 
+```ts [type]
+type PagefindConfig = PagefindOption & SearchConfig
+
+type SearchConfig =
+    | false
+    | PagefindConfig
+
+interface SearchConfig {
+  /**
+   * @default
+   * 'Search'
+   */
+  btnPlaceholder?: string
+  /**
+   * @default
+   * 'Search Docs'
+   */
+  placeholder?: string
+  /**
+   * @default
+   * 'No results found.'
+   */
+  emptyText?: string
+  /**
+   * @default
+   * 'Total: {{searchResult}} search results.'
+   */
+  heading?: string
+
+  /**
+   * Automatically reloads the page when the page language changes.
+   *
+   * The purpose is to reload the index file for the target language.
+   * @default true
+   */
+  langReload?: boolean
+  /**
+   * For some special languages.
+   * Customize the conversion of user input
+   * @see https://pagefind.app/docs/multilingual/#specialized-languages
+   */
+  customSearchQuery?: (input: string) => string
+  /**
+   * @default false
+   * @deprecated
+   */
+  resultOptimization?: boolean
+  /**
+   * Customize the filtering schema
+   */
+  filter?: (searchItem: SearchItem, idx: number, array: SearchItem[]) => boolean
+  /**
+   * Search result Displays the date the document was last modified
+   * @default false
+   */
+  showDate?: boolean
+  /**
+   * Set the time zone for parsing date in frontmatter
+   * @deprecated
+   */
+  timeZone?: number
+  /**
+   * i18n
+   */
+  locales?: Record<string, Omit<SearchConfig, 'locales'>>
+  /**
+   * ignore publish frontmatter
+   * @default false
+   */
+  ignorePublish?: boolean
+
+  /**
+   * Manually control index generation instructions and resource loading scripts
+   * @see README.md Example7
+   * @default false
+   */
+  manual?: boolean
+}
+
+interface PagefindOption {
+  /**
+   * Pass extra element selectors that Pagefind should ignore when indexing
+   * @see https://pagefind.app/docs/config-options/#exclude-selectors
+   * @default
+   * ['div.aside' ,'a.header-anchor']
+   */
+  excludeSelector?: string[]
+  /**
+   * Ignores any detected languages and creates a single index for the entire site as the provided language.
+   * Expects an ISO 639-1 code, such as en or zh.
+   * @see https://pagefind.app/docs/config-options/#force-language
+   */
+  forceLanguage?: string
+  /**
+   * You can customize the instructions to generate the index, which is useful when you customize your version of pagefind
+   * @see https://pagefind.app/docs/config-options/
+   */
+  indexingCommand?: string
+}
+
+interface SearchItem {
+  route: string
+  meta: Record<string, any>
+}
+```
 :::
 
 :::tip
@@ -367,42 +471,7 @@ const blogTheme = getThemeConfig({
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY3OTEyMzQ0NDAwOA==679123444008)
 
-如果需要自定义更多的内容可以使用独立的插件 [vitepress-plugin-pagefind](https://github.com/ATQQ/sugar-blog/blob/master/packages/vitepress-plugin-pagefind/README-zh.md)
-
-:::code-group
-
-```sh [①: 安装插件]
-pnpm add vitepress-plugin-pagefind
-```
-
-```ts [②: 引入插件]
-// 在 `.vitepress/config.ts` 引入
-import { defineConfig } from 'vitepress'
-import { chineseSearchOptimize, pagefindPlugin } from 'vitepress-plugin-pagefind'
-import { getThemeConfig } from '@sugarat/theme/node'
-
-const blogTheme = getThemeConfig({
-  // 关闭主题内置
-  search: false
-})
-
-export default defineConfig({
-  extends: blogTheme,
-  lang: 'zh-cn',
-  vite: {
-    // 使用插件加载
-    plugins: [pagefindPlugin({
-      customSearchQuery: chineseSearchOptimize,
-      btnPlaceholder: '搜索',
-      placeholder: '搜索文档',
-      emptyText: '空空如也',
-      heading: '共: {{searchResult}} 条结果'
-    })],
-  },
-})
-```
-
-:::
+详细配置和使用方法可以见插件文档：[vitepress-plugin-pagefind](https://github.com/ATQQ/sugar-blog/blob/master/packages/vitepress-plugin-pagefind/README-zh.md)
 
 ### 全文搜索 - algolia
 
