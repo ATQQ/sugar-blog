@@ -1,7 +1,7 @@
 import path from 'node:path'
 import { existsSync, readFileSync } from 'node:fs'
 import { Buffer } from 'node:buffer'
-import type { SiteConfig } from 'vitepress'
+import type { HeadConfig, SiteConfig } from 'vitepress'
 import {
   pagefindPlugin
 } from 'vitepress-plugin-pagefind'
@@ -16,13 +16,13 @@ import { getArticles } from './theme'
 export function getVitePlugins(cfg: Partial<Theme.BlogConfig> = {}) {
   const plugins: any[] = []
 
-  // const buildEndFn: any[] = []
-  // Build完后运行的一系列列方法，执行自定义的 buildEnd 钩子
-  // plugins.push(inlineBuildEndPlugin(buildEndFn))
-
   // 处理cover image的路径（暂只支持自动识别的文章首图）
   plugins.push(coverImgTransform())
 
+  // 处理自定义主题色
+  if (cfg.themeColor) {
+    plugins.push(setThemeScript(cfg.themeColor))
+  }
   // 自动重载首页
   plugins.push(themeReloadPlugin())
 
@@ -155,4 +155,36 @@ export function providePageData(cfg: Partial<Theme.BlogConfig>) {
       config.vitepress.site.themeConfig.blog.pagesData = pagesData
     },
   } as PluginOption
+}
+
+export function setThemeScript(
+  themeColor: Theme.ThemeColor
+) {
+  let resolveConfig: any
+  const pluginOps: PluginOption = {
+    name: '@sugarat/theme-plugin-theme-color-script',
+    enforce: 'pre',
+    configResolved(config: any) {
+      if (resolveConfig) {
+        return
+      }
+      resolveConfig = config
+
+      const vitepressConfig: SiteConfig = config.vitepress
+      if (!vitepressConfig) {
+        return
+      }
+      // 通过 head 添加额外的脚本注入
+      const selfTransformHead = vitepressConfig.transformHead
+      vitepressConfig.transformHead = async (ctx) => {
+        const selfHead = (await Promise.resolve(selfTransformHead?.(ctx))) || []
+        return selfHead.concat([
+          ['script', { type: 'text/javascript' }, `;(function() {
+            document.documentElement.setAttribute("theme", "${themeColor}");
+          })()`]
+        ] as HeadConfig[])
+      }
+    }
+  }
+  return pluginOps
 }
