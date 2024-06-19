@@ -371,7 +371,7 @@ export namespace Theme {
     /**
      * 内置一些主题色
      * @default 'vp-default'
-     * 也可以自定义颜色，详见 TODO：文档
+     * 也可以自定义颜色，详见 https://theme.sugarat.top/config/style.html#%E4%B8%BB%E9%A2%98%E8%89%B2
      */
     themeColor?: ThemeColor
     pagesData: PageData[]

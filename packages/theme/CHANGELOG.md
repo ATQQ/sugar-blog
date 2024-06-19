@@ -1,5 +1,11 @@
 # @sugarat/theme
 
+## 0.4.5
+
+### Patch Changes
+
+- fix: 自定义主题色，防止展示时页面颜色闪烁
+
 ## 0.4.4
 
 ### Patch Changes
