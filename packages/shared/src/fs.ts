@@ -38,8 +38,15 @@ export async function getFileLastModifyTime(url: string) {
 
 export function getFileLastModifyTimeByGit(url: string): Promise<Date | undefined> {
   return new Promise((resolve) => {
+    const cwd = path.dirname(url)
+    if (!fs.existsSync(cwd))
+      return resolve(undefined)
+    const fileName = path.basename(url)
+
     // 使用异步回调
-    const child = spawn('git', ['log', '-1', '--pretty="%ai"', url])
+    const child = spawn('git', ['log', '-1', '--pretty="%ai"', fileName], {
+      cwd,
+    })
     let output = ''
     child.stdout.on('data', d => (output += String(d)))
     child.on('close', async () => {
