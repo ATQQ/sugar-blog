@@ -39,26 +39,33 @@ export async function getFileLastModifyTime(url: string) {
 export function getFileLastModifyTimeByGit(url: string): Promise<Date | undefined> {
   return new Promise((resolve) => {
     const cwd = path.dirname(url)
-    if (!fs.existsSync(cwd))
-      return resolve(undefined)
-    const fileName = path.basename(url)
 
-    // 使用异步回调
-    const child = spawn('git', ['log', '-1', '--pretty="%ai"', fileName], {
-      cwd,
-    })
-    let output = ''
-    child.stdout.on('data', d => (output += String(d)))
-    child.on('close', async () => {
-      let date: Date | undefined
-      if (output.trim()) {
-        date = new Date(output)
-      }
-      resolve(date)
-    })
-    child.on('error', async () => {
+    // 有额外的耗时，try-catch 处理
+    // if (!fs.existsSync(cwd))
+    //   return resolve(undefined)
+    try {
+      const fileName = path.basename(url)
+
+      // 使用异步回调
+      const child = spawn('git', ['log', '-1', '--pretty="%ai"', fileName], {
+        cwd,
+      })
+      let output = ''
+      child.stdout.on('data', d => (output += String(d)))
+      child.on('close', async () => {
+        let date: Date | undefined
+        if (output.trim()) {
+          date = new Date(output)
+        }
+        resolve(date)
+      })
+      child.on('error', async () => {
+        resolve(undefined)
+      })
+    }
+    catch {
       resolve(undefined)
-    })
+    }
   })
 }
 
