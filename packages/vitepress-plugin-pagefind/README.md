@@ -158,7 +158,15 @@ pagefindPlugin({
   }
 })
 ```
-### Example 5: i18n
+### Example 5: exclude indexing some pages
+set frontmatter `pagefind-indexed: false` to exclude.
+```md
+---
+pagefind-indexed: false
+---
+```
+
+### Example 6: i18n
 [pagefind](https://pagefind.app/docs/multisite/#merging-multiple-languages) search results will only contain content in the same language as the current page (distinguished by the lang attribute of the page)
 
 Here is an example of how to configure the search box to display different text in different language pages
@@ -206,7 +214,7 @@ export default defineConfig({
 | :---------------------------------------------------------------------: | :---------------------------------------------------------------------: |
 | ![](https://img.cdn.sugarat.top/mdImg/MTY4MTIyNjM1NzEyOQ==681226357129) | ![](https://img.cdn.sugarat.top/mdImg/MTY4MTIyNjMzNTU5Nw==681226335597) |
 
-### Example 6: Custom indexing Command
+### Example 7: Custom indexing Command
 You may need this if you are using a lower version or another version of pagefind; You can also use this to customize some CLI configurations when the default configuration is not satisfied
 
 CLI Options See： https://pagefind.app/docs/config-options/
@@ -221,7 +229,7 @@ pagefindPlugin({
 })
 ```
 
-### Example 7: Custom indexing location
+### Example 8: Custom indexing location
 
 *If the plugin cannot execute normally in the buildEnd stage, or custom indexing file location.*
 
