@@ -159,8 +159,16 @@ pagefindPlugin({
   }
 })
 ```
+### 示例5: 排除一些页面
 
-### 示例 5: 国际化
+页面中设置 frontmatter `pagefind-indexed: false`。
+```md
+---
+pagefind-indexed: false
+---
+```
+
+### 示例 6: 国际化
 [pagefind](https://pagefind.app/docs/multisite/#merging-multiple-languages) 搜索结果默认只会包含与当前页面语言一样的页面 (通过 `lang` 属性区分)
 
 下面是一份配置，使搜索框在不同的语言页面下展示不同的文案
@@ -208,7 +216,7 @@ export default defineConfig({
 | :---------------------------------------------------------------------: | :---------------------------------------------------------------------: |
 | ![](https://img.cdn.sugarat.top/mdImg/MTY4MTIyNjM1NzEyOQ==681226357129) | ![](https://img.cdn.sugarat.top/mdImg/MTY4MTIyNjMzNTU5Nw==681226335597) |
 
-### 示例6：自定义生成索引的指令
+### 示例7：自定义生成索引的指令
 如果你使用了低版本或者其他版本的pagefind 你可能很需要这个；当默认的配置不满足时，你也可以使用这个自定义一些CLI配置
 
 CLI 参数见： https://pagefind.app/docs/config-options/
@@ -223,7 +231,7 @@ pagefindPlugin({
 })
 ```
 
-### 示例7: 自定义生成索引的位置
+### 示例8: 自定义生成索引的位置
 
 *如果插件未能正常在 buildEnd 阶段，执行生成索引的指令，也可以按此种方式调整配置*
 

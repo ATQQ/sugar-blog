@@ -1,7 +1,6 @@
 import { execSync } from 'node:child_process'
-import path from 'node:path'
-import process from 'node:process'
 import { withBase } from '@sugarat/theme-shared'
+import type { SiteConfig } from 'vitepress'
 import type { PagefindOption } from './type'
 
 // 需要忽略检索的内容
@@ -12,18 +11,15 @@ const ignoreSelectors: string[] = [
   'a.header-anchor'
 ]
 
-export async function buildEnd(pagefindOps: PagefindOption) {
+export async function buildEnd(pagefindOps: PagefindOption, siteConfig: SiteConfig) {
   const ignore = [
     ...new Set(ignoreSelectors.concat(pagefindOps?.excludeSelector || []))
   ]
   const { log } = console
   log()
   log('=== pagefind: https://pagefind.app/ ===')
-  const siteDir = path.join(
-    process.argv.slice(2)?.[1] || '.',
-    '.vitepress/dist'
-  )
-  let command = `npx pagefind --site ${siteDir}`
+
+  let command = `npx pagefind --site ${siteConfig.outDir}`
 
   if (ignore.length) {
     command += ` --exclude-selectors "${ignore.join(', ')}"`

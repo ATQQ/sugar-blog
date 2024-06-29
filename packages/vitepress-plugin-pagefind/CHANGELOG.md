@@ -1,5 +1,11 @@
 # vitepress-plugin-pagefind
 
+## 0.4.4
+
+### Patch Changes
+
+- feat: add pagefind-indexed
+
 ## 0.4.3
 
 ### Patch Changes
