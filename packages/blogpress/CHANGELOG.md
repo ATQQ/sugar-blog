@@ -1,4 +1,5 @@
 ---
+pagefind-indexed: false
 publish: false
 ---
 
