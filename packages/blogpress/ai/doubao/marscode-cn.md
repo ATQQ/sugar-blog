@@ -1,4 +1,8 @@
-# 使用豆包 MarsCode IDE 搭建  VitePress博客 ，并使用 GitHub 部署
+---
+sidebar: false
+---
+# 使用豆包 MarsCode IDE 搭建 VitePress博客，使用 GitHub 部署
+
 >我正在参加[「豆包MarsCode初体验」](https://juejin.cn/post/7384997062416252939)征文活动
 
 ## 创建MarsCode项目
@@ -49,5 +53,21 @@ npm create @sugarat/theme VitePress-boke
 ```
 
 ![](https://cdn.upyun.sugarat.top/mdImg/sugar/ba5726ac199a5f3551d7cfd67bbfb1b2)
+
+根据操作提示，完成前三步就可以启动。
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/c5d34dee9f0c06198d8cd0a83241a8c1)
+
+点击右侧工具栏中的 `Webview` 就可以预览看到效果。
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/3a2784328291b06d96e6d8c873c0198d)
+
+所有文章内容默认都在 `docs` 目录下。
+
+开发模式(`npm run dev`)下，修改会立即生效，自动热更新到页面上。
+
+生产模式使用 `npm run build` 打包。
+
+如果你没有自己的服务器，又想部署一个站点供其它人访问，就可以使用 `GitHub Pages`，当然弊端就是访问速度不稳定，下面演示一下。
 
 ## 部署到GitHub Pages
