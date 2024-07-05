@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.70
+
+### Patch Changes
+
+- chore: update yaml config
+
 ## 0.0.69
 
 ### Patch Changes

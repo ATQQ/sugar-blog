@@ -43,20 +43,20 @@ jobs:
     steps:
       # 拉取代码
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           # 保留 Git 信息
           fetch-depth: 0
 
       # 设置使用 Node.js 版本
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
 
       # 使用 最新的 PNPM
       # 你也可以指定为具体的版本
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v4
         name: Install pnpm
         with:
           version: latest
@@ -65,7 +65,9 @@ jobs:
 
         # 安装依赖
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
+        # 锁定依赖版本
+        # run: pnpm install --frozen-lockfile
 
         # 构建项目
       - name: Build blog project
