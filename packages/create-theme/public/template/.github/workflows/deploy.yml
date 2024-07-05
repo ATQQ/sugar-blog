@@ -65,7 +65,7 @@ jobs:
 
         # 安装依赖
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --no-frozen-lockfile
         # 锁定依赖版本
         # run: pnpm install --frozen-lockfile
 
