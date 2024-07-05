@@ -1,7 +1,7 @@
 ---
 sidebar: false
 ---
-# 使用豆包 MarsCode IDE 搭建 VitePress博客，使用 GitHub 部署
+# 使用豆包 MarsCode IDE 搭建 VitePress博客并使用 GitHub 部署
 
 >我正在参加[「豆包MarsCode初体验」](https://juejin.cn/post/7384997062416252939)征文活动
 
@@ -26,7 +26,7 @@ sidebar: false
 
 ## 拉取 VItePress 博客项目模板
 
-我们使用终端操作，删除原来的项目文件。
+**使用终端操作**，删除原来的项目文件。
 
 ```sh
 # 查看当前项目 目录
@@ -71,3 +71,116 @@ npm create @sugarat/theme VitePress-boke
 如果你没有自己的服务器，又想部署一个站点供其它人访问，就可以使用 `GitHub Pages`，当然弊端就是访问速度不稳定，下面演示一下。
 
 ## 部署到GitHub Pages
+
+### 创建 GitHub 仓库
+>GitHub 地址：https://github.com
+
+[ATQQ/marscode-blog-preview](https://github.com/ATQQ/marscode-blog-preview)
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/3a2fdcf9c9f267a1d7f28c404ef5741d)
+
+
+### 修改配置
+
+可以参考示例项目 `README.md` 中内容，轻松搞定。
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/e0c376a13d2750fcf572b47ae00db0ab)
+
+1. 修改 GitHub 配置
+
+将 GitHub Pages 部署调整为 `GitHub Actions`
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/660008a054e5b92e44ee820b745d4105)
+
+2. 修改 VitePress 配置
+
+修改 `docs/.vitepress/config.mts` 里的构建配置
+
+`base` 改为 `"/仓库名/"` 即可
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/5d1ae11df04fe9c16d9f1d741ac86942)
+
+### 推送代码
+只差最后一步了，将代码推送到 GitHub 仓库就完成了。
+
+1. 创建并提交至本地仓库
+
+按顺序执行下面 3 条命令即可。
+```sh
+git init
+
+git add .
+
+git commit -m "first commit"
+```
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/a729823f786871ea5761b22ded9a808b)
+
+2. GitHub 授权
+
+生成SSH密钥对(一路回车就行)
+```sh
+ssh-keygen -t rsa -b 4096 -C "你的github邮箱"
+```
+
+将自动生成`id_rsa`和`id_rsa.pub`
+
+复制生成的公钥内容
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/03ae0217087aad0eb9613658ab1be01b)
+
+将其添加到 GitHub 个人设置的 SSH 秘钥中。
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/bfa8a5044c85cd1880e60bb498b716e0)
+
+3. 关联并推送到 GitHub
+
+你可以在空仓库页面看到如下的提示，咱们按顺序执行即可。
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/2360d47775bd07f674116fe794ee276a)
+
+*切换为 ssh 地址视图，截图是 https 地址*
+
+```sh
+# 添加远程仓库地址
+git remote add origin git@github.com:ATQQ/marscode-blog-preview.git
+# 修改分支名
+git branch -M main
+# 推送分支 main 到远程仓库
+git push -u origin main
+```
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/8e8c6ff16fd5161e7aecd8597ad8c0ff)
+
+访问仓库的 Actions 查看结果（[示例项目 > Action 执行结果](https://github.com/ATQQ/marscode-blog-preview/actions/runs/9802748151)）。
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/72ac8a626de255f28b45e9858ccdde5d)
+
+访问 https://atqq.github.io/marscode-blog-preview/ 即可查看到部署后的博客。
+
+## 更新内容
+
+只需修改/创建 `markdown` 文档内容即可，然后通过 git 进行推送即可，会自动触发 GitHub Actions 自动部署。
+
+下面也演示一下：
+
+先修改一点内容，
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/46fc1821c980694aaad06f6e56f1046a)
+
+再提交推送。
+```sh
+git add .
+git commit -m "docs: update index.md"
+git push
+```
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/fd4941615d651d061040492606f8efdd)
+
+推送后触发日志。
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/f299b7d870cf2df6ac78c5fab40cebaa)
+
+再次访问页面就是新的内容了。
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/c37c9ca0f405eb1d0646a4753e37bbfc)
