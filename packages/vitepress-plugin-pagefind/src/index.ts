@@ -90,9 +90,16 @@ export function pagefindPlugin(
     async transform(code, id, options) {
       if (id.endsWith('.md')) {
         const fileContent = await fs.promises.readFile(id, 'utf-8')
-        const { data: frontmatter } = grayMatter(fileContent, {
+        const { data: frontmatter, content } = grayMatter(fileContent, {
           excerpt: true
         })
+
+        // 不检索空内容页
+        if (!content.trim()) {
+          return code
+        }
+
+        // 指定标志的不检索
         if (frontmatter['pagefind-indexed'] === false) {
           return code
         }
@@ -112,17 +119,7 @@ export function pagefindPlugin(
           this.warn(`${options?.ssr ? 'SSR' : 'Client'} ${id} may not be a valid file, will not be indexed, please contact the author for assistance`)
         }
 
-        // const ast = this.parse(code)
-
         if (options?.ssr) {
-          // ast.body.forEach((node) => {
-          //   if (
-          //     node.type === 'FunctionDeclaration'
-          //     && node.id
-          //     && node.id.name === '_sfc_ssrRender'
-          //   ) {
-          //   }
-          // })
           return code.replace('_push(`', `Object.assign(_attrs, ${stringify(attrs)});_push(\``)
         }
         return code.replace('_createElementBlock("div", null', `_createElementBlock("div", ${stringify(attrs)}`)
