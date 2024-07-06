@@ -133,8 +133,11 @@ watch(
         : (chineseRegex.test(searchWords.value) ? chineseSearchOptimize(searchWords.value) : searchWords.value)
     // @ts-expect-error
     await window?.__pagefind__
-      ?.search?.(searchText)
+      ?.debouncedSearch?.(searchText, {}, 500)
       .then(async (pagefindSearchResult: any) => {
+        if (pagefindSearchResult === null) {
+          return
+        }
         // pagefind 搜索结果
         const pagefindResults = await Promise.all(
           pagefindSearchResult.results.map((v: any) => v.data())
