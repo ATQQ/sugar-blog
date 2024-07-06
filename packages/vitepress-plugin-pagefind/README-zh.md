@@ -391,6 +391,12 @@ interface SearchConfig {
      * @default false
      */
     manual?: boolean
+
+    /**
+     * 防抖搜索的延迟时间
+     * @default 300
+     */
+    delay?: number
 }
 ```
 </details>

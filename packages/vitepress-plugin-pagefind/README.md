@@ -388,6 +388,12 @@ interface SearchConfig {
      * @default false
      */
     manual?: boolean
+
+    /**
+     * debouncedSearch delay
+     * @default 300
+     */
+    delay?: number
 }
 ```
 </details>

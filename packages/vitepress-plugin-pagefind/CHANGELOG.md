@@ -5,6 +5,7 @@
 ### Patch Changes
 
 - fix: pagefind indexing empty warn
+- chore: use debouncedSearch replace search
 
 ## 0.4.4
 

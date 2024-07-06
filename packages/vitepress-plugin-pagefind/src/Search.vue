@@ -114,6 +114,9 @@ function chineseSearchOptimize(input: string) {
     .replace(/\s+/g, ' ')
     .trim()
 }
+
+const searchDelayTime = computed(() => finalSearchConfig.value?.delay ?? 300)
+
 // 触发搜索
 watch(
   () => searchWords.value,
@@ -133,7 +136,7 @@ watch(
         : (chineseRegex.test(searchWords.value) ? chineseSearchOptimize(searchWords.value) : searchWords.value)
     // @ts-expect-error
     await window?.__pagefind__
-      ?.debouncedSearch?.(searchText, {}, 500)
+      ?.debouncedSearch?.(searchText, {}, searchDelayTime.value)
       .then(async (pagefindSearchResult: any) => {
         if (pagefindSearchResult === null) {
           return
