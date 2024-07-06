@@ -1,5 +1,11 @@
 # vitepress-plugin-pagefind
 
+## 0.4.5
+
+### Patch Changes
+
+- fix: pagefind indexing empty warn
+
 ## 0.4.4
 
 ### Patch Changes
