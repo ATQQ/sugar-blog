@@ -88,7 +88,10 @@ export function pagefindPlugin(
     },
     // 添加检索的内容标识
     async transform(code, id, options) {
+      // TODO: 动态渲染页面兼容
       if (id.endsWith('.md')) {
+        if (!fs.existsSync(id))
+          return code
         const fileContent = await fs.promises.readFile(id, 'utf-8')
         const { data: frontmatter, content } = grayMatter(fileContent, {
           excerpt: true

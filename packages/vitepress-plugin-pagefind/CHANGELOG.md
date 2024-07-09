@@ -1,5 +1,11 @@
 # vitepress-plugin-pagefind
 
+## 0.4.6
+
+### Patch Changes
+
+- fix: md not exist
+
 ## 0.4.5
 
 ### Patch Changes
