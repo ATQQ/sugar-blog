@@ -69,14 +69,12 @@ const blogTheme = getThemeConfig({
     mobileDisplay: true,
     models: [
       {
-        path: 'https://cdn.bitiful.sugarat.top/npm/oml2d-model/models/Senko_Normals/senko.model3.json',
+        path: 'https://oml2d-models.sugarat.top/Senko_Normals/senko.model3.json',
+      },
+      {
+        path: 'https://oml2d-models.sugarat.top/mai/model.json',
       }
     ],
-    libraryUrls: {
-      complete: 'https://cdn.bitiful.sugarat.top/npm/oh-my-live2d/latest/lib/complete.js',
-      cubism2: 'https://cdn.bitiful.sugarat.top/npm/oh-my-live2d/latest/lib/cubism2.js',
-      cubism5: 'https://cdn.bitiful.sugarat.top/npm/oh-my-live2d/latest/lib/cubism5.js'
-    }
   },
   popover: {
     title: '公告',
@@ -235,7 +233,8 @@ const extraHead: any
             charset: 'UTF-8',
             id: 'LA_COLLECT',
             defer: true,
-            src: '//sugarat.s3.bitiful.net/npm/51la-analysis-sdk/js-sdk-pro.min.js',
+            // src: '//sugarat.s3.bitiful.net/npm/51la-analysis-sdk/js-sdk-pro.min.js',
+            src: '//sdk.51.la/js-sdk-pro.min.js'
           }
         ],
         [
