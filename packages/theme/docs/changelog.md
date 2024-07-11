@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.4.6） ⏰ 2024/06/21：依赖升级，构建优化，显著减少使用主题后增加的耗时，支持自定义友链,标签,数据卡片标题，一系列问题修复。
+description: 最近更新（v0.4.7） ⏰ 2024/07/11：依赖升级，构建优化，显著减少使用主题后增加的耗时，支持自定义友链,标签,数据卡片标题，一系列问题修复。
 author: 粥里有勺糖
 top: 2
 tag: 日志
@@ -26,6 +26,13 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.4.7 (2024/07/11)
+
+### Patch Changes
+
+- fix: init project withBase error
+- chore: use vitepress@1.3.0
 
 ## 0.4.6 (2024/06/21)
 

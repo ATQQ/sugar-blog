@@ -1,5 +1,12 @@
 # @sugarat/create-theme
 
+## 0.0.72
+
+### Patch Changes
+
+- fix: init project withBase error
+- chore: use vitepress@1.3.0
+
 ## 0.0.71
 
 ### Patch Changes

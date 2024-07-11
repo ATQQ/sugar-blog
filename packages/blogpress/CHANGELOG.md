@@ -3,11 +3,19 @@ pagefind-indexed: false
 publish: false
 ---
 
-# CHANGELOG
-## 2.0.54
+## 2.0.55
 ### Patch Changes
 
-  - @sugarat/theme@0.4.6
+- Updated dependencies
+  - @sugarat/theme@0.4.7
+
+# CHANGELOG
+
+## 2.0.54
+
+### Patch Changes
+
+- @sugarat/theme@0.4.6
 
 ## 2.0.53
 
