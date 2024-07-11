@@ -6,7 +6,7 @@ export default defineExamples([
     link: 'https://sugarat.top',
     name: '粥里有勺糖',
     desc: '记录随笔与学习笔记',
-    avatar: 'https://cdn.bitiful.sugarat.top/avatar/blog/zlyst-avatar.jpeg',
+    avatar: 'https://cdn.upyun.sugarat.top/avatar/blog/zlyst-avatar.jpeg',
     nickname: '粥里有勺糖',
     home: 'https://github.com/atqq'
   },
@@ -15,7 +15,7 @@ export default defineExamples([
     link: 'https://docs.ep.sugarat.top/',
     name: 'EastPicker（轻取）',
     desc: '在线文件收取平台',
-    avatar: 'https://cdn.bitiful.sugarat.top/avatar/theme/easypicker.png',
+    avatar: 'https://cdn.upyun.sugarat.top/avatar/theme/easypicker.png',
     nickname: 'EastPicker'
   },
   {
@@ -23,7 +23,7 @@ export default defineExamples([
     link: 'https://www.imufeng.cn/',
     name: '沐风的小站',
     desc: '沐风的个人空间',
-    avatar: 'https://cdn.bitiful.sugarat.top/avatar/theme/imufeng.png',
+    avatar: 'https://cdn.upyun.sugarat.top/avatar/theme/imufeng.png',
     nickname: 'MuFeng'
   },
   {
@@ -31,7 +31,7 @@ export default defineExamples([
     link: 'http://itmei.cn/',
     name: '荷游@iTmei',
     desc: 'vue3学习,typescript学习,typescript/es6学习,qt学习,单片机学习',
-    avatar: 'https://cdn.bitiful.sugarat.top/avatar/theme/itmei.png',
+    avatar: 'https://cdn.upyun.sugarat.top/avatar/theme/itmei.png',
     nickname: '荷游'
   },
   {
@@ -39,7 +39,7 @@ export default defineExamples([
     link: 'http://haitang.icu',
     name: '海棠的小屋',
     desc: '记录海棠的成长点滴',
-    avatar: 'https://cdn.bitiful.sugarat.top/avatar/theme/haitang.png',
+    avatar: 'https://cdn.upyun.sugarat.top/avatar/theme/haitang.png',
     nickname: 'Haitang'
   },
   {
@@ -47,7 +47,7 @@ export default defineExamples([
     link: 'https://blog.ym94.cn/',
     name: 'Ymri',
     desc: '语雀同步到个人博客',
-    avatar: 'https://cdn.bitiful.sugarat.top/avatar/theme/ym94.jpeg',
+    avatar: 'https://cdn.upyun.sugarat.top/avatar/theme/ym94.jpeg',
     nickname: 'Ymri'
   },
   {
@@ -55,7 +55,7 @@ export default defineExamples([
     link: 'http://llxz.top/',
     name: '赖小栈',
     desc: '一名全栈开发工程师，.NET全栈经验',
-    avatar: 'https://cdn.bitiful.sugarat.top/avatar/blog/llxz.png',
+    avatar: 'https://cdn.upyun.sugarat.top/avatar/blog/llxz.png',
     nickname: 'laiky'
   },
 ])
