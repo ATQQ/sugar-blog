@@ -9,7 +9,8 @@ const logo = computed(() =>
   frontmatter.value.logo
     ?? frontmatter.value?.blog?.logo
     ?? home?.logo
-    ?? site.value.themeConfig.logo
+    ?? site.value.themeConfig?.logo
+    ?? '/logo.png'
 )
 const alwaysHide = computed(() => frontmatter.value.blog?.minScreenAvatar === false)
 </script>

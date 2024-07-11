@@ -12,10 +12,11 @@ const author = computed(() =>
   ?? site.value.themeConfig?.blog?.author
 )
 const logo = computed(() =>
-  frontmatter.value.logo
+  frontmatter.value?.logo
   ?? frontmatter.value?.blog?.logo
   ?? home?.logo
-  ?? site.value.themeConfig.logo
+  ?? site.value?.themeConfig?.logo
+  ?? '/logo.png'
 )
 const show = computed(() => author.value || logo.value)
 </script>
