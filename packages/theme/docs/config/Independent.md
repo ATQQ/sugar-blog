@@ -24,7 +24,7 @@ pnpm add @sugarat/theme
 
 安装主题依赖的一些第三方库
 ```sh
-pnpm add @element-plus/icons-vue element-plus vue sass
+pnpm add @element-plus/icons-vue element-plus vue sass pagefind
 ```
 
 ### 引入主题
@@ -132,4 +132,4 @@ getThemeConfig({
 ```
 
 ## 最后
-如有不满足的诉求，欢迎加群交流
+如有不满足的诉求，欢迎右上角公告加群交流。
