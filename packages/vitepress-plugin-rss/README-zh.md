@@ -169,6 +169,18 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
 }
 ```
 
+## FAQ
+### 网页访问RSS文件乱码问题
+以 Nginx 为例，可以添加如下配置
+```
+location ~ \.rss$ {
+  charset utf-8;
+}
+```
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/3eca61766967c6a6be97f73f74f39b14)
+
+
 ## Thanks
 * [jpmonette/feed](https://www.npmjs.com/package/feed)
 * [vuejs/blog](https://github.com/vuejs/blog/tree/main)

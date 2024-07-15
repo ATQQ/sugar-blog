@@ -169,6 +169,17 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
   renderHTML?: ((filecontent: string) => string | Promise<string>) | boolean
 }
 ```
+ 
+## FAQ
+### set response charset
+Using Nginx as an example, you can add the following configuration
+```
+location ~ \.rss$ {
+  charset utf-8;
+}
+```
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/3eca61766967c6a6be97f73f74f39b14)
 
 ## Thanks
 * [jpmonette/feed](https://www.npmjs.com/package/feed)
