@@ -108,7 +108,13 @@ function inlineSearch() {
 }
 
 const chineseRegex = /[\u4E00-\u9FA5]/g
+const segmenterCh = Intl?.Segmenter && new Intl.Segmenter('ch', { granularity: 'word' })
 function chineseSearchOptimize(input: string) {
+  if (segmenterCh) {
+    const splitWords = Array.from(segmenterCh?.segment(input))
+    return splitWords.map(v => v.segment).join(' ')
+  }
+
   return input
     .replace(chineseRegex, ' $& ')
     .replace(/\s+/g, ' ')
