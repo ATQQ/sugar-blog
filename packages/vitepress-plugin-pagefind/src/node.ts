@@ -19,7 +19,7 @@ export async function buildEnd(pagefindOps: PagefindOption, siteConfig: SiteConf
   log()
   log('=== pagefind: https://pagefind.app/ ===')
 
-  let command = `npx pagefind --site ${siteConfig.outDir}`
+  let command = `npx pagefind --site "${siteConfig.outDir}"`
 
   if (ignore.length) {
     command += ` --exclude-selectors "${ignore.join(', ')}"`
