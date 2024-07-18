@@ -88,12 +88,25 @@ export function pagefindPlugin(
     },
     // 添加检索的内容标识
     async transform(code, id, options) {
-      if (id.endsWith('.md')) {
-        const fileContent = await fs.promises.readFile(id, 'utf-8')
+      if (!id.includes('.md')) {
+        return code
+      }
+      const { searchParams, pathname } = new URL(id, 'file:')
+      if (!pathname.endsWith('.md')) {
+        return code
+      }
+
+      if (!fs.existsSync(pathname)) {
+        return code
+      }
+      // 兼容 setup lang="ts"
+      if (!searchParams.size || searchParams.has('lang.ts')) {
+        const fileContent = await fs.promises.readFile(pathname, 'utf-8')
         const { data: frontmatter, content } = grayMatter(fileContent, {
           excerpt: true
         })
 
+        // TODO: 兼容 动态 路由
         // 不检索空内容页
         if (!content.trim()) {
           return code
@@ -111,12 +124,19 @@ export function pagefindPlugin(
         if (!searchConfig.manual) {
           // 添加 frontmatter 元数据
           frontmatter.date = +new Date(frontmatter.date || await getFileLastModifyTime(id))
-          attrs['data-pagefind-meta'] = meta2string(frontmatter)
+
+          // 没有filter则不插入额外的 meta
+          if (typeof searchConfig.filter === 'function') {
+            attrs['data-pagefind-meta'] = meta2string(frontmatter)
+          }
         }
 
-        // error 判断
         if (!code.includes(options?.ssr ? '_push(`' : '_createElementBlock("div", null')) {
-          this.warn(`${options?.ssr ? 'SSR' : 'Client'} ${id} may not be a valid file, will not be indexed, please contact the author for assistance`)
+          // 兼容 setup lang="ts"
+          if (!code.includes(`${id}?vue&type=script&setup=true&lang.ts`)) {
+            this.warn(`${options?.ssr ? 'SSR' : 'Client'} ${id} may not be a valid file, will not be indexed, please contact the author for assistance`)
+          }
+          return code
         }
 
         if (options?.ssr) {
