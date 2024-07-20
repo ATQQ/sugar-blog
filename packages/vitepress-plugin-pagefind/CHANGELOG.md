@@ -1,5 +1,14 @@
 # vitepress-plugin-pagefind
 
+## 0.4.6
+
+### Patch Changes
+
+- fix: setup lang=ts build failed
+- fix: dynamic route build failed
+- chore: search input style like VitePress
+- chore: add `pageResultCount` option
+
 ## 0.4.5
 
 ### Patch Changes
