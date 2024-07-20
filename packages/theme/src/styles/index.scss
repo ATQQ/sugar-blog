@@ -23,6 +23,9 @@ html.dark {
 }
 
 .VPHome {
+  min-height: 100vh;
+  background: radial-gradient(ellipse, rgba(var(--bg-gradient-home), 1) 0%, rgba(var(--bg-gradient-home), 0) 700%);
+  
   &::before {
     content: "";
     inset: 0;
@@ -33,9 +36,6 @@ html.dark {
     background-repeat: repeat;
     min-height: 100%;
   }
-
-  min-height: 100vh;
-  background: radial-gradient(ellipse, rgba(var(--bg-gradient-home), 1) 0%, rgba(var(--bg-gradient-home), 0) 700%);
 }
 
 // 样式重写
