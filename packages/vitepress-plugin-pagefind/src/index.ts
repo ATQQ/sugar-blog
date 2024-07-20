@@ -5,7 +5,7 @@ import fs from 'fs'
 import type { PluginOption } from 'vite'
 import type { HeadConfig, SiteConfig } from 'vitepress'
 import { stringify } from 'javascript-stringify'
-import { getFileLastModifyTime, grayMatter } from '@sugarat/theme-shared'
+import { getFileLastModifyTime, grayMatter, joinPath } from '@sugarat/theme-shared'
 import { buildEnd, getPagefindHead } from './node'
 import type { PagefindOption, SearchConfig } from './type'
 
@@ -29,6 +29,8 @@ export function pagefindPlugin(
   const resolvedVirtualModuleId = `\0${virtualModuleId}`
 
   let resolveConfig: any
+  let vitepressConfig: SiteConfig
+  let dynamicRoutes: SiteConfig['dynamicRoutes']
   const pluginOps: PluginOption = {
     name: 'vitepress-plugin-pagefind',
     config: () => {
@@ -49,7 +51,8 @@ export function pagefindPlugin(
       }
       resolveConfig = config
 
-      const vitepressConfig: SiteConfig = config.vitepress
+      vitepressConfig = config.vitepress
+      dynamicRoutes = vitepressConfig.dynamicRoutes
       if (!vitepressConfig) {
         return
       }
@@ -96,17 +99,22 @@ export function pagefindPlugin(
         return code
       }
 
-      if (!fs.existsSync(pathname)) {
+      // 兼容 动态 路由
+      const dynamicRoute = dynamicRoutes.routes.find(route => route.fullPath === pathname)
+      const isDynamicRoute = !!dynamicRoute
+      const filepath = isDynamicRoute ? joinPath(vitepressConfig.srcDir, `/${dynamicRoute.route}`) : pathname
+      const isExist = fs.existsSync(filepath)
+      if (!isExist) {
+        this.warn(`${id}: not parse ${filepath} please contact the author for assistance`)
         return code
       }
       // 兼容 setup lang="ts"
       if (!searchParams.size || searchParams.has('lang.ts')) {
-        const fileContent = await fs.promises.readFile(pathname, 'utf-8')
+        const fileContent = await fs.promises.readFile(filepath, 'utf-8')
         const { data: frontmatter, content } = grayMatter(fileContent, {
           excerpt: true
         })
 
-        // TODO: 兼容 动态 路由
         // 不检索空内容页
         if (!content.trim()) {
           return code
