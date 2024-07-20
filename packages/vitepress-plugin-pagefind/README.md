@@ -394,6 +394,12 @@ interface SearchConfig {
      * @default 300
      */
     delay?: number
+
+    /**
+     * One article displays several results
+     * @default 1
+     */
+    pageResultCount?: number
 }
 ```
 </details>

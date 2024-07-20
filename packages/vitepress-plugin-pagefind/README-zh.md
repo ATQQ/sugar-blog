@@ -397,6 +397,12 @@ interface SearchConfig {
      * @default 300
      */
     delay?: number
+
+    /**
+     * 单页面展示多少条结果
+     * @default 1
+     */
+    pageResultCount?: number
 }
 ```
 </details>
