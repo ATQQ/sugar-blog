@@ -94,6 +94,27 @@ export interface SearchConfig {
   heading?: string
 
   /**
+   * @default
+   * 'to select'
+   */
+  toSelect?: string
+  /**
+   * @default
+   * 'to navigate'
+   */
+  toNavigate?: string
+  /**
+   * @default
+   * 'to close'
+   */
+  toClose?: string
+  /**
+   * @default
+   * 'Search by'
+   */
+  searchBy?: string
+
+  /**
    * Automatically reloads the page when the page language changes.
    *
    * The purpose is to reload the index file for the target language.
@@ -153,6 +174,12 @@ export interface SearchConfig {
    * @default 300
    */
   delay?: number
+
+  /**
+   * One article displays several results
+   * @default 1
+   */
+  pageResultCount?: number
 }
 
 export type PagefindConfig = PagefindOption & SearchConfig

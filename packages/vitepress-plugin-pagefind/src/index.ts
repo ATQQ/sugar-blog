@@ -1,11 +1,12 @@
 import { Buffer } from 'node:buffer'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import fs from 'fs'
+import fs from 'node:fs'
+import process from 'node:process'
 import type { PluginOption } from 'vite'
 import type { HeadConfig, SiteConfig } from 'vitepress'
 import { stringify } from 'javascript-stringify'
-import { getFileLastModifyTime, grayMatter } from '@sugarat/theme-shared'
+import { getFileLastModifyTime, grayMatter, joinPath } from '@sugarat/theme-shared'
 import { buildEnd, getPagefindHead } from './node'
 import type { PagefindOption, SearchConfig } from './type'
 
@@ -29,6 +30,8 @@ export function pagefindPlugin(
   const resolvedVirtualModuleId = `\0${virtualModuleId}`
 
   let resolveConfig: any
+  let vitepressConfig: SiteConfig
+  let dynamicRoutes: SiteConfig['dynamicRoutes']
   const pluginOps: PluginOption = {
     name: 'vitepress-plugin-pagefind',
     config: () => {
@@ -49,7 +52,8 @@ export function pagefindPlugin(
       }
       resolveConfig = config
 
-      const vitepressConfig: SiteConfig = config.vitepress
+      vitepressConfig = config.vitepress
+      dynamicRoutes = vitepressConfig.dynamicRoutes
       if (!vitepressConfig) {
         return
       }
@@ -88,8 +92,28 @@ export function pagefindPlugin(
     },
     // 添加检索的内容标识
     async transform(code, id, options) {
-      if (id.endsWith('.md')) {
-        const fileContent = await fs.promises.readFile(id, 'utf-8')
+      if (!id.includes('.md')) {
+        return code
+      }
+      const { searchParams, pathname, protocol } = new URL(id, 'file:')
+      if (!pathname.endsWith('.md')) {
+        return code
+      }
+
+      // 兼容 动态 路由
+      const isWindows = process.platform === 'win32'
+      const fullPath = isWindows ? `${protocol}${pathname}` : pathname
+      const dynamicRoute = dynamicRoutes.routes.find(route => fullPath.toLowerCase() === route.fullPath.toLowerCase())
+      const isDynamicRoute = !!dynamicRoute
+      const filepath = isDynamicRoute ? joinPath(vitepressConfig.srcDir, `/${dynamicRoute.route}`) : pathname
+      const isExist = fs.existsSync(filepath)
+      if (!isExist) {
+        this.warn(`${id}: not parse ${filepath} please contact the author for assistance`)
+        return code
+      }
+      // 兼容 setup lang="ts"
+      if (!searchParams.size || searchParams.has('lang.ts')) {
+        const fileContent = await fs.promises.readFile(filepath, 'utf-8')
         const { data: frontmatter, content } = grayMatter(fileContent, {
           excerpt: true
         })
@@ -111,12 +135,19 @@ export function pagefindPlugin(
         if (!searchConfig.manual) {
           // 添加 frontmatter 元数据
           frontmatter.date = +new Date(frontmatter.date || await getFileLastModifyTime(id))
-          attrs['data-pagefind-meta'] = meta2string(frontmatter)
+
+          // 没有filter则不插入额外的 meta
+          if (typeof searchConfig.filter === 'function') {
+            attrs['data-pagefind-meta'] = meta2string(frontmatter)
+          }
         }
 
-        // error 判断
         if (!code.includes(options?.ssr ? '_push(`' : '_createElementBlock("div", null')) {
-          this.warn(`${options?.ssr ? 'SSR' : 'Client'} ${id} may not be a valid file, will not be indexed, please contact the author for assistance`)
+          // 兼容 setup lang="ts"
+          if (!code.includes(`${id}?vue&type=script&setup=true&lang.ts`)) {
+            this.warn(`${options?.ssr ? 'SSR' : 'Client'} ${id} may not be a valid file, will not be indexed, please contact the author for assistance`)
+          }
+          return code
         }
 
         if (options?.ssr) {

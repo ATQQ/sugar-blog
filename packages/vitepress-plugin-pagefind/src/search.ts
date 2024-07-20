@@ -59,14 +59,11 @@ function decodeBase64AndDeserialize(base64String: string) {
   }
 }
 
-export function formatPagefindResult(result: PagefindResult) {
+export function formatPagefindResult(result: PagefindResult, count = 1) {
   const { sub_results: subResults, anchors, weighted_locations: weightedLocations } = result
 
-  // TODO：未来看情况支持单页面多个结果，与完整预览
   // TODO：pick策略优化
 
-  // 展示权重最大的一个结果
-  // 找到subResults权重最大的
   // 按照权重排序，从大到小
   weightedLocations.sort((a, b) => {
     // 权重相等按照 location 排序
@@ -77,7 +74,7 @@ export function formatPagefindResult(result: PagefindResult) {
   })
 
   // pick 集合中权重最大的结果
-  let sub: SubResult | null = null
+  const subs: SubResult[] = []
   for (const { location } of weightedLocations) {
     // 从结果集合中过滤出符合权重的结果
     const filterData = subResults.filter((sub) => {
@@ -91,22 +88,37 @@ export function formatPagefindResult(result: PagefindResult) {
     })
 
     // 保留 locations 数量最多的
-    sub = filterData.reduce((prev, curr) => {
+    const sub = filterData.reduce((prev, curr) => {
       if (!prev) {
         return curr
       }
       return prev.locations.length > curr.locations.length ? prev : curr
     }, null as SubResult | null)
 
-    if (sub) {
+    if (!sub) {
+      continue
+    }
+
+    subs.push(sub)
+
+    if (subs.length >= count) {
       break
     }
   }
 
+  const filterMap = new Map<string, any>()
+  return subs.map(sub => parseSubResult(sub, anchors, result))
+    .filter((v) => {
+      if (filterMap.has(v.meta.title)) {
+        return false
+      }
+      filterMap.set(v.meta.title, v)
+      return true
+    })
+}
+
+function parseSubResult(sub: SubResult, anchors: Anchor[], result: PagefindResult) {
   const route = sub?.url || result?.url
-  //   const route = targetUrl.startsWith(site.value.base)
-  //     ? targetUrl
-  //     : withBase(targetUrl)
   const description = sub?.excerpt || result?.excerpt
 
   // 构造标题
