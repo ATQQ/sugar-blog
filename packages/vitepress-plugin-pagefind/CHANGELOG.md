@@ -1,5 +1,14 @@
 # vitepress-plugin-pagefind
 
+## 0.4.7
+
+### Patch Changes
+
+- fix: windows dyatmic route error
+- fix: path contain space
+- feat: support rewrite operate text
+- feat: inline `Intl?.Segmenter` transform chinese words
+
 ## 0.4.6
 
 ### Patch Changes
