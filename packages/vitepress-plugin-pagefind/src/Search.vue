@@ -154,13 +154,16 @@ watch(
         // 格式化搜索结果
         const formattedResults = pagefindResults
           .map((r) => {
-            const result = formatPagefindResult(r)
-            // base 兼容
-            result.route = result.route.startsWith(site.value.base)
-              ? result.route
-              : withBase(result.route)
-            return result
+            const results = formatPagefindResult(r, finalSearchConfig.value.pageResultCount || 1)
+            return results.map((result) => {
+              // base 兼容
+              result.route = result.route.startsWith(site.value.base)
+                ? result.route
+                : withBase(result.route)
+              return result
+            })
           })
+          .flat()
           // 过滤掉未发布的
           .filter((v) => {
             return ignorePublish.value || v.meta.publish !== false
