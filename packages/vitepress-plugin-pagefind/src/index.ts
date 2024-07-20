@@ -1,7 +1,8 @@
 import { Buffer } from 'node:buffer'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import fs from 'fs'
+import fs from 'node:fs'
+import process from 'node:process'
 import type { PluginOption } from 'vite'
 import type { HeadConfig, SiteConfig } from 'vitepress'
 import { stringify } from 'javascript-stringify'
@@ -94,13 +95,15 @@ export function pagefindPlugin(
       if (!id.includes('.md')) {
         return code
       }
-      const { searchParams, pathname } = new URL(id, 'file:')
+      const { searchParams, pathname, protocol } = new URL(id, 'file:')
       if (!pathname.endsWith('.md')) {
         return code
       }
 
       // 兼容 动态 路由
-      const dynamicRoute = dynamicRoutes.routes.find(route => route.fullPath === pathname)
+      const isWindows = process.platform === 'win32'
+      const fullPath = isWindows ? `${protocol}${pathname}` : pathname
+      const dynamicRoute = dynamicRoutes.routes.find(route => fullPath.toLowerCase() === route.fullPath.toLowerCase())
       const isDynamicRoute = !!dynamicRoute
       const filepath = isDynamicRoute ? joinPath(vitepressConfig.srcDir, `/${dynamicRoute.route}`) : pathname
       const isExist = fs.existsSync(filepath)
