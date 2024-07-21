@@ -27,14 +27,14 @@ bun install vitepress@latest
 ```
 :::
 
-## 0.4.8 (2024/07/20)
+## 0.4.8 (2024/07/21)
 
 ### Patch Changes
 
 - chore: support rewrite version text
 - chore: sass warning
 - Updated dependencies
-  - vitepress-plugin-pagefind@0.4.8
+  - vitepress-plugin-pagefind@0.4.9
   - vitepress@1.3.1
 
 ## 0.4.7 (2024/07/11)
