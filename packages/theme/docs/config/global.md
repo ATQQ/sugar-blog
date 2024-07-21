@@ -1564,9 +1564,13 @@ interface Footer {
    */
   list?: string | string[] | FooterItem | FooterItem[]
   /**
-   * 是否展示主题版本信息
+   * 展示主题版本信息
    */
-  version?: boolean
+  version?: boolean | {
+    name?: string
+    link?: string
+    icon?: boolean | string
+  }
   /**
    * copyright
    */
@@ -1623,6 +1627,17 @@ const blogTheme = getThemeConfig({
 const blogTheme = getThemeConfig({
   footer: {
     version: false
+  }
+})
+
+// 当然也可以自定义版本这块展示的内容
+const blogTheme = getThemeConfig({
+  footer: {
+    version: {
+      name: 'theme',
+      // icon: '',
+      // link: ''
+    }
   }
 })
 ```

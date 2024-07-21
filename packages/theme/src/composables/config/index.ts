@@ -523,7 +523,11 @@ export namespace Theme {
     /**
      * 是否展示主题版本信息
      */
-    version?: boolean
+    version?: boolean | {
+      name?: string
+      link?: string
+      icon?: boolean | string
+    }
     /**
      * copyright
      */
