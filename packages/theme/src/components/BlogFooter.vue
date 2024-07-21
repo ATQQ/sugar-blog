@@ -25,11 +25,13 @@ const renderData = computed(() => {
 
     // version
     const isLast = idx === flatData.length - 1
-    if ((version !== false && isLast) || version === true) {
+    if ((version !== false && isLast) || version) {
+      const versionItem = typeof version === 'object' ? version : {}
+
       data.push({
-        name: `@sugarat/theme@${packageJSON.version}`,
-        link: 'https://theme.sugarat.top/',
-        icon: themeSVG
+        name: versionItem?.name || `@sugarat/theme@${packageJSON.version}`,
+        link: versionItem?.link || 'https://theme.sugarat.top/',
+        icon: versionItem?.icon || themeSVG
       })
     }
     // copyright
