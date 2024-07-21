@@ -192,6 +192,7 @@ const blogTheme = getThemeConfig({
   },
   search: {
     showDate: true,
+    pageResultCount: 4,
   },
   recommend: {
     showSelf: true,
