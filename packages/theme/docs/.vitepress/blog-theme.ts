@@ -12,6 +12,9 @@ const RSS: Theme.RSSOptions = {
 }
 
 export const blogTheme = getThemeConfig({
+  search: {
+    pageResultCount: 5
+  },
   // 图表支持
   mermaid: true,
   imageStyle: {

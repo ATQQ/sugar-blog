@@ -1,5 +1,11 @@
 # vitepress-plugin-pagefind
 
+## 0.4.9
+
+### Patch Changes
+
+- chore: search sort by location
+
 ## 0.4.8
 
 ### Patch Changes

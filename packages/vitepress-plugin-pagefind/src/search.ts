@@ -63,12 +63,11 @@ export function formatPagefindResult(result: PagefindResult, count = 1) {
   const { sub_results: subResults, anchors, weighted_locations: weightedLocations } = result
 
   // TODO：pick策略优化
-
   // 按照权重排序，从大到小
   weightedLocations.sort((a, b) => {
-    // 权重相等按照 location 排序
+    // 权重相等按照 location 顺序排序
     if (b.weight === a.weight) {
-      return b.location - a.location
+      return a.location - b.location
     }
     return b.weight - a.weight
   })
@@ -105,6 +104,16 @@ export function formatPagefindResult(result: PagefindResult, count = 1) {
       break
     }
   }
+
+  // 按文章中顺序，排序
+  subs.sort((a, b) => {
+    const [minA] = a.locations || []
+    const [minB] = b.locations || []
+    if (!minA || !minB) {
+      return 0
+    }
+    return minA - minB
+  })
 
   const filterMap = new Map<string, any>()
   return subs.map(sub => parseSubResult(sub, anchors, result))
