@@ -7,6 +7,23 @@ description: 记录一下每天干的杂事，写的杂七杂八的代码，用�
 
 [[toc]]
 
+## 2024/07/27
+### 周刊自动化创建工具
+
+*[@sugarat/cli-plugin-blog@0.0.12](https://www.npmjs.com/package/@sugarat/cli-plugin-blog)*
+
+- 迭代生成周刊的模板
+- 优化 description 字段的生成逻辑
+- 自动拼接周刊标题，展示描述信息
+
+### 同步 cnpm 工具
+
+*[cnnc](https://www.npmjs.com/package/cnnc)*
+
+- 接入 `@clack/prompts` 支持交互式选择要同步的包
+
+---
+
 ## 2024/03/27
 
 *[@sugarat/theme](https://github.com/ATQQ/sugar-blog/tree/master/packages/theme)*
