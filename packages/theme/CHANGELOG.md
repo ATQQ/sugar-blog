@@ -1,5 +1,13 @@
 # @sugarat/theme
 
+## 0.4.9
+
+### Patch Changes
+
+- Updated dependencies
+  - vitepress-plugin-pagefind@0.4.10
+  - vitepress-plugin-rss@0.2.9
+
 ## 0.4.8
 
 ### Patch Changes

@@ -95,7 +95,8 @@ export function pagefindPlugin(
       if (!id.includes('.md')) {
         return code
       }
-      const { searchParams, pathname, protocol } = new URL(id, 'file:')
+      let { searchParams, pathname, protocol } = new URL(id, 'file:')
+      pathname = decodeURIComponent(pathname)
       if (!pathname.endsWith('.md')) {
         return code
       }
