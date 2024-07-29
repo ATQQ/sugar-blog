@@ -1,5 +1,12 @@
 # vitepress-plugin-rss
 
+
+## 0.2.9
+
+### Patch Changes
+
+- fix: #276 remove `&ZeroWidthSpace;` 
+
 ## 0.2.8
 
 ### Patch Changes
