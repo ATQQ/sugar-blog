@@ -107,6 +107,12 @@ const blogTheme = getThemeConfig({
   friend: {
     list: [
       {
+        nickname: '李年糕',
+        des: '佛系的打工人',
+        avatar: 'https://cdn.upyun.sugarat.top/mdImg/sugar/617be739258b761b7dfed4fa0869326c',
+        url: 'https://rimochiko.github.io/'
+      },
+      {
         nickname: '冴羽',
         des: '冴羽的JavaScript博客',
         avatar:
