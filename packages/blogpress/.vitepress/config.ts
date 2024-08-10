@@ -107,6 +107,12 @@ const blogTheme = getThemeConfig({
   friend: {
     list: [
       {
+        nickname: '茂茂物语',
+        des: '茂茂的成长之路，包含前端常用知识、源码阅读笔记、各种奇淫技巧、日常提效工具等',
+        url: 'https://notes.fe-mm.com',
+        avatar: 'https://notes.fe-mm.com/logo.png'
+      },
+      {
         nickname: '李年糕',
         des: '佛系的打工人',
         avatar: 'https://cdn.upyun.sugarat.top/mdImg/sugar/617be739258b761b7dfed4fa0869326c',
