@@ -8,8 +8,7 @@ date: 2024-03-28 13:29
 
 **爱发电主页：https://afdian.com/a/sugarat**
 
-![](https://img.cdn.sugarat.top/mdImg/sugar/c430e0cd75397d7f444e87dab0157604)
-
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/6677cb36b2706d1920073073288ce42a)
 
 ## 项目介绍
 
