@@ -1,6 +1,6 @@
 {
   "name": "vitepress-plugin-rss",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "description": "vitepress plugin, generate feed.rss",
   "author": "sugar",
   "license": "MIT",

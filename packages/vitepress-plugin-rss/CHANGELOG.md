@@ -1,11 +1,16 @@
 # vitepress-plugin-rss
 
+## 0.2.10
+
+### Patch Changes
+
+- fix: cdata.replace error
 
 ## 0.2.9
 
 ### Patch Changes
 
-- fix: #276 remove `&ZeroWidthSpace;` 
+- fix: #276 remove `&ZeroWidthSpace;`
 
 ## 0.2.8
 
