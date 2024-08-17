@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 // 阅读时间计算方式参考
 // https://zhuanlan.zhihu.com/p/36375802
-import { useData, useRoute } from 'vitepress'
-import { computed, onMounted, ref, watch } from 'vue'
+import { useData } from 'vitepress'
+import { computed, onMounted, ref } from 'vue'
 import { ElIcon } from 'element-plus'
 import {
   AlarmClock,
@@ -11,7 +11,7 @@ import {
   EditPen,
   UserFilled
 } from '@element-plus/icons-vue'
-import { useBlogConfig, useCurrentArticle, useDocMetaInsertPosition, useDocMetaInsertSelector } from '../composables/config/blog'
+import { useAnalyzeTitles, useBlogConfig, useCurrentArticle, useDocMetaInsertPosition, useDocMetaInsertSelector } from '../composables/config/blog'
 import countWord, { formatDate, formatShowDate } from '../utils/client'
 import type { Theme } from '../composables/config'
 import BlogDocCover from './BlogDocCover.vue'
@@ -57,7 +57,6 @@ const readTime = computed(() => {
 const docMetaInsertSelector = useDocMetaInsertSelector()
 const docMetaInsertPosition = useDocMetaInsertPosition()
 
-const route = useRoute()
 const $des = ref<HTMLDivElement>()
 
 function analyze() {
@@ -100,9 +99,6 @@ onMounted(() => {
   analyze()
 })
 
-// 阅读量
-const pv = ref(6666)
-
 const currentArticle = useCurrentArticle()
 const publishDate = computed(() => {
   return formatShowDate(currentArticle.value?.meta?.date || '')
@@ -112,9 +108,6 @@ const hoverDate = computed(() => {
   return currentArticle.value?.meta?.date ? `: ${formatDate(currentArticle.value?.meta?.date)}` : ''
 })
 
-const timeTitle = computed(() =>
-  frontmatter.value.date ? '发布时间' : '最近修改时间'
-)
 const hiddenTime = computed(() => frontmatter.value.date === false)
 
 const { theme } = useData<Theme.Config>()
@@ -129,15 +122,9 @@ const currentAuthorInfo = computed(() =>
 )
 const hiddenAuthor = computed(() => frontmatter.value.author === false)
 
-watch(
-  () => route.path,
-  () => {
-    // TODO: 调用接口取数据
-    pv.value = 123
-  },
-  {
-    immediate: true
-  }
+const { topWordCount, topReadTime, inlineWordCount, inlineReadTime, authorTitle, readTimeTitle, wordCountTitle, publishDateTitle, lastUpdatedTitle, tagTitle } = useAnalyzeTitles(wordCount, readTime)
+const timeTitle = computed(() =>
+  frontmatter.value.date ? publishDateTitle.value : lastUpdatedTitle.value
 )
 </script>
 
@@ -145,16 +132,16 @@ watch(
   <div v-if="showAnalyze && readingTimePosition === 'top'" class="doc-analyze" data-pagefind-ignore="all">
     <span>
       <ElIcon><EditPen /></ElIcon>
-      字数：{{ wordCount }} 个字
+      {{ topWordCount }}
     </span>
     <span>
       <ElIcon><AlarmClock /></ElIcon>
-      预计：{{ readTime }} 分钟
+      {{ topReadTime }}
     </span>
   </div>
   <div id="hack-article-des" ref="$des" class="meta-des">
     <!-- TODO：是否需要原创？转载等标签，理论上可以添加标签解决，可以参考 charles7c -->
-    <span v-if="author && !hiddenAuthor" class="author" title="本文作者">
+    <span v-if="author && !hiddenAuthor" class="author" :title="authorTitle">
       <ElIcon><UserFilled /></ElIcon>
       <a
         v-if="currentAuthorInfo"
@@ -172,30 +159,30 @@ watch(
       <ElIcon><Clock /></ElIcon>
       {{ publishDate }}
     </span>
-    <span v-if="tags.length" class="tags" title="标签">
+    <span v-if="tags.length" class="tags" :title="tagTitle">
       <ElIcon><CollectionTag /></ElIcon>
       <a v-for="tag in tags" :key="tag" class="link" :href="`/?tag=${tag}`">{{ tag }}
       </a>
     </span>
     <template v-if="readingTimePosition === 'inline' && showAnalyze">
-      <span title="文章字数">
+      <span :title="wordCountTitle">
         <ElIcon><EditPen /></ElIcon>
-        {{ wordCount }} 个字
+        {{ inlineWordCount }}
       </span>
-      <span title="预计阅读时间">
+      <span :title="readTimeTitle">
         <ElIcon><AlarmClock /></ElIcon>
-        {{ readTime }} 分钟
+        {{ inlineReadTime }}
       </span>
     </template>
     <template v-if="readingTimePosition === 'newLine' && showAnalyze">
       <div style="width: 100%;" class="new-line-meta-des">
-        <span title="文章字数">
+        <span :title="wordCountTitle">
           <ElIcon><EditPen /></ElIcon>
-          {{ wordCount }} 个字
+          {{ inlineWordCount }}
         </span>
-        <span title="预计阅读时间">
+        <span :title="readTimeTitle">
           <ElIcon><AlarmClock /></ElIcon>
-          {{ readTime }} 分钟
+          {{ inlineReadTime }}
         </span>
       </div>
     </template>

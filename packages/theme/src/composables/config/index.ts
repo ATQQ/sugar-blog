@@ -211,6 +211,10 @@ export namespace Theme {
   }
 
   export interface ArticleConfig {
+    /**
+     * 文章分析数据展示标题
+     */
+    analyzeTitles?: ArticleAnalyzeTitles
     readingTime?: boolean
     /**
      * 阅读时间分析展示位置
@@ -218,6 +222,49 @@ export namespace Theme {
      */
     readingTimePosition?: 'inline' | 'newLine' | 'top'
     hiddenCover?: boolean
+  }
+
+  export interface ArticleAnalyzeTitles {
+    /**
+     * 字数：{{value}} 个字
+     */
+    topWordCount?: string
+    /**
+     * 预计：{{value}} 分钟
+     */
+    topReadTime?: string
+    /**
+     * {{value}} 个字
+     */
+    inlineWordCount?: string
+    /**
+     * {{value}} 分钟
+     */
+    inlineReadTime?: string
+    /**
+     * 文章字数
+     */
+    wordCount?: string
+    /**
+     * 预计阅读时间
+     */
+    readTime?: string
+    /**
+     * 本文作者
+     */
+    author?: string
+    /**
+     * 发布时间
+     */
+    publishDate?: string
+    /**
+     * 最近修改时间
+     */
+    lastUpdated?: string
+    /**
+     * 标签
+     */
+    tag?: string
   }
   export interface Alert {
     type: 'success' | 'warning' | 'info' | 'error'
@@ -368,6 +415,35 @@ export namespace Theme {
     | 'el-red'
   export interface BlogConfig {
     blog?: false
+    /**
+     * 展示日期格式化
+     */
+    formatShowDate?: {
+      /**
+       * 刚刚
+       */
+      justNow?: string
+      /**
+       * 秒前
+       */
+      secondsAgo?: string
+      /**
+       * 分钟前
+       */
+      minutesAgo?: string
+      /**
+       * 小时前
+       */
+      hoursAgo?: string
+      /**
+       * 天前
+       */
+      daysAgo?: string
+      /**
+       * 周前
+       */
+      weeksAgo?: string
+    } | ((date: Date) => string)
     /**
      * 内置一些主题色
      * @default 'vp-default'

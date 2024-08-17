@@ -1,6 +1,7 @@
 import { useData, useRoute, withBase } from 'vitepress'
 import type {
   Component,
+  ComputedRef,
   InjectionKey,
   Ref
 } from 'vue'
@@ -17,6 +18,7 @@ import {
 } from 'vue'
 import { useColorMode } from '@vueuse/core'
 
+import { replaceValue } from '../../utils/client'
 import type { Theme } from './index'
 
 const configSymbol: InjectionKey<Ref<Theme.Config>> = Symbol('theme-config')
@@ -236,4 +238,57 @@ export function useImageStyle() {
 
 export function useHomeAnalysis() {
   return inject(configSymbol)?.value?.blog?.home?.analysis
+}
+
+export function useAnalyzeTitles(wordCount: Ref<number>, readTime: ComputedRef<number>) {
+  const { article } = useBlogConfig()
+
+  const topWordCount = computed(() =>
+    replaceValue(article?.analyzeTitles?.topWordCount || '字数：{{value}} 个字', wordCount.value)
+  )
+  const topReadTime = computed(() =>
+    replaceValue(article?.analyzeTitles?.topReadTime || '预计：{{value}} 分钟', readTime.value)
+  )
+  const inlineWordCount = computed(() =>
+    replaceValue(article?.analyzeTitles?.inlineWordCount || '{{value}} 个字', wordCount.value)
+  )
+  const inlineReadTime = computed(() =>
+    replaceValue(article?.analyzeTitles?.inlineReadTime || '{{value}} 分钟', readTime.value)
+  )
+
+  const wordCountTitle = computed(() =>
+    article?.analyzeTitles?.wordCount || '文章字数'
+  )
+  const readTimeTitle = computed(() =>
+    article?.analyzeTitles?.readTime || '预计阅读时间'
+  )
+
+  const authorTitle = computed(() =>
+    article?.analyzeTitles?.author || '本文作者'
+  )
+
+  const publishDateTitle = computed(() =>
+    article?.analyzeTitles?.publishDate || '发布时间'
+  )
+
+  const lastUpdatedTitle = computed(() =>
+    article?.analyzeTitles?.lastUpdated || '最近修改时间'
+  )
+
+  const tagTitle = computed(() =>
+    article?.analyzeTitles?.tag || '标签'
+  )
+
+  return {
+    topWordCount,
+    topReadTime,
+    inlineWordCount,
+    inlineReadTime,
+    wordCountTitle,
+    readTimeTitle,
+    authorTitle,
+    publishDateTitle,
+    lastUpdatedTitle,
+    tagTitle
+  }
 }

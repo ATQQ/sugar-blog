@@ -177,3 +177,7 @@ export function wrapperCleanUrls(cleanUrls: boolean, route: string) {
   const tempUrl = route.replace(/\.html$/, '')
   return cleanUrls ? tempUrl : `${tempUrl}.html`
 }
+
+export function replaceValue(str: string, value: any) {
+  return str.replace(/\{\{value\}\}/, value)
+}
