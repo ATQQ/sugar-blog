@@ -846,7 +846,20 @@ const blogTheme = getThemeConfig({
     /**
      * 阅读时间分析展示位置
      */
-    readingTimePosition: 'inline'
+    readingTimePosition: 'inline',
+    /**
+     * 自定义一系列文案标题
+     */
+    // analyzeTitles: {
+    //   inlineWordCount: '{{value}} word counts',
+    //   inlineReadTime: '{{value}} min read time',
+    //   wordCount: 'Total word count',
+    //   readTime: 'Total read time',
+    //   author: 'Author',
+    //   publishDate: 'Published on',
+    //   lastUpdated: 'Last updated on',
+    //   tag: 'Tags',
+    // }
   }
 })
 ```
@@ -860,6 +873,52 @@ interface ArticleConfig {
    */
   readingTimePosition?: 'inline' | 'newLine' | 'top'
   hiddenCover?: boolean
+  /**
+   * 文章分析数据展示标题
+   */
+  analyzeTitles?: ArticleAnalyzeTitles
+}
+interface ArticleAnalyzeTitles {
+  /**
+   * 字数：{{value}} 个字
+   */
+  topWordCount?: string
+  /**
+   * 预计：{{value}} 分钟
+   */
+  topReadTime?: string
+  /**
+   * {{value}} 个字
+   */
+  inlineWordCount?: string
+  /**
+   * {{value}} 分钟
+   */
+  inlineReadTime?: string
+  /**
+   * 文章字数
+   */
+  wordCount?: string
+  /**
+   * 预计阅读时间
+   */
+  readTime?: string
+  /**
+   * 本文作者
+   */
+  author?: string
+  /**
+   * 发布时间
+   */
+  publishDate?: string
+  /**
+   * 最近修改时间
+   */
+  lastUpdated?: string
+  /**
+   * 标签
+   */
+  tag?: string
 }
 ```
 
@@ -1869,5 +1928,48 @@ interface ImageStyleConfig {
    */
   coverPreview?: ReplaceRule | ReplaceRule[]
 }
+```
+:::
+
+## formatShowDate
+* Type: `FormatShowDate`
+用于自定义日期显示。
+
+:::code-group
+```ts [example]
+const blogTheme = getThemeConfig({
+  formatShowDate(date) {
+    return new Date(date).toLocaleTimeString()
+  }
+})
+```
+
+```ts [type]
+type FormatShowDate = {
+  /**
+   * 刚刚
+   */
+  justNow?: string
+  /**
+   * 秒前
+   */
+  secondsAgo?: string
+  /**
+   * 分钟前
+   */
+  minutesAgo?: string
+  /**
+   * 小时前
+   */
+  hoursAgo?: string
+  /**
+   * 天前
+   */
+  daysAgo?: string
+  /**
+   * 周前
+   */
+  weeksAgo?: string
+} | ((date: Date) => string)
 ```
 :::

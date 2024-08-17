@@ -418,32 +418,7 @@ export namespace Theme {
     /**
      * 展示日期格式化
      */
-    formatShowDate?: {
-      /**
-       * 刚刚
-       */
-      justNow?: string
-      /**
-       * 秒前
-       */
-      secondsAgo?: string
-      /**
-       * 分钟前
-       */
-      minutesAgo?: string
-      /**
-       * 小时前
-       */
-      hoursAgo?: string
-      /**
-       * 天前
-       */
-      daysAgo?: string
-      /**
-       * 周前
-       */
-      weeksAgo?: string
-    } | ((date: any) => string)
+    formatShowDate?: FormatShowDate
     /**
      * 内置一些主题色
      * @default 'vp-default'
@@ -552,6 +527,32 @@ export namespace Theme {
     imageStyle?: ImageStyleConfig
   }
 
+  export type FormatShowDate = {
+    /**
+     * 刚刚
+     */
+    justNow?: string
+    /**
+     * 秒前
+     */
+    secondsAgo?: string
+    /**
+     * 分钟前
+     */
+    minutesAgo?: string
+    /**
+     * 小时前
+     */
+    hoursAgo?: string
+    /**
+     * 天前
+     */
+    daysAgo?: string
+    /**
+     * 周前
+     */
+    weeksAgo?: string
+  } | ((date: Date) => string)
   export interface BackToTop {
     /**
      * 距离顶部多少距离出现
