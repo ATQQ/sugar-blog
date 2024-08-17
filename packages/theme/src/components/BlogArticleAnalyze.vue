@@ -11,11 +11,12 @@ import {
   EditPen,
   UserFilled
 } from '@element-plus/icons-vue'
-import { useAnalyzeTitles, useBlogConfig, useCurrentArticle, useDocMetaInsertPosition, useDocMetaInsertSelector } from '../composables/config/blog'
-import countWord, { formatDate, formatShowDate } from '../utils/client'
+import { useAnalyzeTitles, useBlogConfig, useCurrentArticle, useDocMetaInsertPosition, useDocMetaInsertSelector, useFormatShowDate } from '../composables/config/blog'
+import countWord, { formatDate } from '../utils/client'
 import type { Theme } from '../composables/config'
 import BlogDocCover from './BlogDocCover.vue'
 
+const formatShowDate = useFormatShowDate()
 const { article, authorList } = useBlogConfig()
 const readingTimePosition = article?.readingTimePosition || 'inline'
 

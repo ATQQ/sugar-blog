@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { useRouter, withBase } from 'vitepress'
 import { computed } from 'vue'
-import { formatShowDate, wrapperCleanUrls } from '../utils/client'
-import { useCleanUrls, useImageStyle } from '../composables/config/blog'
+import { wrapperCleanUrls } from '../utils/client'
+import { useCleanUrls, useFormatShowDate, useImageStyle } from '../composables/config/blog'
 
 const props = defineProps<{
   route: string
@@ -16,6 +16,9 @@ const props = defineProps<{
   cover?: string | false
   pin?: number
 }>()
+
+const formatShowDate = useFormatShowDate()
+
 const showTime = computed(() => {
   return formatShowDate(props.date)
 })

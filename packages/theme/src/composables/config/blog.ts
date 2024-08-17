@@ -18,7 +18,7 @@ import {
 } from 'vue'
 import { useColorMode } from '@vueuse/core'
 
-import { replaceValue } from '../../utils/client'
+import { formatDate, replaceValue } from '../../utils/client'
 import type { Theme } from './index'
 
 const configSymbol: InjectionKey<Ref<Theme.Config>> = Symbol('theme-config')
@@ -291,4 +291,52 @@ export function useAnalyzeTitles(wordCount: Ref<number>, readTime: ComputedRef<n
     lastUpdatedTitle,
     tagTitle
   }
+}
+
+export function useFormatShowDate() {
+  const blog = useBlogConfig()
+  if (typeof blog.formatShowDate === 'function') {
+    return blog.formatShowDate
+  }
+
+  function formatShowDate(date: any) {
+    const source = +new Date(date)
+    const now = +new Date()
+    const diff = now - source
+    const oneSeconds = 1000
+    const oneMinute = oneSeconds * 60
+    const oneHour = oneMinute * 60
+    const oneDay = oneHour * 24
+    const oneWeek = oneDay * 7
+
+    const langMap = {
+      justNow: '刚刚',
+      secondsAgo: '秒前',
+      minutesAgo: '分钟前',
+      hoursAgo: '小时前',
+      daysAgo: '天前',
+      weeksAgo: '周前',
+      ...blog.formatShowDate
+    }
+    const mapValue = langMap
+
+    if (diff < 10) {
+      return mapValue.justNow
+    }
+    if (diff < oneMinute) {
+      return `${Math.floor(diff / oneSeconds)}${mapValue.secondsAgo}`
+    }
+    if (diff < oneHour) {
+      return `${Math.floor(diff / oneMinute)}${mapValue.minutesAgo}`
+    }
+    if (diff < oneDay) {
+      return `${Math.floor(diff / oneHour)}${mapValue.hoursAgo}`
+    }
+    if (diff < oneWeek) {
+      return `${Math.floor(diff / oneDay)}${mapValue.daysAgo}`
+    }
+
+    return formatDate(new Date(date), 'yyyy-MM-dd')
+  }
+  return formatShowDate
 }

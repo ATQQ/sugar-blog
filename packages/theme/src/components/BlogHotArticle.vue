@@ -2,9 +2,11 @@
 import { computed, ref } from 'vue'
 import { ElButton } from 'element-plus'
 import { useRouter, withBase } from 'vitepress'
-import { useArticles, useBlogConfig, useCleanUrls } from '../composables/config/blog'
-import { formatShowDate, wrapperCleanUrls } from '../utils/client'
+import { useArticles, useBlogConfig, useCleanUrls, useFormatShowDate } from '../composables/config/blog'
+import { wrapperCleanUrls } from '../utils/client'
 import { fireSVG } from '../constants/svg'
+
+const formatShowDate = useFormatShowDate()
 
 const { hotArticle: _hotArticle } = useBlogConfig()
 

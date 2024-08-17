@@ -2,10 +2,12 @@
 import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter, withBase } from 'vitepress'
 import { ElButton } from 'element-plus'
-import { formatShowDate, wrapperCleanUrls } from '../utils/client'
-import { useArticles, useBlogConfig, useCleanUrls } from '../composables/config/blog'
+import { wrapperCleanUrls } from '../utils/client'
+import { useArticles, useBlogConfig, useCleanUrls, useFormatShowDate } from '../composables/config/blog'
 import { recommendSVG } from '../constants/svg'
 import type { Theme } from '../composables/config/index'
+
+const formatShowDate = useFormatShowDate()
 
 const { recommend: _recommend } = useBlogConfig()
 

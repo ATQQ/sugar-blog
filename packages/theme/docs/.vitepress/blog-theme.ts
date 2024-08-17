@@ -12,6 +12,21 @@ const RSS: Theme.RSSOptions = {
 }
 
 export const blogTheme = getThemeConfig({
+  article: {
+    analyzeTitles: {
+      inlineWordCount: '{{value}} word counts',
+      inlineReadTime: '{{value}} min read time',
+      wordCount: 'Total word count',
+      readTime: 'Total read time',
+      author: 'Author',
+      publishDate: 'Published on',
+      lastUpdated: 'Last updated on',
+      tag: 'Tags',
+    }
+  },
+  formatShowDate(date) {
+    return new Date(date).toLocaleTimeString()
+  },
   search: {
     pageResultCount: 5
   },

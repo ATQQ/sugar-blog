@@ -443,7 +443,7 @@ export namespace Theme {
        * 周前
        */
       weeksAgo?: string
-    } | ((date: Date) => string)
+    } | ((date: any) => string)
     /**
      * 内置一些主题色
      * @default 'vp-default'
