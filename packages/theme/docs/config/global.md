@@ -1939,7 +1939,13 @@ interface ImageStyleConfig {
 ```ts [example]
 const blogTheme = getThemeConfig({
   formatShowDate(date) {
-    return new Date(date).toLocaleTimeString()
+    return new Date(date).toLocaleString()
+  }
+})
+
+const blogTheme = getThemeConfig({
+  formatShowDate: {
+    minutesAgo: ' minutes ago',
   }
 })
 ```
@@ -1973,3 +1979,7 @@ type FormatShowDate = {
 } | ((date: Date) => string)
 ```
 :::
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/1954ec12b73222a210e85b75aa48f777)
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/76a88adf6b81ed95b45fdb03c5ea2279)

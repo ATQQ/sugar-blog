@@ -12,21 +12,22 @@ const RSS: Theme.RSSOptions = {
 }
 
 export const blogTheme = getThemeConfig({
-  article: {
-    analyzeTitles: {
-      inlineWordCount: '{{value}} word counts',
-      inlineReadTime: '{{value}} min read time',
-      wordCount: 'Total word count',
-      readTime: 'Total read time',
-      author: 'Author',
-      publishDate: 'Published on',
-      lastUpdated: 'Last updated on',
-      tag: 'Tags',
-    }
-  },
-  formatShowDate(date) {
-    return new Date(date).toLocaleTimeString()
-  },
+  // article: {
+  //   analyzeTitles: {
+  //     inlineWordCount: '{{value}} word counts',
+  //     inlineReadTime: '{{value}} min read time',
+  //     wordCount: 'Total word count',
+  //     readTime: 'Total read time',
+  //     author: 'Author',
+  //     publishDate: 'Published on',
+  //     lastUpdated: 'Last updated on',
+  //     tag: 'Tags',
+  //   }
+  // },
+  // formatShowDate: {
+  //   justNow: '不久前',
+  //   minutesAgo: ' minutes ago',
+  // },
   search: {
     pageResultCount: 5
   },
