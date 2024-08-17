@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.4.9） ⏰ 2024/07/29：依赖升级，sass 警告信息优化
+description: 最近更新（v0.4.10） ⏰ 2024/08/17：依赖升级，添加自定义文案配置
 author: 粥里有勺糖
 top: 2
 tag: 日志
@@ -26,6 +26,15 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.4.10 (2024/08/17)
+
+### Patch Changes
+
+- feat: support custom analyze titles
+- feat: support custom formatShowDate
+- Updated dependencies
+  - vitepress-plugin-rss@0.2.10
 
 ## 0.4.9 (2024/07/29)
 

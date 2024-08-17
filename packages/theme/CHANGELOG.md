@@ -5,9 +5,10 @@
 ### Patch Changes
 
 - feat: support custom analyze titles
+- feat: support custom formatShowDate
 - Updated dependencies
-  - vitepress-plugin-pagefind@0.4.10
   - vitepress-plugin-rss@0.2.10
+
 ## 0.4.9
 
 ### Patch Changes
