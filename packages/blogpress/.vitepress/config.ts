@@ -107,6 +107,12 @@ const blogTheme = getThemeConfig({
   friend: {
     list: [
       {
+        nickname: '七仔的博客',
+        des: '记录自己在写程序过程中的发现、问题、成果',
+        url: 'https://www.baby7blog.com',
+        avatar: 'https://www.baby7blog.com/favicon.ico'
+      },
+      {
         nickname: '茂茂物语',
         des: '茂茂的成长之路，包含前端常用知识、源码阅读笔记、各种奇淫技巧、日常提效工具等',
         url: 'https://notes.fe-mm.com',
