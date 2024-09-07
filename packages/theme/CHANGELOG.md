@@ -1,5 +1,11 @@
 # @sugarat/theme
 
+## 0.4.11
+
+### Patch Changes
+
+- feat: 支持隐藏recommend部分的日期
+
 ## 0.4.10
 
 ### Patch Changes

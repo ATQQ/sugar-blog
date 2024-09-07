@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.76
+
+### Patch Changes
+- chore: use theme@0.4.11
+- chore: use vitepress@1.3.4
+
 ## 0.0.75
 
 ### Patch Changes

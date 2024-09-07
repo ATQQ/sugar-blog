@@ -721,6 +721,7 @@ export default defineConfig({
 ::: code-group
 
 ```ts [default]
+// 默认配置如下，即默认生效配置，无需再设置
 const blogTheme = getThemeConfig({
   recommend: {
     title: '🔍 相关文章',
@@ -728,7 +729,9 @@ const blogTheme = getThemeConfig({
     pageSize: 9,
     empty: '暂无相关文章',
     style: 'sidebar',
-    sort: 'date'
+    sort: 'date',
+    showDate: true,
+    showNum: true
   }
 })
 ```
@@ -775,6 +778,16 @@ interface RecommendArticle {
    * @default 'sidebar'
    */
   style?: 'card' | 'sidebar'
+  /**
+   * 是否在左侧显示日期
+   * @default true
+   */
+  showDate?: boolean
+  /**
+   * 是否在左侧展示序号
+   * @default true
+   */
+  showNum?: boolean
 }
 ```
 

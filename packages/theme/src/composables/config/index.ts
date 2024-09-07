@@ -184,6 +184,16 @@ export namespace Theme {
      * @default 'sidebar'
      */
     style?: 'card' | 'sidebar'
+    /**
+     * 是否在左侧显示日期
+     * @default true
+     */
+    showDate?: boolean
+    /**
+     * 是否在左侧展示序号
+     * @default true
+     */
+    showNum?: boolean
   }
 
   export interface HomeAnalysis {
@@ -552,7 +562,7 @@ export namespace Theme {
      * 周前
      */
     weeksAgo?: string
-  } | ((date: Date) => string)
+  } | ((date: Date | string) => string)
   export interface BackToTop {
     /**
      * 距离顶部多少距离出现
