@@ -29,12 +29,16 @@ export default defineConfig({
         link: '/changelog'
       },
       {
-        text: '个人作品展示',
-        link: '/work'
+        text: '关于',
+        link: '/about'
       },
       {
         text: '案例',
         link: '/example/'
+      },
+      {
+        text: '个人作品展示',
+        link: '/work'
       },
       {
         text: '线上作品',
