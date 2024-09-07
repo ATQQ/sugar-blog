@@ -5,6 +5,7 @@
 ### Patch Changes
 
 - feat: 支持隐藏recommend部分的日期
+- feat: PC 文章列表 title 添加 span 包裹
 
 ## 0.4.10
 
