@@ -7,6 +7,13 @@ description: 记录一下每天干的杂事，写的杂七杂八的代码，用�
 
 [[toc]]
 
+## 2024/09/09
+### VitePress 51la 插件
+
+*[vitepress-plugin-51la](https://www.npmjs.com/package/vitepress-plugin-51la)*
+
+* 为 `VitePress` 站点引入 [51.la](https://v6.51.la/) 的网站数据统计能力。
+
 ## 2024/07/27
 ### 周刊自动化创建工具
 
