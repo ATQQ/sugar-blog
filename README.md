@@ -6,7 +6,7 @@
 
 ## 仓库介绍
 
-这是一个 monorepo 仓库，目前有如下四个部分
+这是一个 monorepo 仓库，包含如下内容
 * [blogpress](./packages/blogpress/)：博客内容本身
 * [@sugarat/theme](./packages/theme/)：博客分离出的通用 `VitePress` 主题
 * [@sugarat/theme-shared](./packages/shared/)：`VitePress` 主题相关的工具方法
