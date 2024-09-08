@@ -1,7 +1,7 @@
-import process from 'node:process'
 import { getThemeConfig } from '@sugarat/theme/node'
 import type { Theme } from '@sugarat/theme'
 import { defineConfig } from 'vitepress'
+import { La51Plugin } from 'vitepress-plugin-51la'
 
 const baseUrl = 'https://sugarat.top'
 const weekly = `${baseUrl}/weekly`
@@ -243,27 +243,6 @@ const blogTheme = getThemeConfig({
   },
 })
 
-const extraHead: any
-  = process.env.NODE_ENV === 'production'
-    ? [
-        [
-          'script',
-          {
-            charset: 'UTF-8',
-            id: 'LA_COLLECT',
-            defer: true,
-            // src: '//sugarat.s3.bitiful.net/npm/51la-analysis-sdk/js-sdk-pro.min.js',
-            src: '//sdk.51.la/js-sdk-pro.min.js'
-          }
-        ],
-        [
-          'script',
-          {},
-          'document.addEventListener(\'DOMContentLoaded\', function() {typeof LA !==\'undefined\' && LA.init({id: "Jgmg5avjAUvoyePS",ck: "Jgmg5avjAUvoyePS",hashMode: true})});'
-        ],
-      ]
-    : []
-
 export default defineConfig({
   extends: blogTheme,
   metaChunk: true,
@@ -300,13 +279,19 @@ export default defineConfig({
       'link',
       { rel: 'apple-touch-icon', href: '/favicon.ico', sizes: '180x180' }
     ],
-    ...extraHead
   ],
   vite: {
     server: {
       port: 4000,
       host: '0.0.0.0'
-    }
+    },
+    plugins: [
+      La51Plugin({
+        id: 'Jgmg5avjAUvoyePS',
+        ck: 'Jgmg5avjAUvoyePS',
+        importMode: 'async'
+      })
+    ]
   },
   vue: {
     template: {
