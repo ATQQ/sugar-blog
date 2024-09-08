@@ -1,13 +1,34 @@
 ---
 sticky: 1
+top: 2
+date: 2023-02-5 14:00:00
+sidebar: false
 ---
 # 关于主题
 
 简约风的 Vitepress 博客主题，基于 [vitepress](https://vitepress.dev/) 的自定义主题实现
 
-![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE3MDUxOTMwMw==673170519303)
+## 为什么做了这个
+笔者的博客之前是使用 [VuePress](https://vuepress.vuejs.org/) + [reco主题](https://vuepress-theme-reco.recoluan.com/)
 
-更多细节见 https://theme.sugarat.top
+随着博客文章数量越来越多（md文件已经300+了），博客本地启动和构建越来越来慢了emmm
+
+当然使用频率最高的就是本地启动，构建是个相对比较低频的动作。
+
+恰好此时 [VitePress](https://vitepress.dev/) 也比较成熟了（alpha），相比 VuePress 更加的简洁，可玩性强，上手成本也低。
+
+按照官方的给的定位，VitePress 主打是主题（个人感觉就像[Hexo](https://hexo.io/zh-cn/)丰富多彩的主题一样），不提供插件系统
+
+![](https://img.cdn.sugarat.top/mdImg/MTY3NTU3MjY0MjgzNQ==675572642835)
+
+在笔者进行博客迁移的时候，将主题分离了出来，可供单独使用
+
+新旧对比
+
+![新旧博客对比](https://img.cdn.sugarat.top/mdImg/MTY3NTU3NDk0OTI2Ng==675574949266)
+
+风格借鉴了 [reco](https://vuepress-theme-reco.recoluan.com/) ，[掘金](https://juejin.cn/)，[surmon](https://surmon.me/)等等，组件部分用了 [element-plus](https://element-plus.gitee.io/zh-CN/)
+
 
 ## 已支持功能
 介绍一下主要的，非所有
@@ -32,11 +53,8 @@ sticky: 1
 * 更多可定制的主题样式
 
 ## 规划中功能
-* Valine 评论系统
-* 文章合集（类似于聚合一个内容专题）
-* 文章时间线页面支持
-* 背景图自动更换
-* 首屏铺满slogan，参考reco
+
+转到 [🥔 TODO](./todo.md) 列表
 
 ## 参考项目
 或多或少借鉴&使用了如下的一下开源项目，博客，网站的能力或者UI样式
@@ -51,6 +69,14 @@ sticky: 1
 * [vitepress-blog-zaun](https://github.com/clark-cui/vitepress-blog-zaun)
 * [vuejs/blog](https://github.com/vuejs/blog/tree/main)
 * [列表无限滚动轮播效果](https://code.juejin.cn/pen/7145007064350195748)
+
+## 贡献者们
+
+感谢所有贡献过代码的 [开发者](https://github.com/ATQQ/sugar-blog/graphs/contributors)。
+
+<a target="_blank" href="https://github.com/atqq/sugar-blog/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=atqq/sugar-blog" />
+</a>
 
 ## 主题相关资源
 * 主题地址：https://theme.sugarat.top/

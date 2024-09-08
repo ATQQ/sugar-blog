@@ -82,7 +82,7 @@ const resultCover = computed(() => {
       <div class="info-part">
         <!-- 标题 -->
         <p class="title pc-visible">
-          {{ title }}
+          <span>{{ title }}</span>
         </p>
         <!-- 简短描述 -->
         <p v-show="!descriptionHTML && !!description" class="description">

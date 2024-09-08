@@ -1,0 +1,46 @@
+{
+  "name": "vitepress-plugin-51la",
+  "version": "0.1.0",
+  "description": "vitepress plugin, 51.LA网站统计V6",
+  "author": "sugar",
+  "license": "MIT",
+  "homepage": "https://github.com/ATQQ/sugar-blog/tree/master/packages/vitepress-plugin-51la",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ATQQ/sugar-blog.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ATQQ/sugar-blog/issues"
+  },
+  "keywords": [
+    "vitepress",
+    "plugin",
+    "51",
+    "51la",
+    "网站数据统计",
+    "网站统计"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "npx tsup src/index.ts --dts --watch --format esm,cjs --external vitepress",
+    "build": "npx tsup src/index.ts --dts --format esm,cjs --external vitepress --silent"
+  },
+  "peerDependencies": {
+    "vitepress": "^1"
+  },
+  "devDependencies": {
+    "vite": "^5",
+    "vitepress": "^1.3.4"
+  }
+}

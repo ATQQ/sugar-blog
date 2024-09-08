@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.4.10） ⏰ 2024/08/17：依赖升级，添加自定义文案配置
+description: 最近更新（v0.4.11） ⏰ 2024/09/08：依赖升级，支持隐藏左侧推荐文章的日期
 author: 粥里有勺糖
 top: 2
 tag: 日志
@@ -26,6 +26,14 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.4.11 (2024/09/08)
+
+### Patch Changes
+
+- feat: 支持隐藏 recommend 部分的日期
+- feat: PC 文章列表 title 添加 span 包裹
+- chore: 新增 [vitepress-plugin-51la](https://github.com/ATQQ/sugar-blog/tree/master/packages/vitepress-plugin-51la) 插件
 
 ## 0.4.10 (2024/08/17)
 

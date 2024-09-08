@@ -8,11 +8,12 @@
 
 这是一个 monorepo 仓库，目前有如下四个部分
 * [blogpress](./packages/blogpress/)：博客内容本身
-* [@sugarat/theme](./packages/theme/)：博客分离出的通用VitePress主题
-* [@sugarat/theme-shared](./packages/shared/)：VitePress 主题相关的工具方法
-* [创建主题模板项目CLI](./packages/create-theme/)：用于快速创建和作者一样风格的博客
-* [vitepress-plugin-pagefind](./packages/vitepress-plugin-pagefind/)：基于pagefind实现的VitePress离线全文搜索支持插件
-* [vitepress-plugin-rss](./packages/vitepress-plugin-rss/)：基于 feed 实现的 VitePress RSS 支持插件
+* [@sugarat/theme](./packages/theme/)：博客分离出的通用 `VitePress` 主题
+* [@sugarat/theme-shared](./packages/shared/)：`VitePress` 主题相关的工具方法
+* [@sugarat/create-theme](./packages/create-theme/)：用于快速创建和作者一样风格的博客
+* [vitepress-plugin-pagefind](./packages/vitepress-plugin-pagefind/)：基于 pagefind 实现的 `VitePress` 离线全文搜索支持插件
+* [vitepress-plugin-rss](./packages/vitepress-plugin-rss/)：基于 feed 实现的 `VitePress` RSS 支持插件
+* [vitepress-plugin-51la](./packages/vitepress-plugin-51la/)：为 `VitePress` 站点引入 [51.la](https://v6.51.la/) 的网站数据统计能力。
 
 ## 快速创建博客模板
 支持多种包管理工具
