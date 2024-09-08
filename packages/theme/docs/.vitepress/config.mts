@@ -1,7 +1,8 @@
 import path from 'node:path'
 import { defineConfig } from 'vitepress'
+import { La51Plugin } from 'vitepress-plugin-51la'
 import packageJSON from '../../package.json'
-import { blogTheme, extraHead } from './blog-theme'
+import { blogTheme } from './blog-theme'
 
 export default defineConfig({
   extends: blogTheme,
@@ -13,13 +14,18 @@ export default defineConfig({
   lang: 'zh-cn',
   title: '@sugarat/theme',
   description: '粥里有勺糖的博客主题，基于 vitepress 实现',
-  head: [...extraHead],
   vite: {
     resolve: {
       alias: {
         '@sugarat/theme': path.join(__dirname, '../../src/index.ts')
       }
     },
+    plugins: [
+      La51Plugin({
+        id: 'Jyzk2AcXA3JsYbrG',
+        ck: 'Jyzk2AcXA3JsYbrG'
+      })
+    ]
   },
   themeConfig: {
     logo: '/logo.png',

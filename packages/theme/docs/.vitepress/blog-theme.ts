@@ -1,4 +1,3 @@
-import process from 'node:process'
 import type { Theme } from '@sugarat/theme'
 import { getThemeConfig } from '@sugarat/theme/node'
 import workConfig from './works'
@@ -144,22 +143,3 @@ export const blogTheme = getThemeConfig({
     copyright: 'MIT License | 粥里有勺糖',
   }
 })
-
-export const extraHead: any
-  = process.env.NODE_ENV === 'production'
-    ? [
-        [
-          'script',
-          {
-            charset: 'UTF-8',
-            id: 'LA_COLLECT',
-            src: '//sdk.51.la/js-sdk-pro.min.js'
-          }
-        ],
-        [
-          'script',
-          {},
-          'LA.init({id:"Jyzk2AcXA3JsYbrG",ck:"Jyzk2AcXA3JsYbrG",hashMode:true})'
-        ]
-      ]
-    : []
