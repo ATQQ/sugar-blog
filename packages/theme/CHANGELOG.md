@@ -4,8 +4,9 @@
 
 ### Patch Changes
 
-- feat: 支持隐藏recommend部分的日期
+- feat: 支持隐藏 recommend 部分的日期
 - feat: PC 文章列表 title 添加 span 包裹
+- chore: 新增 [vitepress-plugin-51la](https://github.com/ATQQ/sugar-blog/tree/master/packages/vitepress-plugin-51la) 插件
 
 ## 0.4.10
 
