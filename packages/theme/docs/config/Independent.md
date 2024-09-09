@@ -3,7 +3,7 @@ description: 介绍如何在存量VitePress中引入使用或者使用主题中�
 readingTime: false
 tag:
  - 配置
-top: 2
+top: 3
 recommend: 2
 outline: [2,3]
 ---

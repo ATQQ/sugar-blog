@@ -1,6 +1,5 @@
 ---
 sticky: 1
-top: 2
 date: 2023-02-5 14:00:00
 sidebar: false
 ---

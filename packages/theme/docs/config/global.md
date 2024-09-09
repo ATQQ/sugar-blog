@@ -4,7 +4,7 @@ title: 🔧 主题配置 - 全局
 readingTime: false
 tag:
  - 配置
-top: 2
+top: 3
 recommend: 2
 outline: [2,3]
 ---
