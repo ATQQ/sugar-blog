@@ -27,6 +27,12 @@ bun install vitepress@latest
 ```
 :::
 
+## 0.4.12 (2024/09/13)
+
+### Patch Changes
+
+- fix: utc -number invalid date
+
 ## 0.4.11 (2024/09/08)
 
 ### Patch Changes
