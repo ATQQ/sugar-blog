@@ -193,7 +193,9 @@ export declare namespace Announcement {
     link: string
     content: string
     style?: string
-    props?: any
+    props?: {
+      type: 'primary' | 'success' | 'danger' | 'warning' | 'info' | 'text' | 'default'
+    }
   }
 
   export type Value = Title | Text | Image | Button
