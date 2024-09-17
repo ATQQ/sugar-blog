@@ -35,8 +35,10 @@ description: 主题在近1年多的时间里集成了非常的多功能了，接
 ### [vitepress-plugin-51la](https://www.npmjs.com/package/vitepress-plugin-51la)
 * 提供一键接入 [51.LA](https://v6.51.la/) 网站数据统计分析的功能。
 
+### [vitepress-plugin-announcement](https://www.npmjs.com/package/vitepress-plugin-announcement)
+* 提供全局公告窗口。
+
 ## 规划中的插件
-* 公告
 * 评论
 * 图片预览
 * 标签页

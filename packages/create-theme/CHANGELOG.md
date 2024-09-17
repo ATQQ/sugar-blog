@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.78
+
+### Patch Changes
+
+- chore: use theme@0.4.13
+
 ## 0.0.77
 
 ### Patch Changes

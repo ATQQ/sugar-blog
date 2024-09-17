@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.4.11） ⏰ 2024/09/08：依赖升级，支持隐藏左侧推荐文章的日期
+description: 最近更新（v0.4.13） ⏰ 2024/09/17：分离公告插件
 author: 粥里有勺糖
 top: 3
 tag: 日志
@@ -26,6 +26,12 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.4.13 (2024/09/17)
+
+### Patch Changes
+
+- feat: split buildin plugin [vitepress-plugin-announcement](https://www.npmjs.com/package/vitepress-plugin-announcement)
 
 ## 0.4.12 (2024/09/13)
 
