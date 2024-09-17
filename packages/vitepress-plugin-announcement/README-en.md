@@ -2,6 +2,8 @@
 
 [简体中文](./README.md) | English
 
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/7af94a65e3b4dd05e61e3411daba7fdd)
+
 ## Usage
 Install dependencies `pnpm/npm/yarn`
 ```sh
@@ -20,21 +22,35 @@ export default defineConfig({
       AnnouncementPlugin({
         title: '公告',
         body: [
-          { type: 'text', content: '下方插入了二维码' },
+          { type: 'text', content: '👇公众号👇 ---👇 赞赏 👇' },
           {
             type: 'image',
-            src: 'https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210~fmt.webp'
+            src: 'https://cdn.upyun.sugarat.top/mdImg/sugar/85c9554d023be2fcc5aab94effeef033',
+            style: 'display: inline-block;width:46%;padding-right:6px'
+          },
+          {
+            type: 'image',
+            src: 'https://cdn.upyun.sugarat.top/mdImg/sugar/54eacf3e730af9c1e3542a4800a422ea',
+            style: 'display: inline-block;width:46%;padding-left:6px'
+          }
+        ],
+        footer: [
+          {
+            type: 'text',
+            content: 'footer content'
           },
           {
             type: 'button',
             content: '作者博客',
             link: 'https://sugarat.top'
           },
-        ],
-        footer: [
           {
-            type: 'text',
-            content: '底部内容'
+            type: 'button',
+            content: '博客主题',
+            link: 'https://theme.sugarat.top',
+            props: {
+              type: 'success'
+            }
           },
         ],
       })
@@ -64,6 +80,23 @@ AnnouncementPlugin({
 ```js
 AnnouncementPlugin({
   twinkle: true
+})
+```
+
+### button
+```js
+AnnouncementPlugin({
+  title: '公告',
+  body: [
+    {
+      type: 'button',
+      content: '博客主题',
+      link: 'https://theme.sugarat.top',
+      props: {
+        type: 'success'
+      }
+    },
+  ],
 })
 ```
 

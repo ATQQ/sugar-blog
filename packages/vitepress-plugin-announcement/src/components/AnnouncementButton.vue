@@ -3,15 +3,13 @@ import { computed } from 'vue'
 
 const props = defineProps<{
   type: 'primary' | 'success' | 'danger' | 'warning' | 'info' | 'text' | 'default'
-  onClick?: () => void
-  style?: Record<string, any>
 }>()
 
 const type = computed(() => props.type ?? 'primary')
 </script>
 
 <template>
-  <button class="announcement-button" :class="`announcement-button-${type}`" @click="props.onClick">
+  <button class="announcement-button" :class="`announcement-button-${type}`">
     <span>
       <slot />
     </span>
