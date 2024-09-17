@@ -37,7 +37,7 @@
     "dev:component": "tsc --sourcemap -w --preserveWatchOutput -p src/components",
     "dev:watch": "node scripts/watchAndCopy.mjs",
     "build": "pnpm run /^build:.*/",
-    "build:plugin": "npx tsup src/index.ts --dts --format esm,cjs --external vitepress",
+    "build:plugin": "npx tsup src/index.ts --dts --format esm,cjs --external vitepress --silent",
     "build:component": "tsc -p src/components && node scripts/copyComponents.mjs"
   },
   "peerDependencies": {

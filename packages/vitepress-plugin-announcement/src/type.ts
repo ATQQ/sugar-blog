@@ -1,37 +1,6 @@
 import type { Ref } from 'vue'
 import type { Route } from 'vitepress'
 
-// eslint-disable-next-line ts/no-namespace
-export declare namespace Announcement {
-  export interface Title {
-    type: 'title'
-    content: string
-    style?: string
-  }
-
-  export interface Text {
-    type: 'text'
-    content: string
-    style?: string
-  }
-
-  export interface Image {
-    type: 'image'
-    src: string
-    style?: string
-  }
-
-  export interface Button {
-    type: 'button'
-    link: string
-    content: string
-    style?: string
-    props?: any
-  }
-
-  export type Value = Title | Text | Image | Button
-}
-
 export interface AnnouncementOptions {
   /**
    * 公告标题
@@ -96,4 +65,35 @@ export interface AnnouncementOptions {
    * @param to 切换到的目标路由
    */
   onRouteChanged?: (to: Route, show: Ref<boolean>) => void
+}
+
+// eslint-disable-next-line ts/no-namespace
+export declare namespace Announcement {
+  export interface Title {
+    type: 'title'
+    content: string
+    style?: string
+  }
+
+  export interface Text {
+    type: 'text'
+    content: string
+    style?: string
+  }
+
+  export interface Image {
+    type: 'image'
+    src: string
+    style?: string
+  }
+
+  export interface Button {
+    type: 'button'
+    link: string
+    content: string
+    style?: string
+    props?: any
+  }
+
+  export type Value = Title | Text | Image | Button
 }
