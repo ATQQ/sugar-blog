@@ -1,5 +1,11 @@
 # @sugarat/theme
 
+## 0.4.13
+
+### Patch Changes
+
+- feat: split buildin plugin [vitepress-plugin-announcement](https://www.npmjs.com/package/vitepress-plugin-announcement)
+
 ## 0.4.12
 
 ### Patch Changes

@@ -1021,9 +1021,13 @@ interface Alert {
 
 ## popover
 
-设置一个全局的公告弹窗，支持设置图片，文字，按钮（[el-button](https://element-plus.gitee.io/zh-CN/component/button.html)）跳链
+设置一个全局的公告弹窗，支持设置图片，文字，按钮，跳链
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY3NDk5NDY3Nzc5NQ==674994677795)
+
+::: tip 公共已拆分为独立插件
+详细配置和使用方法可以见插件文档：[vitepress-plugin-announcement](https://github.com/ATQQ/sugar-blog/blob/master/packages/vitepress-plugin-announcement/README.md)
+:::
 
 ::: code-group
 
@@ -1064,40 +1068,68 @@ const blogTheme = getThemeConfig({
 ```
 
 ```ts [type]
-interface Popover {
+import type { Ref } from 'vue'
+import type { Route } from 'vitepress'
+
+export interface AnnouncementOptions {
+  /**
+   * 公告标题
+   */
   title: string
   /**
-   * 细粒度的时间控制
-   * 默认展示时间，-1 只展示1次，其它数字为每次都展示，一定时间后自动消失，0为不自动消失
-   * 配置改变时，会重新触发展示
+   * 公告主要内容
    */
-  duration: number
+  body?: Announcement.Value[]
+  /**
+   * 公告底部内容
+   */
+  footer?: Announcement.Value[]
+
+  /**
+   * 是否只在浏览器环境渲染组件
+   * @default false
+   * @doc https://vitepress.dev/guide/ssr-compat#clientonly
+   */
+  clientOnly?: boolean
+
+  /**
+   * 展示时机控制
+   *
+   * -1 只展示1次；>= 0 每次都展示，一定时间后自动消失，0 不自动消失
+   *
+   * 配置发生改变时，会重新触发此规则
+   * @default 0
+   */
+  duration?: number
+
   /**
    * 移动端自动最小化
    * @default false
    */
   mobileMinify?: boolean
-  body?: BlogPopover.Value[]
-  footer?: BlogPopover.Value[]
+
   /**
-   * 手动重新打开
-   */
-  reopen?: boolean
-  /**
-   * 设置展示图标，svg
-   * @recommend https://iconbuddy.app/search?q=fire
-   */
-  icon?: string
-  /**
-   * 设置关闭图标，svg
-   * @recommend https://iconbuddy.app/search?q=fire
-   */
-  closeIcon?: string
-  /**
-   * 是否打开闪烁提示，通常需要和 reopen 搭配使用
+   * 支持重新打开（右上角 icon 悬浮）
    * @default true
    */
+  reopen?: boolean
+
+  /**
+   * 是否打开闪烁提示，通常需要和 reopen 搭配使用
+   * @default false
+   */
   twinkle?: boolean
+
+  /**
+   * 设置展示图标，svg
+   */
+  icon?: string
+
+  /**
+   * 设置关闭图标，svg
+   */
+  closeIcon?: string
+
   /**
    * 自定义展示策略
    * @param to 切换到的目标路由
@@ -1105,7 +1137,7 @@ interface Popover {
   onRouteChanged?: (to: Route, show: Ref<boolean>) => void
 }
 
-export namespace BlogPopover {
+export declare namespace Announcement {
   export interface Title {
     type: 'title'
     content: string
@@ -1129,7 +1161,7 @@ export namespace BlogPopover {
     link: string
     content: string
     style?: string
-    props?: InstanceType<typeof ElButton>['$props']
+    props?: any
   }
 
   export type Value = Title | Text | Image | Button

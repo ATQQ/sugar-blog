@@ -102,7 +102,8 @@ const blogTheme = getThemeConfig({
         link: '/group',
       }
     ],
-    duration: -1
+    duration: -1,
+    twinkle: true
   },
   friend: {
     list: [

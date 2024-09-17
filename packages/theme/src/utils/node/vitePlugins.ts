@@ -8,6 +8,7 @@ import {
 import { RssPlugin } from 'vitepress-plugin-rss'
 import type { PluginOption } from 'vite'
 import { joinPath } from '@sugarat/theme-shared'
+import { AnnouncementPlugin } from 'vitepress-plugin-announcement'
 import type { Theme } from '../../composables/config/index'
 import { _require } from './mdPlugins'
 import { themeReloadPlugin } from './hot-reload-plugin'
@@ -49,6 +50,10 @@ export function getVitePlugins(cfg: Partial<Theme.BlogConfig> = {}) {
   // 内置支持RSS
   if (cfg?.RSS) {
     ;[cfg?.RSS].flat().forEach(rssConfig => plugins.push(RssPlugin(rssConfig)))
+  }
+
+  if (cfg?.popover) {
+    plugins.push(AnnouncementPlugin(cfg.popover))
   }
   return plugins
 }

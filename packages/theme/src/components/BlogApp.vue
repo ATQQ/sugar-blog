@@ -11,7 +11,6 @@ import BlogSidebar from './BlogSidebar.vue'
 import BlogImagePreview from './BlogImagePreview.vue'
 import BlogArticleAnalyze from './BlogArticleAnalyze.vue'
 import BlogAlert from './BlogAlert.vue'
-import BlogPopover from './BlogPopover.vue'
 import BlogFooter from './BlogFooter.vue'
 import BlogHomeHeaderAvatar from './BlogHomeHeaderAvatar.vue'
 import BlogBackToTop from './BlogBackToTop.vue'
@@ -40,7 +39,6 @@ const openTransition = useDarkTransitionConfig()
       <ClientOnly>
         <BlogOml2d />
         <BlogAlert />
-        <BlogPopover />
       </ClientOnly>
     </template>
 

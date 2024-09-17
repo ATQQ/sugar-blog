@@ -1,6 +1,6 @@
 {
   "name": "@sugarat/theme",
-  "version": "0.4.12",
+  "version": "0.4.13",
   "description": "简约风的 Vitepress 博客主题，sugarat vitepress blog theme",
   "author": "sugar",
   "license": "MIT",
@@ -58,6 +58,7 @@
     "oh-my-live2d": "^0.19.3",
     "swiper": "^11.1.1",
     "vitepress-markdown-timeline": "^1.2.1",
+    "vitepress-plugin-announcement": "workspace:*",
     "vitepress-plugin-mermaid": "2.0.13",
     "vitepress-plugin-pagefind": "workspace:*",
     "vitepress-plugin-rss": "workspace:*",

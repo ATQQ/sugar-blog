@@ -2,7 +2,15 @@
 pagefind-indexed: false
 publish: false
 ---
+
+## 2.0.60
+### Patch Changes
+
+- Updated dependencies
+  - @sugarat/theme@0.4.13
+
 ## 2.0.59
+
 ### Patch Changes
 
 - Updated dependencies
