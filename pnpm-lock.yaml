@@ -201,15 +201,9 @@ importers:
 
   packages/vitepress-plugin-announcement:
     dependencies:
-      '@element-plus/icons-vue':
-        specifier: ^2.3.1
-        version: 2.3.1(vue@3.5.3(typescript@5.6.2))
-      '@vueuse/core':
-        specifier: ^9.13.0
-        version: 9.13.0(vue@3.5.3(typescript@5.6.2))
-      element-plus:
-        specifier: ^2.7.2
-        version: 2.7.2(vue@3.5.3(typescript@5.6.2))
+      javascript-stringify:
+        specifier: ^2.1.0
+        version: 2.1.0
     devDependencies:
       chokidar:
         specifier: ^3.6.0
@@ -4657,10 +4651,6 @@ snapshots:
     dependencies:
       vue: 3.4.27(typescript@5.6.2)
 
-  '@element-plus/icons-vue@2.3.1(vue@3.5.3(typescript@5.6.2))':
-    dependencies:
-      vue: 3.5.3(typescript@5.6.2)
-
   '@es-joy/jsdoccomment@0.40.1':
     dependencies:
       comment-parser: 1.4.0
@@ -5596,16 +5586,6 @@ snapshots:
       - '@vue/composition-api'
       - vue
 
-  '@vueuse/core@9.13.0(vue@3.5.3(typescript@5.6.2))':
-    dependencies:
-      '@types/web-bluetooth': 0.0.16
-      '@vueuse/metadata': 9.13.0
-      '@vueuse/shared': 9.13.0(vue@3.5.3(typescript@5.6.2))
-      vue-demi: 0.14.7(vue@3.5.3(typescript@5.6.2))
-    transitivePeerDependencies:
-      - '@vue/composition-api'
-      - vue
-
   '@vueuse/integrations@10.9.0(async-validator@4.2.5)(axios@0.27.2)(focus-trap@7.5.4)(fuse.js@6.6.2)(vue@3.4.27(typescript@5.6.2))':
     dependencies:
       '@vueuse/core': 10.9.0(vue@3.4.27(typescript@5.6.2))
@@ -5681,13 +5661,6 @@ snapshots:
   '@vueuse/shared@9.13.0(vue@3.4.27(typescript@5.6.2))':
     dependencies:
       vue-demi: 0.14.10(vue@3.4.27(typescript@5.6.2))
-    transitivePeerDependencies:
-      - '@vue/composition-api'
-      - vue
-
-  '@vueuse/shared@9.13.0(vue@3.5.3(typescript@5.6.2))':
-    dependencies:
-      vue-demi: 0.14.10(vue@3.5.3(typescript@5.6.2))
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -6299,27 +6272,6 @@ snapshots:
       memoize-one: 6.0.0
       normalize-wheel-es: 1.2.0
       vue: 3.4.27(typescript@5.6.2)
-    transitivePeerDependencies:
-      - '@vue/composition-api'
-
-  element-plus@2.7.2(vue@3.5.3(typescript@5.6.2)):
-    dependencies:
-      '@ctrl/tinycolor': 3.6.0
-      '@element-plus/icons-vue': 2.3.1(vue@3.5.3(typescript@5.6.2))
-      '@floating-ui/dom': 1.4.5
-      '@popperjs/core': '@sxzz/popperjs-es@2.11.7'
-      '@types/lodash': 4.14.195
-      '@types/lodash-es': 4.17.8
-      '@vueuse/core': 9.13.0(vue@3.5.3(typescript@5.6.2))
-      async-validator: 4.2.5
-      dayjs: 1.11.9
-      escape-html: 1.0.3
-      lodash: 4.17.21
-      lodash-es: 4.17.21
-      lodash-unified: 1.0.3(@types/lodash-es@4.17.8)(lodash-es@4.17.21)(lodash@4.17.21)
-      memoize-one: 6.0.0
-      normalize-wheel-es: 1.2.0
-      vue: 3.5.3(typescript@5.6.2)
     transitivePeerDependencies:
       - '@vue/composition-api'
 
@@ -8661,10 +8613,6 @@ snapshots:
   vue-demi@0.14.7(vue@3.4.27(typescript@5.6.2)):
     dependencies:
       vue: 3.4.27(typescript@5.6.2)
-
-  vue-demi@0.14.7(vue@3.5.3(typescript@5.6.2)):
-    dependencies:
-      vue: 3.5.3(typescript@5.6.2)
 
   vue-eslint-parser@9.3.1(eslint@8.50.0):
     dependencies:

@@ -135,8 +135,7 @@ export const blogTheme = getThemeConfig({
         },
         link: '/group.html',
       }
-    ],
-    duration: 0
+    ]
   },
   works: workConfig,
   footer: {

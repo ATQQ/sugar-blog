@@ -44,9 +44,7 @@
     "vitepress": "^1"
   },
   "dependencies": {
-    "@element-plus/icons-vue": "^2.3.1",
-    "@vueuse/core": "^9.13.0",
-    "element-plus": "^2.7.2"
+    "javascript-stringify": "^2.1.0"
   },
   "devDependencies": {
     "chokidar": "^3.6.0",

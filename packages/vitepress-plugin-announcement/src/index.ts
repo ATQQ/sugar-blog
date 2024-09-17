@@ -1,6 +1,7 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import type { PluginOption } from 'vite'
+import { stringify } from 'javascript-stringify'
 import type { AnnouncementOptions } from './type'
 
 function isESM() {
@@ -17,6 +18,14 @@ const virtualModuleId = 'virtual:announcement-options'
 const resolvedVirtualModuleId = `\0${virtualModuleId}`
 
 export function AnnouncementPlugin(options: AnnouncementOptions): any {
+  const componentOptions: AnnouncementOptions = {
+    clientOnly: false,
+    duration: 0,
+    mobileMinify: false,
+    reopen: true,
+    twinkle: false,
+    ...options
+  }
   const pluginOps: PluginOption = {
     name: 'vitepress-plugin-announcement',
     enforce: 'pre',
@@ -36,6 +45,10 @@ export function AnnouncementPlugin(options: AnnouncementOptions): any {
         const slotPosition = '<slot name="layout-top" />'
         let transformResult = code.replace(slotPosition, `${slotPosition}<Announcement/>`)
 
+        if (componentOptions.clientOnly) {
+          transformResult = transformResult.replace('<Announcement/>', '<ClientOnly><Announcement/></ClientOnly>')
+        }
+
         // 导入自定义组件
         const setupPosition = '<script setup lang="ts">'
         transformResult = transformResult.replace(setupPosition, `${setupPosition}\nimport Announcement from './Announcement.vue'`)
@@ -50,7 +63,7 @@ export function AnnouncementPlugin(options: AnnouncementOptions): any {
     load(this, id) {
       if (id === resolvedVirtualModuleId) {
         // 动态模块处理
-        return `export default ${JSON.stringify(options)}`
+        return `export default ${stringify(options)}`
       }
     },
   }

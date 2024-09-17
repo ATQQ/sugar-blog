@@ -10,10 +10,6 @@
     background-color: rgba(var(--bg-gradient-home));
     box-shadow: var(--box-shadow);
 }
-.theme-blog-popover :deep(.el-button.el-button--primary) {
-    background-color: var(--vp-c-brand-2);
-    border-color: var(--vp-c-brand-2);
-}
 
 .header {
     background-color: var(--vp-c-brand-3);

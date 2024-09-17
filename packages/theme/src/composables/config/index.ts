@@ -1,44 +1,12 @@
 /* eslint-disable ts/no-namespace */
-import type { ElButton } from 'element-plus'
-import type { DefaultTheme, Route } from 'vitepress'
+import type { DefaultTheme } from 'vitepress'
 import type { RSSOptions } from 'vitepress-plugin-rss'
 import type { Mapping, Repo } from '@giscus/vue'
 import type { Options as Oml2dOptions } from 'oh-my-live2d'
-import type { Ref } from 'vue'
 import type { PagefindConfig } from 'vitepress-plugin-pagefind'
+import type { AnnouncementOptions } from 'vitepress-plugin-announcement'
 
 type RSSPluginOptions = RSSOptions
-
-// TODO: 重构 lint 问题
-export declare namespace BlogPopover {
-  export interface Title {
-    type: 'title'
-    content: string
-    style?: string
-  }
-
-  export interface Text {
-    type: 'text'
-    content: string
-    style?: string
-  }
-
-  export interface Image {
-    type: 'image'
-    src: string
-    style?: string
-  }
-
-  export interface Button {
-    type: 'button'
-    link: string
-    content: string
-    style?: string
-    props?: InstanceType<typeof ElButton>['$props']
-  }
-
-  export type Value = Title | Text | Image | Button
-}
 
 export type ThemeableImage =
   | string
@@ -293,50 +261,6 @@ export namespace Theme {
     html?: string
   }
 
-  /**
-   * 公告
-   */
-  export interface Popover {
-    title: string
-    /**
-     * 细粒度的时间控制
-     * 默认展示时间，-1 只展示1次，其它数字为每次都展示，一定时间后自动消失，0为不自动消失
-     * 配置改变时，会重新触发展示
-     */
-    duration: number
-    /**
-     * 移动端自动最小化
-     * @default false
-     */
-    mobileMinify?: boolean
-    body?: BlogPopover.Value[]
-    footer?: BlogPopover.Value[]
-    /**
-     * 手动重新打开
-     * @default true
-     */
-    reopen?: boolean
-    /**
-     * 是否打开闪烁提示，通常需要和 reopen 搭配使用
-     * @default true
-     */
-    twinkle?: boolean
-    /**
-     * 设置展示图标，svg
-     * @recommend https://iconbuddy.app/search?q=fire
-     */
-    icon?: string
-    /**
-     * 设置关闭图标，svg
-     * @recommend https://iconbuddy.app/search?q=fire
-     */
-    closeIcon?: string
-    /**
-     * 自定义展示策略
-     * @param to 切换到的目标路由
-     */
-    onRouteChanged?: (to: Route, show: Ref<boolean>) => void
-  }
   export interface FriendLink {
     nickname: string
     des: string
@@ -462,7 +386,7 @@ export namespace Theme {
      * el-alert
      */
     alert?: Alert
-    popover?: Popover
+    popover?: AnnouncementOptions
     friend?: FriendLink[] | FriendConfig
     authorList?: Omit<FriendLink, 'avatar'>[]
     /**

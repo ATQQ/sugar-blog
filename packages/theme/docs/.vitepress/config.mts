@@ -1,7 +1,6 @@
 import path from 'node:path'
 import { defineConfig } from 'vitepress'
 import { La51Plugin } from 'vitepress-plugin-51la'
-import { AnnouncementPlugin } from 'vitepress-plugin-announcement'
 import packageJSON from '../../package.json'
 import { blogTheme } from './blog-theme'
 
@@ -25,89 +24,6 @@ export default defineConfig({
       La51Plugin({
         id: 'Jyzk2AcXA3JsYbrG',
         ck: 'Jyzk2AcXA3JsYbrG'
-      }),
-      AnnouncementPlugin({
-        title: '公告',
-        body: [
-          { type: 'text', content: '👇公众号👇---👇 微信 👇' },
-          {
-            type: 'image',
-            src: 'https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210~fmt.webp'
-          },
-          {
-            type: 'text',
-            content: '欢迎大家加群&私信交流'
-          },
-          {
-            type: 'text',
-            content: '文章首/文尾有群二维码',
-            style: 'padding-top:0'
-          },
-          {
-            type: 'button',
-            content: '作者博客',
-            link: 'https://sugarat.top'
-          },
-          {
-            type: 'button',
-            content: '加群交流',
-            props: {
-              type: 'success',
-            },
-            link: '/group.html',
-          }
-        ],
-        footer: [
-          {
-            type: 'button',
-            content: '加群交流',
-            props: {
-              type: 'primary',
-            },
-            link: '/group.html',
-          },
-          {
-            type: 'button',
-            content: '加群交流',
-            props: {
-              type: 'warning',
-            },
-            link: '/group.html',
-          },
-          {
-            type: 'button',
-            content: '加群交流',
-            props: {
-              type: 'danger',
-            },
-            link: '/group.html',
-          },
-          {
-            type: 'button',
-            content: '加群交流',
-            props: {
-              type: 'info',
-            },
-            link: '/group.html',
-          },
-          {
-            type: 'button',
-            content: '加群交流',
-            props: {
-              type: 'default',
-            },
-            link: '/group.html',
-          },
-          {
-            type: 'button',
-            content: '加群交流',
-            props: {
-              type: 'text',
-            },
-            link: '/group.html',
-          }
-        ],
-        duration: 0
       })
     ]
   },
