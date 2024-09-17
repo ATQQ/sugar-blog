@@ -85,7 +85,7 @@ AnnouncementPlugin({
 })
 ```
 
-### 修改按钮样式
+### 按钮
 ```js
 AnnouncementPlugin({
   title: '公告',
@@ -99,6 +99,22 @@ AnnouncementPlugin({
       }
     },
   ],
+})
+```
+
+### 修改样式
+```js
+AnnouncementPlugin({
+  title: '公告',
+  body: [
+    {
+      type: '',
+      content: '',
+      // ↓↓↓↓↓
+      style: 'color: #000; font-size: 16px;'
+      // ↑↑↑↑↑
+    }
+  ]
 })
 ```
 

@@ -100,6 +100,22 @@ AnnouncementPlugin({
 })
 ```
 
+### rewrites style
+```js
+AnnouncementPlugin({
+  title: '公告',
+  body: [
+    {
+      type: '',
+      content: '',
+      // ↓↓↓↓↓
+      style: 'color: #000; font-size: 16px;'
+      // ↑↑↑↑↑
+    }
+  ]
+})
+```
+
 ## Full configuration
 ```ts
 import type { Ref } from 'vue'
