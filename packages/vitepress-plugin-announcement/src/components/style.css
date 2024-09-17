@@ -1,3 +1,11 @@
+html .theme-blog-popover {
+    --box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.1);
+}
+
+html.dark .theme-blog-popover {
+    --box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.6);
+}
+
 .theme-blog-popover {
     width: 258px;
     position: fixed;
@@ -7,7 +15,7 @@
     box-sizing: border-box;
     border: 1px solid var(--vp-c-brand-3);
     border-radius: 6px;
-    background-color: rgba(var(--bg-gradient-home));
+    background-color: var(--vp-c-bg);
     box-shadow: var(--box-shadow);
 }
 
