@@ -6,6 +6,17 @@ description: 记录一下每天干的杂事，写的杂七杂八的代码，用�
 记录一下每天干的杂事，写的杂七杂八的代码，用于日后回顾，翻开尘封的记忆。
 
 [[toc]]
+## 2024/09/21
+### VitePress 插件开发模板1
+* [vitepress-plugin-slot-inject-template](https://github.com/ATQQ/sugar-blog/tree/master/template/vitepress-plugin-slot-inject-template)：适用基于默认 Layout 拓展的场景
+
+## 2024/09/17
+### VitePress 公告 插件
+*[vitepress-plugin-announcement](https://www.npmjs.com/package/vitepress-plugin-announcement)*
+
+* 为 `VitePress` 站点提供全局公告弹窗。
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/7af94a65e3b4dd05e61e3411daba7fdd)
 
 ## 2024/09/09
 ### VitePress 51la 插件
