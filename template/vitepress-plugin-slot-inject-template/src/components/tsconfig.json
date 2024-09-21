@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "vitepress-plugin-slot-inject-template": ["../index.ts"]
+    },
+    "declaration": true,
+    "outDir": "../../dist/components"
+  },
+  "include": ["."]
+}

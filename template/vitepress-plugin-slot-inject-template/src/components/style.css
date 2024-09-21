@@ -1,0 +1,15 @@
+/* TODO：按实际情况添加不同模式的变量 */
+html .demo {
+    --box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.1);
+}
+
+html.dark .demo {
+    --box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.6);
+}
+
+.parent-demo{
+    text-align: center;
+}
+.parent-demo h1{
+    color: red;
+}
