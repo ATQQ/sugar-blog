@@ -8,9 +8,7 @@ description: 开发了一个适用于 VitePress 的公告插件 vitepress-plugin
 ## 前言
 笔者维护的 [VitePress 博客主题](https://theme.sugarat.top/)在近1年多的时间里集成了非常多功能，不少用户希望将里面的部分功能分离出来，方便在其它 VitePress 站点也可以独立使用。
 
-分离的一个就是需求较多的 [公告插件](https://www.npmjs.com/package/vitepress-plugin-announcement)。
-
-最终效果如下：
+分离的 [公告插件](https://www.npmjs.com/package/vitepress-plugin-announcement)，效果如下：
 
 ![](https://cdn.upyun.sugarat.top/mdImg/sugar/a588c971f6cea84e44d9316a25130510)
 
