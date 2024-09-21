@@ -63,7 +63,7 @@ export function AnnouncementPlugin(options: AnnouncementOptions): any {
     load(this, id) {
       if (id === resolvedVirtualModuleId) {
         // 动态模块处理
-        return `export default ${stringify(options)}`
+        return `export default ${stringify(componentOptions)}`
       }
     },
   }

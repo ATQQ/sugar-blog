@@ -4,6 +4,7 @@
 
 ![](https://cdn.upyun.sugarat.top/mdImg/sugar/7af94a65e3b4dd05e61e3411daba7fdd)
 
+*介绍文章：[VitePress 公告插件开发实记](https://sugarat.top/technology/works/vitepress-plugin-announcement.html) · [archive](https://web.archive.org/web/20240921095008/https://sugarat.top/technology/works/vitepress-plugin-announcement.html) · [translated](https://sugarat-top.translate.goog/technology/works/vitepress-plugin-announcement.html?_x_tr_sl=zh-CN&_x_tr_tl=en&_x_tr_hl=zh-CN&_x_tr_pto=wapp)*
 ## 使用
 安装依赖 `pnpm/npm/yarn`
 ```sh

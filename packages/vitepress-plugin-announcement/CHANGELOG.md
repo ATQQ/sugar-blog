@@ -1,5 +1,11 @@
 # vitepress-plugin-announcement
 
+## 0.1.2
+
+### Patch Changes
+
+- feat: add default props
+
 ## 0.1.1
 
 ### Patch Changes
