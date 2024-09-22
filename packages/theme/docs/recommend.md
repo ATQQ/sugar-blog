@@ -10,8 +10,10 @@ outline: [2,4]
 先用markdown记录一下，后续整理成独立卡片组件
 
 欢迎大家贡献 🎉🎉🎉！！！
+
+社区：[awesome-vitepress](https://github.com/logicspark/awesome-vitepress-v1?tab=readme-ov-file)
 :::
-## 博客主题
+## 定制站点
 
 ### [@sugarat/theme](https://theme.sugarat.top/)
 
@@ -24,6 +26,9 @@ outline: [2,4]
 ```sh
 npm create @sugarat/theme@latest
 ```
+
+GitHub: [ATQQ/sugar-blog](https://github.com/ATQQ/sugar-blog/tree/master/packages/theme)
+
 ### [查尔斯的知识库](https://blog.charles7c.top/)
 基于 VitePress 打造的知识库。
 
@@ -33,21 +38,15 @@ npm create @sugarat/theme@latest
 
 直接在 VitePress 项目里拓展的配置，没有分离，但项目已经内置了许多功能和功能页。
 
-通过 clone 仓库二次修改即可。
-
-```sh
-git clone https://github.com/Charles7c/charles7c.github.io.git
-```
+GitHub: [Charles7c/charles7c.github.io](https://github.com/Charles7c/charles7c.github.io)
 
 ### [vitepress-blog-zaun](https://visionary-sunflower-dc7ae3.netlify.app/)
 基于 VitePress 打造的博客项目，UI还是很漂亮的。
 
 ![](https://img.cdn.sugarat.top/mdImg/sugar/79bb82ad7850f4a022afe2060cfb10e6)
 
-可通过拉取仓库模板创建。
-```sh
-npx degit clark-cui/vitepress-blog-zaun my-vitepress-blog
-```
+GitHub: [clark-cui/vitepress-blog-zaun](https://github.com/clark-cui/vitepress-blog-zaun)
+
 ### [Vue 博客](https://blog.vuejs.org/)
 
 Vue 官方博客。
@@ -56,10 +55,7 @@ Vue 官方博客。
 
 完全自定义了主题，非常简洁。
 
-直接 clone 二次修改即可。
-```sh
-git clone https://github.com/vuejs/blog.git
-```
+GitHub: [vuejs/blog](https://github.com/vuejs/blog)
 
 ### [Vue3 文档](https://cn.vuejs.org/)
 Vue3 官方文档也是基于 VitePress 构建的。
@@ -74,10 +70,7 @@ Vue3 官方文档也是基于 VitePress 构建的。
 
 自定义了首页，文章页等样式，同时提供独立时间线和标签页。
 
-克隆仓库食用。
-```sh
-git clone https://github.com/airene/vitepress-blog-pure.git
-```
+GitHub: [airene/vitepress-blog-pure](https://github.com/airene/vitepress-blog-pure)
 
 ### [harlanzw.com-vitepress](https://harlanzw.com/)
 很漂亮的博客，简洁美观，有设计感。
@@ -86,93 +79,53 @@ git clone https://github.com/airene/vitepress-blog-pure.git
 
 *但博客用的 vitepress 版本是 0.x 和最新的相比API变化较大。*
 
-```sh
-git clone https://github.com/harlan-zw/harlanzw.com-vitepress.git
-```
+GitHub: [harlan-zw/harlanzw.com-vitepress](https://github.com/harlan-zw/harlanzw.com-vitepress)
+
+### [VitePress教程文档](https://vitepress.yiov.top/)
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/3fbbd0649e9d76db940b88bea408e04e)
+
+VitePress 简中文档站，内部有许多已集成的插件。
+
+GitHub: [Yiov/vitepress-doc](https://github.com/Yiov/vitepress-doc)
 
 ## VitePress插件
 ### 拓展功能
-#### [vitepress-plugin-mermaid](https://github.com/emersonbottero/vitepress-plugin-mermaid)
+#### [mermaid](https://github.com/emersonbottero/vitepress-plugin-mermaid) - 流程图
 
 基于 [mermaid](https://mermaid.js.org/) 实现的 md 流程图插件。
 
-```ts
-// .vitepress/config.js
-import { withMermaid } from 'vitepress-plugin-mermaid'
-
-export default withMermaid({
-  // your existing vitepress config...
-  mermaid: {
-    // mermaidConfig !theme here works for ligth mode since dark theme is forced in dark mode
-  },
-})
-```
-
 ![](https://img.cdn.sugarat.top/mdImg/sugar/9238f8f2ddebc56daba7c45819b88974)
 
-#### [vitepress-plugin-rss](https://github.com/ATQQ/sugar-blog/tree/master/packages/vitepress-plugin-rss)
+#### [rss](https://github.com/ATQQ/sugar-blog/tree/master/packages/vitepress-plugin-rss) - 订阅链接生成
 
 给 vitepress 提供 RSS 订阅源链接生成支持。
 
-```ts
-import { RSSOptions, RssPlugin } from 'vitepress-plugin-rss'
-
-const baseUrl = 'https://sugarat.top'
-const RSS: RSSOptions = {
-  title: '粥里有勺糖',
-  baseUrl,
-  copyright: 'Copyright (c) 2018-present, 粥里有勺糖',
-}
-
-export default defineConfig({
-  vite: {
-    // ↓↓↓↓↓
-    plugins: [RssPlugin(RSS)]
-    // ↑↑↑↑↑
-  }
-})
-```
-
 ![](https://img.cdn.sugarat.top/mdImg/MTY5MjQ1NTQ4MDYxMg==692455480612)
 
+#### [51la](https://www.npmjs.com/package/vitepress-plugin-51la) - 网站统计分析
+提供一键接入 [51.LA](https://v6.51.la/) 网站数据统计分析的功能。
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/f0793f6be7da88ea7ccbfcccfef7aa9e)
+
+#### [announcement](https://www.npmjs.com/package/vitepress-plugin-announcement) - 公告
+提供全局公告窗口。
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/7af94a65e3b4dd05e61e3411daba7fdd)
+
+#### [group-icons](https://github.com/yuyinws/vitepress-plugin-group-icons) - 分组图标
+分组代码块提供不同的图标样式。
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/d1ece3bc3ff5ee15bb5401b0d20da266)
+
 ### 搜索
-#### [vitepress-plugin-search](https://github.com/emersonbottero/vitepress-plugin-search)
+#### [flexsearch](https://github.com/emersonbottero/vitepress-plugin-search)
 
 基于 [flexsearch](https://github.com/nextapps-de/flexsearch) 实现的离线全文搜索插件。
 
-```ts
-import { SearchPlugin } from 'vitepress-plugin-search'
-import { defineConfig } from 'vitepress'
-
-// default options
-const options = {
-  ...flexSearchIndexOptions,
-  previewLength: 62,
-  buttonLabel: 'Search',
-  placeholder: 'Search docs',
-  allow: [],
-  ignore: [],
-}
-
-export default defineConfig({
-  vite: { plugins: [SearchPlugin(options)] }
-})
-```
-#### [vitepress-plugin-pagefind](https://github.com/ATQQ/sugar-blog/tree/master/packages/vitepress-plugin-pagefind)
+#### [pagefind](https://github.com/ATQQ/sugar-blog/tree/master/packages/vitepress-plugin-pagefind)
 
 基于 [pagefind](https://github.com/cloudcannon/pagefind) 实现的离线全文搜索插件。
-
-```ts
-import { defineConfig } from 'vitepress'
-import { pagefindPlugin } from 'vitepress-plugin-pagefind'
-
-// https://vitepress.dev/reference/site-config
-export default defineConfig({
-  vite: {
-    plugins: [pagefindPlugin()],
-  }
-})
-```
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY3OTgxOTE1MDQ0OA==679819150448)
 
@@ -191,9 +144,5 @@ module.exports = {
   },
 }
 ```
-
-TODO：wait a moment
-
-## markdown-it 插件
 
 TODO：wait a moment
