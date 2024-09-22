@@ -186,9 +186,6 @@ importers:
       vitepress-plugin-51la:
         specifier: workspace:*
         version: link:../vitepress-plugin-51la
-      vitepress-plugin-slot-inject-template:
-        specifier: workspace:*
-        version: link:../../template/vitepress-plugin-slot-inject-template
       vue:
         specifier: ^3.4.26
         version: 3.4.26(typescript@5.4.5)
