@@ -1,6 +1,6 @@
 {
   "name": "@sugarat/theme",
-  "version": "0.4.13",
+  "version": "0.4.14",
   "description": "简约风的 Vitepress 博客主题，sugarat vitepress blog theme",
   "author": "sugar",
   "license": "MIT",
@@ -20,6 +20,8 @@
   "exports": {
     "./node": {
       "types": "./node.d.ts",
+      "import": "./node.mjs",
+      "require": "./node.js",
       "default": "./node.js"
     },
     "./package.json": "./package.json",
@@ -29,6 +31,7 @@
   "files": [
     "node.d.ts",
     "node.js",
+    "node.mjs",
     "src",
     "types"
   ],
@@ -59,6 +62,7 @@
     "swiper": "^11.1.1",
     "vitepress-markdown-timeline": "^1.2.1",
     "vitepress-plugin-announcement": "workspace:*",
+    "vitepress-plugin-group-icons": "^1.2.4",
     "vitepress-plugin-mermaid": "2.0.13",
     "vitepress-plugin-pagefind": "workspace:*",
     "vitepress-plugin-rss": "workspace:*",

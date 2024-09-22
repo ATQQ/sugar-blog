@@ -35,6 +35,9 @@ import UserWorksPage from './components/UserWorks.vue'
 // 内置一些特殊的主题色
 import './styles/theme/inline-theme.var.css'
 
+// 导入group icons
+import 'virtual:group-icons.css'
+
 export const BlogTheme: Theme = {
   ...DefaultTheme,
   Layout: withConfigProvider(BlogApp),

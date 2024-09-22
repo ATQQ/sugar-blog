@@ -459,6 +459,9 @@ export namespace Theme {
      * 渲染时替换图片地址
      */
     imageStyle?: ImageStyleConfig
+    groupIcon?: {
+      customIcon: Record<string, string>
+    }
   }
 
   export type FormatShowDate = {

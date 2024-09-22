@@ -1,5 +1,11 @@
 # @sugarat/theme
 
+## 0.4.14
+
+### Patch Changes
+
+- feat: inline group icons plugin
+
 ## 0.4.13
 
 ### Patch Changes

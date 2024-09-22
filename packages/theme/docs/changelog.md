@@ -27,6 +27,14 @@ bun install vitepress@latest
 ```
 :::
 
+## 0.4.14 (2024/09/22)
+
+### Patch Changes
+
+- feat: inline group icons plugin
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/d1ece3bc3ff5ee15bb5401b0d20da266)
+
 ## 0.4.13 (2024/09/17)
 
 ### Patch Changes
