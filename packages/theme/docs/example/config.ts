@@ -58,4 +58,12 @@ export default defineExamples([
     avatar: 'https://cdn.upyun.sugarat.top/avatar/blog/llxz.png',
     nickname: 'laiky'
   },
+  {
+    cover: 'https://cdn.upyun.sugarat.top/test/sugar/5a4eeb0821c98813e7145e34045dc57d',
+    link: 'https://suzhelevel6.github.io/suzhe_blog/',
+    name: '苏柘',
+    desc: '嵌入式安卓开发工程师',
+    avatar: 'https://cdn.upyun.sugarat.top/test/sugar/566d2ea782106c5b88991acf77526244',
+    nickname: 'SuZhelevel6'
+  },
 ])
