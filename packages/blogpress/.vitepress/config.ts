@@ -307,7 +307,8 @@ export default defineConfig({
   lastUpdated: true,
   themeConfig: {
     outline: {
-      level: [2, 3]
+      level: [2, 3],
+      label: '目录'
     },
     // search: {
     //   provider: 'algolia',
