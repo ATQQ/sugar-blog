@@ -1,6 +1,7 @@
 ---
 description: 使用 Web Crypto API，btoa，spark-md5（第三方库），在前端中生成 OSS 上传令牌，支持七牛云，又拍云
 outline: [2,4]
+tag: 技术笔记
 ---
 
 # 浏览器中生成 OSS 令牌 | Web Crypto API
