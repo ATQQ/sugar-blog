@@ -82,12 +82,8 @@ export async function getArticleMeta(filepath: string, route: string, timeZone =
   return meta as Theme.PageMeta
 }
 export async function getArticles(cfg: Partial<Theme.BlogConfig>, vpConfig: SiteConfig) {
-  const srcDir
-    = cfg?.srcDir || vpConfig.srcDir.replace(vpConfig.root, '').replace(/^\//, '')
-    || process.argv.slice(2)?.[1]
-    || '.'
-  const files = glob.sync(`${srcDir}/**/*.md`, { ignore: ['node_modules'], absolute: true })
-
+  // TODO: 使用内置 pages 优化，同时兼容动态路由，国际化
+  const files = glob.sync(`${vpConfig.srcDir}/**/*.md`, { ignore: ['node_modules'].concat(vpConfig?.userConfig?.srcExclude || []).filter(Boolean), absolute: true })
   const metaResults = files.reduce((prev, curr) => {
     const route = getPageRoute(curr, vpConfig.srcDir)
     const metaPromise = getArticleMeta(curr, route, cfg?.timeZone)

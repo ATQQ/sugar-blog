@@ -18,7 +18,7 @@ import { getArticles } from './theme'
 export function getVitePlugins(cfg: Partial<Theme.BlogConfig> = {}) {
   const plugins: any[] = []
 
-  // 处理cover image的路径（暂只支持自动识别的文章首图）
+  // 处理 cover image 的路径（暂只支持自动识别的文章首图）
   plugins.push(coverImgTransform())
 
   // 处理自定义主题色
@@ -28,10 +28,10 @@ export function getVitePlugins(cfg: Partial<Theme.BlogConfig> = {}) {
   // 自动重载首页
   plugins.push(themeReloadPlugin())
 
-  // 主题pageData生成
+  // 主题 pageData生成
   plugins.push(providePageData(cfg))
 
-  // 内置简化版的pagefind
+  // 内置 pagefind
   if (cfg && cfg.search !== false) {
     const ops = cfg.search instanceof Object ? cfg.search : {}
     plugins.push(
@@ -41,7 +41,7 @@ export function getVitePlugins(cfg: Partial<Theme.BlogConfig> = {}) {
     )
   }
 
-  // 内置支持Mermaid
+  // 内置支持 Markdown 流程图 Mermaid
   if (cfg?.mermaid !== false) {
     const { MermaidPlugin } = _require('vitepress-plugin-mermaid')
     plugins.push(inlineInjectMermaidClient())
@@ -53,6 +53,7 @@ export function getVitePlugins(cfg: Partial<Theme.BlogConfig> = {}) {
     ;[cfg?.RSS].flat().forEach(rssConfig => plugins.push(RssPlugin(rssConfig)))
   }
 
+  // 内置支持 全局公告
   if (cfg?.popover) {
     plugins.push(AnnouncementPlugin(cfg.popover))
   }
