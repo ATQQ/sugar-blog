@@ -46,7 +46,7 @@ export function getThemeConfig(cfg: Partial<Theme.BlogConfig> = {}) {
   return {
     themeConfig: {
       blog: {
-        pagesData,
+        pagesData, // 插件里补全
         ...cfg
       },
       // 补充一些额外的配置用于继承

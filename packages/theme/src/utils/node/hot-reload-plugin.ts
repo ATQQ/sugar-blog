@@ -1,5 +1,7 @@
+import fs from 'fs'
 import type { PluginOption } from 'vite'
 import type { SiteConfig } from 'vitepress'
+import { grayMatter } from '@sugarat/theme-shared'
 import type { Theme } from '../../composables/config/index'
 import { getArticleMeta } from './theme'
 import { debounce, isEqual } from './index'
@@ -32,10 +34,37 @@ export function themeReloadPlugin() {
 
       server.watcher.on('change', async (path: string) => {
         const route = generateRoute(path)
+        const fileContent = await fs.promises.readFile(path, 'utf-8')
+        const { data: frontmatter } = grayMatter(fileContent, {
+          excerpt: true,
+        })
         const meta = await getArticleMeta(path, route, blogConfig?.timeZone)
         const matched = blogConfig.pagesData.find(v => v.route === route)
 
-        if (matched && !isEqual(matched.meta, meta, ['date', 'description'])) {
+        // 自动生成的部分属性不参与比较，避免刷新频繁
+        const excludeKeys = ['date', 'description'].filter(key => !frontmatter[key])
+        // 主题不关心的属性不参与比较，避免刷新频繁
+        const inlineKeys = [
+          // vitepress 默认主题 https://vitepress.dev/zh/reference/frontmatter-config
+          'lang',
+          'outline',
+          'head',
+          'layout',
+          'hero',
+          'features',
+          'navbar',
+          'sidebar',
+          'aside',
+          'lastUpdated',
+          'editLink',
+          'footer',
+          'pageClass',
+          // 本主题扩展 https://theme.sugarat.top/config/frontmatter.html
+          'hiddenCover',
+          'readingTime',
+          'buttonAfterArticle'
+        ]
+        if (matched && !isEqual(matched.meta, meta, inlineKeys.concat(excludeKeys))) {
           matched.meta = meta
           restart()
         }

@@ -5,6 +5,7 @@
 ### Patch Changes
 
 - feat: inline group icons plugin
+- chore: Optimization of theme reloading logic in dev mode
 
 ## 0.4.13
 
