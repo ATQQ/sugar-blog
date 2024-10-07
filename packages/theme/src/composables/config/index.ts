@@ -360,6 +360,11 @@ export namespace Theme {
      */
     themeColor?: ThemeColor
     pagesData: PageData[]
+    /**
+     * @deprecated 请使用 VitePress 官方 srcDir 替代
+     *
+     * @doc https://vitepress.dev/zh/reference/site-config#srcdir
+     */
     srcDir?: string
     author?: string
     hotArticle?: HotArticle | false

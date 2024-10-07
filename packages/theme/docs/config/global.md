@@ -946,7 +946,7 @@ interface ArticleAnalyzeTitles {
 | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
 | ![](https://img.cdn.sugarat.top/mdImg/sugar/21aa2571b60f76e7401b66af851009bb) | ![](https://img.cdn.sugarat.top/mdImg/sugar/5da6e5e56bde48265e706bc004e2ad41) | ![](https://img.cdn.sugarat.top/mdImg/sugar/50e9ec84b37af64f723c3b477b99283a) |
 
-## srcDir
+<!-- ## srcDir
 
 * Type: `string`
 * Default: `.`
@@ -963,7 +963,7 @@ interface ArticleAnalyzeTitles {
 const blogTheme = getThemeConfig({
   srcDir: './docs'
 })
-```
+``` -->
 
 ## alert
 
