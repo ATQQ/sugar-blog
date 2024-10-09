@@ -121,13 +121,13 @@ export function coverImgTransform() {
   return {
     name: '@sugarat/theme-plugin-cover-transform',
     apply: 'build',
-    enforce: 'pre',
+    // enforce: 'pre',
     configResolved(config: any) {
       vitepressConfig = config.vitepress
       assetsDir = vitepressConfig.assetsDir
       blogConfig = config.vitepress.site.themeConfig.blog
     },
-    async generateBundle(_: any, bundle: Record<string, any>) {
+    generateBundle(_: any, bundle: Record<string, any>) {
       const assetsMap = Object.entries(bundle).filter(([key]) => {
         return key.startsWith(assetsDir)
       }).map(([_, value]) => {
@@ -165,6 +165,7 @@ export function providePageData(cfg: Partial<Theme.BlogConfig>) {
     async config(config: any) {
       const pagesData = await getArticles(cfg, config.vitepress)
       config.vitepress.site.themeConfig.blog.pagesData = pagesData
+      console.log(config)
     },
   } as PluginOption
 }

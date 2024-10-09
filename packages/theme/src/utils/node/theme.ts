@@ -82,18 +82,22 @@ export async function getArticleMeta(filepath: string, route: string, timeZone =
   return meta as Theme.PageMeta
 }
 export async function getArticles(cfg: Partial<Theme.BlogConfig>, vpConfig: SiteConfig) {
-  // 服用内置 pages 解析逻辑，同时兼容动态路由，国际化
+  // 复用内置 pages 解析逻辑，同时兼容动态路由，国际化
   const { pages, dynamicRoutes, rewrites } = vpConfig
   // const files = glob.sync(`${vpConfig.srcDir}/**/*.md`, { ignore: ['node_modules'].concat(vpConfig?.userConfig?.srcExclude || []).filter(Boolean), absolute: true })
-  console.log(vpConfig.pages, vpConfig.dynamicRoutes, vpConfig.rewrites)
+  // console.log(vpConfig.pages, vpConfig.dynamicRoutes, vpConfig.rewrites)
 
   const metaResults = pages.reduce((prev, curr) => {
     const rewritePath = rewrites.map[curr]
-    const route = normalizePath(rewritePath || curr)
-      .replace(/\.md$/, '')
-    // const route = getPageRoute(curr, vpConfig.srcDir)
-    const metaPromise = getArticleMeta(`${vpConfig.srcDir}/${curr}`, route, cfg?.timeZone)
+    const originRoute = `/${normalizePath(curr)
+      .replace(/\.md$/, '')}`
+    const rewriteRoute = rewritePath
+      ? `/${normalizePath(rewritePath)
+      .replace(/\.md$/, '')}`
+      : ''
 
+    const metaPromise = getArticleMeta(`${vpConfig.srcDir}/${curr}`, originRoute, cfg?.timeZone)
+    const route = rewriteRoute || originRoute
     // 提前获取，有缓存取缓存
     prev[curr] = {
       route,
