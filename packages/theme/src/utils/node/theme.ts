@@ -29,8 +29,8 @@ export function getPageRoute(filepath: string, srcDir: string) {
 }
 
 const defaultTimeZoneOffset = new Date().getTimezoneOffset() / -60
-export async function getArticleMeta(filepath: string, route: string, timeZone = defaultTimeZoneOffset) {
-  const fileContent = await fs.promises.readFile(filepath, 'utf-8')
+export async function getArticleMeta(filepath: string, route: string, timeZone = defaultTimeZoneOffset, baseContent?: string) {
+  const fileContent = baseContent || await fs.promises.readFile(filepath, 'utf-8')
 
   const { data: frontmatter, excerpt, content } = grayMatter(fileContent, {
     excerpt: true,
@@ -81,11 +81,32 @@ export async function getArticleMeta(filepath: string, route: string, timeZone =
   }
   return meta as Theme.PageMeta
 }
+function renderDynamicMarkdown(routeFile: string, params: Record<string, any>, content?: string) {
+  let baseContent = fs.readFileSync(routeFile, 'utf-8')
+
+  if (content) {
+    baseContent = baseContent.replace(/<!--\s*@content\s*-->/, content)
+  }
+
+  // 替换 {{$params}} 参数
+  return baseContent.replace(/\{\{(.*?)\}\}/g, (all, $1) => {
+    const key = $1?.trim?.() || ''
+    if (key.startsWith('$params')) {
+      const value = key.split('.').reduce((prev: Record<string, any>, curr: string) => {
+        if (prev !== null && typeof prev === 'object') {
+          return prev[curr]
+        }
+        return undefined
+      }, { $params: params })
+      return value
+    }
+    return all
+  })
+}
+
 export async function getArticles(cfg: Partial<Theme.BlogConfig>, vpConfig: SiteConfig) {
   // 复用内置 pages 解析逻辑，同时兼容动态路由，国际化
   const { pages, dynamicRoutes, rewrites } = vpConfig
-  // const files = glob.sync(`${vpConfig.srcDir}/**/*.md`, { ignore: ['node_modules'].concat(vpConfig?.userConfig?.srcExclude || []).filter(Boolean), absolute: true })
-  // console.log(vpConfig.pages, vpConfig.dynamicRoutes, vpConfig.rewrites)
 
   const metaResults = pages.reduce((prev, curr) => {
     const rewritePath = rewrites.map[curr]
@@ -96,7 +117,16 @@ export async function getArticles(cfg: Partial<Theme.BlogConfig>, vpConfig: Site
       .replace(/\.md$/, '')}`
       : ''
 
-    const metaPromise = getArticleMeta(`${vpConfig.srcDir}/${curr}`, originRoute, cfg?.timeZone)
+    const dynamicRoute = dynamicRoutes?.routes?.find(r => r.path === curr)
+    let metaPromise: Promise<any>
+    if (dynamicRoute) {
+      const { route, content, params } = dynamicRoute
+      const filepath = normalizePath(path.resolve(vpConfig.srcDir, route))
+      metaPromise = getArticleMeta(filepath, originRoute, cfg?.timeZone, renderDynamicMarkdown(filepath, params, content))
+    }
+    else {
+      metaPromise = getArticleMeta(normalizePath(`${vpConfig.srcDir}/${curr}`), originRoute, cfg?.timeZone)
+    }
     const route = rewriteRoute || originRoute
     // 提前获取，有缓存取缓存
     prev[curr] = {
