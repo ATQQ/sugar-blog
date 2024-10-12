@@ -1,6 +1,3 @@
-import path from 'node:path'
-import { existsSync, readFileSync } from 'node:fs'
-import { Buffer } from 'node:buffer'
 import type { HeadConfig, SiteConfig } from 'vitepress'
 import {
   pagefindPlugin
@@ -113,11 +110,17 @@ export function inlineBuildEndPlugin(buildEndFn: any[]) {
   }
 }
 
-// TODO: 支持frontmatter中的相对路径图片自动处理
+// 支持frontmatter中的相对路径图片自动处理
 export function coverImgTransform() {
   let blogConfig: Theme.BlogConfig
   let vitepressConfig: SiteConfig
   let assetsDir: string
+
+  const relativeMetaName: (keyof Theme.PageMeta)[] = ['cover']
+  const relativeMeta: Theme.PageMeta[] = []
+  const relativeMetaMap: Record<string, Theme.PageMeta> = {}
+  const viteAssetsMap: Record<string, string> = {}
+  const relativePathMap: Record<string, string> = {}
   return {
     name: '@sugarat/theme-plugin-cover-transform',
     apply: 'build',
@@ -126,37 +129,81 @@ export function coverImgTransform() {
       vitepressConfig = config.vitepress
       assetsDir = vitepressConfig.assetsDir
       blogConfig = config.vitepress.site.themeConfig.blog
+
+      // 提取所有相对路径的属性
+      blogConfig.pagesData.forEach((v) => {
+        relativeMetaName.forEach((k) => {
+          const value = v.meta[k]
+          if (value && typeof value === 'string' && value.startsWith('/')) {
+            const absolutePath = `${vitepressConfig.srcDir}${value}`
+
+            // 复用已经映射后的值
+            if (relativeMetaMap[absolutePath]) {
+              Object.assign(v.meta, { [k]: relativeMetaMap[absolutePath][k] })
+              return
+            }
+
+            relativePathMap[value] = absolutePath
+            relativePathMap[absolutePath] = value
+            relativeMeta.push(v.meta)
+            relativeMetaMap[absolutePath] = v.meta
+          }
+        })
+      })
+    },
+    moduleParsed(info) {
+      if (!relativePathMap[info.id]) {
+        return
+      }
+      const asset = info.code?.match(/export default "(.*)"/)?.[1]
+      if (!asset) {
+        return
+      }
+
+      viteAssetsMap[info.id] = asset
+      viteAssetsMap[asset] = info.id
+
+      // 换成 ViteAssets，影响输出 HTML
+      relativeMeta.forEach((meta) => {
+        relativeMetaName.forEach((k) => {
+          const value = meta[k]
+          if (!value || !relativePathMap[value as string]) {
+            return
+          }
+          const viteAsset = viteAssetsMap[relativePathMap[value as string]]
+          if (viteAsset) {
+            Object.assign(meta, { [k]: viteAsset })
+          }
+        })
+      })
     },
     generateBundle(_: any, bundle: Record<string, any>) {
+      // 换成 最终输出路径，影响 CSR 内容
       const assetsMap = Object.entries(bundle).filter(([key]) => {
         return key.startsWith(assetsDir)
       }).map(([_, value]) => {
         return value
-      })
-      for (const page of blogConfig.pagesData) {
-        const { cover } = page.meta
-        // 是否相对路径引用
-        if (!cover?.startsWith?.('/')) {
-          continue
-        }
-        try {
-          // 寻找构建后的
-          const realPath = path.join(vitepressConfig.root, cover)
-          if (!existsSync(realPath)) {
-            continue
-          }
-          const fileBuffer = readFileSync(realPath)
-          const matchAsset = assetsMap.find(v => Buffer.compare(fileBuffer, v.source) === 0)
-          if (matchAsset) {
-            page.meta.cover = joinPath('/', matchAsset.fileName)
-          }
-        }
-        catch (e: any) {
-          vitepressConfig.logger.warn(e?.message)
-        }
+      }).filter(v => v.type === 'asset')
+
+      if (!assetsMap.length) {
+        return
       }
+
+      relativeMeta.forEach((meta) => {
+        relativeMetaName.forEach((k) => {
+          const value = meta[k]
+          if (!value || !viteAssetsMap[value as string]) {
+            return
+          }
+          const absolutePath = viteAssetsMap[value as string]
+          const matchAsset = assetsMap.find(v => joinPath(`${vitepressConfig.srcDir}/`, v.originalFileName) === absolutePath)
+          if (matchAsset) {
+            Object.assign(meta, { [k]: joinPath('/', matchAsset.fileName) })
+          }
+        })
+      })
     }
-  }
+  } as PluginOption
 }
 
 export function providePageData(cfg: Partial<Theme.BlogConfig>) {
@@ -165,7 +212,6 @@ export function providePageData(cfg: Partial<Theme.BlogConfig>) {
     async config(config: any) {
       const pagesData = await getArticles(cfg, config.vitepress)
       config.vitepress.site.themeConfig.blog.pagesData = pagesData
-      console.log(config)
     },
   } as PluginOption
 }
