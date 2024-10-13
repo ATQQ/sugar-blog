@@ -1,5 +1,6 @@
 import type { Theme } from '@sugarat/theme'
 import { getThemeConfig } from '@sugarat/theme/node'
+import { themeEN } from './locales/en'
 import workConfig from './works'
 
 const baseUrl = 'https://theme.sugarat.top'
@@ -12,20 +13,7 @@ const RSS: Theme.RSSOptions = {
 
 export const blogTheme = getThemeConfig({
   locales: {
-    en: {
-      article: {
-        analyzeTitles: {
-          inlineWordCount: '{{value}} word counts',
-          inlineReadTime: '{{value}} min read time',
-          wordCount: 'Total word count',
-          readTime: 'Total read time',
-          author: 'Author',
-          publishDate: 'Published on',
-          lastUpdated: 'Last updated on',
-          tag: 'Tags',
-        }
-      },
-    }
+    en: themeEN
   },
   // formatShowDate: {
   //   justNow: '不久前',

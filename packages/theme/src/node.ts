@@ -63,6 +63,10 @@ export function defineConfig(config: UserConfig<Theme.Config>): any {
   return config
 }
 
+export function defineLocaleConfig(cfg: Omit<Theme.BlogConfig, 'locales' | 'pagesData'>) {
+  return cfg
+}
+
 // 重新导包 tabsMarkdownPlugin 导出CJS格式支持
 export { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
 

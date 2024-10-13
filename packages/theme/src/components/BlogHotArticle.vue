@@ -2,17 +2,14 @@
 import { computed, ref } from 'vue'
 import { ElButton } from 'element-plus'
 import { useRouter, withBase } from 'vitepress'
-import { useArticles, useBlogConfig, useCleanUrls, useFormatShowDate } from '../composables/config/blog'
+import { useArticles, useCleanUrls, useFormatShowDate, useHotArticleConfig, useShowHotArticle } from '../composables/config/blog'
 import { wrapperCleanUrls } from '../utils/client'
 import { fireSVG } from '../constants/svg'
 
 const formatShowDate = useFormatShowDate()
 
-const { hotArticle: _hotArticle } = useBlogConfig()
-
-const hotArticle = computed(() =>
-  _hotArticle === false ? undefined : _hotArticle
-)
+const hotArticle = useHotArticleConfig()
+const show = useShowHotArticle()
 
 const title = computed(() => hotArticle.value?.title || `${fireSVG}精选文章`)
 const nextText = computed(() => hotArticle.value?.nextText || '换一组')
@@ -56,7 +53,7 @@ const showChangeBtn = computed(() => {
 
 <template>
   <div
-    v-if="_hotArticle !== false && (recommendList.length || empty)" class="card recommend"
+    v-if="show && (recommendList.length || empty)" class="card recommend"
     data-pagefind-ignore="all"
   >
     <!-- 头部 -->
