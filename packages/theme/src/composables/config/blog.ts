@@ -116,7 +116,16 @@ export function useBlogThemeMode() {
 
 export function useArticles() {
   const blogConfig = useConfig()
-  const articles = computed(() => blogConfig.config?.blog?.pagesData || [])
+  const { localeIndex, site } = useData()
+
+  const localeKeys = computed(() => Object.keys(site.value.locales))
+
+  const articles = computed(() => {
+    if (localeKeys.value.length === 0) {
+      return (blogConfig.config?.blog?.pagesData || [])
+    }
+    return blogConfig.config?.blog?.locales?.[localeIndex.value]?.pagesData || []
+  })
   return articles
 }
 
@@ -128,10 +137,9 @@ export function useCurrentPageNum() {
 }
 
 export function useCurrentArticle() {
-  const blogConfig = useConfig()
   const route = useRoute()
 
-  const docs = computed(() => blogConfig.config?.blog?.pagesData)
+  const docs = useArticles()
   const currentArticle = computed(() => {
     const currentPath = route.path.replace(/.html$/, '')
     // 兼容中文路径

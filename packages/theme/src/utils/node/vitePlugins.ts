@@ -130,8 +130,15 @@ export function coverImgTransform() {
       assetsDir = vitepressConfig.assetsDir
       blogConfig = config.vitepress.site.themeConfig.blog
 
+      const pagesData = [...blogConfig.pagesData]
+      // 兼容国际化
+      if (vitepressConfig.site.locales && Object.keys(vitepressConfig.site.locales).length > 1 && blogConfig?.locales) {
+        Object.values(blogConfig?.locales).map(v => v.pagesData)
+          .filter(v => !!v)
+          .forEach(v => pagesData.push(...v))
+      }
       // 提取所有相对路径的属性
-      blogConfig.pagesData.forEach((v) => {
+      pagesData.forEach((v) => {
         relativeMetaName.forEach((k) => {
           const value = v.meta[k]
           if (value && typeof value === 'string' && value.startsWith('/')) {
@@ -210,8 +217,31 @@ export function providePageData(cfg: Partial<Theme.BlogConfig>) {
   return {
     name: '@sugarat/theme-plugin-provide-page-data',
     async config(config: any) {
+      const vitepressConfig: SiteConfig = config.vitepress
       const pagesData = await getArticles(cfg, config.vitepress)
-      config.vitepress.site.themeConfig.blog.pagesData = pagesData
+      if (vitepressConfig.site.locales && Object.keys(vitepressConfig.site.locales).length > 1) {
+        if (!vitepressConfig.site.themeConfig.blog.locales) {
+          vitepressConfig.site.themeConfig.blog.locales = {}
+        }
+        // 兼容国际化
+        const localeKeys = Object.keys(vitepressConfig.site.locales)
+        localeKeys.forEach((localeKey) => {
+          if (!vitepressConfig.site.themeConfig.blog.locales[localeKey]) {
+            vitepressConfig.site.themeConfig.blog.locales[localeKey] = {}
+          }
+
+          vitepressConfig.site.themeConfig.blog.locales[localeKey].pagesData = pagesData.filter((v) => {
+            const { route } = v
+            const isRoot = localeKey === 'root'
+            if (isRoot) {
+              return !localeKeys.filter(v => v !== 'root').some(k => route.startsWith(`/${k}`))
+            }
+            return route.startsWith(`/${localeKey}`)
+          })
+        })
+        return
+      }
+      vitepressConfig.site.themeConfig.blog.pagesData = pagesData
     },
   } as PluginOption
 }
