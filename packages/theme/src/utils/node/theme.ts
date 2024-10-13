@@ -1,8 +1,5 @@
-/* eslint-disable prefer-rest-params */
 import fs from 'node:fs'
 import path from 'node:path'
-import process from 'node:process'
-import glob from 'fast-glob'
 import { getDefaultTitle, getFileLastModifyTime, getTextSummary, grayMatter, normalizePath } from '@sugarat/theme-shared'
 import type { SiteConfig } from 'vitepress'
 import type { Theme } from '../../composables/config/index'
@@ -105,7 +102,7 @@ function renderDynamicMarkdown(routeFile: string, params: Record<string, any>, c
 }
 
 export async function getArticles(cfg: Partial<Theme.BlogConfig>, vpConfig: SiteConfig) {
-  // 复用内置 pages 解析逻辑，同时兼容动态路由，国际化
+  // 复用内置 pages 解析逻辑，同时兼容动态路由
   const { pages, dynamicRoutes, rewrites } = vpConfig
 
   const metaResults = pages.reduce((prev, curr) => {

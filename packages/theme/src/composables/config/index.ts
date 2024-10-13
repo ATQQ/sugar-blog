@@ -349,6 +349,7 @@ export namespace Theme {
     | 'el-red'
   export interface BlogConfig {
     blog?: false
+    locales?: Record<string, Omit<BlogConfig, 'locales' | 'pagesData'> & { pagesData?: PageData[] }>
     /**
      * 展示日期格式化
      */
