@@ -1,20 +1,21 @@
 <script setup>
 import { useData, withBase } from 'vitepress'
 import { computed } from 'vue'
-import { useBlogConfig } from '../composables/config/blog'
+import { useBlogConfig, useGlobalAuthor, useHomeConfig } from '../composables/config/blog'
 
-const { home } = useBlogConfig()
+const home = useHomeConfig()
 const { frontmatter, site } = useData()
+const globalAuthor = useGlobalAuthor()
 const author = computed(() =>
   frontmatter.value.author
   ?? frontmatter.value?.blog?.author
-  ?? home?.author
-  ?? site.value.themeConfig?.blog?.author
+  ?? home?.value?.author
+  ?? globalAuthor?.value
 )
 const logo = computed(() =>
   frontmatter.value?.logo
   ?? frontmatter.value?.blog?.logo
-  ?? home?.logo
+  ?? home?.value?.logo
   ?? site.value?.themeConfig?.logo
   ?? '/logo.png'
 )

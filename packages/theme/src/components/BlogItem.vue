@@ -20,7 +20,7 @@ const props = defineProps<{
 const formatShowDate = useFormatShowDate()
 
 const showTime = computed(() => {
-  return formatShowDate(props.date)
+  return formatShowDate.value(props.date)
 })
 const cleanUrls = useCleanUrls()
 const link = computed(() => withBase(wrapperCleanUrls(!!cleanUrls, props.route)))

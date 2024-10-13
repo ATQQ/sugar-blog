@@ -6,14 +6,14 @@ import { useRoute, useRouter } from 'vitepress'
 import {
   useActiveTag,
   useArticles,
-  useConfig,
   useCurrentPageNum,
+  useHomeTagsConfig,
 } from '../composables/config/blog'
 import { tagsSvgStr } from '../constants/svg'
 
 const route = useRoute()
 const docs = useArticles()
-const homeTagsConfig = computed(() => useConfig()?.value?.blog?.homeTags)
+const homeTagsConfig = useHomeTagsConfig()
 const showTags = computed(() => !!(homeTagsConfig.value ?? true))
 const title = computed(() => (typeof homeTagsConfig.value === 'boolean' || !homeTagsConfig.value?.title)
   ? `${tagsSvgStr}标签`

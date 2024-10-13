@@ -1,3 +1,4 @@
+/* eslint-disable ts/no-non-null-asserted-optional-chain */
 import { useData, useRoute, withBase } from 'vitepress'
 import type {
   Component,
@@ -79,6 +80,69 @@ export function withConfigProvider(App: Component) {
     }
   })
 }
+
+export function useGlobalAuthor() {
+  const blogConfig = useBlogConfig()
+  return computed(() => blogConfig.value?.author || '')
+}
+
+export function useArticleConfig() {
+  const blogConfig = useBlogConfig()
+  return computed(() => blogConfig.value?.article)
+}
+
+export function useAuthorList() {
+  const blogConfig = useBlogConfig()
+  return computed(() => blogConfig.value?.authorList)
+}
+
+export function useHotArticleConfig() {
+  const blogConfig = useBlogConfig()
+  return computed(() => {
+    const cfg = blogConfig.value?.hotArticle
+    return cfg === false ? undefined : cfg
+  })
+}
+
+export function useShowHotArticle() {
+  const blogConfig = useBlogConfig()
+  return computed(() => {
+    const cfg = blogConfig.value?.hotArticle
+    return cfg !== false
+  })
+}
+
+export function useRecommendConfig() {
+  const blogConfig = useBlogConfig()
+  return computed(() => {
+    const cfg = blogConfig.value?.recommend
+    return cfg === false ? undefined : cfg
+  })
+}
+
+export function useShowRecommend() {
+  const blogConfig = useBlogConfig()
+  return computed(() => {
+    const cfg = blogConfig.value?.recommend
+    return cfg !== false
+  })
+}
+
+export function useAlertConfig() {
+  const blogConfig = useBlogConfig()
+  return computed(() => blogConfig.value?.alert)
+}
+
+export function useHomeConfig() {
+  const blogConfig = useBlogConfig()
+  return computed(() => blogConfig.value?.home)
+}
+
+export function useHomeTagsConfig() {
+  const blogConfig = useBlogConfig()
+  return computed(() => blogConfig.value?.homeTags)
+}
+
 export function useDocMetaInsertSelector() {
   const blogConfig = useConfig()
   const { frontmatter } = useData()
@@ -96,7 +160,8 @@ export function useConfig() {
 }
 
 export function useBlogConfig() {
-  return inject(configSymbol)!.value.blog!
+  const resolveConfig = useConfig()
+  return computed(() => resolveConfig?.value.blog!)
 }
 /**
  * 获取 oh-my-live2d的配置选项
@@ -234,7 +299,7 @@ export function useHomeFooterConfig() {
 }
 
 export function useBackToTopConfig() {
-  return useBlogConfig().backToTop
+  return computed(() => useBlogConfig().value?.backToTop)
 }
 
 export function useCleanUrls() {
@@ -305,48 +370,50 @@ export function useAnalyzeTitles(wordCount: Ref<number>, readTime: ComputedRef<n
 
 export function useFormatShowDate() {
   const blog = useBlogConfig()
-  if (typeof blog.formatShowDate === 'function') {
-    return blog.formatShowDate
-  }
-
-  function formatShowDate(date: any) {
-    const source = +new Date(date)
-    const now = +new Date()
-    const diff = now - source
-    const oneSeconds = 1000
-    const oneMinute = oneSeconds * 60
-    const oneHour = oneMinute * 60
-    const oneDay = oneHour * 24
-    const oneWeek = oneDay * 7
-
-    const langMap = {
-      justNow: '刚刚',
-      secondsAgo: '秒前',
-      minutesAgo: '分钟前',
-      hoursAgo: '小时前',
-      daysAgo: '天前',
-      weeksAgo: '周前',
-      ...blog.formatShowDate
-    }
-    const mapValue = langMap
-
-    if (diff < 10) {
-      return mapValue.justNow
-    }
-    if (diff < oneMinute) {
-      return `${Math.floor(diff / oneSeconds)}${mapValue.secondsAgo}`
-    }
-    if (diff < oneHour) {
-      return `${Math.floor(diff / oneMinute)}${mapValue.minutesAgo}`
-    }
-    if (diff < oneDay) {
-      return `${Math.floor(diff / oneHour)}${mapValue.hoursAgo}`
-    }
-    if (diff < oneWeek) {
-      return `${Math.floor(diff / oneDay)}${mapValue.daysAgo}`
+  return computed(() => {
+    if (typeof blog.value?.formatShowDate === 'function') {
+      return blog.value.formatShowDate
     }
 
-    return formatDate(new Date(date), 'yyyy-MM-dd')
-  }
-  return formatShowDate
+    function formatShowDate(date: any) {
+      const source = +new Date(date)
+      const now = +new Date()
+      const diff = now - source
+      const oneSeconds = 1000
+      const oneMinute = oneSeconds * 60
+      const oneHour = oneMinute * 60
+      const oneDay = oneHour * 24
+      const oneWeek = oneDay * 7
+
+      const langMap = {
+        justNow: '刚刚',
+        secondsAgo: '秒前',
+        minutesAgo: '分钟前',
+        hoursAgo: '小时前',
+        daysAgo: '天前',
+        weeksAgo: '周前',
+        ...blog.value?.formatShowDate
+      }
+      const mapValue = langMap
+
+      if (diff < 10) {
+        return mapValue.justNow
+      }
+      if (diff < oneMinute) {
+        return `${Math.floor(diff / oneSeconds)}${mapValue.secondsAgo}`
+      }
+      if (diff < oneHour) {
+        return `${Math.floor(diff / oneMinute)}${mapValue.minutesAgo}`
+      }
+      if (diff < oneDay) {
+        return `${Math.floor(diff / oneHour)}${mapValue.hoursAgo}`
+      }
+      if (diff < oneWeek) {
+        return `${Math.floor(diff / oneDay)}${mapValue.daysAgo}`
+      }
+
+      return formatDate(new Date(date), 'yyyy-MM-dd')
+    }
+    return formatShowDate
+  })
 }
