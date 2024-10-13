@@ -14,7 +14,7 @@ import {
   onUnmounted,
   provide,
   reactive,
-  ref
+  ref,
 } from 'vue'
 import { useColorMode } from '@vueuse/core'
 
@@ -35,8 +35,9 @@ export function withConfigProvider(App: Component) {
   return defineComponent({
     name: 'ConfigProvider',
     setup(_, { slots }) {
-      const { theme } = useData()
-      const config = computed(() => resolveConfig(theme.value))
+      const { theme, localeIndex } = useData()
+      const config = computed(() => resolveConfig(theme.value, localeIndex.value))
+
       provide(homeFooter, config.value.blog?.footer)
       provide(configSymbol, config)
       provide(
@@ -81,19 +82,17 @@ export function withConfigProvider(App: Component) {
 export function useDocMetaInsertSelector() {
   const blogConfig = useConfig()
   const { frontmatter } = useData()
-  return computed(() => frontmatter.value?.docMetaInsertSelector || blogConfig.config?.blog?.docMetaInsertSelector || 'h1')
+  return computed(() => frontmatter.value?.docMetaInsertSelector || blogConfig?.value?.blog?.docMetaInsertSelector || 'h1')
 }
 
 export function useDocMetaInsertPosition() {
   const blogConfig = useConfig()
   const { frontmatter } = useData()
-  return computed(() => frontmatter.value?.docMetaInsertPosition || blogConfig.config?.blog?.docMetaInsertPosition || 'after')
+  return computed(() => frontmatter.value?.docMetaInsertPosition || blogConfig?.value?.blog?.docMetaInsertPosition || 'after')
 }
 
 export function useConfig() {
-  return {
-    config: inject(configSymbol)!.value
-  }
+  return inject(configSymbol)
 }
 
 export function useBlogConfig() {
@@ -122,9 +121,9 @@ export function useArticles() {
 
   const articles = computed(() => {
     if (localeKeys.value.length === 0) {
-      return (blogConfig.config?.blog?.pagesData || [])
+      return (blogConfig?.value?.blog?.pagesData || [])
     }
-    return blogConfig.config?.blog?.locales?.[localeIndex.value]?.pagesData || []
+    return blogConfig?.value?.blog?.locales?.[localeIndex.value]?.pagesData || []
   })
   return articles
 }
@@ -159,14 +158,17 @@ export function useCurrentArticle() {
 export function useUserWorks() {
   return inject(userWorks)!
 }
-function resolveConfig(config: Theme.Config): Theme.Config {
-  return {
+function resolveConfig(config: Theme.Config, locale: string = 'root'): Theme.Config {
+  const mergeConfig = {
     ...config,
     blog: {
       ...config?.blog,
-      pagesData: config?.blog?.pagesData || []
+      pagesData: config?.blog?.pagesData || [],
+      // i18n 支持
+      ...config?.blog?.locales?.[locale]
     }
   }
+  return mergeConfig
 }
 
 /**
@@ -249,42 +251,42 @@ export function useHomeAnalysis() {
 }
 
 export function useAnalyzeTitles(wordCount: Ref<number>, readTime: ComputedRef<number>) {
-  const { article } = useBlogConfig()
+  const article = computed(() => useConfig()?.value.blog?.article)
 
   const topWordCount = computed(() =>
-    replaceValue(article?.analyzeTitles?.topWordCount || '字数：{{value}} 个字', wordCount.value)
+    replaceValue(article.value?.analyzeTitles?.topWordCount || '字数：{{value}} 个字', wordCount.value)
   )
   const topReadTime = computed(() =>
-    replaceValue(article?.analyzeTitles?.topReadTime || '预计：{{value}} 分钟', readTime.value)
+    replaceValue(article.value?.analyzeTitles?.topReadTime || '预计：{{value}} 分钟', readTime.value)
   )
   const inlineWordCount = computed(() =>
-    replaceValue(article?.analyzeTitles?.inlineWordCount || '{{value}} 个字', wordCount.value)
+    replaceValue(article.value?.analyzeTitles?.inlineWordCount || '{{value}} 个字', wordCount.value)
   )
   const inlineReadTime = computed(() =>
-    replaceValue(article?.analyzeTitles?.inlineReadTime || '{{value}} 分钟', readTime.value)
+    replaceValue(article.value?.analyzeTitles?.inlineReadTime || '{{value}} 分钟', readTime.value)
   )
 
   const wordCountTitle = computed(() =>
-    article?.analyzeTitles?.wordCount || '文章字数'
+    article.value?.analyzeTitles?.wordCount || '文章字数'
   )
   const readTimeTitle = computed(() =>
-    article?.analyzeTitles?.readTime || '预计阅读时间'
+    article.value?.analyzeTitles?.readTime || '预计阅读时间'
   )
 
   const authorTitle = computed(() =>
-    article?.analyzeTitles?.author || '本文作者'
+    article.value?.analyzeTitles?.author || '本文作者'
   )
 
   const publishDateTitle = computed(() =>
-    article?.analyzeTitles?.publishDate || '发布时间'
+    article.value?.analyzeTitles?.publishDate || '发布时间'
   )
 
   const lastUpdatedTitle = computed(() =>
-    article?.analyzeTitles?.lastUpdated || '最近修改时间'
+    article.value?.analyzeTitles?.lastUpdated || '最近修改时间'
   )
 
   const tagTitle = computed(() =>
-    article?.analyzeTitles?.tag || '标签'
+    article.value?.analyzeTitles?.tag || '标签'
   )
 
   return {
