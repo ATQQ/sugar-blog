@@ -1,4 +1,3 @@
-/* eslint-disable ts/no-non-null-asserted-optional-chain */
 import { useData, useRoute, withBase } from 'vitepress'
 import type {
   Component,
@@ -28,10 +27,6 @@ const activeTagSymbol: InjectionKey<Ref<Theme.activeTag>> = Symbol('active-tag')
 
 const currentPageNum: InjectionKey<Ref<number>> = Symbol('home-page-num')
 
-const userWorks: InjectionKey<Ref<Theme.UserWorks>> = Symbol('user-works')
-
-const homeFooter: InjectionKey<Theme.Footer | Theme.Footer[] | undefined> = Symbol('home-footer')
-
 export function withConfigProvider(App: Component) {
   return defineComponent({
     name: 'ConfigProvider',
@@ -39,18 +34,7 @@ export function withConfigProvider(App: Component) {
       const { theme, localeIndex } = useData()
       const config = computed(() => resolveConfig(theme.value, localeIndex.value))
 
-      provide(homeFooter, config.value.blog?.footer)
       provide(configSymbol, config)
-      provide(
-        userWorks,
-        ref(
-          config.value.blog?.works || {
-            title: '',
-            description: '',
-            list: []
-          }
-        )
-      )
 
       const activeTag = ref<Theme.activeTag>({
         label: '',
@@ -161,7 +145,7 @@ export function useConfig() {
 
 export function useBlogConfig() {
   const resolveConfig = useConfig()
-  return computed(() => resolveConfig?.value.blog!)
+  return computed(() => resolveConfig?.value?.blog)
 }
 /**
  * 获取 oh-my-live2d的配置选项
@@ -221,7 +205,13 @@ export function useCurrentArticle() {
 }
 
 export function useUserWorks() {
-  return inject(userWorks)!
+  const blogConfig = useBlogConfig()
+
+  return computed(() => blogConfig.value?.works || {
+    title: '',
+    description: '',
+    list: []
+  })
 }
 function resolveConfig(config: Theme.Config, locale: string = 'root'): Theme.Config {
   const mergeConfig = {
@@ -295,7 +285,8 @@ export function useAutoUpdateAnchor() {
 }
 
 export function useHomeFooterConfig() {
-  return inject(homeFooter)
+  const blogConfig = useBlogConfig()
+  return computed(() => blogConfig.value?.footer)
 }
 
 export function useBackToTopConfig() {
