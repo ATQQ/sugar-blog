@@ -147,6 +147,23 @@ export function useBlogConfig() {
   const resolveConfig = useConfig()
   return computed(() => resolveConfig?.value?.blog)
 }
+
+export function useButtonAfterConfig() {
+  const blogConfig = useBlogConfig()
+  const { frontmatter } = useData()
+  const frontmatterConfig = computed(() => frontmatter.value.buttonAfterArticle)
+
+  const buttonAfterArticleConfig = computed<Theme.ButtonAfterArticleConfig>(() => {
+    if (frontmatterConfig.value === false || (!frontmatterConfig.value && !blogConfig.value?.buttonAfterArticle)) {
+      return false
+    }
+
+    return { ...blogConfig.value?.buttonAfterArticle, ...frontmatterConfig.value }
+  })
+
+  return buttonAfterArticleConfig
+}
+
 /**
  * 获取 oh-my-live2d的配置选项
  */
