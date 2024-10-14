@@ -299,7 +299,13 @@ export function useHomeFooterConfig() {
 }
 
 export function useBackToTopConfig() {
-  return computed(() => useBlogConfig().value?.backToTop)
+  const blogConfig = useBlogConfig()
+  return computed(() => typeof blogConfig.value?.backToTop === 'boolean' ? undefined : blogConfig.value?.backToTop)
+}
+
+export function useOpenBackToTop() {
+  const blogConfig = useBlogConfig()
+  return computed(() => blogConfig.value?.backToTop !== false)
 }
 
 export function useCleanUrls() {

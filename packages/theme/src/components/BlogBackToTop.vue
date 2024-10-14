@@ -3,7 +3,7 @@ import { useElementSize, useScroll } from '@vueuse/core'
 import { ElIcon } from 'element-plus'
 import { computed, ref } from 'vue'
 import { vOuterHtml } from '../directives'
-import { useBackToTopConfig } from '../composables/config/blog'
+import { useBackToTopConfig, useOpenBackToTop } from '../composables/config/blog'
 
 function handleBackRoTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -15,15 +15,16 @@ const { width } = useElementSize(el)
 const docWidth = computed(() => `${width.value}px`)
 
 const backToTopConfig = useBackToTopConfig()
-const open = computed(() => !!(backToTopConfig ?? true))
+const open = useOpenBackToTop()
 
 const { y } = useScroll(window)
 const defaultTriggerHeight = 450
-const triggerTop = computed(() => (typeof backToTopConfig === 'boolean' ? undefined : backToTopConfig?.top) ?? defaultTriggerHeight)
+const triggerTop = computed(() => backToTopConfig.value?.top ?? defaultTriggerHeight)
 
 const show = computed(() => width && y.value > triggerTop.value)
 
-const iconSVGStr = computed(() => typeof backToTopConfig === 'boolean' ? '' : backToTopConfig?.icon)
+const iconSVGStr = computed(() => backToTopConfig?.value?.icon ?? false)
+// TODO: click error
 </script>
 
 <template>
