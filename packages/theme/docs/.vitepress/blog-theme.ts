@@ -19,8 +19,29 @@ export const blogTheme = getThemeConfig({
   //   justNow: '不久前',
   //   minutesAgo: ' minutes ago',
   // },
+  // TODO: 搜索结果确认
   search: {
-    pageResultCount: 5
+    pageResultCount: 5,
+    btnPlaceholder: '搜索',
+    placeholder: '搜索文章',
+    emptyText: '没有找到相关文章',
+    heading: '结果数: {{searchResult}} 条。',
+    toSelect: '选择',
+    toClose: '关闭',
+    toNavigate: '移动',
+    searchBy: 'Powered by',
+    locales: {
+      en: {
+        btnPlaceholder: 'Search',
+        placeholder: 'Search Docs',
+        emptyText: 'No results found',
+        heading: 'Total: {{searchResult}} search results.',
+        toSelect: 'to select',
+        toClose: 'to close',
+        toNavigate: 'to navigate',
+        searchBy: 'Search by',
+      }
+    }
   },
   // 图表支持
   mermaid: true,

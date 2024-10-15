@@ -47,11 +47,13 @@ export function getVitePlugins(cfg: Partial<Theme.BlogConfig> = {}) {
 
   // 内置支持RSS
   if (cfg?.RSS) {
+    // TODO: i18n
     ;[cfg?.RSS].flat().forEach(rssConfig => plugins.push(RssPlugin(rssConfig)))
   }
 
   // 内置支持 全局公告
   if (cfg?.popover) {
+    // TODO: i18n
     plugins.push(AnnouncementPlugin(cfg.popover))
   }
 

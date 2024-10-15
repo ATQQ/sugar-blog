@@ -39,7 +39,6 @@ export function useOml2d() {
   const oml2dOptions = useOml2dOptions()
   const init = async () => {
     if (oml2dOptions.value) {
-      console.log('oml2dOptions', oml2dOptions.value)
       const { loadOml2d } = await import('oh-my-live2d')
       loadOml2d({
         ...defaultOptions,
