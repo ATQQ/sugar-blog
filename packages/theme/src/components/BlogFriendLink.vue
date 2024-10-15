@@ -3,7 +3,7 @@ import { ElAvatar } from 'element-plus'
 import { useDark, useIntervalFn } from '@vueuse/core'
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import Swiper from 'swiper'
-import { useBlogConfig } from '../composables/config/blog'
+import { useFriendData } from '../composables/config/blog'
 import { getImageUrl, shuffleArray } from '../utils/client'
 import type { Theme } from '../'
 import { friendLinkSvgStr } from '../constants/svg'
@@ -12,13 +12,13 @@ const isDark = useDark({
   storageKey: 'vitepress-theme-appearance'
 })
 
-const { friend } = useBlogConfig()
+const friendData = useFriendData()
 const friendConfig = computed<Theme.FriendConfig>(() => ({
   list: [],
   random: false,
   limit: Number.MAX_SAFE_INTEGER,
   title: `${friendLinkSvgStr}友情链接`,
-  ...(Array.isArray(friend) ? { list: friend } : friend)
+  ...(Array.isArray(friendData.value) ? { list: friendData.value } : friendData.value)
 }))
 
 const limit = computed(() => {
@@ -89,6 +89,7 @@ onMounted(() => {
   }
 })
 
+// TODO: SSR渲染支持
 onUnmounted(() => {
   pause()
 })

@@ -1,4 +1,4 @@
-import { onMounted } from 'vue'
+import { onMounted, watch } from 'vue'
 import type { Options } from 'oh-my-live2d'
 import { useOml2dOptions } from '../composables/config/blog'
 
@@ -37,13 +37,14 @@ const defaultOptions: Options = {
 }
 export function useOml2d() {
   const oml2dOptions = useOml2dOptions()
-  onMounted(async () => {
-    if (oml2dOptions) {
+  const init = async () => {
+    if (oml2dOptions.value) {
+      console.log('oml2dOptions', oml2dOptions.value)
       const { loadOml2d } = await import('oh-my-live2d')
       loadOml2d({
         ...defaultOptions,
         ...oml2dOptions,
-        models: oml2dOptions?.models?.map(model => ({
+        models: oml2dOptions?.value?.models?.map(model => ({
           ...defaultModelOptions,
           ...model,
           stageStyle: {
@@ -57,27 +58,34 @@ export function useOml2d() {
         })),
         tips: {
           ...defaultOptions.tips,
-          ...oml2dOptions.tips,
+          ...oml2dOptions?.value.tips,
           style: {
             // @ts-expect-error
             ...defaultOptions?.tips?.style,
             // @ts-expect-error
-            ...oml2dOptions?.tips?.style
+            ...oml2dOptions?.value.tips?.style
           },
           mobileStyle: {
             // @ts-expect-error
             ...defaultOptions?.tips?.mobileStyle,
             // @ts-expect-error
-            ...oml2dOptions?.tips?.mobileStyle
+            ...oml2dOptions?.value.tips?.mobileStyle
           },
           copyTips: {
             // @ts-expect-error
             ...defaultOptions?.tips?.copyTips,
             // @ts-expect-error
-            ...oml2dOptions?.tips?.copyTips
+            ...oml2dOptions?.value.tips?.copyTips
           }
         }
       })
     }
+  }
+  // TODO: destroy
+  // watch(oml2dOptions, () => {
+  //   init()
+  // })
+  onMounted(() => {
+    init()
   })
 }

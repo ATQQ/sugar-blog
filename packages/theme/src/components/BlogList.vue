@@ -5,14 +5,15 @@ import { useData, useRoute, useRouter } from 'vitepress'
 import {
   useActiveTag,
   useArticles,
-  useBlogConfig,
-  useCurrentPageNum
+  useCurrentPageNum,
+  useGlobalAuthor,
+  useHomeConfig
 } from '../composables/config/blog'
 import type { Theme } from '../composables/config'
 import BlogItem from './BlogItem.vue'
 
-const { theme, frontmatter } = useData<Theme.Config>()
-const globalAuthor = computed(() => theme.value.blog?.author || '')
+const { frontmatter } = useData<Theme.Config>()
+const globalAuthor = useGlobalAuthor()
 const docs = useArticles()
 
 const activeTag = useActiveTag()
@@ -41,9 +42,9 @@ const filterData = computed(() => {
   )
 })
 
-const { home } = useBlogConfig()
+const home = useHomeConfig()
 const pageSize = computed(
-  () => frontmatter.value.blog?.pageSize || home?.pageSize || 6
+  () => frontmatter.value.blog?.pageSize || home?.value?.pageSize || 6
 )
 const currentPage = useCurrentPageNum()
 const currentWikiData = computed(() => {
