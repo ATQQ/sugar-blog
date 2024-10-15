@@ -153,7 +153,7 @@ export function useButtonAfterConfig() {
   const { frontmatter } = useData()
   const frontmatterConfig = computed(() => frontmatter.value.buttonAfterArticle)
 
-  const buttonAfterArticleConfig = computed<Theme.ButtonAfterArticleConfig>(() => {
+  const buttonAfterArticleConfig = computed<Theme.ButtonAfterArticleConfig | false>(() => {
     if (frontmatterConfig.value === false || (!frontmatterConfig.value && !blogConfig.value?.buttonAfterArticle)) {
       return false
     }
