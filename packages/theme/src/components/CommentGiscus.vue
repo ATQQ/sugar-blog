@@ -2,19 +2,18 @@
 import { useData, useRoute } from 'vitepress'
 import { computed, nextTick, ref, watch } from 'vue'
 import Giscus from '@giscus/vue'
-import { useBlogConfig } from '../composables/config/blog'
+import { useCommentConfig } from '../composables/config/blog'
 
-// 读取配制
-const { comment } = useBlogConfig()
+const comment = useCommentConfig()
 const commentConfig = computed(() => {
-  if (!comment) {
+  if (!comment.value) {
     return false
   }
-  if ('type' in comment && comment.type === 'giscus') {
-    return comment.options
+  if ('type' in comment.value && comment.value?.type === 'giscus') {
+    return comment.value.options
   }
-  else if (!('type' in comment)) {
-    return comment
+  else if (!('type' in comment.value)) {
+    return comment.value
   }
 
   return false

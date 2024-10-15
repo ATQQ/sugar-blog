@@ -168,7 +168,8 @@ export function useButtonAfterConfig() {
  * 获取 oh-my-live2d的配置选项
  */
 export function useOml2dOptions() {
-  return inject(configSymbol)!.value.blog?.oml2d
+  const blogConfig = useBlogConfig()
+  return computed(() => blogConfig.value?.oml2d)
 }
 
 export function useDarkTransitionConfig() {
@@ -314,6 +315,24 @@ export function useBackToTopConfig() {
 export function useOpenBackToTop() {
   const blogConfig = useBlogConfig()
   return computed(() => blogConfig.value?.backToTop !== false)
+}
+
+export function useCommentConfig() {
+  const blogConfig = useBlogConfig()
+  return computed(() => {
+    return blogConfig.value?.comment === false ? undefined : blogConfig.value?.comment
+  })
+}
+
+export function useOpenCommentConfig() {
+  const blogConfig = useBlogConfig()
+  const { frontmatter } = useData()
+  return computed(() => !!blogConfig.value?.comment && frontmatter.value.comment !== false)
+}
+
+export function useFriendData() {
+  const blogConfig = useBlogConfig()
+  return computed(() => blogConfig.value?.friend)
 }
 
 export function useCleanUrls() {

@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import { useElementSize, useElementVisibility, useWindowSize } from '@vueuse/core'
-import { useData } from 'vitepress'
-import { computed, h, ref } from 'vue'
-import { ElIcon } from 'element-plus'
+import { computed, ref } from 'vue'
 import { Comment } from '@element-plus/icons-vue'
-import { useBlogConfig } from '../composables/config/blog'
+import { useCommentConfig, useOpenCommentConfig } from '../composables/config/blog'
+import Icon from './Icon.vue'
 
-const { frontmatter } = useData()
 const commentEl = ref(null)
 const commentIsVisible = useElementVisibility(commentEl)
 
@@ -17,27 +15,12 @@ function handleScrollToComment() {
   })
 }
 
-const { comment: _comment } = useBlogConfig()
-const commentConfig = computed(() =>
-  _comment === false ? undefined : _comment
-)
+const commentConfig = useCommentConfig()
 
-const show = computed(() => {
-  return _comment && frontmatter.value.comment !== false
-})
+const show = useOpenCommentConfig()
 
 const { width } = useWindowSize()
 const mobileMinify = computed(() => width.value < 768 && (commentConfig.value?.mobileMinify ?? true))
-
-const CommentIcon = commentConfig.value?.icon
-  ? h('i', {
-    onVnodeMounted(vnode) {
-      if (vnode.el) {
-        vnode.el.outerHTML = commentConfig.value?.icon
-      }
-    },
-  })
-  : h(Comment)
 
 const $vpDoc = document.querySelector('.vp-doc')
 const el = ref<any>($vpDoc)
@@ -54,17 +37,17 @@ const labelText = computed(() => {
     <slot />
     <div v-show="!commentIsVisible" class="comment-btn-wrapper">
       <span v-if="!mobileMinify && labelText" class="icon-wrapper-text" @click="handleScrollToComment">
-        <ElIcon :size="20">
-          <CommentIcon />
-        </ElIcon>
+        <Icon :size="20" :icon="commentConfig?.icon">
+          <Comment />
+        </Icon>
         <span class="text">
           {{ labelText }}
         </span>
       </span>
       <span v-else class="icon-wrapper" @click="handleScrollToComment">
-        <ElIcon :size="20">
-          <CommentIcon />
-        </ElIcon>
+        <Icon :size="20" :icon="commentConfig?.icon">
+          <Comment />
+        </Icon>
       </span>
     </div>
   </div>
