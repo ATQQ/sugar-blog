@@ -59,6 +59,7 @@ export function withConfigProvider(App: Component) {
           'el-red': 'el-red'
         }
       })
+      // TODO: i18n
       mode.value = config.value.blog?.themeColor ?? 'vp-default'
       return () => h(App, null, slots)
     }
