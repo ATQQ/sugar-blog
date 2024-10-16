@@ -2,12 +2,12 @@
 import { computed } from 'vue'
 import { useData } from 'vitepress'
 import { isCurrentWeek } from '../utils/client'
-import { useArticles, useBlogConfig, useHomeAnalysis } from '../composables/config/blog'
+import { useArticles, useHomeAnalysis, useHomeConfig } from '../composables/config/blog'
 import BlogAuthor from './BlogAuthor.vue'
 
-const { home } = useBlogConfig()
+const home = useHomeConfig()
 const { frontmatter } = useData()
-const avatarMode = computed(() => frontmatter.value?.blog?.avatarMode || home?.avatarMode || 'card')
+const avatarMode = computed(() => frontmatter.value?.blog?.avatarMode || home?.value?.avatarMode || 'card')
 
 const showCardAvatar = computed(() => avatarMode.value === 'card')
 const showSplitCard = computed(() => avatarMode.value === 'split')

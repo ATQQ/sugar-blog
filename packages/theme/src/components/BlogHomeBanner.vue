@@ -1,21 +1,21 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useData } from 'vitepress'
-import { useBlogConfig } from '../composables/config/blog'
+import { useHomeConfig } from '../composables/config/blog'
 
 const { site, frontmatter } = useData()
-const { home } = useBlogConfig()
+const home = useHomeConfig()
 
 const name = computed(
-  () => (frontmatter.value.blog?.name ?? site.value.title) || home?.name || ''
+  () => (frontmatter.value.blog?.name ?? site.value.title) || home?.value?.name || ''
 )
-const motto = computed(() => frontmatter.value.blog?.motto || home?.motto || '')
+const motto = computed(() => frontmatter.value.blog?.motto || home?.value?.motto || '')
 
 const inspiring = ref('')
 const inspiringList = computed<string[]>(() => {
   return [
     ...new Set(
-      [frontmatter.value.blog?.inspiring, home?.inspiring]
+      [frontmatter.value.blog?.inspiring, home?.value?.inspiring]
         .flat()
         .filter(v => !!v)
     )
@@ -23,7 +23,7 @@ const inspiringList = computed<string[]>(() => {
 })
 const inspiringIndex = ref<number>(-1)
 const inspiringTimeout = computed<number>(
-  () => frontmatter.value.blog?.inspiringTimeout || home?.inspiringTimeout || 0
+  () => frontmatter.value.blog?.inspiringTimeout || home?.value?.inspiringTimeout || 0
 )
 
 watch(inspiringTimeout, () => {
@@ -50,6 +50,7 @@ onUnmounted(() => {
   }
 })
 
+// TODO：SSR 支持
 async function changeSlogan() {
   // 顺手启动定时器
   startTimer()

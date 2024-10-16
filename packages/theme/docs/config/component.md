@@ -11,6 +11,42 @@ tag:
 
 部分内置组件（插件），来源 [vitepress.yiov.top](https://vitepress.yiov.top/plugin.html) 推荐
 
+## groupIcon - 分组代码块图标
+作用于 `code-group` 代码块，提供语言/工具图标，基于 [vitepress-plugin-group-icons](https://github.com/yuyinws/vitepress-plugin-group-icons/tree/main/docs) 插件实现。
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/d1ece3bc3ff5ee15bb5401b0d20da266)
+
+````md
+::: code-group
+
+```sh [npm]
+npm install vitepress-plugin-group-icons
+```
+
+```sh [yarn]
+yarn add vitepress-plugin-group-icons
+```
+
+```sh [pnpm]
+pnpm add vitepress-plugin-group-icons
+```
+
+```sh [bun]
+bun add vitepress-plugin-group-icons
+```
+
+:::
+````
+
+```ts
+const blogTheme = getThemeConfig({
+  // 自定义图标
+  groupIcon: {
+
+  }
+})
+```
+
 ## oml2d - 看板娘集成
 * Type：[oml2dOptions](https://oml2d.com/options/Options.html)
 

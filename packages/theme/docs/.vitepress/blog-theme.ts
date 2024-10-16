@@ -1,5 +1,6 @@
 import type { Theme } from '@sugarat/theme'
 import { getThemeConfig } from '@sugarat/theme/node'
+import { themeEN } from './locales/en'
 import workConfig from './works'
 
 const baseUrl = 'https://theme.sugarat.top'
@@ -11,24 +12,35 @@ const RSS: Theme.RSSOptions = {
 }
 
 export const blogTheme = getThemeConfig({
-  // article: {
-  //   analyzeTitles: {
-  //     inlineWordCount: '{{value}} word counts',
-  //     inlineReadTime: '{{value}} min read time',
-  //     wordCount: 'Total word count',
-  //     readTime: 'Total read time',
-  //     author: 'Author',
-  //     publishDate: 'Published on',
-  //     lastUpdated: 'Last updated on',
-  //     tag: 'Tags',
-  //   }
-  // },
+  locales: {
+    en: themeEN
+  },
   // formatShowDate: {
   //   justNow: '不久前',
   //   minutesAgo: ' minutes ago',
   // },
   search: {
-    pageResultCount: 5
+    pageResultCount: 5,
+    btnPlaceholder: '搜索',
+    placeholder: '搜索文章',
+    emptyText: '没有找到相关文章',
+    heading: '结果数: {{searchResult}} 条。',
+    toSelect: '选择',
+    toClose: '关闭',
+    toNavigate: '移动',
+    searchBy: 'Powered by',
+    locales: {
+      en: {
+        btnPlaceholder: 'Search',
+        placeholder: 'Search Docs',
+        emptyText: 'No results found',
+        heading: 'Total: {{searchResult}} search results.',
+        toSelect: 'to select',
+        toClose: 'to close',
+        toNavigate: 'to navigate',
+        searchBy: 'Search by',
+      }
+    }
   },
   // 图表支持
   mermaid: true,

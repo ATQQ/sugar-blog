@@ -349,6 +349,7 @@ export namespace Theme {
     | 'el-red'
   export interface BlogConfig {
     blog?: false
+    locales?: Record<string, Omit<BlogConfig, 'locales' | 'pagesData' | 'search' | 'popover' | 'RSS'> & { pagesData?: PageData[] }>
     /**
      * 展示日期格式化
      */
@@ -360,6 +361,11 @@ export namespace Theme {
      */
     themeColor?: ThemeColor
     pagesData: PageData[]
+    /**
+     * @deprecated 请使用 VitePress 官方 srcDir 替代
+     *
+     * @doc https://vitepress.dev/zh/reference/site-config#srcdir
+     */
     srcDir?: string
     author?: string
     hotArticle?: HotArticle | false
@@ -459,6 +465,9 @@ export namespace Theme {
      * 渲染时替换图片地址
      */
     imageStyle?: ImageStyleConfig
+    groupIcon?: {
+      customIcon: Record<string, string>
+    }
   }
 
   export type FormatShowDate = {

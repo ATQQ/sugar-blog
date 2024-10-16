@@ -3,6 +3,7 @@ import { createRequire } from 'module'
 import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
 import type { UserConfig } from 'vitepress'
 import timeline from 'vitepress-markdown-timeline'
+import { groupIconMdPlugin } from 'vitepress-plugin-group-icons'
 import type { Theme } from '../../composables/config/index'
 import { aliasObjectToArray } from './index'
 
@@ -30,6 +31,9 @@ export function getMarkdownPlugins(cfg?: Partial<Theme.BlogConfig>) {
   if (cfg?.timeline !== false) {
     markdownPlugin.push(timeline)
   }
+
+  markdownPlugin.push(groupIconMdPlugin)
+
   return markdownPlugin
 }
 

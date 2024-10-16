@@ -3,27 +3,21 @@ import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter, withBase } from 'vitepress'
 import { ElButton } from 'element-plus'
 import { wrapperCleanUrls } from '../utils/client'
-import { useArticles, useBlogConfig, useCleanUrls, useFormatShowDate } from '../composables/config/blog'
+import { useArticles, useCleanUrls, useFormatShowDate, useRecommendConfig, useShowRecommend } from '../composables/config/blog'
 import { recommendSVG } from '../constants/svg'
 import type { Theme } from '../composables/config/index'
 
 const formatShowDate = useFormatShowDate()
 
-const { recommend: _recommend } = useBlogConfig()
+const recommend = useRecommendConfig()
+const show = useShowRecommend()
 
 const sidebarStyle = computed(() =>
-  _recommend && _recommend?.style ? _recommend.style : 'sidebar'
+  recommend.value?.style ?? 'sidebar'
 )
 
-const recommendPadding = computed(() =>
-  sidebarStyle.value === 'card' ? '10px' : '0px'
-)
-const recommend = computed(() =>
-  _recommend === false ? undefined : _recommend
-)
-
-const showDate = computed(() => (_recommend && _recommend?.showDate) ?? true)
-const showNum = computed(() => (_recommend && _recommend?.showNum) ?? true)
+const showDate = computed(() => recommend.value?.showDate ?? true)
+const showNum = computed(() => recommend.value?.showNum ?? true)
 
 const title = computed(() => recommend.value?.title ?? (`<span class="svg-icon">${recommendSVG}</span>` + '相关文章'))
 const pageSize = computed(() => recommend.value?.pageSize || 9)
@@ -162,7 +156,7 @@ function handleLinkClick(link: string) {
 
 <template>
   <div
-    v-if="_recommend !== false && (recommendList.length || emptyText)" class="recommend"
+    v-if="show && (recommendList.length || emptyText)" class="recommend"
     :class="{ card: sidebarStyle === 'card' }" data-pagefind-ignore="all"
   >
     <!-- 头部 -->
@@ -233,7 +227,10 @@ function handleLinkClick(link: string) {
 
 .recommend {
   flex-direction: column;
-  padding: v-bind(recommendPadding);
+  padding: 0px;
+}
+.recommend.card{
+  padding: 10px;
 }
 
 .recommend-container {
