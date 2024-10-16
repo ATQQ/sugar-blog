@@ -220,7 +220,7 @@ export function providePageData(cfg: Partial<Theme.BlogConfig>) {
     name: '@sugarat/theme-plugin-provide-page-data',
     async config(config: any) {
       const vitepressConfig: SiteConfig = config.vitepress
-      const pagesData = await getArticles(cfg, config.vitepress)
+      const pagesData = await getArticles(cfg, vitepressConfig)
       if (vitepressConfig.site.locales && Object.keys(vitepressConfig.site.locales).length > 1) {
         if (!vitepressConfig.site.themeConfig.blog.locales) {
           vitepressConfig.site.themeConfig.blog.locales = {}

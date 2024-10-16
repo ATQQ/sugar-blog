@@ -23,6 +23,7 @@ export function themeReloadPlugin() {
         server.restart()
       }, 500)
       server.watcher.on('add', async (path) => {
+        // TODO: rewrite 和 动态路由兼容
         const route = generateRoute(path)
         const meta = await getArticleMeta(path, route, blogConfig?.timeZone)
         blogConfig.pagesData.push({

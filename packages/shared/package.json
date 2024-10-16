@@ -1,6 +1,6 @@
 {
   "name": "@sugarat/theme-shared",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "@sugarat/theme-shared",
   "author": "sugar",
   "license": "MIT",
@@ -30,8 +30,8 @@
     "dist"
   ],
   "scripts": {
-    "dev": "npx tsup src/index.ts --dts --watch --format esm,cjs",
-    "build": "npx tsup src/index.ts --dts --format esm,cjs --silent"
+    "dev": "npx tsup src/index.ts --dts --watch --external vitepress --format esm,cjs",
+    "build": "npx tsup src/index.ts --dts --external vitepress --format esm,cjs --silent"
   },
   "dependencies": {
     "cross-spawn": "^7.0.3",
@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "@types/cross-spawn": "^6.0.6",
-    "p-limit": "4"
+    "p-limit": "4",
+    "vitepress": "1.3.4"
   }
 }

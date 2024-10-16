@@ -19,7 +19,6 @@ export const blogTheme = getThemeConfig({
   //   justNow: '不久前',
   //   minutesAgo: ' minutes ago',
   // },
-  // TODO: 搜索结果确认
   search: {
     pageResultCount: 5,
     btnPlaceholder: '搜索',
