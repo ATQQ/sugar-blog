@@ -1,6 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import { getDefaultTitle, getFileLastModifyTime, getTextSummary, grayMatter, normalizePath } from '@sugarat/theme-shared'
+import { getDefaultTitle, getFileLastModifyTime, getTextSummary, getVitePressPages, grayMatter, normalizePath } from '@sugarat/theme-shared'
 import type { SiteConfig } from 'vitepress'
 import type { Theme } from '../../composables/config/index'
 import { formatDate } from '../client'
@@ -67,6 +67,7 @@ export async function getArticleMeta(filepath: string, route: string, timeZone =
     = meta.description || getTextSummary(content, 100) || excerpt
 
   // 获取封面图
+  // TODO: 耦合信息优化
   meta.cover
     = meta.cover
     ?? (getFirstImagURLFromMD(fileContent, route))
@@ -102,31 +103,16 @@ function renderDynamicMarkdown(routeFile: string, params: Record<string, any>, c
 }
 
 export async function getArticles(cfg: Partial<Theme.BlogConfig>, vpConfig: SiteConfig) {
-  // 复用内置 pages 解析逻辑，同时兼容动态路由
-  const { pages, dynamicRoutes, rewrites } = vpConfig
+  const pages = getVitePressPages(vpConfig)
+  const metaResults = pages.reduce((prev, value) => {
+    const { page, route, originRoute, filepath, isDynamic, dynamicRoute } = value
 
-  const metaResults = pages.reduce((prev, curr) => {
-    const rewritePath = rewrites.map[curr]
-    const originRoute = `/${normalizePath(curr)
-      .replace(/\.md$/, '')}`
-    const rewriteRoute = rewritePath
-      ? `/${normalizePath(rewritePath)
-      .replace(/\.md$/, '')}`
-      : ''
+    const metaPromise = (isDynamic && dynamicRoute)
+      ? getArticleMeta(filepath, originRoute, cfg?.timeZone, renderDynamicMarkdown(filepath, dynamicRoute.params, dynamicRoute.content))
+      : getArticleMeta(filepath, originRoute, cfg?.timeZone)
 
-    const dynamicRoute = dynamicRoutes?.routes?.find(r => r.path === curr)
-    let metaPromise: Promise<any>
-    if (dynamicRoute) {
-      const { route, content, params } = dynamicRoute
-      const filepath = normalizePath(path.resolve(vpConfig.srcDir, route))
-      metaPromise = getArticleMeta(filepath, originRoute, cfg?.timeZone, renderDynamicMarkdown(filepath, params, content))
-    }
-    else {
-      metaPromise = getArticleMeta(normalizePath(`${vpConfig.srcDir}/${curr}`), originRoute, cfg?.timeZone)
-    }
-    const route = rewriteRoute || originRoute
     // 提前获取，有缓存取缓存
-    prev[curr] = {
+    prev[page] = {
       route,
       metaPromise
     }
@@ -138,8 +124,8 @@ export async function getArticles(cfg: Partial<Theme.BlogConfig>, vpConfig: Site
 
   const pageData: Theme.PageData[] = []
 
-  for (const file of pages) {
-    const { route, metaPromise } = metaResults[file]
+  for (const page of pages) {
+    const { route, metaPromise } = metaResults[page.page]
     const meta = await metaPromise
     if (meta.layout === 'home') {
       continue

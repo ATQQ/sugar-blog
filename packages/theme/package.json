@@ -55,7 +55,6 @@
     "@sugarat/theme-shared": "workspace:*",
     "@vue/shared": "^3.4.26",
     "@vueuse/core": "^9.13.0",
-    "fast-glob": "^3.3.2",
     "markdown-it-task-checkbox": "^1.0.6",
     "mermaid": "^10.9.0",
     "oh-my-live2d": "^0.19.3",

@@ -349,7 +349,7 @@ export namespace Theme {
     | 'el-red'
   export interface BlogConfig {
     blog?: false
-    locales?: Record<string, Omit<BlogConfig, 'locales' | 'pagesData' | 'search' | 'popover'> & { pagesData?: PageData[] }>
+    locales?: Record<string, Omit<BlogConfig, 'locales' | 'pagesData' | 'search' | 'popover' | 'RSS'> & { pagesData?: PageData[] }>
     /**
      * 展示日期格式化
      */
