@@ -69,7 +69,7 @@ export const blogTheme = getThemeConfig({
       }
     ],
   },
-  // RSS,
+  RSS,
   authorList: [
     {
       nickname: '粥里有勺糖',

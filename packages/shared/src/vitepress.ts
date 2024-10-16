@@ -1,4 +1,5 @@
 import path from 'path'
+import fs from 'node:fs'
 import type { ResolvedRouteConfig, SiteConfig } from 'vitepress'
 import { normalizePath } from './fs'
 
@@ -47,4 +48,27 @@ export function getVitePressPages(vpConfig: SiteConfig) {
   }
 
   return result
+}
+
+export function renderDynamicMarkdown(routeFile: string, params: Record<string, any>, content?: string) {
+  let baseContent = fs.readFileSync(routeFile, 'utf-8')
+
+  if (content) {
+    baseContent = baseContent.replace(/<!--\s*@content\s*-->/, content)
+  }
+
+  // 替换 {{$params}} 参数
+  return baseContent.replace(/\{\{(.*?)\}\}/g, (all, $1) => {
+    const key = $1?.trim?.() || ''
+    if (key.startsWith('$params')) {
+      const value = key.split('.').reduce((prev: Record<string, any>, curr: string) => {
+        if (prev !== null && typeof prev === 'object') {
+          return prev[curr]
+        }
+        return undefined
+      }, { $params: params })
+      return value
+    }
+    return all
+  })
 }

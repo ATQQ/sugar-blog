@@ -4,7 +4,7 @@
 
 ### Patch Changes
 
-- feat: add getVitePressPages
+- feat: add `getVitePressPages`,`renderDynamicMarkdown`
 
 ## 0.0.2
 

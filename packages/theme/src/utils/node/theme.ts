@@ -1,6 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import { getDefaultTitle, getFileLastModifyTime, getTextSummary, getVitePressPages, grayMatter, normalizePath } from '@sugarat/theme-shared'
+import { getDefaultTitle, getFileLastModifyTime, getTextSummary, getVitePressPages, grayMatter, normalizePath, renderDynamicMarkdown } from '@sugarat/theme-shared'
 import type { SiteConfig } from 'vitepress'
 import type { Theme } from '../../composables/config/index'
 import { formatDate } from '../client'
@@ -78,28 +78,6 @@ export async function getArticleMeta(filepath: string, route: string, timeZone =
     meta.recommend = false
   }
   return meta as Theme.PageMeta
-}
-function renderDynamicMarkdown(routeFile: string, params: Record<string, any>, content?: string) {
-  let baseContent = fs.readFileSync(routeFile, 'utf-8')
-
-  if (content) {
-    baseContent = baseContent.replace(/<!--\s*@content\s*-->/, content)
-  }
-
-  // 替换 {{$params}} 参数
-  return baseContent.replace(/\{\{(.*?)\}\}/g, (all, $1) => {
-    const key = $1?.trim?.() || ''
-    if (key.startsWith('$params')) {
-      const value = key.split('.').reduce((prev: Record<string, any>, curr: string) => {
-        if (prev !== null && typeof prev === 'object') {
-          return prev[curr]
-        }
-        return undefined
-      }, { $params: params })
-      return value
-    }
-    return all
-  })
 }
 
 export async function getArticles(cfg: Partial<Theme.BlogConfig>, vpConfig: SiteConfig) {
