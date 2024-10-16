@@ -15,6 +15,7 @@ import {
   provide,
   reactive,
   ref,
+  watch,
 } from 'vue'
 import { useColorMode } from '@vueuse/core'
 
@@ -59,8 +60,12 @@ export function withConfigProvider(App: Component) {
           'el-red': 'el-red'
         }
       })
-      // TODO: i18n
-      mode.value = config.value.blog?.themeColor ?? 'vp-default'
+      watch(config, () => {
+        mode.value = config.value.blog?.themeColor ?? 'vp-default'
+      }, {
+        immediate: true
+      })
+
       return () => h(App, null, slots)
     }
   })
