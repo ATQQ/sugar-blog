@@ -31,8 +31,6 @@ export function getFirstImagURLFromMD(content: string, route: string) {
     return url
   }
 
-  // TODO: 其它协议，待补充
-
   const paths = joinPath('/', route).split('/')
   paths.splice(paths.length - 1, 1)
   const relativePath = url.startsWith('/') ? url : path.join(paths.join('/') || '', url)

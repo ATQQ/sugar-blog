@@ -175,5 +175,5 @@ export function patchVPThemeConfig(
 }
 
 export function checkConfig(cfg?: Partial<Theme.BlogConfig>) {
-  // TODO：保留
+  // 保留
 }
