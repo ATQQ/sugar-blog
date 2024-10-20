@@ -68,6 +68,7 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
    * @default true
    */
   renderHTML?: ((filecontent: string) => string | Promise<string>) | boolean
+  locales?: Record<string, Omit<RSSOptions, 'locales'>>
 }
 
 export interface PostInfo {
