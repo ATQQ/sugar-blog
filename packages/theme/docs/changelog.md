@@ -27,6 +27,20 @@ bun install vitepress@latest
 ```
 :::
 
+## 0.5.0 (2024/10/20)
+
+### Minor Changes
+
+- feat: inline group icons plugin
+- feat: support i18n
+- feat: support rewrites and dynamic routes
+- chore: Optimization of theme reloading logic in dev mode
+- Updated dependencies
+  - @sugarat/theme-shared@0.0.3
+  - vitepress-plugin-pagefind@0.4.11
+  - vitepress-plugin-rss@0.3.0
+  - vitepress-plugin-announcement@0.1.3
+
 ## 0.4.14 (2024/09/22)
 
 ### Patch Changes
