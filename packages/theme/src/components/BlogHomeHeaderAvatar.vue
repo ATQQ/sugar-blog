@@ -1,14 +1,14 @@
 <script  setup lang="ts">
 import { useData, withBase } from 'vitepress'
 import { computed } from 'vue'
-import { useBlogConfig } from '../composables/config/blog'
+import { useHomeConfig } from '../composables/config/blog'
 
-const { home } = useBlogConfig()
+const home = useHomeConfig()
 const { frontmatter, site } = useData()
 const logo = computed(() =>
   frontmatter.value.logo
     ?? frontmatter.value?.blog?.logo
-    ?? home?.logo
+    ?? home?.value?.logo
     ?? site.value.themeConfig?.logo
     ?? '/logo.png'
 )

@@ -1,5 +1,14 @@
 # vitepress-plugin-rss
 
+## 0.3.0
+
+### Minor Changes
+
+- Updated dependencies
+  - @sugarat/theme-shared@0.0.3
+- feat: support rewrites and dynamic routes
+- feat: support i18n
+
 ## 0.2.10
 
 ### Patch Changes

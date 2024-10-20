@@ -5,9 +5,10 @@ import packageJSON from '../../package.json'
 import { copyrightSVG, icpSVG, themeSVG } from '../constants/svg'
 import { vOuterHtml } from '../directives'
 
-const footerData = useHomeFooterConfig()
+const footerConfig = useHomeFooterConfig()
 
 const renderData = computed(() => {
+  const footerData = footerConfig.value
   if (!footerData) {
     return []
   }
@@ -104,6 +105,7 @@ const renderData = computed(() => {
             </a>
             <span v-else>{{ item.name }}</span>
           </span>
+          <!-- TODO: 理论上存在问题，待优化 -->
           <span v-else v-outer-html="item" />
         </template>
       </p>

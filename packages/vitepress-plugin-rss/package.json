@@ -1,6 +1,6 @@
 {
   "name": "vitepress-plugin-rss",
-  "version": "0.2.10",
+  "version": "0.3.0",
   "description": "vitepress plugin, generate feed.rss",
   "author": "sugar",
   "license": "MIT",
@@ -39,11 +39,10 @@
   },
   "dependencies": {
     "@sugarat/theme-shared": "workspace:*",
-    "fast-glob": "^3.2.12",
     "feed": "^4.2.2"
   },
   "devDependencies": {
     "vite": "^5",
-    "vitepress": "1.1.3"
+    "vitepress": "^1.4.1"
   }
 }

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { computed, h, onMounted, ref, watch } from 'vue'
-import { useRoute, useRouter } from 'vitepress'
+import { computed, h, ref, watch } from 'vue'
+import { useData, useRoute, useRouter } from 'vitepress'
 import type { Announcement, AnnouncementOptions } from 'vitepress-plugin-announcement'
 
 // @ts-expect-error
@@ -9,26 +9,28 @@ import AnnouncementButton from './AnnouncementButton.vue'
 import AnnouncementIcon from './AnnouncementIcon.vue'
 import { inBrowser, parseStringStyle, useDebounceFn, useWindowSize } from './util'
 
-const popoverProps: AnnouncementOptions = announcementOptions
+const { localeIndex } = useData()
 
-const show = ref((popoverProps?.duration ?? 0) >= 0)
+const popoverProps = computed<AnnouncementOptions>(() => ({ ...announcementOptions, ...announcementOptions?.locales?.[localeIndex.value] }))
+
+const show = ref((popoverProps.value?.duration ?? 0) >= 0)
 
 const bodyContent = computed(() => {
-  return popoverProps?.body || []
+  return popoverProps.value?.body || []
 })
 
 const footerContent = computed(() => {
-  return popoverProps?.footer || []
+  return popoverProps.value?.footer || []
 })
-const storageKey = 'vitepress-plugin-announcement'
-const closeFlag = `${storageKey}-close`
+const storageKey = computed(() => `vitepress-plugin-announcement-${localeIndex.value}`)
+const closeFlag = computed(() => `${storageKey.value}-close`)
 
 // 移动端最小化
 const { width } = useWindowSize()
 const router = useRouter()
 const route = useRoute()
-onMounted(() => {
-  if (!popoverProps?.title) {
+watch(popoverProps, () => {
+  if (!popoverProps.value?.title) {
     return
   }
 
@@ -37,50 +39,50 @@ onMounted(() => {
   }
 
   // 取旧值
-  const oldValue = localStorage.getItem(storageKey)
-  const newValue = JSON.stringify(popoverProps)
-  localStorage.setItem(storageKey, newValue)
+  const oldValue = localStorage.getItem(storageKey.value)
+  const newValue = JSON.stringify(popoverProps.value)
+  localStorage.setItem(storageKey.value, newValue)
 
   // 移动端最小化
-  if (width.value < 768 && popoverProps?.mobileMinify) {
+  if (width.value < 768 && popoverProps.value?.mobileMinify) {
     show.value = false
     return
   }
 
   // >= 0 每次都展示，区别是否自动消失
-  if (Number(popoverProps?.duration ?? '') >= 0) {
+  if (Number(popoverProps.value?.duration ?? '') >= 0) {
     show.value = true
-    if (popoverProps?.duration) {
+    if (popoverProps.value?.duration) {
       setTimeout(() => {
         show.value = false
-      }, popoverProps?.duration)
+      }, popoverProps.value?.duration)
     }
     return
   }
 
-  if (oldValue !== newValue && popoverProps?.duration === -1) {
+  if (oldValue !== newValue && popoverProps.value?.duration === -1) {
     // 当做新值处理
     show.value = true
-    localStorage.removeItem(closeFlag)
+    localStorage.removeItem(closeFlag.value)
     return
   }
 
   // 新旧相等，判断是否点击过close，没点击关闭依然展示
-  if (oldValue === newValue && popoverProps?.duration === -1 && !localStorage.getItem(closeFlag)) {
+  if (oldValue === newValue && popoverProps.value?.duration === -1 && !localStorage.getItem(closeFlag.value)) {
     show.value = true
   }
-})
+}, { immediate: true })
 
 const onAfterRouteChanged = useDebounceFn(() => {
-  popoverProps?.onRouteChanged?.(route, show)
+  popoverProps.value?.onRouteChanged?.(route, show)
 }, 10)
 
 watch(route, onAfterRouteChanged, { immediate: true })
 
 function handleClose() {
   show.value = false
-  if (popoverProps?.duration === -1) {
-    localStorage.setItem(closeFlag, `${+new Date()}`)
+  if (popoverProps.value?.duration === -1) {
+    localStorage.setItem(closeFlag.value, `${+new Date()}`)
   }
 }
 
@@ -140,7 +142,7 @@ function PopoverValue(props: { key: number; item: Announcement.Value },
 }
 
 const showReopen = computed(() => {
-  return !show.value && (popoverProps?.reopen ?? true) && !!popoverProps.title
+  return !show.value && (popoverProps.value?.reopen ?? true) && !!popoverProps.value.title
 })
 </script>
 

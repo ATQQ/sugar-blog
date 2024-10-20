@@ -65,6 +65,10 @@ export interface AnnouncementOptions {
    * @param to 切换到的目标路由
    */
   onRouteChanged?: (to: Route, show: Ref<boolean>) => void
+  /**
+   * 国际化
+   */
+  locales?: Record<string, Omit<AnnouncementOptions, 'locales'>>
 }
 
 // eslint-disable-next-line ts/no-namespace

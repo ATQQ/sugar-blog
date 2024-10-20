@@ -1,31 +1,22 @@
 <script lang="ts" setup>
 import { ElButton } from 'element-plus'
 import { computed, ref, watch } from 'vue'
-import { useData } from 'vitepress'
-import { useBlogConfig } from '../composables/config/blog'
+import { useButtonAfterConfig } from '../composables/config/blog'
 import { aliPaySVG, weChatPaySVG } from '../constants/svg'
 
-const { buttonAfterArticle: _buttonAfterArticle } = useBlogConfig()
-const { frontmatter } = useData()
-const frontmatterConfig = computed(() => frontmatter.value.buttonAfterArticle)
-
-const buttonAfterArticleConfig = computed(() => {
-  if (frontmatterConfig.value === false || (!frontmatterConfig.value && !_buttonAfterArticle)) {
-    return false
-  }
-
-  return { ..._buttonAfterArticle, ...frontmatterConfig.value }
-})
+const buttonAfterArticleConfig = useButtonAfterConfig()
 
 const showContent = ref(false)
 
 watch(buttonAfterArticleConfig, () => {
-  showContent.value = !!buttonAfterArticleConfig.value?.expand
+  showContent.value = buttonAfterArticleConfig.value !== false && !!buttonAfterArticleConfig.value?.expand
 }, {
   immediate: true
 })
 
 const svg = computed(() => {
+  if (buttonAfterArticleConfig.value === false)
+    return ''
   const icon = buttonAfterArticleConfig.value?.icon
   if (icon === 'aliPay') {
     return aliPaySVG

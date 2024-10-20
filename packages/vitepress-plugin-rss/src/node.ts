@@ -1,22 +1,18 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import process from 'node:process'
-import glob from 'fast-glob'
 import type { SiteConfig } from 'vitepress'
 import { Feed } from 'feed'
-import { formatDate, getDefaultTitle, getFileLastModifyTime, getTextSummary, grayMatter, normalizePath } from '@sugarat/theme-shared'
+import { formatDate, getDefaultTitle, getFileLastModifyTime, getTextSummary, getVitePressPages, grayMatter, joinPath, normalizePath, renderDynamicMarkdown } from '@sugarat/theme-shared'
 import type { PostInfo, RSSOptions } from './type'
 
 const imageRegex = /!\[.*?\]\((.*?)\s*(".*?")?\)/
 const htmlCache = new Map<string, string | undefined>()
 export async function getPostsData(
-  srcDir: string,
   config: SiteConfig,
   ops: RSSOptions
 ) {
   const { ignoreHome = true, ignorePublish = false, renderHTML = true } = ops
-
-  const files = glob.sync(`${srcDir}/**/*.md`, { ignore: ['node_modules'], absolute: true })
+  const pagesData = getVitePressPages(config)
 
   const { createMarkdownRenderer } = await import('vitepress')
 
@@ -27,16 +23,21 @@ export async function getPostsData(
     config.logger
   )
   let posts: PostInfo[] = []
-  const fileContentPromises = files.reduce((prev, f) => {
-    prev[f] = {
-      contentPromise: fs.promises.readFile(f, 'utf-8'),
-      datePromise: getFileLastModifyTime(f)
+  const fileContentPromises = pagesData.reduce((prev, f) => {
+    const { isDynamic, dynamicRoute, filepath } = f
+    const contentPromise = (isDynamic && dynamicRoute)
+      ? Promise.resolve(renderDynamicMarkdown(filepath, dynamicRoute?.params, dynamicRoute?.content))
+      : fs.promises.readFile(filepath, 'utf-8')
+
+    prev[f.page] = {
+      contentPromise,
+      datePromise: getFileLastModifyTime(f.filepath)
     }
     return prev
   }, {} as Record<string, { contentPromise: Promise<string>; datePromise: Promise<Date | undefined> | undefined | Date }>)
 
-  for (const file of files) {
-    const { contentPromise, datePromise } = fileContentPromises[file]
+  for (const page of pagesData) {
+    const { contentPromise, datePromise } = fileContentPromises[page.page]
     const fileContent = await contentPromise
 
     const { data: frontmatter, excerpt, content } = grayMatter(fileContent, {
@@ -63,14 +64,16 @@ export async function getPostsData(
       = (frontmatter.cover
       ?? (fileContent.match(imageRegex)?.[1])) || ''
 
+    const targetPage = normalizePath(
+      page.rewritePath ? page.rewritePath : page.page
+    )
     const url
-      = config.site.base
-      + normalizePath(path.relative(config.srcDir, file))
+      = joinPath(config.site.base, targetPage)
         .replace(/(^|\/)index\.md$/, '$1')
         .replace(/\.md$/, config.cleanUrls ? '' : '.html')
 
     posts.push({
-      filepath: file,
+      filepath: page.filepath,
       fileContent,
       description: frontmatter.description,
       date: frontmatter.date,
@@ -130,11 +133,6 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
   if (!rssOptions)
     return
 
-  const srcDir
-    = config.srcDir.replace(config.root, '').replace(/^\//, '')
-    || process.argv.slice(2)?.[1]
-    || '.'
-
   const { baseUrl, filename } = rssOptions
 
   // eslint-disable-next-line unused-imports/no-unused-vars
@@ -147,7 +145,7 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
 
   // 获取所有文章
   const posts
-    = await getPostsData(srcDir, config, rssOptions)
+    = await getPostsData(config, rssOptions)
 
   for (const post of posts) {
     const { title, description, date, frontmatter, url } = post

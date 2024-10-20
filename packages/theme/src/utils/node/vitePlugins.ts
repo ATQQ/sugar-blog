@@ -1,6 +1,3 @@
-import path from 'node:path'
-import { existsSync, readFileSync } from 'node:fs'
-import { Buffer } from 'node:buffer'
 import type { HeadConfig, SiteConfig } from 'vitepress'
 import {
   pagefindPlugin
@@ -9,6 +6,7 @@ import { RssPlugin } from 'vitepress-plugin-rss'
 import type { PluginOption } from 'vite'
 import { joinPath } from '@sugarat/theme-shared'
 import { AnnouncementPlugin } from 'vitepress-plugin-announcement'
+import { groupIconVitePlugin } from 'vitepress-plugin-group-icons'
 import type { Theme } from '../../composables/config/index'
 import { _require } from './mdPlugins'
 import { themeReloadPlugin } from './hot-reload-plugin'
@@ -17,7 +15,7 @@ import { getArticles } from './theme'
 export function getVitePlugins(cfg: Partial<Theme.BlogConfig> = {}) {
   const plugins: any[] = []
 
-  // 处理cover image的路径（暂只支持自动识别的文章首图）
+  // 处理 cover image 的路径（暂只支持自动识别的文章首图）
   plugins.push(coverImgTransform())
 
   // 处理自定义主题色
@@ -27,10 +25,10 @@ export function getVitePlugins(cfg: Partial<Theme.BlogConfig> = {}) {
   // 自动重载首页
   plugins.push(themeReloadPlugin())
 
-  // 主题pageData生成
+  // 主题 pageData生成
   plugins.push(providePageData(cfg))
 
-  // 内置简化版的pagefind
+  // 内置 pagefind
   if (cfg && cfg.search !== false) {
     const ops = cfg.search instanceof Object ? cfg.search : {}
     plugins.push(
@@ -40,7 +38,7 @@ export function getVitePlugins(cfg: Partial<Theme.BlogConfig> = {}) {
     )
   }
 
-  // 内置支持Mermaid
+  // 内置支持 Markdown 流程图 Mermaid
   if (cfg?.mermaid !== false) {
     const { MermaidPlugin } = _require('vitepress-plugin-mermaid')
     plugins.push(inlineInjectMermaidClient())
@@ -52,9 +50,15 @@ export function getVitePlugins(cfg: Partial<Theme.BlogConfig> = {}) {
     ;[cfg?.RSS].flat().forEach(rssConfig => plugins.push(RssPlugin(rssConfig)))
   }
 
+  // 内置支持 全局公告
   if (cfg?.popover) {
     plugins.push(AnnouncementPlugin(cfg.popover))
   }
+
+  // 内置支持 group icon
+
+  plugins.push(groupIconVitePlugin(cfg?.groupIcon))
+
   return plugins
 }
 
@@ -106,58 +110,138 @@ export function inlineBuildEndPlugin(buildEndFn: any[]) {
   }
 }
 
-// TODO: 支持frontmatter中的相对路径图片自动处理
+// 支持frontmatter中的相对路径图片自动处理
 export function coverImgTransform() {
   let blogConfig: Theme.BlogConfig
   let vitepressConfig: SiteConfig
   let assetsDir: string
+
+  const relativeMetaName: (keyof Theme.PageMeta)[] = ['cover']
+  const relativeMeta: Theme.PageMeta[] = []
+  const relativeMetaMap: Record<string, Theme.PageMeta> = {}
+  const viteAssetsMap: Record<string, string> = {}
+  const relativePathMap: Record<string, string> = {}
   return {
     name: '@sugarat/theme-plugin-cover-transform',
     apply: 'build',
-    enforce: 'pre',
+    // enforce: 'pre',
     configResolved(config: any) {
       vitepressConfig = config.vitepress
       assetsDir = vitepressConfig.assetsDir
       blogConfig = config.vitepress.site.themeConfig.blog
+
+      const pagesData = [...blogConfig.pagesData]
+      // 兼容国际化
+      if (vitepressConfig.site.locales && Object.keys(vitepressConfig.site.locales).length > 1 && blogConfig?.locales) {
+        Object.values(blogConfig?.locales).map(v => v.pagesData)
+          .filter(v => !!v)
+          .forEach(v => pagesData.push(...v))
+      }
+      // 提取所有相对路径的属性
+      pagesData.forEach((v) => {
+        relativeMetaName.forEach((k) => {
+          const value = v.meta[k]
+          if (value && typeof value === 'string' && value.startsWith('/')) {
+            const absolutePath = `${vitepressConfig.srcDir}${value}`
+
+            // 复用已经映射后的值
+            if (relativeMetaMap[absolutePath]) {
+              Object.assign(v.meta, { [k]: relativeMetaMap[absolutePath][k] })
+              return
+            }
+
+            relativePathMap[value] = absolutePath
+            relativePathMap[absolutePath] = value
+            relativeMeta.push(v.meta)
+            relativeMetaMap[absolutePath] = v.meta
+          }
+        })
+      })
     },
-    async generateBundle(_: any, bundle: Record<string, any>) {
+    moduleParsed(info) {
+      if (!relativePathMap[info.id]) {
+        return
+      }
+      const asset = info.code?.match(/export default "(.*)"/)?.[1]
+      if (!asset) {
+        return
+      }
+
+      viteAssetsMap[info.id] = asset
+      viteAssetsMap[asset] = info.id
+
+      // 换成 ViteAssets，影响输出 HTML
+      relativeMeta.forEach((meta) => {
+        relativeMetaName.forEach((k) => {
+          const value = meta[k]
+          if (!value || !relativePathMap[value as string]) {
+            return
+          }
+          const viteAsset = viteAssetsMap[relativePathMap[value as string]]
+          if (viteAsset) {
+            Object.assign(meta, { [k]: viteAsset })
+          }
+        })
+      })
+    },
+    generateBundle(_: any, bundle: Record<string, any>) {
+      // 换成 最终输出路径，影响 CSR 内容
       const assetsMap = Object.entries(bundle).filter(([key]) => {
         return key.startsWith(assetsDir)
       }).map(([_, value]) => {
         return value
-      })
-      for (const page of blogConfig.pagesData) {
-        const { cover } = page.meta
-        // 是否相对路径引用
-        if (!cover?.startsWith?.('/')) {
-          continue
-        }
-        try {
-          // 寻找构建后的
-          const realPath = path.join(vitepressConfig.root, cover)
-          if (!existsSync(realPath)) {
-            continue
-          }
-          const fileBuffer = readFileSync(realPath)
-          const matchAsset = assetsMap.find(v => Buffer.compare(fileBuffer, v.source) === 0)
-          if (matchAsset) {
-            page.meta.cover = joinPath('/', matchAsset.fileName)
-          }
-        }
-        catch (e: any) {
-          vitepressConfig.logger.warn(e?.message)
-        }
+      }).filter(v => v.type === 'asset')
+
+      if (!assetsMap.length) {
+        return
       }
+
+      relativeMeta.forEach((meta) => {
+        relativeMetaName.forEach((k) => {
+          const value = meta[k]
+          if (!value || !viteAssetsMap[value as string]) {
+            return
+          }
+          const absolutePath = viteAssetsMap[value as string]
+          const matchAsset = assetsMap.find(v => joinPath(`${vitepressConfig.srcDir}/`, v.originalFileName) === absolutePath)
+          if (matchAsset) {
+            Object.assign(meta, { [k]: joinPath('/', matchAsset.fileName) })
+          }
+        })
+      })
     }
-  }
+  } as PluginOption
 }
 
 export function providePageData(cfg: Partial<Theme.BlogConfig>) {
   return {
     name: '@sugarat/theme-plugin-provide-page-data',
     async config(config: any) {
-      const pagesData = await getArticles(cfg, config.vitepress)
-      config.vitepress.site.themeConfig.blog.pagesData = pagesData
+      const vitepressConfig: SiteConfig = config.vitepress
+      const pagesData = await getArticles(cfg, vitepressConfig)
+      if (vitepressConfig.site.locales && Object.keys(vitepressConfig.site.locales).length > 1) {
+        if (!vitepressConfig.site.themeConfig.blog.locales) {
+          vitepressConfig.site.themeConfig.blog.locales = {}
+        }
+        // 兼容国际化
+        const localeKeys = Object.keys(vitepressConfig.site.locales)
+        localeKeys.forEach((localeKey) => {
+          if (!vitepressConfig.site.themeConfig.blog.locales[localeKey]) {
+            vitepressConfig.site.themeConfig.blog.locales[localeKey] = {}
+          }
+
+          vitepressConfig.site.themeConfig.blog.locales[localeKey].pagesData = pagesData.filter((v) => {
+            const { route } = v
+            const isRoot = localeKey === 'root'
+            if (isRoot) {
+              return !localeKeys.filter(v => v !== 'root').some(k => route.startsWith(`/${k}`))
+            }
+            return route.startsWith(`/${localeKey}`)
+          })
+        })
+        return
+      }
+      vitepressConfig.site.themeConfig.blog.pagesData = pagesData
     },
   } as PluginOption
 }

@@ -11,14 +11,14 @@ import {
   EditPen,
   UserFilled
 } from '@element-plus/icons-vue'
-import { useAnalyzeTitles, useBlogConfig, useCurrentArticle, useDocMetaInsertPosition, useDocMetaInsertSelector, useFormatShowDate } from '../composables/config/blog'
+import { useAnalyzeTitles, useArticleConfig, useAuthorList, useCurrentArticle, useDocMetaInsertPosition, useDocMetaInsertSelector, useFormatShowDate, useGlobalAuthor } from '../composables/config/blog'
 import countWord, { formatDate } from '../utils/client'
-import type { Theme } from '../composables/config'
 import BlogDocCover from './BlogDocCover.vue'
 
 const formatShowDate = useFormatShowDate()
-const { article, authorList } = useBlogConfig()
-const readingTimePosition = article?.readingTimePosition || 'inline'
+const article = useArticleConfig()
+const authorList = useAuthorList()
+const readingTimePosition = computed(() => article?.value?.readingTimePosition || 'inline')
 
 const { frontmatter } = useData()
 const tags = computed(() => {
@@ -33,7 +33,7 @@ const tags = computed(() => {
   ]
 })
 const showAnalyze = computed(
-  () => frontmatter.value?.readingTime ?? article?.readingTime ?? true
+  () => frontmatter.value?.readingTime ?? article?.value?.readingTime ?? true
 )
 
 const wordCount = ref(0)
@@ -102,7 +102,7 @@ onMounted(() => {
 
 const currentArticle = useCurrentArticle()
 const publishDate = computed(() => {
-  return formatShowDate(currentArticle.value?.meta?.date || '')
+  return formatShowDate.value(currentArticle.value?.meta?.date || '')
 })
 
 const hoverDate = computed(() => {
@@ -111,15 +111,14 @@ const hoverDate = computed(() => {
 
 const hiddenTime = computed(() => frontmatter.value.date === false)
 
-const { theme } = useData<Theme.Config>()
-const globalAuthor = computed(() => theme.value.blog?.author || '')
+const globalAuthor = useGlobalAuthor()
 const author = computed(
   () =>
     (frontmatter.value.author || currentArticle.value?.meta.author)
     ?? globalAuthor.value
 )
 const currentAuthorInfo = computed(() =>
-  authorList?.find(v => author.value === v.nickname)
+  authorList?.value?.find(v => author.value === v.nickname)
 )
 const hiddenAuthor = computed(() => frontmatter.value.author === false)
 
