@@ -1,5 +1,11 @@
 # vitepress-plugin-announcement
 
+## 0.1.3
+
+### Patch Changes
+
+- feat: support i18n
+
 ## 0.1.2
 
 ### Patch Changes

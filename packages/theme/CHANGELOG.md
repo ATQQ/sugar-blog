@@ -1,8 +1,8 @@
 # @sugarat/theme
 
-## 0.4.14
+## 0.5.0
 
-### Patch Changes
+### Minor Changes
 
 - feat: inline group icons plugin
 - feat: support i18n
@@ -11,7 +11,9 @@
 - Updated dependencies
   - @sugarat/theme-shared@0.0.3
   - vitepress-plugin-pagefind@0.4.11
-  - vitepress-plugin-rss@0.2.11
+  - vitepress-plugin-rss@0.3.0
+  - vitepress-plugin-announcement@0.1.3
+
 ## 0.4.13
 
 ### Patch Changes

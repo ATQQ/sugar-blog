@@ -147,7 +147,24 @@ export const blogTheme = getThemeConfig({
         },
         link: '/group.html',
       }
-    ]
+    ],
+    locales: {
+      en: {
+        title: 'Announcement',
+        body: [
+          { type: 'text', content: '👇 Wechat 👇' },
+          {
+            type: 'image',
+            src: 'https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210~fmt.webp'
+          },
+          {
+            type: 'button',
+            content: 'Author Blog',
+            link: 'https://sugarat.top'
+          },
+        ]
+      }
+    }
   },
   works: workConfig,
   footer: {

@@ -169,6 +169,11 @@ export interface AnnouncementOptions {
    * @param to target route
    */
   onRouteChanged?: (to: Route, show: Ref<boolean>) => void
+
+  /**
+   * i18n
+   */
+  locales?: Record<string, Omit<AnnouncementOptions, 'locales'>>
 }
 
 export declare namespace Announcement {
