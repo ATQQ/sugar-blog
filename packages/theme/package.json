@@ -1,6 +1,6 @@
 {
   "name": "@sugarat/theme",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "简约风的 Vitepress 博客主题，sugarat vitepress blog theme",
   "author": "sugar",
   "license": "MIT",
@@ -71,7 +71,7 @@
     "@element-plus/icons-vue": "^2.3.1",
     "artalk": "^2.8.5",
     "element-plus": "^2.7.2",
-    "pagefind": "^1.1.0",
+    "pagefind": "^1.1.1",
     "sass": "^1.77.8",
     "typescript": "^5.4.5",
     "vite": "^5.2.11",

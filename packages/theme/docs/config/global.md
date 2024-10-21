@@ -2028,3 +2028,42 @@ type FormatShowDate = {
 ![](https://cdn.upyun.sugarat.top/mdImg/sugar/1954ec12b73222a210e85b75aa48f777)
 
 ![](https://cdn.upyun.sugarat.top/mdImg/sugar/76a88adf6b81ed95b45fdb03c5ea2279)
+
+
+## locales
+
+* Type: `Record<string, BlogConfig>`
+
+国际化相关配置
+
+每个语言的配置可以单独维护，例如`locale/en.ts`，为了方便配置，主题导出了 `defineLocaleConfig` 方法对配置进行约束。
+```ts
+import { defineLocaleConfig } from '@sugarat/theme/node'
+
+export const themeEN = defineLocaleConfig({
+  author: 'sugar',
+  hotArticle: {
+    title: '🔥 Hot Article',
+    nextText: 'next',
+    pageSize: 3,
+    empty: 'empty content'
+  },
+  homeTags: {
+    title: '🏷 Tags'
+  },
+  // ...other config
+})
+```
+
+在 `blog-theme.ts` 中引入即可。
+
+```ts
+import { getThemeConfig } from '@sugarat/theme/node'
+import { themeEN } from './locales/en'
+
+export const blogTheme = getThemeConfig({
+  locales: {
+    en: themeEN
+  }
+})
+```

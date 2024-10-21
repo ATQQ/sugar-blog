@@ -1,5 +1,11 @@
 # @sugarat/theme
 
+## 0.5.1
+
+### Patch Changes
+
+- fix: dev auto reload failed
+
 ## 0.5.0
 
 ### Minor Changes

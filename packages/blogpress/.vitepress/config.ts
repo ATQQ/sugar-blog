@@ -247,6 +247,7 @@ const blogTheme = getThemeConfig({
 export default defineConfig({
   extends: blogTheme,
   metaChunk: true,
+  srcExclude: ['CHANGELOG.md'],
   markdown: {
     image: {
       lazyLoading: true

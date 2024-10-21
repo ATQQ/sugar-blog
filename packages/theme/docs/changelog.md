@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.4.13） ⏰ 2024/09/17：分离公告插件
+description: 最近更新（v0.5.1） ⏰ 2024/10/21：内置代码组图标插件，支持动态路由和路由重写的识别，国际化支持
 author: 粥里有勺糖
 top: 3
 tag: 日志
@@ -27,6 +27,12 @@ bun install vitepress@latest
 ```
 :::
 
+## 0.5.1 (2024/10/21)
+
+### Patch Changes
+
+- fix: dev auto reload failed
+
 ## 0.5.0 (2024/10/20)
 
 ### Minor Changes
@@ -40,12 +46,6 @@ bun install vitepress@latest
   - vitepress-plugin-pagefind@0.4.11
   - vitepress-plugin-rss@0.3.0
   - vitepress-plugin-announcement@0.1.3
-
-## 0.4.14 (2024/09/22)
-
-### Patch Changes
-
-- feat: inline group icons plugin
 
 ![](https://cdn.upyun.sugarat.top/mdImg/sugar/d1ece3bc3ff5ee15bb5401b0d20da266)
 

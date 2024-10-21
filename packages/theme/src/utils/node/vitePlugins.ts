@@ -216,7 +216,7 @@ export function coverImgTransform() {
 export function providePageData(cfg: Partial<Theme.BlogConfig>) {
   return {
     name: '@sugarat/theme-plugin-provide-page-data',
-    async config(config: any) {
+    async config(config: any, env) {
       const vitepressConfig: SiteConfig = config.vitepress
       const pagesData = await getArticles(cfg, vitepressConfig)
       if (vitepressConfig.site.locales && Object.keys(vitepressConfig.site.locales).length > 1) {
@@ -239,7 +239,9 @@ export function providePageData(cfg: Partial<Theme.BlogConfig>) {
             return route.startsWith(`/${localeKey}`)
           })
         })
-        return
+        if (env.mode === 'production') {
+          return
+        }
       }
       vitepressConfig.site.themeConfig.blog.pagesData = pagesData
     },
