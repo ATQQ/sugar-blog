@@ -74,9 +74,9 @@
     "pagefind": "^1.1.1",
     "sass": "^1.77.8",
     "typescript": "^5.4.5",
-    "vite": "^5.2.11",
+    "vite": "^5.4.9",
     "vitepress": "1.4.1",
     "vitepress-plugin-51la": "workspace:*",
-    "vue": "^3.4.26"
+    "vue": "^3.5.12"
   }
 }
