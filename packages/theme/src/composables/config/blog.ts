@@ -347,11 +347,13 @@ export function useCleanUrls() {
 }
 
 export function useImageStyle() {
-  return inject(configSymbol)?.value?.blog?.imageStyle || {} as Theme.ImageStyleConfig
+  const blogConfig = useBlogConfig()
+  return computed<Theme.ImageStyleConfig>(() => blogConfig.value?.imageStyle || {})
 }
 
 export function useHomeAnalysis() {
-  return inject(configSymbol)?.value?.blog?.home?.analysis
+  const home = useHomeConfig()
+  return computed(() => home.value?.analysis)
 }
 
 export function useAnalyzeTitles(wordCount: Ref<number>, readTime: ComputedRef<number>) {

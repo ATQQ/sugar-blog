@@ -4,6 +4,7 @@
 
 ### Patch Changes
 
+- chore: Improving i18n support
 - fix: dev auto reload failed
 
 ## 0.5.0

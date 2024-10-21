@@ -15,6 +15,11 @@ export const themeEN = defineLocaleConfig({
     name: '@sugarat/theme',
     motto: 'Sugar\'s Blog Theme',
     inspiring: 'Based on VitePress',
+    analysis: {
+      articles: {
+        title: ['Posts', 'Monthly', 'Weekly']
+      }
+    }
   },
   comment: {
     type: 'giscus',

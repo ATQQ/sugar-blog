@@ -30,14 +30,15 @@ function handleSkipDoc() {
   router.go(link.value)
 }
 
-const { coverPreview } = useImageStyle()
+const imageStyle = useImageStyle()
+const coverPreview = computed(() => imageStyle.value.coverPreview)
 
 const resultCover = computed(() => {
   if (!props.cover) {
     return ''
   }
   const baseCover = withBase(props.cover)
-  const coverRule = [coverPreview]
+  const coverRule = [coverPreview.value]
     .flat()
     .filter(v => !!v)
     .find((coverRule) => {

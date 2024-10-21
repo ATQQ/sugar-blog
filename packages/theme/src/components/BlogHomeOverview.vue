@@ -33,7 +33,7 @@ const currentWeek = computed(() => {
 })
 
 const analysis = useHomeAnalysis()
-const titles = computed(() => (frontmatter.value?.blog?.analysis?.articles?.title || analysis?.articles?.title || []))
+const titles = computed(() => (frontmatter.value?.blog?.analysis?.articles?.title || analysis?.value?.articles?.title || []))
 </script>
 
 <template>
