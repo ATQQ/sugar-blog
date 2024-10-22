@@ -132,8 +132,8 @@ importers:
         specifier: ^1.0.6
         version: 1.0.6
       mermaid:
-        specifier: ^10.9.0
-        version: 10.9.0
+        specifier: ^10.9.3
+        version: 10.9.3
       oh-my-live2d:
         specifier: ^0.19.3
         version: 0.19.3
@@ -151,7 +151,7 @@ importers:
         version: 1.2.4
       vitepress-plugin-mermaid:
         specifier: 2.0.13
-        version: 2.0.13(mermaid@10.9.0)(vitepress@1.4.1(@algolia/client-search@4.19.1)(@types/node@20.6.3)(async-validator@4.2.5)(postcss@8.4.47)(sass@1.77.8)(search-insights@2.13.0)(typescript@5.4.5))
+        version: 2.0.13(mermaid@10.9.3)(vitepress@1.4.1(@algolia/client-search@4.19.1)(@types/node@20.6.3)(async-validator@4.2.5)(postcss@8.4.47)(sass@1.77.8)(search-insights@2.13.0)(typescript@5.4.5))
       vitepress-plugin-pagefind:
         specifier: workspace:*
         version: link:../vitepress-plugin-pagefind
@@ -296,13 +296,13 @@ importers:
         specifier: ^5.5.4
         version: 5.6.2
       vite:
-        specifier: ^5.4.9
+        specifier: ^5
         version: 5.4.9(@types/node@20.6.3)(sass@1.77.8)
       vitepress:
         specifier: ^1.3.4
         version: 1.3.4(@algolia/client-search@4.19.1)(@types/node@20.6.3)(async-validator@4.2.5)(postcss@8.4.47)(sass@1.77.8)(search-insights@2.13.0)(typescript@5.6.2)
       vue:
-        specifier: ^3.5.12
+        specifier: ^3.4.26
         version: 3.5.12(typescript@5.6.2)
 
 packages:
@@ -1003,6 +1003,7 @@ packages:
   '@humanwhocodes/config-array@0.11.11':
     resolution: {integrity: sha512-N2brEuAadi0CcdeMXUkhbZB84eskAc8MEX1By6qEchoVywSgXPIjou4rYsl0V3Hj0ZnuGycGCjdNgockbzeWNA==}
     engines: {node: '>=10.10.0'}
+    deprecated: Use @eslint/config-array instead
 
   '@humanwhocodes/module-importer@1.0.1':
     resolution: {integrity: sha512-bxveV4V8v5Yb4ncFTT3rPSgZBOpCkjfK0y4oVVVJwIuDVBRMDXrPyXRL988i5ap9m9bnyEEjWfm5WkBmtffLfA==}
@@ -1010,6 +1011,7 @@ packages:
 
   '@humanwhocodes/object-schema@1.2.1':
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
+    deprecated: Use @eslint/object-schema instead
 
   '@iconify-json/logos@1.2.0':
     resolution: {integrity: sha512-VkU9QSqeZR2guWbecdqkcoZEAJfgJJTUm6QAsypuZQ7Cve6zy39wOXDjp2H31I8QyQy4O3Cz96+pNji6UQFg4w==}
@@ -2502,6 +2504,7 @@ packages:
   eslint@8.50.0:
     resolution: {integrity: sha512-FOnOGSuFuFLv/Sa+FDVRZl4GGVAAFFi8LecRsI5a1tMO5HIE8nCm4ivAlzt4dT3ol/PaaGC0rJEEXQmHJBGoOg==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
 
   espree@9.6.1:
@@ -2719,9 +2722,11 @@ packages:
 
   glob@7.1.6:
     resolution: {integrity: sha512-LwaxwyZ72Lk7vZINtNNrywX0ZuLyStrdDtabefZKAY5ZGJhVtgdznluResxNmPitE0SAO+O26sWTHeKSI2wMBA==}
+    deprecated: Glob versions prior to v9 are no longer supported
 
   glob@7.2.0:
     resolution: {integrity: sha512-lmLf6gtyrPq8tTjSmrO94wBeQbFR3HbLHbuyD69wuyQkImp2hWqMGB47OX65FBkPffO641IP9jWa1z4ivqG26Q==}
+    deprecated: Glob versions prior to v9 are no longer supported
 
   globals@13.22.0:
     resolution: {integrity: sha512-H1Ddc/PbZHTDVJSnj8kWptIRSD6AM3pK+mKytuIVF4uoBV7rshFlhhvA58ceJ5wp3Er58w6zj7bykMpYXt3ETw==}
@@ -2850,6 +2855,7 @@ packages:
 
   inflight@1.0.6:
     resolution: {integrity: sha512-k92I/b08q4wvFscXCLvqfsHCrjrF7yiXsQuIVvVE7N82W3+aqpzuUdBbfhWcy/FZR3/4IgflMgKLOsvPDrGCJA==}
+    deprecated: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
 
   inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
@@ -3237,8 +3243,8 @@ packages:
     resolution: {integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==}
     engines: {node: '>= 8'}
 
-  mermaid@10.9.0:
-    resolution: {integrity: sha512-swZju0hFox/B/qoLKK0rOxxgh8Cf7rJSfAUc1u8fezVihYMvrJAS45GzAxTVf4Q+xn9uMgitBcmWk7nWGXOs/g==}
+  mermaid@10.9.3:
+    resolution: {integrity: sha512-V80X1isSEvAewIL3xhmz/rVmc27CVljcsbWxkxlWJWY/1kQa4XOABqpDl2qQLGKzpKm6WbTfUEKImBlUfFYArw==}
 
   micromark-core-commonmark@1.1.0:
     resolution: {integrity: sha512-BgHO1aRbolh2hcrzL2d1La37V0Aoz73ymF8rAcKnohLy93titmv62E0gP8Hrx9PKcKrqCZ1BbLGbP3bEhoXYlw==}
@@ -3765,6 +3771,7 @@ packages:
 
   rimraf@3.0.2:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
+    deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
   rimraf@5.0.1:
@@ -5498,7 +5505,7 @@ snapshots:
 
   '@types/hast@3.0.4':
     dependencies:
-      '@types/unist': 2.0.6
+      '@types/unist': 3.0.3
 
   '@types/is-ci@3.0.0':
     dependencies:
@@ -5533,7 +5540,7 @@ snapshots:
 
   '@types/mdast@3.0.11':
     dependencies:
-      '@types/unist': 2.0.6
+      '@types/unist': 3.0.3
 
   '@types/mdast@4.0.4':
     dependencies:
@@ -7726,7 +7733,7 @@ snapshots:
 
   merge2@1.4.1: {}
 
-  mermaid@10.9.0:
+  mermaid@10.9.3:
     dependencies:
       '@braintree/sanitize-url': 6.0.2
       '@types/d3-scale': 4.0.8
@@ -7881,7 +7888,7 @@ snapshots:
 
   micromark@2.11.4:
     dependencies:
-      debug: 4.3.4
+      debug: 4.3.7
       parse-entities: 2.0.0
     transitivePeerDependencies:
       - supports-color
@@ -7889,7 +7896,7 @@ snapshots:
   micromark@3.2.0:
     dependencies:
       '@types/debug': 4.1.8
-      debug: 4.3.4
+      debug: 4.3.7
       decode-named-character-reference: 1.0.2
       micromark-core-commonmark: 1.1.0
       micromark-factory-space: 1.1.0
@@ -8862,9 +8869,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  vitepress-plugin-mermaid@2.0.13(mermaid@10.9.0)(vitepress@1.4.1(@algolia/client-search@4.19.1)(@types/node@20.6.3)(async-validator@4.2.5)(postcss@8.4.47)(sass@1.77.8)(search-insights@2.13.0)(typescript@5.4.5)):
+  vitepress-plugin-mermaid@2.0.13(mermaid@10.9.3)(vitepress@1.4.1(@algolia/client-search@4.19.1)(@types/node@20.6.3)(async-validator@4.2.5)(postcss@8.4.47)(sass@1.77.8)(search-insights@2.13.0)(typescript@5.4.5)):
     dependencies:
-      mermaid: 10.9.0
+      mermaid: 10.9.3
       vitepress: 1.4.1(@algolia/client-search@4.19.1)(@types/node@20.6.3)(async-validator@4.2.5)(postcss@8.4.47)(sass@1.77.8)(search-insights@2.13.0)(typescript@5.4.5)
     optionalDependencies:
       '@mermaid-js/mermaid-mindmap': 9.3.0
