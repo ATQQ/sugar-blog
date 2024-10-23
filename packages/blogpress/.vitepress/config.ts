@@ -199,7 +199,13 @@ const blogTheme = getThemeConfig({
         des: '一名全栈开发工程师，.NET全栈经验',
         avatar: 'https://cdn.upyun.sugarat.top/avatar/blog/llxz.png',
         url: 'http://llxz.top/'
-      }
+      },
+      {
+        nickname: '菜园前端',
+        des: '小白都能看懂的笔记',
+        avatar: 'https://note.noxussj.top/logo.png',
+        url: 'https://note.noxussj.top/?s=y8'
+      },
     ].map((v) => {
       if (v.avatar.includes('//cdn.upyun.sugarat.top')) {
         v.avatar = `${v.avatar}-wh50`
