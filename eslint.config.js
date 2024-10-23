@@ -54,5 +54,8 @@ export default antfu({
     'vue/prefer-import-from-vue': 'off',
     'jsdoc/no-types': 'off',
     'no-template-curly-in-string': 'off',
+    'use-isnan': 'warn',
+    'unicorn/prefer-number-properties': 'off',
+    'no-unneeded-ternary': 'off'
   },
 })

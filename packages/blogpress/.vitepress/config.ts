@@ -283,10 +283,6 @@ export default defineConfig({
     ],
   ],
   vite: {
-    server: {
-      port: 4000,
-      host: '0.0.0.0'
-    },
     plugins: [
       La51Plugin({
         id: 'Jgmg5avjAUvoyePS',
