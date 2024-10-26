@@ -6,7 +6,8 @@ export default antfu({
 },
 {
   ignores: [
-    'packages/theme/*.js'
+    'packages/theme/*.js',
+    'packages/blogpress/case/bad/*.md'
   ]
 },
 {
@@ -58,4 +59,5 @@ export default antfu({
     'unicorn/prefer-number-properties': 'off',
     'no-unneeded-ternary': 'off'
   },
-})
+}
+)
