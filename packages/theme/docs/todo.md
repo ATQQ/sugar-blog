@@ -21,6 +21,7 @@ sidebar: false
   * [ ] VitePress 常见问题解答（deadLink，markdown，frontmatter）
   * [ ] Layout 插槽用法
 * [ ] 主题部分能力分离为插件（公告，评论，回到顶部，统计分析，图片预览等）
+* [ ] AI 摘要
 
 ## 已完成
 
