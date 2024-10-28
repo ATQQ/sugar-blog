@@ -34,6 +34,9 @@ const RSS: Theme.RSSOptions = {
   favicon: 'https://sugarat.top/favicon.ico',
   copyright: 'Copyright (c) 2018-present, 粥里有勺糖',
   url: `${baseUrl}/feed.rss`,
+  filter(value) {
+    return !value.url.endsWith('/weekly/') && !value.url.endsWith('/case/bad/')
+  },
   /**
    * 最近100篇，避免太大影响解析
    */

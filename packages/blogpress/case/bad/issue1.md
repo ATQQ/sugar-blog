@@ -1,9 +1,12 @@
 ---
-description: 工作中遇到了许多的 💩 代码，单独开个系列和大家分享&吐槽一下，这是第一期，一起品鉴一下。
+description: 工作中遇到了许多的 💩 代码，单独开个系列和大家分享&吐槽一下，一起品(xue)鉴(xi)一下。
+cover: https://cdn.upyun.sugarat.top/mdImg/sugar/20d763d684bf6f1398f024c279dbbedb
 ---
 # 迷惑代码赏析第1期
 
-工作中遇到了许多的 💩，单独开个系列和大家分享&吐槽一下。
+工开发作中遇到了许多的 💩⛰ 代码，这个系列里就大家分享&吐槽一下。
+
+**同时也分享一下最近深度使用的专业编程显示器👨🏻‍💻👍🏻 🖥**
 
 *攒够素材就更新下一期，有好的素材也欢迎投稿，推荐！*
 
@@ -395,7 +398,7 @@ function getQuery() {
 
 近期深度使用了一款 **「程序员专用」** 显示器 [明基RD280U](https://www.benq.com.cn/zh-cn/monitor/programming/rd280u.html)，分享几个我觉得很棒的地方！
 
-![](https://cdn.upyun.sugarat.top/mdImg/sugar/77bcf23599a88aabd6ad0cea4512358d)
+![https://www.benq.com.cn/zh-cn/monitor/programming/rd280u.html](https://cdn.upyun.sugarat.top/mdImg/sugar/77bcf23599a88aabd6ad0cea4512358d)
 
 ### IDE 编码显示优化
 
@@ -587,6 +590,6 @@ const newData = data.map(item => ({
 
 ## 最后
 
-*喜欢写代码的只占少数，草台班子过多🤦🏻‍♀️！*
+*真心喜欢写代码的只占少数，草台班子过多🤦🏻‍♀️！*
 
 ![](https://cdn.upyun.sugarat.top/mdImg/sugar/9d193200054f61a2923779a361e047b8)

@@ -1,5 +1,6 @@
 ---
 hidden: true
+cover: https://cdn.upyun.sugarat.top/mdImg/sugar/20d763d684bf6f1398f024c279dbbedb
 ---
 
 # 迷惑代码赏析&吐槽
