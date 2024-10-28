@@ -10,7 +10,7 @@ cover: https://cdn.upyun.sugarat.top/mdImg/sugar/20d763d684bf6f1398f024c279dbbed
 
 *攒够素材就更新下一期，有好的素材也欢迎投稿，推荐！*
 
-## 1 随机了寂寞
+## 1 random了寂寞
 目的是将目标值和一个`[0,100)`的随机数比较，但结果一直是 `FAILED`。
 
 让我们来看一下现在实现的代码 ↓：
