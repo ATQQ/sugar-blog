@@ -35,6 +35,14 @@ export default defineExamples([
     nickname: '荷游'
   },
   {
+    cover: 'https://s21.ax1x.com/2024/10/30/pABIC80.png',
+    link: 'https://sloving.top',
+    name: 'SlovinG\'s Blog',
+    desc: '腾讯后台开发工程师',
+    avatar: 'https://sloving.top/img/head.png',
+    nickname: 'SlovinG'
+  },
+  {
     cover: 'https://cdn.upyun.sugarat.top/mdImg/sugar/cfbe7989b5fc4d3c2e9283f07d2540f4',
     link: 'http://haitang.icu',
     name: '海棠的小屋',
