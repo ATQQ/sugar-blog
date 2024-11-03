@@ -95,3 +95,4 @@ categories:
 * [Staticfile CDN](https://www.staticfile.org/) - 免费、快速、开放的 CDN 服务
 * [图好快](https://www.tuhaokuai.com/) - 在线图片压缩
 * [mockium](https://softwium.com/mockium/) - 虚假数据生成器
+* [sqlable](https://sqlable.com) - SQL 工具
