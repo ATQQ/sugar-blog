@@ -209,7 +209,7 @@ const blogTheme = getThemeConfig({
         avatar: 'https://note.noxussj.top/logo.png',
         url: 'https://note.noxussj.top/?s=y8'
       },
-			{
+  {
         nickname: 'Hacxy Blog',
         des: '指尖改变命运😋',
         avatar: 'https://hacxy.cn/logo.png',
