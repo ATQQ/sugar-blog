@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.5.1） ⏰ 2024/10/21：内置代码组图标插件，支持动态路由和路由重写的识别，国际化支持
+description: 最近更新（v0.5.2） ⏰ 2024/11/07：依赖升级，sass warn 问题忽略
 author: 粥里有勺糖
 top: 3
 tag: 日志
@@ -26,6 +26,13 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.5.2 (2024/11/07)
+
+### Patch Changes
+
+- chore: update dependencies
+- fix: sass warn
 
 ## 0.5.1 (2024/10/21)
 

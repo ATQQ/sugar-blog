@@ -1,5 +1,12 @@
 # @sugarat/theme
 
+## 0.5.2
+
+### Patch Changes
+
+- chore: update dependencies
+- fix: sass warn
+
 ## 0.5.1
 
 ### Patch Changes
