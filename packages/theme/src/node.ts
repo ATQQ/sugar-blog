@@ -23,7 +23,16 @@ export function getThemeConfig(cfg: Partial<Theme.BlogConfig> = {}) {
   // 文章数据
   const pagesData: Theme.PageData[] = []
   const extraVPConfig: any = {
-    vite: {}
+    vite: {
+      // see https://sass-lang.com/documentation/breaking-changes/legacy-js-api/
+      css: {
+        preprocessorOptions: {
+          scss: {
+            api: 'modern',
+          },
+        },
+      },
+    },
   }
 
   // 获取要加载的vite插件

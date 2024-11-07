@@ -64,7 +64,8 @@ export function getVitePlugins(cfg: Partial<Theme.BlogConfig> = {}) {
 
 export function registerVitePlugins(vpCfg: any, plugins: any[]) {
   vpCfg.vite = {
-    plugins
+    plugins,
+    ...vpCfg.vite,
   }
 }
 

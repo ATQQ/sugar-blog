@@ -68,7 +68,7 @@ function handleUpdatePageNum(current: number) {
 </template>
 
 <style lang="scss" scoped>
-@import './style.scss';
+@use './style.scss';
 
 .el-pagination-wrapper {
   :deep(.el-pagination li.is-active.number) {
