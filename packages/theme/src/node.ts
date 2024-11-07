@@ -32,6 +32,10 @@ export function getThemeConfig(cfg: Partial<Theme.BlogConfig> = {}) {
           },
         },
       },
+      build: {
+        // https://vite.dev/config/build-options.html#build-chunksizewarninglimit
+        chunkSizeWarningLimit: 2048
+      }
     },
   }
 

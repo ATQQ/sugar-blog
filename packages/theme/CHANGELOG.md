@@ -4,8 +4,9 @@
 
 ### Patch Changes
 
-- chore: update dependencies
 - fix: sass warn - [legacy-js-api](https://sass-lang.com/documentation/breaking-changes/legacy-js-api/)
+- chore: update dependencies
+- chore: chunkSizeWarningLimit 2048
 
 ## 0.5.1
 
