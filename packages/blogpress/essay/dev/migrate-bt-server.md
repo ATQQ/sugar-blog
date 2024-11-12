@@ -172,7 +172,7 @@ location / {
 pm2 start npm --name serviceName -- run start
 ```
 :::tip
-要注意的点就是，和之前启动的服务端口保持一致。
+要注意的点就是，和之前启动的服务端口保持一致，这样反向代理配置也可以直接拷贝过来用。
 :::
 
 
