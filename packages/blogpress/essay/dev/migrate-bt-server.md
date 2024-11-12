@@ -2,10 +2,11 @@
 tag: 
  - 杂记
  - 迁移
+publish: false
 ---
 # 记一次服务器迁移
 
-服务器又要过期了，上一次也是3年前的双十一购入的。
+服务器又要过期了，上一次的机器也是3年前的双十一购入的。
 
 ![](https://cdn.upyun.sugarat.top/mdImg/sugar/5c3d1b1e6475eafcf0a6873b01edb761)
 
@@ -15,7 +16,7 @@ tag:
 
 ![](https://cdn.upyun.sugarat.top/mdImg/sugar/8ed6e6d353a9cce38fed85e46abcb33c)
 
-本文记录分享一下整个过程。
+本文记录分享一下整个服务迁移的过程。（不一定是最佳实践 ❤️）
 
 ## 迁移前准备
 
@@ -25,7 +26,7 @@ tag:
 
 原服务器使用[宝塔面板](https://www.bt.cn/new/index.html)做管理，这块了解到有 [1Panel](https://1panel.cn/) 这个平替产品。
 
-时间比较紧迫，就还是选择沿用宝塔，下次搞个测试机体验一下 1Panel 再看情况替换。
+时间比较紧迫，我还是选择沿用宝塔，下次搞个测试机体验一下 1Panel 再看情况替换。
 
 2. 服务器软件
 
@@ -72,9 +73,10 @@ npm i -g pm2
 
 ① 将网站前端临时指向一个默认的提示页面，避免网站直接无响应，此时访问页面的用户也知道发生了什么。
 
+创建临时页面地址：`/www/wwwroot/migrate/index.html`
+
 内容如下：
 
-`/www/wwwroot/migrate/index.html`
 ```html
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -98,11 +100,19 @@ npm i -g pm2
 
 ![](https://cdn.upyun.sugarat.top/mdImg/sugar/cd5eb499099f2c95a18103352cd3379e)
 
-② 停止接口访问
+② 停止站点关联的后端服务
 
 防止有用户没刷新停留在原页面，请求接口产生新的数据。
 
-我这里采用直接停止对应后端服务的方式，如果是反向代理的接口也可以关闭反向代理的配置。
+我这里采用直接停止对应后端服务的方式。
+
+```sh
+pm2 stop serviceName
+```
+
+如果是反向代理的接口也可以关闭反向代理的配置。
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/d9bc43494d7e0c4db72bde83d474b9d1)
 
 ### 备份数据库
 
@@ -110,7 +120,7 @@ npm i -g pm2
 
 ![](https://cdn.upyun.sugarat.top/mdImg/sugar/95fd40cc72bbd73f9c13c670beada7c0)
 
-然后将其下载下来，后面用于新服务器的导入。
+备份完后，可以将其下载下来，后面在新服务器上进行导入。
 
 ### 创建新站点
 
@@ -119,7 +129,7 @@ npm i -g pm2
 ![](https://cdn.upyun.sugarat.top/mdImg/sugar/f5c6e794fed14ef29e5471b2e91cc0e6)
 
 ### 迁移站点配置和数据
-① 前端资源
+① 同步前端资源
 
 使用宝塔内置的压缩工具，将需要的资源压缩打包下载。
 
@@ -127,7 +137,7 @@ npm i -g pm2
 
 上传解压到新站点对应的目录下。
 
-② 自定义 Nginx 配置
+② 同步 Nginx 配置
 
 我这块主要就是是反向代理和 SPA 的配置
 ```sh
@@ -138,16 +148,32 @@ location / {
 
 ③ SSL 证书
 
-可以直接拷贝过来旧的证书
+可以直接拷贝过来旧的证书。
 
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/6780baa522e2c8372afd0eeb0d3c8702)
+
+宝塔上操作也比较方便，CV 一下就可以了。
 
 ④ 数据库
 
 创建同名数据库，账号和密码与之前的保持一致。
 
-然后将备份的数据一键导入。
+然后将备份的数据一键导入，包含 MongoDB 和 MySQL。
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/0f798a01ce7c2a704c8d51678a31a156)
 
 ⑤ 后端服务资源
+
+都是 Node.js 项目，将除 node_modules 外的资源压缩下载，导入到新机器上。
+
+使用 pm2 启动服务。
+
+```sh
+pm2 start npm --name serviceName -- run start
+```
+:::tip
+要注意的点就是，和之前启动的服务端口保持一致。
+:::
 
 
 ⑥ 配置反向代理
@@ -164,7 +190,7 @@ location / {
 
 这样一个站点的迁移就搞定了。
 
-## 其它问题
+## 其它
 ### .DS_Store 文件
 
 之前有些文件是从 Mac 电脑压缩上传的，解压后会产生 `.DS_Store` 文件，迁移的过程中顺手移除了，存在外部可以访问到的风险。
@@ -178,3 +204,6 @@ find "." -name .DS_Store
 # 删除当前目录下所有.DS_Store 文件
 find "." -name .DS_Store | xargs rm
 ```
+
+### 升级 HTTP3
+TODO: 
