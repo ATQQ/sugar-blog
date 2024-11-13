@@ -56,8 +56,12 @@ export function getPagefindHead(base: string) {
   ]
 }
 export function chineseSearchOptimize(input: string) {
-  return input
-    .replace(/[\u4E00-\u9FA5]/g, ' $& ')
-    .replace(/\s+/g, ' ')
-    .trim()
+  const segmenter = new Intl.Segmenter('zh-CN', { granularity: 'word' })
+  const result: string[] = []
+  for (const it of segmenter.segment(input)) {
+    if (it.isWordLike) {
+      result.push(it.segment)
+    }
+  }
+  return result.join(' ')
 }
