@@ -2,7 +2,6 @@
 tag: 
  - 杂记
  - 迁移
-publish: false
 ---
 # 记一次服务器迁移
 
@@ -116,7 +115,7 @@ pm2 stop serviceName
 
 ### 备份数据库
 
-宝塔提供了一键备份的功能，在数据库面板点击备份即可。
+宝塔提供了一键备份的功能。
 
 ![](https://cdn.upyun.sugarat.top/mdImg/sugar/95fd40cc72bbd73f9c13c670beada7c0)
 
@@ -190,12 +189,12 @@ pm2 start npm --name serviceName -- run start
 
 这样一个站点的迁移就搞定了。
 
-## 其它
+## 其它坑
 ### .DS_Store 文件
 
 之前有些文件是从 Mac 电脑压缩上传的，解压后会产生 `.DS_Store` 文件，迁移的过程中顺手移除了，存在外部可以访问到的风险。
 
-这个搜了一下指令，一键删除，来源：https://www.cnblogs.com/xuyaowen/p/DS_store.html。
+搜了一段 Shell，一键删除，来源：https://www.cnblogs.com/xuyaowen/p/DS_store.html。
 
 ```sh
 # 查询当前目录下所有.DS_Store 文件
@@ -205,5 +204,39 @@ find "." -name .DS_Store
 find "." -name .DS_Store | xargs rm
 ```
 
+主要是腾讯云报告有安全问题说这个，顺手处理了。
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/53ba8c2fb31cb69812946409fd4700e9)
+
+### 图片跨域
+
+发现看板娘的 图片加载不出来，一坨黑的！
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/0d752202cc0a4f523fcf911a4086543b)
+
+再看有个跨域请求。
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/2d73116c922ce4971db1c1d10962c756)
+
+琢磨了一下，少 CV 了一段针对图片的跨域配置！
+
+*SDK 内部应该是用的 new Image() 加载图片，所以触发了跨域的限制。*
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/bed3a10c929fd42fe9af5c63cd2162e0)
+
 ### 升级 HTTP3
-TODO: 
+http3 基于 QUIC 协议，QUIC 又基于 UDP，所以 443 端口得先开放一下 UDP 协议。
+
+然后再找个网站 https://http3.wcode.net/?q=https://sugarat.top 检测了一下。
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/79e617c0ed7b6eaa71a784f2c8b75491)
+
+就说支持了？？？ 我一看没生效啊！
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/dcff62f55d530ab4b3d5035a47085907)
+
+然后就开始捣鼓了。
+
+还没搞出来，正在折腾中！
+
+## 最后
+
+感觉 20 多个站点迁起来还挺费事的，下次迁感觉可以写个脚本自动化搞一搞，这次也算有经验了。
