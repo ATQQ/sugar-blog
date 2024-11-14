@@ -233,7 +233,7 @@ http3 基于 QUIC 协议，QUIC 又基于 UDP，所以 443 端口得先开放一
 
 ![](https://cdn.upyun.sugarat.top/mdImg/sugar/dcff62f55d530ab4b3d5035a47085907)
 
-然后就开始捣鼓了。
+然后就开始捣鼓了，看[官方文档](https://nginx.org/en/docs/http/ngx_http_v3_module.html)。
 
 还没搞出来，正在折腾中！
 
