@@ -34,7 +34,7 @@
     "build": "npx tsup src/index.ts --dts --external vitepress --format esm,cjs --silent"
   },
   "dependencies": {
-    "cross-spawn": "^7.0.3",
+    "cross-spawn": "^7.0.5",
     "gray-matter": "^4.0.3"
   },
   "devDependencies": {
