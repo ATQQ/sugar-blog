@@ -56,6 +56,8 @@ if your docs language（`lang`） is Chinese (`zh-`)
 
 in `.vitepress/config.ts`，recommend import `chineseSearchOptimize` fun
 
+use browser built-in API [Intl.Segmenter](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/Segmenter)
+
 ```ts
 import { defineConfig } from 'vitepress'
 import { chineseSearchOptimize, pagefindPlugin } from 'vitepress-plugin-pagefind'
@@ -133,15 +135,21 @@ like this below
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY4MDkzNzQ4NjYxMg==680937486612)
 
-问题主要是自动分词这一块，咱们可以在搜索词的时候做一下优化，比如自动把搜索输入的内容拆成1个个的单字
+问题主要是自动分词这一块，咱们可以在搜索词的时候做一下优化
 ```ts
-pagefindPlugin({
-  customSearchQuery(input) {
-    // 将搜索的每个中文单字两侧加上空格
-    return input.replace(/[\u4E00-\u9FA5]/g, ' $& ')
-      .replace(/\s+/g, ' ')
-      .trim()
+function chineseSearchOptimize(input: string) {
+  const segmenter = new Intl.Segmenter('zh-CN', { granularity: 'word' })
+  const result: string[] = []
+  for (const it of segmenter.segment(input)) {
+    if (it.isWordLike) {
+      result.push(it.segment)
+    }
   }
+  return result.join(' ')
+}
+
+pagefindPlugin({
+  customSearchQuery: chineseSearchOptimize
 })
 ```
 

@@ -1,5 +1,11 @@
 # vitepress-plugin-pagefind
 
+## 0.4.11
+
+### Patch Changes
+
+- chore: chinese default use Intl.Segmenter
+
 ## 0.4.10
 
 ### Patch Changes

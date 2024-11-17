@@ -58,6 +58,8 @@ export default defineConfig({
 
 在配置中加入 `chineseSearchOptimize` 方法
 
+使用浏览器内置的分词 [Intl.Segmenter](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/Segmenter) 实现
+
 ```ts
 import { defineConfig } from 'vitepress'
 import { chineseSearchOptimize, pagefindPlugin } from 'vitepress-plugin-pagefind'
@@ -134,15 +136,25 @@ export default defineConfig({
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY4MDkzNzQ4NjYxMg==680937486612)
 
-问题主要是自动分词这一块，咱们可以在搜索词的时候做一下优化，比如自动把搜索输入的内容拆成1个个的单字
+问题主要是自动分词这一块，咱们可以在搜索词的时候做一下优化
+
 ```ts
-pagefindPlugin({
-  customSearchQuery(input) {
-    // 将搜索的每个中文单字两侧加上空格
-    return input.replace(/[\u4E00-\u9FA5]/g, ' $& ')
-      .replace(/\s+/g, ' ')
-      .trim()
+/**
+ * 使用浏览器内置的分词API Intl.Segmenter
+ */
+function chineseSearchOptimize(input: string) {
+  const segmenter = new Intl.Segmenter('zh-CN', { granularity: 'word' })
+  const result: string[] = []
+  for (const it of segmenter.segment(input)) {
+    if (it.isWordLike) {
+      result.push(it.segment)
+    }
   }
+  return result.join(' ')
+}
+
+pagefindPlugin({
+  customSearchQuery: chineseSearchOptimize
 })
 ```
 
