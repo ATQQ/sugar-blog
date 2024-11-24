@@ -130,10 +130,10 @@ const blogTheme = getThemeConfig({
       },
       {
         nickname: '冴羽',
-        des: '冴羽的JavaScript博客',
+        des: '冴羽的博客',
         avatar:
           'https://cdn.upyun.sugarat.top/avatar/blog/mqyqingfeng.png',
-        url: 'https://github.com/mqyqingfeng/Blog'
+        url: 'https://yayujs.com/'
       },
       {
         nickname: 'Linbudu',
@@ -174,7 +174,7 @@ const blogTheme = getThemeConfig({
         nickname: 'BlackCell'
       },
       {
-        url: 'https://blog.cuuxx.com',
+        url: 'https://tenyon.cn',
         avatar: 'https://cdn.upyun.sugarat.top/avatar/blog/tenyon.webp',
         des: '工夫为艺，笃志成技',
         nickname: 'Yovvis\'s Blog'
@@ -209,7 +209,7 @@ const blogTheme = getThemeConfig({
         avatar: 'https://note.noxussj.top/logo.png',
         url: 'https://note.noxussj.top/?s=y8'
       },
-  {
+      {
         nickname: 'Hacxy Blog',
         des: '指尖改变命运😋',
         avatar: 'https://hacxy.cn/logo.png',
