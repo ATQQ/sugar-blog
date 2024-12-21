@@ -1,6 +1,6 @@
 {
   "name": "vitepress-plugin-pagefind",
-  "version": "0.4.11",
+  "version": "0.4.12",
   "description": "vitepress plugin, Offline full-text search based on pagefind implementation.",
   "author": "sugar",
   "license": "MIT",
@@ -33,8 +33,8 @@
     "src"
   ],
   "scripts": {
-    "dev": "npx tsup src/index.ts --dts --watch --format esm,cjs",
-    "build": "npx tsup src/index.ts --dts --format esm,cjs --silent"
+    "dev": "npx tsup src/index.ts --dts --watch --format esm,cjs --sourcemap",
+    "build": "npx tsup src/index.ts --dts --format esm,cjs --silent --sourcemap"
   },
   "peerDependencies": {
     "pagefind": "^1.1.0"

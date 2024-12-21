@@ -61,7 +61,6 @@ function decodeBase64AndDeserialize(base64String: string) {
 
 export function formatPagefindResult(result: PagefindResult, count = 1) {
   const { sub_results: subResults, anchors, weighted_locations: weightedLocations } = result
-
   // TODO：pick策略优化
   // 按照权重排序，从大到小
   weightedLocations.sort((a, b) => {
@@ -79,7 +78,7 @@ export function formatPagefindResult(result: PagefindResult, count = 1) {
     const filterData = subResults.filter((sub) => {
       const { locations } = sub
       const [min] = locations || []
-      if (!min) {
+      if (typeof min !== 'number') {
         return false
       }
       const max = locations.length === 1 ? Number.POSITIVE_INFINITY : locations[locations.length - 1]
@@ -135,8 +134,13 @@ function parseSubResult(sub: SubResult, anchors: Anchor[], result: PagefindResul
   const locationsAnchors = anchors?.filter((a) => {
     if (!sub)
       return false
-    // 直接比较
-    return a.location <= sub.anchor.location && a.element <= sub.anchor.element
+    try {
+      // 直接比较
+      return a.location <= sub.anchor.location && a.element <= sub.anchor.element
+    }
+    catch {
+      return false
+    }
   }) || []
   locationsAnchors.reverse()
 
