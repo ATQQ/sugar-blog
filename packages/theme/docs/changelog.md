@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.5.2） ⏰ 2024/11/07：依赖升级，sass warn 问题忽略
+description: 最近更新（v0.5.3） ⏰ 2024/12/21：pagefind 不检索文章标题
 author: 粥里有勺糖
 top: 3
 tag: 日志
@@ -26,6 +26,13 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.5.3 (2024/12/21)
+
+### Patch Changes
+
+- Updated dependencies
+  - vitepress-plugin-pagefind@0.4.12
 
 ## 0.5.2 (2024/11/07)
 
