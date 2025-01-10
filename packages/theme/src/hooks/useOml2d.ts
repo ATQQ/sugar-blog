@@ -42,7 +42,7 @@ export function useOml2d() {
       const { loadOml2d } = await import('oh-my-live2d')
       loadOml2d({
         ...defaultOptions,
-        ...oml2dOptions,
+        ...oml2dOptions?.value,
         models: oml2dOptions?.value?.models?.map(model => ({
           ...defaultModelOptions,
           ...model,
