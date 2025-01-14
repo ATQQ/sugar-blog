@@ -136,7 +136,7 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
   const { baseUrl, filename } = rssOptions
 
   // eslint-disable-next-line unused-imports/no-unused-vars
-  const { renderHTML, ...restOps } = rssOptions
+  const { renderHTML, transform, ...restOps } = rssOptions
   const feed = new Feed({
     id: rssOptions.baseUrl,
     link: rssOptions.baseUrl,
@@ -158,7 +158,9 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
       id: link,
       link,
       description,
-      content: htmlCache.get(post.filepath)?.replaceAll('&ZeroWidthSpace;', ''),
+      content: transform && typeof transform === 'function'
+        ? transform((htmlCache.get(post.filepath) ?? '').replaceAll('&ZeroWidthSpace;', ''))
+        : (htmlCache.get(post.filepath) ?? '').replaceAll('&ZeroWidthSpace;', ''),
       author: [
         {
           name: author,
