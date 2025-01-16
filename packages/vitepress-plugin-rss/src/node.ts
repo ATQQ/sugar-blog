@@ -158,9 +158,7 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
       id: link,
       link,
       description,
-      content: transform && typeof transform === 'function'
-        ? transform((htmlCache.get(post.filepath) ?? '').replaceAll('&ZeroWidthSpace;', ''))
-        : (htmlCache.get(post.filepath) ?? '').replaceAll('&ZeroWidthSpace;', ''),
+      content: transform(htmlCache.get(post.filepath)?.replaceAll('&ZeroWidthSpace;', '')),
       author: [
         {
           name: author,
