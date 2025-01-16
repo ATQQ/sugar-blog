@@ -136,7 +136,7 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
   const { baseUrl, filename } = rssOptions
 
   // eslint-disable-next-line unused-imports/no-unused-vars
-  const { renderHTML, transform, ...restOps } = rssOptions
+  const { renderHTML, transform = (v) => v, ...restOps } = rssOptions
   const feed = new Feed({
     id: rssOptions.baseUrl,
     link: rssOptions.baseUrl,
