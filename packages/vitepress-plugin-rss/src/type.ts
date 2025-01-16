@@ -71,7 +71,6 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
   locales?: Record<string, Omit<RSSOptions, 'locales'>>
   /**
    * (可选)文章解析完成后调用，可对文章内容进行进一步处理
-   * @default undefined
    */
   transform?: (content: string) => string
 }
