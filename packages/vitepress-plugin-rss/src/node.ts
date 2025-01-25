@@ -74,6 +74,7 @@ export async function getPostsData(
 
     posts.push({
       filepath: page.filepath,
+      env: page.env,
       fileContent,
       description: frontmatter.description,
       date: frontmatter.date,
@@ -110,11 +111,11 @@ export async function getPostsData(
 
   // render html
   for (const post of posts) {
-    const { fileContent, filepath } = post
+    const { fileContent, filepath, env } = post
     if (!htmlCache.has(filepath)) {
       let html
       if (renderHTML === true) {
-        html = mdRender.render(fileContent)
+        html = mdRender.render(fileContent, env)
       }
       else if (typeof renderHTML === 'function') {
         html = await renderHTML(fileContent)

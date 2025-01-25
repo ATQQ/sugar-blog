@@ -1,4 +1,5 @@
 import type { Author, FeedOptions } from 'feed'
+import type { MarkdownEnv } from 'vitepress'
 
 export type RSSOptions = Omit<FeedOptions, 'id'> & {
   id?: string
@@ -86,4 +87,5 @@ export interface PostInfo {
   frontmatter: {
     [key: string]: any
   }
+  env: MarkdownEnv
 }
