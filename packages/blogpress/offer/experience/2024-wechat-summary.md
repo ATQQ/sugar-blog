@@ -22,7 +22,9 @@
 
 ## 红包封面🧧
 
-微信公众号打开[这个链接](TODO) 或者扫码，即可领取
+微信公众号打开[这个链接]([TODO](https://mp.weixin.qq.com/s/DLasHClXYtFrsiuPzq7gwA?token=1744030852&lang=zh_CN)) 或者微信扫码领取
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/6934381f600a85fc8351c5f04fef5c29)
 
 *公众号送了 1500 个红包封面*
 
