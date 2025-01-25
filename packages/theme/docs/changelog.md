@@ -26,6 +26,22 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+## 0.5.4 (2024/01/25)
+
+### Patch Changes
+
+- feat(announcement): `content` 支持基础 markdown
+- feat(announcement): 支持使用类名自定义样式
+- feat(rss): 支持用户传入自定义 transform
+- fix(rss): html render without markdown env
+- fix(oml2d): 配置不生效
+- chore(shared): `getVitePressPages` support markdown env
+- Updated dependencies
+  - @sugarat/theme-shared@0.0.4
+  - vitepress-plugin-announcement@0.1.4
+  - vitepress-plugin-rss@0.3.1
+  - vitepress-plugin-pagefind@0.4.13
+  - vitepress@1.6.3
 
 ## 0.5.3 (2024/12/21)
 

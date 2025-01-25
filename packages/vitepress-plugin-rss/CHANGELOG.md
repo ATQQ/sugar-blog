@@ -1,5 +1,14 @@
 # vitepress-plugin-rss
 
+## 0.3.1
+
+### Patch Changes
+
+- feat: 支持用户传入自定义 transform
+- fix: html render without markdown env
+- Updated dependencies
+  - @sugarat/theme-shared@0.0.4
+
 ## 0.3.0
 
 ### Minor Changes

@@ -1,5 +1,12 @@
 # vitepress-plugin-announcement
 
+## 0.1.4
+
+### Patch Changes
+
+- feat: `content` support markdown
+- feat: support add `style` tag
+
 ## 0.1.3
 
 ### Patch Changes

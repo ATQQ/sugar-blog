@@ -1,5 +1,22 @@
 # @sugarat/theme
 
+## 0.5.4
+
+### Patch Changes
+
+- feat(announcement): `content` support markdown
+- feat(announcement): support add `style` tag
+- feat(rss): 支持用户传入自定义 transform
+- fix(rss): html render without markdown env
+- fix(oml2d): options not effective 
+- chore(shared): `getVitePressPages` support markdown env
+- Updated dependencies
+  - @sugarat/theme-shared@0.0.4
+  - vitepress-plugin-announcement@0.1.4
+  - vitepress-plugin-rss@0.3.1
+  - vitepress-plugin-pagefind@0.4.13
+  - vitepress@1.6.3
+
 ## 0.5.3
 
 ### Patch Changes
