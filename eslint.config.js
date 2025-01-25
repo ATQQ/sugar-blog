@@ -57,7 +57,8 @@ export default antfu({
     'no-template-curly-in-string': 'off',
     'use-isnan': 'warn',
     'unicorn/prefer-number-properties': 'off',
-    'no-unneeded-ternary': 'off'
+    'no-unneeded-ternary': 'off',
+    'vue/require-component-is': 'off'
   },
 }
 )

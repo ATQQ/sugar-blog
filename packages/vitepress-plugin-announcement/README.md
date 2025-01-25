@@ -104,6 +104,7 @@ AnnouncementPlugin({
 ```
 
 ### 修改样式
+行内样式
 ```js
 AnnouncementPlugin({
   title: '公告',
@@ -119,12 +120,50 @@ AnnouncementPlugin({
 })
 ```
 
+内部样式表
+```js
+AnnouncementPlugin({
+  style: `.theme-blog-popover a {
+      color: var(--vp-c-brand-2);
+   }
+  `
+})
+```
+### markdown
+`content`,`title` 字段支持基础 markdown 语法
+* `#` 标题
+* `[链接](url)` 链接
+* `**strong**` 加粗
+* `*italic*` 斜体
+
+```js
+AnnouncementPlugin({
+  title: '公告',
+  body: [
+    {
+      type: 'text',
+      content: '**加粗的内容 *斜体[链接](url)***'
+    },
+  ]
+})
+```
+
 ## 完整配置
 ```ts
 import type { Ref } from 'vue'
 import type { Route } from 'vitepress'
 
 export interface AnnouncementOptions {
+  /**
+   * 自定义样式类名
+   * @example
+   * ```css
+   * .theme-blog-popover a {
+   *    color: var(--vp-c-brand-2);
+   * }
+   * ```
+   */
+  style?: string
   /**
    * 公告标题
    */

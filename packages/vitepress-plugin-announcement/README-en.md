@@ -103,6 +103,7 @@ AnnouncementPlugin({
 ```
 
 ### rewrites style
+inline style
 ```js
 AnnouncementPlugin({
   title: '公告',
@@ -118,12 +119,49 @@ AnnouncementPlugin({
 })
 ```
 
+inline style tag
+```js
+AnnouncementPlugin({
+  style: `.theme-blog-popover a {
+      color: var(--vp-c-brand-2);
+   }
+  `
+})
+```
+### markdown
+`content`,`title` support markdown syntax
+* `# title` title
+* `[link](url)` link
+* `**strong**` bold
+* `*italic*` italic
+
+```js
+AnnouncementPlugin({
+  title: '公告',
+  body: [
+    {
+      type: 'text',
+      content: '**加粗的内容 *斜体[链接](url)***'
+    },
+  ]
+})
+```
+
 ## Full configuration
 ```ts
 import type { Ref } from 'vue'
 import type { Route } from 'vitepress'
 
 export interface AnnouncementOptions {
+  /**
+   * @example
+   * ```css
+   * .theme-blog-popover a {
+   *    color: var(--vp-c-brand-2);
+   * }
+   * ```
+   */
+  style?: string
   title: string
   body?: Announcement.Value[]
   footer?: Announcement.Value[]

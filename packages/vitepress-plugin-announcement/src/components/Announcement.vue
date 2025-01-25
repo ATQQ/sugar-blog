@@ -86,6 +86,23 @@ function handleClose() {
   }
 }
 
+function parseMarkdownToHtml(markdown: string): string {
+  const rules = [
+    { regex: /###### (.*$)/gim, replacement: '<h6>$1</h6>' },
+    { regex: /##### (.*$)/gim, replacement: '<h5>$1</h5>' },
+    { regex: /#### (.*$)/gim, replacement: '<h4>$1</h4>' },
+    { regex: /### (.*$)/gim, replacement: '<h3>$1</h3>' },
+    { regex: /## (.*$)/gim, replacement: '<h2>$1</h2>' },
+    { regex: /# (.*$)/gim, replacement: '<h1>$1</h1>' },
+    { regex: /\*\*(.*)\*\*/gim, replacement: '<b>$1</b>' },
+    { regex: /\*(.*)\*/gim, replacement: '<i>$1</i>' },
+    { regex: /\[(.*?)\]\((.*?)\)/gim, replacement: '<a href="$2">$1</a>' },
+    { regex: /\n$/gim, replacement: '<br />' },
+  ]
+
+  return rules.reduce((acc, rule) => acc.replace(rule.regex, rule.replacement), markdown)
+}
+
 function PopoverValue(props: { key: number; item: Announcement.Value },
   { slots }: any) {
   const { key, item } = props
@@ -93,18 +110,18 @@ function PopoverValue(props: { key: number; item: Announcement.Value },
     return h(
       'h4',
       {
-        style: parseStringStyle(item.style || '')
+        style: parseStringStyle(item.style || ''),
+        innerHTML: parseMarkdownToHtml(item.content),
       },
-      item.content
     )
   }
   if (item.type === 'text') {
     return h(
       'p',
       {
-        style: parseStringStyle(item.style || '')
+        style: parseStringStyle(item.style || ''),
+        innerHTML: parseMarkdownToHtml(item.content),
       },
-      item.content
     )
   }
   if (item.type === 'image') {
@@ -148,6 +165,9 @@ const showReopen = computed(() => {
 
 <template>
   <div v-show="show" class="theme-blog-popover" data-pagefind-ignore="all">
+    <component is="style" v-if="popoverProps.style">
+      {{ popoverProps.style }}
+    </component>
     <div class="header">
       <div class="title-wrapper">
         <AnnouncementIcon size="20px" :icon="popoverProps.icon">

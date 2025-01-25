@@ -118,20 +118,21 @@ export const blogTheme = getThemeConfig({
     icon: 'wechatPay',
   },
   popover: {
+    style: '.theme-blog-popover a {color: var(--vp-c-brand-2);}',
     title: '公告',
     body: [
-      { type: 'text', content: '👇公众号👇---👇 微信 👇' },
+      { type: 'text', content: '**👇公众号👇---👇 微信 👇**' },
       {
         type: 'image',
         src: 'https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210~fmt.webp'
       },
       {
         type: 'text',
-        content: '欢迎大家加群&私信交流'
+        content: '[欢迎大家加群&私信交流](/group.html)'
       },
       {
         type: 'text',
-        content: '文章首/文尾有群二维码',
+        content: '*文章首/文尾有群二维码*',
         style: 'padding-top:0'
       },
       {

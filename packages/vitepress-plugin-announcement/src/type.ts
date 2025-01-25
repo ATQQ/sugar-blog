@@ -3,6 +3,16 @@ import type { Route } from 'vitepress'
 
 export interface AnnouncementOptions {
   /**
+   * 自定义样式类名
+   * @example
+   * ```css
+   * .theme-blog-popover a {
+   *    color: var(--vp-c-brand-2);
+   * }
+   * ```
+   */
+  style?: string
+  /**
    * 公告标题
    */
   title: string
@@ -75,12 +85,18 @@ export interface AnnouncementOptions {
 export declare namespace Announcement {
   export interface Title {
     type: 'title'
+    /**
+     * 支持 markdown 和 html
+     */
     content: string
     style?: string
   }
 
   export interface Text {
     type: 'text'
+    /**
+     * 支持 markdown 和 html
+     */
     content: string
     style?: string
   }
