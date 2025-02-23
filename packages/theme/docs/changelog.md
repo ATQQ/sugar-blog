@@ -26,7 +26,7 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
-## 0.5.4 (2024/01/25)
+## 0.5.4 (2025/01/25)
 
 ### Patch Changes
 
