@@ -7,14 +7,14 @@ description: 默认支持流程图，tabs面板，待办列表，作品页面
 部分内置组件（插件），来源 [vitepress.yiov.top](https://vitepress.yiov.top/plugin.html) 推荐
 
 ## oml2d - 看板娘集成
-* Type：[oml2dOptions](https://oml2d.com/options/Options.html)
+* Type：[oml2dOptions](https://oml2d.hacxy.cn/api/interfaces/Options.html)
 
 为网站提供一个 Live2D 看板组件。
 
 :::tip 一点说明
-通过内置 [oh-my-live2d](https://oml2d.com) 实现, 可以通过 `oml2d` 选项配置。
+通过内置 [oh-my-live2d](https://oml2d.hacxy.cn) 实现, 可以通过 `oml2d` 选项配置。
 
-通过这个能力可以快速加入并定制属于自己的看板娘, 开启只需要为其传递一个 [配置选项](https://oml2d.com/options/Options.html) 即可
+通过这个能力可以快速加入并定制属于自己的看板娘, 开启只需要为其传递一个 [配置选项](https://oml2d.hacxy.cn/options/Options.html) 即可
 :::
 
 以下是一个简单的使用示例，当模型加载成功时它将出现在您网站的左下角。
@@ -35,7 +35,7 @@ const blogTheme = getThemeConfig({
 
 ![](https://loclink-1259720482.cos.ap-beijing.myqcloud.com/image/%E5%BD%95%E5%B1%8F2024-03-11%2023.51.51.gif)
 
-之后您还可以前往[配置选项](https://oml2d.com/options/Options.html)查阅更多自定义内容
+之后您还可以前往[配置选项](https://oml2d.hacxy.cn/options/Options.html)查阅更多自定义内容
 
 :::tip 版本说明
 由于时间原因，主题内置的版本不一定都是最新的，可以通过 `resolutions` 配置指定要使用的版本。

@@ -450,7 +450,7 @@ export namespace Theme {
 
     /**
      * oh-my-live2d 的 loadOml2d 方法的配置选项
-     * 详见 https://oml2d.com/options/Options.html
+     * 详见 https://oml2d.hacxy.cn/api/interfaces/Options.html
      */
     oml2d?: Oml2dOptions
     homeTags?: boolean | HomeTagsConfig
