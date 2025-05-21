@@ -215,6 +215,18 @@ const blogTheme = getThemeConfig({
         avatar: 'https://hacxy.cn/logo.png',
         url: 'https://hacxy.cn'
       },
+      {
+        avatar: 'https://onedayxyy.cn/favicon.ico',
+        des: '明心静性，爱自己',
+        nickname: 'One',
+        url: 'https://onedayxyy.cn/',
+      },
+      {
+        url: 'https://teek.seasir.top/',
+        avatar: 'https://teek.seasir.top/favicon.ico',
+        des: '人心中的成见是一座大山',
+        nickname: 'Hyde'
+      }
     ].map((v) => {
       if (v.avatar.includes('//cdn.upyun.sugarat.top')) {
         v.avatar = `${v.avatar}-wh50`
