@@ -213,11 +213,7 @@ function handleChooseTag(tag: string) {
           <!-- times -->
           <div class="times">
             <span class="icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink"
-                viewBox="0 0 24 24"
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24">
                 <title>上线时间</title>
                 <path
                   d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8s8 3.58 8 8s-3.58 8-8 8zm-.22-13h-.06c-.4 0-.72.32-.72.72v4.72c0 .35.18.68.49.86l4.15 2.49c.34.2.78.1.98-.24a.71.71 0 0 0-.25-.99l-3.87-2.3V7.72c0-.4-.32-.72-.72-.72z"
@@ -230,17 +226,10 @@ function handleChooseTag(tag: string) {
           </div>
           <!-- GitHub links -->
           <div v-if="work.github" class="links">
-            <a
-              v-if="work.github"
-              class="github-link"
-              :href="work.github as string"
-              target="_blank"
-              rel="noopener"
-            >
+            <a v-if="work.github" class="github-link" :href="work.github as string" target="_blank" rel="noopener">
               <i class="icon">
                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                   viewBox="0 0 496 512"
                 >
                   <path
@@ -255,35 +244,16 @@ function handleChooseTag(tag: string) {
           <!-- 其它自定义链接 -->
           <div v-if="work.links?.length" class="links">
             <i v-if="work.links?.length" class="icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink"
-                viewBox="0 0 24 24"
-              >
-                <g
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path
-                    d="M10 14a3.5 3.5 0 0 0 5 0l4-4a3.5 3.5 0 0 0-5-5l-.5.5"
-                  />
-                  <path
-                    d="M14 10a3.5 3.5 0 0 0-5 0l-4 4a3.5 3.5 0 0 0 5 5l.5-.5"
-                  />
+              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24">
+                <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M10 14a3.5 3.5 0 0 0 5 0l4-4a3.5 3.5 0 0 0-5-5l-.5.5" />
+                  <path d="M14 10a3.5 3.5 0 0 0-5 0l-4 4a3.5 3.5 0 0 0 5 5l.5-.5" />
                 </g>
               </svg>
             </i>
             <a
-              v-for="link in work.links || []"
-              :key="link.url"
-              class="link"
-              :href="link.url"
-              :title="link.title"
-              target="_blank"
-              rel="noopener"
+              v-for="link in work.links || []" :key="link.url" class="link" :href="link.url" :title="link.title"
+              target="_blank" rel="noopener"
             >
               {{ link.title }}
             </a>
@@ -291,23 +261,14 @@ function handleChooseTag(tag: string) {
           <!-- tags -->
           <div v-if="work.tags?.length" class="tags">
             <i class="icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 1024 1024"
-                data-v-d328c40a=""
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" data-v-d328c40a="">
                 <path
                   fill="currentColor"
                   d="M256 128v698.88l196.032-156.864a96 96 0 0 1 119.936 0L768 826.816V128H256zm-32-64h576a32 32 0 0 1 32 32v797.44a32 32 0 0 1-51.968 24.96L531.968 720a32 32 0 0 0-39.936 0L243.968 918.4A32 32 0 0 1 192 893.44V96a32 32 0 0 1 32-32z"
                 />
               </svg>
             </i>
-            <span
-              v-for="tag in work.tags"
-              :key="tag"
-              class="tag"
-              @click="handleChooseTag(tag)"
-            >{{ tag }}
+            <span v-for="tag in work.tags" :key="tag" class="tag" @click="handleChooseTag(tag)">{{ tag }}
             </span>
           </div>
         </div>
@@ -315,25 +276,11 @@ function handleChooseTag(tag: string) {
         <div v-if="work.covers?.length" class="images">
           <!-- swiper -->
           <div v-if="work.coverLayout === 'swiper'" class="swiper-mode">
-            <ElCarousel
-              autoplay
-              height="260px"
-              :type="isCardMode && work.covers.length >= 3 ? 'card' : ''"
-            >
-              <ElCarouselItem
-                v-for="(url, idx) in work.covers"
-                :key="url"
-                style="text-align: center"
-              >
+            <ElCarousel autoplay height="260px" :type="isCardMode && work.covers.length >= 3 ? 'card' : ''">
+              <ElCarouselItem v-for="(url, idx) in work.covers" :key="url" style="text-align: center">
                 <ElImage
-                  :key="url"
-                  preview-teleported
-                  :src="url"
-                  loading="lazy"
-                  :preview-src-list="work.covers"
-                  :initial-index="idx"
-                  hide-on-click-modal
-                  :alt="`${work.title}-${idx}`"
+                  :key="url" preview-teleported :src="url" loading="lazy" :preview-src-list="work.covers"
+                  :initial-index="idx" hide-on-click-modal :alt="`${work.title}-${idx}`"
                 />
               </ElCarouselItem>
             </ElCarousel>
@@ -341,13 +288,8 @@ function handleChooseTag(tag: string) {
           <!-- list -->
           <div v-if="work.coverLayout === 'list'" class="list-mode">
             <ElImage
-              v-for="(url, idx) in work.covers"
-              :key="url"
-              :src="url"
-              loading="lazy"
-              :preview-src-list="work.covers"
-              :initial-index="idx"
-              hide-on-click-modal
+              v-for="(url, idx) in work.covers" :key="url" :src="url" loading="lazy"
+              :preview-src-list="work.covers" :initial-index="idx" hide-on-click-modal
             />
           </div>
         </div>
@@ -369,24 +311,29 @@ function handleChooseTag(tag: string) {
   width: 100%;
   margin: 20px auto;
   padding: 16px;
+
   h1 {
     font-size: 32px;
     font-weight: bold;
   }
+
   .description {
     margin-top: 16px;
     color: #999;
     font-size: 16px;
   }
+
   a {
     font-weight: 500;
     color: var(--vp-c-brand-1);
   }
 }
+
 .works-container {
   display: flex;
   justify-content: center;
 }
+
 .work {
   max-width: 900px;
 
@@ -396,9 +343,11 @@ function handleChooseTag(tag: string) {
     line-height: 32px;
     font-size: 24px;
     border-top: 1px solid var(--vp-c-divider);
+
     a {
       color: inherit;
     }
+
     &:hover {
       a {
         &::before {
@@ -406,8 +355,10 @@ function handleChooseTag(tag: string) {
         }
       }
     }
+
     a {
       position: relative;
+
       &::before {
         position: absolute;
         left: -16px;
@@ -416,37 +367,44 @@ function handleChooseTag(tag: string) {
       }
     }
   }
+
   h3 {
     margin: 32px 0 0;
     line-height: 28px;
     font-size: 20px;
     position: relative;
-    &.title > a.pin {
+
+    &.title>a.pin {
       position: absolute;
       left: -16px;
+
       &::before {
         left: -16px;
         opacity: 0;
         content: var(--vp-header-anchor-symbol);
       }
     }
-    &:hover > a.pin {
+
+    &:hover>a.pin {
       &::before {
         opacity: 1;
       }
     }
   }
+
   .info {
     display: flex;
     font-size: 14px;
     margin-top: 10px;
     flex-wrap: wrap;
   }
+
   .links,
   .times,
   .tags {
     display: flex;
     align-items: center;
+
     .icon {
       color: var(--vp-c-text-1);
       display: block;
@@ -455,34 +413,42 @@ function handleChooseTag(tag: string) {
       margin-right: 6px;
     }
   }
+
   .times {
     margin-right: 18px;
   }
+
   .links {
     a {
       display: flex;
       align-items: center;
     }
+
     a.github-link {
       margin-right: 10px;
     }
+
     a.link {
       margin-right: 0;
+
       &::after {
         content: ',';
         color: var(--vp-c-text-1);
         margin-right: 6px;
         margin-left: 2px;
       }
+
       &:last-child::after {
         content: '';
       }
     }
   }
+
   .tags {
     span.tag {
       cursor: pointer;
     }
+
     span.tag:not(:last-child) {
       &::after {
         content: '·';
@@ -492,6 +458,21 @@ function handleChooseTag(tag: string) {
     }
   }
 }
+.works {
+  flex: 1;
+}
+@media (min-width: 1440px) {
+  .works {
+    max-width: 784px;
+  }
+}
+
+@media (min-width: 960px) {
+  .works {
+    max-width: 752px;
+  }
+}
+
 .aside-container {
   display: none;
   flex: 1;
@@ -499,18 +480,18 @@ function handleChooseTag(tag: string) {
   width: 100%;
   max-width: 256px;
 }
+
 @media screen and (min-width: 960px) {
   .aside-container {
     display: block;
   }
 }
+
 .aside-outline-container {
   position: sticky;
-  top: calc(
-    var(--vp-nav-height) + var(--vp-layout-top-height, 0px) +
-      var(--vp-doc-top-height, 0px) + 32px
-  );
+  top: calc(var(--vp-nav-height) + var(--vp-layout-top-height, 0px) + var(--vp-doc-top-height, 0px) + 32px);
 }
+
 .lastupdate {
   color: var(--vp-c-text-1);
 }
@@ -522,6 +503,7 @@ function handleChooseTag(tag: string) {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+
   .el-image {
     :deep(img) {
       object-fit: contain;
@@ -532,6 +514,7 @@ function handleChooseTag(tag: string) {
 
 .swiper-mode {
   margin-top: 16px;
+
   .el-image {
     :deep(img) {
       object-fit: contain;
@@ -539,6 +522,7 @@ function handleChooseTag(tag: string) {
     }
   }
 }
+
 .split {
   display: inline-block;
   width: 1px;
