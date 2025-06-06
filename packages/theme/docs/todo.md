@@ -8,7 +8,8 @@ sidebar: false
 ## 正在进行中
 
 * [ ] 模型资源预览
-* [ ] 时间线，归档参考（http://niubin.site/archive.html）
+* [ ] 时间线，归档参考（http://niubin.site/archive.html)
+* [ ] 学习 [vitepress-theme-teek](https://github.com/Kele-Bingtang/vitepress-theme-teek) 主题
 * [ ] 博客概览信息（文章数，网站运行天数，字数，访问量等等）,参考 Hexo 系列主题
 * [ ] 文章支持短链
 * [ ] 时区问题（对齐 VitePress默认逻辑），同时支持自定义时区（引入第三方时间处理库）

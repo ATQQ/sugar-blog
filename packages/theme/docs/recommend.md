@@ -89,6 +89,15 @@ VitePress 简中文档站，内部有许多已集成的插件。
 
 GitHub: [Yiov/vitepress-doc](https://github.com/Yiov/vitepress-doc)
 
+### [vitepress-theme-teek](https://vp.teek.top/)
+✨一个轻量、简洁高效、灵活配置，易于扩展的 VitePress 主题
+
+支持多种展示风格！
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/a80a5fddb62186dffbd61f109529343d)
+
+GitHub: [vitepress-theme-teek](https://github.com/Kele-Bingtang/vitepress-theme-teek)
+
 ## VitePress插件
 ### 拓展功能
 #### [mermaid](https://github.com/emersonbottero/vitepress-plugin-mermaid) - 流程图
