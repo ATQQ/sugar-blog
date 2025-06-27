@@ -20,14 +20,16 @@ const nowMonth = new Date().getMonth()
 const nowYear = new Date().getFullYear()
 const currentMonth = computed(() => {
   return notHiddenArticles.value.filter((v) => {
-    const pubDate = new Date(v.meta?.date)
+    const date = v.meta?.date?.replace(' ', 'T')
+    const pubDate = new Date(date)
     return pubDate?.getMonth() === nowMonth && pubDate.getFullYear() === nowYear
   })
 })
 
 const currentWeek = computed(() => {
   return notHiddenArticles.value.filter((v) => {
-    const pubDate = new Date(v.meta?.date)
+    const date = v.meta?.date.replace(' ', 'T')
+    const pubDate = new Date(date)
     return isCurrentWeek(pubDate)
   })
 })
