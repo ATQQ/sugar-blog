@@ -417,7 +417,7 @@ export function useFormatShowDate() {
     }
 
     function formatShowDate(date: any) {
-      const source = +new Date(date)
+      const source = +new Date(date?.replace(' ', 'T'))
       const now = +new Date()
       const diff = now - source
       const oneSeconds = 1000
@@ -453,7 +453,7 @@ export function useFormatShowDate() {
         return `${Math.floor(diff / oneDay)}${mapValue.daysAgo}`
       }
 
-      return formatDate(new Date(date), 'yyyy-MM-dd')
+      return formatDate(new Date(date?.replace(' ', 'T')), 'yyyy-MM-dd')
     }
     return formatShowDate
   })

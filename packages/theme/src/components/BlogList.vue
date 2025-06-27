@@ -30,7 +30,7 @@ const wikiList = computed(() => {
   const data = docs.value.filter(
     v => v.meta.date && v.meta.title && !v.meta.top && !v.meta.hidden
   )
-  data.sort((a, b) => +new Date(b.meta.date) - +new Date(a.meta.date))
+  data.sort((a, b) => +new Date(b.meta.date.replace(' ', 'T')) - +new Date(a.meta.date.replace(' ', 'T')))
   return topList.concat(data)
 })
 
