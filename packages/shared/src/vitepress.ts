@@ -21,7 +21,7 @@ export function getVitePressPages(vpConfig: SiteConfig) {
   // CV https://github.com/ATQQ/vitepress/blob/36bde803c870c62461651e5148e092c893a1c36b/src/node/markdownToVue.ts#L44
   const srcDir = vpConfig.srcDir
   const vitepressDynamicRoutes = new Map(
-    vpConfig?.dynamicRoutes?.routes.map(r => [
+    vpConfig?.dynamicRoutes?.routes?.map(r => [
       r.fullPath,
       slash(path.join(srcDir, r.route))
     ]) || []
