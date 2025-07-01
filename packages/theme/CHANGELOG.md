@@ -1,5 +1,15 @@
 # @sugarat/theme
 
+## 0.5.5
+
+### Patch Changes
+
+- fix: 一些 SVG 图标 iOS 不渲染
+- fix: 日期在 iOS 上显示 NaN
+- fix: 作品页样式塌陷
+- Updated dependencies
+  - vitepress-plugin-announcement@0.1.5
+
 ## 0.5.4
 
 ### Patch Changes
@@ -8,7 +18,7 @@
 - feat(announcement): support add `style` tag
 - feat(rss): 支持用户传入自定义 transform
 - fix(rss): html render without markdown env
-- fix(oml2d): options not effective 
+- fix(oml2d): options not effective
 - chore(shared): `getVitePressPages` support markdown env
 - Updated dependencies
   - @sugarat/theme-shared@0.0.4

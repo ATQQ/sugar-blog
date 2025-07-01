@@ -1,5 +1,11 @@
 # vitepress-plugin-announcement
 
+## 0.1.5
+
+### Patch Changes
+
+- fix: 关闭 图标 iOS 不渲染
+
 ## 0.1.4
 
 ### Patch Changes
