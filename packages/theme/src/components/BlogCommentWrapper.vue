@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useElementSize, useElementVisibility, useWindowSize } from '@vueuse/core'
 import { computed, ref } from 'vue'
-import { Comment } from '@element-plus/icons-vue'
 import { useCommentConfig, useOpenCommentConfig } from '../composables/config/blog'
 import Icon from './Icon.vue'
 
@@ -38,7 +37,7 @@ const labelText = computed(() => {
     <div v-show="!commentIsVisible" class="comment-btn-wrapper">
       <span v-if="!mobileMinify && labelText" class="icon-wrapper-text" @click="handleScrollToComment">
         <Icon :size="20" :icon="commentConfig?.icon">
-          <Comment />
+          <svg data-v-f0aeb853="" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 1024 1024"><path fill="currentColor" d="M736 504a56 56 0 1 1 0-112 56 56 0 0 1 0 112m-224 0a56 56 0 1 1 0-112 56 56 0 0 1 0 112m-224 0a56 56 0 1 1 0-112 56 56 0 0 1 0 112M128 128v640h192v160l224-160h352V128z" /></svg>
         </Icon>
         <span class="text">
           {{ labelText }}
@@ -46,7 +45,7 @@ const labelText = computed(() => {
       </span>
       <span v-else class="icon-wrapper" @click="handleScrollToComment">
         <Icon :size="20" :icon="commentConfig?.icon">
-          <Comment />
+          <svg data-v-f0aeb853="" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 1024 1024"><path fill="currentColor" d="M736 504a56 56 0 1 1 0-112 56 56 0 0 1 0 112m-224 0a56 56 0 1 1 0-112 56 56 0 0 1 0 112m-224 0a56 56 0 1 1 0-112 56 56 0 0 1 0 112M128 128v640h192v160l224-160h352V128z" /></svg>
         </Icon>
       </span>
     </div>
