@@ -104,7 +104,8 @@ export function pagefindPlugin(
       // 兼容 动态 路由
       const isWindows = process.platform === 'win32'
       const fullPath = isWindows ? `${protocol}${pathname}` : pathname
-      const dynamicRoute = dynamicRoutes.routes.find(route => fullPath.toLowerCase() === route.fullPath.toLowerCase())
+      const _dynamicRoutes = Array.isArray(dynamicRoutes) ? dynamicRoutes : (dynamicRoutes?.routes || [])
+      const dynamicRoute = _dynamicRoutes.find(route => fullPath.toLowerCase() === route.fullPath.toLowerCase())
       const isDynamicRoute = !!dynamicRoute
       const filepath = isDynamicRoute ? joinPath(vitepressConfig.srcDir, `/${dynamicRoute.route}`) : pathname
       const isExist = fs.existsSync(filepath)

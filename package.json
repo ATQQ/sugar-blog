@@ -48,6 +48,7 @@
     "@types/node": "^20.6.3",
     "eslint": "^8.50.0",
     "eslint-plugin-todo-ddl": "^1.1.1",
+    "javascript-stringify": "^2.1.0",
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.3",
     "simple-git-hooks": "^2.9.0",

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
 import { ElPagination } from 'element-plus'
-import data from './config'
+import data from './example-config'
 
 const pageSize = ref(6)
 const currentPage = ref(1)

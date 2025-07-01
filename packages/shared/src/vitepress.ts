@@ -3,6 +3,8 @@ import fs from 'node:fs'
 import type { MarkdownEnv, ResolvedRouteConfig, SiteConfig, SiteData } from 'vitepress'
 import { normalizePath, slash } from './fs'
 
+// import { stringify } from 'javascript-stringify'
+
 export function getVitePressPages(vpConfig: SiteConfig) {
   // 复用内置 pages 解析逻辑，同时兼容动态路由
   const { pages, dynamicRoutes, rewrites } = vpConfig
@@ -20,8 +22,11 @@ export function getVitePressPages(vpConfig: SiteConfig) {
   }[] = []
   // CV https://github.com/ATQQ/vitepress/blob/36bde803c870c62461651e5148e092c893a1c36b/src/node/markdownToVue.ts#L44
   const srcDir = vpConfig.srcDir
+  // fs.writeFileSync('./test.json', stringify(vpConfig,null,2)!)
+
+  const _dynamicRoutes = Array.isArray(dynamicRoutes) ? dynamicRoutes : (dynamicRoutes?.routes || [])
   const vitepressDynamicRoutes = new Map(
-    vpConfig?.dynamicRoutes?.routes.map(r => [
+    _dynamicRoutes?.map(r => [
       r.fullPath,
       slash(path.join(srcDir, r.route))
     ]) || []
@@ -42,7 +47,7 @@ export function getVitePressPages(vpConfig: SiteConfig) {
       ? `/${normalizePath(rewritePath)
         .replace(/\.md$/, '')}`
       : ''
-    const dynamicRoute = dynamicRoutes?.routes?.find(r => r.path === page)
+    const dynamicRoute = _dynamicRoutes?.find(r => r.path === page)
     const isDynamic = !!dynamicRoute
 
     const route = rewriteRoute || originRoute
