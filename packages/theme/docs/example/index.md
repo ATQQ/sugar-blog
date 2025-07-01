@@ -10,7 +10,7 @@ import BlogExample from './BlogExample.vue'
 # 博客案例
 
 :::tip 💡一点说明
-可以评论区按如下格式提供信息，或者直接创建 PR 修改 [example/config.ts](https://github.com/ATQQ/sugar-blog/blob/master/packages/theme/docs/example/config.ts) 文件
+可以评论区按如下格式提供信息，或者直接创建 PR 修改 [example/example-config.ts](https://github.com/ATQQ/sugar-blog/blob/master/packages/theme/docs/example/example-config.ts) 文件
 
 ```md
 * 站点名称：
