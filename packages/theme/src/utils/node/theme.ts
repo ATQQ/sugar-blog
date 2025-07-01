@@ -47,7 +47,7 @@ export async function getArticleMeta(filepath: string, route: string, timeZone =
     || getFileLastModifyTime(filepath)
   )
   // 无法获取时兜底当前时间
-  meta.date = formatDate(date || new Date())
+  meta.date = formatDate(date || new Date(), 'yyyy/MM/dd hh:mm:ss')
 
   // 处理tags和categories,兼容历史文章
   meta.categories
