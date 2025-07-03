@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.5.5） ⏰ 2025/07/01：系列bug修复
+description: 最近更新（v0.5.5） ⏰ 2025/07/03：系列bug修复
 author: 粥里有勺糖
 top: 3
 tag: 日志
@@ -27,10 +27,11 @@ bun install vitepress@latest
 ```
 :::
 
-## 0.5.5 (2025/07/01)
+## 0.5.5 (2025/07/03)
 
 ### Patch Changes
 
+- feat: 支持按需开启 group-icons 插件
 - fix: 一些 SVG 图标 iOS 不渲染
 - fix: 日期在 iOS 上显示 NaN
 - fix: 作品页样式塌陷

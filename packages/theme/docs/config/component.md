@@ -47,6 +47,14 @@ const blogTheme = getThemeConfig({
 })
 ```
 
+也可以关闭这个功能
+
+```ts
+const blogTheme = getThemeConfig({
+  groupIcon: false
+})
+```
+
 ## oml2d - 看板娘集成
 * Type：[oml2dOptions](https://oml2d.hacxy.cn/api/interfaces/Options.html)
 

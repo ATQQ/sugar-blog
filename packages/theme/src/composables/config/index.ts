@@ -467,7 +467,7 @@ export namespace Theme {
     imageStyle?: ImageStyleConfig
     groupIcon?: {
       customIcon: Record<string, string>
-    }
+    } | false
   }
 
   export type FormatShowDate = {

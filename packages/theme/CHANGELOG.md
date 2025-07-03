@@ -4,6 +4,7 @@
 
 ### Patch Changes
 
+- feat: 支持按需开启 group-icons 插件
 - fix: 一些 SVG 图标 iOS 不渲染
 - fix: 日期在 iOS 上显示 NaN
 - fix: 作品页样式塌陷

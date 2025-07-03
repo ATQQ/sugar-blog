@@ -1,6 +1,7 @@
 {
   "name": "vitepress-plugin-slot-inject-template",
   "version": "0.1.0",
+  "private": true,
   "description": "vitepress plugin, slot template",
   "author": "sugar",
   "license": "MIT",

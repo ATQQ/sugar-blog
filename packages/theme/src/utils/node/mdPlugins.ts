@@ -32,7 +32,9 @@ export function getMarkdownPlugins(cfg?: Partial<Theme.BlogConfig>) {
     markdownPlugin.push(timeline)
   }
 
-  markdownPlugin.push(groupIconMdPlugin)
+  if (cfg?.groupIcon !== false) {
+    markdownPlugin.push(groupIconMdPlugin)
+  }
 
   return markdownPlugin
 }

@@ -15,6 +15,7 @@ export const blogTheme = getThemeConfig({
   locales: {
     en: themeEN
   },
+  // groupIcon: false,
   // formatShowDate: {
   //   justNow: '不久前',
   //   minutesAgo: ' minutes ago',

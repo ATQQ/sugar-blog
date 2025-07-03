@@ -56,10 +56,27 @@ export function getVitePlugins(cfg: Partial<Theme.BlogConfig> = {}) {
   }
 
   // 内置支持 group icon
-
-  plugins.push(groupIconVitePlugin(cfg?.groupIcon))
+  if (cfg?.groupIcon !== false) {
+    plugins.push(patchGroupIconPlugin())
+    plugins.push(groupIconVitePlugin(cfg?.groupIcon))
+  }
 
   return plugins
+}
+
+export function patchGroupIconPlugin() {
+  return {
+    name: '@sugarat/theme-plugin-patch-group-icon',
+    enforce: 'pre',
+    transform(code: string, id: string) {
+      // 匹配 theme/index.ts 或 theme/index.js 文件
+      if (id.match(/[\/\\]theme[\/\\]index\.(ts|js)$/)) {
+        // 在文件顶部插入 import 语句
+        return `import 'virtual:group-icons.css'\n${code}`
+      }
+      return code
+    }
+  }
 }
 
 export function registerVitePlugins(vpCfg: any, plugins: any[]) {
