@@ -150,7 +150,7 @@ importers:
         specifier: workspace:*
         version: link:../vitepress-plugin-announcement
       vitepress-plugin-group-icons:
-        specifier: ^1.2.4
+        specifier: 1.2.4
         version: 1.2.4
       vitepress-plugin-mermaid:
         specifier: 2.0.13
@@ -8345,7 +8345,7 @@ snapshots:
 
   micromark@2.11.4:
     dependencies:
-      debug: 4.3.4
+      debug: 4.3.7
       parse-entities: 2.0.0
     transitivePeerDependencies:
       - supports-color

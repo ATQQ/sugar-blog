@@ -7,6 +7,7 @@
 - fix: 一些 SVG 图标 iOS 不渲染
 - fix: 日期在 iOS 上显示 NaN
 - fix: 作品页样式塌陷
+- fix: 锁定依赖 group-icons 版本
 - Updated dependencies
   - vitepress-plugin-announcement@0.1.5
 

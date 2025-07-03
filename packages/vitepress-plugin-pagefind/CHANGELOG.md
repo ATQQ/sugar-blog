@@ -1,5 +1,13 @@
 # vitepress-plugin-pagefind
 
+## 0.4.14
+
+### Patch Changes
+
+- feat: support VitePress 2.x dynamic route
+- Updated dependencies
+  - @sugarat/theme-shared@0.0.5
+
 ## 0.4.13
 
 ### Patch Changes

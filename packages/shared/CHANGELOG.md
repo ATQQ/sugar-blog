@@ -1,5 +1,11 @@
 # @sugarat/theme-shared
 
+## 0.0.5
+
+### Patch Changes
+
+- feat: `getVitePressPages` support VitePress 2.x
+
 ## 0.0.4
 
 ### Patch Changes
