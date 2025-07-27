@@ -111,6 +111,12 @@ const blogTheme = getThemeConfig({
   friend: {
     list: [
       {
+        url: 'https://relaxing.top/',
+        nickname: '放',
+        avatar: 'https://relaxing.top/logo.png',
+        des: '放的博客'
+      },
+      {
         nickname: '七仔的博客',
         des: '记录自己在写程序过程中的发现、问题、成果',
         url: 'https://www.baby7blog.com',
