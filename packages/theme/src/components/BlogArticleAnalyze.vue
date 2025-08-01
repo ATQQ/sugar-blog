@@ -131,24 +131,25 @@ const timeTitle = computed(() =>
 <template>
   <div v-if="showAnalyze && readingTimePosition === 'top'" class="doc-analyze" data-pagefind-ignore="all">
     <span>
-      <ElIcon><EditPen /></ElIcon>
+      <ElIcon>
+        <EditPen />
+      </ElIcon>
       {{ topWordCount }}
     </span>
     <span>
-      <ElIcon><AlarmClock /></ElIcon>
+      <ElIcon>
+        <AlarmClock />
+      </ElIcon>
       {{ topReadTime }}
     </span>
   </div>
   <div id="hack-article-des" ref="$des" class="meta-des">
     <!-- TODO：是否需要原创？转载等标签，理论上可以添加标签解决，可以参考 charles7c -->
     <span v-if="author && !hiddenAuthor" class="author" :title="authorTitle">
-      <ElIcon><UserFilled /></ElIcon>
-      <a
-        v-if="currentAuthorInfo"
-        class="link"
-        :href="currentAuthorInfo.url"
-        :title="currentAuthorInfo.des"
-      >
+      <ElIcon>
+        <UserFilled />
+      </ElIcon>
+      <a v-if="currentAuthorInfo" class="link" :href="currentAuthorInfo.url" :title="currentAuthorInfo.des">
         {{ currentAuthorInfo.nickname }}
       </a>
       <template v-else>
@@ -156,36 +157,48 @@ const timeTitle = computed(() =>
       </template>
     </span>
     <span v-if="publishDate && !hiddenTime" class="publishDate" :title="timeTitle + hoverDate">
-      <ElIcon><Clock /></ElIcon>
+      <ElIcon>
+        <Clock />
+      </ElIcon>
       {{ publishDate }}
-    </span>
-    <span v-if="tags.length" class="tags" :title="tagTitle">
-      <ElIcon><CollectionTag /></ElIcon>
-      <a v-for="tag in tags" :key="tag" class="link" :href="`/?tag=${tag}`">{{ tag }}
-      </a>
     </span>
     <template v-if="readingTimePosition === 'inline' && showAnalyze">
       <span :title="wordCountTitle">
-        <ElIcon><EditPen /></ElIcon>
+        <ElIcon>
+          <EditPen />
+        </ElIcon>
         {{ inlineWordCount }}
       </span>
       <span :title="readTimeTitle">
-        <ElIcon><AlarmClock /></ElIcon>
+        <ElIcon>
+          <AlarmClock />
+        </ElIcon>
         {{ inlineReadTime }}
       </span>
     </template>
     <template v-if="readingTimePosition === 'newLine' && showAnalyze">
       <div style="width: 100%;" class="new-line-meta-des">
         <span :title="wordCountTitle">
-          <ElIcon><EditPen /></ElIcon>
+          <ElIcon>
+            <EditPen />
+          </ElIcon>
           {{ inlineWordCount }}
         </span>
         <span :title="readTimeTitle">
-          <ElIcon><AlarmClock /></ElIcon>
+          <ElIcon>
+            <AlarmClock />
+          </ElIcon>
           {{ inlineReadTime }}
         </span>
       </div>
     </template>
+    <span v-if="tags.length" class="tags" :title="tagTitle">
+      <ElIcon>
+        <CollectionTag />
+      </ElIcon>
+      <a v-for="tag in tags" :key="tag" class="link" :href="`/?tag=${tag}`">{{ tag }}
+      </a>
+    </span>
     <!-- 封面展示 -->
     <ClientOnly>
       <BlogDocCover />
@@ -200,26 +213,33 @@ const timeTitle = computed(() =>
   margin-bottom: 20px;
   display: flex;
   justify-content: center;
+
   span {
     margin-right: 16px;
     display: flex;
     align-items: center;
+
     .el-icon {
       margin-right: 4px;
     }
   }
 }
-.meta-des,.new-line-meta-des {
+
+.meta-des,
+.new-line-meta-des {
   text-align: left;
   color: var(--vp-c-text-2);
   font-size: 14px;
   margin-top: 6px;
   display: flex;
   flex-wrap: wrap;
+
   >span {
     margin-right: 16px;
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+
     .el-icon {
       margin-right: 4px;
     }
@@ -227,12 +247,14 @@ const timeTitle = computed(() =>
 
   .link {
     color: var(--vp-c-text-2);
+
     &:hover {
       color: var(--vp-c-brand-1);
       cursor: pointer;
     }
   }
 }
+
 .tags {
   a.link:not(:last-child) {
     &::after {
