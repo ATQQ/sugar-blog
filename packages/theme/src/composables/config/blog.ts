@@ -357,7 +357,7 @@ export function useHomeAnalysis() {
 }
 
 export function useAnalyzeTitles(wordCount: Ref<number>, readTime: ComputedRef<number>) {
-  const article = computed(() => useConfig()?.value.blog?.article)
+  const article = useArticleConfig()
 
   const topWordCount = computed(() =>
     replaceValue(article.value?.analyzeTitles?.topWordCount || '字数：{{value}} 个字', wordCount.value)
