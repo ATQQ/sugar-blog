@@ -12,6 +12,9 @@ const RSS: Theme.RSSOptions = {
 }
 
 export const blogTheme = getThemeConfig({
+  home: {
+    blogInfoCollapsible: true
+  },
   locales: {
     en: themeEN
   },

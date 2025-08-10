@@ -186,6 +186,10 @@ export function useBlogThemeMode() {
   return inject(configSymbol)!.value?.blog?.blog ?? true
 }
 
+export function useBlogInfoCollapsible() {
+  return inject(configSymbol)!.value?.blog?.home?.blogInfoCollapsible ?? false
+}
+
 export function useArticles() {
   const blogConfig = useConfig()
   const { localeIndex, site } = useData()

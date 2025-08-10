@@ -3,7 +3,7 @@ import Theme from 'vitepress/theme'
 import { useData } from 'vitepress'
 import { computed } from 'vue'
 import { useDarkTransition } from '../hooks/useDarkTransition'
-import { useBlogThemeMode, useDarkTransitionConfig } from '../composables/config/blog'
+import { useBlogInfoCollapsible, useBlogThemeMode, useDarkTransitionConfig } from '../composables/config/blog'
 import BlogHomeInfo from './BlogHomeInfo.vue'
 import BlogHomeBanner from './BlogHomeBanner.vue'
 import BlogList from './BlogList.vue'
@@ -25,6 +25,8 @@ const { frontmatter } = useData()
 const layout = computed(() => frontmatter.value.layout)
 const isBlogTheme = useBlogThemeMode()
 const { Layout } = Theme
+
+const blogInfoCollapsible = useBlogInfoCollapsible()
 
 // 切换深色模式过渡
 // https://vitepress.dev/zh/guide/extending-default-theme#on-appearance-toggle
@@ -67,7 +69,11 @@ const openTransition = useDarkTransitionConfig()
           <div class="blog-list-wrapper">
             <BlogList />
           </div>
-          <div class="blog-info-wrapper">
+          <div
+            :class="{
+              'normal-mode': blogInfoCollapsible,
+            }" class="blog-info-wrapper"
+          >
             <BlogHomeInfo />
           </div>
         </div>
@@ -108,6 +114,9 @@ const openTransition = useDarkTransitionConfig()
       <slot name="nav-screen-content-before" />
     </template>
     <template #nav-screen-content-after>
+      <div v-if="blogInfoCollapsible" class="minify-mode blog-info-wrapper">
+        <BlogHomeInfo />
+      </div>
       <slot name="nav-screen-content-after" />
     </template>
 
@@ -225,6 +234,24 @@ const openTransition = useDarkTransitionConfig()
   .blog-info-wrapper {
     margin: 20px 0;
     width: 100%;
+  }
+
+  .normal-mode {
+    display: none;
+  }
+
+  .minify-mode {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .minify-mode {
+    display: none;
+  }
+
+  .normal-mode {
+    display: block;
   }
 }
 </style>

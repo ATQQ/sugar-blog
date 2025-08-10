@@ -247,6 +247,11 @@ interface HomeBlog {
    * 首页数据分析卡片
    */
   analysis?: HomeAnalysis
+  /**
+   * 首页博客信息卡片是否在移动端折叠展示
+   * @default false
+   */
+  blogInfoCollapsible?: boolean
 }
 ```
 
@@ -260,6 +265,16 @@ interface HomeBlog {
 
 ![](https://cdn.upyun.sugarat.top/mdImg/sugar/8128001649cb35413a0575b2749b8099)
 
+
+```ts [移动端信息卡片折叠]
+const blogTheme = getThemeConfig({
+  home: {
+    blogInfoCollapsible: true
+  }
+})
+```
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/5b78a65730fba0d83d2bf08723c38339)
 ## search
 
 * Type: `boolean | 'pagefind' | Object`
