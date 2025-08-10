@@ -1,3 +1,12 @@
+
+
+## 2.0.68
+
+### Patch Changes
+
+- Updated dependencies
+  - @sugarat/theme@0.5.6
+
 ## 2.0.67
 
 ### Patch Changes

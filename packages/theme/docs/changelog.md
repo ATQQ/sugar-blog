@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.5.5） ⏰ 2025/07/03：系列bug修复
+description: 最近更新（v0.5.6） ⏰ 2025/08/10：系列bug修复
 author: 粥里有勺糖
 top: 3
 tag: 日志
@@ -26,6 +26,14 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.5.6 (2025/08/10)
+
+### Patch Changes
+
+- feat: 支持移动端信息卡片折叠
+- fix: HMR Vue Warn inject
+- fix: 多标签展示异常
 
 ## 0.5.5 (2025/07/03)
 

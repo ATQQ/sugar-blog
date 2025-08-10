@@ -1,5 +1,13 @@
 # @sugarat/theme
 
+## 0.5.6
+
+### Patch Changes
+
+- feat: 支持移动端信息卡片折叠
+- fix: HMR Vue Warn inject
+- fix: 多标签展示异常
+
 ## 0.5.5
 
 ### Patch Changes

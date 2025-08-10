@@ -4,7 +4,7 @@
 
 ### Patch Changes
 
-- @sugarat/theme@0.5.5
+- @sugarat/theme@0.5.6
 
 ## 0.0.82
 
