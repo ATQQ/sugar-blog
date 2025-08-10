@@ -58,6 +58,7 @@ const blogTheme = getThemeConfig({
       }
     ]
   },
+  mermaid: false,
   themeColor: 'el-blue',
   RSS: [RSS, RSSWeekly],
   author: '粥里有勺糖',

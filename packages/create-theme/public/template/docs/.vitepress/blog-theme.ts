@@ -24,8 +24,8 @@ const blogTheme = getThemeConfig({
   // 默认开启pagefind离线的全文搜索支持（如使用其它的可以设置为false）
   // search: false,
 
-  // markdown 图表支持（会增加一定的构建耗时）
-  // mermaid: true
+  // 默认开启 markdown 图表支持（会增加一定的构建耗时）
+  // mermaid: false
 
   // 页脚
   footer: {
