@@ -1,5 +1,7 @@
 ---
 sidebar: false
+date: 2024-07-05 18:00:00
+tag: AI
 ---
 # 使用豆包 MarsCode IDE 搭建 VitePress博客并使用 GitHub 部署
 

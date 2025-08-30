@@ -1,3 +1,7 @@
+---
+date: 2023-07-02 23:26:00
+tag: AI
+---
 # stable-diffusion 学习笔记
 
 ## 前言
