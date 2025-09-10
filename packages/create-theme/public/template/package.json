@@ -12,7 +12,7 @@
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
     "@sugarat/theme": "0.5.6",
-    "element-plus": "^2.7.2",
+    "element-plus": "^2.11.0",
     "vue": "3.5.12"
   },
   "directories": {
