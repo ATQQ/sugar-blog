@@ -8,17 +8,16 @@ const okMark = '\x1B[32m✓\x1B[0m'
 
 function SocialIcon(rssOptions: RSSOptions, base = '/') {
   const icon
-          = typeof rssOptions.icon === 'string'
-            ? rssOptions.icon
-            : svgIcon
+    = typeof rssOptions.icon === 'string'
+      ? rssOptions.icon
+      : svgIcon
   return {
     icon: {
       svg: icon
     },
     link:
       rssOptions.url
-      || `${rssOptions.baseUrl}${
-        base + (rssOptions.filename || 'feed.rss')
+      || `${rssOptions.baseUrl}${base + (rssOptions.filename || 'feed.rss')
       }`,
     ariaLabel: rssOptions?.ariaLabel || 'RSS'
   }
