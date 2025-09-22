@@ -182,7 +182,7 @@ export async function getPostsData(
 
   // render html
   const endRenderHTML = debugTime('endRenderHTML')
-  for (const post of posts) {
+  await Promise.all(posts.map(async (post) => {
     const { fileContent, filepath, env, url } = post
     if (!htmlCache.has(url)) {
       let html
@@ -215,7 +215,7 @@ export async function getPostsData(
         htmlCache.set(url, html)
       }
     }
-  }
+  }))
   endRenderHTML()
 
   return posts
@@ -251,7 +251,7 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
       id: link,
       link,
       description,
-      content: transform((htmlCache.get(post.filepath) ?? '').replaceAll('&ZeroWidthSpace;', '')),
+      content: transform((htmlCache.get(post.url) ?? '').replaceAll('&ZeroWidthSpace;', '')),
       author: [
         {
           name: author,
@@ -269,6 +269,7 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
   }
 
   const RSSFilepath = path.join(config.outDir, RSSFilename)
+
   await fs.promises.writeFile(RSSFilepath, feed.rss2())
   if (rssOptions.log ?? true) {
     console.log('🎉 RSS generated', RSSFilename)
