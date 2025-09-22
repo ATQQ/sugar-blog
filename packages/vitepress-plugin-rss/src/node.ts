@@ -91,10 +91,6 @@ export async function getPostsData(
   }
   endParseConfig()
 
-  if (!cacheMdRender) {
-    cacheMdRender = await getMdRender(config)
-  }
-
   let posts: PostInfo[] = []
   const fileContentPromises = cachePageData.reduce((prev, f) => {
     const { isDynamic, dynamicRoute, filepath } = f
@@ -199,6 +195,9 @@ export async function getPostsData(
       else {
         // 缓存未命中，重新渲染
         if (renderHTML === true) {
+          if (!cacheMdRender) {
+            cacheMdRender = await getMdRender(config)
+          }
           html = cacheMdRender.render(fileContent, env)
         }
         else if (typeof renderHTML === 'function') {
