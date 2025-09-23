@@ -408,7 +408,7 @@ export namespace Theme {
     works?: UserWorks
     /**
      * https://mermaid.js.org/config/setup/modules/mermaidAPI.html#mermaidapi-configuration-defaults for options
-     * @default true
+     * @default false
      */
     mermaid?: any
     /**

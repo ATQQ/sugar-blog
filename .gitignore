@@ -10,3 +10,4 @@ packages/theme/node.js
 packages/theme/node.mjs
 packages/theme/node.d.mts
 _pagefind
+.vite-inspect
