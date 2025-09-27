@@ -61,11 +61,12 @@ export function pagefindPlugin(
       // 添加生成索引的方法
       const selfBuildEnd = vitepressConfig.buildEnd
       vitepressConfig.buildEnd = async (siteConfig: any) => {
+        const okMark = '\x1B[32m✓\x1B[0m'
+        console.time(`${okMark} generating pagefind Indexing...`)
         // 调用自己的
         await selfBuildEnd?.(siteConfig)
         await buildEnd(searchConfig, siteConfig)
-        const okMark = '\x1B[32m✓\x1B[0m'
-        console.log(`${okMark} generating pagefind Indexing...`)
+        console.timeEnd(`${okMark} generating pagefind Indexing...`)
       }
 
       // 通过 head 添加额外的脚本注入
@@ -104,7 +105,9 @@ export function pagefindPlugin(
       // 兼容 动态 路由
       const isWindows = process.platform === 'win32'
       const fullPath = isWindows ? `${protocol}${pathname}` : pathname
+      // @ts-ignore
       const _dynamicRoutes = Array.isArray(dynamicRoutes) ? dynamicRoutes : (dynamicRoutes?.routes || [])
+      // @ts-ignore
       const dynamicRoute = _dynamicRoutes.find(route => fullPath.toLowerCase() === route.fullPath.toLowerCase())
       const isDynamicRoute = !!dynamicRoute
       const filepath = isDynamicRoute ? joinPath(vitepressConfig.srcDir, `/${dynamicRoute.route}`) : pathname

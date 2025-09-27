@@ -25,13 +25,13 @@ export function getThemeConfig(cfg: Partial<Theme.BlogConfig> = {}) {
   const extraVPConfig: any = {
     vite: {
       // see https://sass-lang.com/documentation/breaking-changes/legacy-js-api/
-      css: {
-        preprocessorOptions: {
-          scss: {
-            api: 'modern',
-          },
-        },
-      },
+      // css: {
+      //   preprocessorOptions: {
+      //     scss: {
+      //       api: 'modern',
+      //     },
+      //   },
+      // },
       build: {
         // https://vite.dev/config/build-options.html#build-chunksizewarninglimit
         chunkSizeWarningLimit: 2048

@@ -43,6 +43,6 @@
   },
   "devDependencies": {
     "vite": "^5",
-    "vitepress": "^1.4.1"
+    "vitepress": "https://pkg.pr.new/vitepress@31d87e2"
   }
 }

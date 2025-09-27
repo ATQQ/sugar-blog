@@ -45,7 +45,7 @@
     "@antfu/eslint-config": "1.0.0-beta.3",
     "@changesets/cli": "^2.26.2",
     "@types/bun": "^1.0.4",
-    "@types/node": "^20.6.3",
+    "@types/node": "^24",
     "eslint": "^8.50.0",
     "eslint-plugin-todo-ddl": "^1.1.1",
     "javascript-stringify": "^2.1.0",

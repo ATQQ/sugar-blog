@@ -27,11 +27,11 @@ function getCacheKey(filepath: string, content: string, url?: string): string {
   const hash = crypto.createHash('md5').update(content).digest('hex')
   // 使用 URL basename 作为 key，兼容动态路由场景
   const basename = url ? path.basename(url) : path.basename(filepath)
-  return `${basename}_${hash}.html`
+  return `${basename}_${hash}`
 }
 
 async function getCacheDir(config: SiteConfig): Promise<string> {
-  const cacheDir = path.join(config.cacheDir || path.join(config.root, '.vitepress/cache'), 'rss-html')
+  const cacheDir = path.join(config.cacheDir || path.join(config.root, '.vitepress/cache'), 'rss')
   await fs.promises.mkdir(cacheDir, { recursive: true })
   return cacheDir
 }
@@ -236,9 +236,11 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
     ...restOps,
   })
 
+  const endGetPostsData = debugTime('genFeed:getPostsData')
   // 获取所有文章
   const posts
     = await getPostsData(config, rssOptions)
+  endGetPostsData()
 
   for (const post of posts) {
     const { title, description, date, frontmatter, url } = post

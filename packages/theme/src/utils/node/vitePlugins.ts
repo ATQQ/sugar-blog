@@ -4,7 +4,7 @@ import {
 } from 'vitepress-plugin-pagefind'
 import { RssPlugin } from 'vitepress-plugin-rss'
 import type { PluginOption } from 'vite'
-import { joinPath } from '@sugarat/theme-shared'
+import { cacheAllGitTimestamps, joinPath } from '@sugarat/theme-shared'
 import { AnnouncementPlugin } from 'vitepress-plugin-announcement'
 import { groupIconVitePlugin } from 'vitepress-plugin-group-icons'
 import type { Theme } from '../../composables/config/index'
@@ -14,6 +14,9 @@ import { getArticles } from './theme'
 
 export function getVitePlugins(cfg: Partial<Theme.BlogConfig> = {}) {
   const plugins: any[] = []
+
+  // 缓存所有文章的 git 提交时间
+  plugins.push(cacheAllGitTimestampsPlugin())
 
   // 处理 cover image 的路径（暂只支持自动识别的文章首图）
   plugins.push(coverImgTransform())
@@ -262,6 +265,16 @@ export function providePageData(cfg: Partial<Theme.BlogConfig>) {
         }
       }
       vitepressConfig.site.themeConfig.blog.pagesData = pagesData
+    },
+  } as PluginOption
+}
+
+export function cacheAllGitTimestampsPlugin() {
+  return {
+    name: '@sugarat/theme-plugin-cache-all-git-timestamps',
+    async config(config: any) {
+      const { srcDir } = config.vitepress
+      await cacheAllGitTimestamps(srcDir)
     },
   } as PluginOption
 }
