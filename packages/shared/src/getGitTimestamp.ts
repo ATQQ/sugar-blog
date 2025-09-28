@@ -13,13 +13,13 @@ const cacheRoot = new Map<string, boolean>()
 export async function cacheAllGitTimestamps(
   root: string,
   pathspec: string[] = ['*.md']
-): Promise<void> {
-  if (cacheRoot.has(root)) return Promise.resolve()
+): Promise<Map<string, number>> {
+  if (cacheRoot.has(root)) return Promise.resolve(cache)
   cacheRoot.set(root, true)
   const cp = sync('git', ['rev-parse', '--show-toplevel'], { cwd: root })
   if (cp.error) throw cp.error
   const gitRoot = cp.stdout.toString('utf8').trim()
-
+  
   const args = [
     'log',
     '--pretty=format:%x1e%at%x00', // RS + epoch + NUL
@@ -86,7 +86,7 @@ export async function cacheAllGitTimestamps(
       }
 
       out.clear()
-      resolve()
+      resolve(cache)
     })
 
     child.on('error', reject)

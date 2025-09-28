@@ -139,7 +139,9 @@ export function pagefindPlugin(
 
         if (!searchConfig.manual) {
           // 添加 frontmatter 元数据
-          frontmatter.date = +new Date(frontmatter.date || await getFileLastModifyTime(id))
+          // 移除路径后的查询参数
+          const cleanId = id.split('?')[0]
+          frontmatter.date = +new Date(frontmatter.date || await getFileLastModifyTime(cleanId, vitepressConfig.cacheDir))
 
           // 没有filter则不插入额外的 meta
           if (typeof searchConfig.filter === 'function') {

@@ -9,13 +9,13 @@ import { getFirstImagURLFromMD } from './index'
 export function patchDefaultThemeSideBar(cfg?: Partial<Theme.BlogConfig>) {
   return cfg?.blog !== false && cfg?.recommend !== false
     ? {
-        sidebar: [
-          {
-            text: '',
-            items: []
-          }
-        ]
-      }
+      sidebar: [
+        {
+          text: '',
+          items: []
+        }
+      ]
+    }
     : undefined
 }
 
@@ -26,8 +26,11 @@ export function getPageRoute(filepath: string, srcDir: string) {
 }
 
 const defaultTimeZoneOffset = new Date().getTimezoneOffset() / -60
-export async function getArticleMeta(filepath: string, route: string, timeZone = defaultTimeZoneOffset, baseContent?: string) {
-  const fileContent = baseContent || await fs.promises.readFile(filepath, 'utf-8')
+export async function getArticleMeta(filepath: string, route: string, timeZone = defaultTimeZoneOffset, ops?: {
+  baseContent?: string
+  cacheDir?: string
+}) {
+  const fileContent = ops?.baseContent || await fs.promises.readFile(filepath, 'utf-8')
 
   const { data: frontmatter, excerpt, content } = grayMatter(fileContent, {
     excerpt: true,
@@ -86,8 +89,13 @@ export async function getArticles(cfg: Partial<Theme.BlogConfig>, vpConfig: Site
     const { page, route, originRoute, filepath, isDynamic, dynamicRoute } = value
 
     const metaPromise = (isDynamic && dynamicRoute)
-      ? getArticleMeta(filepath, originRoute, cfg?.timeZone, renderDynamicMarkdown(filepath, dynamicRoute.params, dynamicRoute.content))
-      : getArticleMeta(filepath, originRoute, cfg?.timeZone)
+      ? getArticleMeta(filepath, originRoute, cfg?.timeZone, {
+        baseContent: renderDynamicMarkdown(filepath, dynamicRoute.params, dynamicRoute.content),
+        cacheDir: vpConfig.cacheDir
+      })
+      : getArticleMeta(filepath, originRoute, cfg?.timeZone, {
+        cacheDir: vpConfig.cacheDir
+      })
 
     // 提前获取，有缓存取缓存
     prev[page] = {

@@ -100,7 +100,7 @@ export async function getPostsData(
 
     prev[f.page] = {
       contentPromise,
-      datePromise: getFileLastModifyTime(f.filepath)
+      datePromise: getFileLastModifyTime(f.filepath, config.cacheDir)
     }
     return prev
   }, {} as Record<string, { contentPromise: Promise<string>; datePromise: Promise<Date | undefined> | undefined | Date }>)

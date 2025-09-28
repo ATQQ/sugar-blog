@@ -1,3 +1,4 @@
+import crypto from 'node:crypto'
 import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
@@ -15,27 +16,111 @@ export function getDefaultTitle(content: string) {
 }
 
 const cache = new Map<string, Date | undefined>()
+
+/**
+ * 计算文件内容的MD5哈希值
+ */
+function getFileMD5(filePath: string): string {
+  try {
+    const fileBuffer = fs.readFileSync(filePath)
+    const hashSum = crypto.createHash('md5')
+    hashSum.update(fileBuffer)
+    return hashSum.digest('hex')
+  } catch (error) {
+    // 如果文件读取失败，返回文件路径的哈希作为fallback
+    const hashSum = crypto.createHash('md5')
+    hashSum.update(filePath)
+    return hashSum.digest('hex')
+  }
+}
+
+/**
+ * 生成缓存key：文件MD5 + basename
+ */
+function generateCacheKey(filePath: string): string {
+  const md5 = getFileMD5(filePath)
+  const basename = path.basename(filePath)
+  return `${md5}_${basename}`
+}
+
+/**
+ * 从缓存目录读取时间戳
+ */
+async function readTimestampFromCache(cacheDir: string, cacheKey: string): Promise<Date | null> {
+  try {
+    const cacheFilePath = path.join(cacheDir, `${cacheKey}.cache`)
+    if (!fs.existsSync(cacheFilePath)) {
+      return null
+    }
+    const timestamp = fs.readFileSync(cacheFilePath, 'utf-8').trim()
+    return new Date(parseInt(timestamp))
+  } catch (error) {
+    return null
+  }
+}
+
+/**
+ * 将时间戳写入缓存目录
+ */
+async function writeTimestampToCache(cacheDir: string, cacheKey: string, date: Date): Promise<void> {
+  try {
+    // 确保缓存目录存在
+    if (!fs.existsSync(cacheDir)) {
+      fs.mkdirSync(cacheDir, { recursive: true })
+    }
+    const cacheFilePath = path.join(cacheDir, `${cacheKey}.cache`)
+    fs.writeFileSync(cacheFilePath, date.getTime().toString())
+  } catch (error) {
+    // 缓存写入失败不影响主要功能
+    console.warn('Failed to write cache:', error)
+  }
+}
 /**
  * 获取文件最后修改时间
  * 优先使用 git 命令获取，如果失败则使用 fs.stat 获取
  */
-export async function getFileLastModifyTime(url: string) {
+export async function getFileLastModifyTime(url: string, cacheDir?: string) {
+  if (cacheDir) {
+    cacheDir = path.join(cacheDir, 'fileLastModifyTime')
+  }
+  // 检查内存缓存
   const cached = cache.get(url)
   if (cached) {
     return cached
   }
+
+  // 如果提供了缓存目录，优先从文件缓存中读取
+  if (cacheDir) {
+    const cacheKey = generateCacheKey(url)
+    const cachedDate = await readTimestampFromCache(cacheDir, cacheKey)
+
+    if (cachedDate) {
+      cache.set(url, cachedDate)
+      return cachedDate
+    }
+  }
+
   let date
   let gitTimestamp = await getGitTimestamp(url)
   if (gitTimestamp) {
     date = new Date(gitTimestamp)
   }
-  // let date = await timeLimit(() => getFileLastModifyTimeByGit(url))
+
   if (!date) {
     date = await getFileLastModifyTimeByFs(url)
   }
+
   if (date) {
+    // 保存到内存缓存
     cache.set(url, date)
+
+    // 如果提供了缓存目录，也保存到文件缓存
+    if (cacheDir) {
+      const cacheKey = generateCacheKey(url)
+      await writeTimestampToCache(cacheDir, cacheKey, date)
+    }
   }
+
   return date
 }
 
