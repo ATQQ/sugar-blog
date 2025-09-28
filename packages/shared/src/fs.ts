@@ -17,15 +17,66 @@ export function getDefaultTitle(content: string) {
 
 const cache = new Map<string, Date | undefined>()
 
+// 文件摘要缓存
+const fileSummaryCache = new Map<string, string>()
+
 /**
- * 计算文件内容的MD5哈希值
+ * 计算文件内容的MD5哈希值 - 优化版本
  */
 function getFileMD5(filePath: string): string {
   try {
-    const fileBuffer = fs.readFileSync(filePath)
+    // 检查缓存
+    const stats = fs.statSync(filePath)
+    const cacheKey = `${filePath}_${stats.mtime.getTime()}`
+    const cached = fileSummaryCache.get(cacheKey)
+    if (cached) {
+      return cached
+    }
+
+    
+    // 对于小文件（< 1MB），使用完整内容哈希
+    if (stats.size < 1024 * 1024) {
+      const fileBuffer = fs.readFileSync(filePath)
+      const hashSum = crypto.createHash('md5')
+      hashSum.update(fileBuffer)
+      const hash = hashSum.digest('hex')
+      fileSummaryCache.set(cacheKey, hash)
+      return hash
+    }
+    
+    // 对于大文件，使用文件统计信息 + 部分内容生成快速摘要
     const hashSum = crypto.createHash('md5')
-    hashSum.update(fileBuffer)
-    return hashSum.digest('hex')
+    
+    // 添加文件统计信息
+    hashSum.update(`${filePath}:${stats.size}:${stats.mtime.getTime()}`)
+    
+    // 读取文件开头和结尾的部分内容
+    const fd = fs.openSync(filePath, 'r')
+    try {
+      const chunkSize = 8192 // 8KB
+      const buffer = Buffer.alloc(chunkSize)
+      
+      // 读取开头
+      const bytesRead1 = fs.readSync(fd, buffer, 0, chunkSize, 0)
+      if (bytesRead1 > 0) {
+        hashSum.update(buffer.subarray(0, bytesRead1))
+      }
+      
+      // 如果文件足够大，读取结尾
+      if (stats.size > chunkSize * 2) {
+        const bytesRead2 = fs.readSync(fd, buffer, 0, chunkSize, Math.max(0, stats.size - chunkSize))
+        if (bytesRead2 > 0) {
+          hashSum.update(buffer.subarray(0, bytesRead2))
+        }
+      }
+    } finally {
+      fs.closeSync(fd)
+    }
+    
+    const hash = hashSum.digest('hex')
+    fileSummaryCache.set(cacheKey, hash)
+    return hash
+    
   } catch (error) {
     // 如果文件读取失败，返回文件路径的哈希作为fallback
     const hashSum = crypto.createHash('md5')
@@ -35,10 +86,29 @@ function getFileMD5(filePath: string): string {
 }
 
 /**
- * 生成缓存key：文件MD5 + basename
+ * 快速生成文件摘要 - 仅基于文件统计信息
  */
-function generateCacheKey(filePath: string): string {
-  const md5 = getFileMD5(filePath)
+function getFileQuickSummary(filePath: string): string {
+  try {
+    const stats = fs.statSync(filePath)
+    const hashSum = crypto.createHash('md5')
+    hashSum.update(`${filePath}:${stats.size}:${stats.mtime.getTime()}:${stats.ino}`)
+    return hashSum.digest('hex')
+  } catch (error) {
+    // fallback到路径哈希
+    const hashSum = crypto.createHash('md5')
+    hashSum.update(filePath)
+    return hashSum.digest('hex')
+  }
+}
+
+/**
+ * 生成缓存key：文件MD5 + basename
+ * @param filePath 文件路径
+ * @param useQuickSummary 是否使用快速摘要（默认false，使用完整摘要）
+ */
+function generateCacheKey(filePath: string, useQuickSummary: boolean = false): string {
+  const md5 = useQuickSummary ? getFileQuickSummary(filePath) : getFileMD5(filePath)
   const basename = path.basename(filePath)
   return `${md5}_${basename}`
 }
@@ -78,6 +148,8 @@ async function writeTimestampToCache(cacheDir: string, cacheKey: string, date: D
 /**
  * 获取文件最后修改时间
  * 优先使用 git 命令获取，如果失败则使用 fs.stat 获取
+ * @param url 文件路径
+ * @param cacheDir 缓存目录（可选）
  */
 export async function getFileLastModifyTime(url: string, cacheDir?: string) {
   if (cacheDir) {
