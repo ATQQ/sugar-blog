@@ -334,7 +334,7 @@ export default defineConfig({
       }
     }
   },
-  // lastUpdated: true,
+  lastUpdated: true,
   themeConfig: {
     outline: {
       level: [2, 3],

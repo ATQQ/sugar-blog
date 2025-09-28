@@ -23,16 +23,15 @@ const fileSummaryCache = new Map<string, string>()
 /**
  * 计算文件内容的MD5哈希值 - 优化版本
  */
-function getFileMD5(filePath: string): string {
+export function getFileMD5(filePath: string): string {
   try {
     // 检查缓存
-    const stats = fs.statSync(filePath)
-    const cacheKey = `${filePath}_${stats.mtime.getTime()}`
+    const cacheKey = filePath
     const cached = fileSummaryCache.get(cacheKey)
     if (cached) {
       return cached
     }
-
+    const stats = fs.statSync(filePath)
     
     // 对于小文件（< 1MB），使用完整内容哈希
     if (stats.size < 1024 * 1024) {
@@ -40,7 +39,7 @@ function getFileMD5(filePath: string): string {
       const hashSum = crypto.createHash('md5')
       hashSum.update(fileBuffer)
       const hash = hashSum.digest('hex')
-      fileSummaryCache.set(cacheKey, hash)
+      fileSummaryCache.set(filePath, hash)
       return hash
     }
     
@@ -48,7 +47,7 @@ function getFileMD5(filePath: string): string {
     const hashSum = crypto.createHash('md5')
     
     // 添加文件统计信息
-    hashSum.update(`${filePath}:${stats.size}:${stats.mtime.getTime()}`)
+    hashSum.update(`${filePath}:${stats.size}`)
     
     // 读取文件开头和结尾的部分内容
     const fd = fs.openSync(filePath, 'r')
@@ -74,7 +73,7 @@ function getFileMD5(filePath: string): string {
     }
     
     const hash = hashSum.digest('hex')
-    fileSummaryCache.set(cacheKey, hash)
+    fileSummaryCache.set(filePath, hash)
     return hash
     
   } catch (error) {
@@ -88,7 +87,7 @@ function getFileMD5(filePath: string): string {
 /**
  * 快速生成文件摘要 - 仅基于文件统计信息
  */
-function getFileQuickSummary(filePath: string): string {
+export function getFileQuickSummary(filePath: string): string {
   try {
     const stats = fs.statSync(filePath)
     const hashSum = crypto.createHash('md5')
@@ -102,13 +101,17 @@ function getFileQuickSummary(filePath: string): string {
   }
 }
 
+export async function fastMD5(filePath: string): Promise<string> {
+  return getFileMD5(filePath)
+}
+
 /**
  * 生成缓存key：文件MD5 + basename
  * @param filePath 文件路径
  * @param useQuickSummary 是否使用快速摘要（默认false，使用完整摘要）
  */
 function generateCacheKey(filePath: string, useQuickSummary: boolean = false): string {
-  const md5 = useQuickSummary ? getFileQuickSummary(filePath) : getFileMD5(filePath)
+  const md5 = getFileMD5(filePath)
   const basename = path.basename(filePath)
   return `${md5}_${basename}`
 }
