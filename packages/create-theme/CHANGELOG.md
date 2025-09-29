@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.85
+
+### Patch Changes
+
+- chore: use alpha vitepress
+
 ## 0.0.84
 
 ### Patch Changes
