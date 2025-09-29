@@ -9,13 +9,13 @@ import { getFirstImagURLFromMD } from './index'
 export function patchDefaultThemeSideBar(cfg?: Partial<Theme.BlogConfig>) {
   return cfg?.blog !== false && cfg?.recommend !== false
     ? {
-      sidebar: [
-        {
-          text: '',
-          items: []
-        }
-      ]
-    }
+        sidebar: [
+          {
+            text: '',
+            items: []
+          }
+        ]
+      }
     : undefined
 }
 
@@ -31,7 +31,7 @@ export async function getArticleMeta(filepath: string, route: string, timeZone =
   cacheDir?: string
 }) {
   const fileContent = ops?.baseContent || await fs.promises.readFile(filepath, 'utf-8')
-
+  const cacheDir = ops?.cacheDir
   const { data: frontmatter, excerpt, content } = grayMatter(fileContent, {
     excerpt: true,
   })
@@ -47,7 +47,7 @@ export async function getArticleMeta(filepath: string, route: string, timeZone =
   const date = await (
     (meta.date
       && new Date(`${new Date(meta.date).toUTCString()}${utcValue}`))
-    || getFileLastModifyTime(filepath)
+    || getFileLastModifyTime(filepath, cacheDir)
   )
   // 无法获取时兜底当前时间
   meta.date = formatDate(date || new Date(), 'yyyy/MM/dd hh:mm:ss')

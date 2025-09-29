@@ -1,5 +1,6 @@
 import type { PluginOption } from 'vite'
 import type { SiteConfig } from 'vitepress'
+import { cacheAllGitTimestamps } from '@sugarat/theme-shared'
 import type { RSSOptions } from './type'
 import { genFeed } from './node'
 
@@ -27,7 +28,7 @@ export function RssPlugin(rssOptions: RSSOptions): any {
   const pluginOps: PluginOption = {
     name: 'vitepress-plugin-rss',
     enforce: 'pre',
-    configResolved(config: any) {
+    async configResolved(config: any) {
       // 避免多次执行
       if (resolveConfig) {
         return
@@ -38,6 +39,8 @@ export function RssPlugin(rssOptions: RSSOptions): any {
       if (!VPConfig) {
         return
       }
+
+      await cacheAllGitTimestamps(VPConfig.srcDir)
 
       const localesConfig: RSSOptions[] = []
       // 添加RSS icon

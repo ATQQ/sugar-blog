@@ -6,7 +6,7 @@ import process from 'node:process'
 import type { PluginOption } from 'vite'
 import type { HeadConfig, SiteConfig } from 'vitepress'
 import { stringify } from 'javascript-stringify'
-import { getFileLastModifyTime, grayMatter, joinPath } from '@sugarat/theme-shared'
+import { cacheAllGitTimestamps, getFileLastModifyTime, grayMatter, joinPath } from '@sugarat/theme-shared'
 import { buildEnd, getPagefindHead } from './node'
 import type { PagefindOption, SearchConfig } from './type'
 
@@ -43,7 +43,7 @@ export function pagefindPlugin(
         }
       }
     },
-    configResolved(config: any) {
+    async configResolved(config: any) {
       if (searchConfig.manual) {
         return
       }
@@ -58,6 +58,9 @@ export function pagefindPlugin(
         return
       }
 
+      if (!searchConfig.manual) {
+        await cacheAllGitTimestamps(vitepressConfig.srcDir)
+      }
       // 添加生成索引的方法
       const selfBuildEnd = vitepressConfig.buildEnd
       vitepressConfig.buildEnd = async (siteConfig: any) => {
@@ -105,9 +108,9 @@ export function pagefindPlugin(
       // 兼容 动态 路由
       const isWindows = process.platform === 'win32'
       const fullPath = isWindows ? `${protocol}${pathname}` : pathname
-      // @ts-ignore
+      // @ts-expect-error
       const _dynamicRoutes = Array.isArray(dynamicRoutes) ? dynamicRoutes : (dynamicRoutes?.routes || [])
-      // @ts-ignore
+      // @ts-expect-error
       const dynamicRoute = _dynamicRoutes.find(route => fullPath.toLowerCase() === route.fullPath.toLowerCase())
       const isDynamicRoute = !!dynamicRoute
       const filepath = isDynamicRoute ? joinPath(vitepressConfig.srcDir, `/${dynamicRoute.route}`) : pathname

@@ -1,15 +1,15 @@
-import { spawn, sync } from 'cross-spawn'
 import fs from 'node:fs'
 import path from 'node:path'
 import { Transform, type TransformCallback } from 'node:stream'
+import { spawn, sync } from 'cross-spawn'
 import { slash } from './fs'
 
 // copy from vitepress
 const cache = new Map<string, number>()
 
-const RS = 0x1e
+const RS = 0x1E
 const NUL = 0x00
-const LF = 0x0a
+const LF = 0x0A
 
 interface GitLogRecord {
   ts: number
@@ -41,9 +41,11 @@ class GitLogParser extends Transform {
           case 'READ_TS': {
             if (b === RS) {
               // ignore
-            } else if (b === NUL) {
+            }
+            else if (b === NUL) {
               this.#state = 'READ_FILE'
-            } else {
+            }
+            else {
               this.#tsBytes.push(b)
             }
             break
@@ -52,12 +54,14 @@ class GitLogParser extends Transform {
           case 'READ_FILE': {
             if (b === RS) {
               this.#emitRecord()
-            } else if (b === NUL) {
+            }
+            else if (b === NUL) {
               if (this.#fileBytes.length > 0) {
                 this.#files.push(Buffer.from(this.#fileBytes).toString('utf8'))
                 this.#fileBytes.length = 0
               }
-            } else {
+            }
+            else {
               this.#fileBytes.push(b)
             }
             break
@@ -66,7 +70,8 @@ class GitLogParser extends Transform {
       }
 
       cb()
-    } catch (err) {
+    }
+    catch (err) {
       cb(err as Error)
     }
   }
@@ -76,13 +81,15 @@ class GitLogParser extends Transform {
       if (this.#state === 'READ_FILE') {
         if (this.#fileBytes.length > 0) {
           throw new Error('GitLogParser: unexpected EOF while reading filename')
-        } else {
+        }
+        else {
           this.#emitRecord()
         }
       }
 
       cb()
-    } catch (err) {
+    }
+    catch (err) {
       cb(err as Error)
     }
   }
@@ -93,7 +100,8 @@ class GitLogParser extends Transform {
       ts: Number.parseInt(ts, 10) * 1000,
       files: this.#files.slice()
     }
-    if (rec.ts > 0 && rec.files.length > 0) this.push(rec)
+    if (rec.ts > 0 && rec.files.length > 0)
+      this.push(rec)
 
     this.#tsBytes.length = 0
     this.#fileBytes.length = 0
@@ -102,16 +110,18 @@ class GitLogParser extends Transform {
   }
 }
 
-
 const cacheRoot = new Map<string, boolean>()
 export async function cacheAllGitTimestamps(
   root: string,
   pathspec: string[] = ['*.md']
 ): Promise<Map<string, number>> {
-  if (cacheRoot.has(root)) return Promise.resolve(cache)
+  if (cacheRoot.has(root))
+    return Promise.resolve(cache)
   cacheRoot.set(root, true)
   const cp = sync('git', ['rev-parse', '--show-toplevel'], { cwd: root })
-  if (cp.error) throw cp.error
+  if (cp.error) {
+    return cache
+  }
   const gitRoot = cp.stdout.toString('utf8').trim()
 
   const args = [
@@ -132,7 +142,8 @@ export async function cacheAllGitTimestamps(
       .on('data', (rec: GitLogRecord) => {
         for (const file of rec.files) {
           const slashed = slash(path.resolve(gitRoot, file))
-          if (!cache.has(slashed)) cache.set(slashed, rec.ts)
+          if (!cache.has(slashed))
+            cache.set(slashed, rec.ts)
         }
       })
       .on('error', reject)
@@ -146,12 +157,32 @@ export function getCacheTimestamp(file: string): number | undefined {
   return cache.get(file)
 }
 
+let _isInsideWorkTree: boolean | undefined
+export function isInitGitRepo(root: string): boolean {
+  if (_isInsideWorkTree !== undefined) {
+    return _isInsideWorkTree
+  }
+  try {
+    const cp = sync('git', ['rev-parse', '--is-inside-work-tree'], { cwd: root })
+    _isInsideWorkTree = cp.status === 0 && cp.stdout.toString('utf8').trim() === 'true'
+  }
+  catch (error) {
+    _isInsideWorkTree = false
+  }
+  return _isInsideWorkTree
+}
+
 export async function getGitTimestamp(file: string): Promise<number> {
   const cached = cache.get(file)
-  if (cached) return cached
-  // most likely will never happen except for recently added files in dev
+  if (cached)
+    return cached
 
-  if (!fs.existsSync(file)) return 0
+  if (!isInitGitRepo(path.dirname(file)))
+    return 0
+
+  // most likely will never happen except for recently added files in devß
+  if (!fs.existsSync(file))
+    return 0
 
   return new Promise((resolve, reject) => {
     const child = spawn(
@@ -161,11 +192,12 @@ export async function getGitTimestamp(file: string): Promise<number> {
     )
 
     let output = ''
-    child.stdout.on('data', (d) => (output += String(d)))
+    child.stdout.on('data', d => (output += String(d)))
 
     child.on('close', () => {
       const ts = Number.parseInt(output.trim(), 10) * 1000
-      if (!(ts > 0)) return resolve(0)
+      if (!(ts > 0))
+        return resolve(0)
 
       cache.set(file, ts)
       resolve(ts)

@@ -4,8 +4,7 @@ import os from 'node:os'
 import path from 'node:path'
 import { spawn } from 'cross-spawn'
 import matter from 'gray-matter'
-import { getCacheTimestamp, getGitTimestamp } from './getGitTimestamp'
-
+import { getCacheTimestamp, getGitTimestamp, isInitGitRepo } from './getGitTimestamp'
 
 /**
  * 获取 markdown 内容中的标题
@@ -38,7 +37,8 @@ export function getFileMD5(filePath: string): string {
     const hash = hashSum.digest('hex')
     fileSummaryCache.set(filePath, hash)
     return hash
-  } catch (error) {
+  }
+  catch (error) {
     // 如果文件读取失败，返回文件路径的哈希作为fallback
     const hashSum = crypto.createHash('md5')
     hashSum.update(filePath)
@@ -55,7 +55,8 @@ export function getFileQuickSummary(filePath: string): string {
     const hashSum = crypto.createHash('md5')
     hashSum.update(`${filePath}:${stats.size}:${stats.mtime.getTime()}:${stats.ino}`)
     return hashSum.digest('hex')
-  } catch (error) {
+  }
+  catch (error) {
     // fallback到路径哈希
     const hashSum = crypto.createHash('md5')
     hashSum.update(filePath)
@@ -89,7 +90,8 @@ async function readTimestampFromCache(cacheDir: string, cacheKey: string): Promi
     }
     const timestamp = fs.readFileSync(cacheFilePath, 'utf-8').trim()
     return new Date(parseInt(timestamp))
-  } catch (error) {
+  }
+  catch (error) {
     return null
   }
 }
@@ -105,7 +107,8 @@ async function writeTimestampToCache(cacheDir: string, cacheKey: string, date: D
     }
     const cacheFilePath = path.join(cacheDir, `${cacheKey}.cache`)
     fs.writeFileSync(cacheFilePath, date.getTime().toString())
-  } catch (error) {
+  }
+  catch (error) {
     // 缓存写入失败不影响主要功能
     console.warn('Failed to write cache:', error)
   }
@@ -132,7 +135,7 @@ export async function getFileLastModifyTime(url: string, cacheDir?: string) {
   }
 
   // 如果提供了缓存目录，优先从文件缓存中读取
-  if (cacheDir) {
+  if (cacheDir && isInitGitRepo(path.dirname(url))) {
     const cacheKey = generateCacheKey(url)
     const cachedDate = await readTimestampFromCache(cacheDir, cacheKey)
 
@@ -143,12 +146,13 @@ export async function getFileLastModifyTime(url: string, cacheDir?: string) {
   }
 
   let date
-  let gitTimestamp = await getGitTimestamp(url)
+  const gitTimestamp = await getGitTimestamp(url)
   if (gitTimestamp) {
     date = new Date(gitTimestamp)
   }
-
+  let localFlag = false
   if (!date) {
+    localFlag = true
     date = await getFileLastModifyTimeByFs(url)
   }
 
@@ -157,7 +161,7 @@ export async function getFileLastModifyTime(url: string, cacheDir?: string) {
     cache.set(url, date)
 
     // 如果提供了缓存目录，也保存到文件缓存
-    if (cacheDir) {
+    if (cacheDir && !localFlag) {
       const cacheKey = generateCacheKey(url)
       await writeTimestampToCache(cacheDir, cacheKey, date)
     }
