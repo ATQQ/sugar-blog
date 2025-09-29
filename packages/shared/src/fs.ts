@@ -4,7 +4,7 @@ import os from 'node:os'
 import path from 'node:path'
 import { spawn } from 'cross-spawn'
 import matter from 'gray-matter'
-import { getGitTimestamp } from './getGitTimestamp'
+import { getCacheTimestamp, getGitTimestamp } from './getGitTimestamp'
 
 
 /**
@@ -31,51 +31,13 @@ export function getFileMD5(filePath: string): string {
     if (cached) {
       return cached
     }
-    const stats = fs.statSync(filePath)
-    
-    // 对于小文件（< 1MB），使用完整内容哈希
-    if (stats.size < 1024 * 1024) {
-      const fileBuffer = fs.readFileSync(filePath)
-      const hashSum = crypto.createHash('md5')
-      hashSum.update(fileBuffer)
-      const hash = hashSum.digest('hex')
-      fileSummaryCache.set(filePath, hash)
-      return hash
-    }
-    
-    // 对于大文件，使用文件统计信息 + 部分内容生成快速摘要
+
+    const fileBuffer = fs.readFileSync(filePath)
     const hashSum = crypto.createHash('md5')
-    
-    // 添加文件统计信息
-    hashSum.update(`${filePath}:${stats.size}`)
-    
-    // 读取文件开头和结尾的部分内容
-    const fd = fs.openSync(filePath, 'r')
-    try {
-      const chunkSize = 8192 // 8KB
-      const buffer = Buffer.alloc(chunkSize)
-      
-      // 读取开头
-      const bytesRead1 = fs.readSync(fd, buffer, 0, chunkSize, 0)
-      if (bytesRead1 > 0) {
-        hashSum.update(buffer.subarray(0, bytesRead1))
-      }
-      
-      // 如果文件足够大，读取结尾
-      if (stats.size > chunkSize * 2) {
-        const bytesRead2 = fs.readSync(fd, buffer, 0, chunkSize, Math.max(0, stats.size - chunkSize))
-        if (bytesRead2 > 0) {
-          hashSum.update(buffer.subarray(0, bytesRead2))
-        }
-      }
-    } finally {
-      fs.closeSync(fd)
-    }
-    
+    hashSum.update(fileBuffer)
     const hash = hashSum.digest('hex')
     fileSummaryCache.set(filePath, hash)
     return hash
-    
   } catch (error) {
     // 如果文件读取失败，返回文件路径的哈希作为fallback
     const hashSum = crypto.createHash('md5')
@@ -162,6 +124,11 @@ export async function getFileLastModifyTime(url: string, cacheDir?: string) {
   const cached = cache.get(url)
   if (cached) {
     return cached
+  }
+  const cacheTimeStamp = getCacheTimestamp(url)
+  if (cacheTimeStamp) {
+    cache.set(url, new Date(cacheTimeStamp))
+    return new Date(cacheTimeStamp)
   }
 
   // 如果提供了缓存目录，优先从文件缓存中读取

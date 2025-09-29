@@ -41,6 +41,6 @@
   },
   "devDependencies": {
     "vite": "^5",
-    "vitepress": "https://pkg.pr.new/vitepress@31d87e2"
+    "vitepress": "https://pkg.pr.new/vitepress@3d61619"
   }
 }
