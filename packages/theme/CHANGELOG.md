@@ -1,5 +1,15 @@
 # @sugarat/theme
 
+## 0.5.7
+
+### Patch Changes
+
+- perf: reduce-build-time
+- Updated dependencies
+  - vitepress-plugin-pagefind@0.4.15
+  - vitepress-plugin-rss@0.3.2
+  - @sugarat/theme-shared@0.0.6
+
 ## 0.5.6
 
 ### Patch Changes

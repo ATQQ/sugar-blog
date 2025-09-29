@@ -1,5 +1,13 @@
 # vitepress-plugin-rss
 
+## 0.3.2
+
+### Patch Changes
+
+- perf: reduce-build-time
+- Updated dependencies
+  - @sugarat/theme-shared@0.0.6
+
 ## 0.3.1
 
 ### Patch Changes

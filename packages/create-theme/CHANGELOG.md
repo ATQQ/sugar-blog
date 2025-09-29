@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.84
+
+### Patch Changes
+
+- perf: reduce-build-time
+
 ## 0.0.83
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @sugarat/theme-shared
 
+## 0.0.6
+
+### Patch Changes
+
+- perf: reduce-build-time
+
 ## 0.0.5
 
 ### Patch Changes

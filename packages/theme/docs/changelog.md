@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.5.6） ⏰ 2025/08/10：系列bug修复
+description: 最近更新（v0.5.7） ⏰ 2025/09/29：构建速度优化
 author: 粥里有勺糖
 top: 3
 tag: 日志
@@ -26,6 +26,16 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.5.7 (2025/09/29)
+
+### Patch Changes
+
+- perf: reduce-build-time
+- Updated dependencies
+  - vitepress-plugin-pagefind@0.4.15
+  - vitepress-plugin-rss@0.3.2
+  - @sugarat/theme-shared@0.0.6
 
 ## 0.5.6 (2025/08/10)
 
