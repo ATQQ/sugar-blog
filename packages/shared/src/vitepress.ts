@@ -24,8 +24,10 @@ export function getVitePressPages(vpConfig: SiteConfig) {
   const srcDir = vpConfig.srcDir
   // fs.writeFileSync('./test.json', stringify(vpConfig,null,2)!)
 
+  // @ts-ignore
   const _dynamicRoutes = Array.isArray(dynamicRoutes) ? dynamicRoutes : (dynamicRoutes?.routes || [])
   const vitepressDynamicRoutes = new Map(
+    // @ts-ignore
     _dynamicRoutes?.map(r => [
       r.fullPath,
       slash(path.join(srcDir, r.route))
@@ -42,11 +44,12 @@ export function getVitePressPages(vpConfig: SiteConfig) {
     const rewritePath = rewrites.map[page]
     const isRewrite = !!rewritePath
     const originRoute = `/${normalizePath(page)
-        .replace(/\.md$/, '')}`
+      .replace(/\.md$/, '')}`
     const rewriteRoute = rewritePath
       ? `/${normalizePath(rewritePath)
         .replace(/\.md$/, '')}`
       : ''
+    // @ts-ignore
     const dynamicRoute = _dynamicRoutes?.find(r => r.path === page)
     const isDynamic = !!dynamicRoute
 
@@ -56,7 +59,7 @@ export function getVitePressPages(vpConfig: SiteConfig) {
       : normalizePath(`${vpConfig.srcDir}/${page}`)
 
     let file = path.resolve(vpConfig.srcDir, page)
-    const fileOrig = vitepressDynamicRoutes.get(file) || file
+    const fileOrig: any = vitepressDynamicRoutes.get(file) || file
     file = vitepressRewrites.get(file) || file
     const relativePath = slash(path.relative(srcDir, file))
     const cleanUrls = !!vpConfig.cleanUrls
@@ -163,8 +166,8 @@ export function getLocaleForPath(
     Object.keys(siteData?.locales || {}).find(
       key =>
         key !== 'root'
-          && !isExternal(key)
-          && isActive(relativePath, `/${key}/`, true)
+        && !isExternal(key)
+        && isActive(relativePath, `/${key}/`, true)
     ) || 'root'
   )
 }

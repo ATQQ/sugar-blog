@@ -58,7 +58,8 @@ export default antfu({
     'use-isnan': 'warn',
     'unicorn/prefer-number-properties': 'off',
     'no-unneeded-ternary': 'off',
-    'vue/require-component-is': 'off'
+    'vue/require-component-is': 'off',
+    'node/prefer-global/buffer': 'off'
   },
 }
 )

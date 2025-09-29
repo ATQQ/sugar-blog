@@ -37,15 +37,15 @@
     "pc": "pnpm changeset",
     "pc:version": "pnpm changeset version",
     "pcpe": "changeset pre enter beta",
-    "pcpe:exit": "changeset pre enter exit",
+    "pcpe:exit": "changeset pre exit beta",
     "postinstall": "npx simple-git-hooks",
     "preinstall": "npx only-allow pnpm"
   },
   "devDependencies": {
     "@antfu/eslint-config": "1.0.0-beta.3",
-    "@changesets/cli": "^2.26.2",
+    "@changesets/cli": "^2.29.7",
     "@types/bun": "^1.0.4",
-    "@types/node": "^20.6.3",
+    "@types/node": "^24",
     "eslint": "^8.50.0",
     "eslint-plugin-todo-ddl": "^1.1.1",
     "javascript-stringify": "^2.1.0",
@@ -54,6 +54,7 @@
     "simple-git-hooks": "^2.9.0",
     "tsup": " ^7.2.0",
     "typescript": "5.1.6",
+    "vite-plugin-inspect": "^0.8.9",
     "wait-on": "^7.0.1",
     "zx": "^5.3.0"
   },

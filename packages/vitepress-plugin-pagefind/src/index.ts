@@ -6,7 +6,7 @@ import process from 'node:process'
 import type { PluginOption } from 'vite'
 import type { HeadConfig, SiteConfig } from 'vitepress'
 import { stringify } from 'javascript-stringify'
-import { getFileLastModifyTime, grayMatter, joinPath } from '@sugarat/theme-shared'
+import { cacheAllGitTimestamps, getFileLastModifyTime, grayMatter, joinPath } from '@sugarat/theme-shared'
 import { buildEnd, getPagefindHead } from './node'
 import type { PagefindOption, SearchConfig } from './type'
 
@@ -43,7 +43,7 @@ export function pagefindPlugin(
         }
       }
     },
-    configResolved(config: any) {
+    async configResolved(config: any) {
       if (searchConfig.manual) {
         return
       }
@@ -58,14 +58,18 @@ export function pagefindPlugin(
         return
       }
 
+      if (!searchConfig.manual) {
+        await cacheAllGitTimestamps(vitepressConfig.srcDir)
+      }
       // 添加生成索引的方法
       const selfBuildEnd = vitepressConfig.buildEnd
       vitepressConfig.buildEnd = async (siteConfig: any) => {
+        const okMark = '\x1B[32m✓\x1B[0m'
+        console.time(`${okMark} generating pagefind Indexing...`)
         // 调用自己的
         await selfBuildEnd?.(siteConfig)
         await buildEnd(searchConfig, siteConfig)
-        const okMark = '\x1B[32m✓\x1B[0m'
-        console.log(`${okMark} generating pagefind Indexing...`)
+        console.timeEnd(`${okMark} generating pagefind Indexing...`)
       }
 
       // 通过 head 添加额外的脚本注入
@@ -104,7 +108,9 @@ export function pagefindPlugin(
       // 兼容 动态 路由
       const isWindows = process.platform === 'win32'
       const fullPath = isWindows ? `${protocol}${pathname}` : pathname
+      // @ts-expect-error
       const _dynamicRoutes = Array.isArray(dynamicRoutes) ? dynamicRoutes : (dynamicRoutes?.routes || [])
+      // @ts-expect-error
       const dynamicRoute = _dynamicRoutes.find(route => fullPath.toLowerCase() === route.fullPath.toLowerCase())
       const isDynamicRoute = !!dynamicRoute
       const filepath = isDynamicRoute ? joinPath(vitepressConfig.srcDir, `/${dynamicRoute.route}`) : pathname
@@ -136,7 +142,9 @@ export function pagefindPlugin(
 
         if (!searchConfig.manual) {
           // 添加 frontmatter 元数据
-          frontmatter.date = +new Date(frontmatter.date || await getFileLastModifyTime(id))
+          // 移除路径后的查询参数
+          const cleanId = id.split('?')[0]
+          frontmatter.date = +new Date(frontmatter.date || await getFileLastModifyTime(cleanId, vitepressConfig.cacheDir))
 
           // 没有filter则不插入额外的 meta
           if (typeof searchConfig.filter === 'function') {
