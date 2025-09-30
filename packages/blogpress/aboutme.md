@@ -19,7 +19,9 @@ tags:
 
 ## :sparkles:在做什么
 ### 公司
-* 2024.04 - ing：C端 低代码 营销搭建
+* 2025.05 - ing：Node 网关
+* 2025.01 - 2025.01：AICoding
+* 2024.04 - 2024.12：C端 低代码 营销搭建
 * 2023.11 - 2024.03：[B端 低代码](https://lowcode-engine.cn/)
 * 2022.11 - 2023.10：[大前端 DevOps](https://tech.meituan.com/2023/12/29/the-evolution-of-terminals-from-standardization-to-digitalization.html)
 * 2021.07 - 2022.11：[研发框架：Rome](https://tech.meituan.com/2023/08/03/meituan-rome-practice.html)
