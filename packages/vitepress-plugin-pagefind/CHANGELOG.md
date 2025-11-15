@@ -1,5 +1,11 @@
 # vitepress-plugin-pagefind
 
+## 0.4.16
+
+### Patch Changes
+
+- fix: pagefind showDate Invalid
+
 ## 0.4.15
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # vitepress-plugin-rss
 
+## 0.3.3
+
+### Patch Changes
+
+- fix: rss build Spread syntax error
+
 ## 0.3.2
 
 ### Patch Changes

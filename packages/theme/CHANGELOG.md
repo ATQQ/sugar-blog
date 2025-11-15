@@ -1,5 +1,16 @@
 # @sugarat/theme
 
+## 0.5.8
+
+### Patch Changes
+
+- feat: 旋转头像动画优化，支持配置速度
+- fix: rss build Spread syntax error
+- fix: pagefind showDate Invalid
+- Updated dependencies
+  - vitepress-plugin-pagefind@0.4.16
+  - vitepress-plugin-rss@0.3.3
+
 ## 0.5.7
 
 ### Patch Changes
