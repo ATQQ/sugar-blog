@@ -244,7 +244,7 @@ const blogTheme = getThemeConfig({
   },
   search: {
     showDate: true,
-    pageResultCount: 4,
+    pageResultCount: 4
   },
   recommend: {
     showSelf: true,

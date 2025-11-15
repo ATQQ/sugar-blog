@@ -40,6 +40,7 @@ interface Meta {
   title: string
   image: string
   base64: string
+  date?: string
 }
 
 interface Filters {
@@ -155,10 +156,11 @@ function parseSubResult(sub: SubResult, anchors: Anchor[], result: PagefindResul
   // 构造完整的 title 层级 信息
   const title = filteredAnchors.length ? filteredAnchors.map(t => t.text.trim()).filter(v => !!v).join(' > ') : result.meta.title
 
-  const { base64, ...otherMeta } = result.meta
+  const { base64, date, ...otherMeta } = result.meta
   return {
     route,
     meta: {
+      date: date ? +date : undefined,
       ...decodeBase64AndDeserialize(base64),
       ...otherMeta,
       title,

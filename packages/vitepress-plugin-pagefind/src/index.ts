@@ -145,10 +145,10 @@ export function pagefindPlugin(
           // 移除路径后的查询参数
           const cleanId = id.split('?')[0]
           frontmatter.date = +new Date(frontmatter.date || await getFileLastModifyTime(cleanId, vitepressConfig.cacheDir))
-
+          attrs['data-pagefind-meta'] = `date:${frontmatter.date}`
           // 没有filter则不插入额外的 meta
           if (typeof searchConfig.filter === 'function') {
-            attrs['data-pagefind-meta'] = meta2string(frontmatter)
+            attrs['data-pagefind-meta'] = `${meta2string(frontmatter)}`
           }
         }
 
