@@ -230,6 +230,30 @@ const blogTheme = getThemeConfig({
   }
 })
 ```
+```ts [头像旋转动画]
+const blogTheme = getThemeConfig({
+  home: {
+    // 设置为 false 则不起用
+    hoverSpin: {
+      /**
+       * 旋转的加速度
+       * @default 180
+       */
+      accel: 180,
+      /**
+       * 旋转的最大角速度
+       * @default 2160
+       */
+      maxVel: 2160,
+      /**
+       * 缓停时长
+       * @default 1500
+       */
+      decelDuration: 1500
+    }
+  }
+})
+```
 
 ```ts [type]
 interface HomeBlog {
@@ -252,6 +276,28 @@ interface HomeBlog {
    * @default false
    */
   blogInfoCollapsible?: boolean
+  /**
+   * 旋转的配置
+   */
+  hoverSpin?: boolean | HoverSpinConfig
+}
+
+export interface HoverSpinConfig {
+  /**
+   * 旋转的加速度
+   * @default 180
+   */
+  accel?: number
+  /**
+   * 旋转的最大角速度
+   * @default 2160
+   */
+  maxVel?: number
+  /**
+   * 缓停时长
+   * @default 1500
+   */
+  decelDuration?: number
 }
 ```
 
