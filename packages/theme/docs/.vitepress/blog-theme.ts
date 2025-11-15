@@ -24,6 +24,7 @@ export const blogTheme = getThemeConfig({
   //   minutesAgo: ' minutes ago',
   // },
   search: {
+    showDate: true,
     pageResultCount: 5,
     btnPlaceholder: '搜索',
     placeholder: '搜索文章',

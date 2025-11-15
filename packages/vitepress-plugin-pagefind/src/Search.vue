@@ -325,6 +325,7 @@ function handleToggleDetail() {
                     <div class="title">
                       <span class="headings"><i v-if="item.meta.title" class="prefix"># </i>{{ item.meta.title }}</span>
                       <span v-if="showDateInfo && item.meta.date" class="date">
+                        <!-- @vue-ignore -->
                         {{ formatShowDateFn(item.meta.date, lang) }}</span>
                     </div>
                     <div class="des" v-html="item.meta.description" />
