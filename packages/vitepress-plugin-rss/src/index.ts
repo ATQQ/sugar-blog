@@ -47,7 +47,7 @@ export function RssPlugin(rssOptions: RSSOptions): any {
       if (rssOptions.icon ?? true) {
         VPConfig.site.themeConfig.socialLinks = [
           SocialIcon(rssOptions, VPConfig.site.base),
-          ...VPConfig.site.themeConfig.socialLinks
+          ...(VPConfig.site.themeConfig?.socialLinks || [])
         ]
         // i18n
         if (rssOptions?.locales && VPConfig.site?.locales) {
