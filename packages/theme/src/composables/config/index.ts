@@ -191,6 +191,28 @@ export namespace Theme {
      * @default false
      */
     blogInfoCollapsible?: boolean
+    /**
+     * 旋转的配置
+     */
+    hoverSpin?: boolean | HoverSpinConfig
+  }
+
+  export interface HoverSpinConfig {
+    /**
+     * 旋转的加速度
+     * @default 180
+     */
+    accel?: number
+    /**
+     * 旋转的最大角速度
+     * @default 2160
+     */
+    maxVel?: number
+    /**
+     * 缓停时长
+     * @default 1500
+     */
+    decelDuration?: number
   }
 
   export interface ArticleConfig {

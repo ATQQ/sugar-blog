@@ -1,7 +1,8 @@
 <script  setup lang="ts">
 import { useData, withBase } from 'vitepress'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useHomeConfig } from '../composables/config/blog'
+import { useHoverSpin } from '../hooks/useHoverSpin'
 
 const home = useHomeConfig()
 const { frontmatter, site } = useData()
@@ -13,11 +14,14 @@ const logo = computed(() =>
     ?? '/logo.png'
 )
 const alwaysHide = computed(() => frontmatter.value.blog?.minScreenAvatar === false)
+
+const imgRef = ref(null)
+useHoverSpin(imgRef, home?.value?.hoverSpin)
 </script>
 
 <template>
   <div v-show="!alwaysHide" class="blog-home-header-avatar">
-    <img :src="withBase(logo)" alt="avatar">
+    <img ref="imgRef" :src="withBase(logo)" alt="avatar">
   </div>
 </template>
 
@@ -36,13 +40,14 @@ const alwaysHide = computed(() => frontmatter.value.blog?.minScreenAvatar === fa
         background-color: transparent;
         border: 5px solid rgba(var(--bg-gradient-home));
         box-sizing: border-box;
+        cursor: pointer;
     }
 
-    img:hover {
-        transform: rotate(666turn);
-        transition-duration: 59s;
-        transition-timing-function: cubic-bezier(.34, 0, .84, 1)
-    }
+    // img:hover {
+    //     transform: rotate(666turn);
+    //     transition-duration: 59s;
+    //     transition-timing-function: cubic-bezier(.34, 0, .84, 1)
+    // }
 }
 
 @media screen and (min-width: 768px) {
