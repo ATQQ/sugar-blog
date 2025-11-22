@@ -75,7 +75,7 @@
     "sass": "^1.80.6",
     "typescript": "^5.4.5",
     "vite": "^5.4.9",
-    "vitepress": "https://pkg.pr.new/vitepress@3d61619",
+    "vitepress": "2.0.0-alpha.14",
     "vitepress-plugin-51la": "workspace:*",
     "vue": "^3.5.12"
   }
