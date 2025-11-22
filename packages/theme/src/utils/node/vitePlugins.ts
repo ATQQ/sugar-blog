@@ -18,9 +18,6 @@ export function getVitePlugins(cfg: Partial<Theme.BlogConfig> = {}) {
   // 缓存所有文章的 git 提交时间
   plugins.push(cacheAllGitTimestampsPlugin())
 
-  // 处理 cover image 的路径（暂只支持自动识别的文章首图）
-  plugins.push(coverImgTransform())
-
   // 处理自定义主题色
   if (cfg.themeColor) {
     plugins.push(setThemeScript(cfg.themeColor))
@@ -31,6 +28,8 @@ export function getVitePlugins(cfg: Partial<Theme.BlogConfig> = {}) {
   // 主题 pageData生成
   plugins.push(providePageData(cfg))
 
+  // 处理 cover image 的路径（暂只支持自动识别的文章首图）
+  plugins.push(coverImgTransform())
   // 内置 pagefind
   if (cfg && cfg.search !== false) {
     const ops = cfg.search instanceof Object ? cfg.search : {}
@@ -165,15 +164,18 @@ export function coverImgTransform() {
           if (value && typeof value === 'string' && value.startsWith('/')) {
             const absolutePath = `${vitepressConfig.srcDir}${value}`
 
-            // 复用已经映射后的值
-            if (relativeMetaMap[absolutePath]) {
-              Object.assign(v.meta, { [k]: relativeMetaMap[absolutePath][k] })
-              return
+            // 已经映射后的值
+            if (relativePathMap[absolutePath]) {
+              Object.assign(v.meta, {
+                [k]: relativeMetaMap[absolutePath][k]
+              })
             }
 
             relativePathMap[value] = absolutePath
             relativePathMap[absolutePath] = value
-            relativeMeta.push(v.meta)
+            if (!relativeMeta.includes(v.meta)) {
+              relativeMeta.push(v.meta)
+            }
             relativeMetaMap[absolutePath] = v.meta
           }
         })
