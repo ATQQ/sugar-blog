@@ -25,6 +25,9 @@ function SocialIcon(rssOptions: RSSOptions, base = '/') {
 
 export function RssPlugin(rssOptions: RSSOptions): any {
   let resolveConfig: any
+  let vitepressConfig: SiteConfig
+  let assetsDir: string
+  let assetsMap: any[] = []
   const pluginOps: PluginOption = {
     name: 'vitepress-plugin-rss',
     enforce: 'pre',
@@ -34,6 +37,8 @@ export function RssPlugin(rssOptions: RSSOptions): any {
         return
       }
       resolveConfig = config
+      vitepressConfig = config.vitepress
+      assetsDir = vitepressConfig.assetsDir
 
       const VPConfig: SiteConfig = config.vitepress
       if (!VPConfig) {
@@ -82,7 +87,7 @@ export function RssPlugin(rssOptions: RSSOptions): any {
         console.time(`${okMark} generating RSS`)
         // 生成 rss 文件
         for (const _rssOptions of localesConfig) {
-          await genFeed(siteConfig, _rssOptions)
+          await genFeed(siteConfig, _rssOptions, assetsMap)
         }
 
         // i18n 兼容，过滤掉其它语言的文章
@@ -91,13 +96,21 @@ export function RssPlugin(rssOptions: RSSOptions): any {
             return !localesConfig.some(cfg => !!cfg?.filter?.(value, idx, arr))
           }
         }
-        await genFeed(siteConfig, rssOptions)
+        await genFeed(siteConfig, rssOptions, assetsMap)
         console.timeEnd(`${okMark} generating RSS`)
 
         if (rssOptions.log ?? true) {
           console.log()
         }
       }
+    },
+    generateBundle(_: any, bundle: Record<string, any>) {
+      // 换成 最终输出路径，影响 CSR 内容
+      assetsMap = Object.entries(bundle).filter(([key]) => {
+        return key.startsWith(assetsDir)
+      }).map(([_, value]) => {
+        return value
+      }).filter(v => v.type === 'asset')
     }
   }
   return pluginOps
