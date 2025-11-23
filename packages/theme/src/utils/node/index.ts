@@ -1,5 +1,5 @@
 import path from 'node:path'
-import { joinPath } from '@sugarat/theme-shared'
+import { joinPath, normalizePath } from '@sugarat/theme-shared'
 
 export function aliasObjectToArray(obj: Record<string, string>) {
   return Object.entries(obj).map(([find, replacement]) => ({
@@ -34,8 +34,7 @@ export function getFirstImagURLFromMD(content: string, route: string) {
   const paths = joinPath('/', route).split('/')
   paths.splice(paths.length - 1, 1)
   const relativePath = url.startsWith('/') ? url : path.join(paths.join('/') || '', url)
-
-  return joinPath('/', relativePath)
+  return joinPath('/', normalizePath(relativePath))
 }
 
 export function debounce(func: any, delay = 1000) {
