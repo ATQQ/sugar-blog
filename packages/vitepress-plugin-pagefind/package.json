@@ -48,6 +48,6 @@
   },
   "devDependencies": {
     "vite": "^5.4.9",
-    "vitepress": "2.0.0-alpha.14"
+    "vitepress": "2.0.0-alpha.15"
   }
 }

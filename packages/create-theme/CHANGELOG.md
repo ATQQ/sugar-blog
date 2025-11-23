@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.88
+
+### Patch Changes
+
+- fix: some bugs
+
 ## 0.0.87
 
 ### Patch Changes

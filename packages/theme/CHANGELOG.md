@@ -1,5 +1,14 @@
 # @sugarat/theme
 
+## 0.5.9
+
+### Patch Changes
+
+- fix: 首页封面在window上显示异常
+- fix: rss 构建内容相对路径图片地址未替换
+- Updated dependencies
+  - vitepress-plugin-rss@0.3.4
+
 ## 0.5.8
 
 ### Patch Changes

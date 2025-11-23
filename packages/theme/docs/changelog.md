@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.5.8） ⏰ 2025/11/15：修复 rss / pagefind 问题; 优化旋转头像动画
+description: 最近更新（v0.5.9） ⏰ 2025/11/15：修复一些图片展示异常问题
 author: 粥里有勺糖
 top: 3
 tag: 日志
@@ -26,6 +26,15 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.5.9 (2025/11/23)
+
+### Patch Changes
+
+- fix: 首页封面在window上显示异常
+- fix: rss 构建内容相对路径图片地址未替换
+- Updated dependencies
+  - vitepress-plugin-rss@0.3.4
 
 ## 0.5.8 (2025/11/15)
 

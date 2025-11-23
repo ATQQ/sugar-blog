@@ -52,7 +52,7 @@
     "tinyglobby": "^0.2.6",
     "typescript": "^5.5.4",
     "vite": "^5",
-    "vitepress": "2.0.0-alpha.14",
+    "vitepress": "2.0.0-alpha.15",
     "vue": "^3.5.12"
   }
 }

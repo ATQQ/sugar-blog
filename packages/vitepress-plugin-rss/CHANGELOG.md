@@ -1,5 +1,11 @@
 # vitepress-plugin-rss
 
+## 0.3.4
+
+### Patch Changes
+
+- fix: 构建内容相对路径图片地址未替换
+
 ## 0.3.3
 
 ### Patch Changes
