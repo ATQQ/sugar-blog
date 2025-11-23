@@ -52,6 +52,17 @@ publish: false
 ```
 
 ## 高级用法
+### 自定义静态资源基础地址
+>https://vitepress.dev/zh/guide/asset-handling#referencing-static-assets
+>根据 VitePress 文档可知，所有引用的资源，包括那些使用绝对路径的，都会在生产构建过程中被复制到输出目录，并使用哈希文件名
+
+
+如果你的文章中包含了相对路径图片资源，那么在生成 rss 文件时，图片资源的路径将将会自动修正为 `${assetsBaseUrl}${buildAssetsPath}`。
+
+`assetsBaseUrl` 配置项默认值为 `baseUrl`，你可以根据实际情况进行配置。
+
+自动修正后的值事例: `https://theme.sugarat.top/assets/image.Dqt2QH0u.png`
+
 ### 使用示例
 ```ts
 const RSS: RSSOptions = {
@@ -111,6 +122,12 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
    * @example 'https://sugarat.top'
    */
   baseUrl: string
+  /**
+   * 相对路径静态资源的基础地址（图片）
+   * @example 'https://sugarat.top'
+   * @default baseUrl
+   */
+  assetsBaseUrl?: string
   /**
    * 线上访问的RSS地址
    * @default

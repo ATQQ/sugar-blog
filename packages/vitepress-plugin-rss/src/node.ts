@@ -81,10 +81,11 @@ async function getMdRender(config: SiteConfig) {
 let cachePageData: ReturnType<typeof getVitePressPages>
 export async function getPostsData(
   config: SiteConfig,
-  ops: RSSOptions
+  ops: RSSOptions,
+  assetsMap: any[] = []
 ) {
   const endParseConfig = debugTime('endParseConfig')
-  const { ignoreHome = true, ignorePublish = false, renderHTML = true } = ops
+  const { ignoreHome = true, ignorePublish = false, renderHTML = true, assetsBaseUrl = ops.baseUrl } = ops
   // 能缓存复用的缓存
   if (!cachePageData) {
     cachePageData = getVitePressPages(config)
@@ -108,7 +109,7 @@ export async function getPostsData(
   const endParsePageData = debugTime('endParsePageData')
   for (const page of cachePageData) {
     const { contentPromise, datePromise } = fileContentPromises[page.page]
-    const fileContent = await contentPromise
+    let fileContent = await contentPromise
 
     const { data: frontmatter, excerpt, content } = grayMatter(fileContent, {
       excerpt: true
@@ -134,6 +135,29 @@ export async function getPostsData(
       = (frontmatter.cover
         ?? (fileContent.match(imageRegex)?.[1])) || ''
 
+    const relativeImages = getRelativeImagesFromFileContent(content, page.filepath.replace(config.srcDir, ''))
+    if (relativeImages.length > 0) {
+      // render 替换 assets
+      relativeImages.forEach((v) => {
+        const [originValue, relativePath] = v
+        const absolutePath = joinPath(config.srcDir, `/${relativePath}`)
+        const asset = assetsMap.find((item) => {
+          const assetPath = joinPath(config.srcDir, `/${item.originalFileName}`)
+          return assetPath === absolutePath
+        })
+        if (asset) {
+          const imageUrl = `${assetsBaseUrl}${joinPath('/', asset.fileName)}`
+          v.push(imageUrl)
+          fileContent = fileContent.replaceAll(originValue, imageUrl)
+        }
+      })
+    }
+    if (frontmatter.cover) {
+      const exist = relativeImages.find(v => v[0] === frontmatter.cover)
+      if (exist) {
+        frontmatter.cover = exist[2]
+      }
+    }
     const targetPage = normalizePath(
       page.rewritePath ? page.rewritePath : page.page
     )
@@ -222,7 +246,7 @@ export async function getPostsData(
 }
 
 // 内容md5一样则复用缓存
-export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
+export async function genFeed(config: SiteConfig, rssOptions: RSSOptions, assetsMap: any[]) {
   if (!rssOptions)
     return
 
@@ -239,7 +263,7 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
   const endGetPostsData = debugTime('genFeed:getPostsData')
   // 获取所有文章
   const posts
-    = await getPostsData(config, rssOptions)
+    = await getPostsData(config, rssOptions, assetsMap)
   endGetPostsData()
 
   for (const post of posts) {
@@ -279,4 +303,31 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions) {
     console.log('rss url:', `${baseUrl}${config.site.base + RSSFilename}`)
     console.log('include', posts.length, 'posts')
   }
+}
+
+function isBase64ImageURL(url: string) {
+  // Base64 图片链接的格式为 data:image/[image format];base64,[Base64 编码的数据]
+  const regex = /^data:image\/[a-z]+;base64,/
+  return regex.test(url)
+}
+
+export function getRelativeImagesFromFileContent(content: string, route: string) {
+  const images = [...content.matchAll(/!\[.*?\]\((.*?)\s*(".*?")?\)/g)].map(v => v[1]) || []
+
+  return images.map((originValue) => {
+    const isHTTPSource = originValue && originValue.startsWith('http')
+    if (isHTTPSource || isBase64ImageURL(originValue)) {
+      return [originValue, '']
+    }
+    const paths = joinPath('/', route).split('/')
+    paths.splice(paths.length - 1, 1)
+    const relativePath = normalizePath(
+      originValue.startsWith('/')
+        ? originValue
+        : path.join(paths.join('/') || '', originValue)
+    )
+    return [originValue, joinPath('/', relativePath)]
+  }).filter((v) => {
+    return v[1].startsWith('/')
+  })
 }

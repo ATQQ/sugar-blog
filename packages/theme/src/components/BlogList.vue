@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, watch } from 'vue'
+import { computed, nextTick, watch } from 'vue'
 import { ElPagination } from 'element-plus'
 import { useData, useRoute, useRouter } from 'vitepress'
 import {
@@ -70,7 +70,6 @@ function handleUpdatePageNum(current: number) {
 }
 
 const route = useRoute()
-
 function refreshCurrentPage() {
   if (typeof window === 'undefined')
     return
@@ -78,7 +77,9 @@ function refreshCurrentPage() {
   const searchParams = new URLSearchParams(search)
   const pageNum = Number(searchParams.get(queryPageNumKey)) || 1
   if (pageNum !== currentPage.value) {
-    currentPage.value = pageNum
+    nextTick(() => {
+      currentPage.value = pageNum
+    })
   }
 }
 watch(route, () => {
@@ -86,7 +87,7 @@ watch(route, () => {
 }, { immediate: true })
 
 // 未覆盖的场景处理 左上回到首页
-router.onAfterRouteChanged = () => {
+router.onAfterRouteChange = () => {
   refreshCurrentPage()
 }
 </script>

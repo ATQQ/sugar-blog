@@ -65,7 +65,7 @@ export async function getArticleMeta(filepath: string, route: string, timeZone =
     ])
 
   // 获取摘要信息
-  // TODO：摘要生成优化
+  // TODO：摘要生成优化，支持AI？
   meta.description
     = meta.description || getTextSummary(content, 100) || excerpt
 

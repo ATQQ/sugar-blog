@@ -14,6 +14,12 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
    */
   baseUrl: string
   /**
+   * 相对路径静态资源的基础地址（图片）
+   * @example 'https://sugarat.top'
+   * @default baseUrl
+   */
+  assetsBaseUrl?: string
+  /**
    * 线上访问的RSS地址
    * @default
    * ```ts
@@ -74,6 +80,7 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
    * (可选)文章解析完成后调用，可对文章内容进行进一步处理
    */
   transform?: (content: string) => string
+
 }
 
 export interface PostInfo {
