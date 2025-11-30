@@ -1,5 +1,5 @@
 import type { Author, FeedOptions } from 'feed'
-import type { MarkdownEnv } from 'vitepress'
+import type { MarkdownEnv, SiteConfig } from 'vitepress'
 
 export type RSSOptions = Omit<FeedOptions, 'id'> & {
   id?: string
@@ -79,8 +79,12 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
   /**
    * (可选)文章解析完成后调用，可对文章内容进行进一步处理
    */
-  transform?: (content: string) => string
-
+  transform?: (content: string, vitePressConfig: SiteConfig) => string | Promise<string>
+  /**
+   * 是否缓存文档渲染结果
+   * @default true
+   */
+  cache?: boolean
 }
 
 export interface PostInfo {

@@ -24,11 +24,23 @@ const imageRegex = /!\[.*?\]\((.*?)\s*(".*?")?\)/
 const htmlCache = new Map<string, string | undefined>()
 
 // 文件系统缓存相关函数
-function getCacheKey(filepath: string, content: string, url?: string): string {
-  const hash = crypto.createHash('md5').update(content).digest('hex')
-  // 使用 URL basename 作为 key，兼容动态路由场景
+function stringifyForHash(val: any): string {
+  return JSON.stringify(val, (k, v) => {
+    if (typeof v === 'function')
+      return v.toString()
+    if (v instanceof RegExp)
+      return v.toString()
+    return v
+  })
+}
+
+function getCacheKey(config: SiteConfig, rssOptions: RSSOptions, filepath: string, content: string, url?: string): string {
   const basename = url ? path.basename(url) : path.basename(filepath)
-  return `${basename}_${hash}`
+  const markdownStr = stringifyForHash(config?.markdown || {})
+  const rssOpsStr = stringifyForHash(rssOptions || {})
+  const payload = `${basename}|${markdownStr}|${rssOpsStr}`
+  const hash = crypto.createHash('md5').update(`${content}|${payload}`).digest('hex')
+  return `${basename}_${hash}.html`
 }
 
 async function getCacheDir(config: SiteConfig): Promise<string> {
@@ -37,10 +49,10 @@ async function getCacheDir(config: SiteConfig): Promise<string> {
   return cacheDir
 }
 
-async function getCachedHtml(config: SiteConfig, filepath: string, content: string, url?: string): Promise<string | null> {
+async function getCachedHtml(config: SiteConfig, rssOptions: RSSOptions, filepath: string, content: string, url?: string): Promise<string | null> {
   try {
     const cacheDir = await getCacheDir(config)
-    const cacheKey = getCacheKey(filepath, content, url)
+    const cacheKey = getCacheKey(config, rssOptions, filepath, content, url)
     const cachePath = path.join(cacheDir, cacheKey)
 
     // 检查缓存文件是否存在，直接对比文件名
@@ -55,10 +67,10 @@ async function getCachedHtml(config: SiteConfig, filepath: string, content: stri
   return null
 }
 
-async function setCachedHtml(config: SiteConfig, filepath: string, content: string, html: string, url?: string): Promise<void> {
+async function setCachedHtml(config: SiteConfig, rssOptions: RSSOptions, filepath: string, content: string, html: string, url?: string): Promise<void> {
   try {
     const cacheDir = await getCacheDir(config)
-    const cacheKey = getCacheKey(filepath, content, url)
+    const cacheKey = getCacheKey(config, rssOptions, filepath, content, url)
     const cachePath = path.join(cacheDir, cacheKey)
 
     await fs.promises.writeFile(cachePath, html, 'utf-8')
@@ -213,7 +225,7 @@ export async function getPostsData(
       let html
 
       // 先尝试从文件系统缓存中获取
-      const cachedHtml = await getCachedHtml(config, filepath, fileContent, url)
+      const cachedHtml = ops.cache !== false ? await getCachedHtml(config, ops, filepath, fileContent, url) : null
       if (cachedHtml) {
         html = cachedHtml
       }
@@ -229,9 +241,15 @@ export async function getPostsData(
           html = await renderHTML(fileContent)
         }
 
+        html = html.replaceAll('&ZeroWidthSpace;', '')
+        // 对渲染结果进行转换
+        if (ops?.transform) {
+          html = await ops.transform(html, config)
+        }
+
         // 将渲染结果保存到文件系统缓存
         if (html) {
-          await setCachedHtml(config, filepath, fileContent, html, url)
+          await setCachedHtml(config, ops, filepath, fileContent, html, url)
         }
       }
 
@@ -254,7 +272,7 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions, assets
   const { baseUrl, filename } = rssOptions
 
   // eslint-disable-next-line unused-imports/no-unused-vars
-  const { renderHTML, transform = v => v, ...restOps } = rssOptions
+  const { renderHTML, ...restOps } = rssOptions
   const feed = new Feed({
     id: rssOptions.baseUrl,
     link: rssOptions.baseUrl,
@@ -278,7 +296,7 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions, assets
       id: link,
       link,
       description,
-      content: transform((htmlCache.get(post.url) ?? '').replaceAll('&ZeroWidthSpace;', '')),
+      content: htmlCache.get(post.url) ?? '',
       author: [
         {
           name: author,

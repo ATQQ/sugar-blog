@@ -105,17 +105,7 @@ publish: false
 
 ## Advanced Usage
  
-### Customize the base URL for static assets
-> https://vitepress.dev/guide/asset-handling#referencing-static-assets
-> According to the VitePress documentation, all referenced assets, including those using absolute paths, are copied to the output directory during the production build and are given hashed filenames.
-
-If your article contains image assets with relative paths, then when generating the RSS file, the image paths will be automatically adjusted to `${assetsBaseUrl}${buildAssetsPath}`.
-
-The default value of the `assetsBaseUrl` option is `baseUrl`, and you can configure it as needed.
-
-Example of the corrected value: `https://theme.sugarat.top/assets/image.Dqt2QH0u.png`
-
-### Example
+### Example1
 ```ts
 const RSS: RSSOptions = {
   // necessary（必选参数）
@@ -242,6 +232,17 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
 }
 ```
  
+### Customize the base URL for static assets
+> https://vitepress.dev/guide/asset-handling#referencing-static-assets
+> According to the VitePress documentation, all referenced assets, including those using absolute paths, are copied to the output directory during the production build and are given hashed filenames.
+
+If your article contains image assets with relative paths, then when generating the RSS file, the image paths will be automatically adjusted to `${assetsBaseUrl}${buildAssetsPath}`.
+
+The default value of the `assetsBaseUrl` option is `baseUrl`, and you can configure it as needed.
+
+Example of the corrected value: `https://theme.sugarat.top/assets/image.Dqt2QH0u.png`
+  
+
 ## FAQ
 ### Character encoding issues when accessing RSS files
 Using Nginx as an example, you can add the following configuration
