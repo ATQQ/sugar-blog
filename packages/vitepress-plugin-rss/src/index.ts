@@ -58,6 +58,10 @@ export function RssPlugin(rssOptions: RSSOptions): any {
           Object.keys(VPConfig.site?.locales).forEach((locale) => {
             const rssCfg = rssOptions?.locales?.[locale]
             if (rssCfg && (rssCfg?.icon ?? true)) {
+              // 如果 locales 里没有 baseUrl，使用默认的
+              if (!rssCfg.baseUrl) {
+                rssCfg.baseUrl = rssOptions.baseUrl
+              }
               const _tcfg = VPConfig.site.locales[locale]?.themeConfig
               if (!_tcfg) {
                 VPConfig.site.locales[locale].themeConfig = {}
