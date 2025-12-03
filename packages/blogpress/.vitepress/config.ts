@@ -111,6 +111,12 @@ const blogTheme = getThemeConfig({
   friend: {
     list: [
       {
+        nickname: '技术茶馆',
+        url: 'https://teazg.top/',
+        avatar: 'https://teazg.top/index_logo.png',
+        des: '张工的技术茶馆，分享技术札记、实战经验、源码剖析与效率工具'
+      },
+      {
         url: 'https://relaxing.top/',
         nickname: '放',
         avatar: 'https://relaxing.top/logo.png',
