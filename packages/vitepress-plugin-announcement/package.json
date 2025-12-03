@@ -41,7 +41,7 @@
     "build:component": "tsc -p src/components && node scripts/copyComponents.mjs"
   },
   "peerDependencies": {
-    "vitepress": "^1"
+    "vitepress": "^1 || ^2"
   },
   "dependencies": {
     "javascript-stringify": "^2.1.0"

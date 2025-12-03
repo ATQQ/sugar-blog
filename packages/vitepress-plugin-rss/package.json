@@ -35,7 +35,7 @@
     "build": "npx tsup src/index.ts --dts --format esm,cjs --external vitepress --silent"
   },
   "peerDependencies": {
-    "vitepress": "^1"
+    "vitepress": "^1 || ^2"
   },
   "dependencies": {
     "@sugarat/theme-shared": "workspace:*",
