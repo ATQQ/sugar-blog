@@ -252,6 +252,16 @@ location ~ \.rss$ {
 
 ![](https://cdn.upyun.sugarat.top/mdImg/sugar/3eca61766967c6a6be97f73f74f39b14)
 
+或者，你可以在构建配置中将输出文件名修改为 `.xml` 后缀：
+```ts
+const RSS: RSSOptions = {
+  // ...
+  filename: 'rss.xml',
+}
+```
+
+这样既符合 RSS 文件的标准格式（RSS 本质上是 XML），也能避免某些服务器对 `.rss` 文件的编码处理问题。
+
 
 ## Thanks
 * [jpmonette/feed](https://www.npmjs.com/package/feed)
