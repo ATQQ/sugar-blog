@@ -44,8 +44,59 @@ the rss icon is also added to page nav socialLinks.
 ![](https://img.cdn.sugarat.top/mdImg/MTY5MjQ1NTQ4MDYxMg==692455480612)
 
 ## frontmatter
+
+The RSS plugin reads the following fields from the article frontmatter to generate corresponding RSS item information:
+
+### title
+Article title. If not provided, it will be automatically extracted from the first heading in the content
+```md
+---
+title: My First Article
+---
+```
+
+### date
+Publication date. If not specified, uses the file's last modified time
+```md
+---
+date: 2024-01-15
+---
+```
+
+### description
+Article summary. If not provided, it will attempt to use the `renderExpect` configuration or article excerpt, falling back to the first 100 characters
+```md
+---
+description: An introductory article about RSS
+---
+```
+
+### author
+Article author name. If not specified, uses `author.name` from config
+```md
+---
+author: John Doe
+---
+```
+
+### cover
+Article cover image. Can be manually specified or automatically extracted from the first image in the content
+```md
+---
+cover: /images/cover.png
+---
+```
+
+### layout
+If the value is `home`, the article will be filtered (controlled by the `ignoreHome` option)
+```md
+---
+layout: home
+---
+```
+
 ### publish
-Posts that `publish: false` will not appear in the final rss file，can be used to ignore target articles
+Posts that `publish: false` will not appear in the final rss file，can be used to ignore target articles (controlled by the `ignorePublish` option)
 ```md
 ---
 publish: false
