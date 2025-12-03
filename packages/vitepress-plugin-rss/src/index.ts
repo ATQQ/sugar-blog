@@ -1,6 +1,6 @@
 import type { PluginOption } from 'vite'
 import type { SiteConfig } from 'vitepress'
-import { cacheAllGitTimestamps } from '@sugarat/theme-shared'
+import { cacheAllGitTimestamps, normalizeUrl } from '@sugarat/theme-shared'
 import type { RSSOptions } from './type'
 import { genFeed } from './node'
 
@@ -17,8 +17,7 @@ function SocialIcon(rssOptions: RSSOptions, base = '/') {
     },
     link:
       rssOptions.url
-      || `${rssOptions.baseUrl}${base + (rssOptions.filename || 'feed.rss')
-      }`,
+      || normalizeUrl(`${rssOptions.baseUrl}${base}${rssOptions.filename || 'feed.rss'}`),
     ariaLabel: rssOptions?.ariaLabel || 'RSS'
   }
 }

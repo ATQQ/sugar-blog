@@ -13,6 +13,7 @@ import {
   grayMatter,
   joinPath,
   normalizePath,
+  normalizeUrl,
   renderDynamicMarkdown
 } from '@sugarat/theme-shared'
 import type { PostInfo, RSSOptions } from './type'
@@ -300,7 +301,7 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions, assets
   if (rssOptions.log ?? true) {
     console.log('🎉 RSS generated', RSSFilename)
     console.log('rss filepath:', RSSFilepath)
-    console.log('rss url:', `${baseUrl}${config.site.base + RSSFilename}`)
+    console.log('rss url:', normalizeUrl(`${baseUrl}${config.site.base + RSSFilename}`))
     console.log('include', posts.length, 'posts')
   }
 }
