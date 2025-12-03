@@ -19,6 +19,11 @@ import type { PostInfo, RSSOptions } from './type'
 
 const imageRegex = /!\[.*?\]\((.*?)\s*(".*?")?\)/
 
+// URL 规范化函数，移除多余的斜杠（保留协议的双斜杠）
+export function normalizeUrl(url: string): string {
+  return url.replace(/([^:]\/)\/+/g, '$1')
+}
+
 // 使用文件缓存，避免内存占用
 const htmlCache = new Map<string, string | undefined>()
 
@@ -300,7 +305,7 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions, assets
   if (rssOptions.log ?? true) {
     console.log('🎉 RSS generated', RSSFilename)
     console.log('rss filepath:', RSSFilepath)
-    console.log('rss url:', `${baseUrl}${config.site.base + RSSFilename}`)
+    console.log('rss url:', normalizeUrl(`${baseUrl}${config.site.base + RSSFilename}`))
     console.log('include', posts.length, 'posts')
   }
 }
