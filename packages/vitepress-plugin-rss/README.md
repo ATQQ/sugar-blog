@@ -192,7 +192,7 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
 ```
  
 ## FAQ
-### set response charset
+### Character encoding issues when accessing RSS files
 Using Nginx as an example, you can add the following configuration
 ```
 location ~ \.rss$ {
@@ -201,6 +201,16 @@ location ~ \.rss$ {
 ```
 
 ![](https://cdn.upyun.sugarat.top/mdImg/sugar/3eca61766967c6a6be97f73f74f39b14)
+
+Alternatively, you can modify the output filename to use the `.xml` extension in your build config:
+```ts
+const RSS: RSSOptions = {
+  // ...
+  filename: 'rss.xml',
+}
+```
+
+This not only aligns with the standard RSS format (RSS is essentially XML), but also avoids encoding handling issues that some servers may have with `.rss` files.
 
 ## Thanks
 * [jpmonette/feed](https://www.npmjs.com/package/feed)
