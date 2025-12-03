@@ -43,8 +43,59 @@ pnpm run build
 ![](https://img.cdn.sugarat.top/mdImg/MTY5MjQ1NTQ4MDYxMg==692455480612)
 
 ## frontmatter
+
+RSS 插件会读取文章 frontmatter 中的以下字段来生成对应的 RSS 项信息：
+
+### title
+文章标题。如果未提供，会从正文首个标题自动提取
+```md
+---
+title: 我的第一篇文章
+---
+```
+
+### date
+发布日期。如果未指定，使用文件最后修改时间
+```md
+---
+date: 2024-01-15
+---
+```
+
+### description
+文章摘要。如果未提供，会尝试使用 `renderExpect` 配置或文章摘录，最后降级为截取前 100 字
+```md
+---
+description: 这是一篇关于 RSS 的介绍文章
+---
+```
+
+### author
+文章作者名称。如果未指定，会使用配置中的 `author.name`
+```md
+---
+author: 张三
+---
+```
+
+### cover
+文章封面。可以手动指定，或自动从文中首张图片提取
+```md
+---
+cover: /images/cover.png
+---
+```
+
+### layout
+如果值为 `home`，文章会被过滤（可通过 `ignoreHome` 选项控制）
+```md
+---
+layout: home
+---
+```
+
 ### publish
-包含 `publish: false` 的文章将不会出现在最终的 rss 文件中，可以用来忽略目标文章
+包含 `publish: false` 的文章将不会出现在最终的 rss 文件中，可以用来忽略目标文章（可通过 `ignorePublish` 选项控制）
 ```md
 ---
 publish: false
