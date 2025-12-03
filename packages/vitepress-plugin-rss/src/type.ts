@@ -74,7 +74,7 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
    * 手动控制生成 HTML的逻辑，或不是用 vitepress 内置的 HTML 渲染逻辑
    * @default true
    */
-  renderHTML?: ((filecontent: string) => string | Promise<string>) | boolean
+  renderHTML?: ((filecontent: string, config: SiteConfig, options: RSSOptions) => string | Promise<string>) | boolean
   locales?: Record<string, Omit<RSSOptions, 'locales'>>
   /**
    * (可选)文章解析完成后调用，可对文章内容进行进一步处理

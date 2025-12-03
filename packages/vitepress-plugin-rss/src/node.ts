@@ -238,7 +238,7 @@ export async function getPostsData(
           html = cacheMdRender.render(fileContent, env)
         }
         else if (typeof renderHTML === 'function') {
-          html = await renderHTML(fileContent)
+          html = await renderHTML(fileContent, config, ops)
         }
 
         html = html.replaceAll('&ZeroWidthSpace;', '')
