@@ -13,16 +13,12 @@ import {
   grayMatter,
   joinPath,
   normalizePath,
+  normalizeUrl,
   renderDynamicMarkdown
 } from '@sugarat/theme-shared'
 import type { PostInfo, RSSOptions } from './type'
 
 const imageRegex = /!\[.*?\]\((.*?)\s*(".*?")?\)/
-
-// URL 规范化函数，移除多余的斜杠（保留协议的双斜杠）
-export function normalizeUrl(url: string): string {
-  return url.replace(/([^:]\/)\/+/g, '$1')
-}
 
 // 使用文件缓存，避免内存占用
 const htmlCache = new Map<string, string | undefined>()
