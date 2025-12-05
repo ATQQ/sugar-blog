@@ -16,6 +16,9 @@ import {
   normalizeUrl,
   renderDynamicMarkdown
 } from '@sugarat/theme-shared'
+
+// @ts-expect-error
+import container from 'markdown-it-container'
 import type { PostInfo, RSSOptions } from './type'
 
 const imageRegex = /!\[.*?\]\((.*?)\s*(".*?")?\)/
@@ -80,25 +83,56 @@ async function setCachedHtml(config: SiteConfig, rssOptions: RSSOptions, filepat
   }
 }
 
-let cacheMdRender: any
-async function getMdRender(config: SiteConfig) {
-  const { createMarkdownRenderer } = await import('vitepress')
-  return createMarkdownRenderer(
+async function getMdRender(config: SiteConfig, rssOptions: RSSOptions) {
+  const { createMarkdownRenderer, disposeMdItInstance } = await import('vitepress')
+  // 重载配置
+  const mdOptions = {
+    ...config.markdown,
+    ...rssOptions.markdownOptions
+  }
+  // 释放之前的实例
+  disposeMdItInstance()
+  const md = await createMarkdownRenderer(
     config.srcDir,
-    config.markdown,
+    mdOptions,
     config.site.base,
     config.logger
   )
+
+  // code-group 问题
+  // https://github.com/oxc-project/oxc-project.github.io/blob/main/.vitepress/config/rss.ts
+  // Wrap code groups with <table>s
+  // Reference: https://github.com/vuejs/vitepress/blob/179ee6/src/node/markdown/plugins/preWrapper.ts#L8
+  md.use((md) => {
+    const fence = md.renderer.rules.fence!
+    md.renderer.rules.fence = (...args) => {
+      const [tokens, idx] = args
+      const token = tokens[idx]
+
+      const title = token.info.match(/\[(.*)\]/)?.[1]
+      // Code blocks in a code group have titles
+      return title == null
+        ? fence(...args)
+        : '<tr>' + `<td>${title}</td>` + `<td>${fence(...args)}</td>` + '</tr>'
+    }
+  })
+  // Override https://github.com/vuejs/vitepress/blob/179ee6/src/node/markdown/plugins/containers.ts#L26
+  md.use(container, 'code-group', {
+    render(tokens: any[], idx: number) {
+      return tokens[idx].nesting === 1 ? '<table><tbody>' : '</tbody></table>\n'
+    },
+  })
+  return md
 }
 
 let cachePageData: ReturnType<typeof getVitePressPages>
 export async function getPostsData(
   config: SiteConfig,
-  ops: RSSOptions,
+  rssOptions: RSSOptions,
   assetsMap: any[] = []
 ) {
   const endParseConfig = debugTime('endParseConfig')
-  const { ignoreHome = true, ignorePublish = false, renderHTML = true, assetsBaseUrl = ops.baseUrl } = ops
+  const { ignoreHome = true, ignorePublish = false, renderHTML = true, assetsBaseUrl = rssOptions.baseUrl } = rssOptions
   // 能缓存复用的缓存
   if (!cachePageData) {
     cachePageData = getVitePressPages(config)
@@ -140,7 +174,7 @@ export async function getPostsData(
     // 获取摘要信息
     frontmatter.description
       // eslint-disable-next-line no-await-in-loop
-      = (await ops?.renderExpect?.(content, { ...frontmatter }))
+      = (await rssOptions?.renderExpect?.(content, { ...frontmatter }))
       ?? (frontmatter.description || excerpt || getTextSummary(content, 100))
 
     // 获取封面图
@@ -203,8 +237,8 @@ export async function getPostsData(
 
     return true
   })
-  if (ops?.filter) {
-    posts = posts.filter(ops.filter)
+  if (rssOptions?.filter) {
+    posts = posts.filter(rssOptions.filter)
   }
 
   // 按日期排序
@@ -213,43 +247,42 @@ export async function getPostsData(
   )
 
   // 限制数量
-  if (undefined !== ops?.limit && ops?.limit > 0) {
-    posts.splice(ops.limit)
+  if (undefined !== rssOptions?.limit && rssOptions?.limit > 0) {
+    posts.splice(rssOptions.limit)
   }
 
   // render html
   const endRenderHTML = debugTime('endRenderHTML')
+  const md = await getMdRender(config, rssOptions)
+
   await Promise.all(posts.map(async (post) => {
     const { fileContent, filepath, env, url } = post
     if (!htmlCache.has(url)) {
-      let html
+      let html = ''
 
       // 先尝试从文件系统缓存中获取
-      const cachedHtml = ops.cache !== false ? await getCachedHtml(config, ops, filepath, fileContent, url) : null
+      const cachedHtml = rssOptions.cache !== false ? await getCachedHtml(config, rssOptions, filepath, fileContent, url) : null
       if (cachedHtml) {
         html = cachedHtml
       }
       else {
         // 缓存未命中，重新渲染
         if (renderHTML === true) {
-          if (!cacheMdRender) {
-            cacheMdRender = await getMdRender(config)
-          }
-          html = cacheMdRender.render(fileContent, env)
+          html = md.render(fileContent, env)
         }
         else if (typeof renderHTML === 'function') {
-          html = await renderHTML(fileContent, config, ops)
+          html = await renderHTML(fileContent, config, rssOptions)
         }
 
         html = html.replaceAll('&ZeroWidthSpace;', '')
         // 对渲染结果进行转换
-        if (ops?.transform) {
-          html = await ops.transform(html, config)
+        if (rssOptions?.transform) {
+          html = await rssOptions.transform(html, config)
         }
 
         // 将渲染结果保存到文件系统缓存
         if (html) {
-          await setCachedHtml(config, ops, filepath, fileContent, html, url)
+          await setCachedHtml(config, rssOptions, filepath, fileContent, html, url)
         }
       }
 

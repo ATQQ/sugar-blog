@@ -1,5 +1,5 @@
 import type { Author, FeedOptions } from 'feed'
-import type { MarkdownEnv, SiteConfig } from 'vitepress'
+import type { MarkdownEnv, MarkdownOptions, SiteConfig } from 'vitepress'
 
 export type RSSOptions = Omit<FeedOptions, 'id'> & {
   id?: string
@@ -85,6 +85,10 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
    * @default true
    */
   cache?: boolean
+  /**
+   * 重载 vitepress 的 Markdown 配置
+   */
+  markdownOptions?: Omit<MarkdownOptions, 'config'>
 }
 
 export interface PostInfo {
