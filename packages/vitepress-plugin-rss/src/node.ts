@@ -3,7 +3,7 @@ import path from 'node:path'
 import crypto from 'node:crypto'
 import type { SiteConfig } from 'vitepress'
 import { Feed } from 'feed'
-import type { Author } from 'feed'
+import type { Author, Category, Item } from 'feed'
 import {
   debugTime,
   formatDate,
@@ -270,6 +270,8 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions, assets
 
   for (const post of posts) {
     const { title, description, date, frontmatter, url } = post
+
+    // 文章作者信息
     let authorsInfo: Author[] | undefined
     if (frontmatter.authors) {
       authorsInfo = frontmatter.authors
@@ -281,6 +283,13 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions, assets
     else {
       authorsInfo = rssOptions.author ? [rssOptions.author] : undefined
     }
+
+    // 文章分类信息
+    let categoryInfo: Category[] | undefined
+    if (frontmatter.category) {
+      categoryInfo = frontmatter.category
+    }
+
     // 最后的文章链接
     const link = `${baseUrl}${url}`
 
@@ -291,9 +300,10 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions, assets
       description,
       content: transform((htmlCache.get(post.url) ?? '').replaceAll('&ZeroWidthSpace;', '')),
       author: authorsInfo,
+      category: categoryInfo,
       image: frontmatter?.cover ? new URL(frontmatter?.cover, baseUrl).href : '',
       date: new Date(date)
-    })
+    } satisfies Item)
   }
   const RSSFilename = filename || 'feed.rss'
 

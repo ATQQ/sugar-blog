@@ -92,6 +92,17 @@ authors:
 ---
 ```
 
+### category
+文章分类列表，支持多个分类。每个分类对象可选 `name`、`domain`、`scheme`、`term` 字段。
+```md
+---
+category:
+  - name: 技术
+    domain: https://example.com
+  - name: 前端开发
+---
+```
+
 ### cover
 文章封面。可以手动指定，或自动从文中首张图片提取。
 ```md

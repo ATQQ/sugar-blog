@@ -93,6 +93,17 @@ authors:
 ---
 ```
 
+### category
+List of article categories, supporting multiple categories. Each category object can optionally contain `name`, `domain`, `scheme`, `term` fields.
+```md
+---
+category:
+  - name: Tech
+    domain: https://example.com
+  - name: Frontend
+---
+```
+
 ### cover
 Article cover image. Can be manually specified or automatically extracted from the first image in the content
 ```md
