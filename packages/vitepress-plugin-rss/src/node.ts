@@ -276,7 +276,7 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions, assets
     if (Array.isArray(frontmatter.author)) {
       authorsInfo = frontmatter.author
     }
-    else if (frontmatter.author) {
+    else if (frontmatter.author as string) {
       const foundAuthors = rssOptions.authors?.find(v => v.name === frontmatter.author)
       authorsInfo = foundAuthors ? [foundAuthors] : [{ name: frontmatter.author }]
     }
