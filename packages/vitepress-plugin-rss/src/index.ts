@@ -72,7 +72,7 @@ export function RssPlugin(rssOptions: RSSOptions): any {
               ]
               if (!rssCfg.filter) {
                 rssCfg.filter = (value) => {
-                  return !!value.url.startsWith(`/${locale}`)
+                  return !!value.url.startsWith(`${VPConfig.site.base}${locale}`)
                 }
               }
               localesConfig.push(rssCfg)
