@@ -71,8 +71,17 @@ export function RssPlugin(rssOptions: RSSOptions): any {
                 ...(_tcfg?.socialLinks || [])
               ]
               if (!rssCfg.filter) {
-                rssCfg.filter = (value) => {
-                  return !!value.url.startsWith(`${VPConfig.site.base}${locale}`)
+                const otherLocales = Object.keys(VPConfig.site?.locales || {}).filter(l => l !== 'root')
+                const base = VPConfig.site.base || '/'
+                if (locale === 'root') {
+                  rssCfg.filter = (value) => {
+                    return !otherLocales.some(l => value.url.startsWith(`${base}${l}/`))
+                  }
+                }
+                else {
+                  rssCfg.filter = (value) => {
+                    return value.url.startsWith(`${base}${locale}/`)
+                  }
                 }
               }
               localesConfig.push(rssCfg)
