@@ -47,7 +47,7 @@ pnpm run build
 RSS 插件会读取文章 frontmatter 中的以下字段来生成对应的 RSS 项信息：
 
 ### title
-文章标题。如果未提供，会从正文首个标题自动提取
+文章标题。如果未提供，会从正文首个标题自动提取。
 ```md
 ---
 title: 我的第一篇文章
@@ -55,7 +55,7 @@ title: 我的第一篇文章
 ```
 
 ### date
-发布日期。如果未指定，使用文件最后修改时间
+发布日期。如果未指定，使用文件最后修改时间。
 ```md
 ---
 date: 2024-01-15
@@ -63,7 +63,7 @@ date: 2024-01-15
 ```
 
 ### description
-文章摘要。如果未提供，会尝试使用 `renderExpect` 配置或文章摘录，最后降级为截取前 100 字
+文章摘要。如果未提供，会尝试使用 `renderExpect` 配置或文章摘录，最后降级为截取前 100 字。
 ```md
 ---
 description: 这是一篇关于 RSS 的介绍文章
@@ -71,7 +71,7 @@ description: 这是一篇关于 RSS 的介绍文章
 ```
 
 ### author
-文章作者名称。如果未指定，会使用配置中的 `author.name`
+文章作者名称。如果未指定，会使用配置中的 `author`；如配置了 `authors` 列表，还会按 `frontmatter.author` 作为名称在 `authors` 列表中匹配并补全该作者的 email/link 信息。
 ```md
 ---
 author: 张三
@@ -79,7 +79,7 @@ author: 张三
 ```
 
 ### cover
-文章封面。可以手动指定，或自动从文中首张图片提取
+文章封面。可以手动指定，或自动从文中首张图片提取。
 ```md
 ---
 cover: /images/cover.png
@@ -87,7 +87,7 @@ cover: /images/cover.png
 ```
 
 ### layout
-如果值为 `home`，文章会被过滤（可通过 `ignoreHome` 选项控制）
+如果值为 `home`，文章会被过滤。（可通过 `ignoreHome` 选项控制）
 ```md
 ---
 layout: home
@@ -95,7 +95,7 @@ layout: home
 ```
 
 ### publish
-包含 `publish: false` 的文章将不会出现在最终的 rss 文件中，可以用来忽略目标文章（可通过 `ignorePublish` 选项控制）
+包含 `publish: false` 的文章将不会出现在最终的 rss 文件中，可以用来忽略目标文章。（可通过 `ignorePublish` 选项控制）
 ```md
 ---
 publish: false
@@ -114,7 +114,7 @@ publish: false
 
 自动修正后的值事例: `https://theme.sugarat.top/assets/image.Dqt2QH0u.png`
 
-### 使用示例
+### 配置示例
 ```ts
 const RSS: RSSOptions = {
   // necessary（必选参数）
@@ -125,13 +125,13 @@ const RSS: RSSOptions = {
   // optional（可选参数）
   description: '大前端相关技术分享',
   language: 'zh-cn',
-  author: {
+  author: { // Feed 的全局作者信息；文章的默认作者信息
     name: '粥里有勺糖',
     email: 'engineerzjl@foxmail.com',
     link: 'https://sugarat.top'
   },
   icon: true,
-  authors: [
+  authors: [ // 作者信息列表，文章可按 name 匹配自动补全其他信息
     {
       name: '粥里有勺糖',
       email: 'engineerzjl@foxmail.com',
@@ -143,12 +143,21 @@ const RSS: RSSOptions = {
       link: 'https://github.com/atqq'
     }
   ],
-  filename: 'feed.rss',
+  filename: 'feed.rss', // 包含全部文章
   log: true,
   ignoreHome: true,
   ignorePublish: false,
   filter: (post, idx) => {
     return true
+  },
+  locales: {
+    en: {
+      // 若缺少 baseUrl，则沿用全局 baseUrl
+      filename: 'feed.en.rss', // 仅包含 en 语言目录下的文章
+    },
+    root: {
+      filename: 'feed.zh-hans.rss', // root 作为默认源，排除上面声明的其它 locales 文章
+    },
   }
 }
 ```
@@ -212,6 +221,10 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
    * @default false
    */
   ignorePublish?: boolean
+  /**
+   * Feed 的全局作者信息；文章默认作者信息；同时也作为 feed Options 的 author 传入
+   */
+  author?: Author
   /**
    * 博客站点内容涉及的作者列表
    */

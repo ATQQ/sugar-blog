@@ -269,8 +269,13 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions, assets
 
   for (const post of posts) {
     const { title, description, date, frontmatter, url } = post
-    const author = frontmatter.author || rssOptions.author?.name
-    const authorInfo = rssOptions.authors?.find(v => v.name === author)
+    let authorInfo
+    if (frontmatter.author) {
+      authorInfo = rssOptions.authors?.find(v => v.name === frontmatter.author) || { name: frontmatter.author }
+    }
+    else {
+      authorInfo = rssOptions.author || undefined
+    }
     // 最后的文章链接
     const link = `${baseUrl}${url}`
     feed.addItem({
@@ -279,12 +284,7 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions, assets
       link,
       description,
       content: transform((htmlCache.get(post.url) ?? '').replaceAll('&ZeroWidthSpace;', '')),
-      author: [
-        {
-          name: author,
-          ...authorInfo
-        }
-      ],
+      author: authorInfo ? [{ ...authorInfo }] : undefined,
       image: frontmatter?.cover ? new URL(frontmatter?.cover, baseUrl).href : '',
       date: new Date(date)
     })

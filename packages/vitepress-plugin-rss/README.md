@@ -72,7 +72,7 @@ description: An introductory article about RSS
 ```
 
 ### author
-Article author name. If not specified, uses `author.name` from config
+Article author name. If not specified, uses `author` from config; if `authors` is configured, it matches by `frontmatter.author` to fill the author’s email/link info from that list
 ```md
 ---
 author: John Doe
@@ -126,13 +126,13 @@ const RSS: RSSOptions = {
   // optional（可选参数）
   description: '大前端相关技术分享',
   language: 'zh-cn',
-  author: {
+  author: { // Global feed author; also the default author for articles
     name: '粥里有勺糖',
     email: 'engineerzjl@foxmail.com',
     link: 'https://sugarat.top'
   },
   icon: true,
-  authors: [
+  authors: [ // Author list; articles can match by name to auto-fill other fields
     {
       name: '粥里有勺糖',
       email: 'engineerzjl@foxmail.com',
@@ -150,6 +150,15 @@ const RSS: RSSOptions = {
   ignorePublish: false,
   filter: (post, idx) => {
     return true
+  },
+  locales: {
+    en: {
+      // If baseUrl is missing, it inherits the global baseUrl
+      filename: 'feed.en.rss', // only includes articles under the en locale
+    },
+    root: {
+      filename: 'feed.zh-hans.rss', // root is the default source, excluding articles of other declared locales
+    }
   }
 }
 ```
@@ -213,6 +222,10 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
    * @default false
    */
   ignorePublish?: boolean
+  /**
+   * Global feed author info; default author for articles; also passed as feed Options author
+   */
+  author?: Author
   /**
    * List of authors involved in blog site content
    */

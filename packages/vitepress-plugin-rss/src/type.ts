@@ -53,6 +53,10 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
    */
   ignorePublish?: boolean
   /**
+   * Feed 的全局作者信息；文章默认作者信息；同时也作为 feed Options 的 author 传入
+   */
+  author?: Author
+  /**
    * 博客站点内容涉及的作者列表
    */
   authors?: Author[]
