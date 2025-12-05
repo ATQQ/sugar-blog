@@ -64,7 +64,7 @@ date: 2024-01-15
 ```
 
 ### description
-Article summary. If not provided, it will attempt to use the `renderExpect` configuration or article excerpt, falling back to the first 100 characters
+Article summary. If not provided, it will try in order: call `renderExpect`; if not configured/no result, use the excerpt extracted by [gray-matter](https://www.npmjs.com/package/gray-matter#optionsexcerpt); if still empty, fall back to the first 100 characters.
 ```md
 ---
 description: An introductory article about RSS

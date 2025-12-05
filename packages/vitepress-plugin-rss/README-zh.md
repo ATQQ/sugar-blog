@@ -63,7 +63,7 @@ date: 2024-01-15
 ```
 
 ### description
-文章摘要。如果未提供，会尝试使用 `renderExpect` 配置或文章摘录，最后降级为截取前 100 字。
+文章摘要。若未提供，将依次尝试：调用 `renderExpect` 生成；如未配置/无结果，使用 [gray-matter](https://www.npmjs.com/package/gray-matter#optionsexcerpt) 提取摘要；仍为空则截取正文前 100 字。
 ```md
 ---
 description: 这是一篇关于 RSS 的介绍文章
