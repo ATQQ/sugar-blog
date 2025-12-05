@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "@sugarat/theme-shared": "workspace:*",
-    "feed": "^4.2.2"
+    "feed": "^5.1.0"
   },
   "devDependencies": {
     "vite": "^5",
