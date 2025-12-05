@@ -345,6 +345,25 @@ gantt
     Parallel 4   :         des6, after des4, 1d
 ```
 
+## 数学公式
+
+$a \ne 0$
+
+$$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^\top}{\sqrt{d}}\right)V$$
+
+VitePress 官方提供了内置支持，安装相关依赖，配置开启即可。
+
+```npm
+npm add -D markdown-it-mathjax3^4
+```
+
+```ts [.vitepress/config.mts]
+export default {
+  markdown: {
+    math: true
+  }
+}
+```
 
 ## UserWorksPage
 * Type: `UserWorks`

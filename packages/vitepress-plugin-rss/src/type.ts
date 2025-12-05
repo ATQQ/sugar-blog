@@ -88,7 +88,10 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
   /**
    * 重载 vitepress 的 Markdown 配置
    */
-  markdownOptions?: Omit<MarkdownOptions, 'config'>
+  markdownOptions?: Omit<MarkdownOptions, 'config'> & {
+    style?: string
+    svg2img?: boolean | 'base64' | 'png'
+  }
 }
 
 export interface PostInfo {

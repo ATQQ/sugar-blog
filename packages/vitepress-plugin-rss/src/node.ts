@@ -20,6 +20,7 @@ import {
 // @ts-expect-error
 import container from 'markdown-it-container'
 import type { PostInfo, RSSOptions } from './type'
+import { injectStyle, removeZeroWidthSpace, svgToBase64, svgToUrl } from './transform'
 
 const imageRegex = /!\[.*?\]\((.*?)\s*(".*?")?\)/
 
@@ -193,7 +194,7 @@ export async function getPostsData(
           return assetPath === absolutePath
         })
         if (asset) {
-          const imageUrl = `${assetsBaseUrl}${joinPath('/', asset.fileName)}`
+          const imageUrl = normalizeUrl(`${assetsBaseUrl}${joinPath('/', asset.fileName)}`)
           v.push(imageUrl)
           fileContent = fileContent.replaceAll(originValue, imageUrl)
         }
@@ -274,8 +275,17 @@ export async function getPostsData(
           html = await renderHTML(fileContent, config, rssOptions)
         }
 
-        html = html.replaceAll('&ZeroWidthSpace;', '')
-        // 对渲染结果进行转换
+        // 移除零宽字符
+        // https://github.com/ATQQ/sugar-blog/issues/276
+        html = removeZeroWidthSpace(html)
+
+        // 插入自定义样式
+        // 部分markdown渲染样式由 VitePress 内置
+        if (rssOptions?.markdownOptions?.style) {
+          html = injectStyle(html, rssOptions.markdownOptions.style)
+        }
+
+        // 支持对对渲染结果进行转换
         if (rssOptions?.transform) {
           html = await rssOptions.transform(html, config)
         }
@@ -283,6 +293,20 @@ export async function getPostsData(
         // 将渲染结果保存到文件系统缓存
         if (html) {
           await setCachedHtml(config, rssOptions, filepath, fileContent, html, url)
+        }
+      }
+
+      // 将SVG转为图片
+      if (rssOptions?.markdownOptions?.svg2img) {
+        let target = rssOptions.markdownOptions.svg2img
+        target = target === true ? 'base64' : target
+        if (target === 'base64') {
+          html = svgToBase64(html)
+        }
+        else if (target === 'png') {
+          const assetsBaseUrl = rssOptions?.assetsBaseUrl || rssOptions.baseUrl
+          const outDir = joinPath(config.outDir, `/${config.assetsDir}`)
+          html = await svgToUrl(html, outDir, assetsBaseUrl)
         }
       }
 

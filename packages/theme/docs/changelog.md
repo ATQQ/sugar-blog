@@ -8,11 +8,6 @@ tag: 日志
 
 # Changelog
 
-$a \ne 0$
-
-$$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^\top}{\sqrt{d}}\right)V$$
-
-
 升级主题，原项目执行如下指令即可
 
 :::code-group

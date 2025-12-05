@@ -31,8 +31,8 @@
     "dist"
   ],
   "scripts": {
-    "dev": "npx tsup src/index.ts --dts --watch --format esm,cjs --external vitepress",
-    "build": "npx tsup src/index.ts --dts --format esm,cjs --external vitepress --silent"
+    "dev": "npx tsup src/index.ts --dts --watch --format esm,cjs --external vitepress,sharp",
+    "build": "npx tsup src/index.ts --dts --format esm,cjs --external vitepress,sharp --silent"
   },
   "peerDependencies": {
     "vitepress": "^1 || ^2"
@@ -43,6 +43,7 @@
     "markdown-it-container": "^4.0.0"
   },
   "devDependencies": {
+    "sharp": "^0.34.5",
     "vite": "^5",
     "vitepress": "2.0.0-alpha.15"
   }
