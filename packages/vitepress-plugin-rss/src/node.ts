@@ -273,8 +273,8 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions, assets
 
     // 文章作者信息
     let authorsInfo: Author[] | undefined
-    if (frontmatter.authors) {
-      authorsInfo = frontmatter.authors
+    if (Array.isArray(frontmatter.author)) {
+      authorsInfo = frontmatter.author
     }
     else if (frontmatter.author) {
       const foundAuthors = rssOptions.authors?.find(v => v.name === frontmatter.author)

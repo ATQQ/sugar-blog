@@ -71,18 +71,18 @@ description: 这是一篇关于 RSS 的介绍文章
 ```
 
 ### author
-文章作者名称。如果未指定，会使用配置中的 `author`；如配置了 `authors` 列表，还会按 `frontmatter.author` 作为名称在 `authors` 列表中匹配并补全该作者的 email/link 信息。
+文章作者。支持单个名称（`string` 类型）或作者对象数组（每个作者对象可选 `name`、`email`、`link`、`avatar` 字段）；未填写时沿用全局 `author`。
+
+若提供了全局 `authors` 列表且 `frontmatter.author` 为字符串，会按名称匹配该列表，并自动补全作者的其他信息。
 ```md
 ---
 author: 张三
 ---
 ```
 
-### authors
-文章作者列表，支持多个作者/贡献者。每个作者对象可选 `name`、`email`、`link`、`avatar` 字段。如果指定了 `authors`，会覆盖 `frontmatter.author` 的配置。
 ```md
 ---
-authors:
+author:
   - name: 小王
     email: xiaowang@example.com
     link: https://example.com/xiaowang

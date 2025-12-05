@@ -72,18 +72,18 @@ description: An introductory article about RSS
 ```
 
 ### author
-Article author name. If not specified, uses `author` from config; if `authors` is configured, it matches by `frontmatter.author` to fill the author’s email/link info from that list
+Article author. Supports a single name (`string`) or an array of author objects (each may include `name`, `email`, `link`, `avatar`); falls back to the global `author` when omitted.
+
+If you provide a global `authors` list and `frontmatter.author` is a string, the name will be matched against that list to auto-fill the author’s extra info.
 ```md
 ---
 author: John Doe
 ---
 ```
 
-### authors
-List of article authors, supporting multiple authors/contributors. Each author object can optionally contain `name`, `email`, `link`, `avatar` fields. If `authors` is specified, it will override the `frontmatter.author` configuration.
 ```md
 ---
-authors:
+author:
   - name: Xiao Wang
     email: xiaowang@example.com
     link: https://example.com/xiaowang
