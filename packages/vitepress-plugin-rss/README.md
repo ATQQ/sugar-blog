@@ -79,6 +79,20 @@ author: John Doe
 ---
 ```
 
+### authors
+List of article authors, supporting multiple authors/contributors. Each author object can optionally contain `name`, `email`, `link`, `avatar` fields. If `authors` is specified, it will override the `frontmatter.author` configuration.
+```md
+---
+authors:
+  - name: Xiao Wang
+    email: xiaowang@example.com
+    link: https://example.com/xiaowang
+  - name: Xiao Ming
+    email: xiaoming@example.com
+    link: https://example.com/xiaoming
+---
+```
+
 ### cover
 Article cover image. Can be manually specified or automatically extracted from the first image in the content
 ```md

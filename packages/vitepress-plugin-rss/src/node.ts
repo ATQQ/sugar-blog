@@ -3,6 +3,7 @@ import path from 'node:path'
 import crypto from 'node:crypto'
 import type { SiteConfig } from 'vitepress'
 import { Feed } from 'feed'
+import type { Author } from 'feed'
 import {
   debugTime,
   formatDate,
@@ -269,22 +270,27 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions, assets
 
   for (const post of posts) {
     const { title, description, date, frontmatter, url } = post
-    let authorInfo
-    if (frontmatter.author) {
-      authorInfo = rssOptions.authors?.find(v => v.name === frontmatter.author) || { name: frontmatter.author }
+    let authorsInfo: Author[] | undefined
+    if (frontmatter.authors) {
+      authorsInfo = frontmatter.authors
+    }
+    else if (frontmatter.author) {
+      const foundAuthors = rssOptions.authors?.find(v => v.name === frontmatter.author)
+      authorsInfo = foundAuthors ? [foundAuthors] : [{ name: frontmatter.author }]
     }
     else {
-      authorInfo = rssOptions.author || undefined
+      authorsInfo = rssOptions.author ? [rssOptions.author] : undefined
     }
     // 最后的文章链接
     const link = `${baseUrl}${url}`
+
     feed.addItem({
       title,
       id: link,
       link,
       description,
       content: transform((htmlCache.get(post.url) ?? '').replaceAll('&ZeroWidthSpace;', '')),
-      author: authorInfo ? [{ ...authorInfo }] : undefined,
+      author: authorsInfo,
       image: frontmatter?.cover ? new URL(frontmatter?.cover, baseUrl).href : '',
       date: new Date(date)
     })

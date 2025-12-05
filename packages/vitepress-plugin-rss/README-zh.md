@@ -78,6 +78,20 @@ author: 张三
 ---
 ```
 
+### authors
+文章作者列表，支持多个作者/贡献者。每个作者对象可选 `name`、`email`、`link`、`avatar` 字段。如果指定了 `authors`，会覆盖 `frontmatter.author` 的配置。
+```md
+---
+authors:
+  - name: 小王
+    email: xiaowang@example.com
+    link: https://example.com/xiaowang
+  - name: 小明
+    email: xiaoming@example.com
+    link: https://example.com/xiaoming
+---
+```
+
 ### cover
 文章封面。可以手动指定，或自动从文中首张图片提取。
 ```md
