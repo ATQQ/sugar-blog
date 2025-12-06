@@ -79,12 +79,14 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
    * @default true
    */
   renderHTML?: ((filecontent: string) => string | Promise<string>) | boolean
+  /**
+   * 国际化支持（locale 配置未声明的字段会继承全局 RSSOptions，除 locales 本身外）
+   */
   locales?: Record<string, Omit<RSSOptions, 'locales'>>
   /**
    * (可选)文章解析完成后调用，可对文章内容进行进一步处理
    */
   transform?: (content: string) => string
-
 }
 
 export interface PostInfo {

@@ -272,7 +272,7 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
    */
   renderHTML?: ((filecontent: string) => string | Promise<string>) | boolean
   /**
-   * i18n
+   * i18n (locale configs inherit unspecified fields from the root/global RSSOptions; locales is not recursive)
    */
   locales?: Record<string, Omit<RSSOptions, 'locales'>>
 }
