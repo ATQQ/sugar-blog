@@ -414,7 +414,7 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions, assets
     const guid = frontmatter?.guid || link
 
     // published 支持
-    const published = frontmatter?.published || new Date(frontmatter?.published)
+    const published = frontmatter?.published ? new Date(frontmatter.published) : new Date(date)
 
     // enclosure 支持
     const enclosure = normalizeEnclosure(frontmatter)
