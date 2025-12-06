@@ -22,6 +22,22 @@ function SocialIcon(rssOptions: RSSOptions, base = '/') {
   }
 }
 
+// 将 locale 配置中未显式设置的字段回落到全局配置（排除 locales 本身）
+function inheritLocaleConfig(target: RSSOptions, global: RSSOptions) {
+  const excludeKeys = ['locales'] as Array<keyof RSSOptions>
+  Object.keys(global).forEach((key) => {
+    const k = key as keyof RSSOptions
+    if (excludeKeys.includes(k)) {
+      return
+    }
+
+    if (typeof target[k] === 'undefined') {
+      // 仅在未定义时继承，保留 locale 自己的 falsy 显式值
+      target[k] = global[k]
+    }
+  })
+}
+
 export function RssPlugin(rssOptions: RSSOptions): any {
   let resolveConfig: any
   let vitepressConfig: SiteConfig
@@ -58,14 +74,7 @@ export function RssPlugin(rssOptions: RSSOptions): any {
           Object.keys(VPConfig.site?.locales).forEach((locale) => {
             const rssCfg = rssOptions?.locales?.[locale]
             if (rssCfg && (rssCfg?.icon ?? true)) {
-              // 如果 locales 里没有 baseUrl，使用全局的
-              if (!rssCfg.baseUrl) {
-                rssCfg.baseUrl = rssOptions.baseUrl
-              }
-              // 如果 locales 里没有 authors，使用全局的
-              if (!rssCfg.authors) {
-                rssCfg.authors = rssOptions.authors
-              }
+              inheritLocaleConfig(rssCfg, rssOptions)
               const _tcfg = VPConfig.site.locales[locale]?.themeConfig
               if (!_tcfg) {
                 VPConfig.site.locales[locale].themeConfig = {}

@@ -175,8 +175,7 @@ const RSS: RSSOptions = {
   },
   locales: {
     en: {
-      // 若缺少 baseUrl，则沿用全局 baseUrl
-      // 若缺少 authors，则沿用全局 authors
+      // 若缺少配置则全部沿用全局（除 locales 本身外的所有 RSSOptions 字段）
       filename: 'feed.en.rss', // 仅包含 en 语言目录下的文章
     },
     root: {
