@@ -22,6 +22,22 @@ function SocialIcon(rssOptions: RSSOptions, base = '/') {
   }
 }
 
+// 将 locale 配置中未显式设置的字段回落到全局配置（排除 locales 本身）
+function inheritLocaleConfig(target: RSSOptions, global: RSSOptions) {
+  const excludeKeys = ['locales'] as Array<keyof RSSOptions>
+  Object.keys(global).forEach((key) => {
+    const k = key as keyof RSSOptions
+    if (excludeKeys.includes(k)) {
+      return
+    }
+
+    if (typeof target[k] === 'undefined') {
+      // 仅在未定义时继承，保留 locale 自己的 falsy 显式值
+      target[k] = global[k]
+    }
+  })
+}
+
 export function RssPlugin(rssOptions: RSSOptions): any {
   let resolveConfig: any
   let vitepressConfig: SiteConfig
@@ -58,6 +74,7 @@ export function RssPlugin(rssOptions: RSSOptions): any {
           Object.keys(VPConfig.site?.locales).forEach((locale) => {
             const rssCfg = rssOptions?.locales?.[locale]
             if (rssCfg && (rssCfg?.icon ?? true)) {
+              inheritLocaleConfig(rssCfg, rssOptions)
               const _tcfg = VPConfig.site.locales[locale]?.themeConfig
               if (!_tcfg) {
                 VPConfig.site.locales[locale].themeConfig = {}
@@ -67,8 +84,17 @@ export function RssPlugin(rssOptions: RSSOptions): any {
                 ...(_tcfg?.socialLinks || [])
               ]
               if (!rssCfg.filter) {
-                rssCfg.filter = (value) => {
-                  return !!value.url.startsWith(`/${locale}`)
+                const otherLocales = Object.keys(VPConfig.site?.locales || {}).filter(l => l !== 'root')
+                const base = VPConfig.site.base || '/'
+                if (locale === 'root') {
+                  rssCfg.filter = (value) => {
+                    return !otherLocales.some(l => value.url.startsWith(`${base}${l}/`))
+                  }
+                }
+                else {
+                  rssCfg.filter = (value) => {
+                    return value.url.startsWith(`${base}${locale}/`)
+                  }
                 }
               }
               localesConfig.push(rssCfg)
