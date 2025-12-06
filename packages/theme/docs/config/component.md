@@ -353,7 +353,7 @@ $$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^\top}{\sqrt{d}}\right
 
 VitePress 官方提供了内置支持，安装相关依赖，配置开启即可。
 
-```npm
+```sh
 npm add -D markdown-it-mathjax3^4
 ```
 
