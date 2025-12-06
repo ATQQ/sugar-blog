@@ -135,7 +135,8 @@ RSS 标准的媒体附件字段，用于在 RSS 项目中包含音频/视频/图
 1. 字符串形式。（等价于 `enclosure_url`）
 ```md
 ---
-enclosure: https://example.com/file.mp3
+enclosure: https://example.com/file.jpg
+---
 ```
 
 2. 对象形式。

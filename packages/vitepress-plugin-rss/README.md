@@ -153,7 +153,8 @@ Supported forms:
 1. String form (equivalent to `enclosure_url`)
 ```md
 ---
-enclosure: https://example.com/file.mp3
+enclosure: https://example.com/file.jpg
+---
 ```
 
 2. Object form
