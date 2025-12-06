@@ -74,7 +74,7 @@ description: An introductory article about RSS
 ### author
 Article author. Supports a single name (`string`) or an array of author objects (each may include `name`, `email`, `link`, `avatar`); falls back to the global `author` when omitted.
 
-If you provide a global `authors` list and `frontmatter.author` is a string, the name will be matched against that list to auto-fill the author’s extra info.
+If you provide a global `authors` list and `frontmatter.author` is a string, the name will be matched against that list to auto-fill the author's extra info. When `frontmatter.author` is an array, if an author object only provides the `name` field, it will also match against the global `authors` list to auto-fill the other info.
 ```md
 ---
 author: John Doe
@@ -87,9 +87,7 @@ author:
   - name: Xiao Wang
     email: xiaowang@example.com
     link: https://example.com/xiaowang
-  - name: Xiao Ming
-    email: xiaoming@example.com
-    link: https://example.com/xiaoming
+  - name: Xiao Ming   # If only name is provided, it will try to auto-fill from global authors config
 ---
 ```
 

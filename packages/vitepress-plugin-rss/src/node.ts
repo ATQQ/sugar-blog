@@ -274,7 +274,16 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions, assets
     // 文章作者信息
     let authorsInfo: Author[] | undefined
     if (Array.isArray(frontmatter.author)) {
-      authorsInfo = frontmatter.author
+      authorsInfo = frontmatter.author.map((author: Author) => {
+        if (author.name && !author.email && !author.link && !author.avatar) {
+          // 如果只有 name，尝试从全局 authors 补全其他信息
+          const found = rssOptions.authors?.find(v => v.name === author.name)
+          return found ? { ...author, ...found } : author
+        }
+        else {
+          return author
+        }
+      })
     }
     else if (frontmatter.author as string) {
       const foundAuthors = rssOptions.authors?.find(v => v.name === frontmatter.author)
