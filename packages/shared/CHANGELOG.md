@@ -1,5 +1,11 @@
 # @sugarat/theme-shared
 
+## 0.0.7
+
+### Patch Changes
+
+- feat: rss 插件优化
+
 ## 0.0.6
 
 ### Patch Changes

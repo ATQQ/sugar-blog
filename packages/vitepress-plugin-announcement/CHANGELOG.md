@@ -1,5 +1,11 @@
 # vitepress-plugin-announcement
 
+## 0.1.6
+
+### Patch Changes
+
+- fix: peer deps warn
+
 ## 0.1.5
 
 ### Patch Changes

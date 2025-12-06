@@ -1,5 +1,22 @@
 # vitepress-plugin-rss
 
+## 0.4.0
+
+### Minor Changes
+
+- feat: 支持 svg2img
+- feat：支持插入自定义样式
+- feat: 支持重载 VitePress markdown 配置
+- feat: feed 属性支持补全
+- chore: 构建缓存优化
+- fix: Add normalizeUrl utility to handle URL concatenation
+- fix: i18n 构建相关异常问题
+- fix: peer deps warn
+- docs: 文档完善
+- Updated dependencies
+  - @sugarat/theme-shared@0.0.7
+  - feed@5.1.0
+
 ## 0.3.4
 
 ### Patch Changes
