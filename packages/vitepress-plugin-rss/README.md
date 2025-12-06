@@ -177,6 +177,7 @@ const RSS: RSSOptions = {
   locales: {
     en: {
       // If baseUrl is missing, it inherits the global baseUrl
+      // If authors is missing, it inherits the global authors
       filename: 'feed.en.rss', // only includes articles under the en locale
     },
     root: {
