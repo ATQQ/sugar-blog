@@ -126,6 +126,55 @@ publish: false
 ---
 ```
 
+### guid
+Custom guid/id for the item (falls back to link if omitted).
+```md
+---
+guid: custom-id-123
+---
+```
+
+### published
+Custom published date for the feed item; defaults to the frontmatter `date`.
+```md
+---
+published: 2024-03-12
+---
+```
+
+### enclosure
+RSS media attachment (audio, video, image, PDF, etc.). Most podcast clients rely on it to play/download media.
+
+- `enclosure.url` / `enclosure_url` defines the URL pointing to the media file.
+- `enclosure.length` / `enclosure_length` (optional) defines the file size in bytes (numeric).
+- `enclosure.type` / `enclosure_type` (optional) defines the media MIME type (string).
+
+Supported forms:
+1. String form (equivalent to `enclosure_url`)
+```md
+---
+enclosure: https://example.com/file.mp3
+```
+
+2. Object form
+```md
+---
+enclosure:
+  url: https://example.com/file.mp3
+  length: 12345
+  type: audio/mpeg
+---
+```
+
+3. Split fields
+```md
+---
+enclosure_url: https://example.com/file.mp3
+enclosure_length: 12345
+enclosure_type: audio/mpeg
+---
+```
+
 ## Advanced Usage
  
 ### Customize the base URL for static assets

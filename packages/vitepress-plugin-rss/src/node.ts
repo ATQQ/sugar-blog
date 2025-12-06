@@ -3,7 +3,7 @@ import path from 'node:path'
 import crypto from 'node:crypto'
 import type { SiteConfig } from 'vitepress'
 import { Feed } from 'feed'
-import type { Author, Category, Item } from 'feed'
+import type { Author, Category, Enclosure, Item } from 'feed'
 import {
   debugTime,
   formatDate,
@@ -27,6 +27,37 @@ const htmlCache = new Map<string, string | undefined>()
 // 将空数组标准化为 undefined，方便下游可选字段处理
 function emptyArrayToUndefined<T>(arr?: T[]): T[] | undefined {
   return arr?.length ? arr : undefined
+}
+
+function normalizeEnclosure(frontmatter): Enclosure | undefined {
+  const enclosureObj = frontmatter?.enclosure
+  // 字符串
+  if (typeof enclosureObj === 'string') {
+    return {
+      url: enclosureObj,
+    }
+  }
+  // 对象
+  if (enclosureObj?.url) {
+    return {
+      url: enclosureObj.url,
+      length: enclosureObj?.length || 0,
+      type: enclosureObj?.type,
+      title: enclosureObj?.title,
+      duration: enclosureObj?.duration
+    }
+  }
+  // 拆分字段形式
+  if (frontmatter?.enclosure_url) {
+    return {
+      url: frontmatter.enclosure_url,
+      length: frontmatter?.enclosure_length || 0,
+      type: frontmatter?.enclosure_type,
+      title: frontmatter?.enclosure_title,
+      duration: frontmatter?.enclosure_duration
+    }
+  }
+  return undefined
 }
 
 // 文件系统缓存相关函数
@@ -302,16 +333,26 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions, assets
     // 最后的文章链接
     const link = `${baseUrl}${url}`
 
+    // guid 支持，未提供时回退为 link
+    const guid = frontmatter?.guid || link
+
+    // published 支持
+    const published = frontmatter?.published ? new Date(frontmatter.published) : new Date(date)
+
+    // enclosure 支持
+    const enclosure = normalizeEnclosure(frontmatter)
+
     feed.addItem({
       title,
-      id: link,
+      guid,
       link,
       description,
       content: transform((htmlCache.get(post.url) ?? '').replaceAll('&ZeroWidthSpace;', '')),
       author,
       category,
+      published,
+      enclosure,
       image: frontmatter?.cover ? new URL(frontmatter?.cover, baseUrl).href : '',
-      date: new Date(date)
     } satisfies Item)
   }
   const RSSFilename = filename || 'feed.rss'

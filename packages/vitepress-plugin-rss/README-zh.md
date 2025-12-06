@@ -54,11 +54,18 @@ title: 我的第一篇文章
 ---
 ```
 
-### date
+### date/published
 发布日期。如果未指定，使用文件最后修改时间。
 ```md
 ---
 date: 2024-01-15
+---
+```
+
+同时指定 published 和 data，将使用 published 覆盖 data。
+```md
+---
+published: 2025-12-06
 ---
 ```
 
@@ -106,6 +113,47 @@ category:
 ```md
 ---
 cover: /images/cover.png
+---
+```
+
+### guid
+自定义条目的唯一标识符（未填写时会回退为链接）。
+```md
+---
+guid: custom-id-123
+---
+```
+
+### enclosure
+RSS 标准的媒体附件字段，用于在 RSS 项目中包含音频/视频/图片/PDF 等媒体文件，播客客户端依赖它播放或下载媒体。
+
+- `enclosure.url`/`enclosure_url` 定义指向媒体文件的 URL。
+- `enclosure.length`/`enclosure_length` （可选）定义媒体文件的大小（以字节计），应为数字。
+- `enclosure.type`/`enclosure_type` （可选）定义媒体文件的类型（MIME 类型），应为字符串。
+
+支持三种写法：
+1. 字符串形式。（等价于 `enclosure_url`）
+```md
+---
+enclosure: https://example.com/file.mp3
+```
+
+2. 对象形式。
+```md
+---
+enclosure:
+  url: https://example.com/file.mp3
+  length: 12345
+  type: audio/mpeg
+---
+```
+
+3. 拆分字段形式。
+```md
+---
+enclosure_url: https://example.com/file.mp3
+enclosure_length: 12345
+enclosure_type: audio/mpeg
 ---
 ```
 
