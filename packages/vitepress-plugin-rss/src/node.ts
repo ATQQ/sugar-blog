@@ -25,11 +25,8 @@ const imageRegex = /!\[.*?\]\((.*?)\s*(".*?")?\)/
 const htmlCache = new Map<string, string | undefined>()
 
 // 将空数组标准化为 undefined，方便下游可选字段处理
-function emptyArrayToUndefined<T>(arr: T[] | undefined): T[] | undefined {
-  if (!arr) {
-    return undefined
-  }
-  return arr.length > 0 ? arr : undefined
+function emptyArrayToUndefined<T>(arr?: T[]): T[] | undefined {
+  return arr?.length ? arr : undefined
 }
 
 // 文件系统缓存相关函数
