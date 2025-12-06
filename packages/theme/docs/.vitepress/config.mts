@@ -6,6 +6,10 @@ import { blogTheme } from './blog-theme'
 
 export default defineConfig({
   extends: blogTheme,
+  markdown: {
+    math: true,
+    lineNumbers: true
+  },
   metaChunk: true,
   sitemap: {
     hostname: 'https://theme.sugarat.top',

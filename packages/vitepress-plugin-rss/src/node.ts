@@ -17,7 +17,11 @@ import {
   normalizeUrl,
   renderDynamicMarkdown
 } from '@sugarat/theme-shared'
+
+// @ts-expect-error
+import container from 'markdown-it-container'
 import type { PostInfo, RSSOptions } from './type'
+import { injectStyle, removeZeroWidthSpace, svgToBase64, svgToUrl } from './transform'
 
 const imageRegex = /!\[.*?\]\((.*?)\s*(".*?")?\)/
 
@@ -29,7 +33,7 @@ function emptyArrayToUndefined<T>(arr?: T[]): T[] | undefined {
   return arr?.length ? arr : undefined
 }
 
-function normalizeEnclosure(frontmatter): Enclosure | undefined {
+function normalizeEnclosure(frontmatter: Record<string, any>): Enclosure | undefined {
   const enclosureObj = frontmatter?.enclosure
   // 字符串
   if (typeof enclosureObj === 'string') {
@@ -61,11 +65,23 @@ function normalizeEnclosure(frontmatter): Enclosure | undefined {
 }
 
 // 文件系统缓存相关函数
-function getCacheKey(filepath: string, content: string, url?: string): string {
-  const hash = crypto.createHash('md5').update(content).digest('hex')
-  // 使用 URL basename 作为 key，兼容动态路由场景
+function stringifyForHash(val: any): string {
+  return JSON.stringify(val, (k, v) => {
+    if (typeof v === 'function')
+      return v.toString()
+    if (v instanceof RegExp)
+      return v.toString()
+    return v
+  })
+}
+
+function getCacheKey(config: SiteConfig, rssOptions: RSSOptions, filepath: string, content: string, url?: string): string {
   const basename = url ? path.basename(url) : path.basename(filepath)
-  return `${basename}_${hash}`
+  const markdownStr = stringifyForHash(config?.markdown || {})
+  const rssOpsStr = stringifyForHash(rssOptions || {})
+  const payload = `${basename}|${markdownStr}|${rssOpsStr}`
+  const hash = crypto.createHash('md5').update(`${content}|${payload}`).digest('hex')
+  return `${basename}_${hash}.html`
 }
 
 async function getCacheDir(config: SiteConfig): Promise<string> {
@@ -74,10 +90,10 @@ async function getCacheDir(config: SiteConfig): Promise<string> {
   return cacheDir
 }
 
-async function getCachedHtml(config: SiteConfig, filepath: string, content: string, url?: string): Promise<string | null> {
+async function getCachedHtml(config: SiteConfig, rssOptions: RSSOptions, filepath: string, content: string, url?: string): Promise<string | null> {
   try {
     const cacheDir = await getCacheDir(config)
-    const cacheKey = getCacheKey(filepath, content, url)
+    const cacheKey = getCacheKey(config, rssOptions, filepath, content, url)
     const cachePath = path.join(cacheDir, cacheKey)
 
     // 检查缓存文件是否存在，直接对比文件名
@@ -92,10 +108,10 @@ async function getCachedHtml(config: SiteConfig, filepath: string, content: stri
   return null
 }
 
-async function setCachedHtml(config: SiteConfig, filepath: string, content: string, html: string, url?: string): Promise<void> {
+async function setCachedHtml(config: SiteConfig, rssOptions: RSSOptions, filepath: string, content: string, html: string, url?: string): Promise<void> {
   try {
     const cacheDir = await getCacheDir(config)
-    const cacheKey = getCacheKey(filepath, content, url)
+    const cacheKey = getCacheKey(config, rssOptions, filepath, content, url)
     const cachePath = path.join(cacheDir, cacheKey)
 
     await fs.promises.writeFile(cachePath, html, 'utf-8')
@@ -105,25 +121,58 @@ async function setCachedHtml(config: SiteConfig, filepath: string, content: stri
   }
 }
 
-let cacheMdRender: any
-async function getMdRender(config: SiteConfig) {
-  const { createMarkdownRenderer } = await import('vitepress')
-  return createMarkdownRenderer(
+async function getMdRender(config: SiteConfig, rssOptions: RSSOptions) {
+  const { createMarkdownRenderer, disposeMdItInstance } = await import('vitepress')
+  // 重载配置
+  const mdOptions = {
+    ...config.markdown,
+    // 默认行号（RSS 样式会渲染异常）
+    lineNumbers: false,
+    ...rssOptions.markdownOptions
+  }
+  // 释放之前的实例
+  disposeMdItInstance()
+  const md = await createMarkdownRenderer(
     config.srcDir,
-    config.markdown,
+    mdOptions,
     config.site.base,
     config.logger
   )
+
+  // code-group 问题
+  // https://github.com/oxc-project/oxc-project.github.io/blob/main/.vitepress/config/rss.ts
+  // Wrap code groups with <table>s
+  // Reference: https://github.com/vuejs/vitepress/blob/179ee6/src/node/markdown/plugins/preWrapper.ts#L8
+  md.use((md) => {
+    const fence = md.renderer.rules.fence!
+    md.renderer.rules.fence = (...args) => {
+      const [tokens, idx] = args
+      const token = tokens[idx]
+
+      const title = token.info.match(/\[(.*)\]/)?.[1]
+      // Code blocks in a code group have titles
+      return title == null
+        ? fence(...args)
+        : '<tr>' + `<td>${title}</td>` + `<td>${fence(...args)}</td>` + '</tr>'
+    }
+  })
+  // Override https://github.com/vuejs/vitepress/blob/179ee6/src/node/markdown/plugins/containers.ts#L26
+  md.use(container, 'code-group', {
+    render(tokens: any[], idx: number) {
+      return tokens[idx].nesting === 1 ? '<table><tbody>' : '</tbody></table>\n'
+    },
+  })
+  return md
 }
 
 let cachePageData: ReturnType<typeof getVitePressPages>
 export async function getPostsData(
   config: SiteConfig,
-  ops: RSSOptions,
+  rssOptions: RSSOptions,
   assetsMap: any[] = []
 ) {
   const endParseConfig = debugTime('endParseConfig')
-  const { ignoreHome = true, ignorePublish = false, renderHTML = true, assetsBaseUrl = ops.baseUrl } = ops
+  const { ignoreHome = true, ignorePublish = false, renderHTML = true, assetsBaseUrl = rssOptions.baseUrl } = rssOptions
   // 能缓存复用的缓存
   if (!cachePageData) {
     cachePageData = getVitePressPages(config)
@@ -165,7 +214,7 @@ export async function getPostsData(
     // 获取摘要信息
     frontmatter.description
       // eslint-disable-next-line no-await-in-loop
-      = (await ops?.renderExpect?.(content, { ...frontmatter }))
+      = (await rssOptions?.renderExpect?.(content, { ...frontmatter }))
       ?? (frontmatter.description || excerpt || getTextSummary(content, 100))
 
     // 获取封面图
@@ -184,7 +233,7 @@ export async function getPostsData(
           return assetPath === absolutePath
         })
         if (asset) {
-          const imageUrl = `${assetsBaseUrl}${joinPath('/', asset.fileName)}`
+          const imageUrl = normalizeUrl(`${assetsBaseUrl}${joinPath('/', asset.fileName)}`)
           v.push(imageUrl)
           fileContent = fileContent.replaceAll(originValue, imageUrl)
         }
@@ -228,8 +277,8 @@ export async function getPostsData(
 
     return true
   })
-  if (ops?.filter) {
-    posts = posts.filter(ops.filter)
+  if (rssOptions?.filter) {
+    posts = posts.filter(rssOptions.filter)
   }
 
   // 按日期排序
@@ -238,37 +287,65 @@ export async function getPostsData(
   )
 
   // 限制数量
-  if (undefined !== ops?.limit && ops?.limit > 0) {
-    posts.splice(ops.limit)
+  if (undefined !== rssOptions?.limit && rssOptions?.limit > 0) {
+    posts.splice(rssOptions.limit)
   }
 
   // render html
   const endRenderHTML = debugTime('endRenderHTML')
+  const md = await getMdRender(config, rssOptions)
+
   await Promise.all(posts.map(async (post) => {
     const { fileContent, filepath, env, url } = post
     if (!htmlCache.has(url)) {
-      let html
+      let html = ''
 
       // 先尝试从文件系统缓存中获取
-      const cachedHtml = await getCachedHtml(config, filepath, fileContent, url)
+      const cachedHtml = rssOptions.cache !== false ? await getCachedHtml(config, rssOptions, filepath, fileContent, url) : null
       if (cachedHtml) {
         html = cachedHtml
       }
       else {
         // 缓存未命中，重新渲染
         if (renderHTML === true) {
-          if (!cacheMdRender) {
-            cacheMdRender = await getMdRender(config)
-          }
-          html = cacheMdRender.render(fileContent, env)
+          html = md.render(fileContent, env)
         }
         else if (typeof renderHTML === 'function') {
-          html = await renderHTML(fileContent)
+          html = await renderHTML(fileContent, config, rssOptions)
+        }
+
+        // 移除零宽字符
+        // https://github.com/ATQQ/sugar-blog/issues/276
+        html = removeZeroWidthSpace(html)
+
+        // 插入自定义样式
+        // 部分markdown渲染样式由 VitePress 内置
+        if (rssOptions?.markdownOptions?.style) {
+          html = injectStyle(html, rssOptions.markdownOptions.style)
+        }
+
+        // 支持对对渲染结果进行转换
+        if (rssOptions?.transform) {
+          html = await rssOptions.transform(html, config)
         }
 
         // 将渲染结果保存到文件系统缓存
         if (html) {
-          await setCachedHtml(config, filepath, fileContent, html, url)
+          await setCachedHtml(config, rssOptions, filepath, fileContent, html, url)
+        }
+      }
+
+      // 将SVG转为图片
+      if (rssOptions?.markdownOptions?.svg2img) {
+        let target = rssOptions.markdownOptions.svg2img
+        target = target === true ? 'base64' : target
+        if (target === 'base64') {
+          html = svgToBase64(html)
+        }
+        else if (target === 'png') {
+          const assetsBaseUrl = rssOptions?.assetsBaseUrl || rssOptions.baseUrl
+          const outDir = joinPath(config.outDir, `/${config.assetsDir}`)
+          html = await svgToUrl(html, outDir, assetsBaseUrl)
         }
       }
 
@@ -291,7 +368,7 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions, assets
   const { baseUrl, filename } = rssOptions
 
   // eslint-disable-next-line unused-imports/no-unused-vars
-  const { renderHTML, transform = v => v, ...restOps } = rssOptions
+  const { renderHTML, ...restOps } = rssOptions
   const feed = new Feed({
     id: rssOptions.baseUrl,
     link: rssOptions.baseUrl,
@@ -337,7 +414,7 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions, assets
     const guid = frontmatter?.guid || link
 
     // published 支持
-    const published = frontmatter?.published ? new Date(frontmatter.published) : new Date(date)
+    const published = frontmatter?.published || new Date(frontmatter?.published)
 
     // enclosure 支持
     const enclosure = normalizeEnclosure(frontmatter)
@@ -347,12 +424,13 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions, assets
       guid,
       link,
       description,
-      content: transform((htmlCache.get(post.url) ?? '').replaceAll('&ZeroWidthSpace;', '')),
+      content: htmlCache.get(post.url) ?? '',
       author,
       category,
       published,
       enclosure,
       image: frontmatter?.cover ? new URL(frontmatter?.cover, baseUrl).href : '',
+      date: new Date(date),
     } satisfies Item)
   }
   const RSSFilename = filename || 'feed.rss'

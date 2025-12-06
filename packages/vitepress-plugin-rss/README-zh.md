@@ -175,18 +175,8 @@ publish: false
 ```
 
 ## 高级用法
-### 自定义静态资源基础地址
->https://vitepress.dev/zh/guide/asset-handling#referencing-static-assets
->根据 VitePress 文档可知，所有引用的资源，包括那些使用绝对路径的，都会在生产构建过程中被复制到输出目录，并使用哈希文件名
 
-
-如果你的文章中包含了相对路径图片资源，那么在生成 rss 文件时，图片资源的路径将将会自动修正为 `${assetsBaseUrl}${buildAssetsPath}`。
-
-`assetsBaseUrl` 配置项默认值为 `baseUrl`，你可以根据实际情况进行配置。
-
-自动修正后的值事例: `https://theme.sugarat.top/assets/image.Dqt2QH0u.png`
-
-### 配置示例
+### 使用示例1
 ```ts
 const RSS: RSSOptions = {
   // necessary（必选参数）
@@ -195,6 +185,14 @@ const RSS: RSSOptions = {
   copyright: 'Copyright (c) 2018-present, 粥里有勺糖',
 
   // optional（可选参数）
+  // 启用缓存 (默认: true)
+  cache: true,
+
+  // 自定义 Markdown 配置
+  markdownOptions: {
+    // 关闭行号（RSS 样式会渲染异常）
+    lineNumbers: false
+  },
   description: '大前端相关技术分享',
   language: 'zh-cn',
   author: { // Feed 的全局作者信息；文章的默认作者信息
@@ -331,8 +329,61 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
    * 国际化支持（locale 配置未声明的字段会继承全局 RSSOptions，除 locales 本身外）
    */
   locales?: Record<string, Omit<RSSOptions, 'locales'>>
+  /**
+   * 是否缓存文档渲染结果
+   * @default true
+   */
+  cache?: boolean
+  /**
+   * 重载 vitepress 的 Markdown 配置
+   */
+  markdownOptions?: Omit<MarkdownOptions, 'config'> & {
+    style?: string
+    svg2img?: boolean | 'base64' | 'png'
+  }
 }
 ```
+
+### svg转图片资源
+部分 RSS 阅读器不支持直接展示 svg 图片，你可以通过 `svg2img` 配置项来指定转换方式：
+
+```ts
+const RSS: RSSOptions = {
+  // ...
+  markdownOptions: {
+    svg2img: 'base64' // 默认 base64
+  }
+}
+```
+
+如果需要转化为 png 图片，需要安装 [sharp](https://github.com/lovell/sharp) 依赖
+
+```bash
+npm install sharp
+```
+
+然后配置 `svg2img` 为 `png`
+
+```ts
+const RSS: RSSOptions = {
+  // ...
+  markdownOptions: {
+    svg2img: 'png'
+  }
+}
+```
+
+### 自定义静态资源基础地址
+>https://vitepress.dev/zh/guide/asset-handling#referencing-static-assets
+>根据 VitePress 文档可知，所有引用的资源，包括那些使用绝对路径的，都会在生产构建过程中被复制到输出目录，并使用哈希文件名
+
+如果你的文章中包含了相对路径图片资源，那么在生成 rss 文件时，图片资源的路径将将会自动修正为 `${assetsBaseUrl}${buildAssetsPath}`。
+
+`assetsBaseUrl` 配置项默认值复用 配置的`baseUrl`，你可以根据实际情况进行配置。
+
+自动修正后的值示例: 
+
+`https://theme.sugarat.top/assets/image.Dqt2QH0u.png`
 
 ## FAQ
 ### 网页访问RSS文件乱码问题

@@ -178,17 +178,7 @@ enclosure_type: audio/mpeg
 
 ## Advanced Usage
  
-### Customize the base URL for static assets
-> https://vitepress.dev/guide/asset-handling#referencing-static-assets
-> According to the VitePress documentation, all referenced assets, including those using absolute paths, are copied to the output directory during the production build and are given hashed filenames.
-
-If your article contains image assets with relative paths, then when generating the RSS file, the image paths will be automatically adjusted to `${assetsBaseUrl}${buildAssetsPath}`.
-
-The default value of the `assetsBaseUrl` option is `baseUrl`, and you can configure it as needed.
-
-Example of the corrected value: `https://theme.sugarat.top/assets/image.Dqt2QH0u.png`
-
-### Example
+### Example1
 ```ts
 const RSS: RSSOptions = {
   // necessary（必选参数）
@@ -197,6 +187,14 @@ const RSS: RSSOptions = {
   copyright: 'Copyright (c) 2018-present, 粥里有勺糖',
 
   // optional（可选参数）
+  // Enable cache (default: true)
+  cache: true,
+
+  // Custom Markdown Configuration
+  markdownOptions: {
+    // Enable line numbers
+    lineNumbers: false
+  },
   description: '大前端相关技术分享',
   language: 'zh-cn',
   author: { // Global feed author; also the default author for articles
@@ -235,6 +233,36 @@ const RSS: RSSOptions = {
   }
 }
 ```
+
+### svg2img
+Some RSS readers do not support displaying SVG images directly. You can use the `svg2img` option to specify the conversion method:
+
+```ts
+const RSS: RSSOptions = {
+  // ...
+  markdownOptions: {
+    svg2img: 'base64' // default base64
+  }
+}
+```
+
+If you need to convert to PNG images, you need to install the [sharp](https://github.com/lovell/sharp) dependency.
+
+```bash
+npm install sharp
+```
+
+Then set `svg2img` to `png`.
+
+```ts
+const RSS: RSSOptions = {
+  // ...
+  markdownOptions: {
+    svg2img: 'png'
+  }
+}
+```
+
 ### Options
 support all [feed Options](https://www.npmjs.com/package/feed) 
 
@@ -333,9 +361,32 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
    * i18n (locale configs inherit unspecified fields from the root/global RSSOptions; locales is not recursive)
    */
   locales?: Record<string, Omit<RSSOptions, 'locales'>>
+  /**
+   * Whether to cache the document rendering result
+   * @default true
+   */
+  cache?: boolean
+  /**
+   * Override vitepress Markdown configuration
+   */
+  markdownOptions?: Omit<MarkdownOptions, 'config'> & {
+    style?: string
+    svg2img?: boolean | 'base64' | 'png'
+  }
 }
 ```
  
+### Customize the base URL for static assets
+> https://vitepress.dev/guide/asset-handling#referencing-static-assets
+> According to the VitePress documentation, all referenced assets, including those using absolute paths, are copied to the output directory during the production build and are given hashed filenames.
+
+If your article contains image assets with relative paths, then when generating the RSS file, the image paths will be automatically adjusted to `${assetsBaseUrl}${buildAssetsPath}`.
+
+The default value of the `assetsBaseUrl` option is `baseUrl`, and you can configure it as needed.
+
+Example of the corrected value: `https://theme.sugarat.top/assets/image.Dqt2QH0u.png`
+  
+
 ## FAQ
 ### Character encoding issues when accessing RSS files
 Using Nginx as an example, you can add the following configuration
