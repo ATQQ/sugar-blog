@@ -115,12 +115,7 @@ export function RssPlugin(rssOptions: RSSOptions): any {
           await genFeed(siteConfig, _rssOptions, assetsMap)
         }
 
-        // i18n 兼容，过滤掉其它语言的文章
-        if (!rssOptions.filter && localesConfig.length > 0) {
-          rssOptions.filter = (value, idx, arr) => {
-            return !localesConfig.some(cfg => !!cfg?.filter?.(value, idx, arr))
-          }
-        }
+        // 全局 RSS 包含所有文章，不自动过滤
         await genFeed(siteConfig, rssOptions, assetsMap)
         console.timeEnd(`${okMark} generating RSS`)
 
