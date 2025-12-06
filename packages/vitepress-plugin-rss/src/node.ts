@@ -89,6 +89,8 @@ async function getMdRender(config: SiteConfig, rssOptions: RSSOptions) {
   // 重载配置
   const mdOptions = {
     ...config.markdown,
+    // 默认行号（RSS 样式会渲染异常）
+    lineNumbers: false,
     ...rssOptions.markdownOptions
   }
   // 释放之前的实例

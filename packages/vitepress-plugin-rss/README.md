@@ -114,6 +114,14 @@ const RSS: RSSOptions = {
   copyright: 'Copyright (c) 2018-present, 粥里有勺糖',
 
   // optional（可选参数）
+  // Enable cache (default: true)
+  cache: true,
+
+  // Custom Markdown Configuration
+  markdownOptions: {
+    // Enable line numbers
+    lineNumbers: false
+  },
   description: '大前端相关技术分享',
   language: 'zh-cn',
   author: {
@@ -143,6 +151,36 @@ const RSS: RSSOptions = {
   }
 }
 ```
+
+### svg2img
+Some RSS readers do not support displaying SVG images directly. You can use the `svg2img` option to specify the conversion method:
+
+```ts
+const RSS: RSSOptions = {
+  // ...
+  markdownOptions: {
+    svg2img: 'base64' // default base64
+  }
+}
+```
+
+If you need to convert to PNG images, you need to install the [sharp](https://github.com/lovell/sharp) dependency.
+
+```bash
+npm install sharp
+```
+
+Then set `svg2img` to `png`.
+
+```ts
+const RSS: RSSOptions = {
+  // ...
+  markdownOptions: {
+    svg2img: 'png'
+  }
+}
+```
+
 ### Options
 support all [feed Options](https://www.npmjs.com/package/feed) 
 
@@ -229,6 +267,18 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
    * i18n
    */
   locales?: Record<string, Omit<RSSOptions, 'locales'>>
+  /**
+   * Whether to cache the document rendering result
+   * @default true
+   */
+  cache?: boolean
+  /**
+   * Override vitepress Markdown configuration
+   */
+  markdownOptions?: Omit<MarkdownOptions, 'config'> & {
+    style?: string
+    svg2img?: boolean | 'base64' | 'png'
+  }
 }
 ```
  

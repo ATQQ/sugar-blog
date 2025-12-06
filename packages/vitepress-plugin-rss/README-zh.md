@@ -113,6 +113,14 @@ const RSS: RSSOptions = {
   copyright: 'Copyright (c) 2018-present, 粥里有勺糖',
 
   // optional（可选参数）
+  // 启用缓存 (默认: true)
+  cache: true,
+
+  // 自定义 Markdown 配置
+  markdownOptions: {
+    // 关闭行号（RSS 样式会渲染异常）
+    lineNumbers: false
+  },
   description: '大前端相关技术分享',
   language: 'zh-cn',
   author: {
@@ -228,6 +236,47 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
    * 国际化支持
    */
   locales?: Record<string, Omit<RSSOptions, 'locales'>>
+  /**
+   * 是否缓存文档渲染结果
+   * @default true
+   */
+  cache?: boolean
+  /**
+   * 重载 vitepress 的 Markdown 配置
+   */
+  markdownOptions?: Omit<MarkdownOptions, 'config'> & {
+    style?: string
+    svg2img?: boolean | 'base64' | 'png'
+  }
+}
+```
+
+### svg转图片资源
+部分 RSS 阅读器不支持直接展示 svg 图片，你可以通过 `svg2img` 配置项来指定转换方式：
+
+```ts
+const RSS: RSSOptions = {
+  // ...
+  markdownOptions: {
+    svg2img: 'base64' // 默认 base64
+  }
+}
+```
+
+如果需要转化为 png 图片，需要安装 [sharp](https://github.com/lovell/sharp) 依赖
+
+```bash
+npm install sharp
+```
+
+然后配置 `svg2img` 为 `png`
+
+```ts
+const RSS: RSSOptions = {
+  // ...
+  markdownOptions: {
+    svg2img: 'png'
+  }
 }
 ```
 
