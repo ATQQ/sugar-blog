@@ -47,23 +47,30 @@ pnpm run build
 RSS 插件会读取文章 frontmatter 中的以下字段来生成对应的 RSS 项信息：
 
 ### title
-文章标题。如果未提供，会从正文首个标题自动提取
+文章标题。如果未提供，会从正文首个标题自动提取。
 ```md
 ---
 title: 我的第一篇文章
 ---
 ```
 
-### date
-发布日期。如果未指定，使用文件最后修改时间
+### date/published
+发布日期。如果未指定，使用文件最后修改时间。
 ```md
 ---
 date: 2024-01-15
 ---
 ```
 
+同时指定 published 和 data，将使用 published 覆盖 data。
+```md
+---
+published: 2025-12-06
+---
+```
+
 ### description
-文章摘要。如果未提供，会尝试使用 `renderExpect` 配置或文章摘录，最后降级为截取前 100 字
+文章摘要。若未提供，将依次尝试：调用 `renderExpect` 生成；如未配置/无结果，使用 [gray-matter](https://www.npmjs.com/package/gray-matter#optionsexcerpt) 提取摘要；仍为空则截取正文前 100 字。
 ```md
 ---
 description: 这是一篇关于 RSS 的介绍文章
@@ -71,23 +78,88 @@ description: 这是一篇关于 RSS 的介绍文章
 ```
 
 ### author
-文章作者名称。如果未指定，会使用配置中的 `author.name`
+文章作者。支持单个名称（`string` 类型）或作者对象数组（每个作者对象可选 `name`、`email`、`link`、`avatar` 字段）；未填写时沿用全局 `author`。
+
+若提供了全局 `authors` 列表且 `frontmatter.author` 为字符串，会按名称匹配该列表，并自动补全作者的其他信息。当 `frontmatter.author` 为数组时，如果某个作者对象只提供了 `name` 字段，也会按名称匹配全局 `authors` 列表，并自动补全其他信息。
 ```md
 ---
 author: 张三
 ---
 ```
 
+```md
+---
+author:
+  - name: 小王
+    email: xiaowang@example.com
+    link: https://example.com/xiaowang
+  - name: 小明   # 如果只提供 name，会尝试从全局 authors 配置补全其他信息
+---
+```
+
+### category
+文章分类列表，支持多个分类。每个分类对象可选 `name`、`domain`、`scheme`、`term` 字段。
+```md
+---
+category:
+  - name: 技术
+    domain: https://example.com
+  - name: 前端开发
+---
+```
+
 ### cover
-文章封面。可以手动指定，或自动从文中首张图片提取
+文章封面。可以手动指定，或自动从文中首张图片提取。
 ```md
 ---
 cover: /images/cover.png
 ---
 ```
 
+### guid
+自定义条目的唯一标识符（未填写时会回退为链接）。
+```md
+---
+guid: custom-id-123
+---
+```
+
+### enclosure
+RSS 标准的媒体附件字段，用于在 RSS 项目中包含音频/视频/图片/PDF 等媒体文件，播客客户端依赖它播放或下载媒体。
+
+- `enclosure.url`/`enclosure_url` 定义指向媒体文件的 URL。
+- `enclosure.length`/`enclosure_length` （可选）定义媒体文件的大小（以字节计），应为数字。
+- `enclosure.type`/`enclosure_type` （可选）定义媒体文件的类型（MIME 类型），应为字符串。
+
+支持三种写法：
+1. 字符串形式。（等价于 `enclosure_url`）
+```md
+---
+enclosure: https://example.com/file.jpg
+---
+```
+
+2. 对象形式。
+```md
+---
+enclosure:
+  url: https://example.com/file.mp3
+  length: 12345
+  type: audio/mpeg
+---
+```
+
+3. 拆分字段形式。
+```md
+---
+enclosure_url: https://example.com/file.mp3
+enclosure_length: 12345
+enclosure_type: audio/mpeg
+---
+```
+
 ### layout
-如果值为 `home`，文章会被过滤（可通过 `ignoreHome` 选项控制）
+如果值为 `home`，文章会被过滤。（可通过 `ignoreHome` 选项控制）
 ```md
 ---
 layout: home
@@ -95,7 +167,7 @@ layout: home
 ```
 
 ### publish
-包含 `publish: false` 的文章将不会出现在最终的 rss 文件中，可以用来忽略目标文章（可通过 `ignorePublish` 选项控制）
+包含 `publish: false` 的文章将不会出现在最终的 rss 文件中，可以用来忽略目标文章。（可通过 `ignorePublish` 选项控制）
 ```md
 ---
 publish: false
@@ -123,13 +195,13 @@ const RSS: RSSOptions = {
   },
   description: '大前端相关技术分享',
   language: 'zh-cn',
-  author: {
+  author: { // Feed 的全局作者信息；文章的默认作者信息
     name: '粥里有勺糖',
     email: 'engineerzjl@foxmail.com',
     link: 'https://sugarat.top'
   },
   icon: true,
-  authors: [
+  authors: [ // 作者信息列表，文章可按 name 匹配自动补全其他信息
     {
       name: '粥里有勺糖',
       email: 'engineerzjl@foxmail.com',
@@ -141,12 +213,21 @@ const RSS: RSSOptions = {
       link: 'https://github.com/atqq'
     }
   ],
-  filename: 'feed.rss',
+  filename: 'feed.rss', // 包含全部文章
   log: true,
   ignoreHome: true,
   ignorePublish: false,
   filter: (post, idx) => {
     return true
+  },
+  locales: {
+    en: {
+      // 若缺少配置则全部沿用全局（除 locales 本身外的所有 RSSOptions 字段）
+      filename: 'feed.en.rss', // 仅包含 en 语言目录下的文章
+    },
+    root: {
+      filename: 'feed.zh-hans.rss', // root 作为默认源，排除上面声明的其它 locales 文章
+    },
   }
 }
 ```
@@ -211,6 +292,10 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
    */
   ignorePublish?: boolean
   /**
+   * Feed 的全局作者信息；文章默认作者信息；同时也作为 feed Options 的 author 传入
+   */
+  author?: Author
+  /**
    * 博客站点内容涉及的作者列表
    */
   authors?: Author[]
@@ -221,6 +306,10 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
     fileContent: string,
     frontmatter: Record<string, any>
   ) => string | Promise<string>
+  /**
+   * 文章 HTML 渲染完成后的处理钩子（可对每篇文章的最终 HTML 做二次加工）
+   */
+  transform?: (content: string) => string
   /**
    * 限制输出文件包含的文章数量
    * @default 0
@@ -233,7 +322,11 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
    */
   renderHTML?: ((filecontent: string) => string | Promise<string>) | boolean
   /**
-   * 国际化支持
+   * RSS 社交链接图标的 aria-label（默认 "RSS"）
+   */
+  ariaLabel?: string
+  /**
+   * 国际化支持（locale 配置未声明的字段会继承全局 RSSOptions，除 locales 本身外）
    */
   locales?: Record<string, Omit<RSSOptions, 'locales'>>
   /**

@@ -64,7 +64,7 @@ date: 2024-01-15
 ```
 
 ### description
-Article summary. If not provided, it will attempt to use the `renderExpect` configuration or article excerpt, falling back to the first 100 characters
+Article summary. If not provided, it will try in order: call `renderExpect`; if not configured/no result, use the excerpt extracted by [gray-matter](https://www.npmjs.com/package/gray-matter#optionsexcerpt); if still empty, fall back to the first 100 characters.
 ```md
 ---
 description: An introductory article about RSS
@@ -72,10 +72,33 @@ description: An introductory article about RSS
 ```
 
 ### author
-Article author name. If not specified, uses `author.name` from config
+Article author. Supports a single name (`string`) or an array of author objects (each may include `name`, `email`, `link`, `avatar`); falls back to the global `author` when omitted.
+
+If you provide a global `authors` list and `frontmatter.author` is a string, the name will be matched against that list to auto-fill the author's extra info. When `frontmatter.author` is an array, if an author object only provides the `name` field, it will also match against the global `authors` list to auto-fill the other info.
 ```md
 ---
 author: John Doe
+---
+```
+
+```md
+---
+author:
+  - name: Xiao Wang
+    email: xiaowang@example.com
+    link: https://example.com/xiaowang
+  - name: Xiao Ming   # If only name is provided, it will try to auto-fill from global authors config
+---
+```
+
+### category
+List of article categories, supporting multiple categories. Each category object can optionally contain `name`, `domain`, `scheme`, `term` fields.
+```md
+---
+category:
+  - name: Tech
+    domain: https://example.com
+  - name: Frontend
 ---
 ```
 
@@ -103,6 +126,56 @@ publish: false
 ---
 ```
 
+### guid
+Custom guid/id for the item (falls back to link if omitted).
+```md
+---
+guid: custom-id-123
+---
+```
+
+### published
+Custom published date for the feed item; defaults to the frontmatter `date`.
+```md
+---
+published: 2024-03-12
+---
+```
+
+### enclosure
+RSS media attachment (audio, video, image, PDF, etc.). Most podcast clients rely on it to play/download media.
+
+- `enclosure.url` / `enclosure_url` defines the URL pointing to the media file.
+- `enclosure.length` / `enclosure_length` (optional) defines the file size in bytes (numeric).
+- `enclosure.type` / `enclosure_type` (optional) defines the media MIME type (string).
+
+Supported forms:
+1. String form (equivalent to `enclosure_url`)
+```md
+---
+enclosure: https://example.com/file.jpg
+---
+```
+
+2. Object form
+```md
+---
+enclosure:
+  url: https://example.com/file.mp3
+  length: 12345
+  type: audio/mpeg
+---
+```
+
+3. Split fields
+```md
+---
+enclosure_url: https://example.com/file.mp3
+enclosure_length: 12345
+enclosure_type: audio/mpeg
+---
+```
+
 ## Advanced Usage
  
 ### Example1
@@ -124,13 +197,13 @@ const RSS: RSSOptions = {
   },
   description: '大前端相关技术分享',
   language: 'zh-cn',
-  author: {
+  author: { // Global feed author; also the default author for articles
     name: '粥里有勺糖',
     email: 'engineerzjl@foxmail.com',
     link: 'https://sugarat.top'
   },
   icon: true,
-  authors: [
+  authors: [ // Author list; articles can match by name to auto-fill other fields
     {
       name: '粥里有勺糖',
       email: 'engineerzjl@foxmail.com',
@@ -148,6 +221,15 @@ const RSS: RSSOptions = {
   ignorePublish: false,
   filter: (post, idx) => {
     return true
+  },
+  locales: {
+    en: {
+      // All missing options inherit from the global config (everything in RSSOptions except locales itself)
+      filename: 'feed.en.rss', // only includes articles under the en locale
+    },
+    root: {
+      filename: 'feed.zh-hans.rss', // root is the default source, excluding articles of other declared locales
+    }
   }
 }
 ```
@@ -242,6 +324,10 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
    */
   ignorePublish?: boolean
   /**
+   * Global feed author info; default author for articles; also passed as feed Options author
+   */
+  author?: Author
+  /**
    * List of authors involved in blog site content
    */
   authors?: Author[]
@@ -252,6 +338,10 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
     fileContent: string,
     frontmatter: Record<string, any>
   ) => string | Promise<string>
+  /**
+   * Post-processing hook for each item's rendered HTML (run after render to tweak the final HTML)
+   */
+  transform?: (content: string) => string
   /**
    * Limit the number of docs the output file contains
    * @default 0
@@ -264,7 +354,11 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
    */
   renderHTML?: ((filecontent: string) => string | Promise<string>) | boolean
   /**
-   * i18n
+   * aria-label for the RSS social link icon (falls back to "RSS")
+   */
+  ariaLabel?: string
+  /**
+   * i18n (locale configs inherit unspecified fields from the root/global RSSOptions; locales is not recursive)
    */
   locales?: Record<string, Omit<RSSOptions, 'locales'>>
   /**
