@@ -276,6 +276,10 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
    */
   renderHTML?: ((filecontent: string) => string | Promise<string>) | boolean
   /**
+   * aria-label for the RSS social link icon (falls back to "RSS")
+   */
+  ariaLabel?: string
+  /**
    * i18n (locale configs inherit unspecified fields from the root/global RSSOptions; locales is not recursive)
    */
   locales?: Record<string, Omit<RSSOptions, 'locales'>>

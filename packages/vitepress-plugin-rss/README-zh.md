@@ -275,6 +275,10 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
    */
   renderHTML?: ((filecontent: string) => string | Promise<string>) | boolean
   /**
+   * RSS 社交链接图标的 aria-label（默认 "RSS"）
+   */
+  ariaLabel?: string
+  /**
    * 国际化支持（locale 配置未声明的字段会继承全局 RSSOptions，除 locales 本身外）
    */
   locales?: Record<string, Omit<RSSOptions, 'locales'>>
