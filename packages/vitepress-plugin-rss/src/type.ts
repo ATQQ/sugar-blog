@@ -68,6 +68,10 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
     frontmatter: Record<string, any>
   ) => string | Promise<string>
   /**
+   * 文章 HTML 渲染完成后的处理钩子，在文章解析完成后调用，可对文章内容进行进一步处理
+   */
+  transform?: (content: string) => string
+  /**
    * 限制输出文件包含的文章数量
    * @default 0
    * @description (0 不限制；> 1 会按照日期排序对输出内容进行调整)
@@ -83,10 +87,6 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
    * 国际化支持（locale 配置未声明的字段会继承全局 RSSOptions，除 locales 本身外）
    */
   locales?: Record<string, Omit<RSSOptions, 'locales'>>
-  /**
-   * (可选)文章解析完成后调用，可对文章内容进行进一步处理
-   */
-  transform?: (content: string) => string
 }
 
 export interface PostInfo {

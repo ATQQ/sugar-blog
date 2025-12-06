@@ -261,6 +261,10 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
     frontmatter: Record<string, any>
   ) => string | Promise<string>
   /**
+   * Post-processing hook for the rendered HTML string of each item
+   */
+  transform?: (content: string) => string
+  /**
    * Limit the number of docs the output file contains
    * @default 0
    * @description (0 no limit; > 1 will adjust the output content according to date sorting)
