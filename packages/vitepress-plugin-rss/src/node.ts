@@ -24,6 +24,14 @@ const imageRegex = /!\[.*?\]\((.*?)\s*(".*?")?\)/
 // 使用文件缓存，避免内存占用
 const htmlCache = new Map<string, string | undefined>()
 
+// 将空数组标准化为 undefined，方便下游可选字段处理
+function emptyArrayToUndefined<T>(arr: T[] | undefined): T[] | undefined {
+  if (!arr) {
+    return undefined
+  }
+  return arr.length > 0 ? arr : undefined
+}
+
 // 文件系统缓存相关函数
 function getCacheKey(filepath: string, content: string, url?: string): string {
   const hash = crypto.createHash('md5').update(content).digest('hex')
@@ -271,33 +279,28 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions, assets
   for (const post of posts) {
     const { title, description, date, frontmatter, url } = post
 
-    // 文章作者信息
-    let authorsInfo: Author[] | undefined
-    if (Array.isArray(frontmatter.author)) {
-      authorsInfo = frontmatter.author.map((author: Author) => {
-        if (author.name && !author.email && !author.link && !author.avatar) {
+    // 文章作者信息：合并 frontmatter 与全局，补全仅 name 的作者
+    const author = emptyArrayToUndefined(
+      [frontmatter.author ?? rssOptions.author]
+        .flat()
+        .filter(Boolean)
+        .map((a: string | Author) => {
+          // 字符串情况
+          if (typeof a === 'string') {
+            return rssOptions.authors?.find(v => v.name === a) || { name: a }
+          }
+          // 对象情况
           // 如果只有 name，尝试从全局 authors 补全其他信息
-          const found = rssOptions.authors?.find(v => v.name === author.name)
-          return found ? { ...author, ...found } : author
-        }
-        else {
-          return author
-        }
-      })
-    }
-    else if (frontmatter.author as string) {
-      const foundAuthors = rssOptions.authors?.find(v => v.name === frontmatter.author)
-      authorsInfo = foundAuthors ? [foundAuthors] : [{ name: frontmatter.author }]
-    }
-    else {
-      authorsInfo = rssOptions.author ? [rssOptions.author] : undefined
-    }
+          if (a?.name && !a.email && !a.link && !a.avatar) {
+            const found = rssOptions.authors?.find(v => v.name === a.name)
+            return found ? { ...a, ...found } : a
+          }
+          return a
+        }) as Author[]
+    )
 
     // 文章分类信息
-    let categoryInfo: Category[] | undefined
-    if (frontmatter.category) {
-      categoryInfo = frontmatter.category
-    }
+    const category: Category[] | undefined = emptyArrayToUndefined(frontmatter.category)
 
     // 最后的文章链接
     const link = `${baseUrl}${url}`
@@ -308,8 +311,8 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions, assets
       link,
       description,
       content: transform((htmlCache.get(post.url) ?? '').replaceAll('&ZeroWidthSpace;', '')),
-      author: authorsInfo,
-      category: categoryInfo,
+      author,
+      category,
       image: frontmatter?.cover ? new URL(frontmatter?.cover, baseUrl).href : '',
       date: new Date(date)
     } satisfies Item)
