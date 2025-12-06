@@ -261,7 +261,7 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
     frontmatter: Record<string, any>
   ) => string | Promise<string>
   /**
-   * Post-processing hook for the rendered HTML string of each item
+   * Post-processing hook for each item's rendered HTML (run after render to tweak the final HTML)
    */
   transform?: (content: string) => string
   /**

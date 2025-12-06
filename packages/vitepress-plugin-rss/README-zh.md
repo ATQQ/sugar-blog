@@ -260,7 +260,7 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
     frontmatter: Record<string, any>
   ) => string | Promise<string>
   /**
-   * 文章 HTML 渲染完成后的处理钩子
+   * 文章 HTML 渲染完成后的处理钩子（可对每篇文章的最终 HTML 做二次加工）
    */
   transform?: (content: string) => string
   /**
