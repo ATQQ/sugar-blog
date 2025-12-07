@@ -441,7 +441,7 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions, assets
 
   const RSSFilepath = path.join(config.outDir, RSSFilename)
 
-  await fs.promises.writeFile(RSSFilepath, feed.rss2())
+  await fs.promises.writeFile(RSSFilepath, feed.rss2(), 'utf-8')
   if (rssOptions.log ?? true) {
     console.log('🎉 RSS generated', RSSFilename)
     console.log('rss filepath:', RSSFilepath)
