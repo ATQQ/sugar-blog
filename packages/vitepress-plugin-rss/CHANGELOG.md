@@ -1,5 +1,14 @@
 # vitepress-plugin-rss
 
+## 0.4.1
+
+### Patch Changes
+- feat: support support published sorted
+- fix: published date invalid in RSS feed
+- fix: Remove automatic i18n filtering from RSS generation
+- docs: Clarify date and published fields in RSS plugin docs
+- chore: remove sharp from devDependencies
+
 ## 0.4.0
 
 ### Minor Changes

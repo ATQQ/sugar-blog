@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.5.10） ⏰ 2025/12/06：依赖更新
+description: 最近更新（v0.5.11） ⏰ 2025/12/07：依赖更新
 author: 粥里有勺糖
 top: 3
 tag: 日志
@@ -26,6 +26,13 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.5.11 (2025/12/07)
+
+### Patch Changes
+
+- Updated dependencies
+  - vitepress-plugin-rss@0.4.1
 
 ## 0.5.10 (2025/12/06)
 
