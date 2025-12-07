@@ -357,13 +357,7 @@ const RSS: RSSOptions = {
 }
 ```
 
-如果需要转化为 png 图片，需要安装 [sharp](https://github.com/lovell/sharp) 依赖
-
-```bash
-npm install sharp
-```
-
-然后配置 `svg2img` 为 `png`
+如果需要转化为 png 图片，配置 `svg2img` 为 `png`，使用 [sharp](https://github.com/lovell/sharp) 进行转换。
 
 ```ts
 const RSS: RSSOptions = {

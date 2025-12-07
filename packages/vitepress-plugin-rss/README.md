@@ -246,13 +246,7 @@ const RSS: RSSOptions = {
 }
 ```
 
-If you need to convert to PNG images, you need to install the [sharp](https://github.com/lovell/sharp) dependency.
-
-```bash
-npm install sharp
-```
-
-Then set `svg2img` to `png`.
+If you need to convert to PNG images, set `svg2img` to `png` and use [sharp](https://github.com/lovell/sharp) for conversion.
 
 ```ts
 const RSS: RSSOptions = {

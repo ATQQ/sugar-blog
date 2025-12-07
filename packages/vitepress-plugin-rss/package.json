@@ -40,10 +40,10 @@
   "dependencies": {
     "@sugarat/theme-shared": "workspace:*",
     "feed": "^5.1.0",
-    "markdown-it-container": "^4.0.0"
+    "markdown-it-container": "^4.0.0",
+    "sharp": "^0.34.5"
   },
   "devDependencies": {
-    "sharp": "^0.34.5",
     "vite": "^5",
     "vitepress": "2.0.0-alpha.15"
   }
