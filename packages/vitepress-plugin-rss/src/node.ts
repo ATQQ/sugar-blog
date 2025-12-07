@@ -211,6 +211,8 @@ export async function getPostsData(
     const date = await (frontmatter.date || datePromise)
     frontmatter.date = formatDate(date)
 
+    frontmatter.published = frontmatter.published && formatDate(frontmatter.published)
+
     // 获取摘要信息
     frontmatter.description
       // eslint-disable-next-line no-await-in-loop
@@ -282,9 +284,11 @@ export async function getPostsData(
   }
 
   // 按日期排序
-  posts.sort(
-    (a, b) => +new Date(b.date as string) - +new Date(a.date as string)
-  )
+  posts.sort((a, b) => {
+    const dateA = a.frontmatter.published || a.date
+    const dateB = b.frontmatter.published || b.date
+    return +new Date(dateB) - +new Date(dateA)
+  })
 
   // 限制数量
   if (undefined !== rssOptions?.limit && rssOptions?.limit > 0) {
