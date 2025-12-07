@@ -55,11 +55,19 @@ title: My First Article
 ---
 ```
 
-### date
-Publication date. If not specified, uses the file's last modified time
+### date/published
+Publication date. If not specified, uses the file's last modified time.  
+This field allows any [Date time string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#date_time_string_format).
 ```md
 ---
 date: 2024-01-15
+---
+```
+
+If both published and date are specified, published will override date.
+```md
+---
+published: 2025-12-06
 ---
 ```
 
@@ -131,14 +139,6 @@ Custom guid/id for the item (falls back to link if omitted).
 ```md
 ---
 guid: custom-id-123
----
-```
-
-### published
-Custom published date for the feed item; defaults to the frontmatter `date`.
-```md
----
-published: 2024-03-12
 ---
 ```
 

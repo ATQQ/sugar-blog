@@ -55,14 +55,15 @@ title: 我的第一篇文章
 ```
 
 ### date/published
-发布日期。如果未指定，使用文件最后修改时间。
+发布日期。如果未指定，使用文件最后修改时间。  
+此字段允许传入任意[时间戳字符串](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date#%E6%97%B6%E9%97%B4%E6%88%B3%E5%AD%97%E7%AC%A6%E4%B8%B2_datestring)。
 ```md
 ---
 date: 2024-01-15
 ---
 ```
 
-同时指定 published 和 data，将使用 published 覆盖 data。
+同时指定 published 和 date，将使用 published 覆盖 date。
 ```md
 ---
 published: 2025-12-06
