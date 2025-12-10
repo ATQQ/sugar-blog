@@ -89,7 +89,7 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
   /**
    * 国际化支持（locale 配置未声明的字段会继承全局 RSSOptions，除 locales 本身外）
    */
-  locales?: Record<string, Omit<RSSOptions, 'locales'>>
+  locales?: Record<string, Partial<Omit<RSSOptions, 'locales'>>>
 
   /**
    * 是否缓存文档渲染结果

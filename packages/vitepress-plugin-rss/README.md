@@ -354,7 +354,7 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
   /**
    * i18n (locale configs inherit unspecified fields from the root/global RSSOptions; locales is not recursive)
    */
-  locales?: Record<string, Omit<RSSOptions, 'locales'>>
+  locales?: Record<string, Partial<Omit<RSSOptions, 'locales'>>>
   /**
    * Whether to cache the document rendering result
    * @default true
