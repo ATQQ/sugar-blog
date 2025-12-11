@@ -2,13 +2,8 @@
 import { ElCarousel, ElCarouselItem, ElImage, ElMessage } from 'element-plus'
 import VPDocAsideOutline from 'vitepress/dist/client/theme-default/components/VPDocAsideOutline.vue'
 import { computed, reactive, ref, watch, watchEffect } from 'vue'
-import { slugify } from '@mdit-vue/shared'
 import { useWindowSize } from '@vueuse/core'
-import {
-  formatDate,
-  getGithubDirUpdateTime,
-  getGithubUpdateTime
-} from '../utils/client'
+import { formatDate, getGithubDirUpdateTime, getGithubUpdateTime, slugify } from '../utils/client'
 import {
   useActiveAnchor,
   useAutoUpdateAnchor,
@@ -16,6 +11,7 @@ import {
 } from '../composables/config/blog'
 import type { Theme } from '../composables/config'
 
+// TODO：作品集组件
 const currentAnchor = useAutoUpdateAnchor()
 // 更新锚点的时候更新 url 中的 hash
 watch(

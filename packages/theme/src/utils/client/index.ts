@@ -174,3 +174,20 @@ export function wrapperCleanUrls(cleanUrls: boolean, route: string) {
 export function replaceValue(str: string, value: any) {
   return str.replace(/\{\{value\}\}/, value)
 }
+
+// https://github.com/mdit-vue/mdit-vue/blob/main/packages/shared/src/slugify.ts
+// eslint-disable-next-line no-control-regex
+const rControl = /[\u0000-\u001F]/g
+const rSpecial = /[\s~`!@#$%^&*()\-_+=[\]{}|\\;:"'“”‘’<>,.?/]+/g
+const rCombining = /[\u0300-\u036F]/g
+export function slugify(str: string) {
+  return str
+    .normalize('NFKD')
+    .replace(rCombining, '')
+    .replace(rControl, '')
+    .replace(rSpecial, '-')
+    .replace(/-{2,}/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .replace(/^(\d)/, '_$1')
+    .toLowerCase()
+}
