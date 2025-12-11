@@ -23,7 +23,7 @@ function SocialIcon(rssOptions: RSSOptions, base = '/') {
 }
 
 // 将 locale 配置中未显式设置的字段回落到全局配置（排除 locales 本身）
-function inheritLocaleConfig(target: RSSOptions, global: RSSOptions) {
+function inheritLocaleConfig(target: Partial<RSSOptions>, global: RSSOptions) {
   const excludeKeys = ['locales'] as Array<keyof RSSOptions>
   Object.keys(global).forEach((key) => {
     const k = key as keyof RSSOptions
@@ -80,7 +80,7 @@ export function RssPlugin(rssOptions: RSSOptions): any {
                 VPConfig.site.locales[locale].themeConfig = {}
               }
               VPConfig.site.locales[locale].themeConfig.socialLinks = [
-                SocialIcon(rssCfg, VPConfig.site.base),
+                SocialIcon(rssCfg as RSSOptions, VPConfig.site.base),
                 ...(_tcfg?.socialLinks || [])
               ]
               if (!rssCfg.filter) {
@@ -97,7 +97,7 @@ export function RssPlugin(rssOptions: RSSOptions): any {
                   }
                 }
               }
-              localesConfig.push(rssCfg)
+              localesConfig.push(rssCfg as RSSOptions)
             }
           })
         }
