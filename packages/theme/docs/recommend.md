@@ -127,6 +127,11 @@ GitHub: [vitepress-theme-teek](https://github.com/Kele-Bingtang/vitepress-theme-
 
 ![](https://cdn.upyun.sugarat.top/mdImg/sugar/d1ece3bc3ff5ee15bb5401b0d20da266)
 
+#### [sponsor](https://www.npmjs.com/package/vitepress-plugin-sponsor) - 打赏模块
+可在文章底部添加美观的打赏模块
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/f9ef4e8bd977f4fde2357fe32f7bc5dc)
+
 ### 搜索
 #### [flexsearch](https://github.com/emersonbottero/vitepress-plugin-search)
 

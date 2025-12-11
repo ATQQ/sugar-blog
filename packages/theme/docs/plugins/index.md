@@ -37,11 +37,6 @@ description: 主题在近1年多的时间里集成了非常的多功能了，接
 
 ### [vitepress-plugin-announcement](https://www.npmjs.com/package/vitepress-plugin-announcement)
 * 提供全局公告窗口。
-
-### [vitepress-plugin-sponsor](https://www.npmjs.com/package/vitepress-plugin-sponsor)
-* 可在文章底部添加美观的打赏模块：
-*  ![img](https://github.com/SlovinG/vitepress-plugin-sponsor/blob/HEAD/image.png)
-
   
 ## 规划中的插件
 * 评论
