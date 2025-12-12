@@ -18,10 +18,13 @@ import 'element-plus/theme-chalk/el-alert.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
 
 // 引入时间线组件样式
-import 'vitepress-markdown-timeline/dist/theme/index.css'
+// replace-timeline-import-code
+// import 'vitepress-markdown-timeline/dist/theme/index.css'
 import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
-import { enhanceAppWithTabs } from 'vitepress-plugin-tabs/client'
+
+// replace-tabs-import-code
+// import { enhanceAppWithTabs } from 'vitepress-plugin-tabs/client'
 
 // 图表渲染组件
 // replace-mermaid-import-code
@@ -36,13 +39,15 @@ import UserWorksPage from './components/UserWorks.vue'
 import './styles/theme/inline-theme.var.css'
 
 // 导入group icons，改由自定义插件导入
+// replace-group-icon-import-code
 // import 'virtual:group-icons.css'
 
 export const BlogTheme: Theme = {
   ...DefaultTheme,
   Layout: withConfigProvider(BlogApp),
   enhanceApp(ctx) {
-    enhanceAppWithTabs(ctx.app as any)
+    // replace-tabs-enhance-app-code
+    // enhanceAppWithTabs(ctx.app)
     DefaultTheme.enhanceApp(ctx)
     ctx.app.component('UserWorksPage', UserWorksPage as any)
     // replace-mermaid-mounted-code

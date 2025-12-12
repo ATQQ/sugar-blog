@@ -63,22 +63,35 @@ export function getVitePlugins(cfg: Partial<Theme.BlogConfig> = {}) {
     plugins.push(groupIconVitePlugin(cfg?.groupIcon))
   }
 
+  // patch tabs
+  if (cfg?.tabs !== false) {
+    plugins.push(patchTabsPlugin())
+  }
+
+  // patch timeline
+  if (cfg?.timeline !== false) {
+    plugins.push(patchTimelinePlugin())
+  }
   return plugins
 }
 
 export function patchGroupIconPlugin() {
-  return {
+  return createPatchPlugin({
     name: '@sugarat/theme-plugin-patch-group-icon',
-    enforce: 'pre',
-    transform(code: string, id: string) {
-      // 匹配 theme/index.ts 或 theme/index.js 文件
-      if (id.match(/[\/\\]theme[\/\\]index\.(ts|js)$/)) {
-        // 在文件顶部插入 import 语句
-        return `import 'virtual:group-icons.css'\n${code}`
-      }
-      return code
+    replacements: {
+      '// replace-group-icon-import-code': 'import \'virtual:group-icons.css\''
     }
-  }
+  })
+}
+
+export function patchTabsPlugin() {
+  return createPatchPlugin({
+    name: '@sugarat/theme-plugin-patch-tabs',
+    replacements: {
+      '// replace-tabs-import-code': 'import { enhanceAppWithTabs } from \'vitepress-plugin-tabs/client\'',
+      '// replace-tabs-enhance-app-code': 'enhanceAppWithTabs(ctx.app)'
+    }
+  })
 }
 
 export function registerVitePlugins(vpCfg: any, plugins: any[]) {
@@ -89,18 +102,30 @@ export function registerVitePlugins(vpCfg: any, plugins: any[]) {
 }
 
 export function inlineInjectMermaidClient() {
-  return {
+  return createPatchPlugin({
     name: '@sugarat/theme-plugin-inline-inject-mermaid-client',
+    replacements: {
+      '// replace-mermaid-import-code': 'import Mermaid from \'vitepress-plugin-mermaid/Mermaid.vue\'',
+      '// replace-mermaid-mounted-code': 'if (!ctx.app.component(\'Mermaid\')) { ctx.app.component(\'Mermaid\', Mermaid as any) }'
+    }
+  })
+}
+
+function createPatchPlugin({ name, replacements }: { name: string; replacements: Record<string, string> }) {
+  return {
+    name,
     enforce: 'pre',
-    transform(code, id) {
-      if (id.endsWith('src/index.ts') && code.startsWith('// @sugarat/theme index')) {
-        return code
-          .replace('// replace-mermaid-import-code', 'import Mermaid from \'vitepress-plugin-mermaid/Mermaid.vue\'')
-          .replace('// replace-mermaid-mounted-code', 'if (!ctx.app.component(\'Mermaid\')) { ctx.app.component(\'Mermaid\', Mermaid as any) }')
+    transform(code: string, id: string) {
+      if (id.endsWith('theme/src/index.ts') && code.startsWith('// @sugarat/theme index')) {
+        let newCode = code
+        for (const [key, value] of Object.entries(replacements)) {
+          newCode = newCode.replace(key, value)
+        }
+        return newCode
       }
       return code
-    },
-  } as PluginOption
+    }
+  }
 }
 
 export function inlineBuildEndPlugin(buildEndFn: any[]) {
@@ -311,4 +336,12 @@ export function setThemeScript(
     }
   }
   return pluginOps
+}
+function patchTimelinePlugin() {
+  return createPatchPlugin({
+    name: '@sugarat/theme-plugin-patch-timeline',
+    replacements: {
+      '// replace-timeline-import-code': 'import \'vitepress-markdown-timeline/dist/theme/index.css\''
+    }
+  })
 }

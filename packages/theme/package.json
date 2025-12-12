@@ -59,11 +59,11 @@
     "oh-my-live2d": "^0.19.3",
     "vitepress-markdown-timeline": "^1.2.1",
     "vitepress-plugin-announcement": "workspace:*",
-    "vitepress-plugin-group-icons": "1.2.4",
+    "vitepress-plugin-group-icons": "1.6.5",
     "vitepress-plugin-mermaid": "2.0.13",
     "vitepress-plugin-pagefind": "workspace:*",
     "vitepress-plugin-rss": "workspace:*",
-    "vitepress-plugin-tabs": "0.2.0"
+    "vitepress-plugin-tabs": "0.7.3"
   },
   "devDependencies": {
     "@element-plus/icons-vue": "^2.3.1",
