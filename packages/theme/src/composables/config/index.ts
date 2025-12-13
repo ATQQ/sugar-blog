@@ -424,6 +424,7 @@ export namespace Theme {
     authorList?: Omit<FriendLink, 'avatar'>[]
     /**
      * 启用 [vitepress-plugin-tabs](https://www.npmjs.com/package/vitepress-plugin-tabs)
+     * @default true
      */
     tabs?: boolean
     works?: UserWorks
