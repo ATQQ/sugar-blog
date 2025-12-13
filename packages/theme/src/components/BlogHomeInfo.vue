@@ -14,9 +14,7 @@ import BlogFriendLink from './BlogFriendLink.vue'
     <BlogHotArticle />
 
     <!-- 友链 -->
-    <ClientOnly>
-      <BlogFriendLink />
-    </ClientOnly>
+    <BlogFriendLink />
 
     <!-- 标签 -->
     <BlogHomeTags />

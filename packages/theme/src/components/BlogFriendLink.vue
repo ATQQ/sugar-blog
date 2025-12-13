@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import { ElAvatar } from 'element-plus'
 import { useDark, useIntervalFn } from '@vueuse/core'
 import { computed, onUnmounted, ref, watch } from 'vue'
 import { useFriendData } from '../composables/config/blog'
 import { getImageUrl, shuffleArray } from '../utils/client'
 import type { Theme } from '../'
 import { friendLinkSvgStr } from '../constants/svg'
+import Avatar from './Avatar.vue'
 
 const isDark = useDark({
   storageKey: 'vitepress-theme-appearance'
@@ -135,7 +135,7 @@ onUnmounted(() => {
       <ol class="friend-list" :style="listStyle">
         <li v-for="(v, idx) in displayList" :key="idx" class="scroll-item">
           <a :href="v.url" target="_blank">
-            <ElAvatar :size="50" :src="v.avatar" :alt="v.alt" />
+            <Avatar :size="50" :src="v.avatar" :alt="v.alt" />
             <div class="info-wrapper">
               <span class="nickname">{{ v.nickname }}</span>
               <p class="des">{{ v.des }}</p>
@@ -204,10 +204,6 @@ onUnmounted(() => {
     padding: 0 5px;
     height: 76px;
     cursor: pointer;
-
-    .el-avatar {
-      min-width: 50px;
-    }
 
     a {
       display: flex;
