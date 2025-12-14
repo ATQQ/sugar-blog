@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ElButton } from 'element-plus'
+import Button from './Button.vue'
 
 const props = defineProps<{
   href: string
@@ -9,7 +9,7 @@ const props = defineProps<{
 
 <template>
   <p class="action">
-    <a :href="href"><ElButton type="success" round size="large">戳我 {{ text }}</ElButton></a>
+    <a :href="href"><Button type="success" round size="large">戳我 {{ text }}</Button></a>
   </p>
 </template>
 

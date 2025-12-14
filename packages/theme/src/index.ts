@@ -2,10 +2,8 @@
 // override style
 import './styles/index.scss'
 
-// element-ui
-// import 'element-plus/dist/index.css'
-import 'element-plus/theme-chalk/base.css'
-import 'element-plus/theme-chalk/dark/css-vars.css'
+// element-ui-copy
+import './styles/el-base.css'
 
 // 引入时间线组件样式
 // replace-timeline-import-code

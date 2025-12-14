@@ -249,10 +249,6 @@ const timeTitle = computed(() =>
     margin-right: 16px;
     display: flex;
     align-items: center;
-
-    .el-icon {
-      margin-right: 4px;
-    }
   }
 }
 

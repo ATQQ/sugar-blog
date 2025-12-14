@@ -78,7 +78,7 @@ export function patchOptimizeDeps(config: any) {
     config.vite.optimizeDeps = {}
   }
   config.vite.optimizeDeps.exclude = ['vitepress-plugin-tabs', '@sugarat/theme']
-  config.vite.optimizeDeps.include = ['element-plus']
+  // config.vite.optimizeDeps.include = ['element-plus']
 }
 
 export function supportRunExtendsPlugin(config: UserConfig<Theme.Config>) {
