@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { ElButton } from 'element-plus'
 import { computed, ref, watch } from 'vue'
 import { useButtonAfterConfig } from '../composables/config/blog'
 import { aliPaySVG, weChatPaySVG } from '../constants/svg'
+import Button from './Button.vue'
 
 const buttonAfterArticleConfig = useButtonAfterConfig()
 
@@ -36,10 +36,10 @@ function toggleContent() {
 
 <template>
   <div v-if="buttonAfterArticleConfig" class="appreciation-container">
-    <ElButton :size="buttonAfterArticleConfig.size || 'default'" class="content-button" :type="showContent ? 'danger' : 'primary'" @click="toggleContent">
+    <Button :size="buttonAfterArticleConfig.size || 'default'" class="content-button" :type="showContent ? 'danger' : 'primary'" @click="toggleContent">
       <span class="content-icon" v-html="svg" />
       {{ showContent ? buttonAfterArticleConfig.closeTitle : buttonAfterArticleConfig.openTitle }}
-    </ElButton>
+    </Button>
     <transition name="content">
       <div v-if="showContent" class="content-container" v-html="buttonAfterArticleConfig.content" />
     </transition>
@@ -53,7 +53,7 @@ function toggleContent() {
   font-size: 14px;
   color: #606266;
 
-  :deep(.el-button.el-button--primary){
+  :deep(.sugar-button.sugar-button--primary){
     background-color: var(--vp-c-brand-2);
     border-color: var(--vp-c-brand-2);
   }

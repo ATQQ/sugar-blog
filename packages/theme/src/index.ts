@@ -5,8 +5,6 @@ import './styles/index.scss'
 // element-ui
 // import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/base.css'
-import 'element-plus/theme-chalk/el-button.css'
-
 import 'element-plus/theme-chalk/el-image-viewer.css'
 import 'element-plus/theme-chalk/el-pagination.css'
 import 'element-plus/theme-chalk/el-alert.css'
