@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ElImageViewer } from 'element-plus'
 import { onMounted, onUnmounted, reactive, ref } from 'vue'
+import ImageViewer from './ImageViewer.vue'
 
 const show = ref(false)
 const previewImageInfo = reactive<{ url: string; list: string[]; idx: number }>(
@@ -45,7 +45,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <ElImageViewer
+  <ImageViewer
     v-if="show" :infinite="false" hide-on-click-modal teleported :url-list="previewImageInfo.list"
     :initial-index="previewImageInfo.idx" @close="show = false"
   />
