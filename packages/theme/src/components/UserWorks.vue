@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { ElCarousel, ElCarouselItem, ElImage, ElMessage } from 'element-plus'
 import VPDocAsideOutline from 'vitepress/dist/client/theme-default/components/VPDocAsideOutline.vue'
 import { computed, reactive, ref, watch, watchEffect } from 'vue'
 import { useWindowSize } from '@vueuse/core'
@@ -7,9 +6,12 @@ import { formatDate, getGithubDirUpdateTime, getGithubUpdateTime, slugify } from
 import {
   useActiveAnchor,
   useAutoUpdateAnchor,
-  useUserWorks
+  useUserWorks,
 } from '../composables/config/blog'
 import type { Theme } from '../composables/config'
+import Carousel from './Carousel.vue'
+import CarouselItem from './CarouselItem.vue'
+import Image from './Image.vue'
 
 // TODO：作品集组件
 const currentAnchor = useAutoUpdateAnchor()
@@ -161,10 +163,10 @@ watchEffect(() => {
 const { width } = useWindowSize()
 const isCardMode = computed(() => width.value > 768)
 function handleChooseTag(tag: string) {
-  ElMessage({
-    message: `点击了${tag}标签，标签过滤功能开发中ing...`,
-    type: 'warning'
-  })
+  // Message({
+  //   message: `点击了${tag}标签，标签过滤功能开发中ing...`,
+  //   type: 'warning',
+  // })
 }
 </script>
 
@@ -272,18 +274,17 @@ function handleChooseTag(tag: string) {
         <div v-if="work.covers?.length" class="images">
           <!-- swiper -->
           <div v-if="work.coverLayout === 'swiper'" class="swiper-mode">
-            <ElCarousel autoplay height="260px" :type="isCardMode && work.covers.length >= 3 ? 'card' : ''">
-              <ElCarouselItem v-for="(url, idx) in work.covers" :key="url" style="text-align: center">
-                <ElImage
-                  :key="url" preview-teleported :src="url" loading="lazy" :preview-src-list="work.covers"
-                  :initial-index="idx" hide-on-click-modal :alt="`${work.title}-${idx}`"
+            <Carousel autoplay height="260px" :type="isCardMode && work.covers.length >= 3 ? 'card' : ''">
+              <CarouselItem v-for="(url) in work.covers" :key="url" style="text-align: center">
+                <Image
+                  :src="url" loading="lazy"
                 />
-              </ElCarouselItem>
-            </ElCarousel>
+              </CarouselItem>
+            </Carousel>
           </div>
           <!-- list -->
           <div v-if="work.coverLayout === 'list'" class="list-mode">
-            <ElImage
+            <Image
               v-for="(url, idx) in work.covers" :key="url" :src="url" loading="lazy"
               :preview-src-list="work.covers" :initial-index="idx" hide-on-click-modal
             />
@@ -500,7 +501,7 @@ function handleChooseTag(tag: string) {
   flex-wrap: wrap;
   justify-content: center;
 
-  .el-image {
+  .sugar-image {
     :deep(img) {
       object-fit: contain;
       // max-height: 360px;
@@ -511,7 +512,7 @@ function handleChooseTag(tag: string) {
 .swiper-mode {
   margin-top: 16px;
 
-  .el-image {
+  .sugar-image {
     :deep(img) {
       object-fit: contain;
       max-height: 260px;

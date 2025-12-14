@@ -128,6 +128,10 @@ const openTransition = useDarkTransitionConfig()
     <!-- content -->
     <template #page-top>
       <slot name="page-top" />
+      <ClientOnly>
+        <!-- 图片预览 -->
+        <BlogImagePreview />
+      </ClientOnly>
     </template>
     <template #page-bottom>
       <slot name="page-bottom" />

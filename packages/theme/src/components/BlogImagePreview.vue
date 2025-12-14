@@ -15,7 +15,7 @@ function previewImage(e: Event) {
   const currentTarget = e.currentTarget as HTMLElement
   if (target.tagName.toLowerCase() === 'img') {
     const imgs = currentTarget.querySelectorAll<HTMLImageElement>(
-      '.content-container .main img'
+      '.content-container .main img,.VPPage img'
     )
     const idx = Array.from(imgs).findIndex(el => el === target)
     const urls = Array.from(imgs).map(el => el.src)
