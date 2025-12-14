@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
-import { ElPagination } from 'element-plus'
+import Pagination from '../../src/components/Pagination.vue'
 import data from './example-config'
 
 const pageSize = ref(6)
@@ -52,11 +52,10 @@ function handleUpdatePageNum(current: number) {
     </div>
     <!-- 翻页 -->
     <div class="el-pagination-wrapper">
-      <ElPagination
+      <Pagination
         v-if="data.length >= pageSize"
         small
         background
-        :default-current-page="1"
         :current-page="currentPage"
         :page-size="pageSize"
         :total="total"
@@ -71,17 +70,17 @@ function handleUpdatePageNum(current: number) {
 @use './style.scss';
 
 .el-pagination-wrapper {
-  :deep(.el-pagination li.is-active.number) {
+  :deep(.sugar-pagination li.is-active.number) {
     background-color: var(--vp-c-brand-2);
   }
-  :deep(.el-pagination button:hover) {
+  :deep(.sugar-pagination button:hover) {
     color: var(--vp-c-brand-2);
   }
 
-  :deep(.el-pager li:not(.is-active):hover) {
+  :deep(.sugar-pager li:not(.is-active):hover) {
     color: var(--vp-c-brand-2);
   }
-  :deep(.el-input__wrapper.is-focus) {
+  :deep(.sugar-input__wrapper:focus-within) {
     box-shadow: 0 0 0 1px var(--vp-c-brand-2) inset;
   }
 }
