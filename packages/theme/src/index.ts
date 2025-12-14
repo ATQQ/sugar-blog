@@ -2,26 +2,17 @@
 // override style
 import './styles/index.scss'
 
-// element-ui
-// import 'element-plus/dist/index.css'
-import 'element-plus/theme-chalk/base.css'
-import 'element-plus/theme-chalk/el-button.css'
-import 'element-plus/theme-chalk/el-tag.css'
-import 'element-plus/theme-chalk/el-icon.css'
-import 'element-plus/theme-chalk/el-avatar.css'
-import 'element-plus/theme-chalk/el-image.css'
-import 'element-plus/theme-chalk/el-image-viewer.css'
-import 'element-plus/theme-chalk/el-pagination.css'
-import 'element-plus/theme-chalk/el-carousel.css'
-import 'element-plus/theme-chalk/el-carousel-item.css'
-import 'element-plus/theme-chalk/el-alert.css'
-import 'element-plus/theme-chalk/dark/css-vars.css'
+// element-ui-copy
+import './styles/el-base.css'
 
 // 引入时间线组件样式
-import 'vitepress-markdown-timeline/dist/theme/index.css'
+// replace-timeline-import-code
+// import 'vitepress-markdown-timeline/dist/theme/index.css'
 import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
-import { enhanceAppWithTabs } from 'vitepress-plugin-tabs/client'
+
+// replace-tabs-import-code
+// import { enhanceAppWithTabs } from 'vitepress-plugin-tabs/client'
 
 // 图表渲染组件
 // replace-mermaid-import-code
@@ -36,13 +27,15 @@ import UserWorksPage from './components/UserWorks.vue'
 import './styles/theme/inline-theme.var.css'
 
 // 导入group icons，改由自定义插件导入
+// replace-group-icon-import-code
 // import 'virtual:group-icons.css'
 
 export const BlogTheme: Theme = {
   ...DefaultTheme,
   Layout: withConfigProvider(BlogApp),
   enhanceApp(ctx) {
-    enhanceAppWithTabs(ctx.app as any)
+    // replace-tabs-enhance-app-code
+    // enhanceAppWithTabs(ctx.app)
     DefaultTheme.enhanceApp(ctx)
     ctx.app.component('UserWorksPage', UserWorksPage as any)
     // replace-mermaid-mounted-code

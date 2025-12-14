@@ -10,7 +10,6 @@
     "serve": "vitepress serve docs"
   },
   "dependencies": {
-    "@element-plus/icons-vue": "^2.3.1",
     "@sugarat/theme": "^0.5.11",
     "element-plus": "^2.7.2",
     "vue": "3.5.12"

@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
-import { ElButton } from 'element-plus'
 import { useRouter, withBase } from 'vitepress'
 import { useArticles, useCleanUrls, useFormatShowDate, useHotArticleConfig, useShowHotArticle } from '../composables/config/blog'
 import { wrapperCleanUrls } from '../utils/client'
 import { fireSVG } from '../constants/svg'
+import Button from './Button.vue'
 
 const formatShowDate = useFormatShowDate()
 
@@ -59,9 +59,9 @@ const showChangeBtn = computed(() => {
     <!-- 头部 -->
     <div class="card-header">
       <span class="title svg-icon" v-html="title" />
-      <ElButton v-if="showChangeBtn" size="small" type="primary" text @click="changePage">
+      <Button v-if="showChangeBtn" size="small" type="primary" text @click="changePage">
         {{ nextText }}
-      </ElButton>
+      </Button>
     </div>
     <!-- 文章列表 -->
     <ol v-if="currentWikiData.length" class="recommend-container">

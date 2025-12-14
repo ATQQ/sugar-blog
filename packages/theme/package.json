@@ -49,23 +49,21 @@
     "element-plus": "^2.7"
   },
   "dependencies": {
-    "@giscus/vue": "^2.4.0",
-    "@mdit-vue/shared": "^0.12.1",
+    "@giscus/vue": "^3.1.1",
     "@mermaid-js/mermaid-mindmap": "^9.3.0",
     "@sugarat/theme-shared": "workspace:*",
-    "@vue/shared": "^3.4.26",
-    "@vueuse/core": "^9.13.0",
+    "@vue/shared": "^3.5.25",
+    "@vueuse/core": "^14.1.0",
     "markdown-it-task-checkbox": "^1.0.6",
     "mermaid": "^10.9.0",
     "oh-my-live2d": "^0.19.3",
-    "swiper": "^11.1.1",
     "vitepress-markdown-timeline": "^1.2.1",
     "vitepress-plugin-announcement": "workspace:*",
-    "vitepress-plugin-group-icons": "1.2.4",
+    "vitepress-plugin-group-icons": "1.6.5",
     "vitepress-plugin-mermaid": "2.0.13",
     "vitepress-plugin-pagefind": "workspace:*",
     "vitepress-plugin-rss": "workspace:*",
-    "vitepress-plugin-tabs": "0.2.0"
+    "vitepress-plugin-tabs": "0.7.3"
   },
   "devDependencies": {
     "@element-plus/icons-vue": "^2.3.1",

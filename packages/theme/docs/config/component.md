@@ -201,68 +201,68 @@ const blogTheme = getThemeConfig({
 
 效果如下
 
-:::=tabs
-::tab1
-一些内容
+:::tabs
+== tab a
+a content
+== tab b
+b content
+:::
 
-一些内容
-
-一些内容
-
-::tab2
-一些内容 。。。
+:::tabs
+== tab a
+a content 2
+== tab b
+b content 2
 :::
 
 简单的使用方式如下（效果如上面的示例）
 
 ```md
-:::=tabs
-::tab1
-一些内容
+:::tabs
+== tab a
+a content
+== tab b
+b content
+:::
 
-一些内容
-
-一些内容
-
-::tab2
-一些内容 。。。
+:::tabs
+== tab a
+a content 2
+== tab b
+b content 2
 :::
 ```
 
 共享状态的使用方式如下
 
 ```md
-:::=tabs=ab
-::a
+:::tabs key:ab
+== tab a
 a content
-
-::b
+== tab b
 b content
 :::
 
-:::=tabs=ab
-::a
+:::tabs key:ab
+== tab a
 a content 2
-
-::b
+== tab b
 b content 2
 :::
 ```
 
 
-:::=tabs=ab
-::a
+:::tabs key:ab
+== tab a
 a content
-
-::b
+== tab b
 b content
 :::
 
-:::=tabs=ab
-::a
+:::tabs key:ab
+== tab a
 a content 2
-
-::b
+== tab b
 b content 2
 :::
 

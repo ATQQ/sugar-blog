@@ -80,9 +80,6 @@ export function defineLocaleConfig(cfg: Omit<Theme.BlogConfig, 'locales' | 'page
   return cfg
 }
 
-// 重新导包 tabsMarkdownPlugin 导出CJS格式支持
-export { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
-
 export function footerHTML(footerData: Theme.FooterItem | Theme.FooterItem[]) {
   const data = [footerData || []].flat()
   return data.map((d) => {

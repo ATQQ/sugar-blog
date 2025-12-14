@@ -1,12 +1,11 @@
 <script lang="ts" setup>
-import { ElAvatar } from 'element-plus'
 import { useDark, useIntervalFn } from '@vueuse/core'
-import { computed, onMounted, onUnmounted, ref } from 'vue'
-import Swiper from 'swiper'
+import { computed, onUnmounted, ref, watch } from 'vue'
 import { useFriendData } from '../composables/config/blog'
 import { getImageUrl, shuffleArray } from '../utils/client'
 import type { Theme } from '../'
 import { friendLinkSvgStr } from '../constants/svg'
+import Avatar from './Avatar.vue'
 
 const isDark = useDark({
   storageKey: 'vitepress-theme-appearance'
@@ -71,23 +70,49 @@ const containerHeight = computed(() => {
   return scrollWrapperHeight.value ? `${scrollWrapperHeight.value}px` : 'auto'
 })
 
-const swiper = ref<Swiper>()
-const { resume, pause } = useIntervalFn(() => {
-  swiper.value?.slideNext()
-}, scrollSpeed.value)
+const currentIndex = ref(0)
+const isTransitioning = ref(false)
 
-onMounted(() => {
-  pause()
+const displayList = computed(() => {
   if (openScroll.value) {
-    // eslint-disable-next-line no-new
-    swiper.value = new Swiper('.scroll-wrapper', {
-      direction: 'vertical',
-      slidesPerView: limit.value,
-      loop: true,
-    })
-    resume()
+    return [...friendList.value, ...friendList.value.slice(0, limit.value)]
+  }
+  return friendList.value
+})
+
+const listStyle = computed(() => {
+  const translate = -1 * currentIndex.value * cardHeight
+  return {
+    transform: `translateY(${translate}px)`,
+    transition: isTransitioning.value ? 'transform 0.5s ease-in-out' : 'none'
   }
 })
+
+const { resume, pause } = useIntervalFn(() => {
+  if (!openScroll.value)
+    return
+
+  currentIndex.value++
+  isTransitioning.value = true
+
+  if (currentIndex.value === friendList.value.length) {
+    setTimeout(() => {
+      isTransitioning.value = false
+      currentIndex.value = 0
+    }, 500)
+  }
+}, scrollSpeed)
+
+watch(openScroll, (val) => {
+  if (val) {
+    resume()
+  }
+  else {
+    pause()
+    currentIndex.value = 0
+    isTransitioning.value = false
+  }
+}, { immediate: true })
 
 // TODO: SSR渲染支持
 onUnmounted(() => {
@@ -107,10 +132,10 @@ onUnmounted(() => {
         height: containerHeight,
       }"
     >
-      <ol class="friend-list swiper-wrapper">
-        <li v-for=" (v, idx) in friendList" :key="idx" class="swiper-slide">
+      <ol class="friend-list" :style="listStyle">
+        <li v-for="(v, idx) in displayList" :key="idx" class="scroll-item">
           <a :href="v.url" target="_blank">
-            <ElAvatar :size="50" :src="v.avatar" :alt="v.alt" />
+            <Avatar :size="50" :src="v.avatar" :alt="v.alt" />
             <div class="info-wrapper">
               <span class="nickname">{{ v.nickname }}</span>
               <p class="des">{{ v.des }}</p>
@@ -178,9 +203,7 @@ onUnmounted(() => {
     box-sizing: border-box;
     padding: 0 5px;
     height: 76px;
-    .el-avatar {
-      min-width: 50px;
-    }
+    cursor: pointer;
 
     a {
       display: flex;

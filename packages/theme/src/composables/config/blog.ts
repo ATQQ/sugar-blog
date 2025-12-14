@@ -262,7 +262,12 @@ export function useActiveAnchor() {
   onMounted(() => {
     const { hash } = window.location
     if (hash) {
-      el.value = document.querySelector(decodeURIComponent(hash)) as any
+      try {
+        el.value = document.querySelector(decodeURIComponent(hash)) as any
+      }
+      catch (error) {
+        console.warn('useActiveAnchor error', error)
+      }
     }
   })
   return el

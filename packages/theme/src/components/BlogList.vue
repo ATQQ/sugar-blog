@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import { computed, nextTick, watch } from 'vue'
-import { ElPagination } from 'element-plus'
 import { useData, useRoute, useRouter } from 'vitepress'
 import {
   useActiveTag,
   useArticles,
   useCurrentPageNum,
   useGlobalAuthor,
-  useHomeConfig
+  useHomeConfig,
 } from '../composables/config/blog'
 import type { Theme } from '../composables/config'
 import BlogItem from './BlogItem.vue'
+import Pagination from './Pagination.vue'
 
 const { frontmatter } = useData<Theme.Config>()
 const globalAuthor = useGlobalAuthor()
@@ -111,11 +111,10 @@ router.onAfterRouteChange = () => {
   <!-- 解决element-ui bug -->
   <ClientOnly>
     <div class="el-pagination-wrapper">
-      <ElPagination
+      <Pagination
         v-if="wikiList.length >= pageSize"
         small
         background
-        :default-current-page="1"
         :current-page="currentPage"
         :page-size="pageSize"
         :total="filterData.length"
@@ -128,17 +127,17 @@ router.onAfterRouteChange = () => {
 
 <style lang="scss" scoped>
 .el-pagination-wrapper {
-  :deep(.el-pagination li.is-active.number) {
+  :deep(.sugar-pagination li.is-active.number) {
     background-color: var(--vp-c-brand-2);
   }
-  :deep(.el-pagination button:hover) {
+  :deep(.sugar-pagination button:hover) {
     color: var(--vp-c-brand-2);
   }
 
-  :deep(.el-pager li:not(.is-active):hover) {
+  :deep(.sugar-pager li:not(.is-active):hover) {
     color: var(--vp-c-brand-2);
   }
-  :deep(.el-input__wrapper.is-focus) {
+  :deep(.sugar-input__wrapper:focus-within) {
     box-shadow: 0 0 0 1px var(--vp-c-brand-2) inset;
   }
 }

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { ElAlert } from 'element-plus'
 import { onMounted, ref } from 'vue'
 import { useAlertConfig } from '../composables/config/blog'
+import Alert from './Alert.vue'
 
 // TODO：拆分插件，对标公告插件
 const alertProps = useAlertConfig()
@@ -48,7 +48,7 @@ function handleClose() {
 
 <template>
   <div v-if="show" class="global-alert" data-pagefind-ignore="all">
-    <ElAlert
+    <Alert
       :title="alertProps?.title"
       :type="alertProps?.type"
       :show-icon="alertProps?.showIcon"
@@ -59,7 +59,7 @@ function handleClose() {
       @close="handleClose"
     >
       <div v-if="alertProps?.html" v-html="alertProps?.html" />
-    </ElAlert>
+    </Alert>
   </div>
 </template>
 
@@ -73,7 +73,7 @@ function handleClose() {
   left: 50%;
   transform: translateX(-50%);
   width: auto;
-  :deep(.el-alert__content) {
+  :deep(.sugar-alert__content) {
     padding-right: 20px;
   }
 }

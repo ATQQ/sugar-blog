@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter, withBase } from 'vitepress'
-import { ElButton } from 'element-plus'
 import { wrapperCleanUrls } from '../utils/client'
 import { useArticles, useCleanUrls, useFormatShowDate, useRecommendConfig, useShowRecommend } from '../composables/config/blog'
 import { recommendSVG } from '../constants/svg'
 import type { Theme } from '../composables/config/index'
+import Button from './Button.vue'
 
 const formatShowDate = useFormatShowDate()
 
@@ -162,9 +162,9 @@ function handleLinkClick(link: string) {
     <!-- 头部 -->
     <div class="card-header">
       <span v-if="title" class="title" v-html="title" />
-      <ElButton v-if="showChangeBtn" size="small" type="primary" text @click="changePage">
+      <Button v-if="showChangeBtn" size="small" type="primary" text @click="changePage">
         {{ nextText }}
-      </ElButton>
+      </Button>
     </div>
     <!-- 文章列表 -->
     <ol

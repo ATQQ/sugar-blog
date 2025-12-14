@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { computed, watch } from 'vue'
-import { ElTag } from 'element-plus'
-import { useBrowserLocation, useDark, useUrlSearchParams } from '@vueuse/core'
+import { useBrowserLocation, useUrlSearchParams } from '@vueuse/core'
 import { useRoute, useRouter } from 'vitepress'
 import {
   useActiveTag,
@@ -10,6 +9,7 @@ import {
   useHomeTagsConfig,
 } from '../composables/config/blog'
 import { tagsSvgStr } from '../constants/svg'
+import Tag from './Tag.vue'
 
 const route = useRoute()
 const docs = useArticles()
@@ -24,12 +24,6 @@ const tags = computed(() => {
 })
 
 const activeTag = useActiveTag()
-
-const isDark = useDark({
-  storageKey: 'vitepress-theme-appearance'
-})
-
-const colorMode = computed(() => (isDark.value ? 'light' : 'dark'))
 
 const tagType: any = ['', 'info', 'success', 'warning', 'danger']
 const currentPage = useCurrentPageNum()
@@ -88,22 +82,22 @@ watch(
     <!-- 头部 -->
     <div class="card-header">
       <span class="title svg-icon" v-html="title" />
-      <ElTag
-        v-if="activeTag.label" :type="activeTag.type || 'primary'" :effect="colorMode" closable
+      <Tag
+        v-if="activeTag.label" :type="activeTag.type || 'primary'" closable
         @close="handleCloseTag"
       >
         {{ activeTag.label }}
-      </ElTag>
+      </Tag>
     </div>
     <!-- 标签列表 -->
     <ul class="tag-list">
       <li v-for="(tag, idx) in tags" :key="tag">
-        <ElTag
-          :type="tagType[idx % tagType.length] || 'primary'" :effect="colorMode"
+        <Tag
+          :type="tagType[idx % tagType.length] || 'primary'"
           @click="handleTagClick(tag, tagType[idx % tagType.length])"
         >
           {{ tag }}
-        </ElTag>
+        </Tag>
       </li>
     </ul>
   </div>

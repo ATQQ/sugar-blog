@@ -39,7 +39,8 @@
     "pcpe": "changeset pre enter beta",
     "pcpe:exit": "changeset pre exit beta",
     "postinstall": "npx simple-git-hooks",
-    "preinstall": "npx only-allow pnpm"
+    "preinstall": "npx only-allow pnpm",
+    "update:create-theme": "node packages/create-theme/scripts/bump-version.js"
   },
   "devDependencies": {
     "@antfu/eslint-config": "1.0.0-beta.3",
