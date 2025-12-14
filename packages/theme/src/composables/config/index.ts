@@ -272,7 +272,7 @@ export namespace Theme {
     tag?: string
   }
   export interface Alert {
-    type: 'success' | 'warning' | 'info' | 'error'
+    type: 'success' | 'warning' | 'info' | 'error' | 'primary'
     /**
      * 细粒度的时间控制
      * 默认展示时间，-1 只展示1次，其它数字为每次都展示，一定时间后自动消失，0为不自动消失
