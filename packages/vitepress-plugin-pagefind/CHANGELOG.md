@@ -1,8 +1,15 @@
 # vitepress-plugin-pagefind
 
+## 0.4.18-beta.0
+
+### Patch Changes
+
+- chore: clean deps
+
 ## 0.4.17
 
 ### Patch Changes
+
 - fix: peer deps warn
 - Updated dependencies
   - @sugarat/theme-shared@0.0.7

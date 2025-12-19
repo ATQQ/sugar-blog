@@ -39,6 +39,8 @@ provide('carousel', {
 })
 
 function startTimer() {
+  if (typeof window === 'undefined')
+    return
   if (props.interval <= 0 || !props.autoplay || timer.value)
     return
   timer.value = setInterval(playSlides, props.interval)

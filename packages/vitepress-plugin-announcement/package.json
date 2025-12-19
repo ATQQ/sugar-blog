@@ -1,6 +1,6 @@
 {
   "name": "vitepress-plugin-announcement",
-  "version": "0.1.6",
+  "version": "0.1.7-beta.0",
   "description": "vitepress plugin, Announcement, 公告窗口",
   "author": "sugar",
   "license": "MIT",
@@ -53,6 +53,6 @@
     "typescript": "^5.5.4",
     "vite": "^5",
     "vitepress": "2.0.0-alpha.15",
-    "vue": "^3.5.12"
+    "vue": "^3.5.24"
   }
 }

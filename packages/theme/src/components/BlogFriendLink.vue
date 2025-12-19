@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useDark, useIntervalFn } from '@vueuse/core'
-import { computed, onUnmounted, ref, watch } from 'vue'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useFriendData } from '../composables/config/blog'
 import { getImageUrl, shuffleArray } from '../utils/client'
 import type { Theme } from '../'
@@ -112,9 +112,13 @@ watch(openScroll, (val) => {
     currentIndex.value = 0
     isTransitioning.value = false
   }
-}, { immediate: true })
+})
 
-// TODO: SSR渲染支持
+onMounted(() => {
+  if (openScroll.value)
+    resume()
+})
+
 onUnmounted(() => {
   pause()
 })

@@ -1,5 +1,14 @@
 # @sugarat/theme
 
+## 0.5.12-beta.0
+
+### Patch Changes
+
+- chore: clean deps
+- Updated dependencies
+  - vitepress-plugin-announcement@0.1.7-beta.0
+  - vitepress-plugin-pagefind@0.4.18-beta.0
+
 ## 0.5.11
 
 ### Patch Changes

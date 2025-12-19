@@ -1,5 +1,12 @@
 ## 2.0.71
 
+## 2.0.73-beta.0
+
+### Patch Changes
+
+- Updated dependencies
+  - @sugarat/theme@0.5.12-beta.0
+
 ## 2.0.72
 
 ### Patch Changes
