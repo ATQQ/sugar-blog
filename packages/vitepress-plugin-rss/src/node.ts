@@ -450,7 +450,7 @@ export async function genFeed(config: SiteConfig, rssOptions: RSSOptions, assets
     console.log('🎉 RSS generated', RSSFilename)
     console.log('rss filepath:', RSSFilepath)
     console.log('rss url:', normalizeUrl(`${baseUrl}${config.site.base + RSSFilename}`))
-    console.log('include', posts.length, 'posts')
+    console.log('included', posts.length, 'posts')
   }
 }
 
