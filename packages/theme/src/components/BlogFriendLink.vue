@@ -2,7 +2,7 @@
 import { useDark, useIntervalFn } from '@vueuse/core'
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useFriendData } from '../composables/config/blog'
-import { getImageUrl, shuffleArray } from '../utils/client'
+import { getImageUrl } from '../utils/client'
 import type { Theme } from '../'
 import { friendLinkSvgStr } from '../constants/svg'
 import Avatar from './Avatar.vue'
@@ -36,10 +36,10 @@ const openScroll = computed(() => {
 
 const friendList = computed(() => {
   const data = [...friendConfig.value.list]
-  // 简单的随机打乱
-  if (friendConfig.value.random) {
-    data.splice(0, data.length, ...shuffleArray(data))
-  }
+  // 简单的随机打乱，在数据导入侧打乱，避免SSG与CSR内容不一致
+  // if (friendConfig.value.random) {
+  //   data.splice(0, data.length, ...shuffleArray(data))
+  // }
 
   // 展示个数限制，删除多余的
   if (scrollSpeed.value === 0 && limit.value) {
