@@ -107,7 +107,7 @@ onUnmounted(() => {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .sugar-carousel__item {
   position: absolute;
   top: 0;
@@ -118,37 +118,22 @@ onUnmounted(() => {
   overflow: hidden;
   z-index: 0;
   transition: transform 0.4s ease-in-out;
-  background-color: transparent; // Default
+  background-color: transparent;
 }
 
 .sugar-carousel__item--card {
   width: 50%;
-  left: 25%; // Center it initially?
-  // Actually if we use translateX 50% or -50%, it's relative to item width.
-  // Element Plus Card:
-  // Item width is 50%.
-  // Active item is at translateX(containerWidth/4).
-  // Prev item at translateX(0).
-  // Next item at translateX(containerWidth/2).
-
-  // My simplified CSS logic:
-  // left: 25% (centers the 50% width item in container)
-  // active: translate(0) -> centered
-  // prev: translate(-50% of item) -> -25% of container? No, -50% of 50% is -25% width.
-  // left 25% - 25% = 0% (Left aligned)
-  // next: translate(50% of item) -> +25% of container.
-  // left 25% + 25% = 50% (Right aligned)
-  // This works!
+  left: 25%;
 }
 
 .sugar-carousel__mask {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-color: #fff;
-    opacity: 0.24;
-    transition: .2s;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  opacity: 0.24;
+  transition: 0.2s;
 }
 </style>

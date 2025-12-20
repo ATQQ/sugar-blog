@@ -1,15 +1,13 @@
+@charset "UTF-8";
 html {
   --bg-gradient: 255, 255, 255, 0.1;
   --bg-gradient-home: 255, 255, 255;
   --box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.1);
-
-  // blog-item
   --box-shadow-hover: 0 2px 16px 0 rgba(0, 0, 0, 0.2);
   --nav-bgc: rgba(255, 255, 255, 0.9);
   --badge-font-color: #4e5969;
   --description-font-color: #86909c;
   --blog-theme-color: var(--vp-c-brand-1);
-  // --blog-theme-color: #409eff;
 }
 
 html.dark {
@@ -25,20 +23,18 @@ html.dark {
 .VPHome {
   min-height: 100vh;
   background: radial-gradient(ellipse, rgba(var(--bg-gradient-home), 1) 0%, rgba(var(--bg-gradient-home), 0) 700%);
-  
-  &::before {
-    content: "";
-    inset: 0;
-    position: fixed;
-    top: 0;
-    z-index: -1;
-    background-image: url(./bg.png);
-    background-repeat: repeat;
-    min-height: 100%;
-  }
+}
+.VPHome::before {
+  content: "";
+  inset: 0;
+  position: fixed;
+  top: 0;
+  z-index: -1;
+  background-image: url(./bg.png);
+  background-repeat: repeat;
+  min-height: 100%;
 }
 
-// 样式重写
 .VPHome {
   margin-bottom: 0 !important;
   padding-bottom: 96px;
@@ -49,76 +45,51 @@ html.dark {
     padding-bottom: 128px;
   }
 }
-
 @media screen and (min-width: 960px) {
   #VPContent.is-home.VPContent {
     padding-top: 0;
-
-    .VPHome {
-      min-height: 100vh;
-
-      .VPHero>.container {
-        padding-top: var(--vp-nav-height);
-      }
-    }
+  }
+  #VPContent.is-home.VPContent .VPHome {
+    min-height: 100vh;
+  }
+  #VPContent.is-home.VPContent .VPHome .VPHero > .container {
+    padding-top: var(--vp-nav-height);
   }
 }
-
 @media screen and (max-width: 959px) {
   .VPNav {
     background-color: var(--nav-bgc);
   }
 }
-
 .el-pagination {
   flex-wrap: wrap;
   justify-content: center;
 }
 
-// .el-pagination > * {
-//   margin-bottom: 10px !important;
-// }
-
 @media screen and (min-width: 768px) and (max-width: 1200px) {
-
   .VPNavBarMenuGroup .button span.text,
   .VPNavBarMenuLink {
     font-size: 12px !important;
   }
-
   .VPNavBar {
     height: auto !important;
   }
-
   .VPNavBarMenu.menu {
     flex-wrap: wrap;
   }
 }
-
 @media screen and (min-width: 960px) and (max-width: 1120px) {
   .VPContent.has-sidebar {
     margin-top: 60px !important;
   }
 }
-
-// sidebar
-// @media (min-width: 1440px) {
-//   aside.VPSidebar {
-//     // padding-left: max(32px, calc((100% - (var(--vp-layout-max-width) - 16px)) / 2)) !important;
-//     // padding-right: 10px !important;
-//   }
-// }
-
-.VPDoc .content main {
-  img {
-    max-height: 300px;
-    margin: 0 auto;
-    cursor: pointer;
-  }
-
-  .vp-doc a {
-    word-break: break-all;
-  }
+.VPDoc .content main img {
+  max-height: 300px;
+  margin: 0 auto;
+  cursor: pointer;
+}
+.VPDoc .content main .vp-doc a {
+  word-break: break-all;
 }
 
 ::-webkit-scrollbar {
@@ -150,51 +121,45 @@ main .vp-doc a:hover {
   text-decoration: underline dotted;
 }
 
-// 自定义全局样式
-span.svg-icon {
-  svg {
-    width: 14px;
-    height: 14px;
-    margin-right: 4px;
-  }
+span.svg-icon svg {
+  width: 14px;
+  height: 14px;
+  margin-right: 4px;
 }
 
 .vp-doc ul.task-list {
   list-style: none;
   padding-left: 10px;
-
-  input[type="checkbox"] {
-    cursor: pointer;
-    position: relative;
-    width: 13px;
-    height: 13px;
-  }
-
-  input[type="checkbox"]::after {
-    position: absolute;
-    top: 0;
-    color: #000;
-    width: 13px;
-    height: 13px;
-    display: inline-block;
-    visibility: visible;
-    padding-left: 0px;
-    text-align: center;
-    content: " ";
-    border-radius: 3px;
-  }
-
-  input[type="checkbox"]:checked::after {
-    content: "✓";
-    color: #fff;
-    line-height: 14px;
-    font-size: 10px;
-    font-weight: bold;
-    background-color: var(--vp-c-brand-1);
-  }
+}
+.vp-doc ul.task-list input[type=checkbox] {
+  cursor: pointer;
+  position: relative;
+  width: 13px;
+  height: 13px;
+}
+.vp-doc ul.task-list input[type=checkbox]::after {
+  position: absolute;
+  top: 0;
+  color: #000;
+  width: 13px;
+  height: 13px;
+  display: inline-block;
+  visibility: visible;
+  padding-left: 0px;
+  text-align: center;
+  content: " ";
+  border-radius: 3px;
+}
+.vp-doc ul.task-list input[type=checkbox]:checked::after {
+  content: "✓";
+  color: #fff;
+  line-height: 14px;
+  font-size: 10px;
+  font-weight: bold;
+  background-color: var(--vp-c-brand-1);
 }
 
-.VPImage.logo{
+.VPImage.logo {
   width: 24px;
   height: 24px;
 }

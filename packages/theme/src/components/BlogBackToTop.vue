@@ -40,7 +40,7 @@ const iconSVGStr = computed(() => backToTopConfig?.value?.icon)
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .back-to-top {
   position: fixed;
   width: v-bind(docWidth);
@@ -52,29 +52,26 @@ const iconSVGStr = computed(() => backToTopConfig?.value?.icon)
   display: flex;
   justify-content: right;
   z-index: 200;
-
-  &:hover {
-    opacity: 1;
-  }
-
-  .icon-wrapper {
-    cursor: pointer;
-    border-radius: 50%;
-    position: relative;
-    right: -80px;
-    background-color: var(--vp-c-bg);
-    box-shadow: var(--box-shadow);
-    padding: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--vp-c-brand-soft);
-    color: var(--vp-c-brand-1);
-
-    &:hover {
-      box-shadow: var(--box-shadow-hover);
-    }
-  }
+}
+.back-to-top:hover {
+  opacity: 1;
+}
+.back-to-top .icon-wrapper {
+  cursor: pointer;
+  border-radius: 50%;
+  position: relative;
+  right: -80px;
+  background-color: var(--vp-c-bg);
+  box-shadow: var(--box-shadow);
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+}
+.back-to-top .icon-wrapper:hover {
+  box-shadow: var(--box-shadow-hover);
 }
 
 @media screen and (max-width: 1200px) {

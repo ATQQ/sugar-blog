@@ -125,20 +125,17 @@ router.onAfterRouteChange = () => {
   </ClientOnly>
 </template>
 
-<style lang="scss" scoped>
-.el-pagination-wrapper {
-  :deep(.sugar-pagination li.is-active.number) {
-    background-color: var(--vp-c-brand-2);
-  }
-  :deep(.sugar-pagination button:hover) {
-    color: var(--vp-c-brand-2);
-  }
-
-  :deep(.sugar-pager li:not(.is-active):hover) {
-    color: var(--vp-c-brand-2);
-  }
-  :deep(.sugar-input__wrapper:focus-within) {
-    box-shadow: 0 0 0 1px var(--vp-c-brand-2) inset;
-  }
+<style scoped>
+.el-pagination-wrapper :deep(.sugar-pagination li.is-active.number) {
+  background-color: var(--vp-c-brand-2);
+}
+.el-pagination-wrapper :deep(.sugar-pagination button:hover) {
+  color: var(--vp-c-brand-2);
+}
+.el-pagination-wrapper :deep(.sugar-pager li:not(.is-active):hover) {
+  color: var(--vp-c-brand-2);
+}
+.el-pagination-wrapper :deep(.sugar-input__wrapper:focus-within) {
+  box-shadow: 0 0 0 1px var(--vp-c-brand-2) inset;
 }
 </style>

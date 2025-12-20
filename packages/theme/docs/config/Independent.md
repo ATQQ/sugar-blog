@@ -24,7 +24,8 @@ pnpm add @sugarat/theme
 
 安装主题依赖的一些第三方库
 ```sh
-pnpm add @element-plus/icons-vue element-plus vue sass pagefind
+# 内置搜索依赖，如果关闭内置搜索则不需要安装
+pnpm add pagefind
 ```
 
 ### 引入主题

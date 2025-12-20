@@ -63,7 +63,7 @@ function handleClose() {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .global-alert {
   position: fixed;
   z-index: 999;
@@ -73,16 +73,16 @@ function handleClose() {
   left: 50%;
   transform: translateX(-50%);
   width: auto;
-  :deep(.sugar-alert__content) {
-    padding-right: 20px;
-  }
 }
+.global-alert :deep(.sugar-alert__content) {
+  padding-right: 20px;
+}
+
 @media screen and (max-width: 1100px) {
   .global-alert {
     width: 50%;
   }
 }
-
 @media screen and (max-width: 600px) {
   .global-alert {
     width: 90%;

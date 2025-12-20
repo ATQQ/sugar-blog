@@ -17,18 +17,17 @@ defineProps({
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .sugar-image {
   position: relative;
   display: inline-block;
   overflow: hidden;
-
-  &__inner {
-    width: 100%;
-    height: 100%;
-    vertical-align: top;
-    object-fit: inherit;
-    cursor: pointer;
-  }
+}
+.sugar-image__inner {
+  width: 100%;
+  height: 100%;
+  vertical-align: top;
+  object-fit: inherit;
+  cursor: pointer;
 }
 </style>

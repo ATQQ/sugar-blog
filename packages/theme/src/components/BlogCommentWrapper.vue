@@ -52,7 +52,7 @@ const labelText = computed(() => {
   </div>
 </template>
 
-<style scoped lang="scss">
+<style scoped>
 .comment-btn-wrapper {
   position: fixed;
   width: v-bind(docWidth);
@@ -64,49 +64,42 @@ const labelText = computed(() => {
   display: flex;
   justify-content: right;
   z-index: 200;
-
-  &:hover {
-    opacity: 1;
-  }
-
-  .icon-wrapper,
-  .icon-wrapper-text {
-    cursor: pointer;
-    border-radius: 50%;
-    position: relative;
-    right: -80px;
-    background-color: var(--vp-c-bg);
-    box-shadow: var(--box-shadow);
-    padding: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--vp-c-brand-soft);
-    color: var(--vp-c-brand-1);
-
-    &:hover {
-      box-shadow: var(--box-shadow-hover);
-    }
-  }
-
-  .icon-wrapper-text {
-    border-radius: 2px;
-    padding: 2px 6px;
-
-    span.text {
-      font-size: 12px;
-      margin-left: 4px;
-    }
-  }
+}
+.comment-btn-wrapper:hover {
+  opacity: 1;
+}
+.comment-btn-wrapper .icon-wrapper,
+.comment-btn-wrapper .icon-wrapper-text {
+  cursor: pointer;
+  border-radius: 50%;
+  position: relative;
+  right: -80px;
+  background-color: var(--vp-c-bg);
+  box-shadow: var(--box-shadow);
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+}
+.comment-btn-wrapper .icon-wrapper:hover,
+.comment-btn-wrapper .icon-wrapper-text:hover {
+  box-shadow: var(--box-shadow-hover);
+}
+.comment-btn-wrapper .icon-wrapper-text {
+  border-radius: 2px;
+  padding: 2px 6px;
+}
+.comment-btn-wrapper .icon-wrapper-text span.text {
+  font-size: 12px;
+  margin-left: 4px;
 }
 
 @media screen and (max-width: 1200px) {
-  .comment-btn-wrapper {
-
-    .icon-wrapper,
-    .icon-wrapper-text {
-      position: static;
-    }
+  .comment-btn-wrapper .icon-wrapper,
+  .comment-btn-wrapper .icon-wrapper-text {
+    position: static;
   }
 }
 </style>

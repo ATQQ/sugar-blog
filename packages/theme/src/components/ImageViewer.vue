@@ -249,7 +249,7 @@ function handleKeydown(e: KeyboardEvent) {
   </Teleport>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .sugar-image-viewer__wrapper {
   position: fixed;
   top: 0;
@@ -268,7 +268,7 @@ function handleKeydown(e: KeyboardEvent) {
   height: 100%;
   top: 0;
   left: 0;
-  opacity: .5;
+  opacity: 0.5;
   background: #000;
 }
 
@@ -279,7 +279,7 @@ function handleKeydown(e: KeyboardEvent) {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  opacity: .8;
+  opacity: 0.8;
   cursor: pointer;
   box-sizing: border-box;
   user-select: none;
@@ -288,17 +288,15 @@ function handleKeydown(e: KeyboardEvent) {
   width: 44px;
   height: 44px;
   font-size: 24px;
-
-  &:hover {
-    border-color: #fff;
-    background-color: #909399;
-  }
-
-  &.is-disabled {
-    cursor: not-allowed;
-    opacity: .3;
-    background-color: #606266;
-  }
+}
+.sugar-image-viewer__btn:hover {
+  border-color: #fff;
+  background-color: #909399;
+}
+.sugar-image-viewer__btn.is-disabled {
+  cursor: not-allowed;
+  opacity: 0.3;
+  background-color: #606266;
 }
 
 .sugar-image-viewer__close {
@@ -333,35 +331,32 @@ function handleKeydown(e: KeyboardEvent) {
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: .8;
+  opacity: 0.8;
   box-sizing: border-box;
   user-select: none;
-
-  &__inner {
-    width: 100%;
-    height: 100%;
-    text-align: justify;
-    cursor: default;
-    font-size: 23px;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    gap: 12px;
-
-    svg {
-        cursor: pointer;
-    }
-  }
-
-  &__divider {
-    display: inline-block;
-    width: 1px;
-    height: 18px;
-    margin: 0 10px;
-    background: hsla(0,0%,100%,.5);
-    vertical-align: middle;
-  }
+}
+.sugar-image-viewer__actions__inner {
+  width: 100%;
+  height: 100%;
+  text-align: justify;
+  cursor: default;
+  font-size: 23px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 12px;
+}
+.sugar-image-viewer__actions__inner svg {
+  cursor: pointer;
+}
+.sugar-image-viewer__actions__divider {
+  display: inline-block;
+  width: 1px;
+  height: 18px;
+  margin: 0 10px;
+  background: hsla(0, 0%, 100%, 0.5);
+  vertical-align: middle;
 }
 
 .sugar-image-viewer__canvas {
@@ -379,28 +374,34 @@ function handleKeydown(e: KeyboardEvent) {
   user-select: none;
   pointer-events: auto;
   cursor: grab;
-  transition: transform .3s;
-
-  &:active {
-    cursor: grabbing;
-  }
+  transition: transform 0.3s;
+}
+.sugar-image-viewer__img:active {
+  cursor: grabbing;
 }
 
 .viewer-fade-enter-active {
-  animation: viewer-fade-in .3s;
+  animation: viewer-fade-in 0.3s;
 }
 
 .viewer-fade-leave-active {
-  animation: viewer-fade-out .3s;
+  animation: viewer-fade-out 0.3s;
 }
 
 @keyframes viewer-fade-in {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
-
 @keyframes viewer-fade-out {
-  0% { opacity: 1; }
-  100% { opacity: 0; }
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 </style>

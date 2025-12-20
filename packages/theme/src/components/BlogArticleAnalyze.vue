@@ -237,19 +237,18 @@ const timeTitle = computed(() =>
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .doc-analyze {
   color: var(--vp-c-text-2);
   font-size: 14px;
   margin-bottom: 20px;
   display: flex;
   justify-content: center;
-
-  span {
-    margin-right: 16px;
-    display: flex;
-    align-items: center;
-  }
+}
+.doc-analyze span {
+  margin-right: 16px;
+  display: flex;
+  align-items: center;
 }
 
 .meta-des,
@@ -260,46 +259,42 @@ const timeTitle = computed(() =>
   margin-top: 6px;
   display: flex;
   flex-wrap: wrap;
-
-  >span {
-    margin-right: 16px;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-
-    .icon {
-      margin-right: 4px;
-      --color: inherit;
-      align-items: center;
-      display: inline-flex;
-      height: 1em;
-      justify-content: center;
-      line-height: 1em;
-      position: relative;
-      width: 1em;
-      fill: currentColor;
-      color: var(--color) inherit;
-      font-size: inherit;
-    }
-  }
-
-  .link {
-    color: var(--vp-c-text-2);
-
-    &:hover {
-      color: var(--vp-c-brand-1);
-      cursor: pointer;
-    }
-  }
+}
+.meta-des > span,
+.new-line-meta-des > span {
+  margin-right: 16px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.meta-des > span .icon,
+.new-line-meta-des > span .icon {
+  margin-right: 4px;
+  --color: inherit;
+  align-items: center;
+  display: inline-flex;
+  height: 1em;
+  justify-content: center;
+  line-height: 1em;
+  position: relative;
+  width: 1em;
+  fill: currentColor;
+  color: var(--color) inherit;
+  font-size: inherit;
+}
+.meta-des .link,
+.new-line-meta-des .link {
+  color: var(--vp-c-text-2);
+}
+.meta-des .link:hover,
+.new-line-meta-des .link:hover {
+  color: var(--vp-c-brand-1);
+  cursor: pointer;
 }
 
-.tags {
-  a.link:not(:last-child) {
-    &::after {
-      content: '·';
-      display: inline-block;
-      padding: 0 4px;
-    }
-  }
+.tags a.link:not(:last-child)::after {
+  content: "·";
+  display: inline-block;
+  padding: 0 4px;
 }
 </style>

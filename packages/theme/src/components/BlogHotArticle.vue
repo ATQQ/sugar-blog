@@ -98,7 +98,7 @@ const showChangeBtn = computed(() => {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .card {
   position: relative;
   margin: 0 auto 10px;
@@ -111,10 +111,9 @@ const showChangeBtn = computed(() => {
   transition: all 0.3s;
   background-color: rgba(var(--bg-gradient));
   display: flex;
-
-  &:hover {
-    box-shadow: var(--box-shadow-hover);
-  }
+}
+.card:hover {
+  box-shadow: var(--box-shadow-hover);
 }
 
 .card-header {
@@ -122,12 +121,11 @@ const showChangeBtn = computed(() => {
   width: 100%;
   justify-content: space-between;
   align-items: center;
-
-  .title {
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-  }
+}
+.card-header .title {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
 }
 
 .recommend {
@@ -141,72 +139,63 @@ const showChangeBtn = computed(() => {
   margin: 0;
   padding: 0 10px 0 0px;
   width: 100%;
-
-  li {
-    display: flex;
-
-    &:nth-child(1) .num {
-      background-color: #f56c6c;
-      color: #fff;
-      font-size: 12px;
-      border-radius: 8px 0 8px 0;
-    }
-
-    &:nth-child(2) .num {
-      background-color: #67c23a;
-      color: #fff;
-      font-size: 12px;
-      border-radius: 0 8px 0 8px;
-    }
-
-    &:nth-child(3) .num {
-      background-color: var(--vp-c-brand-2);
-      color: #fff;
-      font-size: 12px;
-      border-radius: 6px;
-    }
-
-    .num {
-      display: block;
-      font-size: 14px;
-      color: var(--description-font-color);
-      font-weight: 600;
-      margin: 6px 12px 10px 0;
-      width: 18px;
-      height: 18px;
-      line-height: 18px;
-      text-align: center;
-    }
-
-    .des {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .title {
-      font-size: 14px;
-      color: var(--vp-c-text-1);
-      font-weight: 500;
-      position: relative;
-      cursor: pointer;
-    }
-
-    .title:hover::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      height: 0;
-      bottom: -3px;
-      border-bottom: 1px solid #b1b3b8;
-    }
-
-    .suffix {
-      font-size: 12px;
-      color: var(--vp-c-text-2);
-    }
-  }
+}
+.recommend-container li {
+  display: flex;
+}
+.recommend-container li:nth-child(1) .num {
+  background-color: #f56c6c;
+  color: #fff;
+  font-size: 12px;
+  border-radius: 8px 0 8px 0;
+}
+.recommend-container li:nth-child(2) .num {
+  background-color: #67c23a;
+  color: #fff;
+  font-size: 12px;
+  border-radius: 0 8px 0 8px;
+}
+.recommend-container li:nth-child(3) .num {
+  background-color: var(--vp-c-brand-2);
+  color: #fff;
+  font-size: 12px;
+  border-radius: 6px;
+}
+.recommend-container li .num {
+  display: block;
+  font-size: 14px;
+  color: var(--description-font-color);
+  font-weight: 600;
+  margin: 6px 12px 10px 0;
+  width: 18px;
+  height: 18px;
+  line-height: 18px;
+  text-align: center;
+}
+.recommend-container li .des {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.recommend-container li .title {
+  font-size: 14px;
+  color: var(--vp-c-text-1);
+  font-weight: 500;
+  position: relative;
+  cursor: pointer;
+}
+.recommend-container li .title:hover::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 0;
+  bottom: -3px;
+  border-bottom: 1px solid #b1b3b8;
+}
+.recommend-container li .suffix {
+  font-size: 12px;
+  color: var(--vp-c-text-2);
 }
 
 .empty-text {

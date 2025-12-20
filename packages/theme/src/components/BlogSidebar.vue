@@ -16,7 +16,7 @@ const sidebarStyle = computed(() =>
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .sidebar.card {
   margin-top: 40px;
 }

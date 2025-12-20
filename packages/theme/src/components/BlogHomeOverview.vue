@@ -60,7 +60,7 @@ const titles = computed(() => (frontmatter.value?.blog?.analysis?.articles?.titl
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .card {
   position: relative;
   margin: 0 auto 10px;
@@ -74,10 +74,9 @@ const titles = computed(() => (frontmatter.value?.blog?.analysis?.articles?.titl
   background-color: rgba(var(--bg-gradient));
   display: flex;
   flex-direction: column;
-
-  &:hover {
-    box-shadow: var(--box-shadow-hover);
-  }
+}
+.card:hover {
+  box-shadow: var(--box-shadow-hover);
 }
 
 .overview-data {
@@ -101,15 +100,13 @@ const titles = computed(() => (frontmatter.value?.blog?.analysis?.articles?.titl
   align-items: center;
   position: relative;
   margin: 0 10px;
-
-  .count {
-    font-size: 18px;
-  }
-
-  .label {
-    margin-top: 6px;
-    font-size: 12px;
-    color: var(--description-font-color);
-  }
+}
+.overview-item .count {
+  font-size: 18px;
+}
+.overview-item .label {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--description-font-color);
 }
 </style>

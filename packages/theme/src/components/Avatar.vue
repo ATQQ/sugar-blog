@@ -38,7 +38,7 @@ const sizeStyle = computed(() => {
   </span>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .blog-avatar {
   display: inline-flex;
   justify-content: center;
@@ -51,13 +51,12 @@ const sizeStyle = computed(() => {
   font-size: 14px;
   vertical-align: middle;
   min-width: 50px;
-
-  > img {
-    display: block;
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-  }
+}
+.blog-avatar > img {
+  display: block;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
 
 .blog-avatar--circle {

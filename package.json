@@ -52,6 +52,7 @@
     "javascript-stringify": "^2.1.0",
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.3",
+    "sass": "^1.97.1",
     "simple-git-hooks": "^2.9.0",
     "tsup": " ^7.2.0",
     "typescript": "5.1.6",

@@ -1,6 +1,6 @@
 // @sugarat/theme index
 // override style
-import './styles/index.scss'
+import './styles/index.css'
 
 // element-ui-copy
 import './styles/el-base.css'

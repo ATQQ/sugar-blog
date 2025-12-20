@@ -188,7 +188,7 @@ const openTransition = useDarkTransitionConfig()
   </Layout>
 </template>
 
-<style scoped lang="scss">
+<style scoped>
 .home {
   margin: 0 auto;
   padding: 20px;
@@ -200,7 +200,6 @@ const openTransition = useDarkTransitionConfig()
     padding-top: var(--vp-nav-height);
   }
 }
-
 .header-banner {
   width: 100%;
   padding: 60px 0;
@@ -229,31 +228,25 @@ const openTransition = useDarkTransitionConfig()
     top: 40px;
   }
 }
-
 @media screen and (max-width: 767px) {
   .content-wrapper {
     flex-wrap: wrap;
   }
-
   .blog-info-wrapper {
     margin: 20px 0;
     width: 100%;
   }
-
   .normal-mode {
     display: none;
   }
-
   .minify-mode {
     display: block;
   }
 }
-
 @media screen and (min-width: 768px) {
   .minify-mode {
     display: none;
   }
-
   .normal-mode {
     display: block;
   }

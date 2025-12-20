@@ -206,7 +206,7 @@ function handleLinkClick(link: string) {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .card {
   position: relative;
   margin: 0 auto 10px;
@@ -219,17 +219,17 @@ function handleLinkClick(link: string) {
   transition: all 0.3s;
   background-color: rgba(var(--bg-gradient));
   display: flex;
-
-  &:hover {
-    box-shadow: var(--box-shadow-hover);
-  }
+}
+.card:hover {
+  box-shadow: var(--box-shadow-hover);
 }
 
 .recommend {
   flex-direction: column;
   padding: 0px;
 }
-.recommend.card{
+
+.recommend.card {
   padding: 10px;
 }
 
@@ -240,63 +240,48 @@ function handleLinkClick(link: string) {
   margin: 0;
   padding: 0 10px 0 0px;
   width: 100%;
-
-  &.hide-num>li{
-    padding: 5px 0;
-  }
-  li {
-    display: flex;
-
-    .num {
-      display: block;
-      font-size: 14px;
-      color: var(--description-font-color);
-      font-weight: 600;
-      margin: 6px 8px 10px 0;
-      width: 22px;
-      height: 18px;
-      line-height: 18px;
-      text-align: center;
-    }
-
-    .des {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .title {
-      font-size: 14px;
-      color: var(--vp-c-text-1);
-      word-break: break-all;
-      white-space: break-spaces;
-      font-weight: 500;
-      position: relative;
-      cursor: pointer;
-      transition: color .25s;
-      &.current,&:hover {
-        color: var(--vp-c-brand-1);
-      }
-    }
-
-    // .title:hover::after {
-    //   content: "";
-    //   position: absolute;
-    //   left: 0;
-    //   right: 0;
-    //   height: 0;
-    //   bottom: -3px;
-    //   border-bottom: 1px solid #b1b3b8;
-    // }
-
-    .suffix {
-      font-size: 12px;
-      color: var(--vp-c-text-2);
-    }
-  }
+}
+.recommend-container.hide-num > li {
+  padding: 5px 0;
+}
+.recommend-container li {
+  display: flex;
+}
+.recommend-container li .num {
+  display: block;
+  font-size: 14px;
+  color: var(--description-font-color);
+  font-weight: 600;
+  margin: 6px 8px 10px 0;
+  width: 22px;
+  height: 18px;
+  line-height: 18px;
+  text-align: center;
+}
+.recommend-container li .des {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.recommend-container li .title {
+  font-size: 14px;
+  color: var(--vp-c-text-1);
+  word-break: break-all;
+  white-space: break-spaces;
+  font-weight: 500;
+  position: relative;
+  cursor: pointer;
+  transition: color 0.25s;
+}
+.recommend-container li .title.current, .recommend-container li .title:hover {
+  color: var(--vp-c-brand-1);
+}
+.recommend-container li .suffix {
+  font-size: 12px;
+  color: var(--vp-c-text-2);
 }
 
 .card-header {
@@ -305,12 +290,11 @@ function handleLinkClick(link: string) {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
-
-  .title {
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-  }
+}
+.card-header .title {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
 }
 
 .empty-text {

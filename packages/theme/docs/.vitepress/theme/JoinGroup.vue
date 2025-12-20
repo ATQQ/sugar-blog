@@ -52,51 +52,50 @@ const props = defineProps({
   </div>
 </template>
 
-<style scoped lang="scss">
+<style scoped>
 .join-group {
   text-align: center;
-
-  img {
-    max-width: 200px;
-    display: inline-block;
-    cursor: pointer;
-  }
-
-  p {
-    padding: 16px 0;
-  }
-
-  a,summary>span {
-    background: linear-gradient(90deg, #58e3f5, #dabcfc);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    padding-bottom: 4px;
-    border-bottom: 1px dashed #58e3f5;
-    font-weight: bolder;
-  }
 }
+.join-group img {
+  max-width: 200px;
+  display: inline-block;
+  cursor: pointer;
+}
+.join-group p {
+  padding: 16px 0;
+}
+.join-group a, .join-group summary > span {
+  background: linear-gradient(90deg, #58e3f5, #dabcfc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding-bottom: 4px;
+  border-bottom: 1px dashed #58e3f5;
+  font-weight: bolder;
+}
+
 .scan-card-list {
   display: flex;
   align-items: center;
   justify-content: center;
-  .scan-card{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 0 16px;
-    img {
-      height: 200px;
-      border-radius: 8px;
-    }
-    span {
-      margin-top: 8px;
-      font-size: 16px;
-      font-weight: bold;
-    }
-  }
 }
-details,summary{
+.scan-card-list .scan-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 16px;
+}
+.scan-card-list .scan-card img {
+  height: 200px;
+  border-radius: 8px;
+}
+.scan-card-list .scan-card span {
+  margin-top: 8px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+details, summary {
   padding-bottom: 10px;
 }
 </style>
