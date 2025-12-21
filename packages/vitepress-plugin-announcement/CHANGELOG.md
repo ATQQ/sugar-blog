@@ -5,6 +5,7 @@
 ### Patch Changes
 
 - 4e56ed4: chore: clean deps
+- feat: support image alt
 
 ## 0.1.7-beta.0
 

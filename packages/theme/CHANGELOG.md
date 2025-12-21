@@ -4,13 +4,11 @@
 
 ### Patch Changes
 
-- 1cbe27f: chore: remove sass
-- 4e56ed4: chore: clean deps
-- d1fdc6c: perf: update
-- Updated dependencies [4e56ed4]
-- Updated dependencies [d1fdc6c]
-  - vitepress-plugin-announcement@0.1.7
-  - vitepress-plugin-pagefind@0.4.18
+- refactor: 优化代码结构，移除冗余逻辑
+- chore: 减少外部依赖（移除 element-plus, sass, vue, swiper等）
+- chore: 友链部分构建优化
+- chore: 第三方依赖更新
+- docs: 校对文档内容
 
 ## 0.5.12-beta.2
 

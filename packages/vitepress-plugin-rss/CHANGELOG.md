@@ -1,8 +1,18 @@
 # vitepress-plugin-rss
 
+## 0.4.2
+
+### Patch Changes
+
+- feat: support transform arr
+- chore: 修正日志语法问题
+- fix: type error
+- fix: allow partial locale overrides
+
 ## 0.4.1
 
 ### Patch Changes
+
 - feat: support support published sorted
 - fix: published date invalid in RSS feed
 - fix: Remove automatic i18n filtering from RSS generation
