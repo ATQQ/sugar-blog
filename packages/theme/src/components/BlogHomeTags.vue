@@ -103,7 +103,7 @@ watch(
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .card {
   position: relative;
   margin: 0 auto 10px;
@@ -116,10 +116,9 @@ watch(
   transition: all 0.3s;
   background-color: rgba(var(--bg-gradient));
   display: flex;
-
-  &:hover {
-    box-shadow: var(--box-shadow-hover);
-  }
+}
+.card:hover {
+  box-shadow: var(--box-shadow-hover);
 }
 
 .card-header {
@@ -127,12 +126,11 @@ watch(
   width: 100%;
   justify-content: space-between;
   align-items: center;
-
-  .title {
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-  }
+}
+.card-header .title {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
 }
 
 .tags {
@@ -143,11 +141,10 @@ watch(
   display: flex;
   flex-wrap: wrap;
   margin-top: 10px;
-
-  li {
-    margin-right: 10px;
-    margin-bottom: 10px;
-    cursor: pointer;
-  }
+}
+.tag-list li {
+  margin-right: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
 }
 </style>

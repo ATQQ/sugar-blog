@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable unused-imports/no-unused-vars */
 const fs = require('fs')
 const path = require('path')
 
@@ -32,19 +34,19 @@ if (!templatePkg.dependencies)
 templatePkg.dependencies['@sugarat/theme'] = `^${themeVersion}`
 writeJSON(templatePkgPath, templatePkg)
 
-const createThemePkg = readJSON(createThemePkgPath)
-const currentVersion = createThemePkg.version
-const nextVersion = bumpPatch(currentVersion)
-createThemePkg.version = nextVersion
-writeJSON(createThemePkgPath, createThemePkg)
+// const createThemePkg = readJSON(createThemePkgPath)
+// const currentVersion = createThemePkg.version
+// const nextVersion = bumpPatch(currentVersion)
+// createThemePkg.version = nextVersion
+// writeJSON(createThemePkgPath, createThemePkg)
 
-const changelog = fs.readFileSync(changelogPath, 'utf-8')
-if (!changelog.includes(`## ${nextVersion}`)) {
-  const header = `## ${nextVersion}\n### Patch Changes\n\n- @sugarat/theme@${themeVersion}\n\n`
-  const updated = changelog.replace(/^# @sugarat\/create-theme\n/, `# @sugarat/create-theme\n\n${header}`)
-  fs.writeFileSync(changelogPath, updated, 'utf-8')
-}
+// const changelog = fs.readFileSync(changelogPath, 'utf-8')
+// if (!changelog.includes(`## ${nextVersion}`)) {
+//   const header = `## ${nextVersion}\n### Patch Changes\n\n- @sugarat/theme@${themeVersion}\n\n`
+//   const updated = changelog.replace(/^# @sugarat\/create-theme\n/, `# @sugarat/create-theme\n\n${header}`)
+//   fs.writeFileSync(changelogPath, updated, 'utf-8')
+// }
 
 console.log(`Updated @sugarat/theme to ^${themeVersion}`)
-console.log(`Bumped @sugarat/create-theme to ${nextVersion}`)
-console.log('Changelog updated')
+// console.log(`Bumped @sugarat/create-theme to ${nextVersion}`)
+// console.log('Changelog updated')

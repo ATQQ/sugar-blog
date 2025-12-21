@@ -16,25 +16,35 @@ tag:
 
 ![](https://cdn.upyun.sugarat.top/mdImg/sugar/d1ece3bc3ff5ee15bb5401b0d20da266)
 
-````md
-::: code-group
-
+:::code-group
 ```sh [npm]
-npm install vitepress-plugin-group-icons
+npm create @sugarat/theme@latest
 ```
-
 ```sh [yarn]
-yarn add vitepress-plugin-group-icons
+yarn create @sugarat/theme
 ```
-
 ```sh [pnpm]
-pnpm add vitepress-plugin-group-icons
+pnpm create @sugarat/theme
 ```
-
 ```sh [bun]
-bun add vitepress-plugin-group-icons
+bun create @sugarat/theme
 ```
+:::
 
+````md
+:::code-group
+```sh [npm]
+npm create @sugarat/theme@latest
+```
+```sh [yarn]
+yarn create @sugarat/theme
+```
+```sh [pnpm]
+pnpm create @sugarat/theme
+```
+```sh [bun]
+bun create @sugarat/theme
+```
 :::
 ````
 
@@ -372,7 +382,7 @@ export default {
 
 效果如下，详见 [个人作品展示](./../work.md)
 
-![](https://img.cdn.sugarat.top/mdImg/MTY4NzA4ODczMzkwNg==687088733906)
+![](https://img.cdn.sugarat.top/mdImg/MTY4NzA4ODczMzkwNg==687088733906~fmt.webp)
 
 新建一个`works.md`文件，放入以下内容
   

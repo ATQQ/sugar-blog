@@ -18,13 +18,13 @@ sidebar: false
 
 按照官方的给的定位，VitePress 主打是主题（个人感觉就像[Hexo](https://hexo.io/zh-cn/)丰富多彩的主题一样），不提供插件系统
 
-![](https://img.cdn.sugarat.top/mdImg/MTY3NTU3MjY0MjgzNQ==675572642835)
+![](https://img.cdn.sugarat.top/mdImg/MTY3NTU3MjY0MjgzNQ==675572642835~fmt.webp)
 
 在笔者进行博客迁移的时候，将主题分离了出来，可供单独使用
 
 新旧对比
 
-![新旧博客对比](https://img.cdn.sugarat.top/mdImg/MTY3NTU3NDk0OTI2Ng==675574949266)
+![新旧博客对比](https://img.cdn.sugarat.top/mdImg/MTY3NTU3NDk0OTI2Ng==675574949266~fmt.webp)
 
 风格借鉴了 [reco](https://vuepress-theme-reco.recoluan.com/) ，[掘金](https://juejin.cn/)，[surmon](https://surmon.me/)等等，组件部分用了 [element-plus](https://element-plus.gitee.io/zh-CN/)
 

@@ -39,6 +39,8 @@ provide('carousel', {
 })
 
 function startTimer() {
+  if (typeof window === 'undefined')
+    return
   if (props.interval <= 0 || !props.autoplay || timer.value)
     return
   timer.value = setInterval(playSlides, props.interval)
@@ -151,15 +153,13 @@ onUnmounted(() => {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .sugar-carousel {
   position: relative;
-  overflow: hidden; // simplified
-  &:hover {
-    .sugar-carousel__arrow {
-      display: inline-flex;
-    }
-  }
+  overflow: hidden;
+}
+.sugar-carousel:hover .sugar-carousel__arrow {
+  display: inline-flex;
 }
 
 .sugar-carousel__container {
@@ -184,10 +184,9 @@ onUnmounted(() => {
   background-color: transparent;
   padding: 12px 4px;
   cursor: pointer;
-
-  &.is-active button {
-    opacity: 1;
-  }
+}
+.sugar-carousel__indicator.is-active button {
+  opacity: 1;
 }
 
 .sugar-carousel__button {
@@ -195,13 +194,13 @@ onUnmounted(() => {
   opacity: 0.48;
   width: 30px;
   height: 2px;
-  background-color: #d3dce6; // element-plus default like
+  background-color: #d3dce6;
   border: none;
   outline: none;
   padding: 0;
   margin: 0;
   cursor: pointer;
-  transition: .3s;
+  transition: 0.3s;
 }
 
 .sugar-carousel__arrow {
@@ -212,9 +211,9 @@ onUnmounted(() => {
   height: 36px;
   width: 36px;
   cursor: pointer;
-  transition: .3s;
+  transition: 0.3s;
   border-radius: 50%;
-  background-color: rgba(31, 45, 61, .11);
+  background-color: rgba(31, 45, 61, 0.11);
   color: #fff;
   position: absolute;
   top: 50%;
@@ -225,19 +224,17 @@ onUnmounted(() => {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-
-  &:hover {
-    background-color: rgba(31, 45, 61, .23);
-  }
-
-  &--left {
-    left: 16px;
-  }
-
-  &--right {
-    right: 16px;
-  }
 }
+.sugar-carousel__arrow:hover {
+  background-color: rgba(31, 45, 61, 0.23);
+}
+.sugar-carousel__arrow--left {
+  left: 16px;
+}
+.sugar-carousel__arrow--right {
+  right: 16px;
+}
+
 .carousel-arrow-left-enter-from,
 .carousel-arrow-left-leave-to {
   opacity: 0;

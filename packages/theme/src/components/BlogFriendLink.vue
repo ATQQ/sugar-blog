@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { useDark, useIntervalFn } from '@vueuse/core'
-import { computed, onUnmounted, ref, watch } from 'vue'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useFriendData } from '../composables/config/blog'
-import { getImageUrl, shuffleArray } from '../utils/client'
+import { getImageUrl } from '../utils/client'
 import type { Theme } from '../'
 import { friendLinkSvgStr } from '../constants/svg'
 import Avatar from './Avatar.vue'
@@ -36,10 +36,10 @@ const openScroll = computed(() => {
 
 const friendList = computed(() => {
   const data = [...friendConfig.value.list]
-  // 简单的随机打乱
-  if (friendConfig.value.random) {
-    data.splice(0, data.length, ...shuffleArray(data))
-  }
+  // 简单的随机打乱，在数据导入侧打乱，避免SSG与CSR内容不一致
+  // if (friendConfig.value.random) {
+  //   data.splice(0, data.length, ...shuffleArray(data))
+  // }
 
   // 展示个数限制，删除多余的
   if (scrollSpeed.value === 0 && limit.value) {
@@ -112,9 +112,13 @@ watch(openScroll, (val) => {
     currentIndex.value = 0
     isTransitioning.value = false
   }
-}, { immediate: true })
+})
 
-// TODO: SSR渲染支持
+onMounted(() => {
+  if (openScroll.value)
+    resume()
+})
+
 onUnmounted(() => {
   pause()
 })
@@ -147,7 +151,7 @@ onUnmounted(() => {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .card {
   position: relative;
   margin: 0 auto 10px;
@@ -160,10 +164,9 @@ onUnmounted(() => {
   transition: all 0.3s;
   background-color: rgba(var(--bg-gradient));
   display: flex;
-
-  &:hover {
-    box-shadow: var(--box-shadow-hover);
-  }
+}
+.card:hover {
+  box-shadow: var(--box-shadow-hover);
 }
 
 .card-header {
@@ -171,12 +174,11 @@ onUnmounted(() => {
   width: 100%;
   justify-content: space-between;
   align-items: center;
-
-  .title {
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-  }
+}
+.card-header .title {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
 }
 
 .friend-wrapper {
@@ -195,43 +197,36 @@ onUnmounted(() => {
   margin: 0;
   padding: 10px 10px 0 0px;
   width: 100%;
-
   position: relative;
   width: 100%;
-
-  li {
-    box-sizing: border-box;
-    padding: 0 5px;
-    height: 76px;
-    cursor: pointer;
-
-    a {
-      display: flex;
-      align-items: center;
-    }
-
-    div {
-      padding-left: 10px;
-    }
-
-    .info-wrapper {
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-
-    .nickname {
-      font-size: 16px;
-      font-weight: 450;
-    }
-
-    .des {
-      color: var(--vp-c-text-2);
-      font-size: 14px;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-  }
+}
+.friend-list li {
+  box-sizing: border-box;
+  padding: 0 5px;
+  height: 76px;
+  cursor: pointer;
+}
+.friend-list li a {
+  display: flex;
+  align-items: center;
+}
+.friend-list li div {
+  padding-left: 10px;
+}
+.friend-list li .info-wrapper {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.friend-list li .nickname {
+  font-size: 16px;
+  font-weight: 450;
+}
+.friend-list li .des {
+  color: var(--vp-c-text-2);
+  font-size: 14px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 </style>

@@ -119,7 +119,7 @@ const isBoldTitle = computed(() => props.description || !!props.title)
   </transition>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 html.dark .sugar-alert {
   background-color: transparent;
 }
@@ -134,122 +134,96 @@ html.dark .sugar-alert {
   background-color: #fff;
   overflow: hidden;
   opacity: 1;
-
   display: flex;
   align-items: center;
-  transition: opacity .2s;
-
-  &.is-center {
-    justify-content: center;
-
-    .sugar-alert__content {
-      text-align: center;
-    }
-  }
-
-  &--success {
-    background-color: #f0f9eb;
-    color: #67c23a;
-
-    .sugar-alert__description {
-      color: #67c23a;
-    }
-
-  }
-
-  &--info {
-    background-color: #f4f4f5;
-    color: #909399;
-
-    .sugar-alert__description {
-      color: #909399;
-    }
-
-  }
-
-  &--warning {
-    background-color: #fdf6ec;
-    color: #e6a23c;
-
-    .sugar-alert__description {
-      color: #e6a23c;
-    }
-
-  }
-
-  &--error {
-    background-color: #fef0f0;
-    color: #f56c6c;
-
-    .sugar-alert__description {
-      color: #f56c6c;
-    }
-
-  }
-
-  &--primary {
-    background-color: var(--vp-c-brand-soft);
-    color: var(--vp-c-brand-1);
-
-    .sugar-alert__description {
-      color: var(--vp-c-brand-1);
-    }
-  }
-
-  &__content {
-    display: table-cell;
-    padding: 0 8px;
-    width: 100%; // Ensure content takes available space
-  }
-
-  &__icon {
-    font-size: 16px;
-    width: 16px;
-    display: table-cell;
-    color: inherit;
-    vertical-align: middle;
-
-    &.is-big {
-      font-size: 28px;
-      width: 28px;
-    }
-  }
-
-  &__title {
-    font-size: 13px;
-    line-height: 18px;
-    vertical-align: text-top;
-
-    &.is-bold {
-      font-weight: 700;
-    }
-  }
-
-  &__description {
-    font-size: 12px;
-    margin: 5px 0 0 0;
-    line-height: 1.5;
-  }
-
-  &__close-btn {
-    font-size: 12px;
-    opacity: 1;
-    position: absolute;
-    top: 12px;
-    right: 15px;
-    cursor: pointer;
-    color: var(--vp-c-text-2); // Use element colors if light
-
-    &.is-customed {
-      font-style: normal;
-      font-size: 11px;
-      line-height: 18px;
-    }
-
-    &:hover {
-      opacity: 0.7;
-    }
-  }
+  transition: opacity 0.2s;
+}
+.sugar-alert.is-center {
+  justify-content: center;
+}
+.sugar-alert.is-center .sugar-alert__content {
+  text-align: center;
+}
+.sugar-alert--success {
+  background-color: #f0f9eb;
+  color: #67c23a;
+}
+.sugar-alert--success .sugar-alert__description {
+  color: #67c23a;
+}
+.sugar-alert--info {
+  background-color: #f4f4f5;
+  color: #909399;
+}
+.sugar-alert--info .sugar-alert__description {
+  color: #909399;
+}
+.sugar-alert--warning {
+  background-color: #fdf6ec;
+  color: #e6a23c;
+}
+.sugar-alert--warning .sugar-alert__description {
+  color: #e6a23c;
+}
+.sugar-alert--error {
+  background-color: #fef0f0;
+  color: #f56c6c;
+}
+.sugar-alert--error .sugar-alert__description {
+  color: #f56c6c;
+}
+.sugar-alert--primary {
+  background-color: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+}
+.sugar-alert--primary .sugar-alert__description {
+  color: var(--vp-c-brand-1);
+}
+.sugar-alert__content {
+  display: table-cell;
+  padding: 0 8px;
+  width: 100%;
+}
+.sugar-alert__icon {
+  font-size: 16px;
+  width: 16px;
+  display: table-cell;
+  color: inherit;
+  vertical-align: middle;
+}
+.sugar-alert__icon.is-big {
+  font-size: 28px;
+  width: 28px;
+}
+.sugar-alert__title {
+  font-size: 13px;
+  line-height: 18px;
+  vertical-align: text-top;
+}
+.sugar-alert__title.is-bold {
+  font-weight: 700;
+}
+.sugar-alert__description {
+  font-size: 12px;
+  margin: 5px 0 0 0;
+  line-height: 1.5;
+}
+.sugar-alert__close-btn {
+  font-size: 12px;
+  opacity: 1;
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  cursor: pointer;
+  color: var(--vp-c-text-2);
+}
+.sugar-alert__close-btn.is-customed {
+  font-style: normal;
+  font-size: 11px;
+  line-height: 18px;
+}
+.sugar-alert__close-btn:hover {
+  opacity: 0.7;
 }
 
 .sugar-alert-fade-enter-from,
@@ -257,52 +231,39 @@ html.dark .sugar-alert {
   opacity: 0;
 }
 
-html.dark {
-  .sugar-alert {
-    &--success {
-      background-color: #1c2518;
-      color: #67c23a;
-
-      .sugar-alert__description {
-        color: #67c23a;
-      }
-    }
-
-    &--info {
-      background-color: #202121;
-      color: #909399;
-
-      .sugar-alert__description {
-        color: #909399;
-      }
-    }
-
-    &--warning {
-      background-color: #292218;
-      color: #e6a23c;
-
-      .sugar-alert__description {
-        color: #e6a23c;
-      }
-    }
-
-    &--error {
-      background-color: #2b1d1d;
-      color: #f56c6c;
-
-      .sugar-alert__description {
-        color: #f56c6c;
-      }
-    }
-
-    &--primary {
-      background-color: var(--vp-c-brand-soft);
-      color: var(--vp-c-brand-1);
-
-      .sugar-alert__description {
-        color: var(--vp-c-brand-1);
-      }
-    }
-  }
+html.dark .sugar-alert--success {
+  background-color: #1c2518;
+  color: #67c23a;
+}
+html.dark .sugar-alert--success .sugar-alert__description {
+  color: #67c23a;
+}
+html.dark .sugar-alert--info {
+  background-color: #202121;
+  color: #909399;
+}
+html.dark .sugar-alert--info .sugar-alert__description {
+  color: #909399;
+}
+html.dark .sugar-alert--warning {
+  background-color: #292218;
+  color: #e6a23c;
+}
+html.dark .sugar-alert--warning .sugar-alert__description {
+  color: #e6a23c;
+}
+html.dark .sugar-alert--error {
+  background-color: #2b1d1d;
+  color: #f56c6c;
+}
+html.dark .sugar-alert--error .sugar-alert__description {
+  color: #f56c6c;
+}
+html.dark .sugar-alert--primary {
+  background-color: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+}
+html.dark .sugar-alert--primary .sugar-alert__description {
+  color: var(--vp-c-brand-1);
 }
 </style>

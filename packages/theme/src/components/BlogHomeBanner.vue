@@ -85,28 +85,26 @@ async function changeSlogan() {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 h1 {
   text-align: center;
-  .name {
-    transition: all 0.25s ease-in-out 0.04s;
-    transform: translateY(0px);
-    opacity: 1;
-    font-weight: bold;
-    margin: 0 auto;
-    font-size: 36px;
-  }
-
-  .motto {
-    position: relative;
-    bottom: 0px;
-    font-size: 14px;
-    margin-left: 10px;
-
-    &::before {
-      content: '- ';
-    }
-  }
+}
+h1 .name {
+  transition: all 0.25s ease-in-out 0.04s;
+  transform: translateY(0px);
+  opacity: 1;
+  font-weight: bold;
+  margin: 0 auto;
+  font-size: 36px;
+}
+h1 .motto {
+  position: relative;
+  bottom: 0px;
+  font-size: 14px;
+  margin-left: 10px;
+}
+h1 .motto::before {
+  content: "- ";
 }
 
 @media screen and (max-width: 500px) {
@@ -114,28 +112,24 @@ h1 {
     display: none;
   }
 }
-
 @keyframes fade-in {
   0% {
     opacity: 0;
   }
-
   100% {
     opacity: 1;
   }
 }
-
 .inspiring-wrapper {
   margin: 16px 0;
   height: 32px;
   width: auto;
-
-  h2 {
-    animation: fade-in 0.5s ease-in-out;
-    cursor: pointer;
-    text-align: center;
-    font-size: 20px;
-    line-height: 1.6;
-  }
+}
+.inspiring-wrapper h2 {
+  animation: fade-in 0.5s ease-in-out;
+  cursor: pointer;
+  text-align: center;
+  font-size: 20px;
+  line-height: 1.6;
 }
 </style>

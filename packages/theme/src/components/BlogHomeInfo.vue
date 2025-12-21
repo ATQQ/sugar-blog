@@ -21,7 +21,7 @@ import BlogFriendLink from './BlogFriendLink.vue'
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .blog-info {
   display: flex;
   flex-direction: column;

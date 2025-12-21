@@ -19,7 +19,7 @@ const hiddenCover = computed(
   <img v-if="cover && !hiddenCover" class="blog-doc-cover" :src="realCover">
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 img.blog-doc-cover.blog-doc-cover.blog-doc-cover {
   width: 100%;
   object-fit: cover;

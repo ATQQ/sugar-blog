@@ -1,0 +1,10 @@
+/* 定义遮罩样式 */
+.VPHome {
+  background: radial-gradient(ellipse, rgba(var(--bg-gradient-home), 1) 0%, rgba(var(--bg-gradient-home), 0) 150%);
+}
+
+/* 自定义首页背景图 */
+.VPHome::before {
+  background-image: url(./assets/bg.webp);
+  background-size: cover;
+}

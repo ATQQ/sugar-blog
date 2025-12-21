@@ -35,6 +35,9 @@ importers:
       prettier:
         specifier: ^3.0.3
         version: 3.0.3
+      sass:
+        specifier: ^1.97.1
+        version: 1.97.1
       simple-git-hooks:
         specifier: ^2.9.0
         version: 2.9.0
@@ -46,7 +49,7 @@ importers:
         version: 5.1.6
       vite-plugin-inspect:
         specifier: ^0.8.9
-        version: 0.8.9(rollup@4.52.2)(vite@7.2.4(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.80.6))
+        version: 0.8.9(rollup@4.52.2)(vite@7.2.4(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.97.1))
       wait-on:
         specifier: ^7.0.1
         version: 7.0.1
@@ -56,34 +59,22 @@ importers:
 
   packages/blogpress:
     dependencies:
-      '@element-plus/icons-vue':
-        specifier: ^2.3.1
-        version: 2.3.1(vue@3.5.24(typescript@5.6.2))
       '@sugarat/theme':
         specifier: workspace:*
         version: link:../theme
-      element-plus:
-        specifier: ^2.7.2
-        version: 2.7.2(vue@3.5.24(typescript@5.6.2))
-      vitepress:
-        specifier: 2.0.0-alpha.15
-        version: 2.0.0-alpha.15(@types/node@24.5.2)(async-validator@4.2.5)(lightningcss@1.30.1)(markdown-it-mathjax3@4.3.2)(postcss@8.5.6)(sass@1.80.6)(typescript@5.6.2)
       vitepress-plugin-51la:
         specifier: workspace:*
         version: link:../vitepress-plugin-51la
-      vue:
-        specifier: ^3.5.12
-        version: 3.5.24(typescript@5.6.2)
     devDependencies:
       pagefind:
         specifier: ^1.3.0
         version: 1.3.0
-      sass:
-        specifier: ^1.76.0
-        version: 1.80.6
       vite:
         specifier: ^5.4.9
-        version: 5.4.19(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.80.6)
+        version: 5.4.19(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.97.1)
+      vitepress:
+        specifier: 2.0.0-alpha.15
+        version: 2.0.0-alpha.15(@types/node@24.5.2)(async-validator@4.2.5)(lightningcss@1.30.1)(markdown-it-mathjax3@4.3.2)(postcss@8.5.6)(sass@1.97.1)(typescript@5.6.2)
 
   packages/create-theme:
     dependencies:
@@ -109,10 +100,13 @@ importers:
         version: 6.0.6
       vitepress:
         specifier: 2.0.0-alpha.15
-        version: 2.0.0-alpha.15(@types/node@24.5.2)(async-validator@4.2.5)(lightningcss@1.30.1)(markdown-it-mathjax3@4.3.2)(postcss@8.5.6)(sass@1.80.6)(typescript@5.6.2)
+        version: 2.0.0-alpha.15(@types/node@24.5.2)(async-validator@4.2.5)(lightningcss@1.30.1)(markdown-it-mathjax3@4.3.2)(postcss@8.5.6)(sass@1.97.1)(typescript@5.6.2)
 
   packages/theme:
     dependencies:
+      '@element-plus/icons-vue':
+        specifier: ^2.3.1
+        version: 2.3.1(vue@3.5.24(typescript@5.6.2))
       '@giscus/vue':
         specifier: ^3.1.1
         version: 3.1.1(vue@3.5.24(typescript@5.6.2))
@@ -128,6 +122,9 @@ importers:
       '@vueuse/core':
         specifier: ^14.1.0
         version: 14.1.0(vue@3.5.24(typescript@5.6.2))
+      element-plus:
+        specifier: ^2.7
+        version: 2.7.2(vue@3.5.24(typescript@5.6.2))
       markdown-it-task-checkbox:
         specifier: ^1.0.6
         version: 1.0.6
@@ -145,10 +142,10 @@ importers:
         version: link:../vitepress-plugin-announcement
       vitepress-plugin-group-icons:
         specifier: 1.6.5
-        version: 1.6.5(vite@5.4.19(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.80.6))
+        version: 1.6.5(vite@5.4.19(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.97.1))
       vitepress-plugin-mermaid:
         specifier: 2.0.13
-        version: 2.0.13(mermaid@10.9.0)(vitepress@2.0.0-alpha.15(@types/node@24.5.2)(async-validator@4.2.5)(lightningcss@1.30.1)(markdown-it-mathjax3@4.3.2)(postcss@8.5.6)(sass@1.80.6)(typescript@5.6.2))
+        version: 2.0.13(mermaid@10.9.0)(vitepress@2.0.0-alpha.15(@types/node@24.5.2)(async-validator@4.2.5)(lightningcss@1.30.1)(markdown-it-mathjax3@4.3.2)(postcss@8.5.6)(sass@1.97.1)(typescript@5.6.2))
       vitepress-plugin-pagefind:
         specifier: workspace:*
         version: link:../vitepress-plugin-pagefind
@@ -157,50 +154,41 @@ importers:
         version: link:../vitepress-plugin-rss
       vitepress-plugin-tabs:
         specifier: 0.7.3
-        version: 0.7.3(vitepress@2.0.0-alpha.15(@types/node@24.5.2)(async-validator@4.2.5)(lightningcss@1.30.1)(markdown-it-mathjax3@4.3.2)(postcss@8.5.6)(sass@1.80.6)(typescript@5.6.2))(vue@3.5.24(typescript@5.6.2))
+        version: 0.7.3(vitepress@2.0.0-alpha.15(@types/node@24.5.2)(async-validator@4.2.5)(lightningcss@1.30.1)(markdown-it-mathjax3@4.3.2)(postcss@8.5.6)(sass@1.97.1)(typescript@5.6.2))(vue@3.5.24(typescript@5.6.2))
     devDependencies:
-      '@element-plus/icons-vue':
-        specifier: ^2.3.1
-        version: 2.3.1(vue@3.5.24(typescript@5.6.2))
       artalk:
         specifier: ^2.8.5
         version: 2.8.5
-      element-plus:
-        specifier: ^2.7.2
-        version: 2.7.2(vue@3.5.24(typescript@5.6.2))
       markdown-it-mathjax3:
         specifier: ^4.3.2
         version: 4.3.2
       pagefind:
         specifier: ^1.3.0
         version: 1.3.0
-      sass:
-        specifier: ^1.80.6
-        version: 1.80.6
       typescript:
         specifier: ^5.4.5
         version: 5.6.2
       vite:
         specifier: ^5.4.9
-        version: 5.4.19(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.80.6)
+        version: 5.4.19(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.97.1)
       vitepress:
         specifier: 2.0.0-alpha.15
-        version: 2.0.0-alpha.15(@types/node@24.5.2)(async-validator@4.2.5)(lightningcss@1.30.1)(markdown-it-mathjax3@4.3.2)(postcss@8.5.6)(sass@1.80.6)(typescript@5.6.2)
+        version: 2.0.0-alpha.15(@types/node@24.5.2)(async-validator@4.2.5)(lightningcss@1.30.1)(markdown-it-mathjax3@4.3.2)(postcss@8.5.6)(sass@1.97.1)(typescript@5.6.2)
       vitepress-plugin-51la:
         specifier: workspace:*
         version: link:../vitepress-plugin-51la
       vue:
-        specifier: ^3.5.12
+        specifier: ^3.5.24
         version: 3.5.24(typescript@5.6.2)
 
   packages/vitepress-plugin-51la:
     devDependencies:
       vite:
         specifier: ^5
-        version: 5.4.19(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.80.6)
+        version: 5.4.19(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.97.1)
       vitepress:
         specifier: 2.0.0-alpha.15
-        version: 2.0.0-alpha.15(@types/node@24.5.2)(async-validator@4.2.5)(lightningcss@1.30.1)(markdown-it-mathjax3@4.3.2)(postcss@8.5.6)(sass@1.80.6)(typescript@5.6.2)
+        version: 2.0.0-alpha.15(@types/node@24.5.2)(async-validator@4.2.5)(lightningcss@1.30.1)(markdown-it-mathjax3@4.3.2)(postcss@8.5.6)(sass@1.97.1)(typescript@5.6.2)
 
   packages/vitepress-plugin-announcement:
     dependencies:
@@ -222,12 +210,46 @@ importers:
         version: 5.6.2
       vite:
         specifier: ^5
-        version: 5.4.19(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.80.6)
+        version: 5.4.19(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.97.1)
       vitepress:
         specifier: 2.0.0-alpha.15
-        version: 2.0.0-alpha.15(@types/node@24.5.2)(async-validator@4.2.5)(lightningcss@1.30.1)(markdown-it-mathjax3@4.3.2)(postcss@8.5.6)(sass@1.80.6)(typescript@5.6.2)
+        version: 2.0.0-alpha.15(@types/node@24.5.2)(async-validator@4.2.5)(lightningcss@1.30.1)(markdown-it-mathjax3@4.3.2)(postcss@8.5.6)(sass@1.97.1)(typescript@5.6.2)
       vue:
-        specifier: ^3.5.12
+        specifier: ^3.5.24
+        version: 3.5.24(typescript@5.6.2)
+
+  packages/vitepress-plugin-image-preview:
+    dependencies:
+      '@vueuse/core':
+        specifier: ^14.1.0
+        version: 14.1.0(vue@3.5.24(typescript@5.6.2))
+      javascript-stringify:
+        specifier: ^2.1.0
+        version: 2.1.0
+    devDependencies:
+      chokidar:
+        specifier: ^3.6.0
+        version: 3.6.0
+      fs-extra:
+        specifier: ^11.1.1
+        version: 11.3.2
+      tinyglobby:
+        specifier: ^0.2.6
+        version: 0.2.15
+      tsup:
+        specifier: ^7.2.0
+        version: 7.2.0(postcss@8.5.6)(typescript@5.6.2)
+      typescript:
+        specifier: ^5.5.4
+        version: 5.6.2
+      vite:
+        specifier: ^5
+        version: 5.4.19(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.97.1)
+      vitepress:
+        specifier: 2.0.0-alpha.15
+        version: 2.0.0-alpha.15(@types/node@24.5.2)(async-validator@4.2.5)(lightningcss@1.30.1)(markdown-it-mathjax3@4.3.2)(postcss@8.5.6)(sass@1.97.1)(typescript@5.6.2)
+      vue:
+        specifier: ^3.5.24
         version: 3.5.24(typescript@5.6.2)
 
   packages/vitepress-plugin-pagefind:
@@ -236,27 +258,27 @@ importers:
         specifier: workspace:*
         version: link:../shared
       '@vueuse/core':
-        specifier: ^9.6.0
-        version: 9.13.0(vue@3.5.24(typescript@5.6.2))
+        specifier: ^14.1.0
+        version: 14.1.0(vue@3.5.24(typescript@5.6.2))
       javascript-stringify:
         specifier: ^2.1.0
         version: 2.1.0
       pagefind:
         specifier: ^1.1.0
         version: 1.3.0
-      vue:
-        specifier: ^3.5.12
-        version: 3.5.24(typescript@5.6.2)
       vue-command-palette:
         specifier: 0.1.4
         version: 0.1.4
     devDependencies:
       vite:
         specifier: ^5.4.9
-        version: 5.4.19(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.80.6)
+        version: 5.4.19(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.97.1)
       vitepress:
         specifier: 2.0.0-alpha.15
-        version: 2.0.0-alpha.15(@types/node@24.5.2)(async-validator@4.2.5)(lightningcss@1.30.1)(markdown-it-mathjax3@4.3.2)(postcss@8.5.6)(sass@1.80.6)(typescript@5.6.2)
+        version: 2.0.0-alpha.15(@types/node@24.5.2)(async-validator@4.2.5)(lightningcss@1.30.1)(markdown-it-mathjax3@4.3.2)(postcss@8.5.6)(sass@1.97.1)(typescript@5.6.2)
+      vue:
+        specifier: ^3.5.24
+        version: 3.5.24(typescript@5.6.2)
 
   packages/vitepress-plugin-rss:
     dependencies:
@@ -275,10 +297,10 @@ importers:
     devDependencies:
       vite:
         specifier: ^5
-        version: 5.4.19(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.80.6)
+        version: 5.4.19(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.97.1)
       vitepress:
         specifier: 2.0.0-alpha.15
-        version: 2.0.0-alpha.15(@types/node@24.5.2)(async-validator@4.2.5)(lightningcss@1.30.1)(markdown-it-mathjax3@4.3.2)(postcss@8.5.6)(sass@1.80.6)(typescript@5.6.2)
+        version: 2.0.0-alpha.15(@types/node@24.5.2)(async-validator@4.2.5)(lightningcss@1.30.1)(markdown-it-mathjax3@4.3.2)(postcss@8.5.6)(sass@1.97.1)(typescript@5.6.2)
 
   template/vitepress-plugin-slot-inject-template:
     dependencies:
@@ -303,12 +325,12 @@ importers:
         version: 5.6.2
       vite:
         specifier: ^5
-        version: 5.4.19(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.80.6)
+        version: 5.4.19(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.97.1)
       vitepress:
         specifier: 2.0.0-alpha.15
-        version: 2.0.0-alpha.15(@types/node@24.5.2)(async-validator@4.2.5)(lightningcss@1.30.1)(markdown-it-mathjax3@4.3.2)(postcss@8.5.6)(sass@1.80.6)(typescript@5.6.2)
+        version: 2.0.0-alpha.15(@types/node@24.5.2)(async-validator@4.2.5)(lightningcss@1.30.1)(markdown-it-mathjax3@4.3.2)(postcss@8.5.6)(sass@1.97.1)(typescript@5.6.2)
       vue:
-        specifier: ^3.4.26
+        specifier: ^3.5.24
         version: 3.5.24(typescript@5.6.2)
 
 packages:
@@ -2902,8 +2924,8 @@ packages:
     resolution: {integrity: sha512-MAb38BcSbH0eHNBxn7ql2NH/kX33OkB3lZ1BNdh7ENeRChHTYsTvWrMubiIAMNS2llXEEgZ1MUOBtXChP3kaFQ==}
     engines: {node: '>= 4'}
 
-  immutable@4.3.1:
-    resolution: {integrity: sha512-lj9cnmB/kVS0QHsJnYKD1uo3o39nrbKxszjnqS9Fr6NB7bZzW45U6WSGBPKXDL/CvDKqDNPA4r3DoDQ8GTxo2A==}
+  immutable@5.1.4:
+    resolution: {integrity: sha512-p6u1bG3YSnINT5RQmx/yRZBpenIl30kVxkTLDyHLIMk0gict704Q9n+thfDI7lTRm9vXdDYutVzXhzcThxTnXA==}
 
   import-fresh@3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
@@ -3873,8 +3895,8 @@ packages:
   safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
 
-  sass@1.80.6:
-    resolution: {integrity: sha512-ccZgdHNiBF1NHBsWvacvT5rju3y1d/Eu+8Ex6c21nHp2lZGLBEtuwc415QfiI1PJa1TpCo3iXwwSRjRpn2Ckjg==}
+  sass@1.97.1:
+    resolution: {integrity: sha512-uf6HoO8fy6ClsrShvMgaKUn14f2EHQLQRtpsZZLeU/Mv0Q1K5P0+x2uvH6Cub39TVVbWNSrraUhDAoFph6vh0A==}
     engines: {node: '>=14.0.0'}
     hasBin: true
 
@@ -5227,7 +5249,7 @@ snapshots:
     dependencies:
       detect-libc: 1.0.3
       is-glob: 4.0.3
-      micromatch: 4.0.5
+      micromatch: 4.0.8
       node-addon-api: 7.1.1
     optionalDependencies:
       '@parcel/watcher-android-arm64': 2.5.0
@@ -5631,10 +5653,10 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@vitejs/plugin-vue@6.0.1(vite@7.2.4(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.80.6))(vue@3.5.24(typescript@5.6.2))':
+  '@vitejs/plugin-vue@6.0.1(vite@7.2.4(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.97.1))(vue@3.5.24(typescript@5.6.2))':
     dependencies:
       '@rolldown/pluginutils': 1.0.0-beta.29
-      vite: 7.2.4(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.80.6)
+      vite: 7.2.4(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.97.1)
       vue: 3.5.24(typescript@5.6.2)
 
   '@vue/compiler-core@3.5.24':
@@ -7007,7 +7029,7 @@ snapshots:
 
   ignore@5.2.4: {}
 
-  immutable@4.3.1: {}
+  immutable@5.1.4: {}
 
   import-fresh@3.3.0:
     dependencies:
@@ -8049,10 +8071,10 @@ snapshots:
 
   safer-buffer@2.1.2: {}
 
-  sass@1.80.6:
+  sass@1.97.1:
     dependencies:
       chokidar: 4.0.1
-      immutable: 4.3.1
+      immutable: 5.1.4
       source-map-js: 1.2.1
     optionalDependencies:
       '@parcel/watcher': 2.5.0
@@ -8438,7 +8460,7 @@ snapshots:
       '@types/unist': 3.0.3
       vfile-message: 4.0.2
 
-  vite-plugin-inspect@0.8.9(rollup@4.52.2)(vite@7.2.4(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.80.6)):
+  vite-plugin-inspect@0.8.9(rollup@4.52.2)(vite@7.2.4(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.97.1)):
     dependencies:
       '@antfu/utils': 0.7.10
       '@rollup/pluginutils': 5.3.0(rollup@4.52.2)
@@ -8449,12 +8471,12 @@ snapshots:
       perfect-debounce: 1.0.0
       picocolors: 1.1.1
       sirv: 3.0.2
-      vite: 7.2.4(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.80.6)
+      vite: 7.2.4(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.97.1)
     transitivePeerDependencies:
       - rollup
       - supports-color
 
-  vite@5.4.19(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.80.6):
+  vite@5.4.19(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.97.1):
     dependencies:
       esbuild: 0.21.5
       postcss: 8.5.4
@@ -8463,9 +8485,9 @@ snapshots:
       '@types/node': 24.5.2
       fsevents: 2.3.3
       lightningcss: 1.30.1
-      sass: 1.80.6
+      sass: 1.97.1
 
-  vite@7.2.4(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.80.6):
+  vite@7.2.4(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.97.1):
     dependencies:
       esbuild: 0.25.10
       fdir: 6.5.0(picomatch@4.0.3)
@@ -8477,33 +8499,33 @@ snapshots:
       '@types/node': 24.5.2
       fsevents: 2.3.3
       lightningcss: 1.30.1
-      sass: 1.80.6
+      sass: 1.97.1
 
   vitepress-markdown-timeline@1.2.1:
     dependencies:
       dayjs: 1.11.9
 
-  vitepress-plugin-group-icons@1.6.5(vite@5.4.19(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.80.6)):
+  vitepress-plugin-group-icons@1.6.5(vite@5.4.19(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.97.1)):
     dependencies:
       '@iconify-json/logos': 1.2.10
       '@iconify-json/vscode-icons': 1.2.37
       '@iconify/utils': 3.1.0
     optionalDependencies:
-      vite: 5.4.19(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.80.6)
+      vite: 5.4.19(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.97.1)
 
-  vitepress-plugin-mermaid@2.0.13(mermaid@10.9.0)(vitepress@2.0.0-alpha.15(@types/node@24.5.2)(async-validator@4.2.5)(lightningcss@1.30.1)(markdown-it-mathjax3@4.3.2)(postcss@8.5.6)(sass@1.80.6)(typescript@5.6.2)):
+  vitepress-plugin-mermaid@2.0.13(mermaid@10.9.0)(vitepress@2.0.0-alpha.15(@types/node@24.5.2)(async-validator@4.2.5)(lightningcss@1.30.1)(markdown-it-mathjax3@4.3.2)(postcss@8.5.6)(sass@1.97.1)(typescript@5.6.2)):
     dependencies:
       mermaid: 10.9.0
-      vitepress: 2.0.0-alpha.15(@types/node@24.5.2)(async-validator@4.2.5)(lightningcss@1.30.1)(markdown-it-mathjax3@4.3.2)(postcss@8.5.6)(sass@1.80.6)(typescript@5.6.2)
+      vitepress: 2.0.0-alpha.15(@types/node@24.5.2)(async-validator@4.2.5)(lightningcss@1.30.1)(markdown-it-mathjax3@4.3.2)(postcss@8.5.6)(sass@1.97.1)(typescript@5.6.2)
     optionalDependencies:
       '@mermaid-js/mermaid-mindmap': 9.3.0
 
-  vitepress-plugin-tabs@0.7.3(vitepress@2.0.0-alpha.15(@types/node@24.5.2)(async-validator@4.2.5)(lightningcss@1.30.1)(markdown-it-mathjax3@4.3.2)(postcss@8.5.6)(sass@1.80.6)(typescript@5.6.2))(vue@3.5.24(typescript@5.6.2)):
+  vitepress-plugin-tabs@0.7.3(vitepress@2.0.0-alpha.15(@types/node@24.5.2)(async-validator@4.2.5)(lightningcss@1.30.1)(markdown-it-mathjax3@4.3.2)(postcss@8.5.6)(sass@1.97.1)(typescript@5.6.2))(vue@3.5.24(typescript@5.6.2)):
     dependencies:
-      vitepress: 2.0.0-alpha.15(@types/node@24.5.2)(async-validator@4.2.5)(lightningcss@1.30.1)(markdown-it-mathjax3@4.3.2)(postcss@8.5.6)(sass@1.80.6)(typescript@5.6.2)
+      vitepress: 2.0.0-alpha.15(@types/node@24.5.2)(async-validator@4.2.5)(lightningcss@1.30.1)(markdown-it-mathjax3@4.3.2)(postcss@8.5.6)(sass@1.97.1)(typescript@5.6.2)
       vue: 3.5.24(typescript@5.6.2)
 
-  vitepress@2.0.0-alpha.15(@types/node@24.5.2)(async-validator@4.2.5)(lightningcss@1.30.1)(markdown-it-mathjax3@4.3.2)(postcss@8.5.6)(sass@1.80.6)(typescript@5.6.2):
+  vitepress@2.0.0-alpha.15(@types/node@24.5.2)(async-validator@4.2.5)(lightningcss@1.30.1)(markdown-it-mathjax3@4.3.2)(postcss@8.5.6)(sass@1.97.1)(typescript@5.6.2):
     dependencies:
       '@docsearch/css': 4.3.2
       '@docsearch/js': 4.3.2
@@ -8512,16 +8534,16 @@ snapshots:
       '@shikijs/transformers': 3.15.0
       '@shikijs/types': 3.15.0
       '@types/markdown-it': 14.1.2
-      '@vitejs/plugin-vue': 6.0.1(vite@7.2.4(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.80.6))(vue@3.5.24(typescript@5.6.2))
+      '@vitejs/plugin-vue': 6.0.1(vite@7.2.4(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.97.1))(vue@3.5.24(typescript@5.6.2))
       '@vue/devtools-api': 8.0.5
-      '@vue/shared': 3.5.24
-      '@vueuse/core': 14.0.0(vue@3.5.24(typescript@5.6.2))
+      '@vue/shared': 3.5.25
+      '@vueuse/core': 14.1.0(vue@3.5.24(typescript@5.6.2))
       '@vueuse/integrations': 14.0.0(async-validator@4.2.5)(focus-trap@7.6.6)(vue@3.5.24(typescript@5.6.2))
       focus-trap: 7.6.6
       mark.js: 8.11.1
       minisearch: 7.2.0
       shiki: 3.15.0
-      vite: 7.2.4(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.80.6)
+      vite: 7.2.4(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.97.1)
       vue: 3.5.24(typescript@5.6.2)
     optionalDependencies:
       markdown-it-mathjax3: 4.3.2

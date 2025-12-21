@@ -28,7 +28,7 @@ const RSS: Theme.RSSOptions = {
   id: baseUrl,
   link: baseUrl,
   language: 'zh-cn',
-  image: 'https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTE2NzAzMA==674995167030',
+  image: 'https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTE2NzAzMA==674995167030~fmt.webp',
   favicon: 'https://sugarat.top/favicon.ico',
   copyright: 'Copyright (c) 2018-present, 粥里有勺糖',
   url: `${baseUrl}/feed.rss`,
@@ -86,7 +86,8 @@ export const blogTheme = getThemeConfig({
       { type: 'text', content: '👇公众号👇---👇 微信 👇' },
       {
         type: 'image',
-        src: 'https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210~fmt.webp'
+        src: 'https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210~fmt.webp',
+        alt: '粥里有勺糖微信二维码'
       },
       {
         type: 'text',

@@ -18,22 +18,25 @@ export default {
   </p>
 </template>
 
-<style scoped lang="scss">
+<style scoped>
 .solve {
   margin: 0 0;
   display: flex;
   align-items: center;
-  :deep(p) {
-    margin: 0 0;
-  }
 }
+.solve :deep(p) {
+  margin: 0 0;
+}
+
 .ok {
   color: #3eaf7c;
   font-weight: bold;
 }
+
 .wait {
   color: #2c3e50;
 }
+
 .ok,
 .wait {
   padding-right: 1em;

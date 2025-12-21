@@ -201,7 +201,7 @@ function handleJumperChange(evt: Event) {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .sugar-pagination {
   display: flex;
   justify-content: center;
@@ -209,189 +209,161 @@ function handleJumperChange(evt: Event) {
   padding: 2px 5px;
   color: var(--vp-c-text-1);
   font-size: 12px;
-
-  &--small {
-    .btn-prev, .btn-next, .sugar-pager li {
-        height: 24px;
-        line-height: 24px;
-        min-width: 24px;
-        font-size: 12px;
-    }
-  }
-
-  button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 12px;
-    padding: 0 6px;
-    min-width: 24px;
-    height: 24px;
-    line-height: 24px;
-    color: var(--vp-c-text-1);
-
-    &:disabled {
-      color: var(--vp-c-text-3);
-      cursor: not-allowed;
-    }
-
-    &:hover:not(:disabled) {
-        color: var(--vp-c-brand-2);
-    }
-  }
-
-  .sugar-pager {
-    user-select: none;
-    list-style: none;
-    display: flex;
-    padding: 0;
-    margin: 0;
-
-    li {
-      padding: 0 4px;
-      background: transparent;
-      vertical-align: top;
-      display: inline-block;
-      font-size: 12px;
-      min-width: 24px;
-      height: 24px;
-      line-height: 24px;
-      cursor: pointer;
-      box-sizing: border-box;
-      text-align: center;
-      margin: 0 4px;
-      border-radius: 2px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      &.is-active {
-        color: var(--vp-c-brand-2);
-        cursor: default;
-        font-weight: normal;
-      }
-
-      &:hover:not(.is-active):not(.more) {
-        color: var(--vp-c-brand-2);
-      }
-
-      &.more {
-        cursor: pointer;
-
-        .icon-more {
-          display: none;
-        }
-
-        .icon-more-text {
-          display: block;
-        }
-
-        &:hover {
-          color: var(--vp-c-brand-2);
-
-          .icon-more {
-            display: inline-block;
-          }
-
-          .icon-more-text {
-            display: none;
-          }
-        }
-      }
-    }
-  }
-
-  &.is-background {
-    .btn-prev, .btn-next, .sugar-pager li {
-        background-color: var(--vp-c-bg-alt);
-        color: var(--vp-c-text-2);
-        margin: 0 3px;
-        border-radius: 2px;
-        font-weight: normal;
-    }
-
-    .btn-prev:disabled, .btn-next:disabled {
-        color: var(--vp-c-text-3);
-        background-color: var(--vp-c-bg-alt);
-    }
-
-    .sugar-pager li:not(.disabled).is-active {
-        background-color: var(--vp-c-brand-2);
-        color: #fff;
-    }
-
-    .sugar-pager li:not(.disabled):hover:not(.is-active):not(.more) {
-        color: var(--vp-c-brand-2);
-    }
-  }
-
-  &__jump {
-    display: flex;
-    align-items: center;
-    margin-left: 24px;
-    font-weight: normal;
-    color: var(--vp-c-text-2);
-  }
-
-  &__editor {
-      margin: 0 8px;
-      width: 50px;
-  }
+}
+.sugar-pagination--small .btn-prev, .sugar-pagination--small .btn-next, .sugar-pagination--small .sugar-pager li {
+  height: 24px;
+  line-height: 24px;
+  min-width: 24px;
+  font-size: 12px;
+}
+.sugar-pagination button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 0 6px;
+  min-width: 24px;
+  height: 24px;
+  line-height: 24px;
+  color: var(--vp-c-text-1);
+}
+.sugar-pagination button:disabled {
+  color: var(--vp-c-text-3);
+  cursor: not-allowed;
+}
+.sugar-pagination button:hover:not(:disabled) {
+  color: var(--vp-c-brand-2);
+}
+.sugar-pagination .sugar-pager {
+  user-select: none;
+  list-style: none;
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+.sugar-pagination .sugar-pager li {
+  padding: 0 4px;
+  background: transparent;
+  vertical-align: top;
+  display: inline-block;
+  font-size: 12px;
+  min-width: 24px;
+  height: 24px;
+  line-height: 24px;
+  cursor: pointer;
+  box-sizing: border-box;
+  text-align: center;
+  margin: 0 4px;
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sugar-pagination .sugar-pager li.is-active {
+  color: var(--vp-c-brand-2);
+  cursor: default;
+  font-weight: normal;
+}
+.sugar-pagination .sugar-pager li:hover:not(.is-active):not(.more) {
+  color: var(--vp-c-brand-2);
+}
+.sugar-pagination .sugar-pager li.more {
+  cursor: pointer;
+}
+.sugar-pagination .sugar-pager li.more .icon-more {
+  display: none;
+}
+.sugar-pagination .sugar-pager li.more .icon-more-text {
+  display: block;
+}
+.sugar-pagination .sugar-pager li.more:hover {
+  color: var(--vp-c-brand-2);
+}
+.sugar-pagination .sugar-pager li.more:hover .icon-more {
+  display: inline-block;
+}
+.sugar-pagination .sugar-pager li.more:hover .icon-more-text {
+  display: none;
+}
+.sugar-pagination.is-background .btn-prev, .sugar-pagination.is-background .btn-next, .sugar-pagination.is-background .sugar-pager li {
+  background-color: var(--vp-c-bg-alt);
+  color: var(--vp-c-text-2);
+  margin: 0 3px;
+  border-radius: 2px;
+  font-weight: normal;
+}
+.sugar-pagination.is-background .btn-prev:disabled, .sugar-pagination.is-background .btn-next:disabled {
+  color: var(--vp-c-text-3);
+  background-color: var(--vp-c-bg-alt);
+}
+.sugar-pagination.is-background .sugar-pager li:not(.disabled).is-active {
+  background-color: var(--vp-c-brand-2);
+  color: #fff;
+}
+.sugar-pagination.is-background .sugar-pager li:not(.disabled):hover:not(.is-active):not(.more) {
+  color: var(--vp-c-brand-2);
+}
+.sugar-pagination__jump {
+  display: flex;
+  align-items: center;
+  margin-left: 24px;
+  font-weight: normal;
+  color: var(--vp-c-text-2);
+}
+.sugar-pagination__editor {
+  margin: 0 8px;
+  width: 50px;
 }
 
 .sugar-input {
-    display: inline-flex;
-    position: relative;
-    font-size: 12px;
-    line-height: 24px;
-    box-sizing: border-box;
-    width: 100%;
+  display: inline-flex;
+  position: relative;
+  font-size: 12px;
+  line-height: 24px;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .sugar-input__wrapper {
-    display: inline-flex;
-    flex-grow: 1;
-    align-items: center;
-    justify-content: center;
-    padding: 1px 11px;
-    background-color: var(--vp-c-bg);
-    background-image: none;
-    border-radius: 4px;
-    transition: box-shadow .2s cubic-bezier(.645,.045,.355,1);
-
-    &:focus-within {
-         box-shadow: 0 0 0 1px var(--vp-c-brand-2) inset;
-    }
+  display: inline-flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 1px 11px;
+  background-color: var(--vp-c-bg);
+  background-image: none;
+  border-radius: 4px;
+  transition: box-shadow 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+.sugar-input__wrapper:focus-within {
+  box-shadow: 0 0 0 1px var(--vp-c-brand-2) inset;
 }
 
 .sugar-input__inner {
-    width: 100%;
-    flex-grow: 1;
-    -webkit-appearance: none;
-    color: var(--vp-c-text-1);
-    font-size: inherit;
-    height: 24px;
-    line-height: 24px;
-    padding: 0;
-    outline: none;
-    border: none;
-    background: none;
-    box-sizing: border-box;
-    text-align: center;
-
-    /* Chrome, Safari, Edge, Opera */
-    &::-webkit-outer-spin-button,
-    &::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-
-    /* Firefox */
-    &[type=number] {
-      -moz-appearance: textfield;
-    }
+  width: 100%;
+  flex-grow: 1;
+  -webkit-appearance: none;
+  color: var(--vp-c-text-1);
+  font-size: inherit;
+  height: 24px;
+  line-height: 24px;
+  padding: 0;
+  outline: none;
+  border: none;
+  background: none;
+  box-sizing: border-box;
+  text-align: center;
+  /* Chrome, Safari, Edge, Opera */
+  /* Firefox */
+}
+.sugar-input__inner::-webkit-outer-spin-button, .sugar-input__inner::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.sugar-input__inner[type=number] {
+  -moz-appearance: textfield;
 }
 </style>

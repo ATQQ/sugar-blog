@@ -54,7 +54,7 @@ const classes = computed(() => {
   </button>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .sugar-button {
   display: inline-flex;
   justify-content: center;
@@ -67,7 +67,7 @@ const classes = computed(() => {
   text-align: center;
   box-sizing: border-box;
   outline: none;
-  transition: .1s;
+  transition: 0.1s;
   font-weight: 500;
   user-select: none;
   vertical-align: middle;
@@ -77,89 +77,78 @@ const classes = computed(() => {
   border-radius: 4px;
   padding: 8px 15px;
   font-size: 14px;
-
-  &:hover {
-    color: var(--vp-c-brand-1);
-    border-color: var(--vp-c-brand-2);
-    background-color: var(--vp-c-bg-alt);
-  }
-
-  &:active {
-    color: var(--vp-c-brand-3);
-    border-color: var(--vp-c-brand-3);
-  }
-
-  &.is-disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
-  }
-
+}
+.sugar-button:hover {
+  color: var(--vp-c-brand-1);
+  border-color: var(--vp-c-brand-2);
+  background-color: var(--vp-c-bg-alt);
+}
+.sugar-button:active {
+  color: var(--vp-c-brand-3);
+  border-color: var(--vp-c-brand-3);
+}
+.sugar-button.is-disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.sugar-button {
   /* Types */
-  &--primary {
-    color: #fff;
-    background-color: var(--vp-c-brand-1);
-    border-color: var(--vp-c-brand-1);
-
-    &:hover {
-      background-color: var(--vp-c-brand-2);
-      border-color: var(--vp-c-brand-2);
-      color: #fff;
-    }
-
-    &:active {
-      background-color: var(--vp-c-brand-3);
-      border-color: var(--vp-c-brand-3);
-      color: #fff;
-    }
-
-    &.is-text {
-      color: var(--vp-c-brand-1);
-      background-color: transparent;
-      border-color: transparent;
-
-      &:hover {
-        background-color: var(--vp-c-bg-alt);
-        color: var(--vp-c-brand-2);
-      }
-
-      &:active {
-        color: var(--vp-c-brand-3);
-      }
-    }
-  }
-
-  &--danger {
-    color: #fff;
-    background-color: var(--vp-c-danger-2);
-    border-color: var(--vp-c-danger-2);
-
-    &:hover {
-      background-color: var(--vp-c-danger-3);
-      border-color: var(--vp-c-danger-3);
-      color: #fff;
-    }
-
-    &:active {
-      background-color: var(--vp-c-danger-3);
-      border-color: var(--vp-c-danger-3);
-      color: #fff;
-    }
-  }
-
-  // 其它有需要再引入
+}
+.sugar-button--primary {
+  color: #fff;
+  background-color: var(--vp-c-brand-1);
+  border-color: var(--vp-c-brand-1);
+}
+.sugar-button--primary:hover {
+  background-color: var(--vp-c-brand-2);
+  border-color: var(--vp-c-brand-2);
+  color: #fff;
+}
+.sugar-button--primary:active {
+  background-color: var(--vp-c-brand-3);
+  border-color: var(--vp-c-brand-3);
+  color: #fff;
+}
+.sugar-button--primary.is-text {
+  color: var(--vp-c-brand-1);
+  background-color: transparent;
+  border-color: transparent;
+}
+.sugar-button--primary.is-text:hover {
+  background-color: var(--vp-c-bg-alt);
+  color: var(--vp-c-brand-2);
+}
+.sugar-button--primary.is-text:active {
+  color: var(--vp-c-brand-3);
+}
+.sugar-button--danger {
+  color: #fff;
+  background-color: var(--vp-c-danger-2);
+  border-color: var(--vp-c-danger-2);
+}
+.sugar-button--danger:hover {
+  background-color: var(--vp-c-danger-3);
+  border-color: var(--vp-c-danger-3);
+  color: #fff;
+}
+.sugar-button--danger:active {
+  background-color: var(--vp-c-danger-3);
+  border-color: var(--vp-c-danger-3);
+  color: #fff;
+}
+.sugar-button {
   /* Sizes */
-  &--small {
-    height: 24px;
-    padding: 5px 11px;
-    font-size: 12px;
-    border-radius: 3px;
-  }
-
-  &--large {
-    height: 40px;
-    padding: 12px 19px;
-    font-size: 16px;
-    border-radius: 4px;
-  }
+}
+.sugar-button--small {
+  height: 24px;
+  padding: 5px 11px;
+  font-size: 12px;
+  border-radius: 3px;
+}
+.sugar-button--large {
+  height: 40px;
+  padding: 12px 19px;
+  font-size: 16px;
+  border-radius: 4px;
 }
 </style>

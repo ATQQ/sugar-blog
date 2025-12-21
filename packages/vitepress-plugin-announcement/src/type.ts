@@ -105,6 +105,7 @@ export declare namespace Announcement {
     type: 'image'
     src: string
     style?: string
+    alt?: string
   }
 
   export interface Button {

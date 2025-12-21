@@ -127,7 +127,8 @@ function PopoverValue(props: { key: number; item: Announcement.Value },
   if (item.type === 'image') {
     return h('img', {
       src: item.src,
-      style: parseStringStyle(item.style || '')
+      style: parseStringStyle(item.style || ''),
+      alt: item.alt ?? '图片'
     })
   }
   if (item.type === 'button') {

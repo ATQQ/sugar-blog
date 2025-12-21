@@ -1,5 +1,17 @@
 # vitepress-plugin-announcement
 
+## 0.1.7
+
+### Patch Changes
+
+- 4e56ed4: chore: clean deps
+
+## 0.1.7-beta.0
+
+### Patch Changes
+
+- chore: clean deps
+
 ## 0.1.6
 
 ### Patch Changes

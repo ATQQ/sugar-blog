@@ -111,7 +111,7 @@ const resultCover = computed(() => {
   </a>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .blog-item .pin {
   position: absolute;
   overflow: hidden;
@@ -127,13 +127,11 @@ const resultCover = computed(() => {
 }
 
 .blog-item .pin::before {
-  content: '';
+  content: "";
   position: absolute;
   width: 120%;
   height: 30px;
-  background-image: linear-gradient(45deg,
-      var(--blog-theme-color),
-      var(--blog-theme-color));
+  background-image: linear-gradient(45deg, var(--blog-theme-color), var(--blog-theme-color));
   transform: rotate(-45deg) translateY(-20px);
   display: flex;
   align-items: center;
@@ -155,10 +153,9 @@ const resultCover = computed(() => {
   cursor: pointer;
   display: flex;
   flex-direction: column;
-
-  &:hover {
-    box-shadow: var(--box-shadow-hover);
-  }
+}
+.blog-item:hover {
+  box-shadow: var(--box-shadow-hover);
 }
 
 .info-container {
@@ -180,8 +177,8 @@ const resultCover = computed(() => {
 .description {
   color: var(--description-font-color);
   font-size: 14px;
+  height: 48px;
   margin-bottom: 8px;
-  // 多行换行
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -197,17 +194,14 @@ const resultCover = computed(() => {
   font-size: 13px;
   color: var(--badge-font-color);
   margin-top: 8px;
-
-  .split:not(:last-child) {
-    &::after {
-      content: '';
-      display: inline-block;
-      width: 1px;
-      height: 8px;
-      margin: 0 10px;
-      background-color: #4e5969;
-    }
-  }
+}
+.badge-list .split:not(:last-child)::after {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 8px;
+  margin: 0 10px;
+  background-color: #4e5969;
 }
 
 .cover-img {
@@ -235,11 +229,9 @@ const resultCover = computed(() => {
     background-size: contain;
     background-position: center;
   }
-
   .pc-visible {
     display: none;
   }
-
   .mobile-visible {
     display: block;
   }

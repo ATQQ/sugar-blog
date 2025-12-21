@@ -22,43 +22,38 @@ recommend: 3
 import BlogTheme from '@sugarat/theme'
 
 // 自定义样式重载 // [!code focus]
-import './style.scss' // [!code focus]
+import './style.css' // [!code focus]
 
 export default BlogTheme
 ```
 
 里面有如下内容
-```scss
+```css
+/* 定义遮罩样式 */
 .VPHome {
-  // 自定义首页背景图
-  &::before {
-    // 图片来源：https://zhuanlan.zhihu.com/p/54060187
-    background-image: url(./assets/bg.webp);
-    background-size: cover;
-  }
-  // 定义遮罩样式
-  background: radial-gradient(
-    ellipse,
-    rgba(var(--bg-gradient-home), 1) 0%,
-    rgba(var(--bg-gradient-home), 0) 150%
-  );
+  background: radial-gradient(ellipse, rgba(var(--bg-gradient-home), 1) 0%, rgba(var(--bg-gradient-home), 0) 150%);
+}
+
+/* 自定义首页背景图 */
+.VPHome::before {
+  background-image: url(./assets/bg.webp);
+  background-size: cover;
 }
 ```
-解除文件`index.ts` 中`import './style.scss'` 注释后，就能看到模板首页背景图发生了变化
+解除文件`index.ts` 中`import './style.css'` 注释后，就能看到模板首页背景图发生了变化
 
-![](https://img.cdn.sugarat.top/mdImg/MTY3Njk5MTAzODkzOQ==676991038939)
+![](https://img.cdn.sugarat.top/mdImg/MTY3Njk5MTAzODkzOQ==676991038939~fmt.webp)
 
 ## 首页背景
-```scss
-.VPHome {// [!code focus]
-  &::before {// [!code focus]
-    background-image: url(./assets/bg.webp); // [!code focus]
-    background-size: cover; // [!code focus]
-  } // [!code focus]
-} // [!code focus]
+```css
+/* 自定义首页背景图 */
+.VPHome::before {
+  background-image: url(./assets/bg.webp);
+  background-size: cover;
+}
 
 .VPHome {
-  // 定义遮罩样式，控制图片展示的程度
+  /* 定义遮罩样式，控制图片展示的程度 */
   background: radial-gradient(
     ellipse,
     rgba(var(--bg-gradient-home), 1) 0%,
@@ -69,27 +64,27 @@ export default BlogTheme
 
 ## 置顶样式
 可以自行修改置顶icon的样式
-```scss
+```css
+/* 修改置顶icon的颜色 */
 .blog-item .pin.pin::before {
-  // 修改颜色
   background-image: linear-gradient(red, red);
 }
 ```
-![](https://img.cdn.sugarat.top/mdImg/MTY3NzA3OTExMjgxMA==677079112810)
+![](https://img.cdn.sugarat.top/mdImg/MTY3NzA3OTExMjgxMA==677079112810~fmt.webp)
 
-```scss
-// 隐藏置顶的icon
+```css
+/* 隐藏置顶的icon */
 .blog-item .pin.pin::before {
   display: none;
 }
 ```
-![](https://img.cdn.sugarat.top/mdImg/MTY3NzA3OTIwODAzNg==677079208036)
+![](https://img.cdn.sugarat.top/mdImg/MTY3NzA3OTIwODAzNg==677079208036~fmt.webp)
 
 
 ## 主题色
 vitepress 最新的默认主题色偏紫色，看着感觉有点不习惯
 
-![](https://img.cdn.sugarat.top/mdImg/MTY5MTkyODQ0ODUzOQ==691928448539)
+![](https://img.cdn.sugarat.top/mdImg/MTY5MTkyODQ0ODUzOQ==691928448539~fmt.webp)
 
 主题包内置了一些主题色，可以自行选择，详见[全局配置:themeColor](./global.md#themecolor)
 

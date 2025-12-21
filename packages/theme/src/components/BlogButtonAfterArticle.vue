@@ -46,17 +46,17 @@ function toggleContent() {
   </div>
 </template>
 
-<style scoped lang="scss">
+<style scoped>
+@charset "UTF-8";
 .appreciation-container {
   text-align: center;
   padding: 20px;
   font-size: 14px;
   color: #606266;
-
-  :deep(.sugar-button.sugar-button--primary){
-    background-color: var(--vp-c-brand-2);
-    border-color: var(--vp-c-brand-2);
-  }
+}
+.appreciation-container :deep(.sugar-button.sugar-button--primary) {
+  background-color: var(--vp-c-brand-2);
+  border-color: var(--vp-c-brand-2);
 }
 
 .content-container {
@@ -65,9 +65,9 @@ function toggleContent() {
   justify-content: center;
   align-items: center;
   margin-top: 20px;
-  :deep(img){
-    height: 260px;
-  }
+}
+.content-container :deep(img) {
+  height: 260px;
 }
 
 .content-icon {
@@ -94,18 +94,15 @@ function toggleContent() {
   from {
     opacity: 0;
   }
-
   to {
     opacity: 1;
   }
 }
-
 /* 淡出 */
 @keyframes fadeOut {
   from {
     opacity: 1;
   }
-
   to {
     opacity: 0;
   }

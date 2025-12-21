@@ -1,5 +1,40 @@
 # @sugarat/theme
 
+## 0.5.12
+
+### Patch Changes
+
+- 1cbe27f: chore: remove sass
+- 4e56ed4: chore: clean deps
+- d1fdc6c: perf: update
+- Updated dependencies [4e56ed4]
+- Updated dependencies [d1fdc6c]
+  - vitepress-plugin-announcement@0.1.7
+  - vitepress-plugin-pagefind@0.4.18
+
+## 0.5.12-beta.2
+
+### Patch Changes
+
+- perf: update
+- Updated dependencies
+  - vitepress-plugin-pagefind@0.4.18-beta.1
+
+## 0.5.12-beta.1
+
+### Patch Changes
+
+- chore: remove sass
+
+## 0.5.12-beta.0
+
+### Patch Changes
+
+- chore: clean deps
+- Updated dependencies
+  - vitepress-plugin-announcement@0.1.7-beta.0
+  - vitepress-plugin-pagefind@0.4.18-beta.0
+
 ## 0.5.11
 
 ### Patch Changes
@@ -358,9 +393,9 @@
 - feat: 支持调整阅读时间分析组件位置，详见全局配置 `article` 属性
 - feat: 左侧推荐列表可以自定义关联关键词，详见文章配置 `recommend` 属性
 
-| top(原)                                                                       | inline(新)                                                                    | newLine(新)                                                                   |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| ![](https://img.cdn.sugarat.top/mdImg/sugar/21aa2571b60f76e7401b66af851009bb) | ![](https://img.cdn.sugarat.top/mdImg/sugar/5da6e5e56bde48265e706bc004e2ad41) | ![](https://img.cdn.sugarat.top/mdImg/sugar/50e9ec84b37af64f723c3b477b99283a) |
+| top(原)                                                                                | inline(新)                                                                             | newLine(新)                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| ![](https://img.cdn.sugarat.top/mdImg/sugar/21aa2571b60f76e7401b66af851009bb~fmt.webp) | ![](https://img.cdn.sugarat.top/mdImg/sugar/5da6e5e56bde48265e706bc004e2ad41~fmt.webp) | ![](https://img.cdn.sugarat.top/mdImg/sugar/50e9ec84b37af64f723c3b477b99283a~fmt.webp) |
 
 ## 0.2.23
 
@@ -848,7 +883,7 @@ cover: /abc.png
 
 - chore: 文档内容完善
 - feat：内置搜索弹窗 UI 更新 - 类似 algolia（基于 [vue-command-palette](https://github.com/xiaoluoboding/vue-command-palette/blob/main/src/assets/scss/algolia.scss)）
-  ![](https://img.cdn.sugarat.top/mdImg/MTY3OTEyNDM0ODQ4OA==679124348488)
+  ![](https://img.cdn.sugarat.top/mdImg/MTY3OTEyNDM0ODQ4OA==679124348488~fmt.webp)
 
 ## 0.1.10
 

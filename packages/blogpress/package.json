@@ -1,7 +1,7 @@
 {
   "name": "blogpress",
   "type": "module",
-  "version": "2.0.72",
+  "version": "2.0.73",
   "private": true,
   "license": "MIT",
   "scripts": {
@@ -10,16 +10,12 @@
     "serve": "vitepress serve"
   },
   "dependencies": {
-    "@element-plus/icons-vue": "^2.3.1",
     "@sugarat/theme": "workspace:*",
-    "element-plus": "^2.7.2",
-    "vitepress": "2.0.0-alpha.15",
-    "vitepress-plugin-51la": "workspace:*",
-    "vue": "^3.5.12"
+    "vitepress-plugin-51la": "workspace:*"
   },
   "devDependencies": {
     "pagefind": "^1.3.0",
-    "sass": "^1.76.0",
-    "vite": "^5.4.9"
+    "vite": "^5.4.9",
+    "vitepress": "2.0.0-alpha.15"
   }
 }

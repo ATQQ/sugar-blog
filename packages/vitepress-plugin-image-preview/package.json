@@ -1,0 +1,62 @@
+{
+  "name": "vitepress-plugin-image-preview",
+  "version": "0.0.1",
+  "private": true,
+  "description": "vitepress plugin, Image Preview, 图片预览",
+  "author": "sugar",
+  "license": "MIT",
+  "homepage": "https://github.com/ATQQ/sugar-blog/tree/master/packages/vitepress-plugin-image-preview",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ATQQ/sugar-blog.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ATQQ/sugar-blog/issues"
+  },
+  "keywords": [
+    "vitepress",
+    "plugin",
+    "image",
+    "preview",
+    "viewer",
+    "图片预览"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "pnpm run /^dev:.*/",
+    "dev:plugin": "npx tsup src/index.ts --dts --watch --format esm,cjs --external vitepress",
+    "dev:component": "node scripts/watchAndCopy.mjs",
+    "dev:watch": "node scripts/watchAndCopy.mjs",
+    "build": "pnpm run /^build:.*/",
+    "build:plugin": "npx tsup src/index.ts --dts --format esm,cjs --external vitepress --silent",
+    "build:component": "node scripts/copyComponents.mjs"
+  },
+  "peerDependencies": {
+    "vitepress": "^1 || ^2"
+  },
+  "dependencies": {
+    "@vueuse/core": "^14.1.0",
+    "javascript-stringify": "^2.1.0"
+  },
+  "devDependencies": {
+    "chokidar": "^3.6.0",
+    "fs-extra": "^11.1.1",
+    "tinyglobby": "^0.2.6",
+    "tsup": "^7.2.0",
+    "typescript": "^5.5.4",
+    "vite": "^5",
+    "vitepress": "2.0.0-alpha.15",
+    "vue": "^3.5.24"
+  }
+}

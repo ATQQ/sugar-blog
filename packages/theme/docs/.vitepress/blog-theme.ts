@@ -97,7 +97,7 @@ export const blogTheme = getThemeConfig({
       nickname: '粥里有勺糖',
       des: '你的指尖,拥有改变世界的力量',
       avatar:
-        'https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTE2NzAzMA==674995167030',
+        'https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTE2NzAzMA==674995167030~fmt.webp',
       url: 'https://sugarat.top'
     },
     {
@@ -133,7 +133,8 @@ export const blogTheme = getThemeConfig({
       { type: 'text', content: '**👇公众号👇---👇 微信 👇**' },
       {
         type: 'image',
-        src: 'https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210~fmt.webp'
+        src: 'https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210~fmt.webp',
+        alt: '粥里有勺糖微信二维码'
       },
       {
         type: 'text',

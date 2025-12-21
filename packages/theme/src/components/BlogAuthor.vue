@@ -36,22 +36,20 @@ useHoverSpin(imgRef, home?.value?.hoverSpin)
   </div>
 </template>
 
-<style scoped lang="scss">
+<style scoped>
 .blog-author {
   margin-bottom: 20px;
-
-  img {
-    display: block;
-    margin: 10px auto;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background-color: rgba(var(--bg-gradient-home));
-    cursor: pointer;
-  }
-
-  p {
-    text-align: center;
-  }
+}
+.blog-author img {
+  display: block;
+  margin: 10px auto;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: rgba(var(--bg-gradient-home));
+  cursor: pointer;
+}
+.blog-author p {
+  text-align: center;
 }
 </style>

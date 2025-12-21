@@ -44,7 +44,7 @@ pnpm serve
 
 ① Github Pages 开启 Git Actions 部署支持
 
-![](https://img.cdn.sugarat.top/mdImg/sugar/8a2454c628d0e2abcc7a0451ddd7d2dc)
+![](https://img.cdn.sugarat.top/mdImg/sugar/8a2454c628d0e2abcc7a0451ddd7d2dc~fmt.webp)
 
 ② 复制文件 `.github/workflows/deploy.yml` 到自己的项目相同目录下
 

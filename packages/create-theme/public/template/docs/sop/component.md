@@ -2,9 +2,59 @@
 description: 默认支持流程图，tabs面板，待办列表，作品页面
 ---
 
-# 内置第三方插件能力
+## groupIcon - 分组代码块图标
+作用于 `code-group` 代码块，提供语言/工具图标，基于 [vitepress-plugin-group-icons](https://github.com/yuyinws/vitepress-plugin-group-icons/tree/main/docs) 插件实现。
 
-部分内置组件（插件），来源 [vitepress.yiov.top](https://vitepress.yiov.top/plugin.html) 推荐
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/d1ece3bc3ff5ee15bb5401b0d20da266)
+
+:::code-group
+```sh [npm]
+npm create @sugarat/theme@latest
+```
+```sh [yarn]
+yarn create @sugarat/theme
+```
+```sh [pnpm]
+pnpm create @sugarat/theme
+```
+```sh [bun]
+bun create @sugarat/theme
+```
+:::
+
+````md
+:::code-group
+```sh [npm]
+npm create @sugarat/theme@latest
+```
+```sh [yarn]
+yarn create @sugarat/theme
+```
+```sh [pnpm]
+pnpm create @sugarat/theme
+```
+```sh [bun]
+bun create @sugarat/theme
+```
+:::
+````
+
+```ts
+const blogTheme = getThemeConfig({
+  // 自定义图标
+  groupIcon: {
+
+  }
+})
+```
+
+也可以关闭这个功能
+
+```ts
+const blogTheme = getThemeConfig({
+  groupIcon: false
+})
+```
 
 ## oml2d - 看板娘集成
 * Type：[oml2dOptions](https://oml2d.hacxy.cn/api/interfaces/Options.html)
@@ -14,7 +64,7 @@ description: 默认支持流程图，tabs面板，待办列表，作品页面
 :::tip 一点说明
 通过内置 [oh-my-live2d](https://oml2d.hacxy.cn) 实现, 可以通过 `oml2d` 选项配置。
 
-通过这个能力可以快速加入并定制属于自己的看板娘, 开启只需要为其传递一个 [配置选项](https://oml2d.hacxy.cn/options/Options.html) 即可
+通过这个能力可以快速加入并定制属于自己的看板娘, 开启只需要为其传递一个 [配置选项](https://oml2d.hacxy.cn/api/interfaces/Options.html) 即可
 :::
 
 以下是一个简单的使用示例，当模型加载成功时它将出现在您网站的左下角。
@@ -49,7 +99,6 @@ const blogTheme = getThemeConfig({
 }
 ```
 :::
-
 ## task-checkbox
 * Type: `boolean | TaskCheckbox`
 
@@ -297,6 +346,25 @@ gantt
     Parallel 4   :         des6, after des4, 1d
 ```
 
+## 数学公式
+
+$a \ne 0$
+
+$$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^\top}{\sqrt{d}}\right)V$$
+
+VitePress 官方提供了内置支持，安装相关依赖，配置开启即可。
+
+```sh
+npm add -D markdown-it-mathjax3@^4
+```
+
+```ts [.vitepress/config.mts]
+export default {
+  markdown: {
+    math: true
+  }
+}
+```
 
 ## UserWorksPage
 * Type: `UserWorks`
@@ -305,7 +373,7 @@ gantt
 
 效果如下，详见 [个人作品展示](https://theme.sugarat.top/work.html)
 
-![](https://img.cdn.sugarat.top/mdImg/MTY4NzA4ODczMzkwNg==687088733906)
+![](https://img.cdn.sugarat.top/mdImg/MTY4NzA4ODczMzkwNg==687088733906~fmt.webp)
 
 新建一个`works.md`文件，放入以下内容
   

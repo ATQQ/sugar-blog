@@ -115,20 +115,19 @@ const renderData = computed(() => {
   </footer>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 footer.blog-footer {
   text-align: center;
   position: relative;
   border-top: 1px solid var(--vp-c-gutter);
   padding: 20px 12px;
   background-color: var(--vp-c-bg);
-
-  p {
-    line-height: 24px;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--vp-c-text-2);
-  }
+}
+footer.blog-footer p {
+  line-height: 24px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--vp-c-text-2);
 }
 
 .footer-item-list {
@@ -143,33 +142,28 @@ footer.blog-footer {
     align-items: center;
   }
 }
-
 .footer-item {
   display: flex;
   align-items: center;
   margin: 0 8px;
-
-  i {
-    margin-right: 4px;
-    font-style: normal;
-  }
-
-  i :deep(svg) {
-    fill: var(--vp-c-text-2);
-    width: 16px;
-    height: 16px;
-  }
-
-  i :deep(img) {
-    width: 16px;
-    height: 16px;
-  }
-
-  a:hover {
-    color: var(--vp-c-brand-1);
-    text-decoration: underline;
-    text-decoration-color: var(--vp-c-brand-1);
-    text-decoration-style: dashed;
-  }
+}
+.footer-item i {
+  margin-right: 4px;
+  font-style: normal;
+}
+.footer-item i :deep(svg) {
+  fill: var(--vp-c-text-2);
+  width: 16px;
+  height: 16px;
+}
+.footer-item i :deep(img) {
+  width: 16px;
+  height: 16px;
+}
+.footer-item a:hover {
+  color: var(--vp-c-brand-1);
+  text-decoration: underline;
+  text-decoration-color: var(--vp-c-brand-1);
+  text-decoration-style: dashed;
 }
 </style>

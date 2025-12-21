@@ -3,7 +3,7 @@ import path from 'node:path'
 import { getDefaultTitle, getFileLastModifyTime, getTextSummary, getVitePressPages, grayMatter, normalizePath, renderDynamicMarkdown } from '@sugarat/theme-shared'
 import type { SiteConfig } from 'vitepress'
 import type { Theme } from '../../composables/config/index'
-import { formatDate } from '../client'
+import { formatDate, shuffleArray } from '../client'
 import { getFirstImagURLFromMD } from './index'
 
 export function patchDefaultThemeSideBar(cfg?: Partial<Theme.BlogConfig>) {
@@ -147,5 +147,8 @@ export function patchVPThemeConfig(
 }
 
 export function checkConfig(cfg?: Partial<Theme.BlogConfig>) {
-  // 保留
+  const friendConfig = cfg?.friend
+  if (!Array.isArray(friendConfig) && friendConfig?.random) {
+    friendConfig.list = shuffleArray(friendConfig.list)
+  }
 }

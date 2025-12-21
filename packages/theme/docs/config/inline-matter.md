@@ -24,7 +24,7 @@ outline: [2,3]
 ---
 ```
 
-![](https://img.cdn.sugarat.top/mdImg/MTY3NzE2MzY5MzMyMA==677163693320)
+![](https://img.cdn.sugarat.top/mdImg/MTY3NzE2MzY5MzMyMA==677163693320~fmt.webp)
 
 ## cleanUrls
 :::warning 需要服务器支持

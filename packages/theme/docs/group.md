@@ -11,6 +11,6 @@ publish: false
 
 |                                QQ交流群                                 |                               微信交流群                                |
 | :---------------------------------------------------------------------: | :---------------------------------------------------------------------: |
-| ![](https://img.cdn.sugarat.top/mdImg/MTY5NTA0NTAzMjAzMQ==695045032031) | ![](https://image-uploader.sugarat.top/images/sugar/theme.png) |
+| ![](https://img.cdn.sugarat.top/mdImg/MTY5NTA0NTAzMjAzMQ==695045032031~fmt.webp) | ![](https://image-uploader.sugarat.top/images/sugar/theme.png) |
 
 如扫码无法加入，可加好友备注“主题”，我拉你进群

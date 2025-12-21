@@ -21,7 +21,7 @@ defineEmits(['close', 'click'])
   </span>
 </template>
 
-<style lang="scss">
+<style>
 .blog-tag {
   display: inline-flex;
   justify-content: center;
@@ -37,127 +37,108 @@ defineEmits(['close', 'click'])
   white-space: nowrap;
   vertical-align: middle;
   color: #fff;
-
-  >.close {
-    margin-left: 6px;
-    font-size: 12px;
-    cursor: pointer;
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 14px;
-    height: 14px;
-    transition: all 0.3s;
-  }
+}
+.blog-tag > .close {
+  margin-left: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  transition: all 0.3s;
 }
 
 /* Primary */
 .blog-tag--primary {
   background-color: #409eff;
   border-color: #409eff;
-
-  .close:hover {
-    background-color: #79bbff;
-  }
+}
+.blog-tag--primary .close:hover {
+  background-color: #79bbff;
 }
 
 /* Success */
 .blog-tag--success {
   background-color: #67c23a;
   border-color: #67c23a;
-
-  .close:hover {
-    background-color: #95d475;
-  }
+}
+.blog-tag--success .close:hover {
+  background-color: #95d475;
 }
 
 /* Info */
 .blog-tag--info {
   background-color: #909399;
   border-color: #909399;
-
-  .close:hover {
-    background-color: #b1b3b8;
-  }
+}
+.blog-tag--info .close:hover {
+  background-color: #b1b3b8;
 }
 
 /* Warning */
 .blog-tag--warning {
   background-color: #e6a23c;
   border-color: #e6a23c;
-
-  .close:hover {
-    background-color: #eebe77;
-  }
+}
+.blog-tag--warning .close:hover {
+  background-color: #eebe77;
 }
 
 /* Danger */
 .blog-tag--danger {
   background-color: #f56c6c;
   border-color: #f56c6c;
-
-  .close:hover {
-    background-color: #f89898;
-  }
 }
-</style>
+.blog-tag--danger .close:hover {
+  background-color: #f89898;
+}
 
-<style lang="scss">
-html.dark {
-  .blog-tag--primary {
-    background-color: #18222c;
-    border-color: #1d3043;
-    color: #409eff;
-
-    .close:hover {
-      background-color: #409eff;
-      color: #fff;
-    }
-  }
-
-  .blog-tag--success {
-    background-color: #1c2518;
-    border-color: #25371c;
-    color: #67c23a;
-
-    .close:hover {
-      background-color: #95d475;
-      color: #fff;
-    }
-  }
-
-  .blog-tag--info {
-    background-color: #202121;
-    border-color: #2d2d2f;
-    color: #909399;
-
-    .close:hover {
-      background-color: #909399;
-      color: #fff;
-    }
-  }
-
-  .blog-tag--warning {
-    background-color: #292218;
-    border-color: #3e301c;
-    color: #e6a23c;
-
-    .close:hover {
-      background-color: #e6a23c;
-      color: #fff;
-    }
-  }
-
-  .blog-tag--danger {
-    background-color: #2b1d1d;
-    border-color: #412626;
-    color: #f56c6c;
-
-    .close:hover {
-      background-color: #f56c6c;
-      color: #fff;
-    }
-  }
+html.dark .blog-tag--primary {
+  background-color: #18222c;
+  border-color: #1d3043;
+  color: #409eff;
+}
+html.dark .blog-tag--primary .close:hover {
+  background-color: #409eff;
+  color: #fff;
+}
+html.dark .blog-tag--success {
+  background-color: #1c2518;
+  border-color: #25371c;
+  color: #67c23a;
+}
+html.dark .blog-tag--success .close:hover {
+  background-color: #95d475;
+  color: #fff;
+}
+html.dark .blog-tag--info {
+  background-color: #202121;
+  border-color: #2d2d2f;
+  color: #909399;
+}
+html.dark .blog-tag--info .close:hover {
+  background-color: #909399;
+  color: #fff;
+}
+html.dark .blog-tag--warning {
+  background-color: #292218;
+  border-color: #3e301c;
+  color: #e6a23c;
+}
+html.dark .blog-tag--warning .close:hover {
+  background-color: #e6a23c;
+  color: #fff;
+}
+html.dark .blog-tag--danger {
+  background-color: #2b1d1d;
+  border-color: #412626;
+  color: #f56c6c;
+}
+html.dark .blog-tag--danger .close:hover {
+  background-color: #f56c6c;
+  color: #fff;
 }
 </style>

@@ -24,7 +24,8 @@ pnpm add @sugarat/theme
 
 安装主题依赖的一些第三方库
 ```sh
-pnpm add @element-plus/icons-vue element-plus vue sass pagefind
+# 内置搜索依赖，如果关闭内置搜索则不需要安装
+pnpm add pagefind
 ```
 
 ### 引入主题
@@ -54,7 +55,7 @@ export default BlogTheme
 
 此时启动项目就可以看见初步的效果了
 
-![](https://img.cdn.sugarat.top/mdImg/MTY5NTk5NjYzMDU5MQ==695996630591)
+![](https://img.cdn.sugarat.top/mdImg/MTY5NTk5NjYzMDU5MQ==695996630591~fmt.webp)
 
 
 ## 只使用部分能力

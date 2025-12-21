@@ -81,7 +81,7 @@ bun create @sugarat/theme my-first-blog
 
 |                              npm/yarn/pnpm                              |                                   bun                                   |
 | :---------------------------------------------------------------------: | :---------------------------------------------------------------------: |
-| ![](https://img.cdn.sugarat.top/mdImg/MTY4OTQyMDE1NTcxMA==689420155710) | ![](https://img.cdn.sugarat.top/mdImg/MTY5NjE0NzY1NDEwMA==696147654100) |
+| ![](https://img.cdn.sugarat.top/mdImg/MTY4OTQyMDE1NTcxMA==689420155710~fmt.webp) | ![](https://img.cdn.sugarat.top/mdImg/MTY5NjE0NzY1NDEwMA==696147654100~fmt.webp) |
 
 
 ① 切换到项目的目录
@@ -112,11 +112,11 @@ bun run --bun dev
 :::
 
 
-![](https://img.cdn.sugarat.top/mdImg/MTY5NTIxODUyMDU4MQ==695218520581)
+![](https://img.cdn.sugarat.top/mdImg/MTY5NTIxODUyMDU4MQ==695218520581~fmt.webp)
 
 你就会得到一个这样的页面
 
-![](https://img.cdn.sugarat.top/mdImg/MTY3Njk4OTk2Mjc0Nw==676989962747)
+![](https://img.cdn.sugarat.top/mdImg/MTY3Njk4OTk2Mjc0Nw==676989962747~fmt.webp)
 
 ④ 构建产物
 :::code-group
@@ -128,7 +128,7 @@ bun run --bun build
 ```
 :::
 
-![](https://img.cdn.sugarat.top/mdImg/MTY5NTIxODYwNzA3Nw==695218607077)
+![](https://img.cdn.sugarat.top/mdImg/MTY5NTIxODYwNzA3Nw==695218607077~fmt.webp)
 
 默认会开启内置的离线全文搜索（基于 `pagefind` 实现）
 
@@ -153,7 +153,7 @@ bun run --bun serve
 ```
 :::
 
-![](https://img.cdn.sugarat.top/mdImg/MTY5NTIxODY1NzAzNg==695218657036)
+![](https://img.cdn.sugarat.top/mdImg/MTY5NTIxODY1NzAzNg==695218657036~fmt.webp)
 
 ## 升级
 
