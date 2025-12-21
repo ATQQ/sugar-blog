@@ -1,6 +1,13 @@
 # @sugarat/create-theme
 
+## 0.0.91-beta.0
+
+### Patch Changes
+
+- chore: remove sass
+
 ## 0.0.90
+
 ### Patch Changes
 
 - fix: some bugs

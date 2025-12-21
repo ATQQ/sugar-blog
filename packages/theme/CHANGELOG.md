@@ -1,5 +1,11 @@
 # @sugarat/theme
 
+## 0.5.12-beta.1
+
+### Patch Changes
+
+- chore: remove sass
+
 ## 0.5.12-beta.0
 
 ### Patch Changes
