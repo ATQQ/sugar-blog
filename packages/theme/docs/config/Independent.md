@@ -55,7 +55,7 @@ export default BlogTheme
 
 此时启动项目就可以看见初步的效果了
 
-![](https://img.cdn.sugarat.top/mdImg/MTY5NTk5NjYzMDU5MQ==695996630591)
+![](https://img.cdn.sugarat.top/mdImg/MTY5NTk5NjYzMDU5MQ==695996630591~fmt.webp)
 
 
 ## 只使用部分能力

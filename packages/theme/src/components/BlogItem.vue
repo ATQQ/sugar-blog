@@ -177,6 +177,7 @@ const resultCover = computed(() => {
 .description {
   color: var(--description-font-color);
   font-size: 14px;
+  height: 48px;
   margin-bottom: 8px;
   overflow: hidden;
   text-overflow: ellipsis;

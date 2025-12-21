@@ -19,7 +19,7 @@ outline: [2,4]
 
 笔者自己的博客主题，详细就不展开了。
 
-![](https://img.cdn.sugarat.top/mdImg/sugar/7b3d73034370602b1eef82fdd7c13a99)
+![](https://img.cdn.sugarat.top/mdImg/sugar/7b3d73034370602b1eef82fdd7c13a99~fmt.webp)
 
 支持 npm 一键创建模板。
 
@@ -34,7 +34,7 @@ GitHub: [ATQQ/sugar-blog](https://github.com/ATQQ/sugar-blog/tree/master/package
 
 |                                   常规首页                                    |                                    标签页                                     |
 | :---------------------------------------------------------------------------: | :---------------------------------------------------------------------------: |
-| ![](https://img.cdn.sugarat.top/mdImg/sugar/29d59c77d786eda38488938aad99ac46) | ![](https://img.cdn.sugarat.top/mdImg/sugar/fadf62e1224f1c93da8740aca2430255) |
+| ![](https://img.cdn.sugarat.top/mdImg/sugar/29d59c77d786eda38488938aad99ac46~fmt.webp) | ![](https://img.cdn.sugarat.top/mdImg/sugar/fadf62e1224f1c93da8740aca2430255~fmt.webp) |
 
 直接在 VitePress 项目里拓展的配置，没有分离，但项目已经内置了许多功能和功能页。
 
@@ -43,7 +43,7 @@ GitHub: [Charles7c/charles7c.github.io](https://github.com/Charles7c/charles7c.g
 ### [vitepress-blog-zaun](https://visionary-sunflower-dc7ae3.netlify.app/)
 基于 VitePress 打造的博客项目，UI还是很漂亮的。
 
-![](https://img.cdn.sugarat.top/mdImg/sugar/79bb82ad7850f4a022afe2060cfb10e6)
+![](https://img.cdn.sugarat.top/mdImg/sugar/79bb82ad7850f4a022afe2060cfb10e6~fmt.webp)
 
 GitHub: [clark-cui/vitepress-blog-zaun](https://github.com/clark-cui/vitepress-blog-zaun)
 
@@ -51,7 +51,7 @@ GitHub: [clark-cui/vitepress-blog-zaun](https://github.com/clark-cui/vitepress-b
 
 Vue 官方博客。
 
-![](https://img.cdn.sugarat.top/mdImg/sugar/c645f6aa11114c3dd0a74f07fb310ffe)
+![](https://img.cdn.sugarat.top/mdImg/sugar/c645f6aa11114c3dd0a74f07fb310ffe~fmt.webp)
 
 完全自定义了主题，非常简洁。
 
@@ -59,14 +59,14 @@ GitHub: [vuejs/blog](https://github.com/vuejs/blog)
 
 ### [Vue3 文档](https://cn.vuejs.org/)
 Vue3 官方文档也是基于 VitePress 构建的。
-![](https://img.cdn.sugarat.top/mdImg/sugar/da3d6554e818a85eebe17236acd266b5)
+![](https://img.cdn.sugarat.top/mdImg/sugar/da3d6554e818a85eebe17236acd266b5~fmt.webp)
 
 其独立主题包为 [@vue/theme](https://github.com/vuejs/theme/blob/main/package.json)
 
 ### [vitepress-blog-pure](https://ti.bi/)
 一个非常简洁美观的博客项目。
 
-![](https://img.cdn.sugarat.top/mdImg/sugar/5cdeb81777695ef0a6d48ec106e586d7)
+![](https://img.cdn.sugarat.top/mdImg/sugar/5cdeb81777695ef0a6d48ec106e586d7~fmt.webp)
 
 自定义了首页，文章页等样式，同时提供独立时间线和标签页。
 
@@ -75,7 +75,7 @@ GitHub: [airene/vitepress-blog-pure](https://github.com/airene/vitepress-blog-pu
 ### [harlanzw.com-vitepress](https://harlanzw.com/)
 很漂亮的博客，简洁美观，有设计感。
 
-![](https://img.cdn.sugarat.top/mdImg/sugar/e99824409d88017a33c767b6392050a7)
+![](https://img.cdn.sugarat.top/mdImg/sugar/e99824409d88017a33c767b6392050a7~fmt.webp)
 
 *但博客用的 vitepress 版本是 0.x 和最新的相比API变化较大。*
 
@@ -104,13 +104,13 @@ GitHub: [vitepress-theme-teek](https://github.com/Kele-Bingtang/vitepress-theme-
 
 基于 [mermaid](https://mermaid.js.org/) 实现的 md 流程图插件。
 
-![](https://img.cdn.sugarat.top/mdImg/sugar/9238f8f2ddebc56daba7c45819b88974)
+![](https://img.cdn.sugarat.top/mdImg/sugar/9238f8f2ddebc56daba7c45819b88974~fmt.webp)
 
 #### [rss](https://github.com/ATQQ/sugar-blog/tree/master/packages/vitepress-plugin-rss) - 订阅链接生成
 
 给 vitepress 提供 RSS 订阅源链接生成支持。
 
-![](https://img.cdn.sugarat.top/mdImg/MTY5MjQ1NTQ4MDYxMg==692455480612)
+![](https://img.cdn.sugarat.top/mdImg/MTY5MjQ1NTQ4MDYxMg==692455480612~fmt.webp)
 
 #### [51la](https://www.npmjs.com/package/vitepress-plugin-51la) - 网站统计分析
 提供一键接入 [51.LA](https://v6.51.la/) 网站数据统计分析的功能。
@@ -141,7 +141,7 @@ GitHub: [vitepress-theme-teek](https://github.com/Kele-Bingtang/vitepress-theme-
 
 基于 [pagefind](https://github.com/cloudcannon/pagefind) 实现的离线全文搜索插件。
 
-![](https://img.cdn.sugarat.top/mdImg/MTY3OTgxOTE1MDQ0OA==679819150448)
+![](https://img.cdn.sugarat.top/mdImg/MTY3OTgxOTE1MDQ0OA==679819150448~fmt.webp)
 
 ### 易用性提升
 #### [vitepress-plugin-autobar](https://github.com/luciozhang/vitepress-plugin-autobar)

@@ -42,7 +42,7 @@ export default BlogTheme
 ```
 解除文件`index.ts` 中`import './style.css'` 注释后，就能看到模板首页背景图发生了变化
 
-![](https://img.cdn.sugarat.top/mdImg/MTY3Njk5MTAzODkzOQ==676991038939)
+![](https://img.cdn.sugarat.top/mdImg/MTY3Njk5MTAzODkzOQ==676991038939~fmt.webp)
 
 ## 首页背景
 ```css
@@ -70,7 +70,7 @@ export default BlogTheme
   background-image: linear-gradient(red, red);
 }
 ```
-![](https://img.cdn.sugarat.top/mdImg/MTY3NzA3OTExMjgxMA==677079112810)
+![](https://img.cdn.sugarat.top/mdImg/MTY3NzA3OTExMjgxMA==677079112810~fmt.webp)
 
 ```css
 /* 隐藏置顶的icon */
@@ -78,13 +78,13 @@ export default BlogTheme
   display: none;
 }
 ```
-![](https://img.cdn.sugarat.top/mdImg/MTY3NzA3OTIwODAzNg==677079208036)
+![](https://img.cdn.sugarat.top/mdImg/MTY3NzA3OTIwODAzNg==677079208036~fmt.webp)
 
 
 ## 主题色
 vitepress 最新的默认主题色偏紫色，看着感觉有点不习惯
 
-![](https://img.cdn.sugarat.top/mdImg/MTY5MTkyODQ0ODUzOQ==691928448539)
+![](https://img.cdn.sugarat.top/mdImg/MTY5MTkyODQ0ODUzOQ==691928448539~fmt.webp)
 
 主题包内置了一些主题色，可以自行选择，详见[全局配置:themeColor](./global.md#themecolor)
 

@@ -27,7 +27,7 @@ export default defineConfig({
 ```
 
 :::details 我启动时遇到配置方式过期提示？
-![](https://img.cdn.sugarat.top/mdImg/MTY3OTIxNDY5MjE3NQ==679214692175)
+![](https://img.cdn.sugarat.top/mdImg/MTY3OTIxNDY5MjE3NQ==679214692175~fmt.webp)
 
 只需动动手指将配置按照如上最新的方式做个替换即可
 
@@ -72,7 +72,7 @@ export default defineConfig({
 })
 ```
 
-![](https://img.cdn.sugarat.top/mdImg/MTY3OTEyMjg5Nzc1Mg==679122897752)
+![](https://img.cdn.sugarat.top/mdImg/MTY3OTEyMjg5Nzc1Mg==679122897752~fmt.webp)
 
 下面开始详细介绍 [Theme.BlogConfig](https://github.com/ATQQ/sugar-blog/blob/255c4b1e6a85a529be3a72c88e365077e067ecba/packages/theme/src/composables/config/index.ts#L69-L137)
 
@@ -88,7 +88,7 @@ const blogTheme = getThemeConfig({
 })
 ```
 
-![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkxMzUxNzQxMg==674913517412)
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkxMzUxNzQxMg==674913517412~fmt.webp)
 
 ## hotArticle
 
@@ -149,7 +149,7 @@ sticky: 1
 
 :::
 
-![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkxNzkzMjY5Nw==674917932697)
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkxNzkzMjY5Nw==674917932697~fmt.webp)
 
 设置为 false 时，不展示
 
@@ -303,11 +303,11 @@ export interface HoverSpinConfig {
 
 :::
 
-![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MDczMzQ2OQ==673180733469)
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MDczMzQ2OQ==673180733469~fmt.webp)
 
-![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMDIwMzE5MQ==674920203192)
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMDIwMzE5MQ==674920203192~fmt.webp)
 
-![](https://img.cdn.sugarat.top/mdImg/MTY5NjE1NTk3MjkxMQ==696155972911)
+![](https://img.cdn.sugarat.top/mdImg/MTY5NjE1NTk3MjkxMQ==696155972911~fmt.webp)
 
 ![](https://cdn.upyun.sugarat.top/mdImg/sugar/8128001649cb35413a0575b2749b8099)
 
@@ -365,11 +365,11 @@ type SearchConfig =
 
 :::
 
-![](https://img.cdn.sugarat.top/mdImg/MTY3OTEyMjg5Nzc1Mg==679122897752)
+![](https://img.cdn.sugarat.top/mdImg/MTY3OTEyMjg5Nzc1Mg==679122897752~fmt.webp)
 
-![](https://img.cdn.sugarat.top/mdImg/MTY3OTEyMjk2MTg5Mg==679122961892)
+![](https://img.cdn.sugarat.top/mdImg/MTY3OTEyMjk2MTg5Mg==679122961892~fmt.webp)
 
-![](https://img.cdn.sugarat.top/mdImg/MTY3OTgxNTk5NTQyMw==679815995423)
+![](https://img.cdn.sugarat.top/mdImg/MTY3OTgxNTk5NTQyMw==679815995423~fmt.webp)
 
 ### 全文搜索 - minisearch
 
@@ -389,7 +389,7 @@ export default defineConfig({
 
 效果如下
 
-![](https://img.cdn.sugarat.top/mdImg/MTY4MjE3NDYxOTczMA==682174619730)
+![](https://img.cdn.sugarat.top/mdImg/MTY4MjE3NDYxOTczMA==682174619730~fmt.webp)
 
 ### 全文搜索 - pagefind
 
@@ -527,10 +527,10 @@ interface SearchItem {
 原理见 => [Pagefind indexes your site after it builds](https://pagefind.app/docs/)
 :::
 :::details 构建示例
-![](https://img.cdn.sugarat.top/mdImg/MTY3OTEyMzM1ODQxNQ==679123358415)
+![](https://img.cdn.sugarat.top/mdImg/MTY3OTEyMzM1ODQxNQ==679123358415~fmt.webp)
 :::
 
-![](https://img.cdn.sugarat.top/mdImg/MTY3OTEyMzQ0NDAwOA==679123444008)
+![](https://img.cdn.sugarat.top/mdImg/MTY3OTEyMzQ0NDAwOA==679123444008~fmt.webp)
 
 详细配置和使用方法可以见插件文档：[vitepress-plugin-pagefind](https://github.com/ATQQ/sugar-blog/blob/master/packages/vitepress-plugin-pagefind/README-zh.md)
 
@@ -554,7 +554,7 @@ export default defineConfig({
 })
 ```
 
-![](https://img.cdn.sugarat.top/mdImg/MTY3NzE2MjEzMjcyNQ==677162132725)
+![](https://img.cdn.sugarat.top/mdImg/MTY3NzE2MjEzMjcyNQ==677162132725~fmt.webp)
 
 ### 全文搜索 - flexsearch
 
@@ -693,9 +693,9 @@ const blogTheme = getThemeConfig({
 
 :::
 
-![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMDc2MDIxMw==674920760213)
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMDc2MDIxMw==674920760213~fmt.webp)
 
-![](https://img.cdn.sugarat.top/mdImg/sugar/4f5883d87e53fbea63b9231beed0d52f)
+![](https://img.cdn.sugarat.top/mdImg/sugar/4f5883d87e53fbea63b9231beed0d52f~fmt.webp)
 
 ### artalk
 
@@ -703,7 +703,7 @@ const blogTheme = getThemeConfig({
 
 访问 <https://artalk.js.org/> 获取具体部署文档
 
-![](https://img.cdn.sugarat.top/mdImg/sugar/826637f9ade0aae08c19bb58ece08f22)
+![](https://img.cdn.sugarat.top/mdImg/sugar/826637f9ade0aae08c19bb58ece08f22~fmt.webp)
 
 **本主题采用Artalk后端控制前端配置，这样能让前后端始终保持兼容性，且无需在程序升级后手动更换 Artalk 前端资源的引入地址。**
 
@@ -854,7 +854,7 @@ interface RecommendArticle {
 
 :::
 
-![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMTI2MDQyNQ==674921260425)
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMTI2MDQyNQ==674921260425~fmt.webp)
 
 设置为 false 时，不展示
 
@@ -874,7 +874,7 @@ const blogTheme = getThemeConfig({
 })
 ```
 
-![](https://img.cdn.sugarat.top/mdImg/MTY5MTIxODc4NDYzNw==691218784637)
+![](https://img.cdn.sugarat.top/mdImg/MTY5MTIxODc4NDYzNw==691218784637~fmt.webp)
 
 通过 `sort` 属性可以自定义排序规则，默认按照时间排序`date`，例如按照文件名排序
 
@@ -998,14 +998,14 @@ interface ArticleAnalyzeTitles {
 
 :::
 
-![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMjAzNDEzOA==674922034138)
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMjAzNDEzOA==674922034138~fmt.webp)
 
-![](https://img.cdn.sugarat.top/mdImg/MTY4MjE3NDAzNzMxMw==682174037313)
+![](https://img.cdn.sugarat.top/mdImg/MTY4MjE3NDAzNzMxMw==682174037313~fmt.webp)
 
 不同配置效果
 | top                                                                           | inline                                                                        | newLine                                                                       |
 | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| ![](https://img.cdn.sugarat.top/mdImg/sugar/21aa2571b60f76e7401b66af851009bb) | ![](https://img.cdn.sugarat.top/mdImg/sugar/5da6e5e56bde48265e706bc004e2ad41) | ![](https://img.cdn.sugarat.top/mdImg/sugar/50e9ec84b37af64f723c3b477b99283a) |
+| ![](https://img.cdn.sugarat.top/mdImg/sugar/21aa2571b60f76e7401b66af851009bb~fmt.webp) | ![](https://img.cdn.sugarat.top/mdImg/sugar/5da6e5e56bde48265e706bc004e2ad41~fmt.webp) | ![](https://img.cdn.sugarat.top/mdImg/sugar/50e9ec84b37af64f723c3b477b99283a~fmt.webp) |
 
 <!-- ## srcDir
 
@@ -1076,15 +1076,15 @@ interface Alert {
 
 :::
 
-![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDk5MzQwNTQwOA==674993405408)
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDk5MzQwNTQwOA==674993405408~fmt.webp)
 
-![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDk5MzcyNzU2MA==674993727560)
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDk5MzcyNzU2MA==674993727560~fmt.webp)
 
 ## popover
 
 设置一个全局的公告弹窗，支持设置图片，文字，按钮，跳链
 
-![](https://img.cdn.sugarat.top/mdImg/MTY3NDk5NDY3Nzc5NQ==674994677795)
+![](https://img.cdn.sugarat.top/mdImg/MTY3NDk5NDY3Nzc5NQ==674994677795~fmt.webp)
 
 ::: tip 公共已拆分为独立插件
 详细配置和使用方法可以见插件文档：[vitepress-plugin-announcement](https://github.com/ATQQ/sugar-blog/blob/master/packages/vitepress-plugin-announcement/README.md)
@@ -1262,7 +1262,7 @@ const blogTheme = getThemeConfig({
 
 用于设置首页展示的友链信息
 
-![](https://img.cdn.sugarat.top/mdImg/MTY5MzMxODIxNDY0Mg==693318214642)
+![](https://img.cdn.sugarat.top/mdImg/MTY5MzMxODIxNDY0Mg==693318214642~fmt.webp)
 
 ::: code-group
 
@@ -1354,7 +1354,7 @@ const blogTheme = getThemeConfig({
 
 支持设置列表`展示数量`，`自动滚动`，`随机顺序`
 
-![](https://img.cdn.sugarat.top/mdImg/MTcwMTc4NjIxMjY2MA==701786212660)
+![](https://img.cdn.sugarat.top/mdImg/MTcwMTc4NjIxMjY2MA==701786212660~fmt.webp)
 
 ```ts
 const blogTheme = getThemeConfig({
@@ -1394,7 +1394,7 @@ const blogTheme = getThemeConfig({
 
 设置这个列表后，作者信息如果匹配上，即可跳转
 
-![](https://img.cdn.sugarat.top/mdImg/MTY4MjE3NTA0MDc1NA==682175040754)
+![](https://img.cdn.sugarat.top/mdImg/MTY4MjE3NTA0MDc1NA==682175040754~fmt.webp)
 
 ::: code-group
 
@@ -1456,7 +1456,7 @@ hero:
 ---
 ```
 
-![](https://img.cdn.sugarat.top/mdImg/MTY3NzE2Mjk1NzczNw==677162957737)
+![](https://img.cdn.sugarat.top/mdImg/MTY3NzE2Mjk1NzczNw==677162957737~fmt.webp)
 
 ## RSS
 
@@ -1583,7 +1583,7 @@ interface FeedOptions {
 }
 ```
 
-![](https://img.cdn.sugarat.top/mdImg/MTY5MTkyODAxMDEwMQ==691928010101)
+![](https://img.cdn.sugarat.top/mdImg/MTY5MTkyODAxMDEwMQ==691928010101~fmt.webp)
 
 :::warning 特别提示
 你也可以使用单独的插件 [vitepress-plugin-rss](https://www.npmjs.com/package/vitepress-plugin-rss) 来添加同样的能力，其支持更加丰富的定制。
@@ -1621,7 +1621,7 @@ type ThemeColor = 'vp-default' | 'vp-green' | 'vp-yellow' | 'vp-red' | 'el-blue'
 
 |                               vp-default                                |                                vp-green                                 |                                 el-blue                                 |
 | :---------------------------------------------------------------------: | :---------------------------------------------------------------------: | :---------------------------------------------------------------------: |
-| ![](https://img.cdn.sugarat.top/mdImg/MTY5NDM1NTU5Nzg4MA==694355597880) | ![](https://img.cdn.sugarat.top/mdImg/MTY5NDM1NTYxOTE4OQ==694355619189) | ![](https://img.cdn.sugarat.top/mdImg/MTY5NDM1NTY5MTk0Nw==694355691947) |
+| ![](https://img.cdn.sugarat.top/mdImg/MTY5NDM1NTU5Nzg4MA==694355597880~fmt.webp) | ![](https://img.cdn.sugarat.top/mdImg/MTY5NDM1NTYxOTE4OQ==694355619189~fmt.webp) | ![](https://img.cdn.sugarat.top/mdImg/MTY5NDM1NTY5MTk0Nw==694355691947~fmt.webp) |
 
 <ChangeThemeDemo />
 
@@ -1631,7 +1631,7 @@ type ThemeColor = 'vp-default' | 'vp-green' | 'vp-yellow' | 'vp-red' | 'el-blue'
 
 用于控制文章底部按钮，点击按钮会在按钮下方渲染一个自定义的html内容，例如可以用来做赞赏按钮，内置了 `wechatPay` 和 `aliPay` 两个图标，也可自定义图标(svg)。
 
-![](https://img.cdn.sugarat.top/mdImg/sugar/4d429bea65b8840f5cfda875fac50926)
+![](https://img.cdn.sugarat.top/mdImg/sugar/4d429bea65b8840f5cfda875fac50926~fmt.webp)
 
 ::: code-group
 
@@ -1695,7 +1695,7 @@ buttonAfterArticle:
 
 设置首页页脚的内容（可用于设置版权，备案信息，自定义内容等）
 
-![](https://img.cdn.sugarat.top/mdImg/MTY5NTU0NTUxMTUxNA==695545511514)
+![](https://img.cdn.sugarat.top/mdImg/MTY5NTU0NTUxMTUxNA==695545511514~fmt.webp)
 
 ::: code-group
 
@@ -1767,7 +1767,7 @@ interface Footer {
 
 下面是一个较完整例子
 
-![](https://img.cdn.sugarat.top/mdImg/MTY5NTU0NTkwMTk1OA==695545901958)
+![](https://img.cdn.sugarat.top/mdImg/MTY5NTU0NTkwMTk1OA==695545901958~fmt.webp)
 
 ```ts
 const blogTheme = getThemeConfig({
@@ -1809,7 +1809,7 @@ const blogTheme = getThemeConfig({
 
 自定义 icon 也是可以的
 
-![](https://img.cdn.sugarat.top/mdImg/MTY5NTU0NjQwNDE2MQ==695546404161)
+![](https://img.cdn.sugarat.top/mdImg/MTY5NTU0NjQwNDE2MQ==695546404161~fmt.webp)
 
 ```ts
 const blogTheme = getThemeConfig({
@@ -1857,7 +1857,7 @@ const blogTheme = getThemeConfig({
 })
 ```
 
-![](https://img.cdn.sugarat.top/mdImg/MTY5NjE1NDYyMjI3NQ==696154622275)
+![](https://img.cdn.sugarat.top/mdImg/MTY5NjE1NDYyMjI3NQ==696154622275~fmt.webp)
 
 同时提供方了一个配置简化的方法，用于生成和主题一样风格的标签的 HTML 代码。
 
@@ -1894,7 +1894,7 @@ const blogTheme = getThemeConfig({
 
 两者配合设置 `作者，标签，时间等` 信息区块的展示位置
 
-![](https://img.cdn.sugarat.top/mdImg/MTcwNDI5MTUyMTAwMg==704291521002)
+![](https://img.cdn.sugarat.top/mdImg/MTcwNDI5MTUyMTAwMg==704291521002~fmt.webp)
 
 ::: code-group
 
@@ -1925,7 +1925,7 @@ const blogTheme = getThemeConfig({
 })
 ```
 
-![](https://img.cdn.sugarat.top/mdImg/MTcwNDM0NjAxNjg3NQ==704346016875)
+![](https://img.cdn.sugarat.top/mdImg/MTcwNDM0NjAxNjg3NQ==704346016875~fmt.webp)
 
 ## backToTop
 
@@ -1934,7 +1934,7 @@ const blogTheme = getThemeConfig({
 * type: `boolean|BackToTop`
 * default: `true`
 
-![](https://img.cdn.sugarat.top/mdImg/sugar/258187044dcf166044e722f879317e14)
+![](https://img.cdn.sugarat.top/mdImg/sugar/258187044dcf166044e722f879317e14~fmt.webp)
 
 :::code-group
 

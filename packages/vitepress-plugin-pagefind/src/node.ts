@@ -44,14 +44,23 @@ export function getPagefindHead(base: string) {
     [
       'script',
       {},
-      `import('${withBase(base || '', '/pagefind/pagefind.js')}')
-  .then((module) => {
-    window.__pagefind__ = module
-    module.init()
-  })
-  .catch(() => {
-    // console.log('not load /pagefind/pagefind.js')
-  })`
+      `
+        const load = () => {
+          import('${withBase(base || '', '/pagefind/pagefind.js')}')
+            .then((module) => {
+              window.__pagefind__ = module
+              module.init()
+            })
+            .catch(() => {
+              // console.log('not load /pagefind/pagefind.js')
+            })
+        }
+        if (window.requestIdleCallback) {
+          window.requestIdleCallback(load)
+        } else {
+          setTimeout(load, 0)
+        }
+      `
     ]
   ]
 }

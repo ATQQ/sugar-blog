@@ -61,7 +61,7 @@ layout: home
 ```
 配完这个之后，首页样式就有了，如下图所示
 
-![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MDM5ODQ3MQ==673180398471)
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MDM5ODQ3MQ==673180398471~fmt.webp)
 
 
 ### blog
@@ -120,11 +120,11 @@ interface HomeAnalysis {
 
 对应效果如下
 
-![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MDczMzQ2OQ==673180733469)
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MDczMzQ2OQ==673180733469~fmt.webp)
 
-![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMDIwMzE5MQ==674920203192)
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMDIwMzE5MQ==674920203192~fmt.webp)
 
-![](https://img.cdn.sugarat.top/mdImg/MTY5NTQ3MTc4NjYzMA==695471786630)
+![](https://img.cdn.sugarat.top/mdImg/MTY5NTQ3MTc4NjYzMA==695471786630~fmt.webp)
 
 其中`inspiring`可以是一个数组，点击的时候就会按照设定顺序切换
 
@@ -141,7 +141,7 @@ blog:
 ---
 ```
 
-![](https://img.cdn.sugarat.top/mdImg/MTY4OTQ5NjEyMDIxMg==689496120212)
+![](https://img.cdn.sugarat.top/mdImg/MTY4OTQ5NjEyMDIxMg==689496120212~fmt.webp)
 
 也可以设置`inspiringTimeout`，实现自动切换
 
@@ -153,7 +153,7 @@ blog:
 ---
 ```
 
-![](https://img.cdn.sugarat.top/mdImg/MTY4OTQ5NjQxNDA3Nw==689496414077)
+![](https://img.cdn.sugarat.top/mdImg/MTY4OTQ5NjQxNDA3Nw==689496414077~fmt.webp)
 
 通过设置 `author` 和 `logo` 可以重载（最高优先级）右侧的作者名和头像信息
 
@@ -192,7 +192,7 @@ blog:
 ```
 |                               card(默认)                                |                                    split                                    |
 | :---------------------------------------------------------------------: | :-------------------------------------------------------------------------: |
-| ![](https://img.cdn.sugarat.top/mdImg/MTY5NjE1NTk3MjkxMQ==696155972911) | ![](https://img.cdn.sugarat.top/mdImg/MTY5NTUyMjY1MjA1Nw==theme-avatar.gif) |
+| ![](https://img.cdn.sugarat.top/mdImg/MTY5NjE1NTk3MjkxMQ==696155972911~fmt.webp) | ![](https://img.cdn.sugarat.top/mdImg/MTY5NTUyMjY1MjA1Nw==theme-avatar.gif~fmt.webp) |
 
 移动端隐藏头部头像展示`minScreenAvatar`
 ```md
@@ -203,7 +203,7 @@ blog:
 ```
 |                      minScreenAvatar: true (默认)                       |                         minScreenAvatar: false                          |
 | :---------------------------------------------------------------------: | :---------------------------------------------------------------------: |
-| ![](https://img.cdn.sugarat.top/mdImg/MTY5NjE2MjE0MTI5Mw==696162141293) | ![](https://img.cdn.sugarat.top/mdImg/MTY5NjE2MjE4NjM3MQ==696162186371) |
+| ![](https://img.cdn.sugarat.top/mdImg/MTY5NjE2MjE0MTI5Mw==696162141293~fmt.webp) | ![](https://img.cdn.sugarat.top/mdImg/MTY5NjE2MjE4NjM3MQ==696162186371~fmt.webp) |
 
 文章数据卡片标题修改
 ```md
@@ -233,7 +233,7 @@ title: 更新日志
 ```
 在首页就会有如下展示
 
-![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MTE0MDEyNg==673181140126)
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MTE0MDEyNg==673181140126~fmt.webp)
 
 不设置情况下默认取一级标题 `# 一级标题`
 
@@ -255,11 +255,11 @@ description: 简单介绍主题的由来和实现原理
 
 在首页就会有如下展示
 
-![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MTQ1NDA2NA==673181454064)
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MTQ1NDA2NA==673181454064~fmt.webp)
 
 不设置的情况下，默认取文章内容的前100个字符
 
-![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MTUyMTExOQ==673181521119)
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MTUyMTExOQ==673181521119~fmt.webp)
 
 ### descriptionHTML
 
@@ -276,7 +276,7 @@ descriptionHTML: '
 ---
 ```
 
-![](https://img.cdn.sugarat.top/mdImg/MTY4OTQzMTQyMzE1MA==689431423150)
+![](https://img.cdn.sugarat.top/mdImg/MTY4OTQzMTQyMzE1MA==689431423150~fmt.webp)
 
 ### cover
 * Type: `string|false`
@@ -296,13 +296,13 @@ cover: false
 ```
 :::
 
-![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4NTk3MDM3OQ==673185970379)
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4NTk3MDM3OQ==673185970379~fmt.webp)
 
 未指定时，默认取文章中出现的第一张图片
 
 同时如果手动设置了，封面将同时在文章页展示
 
-![](https://img.cdn.sugarat.top/mdImg/MTY4MjE3NDAzNzMxMw==682174037313)
+![](https://img.cdn.sugarat.top/mdImg/MTY4MjE3NDAzNzMxMw==682174037313~fmt.webp)
 
 可以通过下面的 `hiddenCover` 隐藏文章页的展示
 
@@ -328,7 +328,7 @@ hidden: true
 ```
 比如设置在`changelog.md`里，首页将不会展示此项
 
-![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MTcwMDU4MQ==673181700581)
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MTcwMDU4MQ==673181700581~fmt.webp)
 
 ### author
 
@@ -342,11 +342,11 @@ author: 粥里有勺糖
 
 在首页的展示样式
 
-![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MjAxOTgxNg==673182019816)
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MjAxOTgxNg==673182019816~fmt.webp)
 
 在文章顶部展示的样式
 
-![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MjA0ODcxMA==673182048710)
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MjA0ODcxMA==673182048710~fmt.webp)
 
 如果没有单独设置则会默认使用全局的 `author` 配置，这个在 [全局配置: author](./global.md#author) 有介绍
 
@@ -359,7 +359,7 @@ readingTime: true
 ---
 ```
 
-![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMjAzNDEzOA==674922034138)
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkyMjAzNDEzOA==674922034138~fmt.webp)
 
 ### comment
 单独为某篇文章设置是否开启评论
@@ -382,7 +382,7 @@ date: 2023-01-04
 ---
 ```
 
-![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MjMxNjc5Ng==673182316796)
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MjMxNjc5Ng==673182316796~fmt.webp)
 
 ```md
 ---
@@ -390,7 +390,7 @@ date: 2023-01-08 20:00:00
 ---
 ```
 
-![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MzIxNzEwOQ==673183217109)
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MzIxNzEwOQ==673183217109~fmt.webp)
 
 展示规则，实现代码见：[packages/theme/src/utils/index.ts](https://github.com/ATQQ/sugar-blog/blob/1758bffebd8529dbec860f531de126410a422795/packages/theme/src/utils/index.ts#L41-L64)
 * 小于1分钟：xx秒前
@@ -405,7 +405,7 @@ date: false
 ---
 ```
 
-![](https://img.cdn.sugarat.top/mdImg/MTY4MjE3NTQwODI4MA==682175408280)
+![](https://img.cdn.sugarat.top/mdImg/MTY4MjE3NTQwODI4MA==682175408280~fmt.webp)
 
 ### tag
 用于按标签给文章分类，同时，在文章页标签可点击跳转
@@ -421,9 +421,9 @@ categories:
 ---
 ```
 
-![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4NTY0MTI2Nw==673185641267)
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4NTY0MTI2Nw==673185641267~fmt.webp)
 
-![](https://img.cdn.sugarat.top/mdImg/MTY4MjE3NTE3NjgyNg==682175176826)
+![](https://img.cdn.sugarat.top/mdImg/MTY4MjE3NTE3NjgyNg==682175176826~fmt.webp)
 ### tags
 效果同上
 ### categories
@@ -438,7 +438,7 @@ sticky: 1
 ---
 ```
 
-![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkxMDA0NzU5MQ==674910047591)
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3NDkxMDA0NzU5MQ==674910047591~fmt.webp)
 
 ### top
 * type: `number`
@@ -451,7 +451,7 @@ top: 1
 ---
 ```
 
-![](https://img.cdn.sugarat.top/mdImg/MTY3NzA3ODA4MDM5NA==677078080394)
+![](https://img.cdn.sugarat.top/mdImg/MTY3NzA3ODA4MDM5NA==677078080394~fmt.webp)
 
 ### recommend
 * type: `number | false | string | string[] | [...string[], number]`
@@ -488,7 +488,7 @@ recommend: ['Node.js', 'css', 'html', 1]
 
 | 手动设置顺序                                                            | 隐藏                                                                    | 自定义关联                                                                    |
 | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| ![](https://img.cdn.sugarat.top/mdImg/MTY3NzI0NTYyNDEyOA==677245624128) | ![](https://img.cdn.sugarat.top/mdImg/MTY3NzI0NjQ2NzIyNA==677246467224) | ![](https://img.cdn.sugarat.top/mdImg/sugar/21db9f87e7b64958dad2c24ed94e40d3) |
+| ![](https://img.cdn.sugarat.top/mdImg/MTY3NzI0NTYyNDEyOA==677245624128~fmt.webp) | ![](https://img.cdn.sugarat.top/mdImg/MTY3NzI0NjQ2NzIyNA==677246467224~fmt.webp) | ![](https://img.cdn.sugarat.top/mdImg/sugar/21db9f87e7b64958dad2c24ed94e40d3~fmt.webp) |
 
 
 ### publish
@@ -512,7 +512,7 @@ recommend: false
 
 比如设置在`changelog.md`里，首页将不会展示此项
 
-![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MTcwMDU4MQ==673181700581)
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE4MTcwMDU4MQ==673181700581~fmt.webp)
 
 同时，左侧边栏也不会展示
 
@@ -533,6 +533,6 @@ buttonAfterArticle:
 ---
 ```
 
-![](https://img.cdn.sugarat.top/mdImg/sugar/4d429bea65b8840f5cfda875fac50926)
+![](https://img.cdn.sugarat.top/mdImg/sugar/4d429bea65b8840f5cfda875fac50926~fmt.webp)
 
 也支持在全局设置，对所有页面都生效。

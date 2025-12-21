@@ -28,7 +28,7 @@ const RSS: Theme.RSSOptions = {
   id: baseUrl,
   link: baseUrl,
   language: 'zh-cn',
-  image: 'https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTE2NzAzMA==674995167030',
+  image: 'https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTE2NzAzMA==674995167030~fmt.webp',
   favicon: 'https://sugarat.top/favicon.ico',
   copyright: 'Copyright (c) 2018-present, 粥里有勺糖',
   url: `${baseUrl}/feed.rss`,

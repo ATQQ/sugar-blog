@@ -30,7 +30,7 @@ html.dark {
   position: fixed;
   top: 0;
   z-index: -1;
-  background-image: url(./bg.png);
+  background-image: url(./bg.webp);
   background-repeat: repeat;
   min-height: 100%;
 }

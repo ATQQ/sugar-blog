@@ -48,7 +48,7 @@ export const themeEN = defineLocaleConfig({
     nickname: 'sugar',
     des: 'Your fingertips have the power to change the world.',
     avatar:
-      'https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTE2NzAzMA==674995167030',
+      'https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTE2NzAzMA==674995167030~fmt.webp',
     url: 'https://sugarat.top'
   }, {
     nickname: 'Vitepress',

@@ -2,7 +2,7 @@
 
 简约风的 Vitepress 博客主题，更多细节见 https://theme.sugarat.top
 
-![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE3MDUxOTMwMw==673170519303)
+![图片](https://img.cdn.sugarat.top/mdImg/MTY3MzE3MDUxOTMwMw==673170519303~fmt.webp)
 
 ## Quick Start
 ① 创建项目
@@ -21,7 +21,7 @@ yarn create @sugarat/theme
 bun create @sugarat/theme
 ```
 
-![](https://img.cdn.sugarat.top/mdImg/MTY4OTQyMDE1NTcxMA==689420155710)
+![](https://img.cdn.sugarat.top/mdImg/MTY4OTQyMDE1NTcxMA==689420155710~fmt.webp)
 
 ② 安装依赖
 ```sh
