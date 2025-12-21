@@ -1,5 +1,12 @@
 # vitepress-plugin-pagefind
 
+## 0.4.18
+
+### Patch Changes
+
+- 4e56ed4: chore: clean deps
+- d1fdc6c: perf: update
+
 ## 0.4.18-beta.1
 
 ### Patch Changes

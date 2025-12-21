@@ -1,5 +1,12 @@
 # @sugarat/create-theme
 
+## 0.0.91
+
+### Patch Changes
+
+- 1cbe27f: chore: remove sass
+- d1fdc6c: perf: update
+
 ## 0.0.91-beta.1
 
 ### Patch Changes

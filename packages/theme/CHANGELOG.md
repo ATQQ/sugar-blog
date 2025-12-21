@@ -1,5 +1,17 @@
 # @sugarat/theme
 
+## 0.5.12
+
+### Patch Changes
+
+- 1cbe27f: chore: remove sass
+- 4e56ed4: chore: clean deps
+- d1fdc6c: perf: update
+- Updated dependencies [4e56ed4]
+- Updated dependencies [d1fdc6c]
+  - vitepress-plugin-announcement@0.1.7
+  - vitepress-plugin-pagefind@0.4.18
+
 ## 0.5.12-beta.2
 
 ### Patch Changes
