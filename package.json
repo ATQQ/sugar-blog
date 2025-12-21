@@ -35,7 +35,7 @@
     "release:only": "changeset publish",
     "release:beta": "changeset publish --tag beta",
     "pc": "pnpm changeset",
-    "pc:version": "pnpm changeset version",
+    "pc:version": "pnpm changeset version && npm run update:create-theme",
     "pcpe": "changeset pre enter beta",
     "pcpe:exit": "changeset pre exit beta",
     "postinstall": "npx simple-git-hooks",

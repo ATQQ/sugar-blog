@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.91-beta.1
+
+### Patch Changes
+
+- perf: update
+
 ## 0.0.91-beta.0
 
 ### Patch Changes
