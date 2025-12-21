@@ -310,7 +310,7 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
   /**
    * 文章 HTML 渲染完成后的处理钩子（可对每篇文章的最终 HTML 做二次加工）
    */
-  transform?: (content: string) => string
+  transform?: TransformHtml | TransformHtml[]
   /**
    * 限制输出文件包含的文章数量
    * @default 0

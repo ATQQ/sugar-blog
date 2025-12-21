@@ -335,7 +335,7 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
   /**
    * Post-processing hook for each item's rendered HTML (run after render to tweak the final HTML)
    */
-  transform?: (content: string) => string
+  transform?: TransformHtml | TransformHtml[]
   /**
    * Limit the number of docs the output file contains
    * @default 0

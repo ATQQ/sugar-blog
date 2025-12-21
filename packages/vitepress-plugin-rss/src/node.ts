@@ -330,7 +330,10 @@ export async function getPostsData(
 
         // 支持对对渲染结果进行转换
         if (rssOptions?.transform) {
-          html = await rssOptions.transform(html, config)
+          const transforms = [rssOptions?.transform].flat()
+          for (const transform of transforms) {
+            html = await transform(html, config)
+          }
         }
 
         // 将渲染结果保存到文件系统缓存
