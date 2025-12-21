@@ -47,10 +47,10 @@ export default BlogTheme
 ## 首页背景
 ```css
 /* 自定义首页背景图 */
-.VPHome::before {// [!code focus]
-  background-image: url(./assets/bg.webp);// [!code focus]
-  background-size: cover;// [!code focus]
-}// [!code focus]
+.VPHome::before {
+  background-image: url(./assets/bg.webp);
+  background-size: cover;
+}
 
 .VPHome {
   /* 定义遮罩样式，控制图片展示的程度 */
