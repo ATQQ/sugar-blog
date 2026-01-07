@@ -1,5 +1,11 @@
 # @sugarat/theme
 
+## 0.5.13
+
+### Patch Changes
+
+- fix: windows dev reload failed
+
 ## 0.5.12
 
 ### Patch Changes

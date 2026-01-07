@@ -1,5 +1,12 @@
 # 我的博客内容
 
+## 2.0.74
+
+### Patch Changes
+
+- Updated dependencies
+  - @sugarat/theme@0.5.13
+
 ## 2.0.73
 
 ### Patch Changes

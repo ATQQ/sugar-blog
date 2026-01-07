@@ -1,7 +1,7 @@
 import fs from 'fs'
 import type { PluginOption } from 'vite'
 import type { SiteConfig } from 'vitepress'
-import { grayMatter } from '@sugarat/theme-shared'
+import { grayMatter, normalizePath } from '@sugarat/theme-shared'
 import type { Theme } from '../../composables/config/index'
 import { getArticleMeta } from './theme'
 import { debounce, isEqual } from './index'
@@ -12,7 +12,7 @@ export function themeReloadPlugin() {
   let docsDir: string
 
   const generateRoute = (filepath: string) => {
-    return filepath.replace(docsDir, '').replace('.md', '')
+    return normalizePath(filepath).replace(docsDir, '').replace('.md', '')
   }
 
   return {
