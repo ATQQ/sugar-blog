@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.92
+
+### Patch Changes
+
+- fix: windows dev reload failed
+
 ## 0.0.91
 
 ### Patch Changes
