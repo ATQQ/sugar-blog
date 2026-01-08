@@ -60,6 +60,7 @@
     "vitepress-markdown-timeline": "^1.2.1",
     "vitepress-plugin-announcement": "workspace:*",
     "vitepress-plugin-group-icons": "1.6.5",
+    "vitepress-plugin-image-preview": "workspace:*",
     "vitepress-plugin-mermaid": "2.0.13",
     "vitepress-plugin-pagefind": "workspace:*",
     "vitepress-plugin-rss": "workspace:*",

@@ -5,6 +5,7 @@ import type { Mapping, Repo } from '@giscus/vue'
 import type { Options as Oml2dOptions } from 'oh-my-live2d'
 import type { PagefindConfig } from 'vitepress-plugin-pagefind'
 import type { AnnouncementOptions } from 'vitepress-plugin-announcement'
+import type { ImagePreviewOptions } from 'vitepress-plugin-image-preview'
 
 type RSSPluginOptions = RSSOptions
 
@@ -420,6 +421,10 @@ export namespace Theme {
      */
     alert?: Alert
     popover?: AnnouncementOptions
+    /**
+     * 图片预览插件配置
+     */
+    imagePreview?: ImagePreviewOptions
     friend?: FriendLink[] | FriendConfig
     authorList?: Omit<FriendLink, 'avatar'>[]
     /**

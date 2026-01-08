@@ -7,6 +7,7 @@ import type { PluginOption } from 'vite'
 import { cacheAllGitTimestamps, joinPath } from '@sugarat/theme-shared'
 import { AnnouncementPlugin } from 'vitepress-plugin-announcement'
 import { groupIconVitePlugin } from 'vitepress-plugin-group-icons'
+import { ImagePreviewPlugin } from 'vitepress-plugin-image-preview'
 import type { Theme } from '../../composables/config/index'
 import { _require } from './mdPlugins'
 import { themeReloadPlugin } from './hot-reload-plugin'
@@ -17,6 +18,9 @@ export function getVitePlugins(cfg: Partial<Theme.BlogConfig> = {}) {
 
   // 缓存所有文章的 git 提交时间
   plugins.push(cacheAllGitTimestampsPlugin())
+
+  // 图片预览
+  plugins.push(ImagePreviewPlugin(cfg?.imagePreview))
 
   // 处理自定义主题色
   if (cfg.themeColor) {
