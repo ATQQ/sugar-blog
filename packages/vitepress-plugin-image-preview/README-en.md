@@ -1,6 +1,10 @@
 # vitepress-plugin-image-preview
 
-VitePress Image Preview Plugin, style referenced from [Element Plus Image Viewer](https://element-plus.org/en-US/component/image.html).
+English | [简体中文](https://github.com/ATQQ/sugar-blog/blob/master/packages/vitepress-plugin-image-preview/README.md)
+
+VitePress Image Preview Plugin, style referenced from [Element Plus Image Viewer](https://element-plus.org/en-US/component/image.html#image-preview).
+
+![Image Preview](image.png)
 
 ## Install
 
