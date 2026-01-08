@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.93
+
+### Patch Changes
+
+- feat: split-image-preview
+
 ## 0.0.92
 
 ### Patch Changes
