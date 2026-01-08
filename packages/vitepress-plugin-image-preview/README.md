@@ -3,9 +3,9 @@
 [English](https://github.com/ATQQ/sugar-blog/blob/master/packages/vitepress-plugin-image-preview/README-en.md) | 简体中文
 
 
-VitePress 图片预览插件，样式参考 [Element Plus Image Viewer](https://element-plus.org/zh-CN/component/image.html#image-preview)。
+VitePress 图片预览插件，样式参考 [Element Plus Image Viewer](https://element-plus.org/zh-CN/component/image#%E5%9B%BE%E7%89%87%E9%A2%84%E8%A7%88)。
 
-![图片预览](image.png)
+![图片预览](https://github.com/ATQQ/sugar-blog/blob/master/packages/vitepress-plugin-image-preview/image.png?raw=true)
 
 ## 安装
 
