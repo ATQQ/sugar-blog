@@ -52,7 +52,17 @@ onUnmounted(() => {
 
 <template>
   <ImageViewer
-    v-if="show" :infinite="false" hide-on-click-modal teleported :url-list="previewImageInfo.list"
-    :initial-index="previewImageInfo.idx" @close="show = false"
+    v-if="show"
+    :infinite="imagePreviewOptions?.infinite ?? false"
+    :hide-on-click-modal="imagePreviewOptions?.hideOnClickModal ?? false"
+    :show-progress="imagePreviewOptions?.showProgress ?? true"
+    :zoom-ratio="imagePreviewOptions?.zoomRatio ?? 1.2"
+    :min-scale="imagePreviewOptions?.minScale ?? 0.2"
+    :max-scale="imagePreviewOptions?.maxScale ?? 7"
+    :toolbar="imagePreviewOptions?.toolbar ?? ['zoomOut', 'zoomIn', 'reset', 'rotateLeft', 'rotateRight', 'download']"
+    teleported
+    :url-list="previewImageInfo.list"
+    :initial-index="previewImageInfo.idx"
+    @close="show = false"
   />
 </template>

@@ -1,5 +1,13 @@
 # @sugarat/theme
 
+## 0.5.14
+
+### Patch Changes
+
+- feat: split-image-preview
+- Updated dependencies
+  - vitepress-plugin-image-preview@0.1.0
+
 ## 0.5.13
 
 ### Patch Changes

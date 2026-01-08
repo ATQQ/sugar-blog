@@ -1086,7 +1086,7 @@ interface Alert {
 
 ![](https://img.cdn.sugarat.top/mdImg/MTY3NDk5NDY3Nzc5NQ==674994677795~fmt.webp)
 
-::: tip 公共已拆分为独立插件
+::: tip 已拆分为独立插件
 详细配置和使用方法可以见插件文档：[vitepress-plugin-announcement](https://github.com/ATQQ/sugar-blog/blob/master/packages/vitepress-plugin-announcement/README.md)
 :::
 
@@ -1257,6 +1257,89 @@ const blogTheme = getThemeConfig({
 
 也支持根据不同路由自定义展示策略，详见`onRouteChanged` 方法。
 
+## imagePreview
+
+用于设置图片预览插件的配置项，详见[插件文档](https://github.com/ATQQ/sugar-blog/blob/master/packages/vitepress-plugin-image-preview/README.md)
+
+::: tip 已拆分为独立插件
+详细配置和使用方法可以见插件文档：[vitepress-plugin-image-preview](https://github.com/ATQQ/sugar-blog/blob/master/packages/vitepress-plugin-image-preview/README.md)
+:::
+
+:::code-group
+
+```ts [example]
+const blogTheme = getThemeConfig({
+  imagePreview: {
+    showProgress: true,
+    infinite: true,
+    hideOnClickModal: true,
+  }
+})
+```
+```ts [type]
+export interface ImagePreviewOptions {
+  /**
+   * Image selector
+   * @default '.content-container .main img,.VPPage img'
+   */
+  selector?: string
+  /**
+   * Wrapper selector to attach event listener
+   * @default '#VPContent'
+   */
+  wrapperId?: string
+
+  /**
+   * Slots to attach event listener
+   * @default ['doc-before','page-top']
+   */
+  slots?: string | string[]
+
+  /**
+   * Show progress bar | 是否在预览图片时显示进度条
+   * @default true
+   */
+  showProgress?: boolean
+
+  /**
+   * Infinite loop | 是否开启无限循环
+   * @default false
+   */
+  infinite?: boolean
+
+  /**
+   * Zoom ratio | 缩放速率
+   * @default 1.2
+   */
+  zoomRatio?: number
+
+  /**
+   * Hide modal on click | 点击 modal 时是否隐藏
+   * @default false
+   */
+  hideOnClickModal?: boolean
+
+  /**
+   * Minimum scale | 最小缩放比例
+   * @default 0.2
+   */
+  minScale?: number
+
+  /**
+   * Maximum scale | 最大缩放比例
+   * @default 7
+   */
+  maxScale?: number
+
+  /**
+   * Toolbar | 工具栏
+   * @default ['zoomOut', 'zoomIn','reset', 'rotateLeft', 'rotateRight', 'download']
+   */
+  toolbar?: string[]
+}
+```
+
+:::
 
 ## friend
 

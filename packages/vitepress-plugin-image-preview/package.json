@@ -1,7 +1,6 @@
 {
   "name": "vitepress-plugin-image-preview",
-  "version": "0.0.1",
-  "private": true,
+  "version": "0.1.0",
   "description": "vitepress plugin, Image Preview, 图片预览",
   "author": "sugar",
   "license": "MIT",

@@ -33,13 +33,18 @@ export function ImagePreviewPlugin(options: ImagePreviewOptions = {}): any {
     transform(code, id) {
       // 筛选出 Layout.vue
       if (id.endsWith('vitepress/dist/client/theme-default/Layout.vue')) {
+        let transformResult = code
+
         // 插入组件
-        const slotPosition = '<slot name="layout-bottom" />'
-        let transformResult = code.replace(slotPosition, `${slotPosition}<ImagePreview />`)
+        const slots = [options.slots || ['doc-before', 'page-top']].flat()
+        for (const slot of slots) {
+          const slotPosition = `<slot name="${slot}" />`
+          transformResult = transformResult.replace(slotPosition, `${slotPosition}\n<ClientOnly><${componentName} /></ClientOnly>`)
+        }
 
         // 导入组件
         const setupPosition = '<script setup lang="ts">'
-        transformResult = transformResult.replace(setupPosition, `${setupPosition}\nimport ImagePreview from './ImagePreview.vue'`)
+        transformResult = transformResult.replace(setupPosition, `${setupPosition}\nimport ${componentName} from './${componentFile}'`)
         return transformResult
       }
     },

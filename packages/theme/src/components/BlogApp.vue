@@ -8,7 +8,7 @@ import BlogHomeInfo from './BlogHomeInfo.vue'
 import BlogHomeBanner from './BlogHomeBanner.vue'
 import BlogList from './BlogList.vue'
 import BlogSidebar from './BlogSidebar.vue'
-import BlogImagePreview from './BlogImagePreview.vue'
+
 import BlogArticleAnalyze from './BlogArticleAnalyze.vue'
 import BlogAlert from './BlogAlert.vue'
 import BlogFooter from './BlogFooter.vue'
@@ -49,8 +49,6 @@ const openTransition = useDarkTransitionConfig()
       <!-- 阅读时间分析 -->
       <ClientOnly>
         <BlogArticleAnalyze />
-        <!-- 图片预览 -->
-        <BlogImagePreview />
       </ClientOnly>
     </template>
 
@@ -128,10 +126,6 @@ const openTransition = useDarkTransitionConfig()
     <!-- content -->
     <template #page-top>
       <slot name="page-top" />
-      <ClientOnly>
-        <!-- 图片预览 -->
-        <BlogImagePreview />
-      </ClientOnly>
     </template>
     <template #page-bottom>
       <slot name="page-bottom" />
