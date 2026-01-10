@@ -15,7 +15,7 @@ const resolvedVirtualModuleId = `\0${virtualModuleId}`
 
 // TODO：要插入的位置，按实际情况修改
 // https://vitepress.dev/zh/guide/extending-default-theme#layout-slots
-const slotName = 'layout-bottom'
+const slots = ['layout-bottom']
 
 export function templatePlugin(options?: TemplatePluginOptions): any {
   const componentOptions: TemplatePluginOptions = {
@@ -39,9 +39,12 @@ export function templatePlugin(options?: TemplatePluginOptions): any {
     transform(code, id) {
       // 使用 官方 Layout.vue 直接插入组件
       if (id.endsWith('vitepress/dist/client/theme-default/Layout.vue')) {
+        let transformResult = code
         // 插入自定义组件
-        const slotPosition = `<slot name="${slotName}" />`
-        let transformResult = code.replace(slotPosition, `${slotPosition}<${componentName} />`)
+        for (const element of slots) {
+          const slotPosition = `<slot name="${element}" />`
+          transformResult = transformResult.replace(slotPosition, `${slotPosition}<${componentName} />`)
+        }
 
         // 导入自定义组件
         const setupPosition = '<script setup lang="ts">'
