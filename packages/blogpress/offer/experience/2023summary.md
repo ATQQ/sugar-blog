@@ -2,7 +2,6 @@
 outline: [2,3]
 cover: https://img.cdn.sugarat.top/mdImg/MTcwNDAwMzUwMzY3OA==704003503678
 description: 时间不在于你拥有多少，而在于你怎样使用
-sticky: 10
 date: 2024-01-01
 tag: 
  - 心得总结
