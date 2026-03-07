@@ -192,6 +192,17 @@ const blogTheme = getThemeConfig({
 
 ![](https://cdn.upyun.sugarat.top/mdImg/sugar/aaf374bfeec13dba4014448ce6a16e7b)
 
+定义标签触发折叠的数量
+
+```ts
+const blogTheme = getThemeConfig({
+  homeTags: {
+    limit: 999
+  }
+})
+```
+
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/6617e69d828656ab7fca67789a9ba4d4)
 ## home
 
 用于设置首页的自定义内容
