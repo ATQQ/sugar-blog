@@ -48,7 +48,7 @@
   },
   "devDependencies": {
     "vite": "^5.4.9",
-    "vitepress": "2.0.0-alpha.15",
+    "vitepress": "2.0.0-alpha.16",
     "vue": "^3.5.24"
   }
 }
