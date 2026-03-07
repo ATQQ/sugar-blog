@@ -659,5 +659,10 @@ export namespace Theme {
      * @default '🏷 标签'
      */
     title?: string
+    /**
+     * 首页标签默认展示数量，超出部分折叠
+     * @default 999
+     */
+    limit?: number
   }
 }
