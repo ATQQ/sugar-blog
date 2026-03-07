@@ -66,8 +66,10 @@ export async function getArticleMeta(filepath: string, route: string, timeZone =
 
   // 获取摘要信息
   // TODO：摘要生成优化，支持AI？
+  // 先去除 Markdown 中的标题行（# 开头），避免 description 中重复出现标题文字
+  const contentWithoutHeadings = content.replace(/^#+\s+.*$/gm, '')
   meta.description
-    = meta.description || getTextSummary(content, 100) || excerpt
+    = meta.description || getTextSummary(contentWithoutHeadings, 100) || excerpt
 
   // 获取封面图
   // TODO: 耦合信息优化

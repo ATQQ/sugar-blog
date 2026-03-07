@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useBrowserLocation, useUrlSearchParams } from '@vueuse/core'
 import { useRoute, useRouter } from 'vitepress'
 import {
@@ -19,9 +19,42 @@ const title = computed(() => (typeof homeTagsConfig.value === 'boolean' || !home
   ? `${tagsSvgStr}标签`
   : homeTagsConfig.value?.title
 )
-const tags = computed(() => {
-  return [...new Set(docs.value.map(v => v.meta.tag || []).flat(3))]
+
+// 统计每个标签的文章数量，并按数量降序排序
+const tagsWithCount = computed(() => {
+  const tagCountMap = new Map<string, number>()
+  docs.value.forEach((v) => {
+    const articleTags = v.meta.tag || []
+    const flatTags = Array.isArray(articleTags) ? articleTags.flat(3) : [articleTags]
+    flatTags.forEach((tag: string) => {
+      tagCountMap.set(tag, (tagCountMap.get(tag) || 0) + 1)
+    })
+  })
+  // 按文章数量降序排序
+  return [...tagCountMap.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .map(([tag, count]) => ({ tag, count }))
 })
+
+// 折叠/展开功能，从配置中读取 limit，默认 10
+const showCount = computed(() => {
+  if (typeof homeTagsConfig.value === 'object' && homeTagsConfig.value?.limit) {
+    return homeTagsConfig.value.limit
+  }
+  return 999
+})
+const isExpanded = ref(false)
+const displayTags = computed(() => {
+  if (isExpanded.value || tagsWithCount.value.length <= showCount.value) {
+    return tagsWithCount.value
+  }
+  return tagsWithCount.value.slice(0, showCount.value)
+})
+const hasMore = computed(() => tagsWithCount.value.length > showCount.value)
+
+function toggleExpand() {
+  isExpanded.value = !isExpanded.value
+}
 
 const activeTag = useActiveTag()
 
@@ -78,7 +111,7 @@ watch(
 </script>
 
 <template>
-  <div v-if="showTags && tags.length" class="card tags" data-pagefind-ignore="all">
+  <div v-if="showTags && tagsWithCount.length" class="card tags" data-pagefind-ignore="all">
     <!-- 头部 -->
     <div class="card-header">
       <span class="title svg-icon" v-html="title" />
@@ -91,15 +124,33 @@ watch(
     </div>
     <!-- 标签列表 -->
     <ul class="tag-list">
-      <li v-for="(tag, idx) in tags" :key="tag">
+      <li v-for="(item, idx) in displayTags" :key="item.tag">
         <Tag
           :type="tagType[idx % tagType.length] || 'primary'"
-          @click="handleTagClick(tag, tagType[idx % tagType.length])"
+          @click="handleTagClick(item.tag, tagType[idx % tagType.length])"
         >
-          {{ tag }}
+          {{ item.tag }}
+          <span class="tag-count">{{ item.count }}</span>
         </Tag>
       </li>
     </ul>
+    <!-- 展开/收起按钮 -->
+    <div v-if="hasMore" class="expand-btn" @click="toggleExpand">
+      <span>{{ isExpanded ? '收起' : `展开全部 ${tagsWithCount.length} 个标签` }}</span>
+      <svg
+        class="expand-icon"
+        :class="{ 'is-expanded': isExpanded }"
+        viewBox="0 0 1024 1024"
+        xmlns="http://www.w3.org/2000/svg"
+        width="1em"
+        height="1em"
+      >
+        <path
+          fill="currentColor"
+          d="M488.832 344.32l-339.84 356.672a32 32 0 0 0 0 44.16l.384.384a29.44 29.44 0 0 0 42.688 0l320-335.872 319.872 335.872a29.44 29.44 0 0 0 42.688 0l.384-.384a32 32 0 0 0 0-44.16L535.168 344.32a32 32 0 0 0-46.336 0z"
+        />
+      </svg>
+    </div>
   </div>
 </template>
 
@@ -146,5 +197,44 @@ watch(
   margin-right: 10px;
   margin-bottom: 10px;
   cursor: pointer;
+}
+
+.tag-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 4px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  font-size: 10px;
+  line-height: 1;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.expand-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 6px;
+  padding: 4px 0;
+  font-size: 12px;
+  color: var(--vp-c-text-2);
+  cursor: pointer;
+  transition: color 0.3s;
+  user-select: none;
+}
+.expand-btn:hover {
+  color: var(--vp-c-brand);
+}
+
+.expand-icon {
+  transition: transform 0.3s;
+  transform: rotate(180deg);
+}
+.expand-icon.is-expanded {
+  transform: rotate(0deg);
 }
 </style>
