@@ -149,15 +149,15 @@ hidden: true
 
 ### 技术资讯
 * [阮一峰: 科技爱好者周刊](https://www.ruanyifeng.com/blog/archives.html) - 记录每周值得分享的科技内容，周五发布
-* [值得一读技术博客](https://daily-blog.chlinlearn.top/) - 每天进步一点点，每天分享有料的技术文章！
 * [前端技术文章](https://fed.chanceyu.com/) - 根据 RSS 订阅源抓取最新前端技术文章
 * [frontendfoc](https://frontendfoc.us/issues) - 🚀 Frontend **Focus**
 * [JavaScript Weekly](https://javascriptweekly.com/issues) - A newsletter of JavaScript articles, news and cool projects
 * [nodejs Weekly](https://nodeweekly.com/issues) - A free, once–weekly e-mail round-up of Node.js news and articles.
 * [ShowMeAI](https://juejin.cn/user/554605767047053/posts) - 为AI硬核资料库(cool)而生
-* [FRE123 技术周刊精选](https://www.fre123.com/weekly) - 前后端技术周刊精选推荐信息流
 * [Product Hunt 每日中文热榜](https://decohack.com/category/producthunt/)
 :::details 已停更
+* [值得一读技术博客](https://daily-blog.chlinlearn.top/) - 每天进步一点点，每天分享有料的技术文章！
+* [FRE123 技术周刊精选](https://www.fre123.com/weekly) - 前后端技术周刊精选推荐信息流
 * [知识星球：咲奈的平行时空](https://wx.zsxq.com/dweb2/index/group/15552285284822) - 前端前沿技术、资讯、方法论分享
 * [省流](https://shengliu.tech/) - 有关行业📱、代码👨‍💻、科研🔬的有趣内容，每个工作日更新
 * [rottenpen：FE News](https://rottenpen.zhubai.love/) - 分享前端，生活
