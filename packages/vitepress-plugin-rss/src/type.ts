@@ -11,7 +11,9 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
    */
   filter?: (value: PostInfo, index: number, array: PostInfo[]) => boolean
   /**
-   * 你的站点地址
+   * 站点的基础 URL 地址（末尾不要加 /）
+   * 实际站点首页 = baseUrl + VPConfig.site.base
+   * 多语言站点首页（localeKey 非 root）= baseUrl + VPConfig.site.base + localeKey + '/'（其中 localeKey 为 VPConfig.site.locales 的 key）
    * @example 'https://sugarat.top'
    */
   baseUrl: string

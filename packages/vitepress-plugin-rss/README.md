@@ -274,7 +274,9 @@ export type RSSOptions = Omit<FeedOptions, 'id'> & {
    */
   filter?: (value: PostInfo, index: number, array: PostInfo[]) => boolean
   /**
-   * your site address
+   * Base URL address of the site (do not add a trailing slash)
+   * Actual site homepage = baseUrl + VPConfig.site.base
+   * Multilingual site homepage (localeKey not root) = baseUrl + VPConfig.site.base + localeKey + '/' (where localeKey is the key of VPConfig.site.locales)
    * @example 'https://sugarat.top'
    */
   baseUrl: string
