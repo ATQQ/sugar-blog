@@ -12,7 +12,8 @@ const RSS: Theme.RSSOptions = {
   markdownOptions: {
     lineNumbers: false,
     svg2img: 'png'
-  }
+  },
+  feed: `${baseUrl}/feed.rss`
 }
 
 export const blogTheme = getThemeConfig({
