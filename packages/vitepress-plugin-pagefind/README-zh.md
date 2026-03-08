@@ -11,7 +11,6 @@
 | ![](https://img.cdn.sugarat.top/mdImg/MTY3OTgxOTEzNjUwMw==679819136503) | ![](https://img.cdn.sugarat.top/mdImg/MTY3OTgxOTE1MDQ0OA==679819150448) |
 
 
-
 ## 如何使用
 
 ①: 安装插件和必要的依赖
@@ -440,6 +439,12 @@ interface SearchConfig {
      * @default 1
      */
     pageResultCount?: number
+  
+    /**
+     * MPA mode 使用 Pagefind 默认 UI 组件
+     * @default false
+     */
+    mpaDefaultUI?: boolean
 }
 ```
 </details>

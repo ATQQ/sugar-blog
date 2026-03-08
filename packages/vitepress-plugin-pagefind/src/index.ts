@@ -18,6 +18,8 @@ function getDirname() {
 }
 
 const aliasSearchVueFile = `${getDirname()}/../src/Search.vue`
+const aliasSearchVueFileMPA = `${getDirname()}/../src/SearchMPA.vue`
+const aliasSearchVueFileMPADefault = `${getDirname()}/../src/SearchMPADefault.vue`
 
 export function meta2string(frontmatter: Record<string, any>) {
   return `base64:${Buffer.from(encodeURIComponent(JSON.stringify(frontmatter))).toString('base64')}`
@@ -34,11 +36,15 @@ export function pagefindPlugin(
   let dynamicRoutes: SiteConfig['dynamicRoutes']
   const pluginOps: PluginOption = {
     name: 'vitepress-plugin-pagefind',
-    config: () => {
+    config: (cfg) => {
+      // @ts-expect-error
+      // MPA 模式下使用 MPA 组件
+      const isMPA = !!cfg.vitepress.mpa
+      const isMPADefaultUI = searchConfig.mpaDefaultUI
       return {
         resolve: {
           alias: {
-            './VPNavBarSearch.vue': aliasSearchVueFile
+            './VPNavBarSearch.vue': isMPA ? (isMPADefaultUI ? aliasSearchVueFileMPADefault : aliasSearchVueFileMPA) : aliasSearchVueFile
           }
         }
       }
@@ -53,7 +59,9 @@ export function pagefindPlugin(
       resolveConfig = config
 
       vitepressConfig = config.vitepress
-      dynamicRoutes = vitepressConfig.dynamicRoutes
+      if (vitepressConfig) {
+        dynamicRoutes = vitepressConfig.dynamicRoutes
+      }
       if (!vitepressConfig) {
         return
       }
@@ -90,7 +98,6 @@ export function pagefindPlugin(
 
       // 动态模块处理
       return `
-      import { ref } from 'vue'
       export const searchConfig = ${stringify(searchConfig)}
       `
     },
