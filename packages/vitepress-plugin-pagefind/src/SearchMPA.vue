@@ -1,10 +1,35 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import { useData } from 'vitepress'
 
-const { site, lang } = useData()
+// @ts-expect-error
+import { searchConfig } from 'virtual:pagefind'
+
+const { site, lang, localeIndex } = useData()
+const finalSearchConfig = computed(() => {
+  return {
+    ...searchConfig,
+    ...(searchConfig?.locales?.[localeIndex.value] || {})
+  }
+})
+
+const stringifySearchConfig = computed(() => {
+  return encodeURIComponent(JSON.stringify(searchConfig))
+})
 </script>
 
 <script client>
+const dataEl = document.getElementById('search-data')
+const currentLang = dataEl?.dataset.lang || 'en-us'
+const base = dataEl?.dataset.base || '/'
+const currentLocaleIndex = dataEl?.dataset.locale || 'root'
+
+const searchConfig = JSON.parse(decodeURIComponent(dataEl?.dataset.searchConfig || '{}'))
+const currentSearchConfig = {
+  ...searchConfig,
+  ...(searchConfig?.locales?.[currentLocaleIndex] || {})
+}
+
 // Helper functions
 function decodeBase64AndDeserialize(base64String) {
   if (!base64String)
@@ -41,6 +66,9 @@ function formatDate(d, fmt = 'yyyy-MM-dd hh:mm:ss') {
 }
 
 function formatShowDate(date, lang) {
+  if (typeof currentSearchConfig.showDate === 'function') {
+    return currentSearchConfig.showDate(date, lang)
+  }
   const source = +new Date(date)
   const now = +new Date()
   const diff = now - source
@@ -161,9 +189,6 @@ const clearBtn = document.getElementById('search-clear-btn')
 const toggleBtn = document.getElementById('search-toggle-detail')
 const backBtn = document.getElementById('search-back-btn')
 const mask = modal.querySelector('[command-dialog-mask]')
-const dataEl = document.getElementById('search-data')
-const lang = dataEl?.dataset.lang || 'en-us'
-const base = dataEl?.dataset.base || '/'
 
 let showDetail = localStorage.getItem('pagefind-search-showDetail') === 'true'
 const dialog = modal.querySelector('.search-dialog')
@@ -217,11 +242,13 @@ let selectedIndex = -1
 
 function renderList(results) {
   if (!results.length) {
-    list.innerHTML = '<div command-empty>No results found.</div>'
+    list.innerHTML = `<div command-empty>${currentSearchConfig.emptyText || 'No results found.'}</div>`
     return
   }
 
-  const heading = `Total: ${results.length} search results.`
+  const heading = currentSearchConfig.heading
+    ? currentSearchConfig.heading.replace(/\{\{searchResult\}\}/, results.length)
+    : `Total: ${results.length} search results.`
   const html = `
       <div command-group>
         <div command-group-heading>${heading}</div>
@@ -230,7 +257,7 @@ function renderList(results) {
             <div class="link">
               <div class="title">
                 <span class="headings">${item.meta.title ? `<i class="prefix"># </i>${item.meta.title}` : ''}</span>
-                ${item.meta.date ? `<span class="date">${formatShowDate(item.meta.date, lang)}</span>` : ''}
+                ${item.meta.date ? `<span class="date">${formatShowDate(item.meta.date, currentLang)}</span>` : ''}
               </div>
               <div class="des">${item.meta.description || ''}</div>
             </div>
@@ -314,6 +341,19 @@ async function loadPagefind() {
   }
 }
 
+const chineseRegex = /[\u4E00-\u9FA5]/g
+const segmenterCh = Intl?.Segmenter && new Intl.Segmenter('zh-CN', { granularity: 'word' })
+function chineseSearchOptimize(input) {
+  if (segmenterCh) {
+    const splitWords = Array.from(segmenterCh.segment(input))
+    return splitWords.map(v => v.segment).join(' ')
+  }
+  return input
+    .replace(chineseRegex, ' $& ')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
 const handleSearch = debounce(async (e) => {
   const val = e.target.value
   clearBtn.disabled = !val
@@ -327,18 +367,33 @@ const handleSearch = debounce(async (e) => {
   }
 
   if (window.__pagefind__) {
-    const search = await window.__pagefind__.debouncedSearch(val)
+    const searchText = typeof currentSearchConfig.customSearchQuery === 'function'
+      ? currentSearchConfig.customSearchQuery(val)
+      : (chineseRegex.test(val) ? chineseSearchOptimize(val) : val)
+
+    const search = await window.__pagefind__.debouncedSearch(searchText)
     if (search && search.results) {
       const pagefindResults = await Promise.all(search.results.map(r => r.data()))
       const formatted = pagefindResults
-        .map(r => formatPagefindResult(r))
+        .map(r => formatPagefindResult(r, currentSearchConfig.pageResultCount || 1))
         .flat()
-        .filter(v => v.meta.publish !== false)
+        .filter((v) => {
+          const ignorePublish = currentSearchConfig.ignorePublish ?? false
+          return ignorePublish || v.meta.publish !== false
+        })
 
-      renderList(formatted)
+      if (currentSearchConfig.sort) {
+        formatted.sort(currentSearchConfig.sort)
+      }
+
+      const filtered = currentSearchConfig.filter
+        ? formatted.filter(currentSearchConfig.filter)
+        : formatted
+
+      renderList(filtered)
     }
   }
-}, 300)
+}, currentSearchConfig.delay || 300)
 
 input.addEventListener('input', handleSearch)
 </script>
@@ -354,7 +409,7 @@ input.addEventListener('input', handleSearch)
           />
         </svg>
       </span>
-      <span class="search-tip">Search</span>
+      <span class="search-tip">{{ finalSearchConfig?.btnPlaceholder || 'Search' }}</span>
       <span class="metaKey"> Ctrl K </span>
     </div>
 
@@ -368,7 +423,7 @@ input.addEventListener('input', handleSearch)
                   <span class="vpi-arrow-left local-search-icon" />
                 </button>
               </div>
-              <input id="search-input" command-input placeholder="Search Docs">
+              <input id="search-input" command-input :placeholder="finalSearchConfig?.placeholder || 'Search Docs'">
               <div class="search-actions">
                 <button
                   id="search-toggle-detail" class="toggle-layout-button"
@@ -389,7 +444,7 @@ input.addEventListener('input', handleSearch)
             <div class="search-dialog">
               <div id="search-list" command-list>
                 <div command-empty>
-                  No results found.
+                  {{ finalSearchConfig?.emptyText || 'No results found.' }}
                 </div>
               </div>
             </div>
@@ -397,7 +452,7 @@ input.addEventListener('input', handleSearch)
           <div command-dialog-footer>
             <div class="command-palette-logo">
               <a href="https://github.com/cloudcannon/pagefind" target="_blank" rel="noopener noreferrer">
-                <span class="command-palette-Label">Search by</span>
+                <span class="command-palette-Label">{{ finalSearchConfig?.searchBy || 'Search by' }}</span>
                 <svg
                   width="77"
                   height="15"
@@ -463,7 +518,7 @@ input.addEventListener('input', handleSearch)
                   >
                     <path d="M12 3.53088v3c0 1-1 2-2 2H4M7 11.53088l-3-3 3-3" />
                   </g>
-                </svg></kbd><span class="command-palette-Label">to select</span>
+                </svg></kbd><span class="command-palette-Label">{{ finalSearchConfig?.toSelect || 'to select' }}</span>
               </li>
               <li>
                 <kbd class="command-palette-commands-key"><svg width="15" height="15" aria-label="Arrow down" role="img">
@@ -483,7 +538,7 @@ input.addEventListener('input', handleSearch)
                   >
                     <path d="M7.5 11.5v-8M10.5 6.5l-3-3-3 3" />
                   </g>
-                </svg></kbd><span class="command-palette-Label">to navigate</span>
+                </svg></kbd><span class="command-palette-Label">{{ finalSearchConfig?.toNavigate || 'to navigate' }}</span>
               </li>
               <li>
                 <kbd class="command-palette-commands-key"><svg width="15" height="15" aria-label="Escape key" role="img">
@@ -495,7 +550,7 @@ input.addEventListener('input', handleSearch)
                       d="M13.6167 8.936c-.1065.3583-.6883.962-1.4875.962-.7993 0-1.653-.9165-1.653-2.1258v-.5678c0-1.2548.7896-2.1016 1.653-2.1016.8634 0 1.3601.4778 1.4875 1.0724M9 6c-.1352-.4735-.7506-.9219-1.46-.8972-.7092.0246-1.344.57-1.344 1.2166s.4198.8812 1.3445.9805C8.465 7.3992 8.968 7.9337 9 8.5c.032.5663-.454 1.398-1.4595 1.398C6.6593 9.898 6 9 5.963 8.4851m-1.4748.5368c-.2635.5941-.8099.876-1.5443.876s-1.7073-.6248-1.7073-2.204v-.4603c0-1.0416.721-2.131 1.7073-2.131.9864 0 1.6425 1.031 1.5443 2.2492h-2.956"
                     />
                   </g>
-                </svg></kbd><span class="command-palette-Label">to close</span>
+                </svg></kbd><span class="command-palette-Label">{{ finalSearchConfig?.toClose || 'to close' }}</span>
               </li>
             </ul>
           </div>
@@ -503,7 +558,7 @@ input.addEventListener('input', handleSearch)
       </div>
     </div>
   </div>
-  <div id="search-data" :data-lang="lang" :data-base="site.base" style="display: none;" />
+  <div id="search-data" :data-search-config="stringifySearchConfig" :data-lang="lang" :data-base="site.base" :data-locale="localeIndex" style="display: none;" />
 </template>
 
 <style lang="css" scoped>

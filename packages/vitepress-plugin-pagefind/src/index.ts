@@ -98,7 +98,6 @@ export function pagefindPlugin(
 
       // 动态模块处理
       return `
-      import { ref } from 'vue'
       export const searchConfig = ${stringify(searchConfig)}
       `
     },

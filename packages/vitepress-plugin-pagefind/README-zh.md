@@ -11,8 +11,6 @@
 | ![](https://img.cdn.sugarat.top/mdImg/MTY3OTgxOTEzNjUwMw==679819136503) | ![](https://img.cdn.sugarat.top/mdImg/MTY3OTgxOTE1MDQ0OA==679819150448) |
 
 
-MPA 模式下，使用 [Pagefind 默认 UI 组件](https://pagefind.app/docs/ui-usage/)
-
 ## 如何使用
 
 ①: 安装插件和必要的依赖
