@@ -10,7 +10,7 @@ Offline full-text search based on [pagefind](https://github.com/cloudcannon/page
 | :---------------------------------------------------------------------: | :---------------------------------------------------------------------: |
 | ![](https://img.cdn.sugarat.top/mdImg/MTY3OTgxOTEzNjUwMw==679819136503) | ![](https://img.cdn.sugarat.top/mdImg/MTY3OTgxOTE1MDQ0OA==679819150448) |
 
-
+MPA mode with [Pagefind default UI component](https://pagefind.app/docs/ui-usage/)
 
 ## Usage
 
