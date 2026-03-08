@@ -368,17 +368,30 @@ export async function getPostsData(
 }
 
 // 内容md5一样则复用缓存
-export async function genFeed(config: SiteConfig, rssOptions: RSSOptions, assetsMap: any[]) {
+export async function genFeed(config: SiteConfig, rssOptions: RSSOptions, assetsMap: any[], localePrefix?: string) {
   if (!rssOptions)
     return
 
   const { baseUrl, filename } = rssOptions
 
+  // localePrefix 由 genFeed 调用时传入，来源于 VPConfig.site.locales 的 key，开头和结尾均没有 /
+  // 根 locale (值为 root) 特殊化为 ''，其他确保以 / 结尾但不以 / 开头
+  let urlPrefix = ''
+  if (localePrefix && localePrefix !== 'root') {
+    urlPrefix = `${localePrefix}/`
+  }
+
+  // rssOptions.baseUrl 无 / 结尾（本插件文档声明）
+  // config.site.base 以 / 开头，以 / 结尾（vitepress 要求）
+  // urlPrefix 为空或无 / 开头，以 / 结尾（上方处理）
+  // 避免设置失误导致链接错误，拼接后再进行规范化
+  const homepageUrl = normalizeUrl(`${baseUrl}${config.site.base}${urlPrefix}`)
+
   // eslint-disable-next-line unused-imports/no-unused-vars
   const { renderHTML, ...restOps } = rssOptions
   const feed = new Feed({
-    id: rssOptions.baseUrl,
-    link: rssOptions.baseUrl,
+    id: homepageUrl,
+    link: homepageUrl,
     ...restOps,
   })
 

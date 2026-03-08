@@ -62,7 +62,7 @@ export function RssPlugin(rssOptions: RSSOptions): any {
 
       await cacheAllGitTimestamps(VPConfig.srcDir)
 
-      const localesConfig: RSSOptions[] = []
+      const localesConfig: Array<[string, RSSOptions]> = []
       // 添加RSS icon
       if (rssOptions.icon ?? true) {
         VPConfig.site.themeConfig.socialLinks = [
@@ -97,7 +97,7 @@ export function RssPlugin(rssOptions: RSSOptions): any {
                   }
                 }
               }
-              localesConfig.push(rssCfg as RSSOptions)
+              localesConfig.push([locale, rssCfg as RSSOptions])
             }
           })
         }
@@ -111,8 +111,8 @@ export function RssPlugin(rssOptions: RSSOptions): any {
         const okMark = '\x1B[32m✓\x1B[0m'
         console.time(`${okMark} generating RSS`)
         // 生成 rss 文件
-        for (const _rssOptions of localesConfig) {
-          await genFeed(siteConfig, _rssOptions, assetsMap)
+        for (const [localePrefix, _rssOptions] of localesConfig) {
+          await genFeed(siteConfig, _rssOptions, assetsMap, localePrefix)
         }
 
         // 全局 RSS 包含所有文章，不自动过滤
