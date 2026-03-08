@@ -433,6 +433,12 @@ interface SearchConfig {
      * @default 1
      */
     pageResultCount?: number
+
+    /**
+     * MPA mode with default UI component
+     * @default false
+     */
+    mpaDefaultUI?: boolean
 }
 ```
 </details>

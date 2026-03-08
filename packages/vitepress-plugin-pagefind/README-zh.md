@@ -441,6 +441,12 @@ interface SearchConfig {
      * @default 1
      */
     pageResultCount?: number
+  
+    /**
+     * MPA mode 使用 Pagefind 默认 UI 组件
+     * @default false
+     */
+    mpaDefaultUI?: boolean
 }
 ```
 </details>
