@@ -1,5 +1,11 @@
 # @sugarat/theme
 
+## 0.5.16
+
+### Patch Changes
+
+- feat: 支持控制标签展示数量和排序
+
 ## 0.5.15
 
 ### Patch Changes

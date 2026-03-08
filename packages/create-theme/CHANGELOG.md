@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.95
+
+### Patch Changes
+
+- feat: 支持控制标签展示数量和排序
+
 ## 0.0.94
 
 ### Patch Changes

@@ -167,6 +167,33 @@ const blogTheme = getThemeConfig({
 
 * Type: `boolean` | `HomeTagsConfig`
 
+```ts
+interface HomeTagsConfig {
+  /**
+   * 自定义标题，支持SVG + 文字
+   * @default '🏷 标签'
+   */
+  title?: string
+  /**
+   * 首页标签默认展示数量，超出部分折叠
+   * @default 999
+   */
+  limit?: number
+  /**
+   * 标签排序方式
+   * desc: 降序(默认)
+   * asc: 升序
+   * normal: 不排序
+   * @default 'normal'
+   */
+  sort?: 'desc' | 'asc' | 'normal'
+  /**
+   * 是否显示文章数量
+   * @default false
+   */
+  showCount?: boolean
+}
+```
 用于控制首页右侧的标签内容
 
 设置为 false 时，不展示

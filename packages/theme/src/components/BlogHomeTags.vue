@@ -31,13 +31,18 @@ const tagsWithCount = computed(() => {
     })
   })
   // 按文章数量降序排序
-  return [...tagCountMap.entries()]
-    .sort((a, b) => b[1] - a[1])
-    .map(([tag, count]) => ({ tag, count }))
+  const data = [...tagCountMap.entries()]
+  const sort = (typeof homeTagsConfig.value === 'object' && homeTagsConfig.value?.sort) ? homeTagsConfig.value.sort : 'normal'
+  if (sort !== 'normal') {
+    data.sort((a, b) => {
+      return sort === 'asc' ? a[1] - b[1] : b[1] - a[1]
+    })
+  }
+  return data.map(([tag, count]) => ({ tag, count }))
 })
 
 // 折叠/展开功能，从配置中读取 limit，默认 10
-const showCount = computed(() => {
+const limit = computed(() => {
   if (typeof homeTagsConfig.value === 'object' && homeTagsConfig.value?.limit) {
     return homeTagsConfig.value.limit
   }
@@ -45,12 +50,12 @@ const showCount = computed(() => {
 })
 const isExpanded = ref(false)
 const displayTags = computed(() => {
-  if (isExpanded.value || tagsWithCount.value.length <= showCount.value) {
+  if (isExpanded.value || tagsWithCount.value.length <= limit.value) {
     return tagsWithCount.value
   }
-  return tagsWithCount.value.slice(0, showCount.value)
+  return tagsWithCount.value.slice(0, limit.value)
 })
-const hasMore = computed(() => tagsWithCount.value.length > showCount.value)
+const hasMore = computed(() => tagsWithCount.value.length > limit.value)
 
 function toggleExpand() {
   isExpanded.value = !isExpanded.value
@@ -130,7 +135,7 @@ watch(
           @click="handleTagClick(item.tag, tagType[idx % tagType.length])"
         >
           {{ item.tag }}
-          <span class="tag-count">{{ item.count }}</span>
+          <span v-if="typeof homeTagsConfig === 'object' && homeTagsConfig?.showCount" class="tag-count">{{ item.count }}</span>
         </Tag>
       </li>
     </ul>

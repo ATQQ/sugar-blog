@@ -664,5 +664,18 @@ export namespace Theme {
      * @default 999
      */
     limit?: number
+    /**
+     * 标签排序方式
+     * desc: 降序
+     * asc: 升序
+     * normal: 不排序 (默认)
+     * @default 'normal'
+     */
+    sort?: 'desc' | 'asc' | 'normal'
+    /**
+     * 是否显示文章数量
+     * @default false
+     */
+    showCount?: boolean
   }
 }
