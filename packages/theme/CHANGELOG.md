@@ -1,5 +1,14 @@
 # @sugarat/theme
 
+## 0.5.15
+
+### Patch Changes
+
+- feat: support tag fold
+- Updated dependencies
+  - vitepress-plugin-pagefind@0.4.19
+  - vitepress-plugin-rss@0.4.3
+
 ## 0.5.14
 
 ### Patch Changes

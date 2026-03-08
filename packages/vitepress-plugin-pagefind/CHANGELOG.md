@@ -1,5 +1,11 @@
 # vitepress-plugin-pagefind
 
+## 0.4.19
+
+### Patch Changes
+
+- feat: support mpa build
+
 ## 0.4.18
 
 ### Patch Changes
