@@ -19,6 +19,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  closeOnPressEscape: {
+    type: Boolean,
+    default: true,
+  },
   teleported: {
     type: Boolean,
     default: false,
@@ -204,7 +208,7 @@ onUnmounted(() => {
 })
 
 function handleKeydown(e: KeyboardEvent) {
-  if (e.key === 'Escape') {
+  if (e.key === 'Escape' && props.closeOnPressEscape) {
     hide()
   }
   else if (e.key === 'ArrowLeft') {

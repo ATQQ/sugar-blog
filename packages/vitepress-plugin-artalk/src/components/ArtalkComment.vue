@@ -1,0 +1,187 @@
+<script setup lang="ts">
+import { useData, useRoute } from 'vitepress'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
+import type Artalk from 'artalk'
+
+// @ts-expect-error
+import pluginOptions from 'virtual:artalk-plugin-options'
+import { useElementSize, useElementVisibility, useWindowSize } from '@vueuse/core'
+import Icon from './Icon.vue'
+
+const { frontmatter, isDark, page } = useData()
+
+const commentConfig = computed(() => {
+  // If explicitly disabled in frontmatter
+  if (frontmatter.value.comment === false) {
+    return false
+  }
+
+  // Merge frontmatter config if available, otherwise use plugin options
+  const fmConfig = frontmatter.value.comment
+  if (typeof fmConfig === 'object') {
+    return { ...pluginOptions, ...fmConfig }
+  }
+
+  return pluginOptions
+})
+
+const route = useRoute()
+const artalk = ref<Artalk>()
+const artalkContainer = ref<HTMLDivElement>()
+
+function initArtalk() {
+  // CDN 异步加载，有优化空间
+  const observer = new MutationObserver((mutationsList, observer) => {
+    // @ts-expect-error
+    if (window.Artalk && commentConfig.value && artalkContainer.value) {
+      // @ts-expect-error
+      artalk.value = window.Artalk.init({
+        el: artalkContainer.value,
+        darkMode: isDark.value,
+        pageKey: route.path,
+        pageTitle: page.value.title,
+        server: commentConfig.value?.server,
+        site: commentConfig.value?.site,
+        ...commentConfig.value
+      })
+      observer.disconnect()
+    }
+  })
+
+  observer.observe(document.head, { subtree: true, childList: true, attributes: true, attributeFilter: ['id'] })
+}
+
+watch(() => route.path, () => {
+  if (artalk.value) {
+    artalk.value.update({
+      pageKey: route.path,
+      pageTitle: page.value.title,
+    })
+    artalk.value.reload()
+  }
+})
+
+onUnmounted(() => {
+  if (artalk.value) {
+    artalk.value.destroy()
+  }
+})
+
+watch(isDark, () => {
+  if (artalk.value) {
+    artalk.value.setDarkMode(isDark.value)
+  }
+})
+
+// Wrapper logic
+const commentEl = ref(null)
+const commentIsVisible = useElementVisibility(commentEl)
+
+function handleScrollToComment() {
+  // @ts-expect-error
+  commentEl.value?.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start'
+  })
+}
+
+const { width } = useWindowSize()
+const mobileMinify = computed(() => width.value < 768 && (commentConfig.value?.mobileMinify ?? true))
+
+const $vpDoc = typeof document !== 'undefined' ? document.querySelector('.vp-doc') || document.body : null
+const el = ref<any>($vpDoc)
+const { width: _docWidth } = useElementSize(el)
+const docWidth = computed(() => `${_docWidth.value}px`)
+
+onMounted(() => {
+  const vpDoc = document.querySelector('.vp-doc')
+  if (vpDoc) {
+    el.value = vpDoc
+  }
+  initArtalk()
+})
+
+const labelText = computed(() => {
+  return commentConfig.value?.label ?? '评论'
+})
+
+const showCommentBtn = computed(() => {
+  return commentConfig.value?.showCommentBtn ?? true
+})
+</script>
+
+<template>
+  <div v-if="commentConfig" id="blog-comment-wrapper" ref="commentEl" class="blog-comment-wrapper" data-pagefind-ignore="all">
+    <div ref="artalkContainer" class="artalk-container" />
+    <div v-if="showCommentBtn && _docWidth" v-show="!commentIsVisible" class="comment-btn-wrapper">
+      <span v-if="!mobileMinify && labelText" class="icon-wrapper-text" @click="handleScrollToComment">
+        <Icon :size="20" :icon="commentConfig?.icon">
+          <svg data-v-f0aeb853="" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 1024 1024"><path fill="currentColor" d="M736 504a56 56 0 1 1 0-112 56 56 0 0 1 0 112m-224 0a56 56 0 1 1 0-112 56 56 0 0 1 0 112m-224 0a56 56 0 1 1 0-112 56 56 0 0 1 0 112M128 128v640h192v160l224-160h352V128z" /></svg>
+        </Icon>
+        <span class="text">
+          {{ labelText }}
+        </span>
+      </span>
+      <span v-else class="icon-wrapper" @click="handleScrollToComment">
+        <Icon :size="20" :icon="commentConfig?.icon">
+          <svg data-v-f0aeb853="" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 1024 1024"><path fill="currentColor" d="M736 504a56 56 0 1 1 0-112 56 56 0 0 1 0 112m-224 0a56 56 0 1 1 0-112 56 56 0 0 1 0 112M128 128v640h192v160l224-160h352V128z" /></svg>
+        </Icon>
+      </span>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+.artalk-container {
+  --at-color-main: var(--vp-c-brand-2);
+}
+.comment-btn-wrapper {
+  position: fixed;
+  width: v-bind(docWidth);
+  text-align: right;
+  bottom: 40px;
+  font-size: 16px;
+  transition: all 0.3s ease-in-out;
+  opacity: 0.6;
+  display: flex;
+  justify-content: right;
+  z-index: 200;
+}
+.comment-btn-wrapper:hover {
+  opacity: 1;
+}
+.comment-btn-wrapper .icon-wrapper,
+.comment-btn-wrapper .icon-wrapper-text {
+  cursor: pointer;
+  border-radius: 50%;
+  position: relative;
+  right: -80px;
+  background-color: var(--vp-c-bg);
+  box-shadow: var(--box-shadow);
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+}
+.comment-btn-wrapper .icon-wrapper:hover,
+.comment-btn-wrapper .icon-wrapper-text:hover {
+  box-shadow: var(--box-shadow-hover);
+}
+.comment-btn-wrapper .icon-wrapper-text {
+  border-radius: 2px;
+  padding: 2px 6px;
+}
+.comment-btn-wrapper .icon-wrapper-text span.text {
+  font-size: 12px;
+  margin-left: 4px;
+}
+
+@media screen and (max-width: 1200px) {
+  .comment-btn-wrapper .icon-wrapper,
+  .comment-btn-wrapper .icon-wrapper-text {
+    position: static;
+  }
+}
+</style>

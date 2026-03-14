@@ -55,6 +55,7 @@ onUnmounted(() => {
     v-if="show"
     :infinite="imagePreviewOptions?.infinite ?? false"
     :hide-on-click-modal="imagePreviewOptions?.hideOnClickModal ?? false"
+    :close-on-press-escape="imagePreviewOptions?.closeOnPressEscape ?? true"
     :show-progress="imagePreviewOptions?.showProgress ?? true"
     :zoom-ratio="imagePreviewOptions?.zoomRatio ?? 1.2"
     :min-scale="imagePreviewOptions?.minScale ?? 0.2"

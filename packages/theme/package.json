@@ -59,6 +59,7 @@
     "oh-my-live2d": "^0.19.3",
     "vitepress-markdown-timeline": "^1.2.1",
     "vitepress-plugin-announcement": "workspace:*",
+    "vitepress-plugin-artalk": "workspace:*",
     "vitepress-plugin-giscus": "workspace:*",
     "vitepress-plugin-group-icons": "1.6.5",
     "vitepress-plugin-image-preview": "workspace:*",

@@ -41,6 +41,12 @@ export interface ImagePreviewOptions {
   hideOnClickModal?: boolean
 
   /**
+   * Close on press escape | 按下 ESC 键时是否关闭
+   * @default true
+   */
+  closeOnPressEscape?: boolean
+
+  /**
    * Minimum scale | 最小缩放比例
    * @default 0.2
    */
