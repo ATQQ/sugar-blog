@@ -6,6 +6,7 @@ import { RssPlugin } from 'vitepress-plugin-rss'
 import type { PluginOption } from 'vite'
 import { cacheAllGitTimestamps, joinPath } from '@sugarat/theme-shared'
 import { AnnouncementPlugin } from 'vitepress-plugin-announcement'
+import { giscusPlugin } from 'vitepress-plugin-giscus'
 import { groupIconVitePlugin } from 'vitepress-plugin-group-icons'
 import { ImagePreviewPlugin } from 'vitepress-plugin-image-preview'
 import type { Theme } from '../../composables/config/index'
@@ -54,6 +55,23 @@ export function getVitePlugins(cfg: Partial<Theme.BlogConfig> = {}) {
   // 内置支持RSS
   if (cfg?.RSS) {
     ;[cfg?.RSS].flat().forEach(rssConfig => plugins.push(RssPlugin(rssConfig)))
+  }
+
+  // 内置支持 giscus 评论
+  if (cfg?.comment && typeof cfg.comment !== 'boolean') {
+    const commentConfig = cfg.comment
+    const isGiscus = (commentConfig as any).type === 'giscus' || (commentConfig as any).repo
+    if (isGiscus) {
+      const { mobileMinify, label, icon } = commentConfig
+      const options = {
+        ...(commentConfig as any).options,
+        ...commentConfig,
+        mobileMinify,
+        label,
+        icon
+      }
+      plugins.push(giscusPlugin(options))
+    }
   }
 
   // 内置支持 全局公告

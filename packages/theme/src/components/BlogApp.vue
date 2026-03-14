@@ -14,12 +14,8 @@ import BlogAlert from './BlogAlert.vue'
 import BlogFooter from './BlogFooter.vue'
 import BlogHomeHeaderAvatar from './BlogHomeHeaderAvatar.vue'
 import BlogBackToTop from './BlogBackToTop.vue'
-import CommentGiscus from './CommentGiscus.vue'
 import BlogOml2d from './BlogOml2d.vue'
-
-import CommentArtalk from './CommentArtalk.vue'
 import BlogButtonAfterArticle from './BlogButtonAfterArticle.vue'
-import BlogCommentWrapper from './BlogCommentWrapper.vue'
 
 const { frontmatter } = useData()
 const layout = computed(() => frontmatter.value.layout)
@@ -87,10 +83,6 @@ const openTransition = useDarkTransitionConfig()
       <ClientOnly>
         <BlogButtonAfterArticle />
         <BlogBackToTop />
-        <BlogCommentWrapper>
-          <CommentArtalk />
-          <CommentGiscus />
-        </BlogCommentWrapper>
       </ClientOnly>
     </template>
     <template #layout-bottom>

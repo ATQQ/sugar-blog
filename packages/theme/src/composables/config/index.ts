@@ -109,6 +109,7 @@ export namespace Theme {
     inputPosition?: 'top' | 'bottom'
     lang?: string
     loading?: 'lazy' | 'eager'
+    showCommentBtn?: boolean
   }
   export interface ArtalkOption {
     site: string
