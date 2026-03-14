@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.96
+
+### Patch Changes
+
+- feat: split plugins
+
 ## 0.0.95
 
 ### Patch Changes

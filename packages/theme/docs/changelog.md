@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.5.16） ⏰ 2026/03/08：为首页标签组件添加数量统计与折叠功能
+description: 最近更新（v0.5.17） ⏰ 2026/03/14：拆分插件
 author: 粥里有勺糖
 top: 3
 tag: 日志
@@ -26,6 +26,15 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.5.17 (2026/03/14)
+
+### Patch Changes
+
+- feat: split plugins
+  - vitepress-plugin-artalk
+  - vitepress-plugin-giscus
+  - vitepress-plugin-back2top
 
 ## 0.5.16 (2026/03/08)
 

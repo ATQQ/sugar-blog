@@ -1,5 +1,14 @@
 # @sugarat/theme
 
+## 0.5.17
+
+### Patch Changes
+
+- feat: split plugins
+  - vitepress-plugin-artalk
+  - vitepress-plugin-giscus
+  - vitepress-plugin-back2top
+
 ## 0.5.16
 
 ### Patch Changes
