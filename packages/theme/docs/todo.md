@@ -16,12 +16,12 @@ sidebar: false
 * [ ] 文章时间：支持选择显示创建时间，而非最后更新时间
 * [ ] 首页独立 BG 图，参考 [友人Aの博客](http://niubin.site/)
 * 文档
-  * [ ] VitePress 常见问题解答（deadLink，markdown，frontmatter）
 * [ ] 主题部分能力分离为插件（回到顶部，统计分析等）
 
 ## 已完成
 
 近期完成：
+* [x] VitePress 常见问题解答（deadLink，markdown，frontmatter）
 * [x] Layout 插槽用法
 * [x] 时区问题（对齐 VitePress默认逻辑），同时支持自定义时区（引入第三方时间处理库）
 * [x] `srcDir,srcExclude,outDir`统一
