@@ -36,7 +36,7 @@
     "lint": "eslint .",
     "deploy": "zx deploy.mjs",
     "deploy:theme": "zx deploy-theme.mjs",
-    "release:only": "changeset publish",
+    "release:only": "npm run buildlib && changeset publish",
     "release:beta": "changeset publish --tag beta",
     "pc": "pnpm changeset",
     "pc:version": "pnpm changeset version && npm run update:create-theme",
