@@ -7,6 +7,7 @@ import type { PluginOption } from 'vite'
 import { cacheAllGitTimestamps, joinPath } from '@sugarat/theme-shared'
 import { AnnouncementPlugin } from 'vitepress-plugin-announcement'
 import { artalkPlugin } from 'vitepress-plugin-artalk'
+import { back2topPlugin } from 'vitepress-plugin-back2top'
 import { giscusPlugin } from 'vitepress-plugin-giscus'
 import { groupIconVitePlugin } from 'vitepress-plugin-group-icons'
 import { ImagePreviewPlugin } from 'vitepress-plugin-image-preview'
@@ -98,6 +99,11 @@ export function getVitePlugins(cfg: Partial<Theme.BlogConfig> = {}) {
   // patch timeline
   if (cfg?.timeline !== false) {
     plugins.push(patchTimelinePlugin())
+  }
+  // 内置支持 back-to-top
+  if (cfg?.backToTop !== false) {
+    const options = typeof cfg.backToTop === 'object' ? cfg.backToTop : {}
+    plugins.push(back2topPlugin(options))
   }
   return plugins
 }

@@ -48,12 +48,14 @@ VitePress 图片预览插件，样式参考 [Element Plus Image Viewer](https://
 ### [vitepress-plugin-artalk](https://www.npmjs.com/package/vitepress-plugin-artalk)
 * 基于 [Artalk](https://artalk.js.org/) 提供文章评论功能。
 
+### [vitepress-plugin-back-to-top](https://www.npmjs.com/package/vitepress-plugin-back-to-top)
+* 提供回到顶部按钮功能。
+
 ## 规划中的插件
 * 标签页
 * 文章时间轴
 * 代码块折叠
 * OhMyLive2D
-* 回到顶部
 * 文章底部投币
 * 短链
 * 文章右下二维码分享

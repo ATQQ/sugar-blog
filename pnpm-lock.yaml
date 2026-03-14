@@ -143,6 +143,9 @@ importers:
       vitepress-plugin-artalk:
         specifier: workspace:*
         version: link:../vitepress-plugin-artalk
+      vitepress-plugin-back2top:
+        specifier: workspace:*
+        version: link:../vitepress-plugin-back2top
       vitepress-plugin-giscus:
         specifier: workspace:*
         version: link:../vitepress-plugin-giscus
@@ -239,6 +242,40 @@ importers:
       artalk:
         specifier: ^2.8.5
         version: 2.8.5
+      chokidar:
+        specifier: ^3.6.0
+        version: 3.6.0
+      fs-extra:
+        specifier: ^11.1.1
+        version: 11.3.2
+      tinyglobby:
+        specifier: ^0.2.6
+        version: 0.2.15
+      tsup:
+        specifier: ' ^7.2.0'
+        version: 7.2.0(postcss@8.5.6)(typescript@5.6.2)
+      typescript:
+        specifier: ^5.5.4
+        version: 5.6.2
+      vite:
+        specifier: ^5
+        version: 5.4.19(@types/node@24.5.2)(lightningcss@1.30.1)(sass@1.97.1)
+      vitepress:
+        specifier: 2.0.0-alpha.16
+        version: 2.0.0-alpha.16(@types/node@24.5.2)(async-validator@4.2.5)(lightningcss@1.30.1)(markdown-it-mathjax3@4.3.2)(postcss@8.5.6)(sass@1.97.1)(typescript@5.6.2)
+      vue:
+        specifier: ^3.5.24
+        version: 3.5.29(typescript@5.6.2)
+
+  packages/vitepress-plugin-back2top:
+    dependencies:
+      '@vueuse/core':
+        specifier: ^14.1.0
+        version: 14.2.1(vue@3.5.29(typescript@5.6.2))
+      javascript-stringify:
+        specifier: ^2.1.0
+        version: 2.1.0
+    devDependencies:
       chokidar:
         specifier: ^3.6.0
         version: 3.6.0

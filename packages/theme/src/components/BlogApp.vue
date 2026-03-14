@@ -13,7 +13,6 @@ import BlogArticleAnalyze from './BlogArticleAnalyze.vue'
 import BlogAlert from './BlogAlert.vue'
 import BlogFooter from './BlogFooter.vue'
 import BlogHomeHeaderAvatar from './BlogHomeHeaderAvatar.vue'
-import BlogBackToTop from './BlogBackToTop.vue'
 import BlogOml2d from './BlogOml2d.vue'
 import BlogButtonAfterArticle from './BlogButtonAfterArticle.vue'
 
@@ -82,7 +81,6 @@ const openTransition = useDarkTransitionConfig()
       <!-- 评论 -->
       <ClientOnly>
         <BlogButtonAfterArticle />
-        <BlogBackToTop />
       </ClientOnly>
     </template>
     <template #layout-bottom>
