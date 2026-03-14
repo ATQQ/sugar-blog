@@ -1,5 +1,6 @@
 /* eslint-disable ts/no-namespace */
 import type { DefaultTheme } from 'vitepress'
+import type { BackToTopPluginOptions } from 'vitepress-plugin-back2top'
 import type { RSSOptions } from 'vitepress-plugin-rss'
 import type { Mapping, Repo } from '@giscus/vue'
 import type { Options as Oml2dOptions } from 'oh-my-live2d'
@@ -109,6 +110,7 @@ export namespace Theme {
     inputPosition?: 'top' | 'bottom'
     lang?: string
     loading?: 'lazy' | 'eager'
+    showCommentBtn?: boolean
   }
   export interface ArtalkOption {
     site: string
@@ -528,18 +530,7 @@ export namespace Theme {
      */
     weeksAgo?: string
   } | ((date: Date | string) => string)
-  export interface BackToTop {
-    /**
-     * 距离顶部多少距离出现
-     * @default 450
-     */
-    top?: number
-
-    /**
-     * 设置展示图标，svg
-     * @recommend https://iconbuddy.app/search?q=fire
-     */
-    icon?: string
+  export interface BackToTop extends BackToTopPluginOptions {
   }
 
   export interface TaskCheckbox {

@@ -670,6 +670,10 @@ interface ArtalkOption {
 
 ### giscus
 
+::: tip 已拆分为独立插件
+详细配置和使用方法可以见插件文档：[vitepress-plugin-giscus](https://github.com/ATQQ/sugar-blog/blob/master/packages/vitepress-plugin-giscus/README.md)
+:::
+
 配置文章的评论，使用 [giscus](https://giscus.app/zh-CN)（由 GitHub Discussions 驱动的评论系统）
 
 访问 <https://giscus.app/zh-CN> 获取下述的参数
@@ -736,6 +740,10 @@ const blogTheme = getThemeConfig({
 ![](https://img.cdn.sugarat.top/mdImg/sugar/4f5883d87e53fbea63b9231beed0d52f~fmt.webp)
 
 ### artalk
+
+::: tip 已拆分为独立插件
+详细配置和使用方法可以见插件文档：[vitepress-plugin-artalk](https://github.com/ATQQ/sugar-blog/blob/master/packages/vitepress-plugin-artalk/README.md)
+:::
 
 配置文章的评论，使用 [artalk](https://artalk.js.org/)（由 Artalk 驱动的评论系统）
 
