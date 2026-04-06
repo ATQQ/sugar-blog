@@ -44,7 +44,7 @@
     "sharp": "^0.34.5"
   },
   "devDependencies": {
-    "vite": "^5",
+    "vite": "^6",
     "vitepress": "2.0.0-alpha.16"
   }
 }
