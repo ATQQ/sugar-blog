@@ -117,6 +117,32 @@ export function patchGroupIconPlugin() {
   })
 }
 
+export function extractDefaultExportString(info: any): string | undefined {
+  // AST 优先：兼容 Literal 与无表达式的 TemplateLiteral
+  const ast: any = info.ast
+  try {
+    if (ast && Array.isArray(ast.body)) {
+      for (const node of ast.body) {
+        if (node.type === 'ExportDefaultDeclaration') {
+          const decl = node.declaration
+          if (decl?.type === 'Literal' && typeof decl.value === 'string') {
+            return decl.value
+          }
+          if (decl?.type === 'TemplateLiteral' && (decl.expressions?.length ?? 0) === 0) {
+            return decl.quasis?.[0]?.value?.cooked
+          }
+        }
+      }
+    }
+  }
+  catch (_) {
+    // 忽略 AST 解析异常，走回退
+  }
+  // 正则回退：兼容 ' " ` 三种引号与空白
+  const m = info.code?.match(/export\s+default\s+(['"`])([\s\S]*?)\1/)
+  return m?.[2]
+}
+
 export function patchTabsPlugin() {
   return createPatchPlugin({
     name: '@sugarat/theme-plugin-patch-tabs',
@@ -243,8 +269,9 @@ export function coverImgTransform() {
       if (!relativePathMap[info.id]) {
         return
       }
-      const asset = info.code?.match(/export default "(.*)"/)?.[1]
+      const asset = extractDefaultExportString(info)
       if (!asset) {
+        console.warn(`[coverImgTransform] 解析默认导出失败: ${info.id}`)
         return
       }
 
