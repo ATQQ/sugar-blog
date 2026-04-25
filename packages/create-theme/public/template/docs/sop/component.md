@@ -2,6 +2,10 @@
 description: 默认支持流程图，tabs面板，待办列表，作品页面
 ---
 
+# 内置第三方插件能力
+
+部分内置组件（插件），来源 [vitepress.yiov.top](https://vitepress.yiov.top/plugin.html) 推荐
+
 ## groupIcon - 分组代码块图标
 作用于 `code-group` 代码块，提供语言/工具图标，基于 [vitepress-plugin-group-icons](https://github.com/yuyinws/vitepress-plugin-group-icons/tree/main/docs) 插件实现。
 
