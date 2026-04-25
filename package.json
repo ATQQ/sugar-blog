@@ -21,6 +21,7 @@
   "scripts": {
     "dev": "pnpm --filter blogpress dev",
     "dev:theme": "pnpm --filter @sugarat/theme dev",
+    "clean:node_modules": "node ./scripts/clean-node-modules.mjs",
     "build": "pnpm --filter blogpress build",
     "buildTheme": "pnpm --filter @sugarat/theme build",
     "buildlib": "pnpm run /^build:.*/",
