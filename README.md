@@ -4,6 +4,10 @@
 
 [![code style](https://antfu.me/badge-code-style.svg)](https://github.com/antfu/eslint-config)
 
+<p align="center">
+    <a href="https://github.com/ATQQ/vitepress-blog-sugar-template" target="_blank">主题示例仓库</a> | <a href="https://github.com/ATQQ/vitepress-plugins-tests" target="_blank">插件测试仓库</a>
+</p>
+
 ## 仓库介绍
 
 这是一个 monorepo 仓库，包含如下内容
