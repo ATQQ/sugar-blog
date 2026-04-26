@@ -298,6 +298,9 @@ div [command-dialog-footer] {
   align-items: center;
   gap: 8px;
 }
+.dark .algolia .command-palette-logo svg {
+  filter: invert(1) hue-rotate(180deg);
+}
 .algolia .command-palette-logo svg {
   height: 24px;
   width: 24px;
