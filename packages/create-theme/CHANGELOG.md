@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.98
+
+### Patch Changes
+
+- fix: peerDependencies warn
+
 ## 0.0.97
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # vitepress-plugin-announcement
 
+## 0.1.8
+
+### Patch Changes
+
+- fix: peerDependencies warn
+
 ## 0.1.7
 
 ### Patch Changes

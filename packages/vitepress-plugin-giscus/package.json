@@ -1,6 +1,6 @@
 {
   "name": "vitepress-plugin-giscus",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "vitepress plugin giscus",
   "author": "sugar",
   "license": "MIT",
