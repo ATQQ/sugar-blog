@@ -1,5 +1,11 @@
 # vitepress-plugin-image-preview
 
+## 0.1.2
+
+### Patch Changes
+
+- fix: not found sass
+
 ## 0.1.1
 
 ### Patch Changes

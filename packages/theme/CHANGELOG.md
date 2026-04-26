@@ -1,5 +1,13 @@
 # @sugarat/theme
 
+## 0.5.18
+
+### Patch Changes
+
+- Updated dependencies
+  - vitepress-plugin-image-preview@0.1.2
+  - vitepress@2.0.0-alpha.17
+
 ## 0.5.17
 
 ### Patch Changes

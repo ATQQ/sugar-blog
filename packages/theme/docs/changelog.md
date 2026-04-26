@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.5.17） ⏰ 2026/03/14：拆分插件
+description: 最近更新（v0.5.18） ⏰ 2026/04/26：依赖更新
 author: 粥里有勺糖
 top: 3
 tag: 日志
@@ -26,6 +26,14 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.5.18 (2026/04/26)
+
+### Patch Changes
+
+- Updated dependencies
+  - vitepress-plugin-image-preview@0.1.2
+  - vitepress@2.0.0-alpha.17
 
 ## 0.5.17 (2026/03/14)
 

@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.97
+
+### Patch Changes
+
+- fix: not found sass
+
 ## 0.0.96
 
 ### Patch Changes
