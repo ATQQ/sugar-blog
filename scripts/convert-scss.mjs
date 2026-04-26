@@ -5,7 +5,7 @@ import { fs, glob } from 'zx'
 const require = createRequire(import.meta.url)
 const sass = require('sass')
 
-const targetDir = './packages/theme/src/components'
+const targetDir = './packages/vitepress-plugin-image-preview/src/components'
 const files = await glob(`${targetDir}/**/*.vue`)
 
 console.log(`Scanning ${files.length} files in ${targetDir}...`)
