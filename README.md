@@ -1,9 +1,6 @@
 <h1 align="center"> 粥里有勺糖 </h1>
 <p align="center">你的指尖,拥有改变世界的力量</p>
 <p align="center">博客主题：<a href="https://theme.sugarat.top/" target="_blank">@sugarat/theme</a></p>
-
-[![code style](https://antfu.me/badge-code-style.svg)](https://github.com/antfu/eslint-config)
-
 <p align="center">
     <a href="https://github.com/ATQQ/vitepress-blog-sugar-template" target="_blank">主题示例仓库</a> | <a href="https://github.com/ATQQ/vitepress-plugins-tests" target="_blank">插件测试仓库</a>
 </p>
