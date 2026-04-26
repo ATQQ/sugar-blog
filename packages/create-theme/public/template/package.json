@@ -10,13 +10,13 @@
     "serve": "vitepress serve docs"
   },
   "dependencies": {
-    "@sugarat/theme": "^0.5.18"
+    "@sugarat/theme": "^0.5.19"
   },
   "directories": {
     "doc": "docs"
   },
   "devDependencies": {
-    "pagefind": "^1.3.0",
+    "pagefind": "^1.5.2",
     "typescript": "^5.4.5",
     "vitepress": "2.0.0-alpha.17"
   },

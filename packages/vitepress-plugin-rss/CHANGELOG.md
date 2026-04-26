@@ -1,5 +1,11 @@
 # vitepress-plugin-rss
 
+## 0.4.4
+
+### Patch Changes
+
+- fix: peerDependencies warn
+
 ## 0.4.3
 
 ### Patch Changes

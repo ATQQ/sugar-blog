@@ -1,6 +1,6 @@
 {
   "name": "vitepress-plugin-artalk",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "vitepress plugin artalk",
   "author": "sugar",
   "license": "MIT",
@@ -40,7 +40,7 @@
     "build:component": "tsc -p src/components && node scripts/copyComponents.mjs"
   },
   "peerDependencies": {
-    "vitepress": "^1 || ^2"
+    "vitepress": "^1.0.0-0 || ^2.0.0-0"
   },
   "dependencies": {
     "@vueuse/core": "^14.1.0",

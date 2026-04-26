@@ -1,6 +1,6 @@
 {
   "name": "vitepress-plugin-51la",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "vitepress plugin, 51.LA网站统计V6",
   "author": "sugar",
   "license": "MIT",
@@ -37,7 +37,7 @@
     "build": "npx tsup src/index.ts --dts --format esm,cjs --external vitepress --silent"
   },
   "peerDependencies": {
-    "vitepress": "^1 || ^2"
+    "vitepress": "^1.0.0-0 || ^2.0.0-0"
   },
   "devDependencies": {
     "vite": "^5",

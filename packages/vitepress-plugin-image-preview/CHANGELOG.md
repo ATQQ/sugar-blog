@@ -1,5 +1,11 @@
 # vitepress-plugin-image-preview
 
+## 0.1.3
+
+### Patch Changes
+
+- fix: peerDependencies warn
+
 ## 0.1.2
 
 ### Patch Changes

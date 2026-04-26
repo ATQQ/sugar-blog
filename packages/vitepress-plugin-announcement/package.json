@@ -1,6 +1,6 @@
 {
   "name": "vitepress-plugin-announcement",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "vitepress plugin, Announcement, 公告窗口",
   "author": "sugar",
   "license": "MIT",
@@ -41,7 +41,7 @@
     "build:component": "tsc -p src/components && node scripts/copyComponents.mjs"
   },
   "peerDependencies": {
-    "vitepress": "^1 || ^2"
+    "vitepress": "^1.0.0-0 || ^2.0.0-0"
   },
   "dependencies": {
     "javascript-stringify": "^2.1.0"

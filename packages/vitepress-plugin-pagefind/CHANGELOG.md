@@ -1,5 +1,13 @@
 # vitepress-plugin-pagefind
 
+## 0.4.20
+
+### Patch Changes
+
+- fix: peerDependencies warn
+- fix: scroll not lock
+- feat: support dark logo
+
 ## 0.4.19
 
 ### Patch Changes

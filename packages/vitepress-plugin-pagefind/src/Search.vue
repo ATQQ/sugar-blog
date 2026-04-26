@@ -196,6 +196,7 @@ watch(
   () => searchModal.value,
   (newValue) => {
     if (newValue) {
+      document.body.style.overflow = 'hidden'
       nextTick(() => {
         document
           .querySelector('div[command-dialog-mask]')
@@ -203,6 +204,7 @@ watch(
       })
     }
     else {
+      document.body.style.overflow = ''
       document
         .querySelector('div[command-dialog-mask]')
         ?.removeEventListener('click', handleClickMask)

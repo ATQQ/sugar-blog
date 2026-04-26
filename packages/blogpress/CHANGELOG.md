@@ -1,5 +1,13 @@
 # 我的博客内容
 
+## 2.0.80
+
+### Patch Changes
+
+- Updated dependencies
+  - vitepress-plugin-51la@0.1.2
+  - @sugarat/theme@0.5.19
+
 ## 2.0.79
 
 ### Patch Changes
