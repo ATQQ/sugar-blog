@@ -39,7 +39,7 @@
     "build:component": "tsc -p src/components && node scripts/copyComponents.mjs"
   },
   "peerDependencies": {
-    "vitepress": "^1 || ^2"
+    "vitepress": "^1.0.0-0 || ^2.0.0-0"
   },
   "dependencies": {
     "@vueuse/core": "^14.1.0",
