@@ -55,7 +55,7 @@
     "@vue/shared": "^3.5.25",
     "@vueuse/core": "^14.1.0",
     "markdown-it-task-checkbox": "^1.0.6",
-    "mermaid": "^10.9.0",
+    "mermaid": "^10.9.6",
     "oh-my-live2d": "^0.19.3",
     "vitepress-markdown-timeline": "^1.2.1",
     "vitepress-plugin-announcement": "workspace:*",
