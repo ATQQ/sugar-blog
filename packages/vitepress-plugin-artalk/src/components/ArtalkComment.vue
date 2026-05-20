@@ -28,10 +28,13 @@ const commentConfig = computed(() => {
 const route = useRoute()
 const artalk = ref<Artalk>()
 const artalkContainer = ref<HTMLDivElement>()
+let artalkObserver: MutationObserver | undefined
 
 function initArtalk() {
-  // CDN 异步加载，有优化空间
-  const observer = new MutationObserver((mutationsList, observer) => {
+  const doInit = () => {
+    if (artalk.value) {
+      return true
+    }
     // @ts-expect-error
     if (window.Artalk && commentConfig.value && artalkContainer.value) {
       // @ts-expect-error
@@ -44,11 +47,22 @@ function initArtalk() {
         site: commentConfig.value?.site,
         ...commentConfig.value
       })
-      observer.disconnect()
+      return true
+    }
+    return false
+  }
+
+  if (doInit()) return
+
+  artalkObserver?.disconnect()
+  artalkObserver = new MutationObserver(() => {
+    if (doInit()) {
+      artalkObserver?.disconnect()
+      artalkObserver = undefined
     }
   })
 
-  observer.observe(document.head, { subtree: true, childList: true, attributes: true, attributeFilter: ['id'] })
+  artalkObserver.observe(document.head, { subtree: true, childList: true })
 }
 
 watch(() => route.path, () => {
@@ -62,6 +76,8 @@ watch(() => route.path, () => {
 })
 
 onUnmounted(() => {
+  artalkObserver?.disconnect()
+  artalkObserver = undefined
   if (artalk.value) {
     artalk.value.destroy()
   }
