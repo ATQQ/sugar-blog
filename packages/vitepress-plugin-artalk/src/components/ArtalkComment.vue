@@ -28,9 +28,13 @@ const commentConfig = computed(() => {
 const route = useRoute()
 const artalk = ref<Artalk>()
 const artalkContainer = ref<HTMLDivElement>()
+let artalkObserver: MutationObserver | undefined
 
 function initArtalk() {
   const doInit = () => {
+    if (artalk.value) {
+      return true
+    }
     // @ts-expect-error
     if (window.Artalk && commentConfig.value && artalkContainer.value) {
       // @ts-expect-error
@@ -50,11 +54,15 @@ function initArtalk() {
 
   if (doInit()) return
 
-  const observer = new MutationObserver(() => {
-    if (doInit()) observer.disconnect()
+  artalkObserver?.disconnect()
+  artalkObserver = new MutationObserver(() => {
+    if (doInit()) {
+      artalkObserver?.disconnect()
+      artalkObserver = undefined
+    }
   })
 
-  observer.observe(document.head, { subtree: true, childList: true })
+  artalkObserver.observe(document.head, { subtree: true, childList: true })
 }
 
 watch(() => route.path, () => {
@@ -68,6 +76,8 @@ watch(() => route.path, () => {
 })
 
 onUnmounted(() => {
+  artalkObserver?.disconnect()
+  artalkObserver = undefined
   if (artalk.value) {
     artalk.value.destroy()
   }
