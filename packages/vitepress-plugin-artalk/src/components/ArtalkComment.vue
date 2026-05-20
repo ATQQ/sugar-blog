@@ -30,8 +30,7 @@ const artalk = ref<Artalk>()
 const artalkContainer = ref<HTMLDivElement>()
 
 function initArtalk() {
-  // CDN 异步加载，有优化空间
-  const observer = new MutationObserver((mutationsList, observer) => {
+  const doInit = () => {
     // @ts-expect-error
     if (window.Artalk && commentConfig.value && artalkContainer.value) {
       // @ts-expect-error
@@ -44,11 +43,18 @@ function initArtalk() {
         site: commentConfig.value?.site,
         ...commentConfig.value
       })
-      observer.disconnect()
+      return true
     }
+    return false
+  }
+
+  if (doInit()) return
+
+  const observer = new MutationObserver(() => {
+    if (doInit()) observer.disconnect()
   })
 
-  observer.observe(document.head, { subtree: true, childList: true, attributes: true, attributeFilter: ['id'] })
+  observer.observe(document.head, { subtree: true, childList: true })
 }
 
 watch(() => route.path, () => {
