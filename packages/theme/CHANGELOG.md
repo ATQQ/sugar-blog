@@ -1,5 +1,12 @@
 # @sugarat/theme
 
+## 0.5.20
+
+### Patch Changes
+
+- Updated dependencies
+  - vitepress-plugin-artalk@0.1.2
+
 ## 0.5.19
 
 ### Patch Changes
