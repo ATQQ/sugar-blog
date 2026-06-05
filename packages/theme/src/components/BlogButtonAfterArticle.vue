@@ -71,12 +71,20 @@ function toggleContent() {
 }
 
 .content-icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
   font-family: "iconfont" !important;
   font-size: 16px;
   margin-right: 8px;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+.content-icon :deep(svg) {
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
 }
 
 /* 进入动画 */

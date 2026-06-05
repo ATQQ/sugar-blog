@@ -388,10 +388,20 @@ function handleChooseTag(tag: string) {
 .work .times .icon,
 .work .tags .icon {
   color: var(--vp-c-text-1);
-  display: block;
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
   width: 20px;
   height: 20px;
   margin-right: 6px;
+}
+.work .links .icon svg,
+.work .times .icon svg,
+.work .tags .icon svg {
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
 }
 .work .times {
   margin-right: 18px;
