@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.5.19） ⏰ 2026/04/26：依赖更新
+description: 最近更新（v0.5.21） ⏰ 2026/06/05：修复 Safari/iPhone 图标不显示
 author: 粥里有勺糖
 top: 3
 tag: 日志
@@ -26,6 +26,36 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.5.21 (2026/06/05)
+
+### Patch Changes
+
+- fix: 修复 Safari / WebKit（iPhone）下图标不显示的问题 ([#441](https://github.com/ATQQ/sugar-blog/issues/441))
+
+  **问题表现**：文章页元信息区域的图标（作者、发布时间、字数、阅读时间、标签等）在 iPhone / Safari 上不可见，桌面端浏览器显示正常。
+
+  **影响范围**：
+  - 文章页元信息（`BlogArticleAnalyze`）
+  - 作品页时间 / 链接 / 标签图标（`UserWorks`）
+  - 返回顶部按钮默认图标（`BlogBackToTop`）
+  - 文章底部赞赏按钮图标（`BlogButtonAfterArticle`）
+  - 评论区、公告、回到顶部等插件的 `Icon` 组件
+
+  **修复方式**：为 flex 布局中的 SVG 补充明确的 `width` / `height` 尺寸约束，避免 WebKit 将无尺寸 SVG 渲染为 0 大小。
+
+- Updated dependencies
+  - vitepress-plugin-back2top@0.1.2
+  - vitepress-plugin-giscus@0.1.2
+  - vitepress-plugin-artalk@0.1.3
+  - vitepress-plugin-announcement@0.1.9
+
+## 0.5.20 (2026/05/20)
+
+### Patch Changes
+
+- Updated dependencies
+  - vitepress-plugin-artalk@0.1.2
 
 ## 0.5.19 (2026/04/26)
 
