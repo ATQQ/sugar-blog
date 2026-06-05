@@ -21,6 +21,7 @@ const size = computed(() => props.size && (typeof props.size === 'number' ? `${p
     --color: inherit;
     align-items: center;
     display: inline-flex;
+    flex-shrink: 0;
     height: 1em;
     justify-content: center;
     line-height: 1em;
@@ -29,5 +30,10 @@ const size = computed(() => props.size && (typeof props.size === 'number' ? `${p
     fill: currentColor;
     color: var(--color);
     font-size: inherit;
+}
+.announcement-icon :deep(svg) {
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
 }
 </style>

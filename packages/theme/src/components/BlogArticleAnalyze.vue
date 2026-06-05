@@ -19,6 +19,8 @@ function createIcon(d: string | string[]) {
     render: () => h('svg', {
       xmlns: 'http://www.w3.org/2000/svg',
       viewBox: '0 0 1024 1024',
+      width: '1em',
+      height: '1em',
     }, [d].flatMap(d => h('path', { fill: 'currentColor', d })))
   })
 }
@@ -267,20 +269,28 @@ const timeTitle = computed(() =>
   align-items: center;
   flex-wrap: wrap;
 }
+.doc-analyze .icon,
 .meta-des > span .icon,
 .new-line-meta-des > span .icon {
   margin-right: 4px;
   --color: inherit;
   align-items: center;
   display: inline-flex;
+  flex-shrink: 0;
   height: 1em;
   justify-content: center;
   line-height: 1em;
   position: relative;
   width: 1em;
   fill: currentColor;
-  color: var(--color) inherit;
+  color: var(--color);
   font-size: inherit;
+}
+.doc-analyze .icon :deep(svg),
+.meta-des > span .icon :deep(svg),
+.new-line-meta-des > span .icon :deep(svg) {
+  width: 1em;
+  height: 1em;
 }
 .meta-des .link,
 .new-line-meta-des .link {
