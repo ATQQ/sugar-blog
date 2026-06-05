@@ -59,6 +59,7 @@
     "eslint-plugin-todo-ddl": "^1.1.1",
     "javascript-stringify": "^2.1.0",
     "lint-staged": "^14.0.1",
+    "oxc-minify": "^0.134.0",
     "prettier": "^3.0.3",
     "sass": "^1.97.1",
     "simple-git-hooks": "^2.9.0",
@@ -69,6 +70,9 @@
     "zx": "^5.3.0"
   },
   "pnpm": {
+    "overrides": {
+      "vite": "npm:rolldown-vite@^7.3.1"
+    },
     "peerDependencyRules": {
       "ignoreMissing": [
         "@algolia/client-search",
