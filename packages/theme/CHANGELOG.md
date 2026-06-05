@@ -1,5 +1,16 @@
 # @sugarat/theme
 
+## 0.5.21
+
+### Patch Changes
+
+- fix: 修复 Safari/WebKit（iPhone）下图标不显示的问题
+- Updated dependencies
+  - vitepress-plugin-back2top@0.1.2
+  - vitepress-plugin-giscus@0.1.2
+  - vitepress-plugin-artalk@0.1.3
+  - vitepress-plugin-announcement@0.1.9
+
 ## 0.5.20
 
 ### Patch Changes

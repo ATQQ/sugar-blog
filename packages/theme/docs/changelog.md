@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.5.19） ⏰ 2026/04/26：依赖更新
+description: 最近更新（v0.5.21） ⏰ 2026/06/05：修复 Safari/iPhone 图标不显示
 author: 粥里有勺糖
 top: 3
 tag: 日志
@@ -26,6 +26,24 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.5.21 (2026/06/05)
+
+### Patch Changes
+
+- fix: 修复 Safari/WebKit（iPhone）下图标不显示的问题
+- Updated dependencies
+  - vitepress-plugin-back2top@0.1.2
+  - vitepress-plugin-giscus@0.1.2
+  - vitepress-plugin-artalk@0.1.3
+  - vitepress-plugin-announcement@0.1.9
+
+## 0.5.20 (2026/05/20)
+
+### Patch Changes
+
+- Updated dependencies
+  - vitepress-plugin-artalk@0.1.2
 
 ## 0.5.19 (2026/04/26)
 

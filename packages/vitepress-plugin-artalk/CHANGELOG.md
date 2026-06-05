@@ -1,5 +1,11 @@
 # vitepress-plugin-artalk
 
+## 0.1.3
+
+### Patch Changes
+
+- fix: 修复 Safari/WebKit（iPhone）下图标不显示的问题
+
 ## 0.1.2
 
 ### Patch Changes
