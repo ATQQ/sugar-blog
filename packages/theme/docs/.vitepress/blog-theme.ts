@@ -72,6 +72,7 @@ export const blogTheme = getThemeConfig({
     model: [
       {
         path: 'https://oml2d-models.sugarat.top/Senko_Normals/senko.model3.json',
+        offset: [-0.2, -0.4] // x 负数左移，y 正数上移
       },
       {
         path: 'https://oml2d-models.sugarat.top/mai/model.json',

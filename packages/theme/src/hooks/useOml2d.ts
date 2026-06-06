@@ -14,7 +14,7 @@ type Oml2dOptions = Omit<WidgetOptions, 'model'> & {
 }
 
 const defaultOptions: Partial<WidgetOptions> = {
-  size: { width: 220, height: 300 },
+  size: { width: 200, height: 280 },
 }
 
 function warnLegacyOptions(options: Oml2dOptions) {

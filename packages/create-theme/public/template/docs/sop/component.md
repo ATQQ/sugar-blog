@@ -78,12 +78,16 @@ const blogTheme = getThemeConfig({
   oml2d: {
     model: [
       {
-        path: 'https://registry.npmmirror.com/oml2d-models/latest/files/models/Senko_Normals/senko.model3.json'
+        path: 'https://registry.npmmirror.com/oml2d-models/latest/files/models/Senko_Normals/senko.model3.json',
+        offset: [-0.2, -0.4] // x 负数左移，y 正数上移
       }
     ]
   }
 })
 ```
+
+其中 `model.offset` 用于微调模型在画布里的位置，格式为 `[x, y]`。`x` 为负数时模型向左移动，正数向右移动；`y` 为正数时模型向上移动，负数向下移动。
+
 效果图如下
 
 ![](https://loclink-1259720482.cos.ap-beijing.myqcloud.com/image/%E5%BD%95%E5%B1%8F2024-03-11%2023.51.51.gif)

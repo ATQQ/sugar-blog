@@ -67,6 +67,7 @@ export const themeEN = defineLocaleConfig({
     model: [
       {
         path: 'https://oml2d-models.sugarat.top/Senko_Normals/senko.model3.json',
+        offset: [-0.2, -0.4]
       },
       {
         path: 'https://oml2d-models.sugarat.top/mai/model.json',
