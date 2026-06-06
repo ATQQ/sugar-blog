@@ -45,7 +45,7 @@
     "vitepress": "^1.0.0-0 || ^2.0.0-0"
   },
   "dependencies": {
-    "@vueuse/core": "^14.1.0",
+    "@vueuse/core": "^14.3.0",
     "javascript-stringify": "^2.1.0"
   },
   "devDependencies": {

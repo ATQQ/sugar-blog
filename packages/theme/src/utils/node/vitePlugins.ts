@@ -146,13 +146,42 @@ export function extractDefaultExportString(info: any): string | undefined {
 }
 
 export function patchTabsPlugin() {
-  return createPatchPlugin({
+  const localStorageCode = 'const ls = typeof localStorage !== "undefined" ? localStorage : null;'
+  const safeLocalStorageCode = `const getSafeLocalStorage = () => {
+try {
+return typeof globalThis !== "undefined" && "localStorage" in globalThis ? globalThis.localStorage : null;
+} catch {
+return null;
+}
+};
+const ls = getSafeLocalStorage();`
+
+  return {
     name: '@sugarat/theme-plugin-patch-tabs',
-    replacements: {
-      '// replace-tabs-import-code': 'import { enhanceAppWithTabs } from \'vitepress-plugin-tabs/client\'',
-      '// replace-tabs-enhance-app-code': 'enhanceAppWithTabs(ctx.app)'
+    enforce: 'pre',
+    config(config: any) {
+      config.ssr ??= {}
+      const noExternal = config.ssr.noExternal
+      config.ssr.noExternal = Array.isArray(noExternal)
+        ? [...new Set([...noExternal, 'vitepress-plugin-tabs'])]
+        : noExternal === true
+          ? true
+          : ['vitepress-plugin-tabs']
+    },
+    transform(code: string, id: string) {
+      if (id.endsWith('theme/src/index.ts') && code.startsWith('// @sugarat/theme index')) {
+        return code
+          .replace('// replace-tabs-import-code', 'import { enhanceAppWithTabs } from \'vitepress-plugin-tabs/client\'')
+          .replace('// replace-tabs-enhance-app-code', 'enhanceAppWithTabs(ctx.app)')
+      }
+
+      if (id.includes('/vitepress-plugin-tabs/') && code.includes(localStorageCode)) {
+        return code.replace(localStorageCode, safeLocalStorageCode)
+      }
+
+      return code
     }
-  })
+  }
 }
 
 export function registerVitePlugins(vpCfg: any, plugins: any[]) {

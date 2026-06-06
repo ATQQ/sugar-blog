@@ -104,7 +104,7 @@ export default defineConfig({
 *   行内公式：`$E=mc^2$` -> $E=mc^2$
 *   块级公式：
 
-```math
+```txt
 $\frac{1}{2\pi}\int_{-\infty}^{\infty}e^{-\frac{x^2}{2}}dx$
 ```
 

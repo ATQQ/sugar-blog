@@ -126,8 +126,8 @@ importers:
         specifier: ^3.5.25
         version: 3.5.25
       '@vueuse/core':
-        specifier: ^14.1.0
-        version: 14.1.0(vue@3.5.24(typescript@5.6.2))
+        specifier: ^14.3.0
+        version: 14.3.0(vue@3.5.24(typescript@5.6.2))
       element-plus:
         specifier: ^2.7
         version: 2.7.2(vue@3.5.24(typescript@5.6.2))
@@ -171,8 +171,8 @@ importers:
         specifier: workspace:*
         version: link:../vitepress-plugin-rss
       vitepress-plugin-tabs:
-        specifier: 0.7.3
-        version: 0.7.3(vitepress@2.0.0-alpha.17(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@types/node@24.5.2)(async-validator@4.2.5)(esbuild@0.27.3)(markdown-it-mathjax3@4.3.2)(oxc-minify@0.134.0)(postcss@8.5.6)(sass@1.97.1)(typescript@5.6.2))(vue@3.5.24(typescript@5.6.2))
+        specifier: 0.9.0
+        version: 0.9.0(vitepress@2.0.0-alpha.17(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@types/node@24.5.2)(async-validator@4.2.5)(esbuild@0.27.3)(markdown-it-mathjax3@4.3.2)(oxc-minify@0.134.0)(postcss@8.5.6)(sass@1.97.1)(typescript@5.6.2))(vue@3.5.24(typescript@5.6.2))
     devDependencies:
       artalk:
         specifier: ^2.8.5
@@ -239,8 +239,8 @@ importers:
   packages/vitepress-plugin-artalk:
     dependencies:
       '@vueuse/core':
-        specifier: ^14.1.0
-        version: 14.2.1(vue@3.5.29(typescript@5.6.2))
+        specifier: ^14.3.0
+        version: 14.3.0(vue@3.5.29(typescript@5.6.2))
       javascript-stringify:
         specifier: ^2.1.0
         version: 2.1.0
@@ -265,10 +265,10 @@ importers:
         version: 5.6.2
       vite:
         specifier: npm:rolldown-vite@^7.3.1
-        version: rolldown-vite@7.3.1(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@types/node@24.5.2)(esbuild@0.27.3)(sass@1.97.1)
+        version: rolldown-vite@7.3.1(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@types/node@24.5.2)(esbuild@0.18.15)(sass@1.97.1)
       vitepress:
         specifier: 2.0.0-alpha.17
-        version: 2.0.0-alpha.17(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@types/node@24.5.2)(async-validator@4.2.5)(esbuild@0.27.3)(markdown-it-mathjax3@4.3.2)(oxc-minify@0.134.0)(postcss@8.5.6)(sass@1.97.1)(typescript@5.6.2)
+        version: 2.0.0-alpha.17(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@types/node@24.5.2)(async-validator@4.2.5)(esbuild@0.18.15)(markdown-it-mathjax3@4.3.2)(oxc-minify@0.134.0)(postcss@8.5.6)(sass@1.97.1)(typescript@5.6.2)
       vue:
         specifier: ^3.5.24
         version: 3.5.29(typescript@5.6.2)
@@ -276,8 +276,8 @@ importers:
   packages/vitepress-plugin-back2top:
     dependencies:
       '@vueuse/core':
-        specifier: ^14.1.0
-        version: 14.2.1(vue@3.5.29(typescript@5.6.2))
+        specifier: ^14.3.0
+        version: 14.3.0(vue@3.5.29(typescript@5.6.2))
       javascript-stringify:
         specifier: ^2.1.0
         version: 2.1.0
@@ -313,8 +313,8 @@ importers:
         specifier: ^3.1.1
         version: 3.1.1(vue@3.5.29(typescript@5.6.2))
       '@vueuse/core':
-        specifier: ^14.1.0
-        version: 14.2.1(vue@3.5.29(typescript@5.6.2))
+        specifier: ^14.3.0
+        version: 14.3.0(vue@3.5.29(typescript@5.6.2))
       javascript-stringify:
         specifier: ^2.1.0
         version: 2.1.0
@@ -347,8 +347,8 @@ importers:
   packages/vitepress-plugin-image-preview:
     dependencies:
       '@vueuse/core':
-        specifier: ^14.1.0
-        version: 14.1.0(vue@3.5.24(typescript@5.6.2))
+        specifier: ^14.3.0
+        version: 14.3.0(vue@3.5.24(typescript@5.6.2))
       javascript-stringify:
         specifier: ^2.1.0
         version: 2.1.0
@@ -384,8 +384,8 @@ importers:
         specifier: workspace:*
         version: link:../shared
       '@vueuse/core':
-        specifier: ^14.1.0
-        version: 14.1.0(vue@3.5.24(typescript@5.6.2))
+        specifier: ^14.3.0
+        version: 14.3.0(vue@3.5.24(typescript@5.6.2))
       javascript-stringify:
         specifier: ^2.1.0
         version: 2.1.0
@@ -1950,13 +1950,13 @@ packages:
   '@vue/shared@3.5.29':
     resolution: {integrity: sha512-w7SR0A5zyRByL9XUkCfdLs7t9XOHUyJ67qPGQjOou3p6GvBeBW+AVjUUmlxtZ4PIYaRvE+1LmK44O4uajlZwcg==}
 
-  '@vueuse/core@14.1.0':
-    resolution: {integrity: sha512-rgBinKs07hAYyPF834mDTigH7BtPqvZ3Pryuzt1SD/lg5wEcWqvwzXXYGEDb2/cP0Sj5zSvHl3WkmMELr5kfWw==}
+  '@vueuse/core@14.2.1':
+    resolution: {integrity: sha512-3vwDzV+GDUNpdegRY6kzpLm4Igptq+GA0QkJ3W61Iv27YWwW/ufSlOfgQIpN6FZRMG0mkaz4gglJRtq5SeJyIQ==}
     peerDependencies:
       vue: ^3.5.0
 
-  '@vueuse/core@14.2.1':
-    resolution: {integrity: sha512-3vwDzV+GDUNpdegRY6kzpLm4Igptq+GA0QkJ3W61Iv27YWwW/ufSlOfgQIpN6FZRMG0mkaz4gglJRtq5SeJyIQ==}
+  '@vueuse/core@14.3.0':
+    resolution: {integrity: sha512-aHfz47g0ZhMtTVHmIzMVpJy8ePhhOy68GY5bv110+5DVtZ+W7BsOx+m61UNQqfrWyPztIHIanWa3E2tib3NFIw==}
     peerDependencies:
       vue: ^3.5.0
 
@@ -2005,22 +2005,22 @@ packages:
       universal-cookie:
         optional: true
 
-  '@vueuse/metadata@14.1.0':
-    resolution: {integrity: sha512-7hK4g015rWn2PhKcZ99NyT+ZD9sbwm7SGvp7k+k+rKGWnLjS/oQozoIZzWfCewSUeBmnJkIb+CNr7Zc/EyRnnA==}
-
   '@vueuse/metadata@14.2.1':
     resolution: {integrity: sha512-1ButlVtj5Sb/HDtIy1HFr1VqCP4G6Ypqt5MAo0lCgjokrk2mvQKsK2uuy0vqu/Ks+sHfuHo0B9Y9jn9xKdjZsw==}
+
+  '@vueuse/metadata@14.3.0':
+    resolution: {integrity: sha512-BwxmbAzwAVF50+MW57GXOUEV61nFBGnlBvrTqj49PqWJu3uw7hdu72ztXeZ33RdZtDY6kO+bfCAE1PCn88Tktw==}
 
   '@vueuse/metadata@9.13.0':
     resolution: {integrity: sha512-gdU7TKNAUVlXXLbaF+ZCfte8BjRJQWPCa2J55+7/h+yDtzw3vOoGQDRXzI6pyKyo6bXFT5/QoPE4hAknExjRLQ==}
 
-  '@vueuse/shared@14.1.0':
-    resolution: {integrity: sha512-EcKxtYvn6gx1F8z9J5/rsg3+lTQnvOruQd8fUecW99DCK04BkWD7z5KQ/wTAx+DazyoEE9dJt/zV8OIEQbM6kw==}
+  '@vueuse/shared@14.2.1':
+    resolution: {integrity: sha512-shTJncjV9JTI4oVNyF1FQonetYAiTBd+Qj7cY89SWbXSkx7gyhrgtEdF2ZAVWS1S3SHlaROO6F2IesJxQEkZBw==}
     peerDependencies:
       vue: ^3.5.0
 
-  '@vueuse/shared@14.2.1':
-    resolution: {integrity: sha512-shTJncjV9JTI4oVNyF1FQonetYAiTBd+Qj7cY89SWbXSkx7gyhrgtEdF2ZAVWS1S3SHlaROO6F2IesJxQEkZBw==}
+  '@vueuse/shared@14.3.0':
+    resolution: {integrity: sha512-bZpge9eSXwa4ToSiqJ7j6KRwhAsneMFoSz3LMWKQDkqimm3D/tbFlrklrs/IOqC8tEcYmXQZJ6N0UrjhBirVCg==}
     peerDependencies:
       vue: ^3.5.0
 
@@ -4556,10 +4556,10 @@ packages:
       mermaid: '10'
       vitepress: ^0.21.6 || ^1.0.0 || ^1.0.0-alpha
 
-  vitepress-plugin-tabs@0.7.3:
-    resolution: {integrity: sha512-CkUz49UrTLcVOszuiHIA7ZBvfsg9RluRkFjRG1KvCg/NwuOTLZwcBRv7vBB3vMlDp0bWXIFOIwdI7bE93cV3Hw==}
+  vitepress-plugin-tabs@0.9.0:
+    resolution: {integrity: sha512-OB+/T6SkwGIQHIQi1NLl011kWCMzfsVEx0/q+NfF6EmvvpcfDzRClc/iEwUlq8TkQnFxANu+GTdmvtXEjJM2Lg==}
     peerDependencies:
-      vitepress: ^1.0.0
+      vitepress: ^1.0.0 || ^2.0.0-alpha.17
       vue: ^3.5.0
 
   vitepress@2.0.0-alpha.17:
@@ -5909,6 +5909,12 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
+  '@vitejs/plugin-vue@6.0.4(rolldown-vite@7.3.1(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@types/node@24.5.2)(esbuild@0.18.15)(sass@1.97.1))(vue@3.5.29(typescript@5.6.2))':
+    dependencies:
+      '@rolldown/pluginutils': 1.0.0-rc.2
+      vite: rolldown-vite@7.3.1(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@types/node@24.5.2)(esbuild@0.18.15)(sass@1.97.1)
+      vue: 3.5.29(typescript@5.6.2)
+
   '@vitejs/plugin-vue@6.0.4(rolldown-vite@7.3.1(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@types/node@24.5.2)(esbuild@0.27.3)(sass@1.97.1))(vue@3.5.29(typescript@5.6.2))':
     dependencies:
       '@rolldown/pluginutils': 1.0.0-rc.2
@@ -6043,18 +6049,25 @@ snapshots:
 
   '@vue/shared@3.5.29': {}
 
-  '@vueuse/core@14.1.0(vue@3.5.24(typescript@5.6.2))':
-    dependencies:
-      '@types/web-bluetooth': 0.0.21
-      '@vueuse/metadata': 14.1.0
-      '@vueuse/shared': 14.1.0(vue@3.5.24(typescript@5.6.2))
-      vue: 3.5.24(typescript@5.6.2)
-
   '@vueuse/core@14.2.1(vue@3.5.29(typescript@5.6.2))':
     dependencies:
       '@types/web-bluetooth': 0.0.21
       '@vueuse/metadata': 14.2.1
       '@vueuse/shared': 14.2.1(vue@3.5.29(typescript@5.6.2))
+      vue: 3.5.29(typescript@5.6.2)
+
+  '@vueuse/core@14.3.0(vue@3.5.24(typescript@5.6.2))':
+    dependencies:
+      '@types/web-bluetooth': 0.0.21
+      '@vueuse/metadata': 14.3.0
+      '@vueuse/shared': 14.3.0(vue@3.5.24(typescript@5.6.2))
+      vue: 3.5.24(typescript@5.6.2)
+
+  '@vueuse/core@14.3.0(vue@3.5.29(typescript@5.6.2))':
+    dependencies:
+      '@types/web-bluetooth': 0.0.21
+      '@vueuse/metadata': 14.3.0
+      '@vueuse/shared': 14.3.0(vue@3.5.29(typescript@5.6.2))
       vue: 3.5.29(typescript@5.6.2)
 
   '@vueuse/core@9.13.0(vue@3.5.24(typescript@5.6.2))':
@@ -6076,17 +6089,21 @@ snapshots:
       async-validator: 4.2.5
       focus-trap: 8.1.0
 
-  '@vueuse/metadata@14.1.0': {}
-
   '@vueuse/metadata@14.2.1': {}
+
+  '@vueuse/metadata@14.3.0': {}
 
   '@vueuse/metadata@9.13.0': {}
 
-  '@vueuse/shared@14.1.0(vue@3.5.24(typescript@5.6.2))':
+  '@vueuse/shared@14.2.1(vue@3.5.29(typescript@5.6.2))':
+    dependencies:
+      vue: 3.5.29(typescript@5.6.2)
+
+  '@vueuse/shared@14.3.0(vue@3.5.24(typescript@5.6.2))':
     dependencies:
       vue: 3.5.24(typescript@5.6.2)
 
-  '@vueuse/shared@14.2.1(vue@3.5.29(typescript@5.6.2))':
+  '@vueuse/shared@14.3.0(vue@3.5.29(typescript@5.6.2))':
     dependencies:
       vue: 3.5.29(typescript@5.6.2)
 
@@ -8303,6 +8320,24 @@ snapshots:
 
   robust-predicates@3.0.2: {}
 
+  rolldown-vite@7.3.1(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@types/node@24.5.2)(esbuild@0.18.15)(sass@1.97.1):
+    dependencies:
+      '@oxc-project/runtime': 0.101.0
+      fdir: 6.5.0(picomatch@4.0.3)
+      lightningcss: 1.32.0
+      picomatch: 4.0.3
+      postcss: 8.5.6
+      rolldown: 1.0.0-beta.53(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)
+      tinyglobby: 0.2.15
+    optionalDependencies:
+      '@types/node': 24.5.2
+      esbuild: 0.18.15
+      fsevents: 2.3.3
+      sass: 1.97.1
+    transitivePeerDependencies:
+      - '@emnapi/core'
+      - '@emnapi/runtime'
+
   rolldown-vite@7.3.1(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@types/node@24.5.2)(esbuild@0.27.3)(sass@1.97.1):
     dependencies:
       '@oxc-project/runtime': 0.101.0
@@ -8831,10 +8866,62 @@ snapshots:
     optionalDependencies:
       '@mermaid-js/mermaid-mindmap': 9.3.0
 
-  vitepress-plugin-tabs@0.7.3(vitepress@2.0.0-alpha.17(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@types/node@24.5.2)(async-validator@4.2.5)(esbuild@0.27.3)(markdown-it-mathjax3@4.3.2)(oxc-minify@0.134.0)(postcss@8.5.6)(sass@1.97.1)(typescript@5.6.2))(vue@3.5.24(typescript@5.6.2)):
+  vitepress-plugin-tabs@0.9.0(vitepress@2.0.0-alpha.17(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@types/node@24.5.2)(async-validator@4.2.5)(esbuild@0.27.3)(markdown-it-mathjax3@4.3.2)(oxc-minify@0.134.0)(postcss@8.5.6)(sass@1.97.1)(typescript@5.6.2))(vue@3.5.24(typescript@5.6.2)):
     dependencies:
       vitepress: 2.0.0-alpha.17(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@types/node@24.5.2)(async-validator@4.2.5)(esbuild@0.27.3)(markdown-it-mathjax3@4.3.2)(oxc-minify@0.134.0)(postcss@8.5.6)(sass@1.97.1)(typescript@5.6.2)
       vue: 3.5.24(typescript@5.6.2)
+
+  vitepress@2.0.0-alpha.17(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@types/node@24.5.2)(async-validator@4.2.5)(esbuild@0.18.15)(markdown-it-mathjax3@4.3.2)(oxc-minify@0.134.0)(postcss@8.5.6)(sass@1.97.1)(typescript@5.6.2):
+    dependencies:
+      '@docsearch/css': 4.6.0
+      '@docsearch/js': 4.6.0
+      '@docsearch/sidepanel-js': 4.6.0
+      '@iconify-json/simple-icons': 1.2.72
+      '@shikijs/core': 3.23.0
+      '@shikijs/transformers': 3.23.0
+      '@shikijs/types': 3.23.0
+      '@types/markdown-it': 14.1.2
+      '@vitejs/plugin-vue': 6.0.4(rolldown-vite@7.3.1(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@types/node@24.5.2)(esbuild@0.18.15)(sass@1.97.1))(vue@3.5.29(typescript@5.6.2))
+      '@vue/devtools-api': 8.0.5
+      '@vue/shared': 3.5.29
+      '@vueuse/core': 14.2.1(vue@3.5.29(typescript@5.6.2))
+      '@vueuse/integrations': 14.2.1(async-validator@4.2.5)(focus-trap@8.1.0)(vue@3.5.29(typescript@5.6.2))
+      focus-trap: 8.1.0
+      mark.js: 8.11.1
+      minisearch: 7.2.0
+      shiki: 3.23.0
+      vite: rolldown-vite@7.3.1(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@types/node@24.5.2)(esbuild@0.18.15)(sass@1.97.1)
+      vue: 3.5.29(typescript@5.6.2)
+    optionalDependencies:
+      markdown-it-mathjax3: 4.3.2
+      oxc-minify: 0.134.0
+      postcss: 8.5.6
+    transitivePeerDependencies:
+      - '@emnapi/core'
+      - '@emnapi/runtime'
+      - '@types/node'
+      - async-validator
+      - axios
+      - change-case
+      - drauu
+      - esbuild
+      - fuse.js
+      - idb-keyval
+      - jiti
+      - jwt-decode
+      - less
+      - nprogress
+      - qrcode
+      - sass
+      - sass-embedded
+      - sortablejs
+      - stylus
+      - sugarss
+      - terser
+      - tsx
+      - typescript
+      - universal-cookie
+      - yaml
 
   vitepress@2.0.0-alpha.17(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@types/node@24.5.2)(async-validator@4.2.5)(esbuild@0.27.3)(markdown-it-mathjax3@4.3.2)(oxc-minify@0.134.0)(postcss@8.5.6)(sass@1.97.1)(typescript@5.6.2):
     dependencies:
