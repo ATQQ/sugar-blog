@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useDark, useIntervalFn } from '@vueuse/core'
+import { useDark } from '@vueuse/core'
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useFriendData } from '../composables/config/blog'
 import { getImageUrl, shuffleArray } from '../utils/client'
@@ -45,7 +45,10 @@ const currentIndex = ref(0)
 const isTransitioning = ref(false)
 const isPageVisible = ref(true)
 const isImageDark = computed(() => isMounted.value && isDark.value)
-let resetTimer: ReturnType<typeof setTimeout> | undefined
+let scrollFrameId: number | undefined
+let lastScrollTime = 0
+let resetStartTime: number | undefined
+const transitionDuration = 500
 
 function refreshRandomFriendList() {
   currentIndex.value = 0
@@ -108,13 +111,8 @@ const listStyle = computed(() => {
 function resetScrollState() {
   currentIndex.value = 0
   isTransitioning.value = false
-}
-
-function clearResetTimer() {
-  if (resetTimer) {
-    clearTimeout(resetTimer)
-    resetTimer = undefined
-  }
+  resetStartTime = undefined
+  lastScrollTime = 0
 }
 
 function getFriendKey(item: FriendListItem, idx: number) {
@@ -123,45 +121,74 @@ function getFriendKey(item: FriendListItem, idx: number) {
   return cloneIndex >= 0 ? `${key}-clone-${cloneIndex}` : key
 }
 
-const { resume, pause } = useIntervalFn(() => {
-  if (resetTimer)
+function stopScrollLoop() {
+  if (scrollFrameId !== undefined) {
+    cancelAnimationFrame(scrollFrameId)
+    scrollFrameId = undefined
+  }
+  lastScrollTime = 0
+}
+
+function requestScrollFrame() {
+  if (scrollFrameId === undefined) {
+    scrollFrameId = requestAnimationFrame(handleScrollFrame)
+  }
+}
+
+function handleScrollFrame(timestamp: number) {
+  scrollFrameId = undefined
+
+  if (!openScroll.value || !isPageVisible.value)
     return
 
-  if (!openScroll.value)
+  if (resetStartTime !== undefined) {
+    if (timestamp - resetStartTime >= transitionDuration) {
+      resetStartTime = undefined
+      isTransitioning.value = false
+      currentIndex.value = 0
+      lastScrollTime = timestamp
+    }
+    requestScrollFrame()
     return
+  }
 
   if (currentIndex.value > friendList.value.length) {
     resetScrollState()
   }
 
-  currentIndex.value++
-  isTransitioning.value = true
-
-  if (currentIndex.value === friendList.value.length) {
-    clearResetTimer()
-    resetTimer = setTimeout(() => {
-      resetTimer = undefined
-      isTransitioning.value = false
-      currentIndex.value = 0
-    }, 500)
+  if (!lastScrollTime) {
+    lastScrollTime = timestamp
   }
-}, scrollSpeed, {
-  immediate: false
-})
+
+  if (timestamp - lastScrollTime >= scrollSpeed.value) {
+    currentIndex.value++
+    isTransitioning.value = true
+    lastScrollTime = timestamp
+
+    if (currentIndex.value === friendList.value.length) {
+      resetStartTime = timestamp
+    }
+  }
+
+  requestScrollFrame()
+}
+
+function startScrollLoop() {
+  requestScrollFrame()
+}
 
 function syncScrollState() {
   if (openScroll.value && isPageVisible.value) {
     if (currentIndex.value > friendList.value.length) {
       resetScrollState()
     }
-    resume()
+    startScrollLoop()
   }
   else {
-    pause()
+    stopScrollLoop()
   }
 
   if (!openScroll.value) {
-    clearResetTimer()
     resetScrollState()
   }
 }
@@ -190,8 +217,7 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  clearResetTimer()
-  pause()
+  stopScrollLoop()
   document.removeEventListener('visibilitychange', handleVisibilityChange)
 })
 </script>
