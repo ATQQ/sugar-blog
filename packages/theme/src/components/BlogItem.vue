@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useRouter, withBase } from 'vitepress'
-import { computed } from 'vue'
-import { wrapperCleanUrls } from '../utils/client'
+import { computed, onMounted, ref } from 'vue'
+import { formatDate, wrapperCleanUrls } from '../utils/client'
 import { useCleanUrls, useFormatShowDate, useImageStyle } from '../composables/config/blog'
 
 const props = defineProps<{
@@ -18,9 +18,19 @@ const props = defineProps<{
 }>()
 
 const formatShowDate = useFormatShowDate()
+const isMounted = ref(false)
 
 const showTime = computed(() => {
+  if (!isMounted.value) {
+    return formatDate(props.date, 'yyyy-MM-dd')
+  }
   return formatShowDate.value(props.date)
+})
+
+onMounted(() => {
+  requestAnimationFrame(() => {
+    isMounted.value = true
+  })
 })
 const cleanUrls = useCleanUrls()
 const link = computed(() => withBase(wrapperCleanUrls(!!cleanUrls, props.route)))
@@ -95,7 +105,7 @@ const resultCover = computed(() => {
         <!-- 底部补充描述 -->
         <div class="badge-list pc-visible">
           <span v-show="author" class="split">{{ author }}</span>
-          <span class="split">{{ showTime }}</span>
+          <span class="split show-time" :class="{ 'show-time-ready': isMounted }">{{ showTime }}</span>
           <span v-if="tag?.length" class="split">{{ tag?.join(' · ') }}</span>
         </div>
       </div>
@@ -105,7 +115,7 @@ const resultCover = computed(() => {
     <!-- 底部补充描述 -->
     <div class="badge-list mobile-visible">
       <span v-show="author" class="split">{{ author }}</span>
-      <span class="split">{{ showTime }}</span>
+      <span class="split show-time" :class="{ 'show-time-ready': isMounted }">{{ showTime }}</span>
       <span v-if="tag?.length" class="split">{{ tag?.join(' · ') }}</span>
     </div>
   </a>
@@ -194,6 +204,16 @@ const resultCover = computed(() => {
   font-size: 13px;
   color: var(--badge-font-color);
   margin-top: 8px;
+}
+.badge-list .show-time {
+  display: inline-block;
+  min-width: 5.5em;
+  opacity: 0.82;
+  font-variant-numeric: tabular-nums;
+  transition: opacity 0.2s ease;
+}
+.badge-list .show-time-ready {
+  opacity: 1;
 }
 .badge-list .split:not(:last-child)::after {
   content: "";

@@ -1,11 +1,16 @@
 <script lang="ts" setup>
-import { useDark, useIntervalFn } from '@vueuse/core'
+import { useDark } from '@vueuse/core'
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useFriendData } from '../composables/config/blog'
-import { getImageUrl } from '../utils/client'
+import { getImageUrl, shuffleArray } from '../utils/client'
 import type { Theme } from '../'
 import { friendLinkSvgStr } from '../constants/svg'
 import Avatar from './Avatar.vue'
+
+type FriendListItem = Theme.FriendLink & {
+  avatar: string
+  alt: string
+}
 
 const isDark = useDark({
   storageKey: 'vitepress-theme-appearance'
@@ -34,12 +39,30 @@ const openScroll = computed(() => {
   return scrollSpeed.value > 0 && limit.value < friendConfig.value.list.length
 })
 
-const friendList = computed(() => {
-  const data = [...friendConfig.value.list]
-  // 简单的随机打乱，在数据导入侧打乱，避免SSG与CSR内容不一致
-  // if (friendConfig.value.random) {
-  //   data.splice(0, data.length, ...shuffleArray(data))
-  // }
+const isMounted = ref(false)
+const randomFriendList = ref<Theme.FriendLink[]>([])
+const currentIndex = ref(0)
+const isTransitioning = ref(false)
+const isPageVisible = ref(true)
+const isImageDark = computed(() => isMounted.value && isDark.value)
+let scrollFrameId: number | undefined
+let lastScrollTime = 0
+let resetStartTime: number | undefined
+const transitionDuration = 500
+
+function refreshRandomFriendList() {
+  currentIndex.value = 0
+  isTransitioning.value = false
+  randomFriendList.value = friendConfig.value.random
+    ? shuffleArray(friendConfig.value.list)
+    : []
+}
+
+const friendList = computed<FriendListItem[]>(() => {
+  const source = isMounted.value && friendConfig.value.random
+    ? randomFriendList.value
+    : friendConfig.value.list
+  const data = [...source]
 
   // 展示个数限制，删除多余的
   if (scrollSpeed.value === 0 && limit.value) {
@@ -47,7 +70,7 @@ const friendList = computed(() => {
   }
   const list = data.map((v) => {
     const { avatar, nickname } = v
-    const avatarUrl = getImageUrl(avatar, isDark.value)
+    const avatarUrl = getImageUrl(avatar, isImageDark.value)
     let alt = nickname
     if (typeof avatar !== 'string') {
       alt = avatar.alt || ''
@@ -70,9 +93,6 @@ const containerHeight = computed(() => {
   return scrollWrapperHeight.value ? `${scrollWrapperHeight.value}px` : 'auto'
 })
 
-const currentIndex = ref(0)
-const isTransitioning = ref(false)
-
 const displayList = computed(() => {
   if (openScroll.value) {
     return [...friendList.value, ...friendList.value.slice(0, limit.value)]
@@ -88,39 +108,117 @@ const listStyle = computed(() => {
   }
 })
 
-const { resume, pause } = useIntervalFn(() => {
-  if (!openScroll.value)
+function resetScrollState() {
+  currentIndex.value = 0
+  isTransitioning.value = false
+  resetStartTime = undefined
+  lastScrollTime = 0
+}
+
+function getFriendKey(item: FriendListItem, idx: number) {
+  const key = `${item.url}-${item.nickname}`
+  const cloneIndex = idx - friendList.value.length
+  return cloneIndex >= 0 ? `${key}-clone-${cloneIndex}` : key
+}
+
+function stopScrollLoop() {
+  if (scrollFrameId !== undefined) {
+    cancelAnimationFrame(scrollFrameId)
+    scrollFrameId = undefined
+  }
+  lastScrollTime = 0
+}
+
+function requestScrollFrame() {
+  if (scrollFrameId === undefined) {
+    scrollFrameId = requestAnimationFrame(handleScrollFrame)
+  }
+}
+
+function handleScrollFrame(timestamp: number) {
+  scrollFrameId = undefined
+
+  if (!openScroll.value || !isPageVisible.value)
     return
 
-  currentIndex.value++
-  isTransitioning.value = true
-
-  if (currentIndex.value === friendList.value.length) {
-    setTimeout(() => {
+  if (resetStartTime !== undefined) {
+    if (timestamp - resetStartTime >= transitionDuration) {
+      resetStartTime = undefined
       isTransitioning.value = false
       currentIndex.value = 0
-    }, 500)
+      lastScrollTime = timestamp
+    }
+    requestScrollFrame()
+    return
   }
-}, scrollSpeed)
 
-watch(openScroll, (val) => {
-  if (val) {
-    resume()
+  if (currentIndex.value > friendList.value.length) {
+    resetScrollState()
+  }
+
+  if (!lastScrollTime) {
+    lastScrollTime = timestamp
+  }
+
+  if (timestamp - lastScrollTime >= scrollSpeed.value) {
+    currentIndex.value++
+    isTransitioning.value = true
+    lastScrollTime = timestamp
+
+    if (currentIndex.value === friendList.value.length) {
+      resetStartTime = timestamp
+    }
+  }
+
+  requestScrollFrame()
+}
+
+function startScrollLoop() {
+  requestScrollFrame()
+}
+
+function syncScrollState() {
+  if (openScroll.value && isPageVisible.value) {
+    if (currentIndex.value > friendList.value.length) {
+      resetScrollState()
+    }
+    startScrollLoop()
   }
   else {
-    pause()
-    currentIndex.value = 0
-    isTransitioning.value = false
+    stopScrollLoop()
   }
+
+  if (!openScroll.value) {
+    resetScrollState()
+  }
+}
+
+function handleVisibilityChange() {
+  isPageVisible.value = !document.hidden
+  syncScrollState()
+}
+
+watch(openScroll, syncScrollState)
+
+watch(() => [friendConfig.value.list, friendConfig.value.random], () => {
+  if (isMounted.value) {
+    refreshRandomFriendList()
+  }
+}, {
+  deep: true
 })
 
 onMounted(() => {
-  if (openScroll.value)
-    resume()
+  isMounted.value = true
+  isPageVisible.value = !document.hidden
+  refreshRandomFriendList()
+  document.addEventListener('visibilitychange', handleVisibilityChange)
+  syncScrollState()
 })
 
 onUnmounted(() => {
-  pause()
+  stopScrollLoop()
+  document.removeEventListener('visibilitychange', handleVisibilityChange)
 })
 </script>
 
@@ -137,7 +235,7 @@ onUnmounted(() => {
       }"
     >
       <ol class="friend-list" :style="listStyle">
-        <li v-for="(v, idx) in displayList" :key="idx" class="scroll-item">
+        <li v-for="(v, idx) in displayList" :key="getFriendKey(v, idx)" class="scroll-item">
           <a :href="v.url" target="_blank">
             <Avatar :size="50" :src="v.avatar" :alt="v.alt" />
             <div class="info-wrapper">
