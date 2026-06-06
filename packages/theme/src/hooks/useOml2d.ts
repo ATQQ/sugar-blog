@@ -10,11 +10,12 @@ type Oml2dOptions = Omit<WidgetOptions, 'model'> & {
   model?: WidgetOptions['model']
   models?: LegacyModelOptions[]
   mobileDisplay?: boolean
+  mobileSize?: WidgetOptions['size']
   tips?: unknown
 }
 
 const defaultOptions: Partial<WidgetOptions> = {
-  size: { width: 200, height: 280 },
+  size: { width: 200, height: 200 },
 }
 
 function warnLegacyOptions(options: Oml2dOptions) {
@@ -31,25 +32,18 @@ function normalizeModel(model: LegacyModelOptions): ModelOptions {
   return {
     ...model,
     offset: model.offset,
-    tips: model.tips && {
-      ...model.tips,
-      style: {
-        top: '-50px',
-        fontSize: '14px',
-        padding: '10px',
-        width: '200px',
-        ...model.tips.style
-      }
-    }
+    tips: model.tips
   }
 }
 
 function normalizeOptions(options: Oml2dOptions): WidgetOptions | undefined {
-  const { models, mobileDisplay, ...widgetOptions } = options
+  const { models, mobileDisplay, mobileSize, ...widgetOptions } = options
 
   warnLegacyOptions(options)
 
-  if (mobileDisplay === false && window.matchMedia('(max-width: 768px)').matches) {
+  const isMobile = window.matchMedia('(max-width: 768px)').matches
+
+  if (mobileDisplay === false && isMobile) {
     return
   }
 
@@ -61,6 +55,7 @@ function normalizeOptions(options: Oml2dOptions): WidgetOptions | undefined {
   return {
     ...defaultOptions,
     ...widgetOptions,
+    ...(isMobile && mobileSize ? { size: mobileSize } : {}),
     model: Array.isArray(model)
       ? model.map(normalizeModel)
       : normalizeModel(model as LegacyModelOptions)

@@ -81,17 +81,19 @@ const blogTheme = getThemeConfig({
 ```ts
 const blogTheme = getThemeConfig({
   oml2d: {
+    size: { width: 200, height: 200 },
+    mobileSize: { width: 120, height: 120 },
     model: [
       {
         path: 'https://registry.npmmirror.com/oml2d-models/latest/files/models/Senko_Normals/senko.model3.json',
-        offset: [-0.2, -0.4] // x 负数左移，y 正数上移
+        offset: [0, 0.2]
       }
     ]
   }
 })
 ```
 
-其中 `model.offset` 用于微调模型在画布里的位置，格式为 `[x, y]`。`x` 为负数时模型向左移动，正数向右移动；`y` 为正数时模型向上移动，负数向下移动。
+其中 `size` 用于设置看板娘画布尺寸，`mobileSize` 用于设置移动端尺寸（命中 `max-width: 768px` 时生效）。`model.offset` 用于微调模型在画布里的位置，格式为 `[x, y]`。`x` 为负数时模型向左移动，正数向右移动；`y` 为正数时模型向上移动，负数向下移动。
 
 效果图如下
 

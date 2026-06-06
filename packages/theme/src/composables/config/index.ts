@@ -12,6 +12,10 @@ type RSSPluginOptions = RSSOptions
 type Oml2dOptions = Omit<WidgetOptions, 'model'> & {
   model?: WidgetOptions['model']
   /**
+   * 移动端尺寸，命中 max-width: 768px 时覆盖 size
+   */
+  mobileSize?: WidgetOptions['size']
+  /**
    * @deprecated 请使用 l2d-widget 的 model 配置
    */
   models?: ModelOptions[]
