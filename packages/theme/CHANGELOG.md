@@ -5,6 +5,8 @@
 ### Patch Changes
 
 - feat: 支持为 `oml2d` 配置移动端尺寸，并优化默认看板娘尺寸与 tips 样式透传
+- fix: 修复 Rolldown 构建下 `vitepress-plugin-tabs` 的 SSR 兼容问题
+- fix: 提升主题水合稳定性，避免文章时间与友链随机/滚动在客户端出现不一致
 
 ## 0.5.22
 
