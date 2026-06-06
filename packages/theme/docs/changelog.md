@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.5.21） ⏰ 2026/06/05：修复 Safari/iPhone 图标不显示
+description: 最近更新（v0.5.22） ⏰ 2026/06/06：替换看板娘底层依赖为 l2d-widget
 author: 粥里有勺糖
 top: 3
 tag: 日志
@@ -26,6 +26,12 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.5.22 (2026/06/06)
+
+### Patch Changes
+
+- feat: 替换看板娘底层依赖为 l2d-widget，并兼容旧的 `oml2d.models` 配置
 
 ## 0.5.21 (2026/06/05)
 

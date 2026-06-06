@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.101
+
+### Patch Changes
+
+- chore: update template theme version
+
 ## 0.0.100
 
 ### Patch Changes

@@ -3,12 +3,23 @@ import type { DefaultTheme } from 'vitepress'
 import type { BackToTopPluginOptions } from 'vitepress-plugin-back2top'
 import type { RSSOptions } from 'vitepress-plugin-rss'
 import type { Mapping, Repo } from '@giscus/vue'
-import type { Options as Oml2dOptions } from 'oh-my-live2d'
+import type { ModelOptions, WidgetOptions } from 'l2d-widget'
 import type { PagefindConfig } from 'vitepress-plugin-pagefind'
 import type { AnnouncementOptions } from 'vitepress-plugin-announcement'
 import type { ImagePreviewOptions } from 'vitepress-plugin-image-preview'
 
 type RSSPluginOptions = RSSOptions
+type Oml2dOptions = Omit<WidgetOptions, 'model'> & {
+  model?: WidgetOptions['model']
+  /**
+   * @deprecated 请使用 l2d-widget 的 model 配置
+   */
+  models?: ModelOptions[]
+  /**
+   * @deprecated 新版 l2d-widget 无移动端独立配置，主题运行时仍会兼容 false 关闭移动端展示
+   */
+  mobileDisplay?: boolean
+}
 
 export type ThemeableImage =
   | string
@@ -483,8 +494,8 @@ export namespace Theme {
     backToTop?: boolean | BackToTop
 
     /**
-     * oh-my-live2d 的 loadOml2d 方法的配置选项
-     * 详见 https://oml2d.hacxy.cn/api/interfaces/Options.html
+     * l2d-widget 的 createWidget 方法的配置选项
+     * 详见 https://github.com/hacxy/l2d-widget
      */
     oml2d?: Oml2dOptions
     homeTags?: boolean | HomeTagsConfig

@@ -1,5 +1,11 @@
 # @sugarat/theme
 
+## 0.5.22
+
+### Patch Changes
+
+- feat: 替换看板娘底层依赖为 l2d-widget，并兼容旧的 `oml2d.models` 配置
+
 ## 0.5.21
 
 ### Patch Changes

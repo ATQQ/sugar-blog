@@ -64,8 +64,7 @@ export const themeEN = defineLocaleConfig({
     }
   ],
   oml2d: {
-    mobileDisplay: false,
-    models: [
+    model: [
       {
         path: 'https://oml2d-models.sugarat.top/Senko_Normals/senko.model3.json',
       },

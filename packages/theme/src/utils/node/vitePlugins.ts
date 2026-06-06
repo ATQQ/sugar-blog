@@ -118,9 +118,11 @@ export function patchGroupIconPlugin() {
 }
 
 export function extractDefaultExportString(info: any): string | undefined {
-  // AST 优先：兼容 Literal 与无表达式的 TemplateLiteral
-  const ast: any = info.ast
   try {
+    // AST 优先：兼容 Literal 与无表达式的 TemplateLiteral
+    // 注意：读取 info.ast 需放在 try 内，rolldown 不支持 ModuleInfo#ast 会抛错，
+    // 此时回退到下方的正则解析（兼容 rolldown-vite）
+    const ast: any = info.ast
     if (ast && Array.isArray(ast.body)) {
       for (const node of ast.body) {
         if (node.type === 'ExportDefaultDeclaration') {

@@ -171,7 +171,7 @@ export function useButtonAfterConfig() {
 }
 
 /**
- * 获取 oh-my-live2d的配置选项
+ * 获取 l2d-widget 的配置选项
  */
 export function useOml2dOptions() {
   const blogConfig = useBlogConfig()

@@ -1,6 +1,6 @@
 {
   "name": "@sugarat/theme",
-  "version": "0.5.21",
+  "version": "0.5.22",
   "description": "简约风的 Vitepress 博客主题，sugarat vitepress blog theme",
   "author": "sugar",
   "license": "MIT",
@@ -54,9 +54,9 @@
     "@sugarat/theme-shared": "workspace:*",
     "@vue/shared": "^3.5.25",
     "@vueuse/core": "^14.1.0",
+    "l2d-widget": "^0.1.0",
     "markdown-it-task-checkbox": "^1.0.6",
     "mermaid": "^10.9.0",
-    "oh-my-live2d": "^0.19.3",
     "vitepress-markdown-timeline": "^1.2.1",
     "vitepress-plugin-announcement": "workspace:*",
     "vitepress-plugin-artalk": "workspace:*",
