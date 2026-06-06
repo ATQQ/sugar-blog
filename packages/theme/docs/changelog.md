@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.5.22） ⏰ 2026/06/06：替换看板娘底层依赖为 l2d-widget
+description: 最近更新（v0.5.23） ⏰ 2026/06/06：支持为 oml2d 配置移动端尺寸
 author: 粥里有勺糖
 top: 3
 tag: 日志
@@ -26,6 +26,12 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.5.23 (2026/06/06)
+
+### Patch Changes
+
+- feat: 支持为 `oml2d` 配置移动端尺寸，并优化默认看板娘尺寸与 tips 样式透传
 
 ## 0.5.22 (2026/06/06)
 

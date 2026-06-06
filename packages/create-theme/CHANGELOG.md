@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.102
+
+### Patch Changes
+
+- chore: update template oml2d config
+
 ## 0.0.101
 
 ### Patch Changes

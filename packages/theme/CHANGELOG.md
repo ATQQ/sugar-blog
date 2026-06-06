@@ -1,5 +1,11 @@
 # @sugarat/theme
 
+## 0.5.23
+
+### Patch Changes
+
+- feat: 支持为 `oml2d` 配置移动端尺寸，并优化默认看板娘尺寸与 tips 样式透传
+
 ## 0.5.22
 
 ### Patch Changes
