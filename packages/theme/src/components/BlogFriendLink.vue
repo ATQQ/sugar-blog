@@ -43,6 +43,7 @@ const isMounted = ref(false)
 const randomFriendList = ref<Theme.FriendLink[]>([])
 const currentIndex = ref(0)
 const isTransitioning = ref(false)
+const isPageVisible = ref(true)
 const isImageDark = computed(() => isMounted.value && isDark.value)
 
 function refreshRandomFriendList() {
@@ -103,6 +104,11 @@ const listStyle = computed(() => {
   }
 })
 
+function resetScrollState() {
+  currentIndex.value = 0
+  isTransitioning.value = false
+}
+
 function getFriendKey(item: FriendListItem, idx: number) {
   const key = `${item.url}-${item.nickname}`
   const cloneIndex = idx - friendList.value.length
@@ -122,18 +128,29 @@ const { resume, pause } = useIntervalFn(() => {
       currentIndex.value = 0
     }, 500)
   }
-}, scrollSpeed)
+}, scrollSpeed, {
+  immediate: false
+})
 
-watch(openScroll, (val) => {
-  if (val) {
+function syncScrollState() {
+  if (openScroll.value && isPageVisible.value) {
     resume()
   }
   else {
     pause()
-    currentIndex.value = 0
-    isTransitioning.value = false
   }
-})
+
+  if (!openScroll.value) {
+    resetScrollState()
+  }
+}
+
+function handleVisibilityChange() {
+  isPageVisible.value = !document.hidden
+  syncScrollState()
+}
+
+watch(openScroll, syncScrollState)
 
 watch(() => [friendConfig.value.list, friendConfig.value.random], () => {
   if (isMounted.value) {
@@ -145,13 +162,15 @@ watch(() => [friendConfig.value.list, friendConfig.value.random], () => {
 
 onMounted(() => {
   isMounted.value = true
+  isPageVisible.value = !document.hidden
   refreshRandomFriendList()
-  if (openScroll.value)
-    resume()
+  document.addEventListener('visibilitychange', handleVisibilityChange)
+  syncScrollState()
 })
 
 onUnmounted(() => {
   pause()
+  document.removeEventListener('visibilitychange', handleVisibilityChange)
 })
 </script>
 
