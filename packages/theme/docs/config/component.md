@@ -66,14 +66,14 @@ const blogTheme = getThemeConfig({
 ```
 
 ## oml2d - 看板娘集成
-* Type：[oml2dOptions](https://oml2d.hacxy.cn/api/interfaces/Options.html)
+* Type：[WidgetOptions](https://github.com/hacxy/l2d-widget)
 
 为网站提供一个 Live2D 看板组件。
 
 :::tip 一点说明
-通过内置 [oh-my-live2d](https://oml2d.hacxy.cn) 实现, 可以通过 `oml2d` 选项配置。
+通过内置 [l2d-widget](https://github.com/hacxy/l2d-widget) 实现, 可以通过 `oml2d` 选项配置。
 
-通过这个能力可以快速加入并定制属于自己的看板娘, 开启只需要为其传递一个 [配置选项](https://oml2d.hacxy.cn/api/interfaces/Options.html) 即可
+通过这个能力可以快速加入并定制属于自己的看板娘, 开启只需要为其传递一个配置选项即可
 :::
 
 以下是一个简单的使用示例，当模型加载成功时它将出现在您网站的左下角。
@@ -81,8 +81,7 @@ const blogTheme = getThemeConfig({
 ```ts
 const blogTheme = getThemeConfig({
   oml2d: {
-    mobileDisplay: true,
-    models: [
+    model: [
       {
         path: 'https://registry.npmmirror.com/oml2d-models/latest/files/models/Senko_Normals/senko.model3.json'
       }
@@ -94,7 +93,7 @@ const blogTheme = getThemeConfig({
 
 ![](https://loclink-1259720482.cos.ap-beijing.myqcloud.com/image/%E5%BD%95%E5%B1%8F2024-03-11%2023.51.51.gif)
 
-之后您还可以前往[配置选项](https://oml2d.hacxy.cn/options/Options.html)查阅更多自定义内容
+之后您还可以前往 [l2d-widget 文档](https://github.com/hacxy/l2d-widget) 查阅更多自定义内容
 
 :::tip 版本说明
 由于时间原因，主题内置的版本不一定都是最新的，可以通过 `resolutions` 配置指定要使用的版本。
@@ -103,7 +102,7 @@ const blogTheme = getThemeConfig({
 ```json
 {
   "resolutions": {
-    "oh-my-live2d": "^0.17.0"
+    "l2d-widget": "^0.1.0"
   }
 }
 ```

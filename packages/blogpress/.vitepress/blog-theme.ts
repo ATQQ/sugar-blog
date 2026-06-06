@@ -76,8 +76,7 @@ export const blogTheme = getThemeConfig({
     inputPosition: 'top'
   },
   oml2d: {
-    mobileDisplay: true,
-    models: [
+    model: [
       {
         path: 'https://oml2d-models.sugarat.top/Senko_Normals/senko.model3.json',
       },

@@ -131,15 +131,15 @@ importers:
       element-plus:
         specifier: ^2.7
         version: 2.7.2(vue@3.5.24(typescript@5.6.2))
+      l2d-widget:
+        specifier: ^0.1.0
+        version: 0.1.0
       markdown-it-task-checkbox:
         specifier: ^1.0.6
         version: 1.0.6
       mermaid:
         specifier: ^10.9.0
         version: 10.9.0
-      oh-my-live2d:
-        specifier: ^0.19.3
-        version: 0.19.3
       vitepress-markdown-timeline:
         specifier: ^1.2.1
         version: 1.2.1
@@ -3307,6 +3307,9 @@ packages:
     resolution: {integrity: sha512-o+NO+8WrRiQEE4/7nwRJhN1HWpVmJm511pBHUxPLtp0BUISzlBplORYSmTclCnJvQq2tKu/sgl3xVpkc7ZWuQQ==}
     engines: {node: '>=6'}
 
+  l2d-widget@0.1.0:
+    resolution: {integrity: sha512-vnEZeom+u/GlcZJeZt1gsigXIsGCHzW+WAWRqv93gG5MqVSRg749drD34mMXhSr48jvrUW+HvufWxURXg93jXQ==}
+
   layout-base@1.0.2:
     resolution: {integrity: sha512-8h2oVEZNktL4BH2JCOI90iD1yXwL6iNW7KcCKT2QZgQJR2vbqDsldCTPRU9NifTCqHZci57XvQQ15YTu+sTYPg==}
 
@@ -3750,9 +3753,6 @@ packages:
   object-assign@4.1.1:
     resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
     engines: {node: '>=0.10.0'}
-
-  oh-my-live2d@0.19.3:
-    resolution: {integrity: sha512-EWva8OUmcExIFIhqGkeiVPQt44RvYYFg+nmpkrZgQVQ+xofVFq4SDYAg5NcdK40HxyV4vORBJEg4OHIHP96MrA==}
 
   once@1.4.0:
     resolution: {integrity: sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==}
@@ -7481,6 +7481,8 @@ snapshots:
 
   kleur@4.1.5: {}
 
+  l2d-widget@0.1.0: {}
+
   layout-base@1.0.2: {}
 
   layout-base@2.0.1: {}
@@ -8003,8 +8005,6 @@ snapshots:
       boolbase: 1.0.0
 
   object-assign@4.1.1: {}
-
-  oh-my-live2d@0.19.3: {}
 
   once@1.4.0:
     dependencies:
