@@ -45,6 +45,7 @@ const currentIndex = ref(0)
 const isTransitioning = ref(false)
 const isPageVisible = ref(true)
 const isImageDark = computed(() => isMounted.value && isDark.value)
+let resetTimer: ReturnType<typeof setTimeout> | undefined
 
 function refreshRandomFriendList() {
   currentIndex.value = 0
@@ -109,6 +110,13 @@ function resetScrollState() {
   isTransitioning.value = false
 }
 
+function clearResetTimer() {
+  if (resetTimer) {
+    clearTimeout(resetTimer)
+    resetTimer = undefined
+  }
+}
+
 function getFriendKey(item: FriendListItem, idx: number) {
   const key = `${item.url}-${item.nickname}`
   const cloneIndex = idx - friendList.value.length
@@ -116,14 +124,23 @@ function getFriendKey(item: FriendListItem, idx: number) {
 }
 
 const { resume, pause } = useIntervalFn(() => {
+  if (resetTimer)
+    return
+
   if (!openScroll.value)
     return
+
+  if (currentIndex.value > friendList.value.length) {
+    resetScrollState()
+  }
 
   currentIndex.value++
   isTransitioning.value = true
 
   if (currentIndex.value === friendList.value.length) {
-    setTimeout(() => {
+    clearResetTimer()
+    resetTimer = setTimeout(() => {
+      resetTimer = undefined
       isTransitioning.value = false
       currentIndex.value = 0
     }, 500)
@@ -134,6 +151,9 @@ const { resume, pause } = useIntervalFn(() => {
 
 function syncScrollState() {
   if (openScroll.value && isPageVisible.value) {
+    if (currentIndex.value > friendList.value.length) {
+      resetScrollState()
+    }
     resume()
   }
   else {
@@ -141,6 +161,7 @@ function syncScrollState() {
   }
 
   if (!openScroll.value) {
+    clearResetTimer()
     resetScrollState()
   }
 }
@@ -169,6 +190,7 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
+  clearResetTimer()
   pause()
   document.removeEventListener('visibilitychange', handleVisibilityChange)
 })
