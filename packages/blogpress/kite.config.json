@@ -1,0 +1,7 @@
+{
+  "projectId": "proj_df89b41a7b7a",
+  "outputDir": "./.vitepress/dist",
+  "files": [
+    "**/*"
+  ]
+}
