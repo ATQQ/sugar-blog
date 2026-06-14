@@ -1,5 +1,4 @@
 ---
-title: 分享一个最近 ViteCoding 项目部署工具：Kite
 date: 2026-06-14 11:00:00
 tags:
   - 技术笔记
@@ -10,7 +9,7 @@ categories:
 description: 之前用 ssh/scp 推本地项目到服务器，索性做了一个本地构建 + 一键上传的工具，走 HTTP 协议更方便
 ---
 
-# 分享一个最近 ViteCoding 项目部署工具：Kite
+# 分享一下最近 VibeCoding 的项目部署工具：Kite
 
 ## 前言
 
@@ -25,7 +24,7 @@ await $`ssh -p22 ${user}@${fullOrigin} "tar -xf ${compressPkgName} -C ${destDir}
 
 这个样子持续了差不多好多年，但始终感觉不优雅，最近刚好 AI 够强，就把一直想实现的一个部署的 CLI 实现了。
 
-服务器只管收 + 解压 + 重启（带后端服务）。
+服务器只管收 + 解压 + 重启（如果带后端服务）。
 
 于是有了 [Kite](https://github.com/ATQQ/Kite) —— 装一个 CLI 就能跑起 Web 管理端 + Server 后端 + 一键上传。
 
@@ -74,7 +73,7 @@ kite serve --pm2
 ![](https://cdn.upyun.sugarat.top/mdImg/sugar/ac1c41072606d0ff478f133bb42b37f8)
 
 
-初始化项目，生成 `kite.config.json`。
+本地项目里执行初始化指令，生成 `kite.config.json`。
 ```bash
 kite init --project proj_669571accfa5 --out ./dist --server http://127.0.0.1:5431 --token kt_a6029f276c354caca86b65960804d22c
 ```
