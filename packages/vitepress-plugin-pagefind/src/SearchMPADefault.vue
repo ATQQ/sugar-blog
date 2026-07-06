@@ -57,7 +57,7 @@ const { site } = useData()
   align-items: center;
 }
 
-@media screen and (max-width: 759px) {
+@media screen and (max-width: 767px) {
   .blog-search {
     flex: 0;
     padding-left: 0;

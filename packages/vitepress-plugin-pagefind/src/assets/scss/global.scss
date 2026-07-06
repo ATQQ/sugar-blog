@@ -135,6 +135,27 @@ div [command-dialog-wrapper] {
   // animation: 333ms cubic-bezier(0.16, 1, 0.3, 1) 0s 1 normal none running shown;
 }
 
+@media (width <= 560px) {
+  .algolia [command-dialog-wrapper] {
+    height: 100dvh;
+    border-radius: 0;
+  }
+}
+
+.algolia [command-dialog-mask],
+.algolia [command-dialog-wrapper] {
+  transition: all 250ms allow-discrete;
+  transition-property: translate, opacity;
+
+  @starting-style {
+    opacity: 0;
+
+    &[command-dialog-wrapper] {
+      translate: 0 -1rem;
+    }
+  }
+}
+
 div [command-dialog-footer] {
   border-top: 1px solid var(--gray6);
   align-items: center;
