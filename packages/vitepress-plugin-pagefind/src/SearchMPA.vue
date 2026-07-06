@@ -575,7 +575,6 @@ input.addEventListener('input', handleSearch)
   justify-content: center;
   box-sizing: border-box;
   border: 1px solid transparent;
-  border-radius: 6px;
   transition: .2s border;
   border-radius: 8px;
   padding: 0 10px 0 12px;
@@ -593,7 +592,6 @@ input.addEventListener('input', handleSearch)
 
 .blog-search .nav-search-btn-wait:hover {
   border: 1px solid var(--vp-c-brand-1);
-  border-radius: 6px;
 }
 
 .blog-search .nav-search-btn-wait .search-tip {
