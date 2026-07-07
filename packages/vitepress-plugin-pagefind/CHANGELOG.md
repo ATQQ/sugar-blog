@@ -1,5 +1,11 @@
 # vitepress-plugin-pagefind
 
+## 0.4.22
+
+### Patch Changes
+
+- chore: 移除 `vue-command-palette` 外部依赖，将搜索面板组件源码内置到，解决依赖提升的问题
+
 ## 0.4.21
 
 ### Patch Changes

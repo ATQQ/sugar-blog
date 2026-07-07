@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.5.24） ⏰ 2026/07/07：修复博客封面地址拼接、优化图片预览与搜索框样式
+description: 最近更新（v0.5.25） ⏰ 2026/07/07：命令面板不再依赖 vue-command-palette，改为内置实现，减小安装体积
 author: 粥里有勺糖
 top: 3
 tag: 日志
@@ -26,6 +26,12 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.5.25 (2026/07/07)
+
+### Patch Changes
+
+- chore(pagefind): 搜索面板组件不再依赖 `vue-command-palette`，改为内置实现
 
 ## 0.5.24 (2026/07/07)
 
