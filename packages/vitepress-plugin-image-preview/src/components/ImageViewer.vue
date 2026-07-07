@@ -76,20 +76,24 @@ const transform = reactive({
   deg: 0,
   offsetX: 0,
   offsetY: 0,
-  enableTransition: false,
+  enableTranslateTransition: false,
 })
 
 const imgStyle = computed(() => ({
-  transform: `translate3d(${transform.offsetX}px, ${transform.offsetY}px, 0) scale(${transform.scale}) rotate(${transform.deg}deg)`,
-  transition: transform.enableTransition ? 'transform .3s' : '',
+  translate: `${transform.offsetX}px ${transform.offsetY}px`,
+  scale: `${transform.scale}`,
+  rotate: `${transform.deg}deg`,
+  transition: transform.enableTranslateTransition
+    ? 'translate 0.3s, scale 0.3s, rotate 0.3s'
+    : undefined,
 }))
 
 function reset() {
+  transform.enableTranslateTransition = true
   transform.scale = 1
   transform.deg = 0
   transform.offsetX = 0
   transform.offsetY = 0
-  transform.enableTransition = false
 }
 
 watch(index, () => {
@@ -125,7 +129,6 @@ function handleMaskClick() {
 
 // Actions
 function handleActions(action: string) {
-  transform.enableTransition = true
   switch (action) {
     case 'zoomOut':
       if (transform.scale > props.minScale) {
@@ -169,7 +172,7 @@ let startOffsetY = 0
 function handleMouseDown(e: MouseEvent) {
   if (e.button !== 0)
     return
-  transform.enableTransition = false
+  transform.enableTranslateTransition = false
   isDragging.value = true
   startX = e.clientX
   startY = e.clientY
@@ -190,6 +193,12 @@ function handleMouseMove(e: MouseEvent) {
 
 function handleMouseUp() {
   isDragging.value = false
+}
+
+function handleTransitionEnd(e: TransitionEvent) {
+  if (e.propertyName === 'translate') {
+    transform.enableTranslateTransition = false
+  }
 }
 
 // Wheel Zoom
@@ -291,6 +300,7 @@ function handleKeydown(e: KeyboardEvent) {
             :style="imgStyle"
             class="vitepress-image-viewer__img"
             @mousedown="handleMouseDown"
+            @transitionend="handleTransitionEnd"
           >
         </div>
       </div>
@@ -436,7 +446,7 @@ function handleKeydown(e: KeyboardEvent) {
   user-select: none;
   pointer-events: auto;
   cursor: grab;
-  transition: transform 0.3s;
+  transition: scale 0.3s, rotate 0.3s;
 }
 .vitepress-image-viewer__img:active {
   cursor: grabbing;
