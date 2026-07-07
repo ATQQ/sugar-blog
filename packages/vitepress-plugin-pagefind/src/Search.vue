@@ -1,13 +1,12 @@
 <script lang="ts" setup>
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
 
-// @ts-expect-error
-import { Command } from 'vue-command-palette'
 import { useData, useRoute, useRouter, withBase } from 'vitepress'
 import { useLocalStorage, useMagicKeys } from '@vueuse/core'
 
 // @ts-expect-error
 import { searchConfig as _searchConfig } from 'virtual:pagefind'
+import { Command } from './command-palette'
 import LogoPagefind from './LogoPagefind.vue'
 import type { SearchConfig } from './type'
 import { formatPagefindResult } from './search'
