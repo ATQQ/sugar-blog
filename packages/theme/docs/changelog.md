@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.5.23） ⏰ 2026/06/06：优化 oml2d 移动端配置与主题水合稳定性
+description: 最近更新（v0.5.24） ⏰ 2026/07/07：修复博客封面地址拼接、优化图片预览与搜索框样式
 author: 粥里有勺糖
 top: 3
 tag: 日志
@@ -26,6 +26,16 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.5.24 (2026/07/07)
+
+### Patch Changes
+
+- fix(BlogItem): 修复博客封面在已带样式后缀（如 `~tplv-xxx`）或已包含目标后缀时，二次拼接导致的封面地址错误问题
+- refactor(image-preview): 重构图片预览工具栏渲染逻辑，采用分组方式声明按钮
+- perf(image-preview): 拆分 `transform` 过渡动画类型（translate/scale/rotate），仅在拖拽结束时启用位移过渡以优化性能
+- style(pagefind): 调整移动端断点（759 → 767）与搜索框样式，移除重复的圆角配置
+- style(pagefind): 移动端搜索弹窗改用 `100dvh` 全屏展示，并新增基于 `@starting-style` 的进场过渡
 
 ## 0.5.23 (2026/06/06)
 

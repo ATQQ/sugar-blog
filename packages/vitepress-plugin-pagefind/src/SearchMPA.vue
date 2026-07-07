@@ -575,17 +575,24 @@ input.addEventListener('input', handleSearch)
   justify-content: center;
   box-sizing: border-box;
   border: 1px solid transparent;
-  border-radius: 6px;
   transition: .2s border;
   border-radius: 8px;
   padding: 0 10px 0 12px;
   height: 40px;
   background-color: var(--vp-c-bg-alt);
+  color: var(--vp-c-text-2);
+}
+
+.blog-search .nav-search-btn-wait svg {
+  stroke-width: 2px;
+  width: 12.5px;
+  height: 12.5px;
 }
 
 .blog-search .nav-search-btn-wait .metaKey {
   margin-left: 10px;
   font-size: 12px;
+  line-height: 20px;
   border: 1px solid var(--vp-c-divider);
   border-radius: 4px;
   padding: 0 6px;
@@ -593,19 +600,24 @@ input.addEventListener('input', handleSearch)
 
 .blog-search .nav-search-btn-wait:hover {
   border: 1px solid var(--vp-c-brand-1);
-  border-radius: 6px;
 }
 
 .blog-search .nav-search-btn-wait .search-tip {
-  color: #909399;
-  font-size: 12px;
+  color: inherit;
+  font-size: 13px;
   padding-left: 8px;
-  padding-right: 16px;
+  padding-right: 0;
 }
 
-@media screen and (max-width: 759px) {
+@media screen and (max-width: 767px) {
   .blog-search>.nav-search-btn-wait {
     background-color: inherit;
+  }
+
+  .blog-search .nav-search-btn-wait svg {
+    width: 18px;
+    height: 18px;
+    color: var(--vp-c-text-1);
   }
 
   .metaKey {

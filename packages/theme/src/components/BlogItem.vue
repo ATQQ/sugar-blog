@@ -63,7 +63,12 @@ const resultCover = computed(() => {
   }
   const { suffix, replace, rule } = coverRule
   if (!replace && suffix) {
-    return `${baseCover}${suffix}`
+    if (baseCover.endsWith(suffix)) {
+      return baseCover
+    }
+    const styleSuffixReg = /(~[^/?#]+)(\?[^#]*)?(#.*)?$/
+    const stripped = baseCover.replace(styleSuffixReg, '$2$3')
+    return `${stripped}${suffix}`
   }
   if (typeof replace === 'function') {
     return replace(baseCover)

@@ -1,5 +1,14 @@
 # @sugarat/theme
 
+## 0.5.24
+
+### Patch Changes
+
+- fix(BlogItem): 修复博客封面在已带样式后缀（如 `~tplv-xxx`）或已包含目标后缀时，二次拼接导致的封面地址错误问题
+- Updated dependencies
+  - vitepress-plugin-image-preview@0.1.4
+  - vitepress-plugin-pagefind@0.4.21
+
 ## 0.5.23
 
 ### Patch Changes

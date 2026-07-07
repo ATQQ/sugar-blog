@@ -274,7 +274,8 @@ div [command-dialog-footer] {
 
   div [command-dialog-wrapper] {
     margin: 0;
-    height: 100vh;
+    height: 100dvh;
+    border-radius: 0;
   }
   .algolia [command-dialog-footer] {
     justify-content: center;
@@ -368,4 +369,20 @@ div[command-item] {
 .search-dialog div[command-item]:hover mark {
   color: inherit;
   text-decoration: underline;
+}
+
+.algolia [command-dialog-mask],
+.algolia [command-dialog-wrapper] {
+  transition: all 250ms allow-discrete;
+  transition-property: translate, opacity;
+}
+
+@starting-style {
+  .algolia [command-dialog-mask],
+  .algolia [command-dialog-wrapper] {
+    opacity: 0;
+  }
+  .algolia [command-dialog-wrapper] {
+    translate: 0 -1rem;
+  }
 }
