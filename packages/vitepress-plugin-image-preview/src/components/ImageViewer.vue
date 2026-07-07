@@ -59,6 +59,18 @@ const isSingle = computed(() => props.urlList.length <= 1)
 const isFirst = computed(() => index.value === 0)
 const isLast = computed(() => index.value === props.urlList.length - 1)
 
+const toolbarGroups = computed(() => {
+  const groups: string[][] = [
+    ['zoomOut', 'zoomIn'],
+    ['reset'],
+    ['rotateLeft', 'rotateRight'],
+    ['download'],
+  ]
+  return groups
+    .map(group => group.filter(action => props.toolbar.includes(action)))
+    .filter(group => group.length > 0)
+})
+
 const transform = reactive({
   scale: 1,
   deg: 0,
@@ -258,15 +270,17 @@ function handleKeydown(e: KeyboardEvent) {
         <div v-if="toolbar.length" class="vitepress-image-viewer__actions">
           <!-- 图片进度展示当前图片索引和图片总数 -->
           <div class="vitepress-image-viewer__actions__inner">
-            <svg v-if="toolbar.includes('zoomOut')" width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" @click="handleActions('zoomOut')"><path fill="currentColor" d="m795.904 750.72 124.992 124.928a32 32 0 0 1-45.248 45.248L750.656 795.904a416 416 0 1 1 45.248-45.248zM480 832a352 352 0 1 0 0-704 352 352 0 0 0 0 704M352 448h256a32 32 0 0 1 0 64H352a32 32 0 0 1 0-64" /></svg>
-            <svg v-if="toolbar.includes('zoomIn')" width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" @click="handleActions('zoomIn')"><path fill="currentColor" d="m795.904 750.72 124.992 124.928a32 32 0 0 1-45.248 45.248L750.656 795.904a416 416 0 1 1 45.248-45.248zM480 832a352 352 0 1 0 0-704 352 352 0 0 0 0 704m-32-384v-96a32 32 0 0 1 64 0v96h96a32 32 0 0 1 0 64h-96v96a32 32 0 0 1-64 0v-96h-96a32 32 0 0 1 0-64z" /></svg>
-            <i v-if="toolbar.includes('zoomOut') || toolbar.includes('zoomIn')" class="vitepress-image-viewer__actions__divider" />
-            <svg v-if="toolbar.includes('reset')" width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" @click="handleActions('reset')"><path fill="currentColor" d="M784.512 230.272v-50.56a32 32 0 1 1 64 0v149.056a32 32 0 0 1-32 32H667.52a32 32 0 1 1 0-64h92.992A320 320 0 1 0 524.8 833.152a320 320 0 0 0 320-320h64a384 384 0 0 1-384 384 384 384 0 0 1-384-384 384 384 0 0 1 643.712-282.88" /></svg>
-            <i v-if="toolbar.includes('reset')" class="vitepress-image-viewer__actions__divider" />
-            <svg v-if="toolbar.includes('rotateLeft')" width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" @click="handleActions('rotateLeft')"><path fill="currentColor" d="M289.088 296.704h92.992a32 32 0 0 1 0 64H232.96a32 32 0 0 1-32-32V179.712a32 32 0 0 1 64 0v50.56a384 384 0 0 1 643.84 282.88 384 384 0 0 1-383.936 384 384 384 0 0 1-384-384h64a320 320 0 1 0 640 0 320 320 0 0 0-555.712-216.448z" /></svg>
-            <svg v-if="toolbar.includes('rotateRight')" width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" @click="handleActions('rotateRight')"><path fill="currentColor" d="M771.776 794.88A384 384 0 0 1 128 512h64a320 320 0 0 0 555.712 216.448H654.72a32 32 0 1 1 0-64h149.056a32 32 0 0 1 32 32v148.928a32 32 0 1 1-64 0v-50.56zM276.288 295.616h92.992a32 32 0 0 1 0 64H220.16a32 32 0 0 1-32-32V178.56a32 32 0 0 1 64 0v50.56A384 384 0 0 1 896.128 512h-64a320 320 0 0 0-555.776-216.384z" /></svg>
-            <i v-if="toolbar.includes('rotateLeft') || toolbar.includes('rotateRight')" class="vitepress-image-viewer__actions__divider" />
-            <svg v-if="toolbar.includes('download')" width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" @click="handleDownload"><path fill="currentColor" d="M160 832h704a32 32 0 1 1 0 64H160a32 32 0 1 1 0-64m384-253.696 236.288-236.352 45.248 45.248L508.8 704 192 387.2l45.248-45.248L480 584.704V128h64z" /></svg>
+            <template v-for="(group, groupIndex) in toolbarGroups" :key="groupIndex">
+              <i v-if="groupIndex > 0" class="vitepress-image-viewer__actions__divider" />
+              <template v-for="action in group" :key="action">
+                <svg v-if="action === 'zoomOut'" width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" @click="handleActions('zoomOut')"><path fill="currentColor" d="m795.904 750.72 124.992 124.928a32 32 0 0 1-45.248 45.248L750.656 795.904a416 416 0 1 1 45.248-45.248zM480 832a352 352 0 1 0 0-704 352 352 0 0 0 0 704M352 448h256a32 32 0 0 1 0 64H352a32 32 0 0 1 0-64" /></svg>
+                <svg v-else-if="action === 'zoomIn'" width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" @click="handleActions('zoomIn')"><path fill="currentColor" d="m795.904 750.72 124.992 124.928a32 32 0 0 1-45.248 45.248L750.656 795.904a416 416 0 1 1 45.248-45.248zM480 832a352 352 0 1 0 0-704 352 352 0 0 0 0 704m-32-384v-96a32 32 0 0 1 64 0v96h96a32 32 0 0 1 0 64h-96v96a32 32 0 0 1-64 0v-96h-96a32 32 0 0 1 0-64z" /></svg>
+                <svg v-else-if="action === 'reset'" width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" @click="handleActions('reset')"><path fill="currentColor" d="M771.776 794.88A384 384 0 0 1 128 512h64a320 320 0 0 0 555.712 216.448H654.72a32 32 0 1 1 0-64h149.056a32 32 0 0 1 32 32v148.928a32 32 0 1 1-64 0v-50.56zM276.288 295.616h92.992a32 32 0 0 1 0 64H220.16a32 32 0 0 1-32-32V178.56a32 32 0 0 1 64 0v50.56A384 384 0 0 1 896.128 512h-64a320 320 0 0 0-555.776-216.384z" /></svg>
+                <svg v-else-if="action === 'rotateLeft'" width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" @click="handleActions('rotateLeft')"><path fill="currentColor" d="M289.088 296.704h92.992a32 32 0 0 1 0 64H232.96a32 32 0 0 1-32-32V179.712a32 32 0 0 1 64 0v50.56a384 384 0 0 1 643.84 282.88 384 384 0 0 1-383.936 384 384 384 0 0 1-384-384h64a320 320 0 1 0 640 0 320 320 0 0 0-555.712-216.448z" /></svg>
+                <svg v-else-if="action === 'rotateRight'" width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" @click="handleActions('rotateRight')"><path fill="currentColor" d="M784.512 230.272v-50.56a32 32 0 1 1 64 0v149.056a32 32 0 0 1-32 32H667.52a32 32 0 1 1 0-64h92.992A320 320 0 1 0 524.8 833.152a320 320 0 0 0 320-320h64a384 384 0 0 1-384 384 384 384 0 0 1-384-384 384 384 0 0 1 643.712-282.88" /></svg>
+                <svg v-else-if="action === 'download'" width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" @click="handleDownload"><path fill="currentColor" d="M160 832h704a32 32 0 1 1 0 64H160a32 32 0 1 1 0-64m384-253.696 236.288-236.352 45.248 45.248L508.8 704 192 387.2l45.248-45.248L480 584.704V128h64z" /></svg>
+              </template>
+            </template>
           </div>
         </div>
 
