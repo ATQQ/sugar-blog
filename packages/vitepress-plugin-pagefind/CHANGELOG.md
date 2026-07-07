@@ -1,5 +1,13 @@
 # vitepress-plugin-pagefind
 
+## 0.4.21
+
+### Patch Changes
+
+- style: 调整移动端断点（759 → 767）与搜索框样式，优化触发按钮显示效果
+- style: 移除重复的圆角样式配置
+- style: 移动端搜索弹窗改用 `100dvh` 全屏展示，并新增基于 `@starting-style` 的进场过渡
+
 ## 0.4.20
 
 ### Patch Changes
