@@ -1,5 +1,13 @@
 # @sugarat/theme
 
+## 0.5.25
+
+### Patch Changes
+
+- chore(pagefind): 命令面板组件不再依赖 `vue-command-palette`，改为内置实现
+- Updated dependencies
+  - vitepress-plugin-pagefind@0.4.22
+
 ## 0.5.24
 
 ### Patch Changes

@@ -449,5 +449,5 @@ Thanks to the following libraries for inspiration.
 
 * [pagefind](https://github.com/cloudcannon/pagefind)
 * [vitepress-plugin-search](https://github.com/emersonbottero/vitepress-plugin-search)
-* [vue-command-palette](https://github.com/xiaoluoboding/vue-command-palette)
+* [vue-command-palette](https://github.com/xiaoluoboding/vue-command-palette) — the command palette UI shipped with this plugin (`src/command-palette`) is inlined from and inspired by this project, with `fuse.js` / `nanoid` removed. All credits to the original author [@xiaoluoboding](https://github.com/xiaoluoboding); the vendored code keeps its original [MIT license](https://github.com/xiaoluoboding/vue-command-palette/blob/main/LICENSE).
 * [@sugarat/theme](https://github.com/ATQQ/sugar-blog/tree/master/packages/theme)

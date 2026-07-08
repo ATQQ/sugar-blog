@@ -1,5 +1,11 @@
 # 我的博客内容
 
+## 2.0.86
+
+### Patch Changes
+
+- @sugarat/theme@0.5.25
+
 ## 2.0.85
 
 ### Patch Changes

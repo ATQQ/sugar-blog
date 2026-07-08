@@ -457,5 +457,5 @@ interface SearchConfig {
 
 * [pagefind](https://github.com/cloudcannon/pagefind)
 * [vitepress-plugin-search](https://github.com/emersonbottero/vitepress-plugin-search)
-* [vue-command-palette](https://github.com/xiaoluoboding/vue-command-palette)
+* [vue-command-palette](https://github.com/xiaoluoboding/vue-command-palette) —— 本插件的命令面板 UI（`src/command-palette`）参考并内置了该库的源码实现，同时移除了 `fuse.js` / `nanoid` 依赖。特此感谢原作者 [@xiaoluoboding](https://github.com/xiaoluoboding)，内置代码沿用原库的 [MIT License](https://github.com/xiaoluoboding/vue-command-palette/blob/main/LICENSE)。
 * [@sugarat/theme](https://github.com/ATQQ/sugar-blog/tree/master/packages/theme)
