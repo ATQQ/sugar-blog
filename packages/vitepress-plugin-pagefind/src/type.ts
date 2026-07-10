@@ -113,6 +113,16 @@ export interface SearchConfig {
    * 'Search by'
    */
   searchBy?: string
+  /**
+   * @default
+   * 'Display detailed list'
+   */
+  displayDetailedList?: string
+  /**
+   * @default
+   * 'Reset search'
+   */
+  resetSearch?: string
 
   /**
    * Automatically reloads the page when the page language changes.
