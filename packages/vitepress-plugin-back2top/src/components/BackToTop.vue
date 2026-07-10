@@ -76,14 +76,19 @@ const iconSize = computed(() => backToTopConfig.value?.iconSize ?? defaultIconSi
   text-align: right;
   bottom: v-bind(marginBottom);
   font-size: 16px;
-  transition: all 0.3s ease-in-out;
   opacity: 0.6;
   display: flex;
   justify-content: right;
   z-index: 200;
   pointer-events: none;
+  --box-shadow-color: rgba(0, 0, 0, 0.1);
+  --box-shadow-hover-color: rgba(0, 0, 0, 0.2);
 }
-.back-to-top:hover {
+html.dark .back-to-top {
+  --box-shadow-color: rgba(0, 0, 0, 0.6);
+  --box-shadow-hover-color: rgba(0, 0, 0, 0.7);
+}
+.back-to-top:is(:hover, :active) {
   opacity: 1;
 }
 .back-to-top .icon-wrapper {
@@ -91,7 +96,7 @@ const iconSize = computed(() => backToTopConfig.value?.iconSize ?? defaultIconSi
   border-radius: 50%;
   position: relative;
   right: -80px;
-  box-shadow: var(--box-shadow);
+  box-shadow: 0 1px 8px 0 var(--box-shadow-color);
   padding: 4px;
   display: flex;
   align-items: center;
@@ -100,8 +105,8 @@ const iconSize = computed(() => backToTopConfig.value?.iconSize ?? defaultIconSi
   color: var(--vp-c-brand-1);
   pointer-events: auto;
 }
-.back-to-top .icon-wrapper:hover {
-  box-shadow: var(--box-shadow-hover);
+.back-to-top .icon-wrapper:is(:hover, :active) {
+  box-shadow: 0 2px 16px 0 var(--box-shadow-hover-color);
 }
 .back-to-top .icon-wrapper:active {
   scale: 0.9;
@@ -116,9 +121,26 @@ const iconSize = computed(() => backToTopConfig.value?.iconSize ?? defaultIconSi
 }
 .back-to-top,
 .back-to-top .icon-wrapper {
-  transition: opacity, scale cubic-bezier(0, 0, 0, 1), display;
+  transition: opacity, scale cubic-bezier(0, 0, 0, 1), display, color, background-color, box-shadow;
   transition-behavior: allow-discrete;
-  transition-duration: 250ms;
+  transition-duration: 0.3s;
+}
+
+@supports (color: rgb(from red r g b / 1)) {
+  .back-to-top {
+    opacity: 1;
+    --box-shadow-color: rgba(0, 0, 0, 0.06);
+  }
+  html.dark .back-to-top {
+    --box-shadow-color: rgba(0, 0, 0, 0.36);
+  }
+  .back-to-top .icon-wrapper {
+    backdrop-filter: blur(3px);
+  }
+  .back-to-top .icon-wrapper:not(:hover):not(:active) {
+    background-color: rgb(from var(--vp-c-brand-soft) r g b / 0.6);
+    color: rgb(from var(--vp-c-brand-1) r g b / 0.6);
+  }
 }
 
 @media screen and (max-width: 1200px) {
