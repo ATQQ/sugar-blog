@@ -10,4 +10,16 @@ export interface BackToTopPluginOptions {
    * @recommend https://iconbuddy.app/search?q=fire
    */
   icon?: string
+
+  /**
+   * 指定按钮距离屏幕下边缘的距离
+   * @default 80
+   */
+  marginBottom?: number
+
+  /**
+   * 指定图标的大小
+   * @default 20
+   */
+  iconSize?: number
 }
