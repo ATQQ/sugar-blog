@@ -52,7 +52,7 @@ onUnmounted(() => {
 
 <template>
   <ImageViewer
-    v-if="show"
+    :show="show"
     :infinite="imagePreviewOptions?.infinite ?? false"
     :hide-on-click-modal="imagePreviewOptions?.hideOnClickModal ?? false"
     :close-on-press-escape="imagePreviewOptions?.closeOnPressEscape ?? true"

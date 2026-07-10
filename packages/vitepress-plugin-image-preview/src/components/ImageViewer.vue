@@ -47,6 +47,10 @@ const props = defineProps({
     type: Number,
     default: 7,
   },
+  show: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 const emit = defineEmits(['close', 'switch'])
@@ -243,8 +247,8 @@ function handleKeydown(e: KeyboardEvent) {
 
 <template>
   <Teleport to="body" :disabled="!teleported">
-    <transition name="viewer-fade">
-      <div class="vitepress-image-viewer__wrapper" tabindex="-1" @wheel.prevent="handleWheel">
+    <Transition name="viewer-fade" appear :duration="300">
+      <div v-if="props.show" class="vitepress-image-viewer__wrapper" tabindex="-1" @wheel.prevent="handleWheel">
         <div class="vitepress-image-viewer__mask" @click="handleMaskClick" />
 
         <!-- Close -->
@@ -304,7 +308,7 @@ function handleKeydown(e: KeyboardEvent) {
           >
         </div>
       </div>
-    </transition>
+    </Transition>
   </Teleport>
 </template>
 
@@ -327,8 +331,8 @@ function handleKeydown(e: KeyboardEvent) {
   height: 100%;
   top: 0;
   left: 0;
-  opacity: 0.5;
-  background: #000;
+  opacity: 1;
+  background: var(--vp-backdrop-bg-color);
 }
 
 .vitepress-image-viewer__btn {
@@ -338,24 +342,29 @@ function handleKeydown(e: KeyboardEvent) {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  opacity: 0.8;
   cursor: pointer;
   box-sizing: border-box;
   user-select: none;
-  background-color: #606266;
   color: #fff;
   width: 44px;
   height: 44px;
   font-size: 24px;
 }
-.vitepress-image-viewer__btn:hover {
-  border-color: #fff;
-  background-color: #909399;
+.vitepress-image-viewer__actions,
+.vitepress-image-viewer__btn {
+  opacity: 1;
+  background-color: #60626680;
+  backdrop-filter: blur(3px);
+}
+.vitepress-image-viewer__btn:hover:not(.is-disabled):not(:active) {
+  background-color: #60626650;
+}
+.vitepress-image-viewer__btn:active:not(.is-disabled) {
+  background-color: #60626665;
 }
 .vitepress-image-viewer__btn.is-disabled {
   cursor: not-allowed;
-  opacity: 0.3;
-  background-color: #606266;
+  opacity: 0.4;
 }
 
 .vitepress-image-viewer__close {
@@ -382,7 +391,6 @@ function handleKeydown(e: KeyboardEvent) {
   min-width: 282px;
   height: 44px;
   padding: 0 23px;
-  background-color: #606266;
   border-color: #fff;
   border-radius: 22px;
   position: absolute;
@@ -390,7 +398,6 @@ function handleKeydown(e: KeyboardEvent) {
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0.8;
   box-sizing: border-box;
   user-select: none;
 }
@@ -428,6 +435,8 @@ function handleKeydown(e: KeyboardEvent) {
   user-select: none;
   z-index: 10;
   opacity: 0.8;
+  -webkit-text-stroke: 1.5px black;
+  paint-order: stroke fill;
 }
 
 .vitepress-image-viewer__canvas {
@@ -452,28 +461,42 @@ function handleKeydown(e: KeyboardEvent) {
   cursor: grabbing;
 }
 
-.viewer-fade-enter-active {
-  animation: viewer-fade-in 0.3s;
+.viewer-fade-enter-active > *,
+.viewer-fade-leave-active > * {
+  transition: opacity, translate, scale;
+  transition-duration: 0.3s;
 }
 
-.viewer-fade-leave-active {
-  animation: viewer-fade-out 0.3s;
+.viewer-fade-leave-active > * {
+  transition-timing-function: cubic-bezier(0, 0, 0, 1);
 }
 
-@keyframes viewer-fade-in {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+.viewer-fade-enter-from .vitepress-image-viewer__canvas,
+.viewer-fade-leave-to .vitepress-image-viewer__canvas,
+.viewer-fade-enter-from .vitepress-image-viewer__close,
+.viewer-fade-leave-to .vitepress-image-viewer__close {
+  scale: 0;
 }
-@keyframes viewer-fade-out {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
+
+.viewer-fade-enter-from .vitepress-image-viewer__mask,
+.viewer-fade-leave-to .vitepress-image-viewer__mask {
+  opacity: 0;
+}
+
+.viewer-fade-enter-from .vitepress-image-viewer__actions,
+.viewer-fade-leave-to .vitepress-image-viewer__actions,
+.viewer-fade-enter-from .vitepress-image-viewer__progress,
+.viewer-fade-leave-to .vitepress-image-viewer__progress {
+  translate: 0 100px;
+}
+
+.viewer-fade-enter-from .vitepress-image-viewer__prev,
+.viewer-fade-leave-to .vitepress-image-viewer__prev {
+  translate: -90px;
+}
+
+.viewer-fade-enter-from .vitepress-image-viewer__next,
+.viewer-fade-leave-to .vitepress-image-viewer__next {
+  translate: 90px;
 }
 </style>
