@@ -51,19 +51,23 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <ImageViewer
-    :show="show"
-    :infinite="imagePreviewOptions?.infinite ?? false"
-    :hide-on-click-modal="imagePreviewOptions?.hideOnClickModal ?? false"
-    :close-on-press-escape="imagePreviewOptions?.closeOnPressEscape ?? true"
-    :show-progress="imagePreviewOptions?.showProgress ?? true"
-    :zoom-ratio="imagePreviewOptions?.zoomRatio ?? 1.2"
-    :min-scale="imagePreviewOptions?.minScale ?? 0.2"
-    :max-scale="imagePreviewOptions?.maxScale ?? 7"
-    :toolbar="imagePreviewOptions?.toolbar ?? ['zoomOut', 'zoomIn', 'reset', 'rotateLeft', 'rotateRight', 'download']"
-    teleported
-    :url-list="previewImageInfo.list"
-    :initial-index="previewImageInfo.idx"
-    @close="show = false"
-  />
+  <Teleport to="body">
+    <Transition name="viewer-fade" appear :duration="300">
+      <ImageViewer
+        v-if="show"
+        :infinite="imagePreviewOptions?.infinite ?? false"
+        :hide-on-click-modal="imagePreviewOptions?.hideOnClickModal ?? false"
+        :close-on-press-escape="imagePreviewOptions?.closeOnPressEscape ?? true"
+        :show-progress="imagePreviewOptions?.showProgress ?? true"
+        :zoom-ratio="imagePreviewOptions?.zoomRatio ?? 1.2"
+        :min-scale="imagePreviewOptions?.minScale ?? 0.2"
+        :max-scale="imagePreviewOptions?.maxScale ?? 7"
+        :toolbar="imagePreviewOptions?.toolbar ?? ['zoomOut', 'zoomIn', 'reset', 'rotateLeft', 'rotateRight', 'download']"
+        teleported
+        :url-list="previewImageInfo.list"
+        :initial-index="previewImageInfo.idx"
+        @close="show = false"
+      />
+    </Transition>
+  </Teleport>
 </template>
