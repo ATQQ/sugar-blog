@@ -185,9 +185,11 @@ watch(
     })
   }
 )
-
-function handleClickMask(e: any) {
-  if (e.target === e.currentTarget) {
+// 避免按住搜索框内选中文本拖动出来到遮罩上导致对话框关闭的问题。
+const lastMouseDownTarget = ref<EventTarget | null>(null)
+const handleMouseDownMask = (e: Event) => lastMouseDownTarget.value = e.target
+function handleClickMask(e: Event) {
+  if (e.target === e.currentTarget && lastMouseDownTarget.value === e.currentTarget) {
     hideSearchModal()
   }
 }
@@ -197,16 +199,16 @@ watch(
     if (newValue) {
       document.body.style.overflow = 'hidden'
       nextTick(() => {
-        document
-          .querySelector('div[command-dialog-mask]')
-          ?.addEventListener('click', handleClickMask)
+        const mask = document.querySelector('div[command-dialog-mask]')
+        mask?.addEventListener('click', handleClickMask)
+        mask?.addEventListener('mousedown', handleMouseDownMask)
       })
     }
     else {
       document.body.style.overflow = ''
-      document
-        .querySelector('div[command-dialog-mask]')
-        ?.removeEventListener('click', handleClickMask)
+      const mask = document.querySelector('div[command-dialog-mask]')
+      mask?.removeEventListener('click', handleClickMask)
+      mask?.removeEventListener('mousedown', handleMouseDownMask)
     }
   }
 )
@@ -291,8 +293,11 @@ function handleToggleDetail() {
                 <span class="vpi-arrow-left local-search-icon" />
               </button>
             </div>
+            <label for="search-input" class="search-icon">
+              <span aria-hidden="true" class="vpi-search search-icon local-search-icon" />
+            </label>
             <Command.Input
-              ref="searchInput" v-model:value="searchWords"
+              id="search-input" ref="searchInput" v-model:value="searchWords"
               :placeholder="finalSearchConfig?.placeholder || 'Search Docs'"
             />
             <div class="search-actions">
@@ -516,9 +521,18 @@ function handleToggleDetail() {
   display: none;
 }
 
+label.search-icon {
+  margin-left: 12px;
+  cursor: text;
+}
+
 @media screen and (max-width: 560px) {
   .search-actions.before {
     display: flex;
+  }
+
+  label.search-icon {
+    display: none;
   }
 }
 </style>

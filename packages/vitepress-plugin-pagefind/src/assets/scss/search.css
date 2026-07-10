@@ -407,6 +407,10 @@ div[command-item] {
   color: var(--vp-c-brand-1);
 }
 
+label.search-icon {
+  margin-left: 12px;
+}
+
 .algolia.command-dialog-enter-active [command-dialog-mask],
 .algolia.command-dialog-enter-active [command-dialog-wrapper],
 .algolia.command-dialog-leave-active [command-dialog-mask],

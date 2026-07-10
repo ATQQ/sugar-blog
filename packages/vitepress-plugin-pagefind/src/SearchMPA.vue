@@ -208,8 +208,11 @@ function closeModal() {
 }
 
 trigger.addEventListener('click', openModal)
+// 避免按住搜索框内选中文本拖动出来到遮罩上导致对话框关闭的问题。
+let lastMouseDownTarget: EventTarget | null = null
+mask.addEventListener('mousedown', (e) => { lastMouseDownTarget = e.target })
 mask.addEventListener('click', (e) => {
-  if (e.target === mask)
+  if (e.target === mask && lastMouseDownTarget === mask)
     closeModal()
 })
 backBtn.addEventListener('click', closeModal)
@@ -423,6 +426,9 @@ input.addEventListener('input', handleSearch)
                   <span class="vpi-arrow-left local-search-icon" />
                 </button>
               </div>
+              <label for="search-input" class="search-icon">
+                <span aria-hidden="true" class="vpi-search search-icon local-search-icon" />
+              </label>
               <input id="search-input" command-input :placeholder="finalSearchConfig?.placeholder || 'Search Docs'">
               <div class="search-actions">
                 <button
@@ -666,9 +672,18 @@ input.addEventListener('input', handleSearch)
   display: none;
 }
 
+label.search-icon {
+  margin-left: 12px;
+  cursor: text;
+}
+
 @media screen and (max-width: 560px) {
   .search-actions.before {
     display: flex;
+  }
+
+  label.search-icon {
+    display: none;
   }
 }
 </style>
