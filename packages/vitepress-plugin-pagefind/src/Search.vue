@@ -97,7 +97,7 @@ function inlineSearch() {
     searchResult.value = []
     return
   }
-  searchResult.value = Array.from({ length: 8 }, () => ({
+  searchResult.value = Array.from({ length: 1 }, () => ({
     route: '#',
     meta: {
       title: '只在构建后才生效',
