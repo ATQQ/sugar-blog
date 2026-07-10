@@ -353,15 +353,25 @@ function handleKeydown(e: KeyboardEvent) {
 .vitepress-image-viewer__actions,
 .vitepress-image-viewer__btn {
   opacity: 1;
-  background-color: #60626680;
+  background-color: #00000038;
   backdrop-filter: blur(3px);
   transition: background-color, color, opacity;
   transition-duration: 250ms;
 }
 .vitepress-image-viewer__btn:hover:not(.is-disabled):not(:active) {
-  background-color: #60626650;
+  background-color: #00000024;
 }
 .vitepress-image-viewer__btn:active:not(.is-disabled) {
+  background-color: #0000002e;
+}
+html.dark .vitepress-image-viewer__actions,
+html.dark .vitepress-image-viewer__btn {
+  background-color: #60626680;
+}
+html.dark .vitepress-image-viewer__btn:hover:not(.is-disabled):not(:active) {
+  background-color: #60626650;
+}
+html.dark .vitepress-image-viewer__btn:active:not(.is-disabled) {
   background-color: #60626665;
 }
 .vitepress-image-viewer__btn.is-disabled {
