@@ -1,6 +1,18 @@
 <script lang="ts" setup>
+/// <reference types="vitepress/client" />
+
 import { computed, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
 import { useScrollLock } from '@vueuse/core'
+
+import zoomOutIcon from '../icons/zoom-out.svg?raw'
+import zoomInIcon from '../icons/zoom-in.svg?raw'
+import resetIcon from '../icons/refresh.svg?raw'
+import rotateLeftIcon from '../icons/rotate-ccw.svg?raw'
+import rotateRightIcon from '../icons/rotate-cw.svg?raw'
+import downloadIcon from '../icons/download.svg?raw'
+import closeIcon from '../icons/close.svg?raw'
+import chevronLeftIcon from '../icons/chevron-left.svg?raw'
+import chevronRightIcon from '../icons/chevron-right.svg?raw'
 
 const props = defineProps({
   urlList: {
@@ -242,70 +254,62 @@ function handleKeydown(e: KeyboardEvent) {
 </script>
 
 <template>
-  <Teleport to="body" :disabled="!teleported">
-    <transition name="viewer-fade">
-      <div class="vitepress-image-viewer__wrapper" tabindex="-1" @wheel.prevent="handleWheel">
-        <div class="vitepress-image-viewer__mask" @click="handleMaskClick" />
+  <div class="vitepress-image-viewer__wrapper" tabindex="-1" @wheel.prevent="handleWheel">
+    <div class="vitepress-image-viewer__mask" @click="handleMaskClick" />
 
-        <!-- Close -->
-        <span class="vitepress-image-viewer__btn vitepress-image-viewer__close" @click="hide">
-          <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"><path fill="currentColor" d="M764.288 214.592 512 466.88 259.712 214.592a31.936 31.936 0 0 0-45.12 45.12L466.752 512 214.528 764.224a31.936 31.936 0 1 0 45.12 45.184L512 557.184l252.288 252.288a31.936 31.936 0 0 0 45.12-45.12L557.12 512.064l252.288-252.352a31.936 31.936 0 1 0-45.12-45.184z" /></svg>
-        </span>
+    <!-- Close -->
+    <span class="vitepress-image-viewer__btn vitepress-image-viewer__close vitepress-image-viewer__icon" @click="hide" v-html="closeIcon" />
 
-        <!-- Arrows -->
-        <template v-if="!isSingle">
-          <span
-            class="vitepress-image-viewer__btn vitepress-image-viewer__prev"
-            :class="{ 'is-disabled': !infinite && isFirst }"
-            @click="prev"
-          >
-            <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"><path fill="currentColor" d="M609.408 149.376 277.76 489.6a32 32 0 0 0 0 44.672l331.648 340.352a29.12 29.12 0 0 0 41.728 0 30.592 30.592 0 0 0 0-42.752L339.264 511.936l311.872-319.872a30.592 30.592 0 0 0 0-42.688 29.12 29.12 0 0 0-41.728 0z" /></svg>
-          </span>
-          <span
-            class="vitepress-image-viewer__btn vitepress-image-viewer__next"
-            :class="{ 'is-disabled': !infinite && isLast }"
-            @click="next"
-          >
-            <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"><path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z" /></svg>
-          </span>
+    <!-- Arrows -->
+    <template v-if="!isSingle">
+      <span
+        class="vitepress-image-viewer__btn vitepress-image-viewer__prev vitepress-image-viewer__icon"
+        :class="{ 'is-disabled': !infinite && isFirst }"
+        @click="prev"
+        v-html="chevronLeftIcon"
+      />
+      <span
+        class="vitepress-image-viewer__btn vitepress-image-viewer__next vitepress-image-viewer__icon"
+        :class="{ 'is-disabled': !infinite && isLast }"
+        @click="next"
+        v-html="chevronRightIcon"
+      />
+    </template>
+
+    <!-- Progress -->
+    <div v-if="showProgress" class="vitepress-image-viewer__progress">
+      {{ index + 1 }} / {{ urlList.length }}
+    </div>
+
+    <!-- Actions Toolbar -->
+    <div v-if="toolbar.length" class="vitepress-image-viewer__actions">
+      <!-- 图片进度展示当前图片索引和图片总数 -->
+      <div class="vitepress-image-viewer__actions__inner">
+        <template v-for="(group, groupIndex) in toolbarGroups" :key="groupIndex">
+          <i v-if="groupIndex > 0" class="vitepress-image-viewer__actions__divider" />
+          <template v-for="action in group" :key="action">
+            <span v-if="action === 'zoomOut'" class="vitepress-image-viewer__icon" @click="handleActions('zoomOut')" v-html="zoomOutIcon" />
+            <span v-else-if="action === 'zoomIn'" class="vitepress-image-viewer__icon" @click="handleActions('zoomIn')" v-html="zoomInIcon" />
+            <span v-else-if="action === 'reset'" class="vitepress-image-viewer__icon" @click="handleActions('reset')" v-html="resetIcon" />
+            <span v-else-if="action === 'rotateLeft'" class="vitepress-image-viewer__icon" @click="handleActions('rotateLeft')" v-html="rotateLeftIcon" />
+            <span v-else-if="action === 'rotateRight'" class="vitepress-image-viewer__icon" @click="handleActions('rotateRight')" v-html="rotateRightIcon" />
+            <span v-else-if="action === 'download'" class="vitepress-image-viewer__icon" @click="handleDownload" v-html="downloadIcon" />
+          </template>
         </template>
-
-        <!-- Progress -->
-        <div v-if="showProgress" class="vitepress-image-viewer__progress">
-          {{ index + 1 }} / {{ urlList.length }}
-        </div>
-
-        <!-- Actions Toolbar -->
-        <div v-if="toolbar.length" class="vitepress-image-viewer__actions">
-          <!-- 图片进度展示当前图片索引和图片总数 -->
-          <div class="vitepress-image-viewer__actions__inner">
-            <template v-for="(group, groupIndex) in toolbarGroups" :key="groupIndex">
-              <i v-if="groupIndex > 0" class="vitepress-image-viewer__actions__divider" />
-              <template v-for="action in group" :key="action">
-                <svg v-if="action === 'zoomOut'" width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" @click="handleActions('zoomOut')"><path fill="currentColor" d="m795.904 750.72 124.992 124.928a32 32 0 0 1-45.248 45.248L750.656 795.904a416 416 0 1 1 45.248-45.248zM480 832a352 352 0 1 0 0-704 352 352 0 0 0 0 704M352 448h256a32 32 0 0 1 0 64H352a32 32 0 0 1 0-64" /></svg>
-                <svg v-else-if="action === 'zoomIn'" width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" @click="handleActions('zoomIn')"><path fill="currentColor" d="m795.904 750.72 124.992 124.928a32 32 0 0 1-45.248 45.248L750.656 795.904a416 416 0 1 1 45.248-45.248zM480 832a352 352 0 1 0 0-704 352 352 0 0 0 0 704m-32-384v-96a32 32 0 0 1 64 0v96h96a32 32 0 0 1 0 64h-96v96a32 32 0 0 1-64 0v-96h-96a32 32 0 0 1 0-64z" /></svg>
-                <svg v-else-if="action === 'reset'" width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" @click="handleActions('reset')"><path fill="currentColor" d="M771.776 794.88A384 384 0 0 1 128 512h64a320 320 0 0 0 555.712 216.448H654.72a32 32 0 1 1 0-64h149.056a32 32 0 0 1 32 32v148.928a32 32 0 1 1-64 0v-50.56zM276.288 295.616h92.992a32 32 0 0 1 0 64H220.16a32 32 0 0 1-32-32V178.56a32 32 0 0 1 64 0v50.56A384 384 0 0 1 896.128 512h-64a320 320 0 0 0-555.776-216.384z" /></svg>
-                <svg v-else-if="action === 'rotateLeft'" width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" @click="handleActions('rotateLeft')"><path fill="currentColor" d="M289.088 296.704h92.992a32 32 0 0 1 0 64H232.96a32 32 0 0 1-32-32V179.712a32 32 0 0 1 64 0v50.56a384 384 0 0 1 643.84 282.88 384 384 0 0 1-383.936 384 384 384 0 0 1-384-384h64a320 320 0 1 0 640 0 320 320 0 0 0-555.712-216.448z" /></svg>
-                <svg v-else-if="action === 'rotateRight'" width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" @click="handleActions('rotateRight')"><path fill="currentColor" d="M784.512 230.272v-50.56a32 32 0 1 1 64 0v149.056a32 32 0 0 1-32 32H667.52a32 32 0 1 1 0-64h92.992A320 320 0 1 0 524.8 833.152a320 320 0 0 0 320-320h64a384 384 0 0 1-384 384 384 384 0 0 1-384-384 384 384 0 0 1 643.712-282.88" /></svg>
-                <svg v-else-if="action === 'download'" width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" @click="handleDownload"><path fill="currentColor" d="M160 832h704a32 32 0 1 1 0 64H160a32 32 0 1 1 0-64m384-253.696 236.288-236.352 45.248 45.248L508.8 704 192 387.2l45.248-45.248L480 584.704V128h64z" /></svg>
-              </template>
-            </template>
-          </div>
-        </div>
-
-        <!-- Canvas -->
-        <div class="vitepress-image-viewer__canvas">
-          <img
-            :src="currentImg"
-            :style="imgStyle"
-            class="vitepress-image-viewer__img"
-            @mousedown="handleMouseDown"
-            @transitionend="handleTransitionEnd"
-          >
-        </div>
       </div>
-    </transition>
-  </Teleport>
+    </div>
+
+    <!-- Canvas -->
+    <div class="vitepress-image-viewer__canvas">
+      <img
+        :src="currentImg"
+        :style="imgStyle"
+        class="vitepress-image-viewer__img"
+        @mousedown="handleMouseDown"
+        @transitionend="handleTransitionEnd"
+      >
+    </div>
+  </div>
 </template>
 
 <style scoped>
@@ -327,8 +331,8 @@ function handleKeydown(e: KeyboardEvent) {
   height: 100%;
   top: 0;
   left: 0;
-  opacity: 0.5;
-  background: #000;
+  opacity: 1;
+  background: var(--vp-backdrop-bg-color);
 }
 
 .vitepress-image-viewer__btn {
@@ -338,24 +342,41 @@ function handleKeydown(e: KeyboardEvent) {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  opacity: 0.8;
   cursor: pointer;
   box-sizing: border-box;
   user-select: none;
-  background-color: #606266;
   color: #fff;
   width: 44px;
   height: 44px;
   font-size: 24px;
 }
-.vitepress-image-viewer__btn:hover {
-  border-color: #fff;
-  background-color: #909399;
+.vitepress-image-viewer__actions,
+.vitepress-image-viewer__btn {
+  opacity: 1;
+  background-color: #00000038;
+  backdrop-filter: blur(3px);
+  transition: background-color, color, opacity;
+  transition-duration: 250ms;
+}
+.vitepress-image-viewer__btn:hover:not(.is-disabled):not(:active) {
+  background-color: #00000024;
+}
+.vitepress-image-viewer__btn:active:not(.is-disabled) {
+  background-color: #0000002e;
+}
+html.dark .vitepress-image-viewer__actions,
+html.dark .vitepress-image-viewer__btn {
+  background-color: #60626680;
+}
+html.dark .vitepress-image-viewer__btn:hover:not(.is-disabled):not(:active) {
+  background-color: #60626650;
+}
+html.dark .vitepress-image-viewer__btn:active:not(.is-disabled) {
+  background-color: #60626665;
 }
 .vitepress-image-viewer__btn.is-disabled {
   cursor: not-allowed;
-  opacity: 0.3;
-  background-color: #606266;
+  opacity: 0.4;
 }
 
 .vitepress-image-viewer__close {
@@ -382,15 +403,13 @@ function handleKeydown(e: KeyboardEvent) {
   min-width: 282px;
   height: 44px;
   padding: 0 23px;
-  background-color: #606266;
-  border-color: #fff;
+  border-color: white;
   border-radius: 22px;
   position: absolute;
   z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0.8;
   box-sizing: border-box;
   user-select: none;
 }
@@ -400,14 +419,26 @@ function handleKeydown(e: KeyboardEvent) {
   text-align: justify;
   cursor: default;
   font-size: 23px;
-  color: #fff;
   display: flex;
   align-items: center;
   justify-content: space-around;
   gap: 12px;
 }
-.vitepress-image-viewer__actions__inner svg {
+.vitepress-image-viewer__actions__inner .vitepress-image-viewer__icon {
   cursor: pointer;
+  color: white;
+  transition: color 250ms;
+}
+.vitepress-image-viewer__actions__inner .vitepress-image-viewer__icon:hover {
+  color: #fffa;
+}
+.vitepress-image-viewer__actions__inner .vitepress-image-viewer__icon:active {
+  color: #fffc;
+}
+.vitepress-image-viewer__icon :deep(svg) {
+  width: 1em;
+  height: 1em;
+  stroke: currentColor;
 }
 .vitepress-image-viewer__actions__divider {
   display: inline-block;
@@ -428,6 +459,8 @@ function handleKeydown(e: KeyboardEvent) {
   user-select: none;
   z-index: 10;
   opacity: 0.8;
+  -webkit-text-stroke: 1.5px black;
+  paint-order: stroke fill;
 }
 
 .vitepress-image-viewer__canvas {
@@ -452,28 +485,42 @@ function handleKeydown(e: KeyboardEvent) {
   cursor: grabbing;
 }
 
-.viewer-fade-enter-active {
-  animation: viewer-fade-in 0.3s;
+.viewer-fade-enter-active > *,
+.viewer-fade-leave-active > * {
+  transition: opacity, translate, scale;
+  transition-duration: 0.3s;
 }
 
-.viewer-fade-leave-active {
-  animation: viewer-fade-out 0.3s;
+.viewer-fade-leave-active > * {
+  transition-timing-function: cubic-bezier(0, 0, 0, 1);
 }
 
-@keyframes viewer-fade-in {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+.viewer-fade-enter-from .vitepress-image-viewer__canvas,
+.viewer-fade-leave-to .vitepress-image-viewer__canvas,
+.viewer-fade-enter-from .vitepress-image-viewer__close,
+.viewer-fade-leave-to .vitepress-image-viewer__close {
+  scale: 0;
 }
-@keyframes viewer-fade-out {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
+
+.viewer-fade-enter-from .vitepress-image-viewer__mask,
+.viewer-fade-leave-to .vitepress-image-viewer__mask {
+  opacity: 0;
+}
+
+.viewer-fade-enter-from .vitepress-image-viewer__actions,
+.viewer-fade-leave-to .vitepress-image-viewer__actions,
+.viewer-fade-enter-from .vitepress-image-viewer__progress,
+.viewer-fade-leave-to .vitepress-image-viewer__progress {
+  translate: 0 100px;
+}
+
+.viewer-fade-enter-from .vitepress-image-viewer__prev,
+.viewer-fade-leave-to .vitepress-image-viewer__prev {
+  translate: -90px;
+}
+
+.viewer-fade-enter-from .vitepress-image-viewer__next,
+.viewer-fade-leave-to .vitepress-image-viewer__next {
+  translate: 90px;
 }
 </style>

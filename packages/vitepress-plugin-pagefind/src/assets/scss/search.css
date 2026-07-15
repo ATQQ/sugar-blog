@@ -136,6 +136,20 @@ div [command-dialog-footer] {
   caret-color: var(--vcp-c-brand);
   margin: 0;
 }
+@supports (caret-animation: manual) {
+  .algolia [command-input] {
+    caret-animation: manual;
+  }
+
+  .algolia [command-input]:focus {
+    animation: algolia-command-input-caret-animation 500ms infinite cubic-bezier(1, 0, 0, 1) alternate;
+  }
+}
+@keyframes algolia-command-input-caret-animation {
+  to {
+    caret-color: transparent;
+  }
+}
 .algolia [command-input]::placeholder {
   color: var(--gray9);
 }
@@ -146,6 +160,7 @@ div [command-dialog-footer] {
   overscroll-behavior: contain;
   transition: 100ms ease;
   transition-property: height;
+  scrollbar-gutter: stable;
 }
 .algolia .detail-list [command-item] {
   min-height: 56px;
@@ -165,32 +180,40 @@ div [command-dialog-footer] {
   position: relative;
   content-visibility: auto;
   cursor: pointer;
-  height: 56px;
+  height: auto;
+  min-height: 56px;
+  max-height: 56px;
   font-size: 14px;
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 0px 16px;
+  padding: 0 16px;
   color: var(--gray12);
   user-select: none;
-  will-change: background, color;
-  transition: all 150ms ease;
-  transition-property: none;
+  transition: 150ms ease;
+  transition-property: padding, height, min-height, max-height, background-color, border-color;
+  interpolate-size: allow-keywords;
   border-radius: 4px;
-  margin-top: 4px;
-  background-color: var(--lowContrast);
+  margin-top: 6px;
+  border: solid 2px var(--vp-c-divider);
 }
 .algolia [command-item]:first-child {
-  margin-top: 0px;
+  margin-top: 0;
 }
 .algolia [command-item][aria-selected="true"],
-.algolia [command-item]:hover {
-  background: var(--vcp-c-brand);
-  color: #fff;
+.algolia [command-item]:hover,
+.algolia [command-item]:focus-visible {
+  border-color: var(--vp-c-brand-1);
 }
-.algolia [command-item][aria-selected="true"] svg,
-.algolia [command-item]:hover svg {
-  color: #fff;
+.algolia [command-item][aria-selected="true"] .headings,
+.algolia [command-item]:hover .headings,
+.algolia [command-item]:focus-visible .headings {
+  color: var(--vp-c-brand-1);
+}
+.algolia [command-item][aria-selected="true"] .des,
+.algolia [command-item]:hover .des,
+.algolia [command-item]:focus-visible .des {
+  opacity: 1;
 }
 .algolia [command-item][aria-selected="true"] [command-linear-shortcuts],
 .algolia [command-item]:hover [command-linear-shortcuts] {
@@ -204,8 +227,7 @@ div [command-dialog-footer] {
   font-size: 13px;
   color: var(--gray11);
 }
-.algolia [command-item]:active {
-  transition-property: background;
+.algolia [command-item]:is(:hover, :focus-visible):active {
   background: var(--gray4);
 }
 .algolia [command-item] svg {
@@ -213,7 +235,10 @@ div [command-dialog-footer] {
   height: 16px;
   color: var(--gray10);
 }
-.algolia [command-empty=""] {
+.algolia [command-list][data-empty-text]:empty::after,
+.algolia [command-list-sizer][data-empty-text]:empty::after,
+.algolia [command-empty=''] {
+  content: attr(data-empty-text);
   font-size: 14px;
   display: flex;
   align-items: center;
@@ -221,15 +246,16 @@ div [command-dialog-footer] {
   height: 64px;
   white-space: pre-wrap;
   color: var(--gray11);
+  padding-bottom: 12px;
 }
 .algolia [command-dialog-mask] {
-  background-color: rgba(75, 75, 75, 0.8);
+  background-color: var(--vp-backdrop-bg-color);
 }
 .algolia [command-dialog-header] {
   padding: 12px;
 }
 .algolia [command-dialog-body] {
-  padding: 0 12px 12px;
+  padding: 0 12px;
 }
 .algolia [command-dialog-footer] {
   align-items: center;
@@ -259,6 +285,9 @@ div [command-dialog-footer] {
   z-index: 10;
   width: 100%;
 }
+.algolia [command-group-items] {
+  padding-bottom: 12px;
+}
 
 .algolia .command-palette-commands {
   color: var(--docsearch-muted-color);
@@ -274,17 +303,26 @@ div [command-dialog-footer] {
 
   div [command-dialog-wrapper] {
     margin: 0;
+    /* 故意写重复的属性，因为 100dvh 效果比 100vh 更好，但兼容性不高。这样写可以使新老浏览器都能获得更好的体验。 */
+    height: 100vh;
     height: 100dvh;
     border-radius: 0;
+    display: flex;
+    flex-direction: column;
   }
   .algolia [command-dialog-footer] {
     justify-content: center;
+    border-radius: 0;
   }
   .algolia [command-input] {
     padding: 6px 4px;
+    font-size: 14px;
   }
   .algolia [command-list] {
     max-height: calc(100vh - 120px);
+  }
+  .algolia [command-dialog-body] {
+    height: 100%;
   }
 }
 .algolia .command-palette-commands li {
@@ -326,6 +364,9 @@ div[command-group] {
   display: block !important;
 }
 div[command-item] {
+  all: unset;
+  width: 100%;
+  box-sizing: border-box;
   display: flex !important;
 }
 .search-dialog div[command-item] > div.link {
@@ -338,10 +379,7 @@ div[command-item] {
 
 .search-dialog div[command-item] .title i.prefix {
   color: var(--vp-c-brand-1);
-}
-.search-dialog div[command-item]:hover .title i.prefix,
-.search-dialog div[command-item][aria-selected="true"] .title i.prefix {
-  color: #fff;
+  opacity: 0.5;
 }
 
 .search-dialog div[command-item] .des {
@@ -349,12 +387,15 @@ div[command-item] {
   overflow: hidden;
   word-break: keep-all;
   white-space: nowrap;
+  transition: margin 150ms, opacity 150ms;
+  opacity: 0.5;
 }
 .search-dialog div[command-item] .headings {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   display: inline-block;
+  transition: color 150ms;
 }
 
 .search-dialog div[command-item] .date {
@@ -365,24 +406,26 @@ div[command-item] {
   background: none;
   color: var(--vp-c-brand-1);
 }
-.search-dialog div[command-item][aria-selected="true"] mark,
-.search-dialog div[command-item]:hover mark {
-  color: inherit;
-  text-decoration: underline;
+
+label.search-icon {
+  margin-left: 12px;
 }
 
-.algolia [command-dialog-mask],
-.algolia [command-dialog-wrapper] {
-  transition: all 250ms allow-discrete;
+.algolia.command-dialog-enter-active [command-dialog-mask],
+.algolia.command-dialog-enter-active [command-dialog-wrapper],
+.algolia.command-dialog-leave-active [command-dialog-mask],
+.algolia.command-dialog-leave-active [command-dialog-wrapper] {
+  transition: 250ms;
   transition-property: translate, opacity;
 }
 
-@starting-style {
-  .algolia [command-dialog-mask],
-  .algolia [command-dialog-wrapper] {
-    opacity: 0;
-  }
-  .algolia [command-dialog-wrapper] {
-    translate: 0 -1rem;
-  }
+.algolia.command-dialog-enter-from [command-dialog-mask],
+.algolia.command-dialog-leave-to [command-dialog-mask] {
+  opacity: 0;
+}
+
+.algolia.command-dialog-enter-from [command-dialog-wrapper],
+.algolia.command-dialog-leave-to [command-dialog-wrapper] {
+  opacity: 0;
+  translate: 0 -1rem;
 }

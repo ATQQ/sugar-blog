@@ -208,8 +208,11 @@ function closeModal() {
 }
 
 trigger.addEventListener('click', openModal)
+// 避免按住搜索框内选中文本拖动出来到遮罩上导致对话框关闭的问题。
+let lastMouseDownTarget: EventTarget | null = null
+mask.addEventListener('mousedown', (e) => { lastMouseDownTarget = e.target })
 mask.addEventListener('click', (e) => {
-  if (e.target === mask)
+  if (e.target === mask && lastMouseDownTarget === mask)
     closeModal()
 })
 backBtn.addEventListener('click', closeModal)
@@ -242,7 +245,7 @@ let selectedIndex = -1
 
 function renderList(results) {
   if (!results.length) {
-    list.innerHTML = `<div command-empty>${currentSearchConfig.emptyText || 'No results found.'}</div>`
+    // list.innerHTML = `<div command-empty>${currentSearchConfig.emptyText || 'No results found.'}</div>`
     return
   }
 
@@ -423,17 +426,20 @@ input.addEventListener('input', handleSearch)
                   <span class="vpi-arrow-left local-search-icon" />
                 </button>
               </div>
+              <label for="search-input" class="search-icon">
+                <span aria-hidden="true" class="vpi-search search-icon local-search-icon" />
+              </label>
               <input id="search-input" command-input :placeholder="finalSearchConfig?.placeholder || 'Search Docs'">
               <div class="search-actions">
                 <button
                   id="search-toggle-detail" class="toggle-layout-button"
-                  type="button" title="Display detailed list"
+                  type="button" :title="finalSearchConfig?.displayDetailedList || 'Display detailed list'"
                 >
                   <span class="vpi-layout-list local-search-icon" />
                 </button>
                 <button
                   id="search-clear-btn" class="clear-button" type="reset"
-                  title="Reset search" disabled
+                  :title="finalSearchConfig?.resetSearch || 'Reset search'" disabled
                 >
                   <span class="vpi-delete local-search-icon" />
                 </button>
@@ -442,11 +448,7 @@ input.addEventListener('input', handleSearch)
           </div>
           <div command-dialog-body>
             <div class="search-dialog">
-              <div id="search-list" command-list>
-                <div command-empty>
-                  {{ finalSearchConfig?.emptyText || 'No results found.' }}
-                </div>
-              </div>
+              <div id="search-list" command-list :data-empty-text="finalSearchConfig?.emptyText || 'No results found.'" />
             </div>
           </div>
           <div command-dialog-footer>
@@ -511,32 +513,23 @@ input.addEventListener('input', handleSearch)
             </div>
             <ul class="command-palette-commands">
               <li>
-                <kbd class="command-palette-commands-key"><svg width="15" height="15" aria-label="Enter key" role="img">
-                  <g
-                    fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                    stroke-width="1.2"
-                  >
-                    <path d="M12 3.53088v3c0 1-1 2-2 2H4M7 11.53088l-3-3 3-3" />
+                <kbd class="command-palette-commands-key"><svg width="12" height="12" viewBox="0 0 24 24" aria-label="Enter key" role="img">
+                  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                    <path d="M20 4v7a4 4 0 0 1-4 4H4" />
+                    <path d="m9 10l-5 5l5 5" />
                   </g>
                 </svg></kbd><span class="command-palette-Label">{{ finalSearchConfig?.toSelect || 'to select' }}</span>
               </li>
               <li>
-                <kbd class="command-palette-commands-key"><svg width="15" height="15" aria-label="Arrow down" role="img">
-                  <g
-                    fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                    stroke-width="1.2"
-                  >
-                    <path d="M7.5 3.5v8M10.5 8.5l-3 3-3-3" />
+                <kbd class="command-palette-commands-key"><svg width="13" height="13" viewBox="0 0 24 24" aria-label="Arrow up" role="img">
+                  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                    <path d="m5 12 7-7 7 7" />
+                    <path d="M12 19V5" />
                   </g>
-                </svg></kbd><kbd class="command-palette-commands-key"><svg
-                  width="15" height="15" aria-label="Arrow up"
-                  role="img"
-                >
-                  <g
-                    fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                    stroke-width="1.2"
-                  >
-                    <path d="M7.5 11.5v-8M10.5 6.5l-3-3-3 3" />
+                </svg></kbd><kbd class="command-palette-commands-key"><svg width="13" height="13" viewBox="0 0 24 24" aria-label="Arrow down" role="img">
+                  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                    <path d="M12 5v14" />
+                    <path d="m19 12-7 7-7-7" />
                   </g>
                 </svg></kbd><span class="command-palette-Label">{{ finalSearchConfig?.toNavigate || 'to navigate' }}</span>
               </li>
@@ -657,6 +650,7 @@ input.addEventListener('input', handleSearch)
 
 .search-actions button {
   padding: 8px;
+  transition: color 0.2s, opacity 0.2s;
 }
 
 .local-search-icon {
@@ -666,6 +660,7 @@ input.addEventListener('input', handleSearch)
 
 .search-actions button.clear-button:disabled {
   opacity: 0.37;
+  cursor: not-allowed;
 }
 
 .search-actions button:not([disabled]):hover,
@@ -677,9 +672,18 @@ input.addEventListener('input', handleSearch)
   display: none;
 }
 
+label.search-icon {
+  margin-left: 12px;
+  cursor: text;
+}
+
 @media screen and (max-width: 560px) {
   .search-actions.before {
     display: flex;
+  }
+
+  label.search-icon {
+    display: none;
   }
 }
 </style>

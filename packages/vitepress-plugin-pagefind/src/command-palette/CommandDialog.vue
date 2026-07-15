@@ -38,7 +38,7 @@ onBeforeUnmount(resetStore)
 
 <template>
   <Teleport ref="dialogRef" to="body">
-    <Transition name="command-dialog" appear>
+    <Transition name="command-dialog" appear :duration="250">
       <Command v-if="visible" :theme="theme">
         <div command-dialog>
           <div command-dialog-mask>

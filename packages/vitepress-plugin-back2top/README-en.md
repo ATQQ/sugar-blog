@@ -55,6 +55,8 @@ backToTop:
 | --- | --- | --- | --- |
 | top | Distance from top to show the button | `number` | `450` |
 | icon | Custom SVG icon code | `string` | - |
+| marginBottom | Distance between the button and the bottom bounding of the screen | `number` | `80` |
+| iconSize | Icon size | `number` | `20` |
 
 ## Type Definitions
 
@@ -71,5 +73,17 @@ export interface BackToTopPluginOptions {
    * @recommend https://iconbuddy.app/search?q=fire
    */
   icon?: string
+
+  /**
+   * Distance between the button and the bottom bounding of the screen
+   * @default 80
+   */
+  marginBottom?: number
+
+  /**
+   * Icon size
+   * @default 20
+   */
+  iconSize?: number
 }
 ```

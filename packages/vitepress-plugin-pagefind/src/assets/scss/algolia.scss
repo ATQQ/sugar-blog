@@ -43,9 +43,9 @@
     padding: 0px 16px;
     color: var(--gray12);
     user-select: none;
-    will-change: background, color;
-    transition: all 150ms ease;
-    transition-property: none;
+    transition: 150ms ease;
+    transition-property: padding;
+    interpolate-size: allow-keywords;
     border-radius: 4px;
     margin-top: 4px;
     background-color: var(--lowContrast);
@@ -93,7 +93,10 @@
     }
   }
 
+  [command-list][data-empty-text]:empty::after,
+  [command-list-sizer][data-empty-text]:empty::after,
   [command-empty=''] {
+    content: attr(data-empty-text);
     font-size: 14px;
     display: flex;
     align-items: center;
@@ -191,41 +194,25 @@
 }
 
 // transition for command-dialog
-// .command-dialog-enter-active,
-// .command-dialog-leave-active {
-//   transition: opacity 0.2s ease-in-out;
-// }
+.algolia {
+  &.command-dialog-enter-active,
+  &.command-dialog-leave-active {
+    [command-dialog-mask],
+    [command-dialog-wrapper] {
+      transition: 250ms;
+      transition-property: translate, opacity;
+    }
+  }
 
-// .command-dialog-enter-from,
-// .command-dialog-leave-to {
-//   opacity: 0;
-// }
+  &.command-dialog-enter-from,
+  &.command-dialog-leave-to {
+    [command-dialog-mask] {
+      opacity: 0;
+    }
 
-// .command-dialog-enter-active {
-//   transition-duration: 0.5s;
-// }
-
-// // transition for command-dialog-wrapper
-// .command-dialog-enter-active [command-dialog-wrapper] {
-//   // transition-delay: 0.2s;
-// }
-
-// .command-dialog-enter-from [command-dialog-wrapper],
-// .command-dialog-leave-to [command-dialog-wrapper] {
-//   // opacity: 0;
-//   transform: translateY(10px) scale(0.95);
-// }
-
-// .command-dialog-enter-active [command-dialog-wrapper] {
-//   transition: transform ease-out 0.3s;
-// }
-
-// .command-dialog-enter-to [command-dialog-wrapper],
-// .command-dialog-leave-from [command-dialog-wrapper] {
-//   opacity: 1;
-//   transform: translateY(0) scale(1);
-// }
-
-// .command-dialog-leave-active [command-dialog-wrapper] {
-//   transition: transfrom ease-in 0.2s;
-// }
+    [command-dialog-wrapper] {
+      opacity: 0;
+      translate: 0 -1rem;
+    }
+  }
+}
