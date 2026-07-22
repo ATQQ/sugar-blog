@@ -89,6 +89,17 @@ export interface SearchConfig {
   emptyText?: string
   /**
    * @default
+   * 'Loading...'
+   */
+  loadingText?: string
+  /**
+   * When there are old search results and a new query is typed,
+   * overlay a translucent loading mask on the existing results.
+   * @default true
+   */
+  showLoadingMask?: boolean
+  /**
+   * @default
    * 'Total: {{searchResult}} search results.'
    */
   heading?: string

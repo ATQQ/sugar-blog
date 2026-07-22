@@ -14,6 +14,8 @@ import { formatShowDate } from './utils'
 
 // 搜索结果
 const searchResult = ref<{ route: string; meta: Record<string, any> }[]>([])
+// 是否正在搜索中
+const isSearching = ref(false)
 // 配置获取
 const searchConfig: SearchConfig = _searchConfig
 
@@ -31,6 +33,9 @@ const ignorePublish = computed(() => finalSearchConfig.value?.ignorePublish ?? f
 
 // 展示日期信息
 const showDateInfo = computed(() => finalSearchConfig.value?.showDate ?? false)
+
+// 搜索中是否在已有结果上展示加载蒙层
+const showLoadingMask = computed(() => finalSearchConfig.value?.showLoadingMask ?? true)
 
 const formatShowDateFn = computed(() => typeof finalSearchConfig.value.showDate === 'function' ? finalSearchConfig.value.showDate : formatShowDate)
 
@@ -126,10 +131,20 @@ const searchDelayTime = computed(() => finalSearchConfig.value?.delay ?? 300)
 watch(
   () => searchWords.value,
   async () => {
+    // 关键词为空：清空结果并结束 loading
+    if (!searchWords.value) {
+      searchResult.value = []
+      isSearching.value = false
+      return
+    }
+    // 关键词非空：立即进入 loading 状态
+    isSearching.value = true
+
     // dev-server兜底
     // @ts-expect-error
     if (!window?.__pagefind__?.search) {
       inlineSearch()
+      isSearching.value = false
       return
     }
 
@@ -139,43 +154,50 @@ watch(
         ? finalSearchConfig.value.customSearchQuery(searchWords.value)
         // 判断有中文，默认启用优化
         : (chineseRegex.test(searchWords.value) ? chineseSearchOptimize(searchWords.value) : searchWords.value)
-    // @ts-expect-error
-    await window?.__pagefind__
-      ?.debouncedSearch?.(searchText, {}, searchDelayTime.value)
-      .then(async (pagefindSearchResult: any) => {
-        if (pagefindSearchResult === null) {
-          return
-        }
-        // pagefind 搜索结果
-        const pagefindResults = await Promise.all(
-          pagefindSearchResult.results.map((v: any) => v.data())
-        )
-        // 格式化搜索结果
-        const formattedResults = pagefindResults
-          .map((r) => {
-            const results = formatPagefindResult(r, finalSearchConfig.value.pageResultCount || 1)
-            return results.map((result) => {
-              // base 兼容
-              result.route = result.route.startsWith(site.value.base)
-                ? result.route
-                : withBase(result.route)
-              return result
+    try {
+      // @ts-expect-error
+      await window?.__pagefind__
+        ?.debouncedSearch?.(searchText, {}, searchDelayTime.value)
+        .then(async (pagefindSearchResult: any) => {
+          if (pagefindSearchResult === null) {
+            // 该次搜索被后续输入取消，保持 loading 状态
+            return
+          }
+          // pagefind 搜索结果
+          const pagefindResults = await Promise.all(
+            pagefindSearchResult.results.map((v: any) => v.data())
+          )
+          // 格式化搜索结果
+          const formattedResults = pagefindResults
+            .map((r) => {
+              const results = formatPagefindResult(r, finalSearchConfig.value.pageResultCount || 1)
+              return results.map((result) => {
+                // base 兼容
+                result.route = result.route.startsWith(site.value.base)
+                  ? result.route
+                  : withBase(result.route)
+                return result
+              })
             })
-          })
-          .flat()
-          // 过滤掉未发布的
-          .filter((v) => {
-            return ignorePublish.value || v.meta.publish !== false
-          })
+            .flat()
+            // 过滤掉未发布的
+            .filter((v) => {
+              return ignorePublish.value || v.meta.publish !== false
+            })
 
-        if (finalSearchConfig.value.sort) {
-          formattedResults.sort(finalSearchConfig.value.sort)
-        }
-        // 调用自定义过滤
-        searchResult.value = formattedResults.filter(
-          finalSearchConfig.value.filter ?? (() => true)
-        )
-      })
+          if (finalSearchConfig.value.sort) {
+            formattedResults.sort(finalSearchConfig.value.sort)
+          }
+          // 调用自定义过滤
+          searchResult.value = formattedResults.filter(
+            finalSearchConfig.value.filter ?? (() => true)
+          )
+          isSearching.value = false
+        })
+    }
+    catch {
+      isSearching.value = false
+    }
 
     nextTick(() => {
       // hack 原组件实现
@@ -251,6 +273,8 @@ watch(
 const searchInput = ref<HTMLInputElement>()
 function handleClearSearch() {
   searchWords.value = ''
+  searchResult.value = []
+  isSearching.value = false
   nextTick(() => {
     if (!searchInput.value)
       return
@@ -314,25 +338,35 @@ function handleToggleDetail() {
         <template #body>
           <div class="search-dialog" :class="{ 'detail-list': showDetail }">
             <Command.List>
-              <Command.Empty v-if="!searchResult.length">
-                {{ finalSearchConfig?.emptyText || 'No results found.' }}
-              </Command.Empty>
-              <Command.Group v-else :heading="headingText">
-                <Command.Item
-                  v-for="item in showSearchResult" :key="item.route" :data-value="item.route"
-                  @select="handleSelect"
-                >
-                  <div class="link">
-                    <div class="title">
-                      <span class="headings"><i v-if="item.meta.title" class="prefix"># </i>{{ item.meta.title }}</span>
-                      <span v-if="showDateInfo && item.meta.date" class="date">
-                        <!-- @vue-ignore -->
-                        {{ formatShowDateFn(item.meta.date, lang) }}</span>
+              <template v-if="!searchResult.length">
+                <div v-if="isSearching" class="search-loading">
+                  {{ finalSearchConfig?.loadingText || 'Loading...' }}
+                </div>
+                <Command.Empty v-else>
+                  {{ finalSearchConfig?.emptyText || 'No results found.' }}
+                </Command.Empty>
+              </template>
+              <div v-else class="search-results-wrapper">
+                <Command.Group :heading="headingText">
+                  <Command.Item
+                    v-for="item in showSearchResult" :key="item.route" :data-value="item.route"
+                    @select="handleSelect"
+                  >
+                    <div class="link">
+                      <div class="title">
+                        <span class="headings"><i v-if="item.meta.title" class="prefix"># </i>{{ item.meta.title }}</span>
+                        <span v-if="showDateInfo && item.meta.date" class="date">
+                          <!-- @vue-ignore -->
+                          {{ formatShowDateFn(item.meta.date, lang) }}</span>
+                      </div>
+                      <div class="des" v-html="item.meta.description" />
                     </div>
-                    <div class="des" v-html="item.meta.description" />
-                  </div>
-                </Command.Item>
-              </Command.Group>
+                  </Command.Item>
+                </Command.Group>
+                <div v-if="isSearching && showLoadingMask" class="search-results-loading-mask">
+                  <span>{{ finalSearchConfig?.loadingText || 'Loading...' }}</span>
+                </div>
+              </div>
             </Command.List>
           </div>
         </template>
@@ -509,6 +543,34 @@ function handleToggleDetail() {
 
 .search-actions.before {
   display: none;
+}
+
+.search-loading {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
+  white-space: pre-wrap;
+  color: var(--vp-c-text-2);
+}
+
+.search-results-wrapper {
+  position: relative;
+}
+
+.search-results-loading-mask {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--vp-c-bg);
+  opacity: 0.6;
+  color: var(--vp-c-text-2);
+  font-size: 14px;
+  z-index: 1;
+  pointer-events: auto;
 }
 
 @media screen and (max-width: 560px) {

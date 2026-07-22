@@ -355,6 +355,16 @@ interface SearchConfig {
     emptyText?: string
     /**
      * @default
+     * 'Loading...'
+     */
+    loadingText?: string
+    /**
+     * 在已有搜索结果的情况下，输入新的搜索关键词时是否在结果列表上覆盖一层半透明的加载蒙层
+     * @default true
+     */
+    showLoadingMask?: boolean
+    /**
+     * @default
      * 'Total: {{searchResult}} search results.'
      */
     heading?: string

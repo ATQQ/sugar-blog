@@ -240,6 +240,27 @@ clearBtn.addEventListener('click', () => {
 
 let selectedIndex = -1
 
+function renderLoading() {
+  list.innerHTML = `<div command-loading>${currentSearchConfig.loadingText || 'Loading...'}</div>`
+  selectedIndex = -1
+}
+
+function showResultOverlay() {
+  const wrapper = list.querySelector('[command-results-wrapper]')
+  if (!wrapper || wrapper.querySelector('[command-overlay]'))
+    return
+  const overlay = document.createElement('div')
+  overlay.setAttribute('command-overlay', '')
+  overlay.innerHTML = `<span>${currentSearchConfig.loadingText || 'Loading...'}</span>`
+  wrapper.appendChild(overlay)
+}
+
+function hideResultOverlay() {
+  const overlay = list.querySelector('[command-overlay]')
+  if (overlay)
+    overlay.remove()
+}
+
 function renderList(results) {
   if (!results.length) {
     list.innerHTML = `<div command-empty>${currentSearchConfig.emptyText || 'No results found.'}</div>`
@@ -250,19 +271,21 @@ function renderList(results) {
     ? currentSearchConfig.heading.replace(/\{\{searchResult\}\}/, results.length)
     : `Total: ${results.length} search results.`
   const html = `
-      <div command-group>
-        <div command-group-heading>${heading}</div>
-        ${results.map((item, index) => `
-          <div command-item data-index="${index}" role="option" aria-selected="false">
-            <div class="link">
-              <div class="title">
-                <span class="headings">${item.meta.title ? `<i class="prefix"># </i>${item.meta.title}` : ''}</span>
-                ${item.meta.date ? `<span class="date">${formatShowDate(item.meta.date, currentLang)}</span>` : ''}
+      <div command-results-wrapper>
+        <div command-group>
+          <div command-group-heading>${heading}</div>
+          ${results.map((item, index) => `
+            <div command-item data-index="${index}" role="option" aria-selected="false">
+              <div class="link">
+                <div class="title">
+                  <span class="headings">${item.meta.title ? `<i class="prefix"># </i>${item.meta.title}` : ''}</span>
+                  ${item.meta.date ? `<span class="date">${formatShowDate(item.meta.date, currentLang)}</span>` : ''}
+                </div>
+                <div class="des">${item.meta.description || ''}</div>
               </div>
-              <div class="des">${item.meta.description || ''}</div>
             </div>
-          </div>
-        `).join('')}
+          `).join('')}
+        </div>
       </div>
     `
   list.innerHTML = html
@@ -354,14 +377,7 @@ function chineseSearchOptimize(input) {
     .trim()
 }
 
-const handleSearch = debounce(async (e) => {
-  const val = e.target.value
-  clearBtn.disabled = !val
-  if (!val) {
-    renderList([])
-    return
-  }
-
+const debouncedRealSearch = debounce(async (val) => {
   if (!window.__pagefind__) {
     await loadPagefind()
   }
@@ -393,7 +409,27 @@ const handleSearch = debounce(async (e) => {
       renderList(filtered)
     }
   }
+  hideResultOverlay()
 }, currentSearchConfig.delay || 300)
+
+function handleSearch(e) {
+  const val = e.target.value
+  clearBtn.disabled = !val
+  if (!val) {
+    renderList([])
+    return
+  }
+  const hasResults = !!list.querySelector('[command-item]')
+  const enableMask = currentSearchConfig.showLoadingMask ?? true
+  if (hasResults) {
+    if (enableMask)
+      showResultOverlay()
+  }
+  else {
+    renderLoading()
+  }
+  debouncedRealSearch(val)
+}
 
 input.addEventListener('input', handleSearch)
 </script>

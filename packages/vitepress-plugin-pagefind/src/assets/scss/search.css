@@ -222,6 +222,31 @@ div [command-dialog-footer] {
   white-space: pre-wrap;
   color: var(--gray11);
 }
+.algolia [command-loading=""] {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
+  white-space: pre-wrap;
+  color: var(--gray11);
+}
+.algolia [command-results-wrapper] {
+  position: relative;
+}
+.algolia [command-overlay] {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--vp-c-bg);
+  opacity: 0.6;
+  color: var(--gray11);
+  font-size: 14px;
+  z-index: 1;
+  pointer-events: auto;
+}
 .algolia [command-dialog-mask] {
   background-color: rgba(75, 75, 75, 0.8);
 }
