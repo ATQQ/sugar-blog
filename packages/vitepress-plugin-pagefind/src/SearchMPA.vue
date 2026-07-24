@@ -241,22 +241,23 @@ clearBtn.addEventListener('click', () => {
 let selectedIndex = -1
 
 function renderLoading() {
-  list.innerHTML = `<div command-loading>${currentSearchConfig.loadingText || 'Loading...'}</div>`
+  list.innerHTML = `<div command-loading><span command-loading-spinner></span>${currentSearchConfig.loadingText || 'Searching...'}</div>`
   selectedIndex = -1
 }
 
 function showResultOverlay() {
-  const wrapper = list.querySelector('[command-results-wrapper]')
-  if (!wrapper || wrapper.querySelector('[command-overlay]'))
+  const container = list.parentElement
+  if (!container || container.querySelector('[command-overlay]'))
     return
   const overlay = document.createElement('div')
   overlay.setAttribute('command-overlay', '')
-  overlay.innerHTML = `<span>${currentSearchConfig.loadingText || 'Loading...'}</span>`
-  wrapper.appendChild(overlay)
+  overlay.innerHTML = `<span command-overlay-text><span command-overlay-spinner></span>${currentSearchConfig.loadingText || 'Searching...'}</span>`
+  container.appendChild(overlay)
 }
 
 function hideResultOverlay() {
-  const overlay = list.querySelector('[command-overlay]')
+  const container = list.parentElement
+  const overlay = container && container.querySelector('[command-overlay]')
   if (overlay)
     overlay.remove()
 }
@@ -271,21 +272,19 @@ function renderList(results) {
     ? currentSearchConfig.heading.replace(/\{\{searchResult\}\}/, results.length)
     : `Total: ${results.length} search results.`
   const html = `
-      <div command-results-wrapper>
-        <div command-group>
-          <div command-group-heading>${heading}</div>
-          ${results.map((item, index) => `
-            <div command-item data-index="${index}" role="option" aria-selected="false">
-              <div class="link">
-                <div class="title">
-                  <span class="headings">${item.meta.title ? `<i class="prefix"># </i>${item.meta.title}` : ''}</span>
-                  ${item.meta.date ? `<span class="date">${formatShowDate(item.meta.date, currentLang)}</span>` : ''}
-                </div>
-                <div class="des">${item.meta.description || ''}</div>
+      <div command-group>
+        <div command-group-heading>${heading}</div>
+        ${results.map((item, index) => `
+          <div command-item data-index="${index}" role="option" aria-selected="false">
+            <div class="link">
+              <div class="title">
+                <span class="headings">${item.meta.title ? `<i class="prefix"># </i>${item.meta.title}` : ''}</span>
+                ${item.meta.date ? `<span class="date">${formatShowDate(item.meta.date, currentLang)}</span>` : ''}
               </div>
+              <div class="des">${item.meta.description || ''}</div>
             </div>
-          `).join('')}
-        </div>
+          </div>
+        `).join('')}
       </div>
     `
   list.innerHTML = html

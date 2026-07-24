@@ -355,7 +355,7 @@ interface SearchConfig {
     emptyText?: string
     /**
      * @default
-     * 'Loading...'
+     * 'Searching...'
      */
     loadingText?: string
     /**

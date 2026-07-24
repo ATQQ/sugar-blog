@@ -227,11 +227,22 @@ div [command-dialog-footer] {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
   height: 64px;
   white-space: pre-wrap;
   color: var(--gray11);
 }
-.algolia [command-results-wrapper] {
+.algolia [command-loading-spinner],
+.algolia [command-overlay] [command-overlay-spinner] {
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--vp-c-divider, var(--gray6));
+  border-top-color: var(--vp-c-brand-1, var(--vp-c-brand, #3eaf7c));
+  animation: algolia-mask-spin 0.8s linear infinite;
+}
+.algolia .search-dialog {
   position: relative;
 }
 .algolia [command-overlay] {
@@ -240,12 +251,31 @@ div [command-dialog-footer] {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--vp-c-bg);
-  opacity: 0.6;
-  color: var(--gray11);
-  font-size: 14px;
-  z-index: 1;
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in srgb, var(--vp-c-bg) 92%, transparent) 0%,
+    color-mix(in srgb, var(--vp-c-bg) 78%, transparent) 32%,
+    color-mix(in srgb, var(--vp-c-bg) 45%, transparent) 65%,
+    color-mix(in srgb, var(--vp-c-bg) 20%, transparent) 100%
+  );
+  z-index: 2;
   pointer-events: auto;
+  animation: algolia-mask-fade-in 0.2s ease-out;
+}
+.algolia [command-overlay] [command-overlay-text] {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--vp-c-text-1, var(--gray12));
+  font-size: 14px;
+  font-weight: 500;
+}
+@keyframes algolia-mask-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes algolia-mask-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 .algolia [command-dialog-mask] {
   background-color: rgba(75, 75, 75, 0.8);

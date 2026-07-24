@@ -340,34 +340,39 @@ function handleToggleDetail() {
             <Command.List>
               <template v-if="!searchResult.length">
                 <div v-if="isSearching" class="search-loading">
-                  {{ finalSearchConfig?.loadingText || 'Loading...' }}
+                  <span class="search-loading-spinner" />
+                  {{ finalSearchConfig?.loadingText || 'Searching...' }}
                 </div>
                 <Command.Empty v-else>
                   {{ finalSearchConfig?.emptyText || 'No results found.' }}
                 </Command.Empty>
               </template>
-              <div v-else class="search-results-wrapper">
-                <Command.Group :heading="headingText">
-                  <Command.Item
-                    v-for="item in showSearchResult" :key="item.route" :data-value="item.route"
-                    @select="handleSelect"
-                  >
-                    <div class="link">
-                      <div class="title">
-                        <span class="headings"><i v-if="item.meta.title" class="prefix"># </i>{{ item.meta.title }}</span>
-                        <span v-if="showDateInfo && item.meta.date" class="date">
-                          <!-- @vue-ignore -->
-                          {{ formatShowDateFn(item.meta.date, lang) }}</span>
-                      </div>
-                      <div class="des" v-html="item.meta.description" />
+              <Command.Group v-else :heading="headingText">
+                <Command.Item
+                  v-for="item in showSearchResult" :key="item.route" :data-value="item.route"
+                  @select="handleSelect"
+                >
+                  <div class="link">
+                    <div class="title">
+                      <span class="headings"><i v-if="item.meta.title" class="prefix"># </i>{{ item.meta.title }}</span>
+                      <span v-if="showDateInfo && item.meta.date" class="date">
+                        <!-- @vue-ignore -->
+                        {{ formatShowDateFn(item.meta.date, lang) }}</span>
                     </div>
-                  </Command.Item>
-                </Command.Group>
-                <div v-if="isSearching && showLoadingMask" class="search-results-loading-mask">
-                  <span>{{ finalSearchConfig?.loadingText || 'Loading...' }}</span>
-                </div>
-              </div>
+                    <div class="des" v-html="item.meta.description" />
+                  </div>
+                </Command.Item>
+              </Command.Group>
             </Command.List>
+            <div
+              v-if="isSearching && showLoadingMask && searchResult.length"
+              class="search-results-loading-mask"
+            >
+              <span class="search-results-loading-mask-text">
+                <span class="search-results-loading-mask-spinner" />
+                {{ finalSearchConfig?.loadingText || 'Searching...' }}
+              </span>
+            </div>
           </div>
         </template>
         <template v-if="searchResult.length" #footer>
@@ -550,12 +555,24 @@ function handleToggleDetail() {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
   height: 64px;
   white-space: pre-wrap;
   color: var(--vp-c-text-2);
 }
 
-.search-results-wrapper {
+.search-loading-spinner,
+.search-results-loading-mask-spinner {
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--vp-c-divider);
+  border-top-color: var(--vp-c-brand-1, var(--vp-c-brand, #3eaf7c));
+  animation: search-mask-spin 0.8s linear infinite;
+}
+
+.search-dialog {
   position: relative;
 }
 
@@ -565,12 +582,34 @@ function handleToggleDetail() {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--vp-c-bg);
-  opacity: 0.6;
-  color: var(--vp-c-text-2);
-  font-size: 14px;
-  z-index: 1;
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in srgb, var(--vp-c-bg) 92%, transparent) 0%,
+    color-mix(in srgb, var(--vp-c-bg) 78%, transparent) 32%,
+    color-mix(in srgb, var(--vp-c-bg) 45%, transparent) 65%,
+    color-mix(in srgb, var(--vp-c-bg) 20%, transparent) 100%
+  );
+  z-index: 2;
   pointer-events: auto;
+  animation: search-mask-fade-in 0.2s ease-out;
+}
+
+.search-results-loading-mask-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--vp-c-text-1);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+@keyframes search-mask-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes search-mask-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @media screen and (max-width: 560px) {

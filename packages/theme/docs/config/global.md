@@ -393,7 +393,7 @@ type SearchConfig =
       placeholder?: string
       emptyText?: string
       /**
-       * @default 'Loading...'
+       * @default 'Searching...'
        */
       loadingText?: string
       /**
@@ -486,7 +486,7 @@ interface SearchConfig {
   emptyText?: string
   /**
    * @default
-   * 'Loading...'
+   * 'Searching...'
    */
   loadingText?: string
   /**
