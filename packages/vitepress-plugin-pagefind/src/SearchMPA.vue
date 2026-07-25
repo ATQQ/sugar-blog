@@ -265,10 +265,13 @@ function hideResultOverlay() {
     overlay.remove()
 }
 
-function renderList(results) {
+function renderList(results, { showEmptyText = false } = {}) {
   if (!results.length) {
-    // 清空旧结果，交给 [command-list][data-empty-text]:empty::after 展示空态文案
-    list.innerHTML = ''
+    // 未输入关键词：空白；有关键词但无结果：展示 emptyText
+    list.innerHTML = showEmptyText
+      ? `<div command-empty>${currentSearchConfig.emptyText || 'No results found.'}</div>`
+      : ''
+    selectedIndex = -1
     return
   }
 
@@ -409,7 +412,7 @@ const debouncedRealSearch = debounce(async (val) => {
         ? formatted.filter(currentSearchConfig.filter)
         : formatted
 
-      renderList(filtered)
+      renderList(filtered, { showEmptyText: true })
     }
   }
   hideResultOverlay()
@@ -484,7 +487,7 @@ input.addEventListener('input', handleSearch)
           </div>
           <div command-dialog-body>
             <div class="search-dialog">
-              <div id="search-list" command-list :data-empty-text="finalSearchConfig?.emptyText || 'No results found.'" />
+              <div id="search-list" command-list />
             </div>
           </div>
           <div command-dialog-footer>

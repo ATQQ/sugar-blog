@@ -348,7 +348,8 @@ function handleToggleDetail() {
                   <span class="search-loading-spinner" />
                   {{ finalSearchConfig?.loadingText || 'Searching...' }}
                 </div>
-                <Command.Empty v-else>
+                <!-- 仅在有搜索词且无结果时展示空态；未输入时保持空白 -->
+                <Command.Empty v-else-if="searchWords">
                   {{ finalSearchConfig?.emptyText || 'No results found.' }}
                 </Command.Empty>
               </template>
