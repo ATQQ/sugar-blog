@@ -243,6 +243,28 @@ clearBtn.addEventListener('click', () => {
 
 let selectedIndex = -1
 
+function renderLoading() {
+  list.innerHTML = `<div command-loading><span command-loading-spinner></span>${currentSearchConfig.loadingText || 'Searching...'}</div>`
+  selectedIndex = -1
+}
+
+function showResultOverlay() {
+  const container = list.parentElement
+  if (!container || container.querySelector('[command-overlay]'))
+    return
+  const overlay = document.createElement('div')
+  overlay.setAttribute('command-overlay', '')
+  overlay.innerHTML = `<span command-overlay-text><span command-overlay-spinner></span>${currentSearchConfig.loadingText || 'Searching...'}</span>`
+  container.appendChild(overlay)
+}
+
+function hideResultOverlay() {
+  const container = list.parentElement
+  const overlay = container && container.querySelector('[command-overlay]')
+  if (overlay)
+    overlay.remove()
+}
+
 function renderList(results) {
   if (!results.length) {
     // list.innerHTML = `<div command-empty>${currentSearchConfig.emptyText || 'No results found.'}</div>`
@@ -357,14 +379,7 @@ function chineseSearchOptimize(input) {
     .trim()
 }
 
-const handleSearch = debounce(async (e) => {
-  const val = e.target.value
-  clearBtn.disabled = !val
-  if (!val) {
-    renderList([])
-    return
-  }
-
+const debouncedRealSearch = debounce(async (val) => {
   if (!window.__pagefind__) {
     await loadPagefind()
   }
@@ -396,7 +411,27 @@ const handleSearch = debounce(async (e) => {
       renderList(filtered)
     }
   }
+  hideResultOverlay()
 }, currentSearchConfig.delay || 300)
+
+function handleSearch(e) {
+  const val = e.target.value
+  clearBtn.disabled = !val
+  if (!val) {
+    renderList([])
+    return
+  }
+  const hasResults = !!list.querySelector('[command-item]')
+  const enableMask = currentSearchConfig.showLoadingMask ?? true
+  if (hasResults) {
+    if (enableMask)
+      showResultOverlay()
+  }
+  else {
+    renderLoading()
+  }
+  debouncedRealSearch(val)
+}
 
 input.addEventListener('input', handleSearch)
 </script>
