@@ -1,4 +1,4 @@
-import { computed, defineComponent, h } from 'vue'
+import { defineComponent, h } from 'vue'
 import Root from './CommandRoot.vue'
 import Dialog from './CommandDialog.vue'
 import Group from './CommandGroup.vue'
@@ -10,27 +10,18 @@ import { useCommandState } from './useCommandState'
 const Empty = defineComponent({
   name: 'Command.Empty',
   setup(props, { attrs, slots }) {
-    const { filtered } = useCommandState()
-    const isRender = computed(() => filtered.value.count === 0)
+    // Search.vue 已通过 v-if 与结果列表互斥挂载，这里直接渲染即可。
+    // 不再依赖 filtered.count，避免列表同步滞后时出现空白。
     return () =>
-      isRender.value
-        ? h(
-          'div',
-          {
-            'command-empty': '',
-            'role': 'presentation',
-            ...attrs,
-          },
-          slots,
-        )
-        : h('div', {
-          'command-empty': 'hidden',
+      h(
+        'div',
+        {
+          'command-empty': '',
           'role': 'presentation',
-          'style': {
-            display: 'none',
-          },
           ...attrs,
-        })
+        },
+        slots,
+      )
   },
 })
 

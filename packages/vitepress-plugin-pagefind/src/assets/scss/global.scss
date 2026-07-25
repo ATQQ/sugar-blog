@@ -142,20 +142,6 @@ div [command-dialog-wrapper] {
   }
 }
 
-.algolia [command-dialog-mask],
-.algolia [command-dialog-wrapper] {
-  transition: all 250ms allow-discrete;
-  transition-property: translate, opacity;
-
-  @starting-style {
-    opacity: 0;
-
-    &[command-dialog-wrapper] {
-      translate: 0 -1rem;
-    }
-  }
-}
-
 div [command-dialog-footer] {
   border-top: 1px solid var(--gray6);
   align-items: center;

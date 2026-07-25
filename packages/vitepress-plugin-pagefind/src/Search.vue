@@ -102,13 +102,13 @@ function inlineSearch() {
     searchResult.value = []
     return
   }
-  searchResult.value = [{
+  searchResult.value = Array.from({ length: 1 }, () => ({
     route: '#',
     meta: {
       title: '只在构建后才生效',
       description: '<mark>only support after build</mark>, only support after build'
     }
-  }]
+  }))
 }
 
 const chineseRegex = /[\u4E00-\u9FA5]/g
@@ -207,9 +207,11 @@ watch(
     })
   }
 )
-
-function handleClickMask(e: any) {
-  if (e.target === e.currentTarget) {
+// 避免按住搜索框内选中文本拖动出来到遮罩上导致对话框关闭的问题。
+const lastMouseDownTarget = ref<EventTarget | null>(null)
+const handleMouseDownMask = (e: Event) => lastMouseDownTarget.value = e.target
+function handleClickMask(e: Event) {
+  if (e.target === e.currentTarget && lastMouseDownTarget.value === e.currentTarget) {
     hideSearchModal()
   }
 }
@@ -219,16 +221,16 @@ watch(
     if (newValue) {
       document.body.style.overflow = 'hidden'
       nextTick(() => {
-        document
-          .querySelector('div[command-dialog-mask]')
-          ?.addEventListener('click', handleClickMask)
+        const mask = document.querySelector('div[command-dialog-mask]')
+        mask?.addEventListener('click', handleClickMask)
+        mask?.addEventListener('mousedown', handleMouseDownMask)
       })
     }
     else {
       document.body.style.overflow = ''
-      document
-        .querySelector('div[command-dialog-mask]')
-        ?.removeEventListener('click', handleClickMask)
+      const mask = document.querySelector('div[command-dialog-mask]')
+      mask?.removeEventListener('click', handleClickMask)
+      mask?.removeEventListener('mousedown', handleMouseDownMask)
     }
   }
 )
@@ -292,9 +294,9 @@ function handleToggleDetail() {
 
 <template>
   <div class="blog-search" data-pagefind-ignore="all">
-    <div class="nav-search-btn-wait" @click="searchModal = true">
+    <button class="nav-search-btn-wait" @click="searchModal = true">
       <span>
-        <svg width="14" height="14" viewBox="0 0 20 20">
+        <svg viewBox="0 0 20 20">
           <path
             d="M14.386 14.386l4.0877 4.0877-4.0877-4.0877c-2.9418 2.9419-7.7115 2.9419-10.6533 0-2.9419-2.9418-2.9419-7.7115 0-10.6533 2.9418-2.9419 7.7115-2.9419 10.6533 0 2.9419 2.9418 2.9419 7.7115 0 10.6533z"
             stroke="currentColor" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"
@@ -305,7 +307,7 @@ function handleToggleDetail() {
         finalSearchConfig?.btnPlaceholder || 'Search'
       }}</span>
       <span class="metaKey"> {{ metaKey }} K </span>
-    </div>
+    </button>
     <ClientOnly>
       <Command.Dialog :visible="searchModal" theme="algolia">
         <template #header>
@@ -315,19 +317,22 @@ function handleToggleDetail() {
                 <span class="vpi-arrow-left local-search-icon" />
               </button>
             </div>
+            <label for="search-input" class="search-icon">
+              <span aria-hidden="true" class="vpi-search search-icon local-search-icon" />
+            </label>
             <Command.Input
-              ref="searchInput" v-model:value="searchWords"
+              id="search-input" ref="searchInput" v-model:value="searchWords"
               :placeholder="finalSearchConfig?.placeholder || 'Search Docs'"
             />
             <div class="search-actions">
               <button
                 :class="{ active: showDetail }" class="toggle-layout-button" type="button"
-                title="Display detailed list" @click="handleToggleDetail"
+                :title="finalSearchConfig?.displayDetailedList || 'Display detailed list'" @click="handleToggleDetail"
               >
                 <span class="vpi-layout-list local-search-icon" />
               </button>
               <button
-                :disabled="!searchWords" class="clear-button" type="reset" title="Reset search"
+                :disabled="!searchWords" class="clear-button" type="reset" :title="finalSearchConfig?.resetSearch || 'Reset search'"
                 @click="handleClearSearch"
               >
                 <span class="vpi-delete local-search-icon" />
@@ -343,7 +348,8 @@ function handleToggleDetail() {
                   <span class="search-loading-spinner" />
                   {{ finalSearchConfig?.loadingText || 'Searching...' }}
                 </div>
-                <Command.Empty v-else>
+                <!-- 仅在有搜索词且无结果时展示空态；未输入时保持空白 -->
+                <Command.Empty v-else-if="searchWords">
                   {{ finalSearchConfig?.emptyText || 'No results found.' }}
                 </Command.Empty>
               </template>
@@ -384,32 +390,23 @@ function handleToggleDetail() {
           </div>
           <ul class="command-palette-commands">
             <li>
-              <kbd class="command-palette-commands-key"><svg width="15" height="15" aria-label="Enter key" role="img">
-                <g
-                  fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                  stroke-width="1.2"
-                >
-                  <path d="M12 3.53088v3c0 1-1 2-2 2H4M7 11.53088l-3-3 3-3" />
+              <kbd class="command-palette-commands-key"><svg width="12" height="12" viewBox="0 0 24 24" aria-label="Enter key" role="img">
+                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                  <path d="M20 4v7a4 4 0 0 1-4 4H4" />
+                  <path d="m9 10l-5 5l5 5" />
                 </g>
               </svg></kbd><span class="command-palette-Label">{{ finalSearchConfig?.toSelect || 'to select' }}</span>
             </li>
             <li>
-              <kbd class="command-palette-commands-key"><svg width="15" height="15" aria-label="Arrow down" role="img">
-                <g
-                  fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                  stroke-width="1.2"
-                >
-                  <path d="M7.5 3.5v8M10.5 8.5l-3 3-3-3" />
+              <kbd class="command-palette-commands-key"><svg width="13" height="13" viewBox="0 0 24 24" aria-label="Arrow up" role="img">
+                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                  <path d="m5 12 7-7 7 7" />
+                  <path d="M12 19V5" />
                 </g>
-              </svg></kbd><kbd class="command-palette-commands-key"><svg
-                width="15" height="15" aria-label="Arrow up"
-                role="img"
-              >
-                <g
-                  fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                  stroke-width="1.2"
-                >
-                  <path d="M7.5 11.5v-8M10.5 6.5l-3-3-3 3" />
+              </svg></kbd><kbd class="command-palette-commands-key"><svg width="13" height="13" viewBox="0 0 24 24" aria-label="Arrow down" role="img">
+                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                  <path d="M12 5v14" />
+                  <path d="m19 12-7 7-7-7" />
                 </g>
               </svg></kbd><span class="command-palette-Label">{{ finalSearchConfig?.toNavigate || 'to navigate' }}</span>
             </li>
@@ -446,8 +443,8 @@ function handleToggleDetail() {
   justify-content: center;
   box-sizing: border-box;
   border: 1px solid transparent;
-  border-radius: 6px;
-  transition: .2s border;
+  transition: 0.2s;
+  transition-property: border-color;
   border-radius: 8px;
   padding: 0 10px 0 12px;
   height: 40px;
@@ -472,7 +469,7 @@ function handleToggleDetail() {
 
 .blog-search .nav-search-btn-wait:hover {
   border: 1px solid var(--vp-c-brand-1);
-  border-radius: 6px;
+  border-radius: 8px;
 }
 
 .blog-search .nav-search-btn-wait .search-tip {
@@ -485,12 +482,26 @@ function handleToggleDetail() {
 @media screen and (max-width: 767px) {
   .blog-search>.nav-search-btn-wait {
     background-color: inherit;
+    color: var(--vp-c-text-1);
+    width: 48px;
+    height: 100%;
+    border-radius: 0;
+    transition-property: border-color, color;
+  }
+
+  .blog-search>.nav-search-btn-wait:is(:hover, :active) {
+    color: var(--vp-c-text-2);
+  }
+
+  .blog-search > .nav-search-btn-wait,
+  .blog-search>.nav-search-btn-wait:is(:hover, :active) {
+    border-width: 0;
+    border-radius: 0;
   }
 
   .blog-search .nav-search-btn-wait svg {
     width: 18px;
     height: 18px;
-    color: var(--vp-c-text-1);
   }
 
   .metaKey {
@@ -503,6 +514,7 @@ function handleToggleDetail() {
 
   .blog-search {
     flex: 0;
+    height: 100%;
   }
 }
 
@@ -510,7 +522,7 @@ function handleToggleDetail() {
   display: flex;
   cursor: text;
   align-items: center;
-  border-radius: 4px;
+  border-radius: 5px;
   border: 1px solid var(--vcp-c-brand);
 }
 
@@ -530,6 +542,7 @@ function handleToggleDetail() {
 
 .search-actions button {
   padding: 8px;
+  transition: color 0.2s, opacity 0.2s;
 }
 
 .local-search-icon {
@@ -539,6 +552,7 @@ function handleToggleDetail() {
 
 .search-actions button.clear-button:disabled {
   opacity: 0.37;
+  cursor: not-allowed;
 }
 
 .search-actions button:not([disabled]):hover,
@@ -550,6 +564,10 @@ function handleToggleDetail() {
   display: none;
 }
 
+label.search-icon {
+  margin-left: 12px;
+  cursor: text;
+}
 .search-loading {
   font-size: 14px;
   display: flex;
@@ -615,6 +633,10 @@ function handleToggleDetail() {
 @media screen and (max-width: 560px) {
   .search-actions.before {
     display: flex;
+  }
+
+  label.search-icon {
+    display: none;
   }
 }
 </style>

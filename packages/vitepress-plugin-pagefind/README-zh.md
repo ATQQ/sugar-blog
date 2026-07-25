@@ -79,7 +79,7 @@ export default defineConfig({
 
 ## 高级用法
 
-### 示例1：自定义搜素框文案
+### 示例1：自定义搜索框文案
 ```ts
 pagefindPlugin({
   btnPlaceholder: '搜索',
@@ -389,7 +389,7 @@ interface SearchConfig {
      * 'Search by'
      */
     searchBy?: string
-  
+
     /**
      * 当页面语言改变时自动重新加载页面
      *
@@ -449,7 +449,7 @@ interface SearchConfig {
      * @default 1
      */
     pageResultCount?: number
-  
+
     /**
      * MPA mode 使用 Pagefind 默认 UI 组件
      * @default false

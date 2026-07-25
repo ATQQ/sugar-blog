@@ -55,6 +55,8 @@ backToTop:
 | --- | --- | --- | --- |
 | top | 距离顶部多少距离出现 | `number` | `450` |
 | icon | 自定义 SVG 图标代码 | `string` | - |
+| marginBottom | 指定按钮距离屏幕下边缘的距离 | `number` | `80` |
+| iconSize | 指定图标的大小 | `number` | `20` |
 
 ## 类型定义
 
@@ -71,5 +73,17 @@ export interface BackToTopPluginOptions {
    * @recommend https://iconbuddy.app/search?q=fire
    */
   icon?: string
+
+  /**
+   * 指定按钮距离屏幕下边缘的距离
+   * @default 80
+   */
+  marginBottom?: number
+
+  /**
+   * 指定图标的大小
+   * @default 20
+   */
+  iconSize?: number
 }
 ```
