@@ -200,6 +200,8 @@ function rerenderMenuList(isRerender: boolean) {
       syncFilteredCount()
       selectedFirstItem()
       shouldRerender.value = false
+      // 重置后后续 ResizeObserver 才能再次触发 watch
+      rerenderList.value = false
     })
   }
 }

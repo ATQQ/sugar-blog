@@ -63,7 +63,6 @@ onUnmounted(() => {
         :min-scale="imagePreviewOptions?.minScale ?? 0.2"
         :max-scale="imagePreviewOptions?.maxScale ?? 7"
         :toolbar="imagePreviewOptions?.toolbar ?? ['zoomOut', 'zoomIn', 'reset', 'rotateLeft', 'rotateRight', 'download']"
-        teleported
         :url-list="previewImageInfo.list"
         :initial-index="previewImageInfo.idx"
         @close="show = false"

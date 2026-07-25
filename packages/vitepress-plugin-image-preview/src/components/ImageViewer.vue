@@ -35,10 +35,6 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
-  teleported: {
-    type: Boolean,
-    default: false,
-  },
   toolbar: {
     type: Array as () => string[],
     default: () => ['zoomOut', 'zoomIn', 'reset', 'rotateLeft', 'rotateRight', 'download'],

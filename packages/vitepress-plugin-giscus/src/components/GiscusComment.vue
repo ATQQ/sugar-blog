@@ -148,7 +148,7 @@ html.dark .comment-btn-wrapper {
   pointer-events: auto;
 }
 .comment-btn-wrapper .icon-wrapper-text {
-  border-radius: 9vw;
+  border-radius: 999px;
   padding: 2px 8px;
 }
 .comment-btn-wrapper .icon-wrapper-text span.text {

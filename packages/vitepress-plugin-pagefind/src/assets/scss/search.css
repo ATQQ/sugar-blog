@@ -236,9 +236,18 @@ div [command-dialog-footer] {
   color: var(--gray10);
 }
 .algolia [command-list][data-empty-text]:empty::after,
-.algolia [command-list-sizer][data-empty-text]:empty::after,
-.algolia [command-empty=''] {
+.algolia [command-list-sizer][data-empty-text]:empty::after {
   content: attr(data-empty-text);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
+  white-space: pre-wrap;
+  color: var(--gray11);
+  padding-bottom: 12px;
+}
+.algolia [command-empty=''] {
   font-size: 14px;
   display: flex;
   align-items: center;

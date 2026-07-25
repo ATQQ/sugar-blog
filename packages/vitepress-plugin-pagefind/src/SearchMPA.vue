@@ -267,7 +267,8 @@ function hideResultOverlay() {
 
 function renderList(results) {
   if (!results.length) {
-    // list.innerHTML = `<div command-empty>${currentSearchConfig.emptyText || 'No results found.'}</div>`
+    // 清空旧结果，交给 [command-list][data-empty-text]:empty::after 展示空态文案
+    list.innerHTML = ''
     return
   }
 
