@@ -125,6 +125,12 @@ const labelText = computed(() => {
 const showCommentBtn = computed(() => {
   return commentConfig.value?.showCommentBtn ?? true
 })
+
+const defaultMarginBottom = 40
+const marginBottom = computed(() => `${commentConfig.value?.marginBottom ?? defaultMarginBottom}px`)
+
+const defaultIconSize = 20
+const iconSize = computed(() => commentConfig.value?.iconSize ?? defaultIconSize)
 </script>
 
 <template>
@@ -132,16 +138,16 @@ const showCommentBtn = computed(() => {
     <div ref="artalkContainer" class="artalk-container" />
     <div v-if="showCommentBtn && _docWidth" v-show="!commentIsVisible" class="comment-btn-wrapper" :class="{ hidden: commentIsVisible }">
       <span v-if="!mobileMinify && labelText" class="icon-wrapper-text" @click="handleScrollToComment">
-        <Icon :size="20" :icon="commentConfig?.icon">
-          <svg data-v-f0aeb853="" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 1024 1024"><path fill="currentColor" d="M736 504a56 56 0 1 1 0-112 56 56 0 0 1 0 112m-224 0a56 56 0 1 1 0-112 56 56 0 0 1 0 112m-224 0a56 56 0 1 1 0-112 56 56 0 0 1 0 112M128 128v640h192v160l224-160h352V128z" /></svg>
+        <Icon :size="iconSize" :icon="commentConfig?.icon">
+          <svg data-v-f0aeb853="" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 1024 1024"><path fill="currentColor" d="M736 504a56 56 0 1 1 0-112 56 56 0 0 1 0 112m-224 0a56 56 0 1 1 0-112 56 56 0 0 1 0 112m-224 0a56 56 0 1 1 0-112 56 56 0 0 1 0 112M128 128v640h192v160l224-160h352V128z" /></svg>
         </Icon>
         <span class="text">
           {{ labelText }}
         </span>
       </span>
       <span v-else class="icon-wrapper" @click="handleScrollToComment">
-        <Icon :size="20" :icon="commentConfig?.icon">
-          <svg data-v-f0aeb853="" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 1024 1024"><path fill="currentColor" d="M736 504a56 56 0 1 1 0-112 56 56 0 0 1 0 112m-224 0a56 56 0 1 1 0-112 56 56 0 0 1 0 112M128 128v640h192v160l224-160h352V128z" /></svg>
+        <Icon :size="iconSize" :icon="commentConfig?.icon">
+          <svg data-v-f0aeb853="" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 1024 1024"><path fill="currentColor" d="M736 504a56 56 0 1 1 0-112 56 56 0 0 1 0 112m-224 0a56 56 0 1 1 0-112 56 56 0 0 1 0 112M128 128v640h192v160l224-160h352V128z" /></svg>
         </Icon>
       </span>
     </div>
@@ -156,7 +162,7 @@ const showCommentBtn = computed(() => {
   position: fixed;
   width: v-bind(docWidth);
   text-align: right;
-  bottom: 40px;
+  bottom: v-bind(marginBottom);
   font-size: 16px;
   opacity: 0.6;
   display: flex;
@@ -216,7 +222,7 @@ html.dark .comment-btn-wrapper {
   transition-duration: 0.3s;
 }
 
-@supports (color: rgb(from red r g b / 1)) {
+@supports (backdrop-filter: blur(3px)) {
   .comment-btn-wrapper {
     opacity: 1;
     --box-shadow-color: rgba(0, 0, 0, 0.06);
@@ -226,10 +232,6 @@ html.dark .comment-btn-wrapper {
   }
   .comment-btn-wrapper :is(.icon-wrapper, .icon-wrapper-text) {
     backdrop-filter: blur(3px);
-  }
-  .comment-btn-wrapper :is(.icon-wrapper, .icon-wrapper-text):not(:hover):not(:active) {
-    background-color: rgb(from var(--vp-c-brand-soft) r g b / 0.6);
-    color: rgb(from var(--vp-c-brand-1) r g b / 0.6);
   }
 }
 

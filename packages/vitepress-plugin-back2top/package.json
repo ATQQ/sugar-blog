@@ -1,6 +1,6 @@
 {
   "name": "vitepress-plugin-back2top",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "vitepress plugin back to top",
   "author": "sugar",
   "license": "MIT",

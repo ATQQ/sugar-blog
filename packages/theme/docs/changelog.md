@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.5.25） ⏰ 2026/07/07：命令面板不再依赖 vue-command-palette，改为内置实现，减小安装体积
+description: 最近更新（v0.5.26） ⏰ 2026/07/25：搜索支持加载态文案与蒙层，统一悬浮按钮样式，图片预览图标优化
 author: 粥里有勺糖
 top: 3
 tag: 日志
@@ -26,6 +26,23 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.5.26 (2026/07/25)
+
+### Patch Changes
+
+- feat(pagefind): 支持搜索加载态文案 `loadingText` 与加载蒙层 `showLoadingMask`
+- fix(pagefind): 未输入关键词时不展示无结果文案；修复清空搜索后空态不显示、拖拽选中文本导致弹窗关闭等问题
+- feat(back2top): 新增 `marginBottom`、`iconSize` 配置项，并统一评论/返回顶部按钮样式
+- feat(comment): artalk/giscus 悬浮按钮支持独立配置 `marginBottom`、`iconSize`（默认 `40`/`20`，避免与返回顶部重叠）
+- fix: 修复右下角悬浮按钮在 VP 主题色下背景过深（相对颜色语法覆盖了 brand-soft 原有透明度）
+- refactor(image-preview): 图标替换为 lucide，优化深浅主题下按钮可见性
+- Updated dependencies
+  - vitepress-plugin-artalk@0.1.4
+  - vitepress-plugin-back2top@0.1.3
+  - vitepress-plugin-giscus@0.1.3
+  - vitepress-plugin-image-preview@0.1.5
+  - vitepress-plugin-pagefind@0.4.23
 
 ## 0.5.25 (2026/07/07)
 

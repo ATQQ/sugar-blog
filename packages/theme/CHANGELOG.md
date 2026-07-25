@@ -1,5 +1,22 @@
 # @sugarat/theme
 
+## 0.5.26
+
+### Patch Changes
+
+- feat(pagefind): 支持搜索加载态文案 `loadingText` 与加载蒙层 `showLoadingMask`
+- fix(pagefind): 未输入关键词时不展示无结果文案；修复清空搜索后空态不显示等问题
+- feat(back2top): 新增 `marginBottom`、`iconSize` 配置项，并统一评论/返回顶部按钮样式
+- feat(comment): artalk/giscus 悬浮按钮支持独立配置 `marginBottom`、`iconSize`（默认 `40`/`20`，避免与返回顶部重叠）
+- fix: 修复右下角悬浮按钮在 VP 主题色下背景过深（相对颜色语法覆盖了 brand-soft 原有透明度）
+- refactor(image-preview): 图标替换为 lucide，优化深浅主题下按钮可见性
+- Updated dependencies
+  - vitepress-plugin-artalk@0.1.4
+  - vitepress-plugin-back2top@0.1.3
+  - vitepress-plugin-giscus@0.1.3
+  - vitepress-plugin-image-preview@0.1.5
+  - vitepress-plugin-pagefind@0.4.23
+
 ## 0.5.25
 
 ### Patch Changes

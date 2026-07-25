@@ -1,5 +1,12 @@
 # vitepress-plugin-image-preview
 
+## 0.1.5
+
+### Patch Changes
+
+- refactor: 将图标系列更换为 VitePress 官方图标库 lucide
+- style: 调整深浅主题下按钮背景色与整体样式，提升可见性
+
 ## 0.1.4
 
 ### Patch Changes

@@ -126,7 +126,7 @@ html.dark .back-to-top {
   transition-duration: 0.3s;
 }
 
-@supports (color: rgb(from red r g b / 1)) {
+@supports (backdrop-filter: blur(3px)) {
   .back-to-top {
     opacity: 1;
     --box-shadow-color: rgba(0, 0, 0, 0.06);
@@ -136,10 +136,6 @@ html.dark .back-to-top {
   }
   .back-to-top .icon-wrapper {
     backdrop-filter: blur(3px);
-  }
-  .back-to-top .icon-wrapper:not(:hover):not(:active) {
-    background-color: rgb(from var(--vp-c-brand-soft) r g b / 0.6);
-    color: rgb(from var(--vp-c-brand-1) r g b / 0.6);
   }
 }
 

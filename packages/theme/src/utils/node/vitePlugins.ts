@@ -64,17 +64,27 @@ export function getVitePlugins(cfg: Partial<Theme.BlogConfig> = {}) {
     const commentConfig = cfg.comment
     const isArtalk = (commentConfig as any).type === 'artalk'
     if (isArtalk) {
-      plugins.push(artalkPlugin((commentConfig as any).options))
+      const { mobileMinify, label, icon, marginBottom, iconSize } = commentConfig as any
+      plugins.push(artalkPlugin({
+        ...(commentConfig as any).options,
+        mobileMinify,
+        label,
+        icon,
+        marginBottom,
+        iconSize,
+      }))
     }
     const isGiscus = (commentConfig as any).type === 'giscus' || (commentConfig as any).repo
     if (isGiscus) {
-      const { mobileMinify, label, icon } = commentConfig
+      const { mobileMinify, label, icon, marginBottom, iconSize } = commentConfig as any
       const options = {
         ...(commentConfig as any).options,
         ...commentConfig,
         mobileMinify,
         label,
-        icon
+        icon,
+        marginBottom,
+        iconSize,
       }
       plugins.push(giscusPlugin(options))
     }

@@ -1,5 +1,13 @@
 # vitepress-plugin-giscus
 
+## 0.1.3
+
+### Patch Changes
+
+- style: 使评论按钮与返回顶部按钮样式保持一致
+- feat: 新增悬浮按钮 `marginBottom`、`iconSize` 配置项（默认分别为 `40`、`20`）
+- fix: 修复悬浮按钮背景误用相对颜色语法导致 `--vp-c-brand-soft` 透明度被覆盖、主题色下背景过深的问题
+
 ## 0.1.2
 
 ### Patch Changes

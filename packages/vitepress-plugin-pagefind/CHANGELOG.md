@@ -1,5 +1,14 @@
 # vitepress-plugin-pagefind
 
+## 0.4.23
+
+### Patch Changes
+
+- feat: 新增搜索加载态配置 `loadingText`、`showLoadingMask`，以及文案配置 `displayDetailedList`、`resetSearch`
+- fix: 未输入关键词时不展示无结果文案；修复清空搜索后空态不显示、MPA 空结果 DOM 残留等问题
+- fix: 修复按住搜索输入框内文本拖出导致搜索框自动关闭
+- style: 调整搜索框样式
+
 ## 0.4.22
 
 ### Patch Changes

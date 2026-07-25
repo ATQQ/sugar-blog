@@ -63,6 +63,8 @@ comment:
 | label | 悬浮按钮旁边的文字提示 | `string` | `'评论'` |
 | mobileMinify | 移动端下是否隐藏文字提示仅显示图标 | `boolean` | `true` |
 | icon | 自定义 SVG 图标代码 | `string` | - |
+| marginBottom | 指定按钮距离屏幕下边缘的距离 | `number` | `40` |
+| iconSize | 指定图标的大小 | `number` | `20` |
 
 ## 类型定义
 
@@ -74,6 +76,16 @@ export interface ArtalkPluginOptions {
   label?: string
   icon?: string
   showCommentBtn?: boolean
+  /**
+   * 指定按钮距离屏幕下边缘的距离
+   * @default 40
+   */
+  marginBottom?: number
+  /**
+   * 指定图标的大小
+   * @default 20
+   */
+  iconSize?: number
   [key: string]: any
 }
 ```

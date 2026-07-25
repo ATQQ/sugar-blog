@@ -10,7 +10,7 @@
     "serve": "vitepress serve docs"
   },
   "dependencies": {
-    "@sugarat/theme": "^0.5.25"
+    "@sugarat/theme": "^0.5.26"
   },
   "directories": {
     "doc": "docs"

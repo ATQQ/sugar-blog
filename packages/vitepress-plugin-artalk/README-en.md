@@ -63,6 +63,8 @@ Inherits configuration from Artalk, while containing the following plugin-specif
 | label | Text prompt next to the floating button | `string` | `'评论'` |
 | mobileMinify | Whether to hide the text prompt and only show the icon on mobile | `boolean` | `true` |
 | icon | Custom SVG icon code | `string` | - |
+| marginBottom | Distance between the button and the bottom edge of the screen | `number` | `40` |
+| iconSize | Icon size | `number` | `20` |
 
 ## Type Definitions
 
@@ -74,6 +76,16 @@ export interface ArtalkPluginOptions {
   label?: string
   icon?: string
   showCommentBtn?: boolean
+  /**
+   * Distance between the button and the bottom edge of the screen
+   * @default 40
+   */
+  marginBottom?: number
+  /**
+   * Icon size
+   * @default 20
+   */
+  iconSize?: number
   [key: string]: any
 }
 ```
