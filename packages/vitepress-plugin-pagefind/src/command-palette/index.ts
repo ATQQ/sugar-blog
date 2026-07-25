@@ -5,6 +5,7 @@ import Group from './CommandGroup.vue'
 import Input from './CommandInput.vue'
 import Item from './CommandItem.vue'
 import List from './CommandList.vue'
+import { useCommandState } from './useCommandState'
 
 const Empty = defineComponent({
   name: 'Command.Empty',
