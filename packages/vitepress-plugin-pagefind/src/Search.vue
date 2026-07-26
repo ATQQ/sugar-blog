@@ -228,7 +228,7 @@ watch(
       const mask = document.querySelector('div[command-dialog-mask]')
       mask?.removeEventListener('click', handleClickMask)
       mask?.removeEventListener('mousedown', handleMouseDownMask)
-      if (finalSearchConfig.value.clearWhenClosed)
+      if (finalSearchConfig.value.clearWhenClosed === 'always')
         handleClearSearch()
     }
   }
@@ -249,6 +249,8 @@ const router = useRouter()
 const route = useRoute()
 function handleSelect(target: any) {
   hideSearchModal()
+  if (finalSearchConfig.value.clearWhenClosed === 'visit')
+    handleClearSearch()
   if (route.path !== target.value) {
     router.go(target.value)
   }
