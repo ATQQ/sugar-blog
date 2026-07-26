@@ -40,6 +40,8 @@ interface Meta {
   title: string
   image: string
   base64: string
+  date?: number
+  description?: string
 }
 
 interface Filters {

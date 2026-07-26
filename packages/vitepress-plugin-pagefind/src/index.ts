@@ -33,13 +33,13 @@ export function pagefindPlugin(
 
   let resolveConfig: any
   let vitepressConfig: SiteConfig
-  let dynamicRoutes: SiteConfig['dynamicRoutes']
+  let dynamicRoutes: SiteConfig['dynamicRoutes'] | { routes: SiteConfig['dynamicRoutes'] }
   const pluginOps: PluginOption = {
     name: 'vitepress-plugin-pagefind',
-    config: (cfg) => {
-      // @ts-expect-error
+    config: (_config) => {
+      const config = _config as typeof _config & { vitepress: SiteConfig }
       // MPA 模式下使用 MPA 组件
-      const isMPA = !!cfg.vitepress.mpa
+      const isMPA = !!config.vitepress.mpa
       const isMPADefaultUI = searchConfig.mpaDefaultUI
       return {
         resolve: {
@@ -49,7 +49,8 @@ export function pagefindPlugin(
         }
       }
     },
-    async configResolved(config: any) {
+    async configResolved(_config) {
+      const config = _config as typeof _config & { vitepress: SiteConfig }
       if (searchConfig.manual) {
         return
       }
@@ -71,7 +72,7 @@ export function pagefindPlugin(
       }
       // 添加生成索引的方法
       const selfBuildEnd = vitepressConfig.buildEnd
-      vitepressConfig.buildEnd = async (siteConfig: any) => {
+      vitepressConfig.buildEnd = async (siteConfig) => {
         const okMark = '\x1B[32m✓\x1B[0m'
         console.time(`${okMark} generating pagefind Indexing...`)
         // 调用自己的
@@ -115,9 +116,7 @@ export function pagefindPlugin(
       // 兼容 动态 路由
       const isWindows = process.platform === 'win32'
       const fullPath = isWindows ? `${protocol}${pathname}` : pathname
-      // @ts-expect-error
       const _dynamicRoutes = Array.isArray(dynamicRoutes) ? dynamicRoutes : (dynamicRoutes?.routes || [])
-      // @ts-expect-error
       const dynamicRoute = _dynamicRoutes.find(route => fullPath.toLowerCase() === route.fullPath.toLowerCase())
       const isDynamicRoute = !!dynamicRoute
       const filepath = isDynamicRoute ? joinPath(vitepressConfig.srcDir, `/${dynamicRoute.route}`) : pathname

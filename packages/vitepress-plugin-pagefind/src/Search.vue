@@ -1,14 +1,13 @@
 <script lang="ts" setup>
-import { computed, nextTick, onMounted, ref, watch } from 'vue'
+import { computed, nextTick, ref, watch } from 'vue'
 
 import { inBrowser, useData, useRoute, useRouter, withBase } from 'vitepress'
 import { useLocalStorage, useMagicKeys } from '@vueuse/core'
 
-// @ts-expect-error
 import { searchConfig as _searchConfig } from 'virtual:pagefind'
 import { Command } from './command-palette'
 import LogoPagefind from './LogoPagefind.vue'
-import type { SearchConfig } from './type'
+import type { SearchConfig, SearchItem } from './type'
 import { formatPagefindResult } from './search'
 import { formatShowDate } from './utils'
 
@@ -105,7 +104,7 @@ function inlineSearch() {
   }))
 }
 
-const chineseRegex = /[\u4E00-\u9FA5]/g
+const chineseRegex = /\p{Ideo}/gu
 const segmenterCh = Intl?.Segmenter && new Intl.Segmenter('zh-CN', { granularity: 'word' })
 function chineseSearchOptimize(input: string) {
   if (segmenterCh) {
@@ -135,7 +134,6 @@ watch(
     isSearching.value = true
 
     // dev-server兜底
-    // @ts-expect-error
     if (!window?.__pagefind__?.search) {
       inlineSearch()
       isSearching.value = false
@@ -149,7 +147,6 @@ watch(
         // 判断有中文，默认启用优化
         : (chineseRegex.test(searchWords.value) ? chineseSearchOptimize(searchWords.value) : searchWords.value)
     try {
-      // @ts-expect-error
       await window?.__pagefind__
         ?.debouncedSearch?.(searchText, {}, searchDelayTime.value)
         .then(async (pagefindSearchResult: any) => {
@@ -170,7 +167,7 @@ watch(
                 result.route = result.route.startsWith(site.value.base)
                   ? result.route
                   : withBase(result.route)
-                return result
+                return result as SearchItem
               })
             })
             .flat()
@@ -249,24 +246,26 @@ function handleSelect(target: any) {
   }
 }
 
-// 语言切换，重载页面
-// const langReload = computed(() => finalSearchConfig.value.langReload ?? true)
-// watch(
-//   () => lang.value,
-//   () => {
-//     // 不在开发环境生效
-//     if (import.meta.env.DEV) {
-//       return
-//     }
-//     // 重载页面
-//     if (langReload.value) {
-//       window.location.reload()
-//     }
-//   }
-// )
+// 语言切换，重载 pagefind
+const langReload = computed(() => finalSearchConfig.value.langReload ?? true)
+watch(
+  () => lang.value,
+  async () => {
+    // 不在开发环境生效
+    if (import.meta.env.DEV) {
+      return
+    }
+    // 重载 pagefind
+    const pagefind = window?.__pagefind__
+    if (langReload.value && pagefind) {
+      await pagefind.destroy()
+      await pagefind.init()
+    }
+  }
+)
 
 // 清空搜索关键词
-const searchInput = ref<HTMLInputElement>()
+const searchInput = ref<InstanceType<typeof Command.Input>>()
 function handleClearSearch() {
   searchWords.value = ''
   searchResult.value = []
@@ -274,8 +273,7 @@ function handleClearSearch() {
   nextTick(() => {
     if (!searchInput.value)
       return
-    // @ts-expect-error
-    searchInput.value.$el.value = ''
+    (searchInput.value.$el as HTMLInputElement).value = ''
   })
 }
 

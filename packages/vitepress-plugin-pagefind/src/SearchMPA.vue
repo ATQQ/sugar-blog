@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useData } from 'vitepress'
-
-// @ts-expect-error
 import { searchConfig } from 'virtual:pagefind'
+import type { PagefindResult, SearchConfig, SearchItem } from './type'
+import type { PagefindSearchAnchor, PagefindSubResult } from './types/pagefind'
 
 const { site, lang, localeIndex } = useData()
 const finalSearchConfig = computed(() => {
@@ -20,18 +20,18 @@ const stringifySearchConfig = computed(() => {
 
 <script client>
 const dataEl = document.getElementById('search-data')
-const currentLang = dataEl?.dataset.lang || 'en-us'
+const currentLang = dataEl?.dataset.lang || 'en-US'
 const base = dataEl?.dataset.base || '/'
 const currentLocaleIndex = dataEl?.dataset.locale || 'root'
 
-const searchConfig = JSON.parse(decodeURIComponent(dataEl?.dataset.searchConfig || '{}'))
+const _searchConfig: SearchConfig = JSON.parse(decodeURIComponent(dataEl?.dataset.searchConfig || '{}'))
 const currentSearchConfig = {
-  ...searchConfig,
-  ...(searchConfig?.locales?.[currentLocaleIndex] || {})
+  ..._searchConfig,
+  ...(_searchConfig?.locales?.[currentLocaleIndex] || {})
 }
 
 // Helper functions
-function decodeBase64AndDeserialize(base64String) {
+function decodeBase64AndDeserialize(base64String: string) {
   if (!base64String)
     return {}
   try {
@@ -42,60 +42,44 @@ function decodeBase64AndDeserialize(base64String) {
   }
 }
 
-function formatDate(d, fmt = 'yyyy-MM-dd hh:mm:ss') {
-  if (!(d instanceof Date))
-    d = new Date(d)
-  const o = {
-    'M+': d.getMonth() + 1,
-    'd+': d.getDate(),
-    'h+': d.getHours(),
-    'm+': d.getMinutes(),
-    's+': d.getSeconds(),
-    'q+': Math.floor((d.getMonth() + 3) / 3),
-    'S': d.getMilliseconds()
+function formatDate(date: Date | string, lang: string) {
+  if (!(date instanceof Date)) {
+    date = new Date(date)
   }
-  if (/(y+)/.test(fmt)) {
-    fmt = fmt.replace(RegExp.$1, `${d.getFullYear()}`.substr(4 - RegExp.$1.length))
-  }
-  for (const k in o) {
-    if (new RegExp(`(${k})`).test(fmt)) {
-      fmt = fmt.replace(RegExp.$1, RegExp.$1.length === 1 ? o[k] : `00${o[k]}`.substr(`${o[k]}`.length))
-    }
-  }
-  return fmt
+
+  return new Intl.DateTimeFormat(lang, { year: 'numeric', month: '2-digit', day: '2-digit' }).format(date)
 }
 
-function formatShowDate(date, lang) {
-  if (typeof currentSearchConfig.showDate === 'function') {
-    return currentSearchConfig.showDate(date, lang)
-  }
+function formatShowDate(date: Date | string, lang: string) {
   const source = +new Date(date)
   const now = +new Date()
-  const diff = now - source
+  const diff = source - now
+
   const oneSeconds = 1000
   const oneMinute = oneSeconds * 60
   const oneHour = oneMinute * 60
   const oneDay = oneHour * 24
   const oneWeek = oneDay * 7
-  const langMap = {
-    'zh-cn': { justNow: '刚刚', secondsAgo: '秒前', minutesAgo: '分钟前', hoursAgo: '小时前', daysAgo: '天前', weeksAgo: '周前' },
-    'en-us': { justNow: ' just now', secondsAgo: ' seconds ago', minutesAgo: ' minutes ago', hoursAgo: ' hours ago', daysAgo: ' days ago', weeksAgo: ' weeks ago' }
+
+  const formatter = new Intl.RelativeTimeFormat(lang, { style: 'long', numeric: 'auto' })
+
+  if (Math.abs(diff) < oneMinute) {
+    return formatter.format(Math.trunc(diff / oneSeconds), 'second')
   }
-  const mapValue = langMap[lang.toLowerCase()] || langMap['en-us']
-  if (diff < 10)
-    return mapValue.justNow
-  if (diff < oneMinute)
-    return `${Math.floor(diff / oneSeconds)}${mapValue.secondsAgo}`
-  if (diff < oneHour)
-    return `${Math.floor(diff / oneMinute)}${mapValue.minutesAgo}`
-  if (diff < oneDay)
-    return `${Math.floor(diff / oneHour)}${mapValue.hoursAgo}`
-  if (diff < oneWeek)
-    return `${Math.floor(diff / oneDay)}${mapValue.daysAgo}`
-  return formatDate(new Date(date), 'yyyy-MM-dd')
+  if (Math.abs(diff) < oneHour) {
+    return formatter.format(Math.trunc(diff / oneMinute), 'minute')
+  }
+  if (Math.abs(diff) < oneDay) {
+    return formatter.format(Math.trunc(diff / oneHour), 'hour')
+  }
+  if (Math.abs(diff) < oneWeek) {
+    return formatter.format(Math.trunc(diff / oneDay), 'day')
+  }
+
+  return formatDate(new Date(date), lang)
 }
 
-function formatPagefindResult(result, count = 1) {
+function formatPagefindResult(result: PagefindResult, count = 1) {
   const { sub_results: subResults, anchors, weighted_locations: weightedLocations } = result
   weightedLocations.sort((a, b) => {
     if (b.weight === a.weight)
@@ -112,7 +96,7 @@ function formatPagefindResult(result, count = 1) {
       const max = locations.length === 1 ? Number.POSITIVE_INFINITY : locations[locations.length - 1]
       return min <= location && location <= max
     })
-    const sub = filterData.reduce((prev, curr) => {
+    const sub = filterData.reduce<PagefindSubResult | null>((prev, curr) => {
       if (!prev)
         return curr
       return prev.locations.length > curr.locations.length ? prev : curr
@@ -140,24 +124,26 @@ function formatPagefindResult(result, count = 1) {
     })
 }
 
-function parseSubResult(sub, anchors, result) {
+function parseSubResult(sub: PagefindSubResult, anchors: PagefindSearchAnchor[], result: PagefindResult): SearchItem {
   const route = sub?.url || result?.url
   const description = sub?.excerpt || result?.excerpt
   const locationsAnchors = anchors?.filter((a) => {
     if (!sub)
       return false
-    try { return a.location <= sub.anchor.location && a.element <= sub.anchor.element }
+    try {
+      return a.location <= sub.anchor!.location && a.element <= sub.anchor!.element
+    }
     catch { return false }
   }) || []
   locationsAnchors.reverse()
-  const filteredAnchors = locationsAnchors.reduce((prev, curr) => {
+  const filteredAnchors = locationsAnchors.reduce<PagefindSearchAnchor[]>((prev, curr) => {
     const isHave = prev.some(p => p.element === curr.element)
     if (isHave)
       return prev
     prev.unshift(curr)
     return prev
   }, [])
-  const title = filteredAnchors.length ? filteredAnchors.map(t => t.text.trim()).filter(v => !!v).join(' > ') : result.meta.title
+  const title = filteredAnchors.length ? filteredAnchors.map(t => t.text!.trim()).filter(v => !!v).join(' > ') : result.meta.title
   const { base64, date, ...otherMeta } = result.meta
   return {
     route,
@@ -172,26 +158,26 @@ function parseSubResult(sub, anchors, result) {
   }
 }
 
-function debounce(func, wait) {
-  let timeout
-  return function (...args) {
+function debounce<T extends (...args: any[]) => any>(func: T, wait: number) {
+  let timeout: NodeJS.Timeout
+  return function (this: any, ...args: any[]) {
     clearTimeout(timeout)
     timeout = setTimeout(() => func.apply(this, args), wait)
-  }
+  } as T
 }
 
 // Main logic
-const trigger = document.getElementById('search-trigger')
-const modal = document.getElementById('search-modal')
-const input = document.getElementById('search-input')
-const list = document.getElementById('search-list')
-const clearBtn = document.getElementById('search-clear-btn')
-const toggleBtn = document.getElementById('search-toggle-detail')
-const backBtn = document.getElementById('search-back-btn')
-const mask = modal.querySelector('[command-dialog-mask]')
+const trigger = document.getElementById('search-trigger')!
+const modal = document.getElementById('search-modal')!
+const input = document.getElementById('search-input') as HTMLInputElement
+const list = document.getElementById('search-list')!
+const clearBtn = document.getElementById('search-clear-btn') as HTMLButtonElement
+const toggleBtn = document.getElementById('search-toggle-detail') as HTMLButtonElement
+const backBtn = document.getElementById('search-back-btn') as HTMLButtonElement
+const mask = modal.querySelector('[command-dialog-mask]')!
 
 let showDetail = localStorage.getItem('pagefind-search-showDetail') === 'true'
-const dialog = modal.querySelector('.search-dialog')
+const dialog = modal.querySelector('.search-dialog')!
 if (showDetail)
   dialog.classList.add('detail-list')
 if (showDetail)
@@ -210,7 +196,9 @@ function closeModal() {
 trigger.addEventListener('click', openModal)
 // 避免按住搜索框内选中文本拖动出来到遮罩上导致对话框关闭的问题。
 let lastMouseDownTarget: EventTarget | null = null
-mask.addEventListener('mousedown', (e) => { lastMouseDownTarget = e.target })
+mask.addEventListener('mousedown', (e) => {
+  lastMouseDownTarget = e.target
+})
 mask.addEventListener('click', (e) => {
   if (e.target === mask && lastMouseDownTarget === mask)
     closeModal()
@@ -229,7 +217,7 @@ document.addEventListener('keydown', (e) => {
 
 toggleBtn.addEventListener('click', () => {
   showDetail = !showDetail
-  localStorage.setItem('pagefind-search-showDetail', showDetail)
+  localStorage.setItem('pagefind-search-showDetail', String(showDetail))
   dialog.classList.toggle('detail-list', showDetail)
   toggleBtn.classList.toggle('active', showDetail)
 })
@@ -265,7 +253,7 @@ function hideResultOverlay() {
     overlay.remove()
 }
 
-function renderList(results, { showEmptyText = false } = {}) {
+function renderList(results: SearchItem[], { showEmptyText = false } = {}) {
   if (!results.length) {
     // 未输入关键词：空白；有关键词但无结果：展示 emptyText
     list.innerHTML = showEmptyText
@@ -276,7 +264,7 @@ function renderList(results, { showEmptyText = false } = {}) {
   }
 
   const heading = currentSearchConfig.heading
-    ? currentSearchConfig.heading.replace(/\{\{searchResult\}\}/, results.length)
+    ? currentSearchConfig.heading.replace(/\{\{searchResult\}\}/, String(results.length))
     : `Total: ${results.length} search results.`
   const html = `
       <div command-group>
@@ -297,10 +285,10 @@ function renderList(results, { showEmptyText = false } = {}) {
   list.innerHTML = html
 
   // Add click events
-  const items = list.querySelectorAll('[command-item]')
+  const items = list.querySelectorAll<HTMLElement>('[command-item]')
   items.forEach((item) => {
     item.addEventListener('click', () => {
-      const index = parseInt(item.dataset.index)
+      const index = parseInt(item.dataset.index!)
       const result = results[index]
       if (result) {
         window.location.href = result.route.startsWith(base) ? result.route : base + result.route.replace(/^\//, '')
@@ -309,14 +297,14 @@ function renderList(results, { showEmptyText = false } = {}) {
     })
     // Hover effect handling
     item.addEventListener('mouseenter', () => {
-      updateSelection(parseInt(item.dataset.index))
+      updateSelection(parseInt(item.dataset.index!))
     })
   })
   selectedIndex = -1
 }
 
-function updateSelection(index) {
-  const items = list.querySelectorAll('[command-item]')
+function updateSelection(index: number) {
+  const items = list.querySelectorAll<HTMLElement>('[command-item]')
   if (index >= items.length)
     index = items.length - 1
   if (index < 0)
@@ -334,7 +322,7 @@ function updateSelection(index) {
 
 // Keyboard navigation
 input.addEventListener('keydown', (e) => {
-  const items = list.querySelectorAll('[command-item]')
+  const items = list.querySelectorAll<HTMLElement>('[command-item]')
   if (items.length === 0)
     return
 
@@ -370,9 +358,9 @@ async function loadPagefind() {
   }
 }
 
-const chineseRegex = /[\u4E00-\u9FA5]/g
+const chineseRegex = /\p{Ideo}/gu
 const segmenterCh = Intl?.Segmenter && new Intl.Segmenter('zh-CN', { granularity: 'word' })
-function chineseSearchOptimize(input) {
+function chineseSearchOptimize(input: string) {
   if (segmenterCh) {
     const splitWords = Array.from(segmenterCh.segment(input))
     return splitWords.map(v => v.segment).join(' ')
@@ -383,7 +371,7 @@ function chineseSearchOptimize(input) {
     .trim()
 }
 
-const debouncedRealSearch = debounce(async (val) => {
+const debouncedRealSearch = debounce(async (val: string) => {
   if (!window.__pagefind__) {
     await loadPagefind()
   }
@@ -395,7 +383,7 @@ const debouncedRealSearch = debounce(async (val) => {
 
     const search = await window.__pagefind__.debouncedSearch(searchText)
     if (search && search.results) {
-      const pagefindResults = await Promise.all(search.results.map(r => r.data()))
+      const pagefindResults = await Promise.all(search.results.map(r => r.data() as unknown as Promise<PagefindResult>))
       const formatted = pagefindResults
         .map(r => formatPagefindResult(r, currentSearchConfig.pageResultCount || 1))
         .flat()
@@ -418,8 +406,8 @@ const debouncedRealSearch = debounce(async (val) => {
   hideResultOverlay()
 }, currentSearchConfig.delay || 300)
 
-function handleSearch(e) {
-  const val = e.target.value
+function handleSearch(e: InputEvent) {
+  const val = (e.target as HTMLInputElement).value
   clearBtn.disabled = !val
   if (!val) {
     renderList([])
@@ -590,7 +578,7 @@ input.addEventListener('input', handleSearch)
       </div>
     </div>
   </div>
-  <div id="search-data" :data-search-config="stringifySearchConfig" :data-lang="lang" :data-base="site.base" :data-locale="localeIndex" style="display: none;" />
+  <div id="search-data" :data-search-config="stringifySearchConfig" :data-lang="lang" :data-base="(site as unknown as typeof site.value).base" :data-locale="localeIndex" style="display: none;" />
 </template>
 
 <style lang="css" scoped>
