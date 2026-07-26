@@ -42,10 +42,16 @@ const formatShowDateFn = computed(() => typeof finalSearchConfig.value.showDate 
 const headingText = computed(() =>
   finalSearchConfig.value?.heading
     ? finalSearchConfig.value.heading.replace(
-      /\{\{searchResult\}\}/,
+      '{{searchResult}}',
       `${searchResult.value.length}`
     )
     : `Total: ${searchResult.value.length} search results.`)
+
+// 修复第一次执行搜索时不显示搜索条数字样，因为被滚动到界面外了
+const commandList = ref<InstanceType<typeof Command.List>>()
+watch(searchResult, async () => {
+  commandList.value?.requestScrollToTop()
+})
 
 // 展示的快捷键
 const metaKey = computed(() => inBrowser && /(Mac|iPhone|iPod|iPad)/i.test(navigator?.platform) ? '⌘' : 'Ctrl')
@@ -95,7 +101,7 @@ function inlineSearch() {
     searchResult.value = []
     return
   }
-  searchResult.value = Array.from({ length: 1 }, () => ({
+  searchResult.value = Array.from({ length: 20 }, () => ({
     route: '#',
     meta: {
       title: '只在构建后才生效',
@@ -334,7 +340,7 @@ function handleToggleDetail() {
         </template>
         <template #body>
           <div class="search-dialog" :class="{ 'detail-list': showDetail }">
-            <Command.List>
+            <Command.List ref="commandList">
               <template v-if="!searchResult.length">
                 <div v-if="isSearching" class="search-loading">
                   <span class="search-loading-spinner" />

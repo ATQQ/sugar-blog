@@ -31,7 +31,9 @@
     transition-property: height;
 
     @supports (height: min(1px, 1px)) {
-      height: min(var(--command-list-height), 360px);
+      @media screen and (min-width: 561px) {
+        height: min(var(--command-list-height), 360px);
+      }
     }
   }
 

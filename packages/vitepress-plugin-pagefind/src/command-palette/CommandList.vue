@@ -17,6 +17,10 @@ const { rerenderList } = useCommandEvent()
 
 const listRef = ref<HTMLDivElement>()
 const heightRef = ref<HTMLDivElement>()
+const isRequestedScrollToTop = ref(false)
+function requestScrollToTop() {
+  isRequestedScrollToTop.value = true
+}
 
 let observer: ResizeObserver | null = null
 let sizer: HTMLDivElement | undefined
@@ -27,19 +31,19 @@ watchEffect(() => {
   let animationFrame: number
   let timeoutId: ReturnType<typeof setTimeout> | undefined
   if (sizer && wrapper) {
-    const onTransitionEnd = (e: TransitionEvent) => {
-      if (e.propertyName === 'height') {
-        clearTimeout(timeoutId)
-        wrapper.style.overflowY = ''
-      }
+    const wrapperScrollAborter = new AbortController()
+    const transitionEndAborter = new AbortController()
+    wrapperScrollAborter.signal.addEventListener('abort', () => isRequestedScrollToTop.value = false)
+    const restoreScroll = () => {
+      wrapper.style.overflowY = ''
     }
     observer = new ResizeObserver(() => {
       // 避免过渡时短暂出现的滚动条。
-      wrapper.style.overflowY = 'hidden'
+      wrapper.style.overflowY = 'clip'
       clearTimeout(timeoutId)
       // 如果下方的 transitionend 异常超时导致未能正确触发恢复 overflow，则执行该 setTimeout 第二道保险。
       timeoutId = setTimeout(() => {
-        wrapper.style.overflowY = ''
+        restoreScroll()
       }, 500)
       animationFrame = requestAnimationFrame(() => {
         const height = sizer?.offsetHeight
@@ -52,21 +56,37 @@ watchEffect(() => {
       })
     })
     observer.observe(sizer)
-    wrapper.addEventListener('transitionend', onTransitionEnd)
+    wrapper.addEventListener('transitionend', (e) => {
+      console.log(e)
+      if (e.propertyName === 'height') {
+        clearTimeout(timeoutId)
+        restoreScroll()
+      }
+    }, { signal: transitionEndAborter.signal })
+    wrapper.addEventListener('scroll', (e) => {
+      if (isRequestedScrollToTop.value) {
+        e.preventDefault()
+        wrapper.scrollTo({ top: 0, behavior: 'instant' })
+        isRequestedScrollToTop.value = false
+      }
+    }, { signal: wrapperScrollAborter.signal })
 
     return () => {
       cancelAnimationFrame(animationFrame)
       clearTimeout(timeoutId)
       observer?.unobserve(sizer!)
-      wrapper.removeEventListener('transitionend', onTransitionEnd)
+      transitionEndAborter.abort()
+      wrapperScrollAborter.abort()
     }
   }
 })
 
 onBeforeUnmount(() => {
   if (observer !== null && sizer)
-    observer.unobserve(sizer)
+    observer.disconnect()
 })
+
+defineExpose({ requestScrollToTop })
 </script>
 
 <template>

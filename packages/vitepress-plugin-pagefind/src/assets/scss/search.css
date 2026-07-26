@@ -163,9 +163,11 @@ div [command-dialog-footer] {
   scrollbar-gutter: stable;
 }
 @supports (height: min(1px, 1px)) {
-  .algolia [command-list] {
-    /* 使用 min() 声明 height 属性，而不是直接用 max-height（额外声明了不影响），可以避免高度过渡动画的异常。 */
-    height: min(var(--command-list-height), 360px);
+  @media screen and (min-width: 561px) {
+    .algolia [command-list] {
+      /* 使用 min() 声明 height 属性，而不是直接用 max-height（额外声明了不影响），可以避免高度过渡动画的异常。 */
+      height: min(var(--command-list-height), 360px);
+    }
   }
 }
 .algolia .detail-list [command-item] {
@@ -397,7 +399,7 @@ div [command-dialog-footer] {
     font-size: 14px;
   }
   .algolia [command-list] {
-    max-height: calc(100vh - 120px);
+    max-height: calc(100vh - 108px);
   }
   .algolia [command-dialog-body] {
     height: 100%;
