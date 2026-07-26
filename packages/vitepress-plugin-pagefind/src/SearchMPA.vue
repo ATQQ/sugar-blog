@@ -191,6 +191,8 @@ function openModal() {
 
 function closeModal() {
   modal.style.display = 'none'
+  if (currentSearchConfig.clearWhenClosed === 'always')
+    handleClearSearch()
 }
 
 trigger.addEventListener('click', openModal)
@@ -222,12 +224,13 @@ toggleBtn.addEventListener('click', () => {
   toggleBtn.classList.toggle('active', showDetail)
 })
 
-clearBtn.addEventListener('click', () => {
+clearBtn.addEventListener('click', handleClearSearch)
+function handleClearSearch() {
   input.value = ''
   renderList([])
   clearBtn.disabled = true
   input.focus()
-})
+}
 
 let selectedIndex = -1
 

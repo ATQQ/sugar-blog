@@ -220,6 +220,7 @@ export interface SearchConfig {
    * Clear the search content and results when the search dialog is closed
    *
    * - `'never'`: Never clear search content and results when closed
+   *   - Same as `'visit'` in MPA mode
    * - `'always'`: Always clear search content and results when closed
    * - `'visit'`: Clear search content and results only if user select a search result link,
    * and won't clear if user just close the dialog directly
