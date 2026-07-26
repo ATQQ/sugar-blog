@@ -185,7 +185,7 @@ div [command-dialog-footer] {
   max-height: 56px;
   font-size: 14px;
   display: flex;
-  align-items: center;
+  align-items: start;
   gap: 12px;
   padding: 0 16px;
   color: var(--gray12);
@@ -337,6 +337,12 @@ div [command-dialog-footer] {
   user-select: none;
   width: 100%;
   z-index: 300;
+}
+@media screen and (min-width: 561px) {
+  .algolia [command-dialog-footer].no-search-result {
+    box-shadow: none;
+    border-top: none;
+  }
 }
 .algolia [command-group-heading] {
   color: var(--vcp-c-brand);

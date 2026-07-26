@@ -309,11 +309,11 @@ function handleToggleDetail() {
       <span class="metaKey"> {{ metaKey }} K </span>
     </button>
     <ClientOnly>
-      <Command.Dialog :visible="searchModal" theme="algolia">
+      <Command.Dialog :visible="searchModal" theme="algolia" :footer-class="{ 'no-search-result': !searchResult.length }">
         <template #header>
           <div class="search-bar">
             <div class="search-actions before">
-              <button class="back-button" title="Close search" @click="searchModal = false">
+              <button class="back-button" :title="finalSearchConfig?.closeSearch || 'Close search'" @click="searchModal = false">
                 <span class="vpi-arrow-left local-search-icon" />
               </button>
             </div>
@@ -381,7 +381,7 @@ function handleToggleDetail() {
             </div>
           </div>
         </template>
-        <template v-if="searchResult.length" #footer>
+        <template #footer>
           <div class="command-palette-logo">
             <a href="https://github.com/cloudcannon/pagefind" target="_blank" rel="noopener noreferrer">
               <span class="command-palette-Label">{{ finalSearchConfig?.searchBy || 'Search by' }}</span>
@@ -637,6 +637,10 @@ label.search-icon {
 
   label.search-icon {
     display: none;
+  }
+
+  .search-bar .search-actions {
+    padding-right: 4px;
   }
 }
 </style>

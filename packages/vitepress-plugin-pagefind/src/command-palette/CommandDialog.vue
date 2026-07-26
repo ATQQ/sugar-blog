@@ -14,6 +14,7 @@ defineOptions({
 const props = defineProps<{
   visible: boolean
   theme: string
+  footerClass?: string | Record<string, unknown>
 }>()
 
 const emit = defineEmits<{
@@ -49,7 +50,7 @@ onBeforeUnmount(resetStore)
               <div command-dialog-body>
                 <slot name="body" />
               </div>
-              <div v-if="$slots.footer" command-dialog-footer>
+              <div v-if="$slots.footer" command-dialog-footer :class="props.footerClass">
                 <slot name="footer" />
               </div>
             </div>

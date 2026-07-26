@@ -461,7 +461,7 @@ input.addEventListener('input', handleSearch)
           <div command-dialog-header>
             <div class="search-bar">
               <div class="search-actions before">
-                <button id="search-back-btn" class="back-button" title="Close search">
+                <button id="search-back-btn" class="back-button" :title="finalSearchConfig?.closeSearch || 'Close search'">
                   <span class="vpi-arrow-left local-search-icon" />
                 </button>
               </div>
@@ -723,6 +723,10 @@ label.search-icon {
 
   label.search-icon {
     display: none;
+  }
+
+  .search-bar .search-actions {
+    padding-right: 4px;
   }
 }
 </style>

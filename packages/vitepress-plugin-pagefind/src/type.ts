@@ -134,6 +134,12 @@ export interface SearchConfig {
    * 'Reset search'
    */
   resetSearch?: string
+  /**
+   * This label is only displayed in the mobile view.
+   * @default
+   * 'Close search'
+   */
+  closeSearch?: string
 
   /**
    * Automatically reloads the page when the page language changes.
