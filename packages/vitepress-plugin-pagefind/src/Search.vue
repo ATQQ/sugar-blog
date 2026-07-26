@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
 
-import { useData, useRoute, useRouter, withBase } from 'vitepress'
+import { inBrowser, useData, useRoute, useRouter, withBase } from 'vitepress'
 import { useLocalStorage, useMagicKeys } from '@vueuse/core'
 
 // @ts-expect-error
@@ -40,22 +40,16 @@ const showLoadingMask = computed(() => finalSearchConfig.value?.showLoadingMask 
 const formatShowDateFn = computed(() => typeof finalSearchConfig.value.showDate === 'function' ? finalSearchConfig.value.showDate : formatShowDate)
 
 // 搜索条数展示
-const headingText = computed(() => {
-  return finalSearchConfig.value?.heading
+const headingText = computed(() =>
+  finalSearchConfig.value?.heading
     ? finalSearchConfig.value.heading.replace(
       /\{\{searchResult\}\}/,
       `${searchResult.value.length}`
     )
-    : `Total: ${searchResult.value.length} search results.`
-})
+    : `Total: ${searchResult.value.length} search results.`)
 
 // 展示的快捷键
-const metaKey = ref('')
-onMounted(() => {
-  metaKey.value = /(Mac|iPhone|iPod|iPad)/i.test(navigator?.platform)
-    ? '⌘'
-    : 'Ctrl'
-})
+const metaKey = computed(() => inBrowser && /(Mac|iPhone|iPod|iPad)/i.test(navigator?.platform) ? '⌘' : 'Ctrl')
 
 // 控制搜索框的展示
 const searchModal = ref(false)
@@ -256,20 +250,20 @@ function handleSelect(target: any) {
 }
 
 // 语言切换，重载页面
-const langReload = computed(() => finalSearchConfig.value.langReload ?? true)
-watch(
-  () => lang.value,
-  () => {
-    // 不在开发环境生效
-    if (import.meta.env.DEV) {
-      return
-    }
-    // 重载页面
-    if (langReload.value) {
-      window.location.reload()
-    }
-  }
-)
+// const langReload = computed(() => finalSearchConfig.value.langReload ?? true)
+// watch(
+//   () => lang.value,
+//   () => {
+//     // 不在开发环境生效
+//     if (import.meta.env.DEV) {
+//       return
+//     }
+//     // 重载页面
+//     if (langReload.value) {
+//       window.location.reload()
+//     }
+//   }
+// )
 
 // 清空搜索关键词
 const searchInput = ref<HTMLInputElement>()
