@@ -215,6 +215,12 @@ export interface SearchConfig {
    * @default false
    */
   mpaDefaultUI?: boolean
+
+  /**
+   * Clear the search content and results when the search dialog is closed
+   * @default false
+   */
+  clearWhenClosed?: boolean
 }
 
 export type PagefindConfig = PagefindOption & SearchConfig

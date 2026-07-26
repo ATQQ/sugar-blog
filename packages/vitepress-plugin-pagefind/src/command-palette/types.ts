@@ -24,7 +24,7 @@ export interface CommandItemEmits {
 
 export interface CommandInputProps {
   placeholder?: string
-  value?: string
+  modelValue?: string
 }
 
 export interface CommandInputEmits {

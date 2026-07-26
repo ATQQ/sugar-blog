@@ -228,6 +228,8 @@ watch(
       const mask = document.querySelector('div[command-dialog-mask]')
       mask?.removeEventListener('click', handleClickMask)
       mask?.removeEventListener('mousedown', handleMouseDownMask)
+      if (finalSearchConfig.value.clearWhenClosed)
+        handleClearSearch()
     }
   }
 )
@@ -292,7 +294,7 @@ function handleToggleDetail() {
 
 <template>
   <div class="blog-search" data-pagefind-ignore="all">
-    <button class="nav-search-btn-wait" @click="searchModal = true">
+    <button class="nav-search-btn-wait" @click="showSearchModal">
       <span>
         <svg viewBox="0 0 20 20">
           <path
@@ -311,7 +313,7 @@ function handleToggleDetail() {
         <template #header>
           <div class="search-bar">
             <div class="search-actions before">
-              <button class="back-button" :title="finalSearchConfig?.closeSearch || 'Close search'" @click="searchModal = false">
+              <button class="back-button" :title="finalSearchConfig?.closeSearch || 'Close search'" @click="hideSearchModal">
                 <span class="vpi-arrow-left local-search-icon" />
               </button>
             </div>
@@ -319,7 +321,7 @@ function handleToggleDetail() {
               <span aria-hidden="true" class="vpi-search search-icon local-search-icon" />
             </label>
             <Command.Input
-              id="search-input" ref="searchInput" v-model:value="searchWords"
+              id="search-input" ref="searchInput" v-model="searchWords"
               :placeholder="finalSearchConfig?.placeholder || 'Search Docs'"
             />
             <div class="search-actions">
