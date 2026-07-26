@@ -182,16 +182,28 @@ html.dark .comment-btn-wrapper {
   transition-duration: 0.3s;
 }
 
-@supports (backdrop-filter: blur(3px)) {
+/**
+ * 若要实现 `backdrop-filter: blur()`，不能使用 opacity 来控制不透明度，否则背景的模糊也会被显示出来。
+ * 因此必须固定 `opacity: 1`。然后只能通过控制更改按钮的背景色和前景色来设置颜色。
+ * 为保证颜色与用户自定义的品牌颜色匹配，需要用到相对颜色语法来计算特定颜色。
+ * 若浏览器已支持相对颜色语法特性，此时也一定支持 `backdrop-filter` 属性和 `oklch()` 颜色空间，无需特意额外声明检查支持性。
+ */
+@supports (color: rgb(from red r g b / 1)) {
   .comment-btn-wrapper {
     opacity: 1;
-    --box-shadow-color: rgba(0, 0, 0, 0.06);
+    --box-shadow-color: oklch(from var(--vp-c-brand-1) calc(l / 2.5) c h / calc(alpha * 0.08));
+    --box-shadow-hover-color: oklch(from var(--vp-c-brand-1) calc(l / 2.5) c h / calc(alpha * 0.2));
   }
   html.dark .comment-btn-wrapper {
-    --box-shadow-color: rgba(0, 0, 0, 0.36);
+    --box-shadow-color: oklch(from var(--vp-c-brand-1) calc(l / 2.5) c h / calc(alpha * 0.2));
+    --box-shadow-hover-color: oklch(from var(--vp-c-brand-1) calc(l / 5) c h / calc(alpha * 0.7));
   }
   .comment-btn-wrapper :is(.icon-wrapper, .icon-wrapper-text) {
     backdrop-filter: blur(3px);
+  }
+  .comment-btn-wrapper :is(.icon-wrapper, .icon-wrapper-text):not(:hover):not(:active) {
+    background-color: rgb(from var(--vp-c-brand-soft) r g b / calc(alpha * 0.6));
+    color: rgb(from var(--vp-c-brand-1) r g b / calc(alpha * 0.6));
   }
 }
 
