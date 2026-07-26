@@ -29,6 +29,10 @@
     overscroll-behavior: contain;
     transition: 100ms ease;
     transition-property: height;
+
+    @supports (height: min(1px, 1px)) {
+      height: min(var(--command-list-height), 360px);
+    }
   }
 
   [command-item] {

@@ -162,6 +162,12 @@ div [command-dialog-footer] {
   transition-property: height;
   scrollbar-gutter: stable;
 }
+@supports (height: min(1px, 1px)) {
+  .algolia [command-list] {
+    /* 使用 min() 声明 height 属性，而不是直接用 max-height（额外声明了不影响），可以避免高度过渡动画的异常。 */
+    height: min(var(--command-list-height), 360px);
+  }
+}
 .algolia .detail-list [command-item] {
   min-height: 56px;
   max-height: 112px;
@@ -171,10 +177,12 @@ div [command-dialog-footer] {
 .algolia .detail-list [command-item] .des {
   word-break: break-all;
   white-space: wrap;
-  margin-top: 6px;
+  margin-top: 3px;
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
+  line-height: 21px;
 }
 .algolia [command-item] {
   position: relative;
@@ -457,7 +465,8 @@ div[command-item] {
   overflow: hidden;
   word-break: keep-all;
   white-space: nowrap;
-  transition: margin 150ms, opacity 150ms;
+  transition: 150ms;
+  transition-property: margin, opacity, line-height;
   opacity: 0.5;
 }
 .search-dialog div[command-item] .headings {
