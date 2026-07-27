@@ -65,7 +65,7 @@ if (container && btn && mask && dialog) {
   }
 
   btn.addEventListener('click', () => {
-    mask.style.display = 'flex'
+    mask.hidden = false
     if (!window.pagefindInitialized) {
       initPagefind()
       window.pagefindInitialized = true
@@ -74,21 +74,21 @@ if (container && btn && mask && dialog) {
 
   mask.addEventListener('click', (e) => {
     if (e.target === mask) {
-      mask.style.display = 'none'
+      mask.hidden = true
     }
   })
 
   // Close on Escape
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && mask.style.display === 'flex') {
-      mask.style.display = 'none'
+    if (e.key === 'Escape' && !mask.hidden) {
+      mask.hidden = true
     }
   })
 }
 </script>
 
 <template>
-  <div class="blog-search" data-pagefind-ignore="all" :data-base="(site as unknown as typeof site.value).base">
+  <div class="blog-search mpa" data-pagefind-ignore="all" :data-base="(site as unknown as typeof site.value).base">
     <div class="nav-search-btn-wait">
       <span class="svg-icon">
         <svg width="14" height="14" viewBox="0 0 20 20">
@@ -100,7 +100,7 @@ if (container && btn && mask && dialog) {
       </span>
       <span class="search-tip">Search</span>
     </div>
-    <div class="search-dialog-mask" style="display: none;">
+    <div class="search-dialog-mask" hidden>
       <div class="search-dialog">
         <div id="pagefind-search" class="pagefind-search" />
       </div>

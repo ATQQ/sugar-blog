@@ -585,3 +585,30 @@ label.search-icon {
   opacity: 0;
   translate: 0 -1rem;
 }
+
+.mpa .algolia [command-dialog-mask],
+.mpa .algolia [command-dialog-wrapper] {
+  transition: 250ms;
+  transition-behavior: allow-discrete;
+  transition-property: translate, opacity, display;
+}
+
+@starting-style {
+  .mpa .algolia [command-dialog-mask],
+  .mpa .algolia [command-dialog-wrapper] {
+    opacity: 0;
+  }
+
+  .mpa .algolia [command-dialog-wrapper] {
+    translate: 0 -1rem;
+  }
+}
+
+.mpa .algolia [command-dialog-mask][hidden],
+.mpa .algolia [command-dialog-mask][hidden] [command-dialog-wrapper] {
+  opacity: 0;
+}
+
+.mpa .algolia [command-dialog-mask][hidden] [command-dialog-wrapper] {
+  translate: 0 -1rem;
+}

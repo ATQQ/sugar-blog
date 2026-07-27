@@ -231,7 +231,7 @@ const list = document.getElementById('search-list')!
 const clearBtn = document.getElementById('search-clear-btn') as HTMLButtonElement
 const toggleBtn = document.getElementById('search-toggle-detail') as HTMLButtonElement
 const backBtn = document.getElementById('search-back-btn') as HTMLButtonElement
-const mask = modal.querySelector('[command-dialog-mask]')!
+const mask = modal.querySelector('[command-dialog-mask]') as HTMLDivElement
 const footer = modal.querySelector('[command-dialog-footer]')!
 
 let showDetail = localStorage.getItem('pagefind-search-showDetail') === 'true'
@@ -242,13 +242,13 @@ if (showDetail)
   toggleBtn.classList.add('active')
 
 function openModal() {
-  modal.style.display = 'block'
+  mask.hidden = false
   input.focus()
   loadPagefind()
 }
 
 function closeModal() {
-  modal.style.display = 'none'
+  mask.hidden = true
   if (currentSearchConfig.clearWhenClosed === 'always')
     handleClearSearch()
 }
@@ -274,7 +274,7 @@ document.addEventListener('keydown', (e) => {
     e.preventDefault()
     openModal()
   }
-  if (e.key === 'Escape' && modal.style.display === 'block') {
+  if (e.key === 'Escape' && !mask.hidden) {
     closeModal()
   }
 })
@@ -508,7 +508,7 @@ input.addEventListener('input', handleSearch)
 </script>
 
 <template>
-  <div class="blog-search" data-pagefind-ignore="all">
+  <div class="blog-search mpa" data-pagefind-ignore="all">
     <div id="search-trigger" class="nav-search-btn-wait">
       <span>
         <svg width="14" height="14" viewBox="0 0 20 20">
@@ -522,8 +522,8 @@ input.addEventListener('input', handleSearch)
       <span class="metaKey"> Ctrl K </span>
     </div>
 
-    <div id="search-modal" class="algolia" style="display: none;">
-      <div command-dialog-mask>
+    <div id="search-modal" class="algolia">
+      <div command-dialog-mask hidden>
         <div command-dialog-wrapper>
           <div command-dialog-header>
             <div class="search-bar">
