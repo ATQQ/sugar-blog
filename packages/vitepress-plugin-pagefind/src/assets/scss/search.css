@@ -211,18 +211,16 @@ div [command-dialog-footer] {
   margin-top: 0;
 }
 .algolia [command-item][aria-selected="true"],
-.algolia [command-item]:hover,
-.algolia [command-item]:focus-visible {
+.algolia [command-item]:is(:hover, :focus-visible) {
   border-color: var(--vp-c-brand-1);
 }
 .algolia [command-item][aria-selected="true"] .headings,
-.algolia [command-item]:hover .headings,
-.algolia [command-item]:focus-visible .headings {
+.algolia [command-item]:is(:hover, :focus-visible) .headings {
   color: var(--vp-c-brand-1);
 }
 .algolia [command-item][aria-selected="true"] .des,
-.algolia [command-item]:hover .des,
-.algolia [command-item]:focus-visible .des {
+.algolia [command-item]:is(:hover, :focus-visible) .des,
+.algolia [command-item]:is(:hover, :focus-visible) .date {
   opacity: 1;
 }
 .algolia [command-item][aria-selected="true"] [command-linear-shortcuts],
@@ -482,10 +480,12 @@ div[command-item] {
 .search-dialog div[command-item] .date {
   min-width: 86px;
   text-align: right;
+  opacity: 0.5;
 }
 .search-dialog div[command-item] mark {
   background: none;
   color: var(--vp-c-brand-1);
+	box-decoration-break: clone;
 }
 
 label.search-icon {

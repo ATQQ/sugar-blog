@@ -13,7 +13,7 @@ export interface PagefindResult {
   sub_results: SubResult[]
 }
 
-interface SubResult {
+export interface SubResult {
   title: string
   url: string
   anchor: Anchor
@@ -22,26 +22,27 @@ interface SubResult {
   excerpt: string
 }
 
-interface WeightedLocation {
+export interface WeightedLocation {
   weight: number
   balanced_score: number
   location: number
 }
 
-interface Anchor {
+export interface Anchor {
   element: string
   id: string
   text: string
   location: number
 }
 
-interface Meta {
+export interface Meta {
   image_alt: string
   title: string
   image: string
   base64: string
-  date?: number
+  date?: string
   description?: string
+  publish?: boolean
 }
 
 interface Filters {
@@ -70,7 +71,10 @@ export interface PagefindOption {
 
 export interface SearchItem {
   route: string
-  meta: Record<string, any>
+  meta: Override<Omit<Partial<Meta>, 'base64'>, {
+    date?: number
+    title: string[]
+  }>
   result: PagefindResult
 }
 export interface SearchConfig {
@@ -231,3 +235,5 @@ export interface SearchConfig {
 }
 
 export type PagefindConfig = PagefindOption & SearchConfig
+
+type Override<T, U> = Omit<T, keyof U> & U

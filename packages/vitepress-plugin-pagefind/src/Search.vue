@@ -8,11 +8,11 @@ import { searchConfig as _searchConfig } from 'virtual:pagefind'
 import { Command } from './command-palette'
 import LogoPagefind from './LogoPagefind.vue'
 import type { SearchConfig, SearchItem } from './type'
-import { formatPagefindResult } from './search'
+import { extractFuzzyKeywordsFromExcerpts, formatPagefindResult } from './search'
 import { formatShowDate } from './utils'
 
 // 搜索结果
-const searchResult = ref<{ route: string; meta: Record<string, any> }[]>([])
+const searchResult = ref<Omit<SearchItem, 'result'>[]>([])
 // 是否正在搜索中
 const isSearching = ref(false)
 // 配置获取
@@ -101,10 +101,10 @@ function inlineSearch() {
     searchResult.value = []
     return
   }
-  searchResult.value = Array.from({ length: 20 }, () => ({
+  searchResult.value = Array.from({ length: 1 }, () => ({
     route: '#',
     meta: {
-      title: '只在构建后才生效',
+      title: ['只在构建后才生效'],
       description: '<mark>only support after build</mark>, only support after build'
     }
   }))
@@ -155,26 +155,28 @@ watch(
     try {
       await window?.__pagefind__
         ?.debouncedSearch?.(searchText, {}, searchDelayTime.value)
-        .then(async (pagefindSearchResult: any) => {
+        .then(async (pagefindSearchResult) => {
           if (pagefindSearchResult === null) {
             // 该次搜索被后续输入取消，保持 loading 状态
             return
           }
           // pagefind 搜索结果
           const pagefindResults = await Promise.all(
-            pagefindSearchResult.results.map((v: any) => v.data())
+            pagefindSearchResult.results.map(v => v.data())
           )
+          // 获取所有模糊匹配的关键词
+          const fuzzyKeywords = extractFuzzyKeywordsFromExcerpts(pagefindResults, searchText)
           // 格式化搜索结果
           const formattedResults = pagefindResults
             .map((r) => {
-              const results = formatPagefindResult(r, finalSearchConfig.value.pageResultCount || 1)
-              return results.map((result) => {
+              const results = formatPagefindResult(r, finalSearchConfig.value.pageResultCount || 1, fuzzyKeywords)
+              results.forEach((result) => {
                 // base 兼容
                 result.route = result.route.startsWith(site.value.base)
                   ? result.route
                   : withBase(result.route)
-                return result as SearchItem
               })
+              return results
             })
             .flat()
             // 过滤掉未发布的
@@ -195,13 +197,6 @@ watch(
     catch {
       isSearching.value = false
     }
-
-    nextTick(() => {
-      // hack 原组件实现
-      document.querySelectorAll('div[aria-disabled="true"]').forEach((v) => {
-        v.setAttribute('aria-disabled', 'false')
-      })
-    })
   }
 )
 // 避免按住搜索框内选中文本拖动出来到遮罩上导致对话框关闭的问题。
@@ -268,6 +263,7 @@ watch(
     // 重载 pagefind
     const pagefind = window?.__pagefind__
     if (langReload.value && pagefind) {
+      handleClearSearch()
       await pagefind.destroy()
       await pagefind.init()
     }
@@ -362,7 +358,13 @@ function handleToggleDetail() {
                 >
                   <div class="link">
                     <div class="title">
-                      <span class="headings"><i v-if="item.meta.title" class="prefix"># </i>{{ item.meta.title }}</span>
+                      <span class="headings">
+                        <i v-if="item.meta.title?.length" class="prefix"># </i>
+                        <template v-for="(title, i) in item.meta.title" :key="title">
+                          <span v-if="i" class="vpi-chevron-right local-search-icon" />
+                          <span class="text">{{ title }}</span>
+                        </template>
+                      </span>
                       <span v-if="showDateInfo && item.meta.date" class="date">
                         <!-- @vue-ignore -->
                         {{ formatShowDateFn(item.meta.date, lang) }}</span>

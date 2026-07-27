@@ -57,7 +57,6 @@ watchEffect(() => {
     })
     observer.observe(sizer)
     wrapper.addEventListener('transitionend', (e) => {
-      console.log(e)
       if (e.propertyName === 'height') {
         clearTimeout(timeoutId)
         restoreScroll()

@@ -386,7 +386,7 @@ const debouncedRealSearch = debounce(async (val: string) => {
 
     const search = await window.__pagefind__.debouncedSearch(searchText)
     if (search && search.results) {
-      const pagefindResults = await Promise.all(search.results.map(r => r.data() as unknown as Promise<PagefindResult>))
+      const pagefindResults = await Promise.all(search.results.map(r => r.data()))
       const formatted = pagefindResults
         .map(r => formatPagefindResult(r, currentSearchConfig.pageResultCount || 1))
         .flat()

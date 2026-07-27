@@ -1,3 +1,5 @@
+import type { PagefindResult } from '../type'
+
 export interface PagefindIndexOptions {
   basePath?: string
   baseUrl?: string
@@ -42,7 +44,7 @@ export interface PagefindSearchResult {
   id: string
   score: number
   words: number[]
-  data: () => Promise<PagefindSearchFragment>
+  data: () => Promise<PagefindResult>
 }
 
 export interface PagefindSearchFragment {
