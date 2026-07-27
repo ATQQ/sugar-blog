@@ -18,8 +18,8 @@ function getDirname() {
 }
 
 const aliasSearchVueFile = `${getDirname()}/../src/Search.vue`
-const aliasSearchVueFileMPA = `${getDirname()}/../src/SearchMPA.vue`
-const aliasSearchVueFileMPADefault = `${getDirname()}/../src/SearchMPADefault.vue`
+const aliasSearchVueFileMPA = `${getDirname()}/../dist/SearchMPA.vue`
+const aliasSearchVueFileMPADefault = `${getDirname()}/../dist/SearchMPADefault.vue`
 
 export function meta2string(frontmatter: Record<string, any>) {
   return `base64:${Buffer.from(encodeURIComponent(JSON.stringify(frontmatter))).toString('base64')}`

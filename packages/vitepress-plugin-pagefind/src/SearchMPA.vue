@@ -3,7 +3,6 @@ import { computed } from 'vue'
 import { useData } from 'vitepress'
 import { searchConfig } from 'virtual:pagefind'
 import type { Anchor, PagefindResult, SearchConfig, SearchItem, SubResult } from './type'
-import type { PagefindSearchAnchor, PagefindSubResult } from './types/pagefind'
 
 const { site, lang, localeIndex } = useData()
 const finalSearchConfig = computed(() => {
@@ -18,7 +17,7 @@ const stringifySearchConfig = computed(() => {
 })
 </script>
 
-<script client>
+<script client lang="ts">
 const dataEl = document.getElementById('search-data')
 const currentLang = dataEl?.dataset.lang || 'en-US'
 const base = dataEl?.dataset.base || '/'
@@ -81,20 +80,15 @@ function formatShowDate(date: Date | string | number, lang: string) {
 
 function formatPagefindResult(result: PagefindResult, count = 1, fuzzyKeywords: FuzzyKeywords) {
   const { sub_results: subResults, anchors, weighted_locations: weightedLocations } = result
-  // TODO：pick策略优化
-  // 按照权重排序，从大到小
   weightedLocations.sort((a, b) => {
-    // 权重相等按照 location 顺序排序
     if (b.weight === a.weight) {
       return a.location - b.location
     }
     return b.weight - a.weight
   })
 
-  // pick 集合中权重最大的结果
   const subs: SubResult[] = []
   for (const { location } of weightedLocations) {
-    // 从结果集合中过滤出符合权重的结果
     const filterData = subResults.filter((sub) => {
       const { locations } = sub
       const [min] = locations || []
@@ -105,7 +99,6 @@ function formatPagefindResult(result: PagefindResult, count = 1, fuzzyKeywords: 
       return min <= location && location <= max
     })
 
-    // 保留 locations 数量最多的
     const sub = filterData.reduce((prev, curr) => {
       if (!prev) {
         return curr
@@ -124,7 +117,6 @@ function formatPagefindResult(result: PagefindResult, count = 1, fuzzyKeywords: 
     }
   }
 
-  // 按文章中顺序，排序
   subs.sort((a, b) => {
     const [minA] = a.locations || []
     const [minB] = b.locations || []
@@ -149,13 +141,10 @@ function parseSubResult(sub: SubResult, anchors: Anchor[], result: PagefindResul
   const route = sub?.url || result?.url
   const description = sub?.excerpt || result?.excerpt
 
-  // 构造标题
-  // 过滤出合适的标题列表
   const locationsAnchors = anchors?.filter((a) => {
     if (!sub)
       return false
     try {
-      // 直接比较
       return a.location <= sub.anchor.location && a.element <= sub.anchor.element
     }
     catch {
@@ -172,7 +161,6 @@ function parseSubResult(sub: SubResult, anchors: Anchor[], result: PagefindResul
     prev.unshift(curr)
     return prev
   }, [] as Anchor[])
-  // 构造完整的 title 层级 信息
   const title = filteredAnchors.length
     ? filteredAnchors.map(t => markTextWithKeywords(t.text.trim(), fuzzyKeywords)).filter(Boolean)
     : [markTextWithKeywords(result.meta.title, fuzzyKeywords)]
@@ -353,7 +341,7 @@ function renderList(results: SearchItem[], { showEmptyText = false } = {}) {
                       ${item.meta.title.map((heading, i) => `
                         ${i ? '<i class="vpi-chevron-right local-search-icon"></i>' : ''}
                         <span class="heading">${heading}</span>
-                      `)}
+                      `).join('')}
                     `}
                 </span>
                 ${item.meta.date ? `<span class="date">${formatShowDate(item.meta.date, currentLang)}</span>` : ''}

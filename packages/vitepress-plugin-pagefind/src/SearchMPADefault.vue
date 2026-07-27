@@ -4,7 +4,7 @@ import { useData } from 'vitepress'
 const { site } = useData()
 </script>
 
-<script client>
+<script client lang="ts">
 const container = document.querySelector<HTMLDivElement>('.blog-search')
 const btn = container?.querySelector<HTMLDivElement>('.nav-search-btn-wait')
 const mask = container?.querySelector<HTMLDivElement>('.search-dialog-mask')
