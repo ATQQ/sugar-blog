@@ -134,18 +134,19 @@ export function extractFuzzyKeywordsFromExcerpts(results: PagefindResult[], inpu
   const extract = (tokens: string[]) => deduplicateCaseInsensitive(tokens.map(word =>
     word.replace(leadingAndTrailingPunctuationsRegexp, '').trim()
   ))
-  return {
+  const fuzzyKeywords = {
     excerptWords: extract(results.flatMap(result => [...result.excerpt.matchAll(/<mark>(.+?)<\/mark>/g).map(matched => matched[1])])),
     inputTokens: extract(input.trim().split(/\s/)),
   }
+  return Object.entries(fuzzyKeywords).flatMap(([from, keywords]) =>
+    keywords.map(keyword => ({ keyword, from: from as keyof typeof fuzzyKeywords })))
 }
 
-function markTextWithKeywords(text: string, fuzzyKeywords: FuzzyKeywords) {
+function markTextWithKeywords(text: string, keywords: FuzzyKeywords) {
   if (!text)
     return text
   text = text.replaceAll('<', '&lt;').replaceAll('>', '&gt;')
   const segments: (string | { mark: string })[] = [text]
-  const keywords = Object.entries(fuzzyKeywords).flatMap(([from, keywords]) => keywords.map(keyword => ({ keyword, from })))
   for (const { keyword, from } of keywords) {
     const escapedKeyword = 'escape' in RegExp ? RegExp.escape(keyword) : keyword
     const regexp = new RegExp(from === 'excerptWords' ? `\\b${escapedKeyword}\\b` : escapedKeyword, 'gi')
