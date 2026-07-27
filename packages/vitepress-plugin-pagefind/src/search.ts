@@ -80,9 +80,21 @@ export function formatPagefindResult(result: PagefindResult, count = 1, fuzzyKey
     })
 }
 
+// Pagefind 默认标记的关键词会把附近的标点符号也匹配上，需移除
+const leadingAndTrailingPunctuationsRegexp = /^[\p{P}\p{S}]+|[\p{P}\p{S}]+$/gu
 function parseSubResult(sub: SubResult, anchors: Anchor[], result: PagefindResult, fuzzyKeywords: FuzzyKeywords): SearchItem {
-  const route = sub?.url || result?.url
+  let route = sub?.url || result?.url
   const description = sub?.excerpt || result?.excerpt
+  const textFragment = description.match(/<mark>(.*?)<\/mark>/)?.[1]?.replace(leadingAndTrailingPunctuationsRegexp, '')
+  let routeUrl: URL | undefined
+  try {
+    routeUrl = new URL(route, location.href)
+  }
+  catch {}
+  if (textFragment && routeUrl) {
+    routeUrl.hash += `:~:text=${textFragment}`
+    route = routeUrl.href.slice(routeUrl.origin.length)
+  }
 
   // 构造标题
   // 过滤出合适的标题列表
@@ -129,8 +141,6 @@ function parseSubResult(sub: SubResult, anchors: Anchor[], result: PagefindResul
 const deduplicateCaseInsensitive = (arr: string[]) => [...new Map(arr.map(s => [s.toLowerCase(), s])).values()]
 type FuzzyKeywords = ReturnType<typeof extractFuzzyKeywordsFromExcerpts>
 export function extractFuzzyKeywordsFromExcerpts(results: PagefindResult[], input: string) {
-  // Pagefind 默认标记的关键词会把附近的标点符号也匹配上，需移除
-  const leadingAndTrailingPunctuationsRegexp = /^[\p{P}\p{S}]+|[\p{P}\p{S}]+$/gu
   const extract = (tokens: string[]) => deduplicateCaseInsensitive(tokens.map(word =>
     word.replace(leadingAndTrailingPunctuationsRegexp, '').trim()
   ))
@@ -140,6 +150,7 @@ export function extractFuzzyKeywordsFromExcerpts(results: PagefindResult[], inpu
   }
   return Object.entries(fuzzyKeywords).flatMap(([from, keywords]) =>
     keywords.map(keyword => ({ keyword, from: from as keyof typeof fuzzyKeywords })))
+    .sort((a, b) => b.keyword.length - a.keyword.length) // 按从长到短排列
 }
 
 function markTextWithKeywords(text: string, keywords: FuzzyKeywords) {

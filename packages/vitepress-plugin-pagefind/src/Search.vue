@@ -242,7 +242,7 @@ const showSearchResult = computed(() => {
 // 选择搜索结果跳转
 const router = useRouter()
 const route = useRoute()
-function handleSelect(target: any) {
+function handleSelect(target: { key: string; value: string }) {
   hideSearchModal()
   if (finalSearchConfig.value.clearWhenClosed === 'visit')
     handleClearSearch()
