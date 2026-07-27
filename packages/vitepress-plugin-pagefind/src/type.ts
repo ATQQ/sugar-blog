@@ -77,6 +77,7 @@ export interface SearchItem {
   }>
   result: PagefindResult
 }
+
 export interface SearchConfig {
   /**
    * @default

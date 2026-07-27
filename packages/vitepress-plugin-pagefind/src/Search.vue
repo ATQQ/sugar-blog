@@ -359,10 +359,10 @@ function handleToggleDetail() {
                   <div class="link">
                     <div class="title">
                       <span class="headings">
-                        <i v-if="item.meta.title?.length" class="prefix"># </i>
+                        <i v-if="item.meta.title?.length" class="prefix">#</i>
                         <template v-for="(title, i) in item.meta.title" :key="title">
-                          <span v-if="i" class="vpi-chevron-right local-search-icon" />
-                          <span class="text">{{ title }}</span>
+                          <i v-if="i" class="vpi-chevron-right local-search-icon" />
+                          <span class="heading" v-html="title" />
                         </template>
                       </span>
                       <span v-if="showDateInfo && item.meta.date" class="date">

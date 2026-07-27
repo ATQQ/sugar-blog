@@ -45,6 +45,7 @@
   --blue11: hsl(211, 100%, 43.2%);
   --blue12: hsl(211, 100%, 15%);
 }
+
 .dark {
   --app-bg: var(--gray1);
   --app-text: #ffffff;
@@ -97,6 +98,7 @@ div [command-dialog-mask] {
   width: 100vw;
   z-index: 200;
 }
+
 div [command-dialog-wrapper] {
   position: relative;
   background: var(--gray2);
@@ -106,6 +108,7 @@ div [command-dialog-wrapper] {
   margin: 20vh auto auto;
   max-width: 560px;
 }
+
 div [command-dialog-footer] {
   border-top: 1px solid var(--gray6);
   align-items: center;
@@ -125,6 +128,7 @@ div [command-dialog-footer] {
   z-index: 300;
   font-size: 12px;
 }
+
 .algolia [command-input] {
   font-family: var(--font-sans);
   width: 100%;
@@ -136,6 +140,7 @@ div [command-dialog-footer] {
   caret-color: var(--vcp-c-brand);
   margin: 0;
 }
+
 @supports (caret-animation: manual) {
   .algolia [command-input] {
     caret-animation: manual;
@@ -145,14 +150,17 @@ div [command-dialog-footer] {
     animation: algolia-command-input-caret-animation 500ms infinite cubic-bezier(1, 0, 0, 1) alternate;
   }
 }
+
 @keyframes algolia-command-input-caret-animation {
   to {
     caret-color: transparent;
   }
 }
+
 .algolia [command-input]::placeholder {
   color: var(--gray9);
 }
+
 .algolia [command-list] {
   height: var(--command-list-height);
   max-height: 360px;
@@ -162,6 +170,7 @@ div [command-dialog-footer] {
   transition-property: height;
   scrollbar-gutter: stable;
 }
+
 @supports (height: min(1px, 1px)) {
   @media screen and (min-width: 561px) {
     .algolia [command-list] {
@@ -170,12 +179,14 @@ div [command-dialog-footer] {
     }
   }
 }
+
 .algolia .detail-list [command-item] {
   min-height: 56px;
   max-height: 112px;
   padding: 10px 16px;
   height: auto;
 }
+
 .algolia .detail-list [command-item] .des {
   word-break: break-all;
   white-space: wrap;
@@ -186,6 +197,7 @@ div [command-dialog-footer] {
   -webkit-box-orient: vertical;
   line-height: 21px;
 }
+
 .algolia [command-item] {
   position: relative;
   content-visibility: auto;
@@ -207,42 +219,52 @@ div [command-dialog-footer] {
   margin-top: 6px;
   border: solid 2px var(--vp-c-divider);
 }
+
 .algolia [command-item]:first-child {
   margin-top: 0;
 }
-.algolia [command-item][aria-selected="true"],
-.algolia [command-item]:is(:hover, :focus-visible) {
+
+.algolia [command-item]:is(:hover, :focus-visible, [aria-selected="true"]) {
   border-color: var(--vp-c-brand-1);
 }
-.algolia [command-item][aria-selected="true"] .headings,
-.algolia [command-item]:is(:hover, :focus-visible) .headings {
+
+.algolia [command-item]:is(:hover, :focus-visible, [aria-selected="true"]) .headings {
   color: var(--vp-c-brand-1);
 }
-.algolia [command-item][aria-selected="true"] .des,
-.algolia [command-item]:is(:hover, :focus-visible) .des,
-.algolia [command-item]:is(:hover, :focus-visible) .date {
+
+.algolia [command-item]:is(:hover, :focus-visible, [aria-selected="true"]) .des,
+.algolia [command-item]:is(:hover, :focus-visible, [aria-selected="true"]) .date {
   opacity: 1;
 }
+
 .algolia [command-item][aria-selected="true"] [command-linear-shortcuts],
 .algolia [command-item]:hover [command-linear-shortcuts] {
   display: flex;
   margin-left: auto;
   gap: 8px;
 }
+
 .algolia [command-item][aria-selected="true"] [command-linear-shortcuts] kbd,
 .algolia [command-item]:hover [command-linear-shortcuts] kbd {
   font-family: var(--font-sans);
   font-size: 13px;
   color: var(--gray11);
 }
+
+.algolia [command-item][aria-selected="true"]:is(:hover, :focus-visible) {
+  background: var(--gray3);
+}
+
 .algolia [command-item]:is(:hover, :focus-visible):active {
   background: var(--gray4);
 }
+
 .algolia [command-item] svg {
   width: 16px;
   height: 16px;
   color: var(--gray10);
 }
+
 .algolia [command-list][data-empty-text]:empty::after,
 .algolia [command-list-sizer][data-empty-text]:empty::after {
   content: attr(data-empty-text);
@@ -255,6 +277,7 @@ div [command-dialog-footer] {
   color: var(--gray11);
   padding-bottom: 12px;
 }
+
 .algolia [command-empty=''] {
   font-size: 14px;
   display: flex;
@@ -265,6 +288,7 @@ div [command-dialog-footer] {
   color: var(--gray11);
   padding-bottom: 12px;
 }
+
 .algolia [command-loading=""] {
   font-size: 14px;
   display: flex;
@@ -275,6 +299,7 @@ div [command-dialog-footer] {
   white-space: pre-wrap;
   color: var(--gray11);
 }
+
 .algolia [command-loading-spinner],
 .algolia [command-overlay] [command-overlay-spinner] {
   flex-shrink: 0;
@@ -285,26 +310,27 @@ div [command-dialog-footer] {
   border-top-color: var(--vp-c-brand-1, var(--vp-c-brand, #3eaf7c));
   animation: algolia-mask-spin 0.8s linear infinite;
 }
+
 .algolia .search-dialog {
   position: relative;
 }
+
 .algolia [command-overlay] {
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(
-    ellipse at center,
-    color-mix(in srgb, var(--vp-c-bg) 92%, transparent) 0%,
-    color-mix(in srgb, var(--vp-c-bg) 78%, transparent) 32%,
-    color-mix(in srgb, var(--vp-c-bg) 45%, transparent) 65%,
-    color-mix(in srgb, var(--vp-c-bg) 20%, transparent) 100%
-  );
+  background: radial-gradient(ellipse at center,
+      color-mix(in srgb, var(--vp-c-bg) 92%, transparent) 0%,
+      color-mix(in srgb, var(--vp-c-bg) 78%, transparent) 32%,
+      color-mix(in srgb, var(--vp-c-bg) 45%, transparent) 65%,
+      color-mix(in srgb, var(--vp-c-bg) 20%, transparent) 100%);
   z-index: 2;
   pointer-events: auto;
   animation: algolia-mask-fade-in 0.2s ease-out;
 }
+
 .algolia [command-overlay] [command-overlay-text] {
   display: inline-flex;
   align-items: center;
@@ -313,22 +339,35 @@ div [command-dialog-footer] {
   font-size: 14px;
   font-weight: 500;
 }
+
 @keyframes algolia-mask-spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
+
 @keyframes algolia-mask-fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
+
 .algolia [command-dialog-mask] {
   background-color: var(--vp-backdrop-bg-color);
 }
+
 .algolia [command-dialog-header] {
   padding: 12px;
 }
+
 .algolia [command-dialog-body] {
   padding: 0 12px;
 }
+
 .algolia [command-dialog-footer] {
   align-items: center;
   border-radius: 0 0 8px 8px;
@@ -346,12 +385,14 @@ div [command-dialog-footer] {
   width: 100%;
   z-index: 300;
 }
+
 @media screen and (min-width: 561px) {
   .algolia [command-dialog-footer].no-search-result {
     box-shadow: none;
     border-top: none;
   }
 }
+
 .algolia [command-group-heading] {
   color: var(--vcp-c-brand);
   font-size: 0.85em;
@@ -363,6 +404,7 @@ div [command-dialog-footer] {
   z-index: 10;
   width: 100%;
 }
+
 .algolia [command-group-items] {
   padding-bottom: 12px;
 }
@@ -374,6 +416,7 @@ div [command-dialog-footer] {
   margin: 0;
   padding: 0;
 }
+
 @media screen and (max-width: 560px) {
   .algolia .command-palette-commands {
     display: none;
@@ -388,40 +431,50 @@ div [command-dialog-footer] {
     display: flex;
     flex-direction: column;
   }
+
   .algolia [command-dialog-footer] {
     justify-content: center;
     border-radius: 0;
   }
+
   .algolia [command-input] {
     padding: 6px 4px;
     font-size: 14px;
   }
+
   .algolia [command-list] {
     max-height: calc(100vh - 108px);
   }
+
   .algolia [command-dialog-body] {
     height: 100%;
   }
 }
+
 .algolia .command-palette-commands li {
   display: flex;
   align-items: center;
 }
+
 .algolia .command-palette-commands li:not(:last-of-type) {
   margin-right: 0.8em;
 }
+
 .algolia .command-palette-logo a {
   display: flex;
   align-items: center;
   gap: 8px;
 }
+
 .dark .algolia .command-palette-logo svg {
   filter: invert(1) hue-rotate(180deg);
 }
+
 .algolia .command-palette-logo svg {
   height: 24px;
   width: 24px;
 }
+
 .algolia .command-palette-commands-key {
   align-items: center;
   background: var(--gray3);
@@ -435,21 +488,26 @@ div [command-dialog-footer] {
   border: 0;
   width: 20px;
 }
+
 .dark .algolia [command-dialog-footer] {
   box-shadow: none;
 }
+
 div[command-group] {
   display: block !important;
 }
+
 div[command-item] {
   all: unset;
   width: 100%;
   box-sizing: border-box;
   display: flex !important;
 }
+
 .search-dialog div[command-item] > div.link {
   width: 100%;
 }
+
 .search-dialog div[command-item] .title {
   display: flex;
   justify-content: space-between;
@@ -458,6 +516,7 @@ div[command-item] {
 .search-dialog div[command-item] .title i.prefix {
   color: var(--vp-c-brand-1);
   opacity: 0.5;
+  margin-inline-end: 1ex;
 }
 
 .search-dialog div[command-item] .des {
@@ -469,23 +528,39 @@ div[command-item] {
   transition-property: margin, opacity, line-height;
   opacity: 0.5;
 }
+
 .search-dialog div[command-item] .headings {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   display: inline-block;
   transition: color 150ms;
+  line-height: 24px;
+}
+
+.search-dialog div[command-item] .vpi-chevron-right {
+  display: inline-block;
+  font-size: 13px;
+  height: 16px;
+  vertical-align: text-bottom;
+  margin-inline: 4px 2px;
 }
 
 .search-dialog div[command-item] .date {
   min-width: 86px;
   text-align: right;
   opacity: 0.5;
+  transition-property: opacity;
 }
+
 .search-dialog div[command-item] mark {
   background: none;
   color: var(--vp-c-brand-1);
-	box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.algolia [command-item]:is(:hover, :focus-visible, [aria-selected="true"]) .headings mark {
+  color: var(--vp-c-brand-3);
 }
 
 label.search-icon {
