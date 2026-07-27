@@ -232,6 +232,7 @@ const clearBtn = document.getElementById('search-clear-btn') as HTMLButtonElemen
 const toggleBtn = document.getElementById('search-toggle-detail') as HTMLButtonElement
 const backBtn = document.getElementById('search-back-btn') as HTMLButtonElement
 const mask = modal.querySelector('[command-dialog-mask]')!
+const footer = modal.querySelector('[command-dialog-footer]')!
 
 let showDetail = localStorage.getItem('pagefind-search-showDetail') === 'true'
 const dialog = modal.querySelector('.search-dialog')!
@@ -250,6 +251,10 @@ function closeModal() {
   modal.style.display = 'none'
   if (currentSearchConfig.clearWhenClosed === 'always')
     handleClearSearch()
+}
+
+function setFooterNoSearchResult(hasResult: boolean) {
+  footer?.classList.toggle('no-search-result', !hasResult)
 }
 
 trigger.addEventListener('click', openModal)
@@ -293,6 +298,7 @@ let selectedIndex = -1
 
 function renderLoading() {
   list.innerHTML = `<div command-loading><span command-loading-spinner></span>${currentSearchConfig.loadingText || 'Searching...'}</div>`
+  setFooterNoSearchResult(true)
   selectedIndex = -1
 }
 
@@ -320,6 +326,7 @@ function renderList(results: SearchItem[], { showEmptyText = false } = {}) {
       ? `<div command-empty>${currentSearchConfig.emptyText || 'No results found.'}</div>`
       : ''
     selectedIndex = -1
+    setFooterNoSearchResult(showEmptyText)
     return
   }
 
@@ -353,6 +360,7 @@ function renderList(results: SearchItem[], { showEmptyText = false } = {}) {
       </div>
     `
   list.innerHTML = html
+  setFooterNoSearchResult(true)
 
   // Add click events
   const items = list.querySelectorAll<HTMLElement>('[command-item]')
@@ -549,7 +557,7 @@ input.addEventListener('input', handleSearch)
               <div id="search-list" command-list />
             </div>
           </div>
-          <div command-dialog-footer>
+          <div command-dialog-footer class="no-search-result">
             <div class="command-palette-logo">
               <a href="https://github.com/cloudcannon/pagefind" target="_blank" rel="noopener noreferrer">
                 <span class="command-palette-Label">{{ finalSearchConfig?.searchBy || 'Search by' }}</span>
