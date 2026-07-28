@@ -17,6 +17,7 @@ import DefaultTheme from 'vitepress/theme'
 // 图表渲染组件
 // replace-mermaid-import-code
 // import Mermaid from 'vitepress-plugin-mermaid/Mermaid.vue'
+import { ProductCard } from 'vitepress-plugin-product-card/client'
 import BlogApp from './components/BlogApp.vue'
 import { withConfigProvider } from './composables/config/blog'
 
@@ -38,6 +39,7 @@ export const BlogTheme: Theme = {
     // enhanceAppWithTabs(ctx.app)
     DefaultTheme.enhanceApp(ctx)
     ctx.app.component('UserWorksPage', UserWorksPage as any)
+    ctx.app.component('ProductCard', ProductCard as any)
     // replace-mermaid-mounted-code
     // if (!ctx.app.component('Mermaid')) { ctx.app.component('Mermaid', Mermaid as any) }
   }

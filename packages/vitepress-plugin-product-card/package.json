@@ -1,0 +1,65 @@
+{
+  "name": "vitepress-plugin-product-card",
+  "version": "0.1.0",
+  "description": "VitePress plugin: markdown ::: card container + Vue product card component with GitHub time badges",
+  "author": "sugar",
+  "license": "MIT",
+  "homepage": "https://github.com/ATQQ/sugar-blog/tree/master/packages/vitepress-plugin-product-card",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ATQQ/sugar-blog.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ATQQ/sugar-blog/issues"
+  },
+  "keywords": [
+    "vitepress",
+    "plugin",
+    "markdown-it",
+    "product-card",
+    "showcase",
+    "github"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./client": {
+      "types": "./dist/client.d.ts",
+      "import": "./dist/client.mjs",
+      "require": "./dist/client.js"
+    }
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "pnpm run /^dev:.*/",
+    "dev:plugin": "npx tsup --watch",
+    "dev:component": "tsc --sourcemap -w --preserveWatchOutput -p src/components",
+    "dev:watch": "node scripts/watchAndCopy.mjs",
+    "build": "pnpm run /^build:.*/",
+    "build:plugin": "npx tsup",
+    "build:component": "tsc -p src/components && node scripts/copyComponents.mjs"
+  },
+  "peerDependencies": {
+    "vitepress": "^1.0.0-0 || ^2.0.0-0",
+    "vue": "^3.3.0"
+  },
+  "devDependencies": {
+    "@types/markdown-it": "^14.0.0",
+    "chokidar": "^3.6.0",
+    "fs-extra": "^11.1.1",
+    "tinyglobby": "^0.2.6",
+    "tsup": "^7.2.0",
+    "typescript": "^5.5.4",
+    "vite": "^5",
+    "vitepress": "2.0.0-alpha.17",
+    "vue": "^3.5.24"
+  }
+}

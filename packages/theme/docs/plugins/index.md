@@ -51,6 +51,9 @@ VitePress 图片预览插件，样式参考 [Element Plus Image Viewer](https://
 ### [vitepress-plugin-back-to-top](https://www.npmjs.com/package/vitepress-plugin-back-to-top)
 * 提供回到顶部按钮功能。
 
+### [vitepress-plugin-product-card](https://www.npmjs.com/package/vitepress-plugin-product-card)
+* 提供 `::: card` markdown 容器语法，用于快速渲染产品/项目/作品卡片，支持 GitHub 仓库时间信息自动展示。
+
 ## 规划中的插件
 * 标签页
 * 文章时间轴

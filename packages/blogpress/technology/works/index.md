@@ -8,6 +8,7 @@ hidden: true
 
 ## 目录
 * [Kite：把构建留在本地，把部署丢给 Kite](./kite.md)
+* [VitePress 产品卡片插件介绍](./vitepress-plugin-product-card.md)
 * [开发一个美观的 VitePress 图片预览插件](./vitepress-plugin-image-preview.md)
 * [用Trae做了个公众号小工具](./md-qrlink.md)
 * [用AI做了个图片上传/下发应用](./image-uploader.md)

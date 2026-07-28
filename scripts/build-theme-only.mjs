@@ -12,6 +12,7 @@ const waitResources = [
   'packages/vitepress-plugin-51la/dist/index.d.ts',
   'packages/vitepress-plugin-rss/dist/index.d.ts',
   'packages/vitepress-plugin-pagefind/dist/index.d.ts',
+  'packages/vitepress-plugin-product-card/dist/index.d.ts',
 ]
 
 await waitOn({ resources: waitResources })
