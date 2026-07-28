@@ -169,6 +169,7 @@ div [command-dialog-footer] {
   transition: 100ms ease;
   transition-property: height;
   scrollbar-gutter: stable;
+  scroll-behavior: smooth;
 }
 
 @supports (height: min(1px, 1px)) {

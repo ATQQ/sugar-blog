@@ -80,8 +80,6 @@ export function formatPagefindResult(result: PagefindResult, count = 1, fuzzyKey
     })
 }
 
-// Pagefind 默认标记的关键词会把附近的标点符号也匹配上，需移除
-const leadingAndTrailingPunctuationsRegexp = /^[\p{P}\p{S}]+|[\p{P}\p{S}]+$/gu
 function parseSubResult(sub: SubResult, anchors: Anchor[], result: PagefindResult, fuzzyKeywords: FuzzyKeywords): SearchItem {
   let route = sub?.url || result?.url
   const description = sub?.excerpt || result?.excerpt
@@ -139,6 +137,8 @@ function parseSubResult(sub: SubResult, anchors: Anchor[], result: PagefindResul
 }
 
 const deduplicateCaseInsensitive = (arr: string[]) => [...new Map(arr.map(s => [s.toLowerCase(), s])).values()]
+// Pagefind 默认标记的关键词会把附近的标点符号也匹配上，需移除
+const leadingAndTrailingPunctuationsRegexp = /^[\p{P}\p{S}]+|[\p{P}\p{S}]+$/gu
 type FuzzyKeywords = ReturnType<typeof extractFuzzyKeywordsFromExcerpts>
 export function extractFuzzyKeywordsFromExcerpts(results: PagefindResult[], input: string) {
   const extract = (tokens: string[]) => deduplicateCaseInsensitive(tokens.map(word =>
@@ -172,4 +172,16 @@ function markTextWithKeywords(text: string, keywords: FuzzyKeywords) {
     }
   }
   return segments.map(segment => typeof segment === 'string' ? segment : `<mark>${segment.mark}</mark>`).join('')
+}
+
+function getTextFragmentFromExcerpt(excerpt: string) {
+  const MARK_ON = '<mark>'
+  const MARK_OFF = '</mark>'
+  const indexBeforeMarkOn = excerpt.indexOf(MARK_ON)
+  const indexBeforeMarkOff = excerpt.indexOf(MARK_OFF)
+  const indexAfterMarkOn = indexBeforeMarkOn + MARK_ON.length
+  const indexAfterMarkOff = indexBeforeMarkOff + MARK_OFF.length
+  const text = excerpt.slice(indexAfterMarkOn, indexBeforeMarkOff)
+  const beforeText = excerpt.slice(0, indexBeforeMarkOn).replaceAll(MARK_ON, '').replaceAll(MARK_OFF, '').trimEnd()
+  const afterText = excerpt.slice(indexAfterMarkOff).replaceAll(MARK_ON, '').replaceAll(MARK_OFF, '').trimStart()
 }
