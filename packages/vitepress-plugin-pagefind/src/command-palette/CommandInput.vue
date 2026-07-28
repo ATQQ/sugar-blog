@@ -12,7 +12,7 @@ defineOptions({
 defineProps<CommandInputProps>()
 
 const inputRef = ref<HTMLInputElement | null>(null)
-const localSearch = defineModel({ default: '' })
+const localSearch = defineModel<string>({ default: '' })
 
 watchEffect(() => {
   inputRef.value?.focus()
