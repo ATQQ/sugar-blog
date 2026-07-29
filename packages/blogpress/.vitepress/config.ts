@@ -5,7 +5,7 @@ import { blogTheme } from './blog-theme'
 export default defineConfig({
   extends: blogTheme,
   metaChunk: true,
-  srcExclude: ['CHANGELOG.md', 'redirect-tag.md'],
+  srcExclude: ['CHANGELOG.md', 'redirect-tag.md', 'weekly/2026-07-16.md'],
   markdown: {
     image: {
       lazyLoading: true
@@ -187,30 +187,34 @@ export default defineConfig({
       //   ]
       // },
       {
-        text: '线上作品',
-        items: [
-          {
-            text: '轻取(文件收集)',
-            link: 'https://ep2.sugarat.top'
-          },
-          {
-            text: '个人图床',
-            link: 'https://imgbed.sugarat.top'
-          },
-          {
-            text: '考勤小程序',
-            link: 'https://hdkq.sugarat.top/'
-          },
-          {
-            text: '时光恋人',
-            link: 'https://lover.sugarat.top'
-          },
-          {
-            text: '在线简历生成',
-            link: 'https://resume.sugarat.top/'
-          }
-        ]
+        text: '个人作品',
+        link: '/works/work'
       }
+      // {
+      //   text: '线上作品',
+      //   items: [
+      //     {
+      //       text: '轻取(文件收集)',
+      //       link: 'https://ep2.sugarat.top'
+      //     },
+      //     {
+      //       text: '个人图床',
+      //       link: 'https://imgbed.sugarat.top'
+      //     },
+      //     {
+      //       text: '考勤小程序',
+      //       link: 'https://hdkq.sugarat.top/'
+      //     },
+      //     {
+      //       text: '时光恋人',
+      //       link: 'https://lover.sugarat.top'
+      //     },
+      //     {
+      //       text: '在线简历生成',
+      //       link: 'https://resume.sugarat.top/'
+      //     }
+      //   ]
+      // }
     ],
     socialLinks: [
       { icon: 'github', link: 'https://github.com/ATQQ/sugar-blog' },

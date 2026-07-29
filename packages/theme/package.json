@@ -66,6 +66,7 @@
     "vitepress-plugin-image-preview": "workspace:*",
     "vitepress-plugin-mermaid": "2.0.13",
     "vitepress-plugin-pagefind": "workspace:*",
+    "vitepress-plugin-product-card": "workspace:*",
     "vitepress-plugin-rss": "workspace:*",
     "vitepress-plugin-tabs": "0.9.0"
   },

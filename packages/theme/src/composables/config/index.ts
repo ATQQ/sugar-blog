@@ -502,6 +502,14 @@ export namespace Theme {
      */
     timeline?: boolean
     /**
+     * 支持 markdown `::: card` 容器语法，用于展示产品/项目卡片列表；设 false 关闭。
+     * 亦可传对象以配置 GitHub 时间自动展示：
+     * - `showCreated`: 是否展示 GitHub 仓库创建时间（default true）
+     * - `showUpdated`: 是否展示 GitHub 仓库最后更新时间（default true）
+     * @default true
+     */
+    productCard?: boolean | ProductCardOptions
+    /**
      * 回到顶部
      * @default true
      */
@@ -556,6 +564,19 @@ export namespace Theme {
     weeksAgo?: string
   } | ((date: Date | string) => string)
   export interface BackToTop extends BackToTopPluginOptions {
+  }
+
+  export interface ProductCardOptions {
+    /**
+     * 是否展示 GitHub 仓库创建时间
+     * @default true
+     */
+    showCreated?: boolean
+    /**
+     * 是否展示 GitHub 仓库最后更新时间
+     * @default true
+     */
+    showUpdated?: boolean
   }
 
   export interface TaskCheckbox {

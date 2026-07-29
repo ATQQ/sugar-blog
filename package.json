@@ -36,6 +36,7 @@
     "build:artalk": "pnpm --filter vitepress-plugin-artalk build",
     "build:giscus": "pnpm --filter vitepress-plugin-giscus build",
     "build:back2top": "pnpm --filter vitepress-plugin-back2top build",
+    "build:product-card": "pnpm --filter vitepress-plugin-product-card build",
     "serve": "pnpm --filter blogpress serve",
     "lint": "eslint .",
     "deploy": "zx deploy.mjs",
@@ -70,9 +71,6 @@
     "zx": "^5.3.0"
   },
   "pnpm": {
-    "overrides": {
-      "vite": "npm:rolldown-vite@^7.3.1"
-    },
     "peerDependencyRules": {
       "ignoreMissing": [
         "@algolia/client-search",
@@ -80,10 +78,20 @@
       ]
     }
   },
+  "overrides": {
+    "vite": "npm:rolldown-vite@^7.3.1"
+  },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"
   },
   "lint-staged": {
     "*": "eslint --fix"
-  }
+  },
+  "workspaces": [
+    "packages/**",
+    "template/vitepress-plugin-slot-inject-template",
+    "!**/__test__/**",
+    "!**/demos/**",
+    "!**/packages/create-theme/**/template/**"
+  ]
 }

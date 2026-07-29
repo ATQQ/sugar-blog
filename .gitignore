@@ -12,3 +12,4 @@ packages/theme/node.d.mts
 _pagefind
 .vite-inspect
 test-scripts
+.trae

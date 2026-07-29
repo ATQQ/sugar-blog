@@ -290,6 +290,180 @@ const blogTheme = getThemeConfig({
 })
 ```
 
+## card - 产品/项目卡片
+* Type: `boolean | ProductCardOptions`
+* default: `true`
+
+::: tip
+底层由独立插件 [vitepress-plugin-product-card](../plugins/vitepress-plugin-product-card.md) 提供，你也可以在非本主题项目中单独使用。
+:::
+
+提供 markdown `::: card` 容器语法，用于在文章中快速展示产品/项目/工具卡片列表（如首页 "我的产品"）。
+
+效果如下
+
+::: card 我的产品
+
+- icon: 🍬
+  iconColor: "#f5d24a"
+  title: 博客主题 @sugarat/theme
+  link: https://theme.sugarat.top
+  github: https://github.com/ATQQ/sugar-blog
+  tags: [Vitepress, Vue, Theme]
+  desc: 基于 **VitePress** 实现的简约风博客主题，开箱即用，支持深色模式、评论、RSS、Pagefind 全文搜索等。
+
+----
+
+- icon: 📥
+  iconColor: "#4f8cff"
+  title: EasyPicker（轻取）
+  link: https://docs.ep.sugarat.top
+  github: https://github.com/ATQQ/easypicker2-client
+  tags: [Vue, 工具]
+  desc: 在线文件收集系统，一站式存储、无需注册即可提交，支持 [私有化部署](https://docs.ep.sugarat.top/deploy/)。
+
+----
+
+- icon: ✍️
+  iconColor: "#ff8f6b"
+  title: 个人博客
+  link: https://sugarat.top
+  github: https://github.com/ATQQ/sugar-blog
+  tags: [Vitepress, Vue, Blog]
+  desc: 记录随笔与学习笔记的地方，同步更新在 [掘金](https://juejin.cn/user/1028798615918983)。
+
+----
+
+- icon: 🖼️
+  iconColor: "#7cd6a4"
+  title: 七牛云 OSS 图床
+  link: https://imgbed.sugarat.top/
+  github: https://github.com/ATQQ/image-bed-qiniu
+  tags: [Vue, 工具]
+  desc: 基于七牛云对象存储服务搭建的图床应用，前端纯静态，无需后端。
+
+:::
+
+语法如下
+
+````md
+::: card 我的产品
+
+- icon: 🍬
+  iconColor: "#f5d24a"
+  title: 博客主题 @sugarat/theme
+  link: https://theme.sugarat.top
+  github: https://github.com/ATQQ/sugar-blog
+  tags: [Vitepress, Vue, Theme]
+  desc: 基于 **VitePress** 实现的简约风博客主题，开箱即用，支持深色模式、评论、RSS、Pagefind 全文搜索等。
+
+----
+
+- icon: 📥
+  iconColor: "#4f8cff"
+  title: EasyPicker（轻取）
+  link: https://docs.ep.sugarat.top
+  github: https://github.com/ATQQ/easypicker2-client
+  tags: [Vue, 工具]
+  desc: 在线文件收集系统，一站式存储、无需注册即可提交，支持 [私有化部署](https://docs.ep.sugarat.top/deploy/)。
+
+----
+
+- icon: ✍️
+  iconColor: "#ff8f6b"
+  title: 个人博客
+  link: https://sugarat.top
+  github: https://github.com/ATQQ/sugar-blog
+  tags: [Vitepress, Vue, Blog]
+  desc: 记录随笔与学习笔记的地方，同步更新在 [掘金](https://juejin.cn/user/1028798615918983)。
+
+----
+
+- icon: 🖼️
+  iconColor: "#7cd6a4"
+  title: 七牛云 OSS 图床
+  link: https://imgbed.sugarat.top/
+  github: https://github.com/ATQQ/image-bed-qiniu
+  tags: [Vue, 工具]
+  desc: 基于七牛云对象存储服务搭建的图床应用，前端纯静态，无需后端。
+
+:::
+````
+
+字段说明：
+- `icon`：图标，支持图片 URL（http/https 或以 `/` 开头的站内绝对路径）或单个字符（配合 `iconColor` 作为底色）
+- `iconColor`：字符图标的背景色，可选
+- `title`：卡片标题（必填）
+- `link`：跳转链接，可选，命中时点击标题在新标签打开
+- `github`：GitHub 仓库地址，可选。填写后组件挂载时会自动请求 `https://api.github.com/repos/{owner}/{repo}` 获取创建 / 最后更新时间并展示
+- `showCreated` / `showUpdated`：布尔值，可选。单卡覆盖全局开关（默认均为 `true`）
+- `tags`：标签数组，形如 `[a, b, "包含空格的标签"]`
+- `desc`：描述，支持内联 Markdown（如 `**加粗**`、`[链接](url)`）
+
+多张卡片之间使用一行 `----`（4 个及以上短横线）分隔。
+
+### GitHub 时间自动展示
+
+当卡片配置了 `github` 字段时，会调用 GitHub 公开 API 自动拉取仓库的创建时间与最后更新时间（`created_at` / `pushed_at`），并以 `YYYY-MM-DD` 格式展示在描述下方。默认两者都开启，可以：
+
+- **全局关闭**创建/更新时间中的任意一个：
+
+```ts
+// .vitepress/blog-theme.ts
+const blogTheme = getThemeConfig({
+  productCard: {
+    showCreated: false,
+    showUpdated: true
+  }
+})
+```
+
+- **单卡覆盖**（在容器语法内声明，优先级高于全局）：
+
+```md
+::: card
+
+- title: 只显示更新时间
+  github: https://github.com/owner/repo
+  showCreated: false
+
+:::
+```
+
+> 注意：GitHub 匿名接口有 60 次/小时 IP 限流；请求失败时时间信息会静默隐藏。
+
+不需要该功能也可以整体关闭
+
+```ts
+// .vitepress/blog-theme.ts
+const blogTheme = getThemeConfig({
+  productCard: false
+})
+```
+
+`ProductCardOptions` 与 `ProductCardItem` 类型定义如下
+
+```ts
+interface ProductCardOptions {
+  /** 是否展示 GitHub 仓库创建时间，默认 true */
+  showCreated?: boolean
+  /** 是否展示 GitHub 仓库最后更新时间，默认 true */
+  showUpdated?: boolean
+}
+
+interface ProductCardItem {
+  icon?: string
+  iconColor?: string
+  title: string
+  link?: string
+  github?: string
+  tags?: string[]
+  descHtml?: string
+  showCreated?: boolean
+  showUpdated?: boolean
+}
+```
+
 ## Mermaid - 图表
 * Type: `boolean`|`object`
 

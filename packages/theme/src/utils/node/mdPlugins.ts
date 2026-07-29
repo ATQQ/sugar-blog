@@ -4,6 +4,7 @@ import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
 import type { UserConfig } from 'vitepress'
 import timeline from 'vitepress-markdown-timeline'
 import { groupIconMdPlugin } from 'vitepress-plugin-group-icons'
+import { productCardMarkdownPlugin } from 'vitepress-plugin-product-card'
 import type { Theme } from '../../composables/config/index'
 import { aliasObjectToArray } from './index'
 
@@ -34,6 +35,15 @@ export function getMarkdownPlugins(cfg?: Partial<Theme.BlogConfig>) {
 
   if (cfg?.groupIcon !== false) {
     markdownPlugin.push(groupIconMdPlugin)
+  }
+
+  if (cfg?.productCard !== false) {
+    const opts = (typeof cfg?.productCard === 'object' && cfg?.productCard !== null) ? cfg.productCard : {}
+    const defaults = {
+      showCreated: opts.showCreated !== false,
+      showUpdated: opts.showUpdated !== false
+    }
+    markdownPlugin.push((md: any) => md.use(productCardMarkdownPlugin, defaults))
   }
 
   return markdownPlugin
