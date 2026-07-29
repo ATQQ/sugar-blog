@@ -18,8 +18,8 @@ function getDirname() {
 }
 
 const aliasSearchVueFile = `${getDirname()}/../src/Search.vue`
-const aliasSearchVueFileMPA = `${getDirname()}/../src/SearchMPA.vue`
-const aliasSearchVueFileMPADefault = `${getDirname()}/../src/SearchMPADefault.vue`
+const aliasSearchVueFileMPA = `${getDirname()}/../dist/SearchMPA.vue`
+const aliasSearchVueFileMPADefault = `${getDirname()}/../dist/SearchMPADefault.vue`
 
 export function meta2string(frontmatter: Record<string, any>) {
   return `base64:${Buffer.from(encodeURIComponent(JSON.stringify(frontmatter))).toString('base64')}`
@@ -33,13 +33,13 @@ export function pagefindPlugin(
 
   let resolveConfig: any
   let vitepressConfig: SiteConfig
-  let dynamicRoutes: SiteConfig['dynamicRoutes']
+  let dynamicRoutes: SiteConfig['dynamicRoutes'] | { routes: SiteConfig['dynamicRoutes'] }
   const pluginOps: PluginOption = {
     name: 'vitepress-plugin-pagefind',
-    config: (cfg) => {
-      // @ts-expect-error
+    config: (_config) => {
+      const config = _config as typeof _config & { vitepress: SiteConfig }
       // MPA 模式下使用 MPA 组件
-      const isMPA = !!cfg.vitepress.mpa
+      const isMPA = !!config.vitepress.mpa
       const isMPADefaultUI = searchConfig.mpaDefaultUI
       return {
         resolve: {
@@ -49,7 +49,8 @@ export function pagefindPlugin(
         }
       }
     },
-    async configResolved(config: any) {
+    async configResolved(_config) {
+      const config = _config as typeof _config & { vitepress: SiteConfig }
       if (searchConfig.manual) {
         return
       }
@@ -71,7 +72,7 @@ export function pagefindPlugin(
       }
       // 添加生成索引的方法
       const selfBuildEnd = vitepressConfig.buildEnd
-      vitepressConfig.buildEnd = async (siteConfig: any) => {
+      vitepressConfig.buildEnd = async (siteConfig) => {
         const okMark = '\x1B[32m✓\x1B[0m'
         console.time(`${okMark} generating pagefind Indexing...`)
         // 调用自己的
@@ -80,11 +81,18 @@ export function pagefindPlugin(
         console.timeEnd(`${okMark} generating pagefind Indexing...`)
       }
 
+      const isMPA = !!vitepressConfig.mpa
       // 通过 head 添加额外的脚本注入
       const selfTransformHead = vitepressConfig.transformHead
       vitepressConfig.transformHead = async (ctx) => {
         const selfHead = (await Promise.resolve(selfTransformHead?.(ctx))) || []
-        return selfHead.concat(getPagefindHead(ctx.siteData.base) as HeadConfig[])
+        return selfHead.concat(getPagefindHead(ctx.siteData.base) as HeadConfig[], isMPA
+          ? [[
+              'script',
+              { id: 'check-mac-os' },
+              'document.documentElement.classList.toggle(\'mac\', /Mac|iPhone|iPod|iPad/i.test(navigator.platform))'
+            ]]
+          : [])
       }
     },
     resolveId(id: string) {
@@ -115,9 +123,7 @@ export function pagefindPlugin(
       // 兼容 动态 路由
       const isWindows = process.platform === 'win32'
       const fullPath = isWindows ? `${protocol}${pathname}` : pathname
-      // @ts-expect-error
       const _dynamicRoutes = Array.isArray(dynamicRoutes) ? dynamicRoutes : (dynamicRoutes?.routes || [])
-      // @ts-expect-error
       const dynamicRoute = _dynamicRoutes.find(route => fullPath.toLowerCase() === route.fullPath.toLowerCase())
       const isDynamicRoute = !!dynamicRoute
       const filepath = isDynamicRoute ? joinPath(vitepressConfig.srcDir, `/${dynamicRoute.route}`) : pathname

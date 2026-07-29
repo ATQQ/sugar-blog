@@ -13,7 +13,7 @@ export interface PagefindResult {
   sub_results: SubResult[]
 }
 
-interface SubResult {
+export interface SubResult {
   title: string
   url: string
   anchor: Anchor
@@ -22,24 +22,27 @@ interface SubResult {
   excerpt: string
 }
 
-interface WeightedLocation {
+export interface WeightedLocation {
   weight: number
   balanced_score: number
   location: number
 }
 
-interface Anchor {
+export interface Anchor {
   element: string
   id: string
   text: string
   location: number
 }
 
-interface Meta {
+export interface Meta {
   image_alt: string
   title: string
   image: string
   base64: string
+  date?: string
+  description?: string
+  publish?: boolean
 }
 
 interface Filters {
@@ -68,9 +71,13 @@ export interface PagefindOption {
 
 export interface SearchItem {
   route: string
-  meta: Record<string, any>
+  meta: Override<Omit<Partial<Meta>, 'base64'>, {
+    date?: number
+    title: string[]
+  }>
   result: PagefindResult
 }
+
 export interface SearchConfig {
   /**
    * @default
@@ -134,6 +141,12 @@ export interface SearchConfig {
    * 'Reset search'
    */
   resetSearch?: string
+  /**
+   * This label is only displayed in the mobile view.
+   * @default
+   * 'Close search'
+   */
+  closeSearch?: string
 
   /**
    * Automatically reloads the page when the page language changes.
@@ -207,6 +220,21 @@ export interface SearchConfig {
    * @default false
    */
   mpaDefaultUI?: boolean
+
+  /**
+   * Clear the search content and results when the search dialog is closed
+   *
+   * - `'never'`: Never clear search content and results when closed
+   *   - Same as `'visit'` in MPA mode
+   * - `'always'`: Always clear search content and results when closed
+   * - `'visit'`: Clear search content and results only if user select a search result link,
+   * and won't clear if user just close the dialog directly
+   *
+   * @default 'never'
+   */
+  clearWhenClosed?: 'never' | 'always' | 'visit'
 }
 
 export type PagefindConfig = PagefindOption & SearchConfig
+
+type Override<T, U> = Omit<T, keyof U> & U

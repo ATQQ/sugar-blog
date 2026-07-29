@@ -16,10 +16,10 @@ const props = withDefaults(defineProps<CommandRootProps>(), {
 
 const emit = defineEmits<CommandRootEmits>()
 
-const ITEM_SELECTOR = '[command-item=""]'
+const ITEM_SELECTOR = '[command-item]'
 const ITEM_KEY_SELECTOR = 'command-item-key'
-const GROUP_SELECTOR = '[command-group=""]'
-const GROUP_HEADING_SELECTOR = '[command-group-heading=""]'
+const GROUP_SELECTOR = '[command-group]'
+const GROUP_HEADING_SELECTOR = '[command-group-heading]'
 const VALID_ITEM_SELECTOR = `${ITEM_SELECTOR}:not([aria-disabled="true"])`
 const SELECTED_ITEM_SELECTOR = `${ITEM_SELECTOR}[aria-selected="true"]`
 const SELECT_EVENT = 'command-item-select'

@@ -1,19 +1,18 @@
 <script lang="ts" setup>
-import { computed, nextTick, onMounted, ref, watch } from 'vue'
+import { computed, nextTick, ref, watch } from 'vue'
 
-import { useData, useRoute, useRouter, withBase } from 'vitepress'
+import { inBrowser, useData, useRoute, useRouter, withBase } from 'vitepress'
 import { useLocalStorage, useMagicKeys } from '@vueuse/core'
 
-// @ts-expect-error
 import { searchConfig as _searchConfig } from 'virtual:pagefind'
 import { Command } from './command-palette'
 import LogoPagefind from './LogoPagefind.vue'
-import type { SearchConfig } from './type'
-import { formatPagefindResult } from './search'
+import type { SearchConfig, SearchItem } from './type'
+import { extractFuzzyKeywordsFromExcerpts, formatPagefindResult } from './search'
 import { formatShowDate } from './utils'
 
 // 搜索结果
-const searchResult = ref<{ route: string; meta: Record<string, any> }[]>([])
+const searchResult = ref<Omit<SearchItem, 'result'>[]>([])
 // 是否正在搜索中
 const isSearching = ref(false)
 // 配置获取
@@ -40,21 +39,18 @@ const showLoadingMask = computed(() => finalSearchConfig.value?.showLoadingMask 
 const formatShowDateFn = computed(() => typeof finalSearchConfig.value.showDate === 'function' ? finalSearchConfig.value.showDate : formatShowDate)
 
 // 搜索条数展示
-const headingText = computed(() => {
-  return finalSearchConfig.value?.heading
+const headingText = computed(() =>
+  finalSearchConfig.value?.heading
     ? finalSearchConfig.value.heading.replace(
-      /\{\{searchResult\}\}/,
+      '{{searchResult}}',
       `${searchResult.value.length}`
     )
-    : `Total: ${searchResult.value.length} search results.`
-})
+    : `Total: ${searchResult.value.length} search results.`)
 
-// 展示的快捷键
-const metaKey = ref('')
-onMounted(() => {
-  metaKey.value = /(Mac|iPhone|iPod|iPad)/i.test(navigator?.platform)
-    ? '⌘'
-    : 'Ctrl'
+// 修复第一次执行搜索时不显示搜索条数字样，因为被滚动到界面外了
+const commandList = ref<InstanceType<typeof Command.List>>()
+watch(searchResult, async () => {
+  commandList.value?.requestScrollToTop()
 })
 
 // 控制搜索框的展示
@@ -105,13 +101,13 @@ function inlineSearch() {
   searchResult.value = Array.from({ length: 1 }, () => ({
     route: '#',
     meta: {
-      title: '只在构建后才生效',
+      title: ['只在构建后才生效'],
       description: '<mark>only support after build</mark>, only support after build'
     }
   }))
 }
 
-const chineseRegex = /[\u4E00-\u9FA5]/g
+const chineseRegex = /\p{Ideo}/gu
 const segmenterCh = Intl?.Segmenter && new Intl.Segmenter('zh-CN', { granularity: 'word' })
 function chineseSearchOptimize(input: string) {
   if (segmenterCh) {
@@ -141,7 +137,6 @@ watch(
     isSearching.value = true
 
     // dev-server兜底
-    // @ts-expect-error
     if (!window?.__pagefind__?.search) {
       inlineSearch()
       isSearching.value = false
@@ -155,29 +150,30 @@ watch(
         // 判断有中文，默认启用优化
         : (chineseRegex.test(searchWords.value) ? chineseSearchOptimize(searchWords.value) : searchWords.value)
     try {
-      // @ts-expect-error
       await window?.__pagefind__
         ?.debouncedSearch?.(searchText, {}, searchDelayTime.value)
-        .then(async (pagefindSearchResult: any) => {
+        .then(async (pagefindSearchResult) => {
           if (pagefindSearchResult === null) {
             // 该次搜索被后续输入取消，保持 loading 状态
             return
           }
           // pagefind 搜索结果
           const pagefindResults = await Promise.all(
-            pagefindSearchResult.results.map((v: any) => v.data())
+            pagefindSearchResult.results.map(v => v.data())
           )
+          // 获取所有模糊匹配的关键词
+          const fuzzyKeywords = extractFuzzyKeywordsFromExcerpts(pagefindResults, searchText)
           // 格式化搜索结果
           const formattedResults = pagefindResults
             .map((r) => {
-              const results = formatPagefindResult(r, finalSearchConfig.value.pageResultCount || 1)
-              return results.map((result) => {
+              const results = formatPagefindResult(r, finalSearchConfig.value.pageResultCount || 1, fuzzyKeywords)
+              results.forEach((result) => {
                 // base 兼容
                 result.route = result.route.startsWith(site.value.base)
                   ? result.route
                   : withBase(result.route)
-                return result
               })
+              return results
             })
             .flat()
             // 过滤掉未发布的
@@ -198,13 +194,6 @@ watch(
     catch {
       isSearching.value = false
     }
-
-    nextTick(() => {
-      // hack 原组件实现
-      document.querySelectorAll('div[aria-disabled="true"]').forEach((v) => {
-        v.setAttribute('aria-disabled', 'false')
-      })
-    })
   }
 )
 // 避免按住搜索框内选中文本拖动出来到遮罩上导致对话框关闭的问题。
@@ -231,6 +220,8 @@ watch(
       const mask = document.querySelector('div[command-dialog-mask]')
       mask?.removeEventListener('click', handleClickMask)
       mask?.removeEventListener('mousedown', handleMouseDownMask)
+      if (finalSearchConfig.value.clearWhenClosed === 'always')
+        handleClearSearch()
     }
   }
 )
@@ -248,31 +239,36 @@ const showSearchResult = computed(() => {
 // 选择搜索结果跳转
 const router = useRouter()
 const route = useRoute()
-function handleSelect(target: any) {
+function handleSelect(target: { key: string; value: string }) {
   hideSearchModal()
+  if (finalSearchConfig.value.clearWhenClosed === 'visit')
+    handleClearSearch()
   if (route.path !== target.value) {
     router.go(target.value)
   }
 }
 
-// 语言切换，重载页面
+// 语言切换，重载 pagefind
 const langReload = computed(() => finalSearchConfig.value.langReload ?? true)
 watch(
   () => lang.value,
-  () => {
+  async () => {
     // 不在开发环境生效
     if (import.meta.env.DEV) {
       return
     }
-    // 重载页面
-    if (langReload.value) {
-      window.location.reload()
+    // 重载 pagefind
+    const pagefind = window?.__pagefind__
+    if (langReload.value && pagefind) {
+      handleClearSearch()
+      await pagefind.destroy()
+      await pagefind.init()
     }
   }
 )
 
 // 清空搜索关键词
-const searchInput = ref<HTMLInputElement>()
+const searchInput = ref<InstanceType<typeof Command.Input>>()
 function handleClearSearch() {
   searchWords.value = ''
   searchResult.value = []
@@ -280,8 +276,7 @@ function handleClearSearch() {
   nextTick(() => {
     if (!searchInput.value)
       return
-    // @ts-expect-error
-    searchInput.value.$el.value = ''
+    (searchInput.value.$el as HTMLInputElement).value = ''
   })
 }
 
@@ -294,7 +289,7 @@ function handleToggleDetail() {
 
 <template>
   <div class="blog-search" data-pagefind-ignore="all">
-    <button class="nav-search-btn-wait" @click="searchModal = true">
+    <button class="nav-search-btn-wait" @click="showSearchModal">
       <span>
         <svg viewBox="0 0 20 20">
           <path
@@ -306,14 +301,14 @@ function handleToggleDetail() {
       <span class="search-tip">{{
         finalSearchConfig?.btnPlaceholder || 'Search'
       }}</span>
-      <span class="metaKey"> {{ metaKey }} K </span>
+      <span class="metaKey" />
     </button>
     <ClientOnly>
-      <Command.Dialog :visible="searchModal" theme="algolia">
+      <Command.Dialog :visible="searchModal" theme="algolia" :footer-class="{ 'no-search-result': !searchResult.length }">
         <template #header>
           <div class="search-bar">
             <div class="search-actions before">
-              <button class="back-button" title="Close search" @click="searchModal = false">
+              <button class="back-button" :title="finalSearchConfig?.closeSearch || 'Close search'" @click="hideSearchModal">
                 <span class="vpi-arrow-left local-search-icon" />
               </button>
             </div>
@@ -321,7 +316,7 @@ function handleToggleDetail() {
               <span aria-hidden="true" class="vpi-search search-icon local-search-icon" />
             </label>
             <Command.Input
-              id="search-input" ref="searchInput" v-model:value="searchWords"
+              id="search-input" ref="searchInput" v-model="searchWords"
               :placeholder="finalSearchConfig?.placeholder || 'Search Docs'"
             />
             <div class="search-actions">
@@ -342,7 +337,7 @@ function handleToggleDetail() {
         </template>
         <template #body>
           <div class="search-dialog" :class="{ 'detail-list': showDetail }">
-            <Command.List>
+            <Command.List ref="commandList">
               <template v-if="!searchResult.length">
                 <div v-if="isSearching" class="search-loading">
                   <span class="search-loading-spinner" />
@@ -360,7 +355,13 @@ function handleToggleDetail() {
                 >
                   <div class="link">
                     <div class="title">
-                      <span class="headings"><i v-if="item.meta.title" class="prefix"># </i>{{ item.meta.title }}</span>
+                      <span class="headings">
+                        <i v-if="item.meta.title?.length" class="prefix">#</i>
+                        <template v-for="(heading, i) in item.meta.title" :key="heading">
+                          <i v-if="i" class="vpi-chevron-right local-search-icon" />
+                          <span class="heading" v-html="heading" />
+                        </template>
+                      </span>
                       <span v-if="showDateInfo && item.meta.date" class="date">
                         <!-- @vue-ignore -->
                         {{ formatShowDateFn(item.meta.date, lang) }}</span>
@@ -381,7 +382,7 @@ function handleToggleDetail() {
             </div>
           </div>
         </template>
-        <template v-if="searchResult.length" #footer>
+        <template #footer>
           <div class="command-palette-logo">
             <a href="https://github.com/cloudcannon/pagefind" target="_blank" rel="noopener noreferrer">
               <span class="command-palette-Label">{{ finalSearchConfig?.searchBy || 'Search by' }}</span>
@@ -621,6 +622,14 @@ label.search-icon {
   font-weight: 500;
 }
 
+.metaKey::before {
+  content: "Ctrl K"
+}
+
+html.mac .metaKey::before {
+  content: "⌘ K"
+}
+
 @keyframes search-mask-spin {
   to { transform: rotate(360deg); }
 }
@@ -637,6 +646,10 @@ label.search-icon {
 
   label.search-icon {
     display: none;
+  }
+
+  .search-bar .search-actions {
+    padding-right: 4px;
   }
 }
 </style>

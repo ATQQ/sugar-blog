@@ -1,50 +1,4 @@
-interface PagefindResult {
-  url: string
-  content: string
-  word_count: number
-  filters: Filters
-  meta: Meta
-  anchors: Anchor[]
-  weighted_locations: WeightedLocation[]
-  locations: number[]
-  raw_content: string
-  raw_url: string
-  excerpt: string
-  sub_results: SubResult[]
-}
-
-interface SubResult {
-  title: string
-  url: string
-  anchor: Anchor
-  weighted_locations: WeightedLocation[]
-  locations: number[]
-  excerpt: string
-}
-
-interface WeightedLocation {
-  weight: number
-  balanced_score: number
-  location: number
-}
-
-interface Anchor {
-  element: string
-  id: string
-  text: string
-  location: number
-}
-
-interface Meta {
-  image_alt: string
-  title: string
-  image: string
-  base64: string
-  date?: string
-}
-
-interface Filters {
-}
+import type { Anchor, PagefindResult, SearchItem, SubResult } from './type'
 
 function decodeBase64AndDeserialize(base64String: string) {
   if (!base64String) {
@@ -60,7 +14,7 @@ function decodeBase64AndDeserialize(base64String: string) {
   }
 }
 
-export function formatPagefindResult(result: PagefindResult, count = 1) {
+export function formatPagefindResult(result: PagefindResult, count = 1, fuzzyKeywords: FuzzyKeywords) {
   const { sub_results: subResults, anchors, weighted_locations: weightedLocations } = result
   // TODO：pick策略优化
   // 按照权重排序，从大到小
@@ -115,18 +69,18 @@ export function formatPagefindResult(result: PagefindResult, count = 1) {
     return minA - minB
   })
 
-  const filterMap = new Map<string, any>()
-  return subs.map(sub => parseSubResult(sub, anchors, result))
+  const filterSet = new Set<string>()
+  return subs.map(sub => parseSubResult(sub, anchors, result, fuzzyKeywords))
     .filter((v) => {
-      if (filterMap.has(v.meta.title)) {
+      const title = v.meta.title.join(' > ')
+      if (filterSet.has(title))
         return false
-      }
-      filterMap.set(v.meta.title, v)
+      filterSet.add(title)
       return true
     })
 }
 
-function parseSubResult(sub: SubResult, anchors: Anchor[], result: PagefindResult) {
+function parseSubResult(sub: SubResult, anchors: Anchor[], result: PagefindResult, fuzzyKeywords: FuzzyKeywords): SearchItem {
   const route = sub?.url || result?.url
   const description = sub?.excerpt || result?.excerpt
 
@@ -154,18 +108,58 @@ function parseSubResult(sub: SubResult, anchors: Anchor[], result: PagefindResul
     return prev
   }, [] as Anchor[])
   // 构造完整的 title 层级 信息
-  const title = filteredAnchors.length ? filteredAnchors.map(t => t.text.trim()).filter(v => !!v).join(' > ') : result.meta.title
+  const title = filteredAnchors.length
+    ? filteredAnchors.map(t => markTextWithKeywords(t.text.trim(), fuzzyKeywords)).filter(Boolean)
+    : [markTextWithKeywords(result.meta.title, fuzzyKeywords)]
 
   const { base64, date, ...otherMeta } = result.meta
   return {
     route,
     meta: {
       date: date ? +date : undefined,
-      ...decodeBase64AndDeserialize(base64),
+      ...decodeBase64AndDeserialize(base64) as object,
       ...otherMeta,
       title,
       description,
     },
     result
   }
+}
+
+const deduplicateCaseInsensitive = (arr: string[]) => [...new Map(arr.map(s => [s.toLowerCase(), s])).values()]
+type FuzzyKeywords = ReturnType<typeof extractFuzzyKeywordsFromExcerpts>
+export function extractFuzzyKeywordsFromExcerpts(results: PagefindResult[], input: string) {
+  // Pagefind 默认标记的关键词会把附近的标点符号也匹配上，需移除
+  const leadingAndTrailingPunctuationsRegexp = /^[\p{P}\p{S}]+|[\p{P}\p{S}]+$/gu
+  const extract = (tokens: string[]) => deduplicateCaseInsensitive(tokens.map(word =>
+    word.replace(leadingAndTrailingPunctuationsRegexp, '').trim()
+  ))
+  const fuzzyKeywords = {
+    excerptWords: extract(results.flatMap(result => [...result.excerpt.matchAll(/<mark>(.+?)<\/mark>/g).map(matched => matched[1])])),
+    inputTokens: extract(input.trim().split(/\s/)),
+  }
+  return Object.entries(fuzzyKeywords).flatMap(([from, keywords]) =>
+    keywords.map(keyword => ({ keyword, from: from as keyof typeof fuzzyKeywords })))
+    .sort((a, b) => b.keyword.length - a.keyword.length) // 按从长到短排列
+}
+
+function markTextWithKeywords(text: string, keywords: FuzzyKeywords) {
+  if (!text)
+    return text
+  text = text.replaceAll('<', '&lt;').replaceAll('>', '&gt;')
+  const segments: (string | { mark: string })[] = [text]
+  for (const { keyword, from } of keywords) {
+    const escapedKeyword = 'escape' in RegExp ? RegExp.escape(keyword) : keyword
+    const regexp = new RegExp(from === 'excerptWords' ? `\\b${escapedKeyword}\\b` : escapedKeyword, 'gi')
+    for (let i = segments.length - 1; i >= 0; i--) {
+      const segment = segments[i]
+      if (typeof segment !== 'string' || segment === '') // 如果 keywords 中包含空字符串（''），正则 gi 会导致死循环（无限匹配）
+        continue
+      if (regexp.test(segment)) {
+        const splitted = segment.split(regexp).flatMap((seg, i) => i ? [{ mark: segment.match(regexp)![i - 1] }, seg] : [seg])
+        segments.splice(i, 1, ...splitted)
+      }
+    }
+  }
+  return segments.map(segment => typeof segment === 'string' ? segment : `<mark>${segment.mark}</mark>`).join('')
 }

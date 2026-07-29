@@ -372,7 +372,12 @@ html.dark .vitepress-image-viewer__btn:active:not(.is-disabled) {
 }
 .vitepress-image-viewer__btn.is-disabled {
   cursor: not-allowed;
-  opacity: 0.4;
+  background-color: #00000016;
+  color: #fff6;
+  backdrop-filter: blur(1.5px);
+}
+html.dark .vitepress-image-viewer__btn.is-disabled {
+  background-color: #60626633;
 }
 
 .vitepress-image-viewer__close {
@@ -457,6 +462,7 @@ html.dark .vitepress-image-viewer__btn:active:not(.is-disabled) {
   opacity: 0.8;
   -webkit-text-stroke: 1.5px black;
   paint-order: stroke fill;
+  font-variant-numeric: tabular-nums;
 }
 
 .vitepress-image-viewer__canvas {

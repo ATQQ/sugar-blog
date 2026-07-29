@@ -34,7 +34,8 @@
   ],
   "scripts": {
     "dev": "npx tsup src/index.ts --dts --watch --format esm,cjs --sourcemap",
-    "build": "npx tsup src/index.ts --dts --format esm,cjs --silent --sourcemap"
+    "build": "npx tsup src/index.ts --dts --format esm,cjs --silent --sourcemap && npm run build:mpa-vue",
+    "build:mpa-vue": "node build-mpa-vue.mjs"
   },
   "peerDependencies": {
     "pagefind": "^1.1.0",

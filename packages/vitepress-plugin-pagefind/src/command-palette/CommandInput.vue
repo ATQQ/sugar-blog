@@ -1,10 +1,9 @@
 <script lang="ts">
-import { computed, ref, watchEffect } from 'vue'
+import { ref, watchEffect } from 'vue'
 </script>
 
 <script lang="ts" setup>
-import type { CommandInputEmits, CommandInputProps } from './types'
-import { useCommandState } from './useCommandState'
+import type { CommandInputProps } from './types'
 
 defineOptions({
   name: 'Command.Input',
@@ -12,19 +11,8 @@ defineOptions({
 
 defineProps<CommandInputProps>()
 
-const emit = defineEmits<CommandInputEmits>()
-
 const inputRef = ref<HTMLInputElement | null>(null)
-const { search } = useCommandState()
-const localSearch = computed(() => search.value)
-
-function handleInput(e: Event) {
-  const event = e as InputEvent
-  const input = e.target as HTMLInputElement
-  search.value = input?.value
-  emit('input', event)
-  emit('update:value', search.value)
-}
+const localSearch = defineModel<string>({ default: '' })
 
 watchEffect(() => {
   inputRef.value?.focus()
@@ -40,6 +28,7 @@ defineExpose({
 <template>
   <input
     ref="inputRef"
+    v-model="localSearch"
     command-input=""
     auto-focus
     auto-complete="off"
@@ -49,7 +38,5 @@ defineExpose({
     role="combobox"
     :aria-expanded="true"
     :placeholder="placeholder"
-    :value="localSearch"
-    @input="handleInput"
   >
 </template>

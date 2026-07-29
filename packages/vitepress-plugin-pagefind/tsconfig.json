@@ -6,6 +6,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "baseUrl": ".",
+    "types": ["vite/client"],
     "resolveJsonModule": true,
     "allowJs": true,
     "outDir": "dist",
