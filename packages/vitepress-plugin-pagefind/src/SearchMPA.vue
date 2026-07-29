@@ -519,7 +519,7 @@ input.addEventListener('input', handleSearch)
         </svg>
       </span>
       <span class="search-tip">{{ finalSearchConfig?.btnPlaceholder || 'Search' }}</span>
-      <span class="metaKey"> Ctrl K </span>
+      <span class="metaKey" />
     </div>
 
     <div id="search-modal" class="algolia">
@@ -795,6 +795,14 @@ label.search-icon {
   .search-bar .search-actions {
     padding-right: 4px;
   }
+}
+
+.metaKey::before {
+  content: "Ctrl K"
+}
+
+html.mac .metaKey::before {
+  content: "⌘ K"
 }
 </style>
 

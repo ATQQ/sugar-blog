@@ -53,9 +53,6 @@ watch(searchResult, async () => {
   commandList.value?.requestScrollToTop()
 })
 
-// 展示的快捷键
-const metaKey = computed(() => inBrowser && /(Mac|iPhone|iPod|iPad)/i.test(navigator?.platform) ? '⌘' : 'Ctrl')
-
 // 控制搜索框的展示
 const searchModal = ref(false)
 function showSearchModal() {
@@ -304,7 +301,7 @@ function handleToggleDetail() {
       <span class="search-tip">{{
         finalSearchConfig?.btnPlaceholder || 'Search'
       }}</span>
-      <span class="metaKey"> {{ metaKey }} K </span>
+      <span class="metaKey" />
     </button>
     <ClientOnly>
       <Command.Dialog :visible="searchModal" theme="algolia" :footer-class="{ 'no-search-result': !searchResult.length }">
@@ -623,6 +620,14 @@ label.search-icon {
   color: var(--vp-c-text-1);
   font-size: 14px;
   font-weight: 500;
+}
+
+.metaKey::before {
+  content: "Ctrl K"
+}
+
+html.mac .metaKey::before {
+  content: "⌘ K"
 }
 
 @keyframes search-mask-spin {
