@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRouter, withBase } from 'vitepress'
 import { useArticles, useCleanUrls, useFormatShowDate, useHotArticleConfig, useShowHotArticle } from '../composables/config/blog'
-import { wrapperCleanUrls } from '../utils/client'
+import { formatDate, wrapperCleanUrls } from '../utils/client'
 import { fireSVG } from '../constants/svg'
 import Button from './Button.vue'
 
@@ -49,6 +49,12 @@ const currentWikiData = computed(() => {
 const showChangeBtn = computed(() => {
   return recommendList.value.length > pageSize.value
 })
+
+const isMounted = ref(false)
+function showDate(d: any) {
+  return isMounted.value ? formatShowDate.value(d) : formatDate(d, 'yyyy-MM-dd')
+}
+onMounted(() => requestAnimationFrame(() => isMounted.value = true))
 </script>
 
 <template>
@@ -87,7 +93,7 @@ const showChangeBtn = computed(() => {
           <!-- 描述信息 -->
           <div class="suffix">
             <!-- 日期 -->
-            <span class="tag">{{ formatShowDate(v.meta.date) }}</span>
+            <span class="tag">{{ showDate(v.meta.date) }}</span>
           </div>
         </div>
       </li>
@@ -196,6 +202,11 @@ const showChangeBtn = computed(() => {
 .recommend-container li .suffix {
   font-size: 12px;
   color: var(--vp-c-text-2);
+}
+.tag {
+  min-width: 64px;
+  text-align: right;
+  display: inline-block;
 }
 
 .empty-text {

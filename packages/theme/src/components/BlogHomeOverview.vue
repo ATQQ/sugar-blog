@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useData } from 'vitepress'
 import { isCurrentWeek } from '../utils/client'
 import { useArticles, useHomeAnalysis, useHomeConfig } from '../composables/config/blog'
@@ -16,19 +16,42 @@ const docs = useArticles()
 const notHiddenArticles = computed(() => {
   return docs.value.filter(v => v.meta?.publish !== false)
 })
-const nowMonth = new Date().getMonth()
-const nowYear = new Date().getFullYear()
+
+const isMounted = ref(false)
+
+const latestPubDate = computed(() => {
+  let latest = new Date(0)
+  for (const v of notHiddenArticles.value) {
+    const pubDate = new Date(v.meta?.date)
+    if (!Number.isNaN(pubDate.getTime()) && pubDate > latest) {
+      latest = pubDate
+    }
+  }
+  return latest
+})
+
+const refDate = computed(() => (isMounted.value ? new Date() : latestPubDate.value))
+
+const nowMonth = computed(() => refDate.value.getMonth())
+const nowYear = computed(() => refDate.value.getFullYear())
+
 const currentMonth = computed(() => {
   return notHiddenArticles.value.filter((v) => {
     const pubDate = new Date(v.meta?.date)
-    return pubDate?.getMonth() === nowMonth && pubDate.getFullYear() === nowYear
+    return pubDate?.getMonth() === nowMonth.value && pubDate.getFullYear() === nowYear.value
   })
 })
 
 const currentWeek = computed(() => {
   return notHiddenArticles.value.filter((v) => {
     const pubDate = new Date(v.meta?.date)
-    return isCurrentWeek(pubDate)
+    return isCurrentWeek(pubDate, refDate.value)
+  })
+})
+
+onMounted(() => {
+  requestAnimationFrame(() => {
+    isMounted.value = true
   })
 })
 
