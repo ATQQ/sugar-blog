@@ -181,6 +181,7 @@ const resultCover = computed(() => {
 
 .info-part {
   flex: 1;
+  min-width: 0;
 }
 
 .title {
@@ -237,6 +238,9 @@ const resultCover = computed(() => {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
+  flex: 0 0 auto;
+  min-width: 120px;
+  min-height: 80px;
 }
 
 .pc-visible {
@@ -253,6 +257,8 @@ const resultCover = computed(() => {
     height: 60px;
     background-size: contain;
     background-position: center;
+    min-width: 100px;
+    min-height: 60px;
   }
   .pc-visible {
     display: none;
