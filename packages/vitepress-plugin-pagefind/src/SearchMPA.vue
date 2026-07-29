@@ -226,6 +226,8 @@ function debounce<T extends (...args: any[]) => any>(func: T, wait: number) {
 // Main logic
 const trigger = document.getElementById('search-trigger')!
 const modal = document.getElementById('search-modal')!
+if (modal.parentElement !== document.body)
+  document.body.appendChild(modal)
 const input = document.getElementById('search-input') as HTMLInputElement
 const list = document.getElementById('search-list')!
 const clearBtn = document.getElementById('search-clear-btn') as HTMLButtonElement
