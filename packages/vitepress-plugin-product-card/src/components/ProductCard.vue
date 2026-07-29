@@ -136,7 +136,7 @@ onMounted(() => {
   margin: 24px 0;
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 44px;
 }
 
 .pc-section-title {

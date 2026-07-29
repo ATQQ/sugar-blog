@@ -10,7 +10,7 @@ publish: false
 
 ::: card 开源的一些项目和应用
 
-- icon: /logo.png
+- icon: https://theme.sugarat.top/logo.png
   iconColor: "#f5d24a"
   title: 博客主题 @sugarat/theme
   link: https://theme.sugarat.top
