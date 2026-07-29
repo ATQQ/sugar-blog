@@ -81,11 +81,18 @@ export function pagefindPlugin(
         console.timeEnd(`${okMark} generating pagefind Indexing...`)
       }
 
+      const isMPA = !!vitepressConfig.mpa
       // 通过 head 添加额外的脚本注入
       const selfTransformHead = vitepressConfig.transformHead
       vitepressConfig.transformHead = async (ctx) => {
         const selfHead = (await Promise.resolve(selfTransformHead?.(ctx))) || []
-        return selfHead.concat(getPagefindHead(ctx.siteData.base) as HeadConfig[])
+        return selfHead.concat(getPagefindHead(ctx.siteData.base) as HeadConfig[], isMPA
+          ? [[
+              'script',
+              { id: 'check-mac-os' },
+              'document.documentElement.classList.toggle(\'mac\', /Mac|iPhone|iPod|iPad/i.test(navigator.platform))'
+            ]]
+          : [])
       }
     },
     resolveId(id: string) {
