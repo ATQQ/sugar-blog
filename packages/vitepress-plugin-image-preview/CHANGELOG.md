@@ -1,5 +1,11 @@
 # vitepress-plugin-image-preview
 
+## 0.1.6
+
+### Patch Changes
+
+- fix: 进度数字改用等宽数字排版，避免翻页时位移；禁用按钮保留亚克力背景
+
 ## 0.1.5
 
 ### Patch Changes

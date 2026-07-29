@@ -1,5 +1,20 @@
 # @sugarat/theme
 
+## 0.5.27
+
+### Patch Changes
+
+- feat: 集成 `vitepress-plugin-product-card`，支持 `::: card` 作品/产品卡片展示
+- style(BlogItem): 修复 flex 布局溢出问题
+- fix: 优化首页概览/热门文章日期显示逻辑，避免 SSR/CSR 水合不一致
+- Updated dependencies
+  - vitepress-plugin-artalk@0.1.5
+  - vitepress-plugin-back2top@0.1.4
+  - vitepress-plugin-giscus@0.1.4
+  - vitepress-plugin-image-preview@0.1.6
+  - vitepress-plugin-pagefind@0.4.24
+  - vitepress-plugin-product-card@0.1.0
+
 ## 0.5.26
 
 ### Patch Changes

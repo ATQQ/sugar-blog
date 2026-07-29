@@ -1,5 +1,11 @@
 # vitepress-plugin-giscus
 
+## 0.1.4
+
+### Patch Changes
+
+- fix: 支持背景模糊时，修复悬停透明度过渡消失的问题
+
 ## 0.1.3
 
 ### Patch Changes

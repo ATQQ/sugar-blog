@@ -1,5 +1,17 @@
 # vitepress-plugin-pagefind
 
+## 0.4.24
+
+### Patch Changes
+
+- feat: 新增 `clearWhenClosed`（`never` | `always` | `visit`）控制关闭搜索后是否保留关键词
+- feat: 新增 `closeSearch` 文案配置；未搜索时也展示底栏
+- feat: 搜索结果标题支持关键词高亮；MPA 模式完善进入/退出过渡与 `clearWhenClosed` 等能力
+- fix: 快捷键展示改由 CSS 处理，避免水合失败；MPA 搜索模态框挂载到 `body`
+- fix: 修复首次搜索不显示结果条数、Searching 到结果间缺少高度过渡等问题
+- fix: 切换语言后无需刷新即可切换搜索语言；优化多语言日期格式化
+- chore: MPA 模式注入 macOS 平台检测脚本
+
 ## 0.4.23
 
 ### Patch Changes

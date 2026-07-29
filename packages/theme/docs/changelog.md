@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.5.26） ⏰ 2026/07/25：搜索支持加载态文案与蒙层，统一悬浮按钮样式，图片预览图标优化
+description: 最近更新（v0.5.27） ⏰ 2026/07/29：集成产品卡片插件，搜索能力增强，修复布局与悬浮按钮样式
 author: 粥里有勺糖
 top: 3
 tag: 日志
@@ -26,6 +26,25 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.5.27 (2026/07/29)
+
+### Patch Changes
+
+- feat: 集成 `vitepress-plugin-product-card`，支持 `::: card` 作品/产品卡片展示
+- feat(pagefind): 新增 `clearWhenClosed`、`closeSearch`；标题关键词高亮；MPA 过渡与体验优化
+- fix(pagefind): 快捷键展示避免水合失败；MPA 模态框挂载到 `body`；首次搜索条数与高度过渡等问题
+- style(BlogItem): 修复 flex 布局溢出问题
+- fix: 优化首页概览/热门文章日期显示逻辑，避免 SSR/CSR 水合不一致
+- fix(back2top/comment): 支持背景模糊时，修复悬停透明度过渡消失的问题
+- fix(image-preview): 进度数字等宽排版，禁用按钮保留亚克力背景
+- Updated dependencies
+  - vitepress-plugin-artalk@0.1.5
+  - vitepress-plugin-back2top@0.1.4
+  - vitepress-plugin-giscus@0.1.4
+  - vitepress-plugin-image-preview@0.1.6
+  - vitepress-plugin-pagefind@0.4.24
+  - vitepress-plugin-product-card@0.1.0
 
 ## 0.5.26 (2026/07/25)
 

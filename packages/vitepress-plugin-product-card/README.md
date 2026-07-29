@@ -2,14 +2,7 @@
 
 在 VitePress 站点里通过 `::: card` markdown 容器语法快速渲染「产品/项目/作品」卡片，卡片可自动拉取 GitHub 仓库的创建时间与最后更新时间，并支持全局与单卡两级覆盖。
 
-## 特性
-
-- 零依赖 markdown-it 容器解析（`::: card`）
-- 自带一个响应式 Vue 3 组件 `ProductCard`（客户端拉 GitHub API 自动展示创建/更新时间）
-- 双入口：Node 侧引入 markdown 插件、Client 侧引入并注册 Vue 组件
-- 全局默认 + 单卡覆盖：`showCreated` / `showUpdated`
-- 支持 GitHub 图标：有时间时前置在时间行；无时间时以标签形式出现
-- 深色模式友好（沿用 VitePress CSS 变量）
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/faae2a1eeed33ece8389c1c82370a3b0)
 
 ## 安装
 
@@ -22,6 +15,23 @@ pnpm add vitepress-plugin-product-card
 ### 1. 注册 markdown 容器插件
 
 `.vitepress/config.ts`：
+
+最简引入：
+
+```ts
+import { defineConfig } from 'vitepress'
+import { productCardMarkdownPlugin } from 'vitepress-plugin-product-card'
+
+export default defineConfig({
+  markdown: {
+    config(md) {
+      md.use(productCardMarkdownPlugin)
+    }
+  }
+})
+```
+
+带可选参数：
 
 ```ts
 import { defineConfig } from 'vitepress'
