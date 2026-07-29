@@ -8,6 +8,8 @@ description: VitePress 产品/作品展示卡片插件支持 markdown 容器语�
 
 笔者维护的 [VitePress 博客主题](https://theme.sugarat.top/) 中包含一个「作品/产品卡片」的能力，可以在 markdown 里通过简单的 `::: card` 容器语法快速展示项目。为便于在主题之外复用，将其抽离为独立插件 [vitepress-plugin-product-card](https://www.npmjs.com/package/vitepress-plugin-product-card)。
 
+![](https://cdn.upyun.sugarat.top/mdImg/sugar/faae2a1eeed33ece8389c1c82370a3b0)
+
 ## 如何使用
 
 *3 步接入：*
