@@ -87,15 +87,6 @@ export default defineConfig({
         link: '/aboutme'
       },
       {
-        text: '备战春秋',
-        items: [
-          { text: '心得总结', link: '/offer/experience/' },
-          { text: '校招考点汇总', link: '/offer/campus/' },
-          { text: '面经汇总', link: '/offer/sum-interview/' },
-          { text: '复习自查', link: '/offer/review/' }
-        ]
-      },
-      {
         text: '技术笔记',
         items: [
           { text: '技术教程', link: '/technology/learn/' },
@@ -104,17 +95,6 @@ export default defineConfig({
           { text: '技术概念', link: '/technology/theory/' },
           { text: '个人作品', link: '/technology/works/' },
           { text: '学习笔记', link: '/technology/study/' }
-        ]
-      },
-      {
-        text: '计算机基础',
-        items: [
-          { text: '算法与数据结构', link: '/computerBase/algorithm/' },
-          { text: '操作系统', link: '/computerBase/os/' },
-          { text: '计算机网络', link: '/computerBase/Internet/' },
-          { text: '设计模式', link: '/computerBase/design/' },
-          { text: '剑指offer', link: '/computerBase/offer/' }
-          // { text: '力扣', link: '/computerBase/leetcode/' }
         ]
       },
       {
@@ -132,32 +112,7 @@ export default defineConfig({
       },
       {
         text: '面试',
-        items: [
-          { text: '心得总结', link: '/offer/experience/' },
-          { text: '校招考点汇总', link: '/offer/campus/' },
-          { text: '面经汇总', link: '/offer/sum-interview/' },
-          { text: '复习自查', link: '/offer/review/' },
-          { text: '问解', link: '/interview/problem/' },
-          { text: 'javascript', link: '/interview/js/' },
-          { text: 'css', link: '/interview/css/' },
-          { text: '手撕代码', link: '/interview/code/' },
-          { text: '性能优化', link: '/interview/performance/' },
-          // { text: "网络", link: "/interview/internet/" },
-          // { text: '操作系统', link: '/interview/os/' },
-          // { text: '设计模式', link: '/interview/design/' },
-          { text: '综合问题', link: '/interview/other/' },
-          { text: '面经汇总', link: '/offer/sum-interview/' },
-          { text: '小程序', link: '/interview/mini/' }
-          // { text: '面经', link: '/interview/experience/' }
-        ]
-      },
-      {
-        text: '手撕代码',
-        items: [
-          { text: '数据结构与算法', link: '/coding/algorithm/' },
-          { text: 'javascript', link: '/coding/js/' },
-          { text: 'css', link: '/coding/css/' }
-        ]
+        link: '/interview/'
       },
       // {
       //   text: '个人站点',
