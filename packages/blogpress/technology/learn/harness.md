@@ -44,18 +44,24 @@ tags:
 
 ## Tools
 
-Tools 是模型和外部世界之间的桥：模型只负责发出结构化调用，真正去改文件、跑命令、调 API 的是 Tool 实现；调度和校验则由 Harness 来做。
+Tools 是模型和外部沟通的桥：模型只负责发出结构化调用，真正去改文件、跑命令、调 API 的是具体 Tool 实现；调度和校验则由 Harness 来做。
 
 ### 先说 Function Calling
 
-Function Calling（现在也叫 Tool Calling）解决的是一件事：**别让模型用自然语言描述去说明要调用的工具，而是让它输出可解析的调用结构。**
+Function Calling（现在大部分时候也叫 Tool Calling）解决的问题是：
 
-没有这套约定时，模型可能写「我需要调用 get_weather(city=上海) 来获取天气信息」——应用侧很难可靠地解析。有了 Function Calling：
+**避免模型用自然语言描述去说明要调用的工具，而是让它输出可解析的调用结构。**
+
+没有这套约定时，模型可能写
+
+*我需要调用 get_weather(上海) 来获取天气信息*
+
+应用侧很难可靠地解析。有了 Function Calling：
 
 1. 先把工具的 **schema** 交给模型（能调什么、参数长什么样）
-2. 模型需要时返回 **`tool_calls`**（调用谁、参数是什么、本次 id）
-3. **Harness 执行**，把结果以 **`tool` 消息**写回
-4. 再请求模型，让它基于证据继续说或继续调
+2. 模型需要时返回 **`tool_calls`**（调用谁、参数是什么、本次调用的 id）
+3. **Harness 解析调用工具执行**，把结果以 **`tool` 消息**写回
+4. Harness 再请求模型，基于工具执行结果继续做推理
 
 贴一张官方的图：[function-calling#how-it-works](https://developers.openai.com/api/docs/guides/function-calling?lang=javascript#how-it-works)
 
@@ -145,7 +151,7 @@ const message = data.choices[0].message
 返回结果里，重点关注这几个：
 
 - **`message.tool_calls`**：决定是否需要执行工具
-- **`tool_calls[].id`**：回写结果时需要原样带回去
+- **`tool_calls[].id`**：回写结果时需要一一对应上id
 - **`tool_calls[].function.name` / `arguments`**：工具名和参数
 - **`finish_reason`**：`"tool_calls"` 表示「需要执行工具」；`"stop"` 表示本轮结束
 
@@ -232,7 +238,7 @@ const message = data.choices[0].message
 
 ### 小结
 
-1. **Function Calling** 让模型输出可解析的 `tool_calls`  
+1. **Function Calling** 让模型输出可解析的 `tool_calls`  参数
 2. **Tool**：由声明（schema）与实现（handler）组成；声明给到模型，实现留在 Harness 里
 3. **Harness** 负责校验 → 执行 → 按 `tool_call_id` 回写 → 再请求
 
@@ -288,7 +294,7 @@ async function runAgent(state) {
 
 ### 其它条件
 
-以 [Pi `agent-loop`](https://github.com/earendil-works/pi/blob/main/packages/agent/src/agent-loop.ts) 为例，默认仍是「本轮有没有工具调用」驱动自动续跑，同时还会看下面这些条件：
+以 [Pi: agent-loop](https://github.com/earendil-works/pi/blob/main/packages/agent/src/agent-loop.ts) 为例，默认仍是「本轮有没有工具调用」驱动自动续跑，同时还会看下面这些条件：
 
 **1）工具结果不一定需要回传**
 
@@ -315,9 +321,9 @@ async execute(_id, params) {
 
 这两个都是「往 Loop 里塞用户消息」，时机不同：
 
-| 名词      | 白话                                                   | 典型时机                                  |
-| --------- | ------------------------------------------------------ | ----------------------------------------- |
-| steering  | Agent 还在跑时，用户可以临时插一句进来，改变执行方向   | 当前回合工具跑完后、下一次请求模型前注入  |
+| 名词      | 白话                                                   | 典型时机                                 |
+| --------- | ------------------------------------------------------ | ---------------------------------------- |
+| steering  | Agent 还在跑时，用户可以临时插一句进来，改变执行方向   | 当前回合工具跑完后、下一次请求模型前注入 |
 | follow-up | Agent 准备结束了，队列里还有一句比如「顺便再总结一下」 | 内层循环要退出前从队列里取出；有则继续跑 |
 
 相关 loop 代码大概就 100 来行，比较容易理解。
@@ -327,13 +333,13 @@ async execute(_id, params) {
 ### 小结
 
 1. Loop 最小模型 = 组装上下文 → 调模型 →（有 `tool_calls` 则）执行工具 → 再请求进行下一轮  
-2. Trace 也可以在 Loop 里记录或者通过事件暴露出来，在外面 Loop 外监听，方便后续分析。
+2. Trace 可以在 Loop 里记录，通过事件将相关信息暴露出来，在 Loop 外监听，方便后续进一步的分析。
 
 ## 运行时约束
 
 Loop 能跑起来之后，接着就是：**怎么让它停得住。**
 
-Prompt 只能是软约束：不可逆操作、调用死循环、反复执行等，需要在 Harness 代码里做硬约束。
+Prompt 只能做一些软约束：不可逆操作、调用死循环、反复执行等，需要在 Harness 代码里做硬约束。
 
 ![运行时约束](https://img.cdn.sugarat.top/mdImg/sugar/d09e52b0b1f0fba95a475d55f60d2286)
 
@@ -361,13 +367,13 @@ await runAgent({
 
 ### 校验
 
-执行路径上需要加一层执行前校验：校验工具 schema，是否存在，参数是否合法等。
+执行工具调用前加一层执行前校验：校验 schema，工具是否存在，参数是否合法等。
 
-异常情况可以回写错误的 Tool Result 消息，而不是默默吞掉，让模型和用户能感知到。
+异常情况可以回写错误的 Tool 消息，让模型可以自主的重试，用户也能感知到。
 
 ### 小结
 
-终止与安全边界，靠 Harness 代码硬约束。
+循环的终止与工具调用安全边界，靠 Harness 代码硬约束。
 
 *执行沙箱等下来仔细研究一下，后面再单开文章。*
 
@@ -410,7 +416,7 @@ const context = assembleContext({
 
 可以看成是解决某类问题或完成某项任务的流程规范文档（SOP）。
 
-**SKILL 不是 Tool**，它是一段提示词，实际执行仍是通过内部的指令描述调用 Tool 来完成任务。
+**SKILL 不是 Tool**，可以看做是一大段提示词，实际执行仍是通过内部的指令描述调用 Tool 来完成任务。
 
 ### SKILL 结构
 
@@ -436,11 +442,11 @@ description: 用户要天气简报时使用
 
 学到的几种方式：
 
-| 方式             | 谁决定加载全文                    | 全文怎么进                                                                            |
-| ---------------- | --------------------------------- | ------------------------------------------------------------------------------------- |
-| **手工 / 显式**  | 用户指定（如 `/skill:name`）      | 直接写入 Context（常进 system）                                                       |
-| **Harness 匹配** | 按 SKILL 描述与用户输入做简单匹配 | 匹配到的正文写入 Context                                                              |
-| **模型决定**     | 模型自己选要加载哪个              | 先把目录（name + description）给模型，再调工具 `load_skill`，正文以 **tool 结果**回写 |
+| 方式             | 谁决定加载全文                            | 全文怎么进                                                                                                       |
+| ---------------- | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| **手工 / 显式**  | 用户指定（如 `/skill:name`）              | 直接写入 Context                                                                                                 |
+| **Harness 匹配** | 按 SKILL 描述与用户输入做简单的关键词匹配 | 匹配到的正文写入 Context                                                                                         |
+| **模型决定**     | 模型自己选要加载哪个                      | 先把SKILL目录里的（name + description）给模型，模型决策后，再调工具 `load_skill`，SKILL 正文以 **tool 结果**回写 |
 
 三种方式的逐步流程（同一例子 `weather-brief`）：
 
@@ -452,19 +458,23 @@ SKILL 可以由 Harness 发现并注入上下文，也可以给模型披露一�
 
 ## MCP
 
-MCP（Model Context Protocol）是一套开放协议，用来标准化 AI 应用怎么连接外部系统（数据、工具等）。本文先只看 Tools：统一发现与调用。
+MCP（Model Context Protocol）是一套开放协议，用来标准化 AI 应用怎么连接外部系统（数据、工具等）。
 
-收到 `tool_calls` 后的路径：Harness → 选中 Client → Server → 结果回写 Context。
+本文先只看 Tools 部分：统一发现与调用。
+
+收到 `tool_calls` 后的执行路径：
+
+Harness → 选则 Client → Server → 返回的结果回写 Context。
 
 ![MCP 构成与调用](https://img.cdn.sugarat.top/mdImg/sugar/58d47446f0a7e8cb7d1e517c54e4b4e6)
 
-| 角色 | 职责 |
-| ---- | ---- |
-| **MCP Host** | 创建/管理多个 Client（本文落在 Harness） |
-| **MCP Client** | 与单个 Server 的会话：连接、`listTools`、`callTool` |
+| 角色           | 职责                                                                          |
+| -------------- | ----------------------------------------------------------------------------- |
+| **MCP Host**   | 创建/管理多个 Client，这里就是 Harness 去负责管理                             |
+| **MCP Client** | 与单个 Server 的会话连接：提供`listTools`、`callTool` 等常用方法              |
 | **MCP Server** | 暴露 Tools 并执行（本地进程或远程服务；另有 Resources / Prompts，本文不展开） |
 
-传输：本地多用 **stdio**，远程多用 **Streamable HTTP**；报文为 **JSON-RPC**。
+传输：本地多用 **stdio**，远程多用 **Streamable HTTP**；数据传输协议使用 **JSON-RPC**。
 
 ### MCP Server（Tools）
 
@@ -494,9 +504,11 @@ const transport = new StdioServerTransport()
 await server.connect(transport) // stdout 专给 JSON-RPC；日志用 console.error
 ```
 
-### 接入 Harness
+### 接入到 Harness 中
 
-`registry` 是 **Harness 自己的工具注册表**（本地 Tools + MCP Tools 的统一目录），不是 MCP SDK 的 API。用来：把 schema 交给模型、按 `name` 找到执行后端。
+下面提到的 `registry` 可以看做是 **Harness 里负责管理工具注册和发现的模块**
+
+包含本地 Tools + MCP Tools 的管理
 
 ```ts
 import { Client } from '@modelcontextprotocol/sdk/client/index.js'
@@ -538,22 +550,22 @@ async function executeTool(call: ToolCall): Promise<ToolResult> {
 }
 ```
 
-连接是**长生命周期**的：
-* 启动时 `new Client` → `connect` → `listTools` 注册一次；
-* 之后多轮 Agent Loop 里反复 `callTool`，复用同一条连接；
-* 只有 Harness 退出或主动卸掉该 Server 时才 `close()`。
+CLient 连接是**长生命周期**的：
+* 启动时 `new Client` → `connect` → `listTools` 注册一次工具；
+* 之后多轮 Agent Loop 里反复 `callTool`，复用之前的连接；
+* 一般只有 Harness 退出或用户主动停止该 Server 时才 `close()`。
 
-*MCP 还包含 Resources 和 Prompt 能力，这块后面再深入研究一下联动再阐述*
+*MCP 还包含 Resources 和 Prompt 能力，这块还要再下来研究一下与 Harness 的联动机制*
 
 ## 最后
 
-到这里搞一个 MVP 版可跑的 Agent 应该是妥妥的了
+到这里 0-1 搞一个 MVP 版可跑的 Agent 应该是妥妥的了
 
 下一篇（Part 2）大概会是以下的内容：
 
 1. **Memory / RAG**：怎么检索、何时注入、怎么裁切；准备看一下各大 Agent 框架的实现细节，和一些业界开源库对比一下效果
-2. **执行沙箱和权限管控**：怎么与用户项目隔离，工具白名单，执行权限控制等
-3. **MCP 其它内容**：Resources / Prompts 怎么和 Harness 联动工作
+2. **执行沙箱和权限管控**：部分工具执行时怎么与用户项目环境隔离；工具白名单，执行权限控制等
+3. **MCP 其它内容**：Resources / Prompts
 
 ## 相关链接
 
