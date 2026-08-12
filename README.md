@@ -96,7 +96,7 @@ pnpm dev:theme
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=atqq/sugar-blog&type=Date)](https://star-history.com/#atqq/sugar-blog&Date)
+[![Star History Chart](https://star-history.dera.page/svg?repos=atqq/sugar-blog&type=Date)](https://star-history.dera.page/#atqq/sugar-blog&Date)
 
 ## Stargazers over time
 [![Stargazers over time](https://starchart.cc/ATQQ/sugar-blog.svg?variant=adaptive)](https://starchart.cc/ATQQ/sugar-blog)
