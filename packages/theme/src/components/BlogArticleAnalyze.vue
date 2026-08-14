@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 // 阅读时间计算方式参考
 // https://zhuanlan.zhihu.com/p/36375802
-import { useData } from 'vitepress'
+import { useData, withBase } from 'vitepress' 
+
 
 // 移除外部依赖，图标内置
 // import { ElIcon } from 'element-plus'
@@ -229,7 +230,7 @@ const timeTitle = computed(() =>
       <i class="icon">
         <CollectionTag />
       </i>
-      <a v-for="tag in tags" :key="tag" class="link" :href="`/?tag=${tag}`">{{ tag }}
+      <a v-for="tag in tags" :key="tag" class="link" :href="withBase(`/?tag=${tag}`)">{{ tag }}
       </a>
     </span>
     <!-- 封面展示 -->
