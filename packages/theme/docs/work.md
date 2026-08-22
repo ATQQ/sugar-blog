@@ -8,7 +8,14 @@ publish: false
 
 # 个人作品
 
-::: card 开源的一些项目和应用
+::: card 做的一些产品和开源
+
+- icon: https://miaowa.sugarat.top/favicon.ico
+  title: 妙蛙记账
+  link:  https://miaowa.sugarat.top/docs/
+  tags: [工具, APP]
+  desc: 一句话，记清花销。打字或语音说一句，支出或收入都能记上。自动完成归类。
+----
 
 - icon: https://theme.sugarat.top/logo.png
   iconColor: "#f5d24a"
@@ -27,16 +34,6 @@ publish: false
   github: https://github.com/ATQQ/easypicker2-client
   tags: [Vue, 工具]
   desc: 在线文件收集系统，一站式存储、无需注册即可提交，支持 [私有化部署](https://docs.ep.sugarat.top/deploy/)。
-
-----
-
-- icon: https://sugarat.top/logo.png
-  iconColor: "#ff8f6b"
-  title: 个人博客
-  link: https://sugarat.top
-  github: https://github.com/ATQQ/sugar-blog
-  tags: [Vitepress, Vue, Blog]
-  desc: ✍️📚我写博客的地方🤪🤪🤪记录随笔与学习笔记，仓库包含：博客内容，博客主题、博客模板、vitepress离线全文搜索插件、VitePress RSS 支持插件，图片预览插件；a blog theme use vitepress
 
 
 ----
@@ -78,6 +75,18 @@ publish: false
   desc: 统一的 AI 编程 Agent 桌面应用 —— 在一个 App 里调度 Claude、Codex 等多种 Agent。
   github: https://github.com/ATQQ/AgentCodePilot
   tags: [TypeScript, Electron, Vue]
+
+
+----
+
+- icon: https://sugarat.top/logo.png
+  iconColor: "#ff8f6b"
+  title: 个人博客
+  link: https://sugarat.top
+  github: https://github.com/ATQQ/sugar-blog
+  tags: [Vitepress, Vue, Blog]
+  desc: ✍️📚我写博客的地方🤪🤪🤪记录随笔与学习笔记，仓库包含：博客内容，博客主题、博客模板、vitepress离线全文搜索插件、VitePress RSS 支持插件，图片预览插件；a blog theme use vitepress
+
 
 ----
 - title: 考勤签到小程序

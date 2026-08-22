@@ -19,8 +19,19 @@ tags:
 
 <!-- ![图片](https://img.cdn.sugarat.top/mdImg/MTYwNDcyMTQ4NTMyOA==604721485328) -->
 
-## :sparkles:在做什么
-### 公司
+## 最近在搓什么
+
+::: card
+
+- icon: https://miaowa.sugarat.top/favicon.ico
+  title: 妙蛙记账
+  link:  https://miaowa.sugarat.top/docs/
+  tags: [工具, APP]
+  desc: 一句话，记清花销；一句话完成想要的数据查询。
+
+:::
+
+## 之前在公司，做了什么
 * ing - 提 🪣 跑路了 🏃🏻
 * 2026.03 - 2026.07 ing：Agent 重塑系统
 * 2025.05 - 2025.12：Node SSR 网关
@@ -30,7 +41,7 @@ tags:
 * 2022.11 - 2023.10：[大前端 DevOps](https://tech.meituan.com/2023/12/29/The-evolution-of-terminals-from-standardization-to-digitalization.html)
 * 2021.07 - 2022.11：[业务产品：开店宝](https://ecom.meituan.com)，[研发框架：Rome](https://tech.meituan.com/2023/08/03/meituan-Rome-Practice.html)
 
-### 开源
+## 开源
 ::: card 开源的一些项目和应用
 
 - icon: https://theme.sugarat.top/logo.png
@@ -50,17 +61,6 @@ tags:
   github: https://github.com/ATQQ/easypicker2-client
   tags: [Vue, 工具]
   desc: 在线文件收集系统，一站式存储、无需注册即可提交，支持 [私有化部署](https://docs.ep.sugarat.top/deploy/)。
-
-----
-
-- icon: https://sugarat.top/logo.png
-  iconColor: "#ff8f6b"
-  title: 个人博客
-  link: https://sugarat.top
-  github: https://github.com/ATQQ/sugar-blog
-  tags: [Vitepress, Vue, Blog]
-  desc: ✍️📚我写博客的地方🤪🤪🤪记录随笔与学习笔记，仓库包含：博客内容，博客主题、博客模板、vitepress离线全文搜索插件、VitePress RSS 支持插件，图片预览插件；a blog theme use vitepress
-
 
 ----
 
@@ -110,6 +110,19 @@ tags:
   github: https://github.com/ATQQ/tools
   link: https://github.com/ATQQ/tools
   tags: [Node]
+
+
+----
+
+- icon: https://sugarat.top/logo.png
+  iconColor: "#ff8f6b"
+  title: 个人博客
+  link: https://sugarat.top
+  github: https://github.com/ATQQ/sugar-blog
+  tags: [Vitepress, Vue, Blog]
+  desc: ✍️📚我写博客的地方🤪🤪🤪记录随笔与学习笔记，仓库包含：博客内容，博客主题、博客模板、vitepress离线全文搜索插件、VitePress RSS 支持插件，图片预览插件；a blog theme use vitepress
+
+
 ----
 - title: 考勤签到小程序
   icon: https://hdkq.sugarat.top/favicon.png
