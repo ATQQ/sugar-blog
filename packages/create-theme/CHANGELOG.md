@@ -1,5 +1,11 @@
 # @sugarat/create-theme
 
+## 0.0.109
+
+### Patch Changes
+
+- chore: template `package.json` add `"type": "module"`, fixing the Vite `configLoader: 'native'` warning about ESM syntax in `.vitepress/blog-theme.ts` loaded as CommonJS
+
 ## 0.0.108
 
 ### Patch Changes

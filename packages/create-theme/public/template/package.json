@@ -2,6 +2,7 @@
   "name": "vitepress-blog",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "author": "粥里有勺糖",
   "license": "MIT",
   "scripts": {
