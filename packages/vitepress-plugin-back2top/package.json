@@ -32,11 +32,11 @@
   "scripts": {
     "dev": "pnpm run /^dev:.*/",
     "dev:plugin": "npx tsup src/index.ts --dts --watch --format esm,cjs --external vitepress",
-    "dev:component": "node scripts/devComponents.mjs",
-    "dev:watch": "node scripts/devComponents.mjs",
-    "build": "pnpm run /^build:.*/",
+    "dev:component": "node ../../scripts/mkdist-vue.mjs --watch --ignore index.ts",
+    "dev:watch": "node ../../scripts/mkdist-vue.mjs --watch --ignore index.ts",
+    "build": "pnpm run build:component && pnpm run build:plugin",
     "build:plugin": "npx tsup src/index.ts --dts --format esm,cjs --external vitepress --silent",
-    "build:component": "mkdist --src src --dist dist --pattern '**/*.{vue,ts,css}' --declaration --format esm"
+    "build:component": "node ../../scripts/mkdist-vue.mjs --ignore index.ts"
   },
   "peerDependencies": {
     "vitepress": "^1.0.0-0 || ^2.0.0-0",
@@ -48,7 +48,6 @@
     "javascript-stringify": "^2.1.0"
   },
   "devDependencies": {
-    "chokidar": "^3.6.0",
     "mkdist": "^2.4.1",
     "tsup": " ^7.2.0",
     "typescript": "^5.9.3",

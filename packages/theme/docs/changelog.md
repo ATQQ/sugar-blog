@@ -32,6 +32,7 @@ bun install vitepress@latest
 ### Patch Changes
 
 - fix: 主题客户端改为 `mkdist` 构建，发布产物中的 `.vue` 为纯 JS（无 `lang="ts"`）并附带类型声明，下游无需 TypeScript 即可构建主题组件（补齐 #467）
+- fix: 覆盖 VitePress 2 preflight 的无单位 `line-height: 1.5`，改回绝对行高 `24px`，避免摘要两行省略和侧栏行距错位
 - fix(插件): 全部插件 Vue 组件产物改为纯 JS（`dist` 内 `.vue` 无 `lang="ts"`，附类型声明），下游项目无需安装 TypeScript 即可构建（修复 #467）
 - fix(插件): Layout 插槽注入改为基于 `@vue/compiler-sfc` 的 `createSlotInjectPlugin`，兼容 VitePress 2.0.0-alpha.20+ 的 `<script setup>`（无 `lang` 属性）形态（修复 #469）
 - fix(插件): `vue` 补充进各插件 `peerDependencies`，组件运行时依赖声明完整

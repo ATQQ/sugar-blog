@@ -41,11 +41,11 @@
   "scripts": {
     "dev": "pnpm run /^dev:.*/",
     "dev:plugin": "npx tsup --watch",
-    "dev:component": "node scripts/devComponents.mjs",
-    "dev:watch": "node scripts/devComponents.mjs",
-    "build": "pnpm run /^build:.*/",
+    "dev:component": "node ../../scripts/mkdist-vue.mjs --watch --ext vue,ts --ignore index.ts,client.ts,node.ts",
+    "dev:watch": "node ../../scripts/mkdist-vue.mjs --watch --ext vue,ts --ignore index.ts,client.ts,node.ts",
+    "build": "pnpm run build:component && pnpm run build:plugin",
     "build:plugin": "npx tsup",
-    "build:component": "mkdist --src src --dist dist --pattern '**/*.{vue,ts}' --declaration --format esm"
+    "build:component": "node ../../scripts/mkdist-vue.mjs --ext vue,ts --ignore index.ts,client.ts,node.ts"
   },
   "peerDependencies": {
     "vitepress": "^1.0.0-0 || ^2.0.0-0",
@@ -53,7 +53,6 @@
   },
   "devDependencies": {
     "@types/markdown-it": "^14.0.0",
-    "chokidar": "^3.6.0",
     "mkdist": "^2.4.1",
     "tsup": "^7.2.0",
     "typescript": "^5.9.3",

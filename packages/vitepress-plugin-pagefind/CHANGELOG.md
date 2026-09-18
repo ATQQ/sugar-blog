@@ -5,6 +5,7 @@
 ### Patch Changes
 
 - fix: 构建改为 `mkdist` 统一处理（`src` 下 `.vue`/`.ts`/`.css` → `dist`），发布产物中的 `.vue` 均为纯 JS（无 `lang="ts"`）并附带类型声明，下游项目无需安装 TypeScript 即可构建（修复 #467）；删除手写 `build-mpa-vue.mjs`，`exports["./Search.vue"]` 指向 dist 产物并补充 `types` 条件。
+- fix: 关闭 mkdist 默认的 postcss/cssnano，避免压缩改写相对颜色、`@supports`、`v-bind()` 导致组件样式失效。
 - Updated dependencies
   - @sugarat/theme-shared@0.1.0
 

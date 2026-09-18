@@ -36,13 +36,13 @@
   ],
   "scripts": {
     "dev": "npx tsup src/index.ts --dts --watch --format esm,cjs --sourcemap",
-    "build:component": "mkdist --src src --dist dist --pattern '**/*.{vue,ts,css}' --declaration --format esm",
+    "build:component": "node ../../scripts/mkdist-vue.mjs --ignore index.ts",
     "build": "npm run build:component && npx tsup src/index.ts --dts --format esm,cjs --silent --sourcemap"
   },
   "peerDependencies": {
-    "vue": "^3.3.0",
+    "pagefind": "^1.1.0",
     "vitepress": "^1.0.0-0 || ^2.0.0-0",
-    "pagefind": "^1.1.0"
+    "vue": "^3.3.0"
   },
   "dependencies": {
     "@sugarat/theme-shared": "workspace:*",

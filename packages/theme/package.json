@@ -61,7 +61,7 @@
     "build": "npm run build:node && npm run build:docs",
     "build:docs": "vitepress build docs",
     "build:node": "npx tsup",
-    "build:component": "node scripts/buildClient.mjs",
+    "build:component": "node ../../scripts/mkdist-vue.mjs --ext vue,ts,css,webp,png --legal-comments",
     "serve": "vitepress serve docs"
   },
   "peerDependencies": {

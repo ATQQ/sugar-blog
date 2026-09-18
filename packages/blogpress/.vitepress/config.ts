@@ -1,14 +1,13 @@
 import { defineConfig } from 'vitepress'
 import { La51Plugin } from 'vitepress-plugin-51la'
-import { blogTheme } from './blog-theme'
+import { blogTheme } from './blog-theme.ts'
 
 export default defineConfig({
   extends: blogTheme,
-  metaChunk: true,
-  srcExclude: ['CHANGELOG.md', 'redirect-tag.md'],
+  srcExclude: ['CHANGELOG.md', 'redirect-tag.md', 'weekly/2026-09-13.md'],
   markdown: {
     image: {
-      lazyLoading: true
+      lazyLoad: true
     }
   },
   ignoreDeadLinks: true,
@@ -75,7 +74,9 @@ export default defineConfig({
     //     placeholder: '请输入要搜索的内容...'
     //   }
     // },
-    lastUpdatedText: '上次更新于',
+    lastUpdated: {
+      text: '上次更新于',
+    },
     logo: 'https://cdn.upyun.sugarat.top/avatar/blog/zlyst-avatar.jpeg-wh100',
     // editLink: {
     //   pattern:
