@@ -189,6 +189,9 @@ importers:
       markdown-it-mathjax3:
         specifier: ^4.3.2
         version: 4.3.2
+      mkdist:
+        specifier: ^2.4.1
+        version: 2.4.1(sass@1.97.1)(typescript@5.6.2)(vue-sfc-transformer@0.3.0(@volar/typescript@2.4.15)(@vue/compiler-core@3.5.29)(esbuild@0.27.3)(typescript@5.6.2)(vue@3.5.24(typescript@5.6.2)))(vue-tsc@2.2.12(typescript@5.6.2))(vue@3.5.24(typescript@5.6.2))
       pagefind:
         specifier: ^1.5.2
         version: 1.5.2
@@ -207,6 +210,12 @@ importers:
       vue:
         specifier: ^3.5.24
         version: 3.5.24(typescript@5.6.2)
+      vue-sfc-transformer:
+        specifier: ^0.3.0
+        version: 0.3.0(@volar/typescript@2.4.15)(@vue/compiler-core@3.5.29)(esbuild@0.27.3)(typescript@5.6.2)(vue@3.5.24(typescript@5.6.2))
+      vue-tsc:
+        specifier: ^2.2.12
+        version: 2.2.12(typescript@5.6.2)
 
   packages/vitepress-plugin-51la:
     devDependencies:
@@ -271,7 +280,7 @@ importers:
         version: 3.6.0
       mkdist:
         specifier: ^2.4.1
-        version: 2.4.1(sass@1.97.1)(typescript@5.6.2)(vue-sfc-transformer@0.3.0(@volar/typescript@2.4.15)(@vue/compiler-core@3.5.29)(esbuild@0.18.15)(typescript@5.6.2)(vue@3.5.29(typescript@5.6.2)))(vue-tsc@2.2.12(typescript@5.6.2))(vue@3.5.29(typescript@5.6.2))
+        version: 2.4.1(sass@1.97.1)(typescript@5.6.2)(vue-sfc-transformer@0.3.0(@volar/typescript@2.4.15)(@vue/compiler-core@3.5.29)(esbuild@0.27.3)(typescript@5.6.2)(vue@3.5.29(typescript@5.6.2)))(vue-tsc@2.2.12(typescript@5.6.2))(vue@3.5.29(typescript@5.6.2))
       tsup:
         specifier: ' ^7.2.0'
         version: 7.2.0(postcss@8.5.6)(typescript@5.6.2)
@@ -289,7 +298,7 @@ importers:
         version: 3.5.29(typescript@5.6.2)
       vue-sfc-transformer:
         specifier: ^0.3.0
-        version: 0.3.0(@volar/typescript@2.4.15)(@vue/compiler-core@3.5.29)(esbuild@0.18.15)(typescript@5.6.2)(vue@3.5.29(typescript@5.6.2))
+        version: 0.3.0(@volar/typescript@2.4.15)(@vue/compiler-core@3.5.29)(esbuild@0.27.3)(typescript@5.6.2)(vue@3.5.29(typescript@5.6.2))
       vue-tsc:
         specifier: ^2.2.12
         version: 2.2.12(typescript@5.6.2)
@@ -9038,28 +9047,6 @@ snapshots:
 
   mj-context-menu@0.6.1: {}
 
-  mkdist@2.4.1(sass@1.97.1)(typescript@5.6.2)(vue-sfc-transformer@0.3.0(@volar/typescript@2.4.15)(@vue/compiler-core@3.5.29)(esbuild@0.18.15)(typescript@5.6.2)(vue@3.5.29(typescript@5.6.2)))(vue-tsc@2.2.12(typescript@5.6.2))(vue@3.5.29(typescript@5.6.2)):
-    dependencies:
-      autoprefixer: 10.6.1(postcss@8.5.6)
-      citty: 0.1.6
-      cssnano: 7.1.9(postcss@8.5.6)
-      defu: 6.1.7
-      esbuild: 0.25.12
-      jiti: 1.21.7
-      mlly: 1.8.0
-      pathe: 2.0.3
-      pkg-types: 2.3.3
-      postcss: 8.5.6
-      postcss-nested: 7.0.2(postcss@8.5.6)
-      semver: 7.7.3
-      tinyglobby: 0.2.15
-    optionalDependencies:
-      sass: 1.97.1
-      typescript: 5.6.2
-      vue: 3.5.29(typescript@5.6.2)
-      vue-sfc-transformer: 0.3.0(@volar/typescript@2.4.15)(@vue/compiler-core@3.5.29)(esbuild@0.18.15)(typescript@5.6.2)(vue@3.5.29(typescript@5.6.2))
-      vue-tsc: 2.2.12(typescript@5.6.2)
-
   mkdist@2.4.1(sass@1.97.1)(typescript@5.6.2)(vue-sfc-transformer@0.3.0(@volar/typescript@2.4.15)(@vue/compiler-core@3.5.29)(esbuild@0.27.3)(typescript@5.6.2)(vue@3.5.24(typescript@5.6.2)))(vue-tsc@2.2.12(typescript@5.6.2))(vue@3.5.24(typescript@5.6.2)):
     dependencies:
       autoprefixer: 10.6.1(postcss@8.5.6)
@@ -10259,16 +10246,6 @@ snapshots:
       semver: 7.7.3
     transitivePeerDependencies:
       - supports-color
-
-  vue-sfc-transformer@0.3.0(@volar/typescript@2.4.15)(@vue/compiler-core@3.5.29)(esbuild@0.18.15)(typescript@5.6.2)(vue@3.5.29(typescript@5.6.2)):
-    dependencies:
-      '@vue/compiler-core': 3.5.29
-      tinyglobby: 0.2.17
-      vue: 3.5.29(typescript@5.6.2)
-    optionalDependencies:
-      '@volar/typescript': 2.4.15
-      esbuild: 0.18.15
-      typescript: 5.6.2
 
   vue-sfc-transformer@0.3.0(@volar/typescript@2.4.15)(@vue/compiler-core@3.5.29)(esbuild@0.27.3)(typescript@5.6.2)(vue@3.5.24(typescript@5.6.2)):
     dependencies:

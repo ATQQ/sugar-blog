@@ -17,3 +17,4 @@ const waitResources = [
 
 await waitOn({ resources: waitResources })
 await $`pnpm --filter @sugarat/theme build:node`
+await $`pnpm --filter @sugarat/theme build:component`

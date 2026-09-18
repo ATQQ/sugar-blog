@@ -29,12 +29,31 @@
   },
   "main": "src/index.ts",
   "files": [
+    "dist",
     "node.d.ts",
     "node.js",
     "node.mjs",
-    "src",
     "types"
   ],
+  "publishConfig": {
+    "main": "./dist/index.mjs",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
+    "exports": {
+      "./node": {
+        "types": "./node.d.ts",
+        "import": "./node.mjs",
+        "require": "./node.js",
+        "default": "./node.js"
+      },
+      "./package.json": "./package.json",
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.mjs",
+        "default": "./dist/index.mjs"
+      }
+    }
+  },
   "scripts": {
     "dev": "npm run build:node && npm run dev:docs",
     "dev:docs": "vitepress dev docs",
@@ -42,6 +61,7 @@
     "build": "npm run build:node && npm run build:docs",
     "build:docs": "vitepress build docs",
     "build:node": "npx tsup",
+    "build:component": "node scripts/buildClient.mjs",
     "serve": "vitepress serve docs"
   },
   "peerDependencies": {
@@ -73,11 +93,14 @@
   "devDependencies": {
     "artalk": "^2.8.5",
     "markdown-it-mathjax3": "^4.3.2",
+    "mkdist": "^2.4.1",
     "pagefind": "^1.5.2",
     "typescript": "^5.4.5",
     "vite": "^5.4.9",
     "vitepress": "2.0.0-alpha.17",
     "vitepress-plugin-51la": "workspace:*",
-    "vue": "^3.5.24"
+    "vue": "^3.5.24",
+    "vue-sfc-transformer": "^0.3.0",
+    "vue-tsc": "^2.2.12"
   }
 }

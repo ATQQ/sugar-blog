@@ -4,6 +4,7 @@
 
 ### Patch Changes
 
+- fix: 主题客户端改为 `mkdist` 构建，发布产物中的 `.vue` 为纯 JS（无 `lang="ts"`）并附带类型声明，下游无需 TypeScript 即可构建主题组件（补齐 #467）
 - Updated dependencies
 - Updated dependencies
 - Updated dependencies
