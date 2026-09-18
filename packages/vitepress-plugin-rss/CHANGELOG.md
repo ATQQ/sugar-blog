@@ -1,5 +1,12 @@
 # vitepress-plugin-rss
 
+## 0.4.5
+
+### Patch Changes
+
+- Updated dependencies
+  - @sugarat/theme-shared@0.1.0
+
 ## 0.4.4
 
 ### Patch Changes

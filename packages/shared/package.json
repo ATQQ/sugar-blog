@@ -1,6 +1,6 @@
 {
   "name": "@sugarat/theme-shared",
-  "version": "0.0.7",
+  "version": "0.1.0",
   "description": "@sugarat/theme-shared",
   "author": "sugar",
   "license": "MIT",
@@ -34,11 +34,12 @@
     "build": "npx tsup src/index.ts --dts --external vitepress --format esm,cjs --silent"
   },
   "dependencies": {
+    "@vue/compiler-sfc": "^3.5.13",
     "cross-spawn": "^7.0.3",
     "gray-matter": "^4.0.3"
   },
   "devDependencies": {
     "@types/cross-spawn": "^6.0.6",
-    "vitepress": "2.0.0-alpha.17"
+    "vitepress": "2.0.0-alpha.20"
   }
 }

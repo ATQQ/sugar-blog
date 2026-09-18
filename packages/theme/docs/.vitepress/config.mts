@@ -10,7 +10,6 @@ export default defineConfig({
     math: true,
     lineNumbers: true
   },
-  metaChunk: true,
   sitemap: {
     hostname: 'https://theme.sugarat.top',
   },
@@ -94,7 +93,9 @@ export default defineConfig({
         'https://github.com/ATQQ/sugar-blog/tree/master/packages/theme/docs/:path',
       text: '去 GitHub 上编辑内容'
     },
-    lastUpdatedText: '上次更新于',
+    lastUpdated: {
+      text: '上次更新于',
+    },
     outline: {
       level: [2, 3],
       label: '目录'

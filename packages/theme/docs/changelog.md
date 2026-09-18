@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.5.27） ⏰ 2026/07/29：集成产品卡片插件，搜索能力增强，修复布局与悬浮按钮样式
+description: 最近更新（v0.5.29） ⏰ 2026/09/18：修复 Vite 8 / VitePress 2 下 SSR 构建崩溃（ERR_UNKNOWN_FILE_EXTENSION .css）
 author: 粥里有勺糖
 top: 3
 tag: 日志
@@ -26,6 +26,35 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.5.29 (2026/09/18)
+
+### Patch Changes
+
+- fix: 修复 0.5.28 起 Vite 8 / VitePress 2 下 `vitepress build` 在 rendering pages 阶段崩溃（`ERR_UNKNOWN_FILE_EXTENSION ".css"`）
+  - 背景：0.5.28 起主题入口从源码改为 `dist` 产物，SSR 构建默认将 node_modules 中的包 externalize，渲染页面时由 Node 原生加载产物，其中的裸 CSS 导入（`import './styles/index.css'`）无法被 Node 处理
+  - 主题的 vite 配置插件强制将 `@sugarat/theme` 加入 `ssr.noExternal`，SSR 构建改为内联主题（与客户端构建行为一致）
+  - 新增无 CSS 的 Node 入口 `dist/index.node.mjs`（exports `node` 条件），Node/SSR 侧解析到无 CSS 导入的产物；客户端仍走原入口，样式不受影响
+  - 受影响组合：`vitepress 2.0.0-alpha.20` + `vite 8`；vitepress 1.x 不受影响
+
+## 0.5.28 (2026/09/16)
+
+### Patch Changes
+
+- fix: 主题客户端改为 `mkdist` 构建，发布产物中的 `.vue` 为纯 JS（无 `lang="ts"`）并附带类型声明，下游无需 TypeScript 即可构建主题组件（补齐 #467）
+- fix: 覆盖 VitePress 2 preflight 的无单位 `line-height: 1.5`，改回绝对行高 `24px`，避免摘要两行省略和侧栏行距错位
+- fix(插件): 全部插件 Vue 组件产物改为纯 JS（`dist` 内 `.vue` 无 `lang="ts"`，附类型声明），下游项目无需安装 TypeScript 即可构建（修复 #467）
+- fix(插件): Layout 插槽注入改为基于 `@vue/compiler-sfc` 的 `createSlotInjectPlugin`，兼容 VitePress 2.0.0-alpha.20+ 的 `<script setup>`（无 `lang` 属性）形态（修复 #469）
+- fix(插件): `vue` 补充进各插件 `peerDependencies`，组件运行时依赖声明完整
+- Updated dependencies
+  - @sugarat/theme-shared@0.1.0
+  - vitepress-plugin-announcement@0.1.10
+  - vitepress-plugin-artalk@0.1.6
+  - vitepress-plugin-back2top@0.1.5
+  - vitepress-plugin-giscus@0.1.5
+  - vitepress-plugin-image-preview@0.1.7
+  - vitepress-plugin-pagefind@0.4.25
+  - vitepress-plugin-product-card@0.1.1
 
 ## 0.5.27 (2026/07/29)
 

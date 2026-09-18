@@ -1,5 +1,8 @@
 @charset "UTF-8";
 html {
+  /* VitePress 2 preflight 用了无单位 line-height: 1.5，14px 文本会变成 21px，
+     固定高度的两行省略和侧栏行距都会错位。改回绝对行高，和线上一致。 */
+  line-height: 24px;
   --bg-gradient: 255, 255, 255, 0.1;
   --bg-gradient-home: 255, 255, 255;
   --box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.1);

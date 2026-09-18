@@ -19,6 +19,10 @@ import { getArticles } from './theme'
 export function getVitePlugins(cfg: Partial<Theme.BlogConfig> = {}) {
   const plugins: any[] = []
 
+  // 强制 SSR 构建内联主题包，避免主题 dist 产物中的裸 CSS 导入
+  // 被 Node 原生加载时报 ERR_UNKNOWN_FILE_EXTENSION ".css"
+  plugins.push(patchThemeSSRPlugin())
+
   // 缓存所有文章的 git 提交时间
   plugins.push(cacheAllGitTimestampsPlugin())
 
@@ -122,7 +126,7 @@ export function patchGroupIconPlugin() {
   return createPatchPlugin({
     name: '@sugarat/theme-plugin-patch-group-icon',
     replacements: {
-      '// replace-group-icon-import-code': 'import \'virtual:group-icons.css\''
+      '/*! replace-group-icon-import-code */': 'import \'virtual:group-icons.css\''
     }
   })
 }
@@ -152,7 +156,40 @@ export function extractDefaultExportString(info: any): string | undefined {
   }
   // 正则回退：兼容 ' " ` 三种引号与空白
   const m = info.code?.match(/export\s+default\s+(['"`])([\s\S]*?)\1/)
-  return m?.[2]
+  if (m?.[2]) {
+    return m[2]
+  }
+  // Vite 8 / Rolldown 资源模块：export default import.meta.ROLLDOWN_FILE_URL_<id>
+  const rollupAsset = info.code?.match(/export\s+default\s+(import\.meta\.ROLLDOWN_FILE_URL_\w+)(?:\s*\+\s*(['"`])([\s\S]*?)\2)?/)
+  if (rollupAsset) {
+    return rollupAsset[3] ? `${rollupAsset[1]}${rollupAsset[3]}` : rollupAsset[1]
+  }
+}
+
+/**
+ * 0.5.28 起主题入口由源码（src/index.ts）改为构建产物（dist/index.mjs），
+ * 产物中包含裸 CSS 导入（import './styles/index.css'）。
+ * SSR 构建默认会将 node_modules 中的包 externalize，渲染页面时由 Node 原生加载，
+ * Node 无法处理 CSS 导入，导致 ERR_UNKNOWN_FILE_EXTENSION ".css" 崩溃。
+ *
+ * 此插件将主题自身加入 ssr.noExternal，让 Vite 在 SSR 构建时将主题内联进
+ * server bundle 并接管 CSS 处理（客户端构建本就如此，行为保持一致）。
+ */
+export function patchThemeSSRPlugin() {
+  return {
+    name: '@sugarat/theme-plugin-ssr-noexternal',
+    enforce: 'pre',
+    config(config: any) {
+      config.ssr ??= {}
+      const noExternal = config.ssr.noExternal
+      const targets = ['@sugarat/theme']
+      config.ssr.noExternal = Array.isArray(noExternal)
+        ? [...new Set([...noExternal, ...targets])]
+        : noExternal === true
+          ? true
+          : targets
+    }
+  }
 }
 
 export function patchTabsPlugin() {
@@ -179,10 +216,10 @@ const ls = getSafeLocalStorage();`
           : ['vitepress-plugin-tabs']
     },
     transform(code: string, id: string) {
-      if (id.endsWith('theme/src/index.ts') && code.startsWith('// @sugarat/theme index')) {
+      if (isThemeClientIndex(id, code)) {
         return code
-          .replace('// replace-tabs-import-code', 'import { enhanceAppWithTabs } from \'vitepress-plugin-tabs/client\'')
-          .replace('// replace-tabs-enhance-app-code', 'enhanceAppWithTabs(ctx.app)')
+          .replace('/*! replace-tabs-import-code */', 'import { enhanceAppWithTabs } from \'vitepress-plugin-tabs/client\'')
+          .replace('/*! replace-tabs-enhance-app-code */', 'enhanceAppWithTabs(ctx.app)')
       }
 
       if (id.includes('/vitepress-plugin-tabs/') && code.includes(localStorageCode)) {
@@ -205,10 +242,20 @@ export function inlineInjectMermaidClient() {
   return createPatchPlugin({
     name: '@sugarat/theme-plugin-inline-inject-mermaid-client',
     replacements: {
-      '// replace-mermaid-import-code': 'import Mermaid from \'vitepress-plugin-mermaid/Mermaid.vue\'',
-      '// replace-mermaid-mounted-code': 'if (!ctx.app.component(\'Mermaid\')) { ctx.app.component(\'Mermaid\', Mermaid as any) }'
+      '/*! replace-mermaid-import-code */': 'import Mermaid from \'vitepress-plugin-mermaid/Mermaid.vue\'',
+      '/*! replace-mermaid-mounted-code */': 'if (!ctx.app.component(\'Mermaid\')) { ctx.app.component(\'Mermaid\', Mermaid) }'
     }
   })
+}
+
+/** 匹配主题客户端入口：本地 workspace 走 src，npm 发布产物走 dist */
+function isThemeClientIndex(id: string, code: string) {
+  // mkdist 会剥掉普通 // 注释，占位改用 /*! */ 以随产物保留
+  if (!code.includes('/*! @sugarat/theme index */'))
+    return false
+  return id.endsWith('theme/src/index.ts')
+    || id.endsWith('theme/dist/index.mjs')
+    || id.endsWith('theme/dist/index.js')
 }
 
 function createPatchPlugin({ name, replacements }: { name: string; replacements: Record<string, string> }) {
@@ -216,7 +263,7 @@ function createPatchPlugin({ name, replacements }: { name: string; replacements:
     name,
     enforce: 'pre',
     transform(code: string, id: string) {
-      if (id.endsWith('theme/src/index.ts') && code.startsWith('// @sugarat/theme index')) {
+      if (isThemeClientIndex(id, code)) {
         let newCode = code
         for (const [key, value] of Object.entries(replacements)) {
           newCode = newCode.replace(key, value)
@@ -442,7 +489,7 @@ function patchTimelinePlugin() {
   return createPatchPlugin({
     name: '@sugarat/theme-plugin-patch-timeline',
     replacements: {
-      '// replace-timeline-import-code': 'import \'vitepress-markdown-timeline/dist/theme/index.css\''
+      '/*! replace-timeline-import-code */': 'import \'vitepress-markdown-timeline/dist/theme/index.css\''
     }
   })
 }

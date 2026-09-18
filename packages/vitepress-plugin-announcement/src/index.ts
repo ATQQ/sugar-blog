@@ -3,6 +3,7 @@ import { fileURLToPath } from 'node:url'
 import type { PluginOption } from 'vite'
 import { stringify } from 'javascript-stringify'
 import type { AnnouncementOptions } from './type'
+import { createSlotInjectPlugin } from '@sugarat/theme-shared'
 
 function isESM() {
   return typeof __filename === 'undefined' || typeof __dirname === 'undefined'
@@ -27,6 +28,8 @@ export function AnnouncementPlugin(options: AnnouncementOptions): any {
     ...options
   }
   const pluginOps: PluginOption = {
+    // 向 VitePress 默认主题 Layout.vue 注入组件（基于 @vue/compiler-sfc，兼容 VitePress 1.x/2.x）
+    ...createSlotInjectPlugin('Announcement', ['layout-top'], componentOptions.clientOnly ? { wrapper: 'ClientOnly' } : {}),
     name: 'vitepress-plugin-announcement',
     enforce: 'pre',
     config: () => {
@@ -36,23 +39,6 @@ export function AnnouncementPlugin(options: AnnouncementOptions): any {
             [`./${componentFile}`]: aliasComponentFile
           }
         }
-      }
-    },
-    transform(code, id) {
-      // 使用 官方 Layout.vue 直接插入组件
-      if (id.endsWith('vitepress/dist/client/theme-default/Layout.vue')) {
-        // 插入自定义组件
-        const slotPosition = '<slot name="layout-top" />'
-        let transformResult = code.replace(slotPosition, `${slotPosition}<Announcement/>`)
-
-        if (componentOptions.clientOnly) {
-          transformResult = transformResult.replace('<Announcement/>', '<ClientOnly><Announcement/></ClientOnly>')
-        }
-
-        // 导入自定义组件
-        const setupPosition = '<script setup lang="ts">'
-        transformResult = transformResult.replace(setupPosition, `${setupPosition}\nimport Announcement from './Announcement.vue'`)
-        return transformResult
       }
     },
     resolveId(id: string) {

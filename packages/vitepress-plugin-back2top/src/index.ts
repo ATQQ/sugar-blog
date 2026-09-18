@@ -1,5 +1,6 @@
 import type { PluginOption } from 'vite'
 import { stringify } from 'javascript-stringify'
+import { createSlotInjectPlugin } from '@sugarat/theme-shared'
 import type { BackToTopPluginOptions } from './type'
 import { getDirname } from './util'
 
@@ -19,6 +20,10 @@ export function back2topPlugin(options?: BackToTopPluginOptions): PluginOption {
   }
 
   const pluginOps: PluginOption = {
+    // 向 VitePress 默认主题 Layout.vue 注入组件（基于 @vue/compiler-sfc，兼容 VitePress 1.x/2.x）
+    ...createSlotInjectPlugin(componentName, slots, {
+      wrapper: 'ClientOnly'
+    }),
     name: 'vitepress-plugin-back2top',
     enforce: 'pre',
     config: () => {
@@ -28,22 +33,6 @@ export function back2topPlugin(options?: BackToTopPluginOptions): PluginOption {
             [`./${componentFile}`]: aliasComponentFile
           }
         }
-      }
-    },
-    transform(code, id) {
-      // Inject into standard VitePress Default Theme Layout
-      if (id.endsWith('vitepress/dist/client/theme-default/Layout.vue')) {
-        let transformResult = code
-
-        for (const element of slots) {
-          const slotPosition = `<slot name="${element}" />`
-          // Append component after the slot
-          transformResult = transformResult.replace(slotPosition, `${slotPosition}<ClientOnly><${componentName} /></ClientOnly>`)
-        }
-
-        const setupPosition = '<script setup lang="ts">'
-        transformResult = transformResult.replace(setupPosition, `${setupPosition}\nimport ${componentName} from './${componentName}.vue'`)
-        return transformResult
       }
     },
     resolveId(id: string) {

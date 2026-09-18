@@ -1,4 +1,4 @@
-// @sugarat/theme index
+/*! @sugarat/theme index */
 // override style
 import './styles/index.css'
 
@@ -6,16 +6,16 @@ import './styles/index.css'
 import './styles/el-base.css'
 
 // 引入时间线组件样式
-// replace-timeline-import-code
+/*! replace-timeline-import-code */
 // import 'vitepress-markdown-timeline/dist/theme/index.css'
 import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 
-// replace-tabs-import-code
+/*! replace-tabs-import-code */
 // import { enhanceAppWithTabs } from 'vitepress-plugin-tabs/client'
 
 // 图表渲染组件
-// replace-mermaid-import-code
+/*! replace-mermaid-import-code */
 // import Mermaid from 'vitepress-plugin-mermaid/Mermaid.vue'
 import { ProductCard } from 'vitepress-plugin-product-card/client'
 import BlogApp from './components/BlogApp.vue'
@@ -28,19 +28,19 @@ import UserWorksPage from './components/UserWorks.vue'
 import './styles/theme/inline-theme.var.css'
 
 // 导入group icons，改由自定义插件导入
-// replace-group-icon-import-code
+/*! replace-group-icon-import-code */
 // import 'virtual:group-icons.css'
 
 export const BlogTheme: Theme = {
   ...DefaultTheme,
   Layout: withConfigProvider(BlogApp),
   enhanceApp(ctx) {
-    // replace-tabs-enhance-app-code
+    /*! replace-tabs-enhance-app-code */
     // enhanceAppWithTabs(ctx.app)
     DefaultTheme.enhanceApp(ctx)
     ctx.app.component('UserWorksPage', UserWorksPage as any)
     ctx.app.component('ProductCard', ProductCard as any)
-    // replace-mermaid-mounted-code
+    /*! replace-mermaid-mounted-code */
     // if (!ctx.app.component('Mermaid')) { ctx.app.component('Mermaid', Mermaid as any) }
   }
 }

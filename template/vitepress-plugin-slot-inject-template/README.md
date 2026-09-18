@@ -34,6 +34,10 @@ export default defineConfig({
 })
 ```
 
+## 原理
+
+通过 vite 插件的 `transform` 钩子向 VitePress 默认主题 `Layout.vue` 注入组件 `import` 与插槽占位，注入逻辑由 [@sugarat/theme-shared](https://www.npmjs.com/package/@sugarat/theme-shared) 的 `createSlotInjectPlugin` 提供（基于 `@vue/compiler-sfc` 结构化解析，不依赖 `<script setup lang="ts">` 标签格式，兼容 VitePress 1.x 与 2.x）。
+
 ## 更多用法
 <!-- TODO 补充更多用法 -->
 

@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitepress'
 
 // 导入主题的配置
-import { blogTheme } from './blog-theme'
+import { blogTheme } from './blog-theme.ts'
 
 // 如果使用 GitHub/Gitee Pages 等公共平台部署
 // 通常需要修改 base 路径，通常为“/仓库名/”
@@ -35,7 +35,9 @@ export default defineConfig({
     // 默认文案修改
     returnToTopLabel: '回到顶部',
     sidebarMenuLabel: '相关文章',
-    lastUpdatedText: '上次更新于',
+    lastUpdated: {
+      text: '上次更新于',
+    },
 
     // 设置logo
     logo: '/logo.png',

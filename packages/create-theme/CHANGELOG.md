@@ -1,5 +1,24 @@
 # @sugarat/create-theme
 
+## 0.0.109
+
+### Patch Changes
+
+- chore: template `package.json` add `"type": "module"`, fixing the Vite `configLoader: 'native'` warning about ESM syntax in `.vitepress/blog-theme.ts` loaded as CommonJS
+
+## 0.0.108
+
+### Patch Changes
+
+- chore: update template theme version to `@sugarat/theme@^0.5.29`
+- docs: 模板 `sop/component.md` 同步主题组件文档新增的 `card - 产品/项目卡片` 段落（语法、GitHub 时间展示、配置项与类型定义）
+
+## 0.0.107
+
+### Patch Changes
+
+- chore: update template theme version to `@sugarat/theme@^0.5.28`
+
 ## 0.0.106
 
 ### Patch Changes

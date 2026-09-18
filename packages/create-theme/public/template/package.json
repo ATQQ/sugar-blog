@@ -2,6 +2,7 @@
   "name": "vitepress-blog",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "author": "粥里有勺糖",
   "license": "MIT",
   "scripts": {
@@ -10,15 +11,15 @@
     "serve": "vitepress serve docs"
   },
   "dependencies": {
-    "@sugarat/theme": "^0.5.27"
+    "@sugarat/theme": "^0.5.29"
   },
   "directories": {
     "doc": "docs"
   },
   "devDependencies": {
     "pagefind": "^1.5.2",
-    "typescript": "^5.4.5",
-    "vitepress": "2.0.0-alpha.17"
+    "typescript": "^5.9.3",
+    "vitepress": "2.0.0-alpha.20"
   },
   "pnpm": {
     "peerDependencyRules": {

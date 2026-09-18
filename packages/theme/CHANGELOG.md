@@ -1,5 +1,33 @@
 # @sugarat/theme
 
+## 0.5.29
+
+### Patch Changes
+
+- fix: 修复 0.5.28 起 Vite 8 / VitePress 2 下 SSR 构建崩溃（`ERR_UNKNOWN_FILE_EXTENSION ".css"`）。主题入口改为 `dist` 产物后，SSR 构建默认将主题 externalize，渲染页面时 Node 原生加载产物中的裸 CSS 导入导致崩溃
+  - 主题的 vite 配置插件强制将 `@sugarat/theme` 加入 `ssr.noExternal`，SSR 构建改为内联主题（与客户端构建行为一致）
+  - 新增无 CSS 的 Node 入口 `dist/index.node.mjs`（exports `node` 条件），Node/SSR 侧解析到无 CSS 导入的产物；客户端仍走原入口，样式不受影响
+
+## 0.5.28
+
+### Patch Changes
+
+- fix: 主题客户端改为 `mkdist` 构建，发布产物中的 `.vue` 为纯 JS（无 `lang="ts"`）并附带类型声明，下游无需 TypeScript 即可构建主题组件（补齐 #467）
+- fix: 覆盖 VitePress 2 preflight 的无单位 `line-height: 1.5`，改回绝对行高 `24px`，避免摘要两行省略和侧栏行距错位
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+  - @sugarat/theme-shared@0.1.0
+  - vitepress-plugin-pagefind@0.4.25
+  - vitepress-plugin-product-card@0.1.1
+  - vitepress-plugin-image-preview@0.1.7
+  - vitepress-plugin-back2top@0.1.5
+  - vitepress-plugin-giscus@0.1.5
+  - vitepress-plugin-announcement@0.1.10
+  - vitepress-plugin-artalk@0.1.6
+  - vitepress-plugin-rss@0.4.5
+
 ## 0.5.27
 
 ### Patch Changes

@@ -17,7 +17,7 @@ function getDirname() {
   return isESM() ? path.dirname(fileURLToPath(import.meta.url)) : __dirname
 }
 
-const aliasSearchVueFile = `${getDirname()}/../src/Search.vue`
+const aliasSearchVueFile = `${getDirname()}/../dist/Search.vue`
 const aliasSearchVueFileMPA = `${getDirname()}/../dist/SearchMPA.vue`
 const aliasSearchVueFileMPADefault = `${getDirname()}/../dist/SearchMPADefault.vue`
 

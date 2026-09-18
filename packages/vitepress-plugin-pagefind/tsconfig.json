@@ -4,7 +4,7 @@
     "lib": ["ESNext", "DOM"],
     "jsx": "preserve",
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "baseUrl": ".",
     "types": ["vite/client"],
     "resolveJsonModule": true,

@@ -1,8 +1,10 @@
-#!/usr/bin/env zx
-import waitOn from 'wait-on'
+/**
+ * 在并行 buildlib 启动前清掉 wait-on 依赖的入口类型文件，
+ * 避免残留 dist 让 theme / pagefind 等任务误判依赖已就绪。
+ */
+import { rm } from 'node:fs/promises'
 
-/** `build:node` 之前需要已由其它构建任务产出的目录（按需增删） */
-const waitResources = [
+const targets = [
   'packages/shared/dist/index.d.ts',
   'packages/vitepress-plugin-back2top/dist/index.d.ts',
   'packages/vitepress-plugin-giscus/dist/index.d.ts',
@@ -15,6 +17,4 @@ const waitResources = [
   'packages/vitepress-plugin-product-card/dist/index.d.ts',
 ]
 
-await waitOn({ resources: waitResources })
-await $`pnpm --filter @sugarat/theme build:node`
-await $`pnpm --filter @sugarat/theme build:component`
+await Promise.all(targets.map(file => rm(file, { force: true })))

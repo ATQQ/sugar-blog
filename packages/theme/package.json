@@ -1,6 +1,6 @@
 {
   "name": "@sugarat/theme",
-  "version": "0.5.27",
+  "version": "0.5.29",
   "description": "简约风的 Vitepress 博客主题，sugarat vitepress blog theme",
   "author": "sugar",
   "license": "MIT",
@@ -29,12 +29,32 @@
   },
   "main": "src/index.ts",
   "files": [
+    "dist",
     "node.d.ts",
     "node.js",
     "node.mjs",
-    "src",
     "types"
   ],
+  "publishConfig": {
+    "main": "./dist/index.mjs",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
+    "exports": {
+      "./node": {
+        "types": "./node.d.ts",
+        "import": "./node.mjs",
+        "require": "./node.js",
+        "default": "./node.js"
+      },
+      "./package.json": "./package.json",
+      ".": {
+        "types": "./dist/index.d.ts",
+        "node": "./dist/index.node.mjs",
+        "import": "./dist/index.mjs",
+        "default": "./dist/index.mjs"
+      }
+    }
+  },
   "scripts": {
     "dev": "npm run build:node && npm run dev:docs",
     "dev:docs": "vitepress dev docs",
@@ -42,6 +62,7 @@
     "build": "npm run build:node && npm run build:docs",
     "build:docs": "vitepress build docs",
     "build:node": "npx tsup",
+    "build:component": "node ../../scripts/mkdist-vue.mjs --ext vue,ts,css,webp,png --legal-comments && node ./scripts/strip-node-entry.mjs",
     "serve": "vitepress serve docs"
   },
   "peerDependencies": {
@@ -53,7 +74,7 @@
     "@mermaid-js/mermaid-mindmap": "^9.3.0",
     "@sugarat/theme-shared": "workspace:*",
     "@vue/shared": "^3.5.25",
-    "@vueuse/core": "^14.3.0",
+    "@vueuse/core": "^15.0.0",
     "l2d-widget": "^0.1.0",
     "markdown-it-task-checkbox": "^1.0.6",
     "mermaid": "^10.9.0",
@@ -73,11 +94,14 @@
   "devDependencies": {
     "artalk": "^2.8.5",
     "markdown-it-mathjax3": "^4.3.2",
+    "mkdist": "^2.4.1",
     "pagefind": "^1.5.2",
-    "typescript": "^5.4.5",
-    "vite": "^5.4.9",
-    "vitepress": "2.0.0-alpha.17",
+    "typescript": "^5.9.3",
+    "vite": "^8.2.1",
+    "vitepress": "2.0.0-alpha.20",
     "vitepress-plugin-51la": "workspace:*",
-    "vue": "^3.5.24"
+    "vue": "^3.5.24",
+    "vue-sfc-transformer": "^0.3.0",
+    "vue-tsc": "^2.2.12"
   }
 }

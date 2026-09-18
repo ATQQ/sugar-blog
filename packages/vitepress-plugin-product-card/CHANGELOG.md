@@ -1,5 +1,12 @@
 # vitepress-plugin-product-card
 
+## 0.1.1
+
+### Patch Changes
+
+- fix: 组件构建改为 `mkdist`（`.vue` 转纯 JS + 类型声明），发布产物不再包含 `lang="ts"`，下游无需 TypeScript 即可构建（修复 #467 同款问题）；`./client` 出口产物同步由 `mkdist` 提供类型声明。
+- fix: 关闭 mkdist 默认的 postcss/cssnano，避免压缩改写相对颜色、`@supports`、`v-bind()` 导致组件样式失效。
+
 ## 0.1.0
 
 ### Minor Changes
