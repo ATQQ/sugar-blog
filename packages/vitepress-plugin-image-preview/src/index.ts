@@ -2,6 +2,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import type { PluginOption } from 'vite'
 import { stringify } from 'javascript-stringify'
+import { createSlotInjectPlugin } from '@sugarat/theme-shared'
 import type { ImagePreviewOptions } from './type'
 
 function isESM() {
@@ -19,6 +20,10 @@ const resolvedVirtualModuleId = `\0${virtualModuleId}`
 
 export function ImagePreviewPlugin(options: ImagePreviewOptions = {}): any {
   const pluginOps: PluginOption = {
+    // 向 VitePress 默认主题 Layout.vue 注入组件（基于 @vue/compiler-sfc，兼容 VitePress 1.x/2.x）
+    ...createSlotInjectPlugin(componentName, [options.slots || ['doc-before', 'page-top']].flat(), {
+      wrapper: 'ClientOnly'
+    }),
     name: 'vitepress-plugin-image-preview',
     enforce: 'pre',
     config: () => {
@@ -28,24 +33,6 @@ export function ImagePreviewPlugin(options: ImagePreviewOptions = {}): any {
             [`./${componentFile}`]: aliasComponentFile
           }
         }
-      }
-    },
-    transform(code, id) {
-      // 筛选出 Layout.vue
-      if (id.endsWith('vitepress/dist/client/theme-default/Layout.vue')) {
-        let transformResult = code
-
-        // 插入组件
-        const slots = [options.slots || ['doc-before', 'page-top']].flat()
-        for (const slot of slots) {
-          const slotPosition = `<slot name="${slot}" />`
-          transformResult = transformResult.replace(slotPosition, `${slotPosition}\n<ClientOnly><${componentName} /></ClientOnly>`)
-        }
-
-        // 导入组件
-        const setupPosition = '<script setup lang="ts">'
-        transformResult = transformResult.replace(setupPosition, `${setupPosition}\nimport ${componentName} from './${componentFile}'`)
-        return transformResult
       }
     },
     resolveId(id: string) {

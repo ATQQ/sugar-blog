@@ -1,6 +1,6 @@
 {
   "name": "vitepress-plugin-pagefind",
-  "version": "0.4.24",
+  "version": "0.4.25",
   "description": "vitepress plugin, Offline full-text search based on pagefind implementation.",
   "author": "sugar",
   "license": "MIT",
@@ -23,32 +23,38 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
-    "./Search.vue": "./src/Search.vue"
+    "./Search.vue": {
+      "types": "./dist/Search.vue.d.ts",
+      "default": "./dist/Search.vue"
+    }
   },
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "scripts": {
     "dev": "npx tsup src/index.ts --dts --watch --format esm,cjs --sourcemap",
-    "build": "npx tsup src/index.ts --dts --format esm,cjs --silent --sourcemap && npm run build:mpa-vue",
-    "build:mpa-vue": "node build-mpa-vue.mjs"
+    "build:component": "mkdist --src src --dist dist --pattern '**/*.{vue,ts,css}' --declaration --format esm",
+    "build": "npm run build:component && npx tsup src/index.ts --dts --format esm,cjs --silent --sourcemap"
   },
   "peerDependencies": {
-    "pagefind": "^1.1.0",
-    "vitepress": "^1.0.0-0 || ^2.0.0-0"
+    "vue": "^3.3.0",
+    "vitepress": "^1.0.0-0 || ^2.0.0-0",
+    "pagefind": "^1.1.0"
   },
   "dependencies": {
     "@sugarat/theme-shared": "workspace:*",
-    "@vueuse/core": "^14.3.0",
+    "@vueuse/core": "^15.0.0",
     "javascript-stringify": "^2.1.0"
   },
   "devDependencies": {
+    "mkdist": "^2.4.1",
     "vite": "^5.4.9",
     "vitepress": "2.0.0-alpha.17",
-    "vue": "^3.5.24"
+    "vue": "^3.5.24",
+    "vue-sfc-transformer": "^0.3.0",
+    "vue-tsc": "^2.2.12"
   }
 }

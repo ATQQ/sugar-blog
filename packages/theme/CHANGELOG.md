@@ -1,5 +1,23 @@
 # @sugarat/theme
 
+## 0.5.28
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+  - @sugarat/theme-shared@0.1.0
+  - vitepress-plugin-pagefind@0.4.25
+  - vitepress-plugin-product-card@0.1.1
+  - vitepress-plugin-image-preview@0.1.7
+  - vitepress-plugin-back2top@0.1.5
+  - vitepress-plugin-giscus@0.1.5
+  - vitepress-plugin-announcement@0.1.10
+  - vitepress-plugin-artalk@0.1.6
+  - vitepress-plugin-rss@0.4.5
+
 ## 0.5.27
 
 ### Patch Changes

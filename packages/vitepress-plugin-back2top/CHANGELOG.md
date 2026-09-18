@@ -1,5 +1,13 @@
 # vitepress-plugin-back2top
 
+## 0.1.5
+
+### Patch Changes
+
+- fix: 组件构建改为 `mkdist`（`.vue` 转纯 JS + 类型声明），发布产物不再包含 `lang="ts"`，下游无需 TypeScript 即可构建（修复 #467）；Layout 注入逻辑切换到 `@sugarat/theme-shared` 的 `createSlotInjectPlugin`，兼容 VitePress 2.0.0-alpha.20+ 的 `<script setup>`（无 `lang` 属性）形态（修复 #469）；`vue` 加入 `peerDependencies`（组件运行时依赖）。
+- Updated dependencies
+  - @sugarat/theme-shared@0.1.0
+
 ## 0.1.4
 
 ### Patch Changes

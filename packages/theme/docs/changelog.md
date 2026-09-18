@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.5.27） ⏰ 2026/07/29：集成产品卡片插件，搜索能力增强，修复布局与悬浮按钮样式
+description: 最近更新（v0.5.28） ⏰ 2026/09/16：插件产物纯 JS 化（下游无需 TypeScript）、Layout 插槽注入兼容 VitePress 2.0.0-alpha.20+
 author: 粥里有勺糖
 top: 3
 tag: 日志
@@ -26,6 +26,23 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.5.28 (2026/09/16)
+
+### Patch Changes
+
+- fix(插件): 全部插件 Vue 组件产物改为纯 JS（`dist` 内 `.vue` 无 `lang="ts"`，附类型声明），下游项目无需安装 TypeScript 即可构建（修复 #467）
+- fix(插件): Layout 插槽注入改为基于 `@vue/compiler-sfc` 的 `createSlotInjectPlugin`，兼容 VitePress 2.0.0-alpha.20+ 的 `<script setup>`（无 `lang` 属性）形态（修复 #469）
+- fix(插件): `vue` 补充进各插件 `peerDependencies`，组件运行时依赖声明完整
+- Updated dependencies
+  - @sugarat/theme-shared@0.1.0
+  - vitepress-plugin-announcement@0.1.10
+  - vitepress-plugin-artalk@0.1.6
+  - vitepress-plugin-back2top@0.1.5
+  - vitepress-plugin-giscus@0.1.5
+  - vitepress-plugin-image-preview@0.1.7
+  - vitepress-plugin-pagefind@0.4.25
+  - vitepress-plugin-product-card@0.1.1
 
 ## 0.5.27 (2026/07/29)
 

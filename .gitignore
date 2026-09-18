@@ -13,3 +13,5 @@ _pagefind
 .vite-inspect
 test-scripts
 .trae
+.pnpm-store
+.plans
