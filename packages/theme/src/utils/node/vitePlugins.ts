@@ -152,7 +152,14 @@ export function extractDefaultExportString(info: any): string | undefined {
   }
   // 正则回退：兼容 ' " ` 三种引号与空白
   const m = info.code?.match(/export\s+default\s+(['"`])([\s\S]*?)\1/)
-  return m?.[2]
+  if (m?.[2]) {
+    return m[2]
+  }
+  // Vite 8 / Rolldown 资源模块：export default import.meta.ROLLDOWN_FILE_URL_<id>
+  const rollupAsset = info.code?.match(/export\s+default\s+(import\.meta\.ROLLDOWN_FILE_URL_\w+)(?:\s*\+\s*(['"`])([\s\S]*?)\2)?/)
+  if (rollupAsset) {
+    return rollupAsset[3] ? `${rollupAsset[1]}${rollupAsset[3]}` : rollupAsset[1]
+  }
 }
 
 export function patchTabsPlugin() {
