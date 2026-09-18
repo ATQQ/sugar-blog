@@ -17,8 +17,8 @@
   },
   "devDependencies": {
     "pagefind": "^1.5.2",
-    "typescript": "^5.4.5",
-    "vitepress": "2.0.0-alpha.17"
+    "typescript": "^5.9.3",
+    "vitepress": "2.0.0-alpha.20"
   },
   "pnpm": {
     "peerDependencyRules": {

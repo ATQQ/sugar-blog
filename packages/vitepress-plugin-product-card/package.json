@@ -56,9 +56,9 @@
     "chokidar": "^3.6.0",
     "mkdist": "^2.4.1",
     "tsup": "^7.2.0",
-    "typescript": "^5.5.4",
-    "vite": "^5",
-    "vitepress": "2.0.0-alpha.17",
+    "typescript": "^5.9.3",
+    "vite": "^8.2.1",
+    "vitepress": "2.0.0-alpha.20",
     "vue": "^3.5.24",
     "vue-sfc-transformer": "^0.3.0",
     "vue-tsc": "^2.2.12"

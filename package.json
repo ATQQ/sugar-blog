@@ -65,7 +65,7 @@
     "sass": "^1.97.1",
     "simple-git-hooks": "^2.9.0",
     "tsup": " ^7.2.0",
-    "typescript": "5.1.6",
+    "typescript": "5.9.3",
     "vite-plugin-inspect": "^0.8.9",
     "wait-on": "^7.0.1",
     "zx": "^5.3.0"
@@ -77,9 +77,6 @@
         "search-insights"
       ]
     }
-  },
-  "overrides": {
-    "vite": "npm:rolldown-vite@^7.3.1"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"
