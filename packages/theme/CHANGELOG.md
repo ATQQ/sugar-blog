@@ -1,5 +1,13 @@
 # @sugarat/theme
 
+## 0.5.29
+
+### Patch Changes
+
+- fix: 修复 0.5.28 起 Vite 8 / VitePress 2 下 SSR 构建崩溃（`ERR_UNKNOWN_FILE_EXTENSION ".css"`）。主题入口改为 `dist` 产物后，SSR 构建默认将主题 externalize，渲染页面时 Node 原生加载产物中的裸 CSS 导入导致崩溃
+  - 主题的 vite 配置插件强制将 `@sugarat/theme` 加入 `ssr.noExternal`，SSR 构建改为内联主题（与客户端构建行为一致）
+  - 新增无 CSS 的 Node 入口 `dist/index.node.mjs`（exports `node` 条件），Node/SSR 侧解析到无 CSS 导入的产物；客户端仍走原入口，样式不受影响
+
 ## 0.5.28
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.5.28） ⏰ 2026/09/18：主题/插件产物纯 JS 化（下游无需 TypeScript）、Layout 插槽注入兼容 VitePress 2.0.0-alpha.20+
+description: 最近更新（v0.5.29） ⏰ 2026/09/18：修复 Vite 8 / VitePress 2 下 SSR 构建崩溃（ERR_UNKNOWN_FILE_EXTENSION .css）
 author: 粥里有勺糖
 top: 3
 tag: 日志
@@ -26,6 +26,16 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.5.29 (2026/09/18)
+
+### Patch Changes
+
+- fix: 修复 0.5.28 起 Vite 8 / VitePress 2 下 `vitepress build` 在 rendering pages 阶段崩溃（`ERR_UNKNOWN_FILE_EXTENSION ".css"`）
+  - 背景：0.5.28 起主题入口从源码改为 `dist` 产物，SSR 构建默认将 node_modules 中的包 externalize，渲染页面时由 Node 原生加载产物，其中的裸 CSS 导入（`import './styles/index.css'`）无法被 Node 处理
+  - 主题的 vite 配置插件强制将 `@sugarat/theme` 加入 `ssr.noExternal`，SSR 构建改为内联主题（与客户端构建行为一致）
+  - 新增无 CSS 的 Node 入口 `dist/index.node.mjs`（exports `node` 条件），Node/SSR 侧解析到无 CSS 导入的产物；客户端仍走原入口，样式不受影响
+  - 受影响组合：`vitepress 2.0.0-alpha.20` + `vite 8`；vitepress 1.x 不受影响
 
 ## 0.5.28 (2026/09/16)
 

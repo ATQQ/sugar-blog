@@ -19,6 +19,10 @@ import { getArticles } from './theme'
 export function getVitePlugins(cfg: Partial<Theme.BlogConfig> = {}) {
   const plugins: any[] = []
 
+  // 强制 SSR 构建内联主题包，避免主题 dist 产物中的裸 CSS 导入
+  // 被 Node 原生加载时报 ERR_UNKNOWN_FILE_EXTENSION ".css"
+  plugins.push(patchThemeSSRPlugin())
+
   // 缓存所有文章的 git 提交时间
   plugins.push(cacheAllGitTimestampsPlugin())
 
@@ -159,6 +163,32 @@ export function extractDefaultExportString(info: any): string | undefined {
   const rollupAsset = info.code?.match(/export\s+default\s+(import\.meta\.ROLLDOWN_FILE_URL_\w+)(?:\s*\+\s*(['"`])([\s\S]*?)\2)?/)
   if (rollupAsset) {
     return rollupAsset[3] ? `${rollupAsset[1]}${rollupAsset[3]}` : rollupAsset[1]
+  }
+}
+
+/**
+ * 0.5.28 起主题入口由源码（src/index.ts）改为构建产物（dist/index.mjs），
+ * 产物中包含裸 CSS 导入（import './styles/index.css'）。
+ * SSR 构建默认会将 node_modules 中的包 externalize，渲染页面时由 Node 原生加载，
+ * Node 无法处理 CSS 导入，导致 ERR_UNKNOWN_FILE_EXTENSION ".css" 崩溃。
+ *
+ * 此插件将主题自身加入 ssr.noExternal，让 Vite 在 SSR 构建时将主题内联进
+ * server bundle 并接管 CSS 处理（客户端构建本就如此，行为保持一致）。
+ */
+export function patchThemeSSRPlugin() {
+  return {
+    name: '@sugarat/theme-plugin-ssr-noexternal',
+    enforce: 'pre',
+    config(config: any) {
+      config.ssr ??= {}
+      const noExternal = config.ssr.noExternal
+      const targets = ['@sugarat/theme']
+      config.ssr.noExternal = Array.isArray(noExternal)
+        ? [...new Set([...noExternal, ...targets])]
+        : noExternal === true
+          ? true
+          : targets
+    }
   }
 }
 

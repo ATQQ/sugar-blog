@@ -1,6 +1,6 @@
 {
   "name": "@sugarat/theme",
-  "version": "0.5.28",
+  "version": "0.5.29",
   "description": "简约风的 Vitepress 博客主题，sugarat vitepress blog theme",
   "author": "sugar",
   "license": "MIT",
@@ -49,6 +49,7 @@
       "./package.json": "./package.json",
       ".": {
         "types": "./dist/index.d.ts",
+        "node": "./dist/index.node.mjs",
         "import": "./dist/index.mjs",
         "default": "./dist/index.mjs"
       }
@@ -61,7 +62,7 @@
     "build": "npm run build:node && npm run build:docs",
     "build:docs": "vitepress build docs",
     "build:node": "npx tsup",
-    "build:component": "node ../../scripts/mkdist-vue.mjs --ext vue,ts,css,webp,png --legal-comments",
+    "build:component": "node ../../scripts/mkdist-vue.mjs --ext vue,ts,css,webp,png --legal-comments && node ./scripts/strip-node-entry.mjs",
     "serve": "vitepress serve docs"
   },
   "peerDependencies": {
