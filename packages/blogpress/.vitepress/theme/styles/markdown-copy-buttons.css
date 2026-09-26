@@ -1,0 +1,20 @@
+/**
+ * 重载 vitepress-plugin-llms 的「复制 / 下载 Markdown」按钮样式
+ * 插件组件自带 scoped 样式（[data-v-xxx]），这里用更高特异性的选择器覆盖
+ */
+
+/* 整体靠右对齐 */
+.vp-doc div.markdown-copy-buttons {
+  justify-content: flex-end;
+}
+
+/* 向上偏移，贴近文章标题 */
+.vp-doc .markdown-copy-buttons .markdown-copy-buttons-inner {
+  margin-top: -20px;
+}
+
+/* 下拉菜单改为右对齐，避免超出内容区 */
+.vp-doc .markdown-copy-buttons .dropdown-menu {
+  left: auto;
+  right: 0;
+}

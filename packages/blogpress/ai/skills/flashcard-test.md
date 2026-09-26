@@ -1,5 +1,7 @@
 ---
 sidebar: false
+tags: [SKILL, AI生图]
+date: 2026-09-24
 ---
 # 体验一下最近比较🔥的闪卡SKILL
 

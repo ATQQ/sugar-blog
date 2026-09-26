@@ -1,5 +1,9 @@
 import type { EnhanceAppContext } from 'vitepress'
 import BlogTheme from '@sugarat/theme'
+import CopyOrDownloadAsMarkdownButtons from 'vitepress-plugin-llms/vitepress-components/CopyOrDownloadAsMarkdownButtons.vue'
+
+// 覆盖「复制 / 下载 Markdown」按钮的默认样式
+import './styles/markdown-copy-buttons.css'
 
 // 全局组件
 import redirectBtn from './src/components/redirectBtn.vue'
@@ -16,6 +20,8 @@ export default {
     app.component('redirectBtn', redirectBtn)
     app.component('solve', Solve)
     app.component('WechatCoverMaker', WechatCoverMaker)
+    // 页面「复制/下载 Markdown」按钮
+    app.component('CopyOrDownloadAsMarkdownButtons', CopyOrDownloadAsMarkdownButtons)
 
     if (inBrowser) {
       //  添加重定向逻辑，兼容旧版博客的分类和标签逻辑

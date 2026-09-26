@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress'
 import { La51Plugin } from 'vitepress-plugin-51la'
+import llmstxt, { copyOrDownloadAsMarkdownButtons } from 'vitepress-plugin-llms'
 import { blogTheme } from './blog-theme.ts'
 
 export default defineConfig({
@@ -8,6 +9,9 @@ export default defineConfig({
   markdown: {
     image: {
       lazyLoad: true
+    },
+    config(md) {
+      md.use(copyOrDownloadAsMarkdownButtons)
     }
   },
   ignoreDeadLinks: true,
@@ -46,6 +50,11 @@ export default defineConfig({
         id: 'Jgmg5avjAUvoyePS',
         ck: 'Jgmg5avjAUvoyePS',
         importMode: 'async'
+      }),
+      // 生成 llms.txt / llms-full.txt 以及每个页面的 Markdown 版本
+      // https://github.com/okineadev/vitepress-plugin-llms
+      llmstxt({
+        domain: 'https://sugarat.top'
       })
     ]
   },
@@ -64,6 +73,13 @@ export default defineConfig({
     outline: {
       level: [2, 3],
       label: '目录'
+    },
+    // 页面「复制/下载 Markdown」按钮文案
+    llms: {
+      copyText: '复制本页',
+      copiedText: '已复制',
+      viewMarkdownText: '查看 Markdown',
+      openInAIText: '在 {provider} 中打开'
     },
     // search: {
     //   provider: 'algolia',
