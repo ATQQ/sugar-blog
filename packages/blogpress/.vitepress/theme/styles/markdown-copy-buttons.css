@@ -9,9 +9,9 @@
 }
 
 /* 向上偏移，贴近文章标题 */
-.vp-doc .markdown-copy-buttons .markdown-copy-buttons-inner {
+/* .vp-doc .markdown-copy-buttons .markdown-copy-buttons-inner {
   margin-top: -20px;
-}
+} */
 
 /* 下拉菜单改为右对齐，避免超出内容区 */
 .vp-doc .markdown-copy-buttons .dropdown-menu {
