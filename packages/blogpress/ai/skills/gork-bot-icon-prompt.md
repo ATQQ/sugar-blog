@@ -3,7 +3,7 @@ tags: [提示词, AI生图]
 date: 2026-09-26
 description: 生成Gork Bot风格的头像提示词，源站：https://grokbot-icon-studio.serio-ai.chatgpt.site/en
 ---
-# Gork Bot风格头像生成提示词
+# 豆豆眼头像 | Gork Bot风格头像生成提示词
 
 源站：https://grokbot-icon-studio.serio-ai.chatgpt.site/en
 
