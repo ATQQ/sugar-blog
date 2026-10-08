@@ -3,13 +3,13 @@ tags: [AI, Agent]
 description: T3 Code 体验分享：一个开源的多 Agent 控制台，把常用的编码 Agent (Claude Code、Codex、Cursor) 放到一个应用里管理与控制
 outline: [2, 3]
 ---
-# 安利一下最近用的T3 Code
+# 安利一下最近用的桌面“Agent”
 
 **https://t3.codes/**
 
 ![](https://cdn.upyun.sugarat.top/mdImg/sugar/089fe63be46a511841e309ed82e3456c)
 
-T3 Code **不是一个新的 code agent**。只负责把机器上常用的编码 Agent 放到一个界面里管理。
+[T3 Code](https://github.com/pingdotgg/t3code) **不是一个新的 code agent**。只负责把机器上常用的编码 Agent 放到一个界面里管理。
 
 目前支持 Claude Code、Codex、Cursor、OpenCode、Grok、Antigravity
 
