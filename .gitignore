@@ -16,5 +16,7 @@ test-scripts
 .pnpm-store
 .plans
 .workbuddy
+.img-temp
 holo-card-jobs
 digimon-cards
+/packages/blogpress/ai/tools/.img-temp/
