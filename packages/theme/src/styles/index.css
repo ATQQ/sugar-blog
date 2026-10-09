@@ -86,6 +86,175 @@ html.dark {
     margin-top: 60px !important;
   }
 }
+
+/* 博客文章左侧文章列表侧边栏优化：贴靠左侧避让桌宠、无外层滚动条、收起/展开与配色统一 */
+.VPContent.has-sidebar {
+  transition: padding-left 0.3s cubic-bezier(0.2, 0, 0, 1);
+}
+
+@media screen and (min-width: 960px) {
+  .VPSidebar {
+    top: 0 !important;
+    left: 0 !important;
+    width: 260px !important;
+    max-width: 260px !important;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+    padding-top: 0 !important;
+    padding-bottom: 12px !important;
+    bottom: var(--blog-sidebar-bottom, 220px) !important;
+    z-index: 35 !important;
+    background-color: var(--vp-c-bg) !important;
+    border: none !important;
+    border-right: 1px solid var(--vp-c-divider) !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    /* 去掉最外层下拉条（滚动条） */
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+    transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1), opacity 0.3s ease !important;
+  }
+
+  .VPSidebar #VPSidebarNav,
+  .VPSidebar .nav {
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+    outline: none !important;
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  /* 消除占位用无内容侧边栏分组造成的顶部空白 */
+  .VPSidebar #VPSidebarNav > .group:not(:has(.item, .items)),
+  .VPSidebar #VPSidebarNav > .group:empty,
+  .VPSidebar #VPSidebarNav > .group:first-child:not(:has(.text, .link, a, button)) {
+    display: none !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .VPSidebar #VPSidebarNav > .group {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  .VPSidebar .VPSidebarItem:not(:has(.item, .items)) {
+    display: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    height: 0 !important;
+  }
+
+  .VPSidebar::-webkit-scrollbar,
+  .VPSidebar .nav::-webkit-scrollbar,
+  .VPSidebar #VPSidebarNav::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+
+  .VPSidebar .curtain {
+    display: none !important;
+  }
+
+  html.blog-sidebar-collapsed .VPSidebar {
+    transform: translateX(-100%) !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    visibility: hidden !important;
+  }
+
+  .VPContent.has-sidebar {
+    padding-left: 260px !important;
+  }
+
+  html.blog-sidebar-collapsed .VPContent.has-sidebar {
+    padding-left: 0 !important;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  /* 覆盖 VitePress 宽屏大留白计算，直接紧贴左侧桌宠正上方 */
+  .VPSidebar {
+    top: 0 !important;
+    left: 0 !important;
+    width: 260px !important;
+    max-width: 260px !important;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+    padding-top: 0 !important;
+  }
+
+  .VPContent.has-sidebar {
+    padding-left: 260px !important;
+    padding-right: 0 !important;
+  }
+
+  html.blog-sidebar-collapsed .VPContent.has-sidebar {
+    padding-left: calc((100% - var(--vp-layout-max-width)) / 2) !important;
+    padding-right: calc((100% - var(--vp-layout-max-width)) / 2) !important;
+  }
+}
+
+.blog-sidebar-expand-btn {
+  position: fixed;
+  top: calc(var(--vp-nav-height, 64px) + 24px);
+  left: 0;
+  z-index: var(--vp-z-index-sidebar, 20);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px 6px 6px;
+  background: var(--vp-c-bg);
+  border: 1px solid var(--vp-c-divider);
+  border-left: none;
+  border-radius: 0 6px 6px 0;
+  box-shadow: var(--vp-c-shadow-1);
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--vp-c-text-2);
+  user-select: none;
+  transition: all 0.25s ease;
+}
+
+.blog-sidebar-expand-btn:hover {
+  color: var(--vp-c-brand-1);
+  border-color: var(--vp-c-brand-1);
+  background: var(--vp-c-bg-alt);
+  padding-left: 8px;
+}
+
+.blog-sidebar-expand-btn .expand-icon {
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--vp-c-brand-1);
+}
+
+.blog-sidebar-expand-btn .expand-text {
+  font-weight: 500;
+}
+
+@media (max-width: 959px) {
+  .blog-sidebar-expand-btn {
+    display: none !important;
+  }
+}
+
+.sidebar-fade-enter-active,
+.sidebar-fade-leave-active {
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.sidebar-fade-enter-from,
+.sidebar-fade-leave-to {
+  opacity: 0;
+  transform: translateX(-12px);
+}
+
 .VPDoc .content main img {
   max-height: 300px;
   margin: 0 auto;
