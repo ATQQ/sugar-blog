@@ -91,28 +91,28 @@ async function processMarkdown(filePath) {
   }
 
   if (files.length > 0) {
-    const relDir = path.relative(ROOT, dir).split(path.sep).join('/')
-    await appendGitignore(relDir)
+    // const relDir = path.relative(ROOT, dir).split(path.sep).join('/')
+    // await appendGitignore(relDir)
   }
 
   return { filePath, count: files.length, files }
 }
 
-async function appendGitignore(relDir) {
-  const gitignore = path.join(ROOT, '.gitignore')
-  let content = ''
-  try {
-    content = await fs.readFile(gitignore, 'utf-8')
-  }
-  catch {
-    // .gitignore 不存在则新建
-  }
-  const rule = `/${relDir}/`
-  if (content.split('\n').some(line => line.trim() === rule)) {
-    return
-  }
-  await fs.appendFile(gitignore, `\n${rule}\n`)
-}
+// async function appendGitignore(relDir) {
+//   const gitignore = path.join(ROOT, '.gitignore')
+//   let content = ''
+//   try {
+//     content = await fs.readFile(gitignore, 'utf-8')
+//   }
+//   catch {
+//     // .gitignore 不存在则新建
+//   }
+//   const rule = `/${relDir}/`
+//   if (content.split('\n').some(line => line.trim() === rule)) {
+//     return
+//   }
+//   await fs.appendFile(gitignore, `\n${rule}\n`)
+// }
 
 async function walk(dir, results = []) {
   const entries = await fs.readdir(dir, { withFileTypes: true })
