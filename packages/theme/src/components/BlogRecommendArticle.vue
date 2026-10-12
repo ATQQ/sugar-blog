@@ -52,6 +52,7 @@ function hasIntersection(arr1: any[], arr2: any[]) {
 const recommendList = computed(() => {
   // 中文支持
   const paths = decodeURIComponent(route.path).split('/')
+  const currentDir = `${paths.slice(0, paths.length - 1).join('/')}/`
   const currentPage = docs.value.find(v => isCurrentDoc(v.route))
   const currentRecommendCategory = getRecommendCategory(currentPage)
   const origin = docs.value
@@ -66,7 +67,7 @@ const recommendList = computed(() => {
         // 过滤出公共路由前缀
         // 限制为同路由前缀
         return v.route.split('/').length === paths.length
-        && v.route.startsWith(paths.slice(0, paths.length - 1).join('/'))
+        && v.route.startsWith(currentDir)
       }
 
     )
