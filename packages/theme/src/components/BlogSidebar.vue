@@ -22,9 +22,10 @@ const sidebarStyle = computed(() =>
   height: 100%;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: visible;
   margin-top: 0 !important;
   padding-top: 0 !important;
+  position: relative;
 }
 
 @media screen and (min-width: 960px) and (max-width: 1120px) {

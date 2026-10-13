@@ -1,5 +1,4 @@
 ---
-sidebar: false
 description: 只使用 Node.js 的标准库，不安装任何外部依赖，写一个命令行工具
 ---
 # 译：使用现代的 Node.js 构建简单的CLI工具

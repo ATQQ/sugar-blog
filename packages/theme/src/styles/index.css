@@ -95,8 +95,12 @@ html.dark {
 @media screen and (min-width: 960px) {
   .VPSidebar {
     transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1), opacity 0.25s ease !important;
-    overflow-y: hidden !important;
-    padding-top: calc(var(--vp-nav-height, 64px) + 12px) !important;
+    overflow: visible !important;
+    padding-top: var(--vp-nav-height, 64px) !important;
+  }
+
+  .VPSidebar .curtain {
+    display: none !important;
   }
 
   /* 消除侧边栏顶部空分组占位与多余留白 */
@@ -135,7 +139,7 @@ html.dark {
 /* 大屏 (>=1440px) 紧凑对齐，左上角 Logo/标题与侧栏同宽 */
 @media screen and (min-width: 1440px) {
   .VPSidebar {
-    padding-left: 24px !important;
+    padding-left: 20px !important;
     padding-right: 20px !important;
     width: var(--vp-sidebar-width) !important;
   }

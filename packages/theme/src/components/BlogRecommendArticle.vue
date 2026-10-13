@@ -144,6 +144,9 @@ const headerTitleText = computed(() => {
   return '相关文章'
 })
 
+// 需求1：分页控件
+const currentPage = ref(1)
+
 // 需求2：搜索与实时过滤
 const isSearchActive = ref(false)
 const searchKeyword = ref('')
@@ -156,6 +159,7 @@ function startSearch() {
     searchBlurTimer = null
   }
   isSearchActive.value = true
+  currentPage.value = 1
   nextTick(() => {
     searchInputRef.value?.focus()
   })
@@ -186,9 +190,6 @@ const filteredList = computed(() => {
   return list.filter(v => v.meta?.title && v.meta.title.toLowerCase().includes(kw))
 })
 
-// 需求1：分页控件
-const currentPage = ref(1)
-
 watch(searchKeyword, () => {
   currentPage.value = 1
   resetIdleTimer()
@@ -201,7 +202,7 @@ const startIdx = computed(() => (currentPage.value - 1) * pageSize.value)
 
 const currentWikiData = computed(() => {
   if (isSearchActive.value) {
-    return filteredList.value
+    return filteredList.value.slice(0, pageSize.value)
   }
   const start = startIdx.value
   const end = start + pageSize.value
@@ -284,9 +285,18 @@ function centerActiveItem(behavior: ScrollBehavior = 'smooth') {
         top: Math.max(0, targetScrollTop),
         behavior,
       })
+      // 触发定位脉冲微反馈
+      activeEl.classList.remove('locate-pulse')
+      if (activeEl.offsetWidth) {
+        activeEl.classList.add('locate-pulse')
+      }
     }
   })
 }
+
+const hasCurrentDoc = computed(() => {
+  return recommendList.value.some(v => isCurrentDoc(v.route))
+})
 
 // 10s 未操作重置回到当前阅读文章页数并居中
 let idleTimer: any = null
@@ -399,6 +409,19 @@ onBeforeUnmount(() => {
     @wheel.passive="resetIdleTimer"
     @touchstart.passive="resetIdleTimer"
   >
+    <!-- 方案五收起按钮：文章列表右侧垂直居中嵌入式毛玻璃滑块 -->
+    <button
+      class="scheme-5-collapse-trigger"
+      title="收起侧边栏"
+      @click="collapse"
+    >
+      <div class="collapse-dot" />
+      <svg class="collapse-icon" viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6" />
+      </svg>
+      <div class="collapse-dot" />
+    </button>
+
     <!-- 头部控件行：容器外框大小圆角不变 -->
     <div class="card-header" :class="{ 'is-searching': isSearchActive }">
       <!-- 搜索态：隐藏内部所有原有控件，替换为搜索输入框 -->
@@ -427,15 +450,34 @@ onBeforeUnmount(() => {
         </button>
       </div>
 
-      <!-- 默认态：显示相关文章文字、搜索图标、分页、收起按钮，原有功能保留 -->
+      <!-- 默认态：显示相关文章文字、搜索图标、分页，原有功能保留 -->
       <template v-else>
         <!-- 左侧：标题 -->
         <div class="header-left">
           <span class="header-title-text">{{ headerTitleText }}</span>
         </div>
 
-        <!-- 右侧：搜索控件、分页控件、收起按钮 -->
+        <!-- 右侧：定位控件、搜索控件、分页控件 -->
         <div class="header-right">
+          <!-- 定位按钮：回到正在阅读的文章 -->
+          <button
+            type="button"
+            class="locate-btn"
+            :class="{ disabled: !hasCurrentDoc }"
+            :disabled="!hasCurrentDoc"
+            title="定位到正在阅读的文章"
+            @click="returnToCurrentArticle"
+          >
+            <svg class="locate-icon" viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3" />
+              <circle cx="12" cy="12" r="8" />
+              <line x1="12" y1="2" x2="12" y2="5" />
+              <line x1="12" y1="19" x2="12" y2="22" />
+              <line x1="2" y1="12" x2="5" y2="12" />
+              <line x1="19" y1="12" x2="22" y2="12" />
+            </svg>
+          </button>
+
           <!-- 搜索图标 -->
           <button
             type="button"
@@ -504,12 +546,6 @@ onBeforeUnmount(() => {
               </svg>
             </button>
           </div>
-
-          <!-- 收起侧边栏按钮 -->
-          <button class="sidebar-collapse-btn" title="收起侧边栏" @click="collapse">
-            <svg class="collapse-icon" viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="15 18 9 12 15 6" /></svg>
-            <span class="btn-text">收起</span>
-          </button>
         </div>
       </template>
     </div>
@@ -563,9 +599,10 @@ onBeforeUnmount(() => {
 .recommend {
   display: flex;
   flex-direction: column;
-  margin-top: 6px; /* 与上方作者区域/导航分割线保持安全间距 */
-  max-height: calc(100vh - var(--vp-nav-height, 64px) - 200px); /* 底部为桌宠预留空间 */
-  overflow: hidden;
+  margin-top: 0; /* 整体上移，紧贴顶部导航栏 */
+  max-height: calc(100vh - var(--vp-nav-height, 64px) - 160px); /* 底部为桌宠预留空间 */
+  overflow: visible;
+  position: relative;
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
@@ -585,9 +622,10 @@ onBeforeUnmount(() => {
   top: 0;
   z-index: 5;
   background: var(--vp-sidebar-bg-color, var(--vp-c-bg));
-  padding: 8px 0 10px;
+  padding: 6px 4px; /* 上下对称内边距，完全垂直居中 */
+  height: 36px; /* 规整高度，确保整行严格垂直居中 */
   border-bottom: 1px solid var(--vp-c-divider-light, rgba(60, 60, 67, 0.08));
-  gap: 4px;
+  gap: 6px;
   width: 100%;
   max-width: 100%;
   min-width: 0;
@@ -597,14 +635,19 @@ onBeforeUnmount(() => {
 .header-left {
   display: flex;
   align-items: center;
+  height: 22px;
   min-width: 0;
   flex-shrink: 0;
 }
 
 .header-title-text {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--vp-c-text-1);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--vp-c-text-1, #1e293b);
+  line-height: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -613,29 +656,31 @@ onBeforeUnmount(() => {
 
 .card-header.is-searching {
   justify-content: stretch;
-  padding: 10px 0 10px; /* 搜索态增加顶部留白，彻底避免与上方重叠 */
+  padding: 6px 4px;
 }
 
 .header-right {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 8px; /* 搜索图标、定位图标、分页胶囊间距 */
+  height: 22px;
   min-width: 0;
   flex-shrink: 0;
-  margin-right: 19px; /* 整行全部内容与左侧标题一起左移，行内各元素相对位置、尺寸完全不变 */
+  margin-right: 0; /* 消除不对称右外边距，整行居中对称 */
 }
 
-/* 搜索控件交互：默认单独 icon 按钮，点击展开为圆角输入框 */
-.search-toggle-btn {
+/* 搜索控件与定位控件交互：细线极简 Icon，与图片颜色保持一致 */
+.search-toggle-btn,
+.locate-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  border: 1px solid transparent;
+  border: none;
   background-color: transparent;
-  color: var(--vp-c-brand-1, #3b82f6);
+  color: var(--vp-c-text-2, #64748b);
   cursor: pointer;
   padding: 0;
   transition: all 0.2s ease;
@@ -643,9 +688,26 @@ onBeforeUnmount(() => {
   flex-shrink: 0;
 }
 
-.search-toggle-btn:hover {
-  background-color: var(--vp-c-brand-soft, rgba(64, 158, 255, 0.14));
-  border-color: var(--vp-c-brand-1, #3b82f6);
+.search-toggle-btn:hover,
+.locate-btn:hover:not(:disabled) {
+  background-color: var(--vp-c-default-soft, #f1f5f9);
+  color: var(--vp-c-brand-1, #3b82f6);
+}
+
+.locate-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+:root.dark .search-toggle-btn,
+:root.dark .locate-btn {
+  color: var(--vp-c-text-2, #94a3b8);
+}
+
+:root.dark .search-toggle-btn:hover,
+:root.dark .locate-btn:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: var(--vp-c-brand-1, #409eff);
 }
 
 /* 搜索态：隐藏内部所有原有控件，替换为通栏搜索输入框 */
@@ -710,15 +772,15 @@ onBeforeUnmount(() => {
   background: var(--vp-c-brand-soft, rgba(64, 158, 255, 0.2));
 }
 
-/* 需求1：分页控件（格式：< 38/48 >，背景使用白色） */
+/* 分页控件：轻质感胶囊（与图片完全一致） */
 .pill-pager {
   display: inline-flex;
   align-items: center;
   height: 22px;
-  background-color: #ffffff;
-  border: 1px solid var(--vp-c-brand-1, #3b82f6);
-  border-radius: 11px;
-  padding: 0 2px;
+  background-color: var(--vp-c-bg-alt, #f8fafc);
+  border: 1px solid var(--vp-c-divider, #e2e8f0);
+  border-radius: 9999px;
+  padding: 0 4px;
   box-sizing: border-box;
   user-select: none;
   transition: all 0.2s ease;
@@ -726,7 +788,16 @@ onBeforeUnmount(() => {
 }
 
 .pill-pager:hover {
-  border-color: var(--vp-c-brand-1, #3b82f6);
+  border-color: rgba(59, 130, 246, 0.4);
+}
+
+:root.dark .pill-pager {
+  background-color: rgba(30, 41, 59, 0.7);
+  border-color: rgba(71, 85, 105, 0.6);
+}
+
+:root.dark .pill-pager:hover {
+  border-color: var(--vp-c-brand-1, #409eff);
 }
 
 .pager-btn {
@@ -738,25 +809,20 @@ onBeforeUnmount(() => {
   border-radius: 50%;
   background: transparent;
   border: none;
-  color: var(--vp-c-brand-1, #3b82f6);
+  color: var(--vp-c-text-2, #6487ba);
   cursor: pointer;
   transition: all 0.15s ease;
   padding: 0;
   line-height: 1;
 }
 
-.pager-btn svg {
-  display: block;
-  pointer-events: none;
-}
-
 .pager-btn:hover:not(:disabled) {
-  color: #ffffff;
-  background-color: var(--vp-c-brand-1, #3b82f6);
+  color: var(--vp-c-brand-1, #3b82f6);
+  background-color: transparent;
 }
 
 .pager-btn:disabled {
-  opacity: 0.4;
+  opacity: 0.35;
   cursor: not-allowed;
 }
 
@@ -775,8 +841,12 @@ onBeforeUnmount(() => {
 }
 
 .pager-middle:hover:not(.is-editing) {
-  background-color: var(--vp-c-bg, #ffffff);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  background-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+:root.dark .pager-middle:hover:not(.is-editing) {
+  background-color: rgba(255, 255, 255, 0.08);
 }
 
 .pager-text {
@@ -784,10 +854,10 @@ onBeforeUnmount(() => {
   align-items: center;
   justify-content: center;
   height: 18px;
-  font-size: 11px;
+  font-size: 11.5px;
   font-weight: 600;
-  color: var(--vp-c-brand-1, #3b82f6);
-  padding: 0 3px;
+  color: var(--vp-c-text-1, #0f172a);
+  padding: 0 4px;
   line-height: 18px;
   letter-spacing: -0.2px;
   font-variant-numeric: tabular-nums;
@@ -795,15 +865,19 @@ onBeforeUnmount(() => {
   user-select: none;
 }
 
+:root.dark .pager-text {
+  color: var(--vp-c-text-1, #f1f5f9);
+}
+
 .pager-input {
   width: 34px;
   height: 18px;
   padding: 0 2px;
   margin: 0;
-  border: 1px solid var(--vp-c-brand-1, #3b82f6);
+  border: 1px solid var(--vp-c-divider, #cbd5e1);
   border-radius: 3px;
   background: var(--vp-c-bg, #ffffff);
-  color: var(--vp-c-brand-1, #3b82f6);
+  color: var(--vp-c-text-1, #0f172a);
   font-size: 11px;
   font-weight: 600;
   text-align: center;
@@ -814,26 +888,77 @@ onBeforeUnmount(() => {
   box-shadow: 0 0 0 1px var(--vp-c-brand-1, #3b82f6);
 }
 
-.sidebar-collapse-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 2px;
-  height: 22px;
-  padding: 0 6px 0 4px;
-  border-radius: 11px;
-  border: 1px solid var(--vp-c-brand-1, #3b82f6);
-  color: var(--vp-c-brand-1, #3b82f6);
-  background: var(--vp-c-brand-soft, rgba(64, 158, 255, 0.1));
-  font-size: 11px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  white-space: nowrap;
-  line-height: 1;
+:root.dark .pager-input {
+  color: var(--vp-c-text-1, #f1f5f9);
 }
 
-.sidebar-collapse-btn:hover {
-  color: #fff;
-  background: var(--vp-c-brand-1, #3b82f6);
+/* 方案五收起按钮：文章列表右侧垂直居中嵌入式毛玻璃滑块 */
+.scheme-5-collapse-trigger {
+  display: none;
+  position: absolute;
+  right: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 40;
+  width: 22px;
+  height: 52px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(226, 232, 240, 0.95);
+  border-radius: 8px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  color: var(--vp-c-text-2, #475569);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+  padding: 0;
+}
+
+@media screen and (min-width: 960px) {
+  .scheme-5-collapse-trigger {
+    display: flex;
+  }
+}
+
+:root.dark .scheme-5-collapse-trigger {
+  background: rgba(30, 41, 59, 0.88);
+  border-color: rgba(71, 85, 105, 0.7);
+  color: var(--vp-c-text-2, #94a3b8);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+}
+
+.collapse-dot {
+  width: 3.5px;
+  height: 3.5px;
+  border-radius: 50%;
+  background: var(--vp-c-text-3, #94a3b8);
+  transition: background-color 0.2s ease;
+}
+
+.scheme-5-collapse-trigger:hover {
+  right: -15px;
+  background: rgba(255, 255, 255, 0.98);
+  color: var(--vp-c-brand-1, #409eff);
+  border-color: var(--vp-c-brand-1, #409eff);
+  box-shadow: 0 6px 18px rgba(64, 158, 255, 0.28);
+  transform: translateY(-50%) scale(1.04);
+}
+
+:root.dark .scheme-5-collapse-trigger:hover {
+  background: rgba(30, 41, 59, 0.98);
+}
+
+.scheme-5-collapse-trigger:hover .collapse-dot {
+  background-color: var(--vp-c-brand-1, #409eff);
+}
+
+.scheme-5-collapse-trigger:active {
+  transform: translateY(-50%) scale(0.96);
 }
 
 .collapse-icon {
@@ -841,7 +966,7 @@ onBeforeUnmount(() => {
   vertical-align: middle;
 }
 
-/* 列表独立滚动与美化滚动条 */
+/* 列表独立滚动与美化滚动条（对齐方案五格式） */
 .recommend-container {
   flex: 1;
   min-height: 0;
@@ -849,7 +974,7 @@ onBeforeUnmount(() => {
   flex-direction: column;
   list-style: none;
   margin: 0;
-  padding: 6px 0 0 0;
+  padding: 4px 4px 8px 0; /* 调小顶部内边距，使整个文章列表更紧凑整体上移 */
   width: 100%;
   overflow-y: auto;
   overflow-x: hidden;
@@ -867,15 +992,21 @@ onBeforeUnmount(() => {
 }
 
 .recommend-container.hide-num > li {
-  padding: 5px 6px 5px 2px;
+  padding: 7px 8px 7px 6px;
 }
 
+/* 方案五列表项 UI：卡片轻胶囊形态与左侧高亮指示条 */
 .recommend-container li {
   display: flex;
   align-items: flex-start;
-  padding: 6px 6px 6px 2px;
-  border-radius: 6px;
-  transition: background-color 0.2s ease;
+  gap: 8px;
+  padding: 8px 8px 8px 6px;
+  border-radius: 8px;
+  margin-bottom: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+  box-sizing: border-box;
 }
 
 .recommend-container li:hover {
@@ -884,28 +1015,53 @@ onBeforeUnmount(() => {
 
 .recommend-container li.active {
   background-color: var(--vp-c-brand-soft, rgba(64, 158, 255, 0.08));
+  border-left: 3px solid var(--vp-c-brand-1, #409eff);
 }
 
-/* 序号与文章第一行标题严格基准对齐：统一 line-height 为 20px */
+:root.dark .recommend-container li.active {
+  background-color: rgba(64, 158, 255, 0.12);
+}
+
+@keyframes locatePulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(64, 158, 255, 0.5);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 4px rgba(64, 158, 255, 0.25);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(64, 158, 255, 0);
+  }
+}
+
+.recommend-container li.locate-pulse {
+  animation: locatePulse 0.5s ease-out;
+}
+
+/* 序号精细化 */
 .recommend-container li .num {
   display: inline-block;
-  font-size: 13px;
-  color: var(--vp-c-text-3);
-  font-weight: 600;
-  margin-right: 6px;
-  min-width: 16px;
+  font-size: 12px;
+  color: var(--vp-c-text-3, #94a3b8);
+  font-weight: 700;
+  margin-right: 2px;
+  min-width: 14px;
   text-align: left;
-  line-height: 20px;
-  height: 20px;
+  line-height: 1.4;
+  margin-top: 1px;
   flex-shrink: 0;
   font-style: normal;
   font-family: var(--vp-font-family-base, inherit);
   box-sizing: border-box;
+  font-variant-numeric: tabular-nums;
 }
 
 .recommend-container li.active .num {
-  color: var(--vp-c-brand-1);
-  font-weight: 700;
+  color: var(--vp-c-brand-1, #409eff);
+  font-weight: 800;
 }
 
 .recommend-container li .des {
@@ -919,8 +1075,9 @@ onBeforeUnmount(() => {
 }
 
 .recommend-container li .title {
-  font-size: 13px;
-  line-height: 20px;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.4;
   margin: 0;
   padding: 0;
   color: var(--vp-c-text-1);
@@ -929,7 +1086,6 @@ onBeforeUnmount(() => {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  font-weight: 400;
   position: relative;
   cursor: pointer;
   text-decoration: none;
@@ -937,23 +1093,24 @@ onBeforeUnmount(() => {
 }
 
 .recommend-container li:hover .title {
-  color: var(--vp-c-brand-1);
+  color: var(--vp-c-brand-1, #409eff);
 }
 
 .recommend-container li.active .title {
-  color: var(--vp-c-brand-1);
-  font-weight: 600;
+  color: var(--vp-c-brand-1, #409eff);
+  font-weight: 700;
 }
 
 .recommend-container li .suffix {
   margin-top: 3px;
-  font-size: 11.5px;
-  color: var(--vp-c-text-3);
+  font-size: 11px;
+  color: var(--vp-c-text-3, #94a3b8);
+  line-height: 1.2;
 }
 
 .recommend-container li.active .suffix {
-  color: var(--vp-c-brand-1);
-  opacity: 0.8;
+  color: var(--vp-c-brand-1, #409eff);
+  opacity: 0.85;
 }
 
 .empty-text {

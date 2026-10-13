@@ -1,9 +1,9 @@
 <script setup lang="ts" name="BlogApp">
 import Theme from 'vitepress/theme'
-import { useData } from 'vitepress'
-import { computed } from 'vue'
+import { useData, useRoute, withBase } from 'vitepress'
+import { computed, watch } from 'vue'
 import { useDarkTransition } from '../hooks/useDarkTransition'
-import { useBlogInfoCollapsible, useBlogThemeMode, useDarkTransitionConfig, useShowRecommend } from '../composables/config/blog'
+import { useArticles, useBlogInfoCollapsible, useBlogThemeMode, useDarkTransitionConfig, useShowRecommend } from '../composables/config/blog'
 import { useSidebarToggle } from '../composables/sidebar'
 import BlogHomeInfo from './BlogHomeInfo.vue'
 import BlogHomeBanner from './BlogHomeBanner.vue'
@@ -17,7 +17,9 @@ import BlogHomeHeaderAvatar from './BlogHomeHeaderAvatar.vue'
 import BlogOml2d from './BlogOml2d.vue'
 import BlogButtonAfterArticle from './BlogButtonAfterArticle.vue'
 
-const { frontmatter } = useData()
+const { frontmatter, theme } = useData()
+const docs = useArticles()
+const route = useRoute()
 const layout = computed(() => frontmatter.value.layout)
 const isBlogTheme = useBlogThemeMode()
 const showRecommend = useShowRecommend()
@@ -25,6 +27,55 @@ const { isSidebarCollapsed, expand } = useSidebarToggle()
 const { Layout } = Theme
 
 const blogInfoCollapsible = useBlogInfoCollapsible()
+
+// 提取所有顶部导航中的链接
+const navLinks = computed(() => {
+  const links = new Set<string>()
+  const clean = (p: string) => decodeURIComponent(p || '').replace(/\.html$/, '').replace(/\/index$/, '').replace(/\/$/, '')
+  const traverse = (items: any[]) => {
+    if (!Array.isArray(items))
+      return
+    for (const item of items) {
+      if (item?.link) {
+        links.add(clean(item.link))
+      }
+      if (item?.items) {
+        traverse(item.items)
+      }
+    }
+  }
+  traverse(theme.value.nav || [])
+  return links
+})
+
+// 若通过顶部导航进入的文章页面在侧边栏中无对应文章，则自动隐藏侧边栏
+watch(
+  () => [route.path, docs.value],
+  () => {
+    if (layout.value === 'home')
+      return
+    if (frontmatter.value.sidebar !== undefined)
+      return
+
+    const clean = (p: string) => decodeURIComponent(p || '').replace(/\.html$/, '').replace(/\/index$/, '').replace(/\/$/, '')
+    const curPath = clean(route.path)
+
+    const isNav = navLinks.value.has(curPath) || navLinks.value.has(clean(withBase(curPath)))
+    if (!isNav)
+      return
+
+    const hasArticle = docs.value.some((doc) => {
+      if (doc.meta.hidden || doc.meta.recommend === false || doc.meta.publish === false)
+        return false
+      return clean(doc.route) === curPath
+    })
+
+    if (!hasArticle) {
+      frontmatter.value.sidebar = false
+    }
+  },
+  { immediate: true, flush: 'sync' }
+)
 
 // 切换深色模式过渡
 // https://vitepress.dev/zh/guide/extending-default-theme#on-appearance-toggle
@@ -38,13 +89,16 @@ const openTransition = useDarkTransitionConfig()
       <slot name="layout-top" />
       <ClientOnly>
         <button
-          v-if="isBlogTheme && showRecommend && layout !== 'home' && isSidebarCollapsed"
+          v-if="isBlogTheme && showRecommend && layout !== 'home' && frontmatter.sidebar !== false && isSidebarCollapsed"
           class="sidebar-expand-trigger"
-          title="展开侧边栏（相关文章）"
+          title="展开侧边栏"
           @click="expand"
         >
-          <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="9 18 15 12 9 6" /></svg>
-          <span class="trigger-text">展开相关文章</span>
+          <div class="expand-dot" />
+          <svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+          <div class="expand-dot" />
         </button>
         <BlogOml2d />
         <BlogAlert />
@@ -252,30 +306,67 @@ const openTransition = useDarkTransitionConfig()
   display: none;
   position: fixed;
   left: 0;
-  top: calc(var(--vp-nav-height, 64px) + 24px);
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 50;
-  align-items: center;
-  gap: 5px;
-  padding: 6px 12px 6px 8px;
-  background-color: var(--vp-c-bg-elv, #ffffff);
-  color: var(--vp-c-brand-1);
-  border: 1.5px solid var(--vp-c-brand-1);
+  width: 20px;
+  height: 52px;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(226, 232, 240, 0.95);
   border-left: none;
-  border-radius: 0 16px 16px 0;
-  box-shadow: 2px 4px 14px rgba(64, 158, 255, 0.2);
+  border-radius: 0 8px 8px 0;
+  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.05);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
   cursor: pointer;
-  font-size: 13px;
-  font-weight: 600;
-  transition: all 0.25s ease;
+  color: var(--vp-c-text-2, #475569);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
 }
+
+:root.dark .sidebar-expand-trigger {
+  background: rgba(30, 41, 59, 0.88);
+  border-color: rgba(71, 85, 105, 0.7);
+  color: var(--vp-c-text-2, #94a3b8);
+  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.expand-dot {
+  width: 3.5px;
+  height: 3.5px;
+  border-radius: 50%;
+  background: var(--vp-c-text-3, #94a3b8);
+  transition: background-color 0.2s ease;
+}
+
 .sidebar-expand-trigger:hover {
-  background-color: var(--vp-c-brand-1);
-  color: #ffffff;
-  transform: translateX(3px);
+  width: 24px;
+  background: rgba(255, 255, 255, 0.98);
+  color: var(--vp-c-brand-1, #409eff);
+  border-color: var(--vp-c-brand-1, #409eff);
+  box-shadow: 3px 5px 16px rgba(64, 158, 255, 0.28);
 }
+
+:root.dark .sidebar-expand-trigger:hover {
+  background: rgba(30, 41, 59, 0.98);
+}
+
+.sidebar-expand-trigger:hover .expand-dot {
+  background-color: var(--vp-c-brand-1, #409eff);
+}
+
+.sidebar-expand-trigger:active {
+  transform: translateY(-50%) scale(0.96);
+}
+
 @media screen and (min-width: 960px) {
   .sidebar-expand-trigger {
-    display: inline-flex;
+    display: flex;
   }
 }
 </style>
