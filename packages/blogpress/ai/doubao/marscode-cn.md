@@ -1,5 +1,4 @@
 ---
-sidebar: false
 date: 2024-07-05 18:00:00
 tag: AI
 ---

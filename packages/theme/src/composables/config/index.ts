@@ -190,6 +190,37 @@ export namespace Theme {
      * @default true
      */
     showNum?: boolean
+    /**
+     * 文章列表数据来源：
+     * - 'home': 展示首页文章列表（置顶优先 + 日期倒序）
+     * - 'directory': 仅展示同目录/同分类文章
+     * @default 'home'
+     */
+    mode?: 'home' | 'directory'
+    /**
+     * 是否支持展开/收起侧边栏
+     * @default true
+     */
+    collapsible?: boolean
+    /**
+     * 初始状态是否默认收起
+     * @default false
+     */
+    collapsed?: boolean
+    /**
+     * 收起按钮文案
+     * @default '收起'
+     */
+    collapseText?: string
+    /**
+     * 展开按钮文案
+     * @default '相关文章'
+     */
+    expandText?: string
+    /**
+     * 底部避让高度（默认会自动检测桌宠 oml2d 高度避让约 220px，避免遮挡左下方桌宠）
+     */
+    bottomOffset?: number | string
   }
 
   export interface HomeAnalysis {

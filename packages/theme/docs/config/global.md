@@ -867,7 +867,11 @@ const blogTheme = getThemeConfig({
     style: 'sidebar',
     sort: 'date',
     showDate: true,
-    showNum: true
+    showNum: true,
+    mode: 'home',
+    collapsible: true,
+    collapseText: '收起',
+    expandText: '相关文章'
   }
 })
 ```
@@ -924,6 +928,37 @@ interface RecommendArticle {
    * @default true
    */
   showNum?: boolean
+  /**
+   * 文章列表数据来源：
+   * - 'home': 展示首页文章列表（置顶优先 + 日期倒序）
+   * - 'directory': 仅展示同目录/同分类文章
+   * @default 'home'
+   */
+  mode?: 'home' | 'directory'
+  /**
+   * 是否支持展开/收起侧边栏
+   * @default true
+   */
+  collapsible?: boolean
+  /**
+   * 初始状态是否默认收起
+   * @default false
+   */
+  collapsed?: boolean
+  /**
+   * 收起按钮文案
+   * @default '收起'
+   */
+  collapseText?: string
+  /**
+   * 展开按钮文案
+   * @default '相关文章'
+   */
+  expandText?: string
+  /**
+   * 底部避让高度（默认会自动检测桌宠 oml2d 高度避让约 220px，避免遮挡左下方桌宠）
+   */
+  bottomOffset?: number | string
 }
 ```
 
@@ -974,6 +1009,17 @@ const blogTheme = getThemeConfig({
 ```
 
 :::
+
+### 列表来源与收起展开
+
+通过 `mode` 属性可以控制侧边栏文章列表的数据来源：
+* `'home'`（默认）：按照首页文章列表的顺序展示所有文章（置顶优先 + 日期倒序），方便用户在文章页直接切换阅读其他文章，无需每次都返回首页。
+* `'directory'`：仅展示与当前文章同目录或具有相同分类/推荐标签的关联文章。
+
+通过 `collapsible` 属性可控制是否支持侧边栏收起/展开：
+* 默认开启（`collapsible: true`），侧边栏顶部右上角带有「收起」按钮。
+* 点击收起后，侧边栏向左滑出隐藏，页面主体内容自动平滑延展，左侧边缘固定展示浮动展开按钮。
+* 当配置了桌宠组件（`oml2d`）时，侧边栏底部会自动计算桌宠高度进行自适应避让（默认留出 220px 空间），确保左下方的桌宠完全不会被遮挡。可以通过 `bottomOffset` 自定义避让高度。
 
 ## article
 
