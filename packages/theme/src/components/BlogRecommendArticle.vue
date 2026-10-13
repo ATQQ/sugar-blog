@@ -53,7 +53,7 @@ const homeList = computed(() => {
     v => v.meta.date && v.meta.title && !v.meta.top && !v.meta.hidden
   )
   normalList.sort((a, b) => +new Date(b.meta.date) - +new Date(a.meta.date))
-  return topList.concat(normalList)
+  return topList.concat(normalList).map(v => ({ ...v, route: withBase(v.route) }))
 })
 
 function getRecommendCategory(page?: Theme.PageData): string[] {
@@ -82,17 +82,24 @@ function hasIntersection(arr1: any[], arr2: any[]) {
 // 兼容按目录/分类匹配的推荐列表
 const directoryList = computed(() => {
   const paths = decodeURIComponent(route.path).split('/')
+  const currentDir = `${paths.slice(0, paths.length - 1).join('/')}/`
   const currentPage = docs.value.find(v => isCurrentDoc(v.route))
   const currentRecommendCategory = getRecommendCategory(currentPage)
-  const origin = docs.value.filter((v) => {
-    if (currentRecommendCategory.length) {
-      return hasIntersection(currentRecommendCategory, getRecommendCategory(v))
-    }
-    return (
-      v.route.split('/').length === paths.length
-      && v.route.startsWith(paths.slice(0, paths.length - 1).join('/'))
-    )
-  })
+  const origin = docs.value
+    .map(v => ({ ...v, route: withBase(v.route) }))
+    .filter((v) => {
+      // 筛选出类别有交集的
+      if (currentRecommendCategory.length) {
+        return hasIntersection(currentRecommendCategory, getRecommendCategory(v))
+      }
+      // 如果没有自定义归类则保持原逻辑
+      // 过滤出公共路由前缀
+      // 限制为同路由前缀（带末尾斜杠，避免如 network 与 network-program 前缀碰撞）
+      return (
+        v.route.split('/').length === paths.length
+        && v.route.startsWith(currentDir)
+      )
+    })
 
   const topList = origin.filter((v) => {
     const value = getRecommendValue(v)
@@ -124,7 +131,6 @@ const recommendList = computed(() => {
   const sourceList = mode === 'directory' ? directoryList.value : homeList.value
 
   return sourceList
-    .map(v => ({ ...v, route: withBase(v.route) }))
     .filter(v => !!v.meta.title)
     .filter(
       v =>
