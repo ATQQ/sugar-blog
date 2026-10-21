@@ -11,6 +11,16 @@ publish: false
 ::: card 做的一些产品和开源
 
 
+- icon: 📝
+  iconColor: "#d84a2f"
+  title: Markdown → X 文章
+  link: https://atqq.github.io/md2xarticle/
+  github: https://github.com/ATQQ/md2xarticle
+  tags: [Chrome 扩展, Markdown, X]
+  desc: 把 Markdown 粘贴进 X 文章编辑器，自动生成富文本并上传图片；支持粘贴、拖拽文件和本地图片。
+
+----
+
 - icon: https://miaowa.sugarat.top/favicon.ico
   title: 妙蛙记账
   link:  https://miaowa.sugarat.top/docs/
