@@ -9,11 +9,8 @@ import {
   useRecommendConfig,
   useShowRecommend,
 } from '../composables/config/blog'
-import { useSidebarToggle } from '../composables/sidebar'
 import { recommendSVG } from '../constants/svg'
 import type { Theme } from '../composables/config/index'
-
-const { collapse } = useSidebarToggle()
 
 const formatShowDate = useFormatShowDate()
 
@@ -30,8 +27,6 @@ const showNum = computed(() => recommend.value?.showNum ?? true)
 const pageSize = computed(() => recommend.value?.pageSize || 9)
 const emptyText = computed(() => recommend.value?.empty ?? '暂无相关文章')
 
-const collapsible = computed(() => recommend.value?.collapsible ?? true)
-const collapseText = computed(() => recommend.value?.collapseText || '收起')
 const bottomOffset = computed(() => {
   const value = recommend.value?.bottomOffset
   if (typeof value === 'number')
@@ -417,20 +412,6 @@ onBeforeUnmount(() => {
     @wheel.passive="resetIdleTimer"
     @touchstart.passive="resetIdleTimer"
   >
-    <!-- 方案五收起按钮：文章列表右侧垂直居中嵌入式毛玻璃滑块 -->
-    <button
-      v-if="collapsible"
-      class="scheme-5-collapse-trigger"
-      :title="collapseText"
-      @click="collapse"
-    >
-      <div class="collapse-dot" />
-      <svg class="collapse-icon" viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="15 18 9 12 15 6" />
-      </svg>
-      <div class="collapse-dot" />
-    </button>
-
     <!-- 头部控件行：容器外框大小圆角不变 -->
     <div class="card-header" :class="{ 'is-searching': isSearchActive }">
       <!-- 搜索态：隐藏内部所有原有控件，替换为搜索输入框 -->
@@ -876,87 +857,6 @@ onBeforeUnmount(() => {
 
 :root.dark .pager-input {
   color: var(--vp-c-text-1, #f1f5f9);
-}
-
-/* 收起按钮：与收起态展开按钮同风格，固定贴在侧栏右侧分割线，视口垂直居中 */
-.scheme-5-collapse-trigger {
-  display: none;
-  position: fixed;
-  left: var(--vp-sidebar-width);
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 40;
-  width: 20px;
-  height: 52px;
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1.5px solid rgba(226, 232, 240, 0.95);
-  border-left: none;
-  border-radius: 0 8px 8px 0;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  cursor: pointer;
-  color: var(--vp-c-text-2, #475569);
-  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.05);
-  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
-  outline: none;
-  padding: 0;
-}
-
-@media screen and (min-width: 960px) {
-  .scheme-5-collapse-trigger {
-    display: flex;
-  }
-}
-
-/* 大屏侧栏右缘随 VitePress 居中留白偏移 */
-@media screen and (min-width: 1440px) {
-  .scheme-5-collapse-trigger {
-    left: calc((100% - var(--vp-layout-max-width)) / 2 + var(--vp-sidebar-width));
-  }
-}
-
-:root.dark .scheme-5-collapse-trigger {
-  background: rgba(30, 41, 59, 0.88);
-  border-color: rgba(71, 85, 105, 0.7);
-  color: var(--vp-c-text-2, #94a3b8);
-  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.3);
-}
-
-.collapse-dot {
-  width: 3.5px;
-  height: 3.5px;
-  border-radius: 50%;
-  background: var(--vp-c-text-3, #94a3b8);
-  transition: background-color 0.2s ease;
-}
-
-.scheme-5-collapse-trigger:hover {
-  width: 24px;
-  background: rgba(255, 255, 255, 0.98);
-  color: var(--vp-c-brand-1, #409eff);
-  border-color: var(--vp-c-brand-1, #409eff);
-  box-shadow: 3px 5px 16px rgba(64, 158, 255, 0.28);
-}
-
-:root.dark .scheme-5-collapse-trigger:hover {
-  background: rgba(30, 41, 59, 0.98);
-}
-
-.scheme-5-collapse-trigger:hover .collapse-dot {
-  background-color: var(--vp-c-brand-1, #409eff);
-}
-
-.scheme-5-collapse-trigger:active {
-  transform: translateY(-50%) scale(0.96);
-}
-
-.collapse-icon {
-  display: inline-block;
-  vertical-align: middle;
 }
 
 /* 列表独立滚动与美化滚动条（对齐方案五格式） */

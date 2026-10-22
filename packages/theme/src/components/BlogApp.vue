@@ -24,12 +24,22 @@ const layout = computed(() => frontmatter.value.layout)
 const isBlogTheme = useBlogThemeMode()
 const showRecommend = useShowRecommend()
 const recommendConfig = useRecommendConfig()
-const { isSidebarCollapsed, isSidebarAutoHidden, expand, setAutoHidden } = useSidebarToggle({
+const { isSidebarCollapsed, isSidebarAutoHidden, expand, collapse, setAutoHidden } = useSidebarToggle({
   collapsed: recommendConfig.value?.collapsed,
 })
 const collapsible = computed(() => recommendConfig.value?.collapsible ?? true)
 const expandText = computed(() => recommendConfig.value?.expandText || '相关文章')
+const collapseText = computed(() => recommendConfig.value?.collapseText || '收起')
 const sidebarDisabled = computed(() => frontmatter.value.sidebar === false)
+const showSidebarToggle = computed(() =>
+  // useBlogThemeMode() 返回的是 boolean，不是 ref
+  !!isBlogTheme
+  && showRecommend.value
+  && layout.value !== 'home'
+  && !sidebarDisabled.value
+  && !isSidebarAutoHidden.value
+  && collapsible.value
+)
 
 // 关闭展开/收起引导时，确保侧栏保持展开
 watch(collapsible, (val) => {
@@ -97,17 +107,26 @@ const openTransition = useDarkTransitionConfig()
     <template #layout-top>
       <slot name="layout-top" />
       <ClientOnly>
+        <!-- 极简箭头条：贴分割线，仅保留方向箭头 -->
         <button
-          v-if="isBlogTheme && showRecommend && layout !== 'home' && !sidebarDisabled && !isSidebarAutoHidden && collapsible && isSidebarCollapsed"
-          class="sidebar-expand-trigger"
+          v-if="showSidebarToggle && isSidebarCollapsed"
+          class="sidebar-toggle-trigger is-expand"
           :title="expandText"
           @click="expand"
         >
-          <div class="expand-dot" />
-          <svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2.25" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <polyline points="9 18 15 12 9 6" />
           </svg>
-          <div class="expand-dot" />
+        </button>
+        <button
+          v-else-if="showSidebarToggle"
+          class="sidebar-toggle-trigger is-collapse"
+          :title="collapseText"
+          @click="collapse"
+        >
+          <svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2.25" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
         </button>
         <BlogOml2d />
         <BlogAlert />
@@ -311,71 +330,68 @@ const openTransition = useDarkTransitionConfig()
   }
 }
 
-.sidebar-expand-trigger {
+/* 贴分割线的极简箭头条：无圆点、无毛玻璃，hover 才略强调 */
+.sidebar-toggle-trigger {
   display: none;
   position: fixed;
-  left: 0;
   top: 50%;
   transform: translateY(-50%);
   z-index: 50;
-  width: 20px;
-  height: 52px;
+  width: 14px;
+  height: 40px;
   padding: 0;
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1.5px solid rgba(226, 232, 240, 0.95);
+  margin: 0;
+  background: var(--vp-c-bg, #ffffff);
+  border: 1px solid var(--vp-c-divider, rgba(60, 60, 67, 0.12));
   border-left: none;
-  border-radius: 0 8px 8px 0;
-  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.05);
-  flex-direction: column;
+  border-radius: 0 6px 6px 0;
+  box-shadow: none;
   align-items: center;
   justify-content: center;
-  gap: 4px;
   cursor: pointer;
-  color: var(--vp-c-text-2, #475569);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  color: var(--vp-c-text-3, #94a3b8);
+  transition: width 0.15s ease, color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
   outline: none;
 }
 
-:root.dark .sidebar-expand-trigger {
-  background: rgba(30, 41, 59, 0.88);
-  border-color: rgba(71, 85, 105, 0.7);
-  color: var(--vp-c-text-2, #94a3b8);
-  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.3);
+.sidebar-toggle-trigger.is-expand {
+  left: 0;
 }
 
-.expand-dot {
-  width: 3.5px;
-  height: 3.5px;
-  border-radius: 50%;
-  background: var(--vp-c-text-3, #94a3b8);
-  transition: background-color 0.2s ease;
+.sidebar-toggle-trigger.is-collapse {
+  left: var(--vp-sidebar-width);
 }
 
-.sidebar-expand-trigger:hover {
-  width: 24px;
-  background: rgba(255, 255, 255, 0.98);
+@media screen and (min-width: 1440px) {
+  .sidebar-toggle-trigger.is-collapse {
+    left: calc((100% - var(--vp-layout-max-width)) / 2 + var(--vp-sidebar-width));
+  }
+}
+
+:root.dark .sidebar-toggle-trigger {
+  background: var(--vp-c-bg, #1b1b1f);
+  border-color: var(--vp-c-divider, rgba(255, 255, 255, 0.12));
+  color: var(--vp-c-text-3, #94a3b8);
+}
+
+.sidebar-toggle-trigger:hover {
+  width: 18px;
   color: var(--vp-c-brand-1, #409eff);
   border-color: var(--vp-c-brand-1, #409eff);
-  box-shadow: 3px 5px 16px rgba(64, 158, 255, 0.28);
+  background: var(--vp-c-bg, #ffffff);
 }
 
-:root.dark .sidebar-expand-trigger:hover {
-  background: rgba(30, 41, 59, 0.98);
+:root.dark .sidebar-toggle-trigger:hover {
+  background: var(--vp-c-bg, #1b1b1f);
 }
 
-.sidebar-expand-trigger:hover .expand-dot {
-  background-color: var(--vp-c-brand-1, #409eff);
-}
-
-.sidebar-expand-trigger:active {
-  transform: translateY(-50%) scale(0.96);
+.sidebar-toggle-trigger:active {
+  transform: translateY(-50%) scale(0.97);
 }
 
 @media screen and (min-width: 960px) {
-  .sidebar-expand-trigger {
-    display: flex;
+  .sidebar-toggle-trigger {
+    display: inline-flex;
   }
 }
 </style>
