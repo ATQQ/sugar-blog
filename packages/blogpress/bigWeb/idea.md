@@ -1,4 +1,5 @@
 ---
+sidebar: false
 outline: [2,3]
 publish: false
 sticky: 10
