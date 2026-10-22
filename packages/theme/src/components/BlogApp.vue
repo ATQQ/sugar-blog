@@ -28,8 +28,8 @@ const { isSidebarCollapsed, isSidebarAutoHidden, expand, collapse, setAutoHidden
   collapsed: recommendConfig.value?.collapsed,
 })
 const collapsible = computed(() => recommendConfig.value?.collapsible ?? true)
-const expandText = computed(() => recommendConfig.value?.expandText || '展开')
-const collapseText = computed(() => recommendConfig.value?.collapseText || '收起')
+const expandText = computed(() => recommendConfig.value?.expandText ?? '展开')
+const collapseText = computed(() => recommendConfig.value?.collapseText ?? '收起')
 const sidebarDisabled = computed(() => frontmatter.value.sidebar === false)
 const showSidebarToggle = computed(() =>
   // useBlogThemeMode() 返回的是 boolean，不是 ref

@@ -26,9 +26,9 @@ const showNum = computed(() => recommend.value?.showNum ?? true)
 
 const pageSize = computed(() => recommend.value?.pageSize || 9)
 const emptyText = computed(() => recommend.value?.empty ?? '暂无相关文章')
-const searchText = computed(() => recommend.value?.searchText || '搜索文章')
-const searchPlaceholder = computed(() => recommend.value?.searchPlaceholder || '搜索文章标题')
-const searchEmpty = computed(() => recommend.value?.searchEmpty || '暂无文章')
+const searchText = computed(() => recommend.value?.searchText ?? '搜索文章')
+const searchPlaceholder = computed(() => recommend.value?.searchPlaceholder ?? '搜索文章标题')
+const searchEmpty = computed(() => recommend.value?.searchEmpty ?? '暂无文章')
 
 const bottomOffset = computed(() => {
   const value = recommend.value?.bottomOffset

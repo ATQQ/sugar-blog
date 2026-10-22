@@ -35,7 +35,6 @@ export const themeEN = defineLocaleConfig({
     mobileMinify: false,
   },
   recommend: {
-    nextText: 'Next',
     sort: 'date'
   },
   buttonAfterArticle: {
