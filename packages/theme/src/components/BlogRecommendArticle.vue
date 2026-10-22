@@ -10,6 +10,7 @@ import {
   useShowRecommend,
 } from '../composables/config/blog'
 import { useSidebarToggle } from '../composables/sidebar'
+import { recommendSVG } from '../constants/svg'
 import type { Theme } from '../composables/config/index'
 
 const { collapse } = useSidebarToggle()
@@ -28,6 +29,15 @@ const showNum = computed(() => recommend.value?.showNum ?? true)
 
 const pageSize = computed(() => recommend.value?.pageSize || 9)
 const emptyText = computed(() => recommend.value?.empty ?? '暂无相关文章')
+
+const collapsible = computed(() => recommend.value?.collapsible ?? true)
+const collapseText = computed(() => recommend.value?.collapseText || '收起')
+const bottomOffset = computed(() => {
+  const value = recommend.value?.bottomOffset
+  if (typeof value === 'number')
+    return `${value}px`
+  return value || '160px'
+})
 
 const docs = useArticles()
 const route = useRoute()
@@ -50,9 +60,14 @@ const homeList = computed(() => {
     return Number(aTop) - Number(bTop)
   })
   const normalList = docs.value.filter(
-    v => v.meta.date && v.meta.title && !v.meta.top && !v.meta.hidden
+    v => v.meta.title && !v.meta.top && !v.meta.hidden
   )
-  normalList.sort((a, b) => +new Date(b.meta.date) - +new Date(a.meta.date))
+  // 无日期的文章排在最后，避免从列表中消失
+  normalList.sort((a, b) => {
+    const aTime = a.meta.date ? +new Date(a.meta.date) : 0
+    const bTime = b.meta.date ? +new Date(b.meta.date) : 0
+    return bTime - aTime
+  })
   return topList.concat(normalList).map(v => ({ ...v, route: withBase(v.route) }))
 })
 
@@ -127,27 +142,23 @@ const directoryList = computed(() => {
 })
 
 const recommendList = computed(() => {
-  const mode = recommend.value?.mode ?? 'home'
+  const mode = recommend.value?.mode ?? 'directory'
   const sourceList = mode === 'directory' ? directoryList.value : homeList.value
+  // home 模式下默认不展示当前文章，directory 模式保持原有行为
+  const showSelf = recommend.value?.showSelf ?? mode === 'directory'
 
   return sourceList
     .filter(v => !!v.meta.title)
-    .filter(
-      v =>
-        (recommend.value?.showSelf ?? true)
-        || !isCurrentDoc(v.route)
-    )
+    .filter(v => showSelf || !isCurrentDoc(v.route))
     .filter(v => v.meta.recommend !== false)
     .filter(v => recommend.value?.filter?.(v) ?? true)
 })
 
-const headerTitleText = computed(() => {
-  if (recommend.value?.title && typeof recommend.value.title === 'string') {
-    const plain = recommend.value.title.replace(/<[^>]+>/g, '').trim()
-    if (plain)
-      return plain
-  }
-  return '相关文章'
+// 与线上一致：默认单片眼镜 emoji SVG；配置了 title 时原样渲染（兼容 HTML/SVG）
+const headerTitleHtml = computed(() => {
+  if (recommend.value?.title && typeof recommend.value.title === 'string')
+    return recommend.value.title
+  return `<span class="svg-icon">${recommendSVG}</span>相关文章`
 })
 
 // 需求1：分页控件
@@ -202,6 +213,13 @@ watch(searchKeyword, () => {
 })
 
 const totalPages = computed(() => Math.ceil(filteredList.value.length / pageSize.value) || 1)
+
+// 文章数量变化导致总页数减少时，把当前页收敛到合法范围，避免出现空白列表
+watch(totalPages, (val) => {
+  if (currentPage.value > val) {
+    currentPage.value = val
+  }
+})
 
 // 当前页开始的序号
 const startIdx = computed(() => (currentPage.value - 1) * pageSize.value)
@@ -300,37 +318,20 @@ function centerActiveItem(behavior: ScrollBehavior = 'smooth') {
   })
 }
 
-const hasCurrentDoc = computed(() => {
-  return recommendList.value.some(v => isCurrentDoc(v.route))
-})
-
-// 10s 未操作重置回到当前阅读文章页数并居中
+// 10s 未操作时微调滚动，把当前阅读文章保持在可视区中部
 let idleTimer: any = null
-
-function returnToCurrentArticle() {
-  if (isSearchActive.value) {
-    cancelSearch()
-  }
-  const currentIdx = recommendList.value.findIndex(v => isCurrentDoc(v.route))
-  if (currentIdx !== -1) {
-    const targetPage = Math.floor(currentIdx / pageSize.value) + 1
-    if (currentPage.value !== targetPage) {
-      currentPage.value = targetPage
-    }
-    nextTick(() => {
-      setTimeout(() => {
-        centerActiveItem('smooth')
-      }, 50)
-    })
-  }
-}
 
 function resetIdleTimer() {
   if (idleTimer) {
     clearTimeout(idleTimer)
   }
   idleTimer = setTimeout(() => {
-    returnToCurrentArticle()
+    // 空闲只做定位微调：搜索态不打断，也不强制切换页码
+    if (isSearchActive.value)
+      return
+    if (currentWikiData.value.some(v => isCurrentDoc(v.route))) {
+      centerActiveItem('smooth')
+    }
   }, 10000)
 }
 
@@ -408,6 +409,7 @@ onBeforeUnmount(() => {
     v-if="show && (recommendList.length || emptyText)"
     class="recommend"
     :class="{ card: sidebarStyle === 'card' }"
+    :style="{ maxHeight: `calc(100vh - var(--vp-nav-height, 64px) - ${bottomOffset})` }"
     data-pagefind-ignore="all"
     @mousemove="resetIdleTimer"
     @click="resetIdleTimer"
@@ -417,8 +419,9 @@ onBeforeUnmount(() => {
   >
     <!-- 方案五收起按钮：文章列表右侧垂直居中嵌入式毛玻璃滑块 -->
     <button
+      v-if="collapsible"
       class="scheme-5-collapse-trigger"
-      title="收起侧边栏"
+      :title="collapseText"
       @click="collapse"
     >
       <div class="collapse-dot" />
@@ -460,30 +463,11 @@ onBeforeUnmount(() => {
       <template v-else>
         <!-- 左侧：标题 -->
         <div class="header-left">
-          <span class="header-title-text">{{ headerTitleText }}</span>
+          <span class="header-title-text" v-html="headerTitleHtml" />
         </div>
 
-        <!-- 右侧：定位控件、搜索控件、分页控件 -->
+        <!-- 右侧：搜索、分页（仅多页时展示） -->
         <div class="header-right">
-          <!-- 定位按钮：回到正在阅读的文章 -->
-          <button
-            type="button"
-            class="locate-btn"
-            :class="{ disabled: !hasCurrentDoc }"
-            :disabled="!hasCurrentDoc"
-            title="定位到正在阅读的文章"
-            @click="returnToCurrentArticle"
-          >
-            <svg class="locate-icon" viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="3" />
-              <circle cx="12" cy="12" r="8" />
-              <line x1="12" y1="2" x2="12" y2="5" />
-              <line x1="12" y1="19" x2="12" y2="22" />
-              <line x1="2" y1="12" x2="5" y2="12" />
-              <line x1="19" y1="12" x2="22" y2="12" />
-            </svg>
-          </button>
-
           <!-- 搜索图标 -->
           <button
             type="button"
@@ -497,8 +481,8 @@ onBeforeUnmount(() => {
             </svg>
           </button>
 
-          <!-- 分页控件交互：<  38/48  > -->
-          <div v-if="totalPages > 1 || filteredList.length > 0" class="pill-pager">
+          <!-- 分页：仅超过 1 页时展示 -->
+          <div v-if="totalPages > 1" class="pill-pager">
             <button
               type="button"
               class="pager-btn pager-prev"
@@ -606,7 +590,6 @@ onBeforeUnmount(() => {
   display: flex;
   flex-direction: column;
   margin-top: 0; /* 整体上移，紧贴顶部导航栏 */
-  max-height: calc(100vh - var(--vp-nav-height, 64px) - 160px); /* 底部为桌宠预留空间 */
   overflow: visible;
   position: relative;
   width: 100%;
@@ -654,10 +637,18 @@ onBeforeUnmount(() => {
   height: 22px;
   display: inline-flex;
   align-items: center;
+  gap: 4px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   user-select: none;
+}
+
+.header-title-text :deep(.svg-icon),
+.header-title-text :deep(svg) {
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
 }
 
 .card-header.is-searching {
@@ -668,16 +659,13 @@ onBeforeUnmount(() => {
 .header-right {
   display: flex;
   align-items: center;
-  gap: 8px; /* 搜索图标、定位图标、分页胶囊间距 */
+  gap: 8px;
   height: 22px;
   min-width: 0;
   flex-shrink: 0;
-  margin-right: 0; /* 消除不对称右外边距，整行居中对称 */
 }
 
-/* 搜索控件与定位控件交互：细线极简 Icon，与图片颜色保持一致 */
-.search-toggle-btn,
-.locate-btn {
+.search-toggle-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -694,24 +682,16 @@ onBeforeUnmount(() => {
   flex-shrink: 0;
 }
 
-.search-toggle-btn:hover,
-.locate-btn:hover:not(:disabled) {
+.search-toggle-btn:hover {
   background-color: var(--vp-c-default-soft, #f1f5f9);
   color: var(--vp-c-brand-1, #3b82f6);
 }
 
-.locate-btn:disabled {
-  opacity: 0.35;
-  cursor: not-allowed;
-}
-
-:root.dark .search-toggle-btn,
-:root.dark .locate-btn {
+:root.dark .search-toggle-btn {
   color: var(--vp-c-text-2, #94a3b8);
 }
 
-:root.dark .search-toggle-btn:hover,
-:root.dark .locate-btn:hover:not(:disabled) {
+:root.dark .search-toggle-btn:hover {
   background-color: rgba(255, 255, 255, 0.08);
   color: var(--vp-c-brand-1, #409eff);
 }
@@ -898,29 +878,30 @@ onBeforeUnmount(() => {
   color: var(--vp-c-text-1, #f1f5f9);
 }
 
-/* 方案五收起按钮：文章列表右侧垂直居中嵌入式毛玻璃滑块 */
+/* 收起按钮：与收起态展开按钮同风格，固定贴在侧栏右侧分割线，视口垂直居中 */
 .scheme-5-collapse-trigger {
   display: none;
-  position: absolute;
-  right: -12px;
+  position: fixed;
+  left: var(--vp-sidebar-width);
   top: 50%;
   transform: translateY(-50%);
   z-index: 40;
-  width: 22px;
+  width: 20px;
   height: 52px;
   background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1.5px solid rgba(226, 232, 240, 0.95);
-  border-radius: 8px;
+  border-left: none;
+  border-radius: 0 8px 8px 0;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 4px;
   cursor: pointer;
   color: var(--vp-c-text-2, #475569);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06), inset 0 1px 1px rgba(255, 255, 255, 0.8);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.05);
+  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
   outline: none;
   padding: 0;
 }
@@ -931,11 +912,18 @@ onBeforeUnmount(() => {
   }
 }
 
+/* 大屏侧栏右缘随 VitePress 居中留白偏移 */
+@media screen and (min-width: 1440px) {
+  .scheme-5-collapse-trigger {
+    left: calc((100% - var(--vp-layout-max-width)) / 2 + var(--vp-sidebar-width));
+  }
+}
+
 :root.dark .scheme-5-collapse-trigger {
   background: rgba(30, 41, 59, 0.88);
   border-color: rgba(71, 85, 105, 0.7);
   color: var(--vp-c-text-2, #94a3b8);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.3);
 }
 
 .collapse-dot {
@@ -947,12 +935,11 @@ onBeforeUnmount(() => {
 }
 
 .scheme-5-collapse-trigger:hover {
-  right: -15px;
+  width: 24px;
   background: rgba(255, 255, 255, 0.98);
   color: var(--vp-c-brand-1, #409eff);
   border-color: var(--vp-c-brand-1, #409eff);
-  box-shadow: 0 6px 18px rgba(64, 158, 255, 0.28);
-  transform: translateY(-50%) scale(1.04);
+  box-shadow: 3px 5px 16px rgba(64, 158, 255, 0.28);
 }
 
 :root.dark .scheme-5-collapse-trigger:hover {
@@ -998,20 +985,20 @@ onBeforeUnmount(() => {
 }
 
 .recommend-container.hide-num > li {
-  padding: 7px 8px 7px 6px;
+  padding: 8px 10px 8px 12px;
 }
 
-/* 方案五列表项 UI：卡片轻胶囊形态与左侧高亮指示条 */
+/* 列表项：轻量圆角块 + 选中左侧指示条 */
 .recommend-container li {
+  position: relative;
   display: flex;
   align-items: flex-start;
   gap: 8px;
-  padding: 8px 8px 8px 6px;
+  padding: 8px 10px 8px 12px;
   border-radius: 8px;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
   cursor: pointer;
-  transition: all 0.2s ease;
-  border-left: 3px solid transparent;
+  transition: background-color 0.2s ease, color 0.2s ease;
   box-sizing: border-box;
 }
 
@@ -1020,12 +1007,22 @@ onBeforeUnmount(() => {
 }
 
 .recommend-container li.active {
-  background-color: var(--vp-c-brand-soft, rgba(64, 158, 255, 0.08));
-  border-left: 3px solid var(--vp-c-brand-1, #409eff);
+  background-color: color-mix(in srgb, var(--vp-c-brand-1, #409eff) 9%, transparent);
+}
+
+.recommend-container li.active::before {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 9px;
+  bottom: 9px;
+  width: 2.5px;
+  border-radius: 999px;
+  background: var(--vp-c-brand-1, #409eff);
 }
 
 :root.dark .recommend-container li.active {
-  background-color: rgba(64, 158, 255, 0.12);
+  background-color: color-mix(in srgb, var(--vp-c-brand-1, #409eff) 16%, transparent);
 }
 
 @keyframes locatePulse {
@@ -1067,7 +1064,7 @@ onBeforeUnmount(() => {
 
 .recommend-container li.active .num {
   color: var(--vp-c-brand-1, #409eff);
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .recommend-container li .des {
@@ -1104,7 +1101,7 @@ onBeforeUnmount(() => {
 
 .recommend-container li.active .title {
   color: var(--vp-c-brand-1, #409eff);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .recommend-container li .suffix {
@@ -1115,8 +1112,7 @@ onBeforeUnmount(() => {
 }
 
 .recommend-container li.active .suffix {
-  color: var(--vp-c-brand-1, #409eff);
-  opacity: 0.85;
+  color: var(--vp-c-text-3, #94a3b8);
 }
 
 .empty-text {

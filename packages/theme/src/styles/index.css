@@ -87,89 +87,66 @@ html.dark {
   }
 }
 
-/* 侧边栏宽度与左上角导航栏对齐 */
-:root {
-  --vp-sidebar-width: 300px;
-}
-
 @media screen and (min-width: 960px) {
   .VPSidebar {
-    transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1), opacity 0.25s ease !important;
-    overflow: visible !important;
-    padding-top: var(--vp-nav-height, 64px) !important;
+    transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1), opacity 0.25s ease;
   }
 
   .VPSidebar .curtain {
-    display: none !important;
+    display: none;
   }
 
   /* 消除侧边栏顶部空分组占位与多余留白 */
   .VPSidebar .group:not(:has(.text)),
   .VPSidebar .group:empty,
   .VPSidebarItem.level-0:not(:has(.text)) {
-    display: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    height: 0 !important;
-    min-height: 0 !important;
+    display: none;
+    padding: 0;
+    margin: 0;
+    height: 0;
+    min-height: 0;
   }
 
   .VPSidebar #VPSidebarNav,
   .VPSidebar .nav,
   .VPSidebar .sidebar {
-    padding-top: 0 !important;
-    margin-top: 0 !important;
+    padding-top: 0;
+    margin-top: 0;
   }
 
   .VPContent.has-sidebar {
-    transition: padding-left 0.3s cubic-bezier(0.2, 0, 0, 1) !important;
+    transition: padding-left 0.3s cubic-bezier(0.2, 0, 0, 1);
   }
 
-  /* 折叠状态 */
+  /* 折叠 / 自动隐藏：只处理侧栏显隐，不改动 VitePress 默认大屏居中布局 */
   html.sidebar-collapsed .VPSidebar {
     transform: translateX(-100%) !important;
     opacity: 0 !important;
     pointer-events: none !important;
   }
-  html.sidebar-collapsed .VPContent.has-sidebar {
+  html.sidebar-auto-hidden .VPSidebar {
+    display: none !important;
+  }
+  html.sidebar-collapsed .VPContent.has-sidebar,
+  html.sidebar-auto-hidden .VPContent.has-sidebar {
     padding-left: 0 !important;
+  }
+  html.sidebar-collapsed .VPNavBar.has-sidebar,
+  html.sidebar-auto-hidden .VPNavBar.has-sidebar {
+    --vp-nav-col-offset: 0px !important;
   }
 }
 
-/* 大屏 (>=1440px) 紧凑对齐，左上角 Logo/标题与侧栏同宽 */
+/* 大屏收起后仍保持 VitePress 默认两侧留白居中，避免内容贴边拉开 */
 @media screen and (min-width: 1440px) {
-  .VPSidebar {
-    padding-left: 20px !important;
-    padding-right: 20px !important;
-    width: var(--vp-sidebar-width) !important;
+  html.sidebar-collapsed .VPContent.has-sidebar,
+  html.sidebar-auto-hidden .VPContent.has-sidebar {
+    padding-left: calc((100% - var(--vp-layout-max-width)) / 2) !important;
   }
-  .VPContent.has-sidebar {
-    padding-left: var(--vp-sidebar-width) !important;
-    padding-right: 0 !important;
+  html.sidebar-collapsed .VPNavBar.has-sidebar,
+  html.sidebar-auto-hidden .VPNavBar.has-sidebar {
+    --vp-nav-col-offset: calc((100% - var(--vp-layout-max-width)) / 2) !important;
   }
-  .VPNavBar.has-sidebar {
-    --vp-nav-col-offset: var(--vp-sidebar-width) !important;
-  }
-  .VPNavBar.has-sidebar .wrapper {
-    padding: 0 24px !important;
-  }
-  .VPNavBar.has-sidebar .container {
-    max-width: 100% !important;
-    padding: 0 !important;
-  }
-  .VPNavBar.has-sidebar .title {
-    max-width: calc(var(--vp-sidebar-width) - 24px) !important;
-    min-width: calc(var(--vp-sidebar-width) - 24px) !important;
-  }
-  html.sidebar-collapsed .VPContent.has-sidebar {
-    padding-left: 0 !important;
-  }
-}
-
-.sidebar-fade-enter-from,
-.sidebar-fade-leave-to {
-  opacity: 0;
-  transform: translateX(-12px);
 }
 
 .VPDoc .content main img {

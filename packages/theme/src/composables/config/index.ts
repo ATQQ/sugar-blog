@@ -155,10 +155,9 @@ export namespace Theme {
   export interface RecommendArticle {
     title?: string
     pageSize?: number
-    nextText?: string
     /**
      * 是否展示当前正在浏览的文章在左侧
-     * @default true
+     * @default true（mode 为 'home' 时默认不展示）
      */
     showSelf?: boolean
     /**
@@ -194,7 +193,7 @@ export namespace Theme {
      * 文章列表数据来源：
      * - 'home': 展示首页文章列表（置顶优先 + 日期倒序）
      * - 'directory': 仅展示同目录/同分类文章
-     * @default 'home'
+     * @default 'directory'
      */
     mode?: 'home' | 'directory'
     /**
@@ -218,7 +217,8 @@ export namespace Theme {
      */
     expandText?: string
     /**
-     * 底部避让高度（默认会自动检测桌宠 oml2d 高度避让约 220px，避免遮挡左下方桌宠）
+     * 侧边栏底部预留高度，避免遮挡左下方桌宠等内容
+     * @default '160px'
      */
     bottomOffset?: number | string
   }

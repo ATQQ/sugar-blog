@@ -3,7 +3,7 @@ import Theme from 'vitepress/theme'
 import { useData, useRoute, withBase } from 'vitepress'
 import { computed, watch } from 'vue'
 import { useDarkTransition } from '../hooks/useDarkTransition'
-import { useArticles, useBlogInfoCollapsible, useBlogThemeMode, useDarkTransitionConfig, useShowRecommend } from '../composables/config/blog'
+import { useArticles, useBlogInfoCollapsible, useBlogThemeMode, useDarkTransitionConfig, useRecommendConfig, useShowRecommend } from '../composables/config/blog'
 import { useSidebarToggle } from '../composables/sidebar'
 import BlogHomeInfo from './BlogHomeInfo.vue'
 import BlogHomeBanner from './BlogHomeBanner.vue'
@@ -23,7 +23,19 @@ const route = useRoute()
 const layout = computed(() => frontmatter.value.layout)
 const isBlogTheme = useBlogThemeMode()
 const showRecommend = useShowRecommend()
-const { isSidebarCollapsed, expand } = useSidebarToggle()
+const recommendConfig = useRecommendConfig()
+const { isSidebarCollapsed, isSidebarAutoHidden, expand, setAutoHidden } = useSidebarToggle({
+  collapsed: recommendConfig.value?.collapsed,
+})
+const collapsible = computed(() => recommendConfig.value?.collapsible ?? true)
+const expandText = computed(() => recommendConfig.value?.expandText || '相关文章')
+const sidebarDisabled = computed(() => frontmatter.value.sidebar === false)
+
+// 关闭展开/收起引导时，确保侧栏保持展开
+watch(collapsible, (val) => {
+  if (!val && isSidebarCollapsed.value)
+    expand()
+}, { immediate: true })
 const { Layout } = Theme
 
 const blogInfoCollapsible = useBlogInfoCollapsible()
@@ -49,33 +61,30 @@ const navLinks = computed(() => {
 })
 
 // 若通过顶部导航进入的文章页面在侧边栏中无对应文章，则自动隐藏侧边栏
-watch(
-  () => [route.path, docs.value],
-  () => {
-    if (layout.value === 'home')
-      return
-    if (frontmatter.value.sidebar !== undefined)
-      return
+// 仅切换主题内的 html class，不修改 VitePress 的 frontmatter
+const autoHideSidebar = computed(() => {
+  if (layout.value === 'home')
+    return false
+  if (frontmatter.value.sidebar !== undefined)
+    return false
 
-    const clean = (p: string) => decodeURIComponent(p || '').replace(/\.html$/, '').replace(/\/index$/, '').replace(/\/$/, '')
-    const curPath = clean(route.path)
+  const clean = (p: string) => decodeURIComponent(p || '').replace(/\.html$/, '').replace(/\/index$/, '').replace(/\/$/, '')
+  const curPath = clean(route.path)
 
-    const isNav = navLinks.value.has(curPath) || navLinks.value.has(clean(withBase(curPath)))
-    if (!isNav)
-      return
+  const isNav = navLinks.value.has(curPath) || navLinks.value.has(clean(withBase(curPath)))
+  if (!isNav)
+    return false
 
-    const hasArticle = docs.value.some((doc) => {
-      if (doc.meta.hidden || doc.meta.recommend === false || doc.meta.publish === false)
-        return false
-      return clean(doc.route) === curPath
-    })
+  const hasArticle = docs.value.some((doc) => {
+    if (doc.meta.hidden || doc.meta.recommend === false || doc.meta.publish === false)
+      return false
+    return clean(doc.route) === curPath
+  })
 
-    if (!hasArticle) {
-      frontmatter.value.sidebar = false
-    }
-  },
-  { immediate: true, flush: 'sync' }
-)
+  return !hasArticle
+})
+
+watch(autoHideSidebar, val => setAutoHidden(val), { immediate: true, flush: 'sync' })
 
 // 切换深色模式过渡
 // https://vitepress.dev/zh/guide/extending-default-theme#on-appearance-toggle
@@ -89,9 +98,9 @@ const openTransition = useDarkTransitionConfig()
       <slot name="layout-top" />
       <ClientOnly>
         <button
-          v-if="isBlogTheme && showRecommend && layout !== 'home' && frontmatter.sidebar !== false && isSidebarCollapsed"
+          v-if="isBlogTheme && showRecommend && layout !== 'home' && !sidebarDisabled && !isSidebarAutoHidden && collapsible && isSidebarCollapsed"
           class="sidebar-expand-trigger"
-          title="展开侧边栏"
+          :title="expandText"
           @click="expand"
         >
           <div class="expand-dot" />
