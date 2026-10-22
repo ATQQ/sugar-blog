@@ -871,7 +871,10 @@ const blogTheme = getThemeConfig({
     collapsible: true,
     collapsed: false,
     collapseText: '收起',
-    expandText: '相关文章',
+    expandText: '展开',
+    searchText: '搜索文章',
+    searchPlaceholder: '搜索文章标题',
+    searchEmpty: '暂无文章',
     bottomOffset: '160px'
   }
 })
@@ -886,6 +889,7 @@ const blogTheme = getThemeConfig({
     sort: 'filename', // 文件名排序
     // empty: false // false时无推荐文章不展示此模块
     // collapsible: false // 关闭展开/收起引导按钮
+    // searchPlaceholder: 'Search title'
   }
 })
 ```
@@ -946,15 +950,30 @@ interface RecommendArticle {
    */
   collapsed?: boolean
   /**
-   * 收起按钮文案
+   * 收起按钮悬停文案
    * @default '收起'
    */
   collapseText?: string
   /**
-   * 展开按钮文案
-   * @default '相关文章'
+   * 展开按钮悬停文案
+   * @default '展开'
    */
   expandText?: string
+  /**
+   * 侧栏标题旁搜索按钮悬停文案
+   * @default '搜索文章'
+   */
+  searchText?: string
+  /**
+   * 侧栏标题搜索输入框占位文案
+   * @default '搜索文章标题'
+   */
+  searchPlaceholder?: string
+  /**
+   * 侧栏标题搜索无结果时的提示
+   * @default '暂无文章'
+   */
+  searchEmpty?: string
   /**
    * 侧边栏底部预留高度，避免遮挡左下方桌宠等内容
    * @default '160px'
@@ -1023,6 +1042,11 @@ const blogTheme = getThemeConfig({
 * 点击收起后，侧边栏向左滑出隐藏，页面主体内容自动平滑延展。
 * 可通过 `collapsed: true` 设置默认收起状态；用户手动操作后的状态会记录在本地。
 * 侧边栏底部默认预留 160px 空间，避免遮挡左下方的桌宠等内容，可通过 `bottomOffset`（数字或 CSS 长度值）自定义。
+
+侧栏标题旁的搜索文案也可配置：
+* `searchText`：搜索图标悬停文案，默认「搜索文章」
+* `searchPlaceholder`：展开搜索后输入框占位文案，默认「搜索文章标题」
+* `searchEmpty`：搜索无结果时的提示，默认「暂无文章」
 
 ## article
 

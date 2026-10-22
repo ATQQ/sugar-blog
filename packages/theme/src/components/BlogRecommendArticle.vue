@@ -26,6 +26,9 @@ const showNum = computed(() => recommend.value?.showNum ?? true)
 
 const pageSize = computed(() => recommend.value?.pageSize || 9)
 const emptyText = computed(() => recommend.value?.empty ?? '暂无相关文章')
+const searchText = computed(() => recommend.value?.searchText || '搜索文章')
+const searchPlaceholder = computed(() => recommend.value?.searchPlaceholder || '搜索文章标题')
+const searchEmpty = computed(() => recommend.value?.searchEmpty || '暂无文章')
 
 const bottomOffset = computed(() => {
   const value = recommend.value?.bottomOffset
@@ -425,7 +428,7 @@ onBeforeUnmount(() => {
           v-model="searchKeyword"
           type="text"
           class="search-input"
-          placeholder="搜索文章标题"
+          :placeholder="searchPlaceholder"
           @blur="handleSearchBlur"
           @keydown.esc="cancelSearch"
         >
@@ -453,7 +456,7 @@ onBeforeUnmount(() => {
           <button
             type="button"
             class="search-toggle-btn"
-            title="搜索文章"
+            :title="searchText"
             @click="startSearch"
           >
             <svg class="search-icon" viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -561,7 +564,7 @@ onBeforeUnmount(() => {
       </li>
     </ol>
     <div v-else class="empty-text">
-      {{ searchKeyword ? '暂无文章' : emptyText }}
+      {{ searchKeyword ? searchEmpty : emptyText }}
     </div>
   </div>
 </template>

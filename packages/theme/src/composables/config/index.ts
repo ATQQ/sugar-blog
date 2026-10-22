@@ -212,10 +212,25 @@ export namespace Theme {
      */
     collapseText?: string
     /**
-     * 展开按钮文案
-     * @default '相关文章'
+     * 展开按钮悬停文案
+     * @default '展开'
      */
     expandText?: string
+    /**
+     * 侧栏标题旁搜索按钮悬停文案
+     * @default '搜索文章'
+     */
+    searchText?: string
+    /**
+     * 侧栏标题搜索输入框占位文案
+     * @default '搜索文章标题'
+     */
+    searchPlaceholder?: string
+    /**
+     * 侧栏标题搜索无结果时的提示
+     * @default '暂无文章'
+     */
+    searchEmpty?: string
     /**
      * 侧边栏底部预留高度，避免遮挡左下方桌宠等内容
      * @default '160px'
