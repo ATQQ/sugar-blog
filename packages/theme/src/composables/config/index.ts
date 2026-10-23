@@ -169,7 +169,7 @@ export namespace Theme {
     nextText?: string
     /**
      * 是否展示标题搜索
-     * @default true
+     * @default false
      */
     search?: boolean
     /**

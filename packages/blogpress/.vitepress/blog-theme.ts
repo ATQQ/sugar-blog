@@ -261,8 +261,8 @@ export const blogTheme = getThemeConfig({
   },
   recommend: {
     showSelf: true,
-    nextText: '下一页',
-    style: 'sidebar'
+    // nextText: '下一页',
+    style: 'sidebar',
   },
   authorList: [
     {

@@ -26,7 +26,7 @@ const showNum = computed(() => recommend.value?.showNum ?? true)
 
 const pageSize = computed(() => recommend.value?.pageSize || 9)
 const emptyText = computed(() => recommend.value?.empty ?? '暂无相关文章')
-const enableSearch = computed(() => recommend.value?.search ?? true)
+const enableSearch = computed(() => recommend.value?.search ?? false)
 const pagination = computed(() =>
   recommend.value?.pagination ?? (recommend.value?.nextText ? 'next' : 'pager')
 )

@@ -869,7 +869,7 @@ const blogTheme = getThemeConfig({
     showNum: true,
     mode: 'directory',
     pagination: 'pager',
-    search: true,
+    search: false,
     collapsible: true,
     collapsed: false,
     collapseText: '收起',
@@ -891,7 +891,7 @@ const blogTheme = getThemeConfig({
     sort: 'filename', // 文件名排序
     // empty: false // false时无推荐文章不展示此模块
     // collapsible: false // 关闭展开/收起引导按钮
-    // search: false // 关闭标题搜索
+    // search: true // 开启标题搜索
     // pagination: 'next', nextText: '换一组' // 使用旧版「换一组」分页
   }
 })
@@ -915,7 +915,7 @@ interface RecommendArticle {
   nextText?: string
   /**
    * 是否展示标题搜索
-   * @default true
+   * @default false
    */
   search?: boolean
   /**
@@ -1068,7 +1068,7 @@ const blogTheme = getThemeConfig({
 * `'next'`：旧版「换一组」按钮，文案由 `nextText` 控制。
 * 兼容旧配置：只要配置了 `nextText` 且未设置 `pagination`，会自动使用 `'next'` 模式。
 
-标题搜索默认开启，设置 `search: false` 可隐藏搜索图标。搜索相关文案也可配置：
+标题搜索默认关闭，设置 `search: true` 后标题旁会出现搜索图标。搜索相关文案也可配置：
 * `searchText`：搜索图标悬停文案，默认「搜索文章」
 * `searchPlaceholder`：展开搜索后输入框占位文案，默认「搜索文章标题」
 * `searchEmpty`：搜索无结果时的提示，默认「暂无文章」
