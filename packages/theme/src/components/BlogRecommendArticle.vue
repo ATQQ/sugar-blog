@@ -597,7 +597,7 @@ onBeforeUnmount(() => {
   background: var(--vp-sidebar-bg-color, var(--vp-c-bg));
   padding: 6px 4px; /* 上下对称内边距，完全垂直居中 */
   height: 36px; /* 规整高度，确保整行严格垂直居中 */
-  border-bottom: 1px solid var(--vp-c-divider-light, rgba(60, 60, 67, 0.08));
+  margin-top: 10px;
   gap: 6px;
   width: 100%;
   max-width: 100%;
