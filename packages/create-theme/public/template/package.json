@@ -1,8 +1,8 @@
 {
   "name": "vitepress-blog",
+  "type": "module",
   "version": "1.0.0",
   "private": true,
-  "type": "module",
   "author": "粥里有勺糖",
   "license": "MIT",
   "scripts": {
@@ -11,7 +11,7 @@
     "serve": "vitepress serve docs"
   },
   "dependencies": {
-    "@sugarat/theme": "^0.5.29"
+    "@sugarat/theme": "^0.5.30"
   },
   "directories": {
     "doc": "docs"

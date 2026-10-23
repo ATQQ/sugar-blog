@@ -1,7 +1,7 @@
 {
   "name": "blogpress",
   "type": "module",
-  "version": "2.0.90",
+  "version": "2.0.91",
   "private": true,
   "license": "MIT",
   "scripts": {

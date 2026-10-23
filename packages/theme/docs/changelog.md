@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.5.29） ⏰ 2026/09/18：修复 Vite 8 / VitePress 2 下 SSR 构建崩溃（ERR_UNKNOWN_FILE_EXTENSION .css）
+description: 最近更新（v0.5.30） ⏰ 2026/10/23：文章页侧边栏交互升级（折叠、定位、搜索、分页）与同目录推荐前缀碰撞修复
 author: 粥里有勺糖
 top: 3
 tag: 日志
@@ -26,6 +26,13 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.5.30 (2026/10/23)
+
+### Patch Changes
+
+- feat: 优化文章页侧边栏交互（#476）
+- fix: 同目录推荐文章匹配改为完整目录路径，避免 `network` / `network-program` 这类前缀碰撞（#481）
 
 ## 0.5.29 (2026/09/18)
 

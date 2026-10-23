@@ -1,5 +1,12 @@
 # @sugarat/theme
 
+## 0.5.30
+
+### Patch Changes
+
+- feat: 优化文章页侧边栏交互（#476）
+- fix: 同目录推荐文章匹配改为完整目录路径，避免 `network` / `network-program` 这类前缀碰撞（#481）
+
 ## 0.5.29
 
 ### Patch Changes
