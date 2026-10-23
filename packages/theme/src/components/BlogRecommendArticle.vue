@@ -26,6 +26,11 @@ const showNum = computed(() => recommend.value?.showNum ?? true)
 
 const pageSize = computed(() => recommend.value?.pageSize || 9)
 const emptyText = computed(() => recommend.value?.empty ?? '暂无相关文章')
+const enableSearch = computed(() => recommend.value?.search ?? true)
+const pagination = computed(() =>
+  recommend.value?.pagination ?? (recommend.value?.nextText ? 'next' : 'pager')
+)
+const nextText = computed(() => recommend.value?.nextText || '换一组')
 const searchText = computed(() => recommend.value?.searchText ?? '搜索文章')
 const searchPlaceholder = computed(() => recommend.value?.searchPlaceholder ?? '搜索文章标题')
 const searchEmpty = computed(() => recommend.value?.searchEmpty ?? '暂无文章')
@@ -454,6 +459,7 @@ onBeforeUnmount(() => {
         <div class="header-right">
           <!-- 搜索图标 -->
           <button
+            v-if="enableSearch"
             type="button"
             class="search-toggle-btn"
             :title="searchText"
@@ -465,8 +471,17 @@ onBeforeUnmount(() => {
             </svg>
           </button>
 
+          <button
+            v-if="pagination === 'next' && totalPages > 1"
+            type="button"
+            class="next-btn"
+            @click="nextPage"
+          >
+            {{ nextText }}
+          </button>
+
           <!-- 分页：仅超过 1 页时展示 -->
-          <div v-if="totalPages > 1" class="pill-pager">
+          <div v-else-if="totalPages > 1" class="pill-pager">
             <button
               type="button"
               class="pager-btn pager-prev"
@@ -614,7 +629,7 @@ onBeforeUnmount(() => {
 }
 
 .header-title-text {
-  font-size: 13.5px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--vp-c-text-1, #1e293b);
   line-height: 22px;
@@ -743,6 +758,23 @@ onBeforeUnmount(() => {
 }
 
 /* 分页控件：轻质感胶囊（与图片完全一致） */
+.next-btn {
+  height: 22px;
+  padding: 0 6px;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--vp-c-brand-1, #3b82f6);
+  font-size: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s ease;
+}
+
+.next-btn:hover {
+  background-color: var(--vp-c-default-soft, #f1f5f9);
+}
+
 .pill-pager {
   display: inline-flex;
   align-items: center;
@@ -950,7 +982,7 @@ onBeforeUnmount(() => {
 /* 序号精细化 */
 .recommend-container li .num {
   display: inline-block;
-  font-size: 12px;
+  font-size: 14px;
   color: var(--vp-c-text-3, #94a3b8);
   font-weight: 700;
   margin-right: 2px;
@@ -981,8 +1013,8 @@ onBeforeUnmount(() => {
 }
 
 .recommend-container li .title {
-  font-size: 12.5px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 500;
   line-height: 1.4;
   margin: 0;
   padding: 0;
@@ -1009,7 +1041,7 @@ onBeforeUnmount(() => {
 
 .recommend-container li .suffix {
   margin-top: 3px;
-  font-size: 11px;
+  font-size: 12px;
   color: var(--vp-c-text-3, #94a3b8);
   line-height: 1.2;
 }

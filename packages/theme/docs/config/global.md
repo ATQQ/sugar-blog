@@ -868,6 +868,8 @@ const blogTheme = getThemeConfig({
     showDate: true,
     showNum: true,
     mode: 'directory',
+    pagination: 'pager',
+    search: true,
     collapsible: true,
     collapsed: false,
     collapseText: '收起',
@@ -889,7 +891,8 @@ const blogTheme = getThemeConfig({
     sort: 'filename', // 文件名排序
     // empty: false // false时无推荐文章不展示此模块
     // collapsible: false // 关闭展开/收起引导按钮
-    // searchPlaceholder: 'Search title'
+    // search: false // 关闭标题搜索
+    // pagination: 'next', nextText: '换一组' // 使用旧版「换一组」分页
   }
 })
 ```
@@ -898,6 +901,23 @@ const blogTheme = getThemeConfig({
 interface RecommendArticle {
   title?: string
   pageSize?: number
+  /**
+   * 分页样式：
+   * - 'pager': 页码胶囊（上一页 / 页码输入 / 下一页）
+   * - 'next': 旧版「换一组」按钮
+   * @default 配置了 nextText 时为 'next'，否则为 'pager'
+   */
+  pagination?: 'pager' | 'next'
+  /**
+   * 'next' 分页模式下的按钮文案
+   * @default '换一组'
+   */
+  nextText?: string
+  /**
+   * 是否展示标题搜索
+   * @default true
+   */
+  search?: boolean
   /**
    * 是否展示当前正在浏览的文章在左侧
    * @default true（mode 为 'home' 时默认不展示）
@@ -1043,7 +1063,12 @@ const blogTheme = getThemeConfig({
 * 可通过 `collapsed: true` 设置默认收起状态；用户手动操作后的状态会记录在本地。
 * 侧边栏底部默认预留 160px 空间，避免遮挡左下方的桌宠等内容，可通过 `bottomOffset`（数字或 CSS 长度值）自定义。
 
-侧栏标题旁的搜索文案也可配置：
+分页样式通过 `pagination` 切换：
+* 默认 `'pager'`：右上角页码胶囊，支持上一页、下一页和点击页码输入跳转。
+* `'next'`：旧版「换一组」按钮，文案由 `nextText` 控制。
+* 兼容旧配置：只要配置了 `nextText` 且未设置 `pagination`，会自动使用 `'next'` 模式。
+
+标题搜索默认开启，设置 `search: false` 可隐藏搜索图标。搜索相关文案也可配置：
 * `searchText`：搜索图标悬停文案，默认「搜索文章」
 * `searchPlaceholder`：展开搜索后输入框占位文案，默认「搜索文章标题」
 * `searchEmpty`：搜索无结果时的提示，默认「暂无文章」

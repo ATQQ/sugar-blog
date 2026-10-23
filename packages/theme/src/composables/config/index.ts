@@ -156,6 +156,23 @@ export namespace Theme {
     title?: string
     pageSize?: number
     /**
+     * 分页样式：
+     * - 'pager': 页码胶囊（上一页 / 页码输入 / 下一页）
+     * - 'next': 旧版「换一组」按钮
+     * @default 配置了 nextText 时为 'next'，否则为 'pager'
+     */
+    pagination?: 'pager' | 'next'
+    /**
+     * 'next' 分页模式下的按钮文案
+     * @default '换一组'
+     */
+    nextText?: string
+    /**
+     * 是否展示标题搜索
+     * @default true
+     */
+    search?: boolean
+    /**
      * 是否展示当前正在浏览的文章在左侧
      * @default true（mode 为 'home' 时默认不展示）
      */
