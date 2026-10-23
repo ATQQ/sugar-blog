@@ -155,10 +155,26 @@ export namespace Theme {
   export interface RecommendArticle {
     title?: string
     pageSize?: number
+    /**
+     * 分页样式：
+     * - 'pager': 页码胶囊（上一页 / 页码输入 / 下一页）
+     * - 'next': 旧版「换一组」按钮
+     * @default 配置了 nextText 时为 'next'，否则为 'pager'
+     */
+    pagination?: 'pager' | 'next'
+    /**
+     * 'next' 分页模式下的按钮文案
+     * @default '换一组'
+     */
     nextText?: string
     /**
+     * 是否展示标题搜索
+     * @default false
+     */
+    search?: boolean
+    /**
      * 是否展示当前正在浏览的文章在左侧
-     * @default true
+     * @default true（mode 为 'home' 时默认不展示）
      */
     showSelf?: boolean
     /**
@@ -190,6 +206,53 @@ export namespace Theme {
      * @default true
      */
     showNum?: boolean
+    /**
+     * 文章列表数据来源：
+     * - 'home': 展示首页文章列表（置顶优先 + 日期倒序）
+     * - 'directory': 仅展示同目录/同分类文章
+     * @default 'directory'
+     */
+    mode?: 'home' | 'directory'
+    /**
+     * 是否支持展开/收起侧边栏
+     * @default true
+     */
+    collapsible?: boolean
+    /**
+     * 初始状态是否默认收起
+     * @default false
+     */
+    collapsed?: boolean
+    /**
+     * 收起按钮文案
+     * @default '收起'
+     */
+    collapseText?: string
+    /**
+     * 展开按钮悬停文案
+     * @default '展开'
+     */
+    expandText?: string
+    /**
+     * 侧栏标题旁搜索按钮悬停文案
+     * @default '搜索文章'
+     */
+    searchText?: string
+    /**
+     * 侧栏标题搜索输入框占位文案
+     * @default '搜索文章标题'
+     */
+    searchPlaceholder?: string
+    /**
+     * 侧栏标题搜索无结果时的提示
+     * @default '暂无文章'
+     */
+    searchEmpty?: string
+    /**
+     * 侧边栏底部预留高度，避免遮挡左下方桌宠等内容
+     * @default '160px'
+     */
+    bottomOffset?: number | string
   }
 
   export interface HomeAnalysis {

@@ -86,6 +86,69 @@ html.dark {
     margin-top: 60px !important;
   }
 }
+
+@media screen and (min-width: 960px) {
+  .VPSidebar {
+    transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1), opacity 0.25s ease;
+  }
+
+  .VPSidebar .curtain {
+    display: none;
+  }
+
+  /* 消除侧边栏顶部空分组占位与多余留白 */
+  .VPSidebar .group:not(:has(.text)),
+  .VPSidebar .group:empty,
+  .VPSidebarItem.level-0:not(:has(.text)) {
+    display: none;
+    padding: 0;
+    margin: 0;
+    height: 0;
+    min-height: 0;
+  }
+
+  .VPSidebar #VPSidebarNav,
+  .VPSidebar .nav,
+  .VPSidebar .sidebar {
+    padding-top: 0;
+    margin-top: 0;
+  }
+
+  .VPContent.has-sidebar {
+    transition: padding-left 0.3s cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  /* 折叠 / 自动隐藏：只处理侧栏显隐，不改动 VitePress 默认大屏居中布局 */
+  html.sidebar-collapsed .VPSidebar {
+    transform: translateX(-100%) !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+  html.sidebar-auto-hidden .VPSidebar {
+    display: none !important;
+  }
+  html.sidebar-collapsed .VPContent.has-sidebar,
+  html.sidebar-auto-hidden .VPContent.has-sidebar {
+    padding-left: 0 !important;
+  }
+  html.sidebar-collapsed .VPNavBar.has-sidebar,
+  html.sidebar-auto-hidden .VPNavBar.has-sidebar {
+    --vp-nav-col-offset: 0px !important;
+  }
+}
+
+/* 大屏收起后仍保持 VitePress 默认两侧留白居中，避免内容贴边拉开 */
+@media screen and (min-width: 1440px) {
+  html.sidebar-collapsed .VPContent.has-sidebar,
+  html.sidebar-auto-hidden .VPContent.has-sidebar {
+    padding-left: calc((100% - var(--vp-layout-max-width)) / 2) !important;
+  }
+  html.sidebar-collapsed .VPNavBar.has-sidebar,
+  html.sidebar-auto-hidden .VPNavBar.has-sidebar {
+    --vp-nav-col-offset: calc((100% - var(--vp-layout-max-width)) / 2) !important;
+  }
+}
+
 .VPDoc .content main img {
   max-height: 300px;
   margin: 0 auto;

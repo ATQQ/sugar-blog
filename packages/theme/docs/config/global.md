@@ -860,14 +860,24 @@ export default defineConfig({
 // 默认配置如下，即默认生效配置，无需再设置
 const blogTheme = getThemeConfig({
   recommend: {
-    title: '🔍 相关文章',
-    nextText: '换一组',
+    // title 默认是「单片眼镜 emoji SVG + 相关文章」，也可自定义字符串/HTML
     pageSize: 9,
     empty: '暂无相关文章',
     style: 'sidebar',
     sort: 'date',
     showDate: true,
-    showNum: true
+    showNum: true,
+    mode: 'directory',
+    pagination: 'pager',
+    search: false,
+    collapsible: true,
+    collapsed: false,
+    collapseText: '收起',
+    expandText: '展开',
+    searchText: '搜索文章',
+    searchPlaceholder: '搜索文章标题',
+    searchEmpty: '暂无文章',
+    bottomOffset: '160px'
   }
 })
 ```
@@ -876,11 +886,13 @@ const blogTheme = getThemeConfig({
 const blogTheme = getThemeConfig({
   recommend: {
     title: '🔍 推荐文章',
-    nextText: '下一页',
     pageSize: 1,
     style: 'card',
-    sort: 'filename' // 文件名排序
+    sort: 'filename', // 文件名排序
     // empty: false // false时无推荐文章不展示此模块
+    // collapsible: false // 关闭展开/收起引导按钮
+    // search: true // 开启标题搜索
+    // pagination: 'next', nextText: '换一组' // 使用旧版「换一组」分页
   }
 })
 ```
@@ -889,10 +901,26 @@ const blogTheme = getThemeConfig({
 interface RecommendArticle {
   title?: string
   pageSize?: number
+  /**
+   * 分页样式：
+   * - 'pager': 页码胶囊（上一页 / 页码输入 / 下一页）
+   * - 'next': 旧版「换一组」按钮
+   * @default 配置了 nextText 时为 'next'，否则为 'pager'
+   */
+  pagination?: 'pager' | 'next'
+  /**
+   * 'next' 分页模式下的按钮文案
+   * @default '换一组'
+   */
   nextText?: string
   /**
+   * 是否展示标题搜索
+   * @default false
+   */
+  search?: boolean
+  /**
    * 是否展示当前正在浏览的文章在左侧
-   * @default true
+   * @default true（mode 为 'home' 时默认不展示）
    */
   showSelf?: boolean
   /**
@@ -924,6 +952,53 @@ interface RecommendArticle {
    * @default true
    */
   showNum?: boolean
+  /**
+   * 文章列表数据来源：
+   * - 'home': 展示首页文章列表（置顶优先 + 日期倒序）
+   * - 'directory': 仅展示同目录/同分类文章
+   * @default 'directory'
+   */
+  mode?: 'home' | 'directory'
+  /**
+   * 是否支持展开/收起侧边栏
+   * @default true
+   */
+  collapsible?: boolean
+  /**
+   * 初始状态是否默认收起
+   * @default false
+   */
+  collapsed?: boolean
+  /**
+   * 收起按钮悬停文案
+   * @default '收起'
+   */
+  collapseText?: string
+  /**
+   * 展开按钮悬停文案
+   * @default '展开'
+   */
+  expandText?: string
+  /**
+   * 侧栏标题旁搜索按钮悬停文案
+   * @default '搜索文章'
+   */
+  searchText?: string
+  /**
+   * 侧栏标题搜索输入框占位文案
+   * @default '搜索文章标题'
+   */
+  searchPlaceholder?: string
+  /**
+   * 侧栏标题搜索无结果时的提示
+   * @default '暂无文章'
+   */
+  searchEmpty?: string
+  /**
+   * 侧边栏底部预留高度，避免遮挡左下方桌宠等内容
+   * @default '160px'
+   */
+  bottomOffset?: number | string
 }
 ```
 
@@ -974,6 +1049,29 @@ const blogTheme = getThemeConfig({
 ```
 
 :::
+
+### 列表来源与收起展开
+
+通过 `mode` 属性可以控制侧边栏文章列表的数据来源：
+* `'directory'`（默认）：仅展示与当前文章同目录或具有相同分类/推荐标签的关联文章。
+* `'home'`：按照首页文章列表的顺序展示所有文章（置顶优先 + 日期倒序），方便用户在文章页直接切换阅读其他文章，无需每次都返回首页。
+
+通过 `collapsible` 属性可控制是否支持侧边栏收起/展开：
+* 默认开启（`collapsible: true`），侧栏右缘会展示贴分割线的极简箭头「收起」按钮；收起后左侧边缘同位置展示「展开」箭头。可通过 `collapseText` / `expandText` 自定义悬停文案。
+* 设置为 `collapsible: false` 时关闭展开/收起引导，侧栏始终保持展开。
+* 点击收起后，侧边栏向左滑出隐藏，页面主体内容自动平滑延展。
+* 可通过 `collapsed: true` 设置默认收起状态；用户手动操作后的状态会记录在本地。
+* 侧边栏底部默认预留 160px 空间，避免遮挡左下方的桌宠等内容，可通过 `bottomOffset`（数字或 CSS 长度值）自定义。
+
+分页样式通过 `pagination` 切换：
+* 默认 `'pager'`：右上角页码胶囊，支持上一页、下一页和点击页码输入跳转。
+* `'next'`：旧版「换一组」按钮，文案由 `nextText` 控制。
+* 兼容旧配置：只要配置了 `nextText` 且未设置 `pagination`，会自动使用 `'next'` 模式。
+
+标题搜索默认关闭，设置 `search: true` 后标题旁会出现搜索图标。搜索相关文案也可配置：
+* `searchText`：搜索图标悬停文案，默认「搜索文章」
+* `searchPlaceholder`：展开搜索后输入框占位文案，默认「搜索文章标题」
+* `searchEmpty`：搜索无结果时的提示，默认「暂无文章」
 
 ## article
 
