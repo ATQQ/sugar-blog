@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "pagefind": "^1.5.2",
-    "vite": "^8.2.1",
+    "vite": "^8.3.3",
     "vitepress": "2.0.0-alpha.20",
     "vitepress-plugin-llms": "^1.14.0"
   }
