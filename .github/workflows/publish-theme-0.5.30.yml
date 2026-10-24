@@ -55,6 +55,7 @@ jobs:
                 body,
                 draft: false,
                 prerelease: false,
+                make_latest: 'true',
               })
               console.log(`Updated release: ${updated.data.html_url}`)
             }
@@ -67,6 +68,7 @@ jobs:
                 body,
                 draft: false,
                 prerelease: false,
+                make_latest: 'true',
               })
               console.log(`Created release: ${created.data.html_url}`)
             }
