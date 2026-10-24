@@ -1,0 +1,72 @@
+name: Publish Theme 0.5.30 Release Notes
+
+on:
+  push:
+    paths:
+      - .github/workflows/publish-theme-0.5.30.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    name: Publish @sugarat/theme@0.5.30
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update and publish release
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const owner = context.repo.owner
+            const repo = context.repo.repo
+            const tag = '@sugarat/theme@0.5.30'
+            const name = '@sugarat/theme@0.5.30'
+            const body = `> Please refer to [CHANGELOG.md](https://github.com/ATQQ/sugar-blog/blob/master/packages/theme/CHANGELOG.md) for details.
+
+            ## What's Changed
+
+            **0.5.30 (2026/10/23)**
+
+            - feat: 优化文章页侧边栏交互（#476）
+            - fix: 同目录推荐文章匹配改为完整目录路径，避免 \`network\` / \`network-program\` 这类前缀碰撞（#481）
+
+            **create-theme**
+
+            - chore: update template theme version to \`@sugarat/theme@^0.5.30\`（create-theme@0.0.110）
+
+            **Full Changelog**: https://github.com/ATQQ/sugar-blog/compare/@sugarat/theme@0.5.29...@sugarat/theme@0.5.30
+            `
+
+            const releases = await github.rest.repos.listReleases({
+              owner,
+              repo,
+              per_page: 30,
+            })
+            const existing = releases.data.find((r) => r.tag_name === tag)
+
+            if (existing) {
+              const updated = await github.rest.repos.updateRelease({
+                owner,
+                repo,
+                release_id: existing.id,
+                tag_name: tag,
+                name,
+                body,
+                draft: false,
+                prerelease: false,
+              })
+              console.log(`Updated release: ${updated.data.html_url}`)
+            }
+            else {
+              const created = await github.rest.repos.createRelease({
+                owner,
+                repo,
+                tag_name: tag,
+                name,
+                body,
+                draft: false,
+                prerelease: false,
+              })
+              console.log(`Created release: ${created.data.html_url}`)
+            }
