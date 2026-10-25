@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.5.30） ⏰ 2026/10/23：文章页侧边栏交互升级（折叠、定位、搜索、分页）与同目录推荐前缀碰撞修复
+description: 最近更新（v0.5.31） ⏰ 2026/10/25：修复进入有侧栏文章时中间内容从左侧滑入
 author: 粥里有勺糖
 top: 3
 tag: 日志
@@ -26,6 +26,12 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.5.31 (2026/10/25)
+
+### Patch Changes
+
+- fix: 侧栏内容区 `padding` 过渡仅在手动折叠/展开时启用，避免进入有侧栏文章时中间内容从左侧滑入
 
 ## 0.5.30 (2026/10/23)
 

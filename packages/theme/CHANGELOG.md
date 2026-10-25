@@ -1,5 +1,11 @@
 # @sugarat/theme
 
+## 0.5.31
+
+### Patch Changes
+
+- fix: 侧栏内容区 `padding` 过渡仅在手动折叠/展开时启用，避免进入有侧栏文章时中间内容从左侧滑入
+
 ## 0.5.30
 
 ### Patch Changes
