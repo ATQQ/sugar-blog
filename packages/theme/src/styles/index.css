@@ -114,7 +114,8 @@ html.dark {
     margin-top: 0;
   }
 
-  .VPContent.has-sidebar {
+  /* 仅在手动折叠/展开时过渡，避免路由切换时内容从左侧滑入 */
+  html.sidebar-animating .VPContent.has-sidebar {
     transition: padding-left 0.3s cubic-bezier(0.2, 0, 0, 1);
   }
 
