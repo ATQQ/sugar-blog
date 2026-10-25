@@ -245,6 +245,12 @@ export const blogTheme = getThemeConfig({
         avatar: 'https://teek.seasir.top/favicon.ico',
         des: '人心中的成见是一座大山',
         nickname: 'Hyde'
+      },
+      {
+        nickname: '书灏',
+        url: 'https://zhaowuya.top/',
+        avatar: 'https://zhaowuya.top/logo.png',
+        des: '书灏的个人博客，记录技术笔记、生活随笔与摄影'
       }
     ].map((v) => {
       if (v.avatar.includes('//cdn.upyun.sugarat.top')) {
