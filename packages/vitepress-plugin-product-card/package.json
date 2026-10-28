@@ -1,6 +1,15 @@
 {
   "name": "vitepress-plugin-product-card",
   "version": "0.1.1",
+  "$schema": "https://raw.githubusercontent.com/vitejs/vite-plugin-registry/refs/heads/main/data/schema/extended-package-json.schema.json",
+  "compatiblePackages": {
+    "schemaVersion": 1,
+    "vite": {
+      "type": "compatible",
+      "versions": "^5.0.0 || ^8.0.0",
+      "note": "Vite version follows the VitePress version"
+    }
+  },
   "description": "VitePress plugin: markdown ::: card container + Vue product card component with GitHub time badges",
   "author": "sugar",
   "license": "MIT",
@@ -13,6 +22,8 @@
     "url": "https://github.com/ATQQ/sugar-blog/issues"
   },
   "keywords": [
+    "vite-plugin",
+    "vitepress-plugin",
     "vitepress",
     "plugin",
     "markdown-it",

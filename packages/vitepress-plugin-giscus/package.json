@@ -1,6 +1,15 @@
 {
   "name": "vitepress-plugin-giscus",
   "version": "0.1.5",
+  "$schema": "https://raw.githubusercontent.com/vitejs/vite-plugin-registry/refs/heads/main/data/schema/extended-package-json.schema.json",
+  "compatiblePackages": {
+    "schemaVersion": 1,
+    "vite": {
+      "type": "compatible",
+      "versions": "^5.0.0 || ^8.0.0",
+      "note": "Vite version follows the VitePress version"
+    }
+  },
   "description": "vitepress plugin giscus",
   "author": "sugar",
   "license": "MIT",
@@ -13,6 +22,8 @@
     "url": "https://github.com/ATQQ/sugar-blog/issues"
   },
   "keywords": [
+    "vite-plugin",
+    "vitepress-plugin",
     "vitepress",
     "plugin",
     "giscus",
