@@ -1,5 +1,11 @@
 # vitepress-plugin-pagefind
 
+## 0.4.26
+
+### Patch Changes
+
+- chore: 标准化包元数据：新增 `$schema`、`compatiblePackages` 的 Vite 兼容声明，补充 `vite-plugin` / `vitepress-plugin` 关键词
+
 ## 0.4.25
 
 ### Patch Changes

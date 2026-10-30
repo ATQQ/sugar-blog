@@ -1,6 +1,6 @@
 {
   "name": "vitepress-plugin-announcement",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "$schema": "https://raw.githubusercontent.com/vitejs/vite-plugin-registry/refs/heads/main/data/schema/extended-package-json.schema.json",
   "compatiblePackages": {
     "schemaVersion": 1,

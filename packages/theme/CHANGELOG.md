@@ -1,5 +1,22 @@
 # @sugarat/theme
 
+## 0.5.32
+
+### Patch Changes
+
+- fix: 修复切换深色模式时页面闪白（深→浅瞬间白屏）
+  - `startViewTransition` 的动画改用 `fill: forwards`，避免 `both` 在动画开始前就应用终态，让新快照瞬间铺满
+  - 快照结束后取消动画，避免 `forwards` 终态残留影响下一次切换
+- Updated dependencies
+  - vitepress-plugin-announcement@0.1.11
+  - vitepress-plugin-artalk@0.1.7
+  - vitepress-plugin-back2top@0.1.6
+  - vitepress-plugin-giscus@0.1.6
+  - vitepress-plugin-image-preview@0.1.8
+  - vitepress-plugin-pagefind@0.4.26
+  - vitepress-plugin-product-card@0.1.2
+  - vitepress-plugin-rss@0.4.6
+
 ## 0.5.31
 
 ### Patch Changes

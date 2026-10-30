@@ -1,6 +1,6 @@
 {
   "name": "vitepress-plugin-51la",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "$schema": "https://raw.githubusercontent.com/vitejs/vite-plugin-registry/refs/heads/main/data/schema/extended-package-json.schema.json",
   "compatiblePackages": {
     "schemaVersion": 1,
