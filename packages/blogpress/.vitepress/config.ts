@@ -161,7 +161,7 @@ export default defineConfig({
       // },
       {
         text: '个人作品',
-        link: '/works/work'
+        link: 'https://vibework.sugarat.top/'
       },
       {
         text: '头图生成',
