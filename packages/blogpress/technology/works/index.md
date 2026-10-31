@@ -7,6 +7,7 @@ hidden: true
 个人精力有限,感兴趣有能力的朋友可以帮忙迭代维护
 
 ## 目录
+* [做了一个Vibe作品集网站模板](./vibe-works.md)
 * [分享一下最近做的记账 App：妙蛙记账](./miaowa.md)
 * [Kite：把构建留在本地，把部署丢给 Kite](./kite.md)
 * [VitePress 产品卡片插件介绍](./vitepress-plugin-product-card.md)
