@@ -50,7 +50,7 @@ export default defineConfig({
       },
       {
         text: '个人作品展示',
-        link: '/work'
+        link: 'https://vibework.sugarat.top/'
       },
       // {
       //   text: '线上作品',

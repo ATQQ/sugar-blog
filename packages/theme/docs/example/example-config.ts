@@ -74,4 +74,13 @@ export default defineExamples([
     avatar: 'https://cdn.upyun.sugarat.top/test/sugar/566d2ea782106c5b88991acf77526244',
     nickname: 'SuZhelevel6'
   },
+  {
+    cover: '/example/blacktea-cover.jpg',
+    link: 'https://blackteayes.github.io/',
+    name: '红茶的博客',
+    desc: '红茶的博客，记录与分享技术笔记等内容',
+    avatar: '/example/blacktea-avatar.png',
+    nickname: '红茶',
+    home: 'https://blackteayes.github.io/about.html'
+  }
 ])

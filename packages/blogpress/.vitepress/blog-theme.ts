@@ -251,6 +251,12 @@ export const blogTheme = getThemeConfig({
         url: 'https://zhaowuya.top/',
         avatar: 'https://zhaowuya.top/logo.png',
         des: '书灏的个人博客，记录技术笔记、生活随笔与摄影'
+      },
+      {
+        nickname: '番茄主理人',
+        url: 'https://blog.fqzlr.top/',
+        avatar: 'https://blog.fqzlr.top/logo/icon.webp',
+        des: '躬身入局，心为主理，行有尺度，自持本心'
       }
     ].map((v) => {
       if (v.avatar.includes('//cdn.upyun.sugarat.top')) {
