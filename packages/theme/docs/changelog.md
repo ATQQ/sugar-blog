@@ -1,6 +1,6 @@
 ---
 title: 更新日志
-description: 最近更新（v0.5.32） ⏰ 2026/10/30：修复切换深色模式时页面闪白
+description: 最近更新（v0.5.33） ⏰ 2026/11/10：修复搜索结果无法滚动、方向键跳回第一项
 author: 粥里有勺糖
 top: 3
 tag: 日志
@@ -26,6 +26,14 @@ bun update @sugarat/theme
 bun install vitepress@latest
 ```
 :::
+
+## 0.5.33 (2026/11/10)
+
+### Patch Changes
+
+- fix: 修复搜索结果无法滚动、方向键上下会自动跳回第一项
+- Updated dependencies
+  - vitepress-plugin-pagefind@0.4.27
 
 ## 0.5.32 (2026/10/30)
 

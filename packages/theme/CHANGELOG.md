@@ -1,5 +1,13 @@
 # @sugarat/theme
 
+## 0.5.33
+
+### Patch Changes
+
+- fix: 修复搜索结果无法滚动、方向键上下会自动跳回第一项
+- Updated dependencies
+  - vitepress-plugin-pagefind@0.4.27
+
 ## 0.5.32
 
 ### Patch Changes
