@@ -68,16 +68,16 @@ export const blogTheme = getThemeConfig({
       }
     ]
   },
-  oml2d: {
-    size: { width: 200, height: 200 },
-    mobileSize: { width: 120, height: 120 },
-    model: [
-      {
-        path: 'https://oml2d-models.sugarat.top/Senko_Normals/senko.model3.json',
-        offset: [0, 0.2],
-      }
-    ],
-  },
+  // oml2d: {
+  //   size: { width: 200, height: 200 },
+  //   mobileSize: { width: 120, height: 120 },
+  //   model: [
+  //     {
+  //       path: 'https://oml2d-models.sugarat.top/Senko_Normals/senko.model3.json',
+  //       offset: [0, 0.2],
+  //     }
+  //   ],
+  // },
   RSS,
   authorList: [
     {
